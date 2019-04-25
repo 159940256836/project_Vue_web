@@ -4,8 +4,7 @@
       <Form v-if="allowRegister" ref="formInline" :model="formInline" :rules="ruleInline" inline>
         <FormItem style="text-align:center;">
           <ButtonGroup>
-            <!--<Button v-for="(list,index) in buttonLists" :key="list.text" :class="{ active:changeActive == index}" @click="actives(index)" >{{list.text}}</Button>-->
-            <div class="tel-title">注册</div>
+            <Button v-for="(list,index) in buttonLists" :key="list.text" :class="{ active:changeActive == index}" @click="actives(index)" >{{list.text}}</Button>
           </ButtonGroup>
         </FormItem>
         <FormItem prop="username">
