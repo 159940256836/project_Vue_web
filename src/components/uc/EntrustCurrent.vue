@@ -62,6 +62,7 @@
         <Select v-model="formItem.type" style="width:70px;">
           <Option value="LIMIT_PRICE">限价</Option>
           <Option value="MARKET_PRICE">市价</Option>
+          <Option value="CHECK_FULL_STOP">止盈止损</Option>
         </Select>
       </FormItem>
       <FormItem label="方向: ">
@@ -86,7 +87,7 @@
 <script>
 var moment = require("moment");
 import expandRow from "@components/exchange/expand.vue";
-
+const map = new Map([['LIMIT_PRICE','限价'],['MARKET_PRICE','市价'],['CHECK_FULL_STOP','止盈止损']])
 export default {
   components: { expandRow },
   data() {
@@ -132,10 +133,8 @@ export default {
           title: "类型",
           width: 60,
           render(h, params) {
-            return h(
-              "span",
-              params.row.type === "LIMIT_PRICE" ? "限价" : "市价"
-            );
+              const type = params.row.type;
+            return h("span",{},map.get(type));
           }
         },
         {

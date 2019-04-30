@@ -1,9 +1,8 @@
 <template>
     <div class="nav-rights">
         <div class="nav-right">
-            <p class="nowintegration">当前积分:{{integration}}</p>
             <div class="blc_box">
-                <span>时间:&nbsp;</span>
+                <span>赠送时间:&nbsp;</span>
                 <DatePicker type="daterange" placeholder="请输入你要查询的日期" style="width: 200px" v-model="rangeDate" :editable="false"></DatePicker>
                 <button class="search_btn" @click="serar">搜索</button>
             </div>
@@ -17,12 +16,11 @@
     </div>
 </template>
 <script>
-const FixAraible = (pageSize, type) => (pageNum) => (createStartTime) => (createEndTime) => ({
+const FixAraible = (pageSize) => (pageNum) => (startTime) => (endTime) => ({
     pageSize,
     pageNum,
-    type,
-    createStartTime,
-    createEndTime
+    startTime,
+    endTime
 });
 const getParams = FixAraible(10, '');
 const map = new Map([["0", "推广"], ['1', '法币充值赠送'], ['2', '币币充值赠送']]);
@@ -37,17 +35,17 @@ export default {
             pageNum: 1,
             type: "",
             integration: "",
-            createStartTime: "",
-            createEndTime: "",
+            startTime: "",
+            endTime: "",
             rangeDate: "",
             tableColumnsBlc: [
                 {
-                    title: "类型",
-                    key: "type",
+                    title: "活动名称",
+                    key: "giftName",
                 },
                 {
-                    title: "数量",
-                    key: "amount"
+                    title: "赠送数量",
+                    key: "giftAmount"
                 },
                 {
                     title: "时间",
@@ -65,23 +63,19 @@ export default {
     methods: {
         init() {
             this.integration = this.$store.getters.member.integration;
-            const params = getParams(this.pageNum)(this.createStartTime)(this.createEndTime);
+            const params = getParams(this.pageNum)(this.startTime)(this.endTime);
             this.getList(params).then(res => {
-                this.tableMoney = res.map(ele => ({
-                    type: map.get(String(ele.type)),
-                    amount: "+" + ele.amount,
-                    createTime: ele.createTime
-                }));
-                this.totalElement = res.length;
+                this.tableMoney = res.data;
+                this.totalElement = res.total;
             });
         },
         getList(params) {
-            return this.$http.post(this.host + "/uc/integration/record/page_query", params).then(res => {
+            return this.$http.post(this.host + "/uc/gift/record", params).then(res => {
                 const resp = res.body;
                 if (resp.code == 0) {
                     this.loading = false;
                     return new Promise((resolve, reject) => {
-                        resolve(resp.data)
+                        resolve(resp)
                     })
                 }
             });

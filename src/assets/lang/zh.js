@@ -54,7 +54,7 @@
         ETH: 'ETH',
         CUSTOM: '自选',
         COIN: '币种',
-        favor:'收藏',
+        favor: '收藏',
         symbol: '交易对',
         NewPrice: '最新价',
         ExchangeNum: '交易数量',
@@ -68,7 +68,7 @@
     },
     exchange: {
         coin: '币种',
-        symbol:"交易对",
+        symbol: "交易对",
         lastprice: '最新价',
         daychange: '24h涨跌',
         market: '市场',
@@ -397,6 +397,7 @@
     uc: {
         login: {
             noaccount: '没有账号？请点击注册',
+            // google: "谷歌验证码",
             register: '注册',
             login: '登录',
             welcomelogin: '欢迎登录',

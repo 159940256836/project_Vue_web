@@ -1416,15 +1416,15 @@ export default {
       this.basecion = str;
     },
     getMemberRate() {
-      this.$http
-        .post(this.host + "/uc/wealth/query", {
-          memberId: this.member.id
-        })
-        .then(res => {
-          if (res.status == 200 && res.body.code == 0) {
-            this.memberRate = res.body.data.memberRate;
-          }
-        });
+    //   this.$http
+    //     .post(this.host + "/uc/wealth/query", {
+    //       memberId: this.member.id
+    //     })
+    //     .then(res => {
+    //       if (res.status == 200 && res.body.code == 0) {
+    //         this.memberRate = res.body.data.memberRate;
+    //       }
+    //     });
     },
     // getMember() {
     //   //获取个人安全信息

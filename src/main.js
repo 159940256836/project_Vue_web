@@ -23,10 +23,7 @@ Vue.use(vueResource);
 Vue.use(VueI18n);
 
 Vue.prototype.host = "http://39.100.79.158:80"; //测试
-// Vue.prototype.host = "https://www.bhuo.top"; //产
-// Vue.prototype.host = "http://47.74.216.147"; //新加坡
-
-
+// Vue.prototype.host = "http://192.168.0.110:6001"; //郭帅
 Vue.prototype.api = Api;
 Vue.http.options.credentials = true;
 Vue.http.options.emulateJSON = true;
@@ -72,6 +69,10 @@ Vue.filter('timeFormat', function(tick) {
 Vue.filter('dateFormat', function(tick) {
     return moment(tick).format("YYYY-MM-DD HH:mm:ss");
 });
+Vue.filter('ymdFormat', function(tick) {
+    return moment(tick).format("YYYY-MM-DD");
+});
+
 
 Vue.filter('toFixed', function(number, scale) {
     return new Number(number).toFixed(scale);
@@ -103,6 +104,15 @@ function toFloor(number, scale = 8) {
 Vue.filter('toFloor', (number, scale) => {
     return toFloor(number, scale);
 });
+//数组三位一个逗号的正则匹配
+const threeComma = (num) => {
+    if (num) {
+        return String(num).replace(/(?=(\B)(\d{3})+$)/g, ',');
+    } else {
+        return 0;
+    }
+}
+Vue.filter('threeComma', threeComma);
 Vue.prototype.toFloor = toFloor;
 
 

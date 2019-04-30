@@ -4,21 +4,24 @@
             <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
                 <div class="login_title">{{$t('uc.login.login')}}</div>
                 <FormItem prop="user">
-                    <Input name="user" type="text" v-model="formInline.user" :placeholder="$t('uc.login.usertip')" class="user">
+                    <Input name="user" type="text" v-model="formInline.user" :placeholder="$t('uc.login.usertip')" class="user" @on-blur="userBlur">
                     </Input>
                 </FormItem>
                 <FormItem prop="password">
-                    <Input type="password" v-model="formInline.password" :placeholder="$t('uc.login.pwdtip')" @on-keyup="onKeyup">
+                    <Input type="password" v-model="formInline.password" :placeholder="$t('uc.login.pwdtip')">
                     </Input>
                 </FormItem>
-                <p id="notice" class="hide">{{$t('uc.login.validatemsg')}}</p>
+                <FormItem prop="googleCode" v-if="openGooleCode">
+                    <Input type="text" v-model="formInline.googleCode" placeholder="谷歌验证码">
+                    </Input>
+                </FormItem>
                 <p style="height:25px;">
                     <router-link to="/findPwd" style="color:#979797;float:right;padding-right:10px;font-size:12px;">
                         {{$t('uc.login.forget')}}
                     </router-link>
                 </p>
                 <FormItem style="margin-bottom:10px;">
-                    <Button class="login_btn">{{$t('uc.login.login')}}</Button>
+                    <Button class="login_btn" @click="handleSubmit('formInline')">{{$t('uc.login.login')}}</Button>
                 </FormItem>
                 <div class='to_register'>
                     <span>没有BIHUO账号</span>
@@ -31,6 +34,7 @@
 </template>
 <style scoped lang="scss">
 /* 验证码 */
+$primary-color: #f0ac19;
 .login_form {
     background: #fff url(../../assets/images/login_bg.jpg) no-repeat center
         center;
@@ -42,32 +46,25 @@
         position: absolute;
         background: #fff;
         width: 350px;
-        height: 330px;
         left: 50%;
         top: 50%;
         margin-left: -175px;
         margin-top: -165px;
-        -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        border-top: 4px solid #f0ac19;
+        border-top: 4px solid $primary-color;
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 .ivu-form-item-content {
                     .login_btn.ivu-btn {
                         width: 100%;
-                        background-color: #f0ac19;
+                        background-color: $primary-color;
                         outline: none;
-                        border-color: #f0ac19;
+                        border-color: $primary-color;
                         color: #fff;
                         font-size: 18px;
                         border-radius: 30px;
                         &:focus {
-                            -moz-box-shadow: 2px 2px 5px #fff,
-                                -2px -2px 4px #fff;
-                            -webkit-box-shadow: 2px 2px 5px #fff,
-                                -2px -2px 4px #fff;
-                            box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                            box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
                         }
                     }
                 }
@@ -82,45 +79,18 @@
         }
         a {
             float: right;
-            color: #f0ac19;
+            color: $primary-color;
         }
     }
 }
-#captcha {
-    width: 100%;
-    display: inline-block;
-}
-.show {
-    display: block;
-}
-.hide {
-    display: none;
-}
-#notice {
-    color: red;
-}
-#wait {
-    text-align: left;
-    color: #666;
-    margin: 0;
-}
-.geetest_wait_dot geetest_dot_1 {
-    color: red;
-}
-.user .ivu-btn,
-.ivu-btn:active,
-.ivu-btn:focus {
-    border-color: #d7dde4;
-    box-shadow: none;
-}
-/*  */
+
 </style>
 <script>
-import gtInit from "../../assets/js/gt.js";
-import $ from "jquery";
 export default {
     data() {
+        const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
         return {
+            openGooleCode: false,//是否开启google验证;
             captchaObj: null,
             _captchaResult: null,
             formInline: {
@@ -132,7 +102,8 @@ export default {
                     {
                         required: true,
                         message: this.$t("uc.login.loginvalidate"),
-                        trigger: "blur"
+                        trigger: "blur",
+                        pattern
                     }
                 ],
                 password: [
@@ -160,11 +131,22 @@ export default {
         }
     },
     methods: {
+        //用户名输入以后判断用户是否开启谷歌验证
+        userBlur() {
+            const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+            let tel = this.formInline.user;
+            console.log(tel);
+            if (pattern.test(tel)) {
+                this.isNeedGoogle(tel).then(res => {
+                    if (res == 1) {//1为开启谷歌验证
+                        this.openGooleCode = true;
+                    }
+                })
+            }
+        },
         init() {
             if (this.isLogin) {
                 this.$router.push("/");
-            } else {
-                this.initGtCaptcha();
             }
         },
         onKeyup(ev) {
@@ -173,96 +155,69 @@ export default {
             }
         },
         initGtCaptcha() {
-            var that = this;
-            this.$http.get(this.host + this.api.uc.captcha).then(function (res) {
-                window.initGeetest(
-                    {
-                        // 以下配置参数来自服务端 SDK
-                        gt: res.body.gt,
-                        challenge: res.body.challenge,
-                        offline: !res.body.success, //表示用户后台检测极验服务器是否宕机
-                        new_captcha: res.body.new_captcha, //用于宕机时表示是新验证码的宕机
-                        product: "bind",
-                        width: "100%"
-                    },
-                    this.handler
-                );
+            var self = this;
+            var captcha1 = new TencentCaptcha("2040846200", (res) => {
+                res.ret == 0 && (self.ticket = res.ticket) && (self.randStr = res.randstr) && self.success(res.ticket, res.randstr);//腾讯防水验证成功的回调
             });
+            captcha1.show(); // 显示验证码
         },
-        handler(captchaObj) {
-            captchaObj
-                .onReady(() => {
-                    $("#wait").hide();
-                })
-                .onSuccess(() => {
-                    let result = (this._captchaResult = captchaObj.getValidate());
-                    if (!result) {
-                        this.$Message.error("请完成验证");
-                    } else {
-                        this.handleSubmit("formInline");
-                    }
-                });
-            $(".login_btn").click(() => {
-                let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/,
-                    tel = this.formInline.user,
-                    flagtel = reg.test(tel),
-                    flagpass = this.formInline.password.length >= 6 ? true : false;
-                flagtel && flagpass && captchaObj.verify();
-                (!flagtel || !flagpass) && this.$Message.error("请填写完整的信息");
-            });
-        },
-        logout() {
-            this.$http.post(this.host + "/uc/logout", {}).then(response => {
-                var resp = response.body;
+        /**验证用户是否开启了谷歌验证  返回值1为开启*/
+        isNeedGoogle(tel) {
+            return this.$http.post(this.host + '/uc/get/user', { mobile: tel }).then(res => {
+                const resp = res.body;
                 if (resp.code == 0) {
-                    localStorage.setItem("MEMBER", JSON.stringify(null));
-                    localStorage.setItem("TOKEN", null);
-                    localStorage.removeItem("USERKEY", null);
-                } else {
-                    // this.$Message.error(resp.message);
+                    return new Promise((resolve, reject) => {
+                        resolve(resp.data)
+                    })
                 }
-            });
+            })
+        },
+        success(ticket, randstr) {
+            const params = {
+                ticket,
+                randStr:randstr
+            };
+            const formParams = this.formInline;
+            params.username = formParams.user;
+            params.password = formParams.password;
+            if (this.openGooleCode) {
+                params.code = formParams.googleCode
+            }
+            return this.login(params);
         },
         handleSubmit(name) {
-            var result = this._captchaResult;
-            if (!result) {
-                $("#notice").show();
-                setTimeout(function () {
-                    $("#notice").hide();
-                }, 2000);
-            } else {
-                this.$refs[name].validate(valid => {
-                    if (valid) {
-                        var params = {};
-                        params["username"] = this.formInline.user;
-                        params["password"] = this.formInline.password;
-                        this.$http
-                            .post(this.host + this.api.uc.login, params)
-                            .then(response => {
-                                var resp = response.body;
-                                if (resp.code == 0) {
-                                    this.$Message.success(this.$t("uc.login.success"));
-                                    this.$store.commit("setMember", response.body.data);
-                                    if (
-                                        this.$route.query.key != null &&
-                                        this.$route.query.key != ""
-                                    ) {
-                                        localStorage.setItem("USERKEY", this.$route.query.key);
-                                    }
-                                    this.$router.push("/");
-                                } else {
-                                    this.$Message.error(resp.message);
-                                }
-                            });
+            this.$refs[name].validate(valid => {
+                if (valid) {
+                    //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
+                    this.initGtCaptcha();
+                }
+            })
+        },
+        login(params) {
+            console.log(params);
+            this.$http.post(this.host + this.api.uc.login, params).then(response => {
+                    var resp = response.body;
+                    if (resp.code == 0) {
+                        this.$Message.success(this.$t("uc.login.success"));
+                        this.$store.commit("setMember", response.body.data);
+                        if (
+                            this.$route.query.key != null &&
+                            this.$route.query.key != ""
+                        ) {
+                            localStorage.setItem("USERKEY", this.$route.query.key);
+                        }
+                        this.$router.push("/");
                     } else {
+                        this.$Message.error(resp.message);
                     }
                 });
-            }
         }
-    }
+    },
 };
 </script>
 <style lang="scss">
+$changeColor:#f5f5f5;
+$white:#fff;
 .login_form {
     .login_right {
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
@@ -272,15 +227,11 @@ export default {
                         .ivu-input {
                             font-size: 14px;
                             border: none;
-                            border-bottom: 1px solid #f5f5f5;
+                            border-bottom: 1px solid $changeColor;
                             &:focus {
                                 border: none;
-                                border-bottom: 1px solid #f5f5f5;
-                                -moz-box-shadow: 2px 2px 5px #fff,
-                                    -2px -2px 4px #fff;
-                                -webkit-box-shadow: 2px 2px 5px #fff,
-                                    -2px -2px 4px #fff;
-                                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                                border-bottom: 1px solid $changeColor;
+                                box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
                             }
                         }
                     }

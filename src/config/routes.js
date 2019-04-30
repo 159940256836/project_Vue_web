@@ -63,12 +63,33 @@ import Bjc from "../pages/bjc/Bijingcai"
 // 平台手续费返还
 import feereturn from "../pages/feereturn/Feereturn"
 
+// ieo
+import Ieo from "../pages/ieo/Index.vue"
+import IeoDetail from "../pages/ieo/Detail.vue"
+
+//开启或者关闭google验证
+import ClosegoogleVali from "../pages/google/CloseGoogleVali.vue";
+import OpenGoogleVali from "../pages/google/ResetGoogleVali.vue"
+
+//uc模块
+import feeLevel from "../components/uc/FeeLevel.vue"
+
+//IEo管理
+import Ieoadmin from '../components/uc/IeoAdmin.vue'
+
+// 糖果赠送记录
+import GiveRecord from '../components/uc/giveRecord.vue'
 export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
     { path: '/login', component: Login },
+    { path: "/Ieo", name: "ieo", component: Ieo },
+    { path: "/Ieo/IeoDetail", name: "IeoDetail", component: IeoDetail },
     { path: '/login/returnUrl/:returnUrl', component: Login },
     { path: '/register', component: Register },
+    { path: "/closeGoogleval", name: "closegoogleVali", component: ClosegoogleVali },
+    { path: "/openGoogleVali", name: "resetgooglevali", component: OpenGoogleVali },
+
     { path: '/findPwd', component: FindPwd },
     { path: '/exchange', component: Exchange },
     { path: '/exchange/*', component: Exchange },
@@ -171,8 +192,22 @@ export default [
                 component: safe
             },
             {
+                path: "ieoadmin",
+                name: "ieoadmin",
+                component: Ieoadmin
+            },
+            {
+                path: "giveRecord",
+                name: "giveRecord",
+                component: GiveRecord
+            },
+            {
                 path: 'safe',
                 component: safe
+            },
+            {
+                path: 'feeLevel',
+                component: feeLevel
             },
             {
                 path: 'account',
