@@ -45,7 +45,9 @@ export default {
                 },
                 {
                     title: "赠送数量",
-                    key: "giftAmount"
+                    render:(h,params)=>{
+                        return h("div",{},params.row.giftAmount+" "+params.row.giftCoin)
+                    }
                 },
                 {
                     title: "时间",
@@ -89,14 +91,15 @@ export default {
             this.pageNo = 1;
             this.loading = true;
             let rangeDate = this.rangeDate;
+            console.log(rangeDate);
             if (rangeDate && rangeDate[0]) {
-                let createStartTime = new Date(rangeDate[0]);
-                let createEndTime = new Date(rangeDate[1]);
-                this.createStartTime = this.formatTime(createStartTime);
-                this.createEndTime = this.formatTime(createEndTime);
+                let startTime = new Date(rangeDate[0]);
+                let endTime = new Date(rangeDate[1]);
+                this.startTime = this.formatTime(startTime);
+                this.endTime = this.formatTime(endTime);
             } else {
-                this.createStartTime = "";
-                this.createEndTime = "";
+                this.startTime = "";
+                this.endTime = "";
             }
             this.init();
         },

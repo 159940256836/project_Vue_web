@@ -476,7 +476,7 @@ export default {
                         desc: resp.message
                     });
                     setTimeout(() => {
-                        that.$router.push("login");
+                        this.$router.push("login");
                     }, 3000);
                 } else {
                     this.$Notice.error({

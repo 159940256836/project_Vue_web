@@ -110,7 +110,7 @@
 </style>
 
 <template>
-    <div class="mymsg_wrapper common">
+    <div class="mymsg_wrapper">
         <div class="wrapper">
             <Menu :active-name="activename" :open-names="opennames" @on-open-change="sss" ref="test" :accordion="true">
                 <div class="title">个人中心</div>
@@ -149,18 +149,18 @@
                     <MenuItem name="2-4">
                     <router-link to="/uc/withdraw">{{$t('uc.finance.pickup')}}</router-link>
                     </MenuItem>
-                    <MenuItem name="2-5">
+                    <!-- <MenuItem name="2-5">
                     <router-link to="/uc/trade">{{$t('uc.finance.tradetail')}}</router-link>
-                    </MenuItem>
+                    </MenuItem> -->
                     <!-- <MenuItem name="2-6">
           <router-link to="/uc/invitingmining">{{$t('uc.finance.invitingmining')}}</router-link>
           </MenuItem> -->
-                    <MenuItem name="2-6">
+                    <!-- <MenuItem name="2-6">
                     <router-link to="/uc/paydividends">{{$t('uc.finance.paydividends')}}</router-link>
-                    </MenuItem>
-                    <MenuItem name="2-7">
+                    </MenuItem> -->
+                    <!-- <MenuItem name="2-7">
                     <router-link to="/uc/blc">币理财管理</router-link>
-                    </MenuItem>
+                    </MenuItem> -->
                     <MenuItem name="2-8">
                     <router-link to="/uc/bjc">积分管理</router-link>
                     </MenuItem>
@@ -309,6 +309,13 @@ export default {
             this.$refs.test.updateOpened();
             this.$refs.test.updateActiveName();
         });
+        const doc = document.body
+         const sreenHeight = doc.offsetHeight;
+         const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
+         const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
+         const contentHeight = doc.getElementsByClassName("mymsg_wrapper")[0];
+         const bodyHeight = sreenHeight - headerHeight - footerHeight;
+         contentHeight.style.minHeight = bodyHeight + "px";
         //  this.sss(this.activename);
     }
 };

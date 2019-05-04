@@ -1,5 +1,5 @@
 <template>
-    <div class="common">
+    <div class="common specail">
         <div class="wrapper">
             <div id="qrcode"></div>
             <div class="abstract">
@@ -47,11 +47,25 @@ export default {
         }
     },
     created() {
-        // this.init().then(res => {
+        this.init().then(res => {
             // const { link, secret } = res;
-            this.data = { link: "otpauth://totp/6@bitrade.com?secret=SHYT6OFT5C4H24MG", secret: "SHYT6OFT5C4H24MG" };
-            console.log(this.data);
-        // })
+            // this.data = { link: "otpauth://totp/6@bitrade.com?secret=SHYT6OFT5C4H24MG", secret: "SHYT6OFT5C4H24MG" };
+            this.data = {
+                link: res.link,
+                secret: res.secret
+            }
+            this.$nextTick(() => {
+                const link = this.data.link;
+                new QRCode(document.getElementById("qrcode"), {
+                    text: link,
+                    width: 128,
+                    height: 128,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                });
+            })
+
+        })
     },
     methods: {
         init() {
@@ -118,13 +132,7 @@ export default {
     },
     mounted() {
         const link = this.data.link;
-        new QRCode(document.getElementById("qrcode"), {
-            text: link,
-            width: 128,
-            height: 128,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-        });
+
 
     }
 }
@@ -136,7 +144,7 @@ export default {
     align-items: flex-end;
 }
 $color: #2d8cf0;
-.common {
+.specail {
     padding: 30px 25%;
     overflow: hidden;
     .wrapper {
@@ -163,3 +171,14 @@ $color: #2d8cf0;
     }
 }
 </style>
+<style lang="scss">
+.common.specail .ivu-input {
+    background-color: #fff;
+    border: 1px solid #eee;
+    color: #000;
+    &:hover {
+        border-color: #f0ac19;
+    }
+}
+</style>
+

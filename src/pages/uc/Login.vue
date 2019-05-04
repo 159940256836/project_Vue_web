@@ -24,7 +24,7 @@
                     <Button class="login_btn" @click="handleSubmit('formInline')">{{$t('uc.login.login')}}</Button>
                 </FormItem>
                 <div class='to_register'>
-                    <span>没有BIHUO账号</span>
+                    <span>没有币多网账号</span>
                     <router-link to="/register">立即注册</router-link>
                 </div>
             </Form>
@@ -98,14 +98,6 @@ export default {
                 password: ""
             },
             ruleInline: {
-                user: [
-                    {
-                        required: true,
-                        message: this.$t("uc.login.loginvalidate"),
-                        trigger: "blur",
-                        pattern
-                    }
-                ],
                 password: [
                     {
                         required: true,
@@ -134,9 +126,9 @@ export default {
         //用户名输入以后判断用户是否开启谷歌验证
         userBlur() {
             const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+            var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
             let tel = this.formInline.user;
-            console.log(tel);
-            if (pattern.test(tel)) {
+            if (pattern.test(tel) || reg.test(tel)) {
                 this.isNeedGoogle(tel).then(res => {
                     if (res == 1) {//1为开启谷歌验证
                         this.openGooleCode = true;

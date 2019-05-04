@@ -1,6 +1,6 @@
 <template>
     <div :class="ieo_box">
-        <div class="common">
+        <div class="common speicial">
             <Tabs value="all" @on-click="tablClick">
                 <TabPane label="全部" name="all"></TabPane>
                 <TabPane label="预热中" name="ready"></TabPane>
@@ -8,12 +8,18 @@
                 <TabPane label="已结束" name="alreadyEnd"></TabPane>
             </Tabs>
             <div class="contentWrapper">
+                <!-- <template v-if="list.length == 0">
+                    <img src="../../assets/images/noData.png" alt="" style="width:30%;">
+                </template> -->
+                <!-- <template v-else>
+                    
+                </template> -->
                 <template v-for="(item, index) in list">
                     <ieoAbstract :content="item"></ieoAbstract>
                 </template>
             </div>
             <div class="page">
-                <Page :total="total" size="small" :current="currentPage" @on-change="changePage"/>
+                <Page :total="total" size="small" :current="currentPage" :page-size="pageSize" @on-change="changePage" />
             </div>
         </div>
     </div>
@@ -37,11 +43,12 @@ export default {
     data() {
         return {
             ieo_box: 'ieo_box',
+            pageSize: 3,
             list: [],
             total: 0,
             pageNum: 1,
             status: "",//1-预热中，2-进行中，3-已结束
-            currentPage:1,
+            currentPage: 1,
         }
     },
     created() {
@@ -65,6 +72,7 @@ export default {
             })
         },
         tablClick(name) {
+            this.list = [];
             switch (name) {
                 case "all":
                     this.ieo_box = "ieo_box";
@@ -83,10 +91,11 @@ export default {
                     this.status = "3"
                     break;
             }
-            this.currentPage = 1;
+            this.pageNum =this.currentPage = 1;
             this.init();
         },
-        changePage(index){
+        changePage(index) {
+            this.list=[];
             this.pageNum = this.currentPage = index;
             this.init();
         }
@@ -98,7 +107,7 @@ export default {
     padding: 50px 10%;
     background: #1c2435;
     overflow: hidden;
-    .contentWrapper{
+    .contentWrapper {
         overflow: hidden;
     }
     .ieoWrapper {
@@ -131,7 +140,7 @@ $pageTheme: rgb(13, 70, 125);
         background: #dcdee2;
     }
 }
-.common {
+.speicial {
     .ivu-tabs-tab {
         padding: 16px;
         &:nth-child(1) {

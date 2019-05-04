@@ -1154,9 +1154,11 @@ li {
                 margin-left: 20px;
                 position: absolute;
                 a {
+                    color: #fff;
                     font-size: 14px;
                     line-height: 40px;
                     display: inline-block;
+                    margin-left: 20px;
                 }
                 .cal_content {
                     line-height: 40px;

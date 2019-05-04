@@ -1,14 +1,14 @@
 <template>
     <div class="ieoWrapper" @click='getDetail'>
         <div class="topBox">
-            <div class="topBox specail"><img :src="content.pic" alt=""><span>{{content.saleCoin}}</span></div>
+            <div class="topBox specail"><img :src="content.picView" alt=""><span>{{content.saleCoin}}</span></div>
             <div class="type">{{status}}</div>
         </div>
         <div class="abstract">
             {{content.ieoName}}
         </div>
         <div class="mainImg">
-            <img :src="content.picView" alt="">
+            <img :src="content.pic" alt="">
         </div>
         <ul>
             <li>
@@ -44,9 +44,10 @@ export default {
             endTime = this.formatTime(content.endTime),
             surplusAmount = content.surplusAmount > 0,
             resultFun = (time1, time2) => time1 - time2 > 0,
-            compareStAndNow = resultFun(nowTime, startTime) > 0,//查看当前时间是否在开始时间之后;
-            compareNowAndEnd = resultFun(endTime, nowTime) > 0;//查看当前时间是否在结束时间之前;
+            compareStAndNow = resultFun(nowTime, startTime),//查看当前时间是否在开始时间之后;
+            compareNowAndEnd = resultFun(endTime, nowTime);//查看当前时间是否在结束时间之前;
         let str = "";
+        console.log(compareStAndNow)
         if (!compareStAndNow) {
             str = "预热中"
         } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
@@ -61,6 +62,7 @@ export default {
             return new Date(date).getTime();
         },
         getDetail() {
+            console.log(this.content)
             this.$router.push({
                 name: "IeoDetail",
                 params: {

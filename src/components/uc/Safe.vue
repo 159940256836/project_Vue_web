@@ -35,7 +35,7 @@
                             <div class="account-item">
                                 <div class="account-item-in">
                                     <Icon type="md-card" size="18" color="#00b5f6" />
-                                    <span class="card-number">{{$t('uc.safe.verified')}}</span>
+                                    <span class="card-number">身份认证</span>
                                     <p v-if="user.realVerified==1" class="bankInfo" style="color: grey;">{{user.realName}}</p>
                                     <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo" style="color: #f0a70a;">
                                         审核未通过{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}，请重试。

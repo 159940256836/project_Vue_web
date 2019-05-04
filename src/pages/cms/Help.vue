@@ -1,5 +1,5 @@
 <template>
-  <div class="help">
+  <div class="help common">
     <img class="bannerimg" src="../../assets/images/help_banner.png">
     <div class="help_container">
       <h1>帮助中心</h1>
@@ -28,7 +28,7 @@
   position: relative;
   overflow: hidden;
   padding-bottom: 50px;
-  padding-top: 60px;
+//   padding-top: 60px;
 }
 .help .bannerimg {
   display: block;
@@ -95,7 +95,9 @@
 </style>
 
 <script>
+import {minHeightMinx} from "../../minxs/minxs"
 export default {
+    mixins:[minHeightMinx],
   data() {
     return {
       helpData: []
@@ -106,7 +108,7 @@ export default {
   },
   methods: {
     getData() {
-      this.$http.post(this.host + "/uc/ancillary/more/help").then(res => {
+      this.$http.post(this.host + "/uc/ancillary/more/help",{}).then(res => {
         if (res.status == 200 && res.body.code == 0) {
           this.helpData = res.body.data;
         } else {

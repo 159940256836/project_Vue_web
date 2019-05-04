@@ -209,7 +209,8 @@ span.price {
 }
 
 .trade_bd {
-    padding: 0 30px;
+    padding: 10px 30px;
+    overflow: hidden;
 }
 
 .trade_bd .panel {
@@ -217,7 +218,7 @@ span.price {
     z-index: 2;
     float: left;
     width: 50%;
-    height: 315px;
+    height: 340px;
     margin-top: 0;
     margin-right: 0;
     border: 0 solid transparent;

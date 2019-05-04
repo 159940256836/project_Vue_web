@@ -9,7 +9,7 @@
                 <div class="nav">
                     <router-link to="/">{{$t("header.index")}}</router-link>
                     <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
-                    <router-link to="/otc/trade/usdt">{{$t("header.exchange")}}</router-link>
+                    <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
                     <router-link to="/help">帮助</router-link>
                     <router-link to="/notice">{{$t("header.service")}}</router-link>
                     <router-link to="/Ieo">上币优选</router-link>
@@ -20,18 +20,18 @@
                         </a>
                         <div class="api" slot="content">
                             <div class="ios">
-                                <img src="../src/assets/images/app_ios.png" alt="">
+                                <!-- <img src="../src/assets/images/app_ios.png" alt="">
                                 <div class="tips">
                                     <img src="../src/assets/images/ios.png" alt="">
                                     <span>IOS</span>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="andrio">
-                                <img src="../src/assets/images/app_andraio.png" alt="">
+                                <!-- <img src="../src/assets/images/app_andraio.png" alt="">
                                 <div class="tips">
                                     <img src="../src/assets/images/andraio.png" alt="">
                                     <span>Android</span>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </poptip>
@@ -70,10 +70,10 @@
                             {{languageValue}}
                             <Icon type="arrow-down-b"></Icon>
                         </a>
-                        <DropdownMenu slot="list" id="change_language_theme">
+                        <!-- <DropdownMenu slot="list" id="change_language_theme">
                             <DropdownItem v-if="languageValue=='简体中文'" name="en">English</DropdownItem>
                             <DropdownItem v-else name="cn">简体中文</DropdownItem>
-                        </DropdownMenu>
+                        </DropdownMenu> -->
                     </Dropdown>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                             <span>{{$t("footer.gsjj")}}</span>
                         </li>
                         <li>
-                            <router-link to="/about-us">{{$t("footer.gywm")}}</router-link>
+                            <router-link to="/">{{$t("footer.gywm")}}</router-link>
                         </li>
                     </ul>
                     <ul>
@@ -120,13 +120,13 @@
                         <li class="wechatclick">
                             <poptip width="200">
                                 <a href="javascript:;" class="wechat">客服邮箱</a>
-                                <div slot="content">
+                                <!-- <div slot="content">
                                     <p style="color:#333;text-align:center;">service@bhuo.top</p>
-                                </div>
+                                </div> -->
                             </poptip>
                         </li>
                         <li>
-                            <a href="https://0.plus/bihuoguanfang" target="_blank">{{$t('footer.biyong')}}</a>
+                            <!-- <a href="https://0.plus/bihuoguanfang" target="_blank">{{$t('footer.biyong')}}</a> -->
                         </li>
                     </ul>
                 </div>

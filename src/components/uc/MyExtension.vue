@@ -34,14 +34,14 @@
                     <Table stripe :columns="tablePromoteFriends" :data="dataPromoteFriends.content||[]" :loading="loading" :disabled-hover="true"></Table>
                     <div class="page-wrap">
                         <span>共{{dataPromoteFriends.totalElements}}条</span>
-                        <Page :current="currentPage" :total="parseInt(dataPromoteFriends.totalElements)" :page-size="pageSize" @on-change="promoteFriendsPageChange"></Page>
+                        <Page :current="currentPage" :total="parseInt(dataPromoteFriends.totalElements)" @on-change="promoteFriendsPageChange"></Page>
                     </div>
                 </div>
                 <div class="message" v-else-if="this.changeActive==1">
-                    <Table stripe :columns="tablePromoteMoney" :page-size="pageSize" :data="dataPromoteMoney.content||[]" :loading="loading" :disabled-hover="true"></Table>
+                    <Table stripe :columns="tablePromoteMoney" :data="dataPromoteMoney||[]" :loading="loading" :disabled-hover="true"></Table>
                     <div class="page-wrap">
                         <span>共{{dataPromoteMoney.totalElements}}条</span>
-                        <Page :current="currentPage" :total="parseInt(dataPromoteMoney.totalElements)" :page-size="pageSize" @on-change="promoteMoneyPageChange"></Page>
+                        <Page :current="currentPage" :total="parseInt(dataPromoteMoney.totalElements)"  @on-change="promoteMoneyPageChange"></Page>
                     </div>
                 </div>
             </div>
@@ -49,6 +49,10 @@
     </div>
 </template>
 <script>
+const getParamFun = (obj) => (pageNum) => Object.assign(obj, pageNum);
+const getParams = getParamFun({ pageSize: 10, type: "", createStartTime: "", createEndTime: '' });
+// 积分类型 PROMOTION_GIVING  LEGAL_RECHARGE_GIVING  COIN_RECHARGE_GIVING("")
+const map = new Map([[0,'推广'],[1,'法币充值赠送'],[2,'币币充值赠送']]);
 export default {
     components: {},
     data() {
@@ -86,16 +90,17 @@ export default {
                     key: "level",
                     align: "center",
                     render: function (h, params) {
-                        return h("span", "V"+(parseInt(params.row.level) + 1))
+                        return h("span", "V" + (parseInt(params.row.level) + 1))
                     }
                 }
             ],
             dataPromoteFriends: {},
             tablePromoteMoney: [
                 {
-                    title: this.$t("uc.extension.symbol"),
-                    key: "symbol",
-                    align: "center"
+                    title: this.$t("uc.extension.type"),
+                    render:(h,params)=>{
+                        return h("div",{},map.get(params.row.type))
+                    }
                 },
                 {
                     title: this.$t("uc.extension.amount"),
@@ -105,11 +110,6 @@ export default {
                 {
                     title: this.$t("uc.extension.amounttime"),
                     key: "createTime",
-                    align: "center"
-                },
-                {
-                    title: this.$t("uc.extension.remark"),
-                    key: "remark",
                     align: "center"
                 }
             ],
@@ -130,8 +130,7 @@ export default {
         },
         qrcodeM() {
             var promotionCode = this.user.promotionCode;
-            // 上生产的时候域名更换;
-            this.qrcode.value = "https://bhuo.top/#/register?agent=" + promotionCode;
+            this.qrcode.value = this.host + "/#/register?agent=" + promotionCode;
             this.qrcode.code = promotionCode;
         },
         onCopy(e) {
@@ -160,9 +159,9 @@ export default {
             this.currentPage = data;
             this.getPromotionMoney(data, this.pageSize);
         },
-        getPromotionMoney(pageNo = 1, pageSize = 10) {
-            this.$http
-                .post(this.host + "/uc/promotion/reward/record", { pageNo, pageSize })
+        getPromotionMoney(pageNum = 1) {
+            const params = getParams({pageNum});
+            this.$http.post(this.host + "/uc/integration/record/page_query",params)
                 .then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {

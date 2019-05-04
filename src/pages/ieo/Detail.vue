@@ -60,7 +60,7 @@
                         <Input v-model="password" placeholder="请输入交易密码" />
                     </li>
                     <li>
-                        <div class="btn"><Button long @click="startSale">募集结束</Button></div>
+                        <div class="btn"><span long @click="startSale">{{text}}</span></div>
                         <p>进行认购即为已阅读并同意<a href="">&lt&lt风险提示&gt&gt</a></p>
                     </li>
                 </ul>
@@ -82,6 +82,7 @@ export default {
     mixins: [minHeightMinx],
     data() {
         return {
+            text:"",
             raiseCoinNum: "",
             number: true,
             base: "",
@@ -102,7 +103,7 @@ export default {
                 pageSize: 1,
                 pageNum: 1,
                 status: '',
-                id: ""
+                id: this.$route.params.id
             };
             this.init(params);
         } else {
@@ -128,8 +129,15 @@ export default {
                         this.content = resp.data[0] || {};
                         this.base = 1;
                         this.exchange = this.multity(1, this.content.ratio);
-                        !this.isLogin && (this.raiseCoinNum = "--");
-                        this.isLogin && this.getStatus(this.content)&&resolve(this.content.raiseCoin);
+                        if(!this.isLogin){
+                            this.raiseCoinNum = "--";
+                            this.text = "去登录";
+                            this.getStatus(this.content);
+                            return;
+                        }else{
+                            this.getStatus(this.content);
+                            resolve(this.content.raiseCoin);
+                        }
                     });
                 } else {
                     this.$Notice.error({
@@ -161,6 +169,10 @@ export default {
             })
         },
         startSale() {//发起募集
+            if(!this.isLogin){
+                this.$router.push("/login");
+                return;
+            }
             if (this.isNaNFun(this.base)) {
                 this.$Message.error("请输入符合规格的持有币种");
                 return;
@@ -212,7 +224,8 @@ export default {
             } else if (!compareNowAndEnd || !surplusAmount) {
                 str = "已完成"
             }
-            this.status = str;
+            console.log(this.status);
+            this.text = this.status = str;
         },
         formatTime(date) {
             return new Date(date).getTime();
@@ -365,6 +378,9 @@ $lineColor: rgb(71, 100, 146);
                     .btn {
                         width: 100%;
                         margin-bottom: 15px;
+                        text-align: center;
+                        background-color: rgb(32, 59, 139);
+                        line-height:2.5;
                     }
                 }
             }
@@ -375,7 +391,7 @@ $lineColor: rgb(71, 100, 146);
 
 <style lang="scss">
 $lineColor: rgb(71, 100, 146);
-.common {
+.ieo_detail_box .common {
     .ivu-input {
         background-color: rgb(15, 20, 36);
         border: 1px solid $lineColor;
@@ -394,12 +410,6 @@ $lineColor: rgb(71, 100, 146);
         span {
             font-size: 18px;
         }
-    }
-    .ivu-btn {
-        background: rgb(40, 40, 42);
-        border-color: transparent;
-        color: #fff;
-        font-size: 24px;
     }
 }
 .table {

@@ -401,7 +401,7 @@
             register: '注册',
             login: '登录',
             welcomelogin: '欢迎登录',
-            usertip: '手机号',
+            usertip: '手机号/邮箱',
             pwdtip: '密码',
             validatecodeload: '正在加载验证码',
             validatemsg: '请先完成验证',
@@ -889,7 +889,7 @@
         extension: {
             title1: '推广链接',
             title2: '推广好友',
-            title3: '我的佣金',
+            title3: '我的积分',
             linkdesc: '以下网址是您对外界进行推广的地址，您可以通过朋友、QQ、微信、微博、博客、论坛或者自己的网站进行推广，所有通过该地址访问过来的人，注册后就都属于您的用户，而当这些用户在本站提交策略时，您就可以赚取佣金了，详细的推广情况可到访问记录里查看。',
             linktitle: '您的推广链接',
             copy: '复制',
@@ -902,8 +902,8 @@
             currcommission: '当前佣金',
             managerfee: '管理费',
             yuan: '元',
-            symbol: '币种',
-            amount: '金额',
+            type: '类型',
+            amount: '数量',
             remark: '备注',
             amounttime: '发放时间',
         }

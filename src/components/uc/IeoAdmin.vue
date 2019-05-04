@@ -1,6 +1,6 @@
 
 <template>
-    <div class="nav-rights common">
+    <div class="nav-rights">
         <Form class="form" :model="formItem" :label-width="65" inline>
             <FormItem label="项目名称:">
                 <Input v-model="formItem.ieoName" type="text"></Input>
@@ -8,7 +8,7 @@
             <FormItem label="认购时间:">
                 <DatePicker type="daterange" v-model="formItem.date" style="width:180px;"></DatePicker>
             </FormItem>
-            <FormItem label="认购状态: ">
+            <FormItem label="认购状态:">
                 <Select v-model="formItem.status" style="width:100px;">
                     <Option value="0">失败</Option>
                     <Option value="1">成功</Option>
@@ -21,7 +21,7 @@
         </Form>
         <div class="page">
             <Table :columns="columns" :data="data"></Table>
-            <Page :current="pageNo" :total="total" :page-size="pageSize" @on-change="changePage" class="pageWrapper"></Page>
+            <Page :current="pageNo" :total="total"  @on-change="changePage" class="pageWrapper"></Page>
         </div>
     </div>
 </template>
@@ -82,7 +82,6 @@ export default {
             },
             pageNo: 1,
             data: [],
-            pageSize:1,
             paramsFun: function () { },
             params: {
                 pageNum: 1,
@@ -106,7 +105,7 @@ export default {
             startTime,
             endTime
         });
-        this.paramsFun = getParams(mobile, userName, 1);
+        this.paramsFun = getParams(mobile, userName, 10);
         this.init();
     },
     methods: {

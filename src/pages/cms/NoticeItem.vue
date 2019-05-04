@@ -3,7 +3,7 @@
     <div class="banner">
     </div>
     <div class="content-wrap">
-      <router-link class="link" to="../notice">
+      <!-- <router-link class="link" to="../notice">
         <公告列表</router-link>
           <div class="header">
             <h2>{{data.info.title}}</h2>
@@ -23,7 +23,12 @@
                 <p>{{data.next.title}}</p>
               </router-link>
             </div>
-          </div>
+          </div> -->
+        <div class="content">
+            <h4 class="title">{{data.title}}</h4>
+            <div v-html="data.content"></div>
+        </div>
+        
     </div>
   </div>
 </template>
@@ -72,9 +77,7 @@ export default {
       //     this.content = result.data.content;
       //   }
       // });
-      this.$http
-        .post(this.host + "/uc/announcement/more", { id })
-        .then(response => {
+      this.$http.get(this.host + `/uc/announcement/${id}`).then(response => {
           var result = response.body;
           if (result.code == 0) {
             const data = result.data;
@@ -96,7 +99,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .notice {
   background: #fff;
   padding-bottom: 20px;
@@ -121,6 +124,13 @@ export default {
 .header span {
   padding: 0 10px;
   color: #999;
+}
+.content-wrap .content{
+    .title{
+        font-size: 20px;
+        line-height: 3;
+        text-align: center;
+    }
 }
 </style>
 <style lang="scss">
