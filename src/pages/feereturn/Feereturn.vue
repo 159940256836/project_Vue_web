@@ -42,12 +42,12 @@ export default {
                         align:'center',
                                             },
                      {//当日挖矿手续费返还
-                        title: "Trans-Fee Mining reimbursement(BHB)",
+                        title: "Trans-Fee Mining reimbursement",
                         key: 'returnCharge',
                         align:'center',
                     },
                     {//当日挖矿收入倍增计划返还;
-                        title: "Incentive Program for FCoin reimbursement（BHB）",
+                        title: "Incentive Program for FCoin reimbursement",
                         key: 'todayChargeReturn',
                         align:'center'
                     }
@@ -60,7 +60,7 @@ export default {
                         maxWidth:100
                     },
                     {//当日BHB均价 eth
-                        title: "当日BIHUO均价(ETH)",
+                        title: "当日币多网均价(ETH)",
                         key: 'averageprice',
                         align:'center',
                         // width:180

@@ -23,7 +23,7 @@ Vue.use(vueResource);
 Vue.use(VueI18n);
 
 Vue.prototype.host = "http://39.100.79.158:80"; //测试
-// Vue.prototype.host = "http://192.168.0.110:6001"; //郭帅
+// Vue.prototype.host = "http://192.168.0.110:6001"; //
 Vue.prototype.api = Api;
 Vue.http.options.credentials = true;
 Vue.http.options.emulateJSON = true;

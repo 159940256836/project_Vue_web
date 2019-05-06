@@ -1,6 +1,6 @@
 <template>
     <div class="plate_distribute">
-        <img src="../../assets/images/text.png" alt="" class="title-img">
+        <!-- <img src="../../assets/images/text.png" alt="" class="title-img"> -->
         <div class="abstract">
             <div class="title">
                 <span class="circle">●</span>

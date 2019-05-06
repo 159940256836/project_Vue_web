@@ -523,8 +523,8 @@ export default {
                     this.formValidate1.bankNo = this.user.bankInfo == null ? '' : this.user.bankInfo.cardNo
                     this.formValidate2.alipay = this.user.alipay == null ? '' : this.user.alipay.aliNo
                     this.formValidate3.wechat = this.user.wechatPay == null ? '' : this.user.wechatPay.wechat
-                    this.aliImg = this.aliPreview = this.user.alipay == null ? 'https://bihuo-ex.oss-ap-southeast-1.aliyuncs.com/4851.png' : this.user.alipay.qrCodeUrl;
-                    this.weImg = this.wePreview = this.user.wechatPay == null ? 'https://bihuo-ex.oss-ap-southeast-1.aliyuncs.com/4851.png' : this.user.wechatPay.qrWeCodeUrl;
+                    this.aliImg = this.aliPreview = this.user.alipay == null ? 'https://币多网-ex.oss-ap-southeast-1.aliyuncs.com/4851.png' : this.user.alipay.qrCodeUrl;
+                    this.weImg = this.wePreview = this.user.wechatPay == null ? 'https://币多网-ex.oss-ap-southeast-1.aliyuncs.com/4851.png' : this.user.wechatPay.qrWeCodeUrl;
 
                 } else {
                     this.msg = resp.message;

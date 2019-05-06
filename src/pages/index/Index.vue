@@ -35,6 +35,13 @@
                     </Carousel>
                 </div>
             </div>
+            <div class="section" id="hot">
+                <div v-for="(item,index) in hostSymbolList" :key="index">
+                    {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}}
+                    <SvgLine :values="item.trend"></SvgLine>
+                </div>
+            </div>
+            <!-- <SvgLine v-for="(item, index) in coins" :key="index" :values="item.trend"></SvgLine> -->
             <!-- 首页行情图 -->
             <div class="section" id="page2">
                 <div class="page2nav">
@@ -111,6 +118,14 @@ var SockJS = require("sockjs-client");
 var moment = require("moment");
 import SvgLine from "@components/exchange/SvgLine.vue";
 import $ from "@js/jquery.min.js";
+const Right = x => ({
+    map: f => Right(f(x)),
+    fold: (f, g) => g(x)
+});
+const Left = x => ({
+    map: f => Left(x),
+    fold: (f, g) => f(x)
+})
 export default {
     components: { SvgLine },
     data() {
@@ -332,36 +347,34 @@ export default {
                     render: function (h, params) {
                         let valus = null;
                         let len = params.row.trend.length;
-                        valus =
-                            len > 0
-                                ? params.row.trend
-                                : [
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0
-                                ];
+                        valus = len > 0 ? params.row.trend
+                            : [
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0
+                            ];
                         return h(SvgLine, {
                             props: {
                                 values: valus,
@@ -472,7 +485,12 @@ export default {
                                     },
                                     params.row.memberName
                                 ),
-                                h("span", {}, params.row.coin)
+                                h("span", {
+                                    style: {
+                                        fontSize: "16px",
+                                        fontWeight: 800
+                                    }
+                                }, params.row.coin)
                             ]);
                         }
                     },
@@ -716,7 +734,8 @@ export default {
             usdtList: [],
             btcList: [],
             ethList: [],
-            picList: []
+            picList: [],
+            hostSymbolList: []
         };
     },
     created: function () {
@@ -739,8 +758,12 @@ export default {
     mounted: function () {
         this.getCNYRate();
         this.getSymbol();
+        this.getHotSymbol();
     },
     methods: {
+        /**
+         * 切割大数组成小数组
+         */
         splitArray(array, num = 4) {
             let index = 0;
             let newArray = [];
@@ -748,6 +771,16 @@ export default {
                 newArray.push(array.slice(index, index += num));
             }
             return newArray;
+        },
+        /*
+         * 获取热门推荐的交易对
+        */
+        getHotSymbol() {
+            this.$http.get(this.host + '/market/overview').then(res => {
+                const resp = res.body;
+                this.hostSymbolList = resp.recommend;
+                this.startWebsockHotlist();
+            })
         },
         strde(str) {
             str = str.trim();
@@ -809,10 +842,10 @@ export default {
         init() {
             //   this.$store.commit("navigate", "nav-index");
             //   this.$store.state.HeaderActiveName = "1-1";
-            this.loadPicData();
+            this.loadPicData();//获取轮播图
             this.addClass(0);
             // this.getmoneyData();
-            this.loadDataPage(this.pageNo);
+            this.loadDataPage(this.pageNo);//获取公告
         },
         stop: function () {
             clearInterval(this.timer3);
@@ -849,45 +882,47 @@ export default {
                 $(".carsoul").animate({ top: p });
             }, 3000);
         },
+        /***
+         * 获取公告
+         */
         loadDataPage(pageIndex) {
             var param = {};
-            (param["pageNo"] = pageIndex),
-                (param["pageSize"] = this.pageSize),
-                this.$http
-                    .post(this.host + this.api.uc.announcement, param)
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            if (resp.data.content.length == 0) return;
-                            let FAQList = resp.data.content;
-                            let len = FAQList.length;
-                            let n = 2; //假设每行显示2个
-                            let lineNum = len % 2 === 0 ? len / 2 : Math.floor(len / 2 + 1);
-                            let res = [];
-                            for (let i = 0; i < lineNum; i++) {
-                                let temp = FAQList.slice(i * n, i * n + n);
-                                res.push(temp);
-                            }
-                            this.FAQList = res;
-                            this.totalNum = resp.data.totalElements;
-                            this.$nextTick(function () {
-                                this.move();
-                            });
-                        } else {
-                            this.$Notice.error({
-                                title: this.$t("common.tip"),
-                                desc: resp.message
-                            });
-                        }
+            param["pageNo"] = pageIndex;
+            param["pageSize"] = this.pageSize;
+            this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
+                var resp = response.body;
+                if (resp.code == 0) {
+                    if (resp.data.content.length == 0) return;
+                    let FAQList = resp.data.content;
+                    let len = FAQList.length;
+                    let n = 2; //假设每行显示2个
+                    let lineNum = len % 2 === 0 ? len / 2 : Math.floor(len / 2 + 1);
+                    let res = [];
+                    for (let i = 0; i < lineNum; i++) {
+                        let temp = FAQList.slice(i * n, i * n + n);
+                        res.push(temp);
+                    }
+                    this.FAQList = res;
+                    this.totalNum = resp.data.totalElements;
+                    this.$nextTick(function () {
+                        this.move();
                     });
+                } else {
+                    this.$Notice.error({
+                        title: this.$t("common.tip"),
+                        desc: resp.message
+                    });
+                }
+            });
         },
+        /***
+         * 获取到usdt对人民币的实时汇率
+         */
         getCNYRate() {
-            this.$http
-                .post(this.host + "/market/exchange-rate/usd-cny")
-                .then(response => {
-                    var resp = response.body;
-                    this.CNYRate = resp.data;
-                });
+            this.$http.post(this.host + "/market/exchange-rate/usd-cny").then(response => {
+                var resp = response.body;
+                this.CNYRate = resp.data;
+            });
         },
         donwload(type) {
             const title = this.$t("common.tip");
@@ -907,12 +942,43 @@ export default {
                     if (result.code == 0 && result.data.length > 0) {
                         const picList = result.data;
                         this.picList = this.splitArray(picList);
-                        console.log(this.picList);
                     }
                 });
         },
         getCoin(symbol) {
             return this.coins._map[symbol];
+        },
+        startWebsockHotlist() {
+            var stompClient = null;
+            var that = this;
+            var socket = new SockJS(that.host + that.api.market.ws);
+            stompClient = Stomp.over(socket);
+            stompClient.debug = true;
+            stompClient.connect({}, (frame) => {
+                //订阅价格变化消息
+                stompClient.subscribe("/topic/market/thumb", (msg) => {
+                    var resp = JSON.parse(msg.body);
+                    const list = this.hostSymbolList.filter(ele => ele.symbol == resp.symbol);
+                    const isHot = list.length > 0 ? Right(resp) : Left(null);
+                    const result = isHot.map(obj => obj.symbol == resp.symbol).fold(x => null, x => x);
+                    console.log(result);
+                    result && this.hostSymbolList.forEach((ele, index) => {
+                        if (ele.symbol == resp.symbol) {
+                            this.hostSymbolList.splice(index, 1, resp);
+                        }
+                    });
+                    // console.log(result);
+                    // if (list.length > 0) {
+                    // this.hostSymbolList.forEach((ele, index) => {
+                    //     if (ele.symbol == list[0].symbol) {
+                    //         this.hostSymbolList.splice(index, 1, resp);
+                    //     }
+                    // });
+                    // } else {
+                    //     return;
+                    // }
+                });
+            });
         },
         startWebsock() {
             var stompClient = null;
@@ -986,24 +1052,26 @@ export default {
         getSymbol() {
             this.loading = true;
             this.$http.post(this.host + this.api.market.thumbTrend, {}).then(response => {
-                    var resp = response.body;
-                    for (var i = 0; i < resp.length; i++) {
-                        var coin = resp[i];
-                        coin.price = resp[i].close;
-                        coin.rose = resp[i].chg > 0? "+" + (resp[i].chg * 100).toFixed(2) + "%": (resp[i].chg * 100).toFixed(2) + "%";
-                        coin.coin = resp[i].symbol.split("/")[0];
-                        coin.base = resp[i].symbol.split("/")[1];
-                        coin.href = (coin.coin + "_" + coin.base).toLowerCase();
-                        coin.isFavor = false;
-                        this.coins._map[coin.symbol] = coin;
-                        this.coins[coin.base].push(coin);
-                    }
-                    if (this.isLogin) {
-                        this.getFavor();
-                    }
-                    this.startWebsock();
-                    this.loading = false;
-                });
+                var resp = response.body;
+                for (var i = 0; i < resp.length; i++) {
+                    var coin = resp[i];
+                    coin.price = resp[i].close;
+                    coin.rose = resp[i].chg > 0 ? "+" + (resp[i].chg * 100).toFixed(2) + "%" : (resp[i].chg * 100).toFixed(2) + "%";
+                    coin.coin = resp[i].symbol.split("/")[0];
+                    coin.base = resp[i].symbol.split("/")[1];
+                    coin.href = (coin.coin + "_" + coin.base).toLowerCase();
+                    coin.isFavor = false;
+                    this.coins._map[coin.symbol] = coin;
+                    this.coins[coin.base].push(coin);
+
+                };
+                console.log(this.coins);
+                if (this.isLogin) {
+                    this.getFavor();
+                }
+                this.startWebsock();
+                this.loading = false;
+            });
         },
         // getFavor() {
         //   //查询自选
@@ -1020,16 +1088,16 @@ export default {
         getFavor() {
             //查询自选(收藏)
             this.$http.post(this.host + this.api.exchange.favorFind, {}).then(response => {
-                    var resp = response.body;
-                    this.coins.favor = [];
-                    for (var i = 0; i < resp.length; i++) {
-                        var coin = this.getCoin(resp[i].symbol);
-                        if (coin != null) {
-                            coin.isFavor = true;
-                            this.coins.favor.push(coin);
-                        }
+                var resp = response.body;
+                this.coins.favor = [];
+                for (var i = 0; i < resp.length; i++) {
+                    var coin = this.getCoin(resp[i].symbol);
+                    if (coin != null) {
+                        coin.isFavor = true;
+                        this.coins.favor.push(coin);
                     }
-                });
+                }
+            });
         },
         collect(index, row) {
             if (!this.isLogin) {
@@ -1116,12 +1184,20 @@ li {
         left: 20%;
         right: 20%;
         top: 200px;
-        .bannerBox{
+        .bannerBox {
             @extend %flex;
-            >div{
+            > div {
                 width: 23%;
             }
         }
+    }
+}
+#hot {
+    padding: 30px 10%;
+    background-color: #202b3c;
+    @extend %flex;
+    > div {
+        width: 20%;
     }
 }
 #pagetips {
@@ -1300,13 +1376,24 @@ li {
             flex-wrap: wrap;
             li {
                 width: 26%;
-                background: #fff;
+                background-image: linear-gradient(
+                    180deg,
+                    #455fa2 0%,
+                    #213169 100%
+                );
                 padding: 0 10px;
                 border-radius: 5px;
-                color: #333;
+                color: #fff;
                 margin-bottom: 20px;
                 @extend %flex;
                 box-sizing: border-box;
+                &:hover {
+                    background-image: linear-gradient(
+                        180deg,
+                        #213169 0%,
+                        #455fa2 100%
+                    );
+                }
             }
         }
     }

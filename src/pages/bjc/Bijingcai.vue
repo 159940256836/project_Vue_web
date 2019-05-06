@@ -55,7 +55,7 @@
   padding-top: 60px;
   .bic_banner {
     padding-top: 29%;
-    background: url("https://bihuo-ex.oss-ap-southeast-1.aliyuncs.com/bijingcai.png")
+    background: url("https://币多网-ex.oss-ap-southeast-1.aliyuncs.com/bijingcai.png")
       no-repeat center center;
     background-size: 100% 100%;
   }

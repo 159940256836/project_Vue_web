@@ -1,6 +1,6 @@
 <template>
   <div class="agreement">
-    <img src="../../assets/images/call.png">
+    <!-- <img src="../../assets/images/call.png"> -->
     <div class="content-wrap">
       <div class="header">
         <h2>{{title}}</h2>

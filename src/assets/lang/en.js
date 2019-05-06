@@ -1,6 +1,6 @@
 module.exports = {
     topInfo: {
-        name: 'BIHUO--International Digital encryption asset trading platform',
+        name: '币多网--International Digital encryption asset trading platform',
     },
     common: {
         login: 'Log In',
@@ -817,7 +817,7 @@ module.exports = {
             certified: "already certified",
             placeholder: "Please fill in the reason for cancellation",
             apply: 'Apply to become business',
-            become: "Become BIHUO Certified Business and enjoy more transaction privileges",
+            become: "Become 币多网 Certified Business and enjoy more transaction privileges",
             zhusnhu: "Businesses enjoy exclusive advertising booths to increase transaction success",
             tijiaoziliao: "Submit merchant authentication information",
             place: "Please upload the prepared merchant authentication information to the platform and submit it",
@@ -928,9 +928,9 @@ module.exports = {
         message3: 'Multiple digital currencies are traded at 7X24 hours',
         // message1: 'Bank-level security technologies such as SSL and dynamic authentication to ensure transaction security; support multiple digital currency transactions',
         // message2: 'Strict project entry threshold to ensure the interests of platform users; 100% margin, wallet hot and cold isolation, to ensure the safety of user funds',
-        // message3: 'BIHUO Exchange supports 10,00 transactions per second, giving users a hearty transaction experience',
+        // message3: '币多网 Exchange supports 10,00 transactions per second, giving users a hearty transaction experience',
         message4: 'Multi-terminal APP, easily traded between',
-        message5: 'BIHUO international digital encryption asset trading platform mobile client, focusing on palm trading experience',
+        message5: '币多网 international digital encryption asset trading platform mobile client, focusing on palm trading experience',
     },
     footer: {
         wechatkefu: "wechat service",
@@ -964,16 +964,16 @@ module.exports = {
         checkMineprinciple: "View the principle of mining",
         checkFlowVolum: 'Inspection of circulation',
         checkLockPosition: 'Check the lock situation',
-        BHBregister: "BIHUO account registration",
+        BHBregister: "币多网 account registration",
         tibi: "The time and limit of the payment of the money to the bill",
         line_plane: "Announcement on BHB's on-line plan, circulation and service fee return",
-        fenpeijizhi: 'A description of the BIHUO income distribution mechanism',
+        fenpeijizhi: 'A description of the 币多网 income distribution mechanism',
         jiangli_jihua: "Inviting the mining Award Scheme",
         friend_fanhuan: "Invite friends, earn extra fee and return"
     },
     plate: {
         title: "Platform income distribution scheme（BHB Holder's equity）",
-        content1: "As described in the white paper, BIHUO will take up 80% of the platform (after deduct Taxes and fees )The income is allocated to BHB holders, and 20% of revenue is used to support R & D and operation of the platform.",
+        content1: "As described in the white paper, 币多网 will take up 80% of the platform (after deduct Taxes and fees )The income is allocated to BHB holders, and 20% of revenue is used to support R & D and operation of the platform.",
         content2: "The distribution of income takes days as a distribution cycle, and June 6, 2018 as the first distribution day. Every day after that, the total income to be distributed on the previous day will be allocated to BHB holders in proportion.",
         content3: "（notice：1. the BHB here only refers to the BHB that has been released / circulated. See also【",
         content3_1: 'Note on the ratio of BHB circulation / participation in income distribution',
@@ -1001,8 +1001,8 @@ module.exports = {
         todayChargeReturn: "Incentive Program for FCoin reimbursement（BHB）"
     },
     aboutUs: {
-        c1: "BIHUO international digital encryption asset trading platform is a comprehensive digital asset trading platform. We have the leading technology strength, the excellent customer service and a good user experience, and provide a free online exchange platform for the majority of digital currency enthusiasts.",
-        c2: "BIHUO international digital encryption asset trading platform also provides one-stop blockchain service, including planning of digital currency white paper , adjustment of encryption algorithm, research and development of digital currency, launched of trading platform.",
-        c3: "BIHUO international digital encrypted asset trading platform overseas operation centers are set up in Singapore, Cambodia and Marshall respectively. There are three offices in Beijing, Zhengzhou and Shenzhen. The Chinese headquarters is set up in Qingshuiwan international information industrial park in Lingshui, Hainan province."
+        c1: "币多网 international digital encryption asset trading platform is a comprehensive digital asset trading platform. We have the leading technology strength, the excellent customer service and a good user experience, and provide a free online exchange platform for the majority of digital currency enthusiasts.",
+        c2: "币多网 international digital encryption asset trading platform also provides one-stop blockchain service, including planning of digital currency white paper , adjustment of encryption algorithm, research and development of digital currency, launched of trading platform.",
+        c3: "币多网 international digital encrypted asset trading platform overseas operation centers are set up in Singapore, Cambodia and Marshall respectively. There are three offices in Beijing, Zhengzhou and Shenzhen. The Chinese headquarters is set up in Qingshuiwan international information industrial park in Lingshui, Hainan province."
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="agreement">
-    <img src="../../assets/images/call.png">
+    <!-- <img src="../../assets/images/call.png"> -->
     <div class="agreement_tab">
       <div class="static_main">
         <router-link to="/about-rule">{{$t('cms.exchangerule')}}</router-link>
@@ -13,8 +13,8 @@
 
       <div class=WordSection1 style='layout-grid:15.6pt'>
         <p class=MsoNormal align=left style='text-align:left'><span style='font-family:
-Microsoft YaHei'>本协议及附加协议适用于您的访问和使用由<span lang=EN-US>BIHUO</span>（网址：</span><span
-          lang=EN-US style=''>http://bhuo.top）（以下简称“<span lang=EN-US>BIHUO(币火)</span>”、“本网站”或“我们”）提供的数字资产投资交易服务（统称为“本服务”）。签订其他有关本网站所提供的产品的相关协议不会影响本协议的生效。如果您代表任何机构使用本服务，您声明并保证（<span
+Microsoft YaHei'>本协议及附加协议适用于您的访问和使用由<span lang=EN-US>币多网</span>（网址：</span><span
+          lang=EN-US style=''>http://bhuo.top）（以下简称“<span lang=EN-US>币多网(币火)</span>”、“本网站”或“我们”）提供的数字资产投资交易服务（统称为“本服务”）。签订其他有关本网站所提供的产品的相关协议不会影响本协议的生效。如果您代表任何机构使用本服务，您声明并保证（<span
           lang=EN-US>1</span>）该机构是符合当地法律法规的合法机构，（<span lang=EN-US>2</span>）您有权代表该机构接受本协议。如果您违反本协议，该机构同意对您的行为负责。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left'><span style='font-family:
@@ -25,7 +25,7 @@ text-indent:0cm'><b><span lang=EN-US style=''>一、</span></b><b><span
           style=''>协议修订</span></b></p>
 
         <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US
-                                                                    style='background:white'>BIHUO(币火)</span><span style='font-family:
+                                                                    style='background:white'>币多网(币火)</span><span style='font-family:
 Microsoft YaHei;background:white'>保留不时修订本协议、并以网站公示的方式进行公告、不再单独通知您的权利，变更后的协议会在本协议首页标注变更时间，一经在网站公布，立即自动生效。您应不时浏览及关注本协议的更新变更时间及更新内容，如您不同意相关变更，应当立即停止使用本网站服务；您继续使用本网站服务，即表示您接受并同意经修订的协议的约束。</span></p>
 
         <p class=MsoNormal align=left style='margin-left:0cm;text-align:left;
@@ -35,7 +35,7 @@ text-indent:0cm;'><b><span lang=EN-US style=''>二、</span></b><b><span
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>本服务仅适用于<span lang=EN-US>18</span>岁或以上的用户。通过访问或使用我们的服务，您声明并确保您至少年满<span
           lang=EN-US>18</span>岁，没有被剥夺过适用本服务的权利。您也保证您不在任何贸易或经济制裁清单中，如联合国安理会制裁清单，也不受香港金融管理局、香港海关等香港行政执法机构限制或禁止适用任何交易平台。此外，<span
-          lang=EN-US>BIHUO(币火)</span>可能不会在所有国家或地区提供本服务，并可能会对受限制地区的用户提供部分或不提供本服务，其中包括中国香港，古巴、伊朗、朝鲜、克里米亚、苏丹、马来西亚、叙利亚、美国<span
+          lang=EN-US>币多网(币火)</span>可能不会在所有国家或地区提供本服务，并可能会对受限制地区的用户提供部分或不提供本服务，其中包括中国香港，古巴、伊朗、朝鲜、克里米亚、苏丹、马来西亚、叙利亚、美国<span
           lang=EN-US>[</span>包括所有美国领土，如波多黎各、美属萨摩亚、关岛、北马里亚纳群岛邦、美属维尔京群岛（圣克罗伊岛，圣约翰岛和圣托马斯岛）<span
           lang=EN-US>]</span>、孟加拉国、玻利维亚、厄瓜多尔和吉尔吉斯斯坦。本协议内容不受用户所属国家或地区法律的排斥。因此，如果您不符合这些要求，请勿使用我们的服务。</span></p>
 
@@ -79,14 +79,14 @@ text-indent:0cm;'><b><span lang=EN-US style=''>四、</span></b><b><span
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>我们提供一个包含数字资产的在线交易平台，用于交易数字资产和衍生品，并提供保证金贷款服务。交易者在我们的平台上进行交易<span
-          lang=EN-US>; BIHUO(币火)</span>作为平台提供商不参与实际交易。交易者必须在开始交易之前开立账户并预存数字资产。<span
-          lang=EN-US>BIHUO(币火)</span>不接受法定货币，也不适用法定货币结算，因此我们是一个仅提供数字资产间交易的平台。交易者可以随时要求提取其数字资产，但须遵守本协议的限制。</span></p>
+          lang=EN-US>; 币多网(币火)</span>作为平台提供商不参与实际交易。交易者必须在开始交易之前开立账户并预存数字资产。<span
+          lang=EN-US>币多网(币火)</span>不接受法定货币，也不适用法定货币结算，因此我们是一个仅提供数字资产间交易的平台。交易者可以随时要求提取其数字资产，但须遵守本协议的限制。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          lang=EN-US style='background:white'>BIHUO(币火)</span><span
+          lang=EN-US style='background:white'>币多网(币火)</span><span
           style='background:white'>会尽力确保网站上信息的准确性。网站上的信息和内容如有更改，恕不另行通知，且仅为协助用户以做出独立决定。<span
-          lang=EN-US>BIHUO(币火)</span>已采取合理措施确保网站信息的准确性。但是，我们不保证本网站所提供的任何服务或产品内容的准确性，适用性，可靠性，完整性，性能和<span
-          lang=EN-US>/</span>或恰当性，且不对任何直接或间接造成的损失或损害，信息传递的延迟或失败承担责任。 <span lang=EN-US>BIHUO(币火)</span>对此类信息的使用或解释不承担任何责任。</span></p>
+          lang=EN-US>币多网(币火)</span>已采取合理措施确保网站信息的准确性。但是，我们不保证本网站所提供的任何服务或产品内容的准确性，适用性，可靠性，完整性，性能和<span
+          lang=EN-US>/</span>或恰当性，且不对任何直接或间接造成的损失或损害，信息传递的延迟或失败承担责任。 <span lang=EN-US>币多网(币火)</span>对此类信息的使用或解释不承担任何责任。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>用户必须自行准备如下设备和承担如下开支：</span></p>
@@ -100,28 +100,28 @@ text-indent:0cm;'><b><span lang=EN-US style=''>四、</span></b><b><span
           style='background:white'>上网开支，包括并不限于网络接入费、上网设备租用费、手机流量费等。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          style='background:white'>用户在接受<span lang=EN-US>BIHUO(币火)</span>各项服务的同时，同意接受<span
-          lang=EN-US>BIHUO(币火)</span>提供的各类信息服务。用户在此授权<span lang=EN-US>BIHUO(币火)</span>可以向其电子邮件、手机、通信地址等发送商业信息。用户有权选择不接受<span
-          lang=EN-US>BIHUO(币火)</span>提供的各类信息服务，并进入<span lang=EN-US>BIHUO(币火)</span>相关页面进行更改。</span></p>
+          style='background:white'>用户在接受<span lang=EN-US>币多网(币火)</span>各项服务的同时，同意接受<span
+          lang=EN-US>币多网(币火)</span>提供的各类信息服务。用户在此授权<span lang=EN-US>币多网(币火)</span>可以向其电子邮件、手机、通信地址等发送商业信息。用户有权选择不接受<span
+          lang=EN-US>币多网(币火)</span>提供的各类信息服务，并进入<span lang=EN-US>币多网(币火)</span>相关页面进行更改。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          style='background:white'>用户理解并同意，<span lang=EN-US>BIHUO(币火)</span>的服务是按照现有技术和条件所能达到的现状提供的。<span
-          lang=EN-US>BIHUO(币火)</span>会尽最大努力向用户提供服务，确保服务的连贯性和安全性；但<span lang=EN-US>BIHUO(币火)</span>不能随时预见和防范法律、技术以及其他风险，包括但不限于不可抗力、病毒、木马、黑客攻击、系统不稳定、第三方服务瑕疵、政府行为等原因可能导致的服务中断、数据丢失以及其他的损失和风险。</span></p>
+          style='background:white'>用户理解并同意，<span lang=EN-US>币多网(币火)</span>的服务是按照现有技术和条件所能达到的现状提供的。<span
+          lang=EN-US>币多网(币火)</span>会尽最大努力向用户提供服务，确保服务的连贯性和安全性；但<span lang=EN-US>币多网(币火)</span>不能随时预见和防范法律、技术以及其他风险，包括但不限于不可抗力、病毒、木马、黑客攻击、系统不稳定、第三方服务瑕疵、政府行为等原因可能导致的服务中断、数据丢失以及其他的损失和风险。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>系统平台因下列状况无法正常运作，使用户无法使用各项服务或不能正常委托时，<span
-          lang=EN-US>BIHUO(币火)</span>不承担损害赔偿责任，该状况包括但不限于：</span></p>
+          lang=EN-US>币多网(币火)</span>不承担损害赔偿责任，该状况包括但不限于：</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>（<span lang=EN-US>1</span>）<span
-          lang=EN-US>BIHUO(币火)</span>平台公告之系统停机维护期间；</span></p>
+          lang=EN-US>币多网(币火)</span>平台公告之系统停机维护期间；</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>（<span lang=EN-US>2</span>）电信设备出现故障不能进行数据传输的；</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>（<span lang=EN-US>3</span>）因台风、地震、海啸、洪水、停电、战争、恐怖袭击等不可抗力之因素，造成<span
-          lang=EN-US>BIHUO(币火)</span>平台系统障碍不能执行业务的；</span></p>
+          lang=EN-US>币多网(币火)</span>平台系统障碍不能执行业务的；</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>（<span lang=EN-US>4</span>）由于黑客攻击、计算机病毒侵入或发作、电信部门技术调整或故障、网站升级、银行方面的问题、因政府管制而造成的暂时性关闭等影响网络正常经营的原因而造成的服务中断或者延迟；</span></p>
@@ -134,18 +134,18 @@ text-indent:0cm;'><b><span lang=EN-US style=''>四、</span></b><b><span
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>由于系统故障，网络原因，<span lang=EN-US>DDoS</span>等黑客攻击等意外因素可能导致的异常成交，行情中断，以及其他可能的异常情况，<span
-          lang=EN-US>BIHUO(币火)</span>有权根据实际情况取消异常成交结果，以及回滚某一段时间的所有成交。</span></p>
+          lang=EN-US>币多网(币火)</span>有权根据实际情况取消异常成交结果，以及回滚某一段时间的所有成交。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          lang=EN-US style='background:white'>BIHUO(币火)</span><span
+          lang=EN-US style='background:white'>币多网(币火)</span><span
           style='background:white'>的部分服务是以收费方式提供的，如用户使用收费服务，请遵守相关的协议。<span
-          lang=EN-US>BIHUO(币火)</span>可能根据实际需要对收费服务的收费标准、方式进行修改和变更，<span lang=EN-US>BIHUO(币火)</span>也可能会对部分免费服务开始收费。前述修改、变更或开始收费前，<span
-          lang=EN-US>BIHUO(币火)</span>将在相应服务页面进行通知或公告。如果用户不同意上述修改、变更或付费内容，则应停止使用该服务。</span></p>
+          lang=EN-US>币多网(币火)</span>可能根据实际需要对收费服务的收费标准、方式进行修改和变更，<span lang=EN-US>币多网(币火)</span>也可能会对部分免费服务开始收费。前述修改、变更或开始收费前，<span
+          lang=EN-US>币多网(币火)</span>将在相应服务页面进行通知或公告。如果用户不同意上述修改、变更或付费内容，则应停止使用该服务。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          lang=EN-US style='background:white'>BIHUO(币火)</span><span
+          lang=EN-US style='background:white'>币多网(币火)</span><span
           style='background:white'>不会向任何用户索取密码，不会让用户往任何非本站交易中心里提供的帐户<span
-          lang=EN-US>BTC/LTC/ETH</span>充值地址打款，请大家不要相信任何<span lang=EN-US>BIHUO(币火)</span>打折、优惠等信息，往非<span
+          lang=EN-US>BTC/LTC/ETH</span>充值地址打款，请大家不要相信任何<span lang=EN-US>币多网(币火)</span>打折、优惠等信息，往非<span
           lang=EN-US>BTC/LTC/ETH</span>交易中心提供的账户、地址里打款或币所造成的损失本站不负责任。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
@@ -210,9 +210,9 @@ text-indent:0cm;'><b><span lang=EN-US style=''>六、</span></b><b><span
           style='background:white'>数字资产交易涉及重大风险。交易或持有数字资产很有可能会造成您的损失。因此，您应该根据自己的财务状况，仔细考虑是否要交易数字资产或相关衍生品及使用杠杆。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          lang=EN-US style='background:white'>6.1 BIHUO(币火)</span><span
+          lang=EN-US style='background:white'>6.1 币多网(币火)</span><span
           style='background:white'>认为，数字资产不应该被称为钱和法定货币，因为它们不以政府或中央银行为后盾支持。<span
-          lang=EN-US>BIHUO(币火)</span>不能保证数字资产市场的有序稳定。您应该在数字资产（以及任何其他资产）交易中保持谨慎。价格会随时波动。由于价格波动，您可能会有大额的盈利或亏损。任何数字资产或交易头寸都可能发生大幅度波动，甚至可能变得毫无价值。</span></p>
+          lang=EN-US>币多网(币火)</span>不能保证数字资产市场的有序稳定。您应该在数字资产（以及任何其他资产）交易中保持谨慎。价格会随时波动。由于价格波动，您可能会有大额的盈利或亏损。任何数字资产或交易头寸都可能发生大幅度波动，甚至可能变得毫无价值。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           lang=EN-US style='background:white'>6.2 </span><span
@@ -225,90 +225,90 @@ text-indent:0cm;'><b><span lang=EN-US style=''>六、</span></b><b><span
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           lang=EN-US style='background:white'>6.4 </span><span
           style='background:white'>在使用本服务时，若用户因为网站交易规则中潜在的尚未发现的某种漏洞而产生的不当得利，本站将联系用户追回，您必须有效予以配合，否则本站将采取包括但不限于限制账户交易、冻结账户资金、向有管辖权的法院起诉等追索措施，因用户不予有效配合而给<span
-          lang=EN-US>BIHUO(币火)</span>产生的追索费用也将由您承担。</span></p>
+          lang=EN-US>币多网(币火)</span>产生的追索费用也将由您承担。</span></p>
 
         <p class=MsoNormal align=left style='margin-left:0cm;text-align:left;
 text-indent:0cm;'><b><span lang=EN-US style=''>七、</span></b><b><span
           style=''>免责声明</span></b></p>
 
         <p style='background:white'><span lang=EN-US style='font-size:10.5pt;
-background:white'>7.1 BIHUO(币火)</span><span style='font-size:10.5pt;
+background:white'>7.1 币多网(币火)</span><span style='font-size:10.5pt;
 background:white'>不担保服务不会受中断，对服务的及时性、安全性都不作担保，不承担非因<span
-          lang=EN-US>BIHUO(币火)</span>一方网络导致的责任； </span></p>
+          lang=EN-US>币多网(币火)</span>一方网络导致的责任； </span></p>
 
         <p style='background:white'><span lang=EN-US style='font-size:10.5pt;
-background:white'>7.2 BIHUO(币火)</span><span style='font-size:10.5pt;
+background:white'>7.2 币多网(币火)</span><span style='font-size:10.5pt;
 background:white'>不担保网站平台上的信息及服务能充分满足用户的需求。对于用户在接受<span
-          lang=EN-US>BIHUO(币火)</span>服务过程中可能遇到的错误、侮辱、诽谤、不作为、淫秽、色情或亵渎事件，<span lang=EN-US>BIHUO(币火)</span>不承担法律责任<span
+          lang=EN-US>币多网(币火)</span>服务过程中可能遇到的错误、侮辱、诽谤、不作为、淫秽、色情或亵渎事件，<span lang=EN-US>币多网(币火)</span>不承担法律责任<span
           lang=EN-US>; </span></span></p>
 
         <p style='background:white'><span lang=EN-US style='font-size:10.5pt;
-background:white'>7.3 BIHUO(币火)</span><span style='font-size:10.5pt;
+background:white'>7.3 币多网(币火)</span><span style='font-size:10.5pt;
 background:white'>不对用户所发布信息的保存、修改、删除或储存失败负责。对网站上的非因<span
-          lang=EN-US>BIHUO(币火)</span>故意所导致的排版错误、疏忽等不承担责任； </span></p>
+          lang=EN-US>币多网(币火)</span>故意所导致的排版错误、疏忽等不承担责任； </span></p>
 
         <p style='background:white'><span lang=EN-US style='font-size:10.5pt;
-background:white'>7.4 BIHUO(币火)</span><span style='font-size:10.5pt;
-background:white'>有权删除<span lang=EN-US>BIHUO(币火)</span>内各类不符合法律或协议规定的信息，而保留不通知用户的权利<span
+background:white'>7.4 币多网(币火)</span><span style='font-size:10.5pt;
+background:white'>有权删除<span lang=EN-US>币多网(币火)</span>内各类不符合法律或协议规定的信息，而保留不通知用户的权利<span
           lang=EN-US>; </span></span></p>
 
         <p style='background:white'><span lang=EN-US style='font-size:10.5pt;
-background:white'>7.5 BIHUO(币火)</span><span style='font-size:10.5pt;
+background:white'>7.5 币多网(币火)</span><span style='font-size:10.5pt;
 background:white'>内所有用户所发表的用户评论，仅代表用户个人观点，并不表示本网站赞同其观点或证实其描述，本网站不承担用户评论引发的任何法律责任；
 </span></p>
 
         <p style='background:white'><span lang=EN-US style='font-size:10.5pt;
 background:white'>7.6 </span><span style='font-size:10.5pt;
-background:white'>所有发给用户的通告，<span lang=EN-US>BIHUO(币火)</span>都将通过正式的页常规的信件送达。任何非经<span
-          lang=EN-US>BIHUO(币火)</span>正规渠道获得的中奖、优惠等活动或信息，<span lang=EN-US>BIHUO(币火)</span>不承担法律责任；
+background:white'>所有发给用户的通告，<span lang=EN-US>币多网(币火)</span>都将通过正式的页常规的信件送达。任何非经<span
+          lang=EN-US>币多网(币火)</span>正规渠道获得的中奖、优惠等活动或信息，<span lang=EN-US>币多网(币火)</span>不承担法律责任；
 </span></p>
 
         <p style='background:white'><span lang=EN-US style='font-size:10.5pt;
-background:white'>7.7 BIHUO(币火)</span><span style='font-size:10.5pt;
+background:white'>7.7 币多网(币火)</span><span style='font-size:10.5pt;
 background:white'>有权根据市场情况调整充值、提现、交易等手续费费率，有权决定免费推广期的终止； </span></p>
 
         <p style='background:white'><span lang=EN-US style='font-size:10.5pt;
-background:white'>7.8 BIHUO(币火)</span><span style='font-size:10.5pt;
+background:white'>7.8 币多网(币火)</span><span style='font-size:10.5pt;
 background:white'>不会担任您使用本服务的任何交易的经纪人，中间人，代理人或顾问，并且<span
-          lang=EN-US>BIHUO(币火)</span>没有受托责任；</span></p>
+          lang=EN-US>币多网(币火)</span>没有受托责任；</span></p>
 
         <p class=MsoNormal align=left style='margin-left:0cm;text-align:left;
 text-indent:0cm;'><b><span lang=EN-US style=''>八、</span></b><b><span
           style=''>隐私声明</span></b></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          lang=EN-US style='background:white'>BIHUO(币火)</span><span
-          style='background:white'>尊重用户的隐私。<span lang=EN-US>BIHUO(币火)</span>隐私政策单独提供，描述了<span
-          lang=EN-US>BIHUO(币火)</span>如何收集，存储，披露和使用与您的隐私相关的信息。您同意<span lang=EN-US>BIHUO(币火)</span>根据<span
-          lang=EN-US>BIHUO(币火)</span>隐私政策的协议使用您的信息。</span></p>
+          lang=EN-US style='background:white'>币多网(币火)</span><span
+          style='background:white'>尊重用户的隐私。<span lang=EN-US>币多网(币火)</span>隐私政策单独提供，描述了<span
+          lang=EN-US>币多网(币火)</span>如何收集，存储，披露和使用与您的隐私相关的信息。您同意<span lang=EN-US>币多网(币火)</span>根据<span
+          lang=EN-US>币多网(币火)</span>隐私政策的协议使用您的信息。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           lang=EN-US style='background:white'>8.1 </span><span
-          style='background:white'>本协议所称之<span lang=EN-US>BIHUO(币火)</span>用户信息是指符合法律、法规及相关规定，并符合下述范围的信息：</span></p>
+          style='background:white'>本协议所称之<span lang=EN-US>币多网(币火)</span>用户信息是指符合法律、法规及相关规定，并符合下述范围的信息：</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>（<span lang=EN-US>1</span>）用户注册<span
-          lang=EN-US>BIHUO(币火)</span>时，向<span lang=EN-US>BIHUO(币火)</span>提供的个人信息；</span></p>
+          lang=EN-US>币多网(币火)</span>时，向<span lang=EN-US>币多网(币火)</span>提供的个人信息；</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>（<span lang=EN-US>2</span>）用户在使用<span
-          lang=EN-US>BIHUO(币火)</span>服务、参加网站活动或访问网站网页时，<span lang=EN-US>BIHUO(币火)</span>自动接收并记录的用户浏览器端或手机客户端数据，包括但不限于<span
+          lang=EN-US>币多网(币火)</span>服务、参加网站活动或访问网站网页时，<span lang=EN-US>币多网(币火)</span>自动接收并记录的用户浏览器端或手机客户端数据，包括但不限于<span
           lang=EN-US>IP</span>地址、网站<span lang=EN-US>Cookie</span>中的资料及用户要求取用的网页记录；</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>（<span lang=EN-US>3</span>）<span
-          lang=EN-US>BIHUO(币火)</span>从商业伙伴处合法获取的用户个人信息；</span></p>
+          lang=EN-US>币多网(币火)</span>从商业伙伴处合法获取的用户个人信息；</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>（<span lang=EN-US>4</span>）其它<span
-          lang=EN-US>BIHUO(币火)</span>通过合法途径获取的用户个人信息。</span></p>
+          lang=EN-US>币多网(币火)</span>通过合法途径获取的用户个人信息。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          lang=EN-US style='background:white'>8.2 BIHUO(币火)</span><span
+          lang=EN-US style='background:white'>8.2 币多网(币火)</span><span
           style='background:white'>承诺：</span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          style='background:white'>非经法定原因或用户事先许可，<span lang=EN-US>BIHUO(币火)</span>不会向任何第三方透露用户的密码、姓名、手机号码等非公开信息<span
+          style='background:white'>非经法定原因或用户事先许可，<span lang=EN-US>币多网(币火)</span>不会向任何第三方透露用户的密码、姓名、手机号码等非公开信息<span
           lang=EN-US>;</span></span></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
@@ -322,7 +322,7 @@ text-indent:0cm;'><b><span lang=EN-US style=''>八、</span></b><b><span
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>（<span lang=EN-US>3</span>）其它<span
-          lang=EN-US>BIHUO(币火)</span>根据法律、法规等相关规定进行的披露。</span></p>
+          lang=EN-US>币多网(币火)</span>根据法律、法规等相关规定进行的披露。</span></p>
 
         <p class=MsoNormal align=left style='margin-left:0cm;text-align:left;
 text-indent:0cm;'><b><span lang=EN-US style=''>九、</span></b><b><span
@@ -343,11 +343,11 @@ text-indent:0cm;'><b><span lang=EN-US style=''>十、</span></b><b><span
           style=''>仲裁</span></b></p>
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
-          style='background:white'>您和<span lang=EN-US>BIHUO(币火)</span>同意仲裁由本协议引起的任何争议或与本服务有关的争议，除非您和<span
-          lang=EN-US>BIHUO(币火)</span>不需要仲裁，任何一方就涉嫌非法使用版权，商标，商品名，标识， 商业秘密或专利权的争议寻求衡平的或其他救济。仲裁优先于在法庭起诉或进行陪审团审判。您和<span
-          lang=EN-US>BIHUO(币火)</span>同意您将在发生任何争议之后的三十（<span lang=EN-US>30</span>）天之内通知对方，您将在提交任何仲裁请求之前尝试非正式解决争议，任何仲裁将在香港发生，仲裁将由单一仲裁员保密地进行。您和<span
-          lang=EN-US>BIHUO(币火)</span>也同意，香港的法院对当事人之间的任何仲裁的上诉以及不受仲裁解决的当事人之间的任何诉讼均具有专属的管辖权。在任何仲裁中，当事人不得相互探寻彼此，仲裁员不得允许当事人探寻彼此；相反，各方应在最终听证会之前的相互同意的时间和日期披露支持其立场的证据。除了以下讨论的程序和补救措施外，仲裁员有权授予若在法庭上起诉也会授予的补救措施。您和我们也不会参与本协议涉及的任何索赔的集体诉讼或集体仲裁。如果<span
-          lang=EN-US>BIHUO(币火)</span>是诉讼的一方，您也同意不参与由私人律师或代表身份提出的索赔或涉及另一人的共同索赔。如果发现禁止上述第三方提起的集体诉讼和其他索赔是不可执行的，则该禁止规定视为已从本协议中删除，而与仲裁有关的其他协议应继续有效。</span></p>
+          style='background:white'>您和<span lang=EN-US>币多网(币火)</span>同意仲裁由本协议引起的任何争议或与本服务有关的争议，除非您和<span
+          lang=EN-US>币多网(币火)</span>不需要仲裁，任何一方就涉嫌非法使用版权，商标，商品名，标识， 商业秘密或专利权的争议寻求衡平的或其他救济。仲裁优先于在法庭起诉或进行陪审团审判。您和<span
+          lang=EN-US>币多网(币火)</span>同意您将在发生任何争议之后的三十（<span lang=EN-US>30</span>）天之内通知对方，您将在提交任何仲裁请求之前尝试非正式解决争议，任何仲裁将在香港发生，仲裁将由单一仲裁员保密地进行。您和<span
+          lang=EN-US>币多网(币火)</span>也同意，香港的法院对当事人之间的任何仲裁的上诉以及不受仲裁解决的当事人之间的任何诉讼均具有专属的管辖权。在任何仲裁中，当事人不得相互探寻彼此，仲裁员不得允许当事人探寻彼此；相反，各方应在最终听证会之前的相互同意的时间和日期披露支持其立场的证据。除了以下讨论的程序和补救措施外，仲裁员有权授予若在法庭上起诉也会授予的补救措施。您和我们也不会参与本协议涉及的任何索赔的集体诉讼或集体仲裁。如果<span
+          lang=EN-US>币多网(币火)</span>是诉讼的一方，您也同意不参与由私人律师或代表身份提出的索赔或涉及另一人的共同索赔。如果发现禁止上述第三方提起的集体诉讼和其他索赔是不可执行的，则该禁止规定视为已从本协议中删除，而与仲裁有关的其他协议应继续有效。</span></p>
 
         <p class=MsoNormal align=left style='margin-left:0cm;text-align:left;
 text-indent:0cm;'><b><span lang=EN-US style=''>十一、</span></b><b><span
@@ -376,8 +376,8 @@ text-indent:0cm;'><b><span lang=EN-US style=''>十二、</span></b><b><span
 
         <p class=MsoNormal align=left style='text-align:left;background:white'><span
           style='background:white'>这些协议规定了双方就服务主题的完整理解，取代了与之有关的所有先前的理解和沟通。
-任何与本协议所规定的内容不一致的其他文件，将不对<span lang=EN-US>BIHUO(币火)</span>具有约束力。 您声明并保证所有披露给<span
-            lang=EN-US>BIHUO(币火)</span>的与本服务协议有关的信息是真实，准确和完整的。</span></p>
+任何与本协议所规定的内容不一致的其他文件，将不对<span lang=EN-US>币多网(币火)</span>具有约束力。 您声明并保证所有披露给<span
+            lang=EN-US>币多网(币火)</span>的与本服务协议有关的信息是真实，准确和完整的。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US
                                                                     style=''>&nbsp;</span></p>
@@ -386,13 +386,13 @@ text-indent:0cm;'><b><span lang=EN-US style=''>十二、</span></b><b><span
 
     </div>
     <div v-else class="content" >
-      <p>This agreement and the additional agreement shall be applicable to your visit and use of the digital assets investment transaction service provided by BIHUO, (website: http://bhuo.top)hereinafter referred to as BIHUO, this website or US. The conclusion of other relevant agreements relating to the products provided on this website shall not affect the entry into force of this agreement. If you use this service on behalf of any organization, you declare and guarantee (1) that the agency is a legitimate body in accordance with local laws and regulations, (2) you have the right to accept this agreement on your behalf. If you violate this agreement, the agency agrees to be responsible for your actions.</p>
+      <p>This agreement and the additional agreement shall be applicable to your visit and use of the digital assets investment transaction service provided by 币多网, (website: http://bhuo.top)hereinafter referred to as 币多网, this website or US. The conclusion of other relevant agreements relating to the products provided on this website shall not affect the entry into force of this agreement. If you use this service on behalf of any organization, you declare and guarantee (1) that the agency is a legitimate body in accordance with local laws and regulations, (2) you have the right to accept this agreement on your behalf. If you violate this agreement, the agency agrees to be responsible for your actions.</p>
       <p>Please read these service agreements carefully (hereinafter referred to as this agreement). By clicking the sign-up button or by accessing or using this service, you agree to comply with this agreement and all additional agreements. If you do not agree to be bound by this agreement, please do not visit or use this service.</p>
       <p><b>1.Amendment of the Agreement</b></p>
-      <p>BIHUO reserves the right to amend this agreement from time to time in the form of a public announcement on the website, without further notice of your rights. The amended agreement shall mark the change of time on the first page of this agreement and shall enter into force immediately upon publication on the website. You should visit and follow up the update and update of this agreement from time to time. If you do not agree to the changes, you should stop using the service immediately.</p>
+      <p>币多网 reserves the right to amend this agreement from time to time in the form of a public announcement on the website, without further notice of your rights. The amended agreement shall mark the change of time on the first page of this agreement and shall enter into force immediately upon publication on the website. You should visit and follow up the update and update of this agreement from time to time. If you do not agree to the changes, you should stop using the service immediately.</p>
       <p>You will continue to use this website, this means that you accept and agree to be bound by the amended agreement.</p>
       <p><b>2.Scope of Application</b></p>
-      <p>This service only applies to users aged 18 or above. By accessing or using our services, you declare and ensure that you are at least 18 years of age and have not been deprived of the right to use this service. You also guarantee that you will not be included in any trade or economic sanctions list, such as the United Nations Security Council sanctions list, or the Hong Kong executive enforcement agencies such as the Hong Kong Monetary Authority and the Customs and Excise Department to restrict or prohibit the application of any trading platform. In addition, BIHUO may not provide the service in all countries or regions and may provide partial or non-provision of this service to users in restricted areas, including Hong Kong, China, Cuba, Iran, the Democratic People's Republic of Korea, Crimea, Sudan, Malaysia, Syria,  Bangladesh, Bolivia, Ecuador, Kyrgyzstan and the United States, here the United States includes all United States territories, such as Puerto Rico, American Samoa, Guam, the northern Marianas, United States Virgin Islands (Saint Croix, Saint John and Saint Thomas). The content of this agreement shall not be excluded from the laws of the country or region to which the user belongs. Therefore, if you do not meet these requirements, please do not use our services.</p>
+      <p>This service only applies to users aged 18 or above. By accessing or using our services, you declare and ensure that you are at least 18 years of age and have not been deprived of the right to use this service. You also guarantee that you will not be included in any trade or economic sanctions list, such as the United Nations Security Council sanctions list, or the Hong Kong executive enforcement agencies such as the Hong Kong Monetary Authority and the Customs and Excise Department to restrict or prohibit the application of any trading platform. In addition, 币多网 may not provide the service in all countries or regions and may provide partial or non-provision of this service to users in restricted areas, including Hong Kong, China, Cuba, Iran, the Democratic People's Republic of Korea, Crimea, Sudan, Malaysia, Syria,  Bangladesh, Bolivia, Ecuador, Kyrgyzstan and the United States, here the United States includes all United States territories, such as Puerto Rico, American Samoa, Guam, the northern Marianas, United States Virgin Islands (Saint Croix, Saint John and Saint Thomas). The content of this agreement shall not be excluded from the laws of the country or region to which the user belongs. Therefore, if you do not meet these requirements, please do not use our services.</p>
       <p><b>3.Create an account </b></p>
       <p>3.1 Account creation qualification</p>
       <p>You confirm and commit that when you complete the registration process or actually use the services provided by this site in a manner permitted by this site, you should be a natural person, legal person or other organization with the capacity to sign this Agreement and to use the services provided by applicable law. Once you click the sign-up button, you or your authorized agent have agreed to the content of the agreement and are represented by it to register and use this site service. If you do not possess the foregoing qualifications, you and your authorized agent shall bear all the consequences resulting therefrom, and t he company reserves the right to cancel or freeze your account permanently and to hold you and your authorized agent liable.</p>
@@ -404,22 +404,22 @@ text-indent:0cm;'><b><span lang=EN-US style=''>十二、</span></b><b><span
       <p>C.You are legally, fully and effectively providing the information required for registration and have verified that you are entitled to the Account Number and password of this website, you shall be deemed to have been registered successfully. You may login this website for membership.</p>
       <p>D.You agree to receive e-mails and / or short messages related to the manage.</p>
       <p><b>4.Web Services</b></p>
-      <p>We offer an online trading platform that includes digital assets for the trading of digital assets and derivatives. Traders Trade on our platform; BIHUO acts as a platform provider and does not participate in the actual transaction. A trader must open an account and pre-store digital assets before starting a transaction. BIHUO does not accept legal tender and does not use legal tender, so we are a platform that only provides digital assets to each other. The trader may at any time request the extraction of its digital assets subject to the restrictions of this agreement. </p>
-      <p>BIHUO will do everything in its power to make sure the sourcing circumstances on the site. The information and content on the website is subject to change without prior notice and only to assist the user in making an independent decision. BIHUO has taken reasonable measures to ensure the sourcing circumstances of the website. However, we do not guarantee the accuracy, suitability, reliability, integrity, performance and / or appropriateness of any service or product content provided on this website and we don’t be liable for any loss or damage, whether direct or indirect, the delay or failure of the transmission of information. BIHUO does not bear any responsibility for the use or interpretation of such information.</p>
+      <p>We offer an online trading platform that includes digital assets for the trading of digital assets and derivatives. Traders Trade on our platform; 币多网 acts as a platform provider and does not participate in the actual transaction. A trader must open an account and pre-store digital assets before starting a transaction. 币多网 does not accept legal tender and does not use legal tender, so we are a platform that only provides digital assets to each other. The trader may at any time request the extraction of its digital assets subject to the restrictions of this agreement. </p>
+      <p>币多网 will do everything in its power to make sure the sourcing circumstances on the site. The information and content on the website is subject to change without prior notice and only to assist the user in making an independent decision. 币多网 has taken reasonable measures to ensure the sourcing circumstances of the website. However, we do not guarantee the accuracy, suitability, reliability, integrity, performance and / or appropriateness of any service or product content provided on this website and we don’t be liable for any loss or damage, whether direct or indirect, the delay or failure of the transmission of information. 币多网 does not bear any responsibility for the use or interpretation of such information.</p>
       <p>Users are required to prepare the following equipment and undertake the following expenses:</p>
       <p>4.1 Internet access equipment including computers or other Internet access terminals, Modems and other internet-connected devices; comment and operation of this web site.</p>
       <p>4.2 Internet access expenses, including those that are not limited to Internet access charges, Internet access charges, mobile phone traffic charges, etc.</p>
-      <p>While accepting BIHUO services, users have agreed to accept various information services provided by BIHUO. Users can now authorize BIHUO to send business messages to their e-mail, mobile phone, mailing address, etc. The user has the right to choose not to accept the various information services provided by BIHUO and to enter the BIHUO-related page for change.</p>
-      <p>Users understand and agree that the services of BIHUO are provided in accordance with the current state of affairs that can be achieved in accordance with available technology and conditions. BIHUO will do its utmost to provide services to users to ensure the continuity and security of services, but BIHUO is not always able to foresee and guard against legal, technical and other risks, these include, but are not limited to terrorist attack , viruses, hacker attacks, systemic instability, third party service flaws, government actions, and so on.</p>
-      <p>The system platform can not function properly due to the fact that the user is unable to use the services or is not able to properly delegate, the BIHUO does not assume liability for damages, including but not limited to:</p>
-      <p>A.Downtime of the BIHUO Platform Bulletin System</p>
+      <p>While accepting 币多网 services, users have agreed to accept various information services provided by 币多网. Users can now authorize 币多网 to send business messages to their e-mail, mobile phone, mailing address, etc. The user has the right to choose not to accept the various information services provided by 币多网 and to enter the 币多网-related page for change.</p>
+      <p>Users understand and agree that the services of 币多网 are provided in accordance with the current state of affairs that can be achieved in accordance with available technology and conditions. 币多网 will do its utmost to provide services to users to ensure the continuity and security of services, but 币多网 is not always able to foresee and guard against legal, technical and other risks, these include, but are not limited to terrorist attack , viruses, hacker attacks, systemic instability, third party service flaws, government actions, and so on.</p>
+      <p>The system platform can not function properly due to the fact that the user is unable to use the services or is not able to properly delegate, the 币多网 does not assume liability for damages, including but not limited to:</p>
+      <p>A.Downtime of the 币多网 Platform Bulletin System</p>
       <p>B.Failure of telecommunications equipment to transmit data</p>
-      <p>C.Factors such as typhoons, earthquakes, tsunamis, floods, power, wars, terrorist attacks, etc, causing the BIHUO platform system to fail to perform business</p>
+      <p>C.Factors such as typhoons, earthquakes, tsunamis, floods, power, wars, terrorist attacks, etc, causing the 币多网 platform system to fail to perform business</p>
       <p>D.Service interruptions or delays due to hacking attacks, computer virus or seizures, technical adjustments or failures in the telecommunications sector, website upgrades, bank problems, temporary closures due to government control, etc. that affect the normal operation of the network</p>
       <p>E.Losses caused by technical problems that can not be predicted or solved by the existing technical force of the trade</p>
       <p>F.Losses caused to users or other third parties as a result of the fault or delay of a third party</p>
-      <p>Some of the services of BIHUO are provided on a fee basis. If you are using a fee-based service, please comply with the relevant agreement. BIHUO may modify and change the fee-charging standards and methods according to actual needs, and BIHUO may also start charging for some of the free services. Prior to the amendment, change or commencement of the charge, BIHUO will be notified or advertised on the corresponding service page. If the user does not agree with the above changes, changes or paid content, it should stop using the service.</p>
-      <p>BIHUO does not ask for passwords from any user and does not allow users to make payments to the account BTC/ LTC/ ETH provided in any non-site trading centre. Please do not trust any BIHUO discount, discount, etc, it is not responsible for any loss of money or money in the account, address, or account provided by the non-BTC / LTC / ETH trading centre. Transaction exception handling: user consent and approval when using this service may be rendered unserviceable due to the problem of digital currency network connection or other irresistible factors. Users ensure that the information you have entered is correct. The site will not be liable for any damages if it is unable to notify the user in time of the occurrence of any of the above abnormal circumstances due to a data error.</p>
+      <p>Some of the services of 币多网 are provided on a fee basis. If you are using a fee-based service, please comply with the relevant agreement. 币多网 may modify and change the fee-charging standards and methods according to actual needs, and 币多网 may also start charging for some of the free services. Prior to the amendment, change or commencement of the charge, 币多网 will be notified or advertised on the corresponding service page. If the user does not agree with the above changes, changes or paid content, it should stop using the service.</p>
+      <p>币多网 does not ask for passwords from any user and does not allow users to make payments to the account BTC/ LTC/ ETH provided in any non-site trading centre. Please do not trust any 币多网 discount, discount, etc, it is not responsible for any loss of money or money in the account, address, or account provided by the non-BTC / LTC / ETH trading centre. Transaction exception handling: user consent and approval when using this service may be rendered unserviceable due to the problem of digital currency network connection or other irresistible factors. Users ensure that the information you have entered is correct. The site will not be liable for any damages if it is unable to notify the user in time of the occurrence of any of the above abnormal circumstances due to a data error.</p>
       <p>Users agree that the site can temporarily stop providing or limiting some of the functionality of the service or provide new functionality to reduce, increase, or change any functionality, based on the need for security of operation and transaction, as long as the user is still using this service, it means that the user still agrees with this agreement or the changed agreement.</p>
       <p>This website has the right to know the true trading background and purpose of users using the products or services of this website. Users should provide the true, comprehensive and accurate information required by this website The company reserves the right to temporarily or permanently restrict some or all of the functions of the products or services used by the users if there are reasonable grounds to suspect that the user is providing false information about the transaction.</p>
       <p><b>5.User Rights and Obligations</b></p>
@@ -444,50 +444,50 @@ text-indent:0cm;'><b><span lang=EN-US style=''>十二、</span></b><b><span
       <p><b>6.Risk Tips for the Future
 </b></p>
       <p>The transaction of digital assets involves significant risks. Trading or holding digital assets is likely to cause your loss. Therefore, you should carefully consider whether to trade digital assets or related derivatives and to use leverage in the light of your financial situation. </p>
-      <p>6.1 BIHUO argues that digital assets should not be called money and legal tender because they are not backed by governments or central banks. BIHUO can not guarantee the orderly stability of the digital asset market. You should be cautious about trading in digital assets (and any other assets) . The price is going to fluctuate all the time. As a result of price fluctuations, you may have a large profit or loss. Any digital asset or trading position can fluctuate wildly, and may even become worthless.
+      <p>6.1 币多网 argues that digital assets should not be called money and legal tender because they are not backed by governments or central banks. 币多网 can not guarantee the orderly stability of the digital asset market. You should be cautious about trading in digital assets (and any other assets) . The price is going to fluctuate all the time. As a result of price fluctuations, you may have a large profit or loss. Any digital asset or trading position can fluctuate wildly, and may even become worthless.
 </p>
       <p>6.2 In the use of this service, when the user or user's trading order error (including but not limited to factors such as price, quantity, etc.) causes a loss of the user's transaction, if not the reason of the local trading rules, the liability for loss will be borne by the user.
 </p>
       <p>6.3 Any loss arising from the user's fault shall be borne by the user himself, including but not limited to that failure to follow the instructions of the transaction, failure to conduct the transaction in time, forgetting or divulging the password, and the password being deciphered by others, the computer used by the user was hacked.
 </p>
-      <p>6.4 When using this service, you will contact the user to recover any improper gains arising from potential undetected vulnerabilities in the site's trading rules, otherwise, we will take the following measures, including, but not limited to, restrictions on account transactions, freezing of account funds and prosecution of cases before competent courts, and the recovery costs incurred by the BIHUO arising from the lack of effective user cooperation. 
+      <p>6.4 When using this service, you will contact the user to recover any improper gains arising from potential undetected vulnerabilities in the site's trading rules, otherwise, we will take the following measures, including, but not limited to, restrictions on account transactions, freezing of account funds and prosecution of cases before competent courts, and the recovery costs incurred by the 币多网 arising from the lack of effective user cooperation. 
 </p>
       <p><b>7.Disclaimer
 </b></p>
-      <p>7.1 The non-guarantee service of BIHUO will not be interrupted, nor will it guarantee the timeliness and security of the service and will not be liable for any liability arising from the network of BIHUO.</p>
-      <p>7.2 BIHUO does not guarantee that the information and services on the plat form of the web site can fully meet the needs of users. BIHUO is not liable for any errors, insults, defamation, omissions, obscenity, pornography or profanity that may have been encountered in the course of accepting BIHUO services.</p>
-      <p>7.3 BIHUO is not responsible for the failure of the user to save, modify, delete, or store information. To the website not because of BIHUO intentionally caused typo error, neglect and so on.</p>
-      <p>7.4 BIHUO has the right to delete all types of information in BIHUO that do not conform to the provisions of the law or the agreement, while retaining the right not to notify the user.</p>
-      <p>7.5 The user comments made by all users in the BIHUO  only represent the personal views of the user and do not mean that the site agrees with these views or confirms these descriptions, and that this website does not bear any legal liability arising from user comments.</p>
-      <p>7.6 All notices sent to users, BIHUO will be delivered by formal page-by-letter delivery. Any activities or information obtained through the regular channels of BIHUO shall not be subject to legal liability.</p>
-      <p>7.7 BIHUO shall have the right to decide the termination of the free promotion period by adjusting the charge rate of charges such as charging, cashing and trading according to the market conditions.</p>
-      <p>7.8 BIHUO will not act as a broker, intermediary, agent or consultant for any transaction in which you use this service, and BIHUO is not liable.</p>
+      <p>7.1 The non-guarantee service of 币多网 will not be interrupted, nor will it guarantee the timeliness and security of the service and will not be liable for any liability arising from the network of 币多网.</p>
+      <p>7.2 币多网 does not guarantee that the information and services on the plat form of the web site can fully meet the needs of users. 币多网 is not liable for any errors, insults, defamation, omissions, obscenity, pornography or profanity that may have been encountered in the course of accepting 币多网 services.</p>
+      <p>7.3 币多网 is not responsible for the failure of the user to save, modify, delete, or store information. To the website not because of 币多网 intentionally caused typo error, neglect and so on.</p>
+      <p>7.4 币多网 has the right to delete all types of information in 币多网 that do not conform to the provisions of the law or the agreement, while retaining the right not to notify the user.</p>
+      <p>7.5 The user comments made by all users in the 币多网  only represent the personal views of the user and do not mean that the site agrees with these views or confirms these descriptions, and that this website does not bear any legal liability arising from user comments.</p>
+      <p>7.6 All notices sent to users, 币多网 will be delivered by formal page-by-letter delivery. Any activities or information obtained through the regular channels of 币多网 shall not be subject to legal liability.</p>
+      <p>7.7 币多网 shall have the right to decide the termination of the free promotion period by adjusting the charge rate of charges such as charging, cashing and trading according to the market conditions.</p>
+      <p>7.8 币多网 will not act as a broker, intermediary, agent or consultant for any transaction in which you use this service, and 币多网 is not liable.</p>
       <p><b>8. Privacy Statement</b></p>
-      <p>BIHUO respects the privacy of its users. The privacy policy of BIHUO is provided separately, describing how BIHUO collects, stores, discloses and Uses Information Relevant to your privacy. You agree with BIHUO to use your information under the BIHUO privacy policy agreement.</p>
-      <p>8.1 The term, BIHUO customer information, in this agreement refers to information that conforms to the laws, regulations and relevant regulations and is consistent with the following scope:</p>
-      <p>A.The personal information provided to BIHUO when a user registers.
+      <p>币多网 respects the privacy of its users. The privacy policy of 币多网 is provided separately, describing how 币多网 collects, stores, discloses and Uses Information Relevant to your privacy. You agree with 币多网 to use your information under the 币多网 privacy policy agreement.</p>
+      <p>8.1 The term, 币多网 customer information, in this agreement refers to information that conforms to the laws, regulations and relevant regulations and is consistent with the following scope:</p>
+      <p>A.The personal information provided to 币多网 when a user registers.
 </p>
-      <p>B.When a user uses the BIHUO service, participates in a website activity or visits a web page, BIHUO automatically receives and records the user's browser or mobile client data, includes, but is not limited to, the IP address, the information in the website Cookie, and the web records requested by the user.
+      <p>B.When a user uses the 币多网 service, participates in a website activity or visits a web page, 币多网 automatically receives and records the user's browser or mobile client data, includes, but is not limited to, the IP address, the information in the website Cookie, and the web records requested by the user.
 </p>
-      <p>C.User's personal information legally obtained from a business partner by BIHUO.
+      <p>C.User's personal information legally obtained from a business partner by 币多网.
 </p>
-      <p>D.Other user's personal information obtained by legal means by other BIHUO.
+      <p>D.Other user's personal information obtained by legal means by other 币多网.
 </p>
-      <p>8.2 BIHUO commitment</p>
+      <p>8.2 币多网 commitment</p>
       <p>Non-public information, such as user's password, name and mobile number, will not be disclosed to any third party without legal reasons or prior permission of the user.</p>
       <p>The personal information of the user will be disclosed in part or in full under the following statutory circumstances:</p>
       <p>A.to disclose to the user or other third parties with the consent of the user
 </p>
       <p>B.to disclose to the administrative, judicial or other law a third party disclosure in accordance with relevant provisions, such as laws and regulations, or at the request of an administrative body
 </p>
-      <p>C.other BIHUO (currency and fire) disclosure in accordance with the relevant provisions of laws and regulations.
+      <p>C.other 币多网 (currency and fire) disclosure in accordance with the relevant provisions of laws and regulations.
 </p>
       <p><b>9.Compensation</b></p>
       <p>9.1 In no case, our liability for your direct damage will not exceed your total cost of three months from the use of this site.</p>
       <p>9.2 In case of any violation of this agreement or any other laws or regulations, you shall indemnify us in the amount of at least US $1 million and bear the full costs (including attorney's fees, etc.). If it is not enough to make up for the actual loss, you must fill it up.
 </p>
       <p><b>10.Arbitration</b></p>
-      <p>You and BIHUO agree to arbitrate any disputes arising out of this agreement or disputes relating to this service unless you and BIHUO do not need arbitration and either party is suspected of illegal use of copyright, trademark, trade name, logo, seek a balanced or other remedy for a dispute over trade secrets or patents. Arbitration takes precedence over prosecution before a court or trial by jury. You and BIHUO agree that you will notify the other party within 30 days of any dispute that you will attempt to resolve the dispute informally before submitting any arbitration request, and any arbitration will take place in Hong Kong, the arbitration will be conducted in confidence by a single arbitrator. You and BIHUO also agree that the courts of Hong Kong have exclusive jurisdiction over appeals against any arbitration between the parties and any proceedings between parties that are not subject to arbitration. In any arbitration where the parties are not allowed to explore one another, the arbitrators shall not allow the parties to seek each other; on the contrary, the parties shall disclose evidence in support of their position at the time and date of mutual consent prior to the final hearing. In addition to the procedures and remedies discussed below, the arbitrators are entitled to grant remedies that would have been granted had they been brought to court. Neither you nor we will participate in class action or collective arbitration in any of the claims covered by this agreement. If BIHUO is a party to the proceedings, you also agree not to participate in a claim filed by a private lawyer or representative or a joint claim involving another person. If a collective action or other claim against the third party mentioned above is found to be unenforceable, the prohibition shall be deemed to have been removed from this agreement, while other agreements relating to arbitration shall remain in force.</p>
+      <p>You and 币多网 agree to arbitrate any disputes arising out of this agreement or disputes relating to this service unless you and 币多网 do not need arbitration and either party is suspected of illegal use of copyright, trademark, trade name, logo, seek a balanced or other remedy for a dispute over trade secrets or patents. Arbitration takes precedence over prosecution before a court or trial by jury. You and 币多网 agree that you will notify the other party within 30 days of any dispute that you will attempt to resolve the dispute informally before submitting any arbitration request, and any arbitration will take place in Hong Kong, the arbitration will be conducted in confidence by a single arbitrator. You and 币多网 also agree that the courts of Hong Kong have exclusive jurisdiction over appeals against any arbitration between the parties and any proceedings between parties that are not subject to arbitration. In any arbitration where the parties are not allowed to explore one another, the arbitrators shall not allow the parties to seek each other; on the contrary, the parties shall disclose evidence in support of their position at the time and date of mutual consent prior to the final hearing. In addition to the procedures and remedies discussed below, the arbitrators are entitled to grant remedies that would have been granted had they been brought to court. Neither you nor we will participate in class action or collective arbitration in any of the claims covered by this agreement. If 币多网 is a party to the proceedings, you also agree not to participate in a claim filed by a private lawyer or representative or a joint claim involving another person. If a collective action or other claim against the third party mentioned above is found to be unenforceable, the prohibition shall be deemed to have been removed from this agreement, while other agreements relating to arbitration shall remain in force.</p>
       <p><b>11.Termination of the agreement 
 </b></p>
       <p>11.1 This website reserves the right to cancel your account in accordance with this agreement. This agreement shall terminate on the date of cancellation of the account.
@@ -500,7 +500,7 @@ text-indent:0cm;'><b><span lang=EN-US style=''>十二、</span></b><b><span
 </p>
       <p><b>12.Other provisions
 </b></p>
-      <p>These agreements provide for a complete understanding of the subject matter and supersede all previous understandings and communications related to them. Any other document inconsistent with the provisions of this agreement shall not be binding on BIHUO. You declare and certify that all information disclosed to BIHUO in connection with this service agreement is true, accurate and complete.</p>
+      <p>These agreements provide for a complete understanding of the subject matter and supersede all previous understandings and communications related to them. Any other document inconsistent with the provisions of this agreement shall not be binding on 币多网. You declare and certify that all information disclosed to 币多网 in connection with this service agreement is true, accurate and complete.</p>
     </div>
   </div>
 </template>

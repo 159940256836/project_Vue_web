@@ -276,7 +276,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -312,7 +311,6 @@
                 <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows"></Table>
             </div>
         </div>
-
     </div>
 </template>
 <style scoped lang="scss">
@@ -1701,7 +1699,7 @@ export default {
             //   this.currentCoin.coin +
             //   "/" +
             //   this.currentCoin.base;
-            // title += "BIHUO--国际数字加密资产交易平台";
+            // title += "币多网--国际数字加密资产交易平台";
             // window.document.title = title;
         },
         updateLangData() {

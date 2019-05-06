@@ -207,8 +207,8 @@ export default {
   padding-top: 60px;
   .blc_header {
     height: 230px;
-    background: url("../../assets/images/blc_banner.png") no-repeat center
-      center;
+    // background: url("../../assets/images/blc_banner.png") no-repeat center
+    //   center;
     background-size: 100% 100%;
     position: relative;
     .bilicai_abs {

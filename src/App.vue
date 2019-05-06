@@ -16,7 +16,7 @@
                 </div>
                 <div class="rightwrapper">
                     <poptip placement="bottom" width="270" class="appdownload">
-                        <a href="javascript:;" style="font-size:12px;">{{$t("header.appdownlaod")}}
+                        <a href="javascript:;" style="font-size:14px;">{{$t("header.appdownlaod")}}
                         </a>
                         <div class="api" slot="content">
                             <div class="ios">
@@ -36,7 +36,7 @@
                         </div>
                     </poptip>
                 </div>
-                <div class="isLoginWrapper">
+                <div class="isLoginWrapper" :style="isLogin?'width:12%':'width:6%'">
                     <!-- 登录 -->
                     <div class="login_register isLogin" v-if="isLogin">
                         <div class="mymsg">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="changelanguage">
                     <Dropdown @on-click="changelanguage">
-                        <a href="javascript:void(0)" style="font-size:12px;color:#fff;">
+                        <a href="javascript:void(0)" style="font-size:14px;color:#fff;">
                             {{languageValue}}
                             <Icon type="arrow-down-b"></Icon>
                         </a>
@@ -126,7 +126,7 @@
                             </poptip>
                         </li>
                         <li>
-                            <!-- <a href="https://0.plus/bihuoguanfang" target="_blank">{{$t('footer.biyong')}}</a> -->
+                            <!-- <a href="https://0.plus/币多网guanfang" target="_blank">{{$t('footer.biyong')}}</a> -->
                         </li>
                     </ul>
                 </div>
@@ -149,7 +149,7 @@ export default {
             content: " ",
             wechat: this.$t("footer.wechat"),
             topInfo: {
-                name: "BIHUO--国际数字加密资产交易平台",
+                name: "币多网",
                 createTime: "2018-01-10 11:37:27"
             }
         };
@@ -160,7 +160,7 @@ export default {
                 case "nav-exchange":
                     break;
                 default:
-                    window.document.title = "BIHUO--国际数字加密资产交易平台";
+                    window.document.title = "币多网";
                     break;
             }
         },
@@ -312,7 +312,7 @@ export default {
                 }
             }
             .isLoginWrapper {
-                width: 12%;
+                // width: 6%;
                 .login_register {
                     @extend %flex;
                     a {

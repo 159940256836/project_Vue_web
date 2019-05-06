@@ -3,7 +3,7 @@
         <div class="nav-right col-xs-12 col-md-10 padding-right-clear">
             <div class="sharelink">
                 <p class="c1">推荐返佣</p>
-                <p class="c2">推荐好友来BIHUO注册交易，赚取佣金。</p>
+                <p class="c2">推荐好友来币多网注册交易，赚取佣金。</p>
                 <div class="copyAndshare">
                     <div class="leftwrapper">
                         <div>

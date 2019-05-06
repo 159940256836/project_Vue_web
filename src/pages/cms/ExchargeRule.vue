@@ -1,6 +1,6 @@
 <template>
 <div class="agreement">
-    <img src="../../assets/images/call.png">
+    <!-- <img src="../../assets/images/call.png"> -->
     <div class="agreement_tab">
         <div class="static_main">
             <router-link to="/about-rule" class="cur">{{$t('cms.exchangerule')}}</router-link>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <img src="../../assets/images/call.png">
+    <!-- <img src="../../assets/images/call.png"> -->
     <div class="content-wrap">
       <Row>
       <Col span="4">

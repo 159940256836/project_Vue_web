@@ -73,8 +73,6 @@
         .ivu-tabs-tabpane {
           .ivu-table-wrapper {
             border: none;
-            -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-            -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
             box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
             .ivu-table-body{
               .ivu-table-tbody{

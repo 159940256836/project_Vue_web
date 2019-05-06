@@ -1,6 +1,6 @@
 <template>
   <div class="agreement">
-    <img src="../../assets/images/call.png">
+    <!-- <img src="../../assets/images/call.png"> -->
     <div class="agreement_tab">
       <div class="static_main">
         <router-link to="/about-rule">{{$t('cms.exchangerule')}}</router-link>
@@ -15,7 +15,7 @@
 
         <p class=MsoNormal align=left style='text-align:left'><span style='font-family:
 Microsoft YaHei'>请确认，在开始“认证商家”前，您已详细阅读了本协议所有内容，一旦您开始认证流程，即表示您充分理解并同意接受本协议的全部内容。为了提高交易的安全性和本平台注册用户身份的可信度，<span
-          lang=EN-US>BIHUO(币火)</span>（以下简称本网站）向您提供认证服务。您申请认证，本网站有权采取各种其认为必要手段对用户的身份进行识别。但是，作为普通的网络服务提供商，本网站所能采取的方法有限，而且在网络上进行用户身份识别也存在一定的困难，因此，本网站对完成认证的用户身份的准确性和绝对真实性不做任何保证。</span></p>
+          lang=EN-US>币多网(币火)</span>（以下简称本网站）向您提供认证服务。您申请认证，本网站有权采取各种其认为必要手段对用户的身份进行识别。但是，作为普通的网络服务提供商，本网站所能采取的方法有限，而且在网络上进行用户身份识别也存在一定的困难，因此，本网站对完成认证的用户身份的准确性和绝对真实性不做任何保证。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US
                                                                     style=''>&nbsp;</span></p>
@@ -122,7 +122,7 @@ Microsoft YaHei'>下列情况时本网站无需承担任何责任：</span></p>
 
     </div>
     <div v-else class="content">
-      <p>Please confirm that you have read all the contents of this agreement before you start the certification merchant, and once you start the authentication process, you fully understand and agree to accept the full content of t his agreement. In order to improve the security of the transaction and the trustworthiness of the registered user of this platform, BIHUO (hereinafter referred to as this website) provides authentication services to you. You apply for authentication, this website has the right to take all the means it deems necessary to identify the user. However, as a general network service provider, there are limited methods available on this site and there are so me difficulties in implementing user identification on the web, this website does not guarantee the accuracy and absolute authenticity of the user identity that completes the authentication.</p>
+      <p>Please confirm that you have read all the contents of this agreement before you start the certification merchant, and once you start the authentication process, you fully understand and agree to accept the full content of t his agreement. In order to improve the security of the transaction and the trustworthiness of the registered user of this platform, 币多网 (hereinafter referred to as this website) provides authentication services to you. You apply for authentication, this website has the right to take all the means it deems necessary to identify the user. However, as a general network service provider, there are limited methods available on this site and there are so me difficulties in implementing user identification on the web, this website does not guarantee the accuracy and absolute authenticity of the user identity that completes the authentication.</p>
       <p><b>1.Understanding and recognition of Certification Service</b></p>
       <p>1.1 The authentication service is an identification service provided by this website. Unless otherwise agreed in this agreement, once you have completed authentication in the account of this website, the corresponding identification information and authentication results will not be modified or cancelled for any reason; if your identity is altered after authentication ha s been completed, you should provide the credentials issued by the appropriate authority to this website to help you change the corresponding authentication information of your account. </p>
       <p>1.2 This website reserves the right to modify or alter the contents of this agreement at any time and to publish the text of the changed agreement through this website at any time without notice to you. After any modification or modification of this agreement, you continue to use the services provided by this website, that is to say that you have read, understood and agreed to accept the content of the changed agreement; if you do not agree t o the content of the changed agreement, the service of this website should be discontinued immediately.</p>
