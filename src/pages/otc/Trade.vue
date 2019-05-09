@@ -1035,7 +1035,8 @@ export default {
       return this.$store.getters.member;
     },
     coin: function() {
-      return this.$route.params[0];
+      return this.$route.params.pathMatch
+      // return this.$route.params[0];
     },
     lang: function() {
       return this.$store.state.lang;
@@ -1068,9 +1069,15 @@ export default {
       params["pageSize"] = table.pageNumber;
       params["advertiseType"] = advertiseType;
       params["unit"] = this.coin;
+      //unit
+      if(params.unit==undefined){
+          params.unit="usdt";
+      }
+      // console.log(params)
       this.$http
         .post(this.host + this.api.otc.advertise, params)
         .then(response => {
+
           var resp = response.body;
           if (resp.code == 0) {
             if (resp.data.context) {
@@ -1110,6 +1117,7 @@ export default {
     }
   },
   created() {
+      // console.log(this.$route.params.pathMatch)
     this.reloadAd();
   }
 };
