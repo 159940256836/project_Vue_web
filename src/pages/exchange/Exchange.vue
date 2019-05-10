@@ -1356,7 +1356,7 @@ export default {
             return this.$store.getters.isLogin;
         },
         member: function () {
-            console.log(this.$store.getters.member)
+            // console.log(this.$store.getters.member)
             return this.$store.getters.member;
         },
         lang: function () {
@@ -1550,7 +1550,7 @@ export default {
             });
         },
         silderGo(silder, val) {
-            console.log(silder, val);
+            // console.log(silder, val);
             this[silder] = val;
         },
         init() {
@@ -2917,7 +2917,8 @@ export default {
                 .post(this.host + this.api.exchange.current, params)
                 .then(response => {
                     var resp = response.body;
-                    if (resp.content.length > 0) {
+                    if(resp.content!=undefined){
+                        if (resp.content.length > 0) {
                         this.currentOrder.rows = resp.content.slice(0, 3);
                         this.currentOrder.rows.forEach((row, index) => {
                             row.skin = that.skin;
@@ -2926,6 +2927,7 @@ export default {
                                     ? that.$t("exchange.marketprice")
                                     : row.price;
                         });
+                    }
                     }
                 });
         },
@@ -2947,6 +2949,7 @@ export default {
                 .then(response => {
                     var resp = response.body;
                     let rows = [];
+                    if(resp.content!=undefined){
                     if (resp.content.length > 0) {
                         this.historyOrder.total = resp.totalElements;
                         this.historyOrder.page = resp.number;
@@ -2964,6 +2967,8 @@ export default {
                         }
                         this.historyOrder.rows = rows;
                     }
+                    }
+
                 });
         },
         cancel(index) {

@@ -178,12 +178,6 @@ export default {
             return this.login(params);
         },
         handleSubmit(name) {
-            // this.$refs[name].validate(valid => {
-            //     if (valid) {
-            //         //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
-            //         this.initGtCaptcha();
-            //     }
-            // })
             const params = {};
             const formParams = this.formInline;
             params.username = formParams.user;

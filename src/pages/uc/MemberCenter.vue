@@ -67,7 +67,7 @@
                         padding-left: 5px;
                     }
                     .ivu-icon {
-                        top: 9px;
+                        top: 27px;
                     }
                 }
                 .ivu-menu {
