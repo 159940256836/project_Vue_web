@@ -1554,7 +1554,9 @@ export default {
             this[silder] = val;
         },
         init() {
-            var params = this.$route.params[0];
+            // console.log("111111111111111",this.$route.params)
+            var params = this.$route.params.pathMatch;
+            console.log(params)
             if (params == undefined) {
                 this.$router.push("/exchange/" + this.defaultPath);
                 params = this.defaultPath;
@@ -1565,6 +1567,7 @@ export default {
             }
             var coin = params.toUpperCase().split("_")[0];
             var base = params.toUpperCase().split("_")[1];
+            console.log(params, coin, base)
             this.currentCoin.symbol = coin + "/" + base;
             this.currentCoin.coin = coin;
             this.currentCoin.base = base;

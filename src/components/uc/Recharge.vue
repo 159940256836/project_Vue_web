@@ -182,7 +182,7 @@ export default {
     },
     created() {
         this.coinType = this.$route.query.name || "";
-        this.getMember();
+        // this.getMember();
         this.getMoney();
         this.getList(1);
     },

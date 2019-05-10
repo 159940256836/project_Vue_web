@@ -178,12 +178,32 @@ export default {
             return this.login(params);
         },
         handleSubmit(name) {
-            this.$refs[name].validate(valid => {
-                if (valid) {
-                    //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
-                    this.initGtCaptcha();
+            // this.$refs[name].validate(valid => {
+            //     if (valid) {
+            //         //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
+            //         this.initGtCaptcha();
+            //     }
+            // })
+            const params = {};
+            const formParams = this.formInline;
+            params.username = formParams.user;
+            params.password = formParams.password;
+            params.code = formParams.googleCode
+            // 新加代码
+            // 判断手机号邮箱不能为空
+            if(!formParams.user) {
+                this.$Message.error(this.$t("uc.login.loginvalidate"));
+                return false
+            } 
+            // 判断是否绑定谷歌
+            if(this.openGooleCode == 1) {
+                // 判断谷歌验证码不能为空
+                if (!formParams.googleCode) {
+                    this.$Message.error(this.$t("uc.login.google"));
+                    return false
                 }
-            })
+            }
+            this.login(params)
         },
         login(params) {
             console.log(params);
