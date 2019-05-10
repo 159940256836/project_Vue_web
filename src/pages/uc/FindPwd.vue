@@ -153,8 +153,11 @@ import $ from "jquery";
 export default {
   data() {
     const validateUser = (rule, value, callback) => {
+       var reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+       reg.test(this.formInline.user)?this.changeActive=0:this.changeActive=1;
+       console.log(reg)
+      // reg?this.changeActive=0:this.changeActive=1;
       if (this.changeActive == 0) {
-        var reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
         if (value == "") {
           callback(new Error(this.$t("uc.regist.teltip")));
         } else if (!reg.test(this.formInline.user)) {
@@ -333,7 +336,9 @@ export default {
          tel = this.formInline.user,
          flagtel = reg.test(tel);
          flagtel && captchaObj.verify();
+          console.log(flagtel,tel)
          !flagtel &&  this.$Message.error("请填写正确的手机号");
+        
       });
     },
     afterValidate() {

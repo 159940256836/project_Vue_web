@@ -226,6 +226,9 @@ export default {
             }
             console.log(this.status);
             this.text = this.status = str;
+            if(this.text=="进行中"){
+                this.text="确定"
+            }
         },
         formatTime(date) {
             return new Date(date).getTime();
