@@ -90,7 +90,7 @@
                                 <div class="trade-price-input">
                                     <p class="price-input-list">
                                         <Poptip trigger="focus" :content="text1" style="width: 100%;">
-                                            <Input @on-change="transform1" v-model="buyPrice" size="large" :placeholder="$t('otc.tradeinfo.amounttip')" style="width: 420px">
+                                            <Input @on-change="transform1" @on-keyup="keyEvent1" v-model="buyPrice" size="large" :placeholder="$t('otc.tradeinfo.amounttip')" style="width: 420px">
                                             <span slot="prepend">CNY</span>
                                             </Input>
                                         </Poptip>
@@ -100,7 +100,7 @@
                                     </span>
                                     <p class="price-input-list">
                                         <Poptip trigger="focus" :content="text2" style="width: 100%;">
-                                            <Input @on-change="transform2" v-model="nuyNum" size="large" :placeholder="$t('otc.tradeinfo.numtip')" style="width: 420px">
+                                            <Input @on-change="transform2" @on-keyup="keyEvent2" v-model="nuyNum" size="large" :placeholder="$t('otc.tradeinfo.numtip')" style="width: 420px">
                                             <span slot="prepend">{{user.unit}}</span>
                                             </Input>
                                         </Poptip>
@@ -144,6 +144,7 @@
     </div>
 </template>
 <script>
+import $ from "@js/jquery.min.js";
 export default {
   components: {},
   data() {
@@ -173,24 +174,46 @@ export default {
       // this.price = '100';
       // this.user.advertiseType=1
     },
+    keyEvent1(event){
+       let val=$(event.target).val();
+            if(val!=""){
+                let r = /^[0-9]+\.?[0-9]{0,9}$/;　　//正数
+                let flag =r.test(val)
+                if(!flag){
+                   this.buyPrice=""
+                }
+              }
+    },keyEvent2(event){
+       let val=$(event.target).val();
+            if(val!=""){
+                let r = /^[0-9]+\.?[0-9]{0,9}$/;　　//正数
+                let flag =r.test(val)
+                if(!flag){
+                   this.nuyNum=""
+                }
+              }
+    },
     transform1() {
-      if (!Number.isNaN(Number(this.buyPrice))) {
-        this.nuyNum = this.round(this.div(this.buyPrice, this.priceNow), 8);
-        if (/^\d+(\.\d{1,2})?$/.test(this.buyPrice)) {
-          this.submitBtn = true;
-        } else {
-          this.submitBtn = false;
-          this.text1 = this.$t("otc.tradeinfo.warning1");
-        }
-      } else {
-        this.text1 =
-          this.$t("otc.tradeinfo.warning2") +
-          this.user.minLimit +
-          "~" +
-          this.user.maxLimit;
-        this.submitBtn = false;
-        return false;
-      }
+
+       if (!Number.isNaN(Number(this.buyPrice))) {
+            this.nuyNum = this.round(this.div(this.buyPrice, this.priceNow), 8);
+            if (/^\d+(\.\d{1,2})?$/.test(this.buyPrice)) {
+                   this.submitBtn = true;
+              } else {
+                      this.submitBtn = false;
+                      this.text1 = this.$t("otc.tradeinfo.warning1");
+                    }
+                  } else {
+                      this.text1 =
+                        this.$t("otc.tradeinfo.warning2") +
+                        this.user.minLimit +
+                        "~" +
+                        this.user.maxLimit;
+                      this.submitBtn = false;
+                      return false;
+       }
+   
+
     },
     transform2() {
       if (!Number.isNaN(Number(this.nuyNum))) {
