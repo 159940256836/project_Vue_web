@@ -91,7 +91,7 @@ export default {
         const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
         return {
             openGooleCode: false,//是否开启google验证;
-            openGoole: "",
+            openGoole: "", //  获取谷歌验证状态
             captchaObj: null,
             _captchaResult: null,
             formInline: {

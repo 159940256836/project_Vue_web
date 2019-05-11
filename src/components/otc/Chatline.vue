@@ -187,7 +187,7 @@ export default {
                     if(self.fOpenNotice && window.Notification && Notification.permission == "granted") {
                         var notification = new Notification(self.msg.otherSide+"：", {
                             body: self.otheritem.content,
-                            icon: 'https://币多网-ex.oss-ap-southeast-1.aliyuncs.com/FAA55D97ED0370F08273C3A94F765C22.png'
+                            icon: 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/20190509154221.png'
                         });
 
                         notification.onclick = function() {

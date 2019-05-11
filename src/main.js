@@ -72,8 +72,6 @@ Vue.filter('dateFormat', function(tick) {
 Vue.filter('ymdFormat', function(tick) {
     return moment(tick).format("YYYY-MM-DD");
 });
-
-
 Vue.filter('toFixed', function(number, scale) {
     return new Number(number).toFixed(scale);
 });
@@ -103,6 +101,11 @@ function toFloor(number, scale = 8) {
 }
 Vue.filter('toFloor', (number, scale) => {
     return toFloor(number, scale);
+});
+// Input 特殊字符限制
+Vue.filter('reg', function(reg) {
+    var reg = new RegExp(/[\-\_\,\!\|\~\`\(\)\#\@\%\-\+\=\/\'\￥\。\ \…\$\（\）\(\)\[\]\【\】\^\&\*\{\}\:\;\"\L\<\>\?\\]/g, '');
+    return reg;
 });
 //数组三位一个逗号的正则匹配
 const threeComma = (num) => {
