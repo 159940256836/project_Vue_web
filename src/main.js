@@ -101,6 +101,7 @@ function toFloor(number, scale = 8) {
         return str;
     }
 }
+
 Vue.filter('toFloor', (number, scale) => {
     return toFloor(number, scale);
 });
@@ -114,7 +115,6 @@ const threeComma = (num) => {
 }
 Vue.filter('threeComma', threeComma);
 Vue.prototype.toFloor = toFloor;
-
 
 
 /* eslint-disable no-new */
