@@ -79,6 +79,9 @@ import Ieoadmin from '../components/uc/IeoAdmin.vue'
 
 // 糖果赠送记录
 import GiveRecord from '../components/uc/giveRecord.vue'
+
+//归还赠送记录
+import LeverIndex from "../pages/lever/Index.vue"
 export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
@@ -89,7 +92,7 @@ export default [
     { path: '/register', component: Register },
     { path: "/closeGoogleval", name: "closegoogleVali", component: ClosegoogleVali },
     { path: "/openGoogleVali", name: "resetgooglevali", component: OpenGoogleVali },
-
+    { path: "/lever/:coin", name: "lever", component: LeverIndex },
     { path: '/findPwd', component: FindPwd },
     { path: '/exchange', component: Exchange },
     { path: '/exchange/*', component: Exchange },
