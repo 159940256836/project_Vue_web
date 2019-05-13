@@ -1,6 +1,6 @@
 <template>
   <div class="help common">
-    <img class="bannerimg" src="../../assets/images/help_banner.png">
+    <img class="bannerimg" src="../../assets/images/help.jpg">
     <div class="help_container">
       <h1>帮助中心</h1>
       <div class="main">
