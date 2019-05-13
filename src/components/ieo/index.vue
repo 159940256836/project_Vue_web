@@ -2,7 +2,7 @@
     <div class="ieoWrapper" @click='getDetail'>
         <div class="topBox">
             <div class="topBox specail"><img :src="content.picView" alt=""><span>{{content.saleCoin}}</span></div>
-            <div class="type">{{status}}</div>
+             <div class="type" :class="status == '进行中'? 'red':(status == '已完成' ? 'yellow' : ( status == '预热中' ? 'pink' : ''))">{{status}}</div>
         </div>
         <div class="abstract">
             {{content.ieoName}}
@@ -74,13 +74,36 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.type.red:before{
+    background:#ffa500 !important;
+}
+.red{
+    color:#ffa500 !important;
+   
+}
+.type.yellow:before{
+    background:#999 !important;
+}
+.yellow{
+    color:#999;
+}
+.type.pink:before{
+    background:#2ac082 !important
+}
+.pink{
+
+    color:#2ac082;
+}
+.yure{
+    color:red;
+}
 %flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .ieoWrapper {
-    width: 30%;
+    width: 31.8%;
     background: rgb(17, 20, 36);
     padding: 10px;
     border-radius: 5px;
@@ -96,7 +119,7 @@ export default {
             width: 30px;
         }
         .type {
-            background: rgb(125, 131, 152);
+            // background: rgb(125, 131, 152);
             padding: 5px 20px;
             border-radius: 15px;
             &:before {
@@ -116,6 +139,7 @@ export default {
     }
     .mainImg {
         img {
+           
             width: 100%;
             height: 100px;
         }

@@ -10,7 +10,9 @@
                     {{content.ieoName}}
                 </div>
                 <div>
-                    <span class="type">{{status}}</span>
+                    <!-- <span class="type">{{status}}</span> -->
+                    <!-- 5.13修改 -->
+                    <div class="type" :class="status == '进行中'? 'red':(status == '已完成' ? 'yellow' : ( status == '预热中' ? 'pink' : ''))">{{status}}</div>
                 </div>
             </div>
             <div class="ieoDetail">
@@ -19,12 +21,30 @@
                 </div>
                 <div class="detail">
                     <ul>
-                        <li><span>发售总量</span><span>{{content.saleAmount|threeComma}}&nbsp;&nbsp;{{content.saleCoin}}</span></li>
-                        <li><span>预计上线时间</span><span>{{content.expectTime}}</span></li>
-                        <li><span>募集币种</span><span class="specialColor">{{content.raiseCoin}}</span></li>
-                        <li><span>兑换比例</span><span>1{{content.raiseCoin}}={{content.ratio}}{{content.saleCoin}}</span></li>
-                        <li><span>手续费</span><span class="specialColor">免手续费</span></li>
-                        <li><span>募集周期(UTC+8)</span><span>{{content.startTime}}-{{content.endTime}}</span></li>
+                        <li>
+                            <span class="span1">发售总量</span>
+                            <span class="span2">{{content.saleAmount|threeComma}}&nbsp;&nbsp;{{content.saleCoin}}</span>
+                        </li>
+                        <li>
+                            <span class="span1">预计上线时间</span>
+                            <span class="span2">{{content.expectTime}}</span>
+                        </li>
+                        <li>
+                            <span class="span1">募集币种</span>
+                            <span class="specialColor span2">{{content.raiseCoin}}</span>
+                        </li>
+                        <li>
+                            <span class="span1">兑换比例</span>
+                            <span class="span2">1{{content.raiseCoin}}={{content.ratio}}{{content.saleCoin}}</span>
+                        </li>
+                        <li>
+                            <span class="span1">手续费</span>
+                            <span class="specialColor span2">免手续费</span>
+                        </li>
+                        <li>
+                            <span class="span1">募集周期(UTC+8)</span>
+                            <span class="span2">{{content.startTime}}-{{content.endTime}}</span>
+                        </li>
                     </ul>
                 </div>
                 <div class="progress">
@@ -67,10 +87,14 @@
             </div>
         </div>
         <div class="table">
-            <Tabs value="name1">
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+            <!-- <Tabs value="name1">
                 <TabPane label="售卖方式" name="name1">{{content.sellMode}}</TabPane>
                 <TabPane label="项目详情" name="name2">{{content.sellDetail}}</TabPane>
-            </Tabs>
+            </Tabs> -->
         </div>
     </div>
 </template>
@@ -147,8 +171,12 @@ export default {
                 }
             })
         },
-        multity(x, y) {
-            return String(x * y).slice(0, 3);
+        // multity(x, y) {
+        //     return String(x * y).slice(0, 3);
+        // },
+        //5.13修改
+         multity(x, y) {
+            return String(x * y)
         },
         changeNum() {
             if (this.isNaNFun(this.base)) {
@@ -237,6 +265,16 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.red{
+    color:#ffa500 !important;
+}
+.yellow{
+    color:#999;
+}
+.pink{
+
+    color:#2ac082;
+}
 %flex {
     display: flex;
     justify-content: space-between;
@@ -257,6 +295,7 @@ $lineColor: rgb(71, 100, 146);
     background: rgb(25, 26, 28);
     padding: 50px 10%;
     .common {
+        width:1200px;
         background: rgb(15, 20, 36);
         overflow: hidden;
         color: #aaa;
@@ -265,6 +304,7 @@ $lineColor: rgb(71, 100, 146);
         @extend %flex;
         flex-wrap: wrap;
         align-items: stretch;
+        margin:20px auto;
         .top_box {
             @extend %flex;
             width: 100%;
@@ -281,7 +321,7 @@ $lineColor: rgb(71, 100, 146);
                 }
             }
             .type {
-                background: rgb(125, 131, 152);
+                // background: rgb(125, 131, 152);
                 padding: 5px 20px;
                 border-radius: 15px;
                 color: #fff;
@@ -324,7 +364,14 @@ $lineColor: rgb(71, 100, 146);
                         width: 100%;
                         line-height: 2.5;
                         @extend %flex;
+                        .span2{
+                            margin-right:22px;
+                        }
+                        .span1{
+                            margin-left:14px;
+                        }
                     }
+
                 }
             }
             .progress {
@@ -371,6 +418,7 @@ $lineColor: rgb(71, 100, 146);
             border-left: 1px dotted $lineColor;
             padding: 10px;
             ul {
+                margin-left:22px;
                 @extend %flex;
                 height: 100%;
                 flex-direction: column;
@@ -384,7 +432,13 @@ $lineColor: rgb(71, 100, 146);
                         text-align: center;
                         background-color: rgb(32, 59, 139);
                         line-height:2.5;
+                        span{
+                            display:block;
+                            width:100%;
+                            height:100%;
+                        }
                     }
+
                 }
             }
         }
