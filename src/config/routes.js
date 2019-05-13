@@ -77,6 +77,11 @@ import feeLevel from "../components/uc/FeeLevel.vue"
 //IEo管理
 import Ieoadmin from '../components/uc/IeoAdmin.vue'
 
+//api管理
+import apiManage from '../components/uc/apiManage.vue'
+
+//杠杆账户管理 => 当前委托
+import levelCurrent from '../components/uc/levelCurrent.vue'
 // 糖果赠送记录
 import GiveRecord from '../components/uc/giveRecord.vue'
 export default [
@@ -195,6 +200,16 @@ export default [
                 path: "ieoadmin",
                 name: "ieoadmin",
                 component: Ieoadmin
+            },
+            {
+                path: "apiManage",
+                name: "apiManage",
+                component: apiManage
+            },
+            {
+                path: "level/current",
+                name: "levelCurrent",
+                component: levelCurrent
             },
             {
                 path: "giveRecord",

@@ -201,6 +201,24 @@
                     <router-link to="/uc/ieoadmin">IEO管理</router-link>
                     </MenuItem>
                 </Submenu>
+                 <Submenu name="6">
+                    <template slot="title">
+                        <span class="isclick"></span>
+                        <span class="content">API管理</span>
+                    </template>
+                    <MenuItem name="6-1">
+                    <router-link to="/uc/apiManage">API管理</router-link>
+                    </MenuItem>
+                </Submenu>
+                 <Submenu name="7">
+                    <template slot="title">
+                        <span class="isclick"></span>
+                        <span class="content">杠杆交易管理</span>
+                    </template>
+                    <MenuItem name="7-1">
+                    <router-link to="/uc/level/current">当前委托</router-link>
+                    </MenuItem>
+                </Submenu>
             </Menu>
             <router-view></router-view>
         </div>
@@ -236,7 +254,9 @@ export default {
                 "/uc/order": "4-2",
                 "/uc/withdraw/address": "2-4",
                 "/uc/ad/create": "4-1",
-                "/uc/ieoadmin": "5-1"
+                "/uc/ieoadmin": "5-1",
+                "/uc/apiManage": "6-1",
+                "/uc/level/current": "7-1"
             }
         };
     },
@@ -282,6 +302,12 @@ export default {
                 case "5-1":
                     this.$router.push("/uc/ieoadmin");
                     break;
+                case "6-1":
+                    this.$router.push("/uc/apiManage");
+                    break;
+                case "7-1":
+                    this.$router.push("/uc/level/current");
+                    break;    
                 default:
                     this.$router.push("/uc/safe");
                     break;
@@ -309,7 +335,7 @@ export default {
             this.$refs.test.updateOpened();
             this.$refs.test.updateActiveName();
         });
-        const doc = document.body
+        const doc = document.body;
          const sreenHeight = doc.offsetHeight;
          const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
          const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
