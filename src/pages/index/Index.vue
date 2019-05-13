@@ -961,7 +961,6 @@ export default {
                     const list = this.hostSymbolList.filter(ele => ele.symbol == resp.symbol);
                     const isHot = list.length > 0 ? Right(resp) : Left(null);
                     const result = isHot.map(obj => obj.symbol == resp.symbol).fold(x => null, x => x);
-                    console.log(result);
                     result && this.hostSymbolList.forEach((ele, index) => {
                         if (ele.symbol == resp.symbol) {
                             this.hostSymbolList.splice(index, 1, resp);

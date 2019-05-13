@@ -22,8 +22,8 @@ Vue.use(VueRouter);
 Vue.use(vueResource);
 Vue.use(VueI18n);
 
-Vue.prototype.host = "http://39.100.79.158:80"; //测试
-// Vue.prototype.host = "http://192.168.0.110:6001"; //
+//Vue.prototype.host = "http://39.100.79.158:80"; //测试
+Vue.prototype.host = "http://www.coinmany.com"; //
 Vue.prototype.api = Api;
 Vue.http.options.credentials = true;
 Vue.http.options.emulateJSON = true;
@@ -72,8 +72,6 @@ Vue.filter('dateFormat', function(tick) {
 Vue.filter('ymdFormat', function(tick) {
     return moment(tick).format("YYYY-MM-DD");
 });
-
-
 Vue.filter('toFixed', function(number, scale) {
     return new Number(number).toFixed(scale);
 });
@@ -101,8 +99,14 @@ function toFloor(number, scale = 8) {
         return str;
     }
 }
+
 Vue.filter('toFloor', (number, scale) => {
     return toFloor(number, scale);
+});
+// Input 特殊字符限制
+Vue.filter('reg', function(reg) {
+    var reg = new RegExp(/[\-\_\,\!\|\~\`\(\)\#\@\%\-\+\=\/\'\￥\。\ \…\$\（\）\(\)\[\]\【\】\^\&\*\{\}\:\;\"\L\<\>\?\\]/g, '');
+    return reg;
 });
 //数组三位一个逗号的正则匹配
 const threeComma = (num) => {
@@ -114,7 +118,6 @@ const threeComma = (num) => {
 }
 Vue.filter('threeComma', threeComma);
 Vue.prototype.toFloor = toFloor;
-
 
 
 /* eslint-disable no-new */

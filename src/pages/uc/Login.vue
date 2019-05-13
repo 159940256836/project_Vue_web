@@ -91,6 +91,7 @@ export default {
         const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
         return {
             openGooleCode: false,//是否开启google验证;
+            openGoole: "", //  获取谷歌验证状态
             captchaObj: null,
             _captchaResult: null,
             formInline: {
@@ -125,13 +126,17 @@ export default {
     methods: {
         //用户名输入以后判断用户是否开启谷歌验证
         userBlur() {
+            console.log(this.formInline.user)
             const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
             var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
             let tel = this.formInline.user;
             if (pattern.test(tel) || reg.test(tel)) {
                 this.isNeedGoogle(tel).then(res => {
+                    console.log(res)
                     if (res == 1) {//1为开启谷歌验证
                         this.openGooleCode = true;
+                    } else {
+                        this.openGooleCode = false;
                     }
                 })
             }
@@ -157,6 +162,8 @@ export default {
         isNeedGoogle(tel) {
             return this.$http.post(this.host + '/uc/get/user', { mobile: tel }).then(res => {
                 const resp = res.body;
+                this.openGoole = res.body.data
+                console.log(resp)
                 if (resp.code == 0) {
                     return new Promise((resolve, reject) => {
                         resolve(resp.data)
@@ -178,12 +185,32 @@ export default {
             return this.login(params);
         },
         handleSubmit(name) {
-            this.$refs[name].validate(valid => {
-                if (valid) {
+             // this.$refs[name].validate(valid => {
+            //     if (valid) {
                     //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
-                    this.initGtCaptcha();
+                    // this.initGtCaptcha();
+            const params = {};
+            const formParams = this.formInline;
+            params.username = formParams.user;
+            params.password = formParams.password;
+            params.code = formParams.googleCode
+            // 新加代码
+            // 判断手机号邮箱不能为空
+            if(!formParams.user) {
+                this.$Message.error(this.$t("uc.login.loginvalidate"));
+                return false
+            } 
+            // 判断是否绑定谷歌
+            if(this.openGoole == 1) {
+                // 判断谷歌验证码不能为空
+                if (!formParams.googleCode) {
+                    this.$Message.error(this.$t("uc.login.google"));
+                    return false
                 }
-            })
+            }
+            this.login(params)
+            // }
+            //})
         },
         login(params) {
             console.log(params);

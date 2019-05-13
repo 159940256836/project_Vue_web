@@ -194,12 +194,12 @@
                                 <div class="bd bd_limited" v-show="btnList[0].check==true">
                                     <Form ref="formValidate">
                                         <FormItem>
-                                            <Input @on-keyup="keyEvent" v-model="form.sell.limitPrice" :placeholder="$t('exchange.sellprice')"></Input>
+                                            <Input  @on-keyup="keyEvent" v-model="form.sell.limitPrice" :placeholder="$t('exchange.sellprice')"></Input>
                                             <label>{{currentCoin.base}}</label>
                                             <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.sell.limitPrice*CNYRate||0|toFixed(2)}} CNY</p>
                                         </FormItem>
                                         <FormItem>
-                                            <Input @on-keyup="keyEvent" v-model="form.sell.limitAmount" :placeholder="$t('exchange.sellnum')"></Input>
+                                            <Input  @on-keyup="keyEvent" v-model="form.sell.limitAmount" :placeholder="$t('exchange.sellnum')"></Input>
                                             <label>{{currentCoin.coin}}</label>
                                         </FormItem>
                                         <!-- <Slider class="silder-sell" v-model="sliderSellLimitPercent" :step="25" show-stops :tip-format="tipFormat"></Slider> -->
@@ -1356,7 +1356,7 @@ export default {
             return this.$store.getters.isLogin;
         },
         member: function () {
-            console.log(this.$store.getters.member)
+            // console.log(this.$store.getters.member)
             return this.$store.getters.member;
         },
         lang: function () {
@@ -1540,6 +1540,27 @@ export default {
         // // this.setback();
     },
     methods: {
+        //金额只能为正整数
+    checkNum(element) {
+	    var val= element.value;
+        //匹配非数字
+	    var reg = new RegExp("([^0-9]*)","g");
+	    var ma = val.match(reg);
+        //如果有非数字，替换成""
+	    if(ma.length>0){
+	        for(var k in ma){
+                if(ma[k]!=""){
+                    val = val.replace(ma[k],"");
+                }
+            }
+        }
+        //可以为0，但不能以0开头
+        if(val.startsWith("0")&&val.length>1){
+            val = val.substring(1,val.length);
+        }
+        //赋值，这样实现的效果就是用户按下非数字不会有任何反应
+        element.value = val;
+    },
         tab(index) {
             this.btnList.map((ele, i) => {
                 if (i == index) {
@@ -1550,10 +1571,13 @@ export default {
             });
         },
         silderGo(silder, val) {
-            console.log(silder, val);
+            // console.log(silder, val);
             this[silder] = val;
         },
         init() {
+            $("input").on("oninput",function(){
+
+            })
             var params = this.$route.params[0];
             if (params == undefined) {
                 this.$router.push("/exchange/" + this.defaultPath);
@@ -1790,10 +1814,11 @@ export default {
                 client_id: "tradingview.com",
                 user_id: "public_user_id",
                 overrides: {
+                    // 背景色网格颜色
                     "paneProperties.background": "#1B1E2E",
-                    "paneProperties.vertGridProperties.color": "rgba(0,0,0,.1)",
-                    "paneProperties.horzGridProperties.color": "rgba(0,0,0,.1)",
-                    //"scalesProperties.textColor" : "#AAA",
+                    "paneProperties.vertGridProperties.color": "rgba(255,255,255,.04)",
+                    "paneProperties.horzGridProperties.color": "rgba(255,255,255,.04)",
+                    // "scalesProperties.textColor" : "#AAA",
                     "scalesProperties.textColor": "#61688A",
                     "mainSeriesProperties.candleStyle.upColor": "#589065",
                     "mainSeriesProperties.candleStyle.downColor": "#AE4E54",
@@ -1805,6 +1830,19 @@ export default {
                     "mainSeriesProperties.areaStyle.color1": "rgba(71, 78, 112, 0.5)",
                     "mainSeriesProperties.areaStyle.color2": "rgba(71, 78, 112, 0.5)",
                     "mainSeriesProperties.areaStyle.linecolor": "#9194a4"
+                },
+                // 柱状图样式
+                studies_overrides: {
+                    "volume.volume.color.0": "#AE4E54",  //第一根的颜色
+                    "volume.volume.color.1": "#589065",  //第二根的颜色
+                //     "volume.volume.transparency": 70,    //透明度
+                //     "volume.volume ma.color": "#FF0000", //波浪图颜色
+                //     "volume.volume ma.transparency": 30, //波浪图透明度
+                //     "volume.volume ma.linewidth": 5,    
+                //     "volume.show ma": true,    //是否显示
+                //     "volume.options.showStudyArguments": false,
+                //     "bollinger bands.median.color": "#33FF88",
+                //     "bollinger bands.upper.linewidth": 7
                 },
                 time_frames: [
                     {
@@ -2914,7 +2952,8 @@ export default {
                 .post(this.host + this.api.exchange.current, params)
                 .then(response => {
                     var resp = response.body;
-                    if (resp.content.length > 0) {
+                    if(resp.content!=undefined){
+                        if (resp.content.length > 0) {
                         this.currentOrder.rows = resp.content.slice(0, 3);
                         this.currentOrder.rows.forEach((row, index) => {
                             row.skin = that.skin;
@@ -2923,6 +2962,7 @@ export default {
                                     ? that.$t("exchange.marketprice")
                                     : row.price;
                         });
+                    }
                     }
                 });
         },
@@ -2944,6 +2984,7 @@ export default {
                 .then(response => {
                     var resp = response.body;
                     let rows = [];
+                    if(resp.content!=undefined){
                     if (resp.content.length > 0) {
                         this.historyOrder.total = resp.totalElements;
                         this.historyOrder.page = resp.number;
@@ -2961,6 +3002,8 @@ export default {
                         }
                         this.historyOrder.rows = rows;
                     }
+                    }
+
                 });
         },
         cancel(index) {
@@ -2999,44 +3042,53 @@ export default {
             return moment(tick).format("YYYY-MM-DD HH:mm:ss");
         },
         keyEvent(event) {
-            var re1 = new RegExp(
-                "([0-9]+.[0-9]{" + this.baseCoinScale + "})[0-9]*",
-                ""
-            );
-            this.form.buy.limitPrice = this.form.buy.limitPrice
-                .toString()
-                .replace(re1, "$1");
-            this.form.sell.limitPrice = this.form.sell.limitPrice
-                .toString()
-                .replace(re1, "$1");
-            this.form.buy.marketAmount = this.form.buy.marketAmount
-                .toString()
-                .replace(re1, "$1");
-            this.form.buy.stopBuyPrice = this.form.buy.stopBuyPrice
-                .toString()
-                .replace(re1, "$1");
-            this.form.sell.stopBuyPrice = this.form.sell.stopBuyPrice
-                .toString()
-                .replace(re1, "$1");
+            let val=$(event.target).val();
+            if(val!=""){
+                let r = /^[0-9]+\.?[0-9]{0,9}$/;　　//正数
+                let flag =r.test(val)
+                if(flag){
+                    var re1 = new RegExp(
+                            "([0-9]+.[0-9]{" + this.baseCoinScale + "})[0-9]*",
+                            ""
+                        );
+                        this.form.buy.limitPrice = this.form.buy.limitPrice
+                            .toString()
+                            .replace(re1, "$1");
+                        this.form.sell.limitPrice = this.form.sell.limitPrice
+                            .toString()
+                            .replace(re1, "$1");
+                        this.form.buy.marketAmount = this.form.buy.marketAmount
+                            .toString()
+                            .replace(re1, "$1");
+                        this.form.buy.stopBuyPrice = this.form.buy.stopBuyPrice
+                            .toString()
+                            .replace(re1, "$1");
+                        this.form.sell.stopBuyPrice = this.form.sell.stopBuyPrice
+                            .toString()
+                            .replace(re1, "$1");
 
-            var re2 = new RegExp("([0-9]+.[0-9]{" + this.coinScale + "})[0-9]*", "");
-            this.form.buy.limitAmount = this.form.buy.limitAmount
-                .toString()
-                .replace(re2, "$1");
-            this.form.buy.stopBuyAmount = this.form.buy.stopBuyAmount
-                .toString()
-                .replace(re2, "$1");
+                        var re2 = new RegExp("([0-9]+.[0-9]{" + this.coinScale + "})[0-9]*", "");
+                        this.form.buy.limitAmount = this.form.buy.limitAmount
+                            .toString()
+                            .replace(re2, "$1");
+                        this.form.buy.stopBuyAmount = this.form.buy.stopBuyAmount
+                            .toString()
+                            .replace(re2, "$1");
 
-            this.form.sell.limitAmount = this.form.sell.limitAmount
-                .toString()
-                .replace(re2, "$1");
-            this.form.sell.stopBuyAmount = this.form.sell.stopBuyAmount
-                .toString()
-                .replace(re2, "$1");
+                        this.form.sell.limitAmount = this.form.sell.limitAmount
+                            .toString()
+                            .replace(re2, "$1");
+                        this.form.sell.stopBuyAmount = this.form.sell.stopBuyAmount
+                            .toString()
+                            .replace(re2, "$1");
 
-            this.form.sell.marketAmount = this.form.sell.marketAmount
-                .toString()
-                .replace(re2, "$1");
+                        this.form.sell.marketAmount = this.form.sell.marketAmount
+                            .toString()
+                            .replace(re2, "$1");
+                    }else{
+                        $(event.target).val("");                    
+                    }
+                }
         }
     }
 };

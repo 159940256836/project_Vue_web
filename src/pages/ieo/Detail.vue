@@ -57,7 +57,7 @@
                         </Input>
                     </li>
                     <li>
-                        <Input v-model="password" placeholder="请输入交易密码" />
+                        <Input type="password" v-model="password" placeholder="请输入交易密码" />
                     </li>
                     <li>
                         <div class="btn"><span long @click="startSale">{{text}}</span></div>
@@ -226,6 +226,9 @@ export default {
             }
             console.log(this.status);
             this.text = this.status = str;
+            if(this.text=="进行中"){
+                this.text="确定"
+            }
         },
         formatTime(date) {
             return new Date(date).getTime();

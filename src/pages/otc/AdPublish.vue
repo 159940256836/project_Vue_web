@@ -49,12 +49,12 @@
               </FormItem>
               <p class="msg" v-show="form.fixed">{{$t('otc.publishad.usetip')}}</p>
               <FormItem :label="$t('otc.publishad.premiseprice')" prop="premisePrice" v-show="!form.fixed" class="ivu-form-item-required">
-                <Input v-model="form.premisePrice" :placeholder="$t('otc.publishad.premisepricetip')">
+                <Input v-model="form.premisePrice" @keyup.native="handleInput(form.premisePrice)" :placeholder="$t('otc.publishad.premisepricetip')">
                 <span slot="append">%</span>
                 </Input>
               </FormItem>
               <FormItem :label="$t('otc.publishad.fixedprice')" prop="fixedPrice" v-show="form.fixed" class="ivu-form-item-required">
-                <Input v-model="form.fixedPrice" :placeholder="$t('otc.publishad.fixedpricetip')">
+                <Input v-model="form.fixedPrice" @keyup.native="handleInput(form.fixedPrice)" :placeholder="$t('otc.publishad.fixedpricetip')">
                 <span slot="append">{{form.rmb}}</span>
                 </Input>
               </FormItem>
@@ -76,7 +76,7 @@
                 <Input v-model="form.number" :placeholder="$t('otc.publishad.num_text1')+wantstyle+$t('otc.publishad.num_text2')"></Input>
               </FormItem>
               <FormItem :label="$t('otc.publishad.exchangeperiod')" prop="timeLimit">
-                <Input v-model="form.timeLimit" :placeholder="$t('otc.publishad.exchangeperiod_text1')+'('+wantTime+$t('otc.publishad.minute')+')'">
+                <Input v-model="form.timeLimit" @keyup.native="handleInput(form.timeLimit)" :placeholder="$t('otc.publishad.exchangeperiod_text1')+'('+wantTime+$t('otc.publishad.minute')+')'">
                 <span slot="append">{{$t('otc.publishad.minute')}}</span>
                 </Input>
               </FormItem>
@@ -90,12 +90,12 @@
               </FormItem>
 
               <FormItem :label="$t('otc.publishad.minlimit')" prop="minLimit">
-                <Input v-model="form.minLimit" :placeholder="$t('otc.publishad.tip3')">
+                <Input v-model="form.minLimit" @keyup.native="handleInput(form.minLimit)" :placeholder="$t('otc.publishad.tip3')">
                 <span slot="append">CNY</span>
                 </Input>
               </FormItem>
               <FormItem :label="$t('otc.publishad.maxlimit')" prop="maxLimit">
-                <Input v-model="form.maxLimit" :placeholder="$t('otc.publishad.tip4')">
+                <Input v-model="form.maxLimit" @keyup.native="handleInput(form.maxLimit)" :placeholder="$t('otc.publishad.tip4')">
                 <span slot="append">CNY</span>
                 </Input>
               </FormItem>
@@ -355,6 +355,18 @@ export default {
     };
   },
   methods: {
+    // 特殊字符限制
+    handleInput (reg1) {
+      console.log(reg1)
+      var reg = new RegExp(/[\-\_\,\!\|\~\`\(\)\#\@\%\-\+\=\/\'\￥\。\ \…\$\（\）\(\)\[\]\【\】\^\&\*\{\}\:\;\"\L\<\>\?\\]/g, '');
+      if(reg.test(reg1)) {
+        this.form.premisePrice = ''
+        this.form.fixedPrice = ''
+        this.form.minLimit = ''
+        this.form.maxLimit = ''
+        this.form.number = ''
+      }
+    },
     changeCoin() {
       let coinItem = this.getCoin(this.form.coin);
       if (coinItem != null) {

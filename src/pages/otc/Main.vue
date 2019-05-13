@@ -226,16 +226,20 @@ export default {
       console.log(coin);
       switch (coin) {
         case "BTC":
-          this.activeMenuName = "coin-0";
+         // this.activeMenuName = "coin-0";
+         this.activeMenuName = "BTC";
           break;
         case "USDT":
-          this.activeMenuName = "coin-1";
+         // this.activeMenuName = "coin-1";
+          this.activeMenuName = "USDT";
           break;
         case "ETH":
-          this.activeMenuName = "coin-2";
+        //  this.activeMenuName = "coin-2";
+         this.activeMenuName = "ETH";
           break;
         default:
-          this.activeMenuName = "coin-1";
+        //  this.activeMenuName = "coin-1";
+         this.activeMenuName = "USDT";
           break;
       }
       this.$nextTick(function() {

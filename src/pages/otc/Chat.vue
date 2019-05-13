@@ -287,11 +287,19 @@ export default {
     },
     showQRCode: function(type) {
       if (type == 1) {
-        this.payCodeUrl = this.alipay.qrCodeUrl;
-      } else {
-        this.payCodeUrl = this.wechatPay.qrWeCodeUrl;
-      }
-      this.modal6 = true;
+          this.payCodeUrl = this.alipay.qrCodeUrl;
+          if (this.alipay.qrCodeUrl == "") {
+            this.$Message.error(this.$t("otc.chat.qcode"));
+            this.modal6 = false;
+          }
+        } else {
+          this.payCodeUrl = this.wechatPay.qrWeCodeUrl;
+          if (this.wechatPay.qrWeCodeUrl == "") {
+            this.$Message.error(this.$t("otc.chat.qcode"));
+            this.modal6 = false;
+          }
+        }
+        this.modal6 = true; 
     },
     setReserveTime: function() {
       this.getReserveTime();
