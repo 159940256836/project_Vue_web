@@ -18,7 +18,7 @@
             </div>
         </div>
         <!-- <div class="help_container">
-          <div style="line-height: 40px;font-size:16px;"><router-link to="/help" style="color:#f0a70a;">{{$t('cms.servicecenter')}}</router-link>->{{$t('cms.notice')}}</div>
+          <div style="line-height: 40px;font-size:16px;"><router-link to="/help" style="color:#3399ff;">{{$t('cms.servicecenter')}}</router-link>->{{$t('cms.notice')}}</div>
 
             <Col span="24" style="padding:0 2%;color:#000;font-size:18px;background:#fff">
                 <div class="faqlist">
@@ -151,9 +151,9 @@ export default {
 }
 .ivu-page .ivu-page-item {
     &:hover {
-        border: 1px solid #f0a70a;
+        border: 1px solid #3399ff;
         a {
-            color: #f0a70a;
+            color: #3399ff;
         }
     }
 }

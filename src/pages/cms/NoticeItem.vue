@@ -159,7 +159,7 @@ export default {
     padding-bottom: 110px;
     .link {
       font-size: 14px;
-      color: #f0a70a;
+      color: #3399ff;
     }
     .header {
       margin-bottom: 40px;

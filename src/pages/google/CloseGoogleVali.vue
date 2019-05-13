@@ -5,12 +5,12 @@
             <FormItem label="手机号">
                 <p style="background:rgb(247, 244, 253);padding:5px;font-size:16px;">{{phone|addStart}}</p>
             </FormItem>
-            <FormItem label="短信验证码">
+            <FormItem label="短信验证码" prop="code">
                 <Input type="text" v-model="formInline.code" placeholder="短信验证码">
                 <Button slot="append" @click="getCode" :disabled="disabled">{{getCodeText}}</Button>
                 </Input>
             </FormItem>
-            <FormItem label="谷歌验证码">
+            <FormItem label="谷歌验证码" prop="googleCode">
                 <Input type="text" v-model="formInline.googleCode" placeholder="谷歌验证码">
                 </Input>
             </FormItem>
@@ -30,7 +30,7 @@ export default {
     data() {
         return {
             getCodeText: "获取验证码",
-            phone: "15838413254",
+            phone: this.$route.params.phone,
             disabled: false,
             openGoogleModal: true,
             formInline: {
@@ -63,6 +63,7 @@ export default {
     methods: {
         jcgoogle(params) {
             this.$http.post(this.host+"/uc/google/jcgoogle",params).then(res=>{
+                console.log(res)
                 const resp = res.body;
                 if(resp.code == 0){
                     this.$Notice.success({
@@ -76,7 +77,9 @@ export default {
             })
         },
         sureBtn(name) {
+            console.log(name)
             this.$refs[name].validate((valid) => {
+                console.log(valid)
                 if (valid) {
                     const formInline = this.formInline;
                     const params = {
@@ -106,12 +109,17 @@ export default {
         },
         getPhoneCode() {
             return this.$http.post(this.host + "/uc/mobile/google/code", {}).then(res => {
-                if (res.code == 0) {
-                    return new Promise((resolve, reject) => {
-                        resolve();
-                    })
+                console.log(res)
+                if (res.body.code == 0) {
+                    // return new Promise((resolve, reject) => {
+                    //     resolve();
+                    // })
+                     this.$Notice.success({
+                    title: this.$t("common.tip"),
+                    desc: res.body.message
+                });
                 } else {
-                    this.$Notice.error({ title: this.$t("common.tip"), desc: resp.message });
+                    this.$Notice.error({ title: this.$t("common.tip"), desc: res.body.message });
                 }
             })
         }

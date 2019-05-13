@@ -159,7 +159,7 @@ export default {
                         let flag = this.isLogin;
                         return h("Icon", {
                             props: {
-                                color: "#f0a70a",
+                                color: "#3399ff",
                                 size: "18",
                                 type: params.row.isFavor
                                     ? "ios-star"
@@ -428,7 +428,7 @@ export default {
                             let flag = this.isLogin;
                             return h("Icon", {
                                 props: {
-                                    color: "#f0a70a",
+                                    color: "#3399ff",
                                     size: "18",
                                     type: params.row.isFavor
                                         ? "ios-star"
@@ -1279,12 +1279,12 @@ li {
                 padding: 0 30px;
                 box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
                 &:hover {
-                    color: #f0a70a;
+                    color: #3399ff;
                 }
             }
             li.active {
                 background: #fff;
-                color: #f0a70a;
+                color: #3399ff;
                 position: relative;
             }
         }
@@ -1294,7 +1294,7 @@ li {
         .tables {
             border: none;
             box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-            border-top: 2px solid #f0ac19;
+            border-top: 2px solid #3399ff;
             .ivu-table {
                 .ivu-table-header {
                     .ivu-table-column-center {

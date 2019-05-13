@@ -186,9 +186,9 @@ color:black'>发布广告免费。</span></p>
 }
 
 .agreement_tab a.cur {
-    color: #f0a70a;
+    color: #3399ff;
     font-weight: bold;
-    border-bottom: 2px solid #f0a70a;
+    border-bottom: 2px solid #3399ff;
 }
 
 /*.content {*/

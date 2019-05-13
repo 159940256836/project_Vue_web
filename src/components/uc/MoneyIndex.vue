@@ -323,10 +323,10 @@ export default {
                 }
               }
               p .ivu-btn.ivu-btn-info {
-                border: 1px solid #f0ac19;
+                border: 1px solid #3399ff;
                 border-radius: 20px;
                 span {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
               p .ivu-btn.ivu-btn-error {

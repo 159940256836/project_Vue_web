@@ -29,20 +29,20 @@
   text-align: center;
 }
 .table .ivu-table-cell-expand {
-  color: #f0a70a;
+  color: #3399ff;
 }
 .form .clear_btn {
   &:hover {
-    color: #f0ac19;
-    border-color: #f0ac19;
+    color: #3399ff;
+    border-color: #3399ff;
   }
   &:focus {
     background-color: #fff;
     -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
     -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
     box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-    color: #f0ac19;
-    border-color: #f0ac19;
+    color: #3399ff;
+    border-color: #3399ff;
   }
 }
 </style>
@@ -72,7 +72,7 @@
         </Select>
       </FormItem>
       <FormItem>
-        <Button type="warning" @click="handleSubmit">搜索</Button>
+        <Button type="primary" @click="handleSubmit">搜索</Button>
         <Button style="margin-left: 8px " @click="handleClear " class="clear_btn">清空条件</Button>
       </FormItem>
     </Form>
@@ -229,8 +229,8 @@ export default {
                   size: "small"
                 },
                 style: {
-                  background: "#f0ac19",
-                  borderColor: "#f0ac19",
+                  background: "#3399ff",
+                  borderColor: "#3399ff",
                   color: "#fff",
                   lineHeight: "15px"
                 },
@@ -308,7 +308,6 @@ export default {
               rows.push(row);
             }
             this.orders = rows;
-            console.log(this.orders);
           }
           this.loading = false;
         });

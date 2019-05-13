@@ -59,7 +59,7 @@
         </Steps>
 
         <div v-if="certStatus == 6" style="width: 500px;margin: 0 auto;text-align: center;">
-          <Button type="warning" style="width: 120px;background:#f0ac19;border-color:#f0ac19" @click="modal_return=true" long size="large">{{$t("uc.identity.shenagain")}}</Button>
+          <Button type="warning" style="width: 120px;background:#3399ff;border-color:#3399ff" @click="modal_return=true" long size="large">{{$t("uc.identity.shenagain")}}</Button>
           <div class="fail-reason" style="margin-top: 50px;font-size: 16px;">
             <Icon type="md-alert" color="red" size="16" />
             <span style="margin-left: 10px;">{{$t('uc.identity.yuanyin')}}：{{refuseReason}}</span>
@@ -67,11 +67,11 @@
         </div>
 
         <div v-if="certStatus == 7" style="width: 500px;margin: 0 auto;text-align: center;">
-          <Button type="warning" style="width: 120px;background:#f0ac19;border-color:#f0ac19" @click="modal_read=true" long size="large">{{$t("uc.identity.sheqinggain")}}</Button>
+          <Button type="warning" style="width: 120px;background:#3399ff;border-color:#3399ff" @click="modal_read=true" long size="large">{{$t("uc.identity.sheqinggain")}}</Button>
         </div>
 
         <div v-if="certStatus == 3" style="width: 500px;margin: 0 auto;text-align: center;">
-          <Button type="warning" style="width: 120px;background:#f0ac19;border-color:#f0ac19" @click="modal_read=true" long size="large">{{$t("uc.identity.shenagain")}}</Button>
+          <Button type="warning" style="width: 120px;background:#3399ff;border-color:#3399ff" @click="modal_read=true" long size="large">{{$t("uc.identity.shenagain")}}</Button>
           <div class="fail-reason" style="margin-top: 50px;font-size: 16px;">
             <Icon type="md-alert" color="red" size="16" />
             <span style="margin-left: 10px;">{{$t("uc.identity.reason")}}：{{certReason}}</span>
@@ -79,7 +79,7 @@
         </div>
 
         <div v-else-if="certStatus == 2" style="width: 500px;margin: 0 auto;text-align: center;">
-          <Button type="warning" style="width: 120px;background:#f0ac19;border-color:#f0ac19" @click="publishAd" long size="large">{{$t('nav.fabu')}}</Button>
+          <Button type="warning" style="width: 120px;background:#3399ff;border-color:#3399ff" @click="publishAd" long size="large">{{$t('nav.fabu')}}</Button>
           <div style="margin-top: 30px;font-size: 16px;text-align: center;">
             <a @click="returnAdit" style="color: #aaa;">{{$t("uc.identity.shenqingtuibao")}}</a>
           </div>
@@ -122,11 +122,11 @@
         <div v-show="certStatus === 0" style="text-align: center;font-size: 16px;margin-top:50px">
           <Checkbox v-model="single"></Checkbox>
           <span>{{$t("uc.identity.read")}}</span>
-          <router-link target="_blank" to="/helpdetail?cate=1&id=6&cateTitle=常见问题" class="cur" style="color:#f0a70a">{{$t('uc.identity.agreement')}}</router-link>
+          <router-link target="_blank" to="/helpdetail?cate=1&id=6&cateTitle=常见问题" class="cur" style="color:#3399ff">{{$t('uc.identity.agreement')}}</router-link>
         </div>
         <!-- 同意第一步的按钮 -->
         <div v-show="certStatus === 0" class="sq">
-          <Button @click="apply" style="background:#f0a70a;color:#fff;outline:none;">{{$t("uc.identity.lijishenqing")}}</Button>
+          <Button @click="apply" style="background:#3399ff;color:#fff;outline:none;">{{$t("uc.identity.lijishenqing")}}</Button>
         </div>
       </div>
 
@@ -165,9 +165,9 @@
         <div style="text-align: left;padding: 30px 0;">
           <Checkbox v-model="agreeFrozen"></Checkbox> {{$t('uc.identity.second.agree')}}
           <span>
-            <font color="#f0a70a">{{auditText}}</font>{{$t('uc.identity.second.agreec')}}</span>
+            <font color="#3399ff">{{auditText}}</font>{{$t('uc.identity.second.agreec')}}</span>
         </div>
-        <Button @click="apply2" long style="font-size: 16px;background:#f0a70a;color:#fff;border:1px solid #f0a70a;">{{$t('uc.identity.second.shenqingchngweishangjia')}}</Button>
+        <Button @click="apply2" long style="font-size: 16px;background:#3399ff;color:#fff;border:1px solid #3399ff;">{{$t('uc.identity.second.shenqingchngweishangjia')}}</Button>
       </div>
       <p slot="footer">
         <!--<span style="text-align: left">-->
@@ -232,7 +232,7 @@
             </Col>
           </Row>
           <FormItem style="margin-top: 20px;">
-            <Button style="width:100%;background:#f0a70a;color:#fff;border:1px solid #f0a70a;" type="info" @click="apply3('apply_form')" :disabled="applyBtn">{{$t("uc.identity.lijishenqing")}}</Button>
+            <Button style="width:100%;background:#3399ff;color:#fff;border:1px solid #3399ff;" type="info" @click="apply3('apply_form')" :disabled="applyBtn">{{$t("uc.identity.lijishenqing")}}</Button>
           </FormItem>
         </Form>
       </div>
@@ -602,7 +602,7 @@ export default {
 .tit {
   font-size: 16px;
   line-height: 25px;
-  border-left: 5px solid #f0a70a;
+  border-left: 5px solid #3399ff;
   padding-left: 15px;
 }
 .plancon {
@@ -764,7 +764,7 @@ export default {
   .sq {
     button {
       &:active {
-        border-color: #f0a70a;
+        border-color: #3399ff;
       }
     }
     button.ivu-btn {
@@ -774,7 +774,7 @@ export default {
         box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
       }
       &:hover {
-        border: 1px solid #f0a70a;
+        border: 1px solid #3399ff;
       }
     }
   }
@@ -787,10 +787,10 @@ export default {
           .ivu-form-item-content {
             .ivu-input {
               &:hover {
-                border-color: #f0a70a;
+                border-color: #3399ff;
               }
               &:focus {
-                border-color: #f0a70a;
+                border-color: #3399ff;
                 -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -798,9 +798,9 @@ export default {
             }
             .ivu-select.ivu-select-single {
               .ivu-select-selection {
-                // border-color:#f0a70a;
+                // border-color:#3399ff;
                 &:hover {
-                  border-color: #f0a70a;
+                  border-color: #3399ff;
                 }
                 -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -808,13 +808,13 @@ export default {
               }
             }
             .ivu-select-visible .ivu-select-selection {
-              border-color: #f0a70a;
+              border-color: #3399ff;
             }
           }
           .ivu-row {
             .ivu-upload.ivu-upload-drag {
               &:hover {
-                border-color: #f0a70a;
+                border-color: #3399ff;
               }
             }
           }
@@ -843,14 +843,14 @@ export default {
       .ivu-modal-footer {
         border: none;
         .ivu-btn-primary {
-          background-color: #f0a70a;
+          background-color: #3399ff;
           color: #fff;
           border-color: #f0ac70;
         }
         .ivu-btn-text {
           &:hover,
           &:focus {
-            color: #f0a70a;
+            color: #3399ff;
           }
         }
       }
@@ -858,26 +858,26 @@ export default {
   }
 }
 .ivu-btn-primary {
-  background: #f0a70a;
-  border: 1px solid #f0a70a;
+  background: #3399ff;
+  border: 1px solid #3399ff;
   &:hover {
-    background: #f0a70a;
-    border: 1px solid #f0a70a;
+    background: #3399ff;
+    border: 1px solid #3399ff;
   }
 }
 .ivu-btn-text {
   &:hover {
-    color: #f0a70a;
+    color: #3399ff;
   }
 }
 .ivu-checkbox-checked .ivu-checkbox-inner {
-  background-color: #f0a70a !important;
-  border: 1px solid #f0a70a !important;
+  background-color: #3399ff !important;
+  border: 1px solid #3399ff !important;
 }
 li.ivu-upload-list-file.ivu-upload-list-file-finish {
   &:hover {
     span {
-      color: #f0a70a;
+      color: #3399ff;
     }
   }
 }
@@ -888,14 +888,14 @@ li.ivu-upload-list-file.ivu-upload-list-file-finish {
       .ivu-steps-tail {
         i {
           &:after {
-            background: #f0a70a;
+            background: #3399ff;
           }
         }
       }
       .ivu-steps-head {
         .ivu-steps-head-inner {
-          background-color: #f0a70a;
-          border-color: #f0a70a;
+          background-color: #3399ff;
+          border-color: #3399ff;
         }
       }
       .ivu-steps-main {
@@ -907,8 +907,8 @@ li.ivu-upload-list-file.ivu-upload-list-file-finish {
     .ivu-steps-item.ivu-steps-status-process {
       .ivu-steps-head {
         .ivu-steps-head-inner {
-          background-color: #f0a70a;
-          border-color: #f0a70a;
+          background-color: #3399ff;
+          border-color: #3399ff;
         }
       }
     }

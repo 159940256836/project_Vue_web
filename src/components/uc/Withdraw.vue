@@ -126,7 +126,7 @@
       </Form>
       <div slot="footer">
         <span style="margin-right:50px" @click="cancel">取消</span>
-        <span style="background:#f0ac19;color:#fff;width:80px;border-radius:30px;display:inline-block;text-align:center;height:30px;line-height: 30px;" @click="ok">确定</span>
+        <span style="background:#3399ff;color:#fff;width:80px;border-radius:30px;display:inline-block;text-align:center;height:30px;line-height: 30px;" @click="ok">确定</span>
       </div>
     </Modal>
   </div>
@@ -508,7 +508,7 @@ export default {
   outline: none;
   right: 0;
   width: 30%;
-  color: #f0ac19;
+  color: #3399ff;
   cursor: pointer;
   height: 20px;
   line-height: 20px;
@@ -533,10 +533,10 @@ export default {
         margin-right: 0;
         a {
           display: inline-block;
-          color: #f0a70a;
+          color: #3399ff;
           width: 100px;
           height: 30px;
-          border: 1px solid #f0a70a;
+          border: 1px solid #3399ff;
           line-height: 30px;
           text-align: center;
           border-radius: 20px;
@@ -914,7 +914,7 @@ table.table .table-inner.action-box {
 }
 
 .order_box .active {
-  border-bottom: 2px solid #f0a70a;
+  border-bottom: 2px solid #3399ff;
 }
 
 .order_box .search {
@@ -928,26 +928,26 @@ table.table .table-inner.action-box {
 }
 
 .ivu-btn-primary {
-  background-color: #f0a70a;
-  border-color: #f0a70a;
+  background-color: #3399ff;
+  border-color: #3399ff;
 }
 #pages {
   margin: 10px;
   overflow: hidden;
 }
 #pages .ivu-page li.ivu-page-item-active {
-  background-color: #f0a70a !important;
-  border-color: #f0a70a !important;
+  background-color: #3399ff !important;
+  border-color: #3399ff !important;
 }
 #pages li.ivu-page-item-active:hover {
-  color: #f0a70a !important;
+  color: #3399ff !important;
 }
 .ivu-page-item-active {
-  background-color: #f0a70a;
-  border-color: #f0a70a;
+  background-color: #3399ff;
+  border-color: #3399ff;
 }
 .ivu-page-item:hover {
-  color: #f0a70a;
+  color: #3399ff;
 }
 .pages_a .ivu-page-item-active {
   background-color: red !important;
@@ -965,16 +965,16 @@ table.table .table-inner.action-box {
             .ivu-select.ivu-select-single {
               .ivu-select-selection {
                 &:hover {
-                  border-color: #f0a70a;
+                  border-color: #3399ff;
                 }
               }
               .ivu-select-selection.ivu-select-selection-focused {
-                border-color: #f0a70a;
+                border-color: #3399ff;
               }
             }
             .ivu-select.ivu-select-visible.ivu-select-single {
               .ivu-select-selection {
-                border-color: #f0a70a;
+                border-color: #3399ff;
                 -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -984,19 +984,19 @@ table.table .table-inner.action-box {
               padding: 6px 16px;
               &:hover {
                 background: #fff;
-                color: #f0a70a;
+                color: #3399ff;
               }
             }
             .ivu-select-dropdown {
               li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
                 background: #fff;
-                color: #f0a70a;
+                color: #3399ff;
               }
               li.ivu-select-item.ivu-select-item-selected {
                 background: #fff;
                 color: #495060;
                 &:hover {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
             }
@@ -1010,11 +1010,11 @@ table.table .table-inner.action-box {
                 .ivu-input-number {
                   width: 100%;
                   &:hover {
-                    border-color: #f0ac19;
+                    border-color: #3399ff;
                   }
                 }
                 .ivu-input-number-focused {
-                  border-color: #f0ac19;
+                  border-color: #3399ff;
                   -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                   -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                   box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -1023,11 +1023,11 @@ table.table .table-inner.action-box {
               .ivu-input-number {
                 width: 100%;
                 &:hover {
-                  border-color: #f0ac19;
+                  border-color: #3399ff;
                 }
               }
               .ivu-input-number-focused {
-                border-color: #f0ac19;
+                border-color: #3399ff;
                 -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -1053,7 +1053,7 @@ table.table .table-inner.action-box {
           thead .ivu-table-cell {
             .ivu-poptip .ivu-poptip-rel .ivu-table-filter {
               i.ivu-icon.ivu-icon-funnel.on {
-                color: #f0ac19;
+                color: #3399ff;
               }
             }
           }
@@ -1061,8 +1061,8 @@ table.table .table-inner.action-box {
         #pages {
           .ivu-page {
             .ivu-page-item.ivu-page-item-active {
-              background-color: #f0ac19;
-              border-color: #f0ac19;
+              background-color: #3399ff;
+              border-color: #3399ff;
               color: #fff;
               &:hover {
                 a {
@@ -1072,18 +1072,18 @@ table.table .table-inner.action-box {
             }
             .ivu-page-item {
               &:hover {
-                border: 1px solid #f0ac19;
+                border: 1px solid #3399ff;
                 a {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
             }
             .ivu-page-prev,
             .ivu-page-next {
               &:hover {
-                border: 1px solid #f0ac19;
+                border: 1px solid #3399ff;
                 a {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
             }
@@ -1101,7 +1101,7 @@ table.table .table-inner.action-box {
       }
     }
     li.ivu-table-filter-select-item.ivu-table-filter-select-item-selected {
-      background: #f0ac19;
+      background: #3399ff;
       color: #fff;
     }
   }

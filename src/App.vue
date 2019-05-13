@@ -410,8 +410,8 @@ ul,li{
 }
 /* 多选框 */
 .exchange .ivu-checkbox-checked .ivu-checkbox-inner {
-    background-color: #f0a70a;
-    border-color: #f0a70a;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 /* modal */
 .ivu-modal-confirm-head {
@@ -419,23 +419,23 @@ ul,li{
     margin-bottom: 15px;
 }
 .ivu-modal-body {
-    // border-top: 4px solid #f0a70a;
+    // border-top: 4px solid #3399ff;
     border-radius: 5px;
     .ivu-modal-confirm {
         .ivu-modal-confirm-body.ivu-modal-confirm-body-render {
             .ivu-input-number {
                 &:hover {
-                    border-color: #f0a710;
+                    border-color: #3399ff;
                 }
                 &:focus {
-                    border-color: #f0a710;
+                    border-color: #3399ff;
                     -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                     -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                     box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 }
             }
             .ivu-input-number.ivu-input-number-focused {
-                border-color: #f0a710;
+                border-color: #3399ff;
                 -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -447,12 +447,12 @@ ul,li{
     }
 }
 .ivu-modal-confirm-footer .ivu-btn-primary {
-    background-color: #f0a70a;
-    border-color: #f0a70a;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 .ivu-modal-confirm-footer .ivu-btn-text {
     &:hover {
-        color: #f0a70a;
+        color: #3399ff;
     }
 }
 .ivu-modal-confirm-footer {
@@ -521,13 +521,13 @@ ul,li{
     padding: 6px 16px;
     &:hover {
         background: #fff;
-        color: #f0a70a;
+        color: #3399ff;
     }
 }
 .ivu-select-dropdown
     li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
     background: #fff;
-    color: #f0a70a;
+    color: #3399ff;
 }
 .page-view {
     .page-content {
@@ -965,17 +965,17 @@ body {
 }
 // 重置分页器颜色
 .ivu-page-item-active {
-    background-color: #f0ac19;
-    border-color: #f0ac19;
+    background-color: #3399ff;
+    border-color: #3399ff;
     color: #fff;
 }
 .ivu-page-next:hover,
 .ivu-page-prev:hover {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 .ivu-page-next:hover a,
 .ivu-page-prev:hover a {
-    color: #f0ac19;
+    color: #3399ff;
 }
 
 .ivu-page-item-jump-prev a,
@@ -984,13 +984,13 @@ body {
 }
 .ivu-page-item-jump-prev a:hover,
 .ivu-page-item-jump-next a:hover {
-    color: #f0ac19;
+    color: #3399ff;
 }
 .ivu-page-item:hover {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 .ivu-page-item:hover a {
-    color: #f0ac19;
+    color: #3399ff;
 }
 .ivu-page-item.ivu-page-item-active a {
     color: #fff;
@@ -1006,10 +1006,10 @@ body {
 /*input框样式重置*/
 .ivu-input {
     &:hover {
-        border-color: #f0ac19;
+        border-color: #3399ff;
     }
     &:focus {
-        border-color: #f0ac19;
+        border-color: #3399ff;
         -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
         -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
         box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -1017,10 +1017,10 @@ body {
 }
 /*下拉框样式重置*/
 .ivu-select-selection:hover {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 .ivu-select-visible .ivu-select-selection {
-    border-color: #f0ac19;
+    border-color: #3399ff;
     -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
     -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
     box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -1029,7 +1029,7 @@ body {
     color: #333;
 }
 .ivu-select-selection-focused {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 /*table组件样式重置*/
 .ivu-table-wrapper {
@@ -1040,7 +1040,7 @@ body {
 }
 /*加载样式重置*/
 .ivu-spin-dot {
-    background: #f0ac19;
+    background: #3399ff;
 }
 .ivu-tabs-bar {
     border-color: #f5f5f5;
@@ -1048,52 +1048,54 @@ body {
 /*日期组件样式重置*/
 .ivu-picker-panel-icon-btn {
     &:hover {
-        color: #f0ac19;
+        color: #3399ff;
     }
 }
 .ivu-date-picker-cells-focused em {
-    -moz-box-shadow: 0 0 0 1px #f0ac19 inset;
-    -webkit-box-shadow: 0 0 0 1px #f0ac19 inset;
-    box-shadow: 0 0 0 1px #f0ac19 inset;
+    -moz-box-shadow: 0 0 0 1px #3399ff inset;
+    -webkit-box-shadow: 0 0 0 1px #3399ff inset;
+    box-shadow: 0 0 0 1px #3399ff inset;
     &:after {
-        background: #f0ac19;
+        background: #3399ff;
     }
 }
 .ivu-date-picker-cells-cell-selected em,
 .ivu-date-picker-cells-cell-selected:hover em {
-    background: #f0ac19;
+    background: #3399ff;
 }
 .ivu-date-picker-cells-cell-today em:after {
-    background: #f0ac19;
+    background: #3399ff;
 }
 .ivu-date-picker-cells-cell-range:before {
     background: rgba(240, 167, 10, 0.2);
 }
 .ivu-date-picker-cells-cell:hover em {
     background: #fff;
-    color: #f0ac19;
+    color: #3399ff;
 }
 /*按钮样式重置*/
 .ivu-btn-primary:hover {
-    background: #f0ac19;
-    border-color: #f0ac19;
+    // background: #3399ff;
+    // border-color: #3399ff;
+    background: #3399ff;
+    border-color: #3399ff;
 }
 
 /*radio样式重置*/
 .ivu-radio-checked .ivu-radio-inner {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 .ivu-radio-checked:hover {
     .ivu-radio-inner {
-        border-color: #f0ac19;
+        border-color: #3399ff;
     }
 }
 .ivu-radio-inner:after {
-    background: #f0ac19;
+    background: #3399ff;
 }
 .ivu-switch-checked {
-    border-color: #f0ac19;
-    background-color: #f0ac19;
+    border-color: #3399ff;
+    background-color: #3399ff;
 }
 .ivu-switch:focus {
     box-shadow: none;
@@ -1105,27 +1107,27 @@ body {
 /*下拉框*/
 .ivu-select-item-selected {
     background: #fff;
-    color: #f0ac19;
+    color: #3399ff;
 }
 // primary按钮
 .ivu-btn-primary {
-    background-color: #f0ac19;
-    border-color: #f0ac19;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 .ivu-btn-text:hover {
-    color: #f0ac19;
+    color: #3399ff;
 }
 // .ivu-btn:hover{
-//     color: #f0ac19;
+//     color: #3399ff;
 //     background-color: #fff;
-//     border-color: #f0ac19;
+//     border-color: #3399ff;
 // }
 
 /*排序小箭头样式重置*/
 .ivu-table-sort i.on {
-    color: #f0ac19;
+    color: #3399ff;
 }
 .ivu-table-sort i:hover {
-    color: #f0ac19;
+    color: #3399ff;
 }
 </style>

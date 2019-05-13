@@ -34,7 +34,7 @@
 </template>
 <style scoped lang="scss">
 /* 验证码 */
-$primary-color: #f0ac19;
+$primary-color: #3399ff;
 .login_form {
     background: #fff url(../../assets/images/login_bg.jpg) no-repeat center
         center;
@@ -126,13 +126,11 @@ export default {
     methods: {
         //用户名输入以后判断用户是否开启谷歌验证
         userBlur() {
-            console.log(this.formInline.user)
             const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
             var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
             let tel = this.formInline.user;
             if (pattern.test(tel) || reg.test(tel)) {
                 this.isNeedGoogle(tel).then(res => {
-                    console.log(res)
                     if (res == 1) {//1为开启谷歌验证
                         this.openGooleCode = true;
                     } else {
@@ -163,7 +161,6 @@ export default {
             return this.$http.post(this.host + '/uc/get/user', { mobile: tel }).then(res => {
                 const resp = res.body;
                 this.openGoole = res.body.data
-                console.log(resp)
                 if (resp.code == 0) {
                     return new Promise((resolve, reject) => {
                         resolve(resp.data)
@@ -213,7 +210,6 @@ export default {
             //})
         },
         login(params) {
-            console.log(params);
             this.$http.post(this.host + this.api.uc.login, params).then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {

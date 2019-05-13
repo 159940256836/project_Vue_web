@@ -23,7 +23,7 @@
                         <!--<Select v-model="recordValue" clearable style="width:200px">-->
                         <!--<Option v-for="item in recordType" :value="item.value" :key="item.value">{{ item.label }}</Option>-->
                         <!--</Select>-->
-                        <Button type="primary" @click="queryOrder" style="padding: 6px 30px;margin-left:10px;background-color:#f0a70a;border-color:#f0a70a">{{$t('uc.finance.trade.search')}}</Button>
+                        <Button type="primary" @click="queryOrder" style="padding: 6px 30px;margin-left:10px;background-color:#3399ff;border-color:#3399ff">{{$t('uc.finance.trade.search')}}</Button>
                     </div>
                     <!-- <div class="datedaitl">
                         <span style="color: #eb6f6c">{{$t('uc.finance.trade.start_end')}} ：</span>&nbsp;&nbsp;<span>{{$t('uc.finance.trade.chargetime')}}</span>
@@ -511,7 +511,7 @@ export default {
 }
 
 .order_box .active {
-  border-bottom: 2px solid #f0a70a;
+  border-bottom: 2px solid #3399ff;
 }
 
 .order_box .search {
@@ -525,18 +525,18 @@ export default {
 }
 
 #record_pages ivu-page-item-active {
-  background-color: #f0a70a !important;
-  border-color: #f0a70a !important;
+  background-color: #3399ff !important;
+  border-color: #3399ff !important;
 }
 #record_pages ivu-page-item-active:hover {
-  background-color: #f0a70a !important;
+  background-color: #3399ff !important;
 }
 .ivu-page-item-active {
-  background-color: #f0a70a;
-  border-color: #f0a70a;
+  background-color: #3399ff;
+  border-color: #3399ff;
 }
 .ivu-page-item:hover {
-  color: #f0a70a;
+  color: #3399ff;
 }
 .order-table .ivu-table-body .ivu-table-cell {
   padding-right: 0 !important;

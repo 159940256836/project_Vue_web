@@ -55,15 +55,15 @@
           .ivu-tabs-nav-wrap {
             .ivu-tabs-nav-scroll {
               .ivu-tabs-ink-bar.ivu-tabs-ink-bar-animated {
-                background: #f0ac19;
+                background: #3399ff;
               }
               .ivu-tabs-tab {
                 &:hover {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
               .ivu-tabs-tab.ivu-tabs-tab-active.ivu-tabs-tab-focused {
-                color: #f0ac19;
+                color: #3399ff;
               }
             }
           }
@@ -80,11 +80,11 @@
                   .ivu-table-cell.ivu-table-cell-ellipsis{
                     .user-face.user-avatar-public{
                       span{
-                        background:#f0ac19;
+                        background:#3399ff;
                       }
                     }
                     p a{
-                      color:#f0ac19;
+                      color:#3399ff;
                     }
                   }
                 }
@@ -96,8 +96,8 @@
             overflow: hidden;
             .ivu-page {
               .ivu-page-item.ivu-page-item-active {
-                background-color: #f0ac19;
-                border-color: #f0ac19;
+                background-color: #3399ff;
+                border-color: #3399ff;
                 color: #fff;
                 &:hover {
                   a {
@@ -107,17 +107,17 @@
               }
               .ivu-page-item {
                 &:hover {
-                  border: 1px solid #f0ac19;
+                  border: 1px solid #3399ff;
                   a {
-                    color: #f0ac19;
+                    color: #3399ff;
                   }
                 }
               }
               .ivu-page-prev,.ivu-page-next{
                 &:hover{
-                  border:1px solid #f0ac19;
+                  border:1px solid #3399ff;
                   a{
-                    color:#f0ac19;
+                    color:#3399ff;
                   }
                 }
               }
@@ -235,7 +235,7 @@
 //   height: 75px;
 // }
 // .ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
-//   color: #f0a70a;
+//   color: #3399ff;
 // }
 // #List .nav-right .list-content .list-table .user-name {
 //   display: flex;
@@ -384,7 +384,7 @@
   width: 4px;
   height: 22px;
   margin-right: 10px;
-  background: #f0a70a;
+  background: #3399ff;
 }
 
 .merchant-icon.alipay {
@@ -708,7 +708,7 @@
 }
 
 .user-avatar-public > .user-avatar-in {
-  background: #f0a70a;
+  background: #3399ff;
   border-radius: 50%;
   height: 35px;
   width: 35px;
@@ -741,20 +741,20 @@
 //   .ivu-table-cell.ivu-table-cell-ellipsis
 //   p
 //   a {
-//   color: #f0a70a;
+//   color: #3399ff;
 // }
 // .list-content {
 //   .ivu-tabs-bar {
 //     .ivu-tabs-nav-container {
 //       .ivu-tabs-ink-bar.ivu-tabs-ink-bar-animated {
-//         background: #f0a70a;
+//         background: #3399ff;
 //       }
 //       .ivu-tabs-tab.ivu-tabs-tab-active.ivu-tabs-tab-focused {
-//         color: #f0a70a;
+//         color: #3399ff;
 //       }
 //       .ivu-tabs-tab {
 //         &:hover {
-//           color: #f0a70a;
+//           color: #3399ff;
 //         }
 //       }
 //     }

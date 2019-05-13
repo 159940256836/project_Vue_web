@@ -207,9 +207,9 @@ Microsoft YaHei'>下列情况时本网站无需承担任何责任：</span></p>
   }
 
   .agreement_tab a.cur {
-    color: #f0a70a;
+    color: #3399ff;
     font-weight: bold;
-    border-bottom: 2px solid #f0a70a;
+    border-bottom: 2px solid #3399ff;
   }
 
   /*.content {*/

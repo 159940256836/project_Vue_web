@@ -177,7 +177,7 @@ export default {
     keyEvent1(event){
        let val=$(event.target).val();
             if(val!=""){
-                let r = /^[0-9]+\.?[0-9]{0,9}$/;　　//正数
+                let r = /^[0-9]+\.?[0-9]{0,9}$/;
                 let flag =r.test(val)
                 if(!flag){
                    this.buyPrice=""
@@ -186,7 +186,7 @@ export default {
     },keyEvent2(event){
        let val=$(event.target).val();
             if(val!=""){
-                let r = /^[0-9]+\.?[0-9]{0,9}$/;　　//正数
+                let r = /^[0-9]+\.?[0-9]{0,9}$/;
                 let flag =r.test(val)
                 if(!flag){
                    this.nuyNum=""
@@ -523,7 +523,7 @@ export default {
 
 .trade-right-box .trade-operation .price-box .show-price span {
   font-size: 18px;
-  color: #f0ac19;
+  color: #3399ff;
   font-weight: bolder;
 }
 
@@ -532,7 +532,7 @@ export default {
   border: 0;
   color: white;
   padding: 14px 20px;
-  background-color: #f0ac19;
+  background-color: #3399ff;
   cursor: pointer;
   width: 20%;
   text-align: center;
@@ -655,7 +655,7 @@ export default {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background: #f0a70a;
+  background: #3399ff;
   height: 60px;
   width: 60px;
   color: #fff;

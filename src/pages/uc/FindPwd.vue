@@ -65,7 +65,7 @@
         -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        border-top: 4px solid #f0ac19;
+        border-top: 4px solid #3399ff;
         .tel-title {
             font-size: 25px;
         }
@@ -74,9 +74,9 @@
                 .ivu-form-item-content {
                     .login_btn.ivu-btn {
                         width: 100%;
-                        background-color: #f0ac19;
+                        background-color: #3399ff;
                         outline: none;
-                        border-color: #f0ac19;
+                        border-color: #3399ff;
                         color: #fff;
                         font-size: 18px;
                         border-radius: 30px;
@@ -95,7 +95,7 @@
                     }
                     #sendCode {
                         position: absolute;
-                        border: 1px solid #f0ac19;
+                        border: 1px solid #3399ff;
                         background: #fdfaf3;
                         top: -10px;
                         outline: none;
@@ -114,14 +114,14 @@
                 font-size: 12px;
                 cursor: default;
                 a {
-                    color: #f0ac19;
+                    color: #3399ff;
                     margin-left: -10px;
                 }
                 .ivu-checkbox-wrapper.ivu-checkbox-wrapper-checked {
                     .ivu-checkbox.ivu-checkbox-checked {
                         .ivu-checkbox-inner {
-                            border: 1px solid #f0ac19;
-                            background-color: #f0ac19;
+                            border: 1px solid #3399ff;
+                            background-color: #3399ff;
                         }
                     }
                 }
