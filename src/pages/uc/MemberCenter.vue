@@ -35,7 +35,7 @@
     }
 }
 </style>
-<style lang="scss">
+<style lang="scss" scoped>
 .mymsg_wrapper {
     .wrapper {
         ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {

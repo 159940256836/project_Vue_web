@@ -1575,10 +1575,7 @@ export default {
             this[silder] = val;
         },
         init() {
-            $("input").on("oninput",function(){
-
-            })
-            var params = this.$route.params[0];
+            var params = this.$route.params.pathMatch;
             if (params == undefined) {
                 this.$router.push("/exchange/" + this.defaultPath);
                 params = this.defaultPath;

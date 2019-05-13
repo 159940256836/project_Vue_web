@@ -30,7 +30,7 @@ export default {
     data() {
         return {
             getCodeText: "获取验证码",
-            phone: "15838413254",
+            phone: this.$route.params.phone,
             disabled: false,
             openGoogleModal: true,
             formInline: {
@@ -76,7 +76,9 @@ export default {
             })
         },
         sureBtn(name) {
+            console.log(name,valid)
             this.$refs[name].validate((valid) => {
+                console.log(valid)
                 if (valid) {
                     const formInline = this.formInline;
                     const params = {

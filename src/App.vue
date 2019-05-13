@@ -14,6 +14,7 @@
                     <router-link to="/notice">{{$t("header.service")}}</router-link>
                     <router-link to="/Ieo">上币优选</router-link>
                 </div>
+                <!-- app二维码 -->
                 <div class="rightwrapper">
                     <poptip placement="bottom" width="270" class="appdownload">
                         <a href="javascript:;" style="font-size:14px;">{{$t("header.appdownlaod")}}
@@ -36,8 +37,8 @@
                         </div>
                     </poptip>
                 </div>
+                <!-- 登录 -->
                 <div class="isLoginWrapper" :style="isLogin?'width:12%':'width:6%'">
-                    <!-- 登录 -->
                     <div class="login_register isLogin" v-if="isLogin">
                         <div class="mymsg">
                             <router-link to="/uc/safe">个人中心</router-link>
@@ -64,6 +65,7 @@
                         <router-link to="/register" id="register">{{$t("common.register")}}</router-link>
                     </div>
                 </div>
+                <!-- 中英文切换 -->
                 <div class="changelanguage">
                     <Dropdown @on-click="changelanguage">
                         <a href="javascript:void(0)" style="font-size:14px;color:#fff;">
@@ -76,6 +78,7 @@
                         </DropdownMenu> -->
                     </Dropdown>
                 </div>
+                
             </div>
         </div>
         </header>
@@ -296,7 +299,7 @@ export default {
             line-height: 50px;
             overflow: hidden;
             .netLogo {
-                width: 15%;
+                width: 10%;
                 img {
                     vertical-align: middle;
                 }
@@ -304,8 +307,14 @@ export default {
             .nav {
                 width: 60%;
                 a {
+                    // color: #fff;
+                    // margin-right: 20px;
                     color: #fff;
-                    margin-right: 20px;
+                    /* flex: 1; */
+                    display: inline-block;
+                    min-width: 90px;
+                    text-align: center;
+                    /* margin-right: 20px; */
                 }
                 a.router-link-exact-active.router-link-active {
                     color: #2d8cf0;
@@ -373,7 +382,7 @@ export default {
             }
             .changelanguage {
                 width: 7%;
-                 @extend %flex;
+                @extend %flex;
                 justify-content: flex-end;
                 #change_language_theme .ivu-dropdown-item{
                     color: #000;
