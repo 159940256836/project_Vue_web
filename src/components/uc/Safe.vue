@@ -25,7 +25,7 @@
                                 <div class="account-item-in">
                                     <Icon type="person" style="font-size: 18px;color: #00b5f6;"></Icon>
                                     <span class="card-number">{{$t('uc.safe.nickname')}}</span>
-                                    <p class="bankInfo" style="color: grey;">
+                                    <p class="bankInfo" style="color:grey;">
                                         bearbaby
                                     </p>
                                     <span>{{$t('uc.safe.binded')}}</span>
