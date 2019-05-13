@@ -129,7 +129,7 @@
                                         <div class="total buy_total">
                                             {{$t("exchange.amount")}}
                                             <span>{{form.buy.limitTurnover|toFloor(baseCoinScale)}}</span> {{currentCoin.base}}
-                                        </div>
+                                        </div>                                   
                                         <Button class="bg-green" @click="buyWithLimitPrice" v-show="isLogin">{{$t("exchange.buyin")}}{{currentCoin.coin}}</Button>
                                     </Form>
                                 </div>
