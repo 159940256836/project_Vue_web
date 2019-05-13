@@ -1,13 +1,23 @@
 <template>
-    <div class="common specail">
+    <div class="specail" style="min-height:519px;margin:100px 0;">
         <div class="wrapper">
-            <div id="qrcode"></div>
+            <div class="qrclass">
+                <img src="../../assets/images/goole_Android.png" alt="">
+                <div>android谷歌验证器下载</div>
+            </div>
+            <div class="qrclass">
+                <img src="../../assets/images/goole_IOS.png" alt="">
+                <div>ios谷歌验证器下载</div>
+            </div>
+            <div class="qrflex">
+                  <div id="qrcode"></div>
             <div class="abstract">
                 <p>秘钥用于找回谷歌验证器请妥善保存</p>
                 <p>
                     <span>{{data.secret}}</span>
                     <span v-clipboard:copy="data.secret" v-clipboard:success="onCopy" v-clipboard:error="onError" class="blue">复制</span>
                 </p>
+            </div>
             </div>
         </div>
         <ul>
@@ -20,7 +30,7 @@
                 <Input v-model="formCode.code"></Input>
             </FormItem>
             <FormItem>
-                <Button type="warning" style="width:100%;" @click="sure('formCode')">确定</Button>
+                <Button type="primary" style="width:100%;" @click="sure('formCode')">确定</Button>
             </FormItem>
         </Form>
 
@@ -149,17 +159,17 @@ $color: #2d8cf0;
     overflow: hidden;
     .wrapper {
         @extend %flex;
-        margin-bottom: 30px;
+         margin-bottom: 30px;
         .blue {
             color: $color;
         }
     }
     #qrcode {
-        width: 128px;
+        width: 80px;
         line-height: 2;
     }
     .abstract {
-        padding: 30px;
+        padding-top:8px;
     }
     ul li {
         list-style-type: none;
@@ -170,6 +180,19 @@ $color: #2d8cf0;
         background-color: #fff;
     }
 }
+    .qrflex{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+            text-align: center;
+    }
+.qrclass{
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 25px;
+    margin-right: 60px;
+}
 </style>
 <style lang="scss">
 .common.specail .ivu-input {
@@ -177,7 +200,7 @@ $color: #2d8cf0;
     border: 1px solid #eee;
     color: #000;
     &:hover {
-        border-color: #f0ac19;
+        border-color: #3399ff;
     }
 }
 </style>

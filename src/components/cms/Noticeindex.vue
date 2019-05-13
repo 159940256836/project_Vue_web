@@ -127,7 +127,7 @@ export default {
     width: 4px;
     height: 22px;
     margin-right: 10px;
-    background: #f0a70a;
+    background: #3399ff;
 }
 
 .notice .merchant-top .tips-word {

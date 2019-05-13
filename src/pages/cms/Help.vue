@@ -88,7 +88,7 @@
     right: 0;
     font-size: 14px;
     a {
-      color: #f1ab15;
+      color: #3399ff;
     }
   }
 }

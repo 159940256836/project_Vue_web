@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="btnbox">
-                            <Button id="addrSubmit" @click='addAddr' size="large" style="height:32px;width:86px;color:#fff;background:#f0a70a;border:1px solid #f0a70a;">{{$t('uc.finance.withdraw.add')}}</Button>
+                            <Button id="addrSubmit" @click='addAddr' size="large" style="height:32px;width:86px;color:#fff;background:#3399ff;border:1px solid #3399ff;">{{$t('uc.finance.withdraw.add')}}</Button>
                         </div>
                         <div class="action-content">
                             <div class="action-body">
@@ -480,16 +480,16 @@ p.describe {
             .ivu-select.ivu-select-single {
               .ivu-select-selection {
                 &:hover {
-                  border-color: #f0a70a;
+                  border-color: #3399ff;
                 }
               }
               .ivu-select-selection.ivu-select-selection-focused {
-                border-color: #f0a70a;
+                border-color: #3399ff;
               }
             }
             .ivu-select.ivu-select-visible.ivu-select-single {
               .ivu-select-selection {
-                border-color: #f0a70a;
+                border-color: #3399ff;
                 -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -499,29 +499,29 @@ p.describe {
               padding: 6px 16px;
               &:hover {
                 background: #fff;
-                color: #f0a70a;
+                color: #3399ff;
               }
             }
             .ivu-select-dropdown {
               li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
                 background: #fff;
-                color: #f0a70a;
+                color: #3399ff;
               }
               li.ivu-select-item.ivu-select-item-selected {
                 background: #fff;
                 color: #495060;
                 &:hover {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
             }
           }
           .mt25 .ivu-input{
               &:hover{
-                  border-color:#f0ac19;
+                  border-color:#3399ff;
               }
               &:focus{
-                  border-color:#f0ac19;
+                  border-color:#3399ff;
                   -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                   -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                   box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -539,8 +539,8 @@ p.describe {
         /*分页*/
           .ivu-page {
             .ivu-page-item.ivu-page-item-active {
-              background-color: #f0ac19;
-              border-color: #f0ac19;
+              background-color: #3399ff;
+              border-color: #3399ff;
               color: #fff;
               &:hover {
                 a {
@@ -550,18 +550,18 @@ p.describe {
             }
             .ivu-page-item {
               &:hover {
-                border: 1px solid #f0ac19;
+                border: 1px solid #3399ff;
                 a {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
             }
             .ivu-page-prev,
             .ivu-page-next {
               &:hover {
-                border: 1px solid #f0ac19;
+                border: 1px solid #3399ff;
                 a {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
             }

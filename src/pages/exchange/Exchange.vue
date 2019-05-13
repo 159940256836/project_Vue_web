@@ -2,8 +2,8 @@
     <div class="container exchange" :class="skin">
         <div class="symbol">
             <div class="item" @click="currentCoinFavorChange">
-                <Icon v-if="currentCoinIsFavor" type="ios-star" color="#f0a70a" size="24" />
-                <Icon v-else type="ios-star-outline" color="#f0a70a" size="24" />
+                <Icon v-if="currentCoinIsFavor" type="ios-star" color="#3399ff" size="24" />
+                <Icon v-else type="ios-star-outline" color="#3399ff" size="24" />
             </div>
             <div class="item">
                 <span class="coin">{{currentCoin.coin}}
@@ -66,7 +66,7 @@
                         <div class="mask" v-show="!isLogin">
                             <span>请先
                                 <router-link to="/login">
-                                    <span style="color:#f0a70a;">{{$t("common.login")}}</span>
+                                    <span style="color:#3399ff;">{{$t("common.login")}}</span>
                                 </router-link> /
                                 <router-link to="/register">
                                     <span style="color:#f67951;">{{$t("common.register")}}</span>
@@ -76,7 +76,7 @@
                         <div class="mask" v-show="isLogin&&!member.realName">
                             <span>请先
                                 <router-link to="/uc/safe">
-                                    <span style="color:#f0a70a;">实名认证</span>
+                                    <span style="color:#3399ff;">实名认证</span>
                                 </router-link>
                             </span>
                         </div>
@@ -129,7 +129,7 @@
                                         <div class="total buy_total">
                                             {{$t("exchange.amount")}}
                                             <span>{{form.buy.limitTurnover|toFloor(baseCoinScale)}}</span> {{currentCoin.base}}
-                                        </div>
+                                        </div>                                   
                                         <Button class="bg-green" @click="buyWithLimitPrice" v-show="isLogin">{{$t("exchange.buyin")}}{{currentCoin.coin}}</Button>
                                     </Form>
                                 </div>
@@ -428,7 +428,7 @@ $night-color: #fff;
                             cursor: pointer;
                             &.active {
                                 background-color: #27313e;
-                                color: #f0a70a;
+                                color: #3399ff;
                             }
                             &:first-child {
                                 border-top-left-radius: 6px;
@@ -470,7 +470,7 @@ $night-color: #fff;
                         color: #fff;
                     }
                     a {
-                        color: #f0a70a;
+                        color: #3399ff;
                     }
                 }
             }
@@ -538,7 +538,7 @@ $night-color: #fff;
                 line-height: 40px;
                 background-color: #192330;
                 &.active {
-                    color: #f0a70a;
+                    color: #3399ff;
                     background-color: #27313e;
                 }
                 &:first-child {
@@ -588,7 +588,7 @@ $night-color: #fff;
                             cursor: pointer;
                             &.active {
                                 background-color: #f0f0f0;
-                                color: #f0a70a;
+                                color: #3399ff;
                             }
                             &:first-child {
                                 border-top-left-radius: 6px;
@@ -600,7 +600,7 @@ $night-color: #fff;
                 //     border-right: 1px solid #f0f0f0;
                 //     &.active {
                 //         background-color: #fff;
-                //         color: #f0a70a;
+                //         color: #3399ff;
                 //     }
                 //     &:last-child {
                 //         border-top-right-radius: 6px;
@@ -623,7 +623,7 @@ $night-color: #fff;
                     color: #333;
                 }
                 a {
-                    color: #f0a70a;
+                    color: #3399ff;
                 }
             }
         }
@@ -664,7 +664,7 @@ $night-color: #fff;
                 background-color: #fafafa;
                 box-shadow: 0 0 2px #ccc;
                 &.active {
-                    color: #f0a70a;
+                    color: #3399ff;
                     background-color: #fff;
                 }
             }
@@ -1317,7 +1317,7 @@ export default {
                                     "span",
                                     {
                                         style: {
-                                            color: "#f0a70a"
+                                            color: "#3399ff"
                                         }
                                     },
                                     self.$t("exchange.finished")
@@ -1327,7 +1327,7 @@ export default {
                                     "span",
                                     {
                                         style: {
-                                            color: "#f0a70a"
+                                            color: "#3399ff"
                                         }
                                     },
                                     self.$t("exchange.canceled")

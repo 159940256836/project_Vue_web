@@ -626,7 +626,7 @@ export default {
 .account-box .account-in .account-item .account-item-in .btn {
     padding: 8px 10px;
     cursor: pointer;
-    color: #f0a70a;
+    color: #3399ff;
 }
 
 .tips-g {
@@ -673,7 +673,7 @@ export default {
 
 .hb-night a {
     text-decoration: none;
-    color: #f0a70a;
+    color: #3399ff;
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
@@ -686,7 +686,7 @@ export default {
 
 .hb-night a {
     text-decoration: none;
-    color: #f0a70a;
+    color: #3399ff;
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
@@ -760,7 +760,7 @@ p.describe {
     width: 4px;
     height: 22px;
     margin-right: 10px;
-    background: #f0a70a;
+    background: #3399ff;
 }
 
 .bill_box {
@@ -924,7 +924,7 @@ p.describe {
 }
 
 .order_box .active {
-    border-bottom: 2px solid #f0a70a;
+    border-bottom: 2px solid #3399ff;
 }
 
 .order_box .search {
@@ -937,7 +937,7 @@ p.describe {
     /* border: #c5cdd7 solid 1px; */
 }
 .ivu-btn-primary{
-    background-color: #f0a70a;
-    border-color: #f0a70a;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 </style>

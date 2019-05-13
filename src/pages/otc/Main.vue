@@ -152,12 +152,12 @@
           li.ivu-menu-item {
             border: none;
             &:hover {
-              color: #f0ac19;
+              color: #3399ff;
               border-bottom: 0;
             }
           }
           li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
-            color: #f0ac19;
+            color: #3399ff;
             border-bottom: none;
           }
         }

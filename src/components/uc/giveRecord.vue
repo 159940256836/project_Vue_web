@@ -125,7 +125,7 @@ export default {
         .search_btn {
             height: 32px;
             width: 86px;
-            background: #f0ac19;
+            background: #3399ff;
             color: #fff;
             font-size: 14px;
             border: none;

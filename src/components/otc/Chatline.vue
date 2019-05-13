@@ -79,7 +79,7 @@
                 </div>
                 <input v-model="mytext" @keyup.enter="sendName" autocomplete="off" type="text" :placeholder="$t('otc.chatline.contenttip')" style=" background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
                 <button class="send-btn" @click="sendName">
-                    <Icon type="md-paper-plane" size="28" color="#f0ac19"/>
+                    <Icon type="md-paper-plane" size="28" color="#3399ff"/>
                 </button>
               <div class="msg-notice">
                 <!--<Checkbox @on-change="handleCheckClick" v-model="fOpenNotice">开启windows消息提醒,不担心错过任何消息</Checkbox>-->
@@ -339,7 +339,7 @@ export default {
 
 .chat-in-box .chat-in .chat-line .scroll-chat .more {
     text-align: center;
-    color: #f0a70a;
+    color: #3399ff;
 }
 
 .chat-in-box .chat-in .chat-line .scroll-chat .more span {
@@ -404,7 +404,7 @@ export default {
 }
 
 .user-avatar-public>.user-avatar-in {
-    background: #f0a70a;
+    background: #3399ff;
     height: 42px;
     width: 42px;
     color: #fff;
@@ -486,7 +486,7 @@ export default {
 .chat-container-box .user-chat-box .user-content-box .chat-info .self-desc {
     margin-left: 0;
     margin-right: 16px;
-    background-color: #f0a70a;
+    background-color: #3399ff;
     color: #fff;
 }
 
@@ -494,7 +494,7 @@ export default {
     height: 0;
     width: 0;
     border: 8px solid transparent;
-    border-left: 14px solid #f0a70a;
+    border-left: 14px solid #3399ff;
     position: absolute;
     top: 6px;
     right: -18px;
@@ -577,12 +577,12 @@ export default {
 
 .chat-in-box .chat-in .chat-line .send-msg-box .img-btn .img-icons {
     font-size: 24px;
-    color: #f0a70a;
+    color: #3399ff;
 }
 
 .chat-in-box .chat-in .chat-line .send-msg-box .send-btn .iconfont {
     font-size: 28px;
-    color: #f0a70a;
+    color: #3399ff;
 }
 </style>
 

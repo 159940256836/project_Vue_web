@@ -23,7 +23,7 @@
                         <Select v-model="recordValue" clearable style="width:200px" @on-change="getType">
                             <Option v-for="item in recordType" :value="item.value" :key="item.value">{{ item.label }}</Option>
                         </Select>
-                        <Button type="warning" @click="queryOrder" style="padding: 6px 30px;margin-left:10px;background-color:#f0a70a;border-color:#f0a70a">{{$t('uc.finance.record.search')}}</Button>
+                        <Button type="warning" @click="queryOrder" style="padding: 6px 30px;margin-left:10px;background-color:#3399ff;border-color:#3399ff">{{$t('uc.finance.record.search')}}</Button>
                     </div>
                     <div class="order-table">
                         <Table stripe :no-data-text="$t('common.nodata')" :columns="tableColumnsRecord" :data="tableRecord" :disabled-hover="true" :loading="loading"></Table>
@@ -368,10 +368,10 @@ export default {
                     .ivu-date-picker-rel {
                         .ivu-input {
                             &:hover {
-                                border-color: #f0ac19;
+                                border-color: #3399ff;
                             }
                             &:focus {
-                                border-color: #f0ac19;
+                                border-color: #3399ff;
                                 box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                             }
                         }
@@ -380,10 +380,10 @@ export default {
                 .ivu-date-picker-focused {
                     .ivu-date-picker-rel {
                         .ivu-input {
-                            border-color: #f0ac19;
+                            border-color: #3399ff;
                             box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                             &:focus {
-                                border-color: #f0ac19;
+                                border-color: #3399ff;
                             }
                         }
                     }
@@ -393,21 +393,21 @@ export default {
     }
 }
 #record_pages li.ivu-page-item.ivu-page-item-active {
-    background-color: #f0a70a;
-    border-color: #f0a70a;
+    background-color: #3399ff;
+    border-color: #3399ff;
     a {
         color: #fff;
     }
 }
 #record_pages li.ivu-page-item.ivu-page-item-active {
     &:hover {
-        background-color: #f0a70a;
+        background-color: #3399ff;
         a {
             color: #fff;
         }
     }
 }
 .ivu-page-item:hover {
-    color: #f0a70a;
+    color: #3399ff;
 }
 </style>

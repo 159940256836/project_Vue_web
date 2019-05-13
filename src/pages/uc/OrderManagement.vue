@@ -56,7 +56,7 @@ export default {
 <style scoped>
 .leftmenu a.router-link-active {
     background: #ebeff5;
-    color: #f0a70a !important;
+    color: #3399ff !important;
 }
 .icon3 {
     background: url('../../assets/img/ordericon.png') no-repeat 0 0;

@@ -37,7 +37,7 @@
                                     <Icon type="md-card" size="18" color="#00b5f6" />
                                     <span class="card-number">身份认证</span>
                                     <p v-if="user.realVerified==1" class="bankInfo" style="color: grey;">{{user.realName}}</p>
-                                    <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo" style="color: #f0a70a;">
+                                    <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo" style="color: #3399ff;">
                                         审核未通过{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}，请重试。
                                     </p>
                                     <p v-else class="bankInfo" style="color: grey;">
@@ -301,7 +301,7 @@
                                             <!--</Input>-->
                                             <!--</FormItem>-->
                                             <p style="text-align:right;">
-                                                <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#f0ac19;">忘记密码?</a>
+                                                <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#3399ff;">忘记密码?</a>
                                             </p>
                                             <!-- Button -->
                                             <FormItem>
@@ -349,7 +349,7 @@
                                     <div>提现，修改密码，及安全设置的时候用以输入google验证码，详细信息请阅读<a href="">使用指南</a></div>
                                 </div>
                                 <div>
-                                    <router-link to="/OpenGoogleVali">重置</router-link>
+                                    <router-link to="/OpenGoogleVali">{{googleAuthentication}}</router-link>
                                     <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                                         <span slot="open">开</span>
                                         <span slot="close">关</span>
@@ -665,7 +665,8 @@ export default {
             sendMsgDisabled1: false,
             sendMsgDisabled2: false,
             sendMsgDisabled3: false,
-            sendMsgDisabled5: false
+            sendMsgDisabled5: false,
+            googleAuthentication:"绑定"
         };
     },
     methods: {
@@ -674,6 +675,9 @@ export default {
                 const data = res.body;
                 if(data.code == 0){
                     this.googleSwitch = !!data.data;
+                }
+                if(data.data == 1){
+                    this.googleAuthentication="重置"
                 }
             })
         },
@@ -1051,7 +1055,7 @@ export default {
         this.memberlevel = level(memberGradeId);
         //验证用户是否开启google验证
         // this.checkGoogleValidtor();
-    }
+    },
 };
 </script>
 <style scoped lang="scss">
@@ -1083,7 +1087,7 @@ button.ivu-btn.ivu-btn-primary {
 .uploadimgtip {
     position: relative;
     top: -20px;
-    color: #f0a70a;
+    color: #3399ff;
 }
 .account-box .account-in .account-item.googleValidter {
     @extend %flex;
@@ -1476,7 +1480,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .user-avatar-public > .user-avatar-in {
-    background: #f0a70a;
+    background: #3399ff;
     border-radius: 50%;
     height: 42px;
     width: 42px;
@@ -1491,32 +1495,32 @@ button.ivu-btn.ivu-btn-primary {
 // }
 /* router-link-exact-active router-link-active */
 .account-item-in i {
-    color: #f0a70a !important;
+    color: #3399ff !important;
 }
 .btn {
-    color: #f0a70a;
+    color: #3399ff;
 }
 .ivu-btn-primary {
-    background-color: #f0a70a;
-    border-color: #f0a70a;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 </style>
 <style lang="scss">
 button.ivu-btn.ivu-btn-default {
     &:hover {
-        color: #f0a70a;
-        border: 1px solid #f0a70a;
+        color: #3399ff;
+        border: 1px solid #3399ff;
     }
     &:active {
-        color: #f0a70a;
-        border: 1px solid #f0a70a;
+        color: #3399ff;
+        border: 1px solid #3399ff;
         background: #fff;
     }
 }
 li.ivu-upload-list-file.ivu-upload-list-file-finish {
     &:hover {
         span {
-            color: #f0a70a;
+            color: #3399ff;
         }
     }
 }

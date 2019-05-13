@@ -254,7 +254,7 @@ export default {
                     line-height: 30px;
                     color: 12px;
                     .code {
-                        color: #f0a70a;
+                        color: #3399ff;
                     }
                     .link-copy {
                         margin-left: 10px;
@@ -273,7 +273,7 @@ export default {
     margin: 20px 0 0;
 }
 .nav-right .active {
-    color: #f0a70a;
+    color: #3399ff;
 }
 .rightarea .message {
     margin: 0 auto;
@@ -328,8 +328,8 @@ export default {
     font-size: 26px;
 }
 .ivu-btn-primary {
-    background-color: #f0a70a;
-    border-color: #f0a70a;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 </style>
 <style lang="scss">
@@ -340,7 +340,7 @@ export default {
             -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
             -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
             box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-            // border-top: 4px solid #f0ac19;
+            // border-top: 4px solid #3399ff;
             margin-top: 2px;
             .ivu-table {
                 .ivu-table-header th {
@@ -354,8 +354,8 @@ export default {
         .page-wrap {
             .ivu-page {
                 .ivu-page-item.ivu-page-item-active {
-                    background-color: #f0ac19;
-                    border-color: #f0ac19;
+                    background-color: #3399ff;
+                    border-color: #3399ff;
                     color: #fff;
                     &:hover {
                         a {
@@ -365,18 +365,18 @@ export default {
                 }
                 .ivu-page-item {
                     &:hover {
-                        border: 1px solid #f0ac19;
+                        border: 1px solid #3399ff;
                         a {
-                            color: #f0ac19;
+                            color: #3399ff;
                         }
                     }
                 }
                 .ivu-page-prev,
                 .ivu-page-next {
                     &:hover {
-                        border: 1px solid #f0ac19;
+                        border: 1px solid #3399ff;
                         a {
-                            color: #f0ac19;
+                            color: #3399ff;
                         }
                     }
                 }
@@ -390,14 +390,14 @@ button.btStyle.ivu-btn {
     box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
     border: none;
     &:hover {
-        color: #f0a70a;
+        color: #3399ff;
         border: none;
     }
 }
 button.btStyle.ivu-btn.active {
     &:hover {
         border: none;
-        color: #f0a70a;
+        color: #3399ff;
     }
     &:focus {
         -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;

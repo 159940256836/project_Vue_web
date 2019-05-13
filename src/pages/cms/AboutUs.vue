@@ -152,11 +152,11 @@
   }
 
   .leftmenu li a:hover {
-    color: #f0a70a
+    color: #3399ff
   }
 
   .leftmenu li.cur a {
-    color: #f0a70a;
+    color: #3399ff;
   }
   .content{
     padding-top: 20px;

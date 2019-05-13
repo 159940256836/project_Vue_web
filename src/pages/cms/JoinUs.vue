@@ -471,10 +471,10 @@ Microsoft YaHei;color:black'>若要申请上述职位，请将您的简历和求
     color: #444;
   }
   .leftmenu li a:hover{
-    color: #f0a70a
+    color: #3399ff
   }
   .leftmenu li.cur a {
-    color: #f0a70a
+    color: #3399ff
   }
   .content {
     padding-top: 20px;

@@ -70,15 +70,15 @@
         margin-left: -175px;
         margin-top: -255px;
         box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        border-top: 4px solid #f0ac19;
+        border-top: 4px solid #3399ff;
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 .ivu-form-item-content {
                     .register_btn.ivu-btn {
                         width: 100%;
-                        background-color: #f0ac19;
+                        background-color: #3399ff;
                         outline: none;
-                        border-color: #f0ac19;
+                        border-color: #3399ff;
                         color: #fff;
                         border-radius: 30px;
                         font-size: 18px;
@@ -95,14 +95,14 @@
                     }
                     #sendCode {
                         position: absolute;
-                        border: 1px solid #f0ac19;
+                        border: 1px solid #3399ff;
                         background: #fdfaf3;
                         top: -10px;
                         outline: none;
                         right: 0;
                         width: 30%;
                         border-radius: 20px;
-                        color: #f0ac19;
+                        color: #3399ff;
                         cursor: pointer;
                     }
                 }
@@ -114,14 +114,14 @@
                 font-size: 12px;
                 cursor: default;
                 a {
-                    color: #f0ac19;
+                    color: #3399ff;
                     margin-left: -10px;
                 }
                 .ivu-checkbox-wrapper.ivu-checkbox-wrapper-checked {
                     .ivu-checkbox.ivu-checkbox-checked {
                         .ivu-checkbox-inner {
-                            border: 1px solid #f0ac19;
-                            background-color: #f0ac19;
+                            border: 1px solid #3399ff;
+                            background-color: #3399ff;
                         }
                     }
                 }
@@ -368,7 +368,6 @@ export default {
             }
         },
         emailSuccess() {//邮箱注册腾讯防水验证成功
-            console.log(this)
             const forminline = this.formInline;
             var params = {
                 ticket: this.ticket,
@@ -380,7 +379,6 @@ export default {
                 promotion: forminline.agentcode,
                 superPartner: ""
             };
-            console.log(params);
             this.$http.post(this.host + '/uc/register/email', params).then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
@@ -494,7 +492,7 @@ export default {
 </script>
 <style lang="scss">
 .login_form {
-    $main_theme: #f0ac19;
+    $main_theme: #3399ff;
     .login_right {
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
