@@ -1,7 +1,7 @@
 <template>
     <div :class="ieo_box">
         <div class="common speicial">
-            <Tabs value="all" @on-click="tablClick">
+            <Tabs value="all" @on-click="tablClick" class="father">
                 <TabPane label="全部" name="all"></TabPane>
                 <TabPane label="预热中" name="ready"></TabPane>
                 <TabPane label="进行中" name="doing"></TabPane>
@@ -133,7 +133,7 @@ export default {
 </style>
 <style lang="scss">
 $pageTheme: rgb(13, 70, 125);
-.ivu-tabs-bar{
+.father .ivu-tabs-bar{
     border-bottom: 1px solid #145a89;
 }
 .tab-pane{
@@ -149,7 +149,6 @@ $pageTheme: rgb(13, 70, 125);
     height:0;
 }
 .ieo_box_ready {
-
     // .ivu-tabs-ink-bar {
     //     background: orange;
     // }
@@ -179,33 +178,33 @@ $pageTheme: rgb(13, 70, 125);
     //     border-color: $pageTheme;
     //     color: #fff;
     // }
-    .ivu-page-next:hover,
-    .ivu-page-prev:hover {
+    .father .ivu-page-next:hover,
+    .father .ivu-page-prev:hover {
         border-color: $pageTheme;
     }
-    .ivu-page-next:hover a,
-    .ivu-page-prev:hover a {
+    .father .ivu-page-next:hover a,
+    .father .ivu-page-prev:hover a {
         color: $pageTheme;
     }
 
-    .ivu-page-item-jump-prev a,
-    .ivu-page-item-jump-next a {
+    .father .ivu-page-item-jump-prev a,
+    .father .ivu-page-item-jump-next a {
         color: #666;
     }
-    .ivu-page-item-jump-prev a:hover,
-    .ivu-page-item-jump-next a:hover {
+    .father .ivu-page-item-jump-prev a:hover,
+    .father .ivu-page-item-jump-next a:hover {
         color: $pageTheme;
     }
-    .ivu-page-item:hover {
+    .father .ivu-page-item:hover {
         border-color: $pageTheme;
     }
-    .ivu-page-item:hover a {
+    .father .ivu-page-item:hover a {
         color: $pageTheme;
     }
-    .ivu-page-item.ivu-page-item-active a {
+    .father .ivu-page-item .ivu-page-item-active a {
         color: #fff;
     }
-    .ivu-page-disabled {
+    .father .ivu-page-disabled {
         a {
             cursor: not-allowed;
             .ivu-icon {
@@ -214,24 +213,23 @@ $pageTheme: rgb(13, 70, 125);
         }
     }
 }
-.ivu-page-item-active{
+.father .ivu-page-item-active{
     background:#145b89,
 }
-.ivu-tabs-nav:hover{
+.father .ivu-tabs-nav:hover{
     color:#fff;
-    
-     width:102px;
+    width:102px;
     height:46px;
 }
 //5.13修改
-.ivu-tabs-tab-active{
+.father .ivu-tabs-tab-active{
     background:#145b89;
     color:#fff;
 }
-.ivu-tabs-nav .ivu-tabs-tab{
+.father .ivu-tabs-nav .ivu-tabs-tab{
     margin-right:0;
 }
-.ivu-tabs-nav .ivu-tabs-tab:hover{
+.father .ivu-tabs-nav .ivu-tabs-tab:hover{
     color:#fff;
 }
 </style>
