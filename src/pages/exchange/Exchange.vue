@@ -105,6 +105,7 @@
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
                                     <router-link :to="rechargeUSDTUrl">{{$t("exchange.recharge")}}</router-link>
+                                    <span>划转</span>
                                     <!-- <a :href="rechargeUSDTUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
