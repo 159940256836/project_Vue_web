@@ -1,5 +1,12 @@
 <template>
   <div class="nav-rights">
+    <div class="hidden-assets">
+      <span>隐藏资产为0的币种:</span>
+      <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
+          <span slot="open">开</span>
+          <span slot="close">关</span>
+      </i-switch>
+    </div>
     <div class="nav-right col-xs-12 col-md-10 padding-right-clear">
       <div class="bill_box rightarea padding-right-clear">
         <div class="shaow">
@@ -35,31 +42,59 @@ export default {
       tableMoney: [],
       canMatch: true,
       modal_msg: false,
-      match_msg: ""
+      match_msg: "",
+      googleSwitch: false
     };
   },
   methods: {
-    getMoney() {
-      //获取
-      this.$http.post(this.host + "/uc/asset/wallet").then(response => {
-        var resp = response.body;
-        if (resp.code == 0) {
-          let data=resp.data
-          for (let i = 0; i < data.length; i++) {
-            if(data[i].balance=="0" && data[i].frozenBalance=="0" && data[i].frozenBalance=="0"){
-            }else{
-            data[i].coinType = data[i].coin.unit;
-            this.tableMoney.push(data[i])
-            }
+     changeGoogleSwitch (status) {
+         if(status){
+           this.tableMoney=[];
+           this.getMoney(true)
+         }else{
+           this.tableMoney=[];
+           this.getMoney(false)
+         }
+      },
+    getMoney(status) {
+      if(!status){
+        this.$http.post(this.host + "/uc/asset/wallet").then(response => {
+                var resp = response.body;
+                if (resp.code == 0) {
+                   this.tableMoney=resp.data
+                  for (let i = 0; i < this.tableMoney.length; i++) {
+                    this.tableMoney[i].coinType = this.tableMoney[i].coin.unit;
+                  }
+                  this.loading = false;
+                } else {
+                  // this.$Message.error(resp.message);
+                  //  this.$Message.info(this.$t('common.logintip'));
+                  this.$Message.error(this.loginmsg);
+                }
+          });
+      }else{
+        this.$http.post(this.host + "/uc/asset/wallet").then(response => {
+                var resp = response.body;
+                if (resp.code == 0) {
+                  let data=resp.data
+                  for (let i = 0; i < data.length; i++) {
+                    if(data[i].balance=="0" && data[i].frozenBalance=="0" && data[i].frozenBalance=="0"){
+                    }else{
+                    data[i].coinType = data[i].coin.unit;
+                    this.tableMoney.push(data[i])
+                    }
 
-          }
-          this.loading = false;
-        } else {
-          // this.$Message.error(resp.message);
-          //  this.$Message.info(this.$t('common.logintip'));
-          this.$Message.error(this.loginmsg);
-        }
-      });
+                  }
+                  this.loading = false;
+                } else {
+                  // this.$Message.error(resp.message);
+                  //  this.$Message.info(this.$t('common.logintip'));
+                  this.$Message.error(this.loginmsg);
+                }
+          });
+      }
+      //获取
+      
     },
     getGCCMatchAmount() {
       //获取
@@ -123,8 +158,7 @@ export default {
     }
   },
   created() {
-    this.getMoney();
-    //this.getGCCMatchAmount();
+    this.getMoney(false);
   },
   computed: {
     tableColumnsMoney() {
@@ -355,6 +389,9 @@ export default {
     }
   }
 }
+    .hidden-assets{
+    margin-left:45px;
+  }
 </style>
 
 <style scoped lang="scss">
