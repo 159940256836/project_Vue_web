@@ -79,7 +79,7 @@
         width: 220px;
         height: 45px;
         display: inline-block;
-        background: #d0b387;
+        background: #fff;
         border-radius: 5px;
         font-size: 20px;
         line-height: 45px;

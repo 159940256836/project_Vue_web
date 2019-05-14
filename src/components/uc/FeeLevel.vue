@@ -93,7 +93,7 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
-$color: #f0ac17;
+$color: #39f;
 .top {
     padding: 10px;
     ul {
@@ -105,7 +105,10 @@ $color: #f0ac17;
             color: #fff;
             width: 60px;
             height: 60px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size:20px;
         }
     }
     h4{
