@@ -146,7 +146,6 @@ export default {
     methods: {
         changeTab(n){
             this.tabid=n;
-            console.log(1111)
         },
         init(params) {
             this.getMsg(params)
