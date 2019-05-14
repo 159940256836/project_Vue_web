@@ -218,6 +218,9 @@
                     <MenuItem name="7-1">
                     <router-link to="/uc/level/current">当前委托</router-link>
                     </MenuItem>
+                     <MenuItem name="7-2">
+                    <router-link to="/uc/level/history">历史委托</router-link>
+                    </MenuItem>
                 </Submenu>
             </Menu>
             <router-view></router-view>
@@ -256,7 +259,8 @@ export default {
                 "/uc/ad/create": "4-1",
                 "/uc/ieoadmin": "5-1",
                 "/uc/apiManage": "6-1",
-                "/uc/level/current": "7-1"
+                "/uc/level/current": "7-1",
+                "/uc/level/history": "7-2"
             }
         };
     },
@@ -307,7 +311,10 @@ export default {
                     break;
                 case "7-1":
                     this.$router.push("/uc/level/current");
-                    break;    
+                    break;
+                 case "7-2":
+                    this.$router.push("/uc/level/history");
+                    break;         
                 default:
                     this.$router.push("/uc/safe");
                     break;

@@ -82,6 +82,10 @@ import apiManage from '../components/uc/apiManage.vue'
 
 //杠杆账户管理 => 当前委托
 import levelCurrent from '../components/uc/levelCurrent.vue'
+
+//杠杆账户管理 => 历史委托
+import levelHistory from '../components/uc/levelHistory.vue'
+
 // 糖果赠送记录
 import GiveRecord from '../components/uc/giveRecord.vue'
 
@@ -213,6 +217,11 @@ export default [
                 path: "level/current",
                 name: "levelCurrent",
                 component: levelCurrent
+            },
+            {
+                path: "level/history",
+                name: "levelHistory",
+                component: levelHistory
             },
             {
                 path: "giveRecord",

@@ -50,27 +50,27 @@
 <template>
   <div class="entrustcurrent">
     <Form class="form" :model="formItem" :label-width="65" inline>
-      <FormItem label="起止时间:">
+      <!-- <FormItem label="起止时间:">
         <DatePicker type="daterange" v-model="formItem.date" style="width:180px;"></DatePicker>
-      </FormItem>
+      </FormItem> -->
       <FormItem label="交易对:">
         <Select v-model="formItem.symbol" style="width:100px;">
           <Option v-for="(item,index) in symbol " :value="item.symbol " :key="index">{{item.symbol}}</Option>
         </Select>
       </FormItem>
-      <FormItem label="类型: ">
+      <!-- <FormItem label="类型: ">
         <Select v-model="formItem.type" style="width:70px;">
           <Option value="LIMIT_PRICE">限价</Option>
           <Option value="MARKET_PRICE">市价</Option>
           <Option value="CHECK_FULL_STOP">止盈止损</Option>
         </Select>
-      </FormItem>
-      <FormItem label="方向: ">
+      </FormItem> -->
+      <!-- <FormItem label="方向: ">
         <Select v-model="formItem.direction" style="width:70px;">
           <Option value="0">买入</Option>
           <Option value="1">卖出</Option>
         </Select>
-      </FormItem>
+      </FormItem> -->
       <FormItem>
         <Button type="warning" @click="handleSubmit">搜索</Button>
         <Button style="margin-left: 8px " @click="handleClear " class="clear_btn">清空条件</Button>
@@ -331,7 +331,8 @@ export default {
         content: this.$t("exchange.undotip"),
         onOk: () => {
           this.$http
-            .post(this.host + this.api.exchange.orderCancel + "/" + orderId, {})
+            // .post(this.host + this.api.exchange.orderCancel + "/" + orderId, {})
+            .get(this.host + `/margin-trade/order/cancel/${orderId}`)
             .then(response => {
               var resp = response.body;
               if (resp.code == 0) {
