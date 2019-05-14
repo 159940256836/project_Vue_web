@@ -1560,7 +1560,7 @@ export default {
         init() {
             var params = this.$route.params[0];
             if (params == undefined) {
-                this.$router.push("/exchange/" + this.defaultPath);
+                this.$router.push("/leverindex/" + this.defaultPath);
                 params = this.defaultPath;
             }
             const basecion = params.split("_")[1];
@@ -2583,7 +2583,7 @@ export default {
         gohref(currentRow, oldCurrentRow) {
             // location.href = "/#exchange/" + currentRow.href;
             // location.reload();
-            const path = "/exchange/" + currentRow.href;
+            const path = "/leverindex/" + currentRow.href;
             this.$router.push({
                 path
             });

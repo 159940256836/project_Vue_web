@@ -13,6 +13,7 @@
                     <router-link to="/help">帮助</router-link>
                     <router-link to="/notice">{{$t("header.service")}}</router-link>
                     <router-link to="/Ieo">上币优选</router-link>
+                    <router-link to="/leverindex">杠杆交易</router-link>
                 </div>
                 <div class="rightwrapper">
                     <poptip placement="bottom" width="270" class="appdownload">
