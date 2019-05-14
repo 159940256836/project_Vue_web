@@ -18,6 +18,7 @@ export default {
     props:["repayment"],
     created() {
         this.init();
+        // this.repayment == 0 && ()
     },
     methods: {
         init() {
