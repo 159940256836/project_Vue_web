@@ -186,7 +186,7 @@
                                 <li>
                                     <a href="javascript:;">服务邮箱：kaililiangu@163.com</a>
                                 </li>
-                                <!--                            <li><span>业务邮箱：</span></li>-->
+                                <li><span>业务邮箱：service@coinmany.com</span></li>
                             </ul>
                         </div>
                     </div>
@@ -377,7 +377,7 @@ export default {
         height: 60px;
         line-height: 60px;
         position: fixed;
-        z-index: 999;
+        z-index: 999999;
         background-color: #1c2435;
         transition: all .5s;
         .page-content {
