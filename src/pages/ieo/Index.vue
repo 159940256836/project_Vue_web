@@ -119,11 +119,11 @@ export default {
     .contentWrapper {
         width:1200px;
         overflow: hidden;
-        border:1px solid rgba(221, 221, 221, 1)
+        // border:1px solid rgba(221, 221, 221, 1)
     }
     .ieoWrapper {
         float: left;
-        margin-right: 26px;
+        margin-right: 27px;
         background:#fff;
         color:#333333;
 

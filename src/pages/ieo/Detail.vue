@@ -1,6 +1,6 @@
 <template>
     <div class="ieo_detail_box">
-        <div class="common  commona">
+        <div class="common  commona" style="min-height: 1px;">
             <div class="top_box">
                 <div class="ieoLogo">
                     <img :src="content.pic" alt="">
@@ -92,8 +92,12 @@
                 <div @click="changeTab(1)" :class="tabid==1?'activee':''">售卖方式</div>
                 <div @click="changeTab(2)" :class="tabid==2?'activee':''">项目详情</div>
             </div>
-            <div class="tabida1" v-show="tabid==1">{{content.sellMode}}</div>
-            <div class="tabida1" v-show="tabid==2">{{content.sellDetail}}</div>
+            <div class="tabida1" v-show="tabid==1">
+                <div>{{content.sellMode}}</div>
+            </div>
+            <div class="tabida1" v-show="tabid==2">
+                <div>{{content.sellDetail}}</div>
+            </div>
             <!-- <Tabs value="name1">
                 <TabPane label="售卖方式" name="name1">{{content.sellMode}}</TabPane>
                 <TabPane label="项目详情" name="name2">{{content.sellDetail}}</TabPane>
@@ -103,10 +107,11 @@
 </template>
 <script>
 import { minHeightMinx } from "../../minxs/minxs.js";
+import { fail } from 'assert';
 
 export default {
     name: "IeoDetail",
-    mixins: [minHeightMinx],
+    // mixins: [minHeightMinx],
     data() {
         return {
             text:"",
@@ -205,6 +210,10 @@ export default {
             })
         },
         startSale() {//发起募集
+            // 5.14修改
+            if (this.status != '进行中') {
+                return false
+            }
             if(!this.isLogin){
                 this.$router.push("/login");
                 return;
@@ -273,11 +282,15 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+.specialColor[data-v-2300a631]{
+    color:#333;
+}
 .type.pink:before{
     background:#F15057 !important
 }
 .type.yellow:before{
-    background:#DDDDDD !important;
+    background:#AAA !important;
 }
 .type.red:before{
     background:#00B274 !important;
@@ -292,16 +305,16 @@ export default {
 }
 .pink1{
 
-    background:#F15057 !important;
+    background:#AAA !important;
 }
 .red1{
-    background:#00B274 !important;
+    background:#3399FF !important;
    
 }
 .yellow1{
-    background:#DDDDDD !important;
+    background:#AAA !important;
 }
-.commona{
+.commona{  color:#333333;
     // height:374px;
     .top_box{
         height:60px;
@@ -323,6 +336,10 @@ export default {
          font-size:14px;
          color:#333333;
          padding-left:22px;
+         div{
+             margin-top:22px;
+         }
+         
 
         }
     .tabida{
@@ -346,7 +363,7 @@ export default {
     color:#00B274 !important;
 }
 .yellow{
-    color:#DDDDDD !important;
+    color:#AAA !important;
 }
 .pink{
 
@@ -372,6 +389,7 @@ $lineColor: rgb(71, 100, 146);
     background: rgb(25, 26, 28);
     padding: 50px 10%;
     .common {
+        // mine-height:200px;
         width:1200px;
         background:#fff;
         color:#333333;
@@ -424,14 +442,15 @@ $lineColor: rgb(71, 100, 146);
             flex-wrap: wrap;
             overflow: hidden;
             .leftWrapper {
-                margin-top:18px;
+                margin-top:12px;
                 margin-left:20px;
                 width: 42%;
                 img {
+                    // width:100%;
                     width:352px;
                     height:185px;
-                    // background-size:100%;
-                    // width: 100%;
+                    background-size:contain;
+                
                 }
             }
             .detail {

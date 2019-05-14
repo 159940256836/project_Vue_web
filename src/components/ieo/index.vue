@@ -82,10 +82,10 @@ export default {
    
 }
 .type.yellow:before{
-    background:#DDDDDD !important;
+    background:#AAAAAA !important;
 }
 .yellow{
-    color:#DDDDDD !important
+    color:#AAAAAA !important
 }
 .type.pink:before{
     background:#F15057 !important
@@ -103,6 +103,7 @@ export default {
     align-items: center;
 }
 .ieoWrapper {
+    border:1px solid #DDDDDD;
     width: 31.8%;
     background: rgb(17, 20, 36);
     padding: 10px;
@@ -139,8 +140,9 @@ export default {
     }
     .mainImg {
         img {
-            width: 100%;
-            height: 100px;
+            width: 99%;
+            height: 160px;
+            background-size:contain;
         }
     }
     > ul {
