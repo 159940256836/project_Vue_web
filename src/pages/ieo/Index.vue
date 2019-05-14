@@ -1,7 +1,7 @@
 <template>
-    <div :class="ieo_box">
+    <div :class="ieo_box" id="centent">
         <div class="common speicial">
-            <Tabs value="all" @on-click="tablClick" class="father">
+            <Tabs  value="all" @on-click="tablClick" class="father">
                 <TabPane label="全部" name="all"></TabPane>
                 <TabPane label="预热中" name="ready"></TabPane>
                 <TabPane label="进行中" name="doing"></TabPane>
@@ -108,6 +108,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
 .ivu-tabs{
     width:1200px;
 }
@@ -116,11 +117,16 @@ export default {
     background: #1c2435;
     overflow: hidden;
     .contentWrapper {
+        width:1200px;
         overflow: hidden;
+        // border:1px solid rgba(221, 221, 221, 1)
     }
     .ieoWrapper {
         float: left;
-        margin-right: 26px
+        margin-right: 27px;
+        background:#fff;
+        color:#333333;
+
     }
     .ieoWrapper:nth-child(3) {
         margin-right: 0%;
@@ -133,8 +139,13 @@ export default {
 </style>
 <style lang="scss">
 $pageTheme: rgb(13, 70, 125);
+#centent{
+    .ivu-tabs-ink-bar{
+        height: 0;
+    }
+}
 .father .ivu-tabs-bar{
-    border-bottom: 1px solid #145a89;
+    border-bottom: 1px solid #E0E0E0;
 }
 .tab-pane{
     display: flex;
@@ -144,9 +155,6 @@ $pageTheme: rgb(13, 70, 125);
 }
 .tab-pane div.active1{
     color: red;
-}
-.ivu-tabs-ink-bar{
-    height:0;
 }
 .ieo_box_ready {
     // .ivu-tabs-ink-bar {
@@ -168,7 +176,7 @@ $pageTheme: rgb(13, 70, 125);
         width:102px;
         height:46px;
         font-size:16px;
-        color:#fff;
+        // color:#fff;
         padding: 16px;
         text-align:center;
         line-height:18px;
@@ -214,24 +222,25 @@ $pageTheme: rgb(13, 70, 125);
     }
 }
 .father .ivu-page-item-active{
-    background:#145b89,
+    background:#145b89
 }
-.father .ivu-tabs-nav:hover{
-    color:#fff;
-    width:102px;
-    height:46px;
-}
+// .father .ivu-tabs-nav:hover{
+//     color:#fff;
+//     width:102px;
+//     height:46px;
+// }
 //5.13修改
 .father .ivu-tabs-tab-active{
-    background:#145b89;
+    background:#3399FF;
     color:#fff;
+    z-index:9999;
 }
 .father .ivu-tabs-nav .ivu-tabs-tab{
     margin-right:0;
 }
-.father .ivu-tabs-nav .ivu-tabs-tab:hover{
-    color:#fff;
-}
+// .father .ivu-tabs-nav .ivu-tabs-tab:hover{
+//     color:#fff;
+// }
 </style>
 
 

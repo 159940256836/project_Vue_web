@@ -1,6 +1,6 @@
 <template>
     <div class="ieo_detail_box">
-        <div class="common">
+        <div class="common  commona" style="min-height: 1px;">
             <div class="top_box">
                 <div class="ieoLogo">
                     <img :src="content.pic" alt="">
@@ -52,7 +52,7 @@
                     <span>无折扣认购</span>
                     <div class="right_circle left_circle"></div>
                 </div>
-                <div class="time">
+                <div class="time time11">
                     <span>{{content.startTime}}</span>
                     <span>{{content.endTime}}</span>
                 </div>
@@ -66,7 +66,7 @@
                             <Icon type="ios-card" color="rgb(19,133,211)" size="25" />
                         </div>
                     </li>
-                    <li>
+                    <li class="li1">
                         <Input v-model="base" @on-change="changeNum">
                         <span slot="append">{{content.raiseCoin}}</span>
                         </Input>
@@ -77,19 +77,26 @@
                         </Input>
                     </li>
                     <li>
-                        <Input type="password" v-model="password" placeholder="请输入交易密码" />
+                        <Input class="pwda" type="password" v-model="password" placeholder="请输入交易密码" />
                     </li>
                     <li>
-                        <div class="btn"><span long @click="startSale">{{text}}</span></div>
+                        <div :class="status == '进行中'? 'red1':(status == '已完成' ? 'yellow1' : ( status == '预热中' ? 'pink1' : ''))" class="btn"><span long @click="startSale">{{text}}</span></div>
                         <p>进行认购即为已阅读并同意<a href="">&lt&lt风险提示&gt&gt</a></p>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="table">
-            <div>
-                <div></div>
-                <div></div>
+        <div class="table1">
+            <!-- 5.14修改 -->
+            <div class="tabida"> 
+                <div @click="changeTab(1)" :class="tabid==1?'activee':''">售卖方式</div>
+                <div @click="changeTab(2)" :class="tabid==2?'activee':''">项目详情</div>
+            </div>
+            <div class="tabida1" v-show="tabid==1">
+                <div>{{content.sellMode}}</div>
+            </div>
+            <div class="tabida1" v-show="tabid==2">
+                <div>{{content.sellDetail}}</div>
             </div>
             <!-- <Tabs value="name1">
                 <TabPane label="售卖方式" name="name1">{{content.sellMode}}</TabPane>
@@ -100,10 +107,11 @@
 </template>
 <script>
 import { minHeightMinx } from "../../minxs/minxs.js";
+import { fail } from 'assert';
 
 export default {
     name: "IeoDetail",
-    mixins: [minHeightMinx],
+    // mixins: [minHeightMinx],
     data() {
         return {
             text:"",
@@ -113,7 +121,8 @@ export default {
             exchange: "",
             password: "",
             content: {},
-            status
+            status,
+            tabid:1,
         }
     },
     computed: {
@@ -135,6 +144,9 @@ export default {
         }
     },
     methods: {
+        changeTab(n){
+            this.tabid=n;
+        },
         init(params) {
             this.getMsg(params)
                 .then(res => {
@@ -197,6 +209,10 @@ export default {
             })
         },
         startSale() {//发起募集
+            // 5.14修改
+            if (this.status != '进行中') {
+                return false
+            }
             if(!this.isLogin){
                 this.$router.push("/login");
                 return;
@@ -265,15 +281,92 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+.specialColor[data-v-2300a631]{
+    color:#333;
+}
+.type.pink:before{
+    background:#F15057 !important
+}
+.type.yellow:before{
+    background:#AAA !important;
+}
+.type.red:before{
+    background:#00B274 !important;
+}
+.time11{
+    margin-top:16px;
+    color:#666666;
+    font-size:14px;
+    height:12px;
+    line-height:12px;
+    margin-bottom: 35px;
+}
+.pink1{
+
+    background:#AAA !important;
+}
+.red1{
+    background:#3399FF !important;
+   
+}
+.yellow1{
+    background:#AAA !important;
+}
+.commona{  color:#333333;
+    // height:374px;
+    .top_box{
+        height:60px;
+    }
+}
+.activee{
+    background:#3399FF;
+    color:#fff;
+}
+.table1{
+    width:1200px;
+    margin-top:40px;
+    margin-left:10.7%;
+     .tabida1{
+        height:100px;
+        margin-top:20px;
+         width:1178px;
+         border:1px solid #DDDDDD;
+         font-size:14px;
+         color:#333333;
+         padding-left:22px;
+         div{
+             margin-top:22px;
+         }
+         
+
+        }
+    .tabida{
+        display:flex;
+        height:46px;
+        border-bottom: 1px solid #E0E0E0;
+        font-size:16px;
+        line-height:46px;
+       
+        div{
+            width:102px;
+            text-align:center;
+        }
+    }
+}
+
+.ieo_detail_box[data-v-2300a631]{
+    background:#fff;
+}
 .red{
-    color:#ffa500 !important;
+    color:#00B274 !important;
 }
 .yellow{
-    color:#999;
+    color:#AAA !important;
 }
 .pink{
 
-    color:#2ac082;
+    color:#F15057;
 }
 %flex {
     display: flex;
@@ -295,11 +388,14 @@ $lineColor: rgb(71, 100, 146);
     background: rgb(25, 26, 28);
     padding: 50px 10%;
     .common {
+        // mine-height:200px;
         width:1200px;
-        background: rgb(15, 20, 36);
+        background:#fff;
+        color:#333333;
+        border:1px solid rgba(221, 221, 221, 1);
         overflow: hidden;
-        color: #aaa;
-        padding: 20px;
+        color: #333;
+        // padding: 20px;
         margin-bottom: 30px;
         @extend %flex;
         flex-wrap: wrap;
@@ -308,13 +404,15 @@ $lineColor: rgb(71, 100, 146);
         .top_box {
             @extend %flex;
             width: 100%;
-            padding: 10px;
-            border-radius: 10px;
+            // padding: 10px;
+            // border-radius: 10px;
+            width:1200px;
             line-height: 2;
             font-size: 16px;
-            border-bottom: 1px solid $lineColor;
+            border-bottom: 1px solid #E0E0E0;
             .ieoLogo {
                 @extend %flex;
+                margin-left:20px;
                 img {
                     width: 30px;
                     margin-right: 20px;
@@ -324,7 +422,7 @@ $lineColor: rgb(71, 100, 146);
                 // background: rgb(125, 131, 152);
                 padding: 5px 20px;
                 border-radius: 15px;
-                color: #fff;
+                // color: #fff;
                 &:before {
                     display: inline-block;
                     content: "";
@@ -343,9 +441,15 @@ $lineColor: rgb(71, 100, 146);
             flex-wrap: wrap;
             overflow: hidden;
             .leftWrapper {
-                width: 45%;
+                margin-top:12px;
+                margin-left:20px;
+                width: 42%;
                 img {
-                    width: 100%;
+                    // width:100%;
+                    width:352px;
+                    height:185px;
+                    background-size:contain;
+                
                 }
             }
             .detail {
@@ -387,13 +491,13 @@ $lineColor: rgb(71, 100, 146);
                     &:before {
                         display: inline-block;
                         content: "";
-                        width: 10px;
-                        height: 10px;
+                        width: 6px;
+                        height: 6px;
                         margin-right: 10px;
                         border-radius: 50%;
                         background-color: $color;
                         position: absolute;
-                        top: -5px;
+                        top: -2px;
                     }
                 }
                 span {
@@ -422,6 +526,9 @@ $lineColor: rgb(71, 100, 146);
                 @extend %flex;
                 height: 100%;
                 flex-direction: column;
+                .ivu-input-group{
+                    border:1px solid #3399FF;
+                }
                 li {
                     width: 100%;
                     @extend %flex;
@@ -430,7 +537,8 @@ $lineColor: rgb(71, 100, 146);
                         width: 100%;
                         margin-bottom: 15px;
                         text-align: center;
-                        background-color: rgb(32, 59, 139);
+                        background:#3399FF;
+                        color:#fff;
                         line-height:2.5;
                         span{
                             display:block;
@@ -448,11 +556,18 @@ $lineColor: rgb(71, 100, 146);
 
 <style lang="scss">
 $lineColor: rgb(71, 100, 146);
+.pwda{
+    border: 1px solid #3399FF;
+}
 .ieo_detail_box .common {
     .ivu-input {
-        background-color: rgb(15, 20, 36);
-        border: 1px solid $lineColor;
-        color: #fff;
+        background:#fff;
+        color:#333;
+        outline: none;
+        // border: 1px solid #3399FF;
+        border:0;
+
+        // color: #fff;
         &:hover {
             border-color: $lineColor;
         }
@@ -463,17 +578,26 @@ $lineColor: rgb(71, 100, 146);
     }
     .ivu-input-group-append {
         background-color: transparent;
-        border: 1px solid $lineColor;
+        border-left: 1px solid #3399FF;
+        border-radius: 0;
         span {
             font-size: 18px;
         }
     }
 }
 .table {
+    width:1200px;
+    margin-top:40px;
+    height:46px;
+
     .ivu-tabs-tab {
         padding: 16px;
         font-size: 26px;
         font-weight: 700;
     }
+}
+.ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631]{
+    background:#3399FF;
+    opacity:0.5;
 }
 </style>

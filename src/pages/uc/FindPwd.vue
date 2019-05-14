@@ -102,7 +102,7 @@
                         right: 0;
                         width: 30%;
                         border-radius: 20px;
-                        color: #d5851d;
+                        color: #3399ff;
                         cursor: pointer;
                     }
                 }

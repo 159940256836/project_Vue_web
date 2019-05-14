@@ -75,27 +75,27 @@ export default {
 </script>
 <style lang="scss" scoped>
 .type.red:before{
-    background:#ffa500 !important;
+    background:#00B274 !important;
 }
 .red{
-    color:#ffa500 !important;
+    color:#00B274 !important;
    
 }
 .type.yellow:before{
-    background:#999 !important;
+    background:#AAAAAA !important;
 }
 .yellow{
-    color:#999;
+    color:#AAAAAA !important
 }
 .type.pink:before{
-    background:#2ac082 !important
+    background:#F15057 !important
 }
 .pink{
 
-    color:#2ac082;
+    color:#F15057 !important
 }
 .yure{
-    color:red;
+    color:red !important
 }
 %flex {
     display: flex;
@@ -103,6 +103,7 @@ export default {
     align-items: center;
 }
 .ieoWrapper {
+    border:1px solid #DDDDDD;
     width: 31.8%;
     background: rgb(17, 20, 36);
     padding: 10px;
@@ -139,9 +140,9 @@ export default {
     }
     .mainImg {
         img {
-           
-            width: 100%;
-            height: 100px;
+            width: 99%;
+            height: 160px;
+            background-size:contain;
         }
     }
     > ul {

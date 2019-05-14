@@ -44,9 +44,14 @@ export default {
       this.$http.post(this.host + "/uc/asset/wallet").then(response => {
         var resp = response.body;
         if (resp.code == 0) {
-          this.tableMoney = resp.data;
-          for (let i = 0; i < this.tableMoney.length; i++) {
-            this.tableMoney[i]["coinType"] = this.tableMoney[i].coin.unit;
+          let data=resp.data
+          for (let i = 0; i < data.length; i++) {
+            if(data[i].balance=="0" && data[i].frozenBalance=="0" && data[i].frozenBalance=="0"){
+            }else{
+            data[i].coinType = data[i].coin.unit;
+            this.tableMoney.push(data[i])
+            }
+
           }
           this.loading = false;
         } else {

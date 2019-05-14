@@ -33,6 +33,7 @@
         }
     }
 }
+
 </style>
 <style lang="scss" scoped>
 .mymsg_wrapper {
@@ -78,7 +79,7 @@
                     }
                     li.ivu-menu-item {
                         color: #666;
-                        background: #fdfaf3;
+                        background: #edf8ff;
                         padding: 0;
                         text-align: left;
                         a {
@@ -91,19 +92,19 @@
                     }
                 }
             }
-            li.ivu-menu-submenu.ivu-menu-opened {
+            li.ivu-menu-submenu.ivu-menu-opened{
+             background-color: #3399ff;
                 .ivu-menu-submenu-title {
-                    background-color: #3399ff;
                     .isclick {
-                        background-color: #fff;
+                         background-color: #fff;
                     }
-                    .content,
-                    .ivu-icon {
+                    .content,.ivu-icon {
                         color: #fff;
                     }
                 }
             }
         }
+       
     }
 }
 </style>

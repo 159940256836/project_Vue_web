@@ -669,7 +669,7 @@
         member: {
             securitycenter: '安全中心',
             securitysetting: '安全设置',
-            accountsetting: '账户设置',
+            accountsetting: '收款方式',
             myextension: '我的推广',
         },
         order: {

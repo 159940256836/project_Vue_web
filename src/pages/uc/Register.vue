@@ -327,7 +327,7 @@ export default {
         },
         initGtCaptcha() {
             // 直接生成一个验证码对象
-            var captcha1 = new TencentCaptcha("2040846200", (res) => {
+            var captcha1 = new TencentCaptcha("2038419167", (res) => {
                 res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr);
                 (this.changeActive == 0) && this.success();
                 this.changeActive == 1 && this.emailSuccess();
