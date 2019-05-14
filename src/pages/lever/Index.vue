@@ -7,7 +7,7 @@
                     <div>交易对</div>
                     <div>风险率</div>
                 </li>
-                <li v-for="(item,index) in allLeverList" :key="index">
+                <li v-for="(item,index) in allLeverList" :key="index" @click="changLeverSymbol(index)">
                     <div>{{item.symbol}}</div>
                     <div>{{item.riskRate}}%</div>
                 </li>
@@ -60,8 +60,8 @@
                         <Input v-model="baseInputvalue" style="width:80%; margin-bottom:20px;">
                         <span slot="append">{{item.baseUnit}}</span>
                         </Input>
-                        <Slider v-model="baseValue" style="width:80%;" show-tip="never"></Slider>
-                        <Button type="primary" style="width:80%">申请{{item.baseUnit}}</Button>
+                        <Slider v-model="baseValue" style="width:80%;" show-tip="never" @on-change='getBaseValue'></Slider>
+                        <Button type="primary" style="width:80%" @click="borrow('base', item.baseUnit)">申请{{item.baseUnit}}</Button>
                     </div>
                     <div>
                         <h4>{{item.coinUnit}}借贷</h4>
@@ -83,26 +83,29 @@
                         <Input v-model="baseCoinvalue" style="width:80%;margin-bottom:20px;">
                         <span slot="append">{{item.coinUnit}}</span>
                         </Input>
-                        <Slider v-model="coinValue" style="width:80%;" show-tip="never"></Slider>
-                        <Button type="primary" style="width:80%">申请{{item.coinUnit}}</Button>
+                        <Slider v-model="coinValue" style="width:80%;" show-tip="never" @on-change='getCoinValue'></Slider>
+                        <Button type="primary" style="width:80%" @click="borrow('coin',item.coinUnit)">申请{{item.coinUnit}}</Button>
                     </div>
                 </div>
             </template>
         </div>
-        <noReruen repayment="0"></noReruen>
-        <noReruen repayment="1"></noReruen>
+        <noReruen :repayment="noReruenRepayment" @borowSuccess="borowSuccess"></noReruen>
+        <alreadyReturn :repayment="alreadyRepayment"></alreadyReturn>
     </div>
 </template>
 <script>
-import noReruen from "../../components/lever/noReturn"
+import noReruen from "../../components/lever/noReturn";
+import alreadyReturn from "../../components/lever/alreadyReturn"
 export default {
-    components: { noReruen },
+    components: { noReruen, alreadyReturn },
     data() {
         return {
-            baseInputvalue:"",
-            baseCoinvalue:"",
-            baseValue: 25,
-            coinValue: 25,
+            noReruenRepayment: 0,
+            alreadyRepayment: 1,
+            baseInputvalue: "",
+            baseCoinvalue: "",
+            baseValue: 0,
+            coinValue: 0,
             allLeverList: [],
             symbol: "",
             symbolList: []
@@ -119,6 +122,33 @@ export default {
         }
     },
     methods: {
+        getCoinValue(value) {
+            this.baseCoinvalue = this.toFloor(this.symbolList[0].coinCanLoan * value/100);
+        },
+        getBaseValue(value) {
+            console.log(value);
+            console.log(this.symbolList);
+            this.baseInputvalue = this.toFloor(this.symbolList[0].baseCanLoan * value/100);
+        },
+        borowSuccess() {
+            this.getSymbolAccount(this.symbol);
+            this.alreadyRepayment++;
+            // window.location.reload();
+        },
+        changLeverSymbol(index) {
+            const symbol = this.allLeverList[index].symbol;
+            this.$router.push({
+                name: "lever",
+                params: {
+                    coin: encodeURIComponent(symbol)
+                }
+            });
+            this.baseInputvalue = this.baseCoinvalue = "";
+            this.baseValue = this.coinValue = 0;
+            this.symbol = symbol;
+            this.getAllLeverAccount();
+            this.getSymbolAccount(symbol);
+        },
         getAllLeverAccount() {
             this.$http.post(this.host + "/margin-trade/lever_wallet/list").then(response => {
                 var resp = response.body;
@@ -137,26 +167,62 @@ export default {
                     const list = resp.data.map(ele => {
                         return {
                             symbol: ele.symbol || "----/----",
-                            baseUnit: ele.leverWalletList[0].coin.unit || "----",
-                            baseBanlance: ele.leverWalletList[0].balance || 0,
-                            baseLoanCount: ele.leverWalletList[0].baseLoanCount || 0,
-                            baseCanLoan: ele.leverWalletList[0].baseCanLoan || 0,
-                            baseINsertRate: ele.leverWalletList[0].leverCoin.interestRate || 0,
-                            coinUnit: ele.leverWalletList[1].coin.unit || "----",
-                            coinBalance: ele.leverWalletList[1].balance || 0,
-                            coinLoanCount: ele.leverWalletList[1].coinLoanCount || 0,
-                            coinCanLoan: ele.leverWalletList[1].coinCanLoan || 0,
-                            coinINsertRate: ele.leverWalletList[1].leverCoin.interestRate || 0,
+                            baseUnit: ele.leverWalletList[1].coin.unit || "----",
+                            baseBanlance: ele.leverWalletList[1].balance || 0,
+                            baseLoanCount: ele.baseLoanCount || 0,
+                            baseCanLoan: ele.baseCanLoan || 0,
+                            baseINsertRate: ele.leverWalletList[1].leverCoin.interestRate || 0,
+                            coinUnit: ele.leverWalletList[0].coin.unit || "----",
+                            coinBalance: ele.leverWalletList[0].balance || 0,
+                            coinLoanCount: ele.coinLoanCount || 0,
+                            coinCanLoan: ele.coinCanLoan || 0,
+                            coinINsertRate: ele.leverWalletList[0].leverCoin.interestRate || 0,
                             explosionPrice: ele.explosionPrice,
                             riskRate: ele.riskRate
                         }
                     });
                     this.symbolList = list || [];
+                    console.log(this.symbolList);
                     this.loading = false;
                 } else {
                     this.$Message.error(resp.message);
                 }
             });
+        },
+        isEmpty(str) {
+            if (!str) {
+                this.$Message.error("请输入您要借贷的币的个数");
+                return false;
+            } else {
+                return true;
+            }
+        },
+        isNum(str) {
+            if (isNaN(Number(str))) {
+                this.$Message.error("请输入数字类型");
+                return false;
+            } else {
+                return true;
+            }
+        },
+        borrow(params, unit) {
+            console.log(unit);
+            if (params === "base") {
+                this.isEmpty(this.baseInputvalue) && this.isNum(this.baseInputvalue) && this.toBorrow({ amount: this.baseInputvalue, coinUnit: unit, symbol: this.symbol });
+            } else {
+                this.isEmpty(this.baseCoinvalue) && this.isNum(this.baseCoinvalue) && this.toBorrow({ amount: this.baseCoinvalue, coinUnit: unit, symbol: this.symbol });
+            }
+        },
+        toBorrow(params) {
+            this.$http.post(this.host + "/margin-trade/loan/loan", params).then(res => {
+                if (res.body.code == 0) {
+                    this.$Message.success("借贷成功");
+                    ++this.noReruenRepayment;
+                    this.getSymbolAccount(this.symbol);
+                } else {
+                    this.$Message.success(res.body.message);
+                }
+            })
         }
     }
 }

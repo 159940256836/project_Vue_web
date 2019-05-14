@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Modal v-model="modal" title="转出" :footer-hide="true" :mask-closable="false">
+        <Modal v-model="modal" title="转出" :footer-hide="true" :mask-closable="false" :closable="false">
             <div>
                 <div style="margin-bottom:30px;">
                     <Cascader :data="data" v-model="value" :render-format="formatRender" @on-change="getValue" @on-visible-change="visibleChange"></Cascader>

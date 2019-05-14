@@ -99,8 +99,10 @@
                         <div class="trade_menu">
                             <ul>
                                 <template v-for="(item, index) in btnList">
-                                    <li @click="tab(index)" :class="{active:item.check}">{{item.text}}</li>
+                                    <li @click="tab(index)" :class="{active:item.check}" style="width:18%;text-align:center;">{{item.text}}</li>
                                 </template>
+                                <li style="color:#f0ac19;width:30%;text-align:right;" @click="transFerFun" v-if="isLogin">划转</li>
+                                <li style="color:#f0ac19;width:20%" @click="toBorrow" v-if="isLogin">借贷/归还</li>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
                             <span @click="market_price" :class="{active:showMarket}">{{$t("exchange.market_price")}}</span>
@@ -321,8 +323,8 @@
             <div class="order-handler">
                 <span @click="changeOrder('current')" :class="{active:selectedOrder==='current'}">{{$t('exchange.curdelegation')}}</span>
                 <span @click="changeOrder('history')" :class="{active:selectedOrder==='history'}">{{$t('exchange.hisdelegation')}}</span>
-                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/entrust/current">查看更多>></router-link>
-                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/entrust/history">查看更多>></router-link>
+                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/level/current">查看更多>></router-link>
+                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/level/history">查看更多>></router-link>
             </div>
             <div class="table">
                 <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows"></Table>
@@ -1560,6 +1562,16 @@ export default {
         // // this.setback();
     },
     methods: {
+        toBorrow() {//去借贷或者归还
+            // this.$router.push({
+            this.$router.push({
+                name: "lever",
+                params: {
+                    coin: encodeURIComponent(this.currentCoin.symbol)
+                }
+            })
+            // })
+        },
         tab(index) {
             this.btnList.map((ele, i) => {
                 if (i == index) {
@@ -1623,7 +1635,6 @@ export default {
                     }));
                     const [{ symbol, explosionPrice, proportion, riskRate, baseCoin }] = list;
                     this.LeversymbolMsg = { symbol, explosionPrice, proportion, riskRate, baseCoin };
-                    console.log(this.LeversymbolMsg);
                 }
             })
         },
@@ -2987,24 +2998,24 @@ export default {
                 .then(response => {
                     var resp = response.body;
                     let rows = [];
-                    if(resp.content){
+                    if (resp.content) {
                         if (resp.content.length > 0) {
-                        this.historyOrder.total = resp.totalElements;
-                        this.historyOrder.page = resp.number;
-                        for (var i = 0; i < 3; i++) {
-                            var row = resp.content[i];
-                            if (row) {
-                                row.skin = that.skin;
-                                row.price =
-                                    row.type == "MARKET_PRICE"
-                                        ? that.$t("exchange.marketprice")
-                                        : row.price;
-                                // this.historyOrder.rows.push(row);
-                                rows.push(row);
+                            this.historyOrder.total = resp.totalElements;
+                            this.historyOrder.page = resp.number;
+                            for (var i = 0; i < 3; i++) {
+                                var row = resp.content[i];
+                                if (row) {
+                                    row.skin = that.skin;
+                                    row.price =
+                                        row.type == "MARKET_PRICE"
+                                            ? that.$t("exchange.marketprice")
+                                            : row.price;
+                                    // this.historyOrder.rows.push(row);
+                                    rows.push(row);
+                                }
                             }
+                            this.historyOrder.rows = rows;
                         }
-                        this.historyOrder.rows = rows;
-                    }
                     }
                 });
         },
