@@ -48,7 +48,7 @@
         <Modal v-model="del" title="删除" @on-ok="onDel(id)" @on-cancel="del=false">
             <p>确认删除吗？</p>
         </Modal>
-        <Modal v-model="show" title="密钥" @on-ok="show=false" >
+        <Modal v-model="show" title="密钥" @on-ok="show=false" :mask-closable="false">
             <p class="screat">密钥只在新增时展示，请及时保存</p>
             <p  class="screat">{{screat}}</p>
         </Modal>

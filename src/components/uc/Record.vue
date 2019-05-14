@@ -97,6 +97,14 @@ export default {
                 {
                     value: 11,
                     label: this.$t("uc.finance.record.match")
+                },
+                {
+                    value: 12,
+                    label: this.$t("uc.finance.record.borrowing")
+                },
+                {
+                    value: 13,
+                    label: this.$t("uc.finance.record.repayment")
                 }
             ],
             coinList: [],
@@ -257,6 +265,10 @@ export default {
                         str = that.$t("uc.finance.record.handrecharge");
                     } else if (type == 11) {
                         str = that.$t("uc.finance.record.match");
+                    } else if (type == 12) {
+                        str = that.$t("uc.finance.record.borrowing");
+                    } else if (type == 13) {
+                        str = that.$t("uc.finance.record.repayment");
                     } else {
                         str = "充值";
                     }
