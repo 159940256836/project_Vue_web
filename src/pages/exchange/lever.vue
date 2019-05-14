@@ -35,6 +35,7 @@
                 <img src="../../assets/images/exchange/light-switch.png" alt="">
             </div>
         </div>
+
         <div class="main">
             <div class="left plate-wrap">
                 <div class="handlers">
@@ -62,6 +63,21 @@
                     <!-- <DepthGraph :class="{hidden:currentImgTable==='k'}" ref="depthGraph"></DepthGraph> -->
                 </div>
                 <div class="trade_wrap">
+                    <div class="symbol">
+                        <div class="item">
+                            <span class="coin">{{currentCoin.coin}}
+                                <small>/{{currentCoin.base}} &nbsp;&nbsp;{{LeversymbolMsg.proportion}}</small>
+                            </span>
+                        </div>
+                        <div class="item">
+                            <span class="text">风险率</span>
+                            <span class="num">{{LeversymbolMsg.riskRate}}</span>
+                        </div>
+                        <div class="item">
+                            <span class="text">爆仓价</span>
+                            <span class="num">{{LeversymbolMsg.explosionPrice}}&nbsp;&nbsp;{{LeversymbolMsg.baseCoin}}</span>
+                        </div>
+                    </div>
                     <div class="trade_panel trade_panel_logout">
                         <div class="mask" v-show="!isLogin">
                             <span>请先
@@ -104,8 +120,8 @@
                                     <span>{{$t("exchange.canuse")}}</span>
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
-                                    <router-link :to="rechargeUSDTUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span>
+                                    <!-- <router-link :to="rechargeUSDTUrl">{{$t("exchange.recharge")}}</router-link> -->
+                                    <!-- <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span> -->
                                     <!-- <a :href="rechargeUSDTUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
@@ -187,8 +203,8 @@
                                     <span>{{$t("exchange.canuse")}}</span>
                                     <b>{{wallet.coin|toFloor(coinScale)}}</b>
                                     <span>{{currentCoin.coin}}</span>
-                                    <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span>
+                                    <!-- <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link> -->
+                                    <!-- <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span> -->
                                     <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
@@ -297,7 +313,7 @@
                     <Table @on-current-change="gohref" highlight-row v-show="basecion==='favor'" no-data-text="暂无记录" id="collect" :columns="favorColumns" :data="coins.favor"></Table>
                 </div>
                 <div class="trade-wrap">
-                    <Table height="400" :columns="trade.columns" :data="trade.rows"></Table>
+                    <Table height="480" :columns="trade.columns" :data="trade.rows"></Table>
                 </div>
             </div>
         </div>
@@ -695,6 +711,7 @@ export default {
         let self = this;
         return {
             modal: false,
+            LeversymbolMsg: {},
             btnList: [
                 {
                     text: self.$t("exchange.limited_price"),
@@ -865,7 +882,7 @@ export default {
                                         }
                                     }
                                 }),
-                                h("span", params.row.coin)
+                                h("span", params.row.coin + " " + params.row.proportion)
                             ]);
                         }
                     },
@@ -1360,7 +1377,6 @@ export default {
             return this.$store.getters.isLogin;
         },
         member: function () {
-            console.log(this.$store.getters.member)
             return this.$store.getters.member;
         },
         lang: function () {
@@ -1554,7 +1570,6 @@ export default {
             });
         },
         silderGo(silder, val) {
-            console.log(silder, val);
             this[silder] = val;
         },
         init() {
@@ -1575,6 +1590,7 @@ export default {
             this.$store.commit("navigate", "nav-exchange");
             this.$store.commit("setSkin", this.skin);
             this.getCNYRate();
+            this.getSymboLeverMsg();
             this.getSymbolScale();
             this.getSymbol(); //包含 K线图、getFavor、startWebsock等
             this.getPlate(); //买卖盘
@@ -1593,6 +1609,23 @@ export default {
             this.sliderSellMarketPercent = 0;
             this.sliderBuyStopPercent = 0;
             this.sliderSellStopPercent = 0;
+        },
+        getSymboLeverMsg() {
+            this.$http.post(this.host + "/margin-trade/lever_wallet/list", { symbol: this.currentCoin.symbol }).then(res => {
+                const data = res.body;
+                if (data.code == 0) {
+                    const list = data.data.map(ele => ({
+                        symbol: ele.symbol,
+                        proportion: ele.proportion + "X",
+                        explosionPrice: ele.explosionPrice,
+                        riskRate: ele.riskRate + "%",
+                        baseCoin: this.currentCoin.base
+                    }));
+                    const [{ symbol, explosionPrice, proportion, riskRate, baseCoin }] = list;
+                    this.LeversymbolMsg = { symbol, explosionPrice, proportion, riskRate, baseCoin };
+                    console.log(this.LeversymbolMsg);
+                }
+            })
         },
         tipFormat(val) {
             return val + "%";
@@ -1625,31 +1658,31 @@ export default {
         //       }
         //     });
         // },
-        changeUseBHB() {
-            if (this.memberRate > 0) {
-                //会员身份：0普通，1超级群主，3超级合伙人
-                this.$Modal.confirm({
-                    content: "使用BHB抵扣手续费的交易不参与交易挖矿，是否使用？",
-                    okText: "使用，不参与交易挖矿",
-                    cancelText: "不使用，参与交易挖矿",
-                    width: "460",
-                    onOk: () => {
-                        this.isUseBHB = true;
-                    },
-                    onCancel: () => {
-                        this.isUseBHB = false;
-                    }
-                });
-            } else {
-                this.$Modal.warning({
-                    content: "您当前不符合开通条件，详见使用帮助。",
-                    okText: "关闭",
-                    onOk: () => {
-                        this.isUseBHB = false;
-                    }
-                });
-            }
-        },
+        // changeUseBHB() {
+        //     if (this.memberRate > 0) {
+        //         //会员身份：0普通，1超级群主，3超级合伙人
+        //         this.$Modal.confirm({
+        //             content: "使用BHB抵扣手续费的交易不参与交易挖矿，是否使用？",
+        //             okText: "使用，不参与交易挖矿",
+        //             cancelText: "不使用，参与交易挖矿",
+        //             width: "460",
+        //             onOk: () => {
+        //                 this.isUseBHB = true;
+        //             },
+        //             onCancel: () => {
+        //                 this.isUseBHB = false;
+        //             }
+        //         });
+        //     } else {
+        //         this.$Modal.warning({
+        //             content: "您当前不符合开通条件，详见使用帮助。",
+        //             okText: "关闭",
+        //             onOk: () => {
+        //                 this.isUseBHB = false;
+        //             }
+        //         });
+        //     }
+        // },
         changeSkin() {
             const currentSkin = this.skin;
             if (currentSkin === "day") {
@@ -1667,9 +1700,9 @@ export default {
         },
         changePlate(str) {
             if (str != "all") {
-                this.plate.maxPostion = 24;
+                this.plate.maxPostion = 28;
             } else {
-                this.plate.maxPostion = 13;
+                this.plate.maxPostion = 14;
             }
             this.selectedPlate = str;
             this.getPlate();
@@ -2035,7 +2068,7 @@ export default {
                 });
         },
         getSymbol() {
-            this.$http.post(this.host + this.api.market.thumb, {}).then(response => {
+            this.$http.post(this.host + this.api.market.thumb, { isLever: true }).then(response => {
                 var resp = response.body;
                 //先清空已有数据
                 for (var i = 0; i < resp.length; i++) {
@@ -2058,6 +2091,7 @@ export default {
                     coin.base = resp[i].symbol.split("/")[1];
                     coin.href = (coin.coin + "_" + coin.base).toLowerCase();
                     coin.isFavor = false;
+                    coin.proportion = resp[i].proportion + 'X';
                     this.coins._map[coin.symbol] = coin;
                     this.coins[coin.base].push(coin);
                     if (coin.symbol == this.currentCoin.symbol) {
@@ -2122,7 +2156,7 @@ export default {
                                 totle = rows[0].totalAmount;
                             this.plate.askTotle = totle;
                         } else {
-                            for (var i = 12; i > resp.ask.items.length; i--) {
+                            for (var i = 14; i > resp.ask.items.length; i--) {
                                 var ask = { price: 0, amount: 0 };
                                 ask.direction = "SELL";
                                 ask.position = i;
@@ -2588,7 +2622,7 @@ export default {
                 path
             });
         },
-        buyWithLimitPrice() {
+        buyWithLimitPrice() {//限价买入
             if (this.form.buy.limitAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2612,9 +2646,9 @@ export default {
             params["amount"] = this.form.buy.limitAmount;
             params["direction"] = "BUY";
             params["type"] = "LIMIT_PRICE";
-            params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+            // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             this.$http
-                .post(this.host + this.api.exchange.orderAdd, params)
+                .post(this.host + "/margin-trade/order/add", params)
                 .then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
@@ -2634,7 +2668,7 @@ export default {
                     }
                 });
         },
-        buyWithStopPrice() {
+        buyWithStopPrice() {//止盈止损买入
             if (this.form.buy.stopPrice == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2668,7 +2702,7 @@ export default {
             params['triggerPrice'] = this.form.buy.stopPrice;
             params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             this.$http
-                .post(this.host + this.api.exchange.orderAdd, params)
+                .post(this.host + '/margin-trade/order/add', params)
                 .then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
@@ -2688,7 +2722,7 @@ export default {
                     }
                 });
         },
-        buyWithMarketPrice() {
+        buyWithMarketPrice() {//市价买入
             if (this.form.buy.marketAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2711,7 +2745,7 @@ export default {
             params["type"] = "MARKET_PRICE";
             params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             var that = this;
-            this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {
+            this.$http.post(this.host + '/margin-trade/order/add', params).then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
@@ -2727,15 +2761,7 @@ export default {
                 }
             });
         },
-        sellLimitPrice() {
-            // var userkey = localStorage.getItem('USERKEY');
-            // if (userkey != "aisizx") {
-            //     this.$Notice.error({
-            //         title: this.$t('exchange.tip'),
-            //         desc: "Submit failed"
-            //     });
-            //     return;
-            // }
+        sellLimitPrice() {//限价卖出
             if (this.form.sell.limitAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2764,13 +2790,12 @@ export default {
             params["amount"] = this.form.sell.limitAmount;
             params["direction"] = "SELL";
             params["type"] = "LIMIT_PRICE";
-            params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+            // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             var that = this;
             this.$http
-                .post(this.host + this.api.exchange.orderAdd, params)
+                .post(this.host + '/margin-trade/order/add', params)
                 .then(response => {
                     var resp = response.body;
-
                     if (resp.code == 0) {
                         this.$Notice.success({
                             title: that.$t("exchange.tip"),
@@ -2786,7 +2811,7 @@ export default {
                     }
                 });
         },
-        sellStopPrice() {
+        sellStopPrice() {//止盈止损卖出
             if (this.form.sell.stopPrice == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2823,10 +2848,10 @@ export default {
             params["direction"] = "SELL";
             params["type"] = "CHECK_FULL_STOP";
             params['triggerPrice'] = this.form.sell.stopPrice;
-            params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+            // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             var that = this;
             this.$http
-                .post(this.host + this.api.exchange.orderAdd, params)
+                .post(this.host + '/margin-trade/order/add', params)
                 .then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
@@ -2844,7 +2869,7 @@ export default {
                     }
                 });
         },
-        sellMarketPrice() {
+        sellMarketPrice() {//市价卖出
             if (this.form.sell.marketAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2867,10 +2892,10 @@ export default {
             params["amount"] = this.form.sell.marketAmount;
             params["direction"] = "SELL";
             params["type"] = "MARKET_PRICE";
-            params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+            // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             var that = this;
             this.$http
-                .post(this.host + this.api.exchange.orderAdd, params)
+                .post(this.host + '/margin-trade/order/add', params)
                 .then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
@@ -2900,30 +2925,37 @@ export default {
          */
         getWallet() {
             this.$http
-                .post(this.host + this.api.uc.wallet + this.currentCoin.base, {})
+                .post(this.host + "/margin-trade/lever_wallet/list", { symbol: this.currentCoin.symbol })
                 .then(response => {
                     var resp = response.body;
-                    this.wallet.base = resp.data.balance || "";
+                    if (resp.code == 0) {
+                        const list = resp.data[0].leverWalletList;
+                        this.wallet.base = list[1].balance;
+                        this.wallet.coin = list[0].balance;
+                    } else {
+                        this.wallet.base = 0;
+                        this.wallet.coin = 0;
+                    }
+                    // this.wallet.base = resp.data.balance || "";
                 });
-            this.$http
-                .post(this.host + this.api.uc.wallet + this.currentCoin.coin, {})
-                .then(response => {
-                    var resp = response.body;
-                    this.wallet.coin = (resp.data && resp.data.balance) || '';
-                });
+            // this.$http
+            //     .post(this.host + this.api.uc.wallet + this.currentCoin.coin, {})
+            //     .then(response => {
+            //         var resp = response.body;
+            //         this.wallet.coin = (resp.data && resp.data.balance) || '';
+            //     });
         },
         getCurrentOrder() {
             //查询当前委托
             var params = {};
-            params["pageNo"] = 0;
+            params["pageNum"] = 1;
             params["pageSize"] = 100;
             params["symbol"] = this.currentCoin.symbol;
             this.currentOrder.rows = [];
             var that = this;
-            this.$http
-                .post(this.host + this.api.exchange.current, params)
-                .then(response => {
-                    var resp = response.body;
+            this.$http.post(this.host + '/margin-trade/order/current', params).then(response => {
+                var resp = response.body;
+                if (resp.content) {
                     if (resp.content.length > 0) {
                         this.currentOrder.rows = resp.content.slice(0, 3);
                         this.currentOrder.rows.forEach((row, index) => {
@@ -2934,27 +2966,29 @@ export default {
                                     : row.price;
                         });
                     }
-                });
+                }
+
+            });
         },
         getHistoryOrder(pageNo) {
             //查询历史委托
-            if (pageNo == undefined) {
-                pageNo = this.historyOrder.page;
-            } else {
-                pageNo = pageNo - 1;
-            }
+            // if (pageNo == undefined) {
+            //     pageNo = this.historyOrder.page;
+            // } else {
+            //     pageNo = pageNo - 1;
+            // }
             this.historyOrder.rows = []; //清空数据
             var params = {};
-            params["pageNo"] = pageNo;
+            params["pageNum"] = 1;
             params["pageSize"] = this.historyOrder.pageSize;
             params["symbol"] = this.currentCoin.symbol;
             var that = this;
-            this.$http
-                .post(this.host + this.api.exchange.history, params)
+            this.$http.post(this.host + '/margin-trade/order/history', params)
                 .then(response => {
                     var resp = response.body;
                     let rows = [];
-                    if (resp.content.length > 0) {
+                    if(resp.content){
+                        if (resp.content.length > 0) {
                         this.historyOrder.total = resp.totalElements;
                         this.historyOrder.page = resp.number;
                         for (var i = 0; i < 3; i++) {
@@ -2970,6 +3004,7 @@ export default {
                             }
                         }
                         this.historyOrder.rows = rows;
+                    }
                     }
                 });
         },
