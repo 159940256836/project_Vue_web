@@ -82,6 +82,9 @@ import GiveRecord from '../components/uc/giveRecord.vue'
 
 //归还赠送记录
 import LeverIndex from "../pages/lever/Index.vue"
+
+//杠杆交易
+import Lever from "../pages/exchange/lever.vue"
 export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
@@ -96,6 +99,8 @@ export default [
     { path: '/findPwd', component: FindPwd },
     { path: '/exchange', component: Exchange },
     { path: '/exchange/*', component: Exchange },
+    { path: '/leverindex', component: Lever },
+    { path: '/leverindex/*', component: Lever },
     { path: '/help', component: Help },
     { path: '/helplist', component: HelpList },
     { path: '/helpdetail', component: HelpDetail },
