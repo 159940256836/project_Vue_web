@@ -21,7 +21,7 @@
                         {{$t('uc.finance.inviting.refere')}} ：
                         </span> -->
                         <!-- <Input v-model="value" :placeholder="$t('uc.finance.inviting.refereinput')" style="width: 200px"></Input> -->
-                        <Button type="primary" @click="queryOrder" style="padding: 6px 50px;margin-left:10px;background-color:#f0a70a;border-color:#f0a70a">{{$t('uc.finance.record.search')}}</Button>
+                        <Button type="primary" @click="queryOrder" style="padding: 6px 50px;margin-left:10px;background-color:#3399ff;border-color:#3399ff">{{$t('uc.finance.record.search')}}</Button>
                     </div>
                     <div class="datedaitl">
                         <span style="color: #eb6f6c">{{$t('uc.finance.inviting.start_end')}} ：</span>&nbsp;&nbsp;<span>{{$t('uc.finance.inviting.chargetime')}}</span>
@@ -414,7 +414,7 @@
     }
 
     .order_box .active {
-        border-bottom: 2px solid #f0a70a;
+        border-bottom: 2px solid #3399ff;
     }
 
     .order_box .search {
@@ -428,18 +428,18 @@
     }
 
     #record_pages ivu-page-item-active{
-        background-color: #f0a70a !important;
-        border-color: #f0a70a !important;
+        background-color: #3399ff !important;
+        border-color: #3399ff !important;
     }
     #record_pages ivu-page-item-active:hover{
-        background-color: #f0a70a !important;
+        background-color: #3399ff !important;
     }
     .ivu-page-item-active{
-        background-color: #f0a70a;
-        border-color: #f0a70a;
+        background-color: #3399ff;
+        border-color: #3399ff;
     }
     .ivu-page-item:hover{
-        color: #f0a70a;
+        color: #3399ff;
     }
     .order-table .ivu-table-body .ivu-table-cell{
         padding-right: 0 !important;

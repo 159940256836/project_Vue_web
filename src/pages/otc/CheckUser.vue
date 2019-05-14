@@ -404,7 +404,7 @@ export default {
   width: 4px;
   height: 22px;
   margin-right: 10px;
-  background: #f0a70a;
+  background: #3399ff;
   display: inline-block;
   margin-left: 4px;
 }
@@ -665,7 +665,7 @@ export default {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background: #f0a70a;
+  background: #3399ff;
   height: 60px;
   width: 60px;
   color: #fff;
@@ -759,14 +759,14 @@ export default {
                 .ivu-tabs-nav-container{
                     .nav-text.ivu-tabs-nav{
                         .ivu-tabs-tab.ivu-tabs-tab-active.ivu-tabs-tab-focused{
-                            color: #f0a70a;
+                            color: #3399ff;
                         }
                         .ivu-tabs-ink-bar.ivu-tabs-ink-bar-animated{
-                            background-color: #f0a70a;
+                            background-color: #3399ff;
                         }
                         .ivu-tabs-tab{
                             &:hover{
-                                color: #f0a70a;
+                                color: #3399ff;
                             }
                         }
                     }

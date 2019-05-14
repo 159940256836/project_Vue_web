@@ -248,7 +248,7 @@ export default {
                   }
                 },
                 style: {
-                  color: "#f0ac19",
+                  color: "#3399ff",
                   cursor:"pointer"
                 },
               },
@@ -436,7 +436,7 @@ export default {
               position: absolute;
               right: 0;
               bottom: 10px;
-              color: #f0ac19;
+              color: #3399ff;
               margin-bottom:0;
             }
           }

@@ -75,27 +75,27 @@ export default {
 </script>
 <style lang="scss" scoped>
 .type.red:before{
-    background:#ffa500 !important;
+    background:#00B274 !important;
 }
 .red{
-    color:#ffa500 !important;
+    color:#00B274 !important;
    
 }
 .type.yellow:before{
-    background:#999 !important;
+    background:#DDDDDD !important;
 }
 .yellow{
-    color:#999;
+    color:#DDDDDD !important
 }
 .type.pink:before{
-    background:#2ac082 !important
+    background:#F15057 !important
 }
 .pink{
 
-    color:#2ac082;
+    color:#F15057 !important
 }
 .yure{
-    color:red;
+    color:red !important
 }
 %flex {
     display: flex;
@@ -139,7 +139,6 @@ export default {
     }
     .mainImg {
         img {
-           
             width: 100%;
             height: 100px;
         }

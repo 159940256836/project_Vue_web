@@ -321,7 +321,7 @@ export default {
             -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
             box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
             a {
-              color: #f0a70a;
+              color: #3399ff;
             }
           }
         }
@@ -345,9 +345,9 @@ export default {
               color: #666;
             }
             &:hover {
-              border: 1px solid #f0a70a;
+              border: 1px solid #3399ff;
               a {
-                color: #f0a70a;
+                color: #3399ff;
               }
             }
           }
@@ -357,17 +357,17 @@ export default {
         .ivu-tabs-nav-container {
           .ivu-tabs-nav-scroll {
             .ivu-tabs-ink-bar.ivu-tabs-ink-bar-animated {
-              background-color: #f0a70a;
+              background-color: #3399ff;
             }
             .ivu-tabs-tab.ivu-tabs-tab-active.ivu-tabs-tab-focused {
-              color: #f0a70a;
+              color: #3399ff;
               &:hover {
-                color: #f0a70a;
+                color: #3399ff;
               }
             }
             .ivu-tabs-tab {
               &:hover {
-                color: #f0a70a;
+                color: #3399ff;
               }
             }
           }

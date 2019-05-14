@@ -68,12 +68,12 @@ export default {
 
 }
 .leftmenu a.router-link-active {
-    background: #f0a70a;
+    background: #3399ff;
     color: #ffffff !important;
     /*width: 216px;*/
 }
 .active{
-    background: #f0a70a;
+    background: #3399ff;
     color: #ffffff !important;
     /*width: 216px;*/
     font-size: 16px;
@@ -161,7 +161,7 @@ export default {
 .leftmenu .nav > li > div:hover,
 .nav-pills > li.active > div:focus,
 .nav-pills > li.active > div:hover {
-     background: #f0a70a;
+     background: #3399ff;
     color: #ffffff !important;
     /*width: 216px;*/
     font-size: 16px;

@@ -9,28 +9,29 @@
           <!-- <router-link to="/identbusiness">成为商家</router-link> -->
         </div>
       </div>
-      <div class="content">
-        <Menu ref="navMenu" mode="horizontal" width="auto" :active-name="activeMenuName" @on-select="menuSelected" class='tradelist'>
-          <MenuGroup>
-            <template v-for="(coin,index) in coins">
-              <MenuItem :name="'coin-'+index"> {{coin.unit}}
-              </MenuItem>
-            </template>
-          </MenuGroup>
-        </Menu>
-        <router-view></router-view>
-      </div>
-      <div class="advantage">
-        <ul>
-          <li>
-            <div class="image"><img src="../../assets/images/price.png" alt=""></div>
-            <div class="title">市场一口价</div>
-            <div class="content1">根据市场价格实时波动</div>
-          </li>
-          <li>
-            <div class="image"><img src="../../assets/images/poundage.png" alt=""></div>
-            <div class="title">完全免手续费</div>
-            <div class="content1">用户所见即所得，买卖价格外，无需任何平台手续费</div>
+      <div class="fiat-main">
+        <div class="content">
+          <Menu ref="navMenu" mode="horizontal" width="auto" :active-name="activeMenuName" @on-select="menuSelected" class='tradelist'>
+            <MenuGroup>
+              <template v-for="(coin,index) in coins">
+                <MenuItem :name="'coin-'+index"> {{coin.unit}}
+                </MenuItem>
+              </template>
+            </MenuGroup>
+          </Menu>
+          <router-view></router-view>
+        </div>
+        <div class="advantage">
+          <ul>
+            <li>
+              <div class="image"><img src="../../assets/images/price.png" alt=""></div>
+              <div class="title">市场一口价</div>
+              <div class="content1">根据市场价格实时波动</div>
+            </li>
+            <li>
+              <div class="image"><img src="../../assets/images/poundage.png" alt=""></div>
+              <div class="title">完全免手续费</div>
+              <div class="content1">用户所见即所得，买卖价格外，无需任何平台手续费</div>
             <li>
               <div class="image"><img src="../../assets/images/instant.png" alt=""></div>
               <div class="title">即时成交</div>
@@ -41,7 +42,8 @@
               <div class="title">平台担保</div>
               <div class="content1">平台认证商家，安全有保障，24小时客服为交易保驾护航</div>
             </li>
-        </ul>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -49,90 +51,92 @@
 
 <style scoped lang="scss">
 .content-wraps {
-  padding: 0 12%;
   background-color: #fff;
-  padding-top: 60px;
   .containers {
     width: 100%;
-    margin: 20px 0;
+    /*margin: 20px 0;*/
     .fiat {
-      border-radius: 5px;
-      height: 400px;
-      background: url("../../assets/images/fiat.png") no-repeat center center;
-      background-size: 100%;
-      display: flex; //flex布局
-      justify-content: center; //使子项目水平居中
-      align-items: center; //使子项目垂直居中
-      .to_business {
-        color: #fff;
-        text-align: center;
-        h3 {
-          font-size: 46px;
-          letter-spacing: 20px;
-        }
-        span {
-          font-size: 20px;
-          letter-spacing: 10px;
-          display: block;
-        }
-        a {
-          width: 220px;
-          height: 45px;
-          display: inline-block;
-          background: #d0b387;
-          border-radius: 5px;
-          font-size: 20px;
-          line-height: 45px;
-          color: #000;
-          margin-top: 20px;
-        }
+    border-radius: 5px;
+    height: 400px;
+    background: url("../../assets/images/fiat_banner.jpg") no-repeat center center;
+    background-size: 100%;
+    display: flex; //flex布局
+    justify-content: center; //使子项目水平居中
+    align-items: center; //使子项目垂直居中
+    .to_business {
+      color: #fff;
+      text-align: center;
+      h3 {
+        font-size: 46px;
+        letter-spacing: 20px;
+      }
+      span {
+        font-size: 20px;
+        letter-spacing: 10px;
+        display: block;
+      }
+      a {
+        width: 220px;
+        height: 45px;
+        display: inline-block;
+        background: #d0b387;
+        border-radius: 5px;
+        font-size: 20px;
+        line-height: 45px;
+        color: #000;
+        margin-top: 20px;
       }
     }
-    .content {
-      width: 100%;
-      margin: 20px auto;
-      -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-      -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-      box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-    }
-    .advantage {
-      -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-      -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-      box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-      ul {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 30px;
-        li {
-          width: 25%;
-          list-style-type: none;
-          min-height: 190px;
-          div {
-            text-align: center;
-          }
-          div.image {
-            width: 50px;
-            height: 50px;
-            margin: 20px auto;
-            img {
-              width: 100%;
+  }
+  }
+  .fiat-main {
+    width: 1200px;
+    margin: 50px auto;
+      .content {
+        width: 100%;
+        margin: 20px auto;
+        -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+      }
+      .advantage {
+        -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        ul {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 30px;
+          li {
+            width: 25%;
+            list-style-type: none;
+            min-height: 190px;
+            div {
+              text-align: center;
+            }
+            div.image {
+              width: 50px;
+              height: 50px;
+              margin: 20px auto;
+              img {
+                width: 100%;
+              }
+            }
+            div.title {
+              line-height: 30px;
+              font-size: 16px;
+              color: #333;
+            }
+            div.content1 {
+              padding: 20px 40px;
+              line-height: 20px;
+              font-size: 12px;
+              color: #999;
             }
           }
-          div.title {
-            line-height: 30px;
-            font-size: 16px;
-            color: #333;
-          }
-          div.content1 {
-            padding: 20px 40px;
-            line-height: 20px;
-            font-size: 12px;
-            color: #999;
-          }
         }
       }
-    }
   }
 }
 </style>
@@ -148,12 +152,12 @@
           li.ivu-menu-item {
             border: none;
             &:hover {
-              color: #f0ac19;
+              color: #3399ff;
               border-bottom: 0;
             }
           }
           li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
-            color: #f0ac19;
+            color: #3399ff;
             border-bottom: none;
           }
         }

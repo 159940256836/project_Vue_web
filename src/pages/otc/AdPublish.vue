@@ -82,7 +82,7 @@
               </FormItem>
               <p class="msg">{{$t('otc.publishad.tip1')}} </p>
 
-              <router-link to="/uc/account" style="padding-left: 90px;color:#f0ac19;">{{$t('otc.publishad.tip2')}}</router-link>
+              <router-link to="/uc/account" style="padding-left: 90px;color:#3399ff;">{{$t('otc.publishad.tip2')}}</router-link>
               <FormItem :label="$t('otc.publishad.paymode')" prop="payMode">
                 <Select v-model="form.payMode" multiple>
                   <Option v-for="(item,index) in payModeList" :value="item.value" :key="item.value" :disabled="item.isOpen">{{ item.label }}</Option>
@@ -116,7 +116,7 @@
                 <Input v-model="form.priceW" :placeholder="$t('otc.publishad.fundpwdtip')" type="password"></Input>
               </FormItem>
               <FormItem>
-                <Button style="background:#f0a70a;color:#fff;border:1px solid #f0a70a;" long @click="handleSubmit('form')" :disabled="disAllowBtn">{{$t('otc.publishad.submit')}}</Button>
+                <Button style="background:#3399ff;color:#fff;border:1px solid #3399ff;" long @click="handleSubmit('form')" :disabled="disAllowBtn">{{$t('otc.publishad.submit')}}</Button>
                 <!-- <Button type="ghost" @click="handleReset('form')" style="margin-left: 8px">Reset</Button> -->
               </FormItem>
             </Form>
@@ -779,7 +779,7 @@ export default {
 }
 
 .title-box p a {
-  color: #f0a70a;
+  color: #3399ff;
 }
 
 .order-table {

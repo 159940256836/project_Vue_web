@@ -1,6 +1,6 @@
 <template>
     <div class="ieo_detail_box">
-        <div class="common">
+        <div class="common  commona">
             <div class="top_box">
                 <div class="ieoLogo">
                     <img :src="content.pic" alt="">
@@ -52,7 +52,7 @@
                     <span>无折扣认购</span>
                     <div class="right_circle left_circle"></div>
                 </div>
-                <div class="time">
+                <div class="time time11">
                     <span>{{content.startTime}}</span>
                     <span>{{content.endTime}}</span>
                 </div>
@@ -80,17 +80,20 @@
                         <Input class="pwda" type="password" v-model="password" placeholder="请输入交易密码" />
                     </li>
                     <li>
-                        <div class="btn"><span long @click="startSale">{{text}}</span></div>
+                        <div :class="status == '进行中'? 'red1':(status == '已完成' ? 'yellow1' : ( status == '预热中' ? 'pink1' : ''))" class="btn"><span long @click="startSale">{{text}}</span></div>
                         <p>进行认购即为已阅读并同意<a href="">&lt&lt风险提示&gt&gt</a></p>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="table">
-            <div>
-                <div></div>
-                <div></div>
+        <div class="table1">
+            <!-- 5.14修改 -->
+            <div class="tabida"> 
+                <div @click="changeTab(1)" :class="tabid==1?'activee':''">售卖方式</div>
+                <div @click="changeTab(2)" :class="tabid==2?'activee':''">项目详情</div>
             </div>
+            <div class="tabida1" v-show="tabid==1">{{content.sellMode}}</div>
+            <div class="tabida1" v-show="tabid==2">{{content.sellDetail}}</div>
             <!-- <Tabs value="name1">
                 <TabPane label="售卖方式" name="name1">{{content.sellMode}}</TabPane>
                 <TabPane label="项目详情" name="name2">{{content.sellDetail}}</TabPane>
@@ -113,7 +116,8 @@ export default {
             exchange: "",
             password: "",
             content: {},
-            status
+            status,
+            tabid:1,
         }
     },
     computed: {
@@ -135,6 +139,10 @@ export default {
         }
     },
     methods: {
+        changeTab(n){
+            this.tabid=n;
+            console.log(1111)
+        },
         init(params) {
             this.getMsg(params)
                 .then(res => {
@@ -265,20 +273,84 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.type.pink:before{
+    background:#F15057 !important
+}
+.type.yellow:before{
+    background:#DDDDDD !important;
+}
+.type.red:before{
+    background:#00B274 !important;
+}
+.time11{
+    margin-top:16px;
+    color:#666666;
+    font-size:14px;
+    height:12px;
+    line-height:12px;
+    margin-bottom: 35px;
+}
+.pink1{
 
+    background:#F15057 !important;
+}
+.red1{
+    background:#00B274 !important;
+   
+}
+.yellow1{
+    background:#DDDDDD !important;
+}
+.commona{
+    // height:374px;
+    .top_box{
+        height:60px;
+    }
+}
+.activee{
+    background:#3399FF;
+    color:#fff;
+}
+.table1{
+    width:1200px;
+    margin-top:40px;
+    margin-left:10.7%;
+     .tabida1{
+        height:100px;
+        margin-top:20px;
+         width:1178px;
+         border:1px solid #DDDDDD;
+         font-size:14px;
+         color:#333333;
+         padding-left:22px;
+
+        }
+    .tabida{
+        display:flex;
+        height:46px;
+        border-bottom: 1px solid #E0E0E0;
+        font-size:16px;
+        line-height:46px;
+       
+        div{
+            width:102px;
+            text-align:center;
+        }
+    }
+}
 
 .ieo_detail_box[data-v-2300a631]{
     background:#fff;
 }
 .red{
-    color:#ffa500 !important;
+    color:#00B274 !important;
 }
 .yellow{
-    color:#999;
+    color:#DDDDDD !important;
 }
 .pink{
 
-    color:#2ac082;
+    color:#F15057;
 }
 %flex {
     display: flex;
@@ -305,7 +377,7 @@ $lineColor: rgb(71, 100, 146);
         color:#333333;
         border:1px solid rgba(221, 221, 221, 1);
         overflow: hidden;
-        color: #aaa;
+        color: #333;
         // padding: 20px;
         margin-bottom: 30px;
         @extend %flex;
@@ -333,7 +405,7 @@ $lineColor: rgb(71, 100, 146);
                 // background: rgb(125, 131, 152);
                 padding: 5px 20px;
                 border-radius: 15px;
-                color: #fff;
+                // color: #fff;
                 &:before {
                     display: inline-block;
                     content: "";
@@ -352,9 +424,14 @@ $lineColor: rgb(71, 100, 146);
             flex-wrap: wrap;
             overflow: hidden;
             .leftWrapper {
-                width: 45%;
+                margin-top:18px;
+                margin-left:20px;
+                width: 42%;
                 img {
-                    width: 100%;
+                    width:352px;
+                    height:185px;
+                    // background-size:100%;
+                    // width: 100%;
                 }
             }
             .detail {
@@ -396,13 +473,13 @@ $lineColor: rgb(71, 100, 146);
                     &:before {
                         display: inline-block;
                         content: "";
-                        width: 10px;
-                        height: 10px;
+                        width: 6px;
+                        height: 6px;
                         margin-right: 10px;
                         border-radius: 50%;
                         background-color: $color;
                         position: absolute;
-                        top: -5px;
+                        top: -2px;
                     }
                 }
                 span {
@@ -491,10 +568,18 @@ $lineColor: rgb(71, 100, 146);
     }
 }
 .table {
+    width:1200px;
+    margin-top:40px;
+    height:46px;
+
     .ivu-tabs-tab {
         padding: 16px;
         font-size: 26px;
         font-weight: 700;
     }
+}
+.ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631]{
+    background:#3399FF;
+    opacity:0.5;
 }
 </style>

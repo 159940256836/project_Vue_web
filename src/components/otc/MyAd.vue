@@ -275,10 +275,10 @@ export default {
     .add_ad {
       margin-bottom: 20px;
       .ivu-btn {
-        background: #f0a70a;
+        background: #3399ff;
         color: #fff;
         &:hover {
-          border-color: #f0a70a;
+          border-color: #3399ff;
         }
         &:focus {
           -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -329,9 +329,9 @@ export default {
               }
             }
             button.ivu-btn.ivu-btn-primary {
-              border-color: #f0ac19;
+              border-color: #3399ff;
               span {
-                color: #f0ac19;
+                color: #3399ff;
               }
             }
             button.ivu-btn.ivu-btn-error {
@@ -346,8 +346,8 @@ export default {
       #pages{
            .ivu-page {
             .ivu-page-item.ivu-page-item-active {
-              background-color: #f0ac19;
-              border-color: #f0ac19;
+              background-color: #3399ff;
+              border-color: #3399ff;
               color: #fff;
               &:hover {
                 a {
@@ -357,18 +357,18 @@ export default {
             }
             .ivu-page-item {
               &:hover {
-                border: 1px solid #f0ac19;
+                border: 1px solid #3399ff;
                 a {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
             }
             .ivu-page-prev,
             .ivu-page-next {
               &:hover {
-                border: 1px solid #f0ac19;
+                border: 1px solid #3399ff;
                 a {
-                  color: #f0ac19;
+                  color: #3399ff;
                 }
               }
             }

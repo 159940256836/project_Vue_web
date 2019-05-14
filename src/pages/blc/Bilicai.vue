@@ -245,7 +245,7 @@ export default {
       margin-bottom: 20px;
       list-style: none;
       padding: 20px 20px 0 20px;
-      border-top: 3px solid #f0ac19;
+      border-top: 3px solid #3399ff;
       -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
       -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
       box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
@@ -281,7 +281,7 @@ export default {
         margin: 20px auto;
         .shouyilv {
           .numlv {
-            color: #f0ac19;
+            color: #3399ff;
             font-size: 36px;
             line-height: 36px;
           }
@@ -294,7 +294,7 @@ export default {
           button {
             width: 100px;
             height: 30px;
-            background: #f0ac19;
+            background: #3399ff;
             color: #fff;
             border: none;
             outline: none;
@@ -335,7 +335,7 @@ export default {
       list-style: none;
       padding: 10px 0;
       .q {
-        color: #f0ac19;
+        color: #3399ff;
         margin: 5px 0;
       }
     }

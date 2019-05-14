@@ -35,12 +35,23 @@
                     </Carousel>
                 </div>
             </div>
-            <div class="section" id="hot">
-                <div v-for="(item,index) in hostSymbolList" :key="index">
-                    {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}}
-                    <SvgLine :values="item.trend"></SvgLine>
+           <!-- <div class="section" id="hot">
+                <div class="section-market">
+                    <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index">
+                        <p>
+                            <span class="pairs">{{item.symbol}}</span>
+&lt;!&ndash;                            parseFloat(params.row.rose) < 0 ? "red" : "green"&ndash;&gt;
+                            <span>{{item.chg}}</span>
+                        </p>
+                        <p>
+                            <span>{{item.volume}}</span>
+                            <span>{{item.baseUsdRate}}</span>
+                        </p>
+                        &lt;!&ndash;{{item.change}}&ndash;&gt;
+                        <SvgLine :values="item.trend"></SvgLine>
+                    </div>
                 </div>
-            </div>
+            </div>-->
             <!-- <SvgLine v-for="(item, index) in coins" :key="index" :values="item.trend"></SvgLine> -->
             <!-- 首页行情图 -->
             <div class="section" id="page2">
@@ -56,29 +67,32 @@
             </div>
             <!-- 下载部分 -->
             <div class="section" id="page5">
-                <ul class="download">
-                    <li class="qrcode">随时随地 多平台终端交易</li>
-                    <li class="description">覆盖iOS、Android、Windows、Mac多个平台，支持全业务功能</li>
-                    <li>
-                        <ul class="os">
-                            <li>
-                                <Icon type="logo-windows" size="16" /> <span>win32位</span></li>
-                            <li>
-                                <Icon type="logo-windows" size="16" /> <span>win64位</span></li>
-                            <li>
-                                <Icon type="logo-apple" size="20" /><span>mac</span></li>
-                            <li>
-                                <Icon type="logo-apple" size="20" /><span>ios</span></li>
-                            <li>
-                                <Icon type="logo-android" size="20" /><span>Android</span></li>
-                            <li>
-                                <Icon type="logo-apple" size="20" /><span>Apple Store</span></li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="phone_image">
-                    <img src="../../assets/images/phone_img.png" alt="">
+                <div class="section-main">
+                    <ul class="download">
+                        <li class="qrcode">随时随地 多平台终端交易</li>
+                        <li class="description">覆盖iOS、Android、Windows、Mac多个平台，支持全业务功能</li>
+                        <li>
+                            <ul class="os">
+                                <li>
+                                    <Icon type="logo-windows" size="25" /> <span>win32位</span></li>
+                                <li>
+                                    <Icon type="logo-windows" size="25" /> <span>win64位</span></li>
+                                <li>
+                                    <Icon type="logo-apple" size="30" /><span>mac</span></li>
+                                <li>
+                                    <Icon type="logo-apple" size="30" /><span>ios</span></li>
+                                <li>
+                                    <Icon type="logo-android" size="30" /><span>Android</span></li>
+                                <li>
+                                    <Icon type="logo-apple" size="30" /><span>Apple Store</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="phone_image">
+                        <img src="../../assets/images/phone_img.png" alt="">
+                    </div>
                 </div>
+
             </div>
             <!-- 网站功能模块 -->
             <div class="section" id="page4">
@@ -105,7 +119,6 @@
                     </li>
                 </ul>
             </div>
-
         </div>
         <div id="onlineservice">
             <a href="http://kefu.caymanex.pro:80/im/text/15FwEk.html" target="_blank"></a>
@@ -159,7 +172,7 @@ export default {
                         let flag = this.isLogin;
                         return h("Icon", {
                             props: {
-                                color: "#f0a70a",
+                                color: "#3399ff",
                                 size: "18",
                                 type: params.row.isFavor
                                     ? "ios-star"
@@ -428,7 +441,7 @@ export default {
                             let flag = this.isLogin;
                             return h("Icon", {
                                 props: {
-                                    color: "#f0a70a",
+                                    color: "#3399ff",
                                     size: "18",
                                     type: params.row.isFavor
                                         ? "ios-star"
@@ -678,7 +691,8 @@ export default {
                                     values: valus,
                                     rose: params.row.rose,
                                     width: 100,
-                                    height: 40
+                                    height: 40,
+                                    background: parseFloat(params.row.rose) < 0 ? "red" : "green"
                                 }
                             });
                         }
@@ -779,6 +793,7 @@ export default {
             this.$http.get(this.host + '/market/overview').then(res => {
                 const resp = res.body;
                 this.hostSymbolList = resp.recommend;
+                console.log(this.hostSymbolList)
                 this.startWebsockHotlist();
             })
         },
@@ -1195,9 +1210,38 @@ li {
     padding: 30px 10%;
     background-color: #202b3c;
     @extend %flex;
-    > div {
-        width: 20%;
+    .section-market {
+        width: 1200px;
+        margin: 0 auto;
+        .market-box {
+            width: 240px;
+            height: 120px;
+            border-radius: 8px;
+            background: rgb(37, 43, 56);
+            float: left;
+            margin-right: 15px;
+            padding: 15px 0 0;
+            &:last-child {
+                margin-right: 0;
+            }
+            p {
+                padding: 3px 20px;
+                span {
+                    &:last-child {
+                        float: right;
+                    }
+                }
+                .pairs {
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+        }
     }
+    /*> div {*/
+    /*    width: 20%;*/
+    /*}*/
 }
 #pagetips {
     position: absolute;
@@ -1262,13 +1306,18 @@ li {
 }
 #page2 {
     background: #fff;
+    width: 1200px;
     height: auto;
     min-height: 320px;
-    padding: 20px 14%;
+    margin: 40px auto;
     .page2nav {
         line-height: 40px;
         font-size: 20px;
         .brclearfix {
+            font-weight: 600;
+            border: 1px solid #eee;
+            border-bottom: 0;
+            background: #fafafd;
             li {
                 float: left;
                 cursor: pointer;
@@ -1277,38 +1326,56 @@ li {
                 list-style: none;
                 font-size: 16px;
                 padding: 0 30px;
-                box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+                /*box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
                 &:hover {
-                    color: #f0a70a;
+                    color: #3399ff;
                 }
             }
             li.active {
                 background: #fff;
-                color: #f0a70a;
+                color: #3399ff;
+                border-bottom: 2px solid #3399ff;
                 position: relative;
             }
         }
     }
     .ptjy {
+        border: 1px solid #eee;
         height: 100%;
         .tables {
             border: none;
-            box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-            border-top: 2px solid #f0ac19;
+            /*<!--box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;-->*/
+            /*border-top: 2px solid #f0ac19;*/
             .ivu-table {
                 .ivu-table-header {
                     .ivu-table-column-center {
                         background: none;
                     }
                 }
+
             }
         }
+        .ivu-table-wrapper {
+            .ivu-table {
+                .ivu-table-row {
+                    &:nth-of-type(odd) {
+                        background: #fff;
+                    }
+
+                    &:nth-of-type(even) {
+                        background: #fafafd;
+                    }
+                }
+            }
+        }
+
     }
 }
 #page4 {
     background: #fff;
     height: auto;
-    padding: 100px 0 80px 0;
+    width: 1200px;
+    margin: 100px auto;
     ul {
         width: 88%;
         margin: 0 auto;
@@ -1324,7 +1391,7 @@ li {
                 text-align: center;
                 margin: 0 auto;
                 img {
-                    height: 34px;
+                    height: 55px;
                     margin-top: 28px;
                 }
             }
@@ -1344,55 +1411,53 @@ li {
 }
 #page5 {
     height: 460px;
-    padding: 140px 14% 0;
+    /*padding: 140px 14% 0;*/
     position: relative;
     background: url("../../assets/images/app-download.png") no-repeat 0 0;
     background-size: 100% 460px;
     overflow: hidden;
     @extend %flex;
     align-items: flex-start;
-    .phone_image {
-        width: 480px;
-        img {
-            width: 100%;
-        }
-    }
-    .download {
-        list-style-type: none;
-        color: #fff;
-        text-align: left;
-        line-height: 40px;
-        .qrcode {
-            font-size: 18px;
-            font-weight: 500;
-            font-weight: 900;
-        }
-        .description {
-            font-size: 14px;
-        }
-        .os {
-            @extend %flex;
-            flex-wrap: wrap;
-            li {
-                width: 26%;
-                background-image: linear-gradient(
-                    180deg,
-                    #455fa2 0%,
-                    #213169 100%
-                );
-                padding: 0 10px;
-                border-radius: 5px;
-                color: #fff;
-                margin-bottom: 20px;
+    .section-main {
+        width: 1200px;
+        margin: 140px auto 0;
+        display: flex;
+        .download {
+            flex: 1;
+            list-style-type: none;
+            color: #fff;
+            text-align: left;
+            line-height: 40px;
+            .qrcode {
+                font-size: 45px;
+            }
+            .description {
+                font-size: 18px;
+                margin: 20px 0;
+            }
+            .os {
                 @extend %flex;
-                box-sizing: border-box;
-                &:hover {
-                    background-image: linear-gradient(
-                        180deg,
-                        #213169 0%,
-                        #455fa2 100%
-                    );
+                flex-wrap: wrap;
+                padding-right: 200px;
+                li {
+                    width: 26%;
+                    background: #fff;
+                    padding: 0 10px;
+                    border-radius: 5px;
+                    color: #333;
+                    margin-bottom: 20px;
+                    @extend %flex;
+                    box-sizing: border-box;
+                    span {
+                        font-size: 16px;
+                    }
                 }
+            }
+        }
+        .phone_image {
+            width: 480px;
+            img {
+                width: 100%;
             }
         }
     }
@@ -1405,6 +1470,7 @@ li {
             .ivu-table {
                 .ivu-table-header {
                     th {
+                        color: #999;
                         background: none;
                     }
                 }
@@ -1430,11 +1496,11 @@ li {
 }
 
 .green {
-    color: #00b275 !important;
+    color: #03bf7b !important;
 }
 
 .red {
-    color: #f15057 !important;
+    color: #de211d !important;
 }
 
 .brclearfix:after {
@@ -1446,6 +1512,7 @@ li {
 }
 
 #fullpage {
+    min-width: 1260px;
     background: #fff;
 }
 

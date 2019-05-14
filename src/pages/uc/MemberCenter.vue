@@ -35,7 +35,7 @@
     }
 }
 </style>
-<style lang="scss">
+<style lang="scss" scoped>
 .mymsg_wrapper {
     .wrapper {
         ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
@@ -47,7 +47,7 @@
                     &:hover {
                         background-color: #fff;
                         .isclick {
-                            background-color: #f0ac19;
+                            background-color: #3399ff;
                         }
                         .content,
                         .ivu-icon {
@@ -57,7 +57,7 @@
                     .isclick {
                         width: 6px;
                         height: 6px;
-                        background-color: #f0ac19;
+                        background-color: #3399ff;
                         display: inline-block;
                         border-radius: 50%;
                         margin-top: 16px;
@@ -72,9 +72,9 @@
                 }
                 .ivu-menu {
                     li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
-                        color: #f0ac19;
+                        color: #3399ff;
                         a {
-                            color: #f0ac19;
+                            color: #3399ff;
                         }
                     }
                     li.ivu-menu-item {
@@ -94,7 +94,7 @@
             }
             li.ivu-menu-submenu.ivu-menu-opened {
                 .ivu-menu-submenu-title {
-                    background-color: #f0ac19;
+                    background-color: #3399ff;
                     .isclick {
                         background-color: #fff;
                     }
@@ -300,7 +300,6 @@ export default {
     },
     watch: {
         $route(to, form) {
-            console.log(to.path);
             this.heightLightMenu(to.path);
         }
     },

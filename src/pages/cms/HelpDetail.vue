@@ -139,7 +139,7 @@ export default {
         }
         > a {
             padding: 10px;
-            color: #f1ab15;
+            color: #3399ff;
         }
         .route {
             display: flex;
@@ -158,7 +158,7 @@ export default {
                 -webkit-line-clamp: 2;
             }
             &.active {
-                background-color: #f1ab15;
+                background-color: #3399ff;
                 color: #fff;
             }
         }
@@ -186,10 +186,10 @@ export default {
 
 .route-wrap {
     font-size: 14px;
-    color: #f1ab15;
+    color: #3399ff;
     margin-bottom: 40px;
     a {
-        color: #f1ab15;
+        color: #3399ff;
     }
 }
 </style>

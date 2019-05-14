@@ -262,7 +262,7 @@ export default {
 .action-box .title a.link-copy {
     font-size: 14px;
     margin-left: 20px;
-    color: #f0a70a;
+    color: #3399ff;
 }
 
 .hb-night a {
@@ -276,7 +276,7 @@ export default {
     margin-left: 20px;
     font-size: 14px;
     position: relative;
-    color: #f0a70a;
+    color: #3399ff;
 }
 
 .hb-night a {
@@ -329,7 +329,7 @@ p.describe {
     width: 4px;
     height: 22px;
     margin-right: 10px;
-    background: #f0a70a;
+    background: #3399ff;
 }
 
 .bill_box {
@@ -376,18 +376,18 @@ p.describe {
     /* border: #c5cdd7 solid 1px; */
 }
 #recharge_btn .ivu-page li.ivu-page-item-active {
-    background-color: #f0a70a !important;
-    border-color: #f0a70a !important;
+    background-color: #3399ff !important;
+    border-color: #3399ff !important;
 }
 #recharge_btn li.ivu-page-item-active:hover {
-    color: #f0a70a !important;
+    color: #3399ff !important;
 }
 .ivu-page-item-active {
-    background-color: #f0a70a;
-    border-color: #f0a70a;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 .ivu-page-item:hover {
-    color: #f0a70a;
+    color: #3399ff;
 }
 .recharge_btn .ivu-page-item-active {
     background-color: red !important;

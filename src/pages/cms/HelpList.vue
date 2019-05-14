@@ -57,7 +57,7 @@
 .route-wrap {
     font-size: 14px;
     a {
-        color: #f1ab15;
+        color: #3399ff;
     }
 }
 .page {

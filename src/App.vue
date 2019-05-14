@@ -2,136 +2,194 @@
     <div class="page-view">
         <header>
             <div class="page-content">
-            <div class="time_download">
-                <div class="netLogo">
-                    <img src="./assets/images/logo.png" alt="">
-                </div>
-                <div class="nav">
-                    <router-link to="/">{{$t("header.index")}}</router-link>
-                    <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
-                    <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
-                    <router-link to="/help">帮助</router-link>
-                    <router-link to="/notice">{{$t("header.service")}}</router-link>
-                    <router-link to="/Ieo">上币优选</router-link>
-                </div>
-                <div class="rightwrapper">
-                    <poptip placement="bottom" width="270" class="appdownload">
-                        <a href="javascript:;" style="font-size:14px;">{{$t("header.appdownlaod")}}
-                        </a>
-                        <div class="api" slot="content">
-                            <div class="ios">
-                                <!-- <img src="../src/assets/images/app_ios.png" alt="">
-                                <div class="tips">
-                                    <img src="../src/assets/images/ios.png" alt="">
-                                    <span>IOS</span>
-                                </div> -->
-                            </div>
-                            <div class="andrio">
-                                <!-- <img src="../src/assets/images/app_andraio.png" alt="">
-                                <div class="tips">
-                                    <img src="../src/assets/images/andraio.png" alt="">
-                                    <span>Android</span>
-                                </div> -->
-                            </div>
-                        </div>
-                    </poptip>
-                </div>
-                <div class="isLoginWrapper" :style="isLogin?'width:12%':'width:6%'">
-                    <!-- 登录 -->
-                    <div class="login_register isLogin" v-if="isLogin">
-                        <div class="mymsg">
-                            <router-link to="/uc/safe">个人中心</router-link>
-                        </div>
-                        <Dropdown>
-                            <a href="javascript:void(0)">
-                                <!-- <Icon type="person"></Icon> -->
-                                <Icon type="md-person" size="20" />
-                                <span>{{strpo(member.username)}}</span>
-                                <Icon type="md-arrow-dropdown" size="16" />
-                            </a>
-                            <DropdownMenu slot="list">
-                                <div @click="logout">
-                                    <DropdownItem>
-                                        <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
-                                    </DropdownItem>
+                <div class="time_download">
+                    <div class="netLogo">
+                        <img src="./assets/images/logo.png" alt="">
+                    </div>
+                    <div class="nav">
+                        <router-link to="/">{{$t("header.index")}}</router-link>
+                        <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
+                        <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
+                        <router-link to="/help">帮助</router-link>
+                        <router-link to="/notice">{{$t("header.service")}}</router-link>
+                        <router-link to="/Ieo">上币优选</router-link>
+                    </div>
+                    <div class="nav-header">
+                        <!--中英文切换-->
+                        <!--<div class="changelanguage">
+                            <Dropdown @on-click="changelanguage">
+                                <a href="javascript:void(0)" style="font-size:14px;color:#fff;">
+                                    {{languageValue}}
+                                    <Icon type="arrow-down-b"></Icon>
+                                </a>
+                                <DropdownMenu slot="list" id="change_language_theme">
+                                    <DropdownItem v-if="languageValue=='简体中文'" name="en">English</DropdownItem>
+                                    <DropdownItem v-else name="cn">简体中文</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>-->
+
+                        <!-- 登录 -->
+                        <!--:style="isLogin?'width:12%':'width:6%'"-->
+                        <div class="isLoginWrapper">
+                            <div class="login_register isLogin" v-if="isLogin" >
+                                <div class="mymsg">
+                                    <router-link to="/uc/safe">个人中心</router-link>
                                 </div>
-                            </DropdownMenu>
-                        </Dropdown>
+                                <Dropdown>
+                                    <a href="javascript:void(0)">
+                                        <!-- <Icon type="person"></Icon> -->
+                                        <Icon type="md-person" class="header-icon" size="20" />
+                                        <span class="header-img">{{strpo(member.username)}}</span>
+                                        <Icon type="md-arrow-dropdown" size="16" />
+                                    </a>
+                                    <DropdownMenu slot="list">
+                                        <div @click="logout">
+                                            <DropdownItem>
+                                                <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
+                                            </DropdownItem>
+                                        </div>
+                                    </DropdownMenu>
+                                </Dropdown>
+                            </div>
+                            <!-- 未登录 -->
+                            <div class="login_register" v-else>
+                                <router-link to="/login" id="login">{{$t("common.login")}}</router-link>
+                                <router-link to="/register" id="register">{{$t("common.register")}}</router-link>
+                            </div>
+                        </div>
+                        <!-- app二维码 -->
+                        <div class="rightwrapper">
+                            <poptip placement="bottom" width="270" class="appdownload">
+                                <a href="javascript:;" style="font-size:14px;">{{$t("header.appdownlaod")}}
+                                </a>
+                                <div class="api" slot="content">
+                                    <div class="ios">
+                                        <!-- <img src="../src/assets/images/app_ios.png" alt="">
+                                        <div class="tips">
+                                            <img src="../src/assets/images/ios.png" alt="">
+                                            <span>IOS</span>
+                                        </div> -->
+                                    </div>
+                                    <div class="andrio">
+                                        <!-- <img src="../src/assets/images/app_andraio.png" alt="">
+                                        <div class="tips">
+                                            <img src="../src/assets/images/andraio.png" alt="">
+                                            <span>Android</span>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </poptip>
+                        </div>
                     </div>
-                    <!-- 未登录 -->
-                    <div class="login_register" v-else>
-                        <router-link to="/login" id="login">{{$t("common.login")}}</router-link>
-                        <router-link to="/register" id="register">{{$t("common.register")}}</router-link>
-                    </div>
-                </div>
-                <div class="changelanguage">
-                    <Dropdown @on-click="changelanguage">
-                        <a href="javascript:void(0)" style="font-size:14px;color:#fff;">
-                            {{languageValue}}
-                            <Icon type="arrow-down-b"></Icon>
-                        </a>
-                        <!-- <DropdownMenu slot="list" id="change_language_theme">
-                            <DropdownItem v-if="languageValue=='简体中文'" name="en">English</DropdownItem>
-                            <DropdownItem v-else name="cn">简体中文</DropdownItem>
-                        </DropdownMenu> -->
-                    </Dropdown>
                 </div>
             </div>
-        </div>
         </header>
         <router-view></router-view>
         <footer>
             <div class="footer">
-            <div class="footer_content">
-                <div class="footer_left">
-                    <img src="./assets/images/logo.png" style="margin:0"></img>
-                    <div>
-                        <img src="./assets/images/in.png" alt="">
-                        <img src="./assets/images/twitter.png" alt="">
-                        <img src="./assets/images/telegram.png" alt="">
-                        <img src="./assets/images/facebook.png" alt="">
+                <div class="footer_content">
+                    <div class="footer-main">
+                        <div class="footer_left">
+                            <img src="./assets/images/logo.png" style="margin:0"></img>
+                            <div>
+                                <img src="./assets/images/in.png" alt="">
+                                <img src="./assets/images/twitter.png" alt="">
+                                <img src="./assets/images/telegram.png" alt="">
+                                <img src="./assets/images/facebook.png" alt="">
+                            </div>
+                        </div>
+                        <div class="footer_right">
+                            <!--下载支持-->
+                            <ul class="footer_info">
+                                <li class="footer_title">
+                                    <span>{{$t("footer.gsjj")}}</span>
+                                </li>
+                                <li>
+                                    <router-link to="/">{{$t("footer.gywm")}}</router-link>
+                                </li>
+                            </ul>
+                            <!--客户服务-->
+                            <ul class="footer_info">
+                                <li class="footer_title">
+                                    <span>{{$t("footer.bzzx")}}</span>
+                                </li>
+                                <li>
+                                    <router-link to="/helplist?cate=0&cateTitle=使用教程">{{$t("footer.xszn")}}</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/helplist?cate=1&cateTitle=常见问题">{{$t("footer.cjwt")}}</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/">服务协议</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/">交易费率</router-link>
+                                </li>
+                            </ul>
+                            <!--投票上币-->
+                            <ul class="footer_info">
+                                <li class="footer_title">
+                                    <span>{{$t("footer.lxwm")}}</span>
+                                </li>
+                                <li class="wechatclick">
+                                    <router-link to="/">我要投票</router-link>
+                                    <!--                                <poptip width="200">-->
+                                    <!--                                    <a href="javascript:;" class="wechat">客服邮箱</a>-->
+                                    <!--                                    &lt;!&ndash; <div slot="content">-->
+                                    <!--                                        <p style="color:#333;text-align:center;">service@bhuo.top</p>-->
+                                    <!--                                    </div> &ndash;&gt;-->
+                                    <!--                                </poptip>-->
+                                </li>
+                                <li>
+                                    <router-link to="/">上币申请</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/">节点中心</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/">节点列表</router-link>
+                                </li>
+                            </ul>
+                            <!--其他-->
+                            <ul class="footer_info">
+                                <li class="footer_title">
+                                    <span>其他</span>
+                                </li>
+                                <li>
+                                    <router-link to="/">官方公告</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/">做市商计划</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/">子账号管理</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/">调查问卷</router-link>
+                                </li>
+
+                            </ul>
+                            <!--联系我们-->
+                            <ul class="footer_info">
+                                <li class="footer_title">
+                                    <span>联系我们</span>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">服务邮箱：kaililiangu@163.com</a>
+                                </li>
+                                <!--                            <li><span>业务邮箱：</span></li>-->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer-info">
+                        风险提示：区块链资产（数字货币和数字权益）交易具有极高的风险（技术缺陷、暴涨暴跌、庄家操控、团队解散等）, 币多网仅为区块链资产的爱好者提供一个自由的网上交换平台, 对资产的投资价值不承担任何审查、担保、赔偿的责任, 如果您不能接受, 请谨慎交易。
                     </div>
                 </div>
-                <div class="footer_right">
-                    <ul>
-                        <li class="footer_title">
-                            <span>{{$t("footer.gsjj")}}</span>
-                        </li>
-                        <li>
-                            <router-link to="/">{{$t("footer.gywm")}}</router-link>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="footer_title">
-                            <span>{{$t("footer.bzzx")}}</span>
-                        </li>
-                        <li>
-                            <router-link to="/helplist?cate=0&cateTitle=新手指南">{{$t("footer.xszn")}}</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/helplist?cate=1&cateTitle=常见问题">{{$t("footer.cjwt")}}</router-link>
-                        </li>
-                    </ul>
-
-                    <ul>
-                        <li class="footer_title">
-                            <span>{{$t("footer.lxwm")}}</span>
-                        </li>
-                        <li class="wechatclick">
-                            <poptip width="200">
-                                <a href="javascript:;" class="wechat">客服邮箱</a>
-                                <!-- <div slot="content">
-                                    <p style="color:#333;text-align:center;">service@bhuo.top</p>
-                                </div> -->
-                            </poptip>
-                        </li>
-                        <li>
-                            <!-- <a href="https://0.plus/币多网guanfang" target="_blank">{{$t('footer.biyong')}}</a> -->
-                        </li>
-                    </ul>
+                <div class="info">
+                    © 2019 coinmany.com. All Rights Reserved
                 </div>
             </div>
-        </div>
         </footer>
     </div>
 </template>
@@ -282,107 +340,129 @@ export default {
 <style scoped lang="scss">
 
 %flex {
-    display: flex;
-    justify-content: space-between;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
     align-items: center;
 }
 .page-view {
     .page-content {
         .time_download {
             @extend %flex;
+            min-width: 1260px;
             padding: 0 80px;
             height: 50px;
-            background-color: #1e222a;
+            background-color: #1c2435;
             line-height: 50px;
             overflow: hidden;
             .netLogo {
-                width: 15%;
+                width: 145px;
+                float: left;
                 img {
                     vertical-align: middle;
                 }
+                }
             }
             .nav {
-                width: 60%;
+                float: left;
+                margin-left: 50px;
                 a {
                     color: #fff;
-                    margin-right: 20px;
+                    display: inline-block;
+                    min-width: 90px;
+                    text-align: center;
+                    &:nth-child(2) {
+                        padding-right: 15px;
+                    }
+                    &:nth-child(5) {
+                        padding-right: 19px;
+                        min-width: 50px;
+                    }
                 }
                 a.router-link-exact-active.router-link-active {
                     color: #2d8cf0;
                 }
             }
-            .isLoginWrapper {
-                // width: 6%;
-                .login_register {
-                    @extend %flex;
-                    a {
-                        color: #fff;
-                    }
-                }
-            }
-            .rightwrapper {
-                width: 8%;
-                .appdownload {
-                    float: left;
-                    padding-right: 30px;
-                    .ivu-poptip-rel {
+            .nav-header {
+                float: right;
+                .isLoginWrapper {
+                    float: right;
+                    .login_register {
+                        display: flex;;
                         a {
                             color: #fff;
-                        }
-                        i.ivu-icon.ivu-icon-arrow-down-b {
-                            margin-left: 5px;
-                        }
-                    }
-                }
-                .ios,
-                .andrio {
-                    float: left;
-                    text-align: center;
-                    img {
-                        width: 106px;
-                        height: 106px;
-                        margin: 0 auto;
-                    }
-                    .tips {
-                        height: 30px;
-                        img {
-                            width: 14px;
-                            height: 14px;
-                            margin-top: 5px;
-                        }
-                        span {
-                            font-size: 14px;
+                            margin: 0 20px 0 10px;
+                            .header-icon {
+                                margin-left: 15px;
+                            }
+                            .header-img {
+                                margin-left: 10px;
+                            }
                         }
                     }
                 }
-                .andrio {
+                .rightwrapper {
                     float: right;
-                }
-                .ivu-dropdown-rel a {
-                    color: #fff;
-                }
-                .ivu-select-dropdown {
-                    z-index: 901;
-                    #change_language_theme {
-                        li {
-                            background: #fff;
-                            color: #333;
+                    .appdownload {
+                        float: left;
+                        padding-right: 30px;
+                        .ivu-poptip-rel {
+                            a {
+                                color: #fff;
+                            }
+                            i.ivu-icon.ivu-icon-arrow-down-b {
+                                margin-left: 5px;
+                            }
+                        }
+                    }
+                    .ios,
+                    .andrio {
+                        float: left;
+                        text-align: center;
+                        img {
+                            width: 106px;
+                            height: 106px;
+                            margin: 0 auto;
+                        }
+                        .tips {
+                            height: 30px;
+                            img {
+                                width: 14px;
+                                height: 14px;
+                                margin-top: 5px;
+                            }
+                            span {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                    .andrio {
+                        float: right;
+                    }
+                    .ivu-dropdown-rel a {
+                        color: #fff;
+                    }
+                    .ivu-select-dropdown {
+                        z-index: 901;
+                        #change_language_theme {
+                            li {
+                                background: #fff;
+                                color: #333;
+                            }
                         }
                     }
                 }
-            }
-            .changelanguage {
-                width: 7%;
-                 @extend %flex;
-                justify-content: flex-end;
-                #change_language_theme .ivu-dropdown-item{
-                    color: #000;
+                .changelanguage {
+                    float: right;
+                    /*width: 7%;*/
+                    //@extend %flex;
+                    justify-content: flex-end;
+                    #change_language_theme .ivu-dropdown-item{
+                        color: #000;
+                    }
                 }
             }
         }
     }
-}
-
 
 .wechatclick .api2 {
     overflow: hidden;
@@ -410,8 +490,8 @@ ul,li{
 }
 /* 多选框 */
 .exchange .ivu-checkbox-checked .ivu-checkbox-inner {
-    background-color: #f0a70a;
-    border-color: #f0a70a;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 /* modal */
 .ivu-modal-confirm-head {
@@ -419,23 +499,23 @@ ul,li{
     margin-bottom: 15px;
 }
 .ivu-modal-body {
-    // border-top: 4px solid #f0a70a;
+    // border-top: 4px solid #3399ff;
     border-radius: 5px;
     .ivu-modal-confirm {
         .ivu-modal-confirm-body.ivu-modal-confirm-body-render {
             .ivu-input-number {
                 &:hover {
-                    border-color: #f0a710;
+                    border-color: #3399ff;
                 }
                 &:focus {
-                    border-color: #f0a710;
+                    border-color: #3399ff;
                     -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                     -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                     box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 }
             }
             .ivu-input-number.ivu-input-number-focused {
-                border-color: #f0a710;
+                border-color: #3399ff;
                 -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -447,12 +527,12 @@ ul,li{
     }
 }
 .ivu-modal-confirm-footer .ivu-btn-primary {
-    background-color: #f0a70a;
-    border-color: #f0a70a;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 .ivu-modal-confirm-footer .ivu-btn-text {
     &:hover {
-        color: #f0a70a;
+        color: #3399ff;
     }
 }
 .ivu-modal-confirm-footer {
@@ -464,11 +544,11 @@ ul,li{
         }
     }
 }
-.ivu-table-wrapper {
+/*.ivu-table-wrapper {
     -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
     -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
     box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-}
+}*/
 .ivu-table-wrapper {
     .ivu-table {
         &:before {
@@ -483,9 +563,29 @@ ul,li{
                 border-color: #f5f5f5;
             }
         }
-        .ivu-table-row td {
-            background-color: #fff;
-            border-color: #f5f5f5;
+    }
+}
+#page2 {
+    .ivu-table-wrapper {
+        .ivu-table {
+            .ivu-table-row {
+                &:nth-of-type(odd) {
+                    background: #fff;
+                    td {
+                        background: #fff;
+                    }
+                }
+
+                &:nth-of-type(even) {
+                    td {
+                        /*background: ;*/
+                    }
+                    background: #fafafd;
+                }
+            }
+            /*.ivu-table-row td {*/
+            /*    border-color: #eee;*/
+            /*}*/
         }
     }
 }
@@ -505,7 +605,7 @@ ul,li{
                 }
             }
             .ivu-table-row td {
-                background-color: #fff;
+                /*background-color: #fff;*/
                 border-color: #f5f5f5;
             }
         }
@@ -521,13 +621,13 @@ ul,li{
     padding: 6px 16px;
     &:hover {
         background: #fff;
-        color: #f0a70a;
+        color: #3399ff;
     }
 }
 .ivu-select-dropdown
     li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
     background: #fff;
-    color: #f0a70a;
+    color: #3399ff;
 }
 .page-view {
     .page-content {
@@ -861,53 +961,70 @@ body {
 // }
 
 .footer {
-    width: 100%;
+    min-width: 1260px;
+    height:400px;
     overflow: hidden;
-    // margin-top: -200px;
-}
-.footer_content {
-    height: 200px;
-    padding: 50px 10%;
     color: #53575c;
-    background: #1e222a;
-}
+    background: #1c2435;
+    .footer_content {
+        width: 1200px;
+        margin: 80px auto 0;
+        .footer-main {
+            height: 150px;
+            .footer_left {
+                float: left;
+                font-size: 14px;
+                img {
+                    margin: 15px 0;
+                }
+                p {
+                    margin: 10px 0;
+                    color: rgba(255, 255, 255, 0.6);
+                }
+            }
+            .footer_right {
+                float: right;
+                text-align: left;
+                ul {
+                    float: left;
+                    margin: 0 35px;
+                }
+                .footer_info {
+                    .footer_title {
+                        font-size: 15px;
+                        height: 35px;
+                    }
+                    li {
+                        color: #fff;
+                        &:first-child {
+                            span {
+                                font-size: 16px;
+                                display: block;
+                            }
+                        }
 
-.footer_left {
-    float: left;
-    font-size: 14px;
-}
-
-.footer_left img {
-    margin: 15px 0;
-}
-
-.footer_left p {
-    margin: 10px 0;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.footer_right {
-    float: right;
-    /*margin-top: 15px;*/
-    text-align: left;
-    /* margin-right: 20px; */
-}
-
-.footer_right ul {
-    float: left;
-    margin: 0 30px;
-}
-
-.footer_right ul li a {
-    color: #53575c;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 25px;
-    display: block;
-}
-
-.footer_title {
-    font-size: 15px;
-    height: 35px;
+                        a {
+                            line-height: 26px;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        .footer-info {
+            color: #8790a1;
+            text-align: center;
+            padding: 45px 0px 20px;
+        }
+    }
+    .info {
+        text-align: center;
+        width: 100%;
+        height: 60px;
+        border-top: 1px solid #8790a1;
+        line-height: 60px;
+        font-size: 15px;
+    }
 }
 
 .ivu-select-selected-value {
@@ -965,17 +1082,17 @@ body {
 }
 // 重置分页器颜色
 .ivu-page-item-active {
-    background-color: #f0ac19;
-    border-color: #f0ac19;
+    background-color: #3399ff;
+    border-color: #3399ff;
     color: #fff;
 }
 .ivu-page-next:hover,
 .ivu-page-prev:hover {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 .ivu-page-next:hover a,
 .ivu-page-prev:hover a {
-    color: #f0ac19;
+    color: #3399ff;
 }
 
 .ivu-page-item-jump-prev a,
@@ -984,13 +1101,13 @@ body {
 }
 .ivu-page-item-jump-prev a:hover,
 .ivu-page-item-jump-next a:hover {
-    color: #f0ac19;
+    color: #3399ff;
 }
 .ivu-page-item:hover {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 .ivu-page-item:hover a {
-    color: #f0ac19;
+    color: #3399ff;
 }
 .ivu-page-item.ivu-page-item-active a {
     color: #fff;
@@ -1006,10 +1123,10 @@ body {
 /*input框样式重置*/
 .ivu-input {
     &:hover {
-        border-color: #f0ac19;
+        border-color: #3399ff;
     }
     &:focus {
-        border-color: #f0ac19;
+        border-color: #3399ff;
         -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
         -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
         box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -1017,10 +1134,10 @@ body {
 }
 /*下拉框样式重置*/
 .ivu-select-selection:hover {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 .ivu-select-visible .ivu-select-selection {
-    border-color: #f0ac19;
+    border-color: #3399ff;
     -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
     -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
     box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
@@ -1029,7 +1146,7 @@ body {
     color: #333;
 }
 .ivu-select-selection-focused {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 /*table组件样式重置*/
 .ivu-table-wrapper {
@@ -1040,7 +1157,7 @@ body {
 }
 /*加载样式重置*/
 .ivu-spin-dot {
-    background: #f0ac19;
+    background: #3399ff;
 }
 .ivu-tabs-bar {
     border-color: #f5f5f5;
@@ -1048,52 +1165,54 @@ body {
 /*日期组件样式重置*/
 .ivu-picker-panel-icon-btn {
     &:hover {
-        color: #f0ac19;
+        color: #3399ff;
     }
 }
 .ivu-date-picker-cells-focused em {
-    -moz-box-shadow: 0 0 0 1px #f0ac19 inset;
-    -webkit-box-shadow: 0 0 0 1px #f0ac19 inset;
-    box-shadow: 0 0 0 1px #f0ac19 inset;
+    -moz-box-shadow: 0 0 0 1px #3399ff inset;
+    -webkit-box-shadow: 0 0 0 1px #3399ff inset;
+    box-shadow: 0 0 0 1px #3399ff inset;
     &:after {
-        background: #f0ac19;
+        background: #3399ff;
     }
 }
 .ivu-date-picker-cells-cell-selected em,
 .ivu-date-picker-cells-cell-selected:hover em {
-    background: #f0ac19;
+    background: #3399ff;
 }
 .ivu-date-picker-cells-cell-today em:after {
-    background: #f0ac19;
+    background: #3399ff;
 }
 .ivu-date-picker-cells-cell-range:before {
     background: rgba(240, 167, 10, 0.2);
 }
 .ivu-date-picker-cells-cell:hover em {
     background: #fff;
-    color: #f0ac19;
+    color: #3399ff;
 }
 /*按钮样式重置*/
 .ivu-btn-primary:hover {
-    background: #f0ac19;
-    border-color: #f0ac19;
+    // background: #3399ff;
+    // border-color: #3399ff;
+    background: #3399ff;
+    border-color: #3399ff;
 }
 
 /*radio样式重置*/
 .ivu-radio-checked .ivu-radio-inner {
-    border-color: #f0ac19;
+    border-color: #3399ff;
 }
 .ivu-radio-checked:hover {
     .ivu-radio-inner {
-        border-color: #f0ac19;
+        border-color: #3399ff;
     }
 }
 .ivu-radio-inner:after {
-    background: #f0ac19;
+    background: #3399ff;
 }
 .ivu-switch-checked {
-    border-color: #f0ac19;
-    background-color: #f0ac19;
+    border-color: #3399ff;
+    background-color: #3399ff;
 }
 .ivu-switch:focus {
     box-shadow: none;
@@ -1105,27 +1224,27 @@ body {
 /*下拉框*/
 .ivu-select-item-selected {
     background: #fff;
-    color: #f0ac19;
+    color: #3399ff;
 }
 // primary按钮
 .ivu-btn-primary {
-    background-color: #f0ac19;
-    border-color: #f0ac19;
+    background-color: #3399ff;
+    border-color: #3399ff;
 }
 .ivu-btn-text:hover {
-    color: #f0ac19;
+    color: #3399ff;
 }
 // .ivu-btn:hover{
-//     color: #f0ac19;
+//     color: #3399ff;
 //     background-color: #fff;
-//     border-color: #f0ac19;
+//     border-color: #3399ff;
 // }
 
 /*排序小箭头样式重置*/
 .ivu-table-sort i.on {
-    color: #f0ac19;
+    color: #3399ff;
 }
 .ivu-table-sort i:hover {
-    color: #f0ac19;
+    color: #3399ff;
 }
 </style>
