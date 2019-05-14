@@ -23,6 +23,7 @@
 <style lang="scss" scoped>
 .help {
   background: white;
+  padding-top: 60px;
   height: 100%;
   background-size: cover;
   position: relative;

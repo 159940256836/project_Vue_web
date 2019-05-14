@@ -6,7 +6,8 @@
                     <div class="topnav">
                         <div class="carl">
                             <!-- <div class="laba"> -->
-                            <Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />
+                            <img style="margin: 13px;" src="../../assets/images/laba_pri.png" alt="">
+<!--                            <Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />-->
                             <!-- </div> -->
                             <div class="carsoul">
                                 <div v-for="(item,index) in FAQList" class="cal_content1">
@@ -35,24 +36,25 @@
                     </Carousel>
                 </div>
             </div>
-           <!-- <div class="section" id="hot">
+            <div class="section" id="hot">
                 <div class="section-market">
                     <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index">
                         <p>
                             <span class="pairs">{{item.symbol}}</span>
-&lt;!&ndash;                            parseFloat(params.row.rose) < 0 ? "red" : "green"&ndash;&gt;
-                            <span>{{item.chg}}</span>
+                            <span class="pairs-sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">
+                                {{item.chg < 0 ? "-":"+"}}{{parseFloat(item.chg * 100).toFixed(2) + '%'}}
+                            </span>
                         </p>
                         <p>
-                            <span>{{item.volume}}</span>
-                            <span>{{item.baseUsdRate}}</span>
+                            <span class="pairs-sip sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">{{item.volume}}</span>
+                            <span class="pairs-pri">{{item.closeStr - 0}}</span>
                         </p>
-                        &lt;!&ndash;{{item.change}}&ndash;&gt;
+                        <!--{{item.change}}-->
                         <SvgLine :values="item.trend"></SvgLine>
                     </div>
                 </div>
-            </div>-->
-            <!-- <SvgLine v-for="(item, index) in coins" :key="index" :values="item.trend"></SvgLine> -->
+            </div>
+             <!--<SvgLine v-for="(item, index) in coins" :key="index" :values="item.trend"></SvgLine>-->
             <!-- 首页行情图 -->
             <div class="section" id="page2">
                 <div class="page2nav">
@@ -158,9 +160,9 @@ export default {
             yesDayMineAmountBHB: 0,
             CNYRate: null,
             dataIndex: [],
-            pageNo: 1,
-            pageSize: 50,
-            totalNum: 0,
+            // pageNo: 1,
+            // pageSize: 50,
+            // totalNum: 0,
             FAQList: [],
             favorColumns: [
                 {
@@ -1184,7 +1186,7 @@ li {
     align-items: center;
 }
 #banner {
-    background: url("../../assets/images/bannerBk.png") no-repeat center center;
+    background: url("../../assets/images/bannerBk.jpg") no-repeat center center;
     background-size: cover;
     overflow: hidden;
     height: 400px;
@@ -1204,8 +1206,8 @@ li {
     }
 }
 #hot {
-    padding: 30px 10%;
-    background-color: #202b3c;
+    padding: 23px 10%;
+    background-color: #1c2435;
     @extend %flex;
     .section-market {
         width: 1200px;
@@ -1216,23 +1218,38 @@ li {
             border-radius: 8px;
             background: rgb(37, 43, 56);
             float: left;
-            margin-right: 15px;
-            padding: 15px 0 0;
+            margin-right: 20px;
+            padding: 13px 0 0;
             &:last-child {
                 margin-right: 0;
             }
             p {
-                padding: 3px 20px;
-                span {
-                    &:last-child {
-                        float: right;
-                    }
-                }
-                .pairs {
-                    color: #fff;
-                    font-size: 14px;
-                    font-weight: 600;
-                }
+              &:first-child {
+                padding: 0 20px 3px;
+              }
+              &:nth-child(2) {
+                padding: 6px 20px 0;
+              }
+              span {
+                  &:last-child {
+                      float: right;
+                  }
+              }
+              .pairs {
+                  color: #fff;
+                  font-size: 14px;
+                  font-weight: 600;
+              }
+              .sip {
+                font-size: 18px;
+                font-weight: bold;
+              }
+              .pairs-sip {
+                color: #03bf7b;
+              }
+              .pairs-pri {
+                color: #a5a9be;
+              }
             }
         }
     }
@@ -1294,7 +1311,7 @@ li {
                 z-index: 12;
                 right: 0;
                 a {
-                    color: #fff;
+                    color: #a8b0c0;
                     font-size: 14px;
                 }
             }
@@ -1374,11 +1391,11 @@ li {
     width: 1200px;
     margin: 100px auto;
     ul {
-        width: 88%;
+        width: 100%;
         margin: 0 auto;
         @extend %flex;
         li {
-            width: 25%;
+            width: 200px;
             padding: 0 15px;
             div {
                 width: 90px;
@@ -1417,7 +1434,7 @@ li {
     align-items: flex-start;
     .section-main {
         width: 1200px;
-        margin: 140px auto 0;
+        margin: 110px auto 0;
         display: flex;
         .download {
             flex: 1;
@@ -1435,9 +1452,9 @@ li {
             .os {
                 @extend %flex;
                 flex-wrap: wrap;
-                padding-right: 200px;
+                width: 510px;
                 li {
-                    width: 26%;
+                    width: 135px;
                     background: #fff;
                     padding: 0 10px;
                     border-radius: 5px;
@@ -1452,7 +1469,7 @@ li {
             }
         }
         .phone_image {
-            width: 480px;
+            width: 565px;
             img {
                 width: 100%;
             }
@@ -1509,6 +1526,7 @@ li {
 }
 
 #fullpage {
+    padding-top: 60px;
     min-width: 1260px;
     background: #fff;
 }

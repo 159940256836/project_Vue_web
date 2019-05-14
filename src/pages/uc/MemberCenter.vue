@@ -1,7 +1,6 @@
 <style lang="scss" scoped>
 .mymsg_wrapper {
     padding: 60px 8% 0;
-    margin: 20px 0;
 
     .wrapper {
         width: 100%;
@@ -315,7 +314,7 @@ export default {
          const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
          const contentHeight = doc.getElementsByClassName("mymsg_wrapper")[0];
          const bodyHeight = sreenHeight - headerHeight - footerHeight;
-         contentHeight.style.minHeight = bodyHeight + "px";
+         // contentHeight.style.minHeight = bodyHeight + "px";
         //  this.sss(this.activename);
     }
 };

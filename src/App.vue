@@ -1,10 +1,18 @@
 <template>
     <div class="page-view">
-        <header>
-            <div class="page-content">
+        <header
+
+        >
+            <div
+                class="page-content"
+                :style="{
+                  padding: $route.path==='/'? topPadding : '0 5%',
+                  backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
+                }"
+            >
                 <div class="time_download">
                     <div class="netLogo">
-                        <img src="./assets/images/logo.png" alt="">
+                        <router-link to="/"><img src="./assets/images/logo.png" alt=""></router-link>
                     </div>
                     <div class="nav">
                         <router-link to="/">{{$t("header.index")}}</router-link>
@@ -209,7 +217,10 @@ export default {
             topInfo: {
                 name: "币多网",
                 createTime: "2018-01-10 11:37:27"
-            }
+            },
+            styleTop: 30,
+            topPadding: '0 5%',
+            topBackgroundColor: 'rgba(28, 36, 53)'
         };
     },
     watch: {
@@ -274,6 +285,18 @@ export default {
         }
     },
     methods: {
+        // header动画效果
+        handleScroll () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+            if (scrollTop > 0) {
+                this.styleTop = 0
+                this.topPadding = '0 17%'
+            } else {
+                this.styleTop = 30
+                this.topPadding = '0 5%'
+                // this.topBackgroundColor = 'rgba(0,0,0,.5)'
+            }
+        },
         strpo(str) {
             if (str.length > 4) {
                 str = str.slice(0, 4) + "···";
@@ -334,136 +357,145 @@ export default {
                 this.$i18n.locale = "zh";
             }
         }
+    },
+    mounted () {
+        window.addEventListener('scroll', this.handleScroll)
+    },
+    beforeDestroy () {
+        window.removeEventListener('scroll', this.handleScroll)
     }
 };
 </script>
 <style scoped lang="scss">
 
 %flex {
-    /*display: flex;*/
-    /*justify-content: space-between;*/
     align-items: center;
 }
 .page-view {
-    .page-content {
-        .time_download {
-            @extend %flex;
-            min-width: 1260px;
-            padding: 0 80px;
-            height: 50px;
-            background-color: #1c2435;
-            line-height: 50px;
-            overflow: hidden;
-            .netLogo {
-                width: 145px;
-                float: left;
-                img {
-                    vertical-align: middle;
-                }
-                }
-            }
-            .nav {
-                float: left;
-                margin-left: 50px;
-                a {
-                    color: #fff;
-                    display: inline-block;
-                    min-width: 90px;
-                    text-align: center;
-                    &:nth-child(2) {
-                        padding-right: 15px;
-                    }
-                    &:nth-child(5) {
-                        padding-right: 19px;
-                        min-width: 50px;
-                    }
-                }
-                a.router-link-exact-active.router-link-active {
-                    color: #2d8cf0;
-                }
-            }
-            .nav-header {
-                float: right;
-                .isLoginWrapper {
-                    float: right;
-                    .login_register {
-                        display: flex;;
-                        a {
-                            color: #fff;
-                            margin: 0 20px 0 10px;
-                            .header-icon {
-                                margin-left: 15px;
-                            }
-                            .header-img {
-                                margin-left: 10px;
-                            }
+    header {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        position: fixed;
+        z-index: 999;
+        background-color: #1c2435;
+        transition: all .5s;
+        .page-content {
+            transition: all .5s;
+            .time_download {
+                @extend %flex;
+                min-width: 1260px;
+                overflow: hidden;
+                .netLogo {
+                    width: 145px;
+                    float: left;
+                        img {
+                            vertical-align: middle;
                         }
                     }
                 }
-                .rightwrapper {
+                .nav {
+                    float: left;
+                    margin-left: 30px;
+                    a {
+                        color: #fff;
+                        display: inline-block;
+                        min-width: 90px;
+                        text-align: center;
+                        &:nth-child(2) {
+                            padding-right: 15px;
+                        }
+                        &:nth-child(5) {
+                            padding-right: 19px;
+                            min-width: 50px;
+                        }
+                    }
+                    a.router-link-exact-active.router-link-active {
+                        color: #2d8cf0;
+                    }
+                }
+                .nav-header {
                     float: right;
-                    .appdownload {
-                        float: left;
-                        padding-right: 30px;
-                        .ivu-poptip-rel {
+                    .isLoginWrapper {
+                        float: right;
+                        .login_register {
+                            display: flex;;
                             a {
                                 color: #fff;
-                            }
-                            i.ivu-icon.ivu-icon-arrow-down-b {
-                                margin-left: 5px;
-                            }
-                        }
-                    }
-                    .ios,
-                    .andrio {
-                        float: left;
-                        text-align: center;
-                        img {
-                            width: 106px;
-                            height: 106px;
-                            margin: 0 auto;
-                        }
-                        .tips {
-                            height: 30px;
-                            img {
-                                width: 14px;
-                                height: 14px;
-                                margin-top: 5px;
-                            }
-                            span {
-                                font-size: 14px;
+                                margin: 0 20px 0 10px;
+                                .header-icon {
+                                    margin-left: 15px;
+                                }
+                                .header-img {
+                                    margin-left: 10px;
+                                }
                             }
                         }
                     }
-                    .andrio {
+                    .rightwrapper {
                         float: right;
-                    }
-                    .ivu-dropdown-rel a {
-                        color: #fff;
-                    }
-                    .ivu-select-dropdown {
-                        z-index: 901;
-                        #change_language_theme {
-                            li {
-                                background: #fff;
-                                color: #333;
+                        .appdownload {
+                            float: left;
+                            padding-right: 30px;
+                            .ivu-poptip-rel {
+                                a {
+                                    color: #fff;
+                                }
+                                i.ivu-icon.ivu-icon-arrow-down-b {
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+                        .ios,
+                        .andrio {
+                            float: left;
+                            text-align: center;
+                            img {
+                                width: 106px;
+                                height: 106px;
+                                margin: 0 auto;
+                            }
+                            .tips {
+                                height: 30px;
+                                img {
+                                    width: 14px;
+                                    height: 14px;
+                                    margin-top: 5px;
+                                }
+                                span {
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                        .andrio {
+                            float: right;
+                        }
+                        .ivu-dropdown-rel a {
+                            color: #fff;
+                        }
+                        .ivu-select-dropdown {
+                            z-index: 901;
+                            #change_language_theme {
+                                li {
+                                    background: #fff;
+                                    color: #333;
+                                }
                             }
                         }
                     }
-                }
-                .changelanguage {
-                    float: right;
-                    /*width: 7%;*/
-                    //@extend %flex;
-                    justify-content: flex-end;
-                    #change_language_theme .ivu-dropdown-item{
-                        color: #000;
+                    .changelanguage {
+                        float: right;
+                        /*width: 7%;*/
+                        //@extend %flex;
+                        justify-content: flex-end;
+                        #change_language_theme .ivu-dropdown-item{
+                            color: #000;
+                        }
                     }
                 }
             }
-        }
     }
-
+}
 .wechatclick .api2 {
     overflow: hidden;
     display: flex;

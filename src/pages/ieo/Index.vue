@@ -113,8 +113,8 @@ export default {
     width:1200px;
 }
 .common {
-    padding: 50px 18.75%;
-    background: #FFFFFF;
+    padding: 60px 18.75%;
+    background: #1c2435;
     overflow: hidden;
     .contentWrapper {
         width:1200px;
@@ -222,7 +222,7 @@ $pageTheme: rgb(13, 70, 125);
     }
 }
 .father .ivu-page-item-active{
-    background:#145b89,
+    background:#145b89
 }
 // .father .ivu-tabs-nav:hover{
 //     color:#fff;
