@@ -66,7 +66,7 @@
                             <Icon type="ios-card" color="rgb(19,133,211)" size="25" />
                         </div>
                     </li>
-                    <li>
+                    <li class="li1">
                         <Input v-model="base" @on-change="changeNum">
                         <span slot="append">{{content.raiseCoin}}</span>
                         </Input>
@@ -77,7 +77,7 @@
                         </Input>
                     </li>
                     <li>
-                        <Input type="password" v-model="password" placeholder="请输入交易密码" />
+                        <Input class="pwda" type="password" v-model="password" placeholder="请输入交易密码" />
                     </li>
                     <li>
                         <div class="btn"><span long @click="startSale">{{text}}</span></div>
@@ -265,6 +265,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+
+.ieo_detail_box[data-v-2300a631]{
+    background:#fff;
+}
 .red{
     color:#ffa500 !important;
 }
@@ -296,10 +301,12 @@ $lineColor: rgb(71, 100, 146);
     padding: 50px 10%;
     .common {
         width:1200px;
-        background: rgb(15, 20, 36);
+        background:#fff;
+        color:#333333;
+        border:1px solid rgba(221, 221, 221, 1);
         overflow: hidden;
         color: #aaa;
-        padding: 20px;
+        // padding: 20px;
         margin-bottom: 30px;
         @extend %flex;
         flex-wrap: wrap;
@@ -308,13 +315,15 @@ $lineColor: rgb(71, 100, 146);
         .top_box {
             @extend %flex;
             width: 100%;
-            padding: 10px;
-            border-radius: 10px;
+            // padding: 10px;
+            // border-radius: 10px;
+            width:1200px;
             line-height: 2;
             font-size: 16px;
-            border-bottom: 1px solid $lineColor;
+            border-bottom: 1px solid #E0E0E0;
             .ieoLogo {
                 @extend %flex;
+                margin-left:20px;
                 img {
                     width: 30px;
                     margin-right: 20px;
@@ -422,6 +431,9 @@ $lineColor: rgb(71, 100, 146);
                 @extend %flex;
                 height: 100%;
                 flex-direction: column;
+                .ivu-input-group{
+                    border:1px solid #3399FF;
+                }
                 li {
                     width: 100%;
                     @extend %flex;
@@ -430,7 +442,8 @@ $lineColor: rgb(71, 100, 146);
                         width: 100%;
                         margin-bottom: 15px;
                         text-align: center;
-                        background-color: rgb(32, 59, 139);
+                        background:#3399FF;
+                        color:#fff;
                         line-height:2.5;
                         span{
                             display:block;
@@ -448,11 +461,18 @@ $lineColor: rgb(71, 100, 146);
 
 <style lang="scss">
 $lineColor: rgb(71, 100, 146);
+.pwda{
+    border: 1px solid #3399FF;
+}
 .ieo_detail_box .common {
     .ivu-input {
-        background-color: rgb(15, 20, 36);
-        border: 1px solid $lineColor;
-        color: #fff;
+        background:#fff;
+        color:#333;
+        outline: none;
+        // border: 1px solid #3399FF;
+        border:0;
+
+        // color: #fff;
         &:hover {
             border-color: $lineColor;
         }
@@ -463,7 +483,8 @@ $lineColor: rgb(71, 100, 146);
     }
     .ivu-input-group-append {
         background-color: transparent;
-        border: 1px solid $lineColor;
+        border-left: 1px solid #3399FF;
+        border-radius: 0;
         span {
             font-size: 18px;
         }

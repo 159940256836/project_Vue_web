@@ -113,14 +113,18 @@ export default {
 }
 .common {
     padding: 50px 18.75%;
-    background: #1c2435;
+    background: #FFFFFF;
     overflow: hidden;
     .contentWrapper {
         overflow: hidden;
+        border:1px solid rgba(221, 221, 221, 1)
     }
     .ieoWrapper {
         float: left;
-        margin-right: 26px
+        margin-right: 26px;
+        background:#fff;
+        color:#333333;
+
     }
     .ieoWrapper:nth-child(3) {
         margin-right: 0%;
@@ -169,7 +173,7 @@ $pageTheme: rgb(13, 70, 125);
         width:102px;
         height:46px;
         font-size:16px;
-        color:#fff;
+        // color:#fff;
         padding: 16px;
         text-align:center;
         line-height:18px;
@@ -215,18 +219,19 @@ $pageTheme: rgb(13, 70, 125);
     }
 }
 .ivu-page-item-active{
-    background:#145b89,
+    background:#3399FF;
 }
 .ivu-tabs-nav:hover{
-    color:#fff;
+    // color:#fff;
     
      width:102px;
     height:46px;
 }
 //5.13修改
 .ivu-tabs-tab-active{
-    background:#145b89;
+    background:#3399FF;
     color:#fff;
+    z-index:9999;
 }
 .ivu-tabs-nav .ivu-tabs-tab{
     margin-right:0;
