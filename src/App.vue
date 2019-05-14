@@ -768,10 +768,10 @@ body {
     float: right;
 }
 
-.layout-ceiling-main .ivu-menu-vertical .ivu-menu-item,
-.ivu-menu-vertical .ivu-menu-submenu-title {
-    padding: 0;
-}
+// .layout-ceiling-main .ivu-menu-vertical .ivu-menu-item,
+// .ivu-menu-vertical .ivu-menu-submenu-title {
+//      padding: 0;
+// }
 
 .layout-ceiling-main .ivu-menu-item {
     font-size: 14px;
@@ -1247,4 +1247,7 @@ body {
 .ivu-table-sort i:hover {
     color: #3399ff;
 }
+//修改iview样式
+.ivu-menu-vertical .ivu-menu-item:hover,.ivu-menu-vertical .ivu-menu-submenu-title:hover{color:	not specified}
+.ivu-menu-opened>*>.ivu-menu-submenu-title-icon{color:#fff;}
 </style>
