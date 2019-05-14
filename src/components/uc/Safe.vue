@@ -344,17 +344,22 @@
 
                             <!-- 7 -->
                             <div class="account-item googleValidter">
-                                <div>
-                                    <h4>谷歌验证</h4>
-                                    <div>提现，修改密码，及安全设置的时候用以输入google验证码，详细信息请阅读<a href="">使用指南</a></div>
+                                <div class="account-item-in" style="width: 100%;">
+                                    <Icon type="logo-bitcoin" size="20" color="#00b5f6" />
+                                    <span class="card-number">谷歌验证</span>
+                                    <p class="bankInfo" style="color: grey; width: 66%">
+                                        提现，修改密码，及安全设置的时候用以输入google验证码，详细信息请阅读
+                                        <a href="">使用指南</a>
+                                    </p>
+                                    <div class="google-info">
+                                        <router-link to="/OpenGoogleVali">{{googleAuthentication}}</router-link>
+                                        <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
+                                            <span slot="open">开</span>
+                                            <span slot="close">关</span>
+                                        </i-switch>
+                                    </div>
                                 </div>
-                                <div>
-                                    <router-link to="/OpenGoogleVali">{{googleAuthentication}}</router-link>
-                                    <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-                                        <span slot="open">开</span>
-                                        <span slot="close">关</span>
-                                    </i-switch>
-                                </div>
+
                             </div>
                         </div>
                     </section>
@@ -1091,7 +1096,6 @@ button.ivu-btn.ivu-btn-primary {
 }
 .account-box .account-in .account-item.googleValidter {
     @extend %flex;
-    padding: 20px 0;
     > div h4 {
         font-size: 24px;
         div {
@@ -1145,43 +1149,40 @@ button.ivu-btn.ivu-btn-primary {
     box-shadow: 0 1px 0 0 rgba(69, 112, 128, 0.06);
     font-size: 14px;
     color: #242a4a;
-}
-
-.account-box .account-in .account-item .account-item-in .icons {
-    height: 17px;
-    width: 17px;
-    display: inline-block;
-    margin-top: -1px;
-    background-size: 100% 100%;
-}
-
-.account-box .account-in .account-item .account-item-in .yesImg {
-    background-image: url(../../assets/img/overicon.png);
-}
-
-.icons.noImg {
-    background-image: url(../../assets/img/noicon.png);
-}
-
-.account-box .account-in .account-item .account-item-in .card-number {
-    width: 142px;
-    height: 40px;
-    margin-right: 15px;
-    border-right: 1px dashed #d0d5de;
-    padding: 0 15px;
-    line-height: 40px;
-    text-align: left;
-    display: inline-block;
-}
-
-.account-box .account-in .account-item .account-item-in .bankInfo {
-    width: 70%;
-    text-align: left;
-}
-
-.account-box .account-in .account-item .account-item-in .btn {
-    padding: 8px 10px;
-    cursor: pointer;
+    .icons {
+        height: 17px;
+        width: 17px;
+        display: inline-block;
+        margin-top: -1px;
+        background-size: 100% 100%;
+    }
+    .yesImg {
+        background-image: url(../../assets/img/overicon.png);
+    }
+    .card-number {
+        width: 142px;
+        height: 40px;
+        margin-right: 15px;
+        border-right: 1px dashed #d0d5de;
+        padding: 0 15px;
+        line-height: 40px;
+        text-align: left;
+        display: inline-block;
+    }
+    .bankInfo {
+        width: 70%;
+        text-align: left;
+    }
+    .btn {
+        padding: 8px 10px;
+        cursor: pointer;
+    }
+    .google-info {
+        width: 100px;
+        a {
+            margin-right: 15px;
+        }
+    }
 }
 
 .tips-g {

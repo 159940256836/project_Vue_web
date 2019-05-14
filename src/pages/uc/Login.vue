@@ -36,8 +36,7 @@
 /* 验证码 */
 $primary-color: #3399ff;
 .login_form {
-    background: #fff url(../../assets/images/login_bg.jpg) no-repeat center
-        center;
+    background: #fff url('../../assets/images/login_bg.png') no-repeat center;
     height: 760px;
     position: relative;
     overflow: hidden;

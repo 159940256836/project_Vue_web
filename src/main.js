@@ -117,10 +117,9 @@ const threeComma = (num) => {
     }
 }
 Vue.filter('threeComma', threeComma);
+
 Vue.prototype.toFloor = toFloor;
 
-
-/* eslint-disable no-new */
 new Vue({
     el: '#app',
     router,

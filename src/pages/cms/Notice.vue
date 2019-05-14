@@ -37,6 +37,7 @@
 </template>
 <style lang="scss" scoped>
 .notice {
+    padding-top: 60px;
     .banner {
         display: flex;
         justify-content: center;

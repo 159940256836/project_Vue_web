@@ -20,8 +20,11 @@
                                 <p class="describe">{{$t('uc.finance.recharge.address')}}</p>
                                 <div class="title">
                                     <Input v-model="qrcode.value" readonly style="width: 400px"></Input>
-                                    <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" id="copyBtn" class="link-copy">{{$t('uc.finance.recharge.copy')}}</a>
-                                    <a id="showQRcode" class="link-qrcode" href="javascript:;" @click="showEwm"> {{$t('uc.finance.recharge.qrcode')}}
+                                    <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" id="copyBtn" class="link-copy">
+                                        {{$t('uc.finance.recharge.copy')}}
+                                    </a>
+                                    <a id="showQRcode" class="link-qrcode" href="javascript:;" @click="showEwm">
+                                        {{$t('uc.finance.recharge.qrcode')}}
                                         <Modal v-model="isShowEwm">
                                             <!--<div v-show="isShowEwm" class="show-qrcode">-->
                                             <p slot="header" style="text-align: center;">充币地址二维码</p>
@@ -110,12 +113,10 @@ export default {
         },
         changeCoin(value) {
             const list = (this.coinList.length>0 && this.coinList.filter(ele=>ele.coin.unit == value)) || [];
-            console.log(list);
             if(list.length>0){
-                this.qrcode.value = list[0].coin.address || '';
-                this.qrcode.coinName = list[0].coin.name.toLowerCase();
+                this.qrcode.value = list[0].address || '';
+                this.qrcode.coinName = list[0].name.toLowerCase();
             }
-            console.log(this.qrcode)
             // for (var i = 0; i < this.coinList.length; i++) {
             //     if (this.coinList[i].coin.unit == value) {
                    

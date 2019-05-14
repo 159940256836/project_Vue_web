@@ -112,7 +112,7 @@ export default {
     width:1200px;
 }
 .common {
-    padding: 50px 18.75%;
+    padding: 60px 18.75%;
     background: #1c2435;
     overflow: hidden;
     .contentWrapper {
