@@ -28,7 +28,7 @@
                 <span class="expand-key">{{$t('exchange.expand.fee')}}</span>
             </Col>
         </Row>
-        <Row v-for="(row , index) in rows" key="index">
+        <Row v-for="(row , index) in rows" :key="index">
             <Col span="8">
                 <span class="expand-value">{{ row.time|dateFormat }}</span>
             </Col>
