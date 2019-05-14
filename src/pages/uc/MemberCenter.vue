@@ -1,116 +1,5 @@
-<style lang="scss" scoped>
-.mymsg_wrapper {
-    padding: 60px 8% 0;
-
-    .wrapper {
-        width: 100%;
-        border: 1px solid #f5f5f5;
-        padding: 30px 30px 30px 0;
-        overflow: hidden;
-        ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
-            padding: 0 10px;
-            width: 15% !important;
-            float: left;
-            background: none;
-            min-height: 662px;
-            border-right: 1px solid #eee;
-            .title {
-                text-align: center;
-                font-size: 20px;
-                line-height: 40px;
-                color: #666;
-            }
-        }
-        ul.ivu-menu.ivu-menu-light {
-            &:after {
-                background-color: #fff;
-            }
-        }
-        .nav-rights {
-            width: 85%;
-            float: left;
-            min-height: 600px;
-        }
-    }
-}
-
-</style>
-<style lang="scss" scoped>
-.mymsg_wrapper {
-    .wrapper {
-        ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
-            li.ivu-menu-submenu {
-                .ivu-menu-submenu-title {
-                    height: 50px;
-                    padding: 10px;
-                    border-radius: 5px;
-                    &:hover {
-                        background-color: #fff;
-                        .isclick {
-                            background-color: #3399ff;
-                        }
-                        .content,
-                        .ivu-icon {
-                            color: #666;
-                        }
-                    }
-                    .isclick {
-                        width: 6px;
-                        height: 6px;
-                        background-color: #3399ff;
-                        display: inline-block;
-                        border-radius: 50%;
-                        margin-top: 16px;
-                        line-height: 50px;
-                    }
-                    .content {
-                        padding-left: 5px;
-                    }
-                    .ivu-icon {
-                        top: 27px;
-                    }
-                }
-                .ivu-menu {
-                    li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
-                        color: #3399ff;
-                        a {
-                            color: #3399ff;
-                        }
-                    }
-                    li.ivu-menu-item {
-                        color: #666;
-                        background: #edf8ff;
-                        padding: 0;
-                        text-align: left;
-                        a {
-                            color: #666;
-                            display: block;
-                            height: 100%;
-                            padding: 14px 24px;
-                            font-size: 14px;
-                        }
-                    }
-                }
-            }
-            li.ivu-menu-submenu.ivu-menu-opened{
-             background-color: #3399ff;
-                .ivu-menu-submenu-title {
-                    .isclick {
-                         background-color: #fff;
-                    }
-                    .content,.ivu-icon {
-                        color: #fff;
-                    }
-                }
-            }
-        }
-       
-    }
-}
-</style>
-
 <template>
-    <div class="mymsg_wrapper">
+    <div class="mymsg_wrapper common">
         <div class="wrapper">
             <Menu :active-name="activename" :open-names="opennames" @on-open-change="sss" ref="test" :accordion="true">
                 <div class="title">个人中心</div>
@@ -119,87 +8,87 @@
                         <span class="isclick"></span>
                         <span class="content">账户管理</span>
                     </template>
-                    <MenuItem name="1-1">
-                    <router-link to="/uc/safe">{{$t('uc.member.securitysetting')}}</router-link>
-                    </MenuItem>
-                    <MenuItem name="1-2">
-                    <router-link to="/uc/account">{{$t('uc.member.accountsetting')}}</router-link>
-                    </MenuItem>
-                    <MenuItem name="1-3">
-                    <router-link to="/uc/myextension">{{$t('uc.member.myextension')}}</router-link>
-                    </MenuItem>
-                    <MenuItem name="1-4">
-                    <router-link to="/uc/feeLevel">手续费等级</router-link>
-                    </MenuItem>
+                    <Menu-item name="1-1">
+                        <router-link to="/uc/safe">{{$t('uc.member.securitysetting')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="1-2">
+                        <router-link to="/uc/account">{{$t('uc.member.accountsetting')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="1-3">
+                        <router-link to="/uc/myextension">{{$t('uc.member.myextension')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="1-4">
+                        <router-link to="/uc/feeLevel">手续费等级</router-link>
+                    </Menu-item>
                 </Submenu>
                 <Submenu name="2">
                     <template slot="title">
                         <span class="isclick"></span>
                         <span class="content">资产管理</span>
                     </template>
-                    <MenuItem name="2-1">
-                    <router-link to="/uc/money">{{$t('uc.finance.personalassets')}}</router-link>
-                    </MenuItem>
-                    <MenuItem name="2-2">
-                    <router-link to="/uc/record">{{$t('uc.finance.billdetail')}}</router-link>
-                    </MenuItem>
-                    <MenuItem name="2-3">
-                    <router-link to="/uc/recharge">{{$t('uc.finance.charge')}}</router-link>
-                    </MenuItem>
-                    <MenuItem name="2-4">
-                    <router-link to="/uc/withdraw">{{$t('uc.finance.pickup')}}</router-link>
-                    </MenuItem>
-                    <!-- <MenuItem name="2-5">
-                    <router-link to="/uc/trade">{{$t('uc.finance.tradetail')}}</router-link>
-                    </MenuItem> -->
-                    <!-- <MenuItem name="2-6">
-          <router-link to="/uc/invitingmining">{{$t('uc.finance.invitingmining')}}</router-link>
-          </MenuItem> -->
-                    <!-- <MenuItem name="2-6">
-                    <router-link to="/uc/paydividends">{{$t('uc.finance.paydividends')}}</router-link>
-                    </MenuItem> -->
-                    <!-- <MenuItem name="2-7">
-                    <router-link to="/uc/blc">币理财管理</router-link>
-                    </MenuItem> -->
-                    <MenuItem name="2-8">
-                    <router-link to="/uc/bjc">积分管理</router-link>
-                    </MenuItem>
-                    <MenuItem name="2-9">
-                    <router-link to="/uc/giveRecord">糖果赠送记录</router-link>
-                    </MenuItem>
+                    <Menu-item name="2-1">
+                        <router-link to="/uc/money">{{$t('uc.finance.personalassets')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="2-2">
+                        <router-link to="/uc/record">{{$t('uc.finance.billdetail')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="2-3">
+                        <router-link to="/uc/recharge">{{$t('uc.finance.charge')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="2-4">
+                        <router-link to="/uc/withdraw">{{$t('uc.finance.pickup')}}</router-link>
+                    </Menu-item>
+                    <!-- <Menu-item name="2-5">
+                        <router-link to="/uc/trade">{{$t('uc.finance.tradetail')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="2-6">
+                        <router-link to="/uc/invitingmining">{{$t('uc.finance.invitingmining')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="2-6">
+                        <router-link to="/uc/paydividends">{{$t('uc.finance.paydividends')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="2-7">
+                        <router-link to="/uc/blc">币理财管理</router-link>
+                    </Menu-item> -->
+                    <Menu-item name="2-8">
+                        <router-link to="/uc/bjc">积分管理</router-link>
+                    </Menu-item>
+                    <Menu-item name="2-9">
+                        <router-link to="/uc/giveRecord">糖果赠送记录</router-link>
+                    </Menu-item>
                 </Submenu>
                 <Submenu name="3">
                     <template slot="title">
                         <span class="isclick"></span>
                         <span class="content">币币管理</span>
                     </template>
-                    <MenuItem name="3-1">
-                    <router-link to="/uc/entrust/current">当前委托</router-link>
-                    </MenuItem>
-                    <MenuItem name="3-2">
-                    <router-link to="/uc/entrust/history">历史委托</router-link>
-                    </MenuItem>
+                    <Menu-item name="3-1">
+                        <router-link to="/uc/entrust/current">当前委托</router-link>
+                    </Menu-item>
+                    <Menu-item name="3-2">
+                        <router-link to="/uc/entrust/history">历史委托</router-link>
+                    </Menu-item>
                 </Submenu>
                 <Submenu name="4">
                     <template slot="title">
                         <span class="isclick"></span>
                         <span class="content">法币管理</span>
                     </template>
-                    <MenuItem name="4-1">
-                    <router-link to="/uc/ad">{{$t('otc.myad.title')}}</router-link>
-                    </MenuItem>
-                    <MenuItem name="4-2">
-                    <router-link to="/uc/order">{{$t('otc.myorder')}}</router-link>
-                    </MenuItem>
+                    <Menu-item name="4-1">
+                        <router-link to="/uc/ad">{{$t('otc.myad.title')}}</router-link>
+                    </Menu-item>
+                    <Menu-item name="4-2">
+                        <router-link to="/uc/order">{{$t('otc.myorder')}}</router-link>
+                    </Menu-item>
                 </Submenu>
                 <Submenu name="5">
                     <template slot="title">
                         <span class="isclick"></span>
                         <span class="content">IEO管理</span>
                     </template>
-                    <MenuItem name="5-1">
-                    <router-link to="/uc/ieoadmin">IEO管理</router-link>
-                    </MenuItem>
+                    <Menu-item name="5-1">
+                        <router-link to="/uc/ieoadmin">IEO管理</router-link>
+                    </Menu-item>
                 </Submenu>
             </Menu>
             <router-view></router-view>
@@ -264,6 +153,7 @@ export default {
             } else {
                 return;
             }
+            console.log(name)
         },
         link(code) {
             switch (code) {
@@ -309,13 +199,184 @@ export default {
             this.$refs.test.updateActiveName();
         });
         const doc = document.body
-         const sreenHeight = doc.offsetHeight;
-         const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
-         const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
-         const contentHeight = doc.getElementsByClassName("mymsg_wrapper")[0];
-         const bodyHeight = sreenHeight - headerHeight - footerHeight;
-         // contentHeight.style.minHeight = bodyHeight + "px";
-        //  this.sss(this.activename);
+        const sreenHeight = doc.offsetHeight;
+        const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
+        const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
+        const contentHeight = doc.getElementsByClassName("mymsg_wrapper")[0];
+        const bodyHeight = sreenHeight - headerHeight - footerHeight;
+        contentHeight.style.minHeight = bodyHeight + "px";
+        console.log(contentHeight.style.minHeight)
     }
 };
 </script>
+<style lang="scss" scoped>
+    .mymsg_wrapper {
+        padding: 60px 8% 0;
+
+        .wrapper {
+            width: 100%;
+            border: 1px solid #f5f5f5;
+            padding: 30px 30px 30px 0;
+            overflow: hidden;
+            ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
+                padding: 0 10px;
+                width: 15% !important;
+                float: left;
+                background: none;
+                min-height: 662px;
+                border-right: 1px solid #eee;
+                .title {
+                    text-align: center;
+                    font-size: 20px;
+                    line-height: 40px;
+                    color: #666;
+                }
+                li.ivu-menu-submenu {
+                    .ivu-menu-submenu-title {
+                        height: 50px;
+                        padding: 10px;
+                        border-radius: 5px;
+                        &:hover {
+                            background-color: #fff;
+                            .isclick {
+                                background-color: #3399ff;
+                            }
+                            .content,
+                            .ivu-icon {
+                                color: #666;
+                            }
+                        }
+                        .isclick {
+                            width: 6px;
+                            height: 6px;
+                            background-color: #3399ff;
+                            display: inline-block;
+                            border-radius: 50%;
+                            margin-top: 16px;
+                            line-height: 50px;
+                        }
+                        .content {
+                            padding-left: 5px;
+                        }
+                        .ivu-icon {
+                            top: 27px;
+                        }
+                    }
+                    .ivu-menu {
+                        li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
+                            color: #3399ff;
+                            a {
+                                color: #3399ff;
+                            }
+                        }
+                        li.ivu-menu-item {
+                            color: #666;
+                            background: #edf8ff;
+                            padding: 0;
+                            text-align: left;
+                            a {
+                                color: #666;
+                                display: block;
+                                height: 100%;
+                                padding: 14px 24px;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+                li.ivu-menu-submenu.ivu-menu-opened{
+                    background-color: #3399ff;
+                    .ivu-menu-submenu-title {
+                        .isclick {
+                            background-color: #fff;
+                        }
+                        .content,.ivu-icon {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+            ul.ivu-menu.ivu-menu-light {
+                &:after {
+                    background-color: #fff;
+                }
+            }
+            .nav-rights {
+                width: 85%;
+                float: left;
+                min-height: 600px;
+            }
+        }
+    }
+    /*.mymsg_wrapper {
+        .wrapper {
+            ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
+                li.ivu-menu-submenu {
+                    .ivu-menu-submenu-title {
+                        height: 50px;
+                        padding: 10px;
+                        border-radius: 5px;
+                        &:hover {
+                            background-color: #fff;
+                            .isclick {
+                                background-color: #3399ff;
+                            }
+                            .content,
+                            .ivu-icon {
+                                color: #666;
+                            }
+                        }
+                        .isclick {
+                            width: 6px;
+                            height: 6px;
+                            background-color: #3399ff;
+                            display: inline-block;
+                            border-radius: 50%;
+                            margin-top: 16px;
+                            line-height: 50px;
+                        }
+                        .content {
+                            padding-left: 5px;
+                        }
+                        .ivu-icon {
+                            top: 27px;
+                        }
+                    }
+                    .ivu-menu {
+                        li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
+                            color: #3399ff;
+                            a {
+                                color: #3399ff;
+                            }
+                        }
+                        li.ivu-menu-item {
+                            color: #666;
+                            background: #edf8ff;
+                            padding: 0;
+                            text-align: left;
+                            a {
+                                color: #666;
+                                display: block;
+                                height: 100%;
+                                padding: 14px 24px;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+                li.ivu-menu-submenu.ivu-menu-opened{
+                    background-color: #3399ff;
+                    .ivu-menu-submenu-title {
+                        .isclick {
+                            background-color: #fff;
+                        }
+                        .content,.ivu-icon {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+
+        }
+    }*/
+</style>

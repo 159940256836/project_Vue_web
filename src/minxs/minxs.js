@@ -6,7 +6,9 @@
          const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
          const contentHeight = doc.getElementsByClassName("common")[0];
          const bodyHeight = sreenHeight - headerHeight - footerHeight;
-         contentHeight.style.minHeight = bodyHeight + "px";
+         console.error(contentHeight);
+         if (contentHeight != undefined)
+          contentHeight.style.minHeight = bodyHeight + "px";
      }
  }
 

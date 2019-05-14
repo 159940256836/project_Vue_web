@@ -128,7 +128,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .openGoogleModal {
-    padding: 60px 35%;
+    padding: 100px 35%;
     overflow: hidden;
 }
 </style>

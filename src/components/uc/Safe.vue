@@ -341,11 +341,10 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- 7 -->
                             <div class="account-item googleValidter">
                                 <div class="account-item-in" style="width: 100%;">
-                                    <Icon type="logo-bitcoin" size="20" color="#00b5f6" />
+                                    <Icon type="social-googleplus-outline" size="20" color="#00b5f6" />
                                     <span class="card-number">谷歌验证</span>
                                     <p class="bankInfo" style="color: grey; width: 66%">
                                         提现，修改密码，及安全设置的时候用以输入google验证码，详细信息请阅读
@@ -697,7 +696,7 @@ export default {
             this.googleSwitch && this.$router.push({
                 name:"resetgooglevali",
             })
-            
+
         },
         beforeUpload(data) {
             if (data && data.size >= 1024000 * 2) {

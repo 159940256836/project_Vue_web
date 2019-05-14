@@ -200,7 +200,9 @@ span.price {
     margin-right: 40px;
     cursor: pointer;
 }
-
+ul li {
+    list-style-type: none;
+}
 .trade_hd .feesRate {
     float: right;
 }
@@ -381,7 +383,21 @@ p.math_price {
 tr.ivu-table-row-highlight.ivu-table-row-hover td {
     background: #262A42;
 }
-
+.ivu-table-overflowY::-webkit-scrollbar {
+    width: 5px; /*对垂直流动条有效*/
+}
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+.ivu-table-overflowY::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px #27313e;
+    background-color: #192330;
+    border-radius: 3px;
+}
+/*定义滑块颜色、内阴影及圆角*/
+.ivu-table-overflowY::-webkit-scrollbar-thumb{
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px #27313e;
+    background-color: #27313e;
+}
 .order_book .ivu-table .ivu-table-body tr:hover {
     background: #262A42;
     cursor: pointer;

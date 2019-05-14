@@ -29,7 +29,7 @@ Vue.http.options.credentials = true;
 Vue.http.options.emulateJSON = true;
 Vue.http.options.headers = {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    'Content-Type': 'application/json;charset=utf-8'
+    // 'Content-Type': 'application/json;charset=utf-8'
 };
 const router = new VueRouter({
     mode: 'hash',

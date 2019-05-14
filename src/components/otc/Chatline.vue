@@ -82,7 +82,7 @@
                     <Icon type="md-paper-plane" size="28" color="#3399ff"/>
                 </button>
               <div class="msg-notice">
-                <!--<Checkbox @on-change="handleCheckClick" v-model="fOpenNotice">开启windows消息提醒,不担心错过任何消息</Checkbox>-->
+<!--                <Checkbox @on-change="handleCheckClick" v-model="fOpenNotice">开启windows消息提醒,不担心错过任何消息</Checkbox>-->
                 <Checkbox @on-change="handleNoticeClick" v-model="fOpenNotice">开启桌面消息提醒</Checkbox>
                 <Checkbox @on-change="handleAudioClick" v-model="fOpenAudio">开启声音消息提醒</Checkbox>
               </div>
@@ -99,7 +99,8 @@ export default {
     props: ['msg'],
     data() {
         return {
-            audioSrc:'/assets/audio/notice.wav',
+            // audioSrc:'/assets/audio/notice.wav',
+            audioSrc:'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/notice.wav',
             fOpenAudio:true,
             fOpenNotice:false,
             currentPage: 1,
@@ -181,8 +182,9 @@ export default {
             stompClient = Stomp.over(socket);
             stompClient.debug = false;
             stompClient.connect({}, function(frame) {
-              stompClient.subscribe('/user/' + self.msg.myId + '/' + self.orderId, function(response) {
-                    self.otheritem = JSON.parse(response.body)
+                // console.log(self.fOpenNotice,window.Notification)
+                stompClient.subscribe('/user/' + self.msg.myId + '/' + self.orderId, function(response) {
+                  self.otheritem = JSON.parse(response.body)
                     self.msgLists.push(self.otheritem)
                     if(self.fOpenNotice && window.Notification && Notification.permission == "granted") {
                         var notification = new Notification(self.msg.otherSide+"：", {

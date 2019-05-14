@@ -1,5 +1,5 @@
 <template>
-    <div class="specail" style="min-height:519px;margin:100px 0;">
+    <div class="specail" style="min-height:519px;">
         <div class="wrapper">
             <div class="qrclass">
                 <img src="../../assets/images/goole_Android.png" alt="">
@@ -155,7 +155,7 @@ export default {
 }
 $color: #2d8cf0;
 .specail {
-    padding: 30px 25%;
+    padding: 100px 25%;
     overflow: hidden;
     .wrapper {
         @extend %flex;

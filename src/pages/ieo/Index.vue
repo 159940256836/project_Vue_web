@@ -234,7 +234,11 @@ $pageTheme: rgb(13, 70, 125);
     background:#3399FF;
     color:#fff;
     z-index:9999;
+    &:hover {
+        color: #fff;
+    }
 }
+
 .father .ivu-tabs-nav .ivu-tabs-tab{
     margin-right:0;
 }
