@@ -151,7 +151,7 @@ export default {
         },
         initGtCaptcha() {
             var self = this;
-            var captcha1 = new TencentCaptcha("2040846200", (res) => {
+            var captcha1 = new TencentCaptcha("2038419167", (res) => {
                 res.ret == 0 && (self.ticket = res.ticket) && (self.randStr = res.randstr) && self.success(res.ticket, res.randstr);//腾讯防水验证成功的回调
             });
             captcha1.show(); // 显示验证码
@@ -182,10 +182,10 @@ export default {
             return this.login(params);
         },
         handleSubmit(name) {
-             // this.$refs[name].validate(valid => {
-            //     if (valid) {
-                    //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
-                    // this.initGtCaptcha();
+             this.$refs[name].validate(valid => {
+                if (valid) {
+                   //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
+                    this.initGtCaptcha();
             const params = {};
             const formParams = this.formInline;
             params.username = formParams.user;
@@ -205,9 +205,8 @@ export default {
                     return false
                 }
             }
-            this.login(params)
-            // }
-            //})
+            }
+            })
         },
         login(params) {
             this.$http.post(this.host + this.api.uc.login, params).then(response => {

@@ -793,7 +793,6 @@ export default {
             this.$http.get(this.host + '/market/overview').then(res => {
                 const resp = res.body;
                 this.hostSymbolList = resp.recommend;
-                console.log(this.hostSymbolList)
                 this.startWebsockHotlist();
             })
         },
@@ -852,7 +851,6 @@ export default {
             // this.coins.columns[4].title = this.$t("service.OpenPrice");
         },
         openActivity(url) {
-            // console.log(url);
         },
         init() {
             //   this.$store.commit("navigate", "nav-index");
@@ -1079,7 +1077,6 @@ export default {
                     this.coins[coin.base].push(coin);
 
                 };
-                console.log(this.coins);
                 if (this.isLogin) {
                     this.getFavor();
                 }

@@ -15,7 +15,7 @@
                 </Select>
             </FormItem>
             <FormItem>
-                <Button type="warning" @click="search">搜索</Button>
+                <Button type="primary" @click="search">搜索</Button>
                 <!-- <Button style="margin-left: 8px " @click="handleClear" class="clear_btn">清空条件</Button> -->
             </FormItem>
         </Form>
