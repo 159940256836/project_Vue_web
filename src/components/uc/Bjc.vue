@@ -87,7 +87,6 @@ export default {
             });
         },
         changePage(index) {
-            console.log(index);
             this.pageNum = this.pageNo = index;
             this.init();
         },

@@ -408,7 +408,11 @@ export default {
                                 padding-right: 19px;
                             }
                         }
-                        a.router-link-exact-active.router-link-active {
+                        // a.router-link-exact-active.router-link-active {
+                        //     color: #2d8cf0;
+                        // }
+                        // 5.15修改
+                        a.router-link-active {
                             color: #2d8cf0;
                         }
                     }

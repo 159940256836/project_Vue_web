@@ -216,7 +216,6 @@ export default {
       }
     },
     menuSelected(menuName) {
-      console.log(menuName);
       if (menuName.startsWith("coin")) {
         var coin = this.coins[menuName.split("-")[1]];
         this.$router.push("/otc/trade/" + coin.unit);
@@ -227,7 +226,6 @@ export default {
     activeMenu() {
       let coin = this.$route.params[0] || "USDT";
       coin = coin.toUpperCase();
-      console.log(coin);
       switch (coin) {
         case "BTC":
          // this.activeMenuName = "coin-0";

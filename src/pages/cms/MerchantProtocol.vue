@@ -179,7 +179,6 @@ Microsoft YaHei'>下列情况时本网站无需承担任何责任：</span></p>
     },
     methods:{
       init(){
-        // console.log(this.lang);
       }
     }
   }

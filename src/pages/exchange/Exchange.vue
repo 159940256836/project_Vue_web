@@ -1213,7 +1213,6 @@ $night-color: #fff;
                                         style: {},
                                         on: {
                                             click: () => {
-                                                // console.log("======开始撤单")
                                                 this.cancel(params.index);
                                             }
                                         }
@@ -1357,7 +1356,6 @@ $night-color: #fff;
                 return this.$store.getters.isLogin;
             },
             member: function () {
-                // console.log(this.$store.getters.member)
                 return this.$store.getters.member;
             },
             lang: function () {
@@ -1572,7 +1570,6 @@ $night-color: #fff;
                 });
             },
             silderGo(silder, val) {
-                // console.log(silder, val);
                 this[silder] = val;
             },
             init() {
@@ -2135,16 +2132,13 @@ $night-color: #fff;
                         let resp = response.body;
 
                         if (resp.ask && resp.ask.items) {
-                            console.log(resp.ask.items)
                             for (var i = 0; i < resp.ask.items.length; i++) {
-                                console.log(resp.ask.items[i].totalAmount,resp.ask.items[i].amount)
                                 if (i == 0) {
                                     resp.ask.items[i].totalAmount = resp.ask.items[i].amount;
                                 } else {
                                     resp.ask.items[i].totalAmount =
                                         resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount;
                                 }
-                                console.log(resp.ask.items[i].totalAmount,resp.ask.items[i].amount)
                             }
                             if (resp.ask.items.length >= this.plate.maxPostion) {
                                 for (var i = this.plate.maxPostion; i > 0; i--) {
@@ -2974,7 +2968,6 @@ $night-color: #fff;
                 });
             },
             getHistoryOrder(pageNo) {
-                console.log(pageNo,this.historyOrder.page)
                 //查询历史委托
                 if (pageNo == undefined) {
                     pageNo = this.historyOrder.page;

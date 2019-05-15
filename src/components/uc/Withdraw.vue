@@ -183,7 +183,6 @@ export default {
    /* currencyCheck() {
       this.withdrawOutAmount = this.withdrawAmount - this.withdrawFee
       this.withdrawOutAmount = this.withdrawFee - this.withdrawAmount
-      console.log(this.withdrawOutAmount)
     },*/
     cancel(){
       this.modal = false;
@@ -433,11 +432,9 @@ export default {
     this.coinType = this.$route.query.name || "";
     this.getAddrList();
     this.getList(0, 10, 1);
-    console.log(this.$store.getters.member);
   },
   computed: {
     member: function() {
-      console.log(this.$store.getters.member);
       return this.$store.getters.member;
     },
     tableColumnsWithdraw() {

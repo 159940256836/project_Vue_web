@@ -981,7 +981,6 @@ export default {
                             this.hostSymbolList.splice(index, 1, resp);
                         }
                     });
-                    // console.log(result);
                     // if (list.length > 0) {
                     // this.hostSymbolList.forEach((ele, index) => {
                     //     if (ele.symbol == list[0].symbol) {

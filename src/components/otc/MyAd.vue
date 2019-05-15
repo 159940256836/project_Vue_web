@@ -235,7 +235,6 @@ export default {
         var resp = response.body;
         if (resp.code == 0) {
           this.tableAdv = resp.data.content;
-          // console.log(this.tableAdv);
           for (var i = 0; i < this.tableAdv.length; i++) {
             this.tableAdv[i].coinUnit = this.tableAdv[i].coin.unit;
           }

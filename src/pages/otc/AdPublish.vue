@@ -198,7 +198,6 @@ export default {
         this.form.maxLimit != 0 &&
         parseFloat(value) > this.form.maxLimit - 0
       ) {
-        // console.log(this.form.maxLimit)
         callback(new Error(this.$t("otc.publishad.warning9")));
       } else {
         callback();
@@ -357,7 +356,6 @@ export default {
   methods: {
     // 特殊字符限制
     handleInput (reg1) {
-      console.log(reg1)
       var reg = new RegExp(/[\-\_\,\!\|\~\`\(\)\#\@\%\-\+\=\/\'\￥\。\ \…\$\（\）\(\)\[\]\【\】\^\&\*\{\}\:\;\"\L\<\>\?\\]/g, '');
       if(reg.test(reg1)) {
         this.form.premisePrice = ''
@@ -639,7 +637,6 @@ export default {
             this.form.timeLimit = resp.data.timeLimit;
             this.form.premisePrice = resp.data.premiseRate;
             this.form.payMode = (resp.data.payMode + "").split(",");
-            // console.log(this.form.payMode)
             this.form.number = resp.data.number;
             if (resp.data.auto == 1) {
               this.form.autoReply = true;

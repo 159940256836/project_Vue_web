@@ -275,7 +275,6 @@ export default {
             }
           }
           if (params.row.coin.canWithdraw == 1) {
-            // console.log(self.$t('uc.finance.money.pickup'));
             // 提币;
             actions.push(
               h(
