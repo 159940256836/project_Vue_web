@@ -761,8 +761,10 @@ export default {
         submit(name) {
             //实名认证
             if (name == "formValidate6") {
+                console.log(this.imgPreview)
                 if (this.imgPreview == "") {
                     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
+                    
                     return false;
                 }
                 if (this.imgNext == "") {
@@ -783,6 +785,7 @@ export default {
                     .post(this.host + "/uc/approve/real/name", param)
                     .then(response => {
                         var resp = response.body;
+                        console.log(resp,resp.message)
                         if (resp.code == 0) {
                             this.member.realName = this.formValidate6.realName;
                             this.$store.commit("setMember", this.member);
