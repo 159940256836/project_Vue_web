@@ -1273,7 +1273,5 @@ export default {
     .ivu-table-sort i:hover {
         color: #3399ff;
     }
-    //修改iview样式
-    .ivu-menu-vertical .ivu-menu-item:hover,.ivu-menu-vertical .ivu-menu-submenu-title:hover{color:	not specified}
-    .ivu-menu-opened>*>.ivu-menu-submenu-title-icon{color:#fff;}
+ 
 </style>
