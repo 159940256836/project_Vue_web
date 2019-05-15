@@ -60,7 +60,7 @@
                   <!--<Slider v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee"></Slider>
                   <Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">
                   <InputNumber readonly v-model="withdrawFee" :min="currentCoin.minTxFee" :max="currentCoin.maxTxFee" size="large" style="width: 440px;"></InputNumber>-->
-                  <Input v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee"></Input>
+                  <Input v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee" style="height: 36px;"></Input>
                   <span class="input-group-addon addon-tag uppercase">{{currentCoin.unit}}</span>
                   <!--</Poptip>-->
                 </div>
@@ -165,6 +165,7 @@ export default {
   },
   watch: {
     currentCoin: function() {
+      console.log(this.currentCoin)
       this.withdrawFee =
         this.currentCoin.minTxFee +
         (this.currentCoin.maxTxFee - this.currentCoin.minTxFee) / 2;

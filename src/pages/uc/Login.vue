@@ -4,8 +4,7 @@
             <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
                 <div class="login_title">{{$t('uc.login.login')}}</div>
                 <FormItem prop="user">
-                    <Input name="user" type="text" v-model="formInline.user" :placeholder="$t('uc.login.usertip')" class="user" @on-blur="userBlur">
-                    </Input>
+                    <Input name="user" type="text" v-model="formInline.user" :placeholder="$t('uc.login.usertip')" class="user" @on-blur="userBlur" />
                 </FormItem>
                 <FormItem prop="password">
                     <Input type="password" v-model="formInline.password" :placeholder="$t('uc.login.pwdtip')">
@@ -40,6 +39,7 @@ $primary-color: #3399ff;
     height: 760px;
     position: relative;
     overflow: hidden;
+    padding-top: 60px;
     .login_right {
         padding: 20px 30px 10px 30px;
         position: absolute;
@@ -95,7 +95,8 @@ export default {
             _captchaResult: null,
             formInline: {
                 user: "",
-                password: ""
+                password: "",
+                googleCode: ""
             },
             ruleInline: {
                 password: [
@@ -180,31 +181,38 @@ export default {
             }
             return this.login(params);
         },
-        handleSubmit(name) {
-             this.$refs[name].validate(valid => {
-                if (valid) {
-                   //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
-                    this.initGtCaptcha();
-            const params = {};
-            const formParams = this.formInline;
-            params.username = formParams.user;
-            params.password = formParams.password;
-            params.code = formParams.googleCode
+        loginCheck () {
             // 新加代码
             // 判断手机号邮箱不能为空
-            if(!formParams.user) {
+            if(!this.formInline.user) {
                 this.$Message.error(this.$t("uc.login.loginvalidate"));
                 return false
-            } 
+            }
             // 判断是否绑定谷歌
             if(this.openGoole == 1) {
                 // 判断谷歌验证码不能为空
-                if (!formParams.googleCode) {
+                if (!this.formInline.googleCode) {
                     this.$Message.error(this.$t("uc.login.google"));
                     return false
+                } else  {
+                    this.initGtCaptcha();
                 }
+            } else {
+                // 谷歌验证调用
+                this.initGtCaptcha();
             }
-            }
+        },
+        handleSubmit(name) {
+             this.$refs[name].validate(valid => {
+                 //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
+                 this.loginCheck()
+                if (valid) {
+                    const params = {};
+                    const formParams = this.formInline;
+                    params.username = formParams.user;
+                    params.password = formParams.password;
+                    params.code = formParams.googleCode
+                }
             })
         },
         login(params) {

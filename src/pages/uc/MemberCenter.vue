@@ -170,7 +170,7 @@
   }*/
 </style>
 <template>
-    <div class="mymsg_wrapper common">
+    <div class="mymsg_wrapper">
         <div class="wrapper">
             <Menu :active-name="activename" :open-names="opennames" @on-open-change="sss" ref="test" :accordion="true">
                 <div class="title">个人中心</div>

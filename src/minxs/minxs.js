@@ -4,11 +4,11 @@
          const sreenHeight = doc.offsetHeight;
          const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
          const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
-         // const contentHeight = doc.getElementsByClassName("common")[0];
-         // const bodyHeight = sreenHeight - headerHeight - footerHeight;
-         // console.error(contentHeight);
-         // if (contentHeight != undefined)
-         //  contentHeight.style.minHeight = bodyHeight + "px";
+         const contentHeight = doc.getElementsByClassName("common")[0];
+         const bodyHeight = sreenHeight - headerHeight - footerHeight;
+         // console.error(sreenHeight,headerHeight,footerHeight,contentHeight,bodyHeight);
+         if (contentHeight == undefined) return false;
+         contentHeight.style.minHeight = bodyHeight + "px";
      }
  }
 
