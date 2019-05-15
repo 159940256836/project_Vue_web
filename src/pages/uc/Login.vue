@@ -4,14 +4,14 @@
             <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
                 <div class="login_title">{{$t('uc.login.login')}}</div>
                 <FormItem prop="user">
-                    <Input name="user" type="text" v-model="formInline.user" :placeholder="$t('uc.login.usertip')" class="user" @on-blur="userBlur" />
+                    <Input @on-enter="handleSubmit('formInline')" name="user" type="text" v-model="formInline.user" :placeholder="$t('uc.login.usertip')" class="user" @on-blur="userBlur" />
                 </FormItem>
                 <FormItem prop="password">
-                    <Input type="password" v-model="formInline.password" :placeholder="$t('uc.login.pwdtip')">
+                    <Input @on-enter="handleSubmit('formInline')" type="password" v-model="formInline.password" :placeholder="$t('uc.login.pwdtip')">
                     </Input>
                 </FormItem>
                 <FormItem prop="googleCode" v-if="openGooleCode">
-                    <Input type="text" v-model="formInline.googleCode" placeholder="谷歌验证码">
+                    <Input type="text" @on-enter="handleSubmit('formInline')" v-model="formInline.googleCode" placeholder="谷歌验证码">
                     </Input>
                 </FormItem>
                 <p style="height:25px;">
@@ -20,7 +20,7 @@
                     </router-link>
                 </p>
                 <FormItem style="margin-bottom:10px;">
-                    <Button class="login_btn" @click="handleSubmit('formInline')">{{$t('uc.login.login')}}</Button>
+                    <Button class="login_btn"  @click="handleSubmit('formInline')">{{$t('uc.login.login')}}</Button>
                 </FormItem>
                 <div class='to_register'>
                     <span>没有币多网账号</span>
