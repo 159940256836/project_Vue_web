@@ -42,7 +42,7 @@
                         <p>
                             <span class="pairs">{{item.symbol}}</span>
                             <span class="pairs-sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">
-                                {{item.chg < 0 ? "-":"+"}}{{parseFloat(item.chg * 100).toFixed(2) + '%'}}
+                                {{item.chg < 0 ? "":"+"}}{{parseFloat(item.chg * 100).toFixed(2) + '%'}}
                             </span>
                         </p>
                         <p>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-             <!--<SvgLine v-for="(item, index) in coins" :key="index" :values="item.trend"></SvgLine>-->
+
             <!-- 首页行情图 -->
             <div class="section" id="page2">
                 <div class="page2nav">
@@ -1205,11 +1205,11 @@ li {
     }
 }
 #hot {
-    padding: 23px 10%;
+    padding: 23px 0;
     background-color: #1c2435;
     @extend %flex;
     .section-market {
-        width: 1200px;
+        width: 1146px;
         margin: 0 auto;
         .market-box {
             width: 240px;
@@ -1319,7 +1319,7 @@ li {
 }
 #page2 {
     background: #fff;
-    width: 1200px;
+    width: 1146px;
     height: auto;
     min-height: 320px;
     margin: 40px auto;
@@ -1387,7 +1387,7 @@ li {
 #page4 {
     background: #fff;
     height: auto;
-    width: 1200px;
+    width: 1146px;
     margin: 100px auto;
     ul {
         width: 100%;
@@ -1432,7 +1432,7 @@ li {
     @extend %flex;
     align-items: flex-start;
     .section-main {
-        width: 1200px;
+        width: 1146px;
         margin: 110px auto 0;
         display: flex;
         .download {

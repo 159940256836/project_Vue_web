@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
 .entrusthistory {
     float: left;
-    width: 85%;
+    width: 82%;
     padding-left: 30px;
 }
 .page {

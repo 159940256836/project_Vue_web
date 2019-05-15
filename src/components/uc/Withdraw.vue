@@ -13,7 +13,7 @@
             <div class="action-inner">
               <div class="inner-left">
                 <p class="describe">{{$t('uc.finance.withdraw.symbol')}}</p>
-                <Select v-model="coinType" style="width:100px;margin-top: 14px;" @on-change="getAddrList">
+                <Select v-model="coinType" style="width:155px;margin-top: 14px;" @on-change="getAddrList">
                   <Option v-for="item in coinList" :value="item.unit" :key="item.unit">{{ item.unit }}</Option>
                 </Select>
               </div>
@@ -42,8 +42,19 @@
                   </p>
                 </label>
                 <div class="input-group">
-                  <Poptip trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.withdrawScale+$t('uc.finance.withdraw.tip11')+currentCoin.minAmount+' ,'+$t('uc.finance.withdraw.tip2')+currentCoin.maxAmount" style="width: 100%;">
-                    <InputNumber @on-change="computerAmount" v-model="withdrawAmount" :placeholder="$t('uc.finance.withdraw.numtip1')" size="large" :min="currentCoin.minAmount" :max="currentCoin.maxAmount"></InputNumber>
+                  <Poptip
+                    trigger="focus"
+                    :content="$t('uc.finance.withdraw.tip1')+currentCoin.withdrawScale+$t('uc.finance.withdraw.tip11')+currentCoin.minAmount+' ,'+$t('uc.finance.withdraw.tip2')+currentCoin.maxAmount"
+                    style="width: 100%;"
+                  >
+                    <InputNumber
+                       @keyup.native="computerAmount"
+                       v-model="withdrawAmount"
+                       :placeholder="$t('uc.finance.withdraw.numtip1')"
+                       size="large"
+                       :max="currentCoin.maxAmount"
+                    >
+                    </InputNumber>
                     <span class="input-group-addon addon-tag uppercase firstt">{{currentCoin.unit}}</span>
                   </Poptip>
                 </div>
@@ -59,15 +70,8 @@
                 <div class="input-group" style="margin-top:14px;position:relative;">
                   <Slider v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee"></Slider>
                   <!--<Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">-->
-                  <InputNumber readonly v-model="withdrawFee" :min="currentCoin.minTxFee" :max="currentCoin.maxTxFee" size="large" style="width: 605px;"></InputNumber>
+                  <InputNumber readonly v-model="withdrawFee" :min="currentCoin.minTxFee" :max="currentCoin.maxTxFee" size="large" style="width: 425px;"></InputNumber>
                   <Input v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee"></Input>
-                  <!--<Input
-                    v-model="withdrawFee"
-                    :max="currentCoin.maxTxFee"
-                    :min="currentCoin.minTxFee"
-                    @keyup.native="currencyCheck"
-                  >
-                  </Input>-->
                   <span class="input-group-addon addon-tag uppercase">{{currentCoin.unit}}</span>
                   <!--</Poptip>-->
                 </div>
@@ -75,7 +79,7 @@
               <div class="form-group">
                 <label>{{$t('uc.finance.withdraw.arriamount')}}</label>
                 <div class="input-group" style="margin-top:14px;position:relative;">
-                  <InputNumber v-model="withdrawOutAmount" :placeholder="$t('uc.finance.withdraw.arriamount')" size="large" style="width: 100%;"></InputNumber>
+                  <InputNumber readonly v-model="withdrawOutAmount" :placeholder="$t('uc.finance.withdraw.arriamount')" size="large" style="width: 100%;"></InputNumber>
                   <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->
                   <span class="input-group-addon addon-tag uppercase">{{currentCoin.unit}}</span>
                 </div>
@@ -354,10 +358,19 @@ export default {
       return Math.round(v * t) / t;
     },
     computerAmount() {
-      this.withdrawOutAmount = this.round(
-        this.accSub(this.withdrawAmount, this.withdrawFee),
-        this.currentCoin.withdrawScale
-      );
+      // 新增代码
+      // 判断 提币数量 < 最小手续费 = 最小提币数量
+      if (this.withdrawAmount <= this.currentCoin.minTxFee) {
+        this.withdrawAmount = this.currentCoin.minAmount
+      }
+      // 否则 提出当前数量减去手续费
+      this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
+      // 旧代码
+      // console.log(this.withdrawOutAmount,this.currentCoin.withdrawScale,this.withdrawAmount, this.withdrawFee)
+      // this.withdrawOutAmount = this.round(
+      //   this.accSub(this.withdrawAmount, this.withdrawFee),
+      //   this.currentCoin.withdrawScale
+      // );
     },
     computerAmount2() {
       this.withdrawAmount =
@@ -653,7 +666,7 @@ p.describe {
 
 .action-foot {
   text-align: center;
-  padding: 40px 170px 0;
+  padding: 40px 0;
 }
 
 .hb-night .btn.btn-primary,
