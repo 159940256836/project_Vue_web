@@ -63,7 +63,6 @@ export default {
     methods: {
         jcgoogle(params) {
             this.$http.post(this.host+"/uc/google/jcgoogle",params).then(res=>{
-                console.log(res)
                 const resp = res.body;
                 if(resp.code == 0){
                     this.$Notice.success({
@@ -78,7 +77,6 @@ export default {
         },
         sureBtn(name) {
             this.$refs[name].validate((valid) => {
-                console.log(valid)
                 if (valid) {
                     const formInline = this.formInline;
                     const params = {
@@ -108,7 +106,6 @@ export default {
         },
         getPhoneCode() {
             return this.$http.post(this.host + "/uc/mobile/google/code", {}).then(res => {
-                console.log(res)
                 if (res.body.code == 0) {
                     // return new Promise((resolve, reject) => {
                     //     resolve();

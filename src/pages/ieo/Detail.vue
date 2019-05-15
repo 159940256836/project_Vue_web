@@ -231,7 +231,6 @@ export default {
                 jyPassword: this.password
             };
             this.$http.post(this.host + "/uc/ieo/order", params).then(res => {
-                console.log(res);
                 const resp = res.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
@@ -268,7 +267,6 @@ export default {
             } else if (!compareNowAndEnd || !surplusAmount) {
                 str = "已完成"
             }
-            console.log(this.status);
             this.text = this.status = str;
             if(this.text=="进行中"){
                 this.text="确定"

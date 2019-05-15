@@ -83,7 +83,6 @@ export default {
             });
         },
         changePage(index) {
-            console.log(index);
             this.pageNum = this.pageNo = index;
             this.init();
         },
@@ -91,7 +90,6 @@ export default {
             this.pageNo = 1;
             this.loading = true;
             let rangeDate = this.rangeDate;
-            console.log(rangeDate);
             if (rangeDate && rangeDate[0]) {
                 let startTime = new Date(rangeDate[0]);
                 let endTime = new Date(rangeDate[1]);

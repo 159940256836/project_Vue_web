@@ -258,7 +258,6 @@ export default {
               this.minNum +
               "~" +
               this.user.number;
-            // console.log(this.user)
             if (this.user.advertiseType == 1) {
               this.btnType = this.$t("otc.tradeinfo.confirmbuyin");
               this.type = this.$t("otc.tradeinfo.buyin");
@@ -397,8 +396,6 @@ export default {
     }
   },
   created() {
-    // console.log(this.$route.query)
-    // console.log(this.div(121.03, 121.03) + '--00--')
     // this.update()
     this.getIdAdv();
   },

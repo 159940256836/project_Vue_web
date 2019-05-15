@@ -54,7 +54,6 @@
             rows: Array
         },
         created(){
-            // console.log(this.skin)
         }
     };
 </script>

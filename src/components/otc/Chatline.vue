@@ -182,7 +182,6 @@ export default {
             stompClient = Stomp.over(socket);
             stompClient.debug = false;
             stompClient.connect({}, function(frame) {
-                // console.log(self.fOpenNotice,window.Notification)
                 stompClient.subscribe('/user/' + self.msg.myId + '/' + self.orderId, function(response) {
                   self.otheritem = JSON.parse(response.body)
                     self.msgLists.push(self.otheritem)

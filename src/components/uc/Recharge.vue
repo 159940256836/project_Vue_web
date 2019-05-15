@@ -144,7 +144,6 @@ export default {
             const params = { unit: "", pageNo, pageSize:10, type:"0" };
             this.$http.post(this.host + "/uc/asset/transaction", params).then(response => {
                     var resp = response.body;
-                    console.log(resp);
                     if (resp.code == 0) {
                         if (resp.data) {
                             this.allTableRecharge = resp.data.content || [];
@@ -194,7 +193,6 @@ export default {
                 title: this.$t("uc.finance.recharge.time"),
                 align: "center",
                 render: (h, param) => {
-                    console.log(param);
                     let str = param.row.createTime;
                     return h("div", {}, str);
                 }

@@ -324,7 +324,6 @@ export default {
             } else {
                 return;
             }
-            console.log(name)
         },
         link(code) {
             switch (code) {
@@ -376,7 +375,6 @@ export default {
         const contentHeight = doc.getElementsByClassName("mymsg_wrapper")[0];
         const bodyHeight = sreenHeight - headerHeight - footerHeight;
         contentHeight.style.minHeight = bodyHeight + "px";
-        console.log(contentHeight.style.minHeight)
     }
 };
 </script>

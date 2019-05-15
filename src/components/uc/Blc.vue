@@ -160,7 +160,6 @@ export default {
         this.lockDate = date_value;
       }
       let itemId = this.model1;
-      console.log(itemId)
       if (String(itemId).length > 0) {
         this.itemId = itemId;
       }
