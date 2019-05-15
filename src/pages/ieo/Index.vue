@@ -8,11 +8,11 @@
                 <TabPane label="已结束" name="alreadyEnd"></TabPane>
             </Tabs>
             <div class="contentWrapper">
-                <!-- <template v-if="list.length == 0">
+                 <template v-if="list.length == 0">
                     <img src="../../assets/images/noData.png" alt="" style="width:30%;">
-                </template> -->
+                </template>
                 <!-- <template v-else>
-                    
+
                 </template> -->
                 <template v-for="(item, index) in list">
                     <ieoAbstract :content="item"></ieoAbstract>
@@ -117,6 +117,7 @@ export default {
     background: #fff;
     overflow: hidden;
     .contentWrapper {
+        text-align: center;
         width:1200px;
         overflow: hidden;
         // border:1px solid rgba(221, 221, 221, 1)
