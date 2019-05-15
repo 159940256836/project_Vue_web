@@ -3,22 +3,29 @@
         <div class="order-table">
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
         </div>
+        <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
     </div>
 </template>
 <script>
+import transfermodal from "../transfer/Index"
 export default {
-    props: ["content"],
+    // props: ["modal"],
+    components:{transfermodal},
     data() {
         return {
+            modal:false,
             tableMoney: [],
             loading: true,
         }
     },
     created() {
-        console.log("初始化");
+        this.modal = false;
         this.getMoney();
     },
     methods: {
+        closeModal(){
+            this.modal = false;
+        },
         getMoney() {
             this.$http.post(this.host + "/uc/asset/wallet").then(response => {
                 var resp = response.body;
@@ -112,7 +119,7 @@ export default {
                 key: "price1",
                 width: 400,
                 align: "center",
-                render: function (h, params) {
+                render: (h, params)=> {
                     var actions = [];
                     if (params.row.coin.canRecharge == 1) {
                         if (params.row.address != null && params.row.address != "") {
@@ -186,7 +193,11 @@ export default {
                     const btn = h('Button', {
                         props: {
                             type: "info",
-
+                        },
+                        on: {
+                            click: () => {
+                                this.modal = true;
+                            }
                         },
                         style: {
                             marginRight: "8px",

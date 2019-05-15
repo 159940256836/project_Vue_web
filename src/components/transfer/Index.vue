@@ -63,7 +63,7 @@ export default {
         // this.getLeverNum();
         // this.getOtcNum();
         this.init();
-
+        console.log(this.modal);
         // this.getSupportCoin().then(res => {
         //     this.getLeverNum().then(res => {
         //         console.log(this.leverList);
@@ -99,7 +99,7 @@ export default {
             })
         },
         cancel() {
-            this.$emit("closetransferModal")
+            this.$emit("closetransferModal");
         },
         getOtcNum() {
             return this.$http.post(this.host + "/uc/otc/wallet/get").then(response => {//查询法币种类的个数
@@ -127,7 +127,7 @@ export default {
                         resolve("success");
                     })
                 } else {
-                    this.$Message.error(this.loginmsg);
+                    this.$Message.error(resp.message);
                 }
             });
         },

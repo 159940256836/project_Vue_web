@@ -201,7 +201,7 @@
                     <router-link to="/uc/ieoadmin">IEO管理</router-link>
                     </MenuItem>
                 </Submenu>
-                 <Submenu name="6">
+                <Submenu name="6">
                     <template slot="title">
                         <span class="isclick"></span>
                         <span class="content">API管理</span>
@@ -210,7 +210,7 @@
                     <router-link to="/uc/apiManage">API管理</router-link>
                     </MenuItem>
                 </Submenu>
-                 <Submenu name="7">
+                <Submenu name="7">
                     <template slot="title">
                         <span class="isclick"></span>
                         <span class="content">杠杆交易管理</span>
@@ -218,7 +218,7 @@
                     <MenuItem name="7-1">
                     <router-link to="/uc/level/current">当前委托</router-link>
                     </MenuItem>
-                     <MenuItem name="7-2">
+                    <MenuItem name="7-2">
                     <router-link to="/uc/level/history">历史委托</router-link>
                     </MenuItem>
                 </Submenu>
@@ -229,10 +229,10 @@
 
 </template>
 <script>
-import { minHeightMinx } from "../../minxs/minxs.js"
+// import { minHeightMinx } from "../../minxs/minxs.js"
 export default {
     //   components: {},
-    mixins: [minHeightMinx],
+    // mixins: [minHeightMinx],
     data() {
         return {
             activename: "1-1",
@@ -312,9 +312,9 @@ export default {
                 case "7-1":
                     this.$router.push("/uc/level/current");
                     break;
-                 case "7-2":
+                case "7-2":
                     this.$router.push("/uc/level/history");
-                    break;         
+                    break;
                 default:
                     this.$router.push("/uc/safe");
                     break;
@@ -343,12 +343,12 @@ export default {
             this.$refs.test.updateActiveName();
         });
         const doc = document.body;
-         const sreenHeight = doc.offsetHeight;
-         const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
-         const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
-         const contentHeight = doc.getElementsByClassName("mymsg_wrapper")[0];
-         const bodyHeight = sreenHeight - headerHeight - footerHeight;
-         contentHeight.style.minHeight = bodyHeight + "px";
+        const sreenHeight = doc.offsetHeight;
+        const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
+        const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
+        const contentHeight = doc.getElementsByClassName("mymsg_wrapper")[0];
+        const bodyHeight = sreenHeight - headerHeight - footerHeight;
+        contentHeight.style.minHeight = bodyHeight + "px";
         //  this.sss(this.activename);
     }
 };

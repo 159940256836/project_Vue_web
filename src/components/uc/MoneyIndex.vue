@@ -7,13 +7,13 @@
                     <TabPane label="法币账户" name="CURRENCY"></TabPane>
                     <TabPane label="杠杆账户" name="LEVER"></TabPane>
                 </Tabs>
-                <keep-alive>
-                    <component :is="splitcomponent"></component>
-                </keep-alive>
-                
+                <!-- <keep-alive> -->
+                <component :is="splitcomponent"></component>
+                <!-- </keep-alive> -->
+
             </div>
         </div>
-        <Modal v-model="modal" :title="$t('uc.finance.money.match')" @on-ok="matchGCC">
+        <!-- <Modal v-model="modal" :title="$t('uc.finance.money.match')" @on-ok="matchGCC">
             <P style="font-weight: bold;padding: 10px 0;">{{$t('uc.finance.money.matchtip1')}}：{{GCCMatchAmount}}</p>
             <p>
                 <span>{{$t('uc.finance.money.matchtip2')}}：</span>
@@ -22,7 +22,8 @@
         </Modal>
         <Modal v-model="modal_msg" :title="$t('uc.finance.money.match')">
             <p>{{match_msg}}</p>
-        </Modal>
+        </Modal> -->
+        <!-- <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal> -->
     </div>
 </template>
 <script>
@@ -30,11 +31,11 @@ import coin from "../splitaccount/coin";
 import currency from "../splitaccount/currency";
 import lever from "../splitaccount/lever"
 export default {
-    components: {coin,currency,lever},
+    components: { coin, currency, lever },
     data() {
         return {
-            splitcomponent:coin,
-            splitcomponentContent:"COIN",
+            splitcomponent: coin,
+            splitcomponentContent: "COIN",
             GCCMatchAmount: 0,
             matchAmount: 0,
             modal: false,
@@ -48,13 +49,16 @@ export default {
         };
     },
     methods: {
-        changeTab(name){
+        // closeModal(){
+        //     this.modal = false;
+        // },
+        changeTab(name) {
             this.splitcomponentContent = name;
-            name == "COIN" && (this.splitcomponent = coin );
+            name == "COIN" && (this.splitcomponent = coin);
             name == 'CURRENCY' && (this.splitcomponent = currency);
             name == "LEVER" && (this.splitcomponent = lever);
         },
-        
+
         getGCCMatchAmount() {
             //获取
             this.$http
@@ -98,13 +102,13 @@ export default {
                     });
             }
         },
-        
+
     },
     created() {
         // this.getMoney();
         //this.getGCCMatchAmount();
     },
-    
+
 };
 </script>
 <style lang="scss">

@@ -189,6 +189,7 @@
                                     <span>{{currentCoin.coin}}</span>
                                     <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link>
                                     <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span>
+                                    <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                                     <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
@@ -313,7 +314,6 @@
                 <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows"></Table>
             </div>
         </div>
-        <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
     </div>
 </template>
 <style scoped lang="scss">
@@ -2924,7 +2924,7 @@ export default {
                 .post(this.host + this.api.exchange.current, params)
                 .then(response => {
                     var resp = response.body;
-                    if (resp.content.length > 0) {
+                    if (resp.content && resp.content.length > 0) {
                         this.currentOrder.rows = resp.content.slice(0, 3);
                         this.currentOrder.rows.forEach((row, index) => {
                             row.skin = that.skin;
@@ -2954,7 +2954,7 @@ export default {
                 .then(response => {
                     var resp = response.body;
                     let rows = [];
-                    if (resp.content.length > 0) {
+                    if (resp.content && resp.content.length > 0) {
                         this.historyOrder.total = resp.totalElements;
                         this.historyOrder.page = resp.number;
                         for (var i = 0; i < 3; i++) {

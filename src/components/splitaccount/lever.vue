@@ -3,7 +3,7 @@
         <div class="order-table">
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
         </div>
-        <Modal v-model="modal" title="转出" :footer-hide="true" :closable="false" :mask-closable="false">
+        <!-- <Modal v-model="modal" title="转出" :footer-hide="true" :closable="false" :mask-closable="false">
             <Form ref="formInline" :model="formInline" inline>
                 <FormItem prop="coinUnit">
                     <Cascader :data="data" v-model="value" @on-change="getValue"></Cascader>
@@ -28,7 +28,8 @@
                     <Button type="primary" @click="ok">确认</Button>
                 </FormItem>
             </Form>
-        </Modal>
+        </Modal> -->
+        <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
     </div>
 </template>
 <script>
@@ -43,8 +44,10 @@ const Left = x => ({
 const isCheck = (arr) => {
     return arr.length == 2 ? Right(arr) : Left(arr);
 }
+import transfermodal from "../transfer/Index";
 export default {
-    props: ["content"],
+    // props: ["modal"],
+    components:{transfermodal},
     data() {
         return {
             styleObject: { "display": "none" },
@@ -62,9 +65,13 @@ export default {
         }
     },
     created() {
+        console.log(this.modal)
         this.getMoney();
     },
     methods: {
+        closeModal(){
+            this.modal = false;
+        },
         turnAll() {
             const result = isCheck(this.value).map(value => value[1]).fold(x => "err", x => x);
             if (result == "err") {
@@ -224,7 +231,7 @@ export default {
                 title: "风险率",
                 align: "center",
                 render: (h, params) => {
-                    const dangerousRate = this.toFloor(params.row.riskRate) + "%";
+                    const dangerousRate = this.toFloor(params.row.explosionRiskRate) + "%";
                     return h("div", {}, dangerousRate)
                 }
             });
@@ -249,19 +256,6 @@ export default {
                         },
                         on: {
                             click: () => {
-                                this.data = [{
-                                    value: data.symbol,
-                                    label: "从" + data.symbol + "杠杆账户中的",
-                                    children: [{
-                                        value: data.leverWalletList[0].coin.unit,
-                                        label: data.leverWalletList[0].coin.unit,
-                                        allNum: data.leverWalletList[0].balance,
-                                    }, {
-                                        value: data.leverWalletList[1].coin.unit,
-                                        label: data.leverWalletList[1].coin.unit,
-                                        allNum: data.leverWalletList[1].balance,
-                                    }]
-                                }]
                                 this.modal = true;
                             }
                         },

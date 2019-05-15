@@ -103,6 +103,7 @@
                                 </template>
                                 <li style="color:#f0ac19;width:30%;text-align:right;" @click="transFerFun" v-if="isLogin">划转</li>
                                 <li style="color:#f0ac19;width:20%" @click="toBorrow" v-if="isLogin">借贷/归还</li>
+                                <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
                             <span @click="market_price" :class="{active:showMarket}">{{$t("exchange.market_price")}}</span>
@@ -122,9 +123,6 @@
                                     <span>{{$t("exchange.canuse")}}</span>
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
-                                    <!-- <router-link :to="rechargeUSDTUrl">{{$t("exchange.recharge")}}</router-link> -->
-                                    <!-- <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span> -->
-                                    <!-- <a :href="rechargeUSDTUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
                                 </div>
@@ -205,9 +203,6 @@
                                     <span>{{$t("exchange.canuse")}}</span>
                                     <b>{{wallet.coin|toFloor(coinScale)}}</b>
                                     <span>{{currentCoin.coin}}</span>
-                                    <!-- <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link> -->
-                                    <!-- <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span> -->
-                                    <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
                                 </div>
@@ -331,7 +326,7 @@
                 <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows"></Table>
             </div>
         </div>
-        <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
+        
     </div>
 </template>
 <style scoped lang="scss">
@@ -1629,8 +1624,8 @@ export default {
                     const list = data.data.map(ele => ({
                         symbol: ele.symbol,
                         proportion: ele.proportion + "X",
-                        explosionPrice: ele.explosionPrice,
-                        riskRate: ele.riskRate + "%",
+                        explosionPrice: ele.explosionPrice>=0?ele.explosionPrice:"--",
+                        riskRate: ele.explosionRiskRate + "%",
                         baseCoin: this.currentCoin.base
                     }));
                     const [{ symbol, explosionPrice, proportion, riskRate, baseCoin }] = list;
@@ -3024,11 +3019,7 @@ export default {
             this.$Modal.confirm({
                 content: this.$t("exchange.undotip"),
                 onOk: () => {
-                    this.$http
-                        .post(
-                            this.host + this.api.exchange.orderCancel + "/" + order.orderId,
-                            {}
-                        )
+                    this.$http.get(this.host + '/margin-trade/order/cancel/'+ order.orderId)
                         .then(response => {
                             var resp = response.body;
                             if (resp.code == 0) {

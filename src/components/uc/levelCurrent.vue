@@ -96,7 +96,7 @@ export default {
       loading: false,
       pageSize: 10,
       pageNum: 1,
-      total: 10,
+      total: 0,
       symbol: [],
       formItem: {
         symbol: "",

@@ -9,7 +9,7 @@
                 </li>
                 <li v-for="(item,index) in allLeverList" :key="index" @click="changLeverSymbol(index)">
                     <div>{{item.symbol}}</div>
-                    <div>{{item.riskRate}}%</div>
+                    <div>{{item.explosionRiskRate}}%</div>
                 </li>
             </ul>
         </div>
@@ -178,7 +178,7 @@ export default {
                             coinCanLoan: ele.coinCanLoan || 0,
                             coinINsertRate: ele.leverWalletList[0].leverCoin.interestRate || 0,
                             explosionPrice: ele.explosionPrice,
-                            riskRate: ele.riskRate
+                            riskRate: ele.explosionRiskRate
                         }
                     });
                     this.symbolList = list || [];
