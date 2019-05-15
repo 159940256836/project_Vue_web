@@ -123,7 +123,7 @@
                     <Input type="password" v-model="formInline.fundpwd" :placeholder="$t('otc.chat.msg7')"></Input>
                 </FormItem>
                 <FormItem v-if="googleSwitch">
-                    <Input type="text" v-model="formInline.googleCode" :placeholder="谷歌验证码"></Input>
+                    <Input type="text" v-model="formInline.googleCode" placeholder="谷歌验证码"></Input>
                 </FormItem>
             </Form>
             <div slot="footer">
@@ -255,6 +255,7 @@ export default {
                 return;
             }
             let params = {};
+            console.log(this.googleSwitch);
             if (this.googleSwitch) {
                 if (this.formInline.googleCode == "") {
                     this.modal = true;
@@ -435,7 +436,8 @@ export default {
         this.coinType = this.$route.query.name || "";
         this.getAddrList();
         this.getList(0, 10, 1);
-        this.$http.post(this.host + '/uc/get/user', data).then(res => {
+        
+        this.$http.post(this.host + '/uc/get/user', {mobile: this.$store.getters.member.mobile}).then(res => {
             const data = res.body;
             if (data.code == 0) {
                 this.googleSwitch = !!data.data;
