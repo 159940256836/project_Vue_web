@@ -1228,7 +1228,7 @@ $night-color: #fff;
                 historyOrder: {
                     pageSize: 10,
                     total: 10,
-                    page: 0,
+                    page: 1,
                     columns: [
                         {
                             type: "expand",
@@ -2133,14 +2133,18 @@ $night-color: #fff;
                         this.plate.askRows = [];
                         this.plate.bidRows = [];
                         let resp = response.body;
+
                         if (resp.ask && resp.ask.items) {
+                            console.log(resp.ask.items)
                             for (var i = 0; i < resp.ask.items.length; i++) {
+                                console.log(resp.ask.items[i].totalAmount,resp.ask.items[i].amount)
                                 if (i == 0) {
                                     resp.ask.items[i].totalAmount = resp.ask.items[i].amount;
                                 } else {
                                     resp.ask.items[i].totalAmount =
                                         resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount;
                                 }
+                                console.log(resp.ask.items[i].totalAmount,resp.ask.items[i].amount)
                             }
                             if (resp.ask.items.length >= this.plate.maxPostion) {
                                 for (var i = this.plate.maxPostion; i > 0; i--) {
@@ -2941,17 +2945,17 @@ $night-color: #fff;
             getCurrentOrder() {
                 //查询当前委托
                 var params = {};
-                params["pageNo"] = 0;
+                params["pageNo"] = 1;
                 params["pageSize"] = 100;
                 params["symbol"] = this.currentCoin.symbol;
                 this.currentOrder.rows = [];
                 var that = this;
                 this.$http
-                    .post(this.host + this.api.exchange.current, params)
-                    .then(response => {
-                        var resp = response.body;
-                        if(resp.content!=undefined){
-                            if (resp.content.length > 0) {
+                .post(this.host + this.api.exchange.current, params)
+                .then(response => {
+                    var resp = response.body;
+                    if(resp.content!=undefined){
+                        if (resp.content.length > 0) {
                             this.currentOrder.rows = resp.content.slice(0, 3);
                             this.currentOrder.rows.forEach((row, index) => {
                                 row.skin = that.skin;
@@ -2961,10 +2965,11 @@ $night-color: #fff;
                                         : row.price;
                             });
                         }
-                        }
-                    });
+                    }
+                });
             },
             getHistoryOrder(pageNo) {
+                console.log(pageNo,this.historyOrder.page)
                 //查询历史委托
                 if (pageNo == undefined) {
                     pageNo = this.historyOrder.page;

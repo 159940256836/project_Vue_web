@@ -57,10 +57,17 @@
                   <!--</p>-->
                 </label>
                 <div class="input-group" style="margin-top:14px;position:relative;">
-                  <!--<Slider v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee"></Slider>
-                  <Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">
-                  <InputNumber readonly v-model="withdrawFee" :min="currentCoin.minTxFee" :max="currentCoin.maxTxFee" size="large" style="width: 440px;"></InputNumber>-->
-                  <Input v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee" style="height: 36px;"></Input>
+                  <Slider v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee"></Slider>
+                  <!--<Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">-->
+                  <InputNumber readonly v-model="withdrawFee" :min="currentCoin.minTxFee" :max="currentCoin.maxTxFee" size="large" style="width: 605px;"></InputNumber>
+                  <Input v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee"></Input>
+                  <!--<Input
+                    v-model="withdrawFee"
+                    :max="currentCoin.maxTxFee"
+                    :min="currentCoin.minTxFee"
+                    @keyup.native="currencyCheck"
+                  >
+                  </Input>-->
                   <span class="input-group-addon addon-tag uppercase">{{currentCoin.unit}}</span>
                   <!--</Poptip>-->
                 </div>
@@ -68,7 +75,7 @@
               <div class="form-group">
                 <label>{{$t('uc.finance.withdraw.arriamount')}}</label>
                 <div class="input-group" style="margin-top:14px;position:relative;">
-                  <InputNumber readonly v-model="withdrawOutAmount" :placeholder="$t('uc.finance.withdraw.arriamount')" size="large" style="width: 100%;"></InputNumber>
+                  <InputNumber v-model="withdrawOutAmount" :placeholder="$t('uc.finance.withdraw.arriamount')" size="large" style="width: 100%;"></InputNumber>
                   <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->
                   <span class="input-group-addon addon-tag uppercase">{{currentCoin.unit}}</span>
                 </div>
@@ -165,18 +172,23 @@ export default {
   },
   watch: {
     currentCoin: function() {
-      console.log(this.currentCoin)
+      /*this.currentCoin.minTxFee*/
       this.withdrawFee =
         this.currentCoin.minTxFee +
         (this.currentCoin.maxTxFee - this.currentCoin.minTxFee) / 2;
     }
   },
   methods: {
+    // 提币逻辑校验
+   /* currencyCheck() {
+      this.withdrawOutAmount = this.withdrawAmount - this.withdrawFee
+      this.withdrawOutAmount = this.withdrawFee - this.withdrawAmount
+      console.log(this.withdrawOutAmount)
+    },*/
     cancel(){
       this.modal = false;
       this.formInline.code = "";
       this.formInline.fundpwd = "";
-
     },
     sendCode() {
       this.$http.post(this.host + "/uc/mobile/withdraw/code").then(response => {
@@ -258,7 +270,7 @@ export default {
       params["fee"] = this.withdrawFee;
       params["jyPassword"] = this.formInline.fundpwd;
       params["code"] = this.formInline.code;
-      this.$http.post(this.host + "/uc/withdraw/apply/code", params).then(response => {
+      this.$http.post(this.host + "/uc/withdraw/apply", params).then(response => {
           this.fundpwd = "";
           var resp = response.body;
           if (resp.code == 0) {
