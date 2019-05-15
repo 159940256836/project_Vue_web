@@ -402,11 +402,10 @@ export default {
                             font-size: 14px;
                             color: #fff;
                             display: inline-block;
-                            min-width: 90px;
+                            margin-right:40px;
                             text-align: center;
                             &:nth-child(5) {
                                 padding-right: 19px;
-                                min-width: 50px;
                             }
                         }
                         a.router-link-exact-active.router-link-active {

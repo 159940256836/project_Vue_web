@@ -258,7 +258,7 @@ export default {
       params["fee"] = this.withdrawFee;
       params["jyPassword"] = this.formInline.fundpwd;
       params["code"] = this.formInline.code;
-      this.$http.post(this.host + "/uc/withdraw/apply/code", params).then(response => {
+      this.$http.post(this.host + "/uc/withdraw/apply", params).then(response => {
           this.fundpwd = "";
           var resp = response.body;
           if (resp.code == 0) {

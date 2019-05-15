@@ -2203,8 +2203,13 @@ $night-color: #fff;
                                     this.plate.bidRows.push(bid);
                                 }
                                 const rows = this.plate.bidRows,
-                                    len = rows.length,
-                                    totle = rows[resp.bid.items.length - 1].totalAmount;
+                                    len = rows.length;
+                                    if(rows[resp.bid.items.length - 1]!=undefined){
+                                        const totle = rows[resp.bid.items.length - 1].totalAmount;
+                                    }else{
+                                        const totle="";
+                                    }
+                                    
                                 this.plate.bidTotle = totle;
                             } else {
                                 const rows = this.plate.bidRows,
