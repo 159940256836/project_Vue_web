@@ -1,6 +1,8 @@
 <style lang="scss" scoped>
   .mymsg_wrapper {
-    padding: 60px 8% 0;
+      width: 1200px;
+      padding-top: 100px;
+      margin: 0 auto 100px;
 
     .wrapper {
       width: 100%;
@@ -9,7 +11,7 @@
       overflow: hidden;
       ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
         padding: 0 10px;
-        width: 15% !important;
+        width: 18% !important;
         float: left;
         background: none;
         min-height: 662px;
@@ -91,7 +93,7 @@
         }
       }
       .nav-rights {
-        width: 85%;
+        width: 82%;
         float: left;
         min-height: 600px;
       }
