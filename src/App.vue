@@ -1279,4 +1279,7 @@ body {
 //修改iview样式
 .ivu-menu-vertical .ivu-menu-item:hover,.ivu-menu-vertical .ivu-menu-submenu-title:hover{color:	not specified}
 .ivu-menu-opened>*>.ivu-menu-submenu-title-icon{color:#fff;}
+.ivu-notice{
+    top:10% !important;
+}
 </style>
