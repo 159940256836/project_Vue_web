@@ -1228,7 +1228,7 @@ $night-color: #fff;
                 historyOrder: {
                     pageSize: 10,
                     total: 10,
-                    page: 0,
+                    page: 1,
                     columns: [
                         {
                             type: "expand",
@@ -2941,7 +2941,7 @@ $night-color: #fff;
             getCurrentOrder() {
                 //查询当前委托
                 var params = {};
-                params["pageNo"] = 0;
+                params["pageNo"] = 1;
                 params["pageSize"] = 100;
                 params["symbol"] = this.currentCoin.symbol;
                 this.currentOrder.rows = [];
