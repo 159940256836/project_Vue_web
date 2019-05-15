@@ -244,7 +244,7 @@ $pageTheme: rgb(13, 70, 125);
 
 .father .ivu-tabs-nav .ivu-tabs-tab{
     margin-right:0;
-    padding:0;
+    padding: 16px;
 }
 // .father .ivu-tabs-nav .ivu-tabs-tab:hover{
 //     color:#fff;

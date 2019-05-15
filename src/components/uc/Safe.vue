@@ -1508,7 +1508,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 </style>
 <style lang="scss">
-button.ivu-btn.ivu-btn-default {
+.accountContent>*>button.ivu-btn.ivu-btn-default {
     &:hover {
         color: #3399ff;
         border: 1px solid #3399ff;
