@@ -115,7 +115,6 @@ export default {
                 this.$http
                     .post(this.host + this.api.uc.announcement, param)
                     .then(response => {
-                        // console.log(response);
                         var resp = response.body;
                         if (resp.code == 0) {
                             if (resp.data.content.length == 0) return;

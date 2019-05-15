@@ -58,7 +58,6 @@ export default {
     methods: {
         changeTab(n){
             this.tabid=n;
-            console.log(111)
         },
         init() {
             const params = getParams(this.pageNum)(this.status);
@@ -140,6 +139,9 @@ export default {
 </style>
 <style lang="scss">
 $pageTheme: rgb(13, 70, 125);
+.ivu-tabs-nav .ivu-tabs-tab-active{
+    color:#fff !important;
+}
 #centent{
     .ivu-tabs-ink-bar{
         height: 0;

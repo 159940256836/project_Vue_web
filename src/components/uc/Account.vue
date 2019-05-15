@@ -382,7 +382,6 @@ export default {
     },
     methods: {
         aliHandleSuccess (res, file,fileList) {
-            // console.log(res);
           this.$refs.upload1.fileList=[fileList[fileList.length-1]];
           this.aliImg=this.aliPreview=res.data;
         },
@@ -510,7 +509,6 @@ export default {
             //获取个人账户信息
             this.$http.post(this.host + '/uc/approve/account/setting').then(response => {
                 var resp = response.body;
-                // console.log(resp);
                 if (resp.code == 0) {
                     this.user = resp.data;
                     this.formValidate1.name = this.formValidate2.name = this.formValidate3.name = this.user.realName

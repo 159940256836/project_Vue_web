@@ -46,7 +46,6 @@ export default {
     },
     methods: {
         // getId() {
-        //     // console.log(event.currentTarget.id)
         //     this.tradeWay = event.currentTarget.id
         // },
         init() {

@@ -517,7 +517,6 @@ text-indent:0cm;'><b><span lang=EN-US style=''>十二、</span></b><b><span
     },
     methods:{
       init(){
-        // console.log(this.lang);
       }
     }
   }

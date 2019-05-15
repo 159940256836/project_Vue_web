@@ -1073,7 +1073,6 @@ export default {
       if(params.unit==undefined){
           params.unit="usdt";
       }
-      // console.log(params)
       this.$http
         .post(this.host + this.api.otc.advertise, params)
         .then(response => {
@@ -1117,7 +1116,6 @@ export default {
     }
   },
   created() {
-      // console.log(this.$route.params.pathMatch)
     this.reloadAd();
   }
 };

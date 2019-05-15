@@ -67,7 +67,6 @@ export default {
         }
         const memberGradeId = level(this.$store.getters.member.memberGradeId);
         this.init().then(data => {
-            console.log(data);
             const mySelf = data.filter(ele => ele.gradeCode == memberGradeId);
             this.mySelf = mySelf[0];
             this.allSelf = data;

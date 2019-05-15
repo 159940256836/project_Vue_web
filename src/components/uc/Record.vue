@@ -153,7 +153,6 @@ export default {
                 });
         },
         getType() {
-            // console.log(this.recordValue);
         },
         dateform(time) {
             var date = new Date(time);
