@@ -294,19 +294,6 @@
                                             <FormItem :label="$t('uc.safe.confirmnewpwd')" prop="newMPwConfirm">
                                                 <Input v-model="formValidate5.newMPwConfirm" size="large" type="password"></Input>
                                             </FormItem>
-                                            <!-- <FormItem :label="$t('uc.safe.emailcode')" prop="vailCode1">
-                                                <Input v-model="formValidate2.vailCode1" size="large">
-                                                <!-- <Button slot="append">点击获取</Button> -->
-                                            <!-- <div class="timebox" slot="append">
-                                                <Button @click="send(1)" :disabled="sendMsgDisabled1">
-                                                    <span v-if="sendMsgDisabled1">{{time1+$t('uc.safe.second')}}</span>
-                                                    <span v-if="!sendMsgDisabled1">{{$t('uc.safe.clickget')}}</span>
-                                                </Button>
-                                            </div>
-                                            </Input>
-                                            </FormItem> -->
-
-                                            <!-- 邮箱验证码 -->
                                             <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode5">
                                                 <Input v-model="formValidate5.vailCode5" size="large">
                                                 <div class="timebox" slot="append">
@@ -318,7 +305,7 @@
                                                 </Input>
                                             </FormItem>
                                             <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
-                                                <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
+                                                <Input v-model="formValidate5.googleCode" size="large" type="text"></Input>
                                             </FormItem>
                                             <p style="text-align:right;">
                                                 <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#f0ac19;">忘记密码?</a>
@@ -351,9 +338,6 @@
                                                     </Button>
                                                 </div>
                                                 </Input>
-                                            </FormItem>
-                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
-                                                <Input v-model="formValidate5.googleCode" size="large" type="text"></Input>
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
@@ -527,6 +511,11 @@ export default {
                 vailCode5: ""
             },
             ruleValidate: {
+                googleCode5: [{
+                    required: true,
+                    message: "请填写谷歌验证码",
+                    trigger: "blur"
+                }],
                 googleCode: [
                     {
                         required: true,
@@ -1034,7 +1023,7 @@ export default {
             } else if (index == 5) {
                 //资金密码获取手机code
                 this.$http
-                    .post(this.host + "/uc/mobile/transaction/code")
+                    .post(this.host + "/uc/mobile/trade/code")
                     .then(response => {
                         var resp = response.body;
                         if (resp.code == 0) {
