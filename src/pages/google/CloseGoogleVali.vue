@@ -130,6 +130,7 @@ export default {
 .openGoogleModal {
     padding: 100px 35%;
     overflow: hidden;
+    min-height: 609px !important;
 }
 </style>
 

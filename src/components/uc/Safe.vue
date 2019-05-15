@@ -344,7 +344,8 @@
                             <!-- 7 -->
                             <div class="account-item googleValidter">
                                 <div class="account-item-in" style="width: 100%;">
-                                    <Icon type="social-googleplus-outline" size="20" color="#00b5f6" />
+                                    <Icon type="social-googleplus-outline"  />
+                                    <Icon type="logo-google" size="20" color="#00b5f6"/>
                                     <span class="card-number">谷歌验证</span>
                                     <p class="bankInfo" style="color: grey; width: 66%">
                                         提现，修改密码，及安全设置的时候用以输入google验证码，详细信息请阅读
@@ -761,8 +762,10 @@ export default {
         submit(name) {
             //实名认证
             if (name == "formValidate6") {
+                console.log(this.imgPreview)
                 if (this.imgPreview == "") {
                     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
+                    
                     return false;
                 }
                 if (this.imgNext == "") {
@@ -783,6 +786,7 @@ export default {
                     .post(this.host + "/uc/approve/real/name", param)
                     .then(response => {
                         var resp = response.body;
+                        console.log(resp,resp.message)
                         if (resp.code == 0) {
                             this.member.realName = this.formValidate6.realName;
                             this.$store.commit("setMember", this.member);

@@ -378,7 +378,7 @@ export default {
             height: 60px;
             line-height: 60px;
             position: fixed;
-            z-index: 999999;
+            z-index: 999;
             background-color: #1c2435;
             transition: all .5s;
             .page-content {
@@ -1279,9 +1279,7 @@ body {
 //修改iview样式
 .ivu-menu-vertical .ivu-menu-item:hover,.ivu-menu-vertical .ivu-menu-submenu-title:hover{color:	not specified}
 .ivu-menu-opened>*>.ivu-menu-submenu-title-icon{color:#fff;}
-.ivu-message,
-.ivu-notice {
-    top: 20% !important;
+.ivu-notice{
+    top:10% !important;
 }
-
 </style>
