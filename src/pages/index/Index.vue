@@ -36,10 +36,22 @@
                 </div>
             </div>
             <div class="section" id="hot">
-                <div v-for="(item,index) in hostSymbolList" :key="index">
-                    {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}}
-                    <SvgLine :values="item.trend"></SvgLine>
-                </div>
+                <section>
+                    <div v-for="(item,index) in hostSymbolList" :key="index">
+                        <div class="">
+                            <div class="flex">
+                                <span class="weight">{{item.symbol}}</span>
+                                <span>{{item.chg | formateRate}}</span>
+                            </div>
+                            <div class="flex">
+                                <span class="weight">{{item.close}}</span>
+                                <span>{{item.cny}}</span>
+                            </div>
+                        </div>
+                        <!-- {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}} -->
+                        <SvgLine :values="item.trend" :width="width" :height="height"></SvgLine>
+                    </div>
+                </section>
             </div>
             <!-- <SvgLine v-for="(item, index) in coins" :key="index" :values="item.trend"></SvgLine> -->
             <!-- 首页行情图 -->
@@ -131,6 +143,8 @@ export default {
     data() {
         let self = this;
         return {
+            width:240,
+            height:80,
             loading: false,
             progress: 0,
             already: 0,
@@ -742,6 +756,11 @@ export default {
         this.stop();
         this.init();
     },
+    filters: {
+        formateRate(str) {
+            return str > 0 ? "+" + (str * 100).toFixed(2) + "%" : (str * 100).toFixed(2) + "%";
+        }
+    },
     computed: {
         isLogin: function () {
             return this.$store.getters.isLogin;
@@ -778,7 +797,15 @@ export default {
         getHotSymbol() {
             this.$http.get(this.host + '/market/overview').then(res => {
                 const resp = res.body;
-                this.hostSymbolList = resp.recommend;
+                const list = resp.recommend.map(ele => ({
+                    symbol: ele.symbol,
+                    chg: ele.chg,
+                    close: ele.close,
+                    cny: this.round(this.mul(ele.baseUsdRate, this.CNYRate), 2),
+                    trend: ele.trend
+                }))
+                this.hostSymbolList = list;
+                console.log(list);
                 this.startWebsockHotlist();
             })
         },
@@ -963,19 +990,15 @@ export default {
                     const result = isHot.map(obj => obj.symbol == resp.symbol).fold(x => null, x => x);
                     result && this.hostSymbolList.forEach((ele, index) => {
                         if (ele.symbol == resp.symbol) {
-                            this.hostSymbolList.splice(index, 1, resp);
+                            this.hostSymbolList.splice(index, 1, {
+                                symbol: resp.symbol,
+                                chg: resp.chg,
+                                close: resp.close,
+                                cny: this.round(this.mul(resp.baseUsdRate, this.CNYRate), 2),
+                                trend: resp.trend
+                            });
                         }
                     });
-                    // console.log(result);
-                    // if (list.length > 0) {
-                    // this.hostSymbolList.forEach((ele, index) => {
-                    //     if (ele.symbol == list[0].symbol) {
-                    //         this.hostSymbolList.splice(index, 1, resp);
-                    //     }
-                    // });
-                    // } else {
-                    //     return;
-                    // }
                 });
             });
         },
@@ -1192,11 +1215,26 @@ li {
     }
 }
 #hot {
-    padding: 30px 10%;
-    background-color: #202b3c;
-    @extend %flex;
-    > div {
-        width: 20%;
+    padding: 30px;
+    background-color: #1c2435;
+
+    section {
+        width: 1200px;
+        margin: 30px auto;
+        @extend %flex;
+        > div {
+            width: 20%;
+            .flex{
+                @extend %flex;
+                color: #00b275;
+                margin-bottom: 10px;
+                .weight{
+                    color: #fff;
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+            }
+        }
     }
 }
 #pagetips {

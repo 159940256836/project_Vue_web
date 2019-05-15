@@ -233,6 +233,9 @@
                                                 </div>
                                                 </Input>
                                             </FormItem>
+                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
+                                                <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
+                                            </FormItem>
                                             <!-- Button -->
                                             <FormItem>
                                                 <Button type="warning" @click="handleSubmit('formValidate4')">{{$t('uc.safe.save')}}</Button>
@@ -266,7 +269,9 @@
                                             <FormItem :label="$t('uc.safe.confirmpwd')" prop="pw7Confirm">
                                                 <Input v-model="formValidate7.pw7Confirm" size="large" type="password"></Input>
                                             </FormItem>
-
+                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
+                                                <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
+                                            </FormItem>
                                             <!-- Button -->
                                             <FormItem>
                                                 <Button type="warning" @click="handleSubmit('formValidate7')">{{$t('uc.safe.save')}}</Button>
@@ -274,7 +279,7 @@
                                             </FormItem>
                                         </Form>
                                     </div>
-                                    <!-- 修改 -->
+                                    <!-- 修改资金密码 -->
                                     <div class="detail-list" v-show="user.fundsVerified==1  && !fGetBackFundpwd">
                                         <Form ref="formValidate5" :model="formValidate5" :rules="ruleValidate" :label-width="95">
                                             <!-- oldPw -->
@@ -289,17 +294,32 @@
                                             <FormItem :label="$t('uc.safe.confirmnewpwd')" prop="newMPwConfirm">
                                                 <Input v-model="formValidate5.newMPwConfirm" size="large" type="password"></Input>
                                             </FormItem>
+                                            <!-- <FormItem :label="$t('uc.safe.emailcode')" prop="vailCode1">
+                                                <Input v-model="formValidate2.vailCode1" size="large">
+                                                <!-- <Button slot="append">点击获取</Button> -->
+                                            <!-- <div class="timebox" slot="append">
+                                                <Button @click="send(1)" :disabled="sendMsgDisabled1">
+                                                    <span v-if="sendMsgDisabled1">{{time1+$t('uc.safe.second')}}</span>
+                                                    <span v-if="!sendMsgDisabled1">{{$t('uc.safe.clickget')}}</span>
+                                                </Button>
+                                            </div>
+                                            </Input>
+                                            </FormItem> -->
+
                                             <!-- 邮箱验证码 -->
-                                            <!--<FormItem :label="$t('uc.safe.phonecode')" prop="vailCode5">-->
-                                            <!--<Input v-model="formValidate5.vailCode5" size="large">-->
-                                            <!--<div class="timebox" slot="append">-->
-                                            <!--<Button @click="send(5)" :disabled="sendMsgDisabled5">-->
-                                            <!--<span v-if="sendMsgDisabled5">{{time5+$t('uc.safe.second')}}</span>-->
-                                            <!--<span v-if="!sendMsgDisabled5">{{$t('uc.safe.clickget')}}</span>-->
-                                            <!--</Button>-->
-                                            <!--</div>-->
-                                            <!--</Input>-->
-                                            <!--</FormItem>-->
+                                            <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode5">
+                                                <Input v-model="formValidate5.vailCode5" size="large">
+                                                <div class="timebox" slot="append">
+                                                    <Button @click="send(5)" :disabled="sendMsgDisabled5">
+                                                        <span v-if="sendMsgDisabled5">{{time5+$t('uc.safe.second')}}</span>
+                                                        <span v-if="!sendMsgDisabled5">{{$t('uc.safe.clickget')}}</span>
+                                                    </Button>
+                                                </div>
+                                                </Input>
+                                            </FormItem>
+                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
+                                                <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
+                                            </FormItem>
                                             <p style="text-align:right;">
                                                 <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#f0ac19;">忘记密码?</a>
                                             </p>
@@ -331,6 +351,9 @@
                                                     </Button>
                                                 </div>
                                                 </Input>
+                                            </FormItem>
+                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
+                                                <Input v-model="formValidate5.googleCode" size="large" type="text"></Input>
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
@@ -477,6 +500,7 @@ export default {
                 password: ""
             },
             formValidate4: {
+                googleCode: "",
                 oldPw: "",
                 newPw: "",
                 newPwConfirm: "",
@@ -485,8 +509,9 @@ export default {
             formValidate5: {
                 oldPw: "",
                 newMPw: "",
-                newMPwConfirm: ""
-                // vailCode5: '',
+                newMPwConfirm: "",
+                vailCode5: '',
+                googleCode: "",
             },
             formValidate6: {
                 realName: "",
@@ -502,6 +527,13 @@ export default {
                 vailCode5: ""
             },
             ruleValidate: {
+                googleCode: [
+                    {
+                        required: true,
+                        message: "请填写谷歌验证码",
+                        trigger: "blur"
+                    }
+                ],
                 mail: [
                     {
                         required: true,
@@ -672,23 +704,23 @@ export default {
         checkGoogleValidtor(data) {//验证用户是否开启google验证
             this.$http.post(this.host + '/uc/get/user', data).then(res => {
                 const data = res.body;
-                if(data.code == 0){
+                if (data.code == 0) {
                     this.googleSwitch = !!data.data;
                 }
             })
         },
-        changeGoogleSwitch(){//改变google验证状态
+        changeGoogleSwitch() {//改变google验证状态
             const params = {
-                phone:this.user.mobilePhone
+                phone: this.user.mobilePhone
             }
             !this.googleSwitch && this.$router.push({
-                name:"closegoogleVali",
+                name: "closegoogleVali",
                 params
             });
             this.googleSwitch && this.$router.push({
-                name:"resetgooglevali",
+                name: "resetgooglevali",
             })
-            
+
         },
         beforeUpload(data) {
             if (data && data.size >= 1024000 * 2) {
@@ -830,33 +862,37 @@ export default {
                 param["oldPassword"] = this.formValidate4.oldPw;
                 param["newPassword"] = this.formValidate4.newPw;
                 param["code"] = this.formValidate4.vailCode3;
-                this.$http
-                    .post(this.host + "/uc/approve/update/password", param)
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            this.$Message.success(this.$t("uc.safe.save_success"));
-                            this.getMember();
-                            this.choseItem = 0;
-                            localStorage.removeItem("MEMBER");
-                            localStorage.removeItem("TOKEN");
-                            this.$store.state.showLogout = true;
-                            this.$store.state.showLogin = false;
-                            let self = this;
-                            setTimeout(() => {
-                                self.$router.push("/login");
-                            }, 2000);
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
+                if (this.googleSwitch) {
+                    param.googleCode = this.formValidate4.googleCode;
+                }
+                this.$http.post(this.host + "/uc/approve/update/password", param).then(response => {
+                    var resp = response.body;
+                    if (resp.code == 0) {
+                        this.$Message.success(this.$t("uc.safe.save_success"));
+                        this.getMember();
+                        this.choseItem = 0;
+                        localStorage.removeItem("MEMBER");
+                        localStorage.removeItem("TOKEN");
+                        this.$store.state.showLogout = true;
+                        this.$store.state.showLogin = false;
+                        let self = this;
+                        setTimeout(() => {
+                            self.$router.push("/login");
+                        }, 2000);
+                    } else {
+                        this.$Message.error(resp.message);
+                    }
+                });
             }
             //修改资金密码
             if (name == "formValidate5") {
                 let param = {};
                 param["oldPassword"] = this.formValidate5.oldPw;
                 param["newPassword"] = this.formValidate5.newMPw;
-                // param['code'] = this.formValidate5.vailCode5
+                param['msgCode'] = this.formValidate5.vailCode5;
+                if (this.googleSwitch) {
+                    param.googleCode = this.formValidate5.googleCode;
+                }
                 this.$http
                     .post(this.host + "/uc/approve/update/transaction/password", param)
                     .then(response => {
@@ -1041,8 +1077,8 @@ export default {
         }
     },
     created() {
-        this.getMember().then(res=>{
-            this.checkGoogleValidtor({mobile:res.mobilePhone});
+        this.getMember().then(res => {
+            this.checkGoogleValidtor({ mobile: res.mobilePhone });
         });
         const level = (memberGradeId) => {
             return `V${memberGradeId}`
