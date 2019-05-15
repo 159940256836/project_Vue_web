@@ -558,6 +558,16 @@ $lineColor: rgb(71, 100, 146);
     border: 1px solid #3399FF;
 }
 .ieo_detail_box .common {
+    .table {
+    width:1200px;
+    margin-top:40px;
+    height:46px;
+    .ivu-tabs-tab {
+        padding: 16px;
+        font-size: 26px;
+        font-weight: 700;
+    }
+}
     .ivu-input {
         background:#fff;
         color:#333;
@@ -583,17 +593,7 @@ $lineColor: rgb(71, 100, 146);
         }
     }
 }
-.table {
-    width:1200px;
-    margin-top:40px;
-    height:46px;
 
-    .ivu-tabs-tab {
-        padding: 16px;
-        font-size: 26px;
-        font-weight: 700;
-    }
-}
 .ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631]{
     background:#3399FF;
     opacity:0.5;
