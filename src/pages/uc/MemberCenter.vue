@@ -1,3 +1,174 @@
+<style lang="scss" scoped>
+  .mymsg_wrapper {
+    padding: 60px 8% 0;
+
+    .wrapper {
+      width: 100%;
+      border: 1px solid #f5f5f5;
+      padding: 30px 30px 30px 0;
+      overflow: hidden;
+      ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
+        padding: 0 10px;
+        width: 15% !important;
+        float: left;
+        background: none;
+        min-height: 662px;
+        border-right: 1px solid #eee;
+        .title {
+          text-align: center;
+          font-size: 20px;
+          line-height: 40px;
+          color: #666;
+        }
+        li.ivu-menu-submenu {
+          .ivu-menu-submenu-title {
+            height: 50px;
+            padding: 10px;
+            border-radius: 5px;
+            &:hover {
+              background-color: #fff;
+              .isclick {
+                background-color: #3399ff;
+              }
+              .content,
+              .ivu-icon {
+                color: #666;
+              }
+            }
+            .isclick {
+              width: 6px;
+              height: 6px;
+              background-color: #3399ff;
+              display: inline-block;
+              border-radius: 50%;
+              margin-top: 16px;
+              line-height: 50px;
+            }
+            .content {
+              padding-left: 5px;
+            }
+            .ivu-icon {
+              top: 27px;
+            }
+          }
+          .ivu-menu {
+            li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
+              color: #3399ff;
+              a {
+                color: #3399ff;
+              }
+            }
+            li.ivu-menu-item {
+              color: #666;
+              background: #edf8ff;
+              padding: 0;
+              text-align: left;
+              a {
+                color: #666;
+                display: block;
+                height: 100%;
+                padding: 14px 24px;
+                font-size: 14px;
+              }
+            }
+          }
+        }
+        li.ivu-menu-submenu.ivu-menu-opened{
+          background-color: #3399ff;
+          .ivu-menu-submenu-title {
+            .isclick {
+              background-color: #fff;
+            }
+            .content,.ivu-icon {
+              color: #fff;
+            }
+          }
+        }
+      }
+      ul.ivu-menu.ivu-menu-light {
+        &:after {
+          background-color: #fff;
+        }
+      }
+      .nav-rights {
+        width: 85%;
+        float: left;
+        min-height: 600px;
+      }
+    }
+  }
+  /*.mymsg_wrapper {
+      .wrapper {
+          ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
+              li.ivu-menu-submenu {
+                  .ivu-menu-submenu-title {
+                      height: 50px;
+                      padding: 10px;
+                      border-radius: 5px;
+                      &:hover {
+                          background-color: #fff;
+                          .isclick {
+                              background-color: #3399ff;
+                          }
+                          .content,
+                          .ivu-icon {
+                              color: #666;
+                          }
+                      }
+                      .isclick {
+                          width: 6px;
+                          height: 6px;
+                          background-color: #3399ff;
+                          display: inline-block;
+                          border-radius: 50%;
+                          margin-top: 16px;
+                          line-height: 50px;
+                      }
+                      .content {
+                          padding-left: 5px;
+                      }
+                      .ivu-icon {
+                          top: 27px;
+                      }
+                  }
+                  .ivu-menu {
+                      li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
+                          color: #3399ff;
+                          a {
+                              color: #3399ff;
+                          }
+                      }
+                      li.ivu-menu-item {
+                          color: #666;
+                          background: #edf8ff;
+                          padding: 0;
+                          text-align: left;
+                          a {
+                              color: #666;
+                              display: block;
+                              height: 100%;
+                              padding: 14px 24px;
+                              font-size: 14px;
+                          }
+                      }
+                  }
+              }
+              li.ivu-menu-submenu.ivu-menu-opened{
+                  background-color: #3399ff;
+                  .ivu-menu-submenu-title {
+                      .isclick {
+                          background-color: #fff;
+                      }
+                      .content,.ivu-icon {
+                          color: #fff;
+                      }
+                  }
+              }
+          }
+
+      }
+  }*/
+</style>
 <template>
     <div class="mymsg_wrapper common">
         <div class="wrapper">
@@ -209,174 +380,4 @@ export default {
     }
 };
 </script>
-<style lang="scss" scoped>
-    .mymsg_wrapper {
-        padding: 60px 8% 0;
 
-        .wrapper {
-            width: 100%;
-            border: 1px solid #f5f5f5;
-            padding: 30px 30px 30px 0;
-            overflow: hidden;
-            ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
-                padding: 0 10px;
-                width: 15% !important;
-                float: left;
-                background: none;
-                min-height: 662px;
-                border-right: 1px solid #eee;
-                .title {
-                    text-align: center;
-                    font-size: 20px;
-                    line-height: 40px;
-                    color: #666;
-                }
-                li.ivu-menu-submenu {
-                    .ivu-menu-submenu-title {
-                        height: 50px;
-                        padding: 10px;
-                        border-radius: 5px;
-                        &:hover {
-                            background-color: #fff;
-                            .isclick {
-                                background-color: #3399ff;
-                            }
-                            .content,
-                            .ivu-icon {
-                                color: #666;
-                            }
-                        }
-                        .isclick {
-                            width: 6px;
-                            height: 6px;
-                            background-color: #3399ff;
-                            display: inline-block;
-                            border-radius: 50%;
-                            margin-top: 16px;
-                            line-height: 50px;
-                        }
-                        .content {
-                            padding-left: 5px;
-                        }
-                        .ivu-icon {
-                            top: 27px;
-                        }
-                    }
-                    .ivu-menu {
-                        li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
-                            color: #3399ff;
-                            a {
-                                color: #3399ff;
-                            }
-                        }
-                        li.ivu-menu-item {
-                            color: #666;
-                            background: #edf8ff;
-                            padding: 0;
-                            text-align: left;
-                            a {
-                                color: #666;
-                                display: block;
-                                height: 100%;
-                                padding: 14px 24px;
-                                font-size: 14px;
-                            }
-                        }
-                    }
-                }
-                li.ivu-menu-submenu.ivu-menu-opened{
-                    background-color: #3399ff;
-                    .ivu-menu-submenu-title {
-                        .isclick {
-                            background-color: #fff;
-                        }
-                        .content,.ivu-icon {
-                            color: #fff;
-                        }
-                    }
-                }
-            }
-            ul.ivu-menu.ivu-menu-light {
-                &:after {
-                    background-color: #fff;
-                }
-            }
-            .nav-rights {
-                width: 85%;
-                float: left;
-                min-height: 600px;
-            }
-        }
-    }
-    /*.mymsg_wrapper {
-        .wrapper {
-            ul.ivu-menu.ivu-menu-light.ivu-menu-vertical {
-                li.ivu-menu-submenu {
-                    .ivu-menu-submenu-title {
-                        height: 50px;
-                        padding: 10px;
-                        border-radius: 5px;
-                        &:hover {
-                            background-color: #fff;
-                            .isclick {
-                                background-color: #3399ff;
-                            }
-                            .content,
-                            .ivu-icon {
-                                color: #666;
-                            }
-                        }
-                        .isclick {
-                            width: 6px;
-                            height: 6px;
-                            background-color: #3399ff;
-                            display: inline-block;
-                            border-radius: 50%;
-                            margin-top: 16px;
-                            line-height: 50px;
-                        }
-                        .content {
-                            padding-left: 5px;
-                        }
-                        .ivu-icon {
-                            top: 27px;
-                        }
-                    }
-                    .ivu-menu {
-                        li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
-                            color: #3399ff;
-                            a {
-                                color: #3399ff;
-                            }
-                        }
-                        li.ivu-menu-item {
-                            color: #666;
-                            background: #edf8ff;
-                            padding: 0;
-                            text-align: left;
-                            a {
-                                color: #666;
-                                display: block;
-                                height: 100%;
-                                padding: 14px 24px;
-                                font-size: 14px;
-                            }
-                        }
-                    }
-                }
-                li.ivu-menu-submenu.ivu-menu-opened{
-                    background-color: #3399ff;
-                    .ivu-menu-submenu-title {
-                        .isclick {
-                            background-color: #fff;
-                        }
-                        .content,.ivu-icon {
-                            color: #fff;
-                        }
-                    }
-                }
-            }
-
-        }
-    }*/
-</style>
