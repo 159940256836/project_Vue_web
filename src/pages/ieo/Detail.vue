@@ -1,5 +1,5 @@
 <template>
-    <div class="ieo_detail_box">
+    <div class="ieo_detail_box ieo_detail_box1">
         <div class="common  commona" style="min-height: 1px;">
             <div class="top_box">
                 <div class="ieoLogo">
@@ -275,6 +275,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.ieo_detail_box1{
+    background:#fff !important;
+}
 
 .specialColor[data-v-2300a631]{
     color:#333;
@@ -380,7 +383,7 @@ $lineColor: rgb(71, 100, 146);
 }
 .ieo_detail_box {
     background: rgb(25, 26, 28);
-    padding: 50px 10%;
+    padding: 70px 10%;
     .common {
         // mine-height:200px;
         width:1200px;
