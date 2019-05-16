@@ -1,0 +1,323 @@
+<template>
+    <div class="leverBox">
+        <div class="leftBox">
+            <h4>杠杆账户</h4>
+            <ul>
+                <li>
+                    <div>交易对</div>
+                    <div>风险率</div>
+                </li>
+                <li v-for="(item,index) in allLeverList" :key="index" @click="changLeverSymbol(index)">
+                    <div>{{item.symbol}}</div>
+                    <div>{{item.explosionRiskRate}}%</div>
+                </li>
+            </ul>
+        </div>
+        <div class="rightBox">
+            <div class="tips">{{symbol}}
+                <Icon type="ios-alert" color="#2d8cf0" />当风险率≤110时,账户将触发爆仓以归还借贷资金</div>
+            <ul>
+                <li v-for="(item,index) in symbolList" :key="index">
+                    <div>
+                        <div class="title">可用&nbsp;&nbsp;{{item.baseUnit}}</div>
+                        <div class="content">{{item.baseBanlance}}</div>
+                    </div>
+                    <div>
+                        <div class="title">可用&nbsp;&nbsp;{{item.coinUnit}}</div>
+                        <div class="content">{{item.coinBalance}}</div>
+                    </div>
+                    <div>
+                        <div class="title">爆仓价</div>
+                        <div class="content">{{item.explosionPrice | defaultTxt}}</div>
+                    </div>
+                    <div>
+                        <div class="title">风险率&nbsp;&nbsp;
+                            <Icon type="ios-alert" />
+                        </div>
+                        <div class="content">{{item.riskRate}}%</div>
+                    </div>
+                </li>
+            </ul>
+            <template v-for="(item, index) in symbolList">
+                <div class="twoBorow">
+                    <div>
+                        <h4>{{item.baseUnit}}借贷</h4>
+                        <ul>
+                            <li>
+                                <div>已借</div>
+                                <div>{{item.baseLoanCount}}</div>
+                            </li>
+                            <li>
+                                <div>可借</div>
+                                <div>{{item.baseCanLoan}}</div>
+                            </li>
+                            <li>
+                                <div>利率</div>
+                                <div>{{item.baseINsertRate}}%</div>
+                            </li>
+                        </ul>
+                        <p>借贷数量</p>
+                        <Input v-model="baseInputvalue" style="width:80%; margin-bottom:20px;">
+                        <span slot="append">{{item.baseUnit}}</span>
+                        </Input>
+                        <Slider v-model="baseValue" style="width:80%;" show-tip="never" @on-change='getBaseValue'></Slider>
+                        <Button type="primary" style="width:80%" @click="borrow('base', item.baseUnit)">申请{{item.baseUnit}}</Button>
+                    </div>
+                    <div>
+                        <h4>{{item.coinUnit}}借贷</h4>
+                        <ul>
+                            <li>
+                                <div>已借</div>
+                                <div>{{item.coinLoanCount}}</div>
+                            </li>
+                            <li>
+                                <div>可借</div>
+                                <div>{{item.coinCanLoan}}</div>
+                            </li>
+                            <li>
+                                <div>利率</div>
+                                <div>{{item.coinINsertRate}}%</div>
+                            </li>
+                        </ul>
+                        <p>借贷数量</p>
+                        <Input v-model="baseCoinvalue" style="width:80%;margin-bottom:20px;">
+                        <span slot="append">{{item.coinUnit}}</span>
+                        </Input>
+                        <Slider v-model="coinValue" style="width:80%;" show-tip="never" @on-change='getCoinValue'></Slider>
+                        <Button type="primary" style="width:80%" @click="borrow('coin',item.coinUnit)">申请{{item.coinUnit}}</Button>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <noReruen :repayment="noReruenRepayment" @borowSuccess="borowSuccess"></noReruen>
+        <alreadyReturn :repayment="alreadyRepayment"></alreadyReturn>
+    </div>
+</template>
+<script>
+import noReruen from "../../components/lever/noReturn";
+import alreadyReturn from "../../components/lever/alreadyReturn"
+export default {
+    components: { noReruen, alreadyReturn },
+    data() {
+        return {
+            noReruenRepayment: 0,
+            alreadyRepayment: 1,
+            baseInputvalue: "",
+            baseCoinvalue: "",
+            baseValue: 0,
+            coinValue: 0,
+            allLeverList: [],
+            symbol: "",
+            symbolList: []
+        }
+    },
+    created() {
+        this.symbol = decodeURIComponent(this.$route.params.coin);
+        this.getAllLeverAccount();
+        this.getSymbolAccount(this.symbol);
+    },
+    filters: {
+        defaultTxt(str) {
+            return str >= 0 ? str : "--";
+        }
+    },
+    methods: {
+        getCoinValue(value) {
+            this.baseCoinvalue = this.toFloor(this.symbolList[0].coinCanLoan * value/100);
+        },
+        getBaseValue(value) {
+            console.log(value);
+            console.log(this.symbolList);
+            this.baseInputvalue = this.toFloor(this.symbolList[0].baseCanLoan * value/100);
+        },
+        borowSuccess() {
+            this.getSymbolAccount(this.symbol);
+            this.alreadyRepayment++;
+            // window.location.reload();
+        },
+        changLeverSymbol(index) {
+            const symbol = this.allLeverList[index].symbol;
+            this.$router.push({
+                name: "lever",
+                params: {
+                    coin: encodeURIComponent(symbol)
+                }
+            });
+            this.baseInputvalue = this.baseCoinvalue = "";
+            this.baseValue = this.coinValue = 0;
+            this.symbol = symbol;
+            this.getAllLeverAccount();
+            this.getSymbolAccount(symbol);
+        },
+        getAllLeverAccount() {
+            this.$http.post(this.host + "/margin-trade/lever_wallet/list").then(response => {
+                var resp = response.body;
+                if (resp.code == 0) {
+                    this.allLeverList = resp.data;
+                    this.loading = false;
+                } else {
+                    this.$Message.error(resp.message);
+                }
+            });
+        },
+        getSymbolAccount(params) {
+            this.$http.post(this.host + "/margin-trade/lever_wallet/list", { symbol: params }).then(response => {
+                var resp = response.body;
+                if (resp.code == 0) {
+                    const list = resp.data.map(ele => {
+                        return {
+                            symbol: ele.symbol || "----/----",
+                            baseUnit: ele.leverWalletList[1].coin.unit || "----",
+                            baseBanlance: ele.leverWalletList[1].balance || 0,
+                            baseLoanCount: ele.baseLoanCount || 0,
+                            baseCanLoan: ele.baseCanLoan || 0,
+                            baseINsertRate: ele.leverWalletList[1].leverCoin.interestRate || 0,
+                            coinUnit: ele.leverWalletList[0].coin.unit || "----",
+                            coinBalance: ele.leverWalletList[0].balance || 0,
+                            coinLoanCount: ele.coinLoanCount || 0,
+                            coinCanLoan: ele.coinCanLoan || 0,
+                            coinINsertRate: ele.leverWalletList[0].leverCoin.interestRate || 0,
+                            explosionPrice: ele.explosionPrice,
+                            riskRate: ele.explosionRiskRate
+                        }
+                    });
+                    this.symbolList = list || [];
+                    console.log(this.symbolList);
+                    this.loading = false;
+                } else {
+                    this.$Message.error(resp.message);
+                }
+            });
+        },
+        isEmpty(str) {
+            if (!str) {
+                this.$Message.error("请输入您要借贷的币的个数");
+                return false;
+            } else {
+                return true;
+            }
+        },
+        isNum(str) {
+            if (isNaN(Number(str))) {
+                this.$Message.error("请输入数字类型");
+                return false;
+            } else {
+                return true;
+            }
+        },
+        borrow(params, unit) {
+            console.log(unit);
+            if (params === "base") {
+                this.isEmpty(this.baseInputvalue) && this.isNum(this.baseInputvalue) && this.toBorrow({ amount: this.baseInputvalue, coinUnit: unit, symbol: this.symbol });
+            } else {
+                this.isEmpty(this.baseCoinvalue) && this.isNum(this.baseCoinvalue) && this.toBorrow({ amount: this.baseCoinvalue, coinUnit: unit, symbol: this.symbol });
+            }
+        },
+        toBorrow(params) {
+            this.$http.post(this.host + "/margin-trade/loan/loan", params).then(res => {
+                if (res.body.code == 0) {
+                    this.$Message.success("借贷成功");
+                    ++this.noReruenRepayment;
+                    this.getSymbolAccount(this.symbol);
+                } else {
+                    this.$Message.success(res.body.message);
+                }
+            })
+        }
+    }
+}
+</script>
+<style lang="scss" scoped>
+%flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.leverBox {
+    @extend %flex;
+    align-items: stretch;
+    padding: 20px 10%;
+    flex-wrap: wrap;
+    .leftBox {
+        width: 30%;
+        box-shadow: 2px 2px 5px #eee;
+        padding: 10px;
+        h4 {
+            text-align: left;
+            font-size: 24px;
+            color: #333;
+        }
+        ul,
+        li {
+            @extend %flex;
+            flex-wrap: wrap;
+        }
+        ul {
+            li {
+                width: 100%;
+                line-height: 2.5;
+                border-bottom: 1px solid #eee;
+            }
+        }
+    }
+    .rightBox {
+        width: 68%;
+        padding: 10px;
+        box-shadow: 2px 2px 5px #eee;
+        .tips {
+            border-bottom: 1px solid #eee;
+            line-height: 3;
+            color: #666;
+            font-size: 20px;
+        }
+        ul {
+            li {
+                @extend %flex;
+                > div {
+                    width: 25%;
+                    border-bottom: 1px solid #eee;
+                    padding: 10px 0;
+                    .title {
+                        line-height: 2.5;
+                        color: #999;
+                        font-size: 16px;
+                    }
+                    .content {
+                        color: #666;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        .twoBorow {
+            @extend %flex;
+            > div {
+                width: 50%;
+                h4 {
+                    font-size: 20px;
+                    color: #333;
+                    line-height: 3;
+                }
+                ul {
+                    @extend %flex;
+                }
+                ul > li {
+                    width: 33.333%;
+                    display: block;
+                    // @extend %flex;
+                    > div {
+                        border-bottom: none;
+                        &:nth-child(1) {
+                            color: #999;
+                        }
+                    }
+                }
+                p {
+                    color: #999;
+                    line-height: 2.5;
+                }
+            }
+        }
+    }
+}
+</style>

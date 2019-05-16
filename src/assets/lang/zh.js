@@ -479,6 +479,8 @@
                 vote: '投票',
                 handrecharge: '人工充值',
                 match: '配对',
+                borrowing: '借贷流水',
+                repayment: '还款流水',
                 chargetime: '交易时间',
                 type: '类型',
                 fee: '手续费',

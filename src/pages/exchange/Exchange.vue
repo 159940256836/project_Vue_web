@@ -105,6 +105,7 @@
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
                                     <router-link :to="rechargeUSDTUrl">{{$t("exchange.recharge")}}</router-link>
+                                    <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span>
                                     <!-- <a :href="rechargeUSDTUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
@@ -187,6 +188,8 @@
                                     <b>{{wallet.coin|toFloor(coinScale)}}</b>
                                     <span>{{currentCoin.coin}}</span>
                                     <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link>
+                                    <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span>
+                                    <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                                     <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
@@ -595,21 +598,12 @@ $night-color: #fff;
                             }
                         }
                     }
-                // > span {
-                //     background-color: #fafafa;
-                //     border-right: 1px solid #f0f0f0;
-                //     &.active {
-                //         background-color: #fff;
-                //         color: #3399ff;
-                //     }
-                //     &:last-child {
-                //         border-top-right-radius: 6px;
-                //     }
-                // }
+                
                 .ivu-icon {
                     color: #333 !important;
                 }
-            }
+            }   
+        }
             .trade_panel {
                 box-shadow: 0 0 2px #ccc;
                 .mask {
@@ -626,7 +620,7 @@ $night-color: #fff;
                     color: #3399ff;
                 }
             }
-        }
+        
         .right {
             .coin-menu {
                 background-color: #fff;
@@ -676,6 +670,7 @@ $night-color: #fff;
 <script>
     import expandRow from "@components/exchange/expand.vue";
     import Datafeeds from "@js/charting_library/datafeed/bitrade.js";
+    import transfermodal from "../../components/transfer/Index"
     var Stomp = require("stompjs");
     var SockJS = require("sockjs-client");
     var moment = require("moment");
@@ -688,15 +683,123 @@ $night-color: #fff;
     // <li @click="tab(1)">{{$t("exchange.market_price")}}</li>
     // <li @click="tab(2)">止盈止损</li>
     export default {
-        components: { expandRow, DepthGraph },
+        components: { expandRow, DepthGraph, transfermodal },
         data() {
             let self = this;
             return {
+                modal: false,
                 btnList: [
                     {
                         text: self.$t("exchange.limited_price"),
                         check: true
-                    },
+                        },
+                {
+                    text: self.$t("exchange.market_price"),
+                    check: false
+                },
+                {
+                    text: "止盈止损",
+                    check: false
+                }
+            ],
+            sliderStep: [25, 50, 75, 100],
+            sliderBuyLimitPercent: 0,
+            sliderSellLimitPercent: 0,
+            sliderBuyMarketPercent: 0,
+            sliderSellMarketPercent: 0,
+            sliderBuyStopPercent: 0,
+            sliderSellStopPercent: 0,
+            memberRate: 0, //用户身份，用于是否允许开启BHB抵扣手续费
+            // userRealVerified: false, //是否实名认证
+            collecRequesting: false,
+            currentCoinIsFavor: false,
+            isUseBHB: false, //是否试用BHB抵扣手续费
+            skin: "night", //皮肤样式day&night
+            currentImgTable: "k",
+            stopLoss: false,
+            selectedOrder: "current", //当前显示的委托记录
+            selectedPlate: "all", //当前显示的买卖盘
+            CNYRate: null,
+            datafeed: null,
+            defaultPath: "btc_usdt",
+            basecion: "usdt",
+            coinScale: 4,
+            baseCoinScale: 2,
+            symbolFee: 0.001,
+            currentCoin: {
+                base: "",
+                coin: "",
+                symbol: ""
+            },
+            favorColumns: [
+                {
+                    title: this.$t("exchange.symbol"),
+                    key: "coin",
+                    sortable: false,
+                    className: "coin-menu-symbol",
+                    render: (h, params) => {
+                        return h("div", [
+                            h("Icon", {
+                                props: {
+                                    // color:"red",
+                                    type: params.row.isFavor
+                                        ? "android-star"
+                                        : "android-star-outline"
+                                },
+                                nativeOn: {
+                                    click: () => {
+                                        event.stopPropagation(); //阻止事件冒泡
+                                        if (this.isLogin) {
+                                            if (
+                                                event.currentTarget.className ==
+                                                "ivu-icon ivu-icon-android-star"
+                                            ) {
+                                                this.cancelCollect(params.index, params.row);
+                                                event.currentTarget.className ==
+                                                    "ivu-icon ivu-icon-android-star-outline";
+                                            } else {
+                                                this.collect(params.index, params.row);
+                                                event.currentTarget.className =
+                                                    "ivu-icon ivu-icon-android-star";
+                                            }
+                                        } else {
+                                            this.$Message.warning("请先登录");
+                                        }
+                                    }
+                                }
+                            }),
+                            h("span", params.row.symbol)
+                        ]);
+                    }
+                },
+                {
+                    title: this.$t("exchange.lastprice"),
+                    key: "close",
+                    sortable: true,
+                    sortMethod: function (a, b, type) {
+                        let a1 = parseFloat(a);
+                        let b1 = parseFloat(b);
+                        if (type == "asc") {
+                            return a1 - b1;
+                        } else {
+                            return b1 - a1;
+                        }
+                    }
+                },
+                {
+                    title: this.$t("exchange.daychange"),
+                    key: "rose",
+                    sortable: true,
+                    sortMethod: function (a, b, type) {
+                        let a1 = a.replace(/[^\d|.|-]/g, "") - 0;
+                        let b1 = b.replace(/[^\d|.|-]/g, "") - 0;
+                        if (type == "asc") {
+                            return a1 - b1;
+                        } else {
+                            return b1 - a1;
+                        }
+                    }
+                },
                     {
                         text: self.$t("exchange.market_price"),
                         check: false
@@ -1074,42 +1177,141 @@ $night-color: #fff;
                                         params.row.totalAmount.toFixed(this.coinScale)
                                     );
                                 }
-                            },
-                            renderHeader: (h, params) => {
-                                const title =
-                                    self.$t("exchange.total") + "(" + self.currentCoin.coin + ")";
-                                return h("span", {}, title);
                             }
-                        },
-                        {
-                            className: "percenttd",
-                            width: 1,
-                            render: (h, params) => {
-                                let width = "0",
-                                    backgroundColor =
-                                        params.row.direction === "BUY" ? "#00b275" : "#f15057",
-                                    totle =
-                                        params.row.direction === "BUY"
-                                            ? this.plate.bidTotle
-                                            : this.plate.askTotle;
-                                if (params.row.totalAmount) {
-                                    width = (params.row.totalAmount / totle).toFixed(4) * 100 + "%";
-                                }
-                                return h(
-                                    "div",
-                                    {
-                                        style: {
-                                            width,
-                                            backgroundColor
-                                        },
-                                        attrs: {
-                                            class: "percentdiv"
-                                        }
-                                    },
-                                    " "
-                                );
-                            }
+                    },
+                    {
+                        title: self.$t("exchange.time"),
+                        key: "time",
+                        render: (h, params) => {
+                            return h("span", {}, this.dateFormat(params.row.time));
                         }
+                    },
+                    {
+                        title: "交易对",
+                        key: "symbol"
+                    },
+                    {
+                        title: "触发价",
+                        key: "triggerPrice"
+                    },
+                    {
+                        title: "类型",
+                        render(h, params) {
+                            return h(
+                                "span", {}, map.get(params.row.type)
+                            );
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.direction"),
+                        key: "direction",
+                        render: (h, params) => {
+                            const row = params.row;
+                            const className = row.direction.toLowerCase();
+                            return h(
+                                "span",
+                                {
+                                    attrs: {
+                                        class: className
+                                    }
+                                },
+                                row.direction == "BUY"
+                                    ? self.$t("exchange.buyin")
+                                    : self.$t("exchange.sellout")
+                            );
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.price"),
+                        key: "price",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.price));
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.num"),
+                        key: "amount",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.amount));
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.traded"),
+                        key: "tradedAmount",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.tradedAmount));
+                        }
+                    },
+                    {
+                        title: "成交金额",
+                        key: "turnover",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.turnover));
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.action"),
+                        key: "operate",
+                        width: 110,
+                        render: (h, params) => {
+                            return h(
+                                "Button",
+                                {
+                                    props: {
+                                        size: "small",
+                                        type: "warning"
+                                    },
+                                    style: {},
+                                    on: {
+                                        click: () => {
+                                            // console.log("======开始撤单")
+                                            this.cancel(params.index);
+                                        }
+                                    }
+                                },
+                                self.$t("exchange.undo")
+                            );
+                        }
+                    }
+                ],
+                rows: []
+            },
+            historyOrder: {
+                pageSize: 10,
+                total: 10,
+                page: 0,
+                columns: [
+                    {
+                        type: "expand",
+                        width: 40,
+                        render: (h, params) => {
+                            return h(expandRow, {
+                                props: {
+                                    skin: params.row.skin,
+                                    rows: params.row.detail
+                                }
+                            });
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.time"),
+                        key: "time",
+                        render: (h, params) => {
+                            return h("span", {}, this.dateFormat(params.row.time));
+                        }
+                    },
+                    {
+                        title: "交易对",
+                        key: "symbol"
+                    },
+                    {
+                        title: "类型",
+                        render(h, params) {
+                            return h(
+                                "span", {}, map.get(params.row.type)
+                            );
+                        }
+                    }
                     ],
                     askRows: [],
                     bidRows: []
@@ -2716,12 +2918,200 @@ $night-color: #fff;
                             });
                         }
                     });
-            },
-            buyWithMarketPrice() {
-                if (this.form.buy.marketAmount == "") {
-                    this.$Notice.error({
-                        title: this.$t("exchange.tip"),
-                        desc: this.$t("exchange.pricetip")
+            }
+        },
+        transFerFun() {
+            this.modal = true;
+        },
+        closeModal() {
+            this.modal = false;
+        },
+        collect(index, row) {
+            if (!this.isLogin) {
+                this.$Message.info(this.$t("common.logintip"));
+                return;
+            }
+            var params = {};
+            params["symbol"] = row.symbol;
+            this.$http
+                .post(this.host + this.api.exchange.favorAdd, params)
+                .then(response => {
+                    var resp = response.body;
+                    if (resp.code == 0) {
+                        this.$Message.info(this.$t("exchange.do_favorite"));
+                        this.getCoin(row.symbol).isFavor = true;
+                        row.isFavor = true;
+                        this.coins.favor.push(row);
+                        if (this.currentCoin.symbol == row.symbol) {
+                            this.currentCoinIsFavor = true;
+                        }
+                    }
+                });
+        },
+        cancelCollect(index, row) {
+            if (!this.isLogin) {
+                this.$Message.info(this.$t("common.logintip"));
+                return;
+            }
+            var params = {};
+            params["symbol"] = row.symbol;
+            this.$http
+                .post(this.host + this.api.exchange.favorDelete, params)
+                .then(response => {
+                    var resp = response.body;
+                    if (resp.code == 0) {
+                        this.$Message.info(this.$t("exchange.cancel_favorite"));
+                        this.getCoin(row.symbol).isFavor = false;
+                        for (var i = 0; i < this.coins.favor.length; i++) {
+                            var favorCoin = this.coins.favor[i];
+                            if (favorCoin.symbol == row.symbol) {
+                                this.coins.favor.splice(i, 1);
+                                break;
+                            }
+                        }
+                        if (this.currentCoin.symbol == row.symbol) {
+                            this.currentCoinIsFavor = false;
+                        }
+                    }
+                });
+        },
+        gohref(currentRow, oldCurrentRow) {
+            // location.href = "/#exchange/" + currentRow.href;
+            // location.reload();
+            const path = "/exchange/" + currentRow.href;
+            this.$router.push({
+                path
+            });
+        },
+        buyWithLimitPrice() {
+            if (this.form.buy.limitAmount == "") {
+                this.$Notice.error({
+                    title: this.$t("exchange.tip"),
+                    desc: this.$t("exchange.buyamounttip")
+                });
+                return;
+            }
+            var maxAmount = this.wallet.base / this.form.buy.limitPrice;
+            if (this.form.buy.limitAmount > maxAmount) {
+                this.$Notice.error({
+                    title: this.$t("exchange.tip"),
+                    desc:
+                        this.$t("exchange.buyamounttipwarning") + this.toFloor(maxAmount)
+                });
+                return;
+            }
+            var that = this;
+            var params = {};
+            params["symbol"] = this.currentCoin.symbol;
+            params["price"] = this.form.buy.limitPrice;
+            params["amount"] = this.form.buy.limitAmount;
+            params["direction"] = "BUY";
+            params["type"] = "LIMIT_PRICE";
+            params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+            this.$http
+                .post(this.host + this.api.exchange.orderAdd, params)
+                .then(response => {
+                    var resp = response.body;
+                    if (resp.code == 0) {
+                        this.$Notice.success({
+                            title: that.$t("exchange.tip"),
+                            desc: that.$t("exchange.success")
+                        });
+                        this.getWallet();
+                        this.getCurrentOrder();
+                        this.getHistoryOrder();
+                        this.form.buy.limitAmount = 0;
+                    } else {
+                        this.$Notice.error({
+                            title: that.$t("exchange.tip"),
+                            desc: resp.message
+                        });
+                    }
+                });
+        },
+        buyWithStopPrice() {
+            if (this.form.buy.stopPrice == "") {
+                this.$Notice.error({
+                    title: this.$t("exchange.tip"),
+                    desc: this.$t("exchange.buyamounttip")
+                });
+                return;
+            }
+            if (this.form.buy.stopBuyAmount == "") {
+                this.$Notice.error({
+                    title: this.$t("exchange.tip"),
+                    desc: this.$t("exchange.buyamounttip")
+                });
+                return;
+            }
+            var maxAmount = this.wallet.base / this.form.buy.stopBuyPrice;
+            if (this.form.buy.stopBuyAmount > maxAmount) {
+                this.$Notice.error({
+                    title: this.$t("exchange.tip"),
+                    desc:
+                        this.$t("exchange.buyamounttipwarning") + this.toFloor(maxAmount)
+                });
+                return;
+            }
+            var that = this;
+            var params = {};
+            params["symbol"] = this.currentCoin.symbol;
+            params["price"] = this.form.buy.stopBuyPrice;
+            params["amount"] = this.form.buy.stopBuyAmount;
+            params["direction"] = "BUY";
+            params["type"] = "CHECK_FULL_STOP";
+            params['triggerPrice'] = this.form.buy.stopPrice;
+            params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+            this.$http
+                .post(this.host + this.api.exchange.orderAdd, params)
+                .then(response => {
+                    var resp = response.body;
+                    if (resp.code == 0) {
+                        this.$Notice.success({
+                            title: that.$t("exchange.tip"),
+                            desc: that.$t("exchange.success")
+                        });
+                        this.getWallet();
+                        this.getCurrentOrder();
+                        this.getHistoryOrder();
+                        this.form.buy.stopBuyAmount = 0;
+                    } else {
+                        this.$Notice.error({
+                            title: that.$t("exchange.tip"),
+                            desc: resp.message
+                        });
+                    }
+                });
+        },
+        buyWithMarketPrice() {
+            if (this.form.buy.marketAmount == "") {
+                this.$Notice.error({
+                    title: this.$t("exchange.tip"),
+                    desc: this.$t("exchange.pricetip")
+                });
+                return;
+            }
+            if (this.form.buy.marketAmount > parseFloat(this.wallet.base)) {
+                this.$Notice.error({
+                    title: this.$t("exchange.tip"),
+                    desc: this.$t("exchange.pricetipwarning") + this.wallet.base
+                });
+                return;
+            }
+            var params = {};
+            params["symbol"] = this.currentCoin.symbol;
+            params["price"] = 0;
+            params["amount"] = this.form.buy.marketAmount;
+            params["direction"] = "BUY";
+            params["type"] = "MARKET_PRICE";
+            params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+            var that = this;
+            this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {
+                var resp = response.body;
+                if (resp.code == 0) {
+                    this.$Notice.success({
+                        title: that.$t("exchange.tip"),
+                        desc: that.$t("exchange.success")
                     });
                     return;
                 }
@@ -2755,6 +3145,7 @@ $night-color: #fff;
                         });
                     }
                 });
+            })
             },
             sellLimitPrice() {
                 // var userkey = localStorage.getItem('USERKEY');
@@ -2953,16 +3344,48 @@ $night-color: #fff;
                 .post(this.host + this.api.exchange.current, params)
                 .then(response => {
                     var resp = response.body;
-                    if(resp.content!=undefined){
-                        if (resp.content.length > 0) {
-                            this.currentOrder.rows = resp.content.slice(0, 3);
-                            this.currentOrder.rows.forEach((row, index) => {
+                    if (resp.content && resp.content.length > 0) {
+                        this.currentOrder.rows = resp.content.slice(0, 3);
+                        this.currentOrder.rows.forEach((row, index) => {
+                            row.skin = that.skin;
+                            row.price =
+                                row.type == "MARKET_PRICE"
+                                    ? that.$t("exchange.marketprice")
+                                    : row.price;
+                        });
+                    }
+                });
+        },
+        getHistoryOrder(pageNo) {
+            //查询历史委托
+            if (pageNo == undefined) {
+                pageNo = this.historyOrder.page;
+            } else {
+                pageNo = pageNo - 1;
+            }
+            this.historyOrder.rows = []; //清空数据
+            var params = {};
+            params["pageNo"] = pageNo;
+            params["pageSize"] = this.historyOrder.pageSize;
+            params["symbol"] = this.currentCoin.symbol;
+            var that = this;
+            this.$http
+                .post(this.host + this.api.exchange.history, params)
+                .then(response => {
+                    var resp = response.body;
+                    let rows = [];
+                    if (resp.content && resp.content.length > 0) {
+                        this.historyOrder.total = resp.totalElements;
+                        this.historyOrder.page = resp.number;
+                        for (var i = 0; i < 3; i++) {
+                            var row = resp.content[i];
+                            if (row) {
                                 row.skin = that.skin;
                                 row.price =
                                     row.type == "MARKET_PRICE"
                                         ? that.$t("exchange.marketprice")
                                         : row.price;
-                            });
+                            }
                         }
                     }
                 });
@@ -3091,6 +3514,5 @@ $night-color: #fff;
                         }
                     }
             }
-        }
     };
 </script>

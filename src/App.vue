@@ -14,12 +14,13 @@
                         <router-link to="/"><img src="./assets/images/logo.png" alt=""></router-link>
                     </div>
                     <div class="nav">
-                        <!--<router-link to="/">{{$t("header.index")}}</router-link>-->
+                         <router-link to="/">{{$t("header.index")}}</router-link>
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
                         <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
                         <router-link to="/help">帮助</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
                         <router-link to="/Ieo">上币优选</router-link>
+                         <router-link to="/leverindex">杠杆交易</router-link>
                     </div>
                     <div class="nav-header">
                         <!--中英文切换-->

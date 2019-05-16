@@ -77,8 +77,23 @@ import feeLevel from "../components/uc/FeeLevel.vue"
 //IEo管理
 import Ieoadmin from '../components/uc/IeoAdmin.vue'
 
+//api管理
+import apiManage from '../components/uc/apiManage.vue'
+
+//杠杆账户管理 => 当前委托
+import levelCurrent from '../components/uc/levelCurrent.vue'
+
+//杠杆账户管理 => 历史委托
+import levelHistory from '../components/uc/levelHistory.vue'
+
 // 糖果赠送记录
 import GiveRecord from '../components/uc/giveRecord.vue'
+
+//归还赠送记录
+import LeverIndex from "../pages/lever/Index.vue"
+
+//杠杆交易
+import Lever from "../pages/exchange/lever.vue"
 export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
@@ -89,10 +104,12 @@ export default [
     { path: '/register', component: Register },
     { path: "/closeGoogleval", name: "closegoogleVali", component: ClosegoogleVali },
     { path: "/openGoogleVali", name: "resetgooglevali", component: OpenGoogleVali },
-
+    { path: "/lever/:coin", name: "lever", component: LeverIndex },
     { path: '/findPwd', component: FindPwd },
     { path: '/exchange', component: Exchange },
     { path: '/exchange/*', component: Exchange },
+    { path: '/leverindex', component: Lever },
+    { path: '/leverindex/*', component: Lever },
     { path: '/help', component: Help },
     { path: '/helplist', component: HelpList },
     { path: '/helpdetail', component: HelpDetail },
@@ -195,6 +212,21 @@ export default [
                 path: "ieoadmin",
                 name: "ieoadmin",
                 component: Ieoadmin
+            },
+            {
+                path: "apiManage",
+                name: "apiManage",
+                component: apiManage
+            },
+            {
+                path: "level/current",
+                name: "levelCurrent",
+                component: levelCurrent
+            },
+            {
+                path: "level/history",
+                name: "levelHistory",
+                component: levelHistory
             },
             {
                 path: "giveRecord",

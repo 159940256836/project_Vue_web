@@ -37,22 +37,25 @@
                 </div>
             </div>
             <div class="section" id="hot">
-                <div class="section-market">
-                    <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index">
-                        <p>
-                            <span class="pairs">{{item.symbol}}</span>
-                            <span class="pairs-sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">
-                                {{item.chg < 0 ? "":"+"}}{{parseFloat(item.chg * 100).toFixed(2) + '%'}}
-                            </span>
-                        </p>
-                        <p>
-                            <span class="pairs-sip sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">{{item.volume}}</span>
-                            <span class="pairs-pri">{{item.closeStr - 0}}</span>
-                        </p>
-                        <!--{{item.change}}-->
-                        <SvgLine :values="item.trend"></SvgLine>
+                <section>
+                    <div v-for="(item,index) in hostSymbolList" :key="index">
+                        <div style="margin-bottom:20px;">
+                            <div class="flex">
+                                <span class="weight">{{item.symbol}}</span>
+                                <span :class="{green: item.isGreen}" v-if="item.isGreen">{{item.chg | formateRate}}</span>
+                                <span :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.chg | formateRate}}</span>
+                            </div>
+                            <div class="flex">
+                                 <span :class="{green: item.isGreen}" v-if="item.isGreen">{{item.close}}</span>
+                                 <span :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.close}}</span>
+                                <!-- <span class="weight">{{item.close}}</span> -->
+                                <span class="white">~CNY&nbsp;{{item.cny}}</span>
+                            </div>
+                        </div>
+                        <!-- {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}} -->
+                        <SvgLine :values="item.trend" :width="width" :height="height" :rose="item.chg.toString()"></SvgLine>
                     </div>
-                </div>
+                </section>
             </div>
 
             <!-- 首页行情图 -->
@@ -146,6 +149,8 @@ export default {
     data() {
         let self = this;
         return {
+            width:240,
+            height:80,
             loading: false,
             progress: 0,
             already: 0,
@@ -758,6 +763,11 @@ export default {
         this.stop();
         this.init();
     },
+    filters: {
+        formateRate(str) {
+            return str > 0 ? "+" + (str * 100).toFixed(2) + "%" : (str * 100).toFixed(2) + "%";
+        }
+    },
     computed: {
         isLogin: function () {
             return this.$store.getters.isLogin;
@@ -794,7 +804,16 @@ export default {
         getHotSymbol() {
             this.$http.get(this.host + '/market/overview').then(res => {
                 const resp = res.body;
-                this.hostSymbolList = resp.recommend;
+                const list = resp.recommend.map(ele => ({
+                    symbol: ele.symbol,
+                    chg: ele.chg,
+                    isGreen:ele.chg>0?true:false,
+                    close: ele.close,
+                    cny: this.round(this.mul(ele.baseUsdRate, this.CNYRate), 2),
+                    trend: ele.trend
+                }))
+                this.hostSymbolList = list;
+                console.log(list);
                 this.startWebsockHotlist();
             })
         },
@@ -978,18 +997,16 @@ export default {
                     const result = isHot.map(obj => obj.symbol == resp.symbol).fold(x => null, x => x);
                     result && this.hostSymbolList.forEach((ele, index) => {
                         if (ele.symbol == resp.symbol) {
-                            this.hostSymbolList.splice(index, 1, resp);
+                            this.hostSymbolList.splice(index, 1, {
+                                symbol: resp.symbol,
+                                chg: resp.chg,
+                                isGreen:resp.chg>0?true:false,
+                                close: resp.close,
+                                cny: this.round(this.mul(resp.baseUsdRate, this.CNYRate), 2),
+                                trend: resp.trend
+                            });
                         }
                     });
-                    // if (list.length > 0) {
-                    // this.hostSymbolList.forEach((ele, index) => {
-                    //     if (ele.symbol == list[0].symbol) {
-                    //         this.hostSymbolList.splice(index, 1, resp);
-                    //     }
-                    // });
-                    // } else {
-                    //     return;
-                    // }
                 });
             });
         },

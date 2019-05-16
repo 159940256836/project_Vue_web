@@ -1,0 +1,94 @@
+<template>
+    <div class="noReturn">
+        <h4>申请记录</h4>
+        <div>
+            <Table :columns="columns" :data="data"></Table>
+        </div>
+        <div style="margin-top:20px;text-align:right;">
+            <Page :total="totalElement" @on-change="changePage" />
+        </div>
+    </div>
+</template>
+<script>
+const paramFun = (pageSize, repayment) => (pageNo) => ({
+    pageSize, repayment, pageNo
+});
+const getParams = paramFun(10, 1);
+export default {
+    data() {
+        return {
+            pageNo: 1,
+            totalElement: 0,
+            columns: [
+                {
+                    title: "申请时间",
+                    key: "createTime",
+                    width: 150,
+                }, {
+                    title: "杠杆账户",
+                    render: (h, params) => {
+                        return h("div", {}, params.row.leverCoin.symbol)
+                    }
+                }, {
+                    title: "币种",
+                    render: (h, params) => {
+                        return h("div", {}, params.row.coin.unit)
+                    }
+                }, {
+                    title: "数量",
+                    key: "loanBalance"
+                }, {
+                    title: "利率",
+                    key: "interestRate"
+                }, {
+                    title: "利息累计",
+                    key: "accumulative"
+                },
+                {
+                    title: "状态",
+                    render: (h, params) => {
+                        return h("div", {}, "已归还");
+                    }
+                }
+            ],
+            data: [],
+        }
+    },
+    props: ["repayment"],
+    created() {
+        this.init();
+    },
+    watch:{
+        repayment(newValue, oldValue){
+            this.init();
+        }
+    },
+    methods: {
+        changePage(index) {
+            this.pageNo = index;
+            this.init();
+        },
+        init() {
+            const params = getParams(this.pageNo);
+            this.$http.post(this.host + "/margin-trade/loan/record_list", params).then(res => {
+                console.log(res);
+                const data = res.body;
+                if (data.code == 0) {
+                    this.data = data.data.content;
+                    this.totalElement = data.data.totalElements;
+                }
+            })
+        }
+    }
+}
+</script>
+<style lang="scss" scoped>
+.noReturn {
+    margin-top: 30px;
+    width: 100%;
+    h4 {
+        font-size: 20px;
+        line-height: 2.5;
+    }
+}
+</style>

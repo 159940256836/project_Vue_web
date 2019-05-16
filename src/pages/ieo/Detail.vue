@@ -3,7 +3,7 @@
         <div class="common  commona" style="min-height: 1px;">
             <div class="top_box">
                 <div class="ieoLogo">
-                    <img :src="content.pic" alt="">
+                    <img :src="content.picView" alt="">
                     <span>{{content.saleCoin}}</span>
                 </div>
                 <div>
@@ -17,7 +17,7 @@
             </div>
             <div class="ieoDetail">
                 <div class="leftWrapper">
-                    <img :src="content.picView" alt="">
+                    <img :src="content.pic" alt="">
                 </div>
                 <div class="detail">
                     <ul>
@@ -189,7 +189,9 @@ export default {
         //5.13修改
          multity(x, y) {
             return String(x * y)
-        },
+        // multity(x, y) {
+        //     return String((x * y).toFixed(3));
+         },
         changeNum() {
             if (this.isNaNFun(this.base)) {
                 this.exchange = 0;

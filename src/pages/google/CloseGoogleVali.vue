@@ -49,8 +49,7 @@ export default {
     },
     created() {
         if (this.$route.params.phone) {
-            // debugger;
-            // this.$router.go(-1);
+            this.phone = this.$route.params.phone;
         } else {
             this.$router.go(-1);
         }
@@ -76,7 +75,9 @@ export default {
             })
         },
         sureBtn(name) {
+            console.log(this.$refs[name].validate);
             this.$refs[name].validate((valid) => {
+                console.log(valid);
                 if (valid) {
                     const formInline = this.formInline;
                     const params = {
@@ -96,7 +97,7 @@ export default {
                 this.disabled = true;
                 const timer = setInterval(() => {
                     this.getCodeText = --count;
-                    if (count <= 50) {
+                    if (count <= 0) {
                         clearInterval(timer);
                         this.getCodeText = "获取验证码";
                         this.disabled = false;
@@ -106,14 +107,15 @@ export default {
         },
         getPhoneCode() {
             return this.$http.post(this.host + "/uc/mobile/google/code", {}).then(res => {
-                if (res.body.code == 0) {
-                    // return new Promise((resolve, reject) => {
-                    //     resolve();
-                    // })
-                     this.$Notice.success({
-                    title: this.$t("common.tip"),
-                    desc: res.body.message
-                });
+                const resp = res.body;
+                if (resp.code == 0) {
+                    return new Promise((resolve, reject) => {
+                        resolve();
+                    })
+                    //  this.$Notice.success({
+                    // title: this.$t("common.tip"),
+                    // desc: res.body.message
+                //});
                 } else {
                     this.$Notice.error({ title: this.$t("common.tip"), desc: res.body.message });
                 }
