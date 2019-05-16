@@ -122,6 +122,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.openGoogleModal .ivu-btn-warning{
+    background:#3399ff !important;
+    border-color:#3399ff !important;
+    
+}
 .openGoogleModal {
     padding: 100px 35%;
     overflow: hidden;
