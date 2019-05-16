@@ -15,7 +15,7 @@
         </div>
         <div class="rightBox">
             <div class="tips">{{symbol}}
-                <Icon type="ios-alert" color="#2d8cf0" />当风险率≤110时,账户将触发爆仓以归还借贷资金</div>
+                <Icon type="ios-alert" color="#2d8cf0" />当风险率≤{{this.inseRate}}%时,账户将触发爆仓以归还借贷资金</div>
             <ul>
                 <li v-for="(item,index) in symbolList" :key="index">
                     <div>
@@ -100,6 +100,7 @@ export default {
     components: { noReruen, alreadyReturn },
     data() {
         return {
+            inseRate:"--",
             noReruenRepayment: 0,
             alreadyRepayment: 1,
             baseInputvalue: "",
@@ -164,21 +165,22 @@ export default {
             this.$http.post(this.host + "/margin-trade/lever_wallet/list", { symbol: params }).then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
+                    this.inseRate = resp.data[0].explosionRiskRate;
                     const list = resp.data.map(ele => {
                         return {
                             symbol: ele.symbol || "----/----",
-                            baseUnit: ele.leverWalletList[1].coin.unit || "----",
-                            baseBanlance: ele.leverWalletList[1].balance || 0,
+                            baseUnit: ele.leverWalletList[0].leverCoin.baseSymbol || "----",
+                            baseBanlance: ele.leverWalletList[0].balance || 0,
                             baseLoanCount: ele.baseLoanCount || 0,
                             baseCanLoan: ele.baseCanLoan || 0,
                             baseINsertRate: ele.leverWalletList[1].leverCoin.interestRate || 0,
-                            coinUnit: ele.leverWalletList[0].coin.unit || "----",
-                            coinBalance: ele.leverWalletList[0].balance || 0,
+                            coinUnit: ele.leverWalletList[1].leverCoin.coinSymbol || "----",
+                            coinBalance: ele.leverWalletList[1].balance || 0,
                             coinLoanCount: ele.coinLoanCount || 0,
                             coinCanLoan: ele.coinCanLoan || 0,
-                            coinINsertRate: ele.leverWalletList[0].leverCoin.interestRate || 0,
+                            coinINsertRate: ele.leverWalletList[1].leverCoin.interestRate || 0,
                             explosionPrice: ele.explosionPrice,
-                            riskRate: ele.explosionRiskRate
+                            riskRate: ele.riskRate
                         }
                     });
                     this.symbolList = list || [];

@@ -262,7 +262,7 @@ export default {
                     this.$Message.error("请填写谷歌验证码");
                     return;
                 }else{
-                    params.googleSwitch = this.formInline.googleCode;
+                    params.googleCode = this.formInline.googleCode;
                 }
             }
 

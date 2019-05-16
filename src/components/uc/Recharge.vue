@@ -109,10 +109,12 @@ export default {
             this.$Message.error(this.$t("uc.finance.recharge.copysuccess"));
         },
         changeCoin(value) {
+            console.log("======");
+            console.log(value);
             const list = (this.coinList.length>0 && this.coinList.filter(ele=>ele.coin.unit == value)) || [];
             console.log(list);
             if(list.length>0){
-                this.qrcode.value = list[0].coin.address || '';
+                this.qrcode.value = list[0].address || '';
                 this.qrcode.coinName = list[0].coin.name.toLowerCase();
             }
             console.log(this.qrcode)
@@ -143,7 +145,6 @@ export default {
             const params = { unit: "", pageNo, pageSize:10, type:"0" };
             this.$http.post(this.host + "/uc/asset/transaction", params).then(response => {
                     var resp = response.body;
-                    console.log(resp);
                     if (resp.code == 0) {
                         if (resp.data) {
                             this.allTableRecharge = resp.data.content || [];
@@ -193,7 +194,6 @@ export default {
                 title: this.$t("uc.finance.recharge.time"),
                 align: "center",
                 render: (h, param) => {
-                    console.log(param);
                     let str = param.row.createTime;
                     return h("div", {}, str);
                 }

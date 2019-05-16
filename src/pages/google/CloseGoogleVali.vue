@@ -71,6 +71,11 @@ export default {
                     setTimeout(()=>{
                         this.$router.go(-1);
                     },1000)
+                }else{
+                    this.$Notice.error({
+                        title: this.$t("common.tip"), 
+                        desc: resp.message 
+                    });
                 }
             })
         },

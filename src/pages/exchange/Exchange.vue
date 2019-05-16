@@ -1231,7 +1231,7 @@ export default {
             historyOrder: {
                 pageSize: 10,
                 total: 10,
-                page: 0,
+                page: 1,
                 columns: [
                     {
                         type: "expand",
@@ -1525,7 +1525,10 @@ export default {
         }
     },
     created: function () {
-        this.init();
+        this.getdefaultSymbol().then(res => {
+            this.defaultPath = res;
+            this.init();
+        });
     },
     mounted: function () {
         // this.getCNYRate();
@@ -1544,6 +1547,16 @@ export default {
         // // this.setback();
     },
     methods: {
+        getdefaultSymbol() {
+            return this.$http.get(this.host + "/market/default/symbol").then(res => {
+                const data = res.body;
+                if (data.code == 0) {
+                    return new Promise((resolve, reject) => {
+                        resolve(data.data.web);
+                    }).catch(reject => reject("BTC_USDT"));
+                }
+            })
+        },
         tab(index) {
             this.btnList.map((ele, i) => {
                 if (i == index) {
@@ -1565,7 +1578,7 @@ export default {
             }
             const basecion = params.split("_")[1];
             if (basecion) {
-                this.basecion = basecion;
+                this.basecion = basecion.toLowerCase();
             }
             var coin = params.toUpperCase().split("_")[0];
             var base = params.toUpperCase().split("_")[1];
@@ -2529,6 +2542,7 @@ export default {
             this.modal = true;
         },
         closeModal() {
+            this.getWallet();
             this.modal = false;
         },
         collect(index, row) {
@@ -2915,7 +2929,7 @@ export default {
         getCurrentOrder() {
             //查询当前委托
             var params = {};
-            params["pageNo"] = 0;
+            params["pageNo"] = 1;
             params["pageSize"] = 100;
             params["symbol"] = this.currentCoin.symbol;
             this.currentOrder.rows = [];
@@ -2938,20 +2952,18 @@ export default {
         },
         getHistoryOrder(pageNo) {
             //查询历史委托
-            if (pageNo == undefined) {
-                pageNo = this.historyOrder.page;
-            } else {
-                pageNo = pageNo - 1;
-            }
+            // if (pageNo == undefined) {
+            //     pageNo = this.historyOrder.page;
+            // } else {
+            //     pageNo = pageNo - 1;
+            // }
             this.historyOrder.rows = []; //清空数据
             var params = {};
-            params["pageNo"] = pageNo;
+            params["pageNo"] = 1;
             params["pageSize"] = this.historyOrder.pageSize;
             params["symbol"] = this.currentCoin.symbol;
             var that = this;
-            this.$http
-                .post(this.host + this.api.exchange.history, params)
-                .then(response => {
+            this.$http.post(this.host + this.api.exchange.history, params).then(response => {
                     var resp = response.body;
                     let rows = [];
                     if (resp.content && resp.content.length > 0) {
