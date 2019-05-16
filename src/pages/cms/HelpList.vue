@@ -1,14 +1,16 @@
 <template>
     <div class="helplist">
-        <div class="route-wrap">
-            <router-link to="help">帮助中心</router-link>
+        <!--<div class="route-wrap">
+             <router-link to="help">帮助中心</router-link>
             <span>></span>
             <span>{{cateTitle}}</span>
-        </div>
+        </div> -->
         <div class="container">
-            <h1>{{cateTitle}}</h1>
+            <!-- <h1>{{cateTitle}}</h1> -->
+            <h1>帮助中心</h1>
             <div class="list">
-                <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{cate:cate,id:item.id,cateTitle:cateTitle}}">
+                <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{cate:cate,id:item.id,cateTitle:cateTitle}}"> -->
+                <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}">
                     <span class="text">{{item.title}}</span>
                     <img v-show="item.isTop==0" class="iconimg" src="../../assets/images/icon-top.png" alt="">
                     <span class="time">
@@ -16,9 +18,9 @@
                     </span>
                 </router-link>
             </div>
-            <div class="page">
+            <!-- <div class="page">
                 <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="pageChange"></Page>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -77,18 +79,18 @@ export default {
         };
     },
     created() {
-        this.$store.commit("navigate", "nav-uc");
-        const { cate, cateTitle } = this.$route.query;
-        this.cate = cate;
-        this.cateTitle = cateTitle;
-        this.getData();
+        // this.$store.commit("navigate", "nav-uc");
+        // const { cate, cateTitle } = this.$route.query;
+        // this.cate = cate;
+        // this.cateTitle = cateTitle;
+        this.getAllData();
     },
     watch: {
         $route(to, from) {
-            const { cate, cateTitle } = to.query;
-            this.cate = cate;
-            this.cateTitle = cateTitle;
-            this.getData();
+            // const { cate, cateTitle } = to.query;
+            // this.cate = cate;
+            // this.cateTitle = cateTitle;
+            this.getAllData();
         }
     },
     methods: {
@@ -96,7 +98,19 @@ export default {
             this.pageNo = data;
             this.getData();
         },
-        getData() {
+        getAllData(){//查询所有帮助
+            this.$http
+                .post(this.host + "/uc/ancillary/system/help", {})
+                .then(res => {
+                    if (res.status == 200 && res.body.code == 0) {
+                        this.list = res.body.data;
+                        // this.totle = res.body.data.totalElements;
+                    } else {
+                        this.$Message.error(res.body.message);
+                    }
+                });
+        },
+        getData() {//查询指定类型的帮助;
             let params = {
                 pageNo: this.pageNo,
                 pageSize: this.pageSize,

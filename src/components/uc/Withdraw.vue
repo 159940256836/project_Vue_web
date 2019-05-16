@@ -43,7 +43,7 @@
                                 </label>
                                 <div class="input-group">
                                     <Poptip trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.withdrawScale+$t('uc.finance.withdraw.tip11')+currentCoin.minAmount+' ,'+$t('uc.finance.withdraw.tip2')+currentCoin.maxAmount" style="width: 100%;">
-                                        <InputNumber @on-change="computerAmount" v-model="withdrawAmount" :placeholder="$t('uc.finance.withdraw.numtip1')" size="large" :min="currentCoin.minAmount" :max="currentCoin.maxAmount"></InputNumber>
+                                        <InputNumber @on-change="computerAmount" v-model="withdrawAmount" :placeholder="$t('uc.finance.withdraw.numtip1')" size="large" :max="currentCoin.maxAmount"></InputNumber>
                                         <span class="input-group-addon addon-tag uppercase firstt">{{currentCoin.unit}}</span>
                                     </Poptip>
                                 </div>
@@ -261,7 +261,7 @@ export default {
                     this.modal = true;
                     this.$Message.error("请填写谷歌验证码");
                     return;
-                }else{
+                } else {
                     params.googleCode = this.formInline.googleCode;
                 }
             }
@@ -358,10 +358,11 @@ export default {
             return Math.round(v * t) / t;
         },
         computerAmount() {
-            this.withdrawOutAmount = this.round(
+            let num = this.round(
                 this.accSub(this.withdrawAmount, this.withdrawFee),
                 this.currentCoin.withdrawScale
             );
+            this.withdrawOutAmount = num >= 0 ? num : 0;
         },
         computerAmount2() {
             this.withdrawAmount =
@@ -436,8 +437,8 @@ export default {
         this.coinType = this.$route.query.name || "";
         this.getAddrList();
         this.getList(0, 10, 1);
-        
-        this.$http.post(this.host + '/uc/get/user', {mobile: this.$store.getters.member.mobile}).then(res => {
+
+        this.$http.post(this.host + '/uc/get/user', { mobile: this.$store.getters.member.mobile }).then(res => {
             const data = res.body;
             if (data.code == 0) {
                 this.googleSwitch = !!data.data;

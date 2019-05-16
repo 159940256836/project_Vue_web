@@ -698,7 +698,7 @@ var moment = require("moment");
 const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CHECK_FULL_STOP', '止盈止损']]);
 
 import DepthGraph from "@components/exchange/DepthGraph.vue";
-import $ from "@js/jquery.min.js";
+// import $ from "@js/jquery.min.js";
 // <li @click="tab(0)" :class="{active:tab0Flag}">{{}}</li>
 // <li @click="tab(1)">{{$t("exchange.market_price")}}</li>
 // <li @click="tab(2)">止盈止损</li>
