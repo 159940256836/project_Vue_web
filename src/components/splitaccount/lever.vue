@@ -1,5 +1,12 @@
 <template>
     <div class="shaow">
+        <div class="hidden-assets">
+            <span>隐藏资产为0的币种:</span>
+            <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
+                <span slot="open">开</span>
+                <span slot="close">关</span>
+            </i-switch>
+        </div>
         <div class="order-table">
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
         </div>
@@ -62,6 +69,9 @@ export default {
             },
             tableMoney: [],
             loading: true,
+            googleSwitch:false,
+            hiddenAccountData:[],
+            showAccountData:[]
         }
     },
     created() {
@@ -69,6 +79,9 @@ export default {
         this.getMoney();
     },
     methods: {
+        changeGoogleSwitch(){
+            this.googleSwitch?this.tableMoney=this.hiddenAccountData:this.tableMoney=this.showAccountData;
+        },
         closeModal(){
             this.modal = false;
         },
@@ -130,6 +143,14 @@ export default {
         getMoney() {
             this.$http.post(this.host + "/margin-trade/lever_wallet/list").then(response => {
                 var resp = response.body;
+                this.showAccountData=resp.data;
+               
+                for(let i=0;i<resp.data.length;i++){
+                    let data=resp.data[i];
+                    if(data.leverWalletList[0].balance != "0" || data.leverWalletList[0].frozenBalance != "0" || data.leverWalletList[0].status != "0"){
+                        this.hiddenAccountData.push(data);
+                    }
+                }
                 if (resp.code == 0) {
                     this.tableMoney = resp.data;
                     this.loading = false;
