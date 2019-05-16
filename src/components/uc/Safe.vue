@@ -332,9 +332,9 @@
                                             <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode5">
                                                 <Input v-model="formValidate8.vailCode5" size="large">
                                                 <div class="timebox" slot="append">
-                                                    <Button @click="send(5)" :disabled="sendMsgDisabled5">
-                                                        <span v-if="sendMsgDisabled5">{{time5+$t('uc.safe.second')}}</span>
-                                                        <span v-if="!sendMsgDisabled5">{{$t('uc.safe.clickget')}}</span>
+                                                    <Button @click="send(8)" :disabled="sendMsgDisabled8">
+                                                        <span v-if="sendMsgDisabled8">{{time8+$t('uc.safe.second')}}</span>
+                                                        <span v-if="!sendMsgDisabled8">{{$t('uc.safe.clickget')}}</span>
                                                     </Button>
                                                 </div>
                                                 </Input>
@@ -683,10 +683,12 @@ export default {
             time2: 60, // 发送验证码倒计时
             time3: 60, // 发送验证码倒计时
             time5: 60, // 发送验证码倒计时
+            time8: 60,
             sendMsgDisabled1: false,
             sendMsgDisabled2: false,
             sendMsgDisabled3: false,
-            sendMsgDisabled5: false
+            sendMsgDisabled5: false,
+            sendMsgDisabled8:false
         };
     },
     methods: {
@@ -1032,6 +1034,23 @@ export default {
                                 if (me.time5-- <= 0) {
                                     me.time5 = 60;
                                     me.sendMsgDisabled5 = false;
+                                    window.clearInterval(interval);
+                                }
+                            }, 1000);
+                        } else {
+                            this.$Message.error(resp.message);
+                        }
+                    });
+            } else if(index == 8){
+                this.$http.post(this.host + "/uc/mobile/transaction/code")
+                    .then(response => {
+                        var resp = response.body;
+                        if (resp.code == 0) {
+                            me.sendMsgDisabled8 = true;
+                            let interval = window.setInterval(function () {
+                                if (me.time8-- <= 0) {
+                                    me.time8 = 60;
+                                    me.sendMsgDisabled8 = false;
                                     window.clearInterval(interval);
                                 }
                             }, 1000);
