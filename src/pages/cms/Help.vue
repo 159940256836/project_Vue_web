@@ -1,23 +1,23 @@
 <template>
-  <div class="help common">
-    <img class="bannerimg" src="../../assets/images/help.jpg">
-    <div class="help_container">
-      <h1>帮助中心</h1>
-      <div class="main">
-        <div class="section" v-for="section in helpData">
-          <h3>{{section.title}}</h3>
-          <div class="list-wrap">
-            <router-link class="item" :title="item.title" v-for="(item, index) in section.content" :to="{path:'helpdetail',query:{cate:section.cate,id:item.id,cateTitle:section.title}}" :key="index">
-              <span class="text">{{item.title}}</span>
-              <img v-show="item.isTop==0" class="iconimg" src="../../assets/images/icon-top.png" alt="">
-            </router-link>
-          </div>
-          <div class="route-wrap">
-            <router-link :to="{path:'helplist',query:{cate:section.cate,cateTitle:section.title}}">更多>></router-link>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="help common">
+        <img class="bannerimg" src="../../assets/images/help_banner.png">
+        <div class="help_container">
+            <h1>帮助中心</h1>
+            <div class="main">
+                <div class="section" v-for="section in helpData">
+                   <h3>{{section.title}}</h3>
+                   <div class="list-wrap">
+                        <router-link class="item" :title="item.title" v-for="(item, index) in section.content" :to="{path:'helpdetail',query:{cate:section.cate,id:item.id,cateTitle:section.title}}" :key="index">
+                            <span class="text">{{item.title}}</span>
+                            <img v-show="item.isTop==0" class="iconimg" src="../../assets/images/icon-top.png" alt="">
+                        </router-link>
+                   </div>
+                   <div class="route-wrap">
+                        <router-link :to="{path:'helplist',query:{cate:section.cate,cateTitle:section.title}}">更多>></router-link>
+                    </div>
+                </div>
+            </div>
+         </div>
   </div>
 </template>
 <style lang="scss" scoped>

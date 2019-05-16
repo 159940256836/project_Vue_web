@@ -83,6 +83,11 @@ export default {
                     key: "remark"
                 },
                 {
+                    title: "API Key",
+                    width:150,
+                    key: "apiKey"
+                },
+               {
                     title: "访问密钥",
                     render: (h, params) => {
                         const text = "******";

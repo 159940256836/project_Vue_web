@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import Layout from '../public/layout'
-import tradingcenter from '../pages/otc/TradingCenter'
-import ordermanagement from '../pages/uc/OrderManagement'
+// import Vue from 'vue'
+// import Layout from '../public/layout'
+// import tradingcenter from '../pages/otc/TradingCenter'
+// import ordermanagement from '../pages/uc/OrderManagement'
 // import finance from '../pages/uc/Finance'
 import membercenter from '../pages/uc/MemberCenter'
 import tradeInfo from '../pages/otc/TradeInfo'
@@ -38,7 +38,7 @@ import Login from '../pages/uc/login'
 import Register from '../pages/uc/register'
 import FindPwd from '../pages/uc/findpwd'
 import Exchange from '../pages/exchange/exchange'
-import Help from '../pages/cms/help'
+//import Help from '../pages/cms/help'
 import HelpList from '../pages/cms/HelpList' //帮助分类列表
 import HelpDetail from '../pages/cms/HelpDetail' //帮助详情
 // import Message from '../pages/cms/message'
@@ -56,9 +56,9 @@ import meblc from "../components/uc/Blc"
 import mebjc from "../components/uc/Bjc"
 // import mymsg from ''
 // 平台的小时分配和昨天的分配路由
-import platedistribute from "../pages/plate/distribution.vue"
-import today from "../components/plate/Today"
-import yesterday from "../components/plate/Yesterday"
+// import platedistribute from "../pages/plate/distribution.vue"
+// import today from "../components/plate/Today"
+// import yesterday from "../components/plate/Yesterday"
 import Bjc from "../pages/bjc/Bijingcai"
 // 平台手续费返还
 import feereturn from "../pages/feereturn/Feereturn"
@@ -110,7 +110,7 @@ export default [
     { path: '/exchange/*', component: Exchange },
     { path: '/leverindex', component: Lever },
     { path: '/leverindex/*', component: Lever },
-    { path: '/help', component: Help },
+    // { path: '/help', component: Help },
     { path: '/helplist', component: HelpList },
     { path: '/helpdetail', component: HelpDetail },
     // { path: '/message', component: Message },
@@ -121,19 +121,19 @@ export default [
     { path: '/bjc', component: Bjc },
     // 平台手续费返还
     { path: "/feereturn", component: feereturn },
-    {
-        path: "/distribute",
-        component: platedistribute,
-        children: [{
-                path: "today",
-                component: today
-            },
-            {
-                path: "yesterday",
-                component: yesterday
-            },
-        ]
-    },
+    // {
+    //     path: "/distribute",
+    //     component: platedistribute,
+    //     children: [{
+    //             path: "today",
+    //             component: today
+    //         },
+    //         {
+    //             path: "yesterday",
+    //             component: yesterday
+    //         },
+    //     ]
+    // },
     {
         path: '/otc',
         component: OTCMain,
