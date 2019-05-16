@@ -122,6 +122,9 @@
                 <FormItem>
                     <Input type="password" v-model="formInline.fundpwd" :placeholder="$t('otc.chat.msg7')"></Input>
                 </FormItem>
+                <FormItem v-if="googleSwitch">
+                    <Input type="text" v-model="formInline.googleCode" placeholder="谷歌验证码"></Input>
+                </FormItem>
             </Form>
             <div slot="footer">
                 <span style="margin-right:50px" @click="cancel">取消</span>
@@ -134,13 +137,15 @@
 export default {
     data() {
         return {
+            googleSwitch: false,
             user: {},
             codeIsSending: false,
             sendcodeValue: this.$t("uc.regist.sendcode"),
             countdown: 60,
             formInline: {
                 code: "",
-                fundpwd: ""
+                fundpwd: "",
+                googleCode: ""
             },
             modal: false,
             fundpwd: "",
@@ -250,6 +255,18 @@ export default {
                 return;
             }
             let params = {};
+            console.log(this.googleSwitch);
+            if (this.googleSwitch) {
+                if (this.formInline.googleCode == "") {
+                    this.modal = true;
+                    this.$Message.error("请填写谷歌验证码");
+                    return;
+                }else{
+                    params.googleSwitch = this.formInline.googleCode;
+                }
+            }
+
+
             params["unit"] = this.currentCoin.unit;
             params["address"] = this.withdrawAdress;
             params["amount"] = this.withdrawAmount;
@@ -419,6 +436,13 @@ export default {
         this.coinType = this.$route.query.name || "";
         this.getAddrList();
         this.getList(0, 10, 1);
+        
+        this.$http.post(this.host + '/uc/get/user', {mobile: this.$store.getters.member.mobile}).then(res => {
+            const data = res.body;
+            if (data.code == 0) {
+                this.googleSwitch = !!data.data;
+            }
+        })
         console.log(this.$store.getters.member);
     },
     computed: {

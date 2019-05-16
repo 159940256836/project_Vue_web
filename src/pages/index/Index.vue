@@ -38,18 +38,21 @@
             <div class="section" id="hot">
                 <section>
                     <div v-for="(item,index) in hostSymbolList" :key="index">
-                        <div class="">
+                        <div style="margin-bottom:20px;">
                             <div class="flex">
                                 <span class="weight">{{item.symbol}}</span>
-                                <span>{{item.chg | formateRate}}</span>
+                                <span :class="{green: item.isGreen}" v-if="item.isGreen">{{item.chg | formateRate}}</span>
+                                <span :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.chg | formateRate}}</span>
                             </div>
                             <div class="flex">
-                                <span class="weight">{{item.close}}</span>
-                                <span>{{item.cny}}</span>
+                                 <span :class="{green: item.isGreen}" v-if="item.isGreen">{{item.close}}</span>
+                                 <span :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.close}}</span>
+                                <!-- <span class="weight">{{item.close}}</span> -->
+                                <span class="white">~CNY&nbsp;{{item.cny}}</span>
                             </div>
                         </div>
                         <!-- {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}} -->
-                        <SvgLine :values="item.trend" :width="width" :height="height"></SvgLine>
+                        <SvgLine :values="item.trend" :width="width" :height="height" :rose="item.chg.toString()"></SvgLine>
                     </div>
                 </section>
             </div>
@@ -800,6 +803,7 @@ export default {
                 const list = resp.recommend.map(ele => ({
                     symbol: ele.symbol,
                     chg: ele.chg,
+                    isGreen:ele.chg>0?true:false,
                     close: ele.close,
                     cny: this.round(this.mul(ele.baseUsdRate, this.CNYRate), 2),
                     trend: ele.trend
@@ -993,6 +997,7 @@ export default {
                             this.hostSymbolList.splice(index, 1, {
                                 symbol: resp.symbol,
                                 chg: resp.chg,
+                                isGreen:resp.chg>0?true:false,
                                 close: resp.close,
                                 cny: this.round(this.mul(resp.baseUsdRate, this.CNYRate), 2),
                                 trend: resp.trend
@@ -1220,14 +1225,22 @@ li {
 
     section {
         width: 1200px;
-        margin: 30px auto;
+        margin: 30px auto 0;
         @extend %flex;
         > div {
             width: 20%;
             .flex{
                 @extend %flex;
-                color: #00b275;
                 margin-bottom: 10px;
+                .green{
+                    color: #00b275;
+                }
+                .red{
+                    color: #f00;
+                }
+                .white{
+                    color:#fff;
+                }
                 .weight{
                     color: #fff;
                     font-size: 18px;
