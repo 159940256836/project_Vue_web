@@ -65,8 +65,8 @@ export default {
                 const resp = res.body;
                 if(resp.code == 0){
                     this.$Notice.success({
-                        title: this.$t("common.tip"), 
-                        desc: resp.message 
+                        title: this.$t("common.tip"),
+                        desc: resp.message
                     });
                     setTimeout(()=>{
                         this.$router.go(-1);
@@ -112,10 +112,6 @@ export default {
                     return new Promise((resolve, reject) => {
                         resolve();
                     })
-                    //  this.$Notice.success({
-                    // title: this.$t("common.tip"),
-                    // desc: res.body.message
-                //});
                 } else {
                     this.$Notice.error({ title: this.$t("common.tip"), desc: res.body.message });
                 }

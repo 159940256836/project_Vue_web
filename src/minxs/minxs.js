@@ -1,3 +1,4 @@
+
  const minHeightMinx = {
      mounted() {
          const doc = document.body

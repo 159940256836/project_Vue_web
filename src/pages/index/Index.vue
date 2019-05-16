@@ -37,20 +37,38 @@
                 </div>
             </div>
             <div class="section" id="hot">
-                <section>
-                    <div v-for="(item,index) in hostSymbolList" :key="index">
-                        <div style="margin-bottom:20px;">
-                            <div class="flex">
-                                <span class="weight">{{item.symbol}}</span>
-                                <span :class="{green: item.isGreen}" v-if="item.isGreen">{{item.chg | formateRate}}</span>
+<!--<<<<<<< HEAD
+                <div class="section-market">
+                    <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index">
+                        <p>
+                            <span class="pairs">{{item.symbol}}</span>
+                            <span class="pairs-sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">
+                                {{item.chg < 0 ? "":"+"}}{{parseFloat(item.chg * 100).toFixed(2) + '%'}}
+                            </span>
+                        </p>
+                        <p>
+                            <span class="pairs-sip sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">{{item.volume}}</span>
+                            <span class="pairs-pri">{{item.closeStr - 0}}</span>
+                        </p>
+                        &lt;!&ndash;{{item.change}}&ndash;&gt;
+                        <SvgLine :values="item.trend"></SvgLine>
+                    </div>
+                </div>
+=======-->
+                <section class="section-market">
+                    <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index" style="float: left;">
+                        <div style="margin-bottom:6px;">
+                            <p class="flex">
+                                <span class="pairs">{{item.symbol}}</span>
+                                <span class="pairs-sip" :class="{green: item.isGreen}" v-if="item.isGreen">{{item.chg | formateRate}}</span>
                                 <span :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.chg | formateRate}}</span>
-                            </div>
-                            <div class="flex">
-                                 <span :class="{green: item.isGreen}" v-if="item.isGreen">{{item.close}}</span>
-                                 <span :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.close}}</span>
+                            </p>
+                            <p class="flex">
+                                 <span class="pairs-sip sip" :class="{green: item.isGreen}" v-if="item.isGreen">{{item.close}}</span>
+                                 <span class="pairs-pri" :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.close}}</span>
                                 <!-- <span class="weight">{{item.close}}</span> -->
                                 <span class="white">~CNY&nbsp;{{item.cny}}</span>
-                            </div>
+                            </p>
                         </div>
                         <!-- {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}} -->
                         <SvgLine :values="item.trend" :width="width" :height="height" :rose="item.chg.toString()"></SvgLine>
@@ -150,7 +168,7 @@ export default {
         let self = this;
         return {
             width:240,
-            height:80,
+            height:50,
             loading: false,
             progress: 0,
             already: 0,
@@ -1007,6 +1025,15 @@ export default {
                             });
                         }
                     });
+                    // if (list.length > 0) {
+                    // this.hostSymbolList.forEach((ele, index) => {
+                    //     if (ele.symbol == list[0].symbol) {
+                    //         this.hostSymbolList.splice(index, 1, resp);
+                    //     }
+                    // });
+                    // } else {
+                    //     return;
+                    // }
                 });
             });
         },

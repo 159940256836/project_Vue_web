@@ -1,29 +1,23 @@
 <template>
   <div class="nav-rights">
-    <div class="hidden-assets">
-      <span>隐藏资产为0的币种:</span>
-      <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-          <span slot="open">开</span>
-          <span slot="close">关</span>
-      </i-switch>
-    </div>
-        <div class="bill_box rightarea padding-right-clear">
-                <Tabs v-model="splitcomponentContent" @on-click="changeTab">
-                    <TabPane label="币币账户" name="COIN"></TabPane>
-                    <TabPane label="法币账户" name="CURRENCY"></TabPane>
-                    <TabPane label="杠杆账户" name="LEVER"></TabPane>
-                </Tabs>
-                <!-- <keep-alive> -->
-                <component :is="splitcomponent"></component>
-                <!-- </keep-alive> -->
-          </div>
     <div class="nav-right col-xs-12 col-md-10 padding-right-clear">
       <div class="bill_box rightarea padding-right-clear">
-        <div class="shaow">
+        <div class="bill_box rightarea padding-right-clear">
+          <Tabs v-model="splitcomponentContent" @on-click="changeTab">
+            <TabPane label="币币账户" name="COIN"></TabPane>
+            <TabPane label="法币账户" name="CURRENCY"></TabPane>
+            <TabPane label="杠杆账户" name="LEVER"></TabPane>
+          </Tabs>
+          <!-- <keep-alive> -->
+          <component :is="splitcomponent"></component>
+          <!-- </keep-alive> -->
+
+        </div>
+        <!-- <div class="shaow">
           <div class="order-table">
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
           </div>
-        </div>
+        </div> -->
         <!-- <Modal v-model="modal" :title="$t('uc.finance.money.match')" @on-ok="matchGCC">
             <P style="font-weight: bold;padding: 10px 0;">{{$t('uc.finance.money.matchtip1')}}：{{GCCMatchAmount}}</p>
             <p>
@@ -35,7 +29,7 @@
             <p>{{match_msg}}</p>
         </Modal> -->
         <!-- <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal> -->
-      </div>
+    </div>
     </div>
   </div>
 </template>
@@ -44,12 +38,12 @@ import coin from "../splitaccount/coin";
 import currency from "../splitaccount/currency";
 import lever from "../splitaccount/lever"
 export default {
-  components: { coin, currency, lever },
+  components: {coin, currency, lever},
   data() {
     return {
-      GCCMatchAmount: 0,
       splitcomponent: coin,
       splitcomponentContent: "COIN",
+      GCCMatchAmount: 0,
       matchAmount: 0,
       modal: false,
       loginmsg: this.$t("common.logintip"),
@@ -59,75 +53,77 @@ export default {
       canMatch: true,
       modal_msg: false,
       match_msg: "",
-      googleSwitch: false
+
     };
   },
   methods: {
-     changeGoogleSwitch (status) {
-         if(status){
-           this.tableMoney=[];
-           this.getMoney(true)
-         }else{
-           this.tableMoney=[];
-           this.getMoney(false)
-         }
-      },
-    getMoney(status) {
-      if(!status){
-        this.$http.post(this.host + "/uc/asset/wallet").then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                   this.tableMoney=resp.data
-                  for (let i = 0; i < this.tableMoney.length; i++) {
-                    this.tableMoney[i].coinType = this.tableMoney[i].coin.unit;
-                  }
-                  this.loading = false;
-                } else {
-                  // this.$Message.error(resp.message);
-                  //  this.$Message.info(this.$t('common.logintip'));
-                  this.$Message.error(this.loginmsg);
-                }
-          });
-      }else{
-        this.$http.post(this.host + "/uc/asset/wallet").then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                  let data=resp.data
-                  for (let i = 0; i < data.length; i++) {
-                    if(data[i].balance=="0" && data[i].frozenBalance=="0" && data[i].frozenBalance=="0"){
-                    }else{
-                    data[i].coinType = data[i].coin.unit;
-                    this.tableMoney.push(data[i])
-                    }
-
-                  }
-                  this.loading = false;
-                } else {
-                  // this.$Message.error(resp.message);
-                  //  this.$Message.info(this.$t('common.logintip'));
-                  this.$Message.error(this.loginmsg);
-                }
-          });
-      }
-      //获取
-      
+    // closeModal(){
+    //     this.modal = false;
+    // },
+    changeTab(name) {
+      this.splitcomponentContent = name;
+      console.log(this.splitcomponentContent)
+      name == "COIN" && (this.splitcomponent = coin);
+      name == 'CURRENCY' && (this.splitcomponent = currency);
+      name == "LEVER" && (this.splitcomponent = lever);
     },
+
+    // getMoney(status) {
+    //   if (!status) {
+    //     this.$http.post(this.host + "/uc/asset/wallet").then(response => {
+    //       var resp = response.body;
+    //       if (resp.code == 0) {
+    //         this.tableMoney = resp.data
+    //         for (let i = 0; i < this.tableMoney.length; i++) {
+    //           this.tableMoney[i].coinType = this.tableMoney[i].coin.unit;
+    //         }
+    //         this.loading = false;
+    //       } else {
+    //         // this.$Message.error(resp.message);
+    //         //  this.$Message.info(this.$t('common.logintip'));
+    //         this.$Message.error(this.loginmsg);
+    //       }
+    //     });
+    //   } else {
+    //     this.$http.post(this.host + "/uc/asset/wallet").then(response => {
+    //       var resp = response.body;
+    //       if (resp.code == 0) {
+    //         let data = resp.data
+    //         for (let i = 0; i < data.length; i++) {
+    //           if (data[i].balance == "0" && data[i].frozenBalance == "0" && data[i].frozenBalance == "0") {
+    //           } else {
+    //             data[i].coinType = data[i].coin.unit;
+    //             this.tableMoney.push(data[i])
+    //           }
+
+    //         }
+    //         this.loading = false;
+    //       } else {
+    //         // this.$Message.error(resp.message);
+    //         //  this.$Message.info(this.$t('common.logintip'));
+    //         this.$Message.error(this.loginmsg);
+    //       }
+    //     });
+    //   }
+    //   //获取
+
+    // },
     getGCCMatchAmount() {
       //获取
       this.$http
-        .post(this.host + "/uc/asset/wallet/match-check")
-        .then(response => {
-          var resp = response.body;
-          if (resp.code == 0) {
-            this.canMatch = true;
-            this.GCCMatchAmount = resp.data;
-          } else {
-            this.canMatch = false;
-            this.match_msg = resp.message;
-            // this.$Message.error(this.loginmsg);
-          }
-          this.showMatchDailog();
-        });
+          .post(this.host + "/uc/asset/wallet/match-check")
+          .then(response => {
+            var resp = response.body;
+            if (resp.code == 0) {
+              this.canMatch = true;
+              this.GCCMatchAmount = resp.data;
+            } else {
+              this.canMatch = false;
+              this.match_msg = resp.message;
+              // this.$Message.error(this.loginmsg);
+            }
+            this.showMatchDailog();
+          });
     },
     showMatchDailog() {
       if (this.canMatch) this.modal = true;
@@ -143,55 +139,57 @@ export default {
         let params = {};
         params["amount"] = this.matchAmount;
         this.$http
-          .post(this.host + "/uc/asset/wallet/match", params)
-          .then(response => {
-            var resp = response.body;
-            if (resp.code == 0) {
-              this.$Message.success(this.$t("uc.finance.money.matchsuccess"));
-              this.GCCMatchAmount = this.GCCMatchAmount - this.matchAmount;
-            } else {
-              this.$Message.error(resp.message);
-            }
-          });
+            .post(this.host + "/uc/asset/wallet/match", params)
+            .then(response => {
+              var resp = response.body;
+              if (resp.code == 0) {
+                this.$Message.success(this.$t("uc.finance.money.matchsuccess"));
+                this.GCCMatchAmount = this.GCCMatchAmount - this.matchAmount;
+              } else {
+                this.$Message.error(resp.message);
+              }
+            });
       }
     },
     resetAddress(unit) {
       let params = {};
       params["unit"] = unit;
       this.$http
-        .post(this.host + "/uc/asset/wallet/reset-address", params)
-        .then(response => {
-          var resp = response.body;
-          if (resp.code == 0) {
-            this.$Message.success(this.$t("uc.finance.money.resetsuccess"));
-            setTimeout(function() {
-              window.location.reload();
-            }, 3000);
-          } else {
-            this.$Message.error(resp.message);
-          }
-        });
+          .post(this.host + "/uc/asset/wallet/reset-address", params)
+          .then(response => {
+            var resp = response.body;
+            if (resp.code == 0) {
+              this.$Message.success(this.$t("uc.finance.money.resetsuccess"));
+              setTimeout(function() {
+                window.location.reload();
+              }, 3000);
+            } else {
+              this.$Message.error(resp.message);
+            }
+          });
     }
   },
-  created() {
-    this.getMoney(false);
+  created(){
+    //this.getMoney();
+    //this.getGCCMatchAmount();
   },
   computed: {
-    tableColumnsMoney() {
-      let self = this;
-      let columns = [];
-      columns.push({
-        title: this.$t("uc.finance.money.cointype"),
-        key: "coinType",
-        width: 100,
-        align: "center"
-      });
-      columns.push({
-        title: this.$t("uc.finance.money.balance"),
-        key: "balance",
-        align: "center",
-        render(h, params) {
-          return h(
+  tableColumnsMoney()
+  {
+    let self = this;
+    let columns = [];
+    columns.push({
+      title: this.$t("uc.finance.money.cointype"),
+      key: "coinType",
+      width: 100,
+      align: "center"
+    });
+    columns.push({
+      title: this.$t("uc.finance.money.balance"),
+      key: "balance",
+      align: "center",
+      render(h, params) {
+        return h(
             "span",
             {
               attrs: {
@@ -199,15 +197,15 @@ export default {
               }
             },
             self.toFloor(params.row.balance || "0")
-          );
-        }
-      });
-      columns.push({
-        title: this.$t("uc.finance.money.frozen"),
-        key: "frozenBalance",
-        align: "center",
-        render(h, params) {
-          return h(
+        );
+      }
+    });
+    columns.push({
+      title: this.$t("uc.finance.money.frozen"),
+      key: "frozenBalance",
+      align: "center",
+      render(h, params) {
+        return h(
             "span",
             {
               attrs: {
@@ -215,14 +213,14 @@ export default {
               }
             },
             self.toFloor(params.row.frozenBalance || "0")
-          );
-        }
-      });
-      columns.push({
-        title: this.$t("uc.finance.money.needreleased"),
-        align: "center",
-        render(h, params) {
-          return h(
+        );
+      }
+    });
+    columns.push({
+      title: this.$t("uc.finance.money.needreleased"),
+      align: "center",
+      render(h, params) {
+        return h(
             "span",
             {
               attrs: {
@@ -230,32 +228,81 @@ export default {
               }
             },
             self.toFloor(params.row.toReleased || "0")
-          );
-        }
-      });
-      columns.push({
-        title: this.$t("uc.finance.money.operate"),
-        key: "price1",
-        align: "center",
-        render: function(h, params) {
-          var actions = [];
-          if (params.row.coin.canRecharge == 1) {
-            if (params.row.address != null && params.row.address != "") {
-              //   console.log(self.$t('uc.finance.money.charge'));
-              // 充币
-              actions.push(
+        );
+      }
+    });
+    columns.push({
+      title: this.$t("uc.finance.money.operate"),
+      key: "price1",
+      align: "center",
+      render: function (h, params) {
+        var actions = [];
+        if (params.row.coin.canRecharge == 1) {
+          if (params.row.address != null && params.row.address != "") {
+            //   console.log(self.$t('uc.finance.money.charge'));
+            // 充币
+            actions.push(
                 h(
+                    "Button",
+                    {
+                      // 充币;
+                      props: {
+                        type: "primary",
+                        size: "small"
+                      },
+                      on: {
+                        click: function () {
+                          self.$router.push(
+                              "/uc/recharge?name=" + params.row.coin.unit
+                          );
+                        }
+                      },
+                      style: {
+                        marginRight: "8px"
+                      }
+                    },
+                    self.$t("uc.finance.money.charge")
+                )
+            );
+          } else {
+            //   获取地址按钮;
+            actions.push(
+                h(
+                    "Button",
+                    {
+                      props: {
+                        type: "info",
+                        size: "small"
+                      },
+                      on: {
+                        click: function () {
+                          self.resetAddress(params.row.coin.unit);
+                        }
+                      },
+                      style: {
+                        marginRight: "8px"
+                      }
+                    },
+                    self.$t("uc.finance.money.getaddress")
+                )
+            );
+          }
+        }
+        if (params.row.coin.canWithdraw == 1) {
+          // console.log(self.$t('uc.finance.money.pickup'));
+          // 提币;
+          actions.push(
+              h(
                   "Button",
                   {
-                    // 充币;
                     props: {
-                      type: "primary",
+                      type: "error",
                       size: "small"
                     },
                     on: {
-                      click: function() {
+                      click: function () {
                         self.$router.push(
-                          "/uc/recharge?name=" + params.row.coin.unit
+                            "/uc/withdraw?name=" + params.row.coin.unit
                         );
                       }
                     },
@@ -263,93 +310,41 @@ export default {
                       marginRight: "8px"
                     }
                   },
-                    this.showMatchDailog()
-                )
+                  self.$t("uc.finance.money.pickup")
               )
-            }
-          }
-        },
-        showMatchDailog() {
-            if (this.canMatch) this.modal = true;
-            else this.modal_msg = true;
-        },
-        matchGCC() {
-            if (this.matchAmount <= 0) {
-                this.$Message.warning(this.$t("uc.finance.money.matcherr1"));
-            } else if (this.matchAmount > this.GCCMatchAmount) {
-                this.$Message.warning(this.$t("uc.finance.money.matcherr2"));
-            } else {
-                //配对
-                let params = {};
-                params["amount"] = this.matchAmount;
-                this.$http
-                    .post(this.host + "/uc/asset/wallet/match", params)
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            this.$Message.success(this.$t("uc.finance.money.matchsuccess"));
-                            this.GCCMatchAmount = this.GCCMatchAmount - this.matchAmount;
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            }
-          if (params.row.coin.canWithdraw == 1) {
-            // 提币;
-            actions.push(
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "error",
-                    size: "small"
-                  },
-                  on: {
-                    click: function() {
-                      self.$router.push(
-                        "/uc/withdraw?name=" + params.row.coin.unit
-                      );
-                    }
-                  },
-                  style: {
-                    marginRight: "8px"
-                  }
-                },
-                self.$t("uc.finance.money.pickup")
-              )
-            );
-          }
-          if (params.row.coin.unit.toUpperCase() == "GCC") {
-            // 配对;
-            actions.push(
-              h(
-                "Button",
-                {
-                  props: {
-                    type: "success",
-                    size: "small"
-                  },
-                  on: {
-                    click: function() {
-                      // self.showMatchDailog(params.row);
-                      self.getGCCMatchAmount();
-                      // self.$router.push('/finance/recharge?name=' + params.row.coin.unit);
-                    }
-                  },
-                  style: {
-                    marginRight: "8px"
-                  }
-                },
-                self.$t("uc.finance.money.match")
-              )
-            );
-          }
-          return h("p", actions);
+          );
         }
-      });
-      return columns;
-    }
+        if (params.row.coin.unit.toUpperCase() == "GCC") {
+          // 配对;
+          actions.push(
+              h(
+                  "Button",
+                  {
+                    props: {
+                      type: "success",
+                      size: "small"
+                    },
+                    on: {
+                      click: function () {
+                        // self.showMatchDailog(params.row);
+                        self.getGCCMatchAmount();
+                        // self.$router.push('/finance/recharge?name=' + params.row.coin.unit);
+                      }
+                    },
+                    style: {
+                      marginRight: "8px"
+                    }
+                  },
+                  self.$t("uc.finance.money.match")
+              )
+          );
+        }
+        return h("p", actions);
+      }
+    });
+    return columns;
   }
+}
 }
 </script>
 <style lang="scss">
@@ -358,33 +353,6 @@ export default {
         .shaow {
             padding: 5px;
         }
-        .ivu-table-body {
-          td {
-            background: none;
-            .ivu-table-cell {
-              p .ivu-btn {
-                background: #fff;
-                height: 25px;
-                padding: 0 10px;
-                span {
-                  display: inline-block;
-                  line-height: 25px;
-                  font-size: 14px;
-                }
-              }
-              p .ivu-btn.ivu-btn-info {
-                border: 1px solid #3399ff;
-                border-radius: 20px;
-                span {
-                  color: #3399ff;
-                }
-              }
-              p .ivu-btn.ivu-btn-error {
-                border: 1px solid #f15057;
-                border-radius: 20px;
-                span {
-                  color: #f15057;
-                }
                 .ivu-table-body {
                     td {
                         background: none;
@@ -424,13 +392,11 @@ export default {
                     }
                 }
             }
-        }
     }
-}
-    }}
     .hidden-assets{
-    margin-left:45px;
-  }
+          display: flex;
+    justify-content: flex-end;
+    }
 </style>
 
 <style scoped lang="scss">
@@ -455,7 +421,6 @@ export default {
         }
     }
 }
-    
 
 // .rightarea .rightarea-top {
 //   line-height: 75px;

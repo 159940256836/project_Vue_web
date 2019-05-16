@@ -36,7 +36,7 @@ export default {
     },
     created:function(){
         this.opts.width = this.width || 240;
-        this.opts.height = this.height || 50;
+        this.opts.height = this.height || 40;
         this.opts.rose = this.rose || 0;
         if (parseFloat(this.opts.rose) < 0) {
           this.pColor = "rgba(222, 33, 29, .1)";

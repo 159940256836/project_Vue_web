@@ -403,7 +403,7 @@ export default {
             this.$refs.test.updateOpened();
             this.$refs.test.updateActiveName();
         });
-        const doc = document.body;
+        const doc = document.body
         const sreenHeight = doc.offsetHeight;
         const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
         const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;

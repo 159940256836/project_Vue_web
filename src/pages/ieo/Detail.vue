@@ -88,7 +88,7 @@
         </div>
         <div class="table1">
             <!-- 5.14修改 -->
-            <div class="tabida"> 
+            <div class="tabida">
                 <div @click="changeTab(1)" :class="tabid==1?'activee':''">售卖方式</div>
                 <div @click="changeTab(2)" :class="tabid==2?'activee':''">项目详情</div>
             </div>
@@ -183,15 +183,9 @@ export default {
                 }
             })
         },
-        // multity(x, y) {
-        //     return String(x * y).slice(0, 3);
-        // },
-        //5.13修改
-         multity(x, y) {
-            return String(x * y)
-        // multity(x, y) {
-        //     return String((x * y).toFixed(3));
-         },
+        multity(x, y) {
+            return String((x * y).toFixed(3));
+        },
         changeNum() {
             if (this.isNaNFun(this.base)) {
                 this.exchange = 0;
@@ -308,7 +302,7 @@ export default {
 }
 .red1{
     background:#3399FF !important;
-   
+
 }
 .yellow1{
     background:#AAA !important;
@@ -338,7 +332,7 @@ export default {
          div{
              margin-top:22px;
          }
-         
+
 
         }
     .tabida{
@@ -347,7 +341,7 @@ export default {
         border-bottom: 1px solid #E0E0E0;
         font-size:16px;
         line-height:46px;
-       
+
         div{
             width:102px;
             text-align:center;
@@ -449,7 +443,7 @@ $lineColor: rgb(71, 100, 146);
                     width:352px;
                     height:185px;
                     background-size:contain;
-                
+
                 }
             }
             .detail {
