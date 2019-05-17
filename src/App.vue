@@ -461,9 +461,9 @@ export default {
                             display: inline-block;
                             margin-right:40px;
                             text-align: center;
-                            &:nth-child(5) {
-                                padding-right: 19px;
-                            }
+                            // &:nth-child(5) {
+                            //     padding-right: 19px;
+                            // }
                         }
                         // a.router-link-exact-active.router-link-active {
                         //     color: #2d8cf0;

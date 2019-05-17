@@ -1403,7 +1403,7 @@ li {
         .tables {
             border: none;
             /*<!--box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;-->*/
-            /*border-top: 2px solid #f0ac19;*/
+            /*border-top: 2px solid #39f;*/
             .ivu-table {
                 .ivu-table-header {
                     .ivu-table-column-center {

@@ -1,5 +1,5 @@
 <template>
-    <div class="shaow">
+    <div class="shaow" id="lever">
         <div class="hidden-assets">
             <span>隐藏资产为0的币种:</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
@@ -143,13 +143,15 @@ export default {
             this.$http.post(this.host + "/margin-trade/lever_wallet/list").then(response => {
                 var resp = response.body;
                 this.showAccountData=resp.data;
-               
+               if(resp.data!=null){
                 for(let i=0;i<resp.data.length;i++){
                     let data=resp.data[i];
                     if(data.leverWalletList[0].balance != "0" || data.leverWalletList[0].frozenBalance != "0" || data.leverWalletList[0].status != "0"){
                         this.hiddenAccountData.push(data);
                     }
                 }
+               }
+
                 if (resp.code == 0) {
                     this.tableMoney = resp.data;
                     this.loading = false;
@@ -311,4 +313,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

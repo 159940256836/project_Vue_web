@@ -1,9 +1,9 @@
 <template>
-    <div class="notice common">
+    <div class="notice common" style="min-height:519px">
         <div class="banner">
             <span>公告板</span>
         </div>
-        <div class="main">
+        <div class="main" >
             <div class="list">
                 <div class="item" v-for="item in FAQList" @click="noticedeail(item.id)">
                     <span class="text">{{item.title}}</span>
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="page">
-                <Page :total="totalNum" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page>
+                <Page v-show="showPage" :total="totalNum" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page>
             </div>
         </div>
         <!-- <div class="help_container">
@@ -85,13 +85,15 @@
 <script>
 import { minHeightMinx } from "../../minxs/minxs"
 export default {
-    mixins: [minHeightMinx],
+    // mixins: [minHeightMinx],
     data() {
         return {
             pageNo: 1,
             pageSize: 10,
             totalNum: 0,
-            FAQList: []
+            FAQList: [],
+            showPage: false
+
         };
     },
     created: function () {
@@ -117,7 +119,13 @@ export default {
                     .then(response => {
                         var resp = response.body;
                         if (resp.code == 0) {
+
                             if (resp.data.content.length == 0) return;
+                            if (resp.data.totalElements <= 10) {
+                                this.showPage = false;
+                            } else {
+                                this.showPage = true;
+                            }
                             this.FAQList = resp.data.content;
                             this.totalNum = resp.data.totalElements;
                         } else {

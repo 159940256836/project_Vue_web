@@ -101,8 +101,8 @@
                                 <template v-for="(item, index) in btnList">
                                     <li @click="tab(index)" :class="{active:item.check}" style="width:18%;text-align:center;">{{item.text}}</li>
                                 </template>
-                                <li style="color:#f0ac19;width:30%;text-align:right;" @click="transFerFun" v-if="isLogin">划转</li>
-                                <li style="color:#f0ac19;width:20%" @click="toBorrow" v-if="isLogin">借贷/归还</li>
+                                <li style="color:#39f;width:30%;text-align:right;" @click="transFerFun" v-if="isLogin">划转</li>
+                                <li style="color:#39f;width:20%" @click="toBorrow" v-if="isLogin">借贷/归还</li>
                                 <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
