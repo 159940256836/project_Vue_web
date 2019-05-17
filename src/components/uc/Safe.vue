@@ -476,6 +476,7 @@ export default {
 
             usernameS: "",
             user: {},
+            googleAuthentication:"",
             choseItem: 0,
             accountValue: "1",
             formValidate2: {

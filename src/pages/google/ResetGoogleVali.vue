@@ -99,7 +99,7 @@ export default {
         onError() {
             this.$Notice.error({
                 title: this.$t("common.tip"),
-                desc: "复制成功"
+                desc: "复制失败"
             })
         },
         sure(name) {
