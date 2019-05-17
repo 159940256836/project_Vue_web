@@ -693,7 +693,8 @@ export default {
             sendMsgDisabled2: false,
             sendMsgDisabled3: false,
             sendMsgDisabled5: false,
-            sendMsgDisabled8:false
+            sendMsgDisabled8:false,
+            googleAuthentication:""
         };
     },
     methods: {

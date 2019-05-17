@@ -105,7 +105,7 @@
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
                                     <router-link :to="rechargeUSDTUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span>
+                                    <span style="float:right;margin-right:10px; color:#39f;" @click="transFerFun">划转</span>
                                     <!-- <a :href="rechargeUSDTUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
@@ -188,7 +188,7 @@
                                     <b>{{wallet.coin|toFloor(coinScale)}}</b>
                                     <span>{{currentCoin.coin}}</span>
                                     <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#f0ac19;" @click="transFerFun">划转</span>
+                                    <span style="float:right;margin-right:10px; color:#39f;" @click="transFerFun">划转</span>
                                     <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                                     <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
@@ -2320,9 +2320,8 @@ export default {
                                     if(rows[resp.bid.items.length - 1]!=undefined){
                                         const totle = rows[resp.bid.items.length - 1].totalAmount;
                                     }else{
-                                        const totle="";
+                                        var totle;
                                     }
-
                                 this.plate.bidTotle = totle;
                             } else {
                                 const rows = this.plate.bidRows,
