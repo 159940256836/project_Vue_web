@@ -247,9 +247,7 @@ export default {
                 }
             };
             if(this.value[0] == "杠杆账户"){
-                debugger;
                 if (this.toValue[0] == "币币账户") {
-                    debugger;
                     const params = {
                         coinUnit: this.toValue[1],
                         amount: this.num,
