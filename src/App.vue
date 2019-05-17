@@ -189,7 +189,9 @@
                                 <li>
                                     <a href="javascript:;">服务邮箱：kaililiangu@163.com</a>
                                 </li>
-                                <li><span>企业邮箱：service@coinmany.com</span></li>
+                                <li>
+                                    <span style="color: #8790a1;">企业邮箱：service@coinmany.com</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -1094,7 +1096,7 @@ body {
 
                         a {
                             line-height: 26px;
-                            color: #fff;
+                            color: #8790a1;
                         }
                     }
                 }
@@ -1114,14 +1116,20 @@ body {
             display: flex;
             .info-title {
                 flex: 1;
+                margin-right: 20px;
+                text-align: left;
+                line-height: 45px;
             }
             .info-img {
                 text-align: left;
                 flex: 15;
                 a {
                     width: 125px;
-                    height: 50px;
                     display: inline-block;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
             }
         }
