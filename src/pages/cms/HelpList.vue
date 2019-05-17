@@ -10,13 +10,13 @@
             <h1>帮助中心</h1>
             <div class="list">
                 <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{cate:cate,id:item.id,cateTitle:cateTitle}}"> -->
-                <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}">
+                <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}">
                     <span class="text">{{item.title}}</span>
                     <img v-show="item.isTop==0" class="iconimg" src="../../assets/images/icon-top.png" alt="">
                     <span class="time">
                         {{item.createTime}}
                     </span>
-                </router-link>
+                </router-link> -->
                 <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}"></router-link>
             </div>
             <!-- <div class="page">
@@ -30,6 +30,7 @@
     width: 60%;
     margin: 0 auto;
     padding: 80px 0;
+    min-height:569px!important;
     .container {
         > h1 {
             text-align: center;
@@ -88,9 +89,6 @@ export default {
     },
     watch: {
         $route(to, from) {
-            // const { cate, cateTitle } = to.query;
-            // this.cate = cate;
-            // this.cateTitle = cateTitle;
             this.getAllData();
         }
     },
@@ -104,8 +102,8 @@ export default {
                 .post(this.host + "/uc/ancillary/system/help", {})
                 .then(res => {
                     if (res.status == 200 && res.body.code == 0) {
+                        console.log(res.body.data)
                         this.list = res.body.data;
-                        // this.totle = res.body.data.totalElements;
                     } else {
                         this.$Message.error(res.body.message);
                     }
@@ -122,7 +120,6 @@ export default {
                 .then(res => {
                     if (res.status == 200 && res.body.code == 0) {
                         this.list = res.body.data.content;
-                        this.totle = res.body.data.totalElements;
                     } else {
                         this.$Message.error(res.body.message);
                     }

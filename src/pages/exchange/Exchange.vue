@@ -1635,8 +1635,7 @@ export default {
         //     this.defaultPath = res;
         //     this.init();
         // });
-                    this.init();
-
+            this.init();
         },
         mounted: function () {
             // this.getCNYRate();
