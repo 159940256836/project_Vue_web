@@ -1,23 +1,19 @@
 <template>
-    <div class="helplist">
-        <!--<div class="route-wrap">
-             <router-link to="help">帮助中心</router-link>
-            <span>></span>
-            <span>{{cateTitle}}</span>
-        </div> -->
-        <div class="container">
+    <div class="help common">
+        <img class="bannerimg" src="../../assets/images/help_banner.png">
+        <div class="help_container">
             <!-- <h1>{{cateTitle}}</h1> -->
             <h1>帮助中心</h1>
             <div class="list">
                 <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{cate:cate,id:item.id,cateTitle:cateTitle}}"> -->
-                <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}">
+                <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}">
                     <span class="text">{{item.title}}</span>
                     <img v-show="item.isTop==0" class="iconimg" src="../../assets/images/icon-top.png" alt="">
                     <span class="time">
                         {{item.createTime}}
                     </span>
-                </router-link> -->
-                <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}"></router-link>
+                </router-link>
+                <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}"></router-link> -->
             </div>
             <!-- <div class="page">
                 <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="pageChange"></Page>
@@ -36,6 +32,32 @@
             text-align: center;
             margin: 30px 0 20px 0;
         }
+    }
+}
+.help {
+  background: white;
+  padding-top: 60px;
+  height: 100%;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 50px;
+//   padding-top: 60px;
+}
+.help .bannerimg {
+    display: block;
+    width: 100%;
+}
+.help_container {
+    padding: 0 12%;
+    height: 100%;
+    margin-top:-210px;
+    min-height: 387px;
+    > h1 {
+        font-size: 32px;
+        line-height: 1;
+        padding: 110px 0;
+        text-align: center;
     }
 }
 .list {
@@ -127,13 +149,13 @@ export default {
         }
     },
     mounted() {
-        const doc = document.body
-        const sreenHeight = doc.offsetHeight;
-        const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
-        const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
-        const contentHeight = doc.getElementsByClassName("helplist")[0];
-        const bodyHeight = sreenHeight - headerHeight - footerHeight;
-        contentHeight.style.minHeight = bodyHeight + "px";
+        // const doc = document.body
+        // const sreenHeight = doc.offsetHeight;
+        // const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
+        // const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
+        // const contentHeight = doc.getElementsByClassName("helplist")[0];
+        // const bodyHeight = sreenHeight - headerHeight - footerHeight;
+        // contentHeight.style.minHeight = bodyHeight + "px";
     }
 };
 </script>

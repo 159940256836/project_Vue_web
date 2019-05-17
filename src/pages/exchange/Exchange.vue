@@ -1631,10 +1631,6 @@ export default {
             }
         },
         created: function () {
-        //     this.getdefaultSymbol().then(res => {
-        //     this.defaultPath = res;
-        //     this.init();
-        // });
             this.init();
         },
         mounted: function () {
@@ -2059,7 +2055,6 @@ export default {
                             })
                             .append("<span>M5</span>")
                             .addClass("selected") // 静态默认分时
-
                         widget
                             .createButton()
                             .attr("title", "M15")

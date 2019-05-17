@@ -199,6 +199,9 @@ export default {
         width: 100% !important;
     }
 }
+.main .content-wrap .title,.main .content-wrap .time{
+    text-align: center;
+}
 </style>
 
 

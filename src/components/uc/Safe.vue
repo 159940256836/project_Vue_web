@@ -1564,8 +1564,8 @@ button.ivu-btn.ivu-btn-primary {
 }
 button.ivu-btn.ivu-btn-default {
     &:hover {
-        color: #3399ff;
-        border: 1px solid #3399ff;
+        //color: #3399ff;
+        //border: 1px solid #3399ff;
     }
     &:active {
         color: #3399ff;
