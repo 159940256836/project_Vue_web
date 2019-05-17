@@ -21,7 +21,7 @@
                     <div class="prompt">
                         <p style="color:#ccc">提示</p>
                         <ul>
-                            <li>Huobi为您提供了强大的API,您可以通过API使用行情查询、自动交易等服务。通过
+                            <li>币多网为您提供了强大的API,您可以通过API使用行情查询、自动交易等服务。通过
                                 <router-link to="">API文档</router-link>查看如何使用。</li>
                             <li>每个用户最多创建5组API Key</li>
                             <li>
