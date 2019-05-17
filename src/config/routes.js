@@ -38,7 +38,7 @@ import Login from '../pages/uc/login'
 import Register from '../pages/uc/register'
 import FindPwd from '../pages/uc/findpwd'
 import Exchange from '../pages/exchange/exchange'
-//import Help from '../pages/cms/help'
+// import Help from '../pages/cms/help'
 import HelpList from '../pages/cms/HelpList' //帮助分类列表
 import HelpDetail from '../pages/cms/HelpDetail' //帮助详情
 // import Message from '../pages/cms/message'

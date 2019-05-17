@@ -1,20 +1,22 @@
 <template>
     <div class="helplist">
-        <!-- <div class="route-wrap">
-            <router-link to="help">帮助中心</router-link>
+        <!--<div class="route-wrap">
+             <router-link to="help">帮助中心</router-link>
             <span>></span>
             <span>{{cateTitle}}</span>
         </div> -->
         <div class="container">
             <!-- <h1>{{cateTitle}}</h1> -->
+            <h1>帮助中心</h1>
             <div class="list">
-                <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{cate:cate,id:item.id,cateTitle:cateTitle}}">
+                <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{cate:cate,id:item.id,cateTitle:cateTitle}}"> -->
+                <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}">
                     <span class="text">{{item.title}}</span>
                     <img v-show="item.isTop==0" class="iconimg" src="../../assets/images/icon-top.png" alt="">
                     <span class="time">
                         {{item.createTime}}
                     </span>
-                </router-link> -->
+                </router-link>
                 <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}"></router-link>
             </div>
             <!-- <div class="page">
@@ -82,14 +84,14 @@ export default {
         // const { cate, cateTitle } = this.$route.query;
         // this.cate = cate;
         // this.cateTitle = cateTitle;
-        this.getData();
+        this.getAllData();
     },
     watch: {
         $route(to, from) {
             // const { cate, cateTitle } = to.query;
             // this.cate = cate;
             // this.cateTitle = cateTitle;
-            this.getData();
+            this.getAllData();
         }
     },
     methods: {
@@ -100,7 +102,7 @@ export default {
         getAllData(){//查询所有帮助
             this.$http
                 .post(this.host + "/uc/ancillary/system/help", {})
-               .then(res => {
+                .then(res => {
                     if (res.status == 200 && res.body.code == 0) {
                         this.list = res.body.data;
                         // this.totle = res.body.data.totalElements;

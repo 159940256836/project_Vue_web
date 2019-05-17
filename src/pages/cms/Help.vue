@@ -32,55 +32,56 @@
 //   padding-top: 60px;
 }
 .help .bannerimg {
-  display: block;
-  width: 100%;
+    display: block;
+    width: 100%;
 }
 .help_container {
-  padding: 0 12%;
-  text-align: center;
-  height: 100%;
-  > h1 {
-    font-size: 32px;
-    line-height: 1;
-    padding: 50px 0;
-  }
+    padding: 0 12%;
+    text-align: center;
+    height: 100%;
+    > h1 {
+        font-size: 32px;
+        line-height: 1;
+        padding: 50px 0;
+    }
 }
 .help .main {
-  display: flex;
-  justify-content: space-around;
-  .section {
-    flex: 0 0 40%;
-    width: 40%;
-    font-size: 16px;
-    text-align: left;
-    margin: 0 20px;
-    position: relative;
-    padding-bottom: 30px;
-    > h3 {
-      font-size: 24px;
-      line-height: 1;
-      padding: 30px 0;
-    }
-    .item {
-      display: block;
-      position: relative;
-      padding: 16px 0;
-      line-height: 1;
-      color: #333;
-      border-bottom: 1px solid #f0f0f0;
-      .text {
-        display: inline-block;
-        max-width: calc(100% - 25px);
-        white-space: nowrap;
-        -o-text-overflow: ellipsis;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-    }
-    .iconimg {
-      display: inline-block;
-      width: 14px;
-      margin-left: 6px;
+    display: flex;
+    justify-content: space-around;
+    .section {
+        flex: 0 0 40%;
+        width: 40%;
+        font-size: 16px;
+        text-align: left;
+        margin: 0 20px;
+        position: relative;
+        padding-bottom: 30px;
+        > h3 {
+            font-size: 24px;
+            line-height: 1;
+            padding: 30px 0;
+        }
+        .item {
+            display: block;
+            position: relative;
+            padding: 16px 0;
+            line-height: 1;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            .text {
+                display: inline-block;
+                max-width: calc(100% - 25px);
+                white-space: nowrap;
+                -o-text-overflow: ellipsis;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+        .iconimg {
+            display: inline-block;
+            width: 14px;
+            margin-left: 6px;
+        }
     }
   }
   .route-wrap {
@@ -91,32 +92,31 @@
     a {
       color: #3399ff;
     }
-  }
 }
 </style>
 
 <script>
-import {minHeightMinx} from "../../minxs/minxs"
+import { minHeightMinx } from "../../minxs/minxs"
 export default {
-    mixins:[minHeightMinx],
-  data() {
-    return {
-      helpData: []
-    };
-  },
-  created: function() {
-    this.getData();
-  },
-  methods: {
-    getData() {
-      this.$http.post(this.host + "/uc/ancillary/more/help",{}).then(res => {
-        if (res.status == 200 && res.body.code == 0) {
-          this.helpData = res.body.data;
-        } else {
-          this.$Message.error(res.body.message);
+    mixins: [minHeightMinx],
+    data() {
+        return {
+            helpData: []
+        };
+    },
+    created: function () {
+        this.getData();
+    },
+    methods: {
+        getData() {
+            this.$http.post(this.host + "/uc/ancillary/more/help", {}).then(res => {
+                if (res.status == 200 && res.body.code == 0) {
+                    this.helpData = res.body.data;
+                } else {
+                    this.$Message.error(res.body.message);
+                }
+            });
         }
-      });
     }
-  }
 };
 </script>

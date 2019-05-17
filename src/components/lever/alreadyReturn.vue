@@ -10,10 +10,10 @@
     </div>
 </template>
 <script>
-const paramFun = (pageSize, repayment) => (pageNo) => ({
-    pageSize, repayment, pageNo
+const paramFun = (pageSize, paymentType) => (pageNo) => ({
+    pageSize, paymentType, pageNo,
 });
-const getParams = paramFun(10, 1);
+const getParams = paramFun(10, 3);
 export default {
     data() {
         return {
@@ -36,13 +36,16 @@ export default {
                     }
                 }, {
                     title: "数量",
-                    key: "loanBalance"
+                    key: "amount"
                 }, {
                     title: "利率",
-                    key: "interestRate"
+                    key: "interestRate",
+                    render:(h,params)=>{
+                        return h("div",{},params.row.leverCoin.interestRate)
+                    }
                 }, {
                     title: "利息累计",
-                    key: "accumulative"
+                    key: "interest"
                 },
                 {
                     title: "状态",
@@ -70,7 +73,7 @@ export default {
         },
         init() {
             const params = getParams(this.pageNo);
-            this.$http.post(this.host + "/margin-trade/loan/record_list", params).then(res => {
+            this.$http.post(this.host + "/margin-trade/repayment/history", params).then(res => {
                 console.log(res);
                 const data = res.body;
                 if (data.code == 0) {

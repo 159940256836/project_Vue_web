@@ -112,10 +112,12 @@ export default {
             this.$Message.error(this.$t("uc.finance.recharge.copysuccess"));
         },
         changeCoin(value) {
+            console.log("======");
+            console.log(value);
             const list = (this.coinList.length>0 && this.coinList.filter(ele=>ele.coin.unit == value)) || [];
             if(list.length>0){
                 this.qrcode.value = list[0].address || '';
-                this.qrcode.coinName = list[0].name.toLowerCase();
+                this.qrcode.coinName = list[0].coin.name.toLowerCase();
             }
             // for (var i = 0; i < this.coinList.length; i++) {
             //     if (this.coinList[i].coin.unit == value) {

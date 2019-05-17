@@ -43,8 +43,7 @@
                                 </label>
                                 <div class="input-group">
                                     <Poptip trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.withdrawScale+$t('uc.finance.withdraw.tip11')+currentCoin.minAmount+' ,'+$t('uc.finance.withdraw.tip2')+currentCoin.maxAmount" style="width: 100%;">
-                                        <!-- <InputNumber @on-change="computerAmount" v-model="withdrawAmount" :placeholder="$t('uc.finance.withdraw.numtip1')" size="large" :min="currentCoin.minAmount" :max="currentCoin.maxAmount"></InputNumber> -->
-                                         <InputNumber @on-change="computerAmount" v-model="withdrawAmount" :placeholder="$t('uc.finance.withdraw.numtip1')" size="large" :max="currentCoin.maxAmount"></InputNumber>
+                                        <InputNumber @on-change="computerAmount" v-model="withdrawAmount" :placeholder="$t('uc.finance.withdraw.numtip1')" size="large" :max="currentCoin.maxAmount"></InputNumber>
                                         <span class="input-group-addon addon-tag uppercase firstt">{{currentCoin.unit}}</span>
                                     </Poptip>
                                 </div>
@@ -173,287 +172,277 @@ export default {
         }
     },
     methods: {
-      cancel() {
-          this.modal = false;
-          this.formInline.code = "";
-          this.formInline.fundpwd = "";
-      },
-      sendCode() {
-          this.$http.post(this.host + "/uc/mobile/withdraw/code").then(response => {
-              var resp = response.body;
-              if (resp.code == 0) {
-                  this.settime();
-                  this.$Notice.success({
-                      title: this.$t("common.tip"),
-                      desc: resp.message
-                  });
-              } else {
-                  this.$Notice.error({
-                      title: this.$t("common.tip"),
-                      desc: resp.message
-                  });
-              }
-          });
-      },
-      settime() {
-          this.sendcodeValue = this.countdown;
-          this.codeIsSending = true;
-          let timercode = setInterval(() => {
-              this.countdown--;
-              this.sendcodeValue = this.countdown;
-              if (this.countdown <= 0) {
-                  clearInterval(timercode);
-                  this.sendcodeValue = this.$t("uc.regist.sendcode");
-                  this.countdown = 60;
-                  this.codeIsSending = false;
-              }
-          }, 1000);
-      },
-      changePage(index) {
-          this.transaction.page = index - 1;
-          this.getList();
-      },
-      onAddressChange(data) {
-          this.inputAddress = data;
-      },
-      clearValues() {
-          if (this.$refs.address) {
-              this.$refs.address.setQuery(" ");
-          }
-          this.withdrawAdress = "";
-          this.inputAddress = "";
-          this.withdrawAmount = 0;
-          // this.withdrawFee= 0;
-          this.withdrawOutAmount = 0;
-      },
-      getCurrentCoinRecharge() {
-          if (this.coinType != "") {
-              var temp = [];
-              for (var i = 0; i < this.allTableWithdraw.length; i++) {
-                  //   if (this.allTableWithdraw[i].symbol == this.coinType) {
-                  if (this.allTableWithdraw[i].coin.unit == this.coinType) {
-                      temp.push(this.allTableWithdraw[i]);
-                  }
-              }
-              this.tableWithdraw = temp;
-          } else {
-              this.tableWithdraw = this.allTableWithdraw;
-          }
-      },
-      ok() {
-          if (this.formInline.code == "") {
-              this.modal = true;
-              this.$Message.error("请填写短信验证码");
-              return;
-          }
-          if (this.formInline.fundpwd == "") {
-              this.modal = true;
-              this.$Message.error(this.$t("otc.chat.msg7tip"));
-              return;
-          }
-          let params = {};
-          console.log(this.googleSwitch);
-          if (this.googleSwitch) {
-              if (this.formInline.googleCode == "") {
-                  this.modal = true;
-                  this.$Message.error("请填写谷歌验证码");
-                  return;
-              }else{
-                  params.googleSwitch = this.formInline.googleCode;
-              }
-          }
+        cancel() {
+            this.modal = false;
+            this.formInline.code = "";
+            this.formInline.fundpwd = "";
+
+        },
+        sendCode() {
+            this.$http.post(this.host + "/uc/mobile/withdraw/code").then(response => {
+                var resp = response.body;
+                if (resp.code == 0) {
+                    this.settime();
+                    this.$Notice.success({
+                        title: this.$t("common.tip"),
+                        desc: resp.message
+                    });
+                } else {
+                    this.$Notice.error({
+                        title: this.$t("common.tip"),
+                        desc: resp.message
+                    });
+                }
+            });
+        },
+        settime() {
+            this.sendcodeValue = this.countdown;
+            this.codeIsSending = true;
+            let timercode = setInterval(() => {
+                this.countdown--;
+                this.sendcodeValue = this.countdown;
+                if (this.countdown <= 0) {
+                    clearInterval(timercode);
+                    this.sendcodeValue = this.$t("uc.regist.sendcode");
+                    this.countdown = 60;
+                    this.codeIsSending = false;
+                }
+            }, 1000);
+        },
+        changePage(index) {
+            this.transaction.page = index - 1;
+            this.getList();
+        },
+        onAddressChange(data) {
+            this.inputAddress = data;
+        },
+        clearValues() {
+            if (this.$refs.address) {
+                this.$refs.address.setQuery(" ");
+            }
+            this.withdrawAdress = "";
+            this.inputAddress = "";
+            this.withdrawAmount = 0;
+            // this.withdrawFee= 0;
+            this.withdrawOutAmount = 0;
+        },
+        getCurrentCoinRecharge() {
+            if (this.coinType != "") {
+                var temp = [];
+                for (var i = 0; i < this.allTableWithdraw.length; i++) {
+                    //   if (this.allTableWithdraw[i].symbol == this.coinType) {
+                    if (this.allTableWithdraw[i].coin.unit == this.coinType) {
+                        temp.push(this.allTableWithdraw[i]);
+                    }
+                }
+                this.tableWithdraw = temp;
+            } else {
+                this.tableWithdraw = this.allTableWithdraw;
+            }
+        },
+        ok() {
+            if (this.formInline.code == "") {
+                this.modal = true;
+                this.$Message.error("请填写短信验证码");
+                return;
+            }
+            if (this.formInline.fundpwd == "") {
+                this.modal = true;
+                this.$Message.error(this.$t("otc.chat.msg7tip"));
+                return;
+            }
+            let params = {};
+            console.log(this.googleSwitch);
+            if (this.googleSwitch) {
+                if (this.formInline.googleCode == "") {
+                    this.modal = true;
+                    this.$Message.error("请填写谷歌验证码");
+                    return;
+                } else {
+                    params.googleCode = this.formInline.googleCode;
+                }
+            }
 
 
-          params["unit"] = this.currentCoin.unit;
-          params["address"] = this.withdrawAdress;
-          params["amount"] = this.withdrawAmount;
-          params["fee"] = this.withdrawFee;
-          params["jyPassword"] = this.formInline.fundpwd;
-          params["code"] = this.formInline.code;
-          this.$http.post(this.host + "/uc/withdraw/apply", params).then(response => {
-              this.fundpwd = "";
-              var resp = response.body;
-              if (resp.code == 0) {
-                  this.modal = false;
-                  this.formInline.code = "";
-                  this.formInline.fundpwd = "";
-                  this.transaction.page = 0;
-                  this.getList();
-                  this.clearValues();
-                  this.$Message.success(resp.message);
-              } else {
-                  this.$Message.error(resp.message);
-              }
-          });
-      },
-      getAddrList() {
-          //初始化页面上的值
-          this.clearValues();
-          //获取地址
-          this.$http.post(this.host + "/uc/withdraw/support/coin/info").then(response => {
-              var resp = response.body;
-              if (resp.code == 0 && resp.data.length > 0) {
-                  this.coinList = resp.data;
-                  if (this.coinType) {
-                      for (let i = 0; i < resp.data.length; i++) {
-                          if (this.coinType == resp.data[i].unit) {
-                              this.currentCoin = resp.data[i];
-                              break;
-                          }
-                      }
-                  } else {
-                      this.currentCoin = this.coinList[0];
-                      this.coinType = this.currentCoin.unit;
-                  }
-              } else {
-                  this.$Message.error(resp.message);
-              }
-          });
-      },
-      getList() {
-          this.loading = true;
-          //获取tableWithdraw
-          let params = {};
-          params["page"] = this.transaction.page;
-          params["pageSize"] = this.transaction.pageSize;
-          this.$http
-              .post(this.host + "/uc/withdraw/record", params)
-              .then(response => {
-                  var resp = response.body;
-                  if (resp.code == 0) {
-                      this.tableWithdraw = resp.data.content;
-                      this.transaction.total = resp.data.totalElements;
-                      this.transaction.page = resp.data.number;
-                  } else {
-                      this.$Message.error(resp.message);
-                  }
-                  this.loading = false;
-              });
-      },
-      accSub(arg1, arg2) {
-          var r1, r2, m, n;
-          try {
-              r1 = arg1.toString().split(".")[1].length;
-          } catch (e) {
-              r1 = 0;
-          }
-          try {
-              r2 = arg2.toString().split(".")[1].length;
-          } catch (e) {
-              r2 = 0;
-          }
-          m = Math.pow(10, Math.max(r1, r2));
-          //last modify by deeka
-          //动态控制精度长度
-          n = r1 >= r2 ? r1 : r2;
-          return ((arg1 * m - arg2 * m) / m).toFixed(n);
-      },
-      round(v, e) {
-          var t = 1;
-          for (; e > 0; t *= 10, e--);
-          for (; e < 0; t /= 10, e++);
-          return Math.round(v * t) / t;
-      },
-      computerAmount() {
-        // 新增代码
-        // 判断 提币数量 < 最小手续费 = 最小提币数量
-        if (this.withdrawAmount <= this.currentCoin.minTxFee) {
-          this.withdrawAmount = this.currentCoin.minAmount
-        }
-        // 否则 提出当前数量减去手续费
-        this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
-        // 旧代码
-        // console.log(this.withdrawOutAmount,this.currentCoin.withdrawScale,this.withdrawAmount, this.withdrawFee)
-        // this.withdrawOutAmount = this.round(
-        //   this.accSub(this.withdrawAmount, this.withdrawFee),
-        //   this.currentCoin.withdrawScale
-        // );
-      },
-      computerAmount2() {
-          this.withdrawAmount =
-              (this.withdrawAmount + "").replace(/([0-9]+\.[0-9]{6})[0-9]*/, "$1") -
-              0;
-          //this.withdrawOutAmount = this.round(
+            params["unit"] = this.currentCoin.unit;
+            params["address"] = this.withdrawAdress;
+            params["amount"] = this.withdrawAmount;
+            params["fee"] = this.withdrawFee;
+            params["jyPassword"] = this.formInline.fundpwd;
+            params["code"] = this.formInline.code;
+            this.$http.post(this.host + "/uc/withdraw/apply", params).then(response => {
+                this.fundpwd = "";
+                var resp = response.body;
+                if (resp.code == 0) {
+                    this.modal = false;
+                    this.formInline.code = "";
+                    this.formInline.fundpwd = "";
+                    this.transaction.page = 0;
+                    this.getList();
+                    this.clearValues();
+                    this.$Message.success(resp.message);
+                } else {
+                    this.$Message.error(resp.message);
+                }
+            });
+        },
+        getAddrList() {
+            //初始化页面上的值
+            this.clearValues();
+            //获取地址
+            this.$http.post(this.host + "/uc/withdraw/support/coin/info").then(response => {
+                var resp = response.body;
+                if (resp.code == 0 && resp.data.length > 0) {
+                    this.coinList = resp.data;
+                    if (this.coinType) {
+                        for (let i = 0; i < resp.data.length; i++) {
+                            if (this.coinType == resp.data[i].unit) {
+                                this.currentCoin = resp.data[i];
+                                break;
+                            }
+                        }
+                    } else {
+                        this.currentCoin = this.coinList[0];
+                        this.coinType = this.currentCoin.unit;
+                    }
+                } else {
+                    this.$Message.error(resp.message);
+                }
+            });
+        },
+        getList() {
+            this.loading = true;
+            //获取tableWithdraw
+            let params = {};
+            params["page"] = this.transaction.page;
+            params["pageSize"] = this.transaction.pageSize;
+            this.$http
+                .post(this.host + "/uc/withdraw/record", params)
+                .then(response => {
+                    var resp = response.body;
+                    if (resp.code == 0) {
+                        this.tableWithdraw = resp.data.content;
+                        this.transaction.total = resp.data.totalElements;
+                        this.transaction.page = resp.data.number;
+                    } else {
+                        this.$Message.error(resp.message);
+                    }
+                    this.loading = false;
+                });
+        },
+        accSub(arg1, arg2) {
+            var r1, r2, m, n;
+            try {
+                r1 = arg1.toString().split(".")[1].length;
+            } catch (e) {
+                r1 = 0;
+            }
+            try {
+                r2 = arg2.toString().split(".")[1].length;
+            } catch (e) {
+                r2 = 0;
+            }
+            m = Math.pow(10, Math.max(r1, r2));
+            //last modify by deeka
+            //动态控制精度长度
+            n = r1 >= r2 ? r1 : r2;
+            return ((arg1 * m - arg2 * m) / m).toFixed(n);
+        },
+        round(v, e) {
+            var t = 1;
+            for (; e > 0; t *= 10, e--);
+            for (; e < 0; t /= 10, e++);
+            return Math.round(v * t) / t;
+        },
+        computerAmount() {
             let num = this.round(
-              this.accSub(this.withdrawAmount, this.withdrawFee),
-              this.currentCoin.withdrawScale
-          );
-          this.withdrawOutAmount = num >= 0 ? num : 0;
-      },
-      valid() {
-        this.withdrawAdress = this.withdrawAdress || this.inputAddress;
-        if (this.coinType == "") {
-          this.$Message.error(this.$t("uc.finance.withdraw.symboltip"));
-          return false;
-        } else if (this.withdrawAdress == "") {
-          this.$Message.error(this.$t("uc.finance.withdraw.addresstip"));
-          return false;
-        } else if (
-          this.withdrawAmount == "" ||
-          this.withdrawAmount == 0 ||
-          this.withdrawAmount - 0 < this.currentCoin.minAmount
-        ) {
-          this.$Message.error(
-            this.$t("uc.finance.withdraw.numtip2") + this.currentCoin.minAmount
-          );
-          return false;
-        } else if (this.withdrawAmount - 0 < this.withdrawFee) {
-          this.$Message.error(this.$t("uc.finance.withdraw.numtip3"));
-          return false;
-        } else if (
-          this.withdrawFee == "" ||
-          this.withdrawFee == 0 ||
-          this.withdrawFee - 0 > this.currentCoin.maxTxFee ||
-          this.withdrawFee - 0 < this.currentCoin.minTxFee
-        ) {
-          this.$Message.error(
-            this.$t("uc.finance.withdraw.feetip1") +this.currentCoin.minTxFee + " , " +  this.$t("uc.finance.withdraw.feetip2") + this.currentCoin.maxTxFee
-          );
-          return false;
-        } else {
-          return true;
+                this.accSub(this.withdrawAmount, this.withdrawFee),
+                this.currentCoin.withdrawScale
+            );
+            this.withdrawOutAmount = num >= 0 ? num : 0;
+        },
+        computerAmount2() {
+            this.withdrawAmount =
+                (this.withdrawAmount + "").replace(/([0-9]+\.[0-9]{6})[0-9]*/, "$1") -
+                0;
+            this.withdrawOutAmount = this.round(
+                this.accSub(this.withdrawAmount, this.withdrawFee),
+                this.currentCoin.withdrawScale
+            );
+        },
+        valid() {
+            this.withdrawAdress = this.withdrawAdress || this.inputAddress;
+            if (this.coinType == "") {
+                this.$Message.error(this.$t("uc.finance.withdraw.symboltip"));
+                return false;
+            } else if (this.withdrawAdress == "") {
+                this.$Message.error(this.$t("uc.finance.withdraw.addresstip"));
+                return false;
+            } else if (
+                this.withdrawAmount == "" ||
+                this.withdrawAmount == 0 ||
+                this.withdrawAmount - 0 < this.currentCoin.minAmount
+            ) {
+                this.$Message.error(
+                    this.$t("uc.finance.withdraw.numtip2") + this.currentCoin.minAmount
+                );
+                return false;
+            } else if (this.withdrawAmount - 0 < this.withdrawFee) {
+                this.$Message.error(this.$t("uc.finance.withdraw.numtip3"));
+                return false;
+            } else if (
+                this.withdrawFee == "" ||
+                this.withdrawFee == 0 ||
+                this.withdrawFee - 0 > this.currentCoin.maxTxFee ||
+                this.withdrawFee - 0 < this.currentCoin.minTxFee
+            ) {
+                this.$Message.error(
+                    this.$t("uc.finance.withdraw.feetip1") + this.currentCoin.minTxFee + " , " + this.$t("uc.finance.withdraw.feetip2") + this.currentCoin.maxTxFee
+                );
+                return false;
+            } else {
+                return true;
+            }
+        },
+        apply() {
+            if (this.valid()) {
+                this.modal = true;
+                let timercode = setInterval(() => {
+                    if (this.countdown <= 0) {
+                        clearInterval(timercode);
+                        this.sendcodeValue = this.$t("uc.regist.sendcode");
+                        this.codeIsSending = false;
+                    }
+                }, 1000)
+            }
+        },
+        getMember() {
+            //获取个人安全信息
+            this.$http.post(this.host + "/uc/approve/security/setting").then(response => {
+                var resp = response.body;
+                if (resp.code == 0) {
+                    this.user = resp.data;
+                } else {
+                    this.$Message.error(this.loginmsg);
+                }
+            });
         }
-      },
-      apply() {
-          if (this.valid()) {
-              this.modal = true;
-              let timercode = setInterval(() => {
-                  if (this.countdown <= 0) {
-                      clearInterval(timercode);
-                      this.sendcodeValue = this.$t("uc.regist.sendcode");
-                      this.codeIsSending = false;
-                  }
-              }, 1000)
-          }
-      },
-      getMember() {
-          //获取个人安全信息
-          this.$http.post(this.host + "/uc/approve/security/setting").then(response => {
-              var resp = response.body;
-              if (resp.code == 0) {
-                  this.user = resp.data;
-              } else {
-                  this.$Message.error(this.loginmsg);
-              }
-          });
-        }
-  },
-  created() {
-      // this.getMember();
-      this.$http.options.emulateJSON = false;
-      this.coinType = this.$route.query.name || "";
-      this.getAddrList();
-      this.getList(0, 10, 1);
+    },
+    created() {
+        // this.getMember();
+        this.$http.options.emulateJSON = false;
+        this.coinType = this.$route.query.name || "";
+        this.getAddrList();
+        this.getList(0, 10, 1);
 
-      //this.$http.post(this.host + '/uc/get/user', {mobile: this.$store.getters.member.mobile}).then(res => {
         this.$http.post(this.host + '/uc/get/user', { mobile: this.$store.getters.member.mobile }).then(res => {
-          const data = res.body;
-          if (data.code == 0) {
-              this.googleSwitch = !!data.data;
-          }
-      })
-      console.log(this.$store.getters.member);
-  },
+            const data = res.body;
+            if (data.code == 0) {
+                this.googleSwitch = !!data.data;
+            }
+        })
+        console.log(this.$store.getters.member);
+    },
     computed: {
         member: function () {
             console.log(this.$store.getters.member);

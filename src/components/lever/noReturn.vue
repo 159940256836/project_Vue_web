@@ -5,7 +5,7 @@
             <Table :columns="columns" :data="data"></Table>
         </div>
         <div style="margin-top:20px;text-align:right;">
-            <Page :total="totalElement" @on-change="changePage"/>
+            <Page :total="totalElement" @on-change="changePage" />
         </div>
         <Modal v-model="modal" title="归还借贷" :footer-hide="true">
             <div style="color:#999;font-size:16px;margin-top:20px;">杠杆账户</div>
@@ -33,7 +33,7 @@
             </div>
             </Input>
             <div style="display:flex;justify-content:space-around;margin-top:10px;">
-                <Button type="default">取消</Button>
+                <Button type="default" @click="cancel">取消</Button>
                 <Button type="primary" @click="sure">确认</Button>
             </div>
         </Modal>
@@ -48,7 +48,7 @@ export default {
     data() {
         return {
             modal: false,
-            totalElement:0,
+            totalElement: 0,
             value: "",
             pageNo: 1,
             title: "",
@@ -117,13 +117,16 @@ export default {
     created() {
         this.init();
     },
-    watch:{
-        repayment(newValue, oldValue){
+    watch: {
+        repayment(newValue, oldValue) {
             this.init();
         }
     },
     methods: {
-        changePage(index){
+        cancel() {
+            this.modal = false;
+        },
+        changePage(index) {
             this.pageNo = index;
             this.init();
         },
@@ -142,16 +145,16 @@ export default {
             }
             this.toBorow(params)
         },
-        toBorow(params){
-            this.$http.post(this.host+"/margin-trade/loan/repayment",params).then(res=>{
+        toBorow(params) {
+            this.$http.post(this.host + "/margin-trade/loan/repayment", params).then(res => {
                 const data = res.body;
-                if(data.code == 0){
+                if (data.code == 0) {
                     this.$Message.success(data.message);
                     this.modal = false;
                     this.pageNo = 1;
                     this.init();
                     this.$emit("borowSuccess");
-                }else{
+                } else {
                     this.$Message.error(data.message);
                 }
             })
