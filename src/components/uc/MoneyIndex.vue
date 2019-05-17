@@ -349,6 +349,9 @@ export default {
 </script>
 <style lang="scss">
 .nav-right {
+  .ivu-tabs-nav .ivu-tabs-tab-active{
+    color:#2d8cf0 !important;
+  }
     .rightarea.bill_box {
         .shaow {
             padding: 5px;

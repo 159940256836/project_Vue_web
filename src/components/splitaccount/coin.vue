@@ -1,11 +1,11 @@
 <template>
     <div class="shaow">
         <div class="hidden-assets">
-        <span>隐藏资产为0的币种:</span>
-        <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-            <span slot="open">开</span>
-            <span slot="close">关</span>
-        </i-switch>
+            <span>隐藏资产为0的币种:</span>
+            <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
+                <span slot="open">开</span>
+                <span slot="close">关</span>
+            </i-switch>
         </div>
         <div class="order-table">
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
@@ -37,11 +37,7 @@ export default {
             this.modal = false;
         },
         changeGoogleSwitch(){
-            if(this.googleSwitch){
-                this.tableMoney=this.hiddenAccountData
-            }else{
-                this.tableMoney=this.showAccountData
-            }
+            this.googleSwitch?this.tableMoney=this.hiddenAccountData:this.tableMoney=this.showAccountData;
         },
         getMoney() {
             this.$http.post(this.host + "/uc/asset/wallet").then(response => {

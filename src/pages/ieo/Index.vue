@@ -144,7 +144,7 @@ export default {
 </style>
 <style lang="scss">
 $pageTheme: rgb(13, 70, 125);
-.ivu-tabs-nav .ivu-tabs-tab-active{
+.father .ivu-tabs-nav .ivu-tabs-tab-active{
     color:#fff !important;
 }
 #centent{
@@ -180,14 +180,14 @@ $pageTheme: rgb(13, 70, 125);
     // }
 }
 .speicial {
-    .ivu-tabs-tab {
+      .ivu-tabs-tab {
         width:102px;
         height:46px;
         font-size:16px;
         // color:#fff;
-        padding: 16px;
+        // padding: 16px;
         text-align:center;
-        line-height:18px;
+        line-height:30px;
     }
     // .ivu-page-item-active {
     //     background-color: $pageTheme;

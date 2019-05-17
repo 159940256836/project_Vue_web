@@ -1,12 +1,12 @@
 <template>
     <div class="helpdetail">
         <div class="route-wrap">
-            <router-link to="help">帮助中心</router-link>
+            <router-link to="helplist">帮助中心</router-link>
             <span>></span>
             <router-link :to="{path:'helplist',query:{cate:cate,cateTitle:cateTitle}}">{{cateTitle}}</router-link>
         </div>
         <div class="main">
-            <div class="menu">
+            <!-- <div class="menu">
                 <p>此组别内的文章</p>
                 <div class="titles">
                     <div class="route" v-for="item in topList" @click="clickTitle(item.id)" :class="{active:item.id==article.id}">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <router-link :to="{path:'helplist',query:{cate:cate,cateTitle:cateTitle}}">查看更多>></router-link>
-            </div>
+            </div> -->
             <div class="content-wrap" style="background:#fff">
                 <h3 class="title">{{article.title}}</h3>
                 <p class="time">{{article.createTime}}</p>

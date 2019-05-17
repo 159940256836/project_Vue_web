@@ -136,6 +136,11 @@ export default {
                     setTimeout(() => {
                         this.$router.push('/uc/safe')
                     })
+                }else{
+                    this.$Notice.error({
+                        title: this.$t("common.tip"),
+                        desc:resp.message
+                    });
                 }
             })
         }

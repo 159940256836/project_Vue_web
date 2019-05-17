@@ -71,6 +71,11 @@ export default {
                     setTimeout(()=>{
                         this.$router.go(-1);
                     },1000)
+                }else{
+                    this.$Notice.error({
+                        title: this.$t("common.tip"), 
+                        desc: resp.message 
+                    });
                 }
             })
         },
@@ -122,6 +127,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.openGoogleModal .ivu-btn-warning{
+    background:#3399ff !important;
+    border-color:#3399ff !important;
+    
+}
 .openGoogleModal {
     padding: 100px 35%;
     overflow: hidden;
