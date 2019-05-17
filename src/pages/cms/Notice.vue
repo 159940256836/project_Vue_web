@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="page">
-                <Page :total="totalNum" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page>
+                <Page v-show="showPage" :total="totalNum" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page>
             </div>
         </div>
         <!-- <div class="help_container">
@@ -91,7 +91,9 @@ export default {
             pageNo: 1,
             pageSize: 10,
             totalNum: 0,
-            FAQList: []
+            FAQList: [],
+            showPage: false
+
         };
     },
     created: function () {
@@ -117,7 +119,13 @@ export default {
                     .then(response => {
                         var resp = response.body;
                         if (resp.code == 0) {
+
                             if (resp.data.content.length == 0) return;
+                            if (resp.data.totalElements <= 10) {
+                                this.showPage = false;
+                            } else {
+                                this.showPage = true;
+                            }
                             this.FAQList = resp.data.content;
                             this.totalNum = resp.data.totalElements;
                         } else {
