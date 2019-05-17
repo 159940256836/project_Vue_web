@@ -13,16 +13,38 @@
                         <div class="action-inner">
                             <div class="inner-left">
                                 <p class="describe">{{$t('uc.finance.withdraw.symbol')}}</p>
-                                <Select v-model="coinType" style="width:100px;margin-top: 14px;" @on-change="getAddrList">
-                                    <Option v-for="item in coinList" :value="item.unit" :key="item.unit">{{ item.unit }}</Option>
+                                <Select
+                                    v-model="coinType"
+                                    style="width:100px;margin-top: 14px;"
+                                    @on-change="getAddrList"
+                                >
+                                    <Option
+                                        v-for="item in coinList"
+                                        :value="item.unit"
+                                        :key="item.unit"
+                                    >
+                                        {{ item.unit }}
+                                    </Option>
                                 </Select>
                             </div>
                             <div class="inner-box">
                                 <div class="form-group form-address">
                                     <label for="controlAddress" class="controlAddress describe">{{$t('uc.finance.withdraw.address')}}</label>
                                     <div class="control-input-group">
-                                        <Select ref="address" v-model="withdrawAdress" filterable clearable @on-query-change="onAddressChange">
-                                            <Option v-for="item in currentCoin.addresses" :value="item.address" :key="item.address">{{ item.remark +'('+ item.address+')' }}</Option>
+                                        <Select
+                                            ref="address"
+                                            v-model="withdrawAdress"
+                                            filterable
+                                            clearable
+                                            @on-query-change="onAddressChange"
+                                        >
+                                            <Option
+                                                v-for="item in currentCoin.addresses"
+                                                :value="item.address"
+                                                :key="item.address"
+                                            >
+                                                {{ item.remark +'('+ item.address+')'}}
+                                            </Option>
                                         </Select>
                                     </div>
                                 </div>
@@ -30,55 +52,137 @@
                         </div>
                         <div class="form-group-container">
                             <div class="form-group form-amount">
-                                <label class="label-amount"> {{$t('uc.finance.withdraw.num')}}
+                                <!--可用余额-->
+                                <label class="label-amount">
+                                    {{$t('uc.finance.withdraw.num')}}
                                     <p class="label-fr">
-                                        <span>【{{$t('uc.finance.withdraw.avabalance')}}】：
-                                            <span class="label-pointer" id="valueAvailable">{{currentCoin.balance|toFloor}}</span>
-                                        </span>
-                                        <span v-if="currentCoin.enableAutoWithdraw == 0">【{{$t('common.tip')}}】：{{$t('uc.finance.withdraw.msg1')}} {{currentCoin.threshold}} {{$t('uc.finance.withdraw.msg2')}}</span>
                                         <span>
-                                            <a href="javascript:;" id="levelUp" style="display: none;">{{$t('uc.finance.withdraw.increase')}}</a>
+                                            【{{$t('uc.finance.withdraw.avabalance')}}】：
+                                            <span
+                                                class="label-pointer"
+                                                id="valueAvailable"
+                                            >
+                                                {{currentCoin.balance|toFloor}}
+                                            </span>
+                                        </span>
+                                        <span v-if="currentCoin.enableAutoWithdraw == 0">
+                                            【{{$t('common.tip')}}】：{{$t('uc.finance.withdraw.msg1')}} {{currentCoin.threshold}} {{$t('uc.finance.withdraw.msg2')}}
+                                        </span>
+                                        <span>
+                                            <a
+                                                href="javascript:;"
+                                                id="levelUp"
+                                                style="display: none;"
+                                            >
+                                                {{$t('uc.finance.withdraw.increase')}}
+                                            </a>
                                         </span>
                                     </p>
                                 </label>
+                                <!--提币数量-->
                                 <div class="input-group">
-                                    <Poptip trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.withdrawScale+$t('uc.finance.withdraw.tip11')+currentCoin.minAmount+' ,'+$t('uc.finance.withdraw.tip2')+currentCoin.maxAmount" style="width: 100%;">
-                                        <InputNumber @on-change="computerAmount" v-model="withdrawAmount" :placeholder="$t('uc.finance.withdraw.numtip1')" size="large" :max="currentCoin.maxAmount"></InputNumber>
-                                        <span class="input-group-addon addon-tag uppercase firstt">{{currentCoin.unit}}</span>
+                                    <Poptip
+                                        trigger="focus"
+                                        :content="$t('uc.finance.withdraw.tip1')+currentCoin.withdrawScale+$t('uc.finance.withdraw.tip11')+
+                                        currentCoin.minAmount+' ,'+$t('uc.finance.withdraw.tip2')+currentCoin.maxAmount"
+                                        style="width: 100%;"
+                                    >
+                                        <!--当前币种可用为零 该input禁止输入-->
+                                        <InputNumber
+                                            v-if=""
+                                            :disabled="currentCoin.balance == 0"
+                                            @keyup.native="computerAmount"
+                                            v-model="withdrawAmount"
+                                            :placeholder="$t('uc.finance.withdraw.numtip1')"
+                                            size="large"
+                                            :max="currentCoin.maxAmount"
+                                        >
+                                        </InputNumber>
+                                        <span class="input-group-addon addon-tag uppercase firstt">
+                                            {{currentCoin.unit}}
+                                        </span>
                                     </Poptip>
                                 </div>
                             </div>
                         </div>
-                         <Slider v-if="currentCoin.maxTxFee > currentCoin.minTxFee" v-model="withdrawFee" show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10" :max="currentCoin.maxTxFee" :min="currentCoin.minTxFee"></Slider>
+                         <Slider
+                             v-if="currentCoin.maxTxFee > currentCoin.minTxFee"
+                             v-model="withdrawFee"
+                             show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10"
+                             :max="currentCoin.maxTxFee"
+                             :min="currentCoin.minTxFee"
+                         >
+                         </Slider>
+                        <!--手续费-->
                         <div class="form-group-container form-group-container2">
                             <div class="form-group form-fee">
-                                <label class="label-amount"> {{$t('uc.finance.withdraw.fee')}}
+                                <label class="label-amount">
+                                    {{$t('uc.finance.withdraw.fee')}}
                                     <!--<p class="label-fr">-->
                                     <!--<span>{{$t('uc.finance.withdraw.range')}}：{{currentCoin.minTxFee}} - {{currentCoin.maxTxFee}}</span>-->
                                     <!--</p>-->
                                 </label>
-                                <div class="input-group" style="margin-top:14px;position:relative;">
+                                <div
+                                    class="input-group"
+                                    style="margin-top:14px;position:relative;"
+                                >
                                     <!--<Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">-->
-                                    <InputNumber readonly v-model="withdrawFee" :min="currentCoin.minTxFee" :max="currentCoin.maxTxFee" size="large" style="width: 440px;"></InputNumber>
-                                    <span class="input-group-addon addon-tag uppercase">{{currentCoin.unit}}</span>
+                                    <InputNumber
+                                        readonly
+                                        v-model="withdrawFee"
+                                        :min="currentCoin.minTxFee"
+                                        :max="currentCoin.maxTxFee"
+                                        size="large"
+                                        style="width: 440px;"
+                                    >
+                                    </InputNumber>
+                                    <span class="input-group-addon addon-tag uppercase">
+                                        {{currentCoin.unit}}
+                                    </span>
                                     <!--</Poptip>-->
                                 </div>
                             </div>
+                            <!--到账数量-->
                             <div class="form-group">
                                 <label>{{$t('uc.finance.withdraw.arriamount')}}</label>
-                                <div class="input-group" style="margin-top:14px;position:relative;">
-                                    <InputNumber readonly v-model="withdrawOutAmount" :placeholder="$t('uc.finance.withdraw.arriamount')" size="large" style="width: 100%;"></InputNumber>
+                                <div
+                                    class="input-group"
+                                    style="margin-top:14px;position:relative;"
+                                >
+                                    <InputNumber
+                                        readonly
+                                        v-model="withdrawOutAmount"
+                                        :placeholder="$t('uc.finance.withdraw.arriamount')"
+                                        size="large"
+                                        style="width: 100%;"
+                                    >
+                                    </InputNumber>
                                     <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->
-                                    <span class="input-group-addon addon-tag uppercase">{{currentCoin.unit}}</span>
+                                    <span class="input-group-addon addon-tag uppercase">
+                                        {{currentCoin.unit}}
+                                    </span>
                                 </div>
                             </div>
                         </div>
                         <div class="action-foot">
-                            <Button id="withdrawSubmit" long size="large" type="primary" style="height:40px;" @click="apply">{{$t('uc.finance.withdraw.pickup')}}</Button>
+                            <!--提币数量等于零 或者 小于最小提币数量 该按钮禁用-->
+                            <Button
+                                id="withdrawSubmit"
+                                long
+                                size="large"
+                                type="primary"
+                                style="height:40px;"
+                                @click="apply"
+                                :disabled="withdrawAmount == 0 || withdrawAmount < currentCoin.minAmount"
+                            >
+                                {{$t('uc.finance.withdraw.pickup')}}
+                            </Button>
                         </div>
                         <div class="action-content pt10">
                             <div class="action-body">
-                                <p class="acb-p1">{{$t('common.tip')}}</p>
+                                <p class="acb-p1">
+                                    {{$t('common.tip')}}
+                                </p>
                                 <p class="acb-p2">• {{$t('uc.finance.withdraw.msg3')}}：{{currentCoin.minAmount}}{{$t('uc.finance.withdraw.msg4')}}。<br>• {{$t('uc.finance.withdraw.msg5')}}<br>• {{$t('uc.finance.withdraw.msg6')}} </p>
                             </div>
                         </div>
@@ -86,12 +190,27 @@
                             <div class="action-body">
                                 <p class="acb-p1">{{$t('uc.finance.withdraw.record')}}</p>
                                 <div class="order-table">
-                                    <p class="acb-p2" style="margin-bottom:10px;">• {{$t('uc.finance.withdraw.click')}}
-                                        <i class="ivu-icon ivu-icon-funnel"></i>{{$t('uc.finance.withdraw.filtrate')}}</p>
-                                    <Table stripe :columns="tableColumnsWithdraw" :data="tableWithdraw" :loading="loading"></Table>
+                                    <p class="acb-p2" style="margin-bottom:10px;">
+                                        • {{$t('uc.finance.withdraw.click')}}
+                                        <i class="ivu-icon ivu-icon-funnel"></i>
+                                        {{$t('uc.finance.withdraw.filtrate')}}
+                                    </p>
+                                    <Table
+                                        stripe
+                                        :columns="tableColumnsWithdraw"
+                                        :data="tableWithdraw"
+                                        :loading="loading"
+                                    >
+                                    </Table>
                                     <div id="pages">
                                         <div style="float: right;">
-                                            <Page class="pages_a" :total="transaction.total" :current="transaction.page + 1" @on-change="changePage"></Page>
+                                            <Page
+                                                class="pages_a"
+                                                :total="transaction.total"
+                                                :current="transaction.page + 1"
+                                                @on-change="changePage"
+                                            >
+                                            </Page>
                                         </div>
                                     </div>
                                 </div>
@@ -109,23 +228,53 @@
             <p slot="header">
                 提示
             </p>
-            <Form class="withdraw-form-inline" ref="formInline" :model="formInline" inline>
-                <!-- <FormItem>
-                  <Input type="text" v-model="user.mobilePhone" disabled></Input>
-                </FormItem> -->
-              <FormItem prop="code">
-                <Input type="text" v-model="formInline.code" :placeholder="$t('uc.regist.smscode')">
-                </Input>
-                <input id="sendCode" @click="sendCode();" type="Button" :value="sendcodeValue" :disabled="codeIsSending">
-                </input>
-              </FormItem>
-              <FormItem>
-                <Input type="password" v-model="formInline.fundpwd" :placeholder="$t('otc.chat.msg7')"></Input>
-              </FormItem>
+            <Form
+                class="withdraw-form-inline"
+                ref="formInline"
+                :model="formInline" inline
+            >
+            <!-- <FormItem>
+              <Input type="text" v-model="user.mobilePhone" disabled></Input>
+            </FormItem> -->
+            <FormItem prop="code">
+              <Input
+                  type="text"
+                  v-model="formInline.code"
+                  :placeholder="$t('uc.regist.smscode')"
+              >
+              </Input>
+              <input
+                  id="sendCode"
+                  @click="sendCode();"
+                  type="Button"
+                  :value="sendcodeValue"
+                  :disabled="codeIsSending"
+              >
+              </input>
+            </FormItem>
+            <FormItem v-if="googleSwitch">
+                <Input
+                    type="text"
+                    v-model="formInline.googleCode"
+                    placeholder="请输入谷歌验证码"
+                ></Input>
+            </FormItem>
+            <FormItem>
+                <Input
+                    type="password"
+                    v-model="formInline.fundpwd"
+                    :placeholder="$t('otc.chat.msg7')"
+                ></Input>
+            </FormItem>
+
         </Form>
       <div slot="footer">
-        <span style="margin-right:50px" @click="cancel">取消</span>
-        <span style="background:#3399ff;color:#fff;width:80px;border-radius:30px;display:inline-block;text-align:center;height:30px;line-height: 30px;" @click="ok">确定</span>
+        <span
+            style="margin-right:50px"
+            @click="cancel">取消</span>
+        <span
+            style="background:#3399ff;color:#fff;width:80px;border-radius:30px;display:inline-block;text-align:center;height:30px;line-height: 30px;"
+            @click="ok">确定</span>
       </div>
     </Modal>
   </div>
@@ -155,9 +304,9 @@ export default {
             loading: true,
             withdrawAdress: "",
             inputAddress: "", //用户输入的地址
-            withdrawAmount: 0,
-            withdrawFee: 0,
-            withdrawOutAmount: 0,
+            withdrawAmount: 0, // 默认提币数量
+            withdrawFee: 0, // 默认提币手续费
+            withdrawOutAmount: 0, // 默认到账数量
             coinType: "",
             coinList: [],
             tableWithdraw: [],
@@ -176,7 +325,7 @@ export default {
             this.modal = false;
             this.formInline.code = "";
             this.formInline.fundpwd = "";
-
+            this.formInline.googleCode = "";
         },
         sendCode() {
             this.$http.post(this.host + "/uc/mobile/withdraw/code").then(response => {
@@ -269,6 +418,7 @@ export default {
             params["fee"] = this.withdrawFee;
             params["jyPassword"] = this.formInline.fundpwd;
             params["code"] = this.formInline.code;
+            params["googleCode"] = this.formInline.googleCode;
             this.$http.post(this.host + "/uc/withdraw/apply", params).then(response => {
                 this.fundpwd = "";
                 var resp = response.body;
@@ -354,11 +504,24 @@ export default {
             return Math.round(v * t) / t;
         },
         computerAmount() {
-            let num = this.round(
+            /*let num = this.round(
                 this.accSub(this.withdrawAmount, this.withdrawFee),
                 this.currentCoin.withdrawScale
             );
-            this.withdrawOutAmount = num >= 0 ? num : 0;
+            this.withdrawOutAmount = num >= 0 ? num : 0;*/
+            // 新增代码
+            // 判断 提币数量 < 最小手续费 = 最小提币数量
+            // if (this.withdrawAmount <= this.currentCoin.minAmount) {
+            //     this.withdrawAmount = this.currentCoin.maxAmount
+            // }
+            // 否则 提出当前数量减去手续费
+            this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
+            // 旧代码
+            // console.log(this.withdrawOutAmount,this.currentCoin.withdrawScale,this.withdrawAmount, this.withdrawFee)
+            // this.withdrawOutAmount = this.round(
+            //   this.accSub(this.withdrawAmount, this.withdrawFee),
+            //   this.currentCoin.withdrawScale
+            // );
         },
         computerAmount2() {
             this.withdrawAmount =
@@ -404,6 +567,9 @@ export default {
             }
         },
         apply() {
+            this.formInline.code = ""
+            this.formInline.fundpwd = ""
+            this.formInline.googleCode = ""
             if (this.valid()) {
                 this.modal = true;
                 let timercode = setInterval(() => {
@@ -548,6 +714,7 @@ export default {
           text-align: center;
           border-radius: 20px;
           float: right;
+          margin-right: 20px;
         }
       }
       .action-box {

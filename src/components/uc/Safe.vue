@@ -1,6 +1,6 @@
 <template>
     <div class="nav-rights">
-        
+
         <div class="nav-right padding-right-clear">
             <div class="padding-right-clear padding-left-clear rightarea user account-box">
                 <div class="rightarea-con">
@@ -195,7 +195,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- 4 -->
+                            <!-- 4 登录密码-->
                             <div class="account-item">
                                 <div class="account-item-in">
                                     <Icon type="ios-lock" size="20" color="#00b5f6;"></Icon>
@@ -216,7 +216,7 @@
                                             </FormItem>
                                             <!-- newPw -->
                                             <FormItem :label="$t('uc.safe.newpwd')" prop="newPw">
-                                                <Input v-model="formValidate4.newPw" size="large" type="password"></Input>
+                                                <Input v-model="formValidate4.newPw" :placeholder="$t('uc.safe.newpwdmsg1')" size="large" type="password"></Input>
                                             </FormItem>
                                             <!-- newPwConfirm -->
                                             <FormItem :label="$t('uc.safe.confirmnewpwd')" prop="newPwConfirm">
@@ -246,7 +246,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- 5 -->
+                            <!-- 5 资金密码-->
                             <div class="account-item">
                                 <div class="account-item-in">
                                     <Icon type="logo-bitcoin" size="20" color="#00b5f6" />
@@ -264,15 +264,15 @@
                                         <Form ref="formValidate7" :model="formValidate7" :rules="ruleValidate" :label-width="85">
                                             <!-- newMPw -->
                                             <FormItem :label="$t('uc.safe.fundpwd')" prop="pw7">
-                                                <Input v-model="formValidate7.pw7" size="large" type="password"></Input>
+                                                <Input v-model="formValidate7.pw7" size="large" :placeholder="$t('uc.safe.pwdmsg1')" type="password"></Input>
                                             </FormItem>
                                             <!-- newMPwConfirm -->
                                             <FormItem :label="$t('uc.safe.confirmpwd')" prop="pw7Confirm">
                                                 <Input v-model="formValidate7.pw7Confirm" size="large" type="password"></Input>
                                             </FormItem>
-                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
+                                            <!--<FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
                                                 <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
-                                            </FormItem>
+                                            </FormItem>-->
                                             <!-- Button -->
                                             <FormItem>
                                                 <Button type="primary" @click="handleSubmit('formValidate7')">{{$t('uc.safe.save')}}</Button>
@@ -289,7 +289,7 @@
                                             </FormItem>
                                             <!-- newMPw -->
                                             <FormItem :label="$t('uc.safe.newfundpwd')" prop="newMPw">
-                                                <Input v-model="formValidate5.newMPw" size="large" type="password"></Input>
+                                                <Input v-model="formValidate5.newMPw" :placeholder="$t('uc.safe.pwdmsg1')" size="large" type="password"></Input>
                                             </FormItem>
                                             <!-- newMPwConfirm -->
                                             <FormItem :label="$t('uc.safe.confirmnewpwd')" prop="newMPwConfirm">
@@ -340,6 +340,9 @@
                                                 </div>
                                                 </Input>
                                             </FormItem>
+                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
+                                                <Input v-model="formValidate5.googleCode" size="large" type="text"></Input>
+                                            </FormItem>
                                             <!-- Button -->
                                             <FormItem>
                                                 <Button type="primary" @click="handleSubmit('formValidate8')">{{$t('uc.safe.save')}}</Button>
@@ -349,7 +352,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- 7 -->
+                            <!-- 6 谷歌-->
                             <div class="account-item googleValidter">
                                 <div class="account-item-in" style="width: 100%;">
                                     <Icon type="social-googleplus-outline"  />
@@ -367,7 +370,6 @@
                                         </i-switch>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </section>
@@ -788,7 +790,7 @@ export default {
             if (name == "formValidate6") {
                 if (this.imgPreview == "") {
                     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
-                    
+
                     return false;
                 }
                 if (this.imgNext == "") {

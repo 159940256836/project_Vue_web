@@ -453,7 +453,7 @@
                 charge: '充币',
                 pickup: '提币',
                 getaddress: '获取地址',
-                resetsuccess: '获取成功',
+                resetsuccess: '获取地址成功请稍后',
                 match: '配对',
                 matchtip1: '可配对GCX的数量',
                 matchtip2: '请输入配对数量',

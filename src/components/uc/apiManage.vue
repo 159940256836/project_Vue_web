@@ -19,7 +19,7 @@
                         <Button type="primary" @click="make">创建</Button>
                     </div>
                     <div class="prompt">
-                        <p style="color:#ccc">提示</p>
+                        <p style="color:#515a6e; font-weight: 600;">提示</p>
                         <ul>
                             <li>币多网为您提供了强大的API,您可以通过API使用行情查询、自动交易等服务。通过
                                 <router-link to="">API文档</router-link>查看如何使用。</li>
@@ -234,7 +234,7 @@ export default {
                 width: 49%;
                 ul li {
                     font-size: 10px;
-                    color: #ccc;
+                    color: #515a6e;
                     line-height: 25px;
                     list-style: disc;
                     span {
