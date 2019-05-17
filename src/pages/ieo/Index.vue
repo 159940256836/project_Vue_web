@@ -9,7 +9,7 @@
             </Tabs>
             <div class="contentWrapper">
                  <template v-if="list.length == 0">
-                    <img src="../../assets/images/noData.png" alt="" style="width:30%;">
+                    <img src="../../assets/images/noData.png" alt="" style="width:30%;margin-top: 55px;">
                 </template>
                 <!-- <template v-else>
 
@@ -19,7 +19,7 @@
                 </template>
             </div>
             <div class="page">
-                <Page :total="total" size="small" :current="currentPage" :page-size="pageSize" @on-change="changePage" />
+                <Page v-show="total > 3" :total="total" size="small" :current="currentPage" :page-size="pageSize" @on-change="changePage" />
             </div>
         </div>
     </div>
@@ -112,8 +112,13 @@ export default {
     width:1200px;
 }
 .common {
-    padding: 100px 18.75%;
+    /*padding: 100px 18.75%;*/
+    /*min-width: ;*/
     background: #fff;
+    width: 1200px;
+    margin: 0 auto 100px;
+    padding-top: 150px;
+    min-height: 700px !important;
     overflow: hidden;
     .contentWrapper {
         text-align: center;
@@ -236,7 +241,7 @@ $pageTheme: rgb(13, 70, 125);
 .father .ivu-tabs-tab-active{
     background:#3399FF;
     color:#fff;
-    z-index:9999;
+    z-index:99;
     &:hover {
         color: #fff;
     }

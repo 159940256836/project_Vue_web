@@ -39,7 +39,7 @@ export default {
         this.opts.height = this.height || 40;
         this.opts.rose = this.rose || 0;
         if (parseFloat(this.opts.rose) < 0) {
-          this.pColor = "rgba(222, 33, 29, .1)";
+          this.pColor = "rgba(222, 33, 29, .2)";
           this.sColor = "#de211d";
         }else {
           this.pColor = "rgba(3, 191, 123, .2)";

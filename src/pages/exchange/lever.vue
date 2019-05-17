@@ -326,7 +326,7 @@
                 <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows"></Table>
             </div>
         </div>
-        
+
     </div>
 </template>
 <style scoped lang="scss">
@@ -698,7 +698,7 @@ var moment = require("moment");
 const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CHECK_FULL_STOP', '止盈止损']]);
 
 import DepthGraph from "@components/exchange/DepthGraph.vue";
-import $ from "@js/jquery.min.js";
+// import $ from "@js/jquery.min.js";
 // <li @click="tab(0)" :class="{active:tab0Flag}">{{}}</li>
 // <li @click="tab(1)">{{$t("exchange.market_price")}}</li>
 // <li @click="tab(2)">止盈止损</li>
@@ -1538,6 +1538,10 @@ export default {
         }
     },
     created: function () {
+        // this.getdefaultSymbol().then(res => {
+        //     this.defaultPath = res;
+            
+        // });
         this.init();
     },
     mounted: function () {
@@ -1557,6 +1561,16 @@ export default {
         // // this.setback();
     },
     methods: {
+        // getdefaultSymbol() {
+        //     return this.$http.get(this.host + "/market/default/symbol").then(res => {
+        //         const data = res.body;
+        //         if (data.code == 0) {
+        //             return new Promise((resolve, reject) => {
+        //                 resolve(data.data.web);
+        //             }).catch(reject => reject("BTC_USDT"));
+        //         }
+        //     })
+        // },
         toBorrow() {//去借贷或者归还
             // this.$router.push({
             this.$router.push({
@@ -1624,8 +1638,8 @@ export default {
                     const list = data.data.map(ele => ({
                         symbol: ele.symbol,
                         proportion: ele.proportion + "X",
-                        explosionPrice: ele.explosionPrice>=0?ele.explosionPrice:"--",
-                        riskRate: ele.explosionRiskRate + "%",
+                        explosionPrice: ele.explosionPrice >= 0 ? ele.explosionPrice : "--",
+                        riskRate: ele.riskRate + "%",
                         baseCoin: this.currentCoin.base
                     }));
                     const [{ symbol, explosionPrice, proportion, riskRate, baseCoin }] = list;
@@ -2798,8 +2812,7 @@ export default {
             params["type"] = "LIMIT_PRICE";
             // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             var that = this;
-            this.$http
-                .post(this.host + '/margin-trade/order/add', params)
+            this.$http.post(this.host + '/margin-trade/order/add', params)
                 .then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
@@ -2936,8 +2949,8 @@ export default {
                     var resp = response.body;
                     if (resp.code == 0) {
                         const list = resp.data[0].leverWalletList;
-                        this.wallet.base = list[1].balance;
-                        this.wallet.coin = list[0].balance;
+                        this.wallet.coin = list[1].balance;
+                        this.wallet.base = list[0].balance;
                     } else {
                         this.wallet.base = 0;
                         this.wallet.coin = 0;
@@ -3019,7 +3032,7 @@ export default {
             this.$Modal.confirm({
                 content: this.$t("exchange.undotip"),
                 onOk: () => {
-                    this.$http.get(this.host + '/margin-trade/order/cancel/'+ order.orderId)
+                    this.$http.get(this.host + '/margin-trade/order/cancel/' + order.orderId)
                         .then(response => {
                             var resp = response.body;
                             if (resp.code == 0) {
@@ -3034,9 +3047,10 @@ export default {
                 }
             });
         },
-        refreshAccount: function () {
+        refreshAccount () {
             this.getCurrentOrder();
             this.getHistoryOrder();
+            this.getSymboLeverMsg();
             this.getWallet();
         },
         timeFormat: function (tick) {

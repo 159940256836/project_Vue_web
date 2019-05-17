@@ -223,7 +223,7 @@ export default {
                 }
             });
             columns.push({
-                title: this.$t("uc.finance.money.needreleased"),
+               title:"可惜",
                 align: "center",
                 render: (h, params) => {
                     const baseBalance = this.toFloor(params.row.baseLoanCount) + " " + params.row.leverWalletList[0].coin.name;
@@ -252,7 +252,7 @@ export default {
                 title: "风险率",
                 align: "center",
                 render: (h, params) => {
-                    const dangerousRate = this.toFloor(params.row.explosionRiskRate) + "%";
+                    const dangerousRate = this.toFloor(params.row.riskRate) + "%";
                     return h("div", {}, dangerousRate)
                 }
             });

@@ -12,13 +12,13 @@
             <Input v-model="num" placeholder="划转数量" style="width:100%">
             <span slot="append">
                 <span>{{unit}}</span>
-                <span style="color:#2d8cf0;margin-left:20px;" @click="turnAll">全部</span>
+                <span class="all" @click="turnAll">全部</span>
             </span>
             </Input>
             <div style="margin-top:20px;">
                 可用&nbsp;&nbsp;&nbsp;{{canUseNum}}&nbsp;&nbsp;&nbsp;{{unit}}
             </div>
-            <div style="display:flex;justify-content:space-around;margin-top:20px;">
+            <div class="button" style="display:flex;justify-content:space-around;margin-top:20px;">
                 <Button @click="cancel" type="default">取消</Button>
                 <Button @click="sure" type="primary">保存</Button>
             </div>
@@ -253,7 +253,7 @@ export default {
                     const params = {
                         coinUnit: this.toValue[1],
                         amount: this.num,
-                        leverCoinSymbol:this.value[1] 
+                        leverCoinSymbol:this.value[1]
                     }
                     this.leverToCoin(params);
                 }
@@ -261,7 +261,7 @@ export default {
             console.log(this.toValue);
             console.log(this.value);
 
-            // 
+            //
         },
         leverToCoin(params){//杠杆转币币
             this.$http.post(this.host + "/margin-trade/lever_wallet/turn_out", params).then(res => {
@@ -383,4 +383,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+    .all {
+        cursor: pointer;
+        color:#2d8cf0;
+        margin-left:20px;
+    }
+    .button {
+        display:flex;
+        justify-content:space-around;
+        margin-top:20px;
+    }
 </style>
