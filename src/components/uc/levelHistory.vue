@@ -34,16 +34,16 @@
 }
 .form .clear_btn {
     &:hover {
-        color: #f0ac19;
-        border-color: #f0ac19;
+        color: #39f;
+        border-color: #39f;
     }
     &:focus {
         background-color: #fff;
         -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
         -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
         box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-        color: #f0ac19;
-        border-color: #f0ac19;
+        color: #39f;
+        border-color: #39f;
     }
 }
 </style>

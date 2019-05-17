@@ -495,7 +495,6 @@ export default {
               .then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
-                  debugger;
                   this.$Message.success(resp.message);
                   var that = this;
                   setTimeout(() => {

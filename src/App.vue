@@ -236,6 +236,9 @@
                             <a href="http://www.zerohello.com">
                                 <img src="./assets/images/footer/11.png" alt="">
                             </a>
+                            <a href="http://www.xnqb.com">
+                                <img src="./assets/images/footer/16.png" alt="">
+                            </a>
                             <a href="http://www.block360.pro">
                                 <img src="./assets/images/footer/12.png" alt="">
                             </a>
@@ -457,9 +460,9 @@ export default {
                             display: inline-block;
                             margin-right:40px;
                             text-align: center;
-                            &:nth-child(5) {
-                                padding-right: 19px;
-                            }
+                            // &:nth-child(5) {
+                            //     padding-right: 19px;
+                            // }
                         }
                         // a.router-link-exact-active.router-link-active {
                         //     color: #2d8cf0;
@@ -801,9 +804,10 @@ body {
 }
 
 .ivu-carousel-dots li button {
-    width: 30px;
-    height: 10px;
+    width: 40px;
+    height: 3px;
     border-radius: 14px;
+    background: #3399ff;
 }
 
 .ivu-menu-dark,
@@ -1053,13 +1057,13 @@ body {
 
 .footer {
     min-width: 1260px;
-    height: 470px;
+    height: 400px;
     overflow: hidden;
     color: #53575c;
     background: #1c2435;
     .footer_content {
         width: 1200px;
-        margin: 80px auto 30px;
+        margin: 60px auto 30px;
         .footer-main {
             height: 150px;
             .footer_left {
@@ -1110,6 +1114,7 @@ body {
         border-top: 1px solid #8790a1;
         line-height: 60px;
         font-size: 15px;
+        color: #8790a1;
         .footer-info {
             width: 1200px;
             margin: 20px auto 0;
@@ -1119,16 +1124,23 @@ body {
                 margin-right: 20px;
                 text-align: left;
                 line-height: 45px;
+                color: #8790a1;
             }
             .info-img {
                 text-align: left;
                 flex: 15;
                 a {
                     width: 125px;
+                    height: 40px;
                     display: inline-block;
+                    float: left;
+                    margin-right: 15px;
+                    &:nth-child(8),
+                    &:last-child {
+                        margin-right: 0;
+                    }
                     img {
-                        width: 100%;
-                        height: 100%;
+                        width: 85%;
                     }
                 }
             }

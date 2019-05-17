@@ -1,6 +1,13 @@
 <template>
     <div class="shaow">
         <div class="order-table">
+            <div class="hidden-assets">
+            <span>隐藏资产为0的币种:</span>
+            <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
+                <span slot="open">开</span>
+                <span slot="close">关</span>
+            </i-switch>
+            </div>
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
         </div>
         <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
@@ -16,6 +23,9 @@ export default {
             modal:false,
             tableMoney: [],
             loading: true,
+            googleSwitch:false,
+            hiddenAccountData:[],
+            showAccountData:[]
         }
     },
     created() {
@@ -25,13 +35,20 @@ export default {
         closeModal(){
             this.modal = false;
         },
+         changeGoogleSwitch(){
+            this.googleSwitch?this.tableMoney=this.hiddenAccountData:this.tableMoney=this.showAccountData;
+        },
         getMoney() {
             this.$http.post(this.host + "/uc/otc/wallet/get").then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
                     this.tableMoney = resp.data;
+                    this.showAccountData=resp.data;
                     for (let i = 0; i < this.tableMoney.length; i++) {
                         this.tableMoney[i]["coinType"] = this.tableMoney[i].coin.unit;
+                         if(this.tableMoney[i].balance != "0" || this.tableMoney[i].frozenBalance != "0" || this.tableMoney[i].releaseBalance != "0"){
+                            this.hiddenAccountData.push(this.tableMoney[i]);
+                        }
                     }
                     this.loading = false;
                 } else {

@@ -101,8 +101,8 @@
                                 <template v-for="(item, index) in btnList">
                                     <li @click="tab(index)" :class="{active:item.check}" style="width:18%;text-align:center;">{{item.text}}</li>
                                 </template>
-                                <li style="color:#f0ac19;width:30%;text-align:right;" @click="transFerFun" v-if="isLogin">划转</li>
-                                <li style="color:#f0ac19;width:20%" @click="toBorrow" v-if="isLogin">借贷/归还</li>
+                                <li style="color:#39f;width:30%;text-align:right;" @click="transFerFun" v-if="isLogin">划转</li>
+                                <li style="color:#39f;width:20%" @click="toBorrow" v-if="isLogin">借贷/归还</li>
                                 <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
@@ -1594,6 +1594,7 @@ export default {
             this[silder] = val;
         },
         init() {
+            /*var params = this.$route.params[0];*/
             var params = this.$route.params.pathMatch;
             if (params == undefined) {
                 this.$router.push("/leverindex/" + this.defaultPath);
@@ -1808,7 +1809,7 @@ export default {
                 autosize: true,
                 fullscreen: true,
                 symbol: that.symbol,
-                interval: "5",
+                interval: "5", // 分时K线传值
                 timezone: "Asia/Shanghai",
                 toolbar_bg: "#18202a",
                 container_id: "kline_container",
@@ -3073,44 +3074,54 @@ export default {
             return moment(tick).format("YYYY-MM-DD HH:mm:ss");
         },
         keyEvent(event) {
-            var re1 = new RegExp(
-                "([0-9]+.[0-9]{" + this.baseCoinScale + "})[0-9]*",
-                ""
-            );
-            this.form.buy.limitPrice = this.form.buy.limitPrice
-                .toString()
-                .replace(re1, "$1");
-            this.form.sell.limitPrice = this.form.sell.limitPrice
-                .toString()
-                .replace(re1, "$1");
-            this.form.buy.marketAmount = this.form.buy.marketAmount
-                .toString()
-                .replace(re1, "$1");
-            this.form.buy.stopBuyPrice = this.form.buy.stopBuyPrice
-                .toString()
-                .replace(re1, "$1");
-            this.form.sell.stopBuyPrice = this.form.sell.stopBuyPrice
-                .toString()
-                .replace(re1, "$1");
+            let val=$(event.target).val();
+            if (val!="") {
+                let r = /^[0-9]+\.?[0-9]{0,9}$/;　　//正数
+                let flag =r.test(val)
+                if (flag) {
+                    var re1 = new RegExp(
+                            "([0-9]+.[0-9]{" + this.baseCoinScale + "})[0-9]*",
+                            ""
+                    );
+                    this.form.buy.limitPrice = this.form.buy.limitPrice
+                            .toString()
+                            .replace(re1, "$1");
+                    this.form.sell.limitPrice = this.form.sell.limitPrice
+                            .toString()
+                            .replace(re1, "$1");
+                    this.form.buy.marketAmount = this.form.buy.marketAmount
+                            .toString()
+                            .replace(re1, "$1");
+                    this.form.buy.stopBuyPrice = this.form.buy.stopBuyPrice
+                            .toString()
+                            .replace(re1, "$1");
+                    this.form.sell.stopBuyPrice = this.form.sell.stopBuyPrice
+                            .toString()
+                            .replace(re1, "$1");
 
-            var re2 = new RegExp("([0-9]+.[0-9]{" + this.coinScale + "})[0-9]*", "");
-            this.form.buy.limitAmount = this.form.buy.limitAmount
-                .toString()
-                .replace(re2, "$1");
-            this.form.buy.stopBuyAmount = this.form.buy.stopBuyAmount
-                .toString()
-                .replace(re2, "$1");
+                    var re2 = new RegExp("([0-9]+.[0-9]{" + this.coinScale + "})[0-9]*", "");
+                    this.form.buy.limitAmount = this.form.buy.limitAmount
+                            .toString()
+                            .replace(re2, "$1");
+                    this.form.buy.stopBuyAmount = this.form.buy.stopBuyAmount
+                            .toString()
+                            .replace(re2, "$1");
 
-            this.form.sell.limitAmount = this.form.sell.limitAmount
-                .toString()
-                .replace(re2, "$1");
-            this.form.sell.stopBuyAmount = this.form.sell.stopBuyAmount
-                .toString()
-                .replace(re2, "$1");
+                    this.form.sell.limitAmount = this.form.sell.limitAmount
+                            .toString()
+                            .replace(re2, "$1");
+                    this.form.sell.stopBuyAmount = this.form.sell.stopBuyAmount
+                            .toString()
+                            .replace(re2, "$1");
 
-            this.form.sell.marketAmount = this.form.sell.marketAmount
-                .toString()
-                .replace(re2, "$1");
+                    this.form.sell.marketAmount = this.form.sell.marketAmount
+                            .toString()
+                            .replace(re2, "$1");
+                } else{
+                    $(event.target).val("");
+                }
+            }
+
         }
     }
 };

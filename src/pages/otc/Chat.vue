@@ -173,7 +173,7 @@
         <Modal v-model="modal5" :title="$t('otc.chat.tip')" @on-ok="ok5">
             <P style="color:red;font-weight: bold;">
               {{$t('otc.chat.msg6')}}<br/>
-              <Input type="password" v-model="fundpwd" :placeholder="$t('otc.chat.msg7')"></Input>
+              <Input type="password" v-model="fundpwd" :placeholder="$t('otc.chat.msg7')" style="margin-top: 10px;"></Input>
             </p>
 
         </Modal>
@@ -299,7 +299,7 @@ export default {
             this.modal6 = false;
           }
         }
-        this.modal6 = true; 
+        this.modal6 = true;
     },
     setReserveTime: function() {
       this.getReserveTime();
@@ -470,13 +470,13 @@ export default {
     strpro(str){
       let newStr = str;
       str = str.slice(1);
-      var re = /[\D\d]*/g;  
+      var re = /[\D\d]*/g;
       var str2 = str.replace(re,function(str){
             var result = '';
             for(var i=0;i<str.length;i++){
                 result += '*';
-            }              
-            return result; 
+            }
+            return result;
         });
       return newStr.slice(0,1)+str2;
     }
