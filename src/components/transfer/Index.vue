@@ -63,7 +63,6 @@ export default {
         // this.getLeverNum();
         // this.getOtcNum();
         this.init();
-        console.log(this.modal);
         // this.getSupportCoin().then(res => {
         //     this.getLeverNum().then(res => {
         //         console.log(this.leverList);
@@ -155,7 +154,6 @@ export default {
                         children: temp || []
                     }];
                     this.leverList = list;
-                    console.log(list);
                     return new Promise((resolve, reject) => {
                         resolve("success");
                     })
@@ -247,9 +245,7 @@ export default {
                 }
             };
             if(this.value[0] == "杠杆账户"){
-                debugger;
                 if (this.toValue[0] == "币币账户") {
-                    debugger;
                     const params = {
                         coinUnit: this.toValue[1],
                         amount: this.num,
@@ -258,8 +254,6 @@ export default {
                     this.leverToCoin(params);
                 }
             }
-            console.log(this.toValue);
-            console.log(this.value);
 
             //
         },

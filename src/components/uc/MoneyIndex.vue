@@ -62,7 +62,6 @@ export default {
     // },
     changeTab(name) {
       this.splitcomponentContent = name;
-      console.log(this.splitcomponentContent)
       name == "COIN" && (this.splitcomponent = coin);
       name == 'CURRENCY' && (this.splitcomponent = currency);
       name == "LEVER" && (this.splitcomponent = lever);

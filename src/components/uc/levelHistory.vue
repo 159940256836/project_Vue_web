@@ -141,6 +141,10 @@ export default {
                     }
                 },
                 {
+                    title: "触发价",
+                    key: "triggerPrice"
+                },
+                {
                     title: this.$t("exchange.direction"),
                     key: "direction",
                     width: 60,

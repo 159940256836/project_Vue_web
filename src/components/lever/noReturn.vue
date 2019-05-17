@@ -189,7 +189,6 @@ export default {
         init() {
             const params = getParams(this.pageNo);
             this.$http.post(this.host + "/margin-trade/loan/record_list", params).then(res => {
-                console.log(res);
                 const data = res.body;
                 if (data.code == 0) {
                     this.data = data.data.content;

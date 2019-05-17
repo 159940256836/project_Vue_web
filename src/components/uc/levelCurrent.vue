@@ -138,6 +138,10 @@ export default {
           }
         },
         {
+            title:"触发价",
+            key:"triggerPrice"
+        },
+        {
           title: this.$t("exchange.direction"),
           key: "direction",
           width: 60,
@@ -298,7 +302,6 @@ export default {
       this.$http
         .post(this.host + "/margin-trade/order/current", params)
         .then(response => {
-            console.log(response.body)
           var resp = response.body;
           let rows = [];
           if (resp.content.length > 0) {
@@ -312,7 +315,6 @@ export default {
               rows.push(row);
             }
             this.orders = rows;
-            console.log(this.orders);
           }
           this.loading = false;
         });

@@ -1,5 +1,6 @@
 <template>
     <div class="nav-rights">
+        
         <div class="nav-right padding-right-clear">
             <div class="padding-right-clear padding-left-clear rightarea user account-box">
                 <div class="rightarea-con">
@@ -95,7 +96,7 @@
                                             <span v-else class="uploadimgtip">Tip: uploaded pictures only support.Jpg,.Gif,.Png,.Jpeg format, and recommended size is 100kb-1024kb, otherwise it may fail to upload.</span>
                                             <!-- Button -->
                                             <FormItem style="text-align:center;">
-                                                <Button type="warning" @click="handleSubmit('formValidate6')" style="margin-left: -85px;">{{$t('uc.safe.save')}}</Button>
+                                                <Button type="primary" @click="handleSubmit('formValidate6')" style="margin-left: -85px;">{{$t('uc.safe.save')}}</Button>
                                                 <Button @click="handleReset('formValidate6')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
                                             </FormItem>
                                         </Form>
@@ -141,7 +142,7 @@
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="warning" @click="handleSubmit('formValidate2')">{{$t('uc.safe.save')}}</Button>
+                                                <Button type="primary" @click="handleSubmit('formValidate2')">{{$t('uc.safe.save')}}</Button>
                                                 <Button @click="handleReset('formValidate2')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
                                             </FormItem>
                                         </Form>
@@ -187,7 +188,7 @@
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="warning" @click="handleSubmit('formValidate3')">{{$t('uc.safe.save')}}</Button>
+                                                <Button type="primary" @click="handleSubmit('formValidate3')">{{$t('uc.safe.save')}}</Button>
                                                 <Button @click="handleReset('formValidate3')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
                                             </FormItem>
                                         </Form>
@@ -238,7 +239,7 @@
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="warning" @click="handleSubmit('formValidate4')">{{$t('uc.safe.save')}}</Button>
+                                                <Button type="primary" @click="handleSubmit('formValidate4')">{{$t('uc.safe.save')}}</Button>
                                                 <Button @click="handleReset('formValidate4')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
                                             </FormItem>
                                         </Form>
@@ -274,7 +275,7 @@
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="warning" @click="handleSubmit('formValidate7')">{{$t('uc.safe.save')}}</Button>
+                                                <Button type="primary" @click="handleSubmit('formValidate7')">{{$t('uc.safe.save')}}</Button>
                                                 <Button @click="handleReset('formValidate7')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
                                             </FormItem>
                                         </Form>
@@ -312,7 +313,7 @@
                                             </p>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="warning" @click="handleSubmit('formValidate5')">{{$t('uc.safe.save')}}</Button>
+                                                <Button type="primary" @click="handleSubmit('formValidate5')">{{$t('uc.safe.save')}}</Button>
                                                 <Button @click="handleReset('formValidate5')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
                                             </FormItem>
                                         </Form>
@@ -341,7 +342,7 @@
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="warning" @click="handleSubmit('formValidate8')">{{$t('uc.safe.save')}}</Button>
+                                                <Button type="primary" @click="handleSubmit('formValidate8')">{{$t('uc.safe.save')}}</Button>
                                                 <Button @click="handleReset('formValidate8')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
                                             </FormItem>
                                         </Form>
@@ -476,6 +477,7 @@ export default {
 
             usernameS: "",
             user: {},
+            googleAuthentication:"",
             choseItem: 0,
             accountValue: "1",
             formValidate2: {
@@ -1109,6 +1111,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+
 .ivu-btn-warning{
     background:#3399ff;
     border-color:#3399ff;
@@ -1556,6 +1559,9 @@ button.ivu-btn.ivu-btn-primary {
 }
 </style>
 <style lang="scss">
+.ivu-btn-warning.active, .ivu-btn-warning:active{
+    background: #3399ff !important;
+}
 button.ivu-btn.ivu-btn-default {
     &:hover {
         color: #3399ff;
@@ -1575,3 +1581,4 @@ li.ivu-upload-list-file.ivu-upload-list-file-finish {
     }
 }
 </style>
+

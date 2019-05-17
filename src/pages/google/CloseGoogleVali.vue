@@ -17,7 +17,7 @@
         </Form>
         <div class="btns" style="display:flex;justify-content:space-around;align-items:center;">
             <Button @click="cancel">取消</Button>
-            <Button type="warning" @click="sureBtn('formInline')">确认</Button>
+            <Button type="primary" @click="sureBtn('formInline')">确认</Button>
         </div>
         <!-- </Modal> -->
     </div>
@@ -80,9 +80,7 @@ export default {
             })
         },
         sureBtn(name) {
-            console.log(this.$refs[name].validate);
             this.$refs[name].validate((valid) => {
-                console.log(valid);
                 if (valid) {
                     const formInline = this.formInline;
                     const params = {
