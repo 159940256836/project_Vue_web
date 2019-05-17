@@ -3191,7 +3191,7 @@ export default {
                         this.form.sell.marketAmount = this.form.sell.marketAmount
                                 .toString()
                                 .replace(re2, "$1");
-                    }else{
+                    } else{
                         $(event.target).val("");
                     }
                 }

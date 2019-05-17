@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="section" id="hot">
-<!--<<<<<<< HEAD
+                <!--<<<<<<< HEAD
                 <div class="section-market">
                     <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index">
                         <p>
@@ -50,14 +50,15 @@
                             <span class="pairs-sip sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">{{item.volume}}</span>
                             <span class="pairs-pri">{{item.closeStr - 0}}</span>
                         </p>
-                        &lt;!&ndash;{{item.change}}&ndash;&gt;
+                        &lt;!&ndash;{{item.change}}
                         <SvgLine :values="item.trend"></SvgLine>
                     </div>
                 </div>
-=======-->
+                =======&ndash;&gt;-->
+                <!-- 首页行情图 -->
                 <section class="section-market">
                     <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index" style="float: left;">
-                        <div style="margin-bottom:6px;">
+                        <div>
                             <p class="flex">
                                 <span class="pairs">{{item.symbol}}</span>
                                 <span class="pairs-sip" :class="{green: item.isGreen}" v-if="item.isGreen">{{item.chg | formateRate}}</span>
@@ -66,8 +67,7 @@
                             <p class="flex">
                                  <span class="pairs-sip sip" :class="{green: item.isGreen}" v-if="item.isGreen">{{item.close}}</span>
                                  <span class="pairs-pri" :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.close}}</span>
-                                <!-- <span class="weight">{{item.close}}</span> -->
-                                <span class="white">~CNY&nbsp;{{item.cny}}</span>
+                                 <span class="white">{{item.cny}}</span>
                             </p>
                         </div>
                         <!-- {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}} -->
@@ -75,8 +75,7 @@
                     </div>
                 </section>
             </div>
-
-            <!-- 首页行情图 -->
+            <!--币种列表-->
             <div class="section" id="page2">
                 <div class="page2nav">
                     <ul class="brclearfix">
@@ -167,7 +166,7 @@ export default {
     data() {
         let self = this;
         return {
-            width:240,
+            width:220,
             height:50,
             loading: false,
             progress: 0,
@@ -1236,9 +1235,9 @@ li {
     .bannerWrapper {
         position: absolute;
         bottom: 0;
-        left: 20%;
-        right: 20%;
-        top: 200px;
+        left: 18.5%;
+        right: 18.5%;
+        top: 170px;
         .bannerBox {
             @extend %flex;
             > div {
@@ -1252,16 +1251,17 @@ li {
     background-color: #1c2435;
     @extend %flex;
     .section-market {
-        width: 1146px;
+        width: 1200px;
         margin: 0 auto;
         .market-box {
-            width: 240px;
+            width: 220px;
             height: 120px;
             border-radius: 8px;
             background: rgb(37, 43, 56);
             float: left;
             margin-right: 20px;
             padding: 13px 0 0;
+            overflow: hidden;
             &:last-child {
                 margin-right: 0;
             }
@@ -1271,6 +1271,7 @@ li {
               }
               &:nth-child(2) {
                 padding: 6px 20px 0;
+                line-height: 25px;
               }
               span {
                   &:last-child {
@@ -1290,7 +1291,8 @@ li {
                 color: #03bf7b;
               }
               .pairs-pri {
-                color: #a5a9be;
+                  font-size: 18px;
+                  color: #a5a9be;
               }
             }
         }
@@ -1362,7 +1364,7 @@ li {
 }
 #page2 {
     background: #fff;
-    width: 1146px;
+    width: 1200px;
     height: auto;
     min-height: 320px;
     margin: 40px auto;
@@ -1430,7 +1432,7 @@ li {
 #page4 {
     background: #fff;
     height: auto;
-    width: 1146px;
+    width: 1200px;
     margin: 100px auto;
     ul {
         width: 100%;
@@ -1475,7 +1477,7 @@ li {
     @extend %flex;
     align-items: flex-start;
     .section-main {
-        width: 1146px;
+        width: 1200px;
         margin: 110px auto 0;
         display: flex;
         .download {
@@ -1548,7 +1550,7 @@ li {
     height: 100%;
 }
 .section .ivu-carousel-dots-inside {
-    bottom: 20px;
+    bottom: 30px;
 }
 
 .green {

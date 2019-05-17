@@ -35,15 +35,15 @@ export default {
         }
     },
     created:function(){
-        this.opts.width = this.width || 240;
-        this.opts.height = this.height || 40;
+        this.opts.width = this.width || 210;
+        this.opts.height = this.height || 50;
         this.opts.rose = this.rose || 0;
         if (parseFloat(this.opts.rose) < 0) {
           this.pColor = "rgba(222, 33, 29, .2)";
-          this.sColor = "#de211d";
+          this.sColor = "rgba(222, 33 , 29, .6)";
         }else {
           this.pColor = "rgba(3, 191, 123, .2)";
-          this.sColor = "#03bf7b";
+          this.sColor = "rgba(3, 191, 123, .6)";
         }
         this.draw();
     },

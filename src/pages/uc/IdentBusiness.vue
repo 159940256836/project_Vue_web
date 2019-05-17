@@ -440,7 +440,6 @@ export default {
       this.$http
         .get(this.host + this.api.uc.apply)
         .then(res => {
-          debugger;
           var resp = res.body;
           if (resp.code == 0) {
             this.$Message.success(resp.message);
