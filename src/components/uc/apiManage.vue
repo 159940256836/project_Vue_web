@@ -21,7 +21,7 @@
                     <div class="prompt">
                         <p style="color:#ccc">提示</p>
                         <ul>
-                            <li>Huobi为您提供了强大的API,您可以通过API使用行情查询、自动交易等服务。通过
+                            <li>币多网为您提供了强大的API,您可以通过API使用行情查询、自动交易等服务。通过
                                 <router-link to="">API文档</router-link>查看如何使用。</li>
                             <li>每个用户最多创建5组API Key</li>
                             <li>
@@ -106,7 +106,6 @@ export default {
                     title: "剩余有效期（天）",
                     render: (h, params) => {
                         if (!params.row.bindIp) {
-                            console.log(params.row)
                             let residue = +new Date(params.row.expireTime) - +new Date();
                             let lastTime = Math.floor(residue / 1000 / 60 / 60 / 24);
                             lastTime = lastTime <= 0 ? 0 : lastTime;
@@ -132,7 +131,6 @@ export default {
                                             const { remark, bindIp, id } = params.row;
                                             this.EditorFormItem = { remark, bindIp, id };
                                             this.editor = true;
-                                            console.log(this.EditorFormItem);
                                         }
                                     }
                                 },
@@ -168,7 +166,6 @@ export default {
     methods: {
         getAllAPI() {
             return this.$http.get(this.host + `/uc/open/get_key`).then(res => {
-                console.log(res.data);
                 this.tableData = res.data.data;
             });
         },

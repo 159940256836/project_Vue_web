@@ -80,9 +80,7 @@ export default {
             })
         },
         sureBtn(name) {
-            console.log(this.$refs[name].validate);
             this.$refs[name].validate((valid) => {
-                console.log(valid);
                 if (valid) {
                     const formInline = this.formInline;
                     const params = {

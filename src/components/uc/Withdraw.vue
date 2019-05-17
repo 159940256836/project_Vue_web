@@ -252,7 +252,6 @@ export default {
                 return;
             }
             let params = {};
-            console.log(this.googleSwitch);
             if (this.googleSwitch) {
                 if (this.formInline.googleCode == "") {
                     this.modal = true;
@@ -441,11 +440,9 @@ export default {
                 this.googleSwitch = !!data.data;
             }
         })
-        console.log(this.$store.getters.member);
     },
     computed: {
         member: function () {
-            console.log(this.$store.getters.member);
             return this.$store.getters.member;
         },
         tableColumnsWithdraw() {
