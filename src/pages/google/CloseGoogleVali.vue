@@ -17,7 +17,7 @@
         </Form>
         <div class="btns" style="display:flex;justify-content:space-around;align-items:center;">
             <Button @click="cancel">取消</Button>
-            <Button type="warning" @click="sureBtn('formInline')">确认</Button>
+            <Button type="primary" @click="sureBtn('formInline')">确认</Button>
         </div>
         <!-- </Modal> -->
     </div>
