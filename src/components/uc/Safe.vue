@@ -1108,6 +1108,10 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.ivu-btn-warning{
+    background:#3399ff;
+    border-color:#3399ff;
+}
 %flex {
     display: flex;
     justify-content: space-between;

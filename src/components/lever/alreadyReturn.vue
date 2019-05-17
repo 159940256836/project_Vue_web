@@ -4,8 +4,8 @@
         <div>
             <Table :columns="columns" :data="data"></Table>
         </div>
-        <div style="margin-top:20px;text-align:right;">
-            <Page :total="totalElement" @on-change="changePage" />
+        <div class="lever-list" style="">
+            <Page v-show="totalElement > 10" :total="totalElement" @on-change="changePage" />
         </div>
     </div>
 </template>
@@ -89,9 +89,20 @@ export default {
 .noReturn {
     margin-top: 30px;
     width: 100%;
+    min-height: 300px;
+    padding-bottom: 30px;
+    border: 1px solid #eee;
     h4 {
         font-size: 20px;
         line-height: 2.5;
+        border-bottom: 1px solid #eee;
+        background: #fafafd;
+        padding-left: 15px;
+    }
+    .lever-list {
+        margin-top:20px;
+        text-align:right;
+        padding-right: 25px;
     }
 }
 </style>

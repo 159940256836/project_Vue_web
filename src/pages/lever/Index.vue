@@ -1,94 +1,103 @@
 <template>
     <div class="leverBox">
-        <div class="leftBox">
-            <h4>杠杆账户</h4>
-            <ul>
-                <li>
-                    <div>交易对</div>
-                    <div>风险率</div>
-                </li>
-                <li v-for="(item,index) in allLeverList" :key="index" @click="changLeverSymbol(index)">
-                    <div>{{item.symbol}}</div>
-                    <div>{{item.explosionRiskRate}}%</div>
-                </li>
-            </ul>
-        </div>
-        <div class="rightBox">
-            <div class="tips">{{symbol}}
-                <Icon type="ios-alert" color="#2d8cf0" />当风险率≤{{this.inseRate}}%时,账户将触发爆仓以归还借贷资金</div>
-            <ul>
-                <li v-for="(item,index) in symbolList" :key="index">
-                    <div>
-                        <div class="title">可用&nbsp;&nbsp;{{item.baseUnit}}</div>
-                        <div class="content">{{item.baseBanlance}}</div>
-                    </div>
-                    <div>
-                        <div class="title">可用&nbsp;&nbsp;{{item.coinUnit}}</div>
-                        <div class="content">{{item.coinBalance}}</div>
-                    </div>
-                    <div>
-                        <div class="title">爆仓价</div>
-                        <div class="content">{{item.explosionPrice | defaultTxt}}</div>
-                    </div>
-                    <div>
-                        <div class="title">风险率&nbsp;&nbsp;
-                            <Icon type="ios-alert" />
+        <div class="main-box">
+            <div class="leftBox">
+                <h4>杠杆账户</h4>
+                <ul>
+                    <li>
+                        <div>交易对</div>
+                        <div>风险率</div>
+                    </li>
+                    <li
+                        v-for="(item,index) in allLeverList"
+                        :key="index"
+                        @click="changLeverSymbol(index)"
+                        :class="{'active':active == index}"
+                    >
+                        <div>{{item.symbol}}</div>
+                        <div>{{item.explosionRiskRate}}%</div>
+                        <div class="triangle"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="rightBox">
+                <div class="tips">{{symbol}}
+                    <Icon type="ios-alert" color="#2d8cf0" />当风险率≤{{this.inseRate}}%时,账户将触发爆仓以归还借贷资金</div>
+                <ul>
+                    <li v-for="(item,index) in symbolList" :key="index">
+                        <div>
+                            <div class="title">可用&nbsp;&nbsp;{{item.baseUnit}}</div>
+                            <div class="content">{{item.baseBanlance}}</div>
                         </div>
-                        <div class="content">{{item.riskRate}}%</div>
+                        <div>
+                            <div class="title">可用&nbsp;&nbsp;{{item.coinUnit}}</div>
+                            <div class="content">{{item.coinBalance}}</div>
+                        </div>
+                        <div>
+                            <div class="title">爆仓价</div>
+                            <div class="content">{{item.explosionPrice | defaultTxt}}</div>
+                        </div>
+                        <div>
+                            <div class="title">风险率&nbsp;&nbsp;
+                                <Icon type="ios-alert" />
+                            </div>
+                            <div class="content">{{item.riskRate}}%</div>
+                        </div>
+                    </li>
+                </ul>
+                <template v-for="(item, index) in symbolList">
+                    <div class="twoBorow">
+                        <div>
+                            <h4>{{item.baseUnit}}借贷</h4>
+                            <ul>
+                                <li>
+                                    <div>已借</div>
+                                    <div>{{item.baseLoanCount}}</div>
+                                </li>
+                                <li>
+                                    <div>可借</div>
+                                    <div>{{item.baseCanLoan}}</div>
+                                </li>
+                                <li>
+                                    <div style="text-align: right">利率</div>
+                                    <div>{{item.baseINsertRate}}%</div>
+                                </li>
+                            </ul>
+                            <p>借贷数量</p>
+                            <Input v-model="baseInputvalue" style="width:80%; margin-bottom:20px;">
+                                <span slot="append">{{item.baseUnit}}</span>
+                            </Input>
+                            <Slider v-model="baseValue" style="width:80%;" show-tip="never" @on-change='getBaseValue'></Slider>
+                            <Button type="primary" style="width:80%" @click="borrow('base', item.baseUnit)">申请{{item.baseUnit}}</Button>
+                        </div>
+                        <div>
+                            <h4>{{item.coinUnit}}借贷</h4>
+                            <ul>
+                                <li>
+                                    <div>已借</div>
+                                    <div>{{item.coinLoanCount}}</div>
+                                </li>
+                                <li>
+                                    <div>可借</div>
+                                    <div>{{item.coinCanLoan}}</div>
+                                </li>
+                                <li>
+                                    <div style="text-align: right">利率</div>
+                                    <div>{{item.coinINsertRate}}%</div>
+                                </li>
+                            </ul>
+                            <p>借贷数量</p>
+                            <Input v-model="baseCoinvalue" style="width:80%;margin-bottom:20px;">
+                                <span slot="append">{{item.coinUnit}}</span>
+                            </Input>
+                            <Slider v-model="coinValue" style="width:80%;" show-tip="never" @on-change='getCoinValue'></Slider>
+                            <Button type="primary" style="width:80%" @click="borrow('coin',item.coinUnit)">申请{{item.coinUnit}}</Button>
+                        </div>
                     </div>
-                </li>
-            </ul>
-            <template v-for="(item, index) in symbolList">
-                <div class="twoBorow">
-                    <div>
-                        <h4>{{item.baseUnit}}借贷</h4>
-                        <ul>
-                            <li>
-                                <div>已借</div>
-                                <div>{{item.baseLoanCount}}</div>
-                            </li>
-                            <li>
-                                <div>可借</div>
-                                <div>{{item.baseCanLoan}}</div>
-                            </li>
-                            <li>
-                                <div>利率</div>
-                                <div>{{item.baseINsertRate}}%</div>
-                            </li>
-                        </ul>
-                        <p>借贷数量</p>
-                        <Input v-model="baseInputvalue" style="width:80%; margin-bottom:20px;">
-                        <span slot="append">{{item.baseUnit}}</span>
-                        </Input>
-                        <Slider v-model="baseValue" style="width:80%;" show-tip="never" @on-change='getBaseValue'></Slider>
-                        <Button type="primary" style="width:80%" @click="borrow('base', item.baseUnit)">申请{{item.baseUnit}}</Button>
-                    </div>
-                    <div>
-                        <h4>{{item.coinUnit}}借贷</h4>
-                        <ul>
-                            <li>
-                                <div>已借</div>
-                                <div>{{item.coinLoanCount}}</div>
-                            </li>
-                            <li>
-                                <div>可借</div>
-                                <div>{{item.coinCanLoan}}</div>
-                            </li>
-                            <li>
-                                <div>利率</div>
-                                <div>{{item.coinINsertRate}}%</div>
-                            </li>
-                        </ul>
-                        <p>借贷数量</p>
-                        <Input v-model="baseCoinvalue" style="width:80%;margin-bottom:20px;">
-                        <span slot="append">{{item.coinUnit}}</span>
-                        </Input>
-                        <Slider v-model="coinValue" style="width:80%;" show-tip="never" @on-change='getCoinValue'></Slider>
-                        <Button type="primary" style="width:80%" @click="borrow('coin',item.coinUnit)">申请{{item.coinUnit}}</Button>
-                    </div>
-                </div>
-            </template>
+                </template>
+            </div>
         </div>
+
         <noReruen :repayment="noReruenRepayment" @borowSuccess="borowSuccess"></noReruen>
         <alreadyReturn :repayment="alreadyRepayment"></alreadyReturn>
     </div>
@@ -100,6 +109,7 @@ export default {
     components: { noReruen, alreadyReturn },
     data() {
         return {
+            active:'0',   //默认选择首页
             inseRate:"--",
             noReruenRepayment: 0,
             alreadyRepayment: 1,
@@ -137,6 +147,7 @@ export default {
             // window.location.reload();
         },
         changLeverSymbol(index) {
+            this.active = index;
             const symbol = this.allLeverList[index].symbol;
             this.$router.push({
                 name: "lever",
@@ -236,90 +247,124 @@ export default {
     align-items: center;
 }
 .leverBox {
+/*
     @extend %flex;
     align-items: stretch;
     padding: 20px 10%;
     flex-wrap: wrap;
-    .leftBox {
-        width: 30%;
-        box-shadow: 2px 2px 5px #eee;
-        padding: 10px;
-        h4 {
-            text-align: left;
-            font-size: 24px;
-            color: #333;
-        }
-        ul,
-        li {
-            @extend %flex;
-            flex-wrap: wrap;
-        }
-        ul {
-            li {
-                width: 100%;
-                line-height: 2.5;
-                border-bottom: 1px solid #eee;
+*/
+    align-items: stretch;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 1200px;
+    margin: 0 auto 100px;
+    padding-top: 150px;
+    .main-box {
+        @extend %flex;
+        margin-bottom: 30px;
+        .leftBox {
+            width: 20%;
+            min-height: 483px;
+            box-shadow: 0 0 25px #EEE;
+            padding: 10px;
+            border: 1px solid #eee;
+            .active {
+                background: #3399ff;
+                color: #fff;
+                border-radius: 2px;
+                .triangle {
+                    width:0;
+                    height:0;
+                    border-top: 8px solid transparent;
+                    border-bottom: 8px solid transparent;
+                    border-left: 8px solid #3399ff;
+                    position: relative;
+                    right: -23px;
+                }
             }
-        }
-    }
-    .rightBox {
-        width: 68%;
-        padding: 10px;
-        box-shadow: 2px 2px 5px #eee;
-        .tips {
-            border-bottom: 1px solid #eee;
-            line-height: 3;
-            color: #666;
-            font-size: 20px;
-        }
-        ul {
+            h4 {
+                text-align: left;
+                font-size: 24px;
+                color: #333;
+            }
+            ul,
             li {
                 @extend %flex;
-                > div {
-                    width: 25%;
+                flex-wrap: wrap;
+                cursor: pointer;
+            }
+            ul {
+                li {
+                    width: 100%;
+                    line-height: 2.5;
                     border-bottom: 1px solid #eee;
-                    padding: 10px 0;
-                    .title {
-                        line-height: 2.5;
-                        color: #999;
-                        font-size: 16px;
-                    }
-                    .content {
-                        color: #666;
-                        font-size: 14px;
-                    }
+                    padding: 2px 15px;
+
                 }
             }
         }
-        .twoBorow {
-            @extend %flex;
-            > div {
-                width: 50%;
-                h4 {
-                    font-size: 20px;
-                    color: #333;
-                    line-height: 3;
-                }
-                ul {
+        .rightBox {
+            width: 79%;
+            padding: 10px 33px 50px;
+            box-shadow: 0 0 5px #eee;
+            border: 1px solid #eee;
+            .tips {
+                border-bottom: 1px solid #eee;
+                line-height: 3;
+                color: #666;
+                font-size: 20px;
+            }
+            ul {
+                li {
                     @extend %flex;
-                }
-                ul > li {
-                    width: 33.333%;
-                    display: block;
-                    // @extend %flex;
                     > div {
-                        border-bottom: none;
-                        &:nth-child(1) {
+                        width: 25%;
+                        border-bottom: 1px solid #eee;
+                        padding: 10px 0;
+                        .title {
+                            line-height: 2.5;
                             color: #999;
+                            font-size: 16px;
+                        }
+                        .content {
+                            color: #666;
+                            font-size: 14px;
                         }
                     }
+
                 }
-                p {
-                    color: #999;
-                    line-height: 2.5;
+            }
+            .twoBorow {
+                @extend %flex;
+                > div {
+                    width: 50%;
+                    h4 {
+                        font-size: 20px;
+                        color: #333;
+                        line-height: 3;
+                    }
+                    ul {
+                        @extend %flex;
+                    }
+                    ul > li {
+                        width: 33.333%;
+                        display: block;
+                        // @extend %flex;
+                        > div {
+                            border-bottom: none;
+                            &:nth-child(1) {
+                                color: #999;
+                            }
+                        }
+                    }
+                    p {
+                        color: #999;
+                        line-height: 2.5;
+                    }
                 }
             }
         }
     }
+
 }
 </style>
