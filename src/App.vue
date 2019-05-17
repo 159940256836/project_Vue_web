@@ -443,6 +443,7 @@ export default {
                 .time_download {
                     align-items: center;
                     overflow: hidden;
+                    min-width: 1050px;
                     .netLogo {
                         width: 145px;
                         float: left;
@@ -589,6 +590,7 @@ ul,li{
 }
 .ivu-modal-body {
     // border-top: 4px solid #3399ff;
+    line-height: 25px;
     border-radius: 5px;
     .ivu-modal-confirm {
         .ivu-modal-confirm-body.ivu-modal-confirm-body-render {

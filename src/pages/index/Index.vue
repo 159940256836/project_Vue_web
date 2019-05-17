@@ -36,7 +36,7 @@
                     </Carousel>
                 </div>
             </div>
-            <div class="section" id="hot">
+            <div class="section" id="hot" v-if="hostSymbolList.length != 0">
                 <!--<<<<<<< HEAD
                 <div class="section-market">
                     <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index">

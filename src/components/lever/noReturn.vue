@@ -32,7 +32,7 @@
                 <span class="all" @click="inputAll">全部</span>
             </div>
             </Input>
-            <div class="lever-info">
+            <div class="lever-info" style="margin-top: 10px;'">
                 <Button type="default" @click="cancel">取消</Button>
                 <Button type="primary" @click="sure">确认</Button>
             </div>
@@ -218,18 +218,25 @@ export default {
         text-align:right;
         padding-right: 25px;
     }
+    .title-box {
+        display: flex;
+    }
+
     .lever-title {
         color:#999;
         font-size:16px;
         margin-top:20px;
+        flex: 1;
     }
     .lever-symbol {
+        flex: 10;
         background:rgb(247, 243, 253);
         color:#333;
         line-height:2;
         font-size:16px;
         padding:10px;
     }
+
     .return-number {
         color:#333;
         font-size:20px;
@@ -255,4 +262,5 @@ export default {
 .ivu-table-tip table td {
     line-height: 180px
 }
+
 </style>

@@ -166,7 +166,13 @@ $color: #2d8cf0;
         @extend %flex;
          margin-bottom: 30px;
         .blue {
-            color: $color;
+            cursor: pointer;
+            color: #fff;
+            background: #3399ff;
+            display: inline-block;
+            padding: 4px 12px;
+            font-size: 12px;
+            border-radius: 3px;
         }
     }
     #qrcode {
