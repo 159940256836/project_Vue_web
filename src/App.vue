@@ -192,11 +192,61 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="footer-info">
+                   <!-- <div class="footer-info">
                         风险提示：区块链资产（数字货币和数字权益）交易具有极高的风险（技术缺陷、暴涨暴跌、庄家操控、团队解散等）, 币多网仅为区块链资产的爱好者提供一个自由的网上交换平台, 对资产的投资价值不承担任何审查、担保、赔偿的责任, 如果您不能接受, 请谨慎交易。
-                    </div>
+                    </div>-->
                 </div>
                 <div class="info">
+                    <div class="footer-info">
+                        <div class="info-title">友情提示:</div>
+                        <div class="info-img">
+                            <a href="javascript:;">
+                                <img src="./assets/images/footer/1.png" alt="">
+                            </a>
+                            <a href="javascript:;">
+                                <img src="./assets/images/footer/2.png" alt="">
+                            </a>
+                            <a href="http://www.jinse.com">
+                                <img src="./assets/images/footer/3.png" alt="">
+                            </a>
+                            <a href="http://www.bishijie.com">
+                                <img src="./assets/images/footer/4.png" alt="">
+                            </a>
+                            <a href="http://www.iterduo.com">
+                                <img src="./assets/images/footer/5.png" alt="">
+                            </a>
+                            <a href="http://www.feixiaohao.com">
+                                <img src="./assets/images/footer/6.png" alt="">
+                            </a>
+                            <a href="http://www.btc123.com">
+                                <img src="./assets/images/footer/7.png" alt="">
+                            </a>
+                            <a href="http://www.jiedian.io">
+                                <img src="./assets/images/footer/8.png" alt="">
+                            </a>
+                            <a href="http://ihuoqiu.com">
+                                <img src="./assets/images/footer/9.png" alt="">
+                            </a>
+                            <a href="http://www.huoxing24.com">
+                                <img src="./assets/images/footer/10.png" alt="">
+                            </a>
+                            <a href="http://www.zerohello.com">
+                                <img src="./assets/images/footer/11.png" alt="">
+                            </a>
+                            <a href="http://www.block360.pro">
+                                <img src="./assets/images/footer/12.png" alt="">
+                            </a>
+                            <a href="http://www.shenliancaijing.com">
+                                <img src="./assets/images/footer/13.png" alt="">
+                            </a>
+                            <a href="http://huoxun.com">
+                                <img src="./assets/images/footer/14.png" alt="">
+                            </a>
+                            <a href="http://www.chaingeworld.com">
+                                <img src="./assets/images/footer/15.png" alt="">
+                            </a>
+                        </div>
+                    </div>
                     © 2019 coinmany.com. All Rights Reserved
                 </div>
             </div>
@@ -386,7 +436,6 @@ export default {
                 transition: all .5s;
                 .time_download {
                     align-items: center;
-                    min-width: 1260px;
                     overflow: hidden;
                     .netLogo {
                         width: 145px;
@@ -560,6 +609,12 @@ ul,li{
         }
     }
 }
+
+.ivu-table-tip {
+    height: 180px;
+    line-height: 180px;
+}
+
 .ivu-modal-confirm-footer .ivu-btn-primary {
     background-color: #3399ff;
     border-color: #3399ff;
@@ -995,13 +1050,13 @@ body {
 
 .footer {
     min-width: 1260px;
-    height:400px;
+    height: 470px;
     overflow: hidden;
     color: #53575c;
     background: #1c2435;
     .footer_content {
         width: 1200px;
-        margin: 80px auto 0;
+        margin: 80px auto 30px;
         .footer-main {
             height: 150px;
             .footer_left {
@@ -1044,19 +1099,31 @@ body {
                 }
             }
         }
-        .footer-info {
-            color: #8790a1;
-            text-align: center;
-            padding: 45px 0px 20px;
-        }
+
     }
     .info {
         text-align: center;
         width: 100%;
-        height: 60px;
         border-top: 1px solid #8790a1;
         line-height: 60px;
         font-size: 15px;
+        .footer-info {
+            width: 1200px;
+            margin: 20px auto 0;
+            display: flex;
+            .info-title {
+                flex: 1;
+            }
+            .info-img {
+                text-align: left;
+                flex: 15;
+                a {
+                    width: 125px;
+                    height: 50px;
+                    display: inline-block;
+                }
+            }
+        }
     }
 }
 
@@ -1283,7 +1350,8 @@ body {
 //修改iview样式
 .ivu-menu-vertical .ivu-menu-item:hover,.ivu-menu-vertical .ivu-menu-submenu-title:hover{color:	not specified}
 .ivu-menu-opened>*>.ivu-menu-submenu-title-icon{color:#fff;}
-.ivu-notice{
-    top:10% !important;
+.ivu-notice,
+.ivu-message {
+    top:20% !important;
 }
 </style>

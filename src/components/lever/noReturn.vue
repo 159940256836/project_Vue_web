@@ -4,35 +4,35 @@
         <div>
             <Table :columns="columns" :data="data"></Table>
         </div>
-        <div style="margin-top:20px;text-align:right;">
-            <Page :total="totalElement" @on-change="changePage"/>
+        <div class="lever-list">
+            <Page v-show="totalElement > 10" :total="totalElement" @on-change="changePage"/>
         </div>
         <Modal v-model="modal" title="归还借贷" :footer-hide="true">
-            <div style="color:#999;font-size:16px;margin-top:20px;">杠杆账户</div>
-            <div style="background:rgb(247, 243, 253);color:#333;line-height:2;font-size:16px;padding:10px;">{{brorrowParams.symbol}}</div>
-            <div style="color:#999;font-size:16px;margin-top:20px;">应还数量</div>
-            <div style="color:#333;font-size:20px;">{{brorrowParams.total}}</div>
-            <ul style="display:flex;justify-content:flex-start;margin-top:20px;">
+            <div class="lever-title">杠杆账户</div>
+            <div class="lever-symbol">{{brorrowParams.symbol}}</div>
+            <div class="lever-title">应还数量</div>
+            <div class="return-number">{{brorrowParams.total}}</div>
+            <ul class="lever-li">
                 <li style="margin-right:40px;">
-                    <p style="color:#999;font-size:16px;margin-top:20px;">借贷数量</p>
-                    <p style="color:#333;font-size:20px;">{{brorrowParams.amount}}</p>
+                    <p class="lever-title">借贷数量</p>
+                    <p class="return-number">{{brorrowParams.amount}}</p>
                 </li>
                 <li>
-                    <p style="color:#999;font-size:16px;margin-top:20px;">利息</p>
-                    <p style="color:#333;font-size:20px;">{{brorrowParams.accumulative}}</p>
+                    <p class="lever-title">利息</p>
+                    <p class="return-number">{{brorrowParams.accumulative}}</p>
                 </li>
             </ul>
-            <ul style="display:flex;justify-content:space-between;margin-top:20px;">
+            <ul class="lever-li">
                 <li>归还数量</li>
                 <li>可用&nbsp;&nbsp;{{brorrowParams.canUse}}&nbsp;&nbsp;{{brorrowParams.coin}}</li>
             </ul>
             <Input v-model="value" placeholder="归还数量" style="margin-top:10px;">
             <div slot="append">
                 <span>{{brorrowParams.coin}}</span>
-                <span @click="inputAll" style="color:#57a3f3;margin-left:30px;">全部</span>
+                <span class="all" @click="inputAll">全部</span>
             </div>
             </Input>
-            <div style="display:flex;justify-content:space-around;margin-top:10px;">
+            <div class="lever-info">
                 <Button type="default">取消</Button>
                 <Button type="primary" @click="sure">确认</Button>
             </div>
@@ -201,9 +201,56 @@ export default {
 .noReturn {
     margin-top: 30px;
     width: 100%;
+    min-height: 300px;
+    padding-bottom: 30px;
+    border: 1px solid #eee;
     h4 {
         font-size: 20px;
         line-height: 2.5;
+        border-bottom: 1px solid #eee;
+        background: #fafafd;
+        padding-left: 15px;
     }
+    .lever-list{
+        margin-top:20px;
+        text-align:right;
+        padding-right: 25px;
+    }
+    .lever-title {
+        color:#999;
+        font-size:16px;
+        margin-top:20px;
+    }
+    .lever-symbol {
+        background:rgb(247, 243, 253);
+        color:#333;
+        line-height:2;
+        font-size:16px;
+        padding:10px;
+    }
+    .return-number {
+        color:#333;
+        font-size:20px;
+    }
+    ul.lever-li {
+        display:flex;
+        justify-content:flex-start;
+        margin-top:20px;
+        &:first-child {
+            margin-right:40px;
+        }
+    }
+    .all {
+        color:#57a3f3;
+        margin-left:30px;
+    }
+    .lever-info {
+        display:flex;
+        justify-content:space-around;
+        margin-top:10px;
+    }
+}
+.ivu-table-tip table td {
+    line-height: 180px
 }
 </style>
