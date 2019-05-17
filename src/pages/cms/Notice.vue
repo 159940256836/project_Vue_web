@@ -1,9 +1,9 @@
 <template>
-    <div class="notice common">
+    <div class="notice common" style="min-height:519px">
         <div class="banner">
             <span>公告板</span>
         </div>
-        <div class="main">
+        <div class="main" >
             <div class="list">
                 <div class="item" v-for="item in FAQList" @click="noticedeail(item.id)">
                     <span class="text">{{item.title}}</span>
@@ -85,7 +85,7 @@
 <script>
 import { minHeightMinx } from "../../minxs/minxs"
 export default {
-    mixins: [minHeightMinx],
+    // mixins: [minHeightMinx],
     data() {
         return {
             pageNo: 1,
