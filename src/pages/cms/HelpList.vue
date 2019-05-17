@@ -17,7 +17,7 @@
                         {{item.createTime}}
                     </span>
                 </router-link>
-                <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}"></router-link>
+                <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}"></router-link> -->
             </div>
             <!-- <div class="page">
                 <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="pageChange"></Page>
