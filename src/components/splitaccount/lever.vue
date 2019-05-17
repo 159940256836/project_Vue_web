@@ -75,7 +75,6 @@ export default {
         }
     },
     created() {
-        console.log(this.modal)
         this.getMoney();
     },
     methods: {

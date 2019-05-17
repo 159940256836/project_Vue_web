@@ -830,7 +830,6 @@ export default {
                     trend: ele.trend
                 }))
                 this.hostSymbolList = list;
-                console.log(list);
                 this.startWebsockHotlist();
             })
         },

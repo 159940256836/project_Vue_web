@@ -137,8 +137,6 @@ export default {
             this.baseCoinvalue = this.toFloor(this.symbolList[0].coinCanLoan * value/100);
         },
         getBaseValue(value) {
-            console.log(value);
-            console.log(this.symbolList);
             this.baseInputvalue = this.toFloor(this.symbolList[0].baseCanLoan * value/100);
         },
         borowSuccess() {
@@ -195,7 +193,6 @@ export default {
                         }
                     });
                     this.symbolList = list || [];
-                    console.log(this.symbolList);
                     this.loading = false;
                 } else {
                     this.$Message.error(resp.message);
@@ -219,7 +216,6 @@ export default {
             }
         },
         borrow(params, unit) {
-            console.log(unit);
             if (params === "base") {
                 this.isEmpty(this.baseInputvalue) && this.isNum(this.baseInputvalue) && this.toBorrow({ amount: this.baseInputvalue, coinUnit: unit, symbol: this.symbol });
             } else {

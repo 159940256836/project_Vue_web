@@ -63,7 +63,6 @@ export default {
         // this.getLeverNum();
         // this.getOtcNum();
         this.init();
-        console.log(this.modal);
         // this.getSupportCoin().then(res => {
         //     this.getLeverNum().then(res => {
         //         console.log(this.leverList);
@@ -155,7 +154,6 @@ export default {
                         children: temp || []
                     }];
                     this.leverList = list;
-                    console.log(list);
                     return new Promise((resolve, reject) => {
                         resolve("success");
                     })
@@ -256,8 +254,6 @@ export default {
                     this.leverToCoin(params);
                 }
             }
-            console.log(this.toValue);
-            console.log(this.value);
 
             //
         },
