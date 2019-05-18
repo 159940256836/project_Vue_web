@@ -1538,10 +1538,6 @@ export default {
         }
     },
     created: function () {
-        // this.getdefaultSymbol().then(res => {
-        //     this.defaultPath = res;
-
-        // });
         this.init();
     },
     mounted: function () {
@@ -2973,12 +2969,6 @@ export default {
                     }
                     // this.wallet.base = resp.data.balance || "";
                 });
-            // this.$http
-            //     .post(this.host + this.api.uc.wallet + this.currentCoin.coin, {})
-            //     .then(response => {
-            //         var resp = response.body;
-            //         this.wallet.coin = (resp.data && resp.data.balance) || '';
-            //     });
         },
         getCurrentOrder() {
             //查询当前委托
