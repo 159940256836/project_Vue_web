@@ -265,7 +265,7 @@ export default {
                                 title: params.row.amount
                             }
                         },
-                        that.toFloor(params.row.amount || "0")
+                        Math.abs(that.toFloor(params.row.amount)) || 0
                     );
                 }
             });
@@ -280,7 +280,7 @@ export default {
                                 title: params.row.fee
                             }
                         },
-                        that.toFloor(params.row.fee || "0")
+                        Math.abs(that.toFloor(params.row.fee)) || 0
                     );
                 }
             });
@@ -295,7 +295,7 @@ export default {
                                 title: params.row.discount_fee
                             }
                         },
-                        that.toFloor(params.row.discount_fee || "0")
+                        Math.abs(that.toFloor(params.row.discount_fee)) || 0
                     );
                 }
             });
@@ -310,7 +310,7 @@ export default {
                                 title: params.row.real_fee
                             }
                         },
-                        that.toFloor(params.row.real_fee || "0")
+                        Math.abs(that.toFloor(params.row.real_fee)) || 0
                     );
                 }
             });
