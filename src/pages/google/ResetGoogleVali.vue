@@ -58,6 +58,7 @@ export default {
     },
     created() {
         this.init().then(res => {
+
             // const { link, secret } = res;
             // this.data = { link: "otpauth://totp/6@bitrade.com?secret=SHYT6OFT5C4H24MG", secret: "SHYT6OFT5C4H24MG" };
             this.data = {

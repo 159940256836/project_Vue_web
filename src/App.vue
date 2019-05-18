@@ -17,11 +17,13 @@
                         <!--<router-link to="/">{{$t("header.index")}}</router-link>-->
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
                         <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
+                         <router-link to="/leverindex">杠杆交易</router-link>
+                          <router-link to="/Ieo">上币优选</router-link>
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">帮助</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
-                        <router-link to="/Ieo">上币优选</router-link>
-                        <router-link to="/leverindex">杠杆交易</router-link>
+                       
+                       
                     </div>
                     <div class="nav-header">
                         <!--中英文切换-->
@@ -74,18 +76,18 @@
                                 </a>
                                 <div class="api" slot="content">
                                     <div class="ios">
-                                        <!-- <img src="../src/assets/images/app_ios.png" alt="">
+                                        <img src="../src/assets/images/app_ios.png" alt="">
                                         <div class="tips">
                                             <img src="../src/assets/images/ios.png" alt="">
                                             <span>IOS</span>
-                                        </div> -->
+                                        </div>
                                     </div>
                                     <div class="andrio">
-                                        <!-- <img src="../src/assets/images/app_andraio.png" alt="">
-                                        <div class="tips">
+                                        <div  style="margin-top: 4px" id="qrcode-and"></div>
+                                        <div class="tips" style="margin-top: 7px">
                                             <img src="../src/assets/images/andraio.png" alt="">
                                             <span>Android</span>
-                                        </div> -->
+                                        </div>
                                     </div>
                                 </div>
                             </poptip>
@@ -98,7 +100,7 @@
         <router-view></router-view>
         <!--底部-->
         <footer>
-            <div class="footer">
+            <div class="footer" style="color:#8790a">
                 <div class="footer_content">
                     <div class="footer-main">
                         <div class="footer_left">
@@ -119,6 +121,13 @@
                                 <li>
                                     <router-link to="/">{{$t("footer.gywm")}}</router-link>
                                 </li>
+                                 <li>
+                                    <router-link to="/">{{$t("footer.gywm1")}}</router-link>
+                                </li>
+                                 <li>
+                                    <router-link to="/">{{$t("footer.gywm2")}}</router-link>
+                                </li>
+                                
                             </ul>
                             <!--客户服务-->
                             <ul class="footer_info">
@@ -260,6 +269,7 @@
     </div>
 </template>
 <script>
+import QRCode from 'qrcode2';
 import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
@@ -417,6 +427,14 @@ export default {
         }
     },
     mounted () {
+        //二维码链接修改
+         new QRCode(document.getElementById("qrcode-and"), {
+                    text: 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/app.apk',
+                    width: 100,
+                    height: 100,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                });
         window.addEventListener('scroll', this.handleScroll)
     },
     beforeDestroy () {
@@ -572,6 +590,9 @@ export default {
     }
 </style>
 <style lang="scss">
+.footer .footer_content .footer-main .footer_right .footer_info li{
+    color:#8790a1 !important;
+}
 ul,li{
     list-style-type: none;
 }
