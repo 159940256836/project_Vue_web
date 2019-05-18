@@ -120,7 +120,7 @@
                         <div class="trade_bd">
                             <div class="panel panel_buy">
                                 <div v-if="isLogin" class="hd hd_login">
-                                    <span>{{$t("exchange.leverindex")}}</span>
+                                    <span>{{$t("exchange.canuse")}}</span>
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
                                 </div>
