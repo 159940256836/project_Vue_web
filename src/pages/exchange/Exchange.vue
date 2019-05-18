@@ -2069,6 +2069,7 @@ export default {
                             })
                             .append("<span>M5</span>")
                             .addClass("selected") // 静态默认分时
+
                         widget
                             .createButton()
                             .attr("title", "M15")
@@ -2858,9 +2859,12 @@ export default {
                 var params = {};
                 params["symbol"] = this.currentCoin.symbol;
                 params["price"] = this.form.sell.limitPrice;
-                params["amount"] = this.form.sell.limitAmount;
+                //params["amount"] = this.form.sell.limitAmount;
+                params["amount"] = this.form.buy.marketAmount;
                 params["direction"] = "SELL";
                 params["type"] = "LIMIT_PRICE";
+                console.log(this.form.buy.marketAmount)
+
                 params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 var that = this;
                 this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {
@@ -2872,6 +2876,7 @@ export default {
                                 desc: that.$t("exchange.success")
                             });
                             this.refreshAccount();
+                            this.form.buy.marketAmount=0;
                         } else {
                             this.$Notice.error({
                                 title: that.$t("exchange.tip"),
@@ -3029,6 +3034,7 @@ export default {
                             desc: that.$t("exchange.success")
                         });
                         this.refreshAccount();
+                        this.form.sell.marketAmount=0;
                     } else {
                         this.$Notice.error({
                             title: that.$t("exchange.tip"),
