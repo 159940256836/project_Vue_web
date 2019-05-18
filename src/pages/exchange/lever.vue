@@ -101,8 +101,8 @@
                                 <template v-for="(item, index) in btnList">
                                     <li @click="tab(index)" :class="{active:item.check}" style="width:18%;text-align:center;">{{item.text}}</li>
                                 </template>
-                                <li style="color:#39f;width:30%;text-align:right;" @click="transFerFun" v-if="isLogin">划转</li>
-                                <li style="color:#39f;width:20%" @click="toBorrow" v-if="isLogin">借贷/归还</li>
+                                <li style="color:#39f;width:30%;text-align:right;cursor: pointer;" @click="transFerFun" v-if="isLogin">划转</li>
+                                <li style="color:#39f;width:20%;cursor: pointer;" @click="toBorrow" v-if="isLogin">借贷/归还</li>
                                 <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
@@ -120,7 +120,7 @@
                         <div class="trade_bd">
                             <div class="panel panel_buy">
                                 <div v-if="isLogin" class="hd hd_login">
-                                    <span>{{$t("exchange.canuse")}}</span>
+                                    <span>{{$t("exchange.leverindex")}}</span>
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
                                 </div>
@@ -1538,11 +1538,10 @@ export default {
         }
     },
     created: function () {
-        // this.getdefaultSymbol().then(res => {
-        //     this.defaultPath = res;
-
-        // });
-        this.init();
+        this.getdefaultSymbol().then(res => {
+            this.defaultPath = res;
+            this.init();
+        });
     },
     mounted: function () {
         // this.getCNYRate();
@@ -1561,16 +1560,16 @@ export default {
         // // this.setback();
     },
     methods: {
-        // getdefaultSymbol() {
-        //     return this.$http.get(this.host + "/market/default/symbol").then(res => {
-        //         const data = res.body;
-        //         if (data.code == 0) {
-        //             return new Promise((resolve, reject) => {
-        //                 resolve(data.data.web);
-        //             }).catch(reject => reject("BTC_USDT"));
-        //         }
-        //     })
-        // },
+        getdefaultSymbol() {
+            return this.$http.get(this.host + "/market/default/symbol").then(res => {
+                const data = res.body;
+                if (data.code == 0) {
+                    return new Promise((resolve, reject) => {
+                        resolve(data.data.web);
+                    }).catch(reject => reject("BTC_USDT"));
+                }
+            })
+        },
         toBorrow() {//去借贷或者归还
             // this.$router.push({
             this.$router.push({
@@ -1597,12 +1596,13 @@ export default {
             /*var params = this.$route.params[0];*/
             var params = this.$route.params.pathMatch;
             if (params == undefined) {
+                console.log('11111111111111')
                 this.$router.push("/leverindex/" + this.defaultPath);
                 params = this.defaultPath;
             }
             const basecion = params.split("_")[1];
             if (basecion) {
-                this.basecion = basecion;
+                this.basecion = basecion.toLowerCase();
             }
             var coin = params.toUpperCase().split("_")[0];
             var base = params.toUpperCase().split("_")[1];
@@ -1619,6 +1619,7 @@ export default {
             // this.getPlateFull(); //深度图
             this.getTrade();
             if (this.isLogin && this.member.realName) {
+                console.log('222222222222222')
                 // this.getMember(); //获取是否实名认证
                 this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
                 this.getWallet(); //账户资产信息
@@ -2597,6 +2598,7 @@ export default {
             this.modal = true;
         },
         closeModal() {
+            this.getWallet();
             this.modal = false;
         },
         collect(index, row) {
@@ -2656,7 +2658,8 @@ export default {
                 path
             });
         },
-        buyWithLimitPrice() {//限价买入
+        //限价买入
+        buyWithLimitPrice() {
             if (this.form.buy.limitAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2702,7 +2705,8 @@ export default {
                     }
                 });
         },
-        buyWithStopPrice() {//止盈止损买入
+        //止盈止损买入
+        buyWithStopPrice() {
             if (this.form.buy.stopPrice == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2756,7 +2760,8 @@ export default {
                     }
                 });
         },
-        buyWithMarketPrice() {//市价买入
+        //市价买入
+        buyWithMarketPrice() {
             if (this.form.buy.marketAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2795,7 +2800,8 @@ export default {
                 }
             });
         },
-        sellLimitPrice() {//限价卖出
+        //限价卖出
+        sellLimitPrice() {
             if (this.form.sell.limitAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2844,7 +2850,8 @@ export default {
                     }
                 });
         },
-        sellStopPrice() {//止盈止损卖出
+        //止盈止损卖出
+        sellStopPrice() {
             if (this.form.sell.stopPrice == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2902,7 +2909,8 @@ export default {
                     }
                 });
         },
-        sellMarketPrice() {//市价卖出
+        //市价卖出
+        sellMarketPrice() {
             if (this.form.sell.marketAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2978,8 +2986,8 @@ export default {
             //         this.wallet.coin = (resp.data && resp.data.balance) || '';
             //     });
         },
+        //查询当前委托
         getCurrentOrder() {
-            //查询当前委托
             var params = {};
             params["pageNum"] = 1;
             params["pageSize"] = 100;
@@ -3003,16 +3011,16 @@ export default {
 
             });
         },
+        //查询历史委托
         getHistoryOrder(pageNo) {
-            //查询历史委托
-            // if (pageNo == undefined) {
-            //     pageNo = this.historyOrder.page;
-            // } else {
-            //     pageNo = pageNo - 1;
-            // }
+            if (pageNo == undefined) {
+                pageNo = this.historyOrder.page;
+            } else {
+                pageNo = pageNo - 1;
+            }
             this.historyOrder.rows = []; //清空数据
             var params = {};
-            params["pageNum"] = 1;
+            params["pageNum"] = pageNo;
             params["pageSize"] = this.historyOrder.pageSize;
             params["symbol"] = this.currentCoin.symbol;
             var that = this;
@@ -3041,6 +3049,7 @@ export default {
                     }
                 });
         },
+        // 当前委托撤销
         cancel(index) {
             var order = this.currentOrder.rows[index];
             this.$Modal.confirm({

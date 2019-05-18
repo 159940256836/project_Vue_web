@@ -1631,7 +1631,10 @@ export default {
             }
         },
         created: function () {
-            this.init();
+            this.getdefaultSymbol().then(res => {
+                this.defaultPath = res;
+                this.init();
+            })
         },
         mounted: function () {
             // this.getCNYRate();
@@ -1650,6 +1653,17 @@ export default {
             // // this.setback();
         },
         methods: {
+            // 默认交易对
+            getdefaultSymbol() {
+                return this.$http.get(this.host + "/market/default/symbol").then(res => {
+                    const data = res.body;
+                    if (data.code == 0) {
+                        return new Promise((resolve, reject) => {
+                            resolve(data.data.web);
+                        }).catch(reject => reject("BTC_USDT"));
+                    }
+                })
+            },
             //金额只能为正整数
             checkNum(element) {
               var val= element.value;
@@ -1691,7 +1705,7 @@ export default {
                 }
                 const basecion = params.split("_")[1];
                 if (basecion) {
-                    this.basecion = basecion;
+                    this.basecion = basecion.toLowerCase();
                 }
                 var coin = params.toUpperCase().split("_")[0];
                 var base = params.toUpperCase().split("_")[1];
@@ -3074,14 +3088,14 @@ export default {
         },
         getHistoryOrder(pageNo) {
             //查询历史委托
-            // if (pageNo == undefined) {
-            //     pageNo = this.historyOrder.page;
-            // } else {
-            //     pageNo = pageNo - 1;
-            // }
+            if (pageNo == undefined) {
+                pageNo = this.historyOrder.page;
+            } else {
+                pageNo = pageNo - 1;
+            }
             this.historyOrder.rows = []; //清空数据
             var params = {};
-            params["pageNo"] = 1;
+            params["pageNo"] = pageNo;
             params["pageSize"] = this.historyOrder.pageSize;
             params["symbol"] = this.currentCoin.symbol;
             var that = this;
@@ -3195,6 +3209,7 @@ export default {
                 this.modal = true;
             },
             closeModal() {
+                this.getWallet();
                 this.modal = false;
             }
         }
