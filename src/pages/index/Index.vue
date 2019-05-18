@@ -1071,9 +1071,15 @@ export default {
             return Math.round(v * t) / t;
         },
         mul(a, b) {
-            var c = 0,
+            if(b!=null){
+                var c = 0,
                 d = a.toString(),
                 e = b.toString();
+            }else{
+                var c = 0,
+                d = a,
+                e = b
+            }
             try {
                 c += d.split(".")[1].length;
             } catch (f) { }

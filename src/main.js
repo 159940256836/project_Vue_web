@@ -52,10 +52,9 @@ Vue.http.interceptors.push((request, next) => {
             localStorage.setItem('TOKEN', xAuthToken);
         }
         //
-
         if (response.body.code == '4000' || response.body.code == '3000') {
             store.commit('setMember', null);
-            router.push('/login');
+            // router.push('/login');
             return false;
         }
         return response;
