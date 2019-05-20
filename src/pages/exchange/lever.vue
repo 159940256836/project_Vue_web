@@ -120,7 +120,7 @@
                         <div class="trade_bd">
                             <div class="panel panel_buy">
                                 <div v-if="isLogin" class="hd hd_login">
-                                    <span>{{$t("exchange.leverindex")}}</span>
+                                    <span>{{$t("exchange.canuse")}}</span>
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
                                 </div>
@@ -2967,6 +2967,7 @@ export default {
          * 获取钱包信息
          */
         getWallet() {
+            if(this.isLogin && this.member.realName){
             this.$http
                 .post(this.host + "/margin-trade/lever_wallet/list", { symbol: this.currentCoin.symbol })
                 .then(response => {
@@ -2979,8 +2980,9 @@ export default {
                         this.wallet.base = 0;
                         this.wallet.coin = 0;
                     }
-                    // this.wallet.base = resp.data.balance || "";
                 });
+            }
+
         },
         //查询当前委托
         getCurrentOrder() {
