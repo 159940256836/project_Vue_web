@@ -1596,7 +1596,6 @@ export default {
             /*var params = this.$route.params[0];*/
             var params = this.$route.params.pathMatch;
             if (params == undefined) {
-                console.log('11111111111111')
                 this.$router.push("/leverindex/" + this.defaultPath);
                 params = this.defaultPath;
             }
@@ -1619,7 +1618,6 @@ export default {
             // this.getPlateFull(); //深度图
             this.getTrade();
             if (this.isLogin && this.member.realName) {
-                console.log('222222222222222')
                 // this.getMember(); //获取是否实名认证
                 this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
                 this.getWallet(); //账户资产信息

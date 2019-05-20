@@ -124,7 +124,6 @@ export default {
                 .post(this.host + "/uc/ancillary/system/help", {})
                 .then(res => {
                     if (res.status == 200 && res.body.code == 0) {
-                        console.log(res.body.data)
                         this.list = res.body.data;
                     } else {
                         this.$Message.error(res.body.message);

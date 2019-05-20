@@ -240,6 +240,7 @@ export default {
                     })
                 }
             })
+            this.password="";
         },
         isNaNFun(num) {
             return isNaN(Number(num));

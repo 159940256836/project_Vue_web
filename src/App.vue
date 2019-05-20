@@ -195,11 +195,11 @@
                                     <span>联系我们</span>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">服务邮箱：kaililiangu@163.com</a>
+                                    <a href="javascript:;">服务邮箱：service@coinmany.com</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <span style="color: #8790a1;">企业邮箱：service@coinmany.com</span>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
