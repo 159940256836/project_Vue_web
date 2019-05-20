@@ -206,13 +206,14 @@ export default {
         handleSubmit(name) {
              this.$refs[name].validate(valid => {
                  //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
-                 this.loginCheck()
                 if (valid) {
                     const params = {};
                     const formParams = this.formInline;
                     params.username = formParams.user;
                     params.password = formParams.password;
-                    params.code = formParams.googleCode
+                    params.code = formParams.googleCode;
+                    // 5.20修改
+                    this.loginCheck()
                 }
             })
         },

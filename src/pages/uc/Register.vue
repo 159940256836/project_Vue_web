@@ -7,14 +7,14 @@
                         <Button v-for="(list,index) in buttonLists" :key="list.text" :class="{ active:changeActive == index}" @click="actives(index)">{{list.text}}</Button>
                     </ButtonGroup>
                 </FormItem>
-                <FormItem prop="username">
-                    <Input type="text" v-model="formInline.username" :placeholder="$t('uc.regist.username')">
-                    </Input>
-                </FormItem>
                 <FormItem prop="country">
                     <Select v-model="formInline.country" :placeholder="$t('uc.regist.country')" @on-change="onAreaChange">
                         <Option v-for="(area,index) in areas" :value="area.zhName" :key="index">{{area.zhName}}</Option>
                     </Select>
+                </FormItem>
+                <FormItem prop="username">
+                    <Input type="text" v-model="formInline.username" :placeholder="$t('uc.regist.username')">
+                    </Input>
                 </FormItem>
                 <FormItem prop="user">
                     <Input v-if="changeActive == 0" type="text" v-model="formInline.user" :placeholder="key">

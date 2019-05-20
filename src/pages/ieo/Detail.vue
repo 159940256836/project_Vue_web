@@ -328,7 +328,7 @@ export default {
      .tabida1{
         height:100px;
         margin-top:20px;
-         width:1178px;
+         width:1200px;
          border:1px solid #DDDDDD;
          font-size:14px;
          color:#333333;
@@ -439,7 +439,7 @@ $lineColor: rgb(71, 100, 146);
             flex-wrap: wrap;
             overflow: hidden;
             .leftWrapper {
-                margin-top:12px;
+                margin-top:20px;
                 margin-left:20px;
                 width: 42%;
                 img {

@@ -160,6 +160,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.form.ivu-form-inline .ivu-form-item[data-v-937c4346]{
+    margin-left:12px;
+}
 .common {
     padding: 20px;
 }
