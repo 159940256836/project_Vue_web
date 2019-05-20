@@ -21,7 +21,7 @@
                             {{$t('uc.finance.record.operatetype')}} ：
                         </span>
                         <Select v-model="recordValue" clearable style="width:200px" @on-change="getType">
-                            <Option v-for="item in recordType" :value="item.value" :key="item.value">{{ item.label }}</Option>
+                            <Option v-for="(item, index) in recordType" :value="index" :key="item">{{ item }}</Option>
                         </Select>
                         <Button type="warning" @click="queryOrder" style="padding: 6px 30px;margin-left:10px;background-color:#3399ff;border-color:#3399ff">{{$t('uc.finance.record.search')}}</Button>
                     </div>
@@ -39,6 +39,35 @@
     </div>
 </template>
 <script>
+const map = new Map([['0', '充值'],
+['1', '提现'],
+['2', '转账'],
+['3', '币币交易'],
+['4', '法币买入'],
+['5', '法币卖出'],
+['6', '活动奖励'],
+['7', '推广奖励'],
+['8', '分红'],
+['9', '投票'],
+['10', '人工充值'],
+['11', '配对'],
+['12', '缴纳商家认证保证金'],
+['13', '退回商家认证保证金'],
+['14', '法币充值'],
+['15', '币币兑换'],
+['16', '渠道推广'],
+['17', '划转入杠杆钱包'],
+['18', '从杠杆钱包划转出'],
+['19', '钱包空投'],
+['20', '锁仓'],
+['21', '解锁'],
+['22', '第三方转入'],
+['23', '第三方转出'],
+['24', '币币转入法币'],
+['25', '法币转入币币'],
+['26', '借贷流水'],
+['27', '还款流水'],
+]);
 export default {
     components: {},
     data() {
@@ -49,64 +78,7 @@ export default {
             startTime: "",
             endTime: "",
             recordValue: "",
-            recordType: [
-                {
-                    value: 0,
-                    label: this.$t("uc.finance.record.charge")
-                },
-                {
-                    value: 1,
-                    label: this.$t("uc.finance.record.pickup")
-                },
-                {
-                    value: 2,
-                    label: this.$t("uc.finance.record.transaccount")
-                },
-                {
-                    value: 3,
-                    label: this.$t("uc.finance.record.exchange")
-                },
-                {
-                    value: 4,
-                    label: this.$t("uc.finance.record.otcbuy")
-                },
-                {
-                    value: 5,
-                    label: this.$t("uc.finance.record.otcsell")
-                },
-                {
-                    value: 6,
-                    label: this.$t("uc.finance.record.activityaward")
-                },
-                {
-                    value: 7,
-                    label: this.$t("uc.finance.record.promotionaward")
-                },
-                {
-                    value: 8,
-                    label: this.$t("uc.finance.record.dividend")
-                },
-                {
-                    value: 9,
-                    label: this.$t("uc.finance.record.vote")
-                },
-                {
-                    value: 10,
-                    label: this.$t("uc.finance.record.handrecharge")
-                },
-                {
-                    value: 11,
-                    label: this.$t("uc.finance.record.match")
-                },
-                {
-                    value: 12,
-                    label: this.$t("uc.finance.record.borrowing")
-                },
-                {
-                    value: 13,
-                    label: this.$t("uc.finance.record.repayment")
-                }
-            ],
+            recordType: [...map.values()],
             coinList: [],
             coinType: "",
             pageSize: 10,
@@ -204,19 +176,19 @@ export default {
                 type
             };
             this.$http.post(this.host + "/uc/asset/transaction", params).then(response => {
-                    var resp = response.body;
-                    if (resp.code == 0) {
-                        this.loading = false;
-                        if (resp.data) {
-                            let trueData = resp.data;
-                            this.total = trueData.totalElements;
-                            this.tableRecord = trueData.content;
-                        }
-                    } else {
-                        this.$Message.error(resp.message);
-                    }
+                var resp = response.body;
+                if (resp.code == 0) {
                     this.loading = false;
-                });
+                    if (resp.data) {
+                        let trueData = resp.data;
+                        this.total = trueData.totalElements;
+                        this.tableRecord = trueData.content;
+                    }
+                } else {
+                    this.$Message.error(resp.message);
+                }
+                this.loading = false;
+            });
         },
         clear() {
             this.startTime = "";
@@ -239,39 +211,39 @@ export default {
                 title: this.$t("uc.finance.record.type"),
                 render: function (h, params) {
                     let str = "";
-                    let type = params.row.type;
-                    if (type == 0) {
-                        str = that.$t("uc.finance.record.charge");
-                    } else if (type == 1) {
-                        str = that.$t("uc.finance.record.pickup");
-                    } else if (type == 2) {
-                        str = that.$t("uc.finance.record.transaccount");
-                    } else if (type == 3) {
-                        str = that.$t("uc.finance.record.exchange");
-                    } else if (type == 4) {
-                        str = that.$t("uc.finance.record.otcbuy");
-                    } else if (type == 5) {
-                        str = that.$t("uc.finance.record.otcsell");
-                    } else if (type == 6) {
-                        str = that.$t("uc.finance.record.activityaward");
-                    } else if (type == 7) {
-                        str = that.$t("uc.finance.record.promotionaward");
-                    } else if (type == 8) {
-                        str = that.$t("uc.finance.record.dividend");
-                    } else if (type == 9) {
-                        str = that.$t("uc.finance.record.vote");
-                    } else if (type == 10) {
-                        str = that.$t("uc.finance.record.handrecharge");
-                    } else if (type == 11) {
-                        str = that.$t("uc.finance.record.match");
-                    } else if (type == 12) {
-                        str = that.$t("uc.finance.record.borrowing");
-                    } else if (type == 13) {
-                        str = that.$t("uc.finance.record.repayment");
-                    } else {
-                        str = "充值";
-                    }
-                    return h("div", str, "");
+                    let type = params.row.type.toString();
+                    // if (type == 0) {
+                    //     str = that.$t("uc.finance.record.charge");
+                    // } else if (type == 1) {
+                    //     str = that.$t("uc.finance.record.pickup");
+                    // } else if (type == 2) {
+                    //     str = that.$t("uc.finance.record.transaccount");
+                    // } else if (type == 3) {
+                    //     str = that.$t("uc.finance.record.exchange");
+                    // } else if (type == 4) {
+                    //     str = that.$t("uc.finance.record.otcbuy");
+                    // } else if (type == 5) {
+                    //     str = that.$t("uc.finance.record.otcsell");
+                    // } else if (type == 6) {
+                    //     str = that.$t("uc.finance.record.activityaward");
+                    // } else if (type == 7) {
+                    //     str = that.$t("uc.finance.record.promotionaward");
+                    // } else if (type == 8) {
+                    //     str = that.$t("uc.finance.record.dividend");
+                    // } else if (type == 9) {
+                    //     str = that.$t("uc.finance.record.vote");
+                    // } else if (type == 10) {
+                    //     str = that.$t("uc.finance.record.handrecharge");
+                    // } else if (type == 11) {
+                    //     str = that.$t("uc.finance.record.match");
+                    // } else if (type == 12) {
+                    //     str = that.$t("uc.finance.record.borrowing");
+                    // } else if (type == 13) {
+                    //     str = that.$t("uc.finance.record.repayment");
+                    // } else {
+                    //     str = "充值";
+                    // }
+                    return h("div", {}, map.get(type));
                 }
             });
             columns.push({
@@ -293,7 +265,7 @@ export default {
                                 title: params.row.amount
                             }
                         },
-                        that.toFloor(params.row.amount || "0")
+                        Math.abs(that.toFloor(params.row.amount)) || 0
                     );
                 }
             });
@@ -308,7 +280,7 @@ export default {
                                 title: params.row.fee
                             }
                         },
-                        that.toFloor(params.row.fee || "0")
+                        Math.abs(that.toFloor(params.row.fee)) || 0
                     );
                 }
             });
@@ -323,7 +295,7 @@ export default {
                                 title: params.row.discount_fee
                             }
                         },
-                        that.toFloor(params.row.discount_fee || "0")
+                        Math.abs(that.toFloor(params.row.discount_fee)) || 0
                     );
                 }
             });
@@ -338,7 +310,7 @@ export default {
                                 title: params.row.real_fee
                             }
                         },
-                        that.toFloor(params.row.real_fee || "0")
+                        Math.abs(that.toFloor(params.row.real_fee)) || 0
                     );
                 }
             });

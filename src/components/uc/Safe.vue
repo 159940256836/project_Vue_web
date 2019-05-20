@@ -789,9 +789,16 @@ export default {
         submit(name) {
             //实名认证
             if (name == "formValidate6") {
+                if (!this.formValidate6.realName) {
+                    this.$Message.error(this.$t("uc.safe.upload_positivetip"));
+                    return false;
+                }
+                if (!this.formValidate6.idCard) {
+                    this.$Message.error(this.$t("uc.safe.upload_positivetip"));
+                    return false;
+                }
                 if (this.imgPreview == "") {
                     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
-
                     return false;
                 }
                 if (this.imgNext == "") {

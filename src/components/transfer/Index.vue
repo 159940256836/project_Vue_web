@@ -158,7 +158,9 @@ export default {
                         resolve("success");
                     })
                 } else {
+                    if(this.loginmsg!=undefined){
                     this.$Message.error(this.loginmsg);
+                    }
                 }
             });
         },
@@ -369,7 +371,9 @@ export default {
                         resolve("success");
                     })
                 } else {
-                    this.$Message.error(this.loginmsg);
+                    if(this.loginmsg!=undefined){
+                        this.$Message.error(this.loginmsg);
+                    }
                 }
             });
         }

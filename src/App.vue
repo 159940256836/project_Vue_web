@@ -22,8 +22,8 @@
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">帮助</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
-                       
-                       
+
+
                     </div>
                     <div class="nav-header">
                         <!--中英文切换-->
@@ -39,7 +39,6 @@
                                 </DropdownMenu>
                             </Dropdown>
                         </div>-->
-
                         <!-- 登录 -->
                         <!--:style="isLogin?'width:12%':'width:6%'"-->
                         <div class="isLoginWrapper">
@@ -127,7 +126,7 @@
                                  <li>
                                     <router-link to="/">{{$t("footer.gywm2")}}</router-link>
                                 </li>
-                                
+
                             </ul>
                             <!--客户服务-->
                             <ul class="footer_info">

@@ -2,8 +2,8 @@
     <div class="container exchange" :class="skin">
         <div class="symbol">
             <div class="item" @click="currentCoinFavorChange">
-                <Icon v-if="currentCoinIsFavor" type="ios-star" color="#f0a70a" size="24" />
-                <Icon v-else type="ios-star-outline" color="#f0a70a" size="24" />
+                <Icon v-if="currentCoinIsFavor" type="ios-star" color="#3399ff" size="24" />
+                <Icon v-else type="ios-star-outline" color="#3399ff" size="24" />
             </div>
             <div class="item">
                 <span class="coin">{{currentCoin.coin}}
@@ -82,7 +82,7 @@
                         <div class="mask" v-show="!isLogin">
                             <span>请先
                                 <router-link to="/login">
-                                    <span style="color:#f0a70a;">{{$t("common.login")}}</span>
+                                    <span style="color:#3399ff;">{{$t("common.login")}}</span>
                                 </router-link> /
                                 <router-link to="/register">
                                     <span style="color:#f67951;">{{$t("common.register")}}</span>
@@ -92,7 +92,7 @@
                         <div class="mask" v-show="isLogin&&!member.realName">
                             <span>请先
                                 <router-link to="/uc/safe">
-                                    <span style="color:#f0a70a;">实名认证</span>
+                                    <span style="color:#3399ff;">实名认证</span>
                                 </router-link>
                             </span>
                         </div>
@@ -101,8 +101,8 @@
                                 <template v-for="(item, index) in btnList">
                                     <li @click="tab(index)" :class="{active:item.check}" style="width:18%;text-align:center;">{{item.text}}</li>
                                 </template>
-                                <li style="color:#39f;width:30%;text-align:right;" @click="transFerFun" v-if="isLogin">划转</li>
-                                <li style="color:#39f;width:20%" @click="toBorrow" v-if="isLogin">借贷/归还</li>
+                                <li style="color:#39f;width:30%;text-align:right;cursor: pointer;" @click="transFerFun" v-if="isLogin">划转</li>
+                                <li style="color:#39f;width:20%;cursor: pointer;" @click="toBorrow" v-if="isLogin">借贷/归还</li>
                                 <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
@@ -349,7 +349,7 @@ $night-color: #fff;
             .handlers {
                 font-size: 0;
                 padding: 10px 20px;
-                background-color: #192330;
+                background-color: #222c41;
                 border-top-left-radius: 6px;
                 border-top-right-radius: 6px;
                 .handler {
@@ -430,7 +430,7 @@ $night-color: #fff;
             .trade_wrap {
                 .trade_menu {
                     position: relative;
-                    background-color: #192330;
+                    background-color: #222c41;
                     border-top-left-radius: 6px;
                     border-top-right-radius: 6px;
                     font-size: 0;
@@ -443,8 +443,8 @@ $night-color: #fff;
                             padding: 0 20px;
                             cursor: pointer;
                             &.active {
-                                background-color: #27313e;
-                                color: #f0a70a;
+                                background-color: #1c2435;
+                                color: #3399FF;
                             }
                             &:first-child {
                                 border-top-left-radius: 6px;
@@ -495,7 +495,7 @@ $night-color: #fff;
             flex: 0 0 24%;
             .coin-menu {
                 height: 480px;
-                background-color: #192330;
+                background-color: #1c2435;
                 margin-bottom: 20px;
                 border-radius: 6px;
             }
@@ -507,7 +507,7 @@ $night-color: #fff;
         padding: 15px 30px;
         margin-bottom: 20px;
         align-items: center;
-        background-color: #192330;
+        background-color: #1c2435;
         line-height: 1;
         border-radius: 6px;
         .item {
@@ -554,8 +554,8 @@ $night-color: #fff;
                 line-height: 40px;
                 background-color: #192330;
                 &.active {
-                    color: #f0a70a;
-                    background-color: #27313e;
+                    color: #3399ff;
+                    background-color: #222c41;
                 }
                 &:first-child {
                     border-top-left-radius: 6px;
@@ -603,8 +603,8 @@ $night-color: #fff;
                         padding: 0 20px;
                         cursor: pointer;
                         &.active {
-                            background-color: #f0f0f0;
-                            color: #f0a70a;
+                            background-color: #222c41;
+                            color: #3399ff;
                         }
                         &:first-child {
                             border-top-left-radius: 6px;
@@ -680,7 +680,7 @@ $night-color: #fff;
                 background-color: #fafafa;
                 box-shadow: 0 0 2px #ccc;
                 &.active {
-                    color: #f0a70a;
+                    color: #3399FF;
                     background-color: #fff;
                 }
             }
@@ -1245,7 +1245,7 @@ export default {
             historyOrder: {
                 pageSize: 10,
                 total: 10,
-                page: 0,
+                page: 1,
                 columns: [
                     {
                         type: "expand",
@@ -1335,7 +1335,7 @@ export default {
                                     "span",
                                     {
                                         style: {
-                                            color: "#f0a70a"
+                                            color: "#3399ff"
                                         }
                                     },
                                     self.$t("exchange.finished")
@@ -1345,7 +1345,7 @@ export default {
                                     "span",
                                     {
                                         style: {
-                                            color: "#f0a70a"
+                                            color: "#3399ff"
                                         }
                                     },
                                     self.$t("exchange.canceled")
@@ -1538,11 +1538,10 @@ export default {
         }
     },
     created: function () {
-        // this.getdefaultSymbol().then(res => {
-        //     this.defaultPath = res;
-
-        // });
-        this.init();
+        this.getdefaultSymbol().then(res => {
+            this.defaultPath = res;
+            this.init();
+        });
     },
     mounted: function () {
         // this.getCNYRate();
@@ -1561,16 +1560,16 @@ export default {
         // // this.setback();
     },
     methods: {
-        // getdefaultSymbol() {
-        //     return this.$http.get(this.host + "/market/default/symbol").then(res => {
-        //         const data = res.body;
-        //         if (data.code == 0) {
-        //             return new Promise((resolve, reject) => {
-        //                 resolve(data.data.web);
-        //             }).catch(reject => reject("BTC_USDT"));
-        //         }
-        //     })
-        // },
+        getdefaultSymbol() {
+            return this.$http.get(this.host + "/market/default/symbol").then(res => {
+                const data = res.body;
+                if (data.code == 0) {
+                    return new Promise((resolve, reject) => {
+                        resolve(data.data.web);
+                    }).catch(reject => reject("BTC_USDT"));
+                }
+            })
+        },
         toBorrow() {//去借贷或者归还
             // this.$router.push({
             this.$router.push({
@@ -1597,12 +1596,13 @@ export default {
             /*var params = this.$route.params[0];*/
             var params = this.$route.params.pathMatch;
             if (params == undefined) {
+                console.log('11111111111111')
                 this.$router.push("/leverindex/" + this.defaultPath);
                 params = this.defaultPath;
             }
             const basecion = params.split("_")[1];
             if (basecion) {
-                this.basecion = basecion;
+                this.basecion = basecion.toLowerCase();
             }
             var coin = params.toUpperCase().split("_")[0];
             var base = params.toUpperCase().split("_")[1];
@@ -1619,6 +1619,7 @@ export default {
             // this.getPlateFull(); //深度图
             this.getTrade();
             if (this.isLogin && this.member.realName) {
+                console.log('222222222222222')
                 // this.getMember(); //获取是否实名认证
                 this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
                 this.getWallet(); //账户资产信息
@@ -1853,11 +1854,11 @@ export default {
                     "paneProperties.horzGridProperties.color": "rgba(0,0,0,.1)",
                     //"scalesProperties.textColor" : "#AAA",
                     "scalesProperties.textColor": "#61688A",
-                    "mainSeriesProperties.candleStyle.upColor": "#589065",
-                    "mainSeriesProperties.candleStyle.downColor": "#AE4E54",
+                    "mainSeriesProperties.candleStyle.upColor": "#00b275",
+                    "mainSeriesProperties.candleStyle.downColor": "#f15057",
                     "mainSeriesProperties.candleStyle.drawBorder": false,
-                    "mainSeriesProperties.candleStyle.wickUpColor": "#589065",
-                    "mainSeriesProperties.candleStyle.wickDownColor": "#AE4E54",
+                    "mainSeriesProperties.candleStyle.wickUpColor": "#00b275",
+                    "mainSeriesProperties.candleStyle.wickDownColor": "#f15057",
                     "paneProperties.legendProperties.showLegend": false,
 
                     "mainSeriesProperties.areaStyle.color1": "rgba(71, 78, 112, 0.5)",
@@ -1866,8 +1867,8 @@ export default {
                 },
                 // 柱状图样式
                 studies_overrides: {
-                    "volume.volume.color.0": "#AE4E54",  //第一根的颜色
-                    "volume.volume.color.1": "#589065",  //第二根的颜色
+                    "volume.volume.color.0": "rgba(241, 80, 87, .3)",  //第一根的颜色
+                    "volume.volume.color.1": "rgba(0, 178, 117, .3)",  //第二根的颜色
                     //     "volume.volume.transparency": 70,    //透明度
                     //     "volume.volume ma.color": "#FF0000", //波浪图颜色
                     //     "volume.volume ma.transparency": 30, //波浪图透明度
@@ -2597,6 +2598,7 @@ export default {
             this.modal = true;
         },
         closeModal() {
+            this.getWallet();
             this.modal = false;
         },
         collect(index, row) {
@@ -2656,7 +2658,8 @@ export default {
                 path
             });
         },
-        buyWithLimitPrice() {//限价买入
+        //限价买入
+        buyWithLimitPrice() {
             if (this.form.buy.limitAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2702,7 +2705,8 @@ export default {
                     }
                 });
         },
-        buyWithStopPrice() {//止盈止损买入
+        //止盈止损买入
+        buyWithStopPrice() {
             if (this.form.buy.stopPrice == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2756,7 +2760,8 @@ export default {
                     }
                 });
         },
-        buyWithMarketPrice() {//市价买入
+        //市价买入
+        buyWithMarketPrice() {
             if (this.form.buy.marketAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2795,7 +2800,8 @@ export default {
                 }
             });
         },
-        sellLimitPrice() {//限价卖出
+        //限价卖出
+        sellLimitPrice() {
             if (this.form.sell.limitAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2844,7 +2850,8 @@ export default {
                     }
                 });
         },
-        sellStopPrice() {//止盈止损卖出
+        //止盈止损卖出
+        sellStopPrice() {
             if (this.form.sell.stopPrice == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2902,7 +2909,8 @@ export default {
                     }
                 });
         },
-        sellMarketPrice() {//市价卖出
+        //市价卖出
+        sellMarketPrice() {
             if (this.form.sell.marketAmount == "") {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2971,15 +2979,9 @@ export default {
                     }
                     // this.wallet.base = resp.data.balance || "";
                 });
-            // this.$http
-            //     .post(this.host + this.api.uc.wallet + this.currentCoin.coin, {})
-            //     .then(response => {
-            //         var resp = response.body;
-            //         this.wallet.coin = (resp.data && resp.data.balance) || '';
-            //     });
         },
+        //查询当前委托
         getCurrentOrder() {
-            //查询当前委托
             var params = {};
             params["pageNum"] = 1;
             params["pageSize"] = 100;
@@ -3003,13 +3005,13 @@ export default {
 
             });
         },
+        //查询历史委托
         getHistoryOrder(pageNo) {
-            //查询历史委托
-            // if (pageNo == undefined) {
-            //     pageNo = this.historyOrder.page;
-            // } else {
-            //     pageNo = pageNo - 1;
-            // }
+            /*if (pageNo == undefined) {
+                pageNo = this.historyOrder.page;
+            } else {
+                pageNo = pageNo - 1;
+            }*/
             this.historyOrder.rows = []; //清空数据
             var params = {};
             params["pageNum"] = 1;
@@ -3041,6 +3043,7 @@ export default {
                     }
                 });
         },
+        // 当前委托撤销
         cancel(index) {
             var order = this.currentOrder.rows[index];
             this.$Modal.confirm({

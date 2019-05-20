@@ -12,7 +12,7 @@
                             <div class="carsoul">
                                 <div v-for="(item,index) in FAQList" class="cal_content1">
                                     <div v-for="(con,j) in item" class="cal_content" @mouseover="stop()" @mouseout="startMove()">
-                                        <router-link :to="{path: '/notice/index', query: { 'id': con.id }}">{{strde(con.title)}}</router-link>
+                                        <router-link style="color: #a8b0c0;" :to="{path: '/notice/index', query: { 'id': con.id }}">{{strde(con.title)}}</router-link>
                                     </div>
                                 </div>
                             </div>
@@ -1071,9 +1071,15 @@ export default {
             return Math.round(v * t) / t;
         },
         mul(a, b) {
-            var c = 0,
+            if(b!=null){
+                var c = 0,
                 d = a.toString(),
                 e = b.toString();
+            }else{
+                var c = 0,
+                d = a,
+                e = b
+            }
             try {
                 c += d.split(".")[1].length;
             } catch (f) { }
@@ -1259,7 +1265,7 @@ li {
             border-radius: 8px;
             background: rgb(37, 43, 56);
             float: left;
-            margin-right: 20px;
+            margin-right: 25px;
             padding: 13px 0 0;
             overflow: hidden;
             &:last-child {

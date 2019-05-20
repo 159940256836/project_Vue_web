@@ -32,7 +32,7 @@
       </div>
       <div class="bjc_table">
         <p class="title">开奖记录</p>
-        
+
         <Table :columns="columns1" :data="data1"></Table>
         <div style="margin-top:20px;text-align:right;margin-right:20px;">
           <Page :total="total" @on-change="changepage" />

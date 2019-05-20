@@ -325,7 +325,7 @@ $night-color: #fff;
 
 .exchange {
     color: #fff;
-    background-color: #0b1520;
+    background-color: #161b25;
     .main {
         display: flex;
         .left {
@@ -336,7 +336,7 @@ $night-color: #fff;
             .handlers {
                 font-size: 0;
                 padding: 10px 20px;
-                background-color: #192330;
+                background-color: #222c41;
                 border-top-left-radius: 6px;
                 border-top-right-radius: 6px;
                 .handler {
@@ -417,7 +417,7 @@ $night-color: #fff;
             .trade_wrap {
                 .trade_menu {
                     position: relative;
-                    background-color: #192330;
+                    background-color: #222c41;
                     border-top-left-radius: 6px;
                     border-top-right-radius: 6px;
                     font-size: 0;
@@ -430,7 +430,7 @@ $night-color: #fff;
                             padding: 0 20px;
                             cursor: pointer;
                             &.active {
-                                background-color: #27313e;
+                                background-color: #1c2435;
                                 color: #3399ff;
                             }
                             &:first-child {
@@ -482,7 +482,7 @@ $night-color: #fff;
             flex: 0 0 24%;
             .coin-menu {
                 height: 480px;
-                background-color: #192330;
+                background-color: #1c2435;
                 margin-bottom: 20px;
                 border-radius: 6px;
             }
@@ -494,7 +494,7 @@ $night-color: #fff;
         padding: 15px 30px;
         margin-bottom: 20px;
         align-items: center;
-        background-color: #192330;
+        background-color: #1c2435;
         line-height: 1;
         border-radius: 6px;
         .item {
@@ -542,7 +542,7 @@ $night-color: #fff;
                 background-color: #192330;
                 &.active {
                     color: #3399ff;
-                    background-color: #27313e;
+                    background-color: #222c41;
                 }
                 &:first-child {
                     border-top-left-radius: 6px;
@@ -1631,11 +1631,10 @@ export default {
             }
         },
         created: function () {
-        //     this.getdefaultSymbol().then(res => {
-        //     this.defaultPath = res;
-        //     this.init();
-        // });
-            this.init();
+            this.getdefaultSymbol().then(res => {
+                this.defaultPath = res;
+                this.init();
+            })
         },
         mounted: function () {
             // this.getCNYRate();
@@ -1654,6 +1653,17 @@ export default {
             // // this.setback();
         },
         methods: {
+            // 默认交易对
+            getdefaultSymbol() {
+                return this.$http.get(this.host + "/market/default/symbol").then(res => {
+                    const data = res.body;
+                    if (data.code == 0) {
+                        return new Promise((resolve, reject) => {
+                            resolve(data.data.web);
+                        }).catch(reject => reject("BTC_USDT"));
+                    }
+                })
+            },
             //金额只能为正整数
             checkNum(element) {
               var val= element.value;
@@ -1695,7 +1705,7 @@ export default {
                 }
                 const basecion = params.split("_")[1];
                 if (basecion) {
-                    this.basecion = basecion;
+                    this.basecion = basecion.toLowerCase();
                 }
                 var coin = params.toUpperCase().split("_")[0];
                 var base = params.toUpperCase().split("_")[1];
@@ -1930,11 +1940,11 @@ export default {
                         "paneProperties.horzGridProperties.color": "rgba(255,255,255,.04)",
                         // "scalesProperties.textColor" : "#AAA",
                         "scalesProperties.textColor": "#61688A",
-                        "mainSeriesProperties.candleStyle.upColor": "#589065",
-                        "mainSeriesProperties.candleStyle.downColor": "#AE4E54",
+                        "mainSeriesProperties.candleStyle.upColor": "#00b275",
+                        "mainSeriesProperties.candleStyle.downColor": "#f15057",
                         "mainSeriesProperties.candleStyle.drawBorder": false,
-                        "mainSeriesProperties.candleStyle.wickUpColor": "#589065",
-                        "mainSeriesProperties.candleStyle.wickDownColor": "#AE4E54",
+                        "mainSeriesProperties.candleStyle.wickUpColor": "#00b275",
+                        "mainSeriesProperties.candleStyle.wickDownColor": "#f15057",
                         "paneProperties.legendProperties.showLegend": false,
 
                         "mainSeriesProperties.areaStyle.color1": "rgba(71, 78, 112, 0.5)",
@@ -1943,8 +1953,8 @@ export default {
                     },
                     // 柱状图样式
                     studies_overrides: {
-                        "volume.volume.color.0": "#AE4E54",  //第一根的颜色
-                        "volume.volume.color.1": "#589065",  //第二根的颜色
+                        "volume.volume.color.0": "rgba(241, 80, 87, .3)",  //第一根的颜色
+                        "volume.volume.color.1": "rgba(0, 178, 117, .3)",  //第二根的颜色
                     //     "volume.volume.transparency": 70,    //透明度
                     //     "volume.volume ma.color": "#FF0000", //波浪图颜色
                     //     "volume.volume ma.transparency": 30, //波浪图透明度
@@ -2850,7 +2860,7 @@ export default {
                 params["symbol"] = this.currentCoin.symbol;
                 params["price"] = this.form.sell.limitPrice;
                 //params["amount"] = this.form.sell.limitAmount;
-                params["amount"] = this.form.buy.marketAmount;  
+                params["amount"] = this.form.buy.marketAmount;
                 params["direction"] = "SELL";
                 params["type"] = "LIMIT_PRICE";
                 console.log(this.form.buy.marketAmount)
@@ -3205,6 +3215,7 @@ export default {
                 this.modal = true;
             },
             closeModal() {
+                this.getWallet();
                 this.modal = false;
             }
         }
