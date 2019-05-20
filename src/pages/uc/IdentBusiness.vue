@@ -197,8 +197,9 @@
           <Row>
             <Col span="8">
             <FormItem :label="bizhong">
+              <!-- //5.20修改 -->
               <Select v-model="apply_form.coinSymbol" :placeholder="select" @on-change="onCoinChange">
-                <Option v-for="(item,index) in auditCurrency" :value="item.coin.unit" :key="index"></Option>
+                <Option v-for="(item,index) in auditCurrency" :value="item.coin.unit" :key="index">{{item.coin.unit}}</Option>
               </Select>
             </FormItem>
             </Col>
@@ -418,7 +419,7 @@ export default {
             for (var i = 0; i < resp.data.length; i++) {
               if (i == 0) {
                 //BHB;
-                this.apply_form.coinSymbol = resp.data[i].coin.unit;
+                //this.apply_form.coinSymbol = resp.data[i].coin.unit;
                 //10000;
                 this.apply_form.amount = resp.data[i].amount;
               }
@@ -844,7 +845,7 @@ export default {
         .ivu-btn-primary {
           background-color: #3399ff;
           color: #fff;
-          border-color: #f0ac70;
+          border-color: #3399ff;
         }
         .ivu-btn-text {
           &:hover,

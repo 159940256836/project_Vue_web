@@ -22,8 +22,8 @@
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">帮助</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
-                       
-                       
+
+
                     </div>
                     <div class="nav-header">
                         <!--中英文切换-->
@@ -39,7 +39,6 @@
                                 </DropdownMenu>
                             </Dropdown>
                         </div>-->
-
                         <!-- 登录 -->
                         <!--:style="isLogin?'width:12%':'width:6%'"-->
                         <div class="isLoginWrapper">
@@ -127,7 +126,7 @@
                                  <li>
                                     <router-link to="/">{{$t("footer.gywm2")}}</router-link>
                                 </li>
-                                
+
                             </ul>
                             <!--客户服务-->
                             <ul class="footer_info">
@@ -196,11 +195,11 @@
                                     <span>联系我们</span>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">服务邮箱：kaililiangu@163.com</a>
+                                    <a href="javascript:;">服务邮箱：service@coinmany.com</a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <span style="color: #8790a1;">企业邮箱：service@coinmany.com</span>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -210,7 +209,7 @@
                 </div>
                 <div class="info">
                     <div class="footer-info">
-                        <div class="info-title">友情提示:</div>
+                        <div class="info-title">友情链接:</div>
                         <div class="info-img">
                             <a href="javascript:;">
                                 <img src="./assets/images/footer/1.png" alt="">

@@ -19,6 +19,7 @@
                                 <p v-else class="bankInfo" style="color: grey;">
                                   {{$t('uc.account.backcardtip')}}
                                 </p>
+                                <!-- 银行卡号 -->
                                 <a class="btn" v-if="user.bankVerified==1" @click="showItem(1)">{{$t('uc.account.modify')}}</a>
                                 <a class="btn" v-else @click="showItem(1)">{{$t('uc.account.bind')}}</a>
                             </div>
@@ -394,7 +395,7 @@ export default {
                 if (valid) {
                     this.submit(name)
                 } else {
-                    this.$Message.error(this.$t('uc.account.save_failure'));
+                    
                 }
             })
         },
@@ -501,6 +502,9 @@ export default {
         },
         showItem(index) {
             this.choseItem = index;
+            this.formValidate1.password="";
+            this.formValidate2.password="";
+            this.formValidate3.password="";
         },
         noName() {
             this.$Message.error(this.msg);

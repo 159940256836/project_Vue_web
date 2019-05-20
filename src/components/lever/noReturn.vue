@@ -143,7 +143,8 @@ export default {
                 loanRecordId: this.brorrowParams.id,
                 amount: this.value
             }
-            this.toBorow(params)
+            this.toBorow(params);
+            this.value=""
         },
         toBorow(params) {
             this.$http.post(this.host + "/margin-trade/loan/repayment", params).then(res => {

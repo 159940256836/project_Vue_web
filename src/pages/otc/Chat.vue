@@ -24,7 +24,7 @@
                             <span>{{msg.money}}&nbsp;CNY</span>
                         </h6>
                         <div class="mt20" v-if="tradeType==0">
-                            <h5>{{$t('otc.chat.operatetip')}}:</h5>
+                            <h5 style="font-size:14px; color:#333">{{$t('otc.chat.operatetip')}}:</h5>
                             <div>
                                 <p>1、{{$t('otc.chat.operatetip_1')}}“
                                     <em>{{$t('otc.chat.finishpayment')}}</em>”。{{$t('otc.chat.operatetip_1_1')}}。</p>
@@ -93,16 +93,16 @@
                         </p>
                         </Col>
                         <Col span="3" class="order-info">
-                        <h5>{{msg.price}}</h5>
-                        <span>{{$t('otc.chat.transprice')}}(CNY)</span>
+                            <span>{{$t('otc.chat.transprice')}}(CNY)</span>
+                            <h5>{{msg.price}}</h5>
                         </Col>
                         <Col span="3" class="order-info">
-                        <h5>{{msg.amount}}</h5>
-                        <span>{{$t('otc.chat.transnum')}}({{msg.unit}})</span>
+                            <span>{{$t('otc.chat.transnum')}}({{msg.unit}})</span>
+                            <h5>{{msg.amount}}</h5>
                         </Col>
                         <Col span="3" class="order-info">
-                        <h5>{{msg.money}}</h5>
-                        <span>{{$t('otc.chat.transmoney')}}(CNY)</span>
+                            <span>{{$t('otc.chat.transmoney')}}(CNY)</span>
+                            <h5>{{msg.money}}</h5>
                         </Col>
                     </Row>
                     <Row class="chat-top" type="flex" justify="space-between" v-show="statusBtn!=0">
@@ -485,6 +485,13 @@ export default {
 </script>
 
 <style>
+.chat-in-box .chat-in .chat-right .chat-right-in p[data-v-5349a3cd]{
+  font-size:14px !important;
+}
+.leftmenu[data-v-5349a3cd]{
+  font-size:12px;
+  color:red;
+}
 .chat-in .ivu-col.ivu-col-span-4 .ivu-poptip-popper{
   margin-top: 35px;
 }

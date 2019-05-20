@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tab">
         <Modal v-model="modal" title="转出" :footer-hide="true" :mask-closable="false" :closable="false">
             <div>
                 <div style="margin-bottom:30px;">
@@ -62,7 +62,9 @@ export default {
         // });
         // this.getLeverNum();
         // this.getOtcNum();
-        this.init();
+        if (this.isLogin) {
+            this.init();
+        }
         // this.getSupportCoin().then(res => {
         //     this.getLeverNum().then(res => {
         //         console.log(this.leverList);
@@ -95,6 +97,7 @@ export default {
         init() {
             Promise.all([this.getLeverNum(), this.getOtcNum(), this.getExchangeList()]).then(res => {
                 this.data = [...this.leverList, ...this.otcList, ...this.exchangeList]
+                console.log(this.data)
             })
         },
         cancel() {
@@ -376,6 +379,11 @@ export default {
                     }
                 }
             });
+        }
+    },
+    computed: {
+        isLogin: function () {
+            return this.$store.getters.isLogin;
         }
     }
 }
