@@ -62,7 +62,9 @@ export default {
         // });
         // this.getLeverNum();
         // this.getOtcNum();
-        this.init();
+        if (this.isLogin) {
+            this.init();
+        }
         // this.getSupportCoin().then(res => {
         //     this.getLeverNum().then(res => {
         //         console.log(this.leverList);
