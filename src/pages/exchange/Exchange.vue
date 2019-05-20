@@ -1952,20 +1952,16 @@ export default {
                         "paneProperties.legendProperties.showLegend": false,
                         "mainSeriesProperties.areaStyle.color1": "rgba(71, 78, 112, 0.5)",
                         "mainSeriesProperties.areaStyle.color2": "rgba(71, 78, 112, 0.5)",
-                        "mainSeriesProperties.areaStyle.linecolor": "#9194a4"
+                        "mainSeriesProperties.areaStyle.linecolor": "#9194a4",
+                        // "scalesProperties.lineColor": "#000", // xy刻度线色值
+                        // "paneProperties.crossHairProperties.color": "#00b275", // 十字光标颜色
+                        "mainSeriesProperties.candleStyle.borderUpColor": "#00b275", // 开高低收买入标线
+                        "mainSeriesProperties.candleStyle.borderDownColor": "#f15057" // 开高低收卖出标线
                     },
                     // 柱状图样式
                     studies_overrides: {
                         "volume.volume.color.0": "rgba(241, 80, 87, .3)",  //第一根的颜色
                         "volume.volume.color.1": "rgba(0, 178, 117, .3)",  //第二根的颜色
-                    //     "volume.volume.transparency": 70,    //透明度
-                    //     "volume.volume ma.color": "#FF0000", //波浪图颜色
-                    //     "volume.volume ma.transparency": 30, //波浪图透明度
-                    //     "volume.volume ma.linewidth": 5,    
-                    //     "volume.show ma": true,    //是否显示
-                    //     "volume.options.showStudyArguments": false,
-                    //     "bollinger bands.median.color": "#33FF88",
-                    //     "bollinger bands.upper.linewidth": 7
                     },
                     time_frames: [
                         {

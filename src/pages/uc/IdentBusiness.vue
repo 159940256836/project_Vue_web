@@ -844,7 +844,7 @@ export default {
         .ivu-btn-primary {
           background-color: #3399ff;
           color: #fff;
-          border-color: #f0ac70;
+          border-color: #3399ff;
         }
         .ivu-btn-text {
           &:hover,

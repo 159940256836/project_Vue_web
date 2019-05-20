@@ -1863,7 +1863,11 @@ export default {
 
                     "mainSeriesProperties.areaStyle.color1": "rgba(71, 78, 112, 0.5)",
                     "mainSeriesProperties.areaStyle.color2": "rgba(71, 78, 112, 0.5)",
-                    "mainSeriesProperties.areaStyle.linecolor": "#9194a4"
+                    "mainSeriesProperties.areaStyle.linecolor": "#9194a4",
+                    // "scalesProperties.lineColor": "#000", // xy刻度线色值
+                    // "paneProperties.crossHairProperties.color": "#00b275", // 十字光标颜色
+                    "mainSeriesProperties.candleStyle.borderUpColor": "#00b275", // 开高低收买入标线
+                    "mainSeriesProperties.candleStyle.borderDownColor": "#f15057" // 开高低收卖出标线
                 },
                 // 柱状图样式
                 studies_overrides: {
