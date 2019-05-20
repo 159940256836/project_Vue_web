@@ -32,7 +32,7 @@
                 <span class="num ">{{currentCoin.volume}} {{currentCoin.coin}}</span>
             </div>
             <div class="item" @click="changeSkin">
-                <img src="../../assets/images/exchange/light-switch.png" alt="">
+                <img :src="skin == 'night' ? night : day" alt="">
             </div>
         </div>
 
@@ -381,7 +381,7 @@ $night-color: #fff;
             }
             .plate-nowprice {
                 text-align: center;
-                background-color: #27313e;
+                background-color: #222c41;
                 line-height: 1;
                 display: flex;
                 align-items: center;
@@ -471,7 +471,7 @@ $night-color: #fff;
                         width: 100%;
                         height: 100%;
                         display: flex;
-                        background-color: rgba(40, 49, 62, 0.8);
+                        background-color: rgba(40, 49, 62, 0.6);
                         justify-content: center;
                         align-items: center;
                         z-index: 100;
@@ -603,7 +603,7 @@ $night-color: #fff;
                         padding: 0 20px;
                         cursor: pointer;
                         &.active {
-                            background-color: #222c41;
+                            background-color: #f0f0f0;
                             color: #3399ff;
                         }
                         &:first-child {
@@ -692,9 +692,9 @@ $night-color: #fff;
 import expandRow from "@components/exchange/expand.vue";
 import Datafeeds from "@js/charting_library/datafeed/bitrade.js";
 import transfermodal from "../../components/transfer/Index"
-var Stomp = require("stompjs");
-var SockJS = require("sockjs-client");
-var moment = require("moment");
+let Stomp = require("stompjs");
+let SockJS = require("sockjs-client");
+let moment = require("moment");
 const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CHECK_FULL_STOP', '止盈止损']]);
 
 import DepthGraph from "@components/exchange/DepthGraph.vue";
@@ -707,6 +707,8 @@ export default {
     data() {
         let self = this;
         return {
+            night: require("../../assets/images/exchange/night.png"), // 黑色版本
+            day: require("../../assets/images/exchange/day.png"), // 白色版本
             modal: false,
             LeversymbolMsg: {},
             btnList: [
@@ -1593,8 +1595,8 @@ export default {
             this[silder] = val;
         },
         init() {
-            /*var params = this.$route.params[0];*/
-            var params = this.$route.params.pathMatch;
+            /*let params = this.$route.params[0];*/
+            let params = this.$route.params.pathMatch;
             if (params == undefined) {
                 this.$router.push("/leverindex/" + this.defaultPath);
                 params = this.defaultPath;
@@ -1603,8 +1605,8 @@ export default {
             if (basecion) {
                 this.basecion = basecion.toLowerCase();
             }
-            var coin = params.toUpperCase().split("_")[0];
-            var base = params.toUpperCase().split("_")[1];
+            let coin = params.toUpperCase().split("_")[0];
+            let base = params.toUpperCase().split("_")[1];
             this.currentCoin.symbol = coin + "/" + base;
             this.currentCoin.coin = coin;
             this.currentCoin.base = base;
@@ -1669,7 +1671,7 @@ export default {
         //   this.$http
         //     .post(this.host + "/uc/approve/security/setting")
         //     .then(response => {
-        //       var resp = response.body;
+        //       let resp = response.body;
         //       if (resp.code == 0) {
         //         this.user = resp.data;
         //         this.userRealVerified = resp.data.realVerified; //0,1
@@ -1734,9 +1736,9 @@ export default {
             this.selectedOrder = str;
         },
         setback() {
-            var obk = document.getElementsByClassName("container")[0];
-            var height = 0;
-            var doc = document;
+            let obk = document.getElementsByClassName("container")[0];
+            let height = 0;
+            let doc = document;
             window.innerHeight && (height = window.innerHeight);
             !window.innerHeight &&
                 doc.body.clientHeight &&
@@ -1795,7 +1797,7 @@ export default {
             this.$http
                 .post(this.host + "/market/exchange-rate/usd-cny")
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     this.CNYRate = resp.data;
                 });
         },
@@ -1803,14 +1805,14 @@ export default {
             return this.coins._map[symbol];
         },
         getKline() {
-            var that = this;
+            let that = this;
             let config = {
                 autosize: true,
                 fullscreen: true,
                 symbol: that.symbol,
                 interval: "5", // 分时K线传值
                 timezone: "Asia/Shanghai",
-                toolbar_bg: "#18202a",
+                toolbar_bg: "#222c41",
                 container_id: "kline_container",
                 datafeed: that.datafeed,
                 library_path:
@@ -1847,9 +1849,9 @@ export default {
                 client_id: "tradingview.com",
                 user_id: "public_user_id",
                 overrides: {
-                    "paneProperties.background": "#1B1E2E",
-                    "paneProperties.vertGridProperties.color": "rgba(0,0,0,.1)",
-                    "paneProperties.horzGridProperties.color": "rgba(0,0,0,.1)",
+                    "paneProperties.background": "#1c2435",
+                    "paneProperties.vertGridProperties.color": "rgba(255,255,255,.04)",
+                    "paneProperties.horzGridProperties.color": "rgba(255,255,255,.04)",
                     //"scalesProperties.textColor" : "#AAA",
                     "scalesProperties.textColor": "#61688A",
                     "mainSeriesProperties.candleStyle.upColor": "#00b275",
@@ -1919,7 +1921,7 @@ export default {
                     "#ffa5a6";
             }
             require(["@js/charting_library/charting_library.min.js"], function (tv) {
-                var widget = (window.tvWidget = new TradingView.widget(config));
+                let widget = (window.tvWidget = new TradingView.widget(config));
                 widget.onChartReady(function () {
                     widget.chart().executeActionById("drawingToolbarAction");
                     widget
@@ -2087,9 +2089,9 @@ export default {
                 .then(response => {
                     this.coins.favor = [];
                     this.currentCoinIsFavor = false;
-                    var resp = response.body;
-                    for (var i = 0; i < resp.length; i++) {
-                        var coin = this.getCoin(resp[i].symbol);
+                    let resp = response.body;
+                    for (let i = 0; i < resp.length; i++) {
+                        let coin = this.getCoin(resp[i].symbol);
                         if (coin != null) {
                             coin.isFavor = true;
                             this.coins.favor.push(coin);
@@ -2102,17 +2104,17 @@ export default {
         },
         getSymbol() {
             this.$http.post(this.host + this.api.market.thumb, { isLever: true }).then(response => {
-                var resp = response.body;
+                let resp = response.body;
                 //先清空已有数据
-                for (var i = 0; i < resp.length; i++) {
-                    var coin = resp[i];
+                for (let i = 0; i < resp.length; i++) {
+                    let coin = resp[i];
                     coin.base = resp[i].symbol.split("/")[1];
                     this.coins[coin.base] = [];
                     this.coins._map = [];
                     this.coins.favor = [];
                 }
-                for (var i = 0; i < resp.length; i++) {
-                    var coin = resp[i];
+                for (let i = 0; i < resp.length; i++) {
+                    let coin = resp[i];
                     coin.price = resp[i].close = resp[i].close.toFixed(
                         this.baseCoinScale
                     );
@@ -2148,7 +2150,7 @@ export default {
                     symbol: this.currentCoin.symbol
                 })
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     if (resp != null) {
                         this.currentCoin.coinScale = resp.coinScale;
                         this.currentCoin.baseCoinScale = resp.baseCoinScale;
@@ -2160,7 +2162,7 @@ export default {
         },
         getPlate() {
             //买卖盘
-            var params = {};
+            let params = {};
             params["symbol"] = this.currentCoin.symbol;
             this.$http
                 .post(this.host + this.api.market.platemini, params)
@@ -2169,7 +2171,7 @@ export default {
                     this.plate.bidRows = [];
                     let resp = response.body;
                     if (resp.ask && resp.ask.items) {
-                        for (var i = 0; i < resp.ask.items.length; i++) {
+                        for (let i = 0; i < resp.ask.items.length; i++) {
                             if (i == 0) {
                                 resp.ask.items[i].totalAmount = resp.ask.items[i].amount;
                             } else {
@@ -2178,8 +2180,8 @@ export default {
                             }
                         }
                         if (resp.ask.items.length >= this.plate.maxPostion) {
-                            for (var i = this.plate.maxPostion; i > 0; i--) {
-                                var ask = resp.ask.items[i - 1];
+                            for (let i = this.plate.maxPostion; i > 0; i--) {
+                                let ask = resp.ask.items[i - 1];
                                 ask.direction = "SELL";
                                 ask.position = i;
                                 this.plate.askRows.push(ask);
@@ -2189,15 +2191,15 @@ export default {
                                 totle = rows[0].totalAmount;
                             this.plate.askTotle = totle;
                         } else {
-                            for (var i = 14; i > resp.ask.items.length; i--) {
-                                var ask = { price: 0, amount: 0 };
+                            for (let i = 14; i > resp.ask.items.length; i--) {
+                                let ask = { price: 0, amount: 0 };
                                 ask.direction = "SELL";
                                 ask.position = i;
                                 ask.totalAmount = ask.amount;
                                 this.plate.askRows.push(ask);
                             }
-                            for (var i = resp.ask.items.length; i > 0; i--) {
-                                var ask = resp.ask.items[i - 1];
+                            for (let i = resp.ask.items.length; i > 0; i--) {
+                                let ask = resp.ask.items[i - 1];
                                 ask.direction = "SELL";
                                 ask.position = i;
                                 this.plate.askRows.push(ask);
@@ -2211,15 +2213,15 @@ export default {
                         }
                     }
                     if (resp.bid && resp.bid.items) {
-                        for (var i = 0; i < resp.bid.items.length; i++) {
+                        for (let i = 0; i < resp.bid.items.length; i++) {
                             if (i == 0)
                                 resp.bid.items[i].totalAmount = resp.bid.items[i].amount;
                             else
                                 resp.bid.items[i].totalAmount =
                                     resp.bid.items[i - 1].totalAmount + resp.bid.items[i].amount;
                         }
-                        for (var i = 0; i < resp.bid.items.length; i++) {
-                            var bid = resp.bid.items[i];
+                        for (let i = 0; i < resp.bid.items.length; i++) {
+                            let bid = resp.bid.items[i];
                             bid.direction = "BUY";
                             bid.position = i + 1;
                             this.plate.bidRows.push(bid);
@@ -2227,11 +2229,11 @@ export default {
                         }
                         if (resp.bid.items.length < this.plate.maxPostion) {
                             for (
-                                var i = resp.bid.items.length;
+                                let i = resp.bid.items.length;
                                 i < this.plate.maxPostion;
                                 i++
                             ) {
-                                var bid = { price: 0, amount: 0 };
+                                let bid = { price: 0, amount: 0 };
                                 bid.direction = "BUY";
                                 bid.position = i + 1;
                                 bid.totalAmount = 0;
@@ -2253,12 +2255,12 @@ export default {
         },
         getPlateFull() {
             //深度图
-            var params = {};
+            let params = {};
             params["symbol"] = this.currentCoin.symbol;
             this.$http
                 .post(this.host + this.api.market.platefull, params)
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     this.fullTrade = resp;
                     resp.skin = this.skin;
                     this.$refs.depthGraph.draw(resp);
@@ -2267,7 +2269,7 @@ export default {
         updatePlate(type, row) {
             //发现该方法未被使用（zhp）
             if (type == "sell") {
-                for (var i = 0; i < this.plate.askRows.length; i++) {
+                for (let i = 0; i < this.plate.askRows.length; i++) {
                     if (
                         row.price > this.plate.askRows[i].price &&
                         i != 0 &&
@@ -2287,7 +2289,7 @@ export default {
                     }
                 }
             } else if (type == "buy") {
-                for (var i = 0; i < this.plate.bidRows.length; i++) {
+                for (let i = 0; i < this.plate.bidRows.length; i++) {
                     if (row.price > this.plate.bidRows[i].price) {
                         this.plate.bidRows.splice(i, 0, row);
                         this.plate.bidRows.pop();
@@ -2297,15 +2299,15 @@ export default {
             }
         },
         getTrade() {
-            var params = {};
+            let params = {};
             params["symbol"] = this.currentCoin.symbol;
             params["size"] = 20;
             this.$http
                 .post(this.host + this.api.market.trade, params)
                 .then(response => {
                     this.trade.rows = [];
-                    var resp = response.body;
-                    for (var i = 0; i < resp.length; i++) {
+                    let resp = response.body;
+                    for (let i = 0; i < resp.length; i++) {
                         this.trade.rows.push(resp[i]);
                     }
                 });
@@ -2314,9 +2316,9 @@ export default {
             if (this.stompClient) {
                 this.stompClient.ws.close();
             }
-            var stompClient = null;
-            var that = this;
-            var socket = new SockJS(that.host + that.api.market.ws);
+            let stompClient = null;
+            let that = this;
+            let socket = new SockJS(that.host + that.api.market.ws);
             stompClient = Stomp.over(socket);
             this.stompClient = stompClient;
             stompClient.debug = false;
@@ -2332,8 +2334,8 @@ export default {
                 that.getKline();
                 //订阅价格变化消息
                 stompClient.subscribe("/topic/market/thumb", function (msg) {
-                    var resp = JSON.parse(msg.body);
-                    var coin = that.getCoin(resp.symbol);
+                    let resp = JSON.parse(msg.body);
+                    let coin = that.getCoin(resp.symbol);
                     if (coin != null) {
                         // coin.price = resp.close.toFixed(2);
                         coin.price = resp.close;
@@ -2356,9 +2358,9 @@ export default {
                 stompClient.subscribe(
                     "/topic/market/trade/" + that.currentCoin.symbol,
                     function (msg) {
-                        var resp = JSON.parse(msg.body);
+                        let resp = JSON.parse(msg.body);
                         if (resp.length > 0) {
-                            for (var i = 0; i < resp.length; i++) {
+                            for (let i = 0; i < resp.length; i++) {
                                 that.trade.rows.unshift(resp[i]);
                             }
                         }
@@ -2375,7 +2377,7 @@ export default {
                         "/" +
                         that.member.id,
                         function (msg) {
-                            var resp = JSON.parse(msg.body);
+                            let resp = JSON.parse(msg.body);
                             that.refreshAccount();
                         }
                     );
@@ -2386,7 +2388,7 @@ export default {
                         "/" +
                         that.member.id,
                         function (msg) {
-                            var resp = JSON.parse(msg.body);
+                            let resp = JSON.parse(msg.body);
                             that.refreshAccount();
                         }
                     );
@@ -2397,7 +2399,7 @@ export default {
                         "/" +
                         that.member.id,
                         function (msg) {
-                            var resp = JSON.parse(msg.body);
+                            let resp = JSON.parse(msg.body);
                             that.refreshAccount();
                         }
                     );
@@ -2407,13 +2409,13 @@ export default {
                 stompClient.subscribe(
                     "/topic/market/trade-plate/" + that.currentCoin.symbol,
                     function (msg) {
-                        var resp = JSON.parse(msg.body);
+                        let resp = JSON.parse(msg.body);
                         if (resp.direction == "SELL") {
-                            var asks = resp.items;
+                            let asks = resp.items;
                             that.plate.askRows = [];
                             let totle = 0;
-                            for (var i = that.plate.maxPostion - 1; i >= 0; i--) {
-                                var ask = {};
+                            for (let i = that.plate.maxPostion - 1; i >= 0; i--) {
+                                let ask = {};
                                 if (i < asks.length) {
                                     ask = asks[i];
                                 } else {
@@ -2424,7 +2426,7 @@ export default {
                                 ask.position = i + 1;
                                 that.plate.askRows.push(ask);
                             }
-                            for (var i = that.plate.askRows.length - 1; i >= 0; i--) {
+                            for (let i = that.plate.askRows.length - 1; i >= 0; i--) {
                                 if (
                                     i == that.plate.askRows.length - 1 ||
                                     that.plate.askRows[i].price == 0
@@ -2442,23 +2444,23 @@ export default {
                             // if (asks.length >= that.plate.maxPostion){
                             //     that.plate.askRows = [];
                             //
-                            //     for(var i=0;i<asks.length;i++){
+                            //     for(let i=0;i<asks.length;i++){
                             //       if (i == 0) asks[i].totalAmount = asks[i].amount;
                             //       else asks[i].totalAmount = asks[i-1].totalAmount + asks[i].amount;
                             //     }
                             //
-                            //     for(var i = that.plate.maxPostion; i > 0 ;i--) {
-                            //       var ask = asks[i-1];
+                            //     for(let i = that.plate.maxPostion; i > 0 ;i--) {
+                            //       let ask = asks[i-1];
                             //       ask.direction = 'SELL';
                             //       ask.position = i;
                             //       that.plate.askRows.push(ask);
                             //     }
                             // }else {
-                            //   for (var i=0;i<asks.length;i++){
+                            //   for (let i=0;i<asks.length;i++){
                             //       that.updatePlate("sell", asks[i]);
                             //   }
                             //
-                            //   for(var i=that.plate.askRows.length-1;i>=0;i--){
+                            //   for(let i=that.plate.askRows.length-1;i>=0;i--){
                             //     that.plate.askRows[i].direction = 'SELL';
                             //     that.plate.askRows[i].position = that.plate.maxPostion - i;
                             //     if (i == that.plate.askRows.length-1) that.plate.askRows[i].totalAmount = that.plate.askRows[i].amount;
@@ -2466,11 +2468,11 @@ export default {
                             //   }
                             // }
                         } else {
-                            var bids = resp.items;
+                            let bids = resp.items;
                             that.plate.bidRows = [];
                             let totle = 0;
-                            for (var i = 0; i < that.plate.maxPostion; i++) {
-                                var bid = {};
+                            for (let i = 0; i < that.plate.maxPostion; i++) {
+                                let bid = {};
                                 if (i < bids.length) {
                                     bid = bids[i];
                                 } else {
@@ -2481,7 +2483,7 @@ export default {
                                 bid.position = i + 1;
                                 that.plate.bidRows.push(bid);
                             }
-                            for (var i = 0; i < that.plate.bidRows.length; i++) {
+                            for (let i = 0; i < that.plate.bidRows.length; i++) {
                                 if (i == 0 || that.plate.bidRows[i].amount == 0) {
                                     that.plate.bidRows[i].totalAmount =
                                         that.plate.bidRows[i].amount;
@@ -2496,22 +2498,22 @@ export default {
                             // if (bids.length >= that.plate.maxPostion){
                             //     that.plate.bidRows = [];
                             //
-                            //     for(var i=0;i<bids.length;i++){
+                            //     for(let i=0;i<bids.length;i++){
                             //       if (i == 0) bids[i].totalAmount = bids[i].amount;
                             //       else bids[i].totalAmount = bids[i-1].totalAmount + bids[i].amount;
                             //     }
-                            //     for(var i=0;i < that.plate.maxPostion; i++){
-                            //         var bid = bids[i];
+                            //     for(let i=0;i < that.plate.maxPostion; i++){
+                            //         let bid = bids[i];
                             //         bid.direction = 'BUY';
                             //         bid.position = i + 1;
                             //         that.plate.bidRows.push(bid);
                             //     }
                             // }else {
-                            //     for (var i=0;i<bids.length;i++){
+                            //     for (let i=0;i<bids.length;i++){
                             //       that.updatePlate("buy", bids[i])
                             //     }
                             //
-                            //     for(var i=0;i<that.plate.bidRows.length;i++){
+                            //     for(let i=0;i<that.plate.bidRows.length;i++){
                             //       that.plate.bidRows[i].direction = 'BUY';
                             //       that.plate.bidRows[i].position = i + 1;
                             //       if (i == 0) that.plate.bidRows[i].totalAmount = that.plate.bidRows[i].amount;
@@ -2552,12 +2554,12 @@ export default {
                         symbol
                     })
                     .then(response => {
-                        var resp = response.body;
+                        let resp = response.body;
                         if (resp.code == 0) {
                             this.$Message.info(this.$t("exchange.cancel_favorite"));
                             // this.getCoin(symbol).isFavor = false;
-                            // for (var i = 0; i < this.coins.favor.length; i++) {
-                            //   var favorCoin = this.coins.favor[i];
+                            // for (let i = 0; i < this.coins.favor.length; i++) {
+                            //   let favorCoin = this.coins.favor[i];
                             //   if (favorCoin.symbol == symbol) {
                             //     this.coins.favor.splice(i, 1);
                             //     break;
@@ -2575,7 +2577,7 @@ export default {
                 this.$http
                     .post(this.host + this.api.exchange.favorAdd, { symbol })
                     .then(response => {
-                        var resp = response.body;
+                        let resp = response.body;
                         if (resp.code == 0) {
                             this.$Message.info(this.$t("exchange.do_favorite"));
                             // this.getCoin(symbol).isFavor = true;
@@ -2604,12 +2606,12 @@ export default {
                 this.$Message.info(this.$t("common.logintip"));
                 return;
             }
-            var params = {};
+            let params = {};
             params["symbol"] = row.symbol;
             this.$http
                 .post(this.host + this.api.exchange.favorAdd, params)
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     if (resp.code == 0) {
                         this.$Message.info(this.$t("exchange.do_favorite"));
                         this.getCoin(row.symbol).isFavor = true;
@@ -2626,17 +2628,17 @@ export default {
                 this.$Message.info(this.$t("common.logintip"));
                 return;
             }
-            var params = {};
+            let params = {};
             params["symbol"] = row.symbol;
             this.$http
                 .post(this.host + this.api.exchange.favorDelete, params)
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     if (resp.code == 0) {
                         this.$Message.info(this.$t("exchange.cancel_favorite"));
                         this.getCoin(row.symbol).isFavor = false;
-                        for (var i = 0; i < this.coins.favor.length; i++) {
-                            var favorCoin = this.coins.favor[i];
+                        for (let i = 0; i < this.coins.favor.length; i++) {
+                            let favorCoin = this.coins.favor[i];
                             if (favorCoin.symbol == row.symbol) {
                                 this.coins.favor.splice(i, 1);
                                 break;
@@ -2665,7 +2667,7 @@ export default {
                 });
                 return;
             }
-            var maxAmount = this.wallet.base / this.form.buy.limitPrice;
+            let maxAmount = this.wallet.base / this.form.buy.limitPrice;
             if (this.form.buy.limitAmount > maxAmount) {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2674,8 +2676,8 @@ export default {
                 });
                 return;
             }
-            var that = this;
-            var params = {};
+            let that = this;
+            let params = {};
             params["symbol"] = this.currentCoin.symbol;
             params["price"] = this.form.buy.limitPrice;
             params["amount"] = this.form.buy.limitAmount;
@@ -2685,7 +2687,7 @@ export default {
             this.$http
                 .post(this.host + "/margin-trade/order/add", params)
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     if (resp.code == 0) {
                         this.$Notice.success({
                             title: that.$t("exchange.tip"),
@@ -2719,7 +2721,7 @@ export default {
                 });
                 return;
             }
-            var maxAmount = this.wallet.base / this.form.buy.stopBuyPrice;
+            let maxAmount = this.wallet.base / this.form.buy.stopBuyPrice;
             if (this.form.buy.stopBuyAmount > maxAmount) {
                 this.$Notice.error({
                     title: this.$t("exchange.tip"),
@@ -2728,8 +2730,8 @@ export default {
                 });
                 return;
             }
-            var that = this;
-            var params = {};
+            let that = this;
+            let params = {};
             params["symbol"] = this.currentCoin.symbol;
             params["price"] = this.form.buy.stopBuyPrice;
             params["amount"] = this.form.buy.stopBuyAmount;
@@ -2740,7 +2742,7 @@ export default {
             this.$http
                 .post(this.host + '/margin-trade/order/add', params)
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     if (resp.code == 0) {
                         this.$Notice.success({
                             title: that.$t("exchange.tip"),
@@ -2774,16 +2776,16 @@ export default {
                 });
                 return;
             }
-            var params = {};
+            let params = {};
             params["symbol"] = this.currentCoin.symbol;
             params["price"] = 0;
             params["amount"] = this.form.buy.marketAmount;
             params["direction"] = "BUY";
             params["type"] = "MARKET_PRICE";
             params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
-            var that = this;
+            let that = this;
             this.$http.post(this.host + '/margin-trade/order/add', params).then(response => {
-                var resp = response.body;
+                let resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
                         title: that.$t("exchange.tip"),
@@ -2822,17 +2824,17 @@ export default {
                 });
                 return;
             }
-            var params = {};
+            let params = {};
             params["symbol"] = this.currentCoin.symbol;
             params["price"] = this.form.sell.limitPrice;
             params["amount"] = this.form.sell.limitAmount;
             params["direction"] = "SELL";
             params["type"] = "LIMIT_PRICE";
             // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
-            var that = this;
+            let that = this;
             this.$http.post(this.host + '/margin-trade/order/add', params)
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     if (resp.code == 0) {
                         this.$Notice.success({
                             title: that.$t("exchange.tip"),
@@ -2879,7 +2881,7 @@ export default {
                 });
                 return;
             }
-            var params = {};
+            let params = {};
             params["symbol"] = this.currentCoin.symbol;
             params["price"] = this.form.sell.stopBuyPrice;
             params["amount"] = this.form.sell.stopBuyAmount;
@@ -2887,11 +2889,11 @@ export default {
             params["type"] = "CHECK_FULL_STOP";
             params['triggerPrice'] = this.form.sell.stopPrice;
             // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
-            var that = this;
+            let that = this;
             this.$http
                 .post(this.host + '/margin-trade/order/add', params)
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     if (resp.code == 0) {
                         this.$Notice.success({
                             title: that.$t("exchange.tip"),
@@ -2925,18 +2927,18 @@ export default {
                 return;
             }
 
-            var params = {};
+            let params = {};
             params["symbol"] = this.currentCoin.symbol;
             params["price"] = 0;
             params["amount"] = this.form.sell.marketAmount;
             params["direction"] = "SELL";
             params["type"] = "MARKET_PRICE";
             // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
-            var that = this;
+            let that = this;
             this.$http
                 .post(this.host + '/margin-trade/order/add', params)
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     if (resp.code == 0) {
                         this.$Notice.success({
                             title: that.$t("exchange.tip"),
@@ -2966,7 +2968,7 @@ export default {
             this.$http
                 .post(this.host + "/margin-trade/lever_wallet/list", { symbol: this.currentCoin.symbol })
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     if (resp.code == 0) {
                         const list = resp.data[0].leverWalletList;
                         this.wallet.coin = list[1].balance;
@@ -2980,14 +2982,14 @@ export default {
         },
         //查询当前委托
         getCurrentOrder() {
-            var params = {};
+            let params = {};
             params["pageNum"] = 1;
             params["pageSize"] = 100;
             params["symbol"] = this.currentCoin.symbol;
             this.currentOrder.rows = [];
-            var that = this;
+            let that = this;
             this.$http.post(this.host + '/margin-trade/order/current', params).then(response => {
-                var resp = response.body;
+                let resp = response.body;
                 if (resp.content) {
                     if (resp.content.length > 0) {
                         this.currentOrder.rows = resp.content.slice(0, 3);
@@ -3011,21 +3013,21 @@ export default {
                 pageNo = pageNo - 1;
             }*/
             this.historyOrder.rows = []; //清空数据
-            var params = {};
+            let params = {};
             params["pageNum"] = 1;
             params["pageSize"] = this.historyOrder.pageSize;
             params["symbol"] = this.currentCoin.symbol;
-            var that = this;
+            let that = this;
             this.$http.post(this.host + '/margin-trade/order/history', params)
                 .then(response => {
-                    var resp = response.body;
+                    let resp = response.body;
                     let rows = [];
                     if (resp.content) {
                         if (resp.content.length > 0) {
                             this.historyOrder.total = resp.totalElements;
                             this.historyOrder.page = resp.number;
-                            for (var i = 0; i < 3; i++) {
-                                var row = resp.content[i];
+                            for (let i = 0; i < 3; i++) {
+                                let row = resp.content[i];
                                 if (row) {
                                     row.skin = that.skin;
                                     row.price =
@@ -3043,13 +3045,13 @@ export default {
         },
         // 当前委托撤销
         cancel(index) {
-            var order = this.currentOrder.rows[index];
+            let order = this.currentOrder.rows[index];
             this.$Modal.confirm({
                 content: this.$t("exchange.undotip"),
                 onOk: () => {
                     this.$http.get(this.host + '/margin-trade/order/cancel/' + order.orderId)
                         .then(response => {
-                            var resp = response.body;
+                            let resp = response.body;
                             if (resp.code == 0) {
                                 this.refreshAccount();
                             } else {
@@ -3080,7 +3082,7 @@ export default {
                 let r = /^[0-9]+\.?[0-9]{0,9}$/;　　//正数
                 let flag =r.test(val)
                 if (flag) {
-                    var re1 = new RegExp(
+                    let re1 = new RegExp(
                             "([0-9]+.[0-9]{" + this.baseCoinScale + "})[0-9]*",
                             ""
                     );
@@ -3100,7 +3102,7 @@ export default {
                             .toString()
                             .replace(re1, "$1");
 
-                    var re2 = new RegExp("([0-9]+.[0-9]{" + this.coinScale + "})[0-9]*", "");
+                    let re2 = new RegExp("([0-9]+.[0-9]{" + this.coinScale + "})[0-9]*", "");
                     this.form.buy.limitAmount = this.form.buy.limitAmount
                             .toString()
                             .replace(re2, "$1");
