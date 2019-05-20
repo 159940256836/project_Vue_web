@@ -66,7 +66,7 @@
                     <div class="symbol">
                         <div class="item">
                             <span class="coin">{{currentCoin.coin}}
-                                <small>/{{currentCoin.base}} &nbsp;&nbsp;<span style="border:1px solid rgba(53,124,225,.4); borderColor: 'rgba(53,124,225,.4); display:inline-block; width:30px; text-align:center;line-height:18px;padding-top:2px">{{LeversymbolMsg.proportion}}</span></small>
+                                <small>/{{currentCoin.base}} &nbsp;&nbsp;<span style="border:1px solid rgba(53,124,225,.4); borderColor: 'rgba(53,124,225,.4); display:inline-block; width:30px; text-align:center;line-height:18px;padding-top:2px; color:#357ce1">{{LeversymbolMsg.proportion}}</span></small>
                             </span>
                         </div>
                         <div class="item">

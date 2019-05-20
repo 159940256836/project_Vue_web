@@ -209,7 +209,7 @@
                 </div>
                 <div class="info">
                     <div class="footer-info">
-                        <div class="info-title">友情提示:</div>
+                        <div class="info-title">友情链接:</div>
                         <div class="info-img">
                             <a href="javascript:;">
                                 <img src="./assets/images/footer/1.png" alt="">
