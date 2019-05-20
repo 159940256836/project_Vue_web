@@ -66,10 +66,11 @@
                     <div class="symbol">
                         <div class="item">
                             <span class="coin">{{currentCoin.coin}}
-                                <small>/{{currentCoin.base}} &nbsp;&nbsp;{{LeversymbolMsg.proportion}}</small>
+                                <small>/{{currentCoin.base}} &nbsp;&nbsp;<span style="border:1px solid rgba(53,124,225,.4); borderColor: 'rgba(53,124,225,.4); display:inline-block; width:30px; text-align:center;line-height:18px;padding-top:2px">{{LeversymbolMsg.proportion}}</span></small>
                             </span>
                         </div>
                         <div class="item">
+                            <!-- 风险率 -->
                             <span class="text">风险率</span>
                             <span class="num">{{LeversymbolMsg.riskRate}}</span>
                         </div>
@@ -879,7 +880,23 @@ export default {
                                         }
                                     }
                                 }),
-                                h("span", params.row.coin + " " + params.row.proportion)
+                                h('div',[
+                                    h('span', params.row.coin),
+                                    h('span', {
+                                          style: {
+                                             display: 'inline-block',
+                                             width:'25px',
+                                             height:'18px',
+                                             marginLeft:'10px',
+                                             border:'1px solid rgba(53,124,225,.4)',
+                                             borderColor: 'rgba(53,124,225,.4)',
+                                             color: '#357ce1',
+                                             textAlign:'center',
+                                             paddingTop:'-2px'
+                                         }
+                                    }, params.row.proportion)
+                                ])
+                                // h("span", params.row.coin + " " + params.row.proportion)
                             ]);
                         }
                     },
@@ -1618,6 +1635,7 @@ export default {
             // this.getPlateFull(); //深度图
             this.getTrade();
             if (this.isLogin && this.member.realName) {
+                console.log('222222222222222')
                 // this.getMember(); //获取是否实名认证
                 this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
                 this.getWallet(); //账户资产信息

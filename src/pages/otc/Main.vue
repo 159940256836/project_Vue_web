@@ -111,7 +111,7 @@
           li {
             width: 25%;
             list-style-type: none;
-            min-height: 190px;
+            min-height: 200px;
             div {
               text-align: center;
             }

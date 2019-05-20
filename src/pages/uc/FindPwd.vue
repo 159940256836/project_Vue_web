@@ -47,8 +47,9 @@
 </template>
 <style scoped lang="scss">
 .login_form {
-    background: #f9f9f9 url(../../assets/images/login_bg.jpg) no-repeat center
-        center;
+    // background: #f9f9f9 url(../../assets/images/login_bg.jpg) no-repeat center
+    //     center;
+    background: #fff url('../../assets/images/login_bg.png') no-repeat center;
     height: 760px;
     position: relative;
     overflow: hidden;

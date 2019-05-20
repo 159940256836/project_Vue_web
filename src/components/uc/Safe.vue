@@ -962,7 +962,7 @@ export default {
                 if (valid) {
                     this.submit(name);
                 } else {
-                    this.$Message.error(this.$t("uc.safe.save_failure"));
+                    // this.$Message.error(this.$t("uc.safe.save_failure"));
                 }
             });
         },
