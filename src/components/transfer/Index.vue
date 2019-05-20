@@ -3,19 +3,42 @@
         <Modal v-model="modal" title="转出" :footer-hide="true" :mask-closable="false" :closable="false">
             <div>
                 <div style="margin-bottom:30px;">
-                    <Cascader :data="data" v-model="value" :render-format="formatRender" @on-change="getValue" @on-visible-change="visibleChange"></Cascader>
+                    <div style="width: 100%;line-height: 25px;text-align: right;">
+                        <span style="padding-right: 5px;">从：</span>
+                        <Cascader
+                            style="width: 90%; float: right;"
+                            :data="data"
+                            v-model="value"
+                            :render-format="formatRender"
+                            @on-change="getValue"
+                            @on-visible-change="visibleChange"
+                        >
+                        </Cascader>
+                    </div>
+
                 </div>
-                <div style="margin-bottom:30px;">
-                    <Cascader :data="toData" v-model="toValue" :render-format="formatRender"></Cascader>
+                <div style="margin-bottom:25px;line-height: 25px;text-align: right;">
+                    <span style="padding-right: 5px;">到：</span>
+                    <Cascader
+                        style="width: 90%; float: right;"
+                        :data="toData"
+                        v-model="toValue"
+                        :render-format="formatRender"
+                    >
+                    </Cascader>
                 </div>
             </div>
-            <Input v-model="num" placeholder="划转数量" style="width:100%">
+            <div style="width: 100%;line-height: 25px;">
+                <span>数量：</span>
+                <Input v-model="num" placeholder="划转数量" style="width: 90%; float: right;">
             <span slot="append">
                 <span>{{unit}}</span>
                 <span class="all" @click="turnAll">全部</span>
             </span>
-            </Input>
-            <div style="margin-top:20px;">
+                </Input>
+            </div>
+
+            <div style="margin-top:20px;padding-left: 5px;">
                 可用&nbsp;&nbsp;&nbsp;{{canUseNum}}&nbsp;&nbsp;&nbsp;{{unit}}
             </div>
             <div class="button" style="display:flex;justify-content:space-around;margin-top:20px;">
