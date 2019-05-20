@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tab">
         <Modal v-model="modal" title="转出" :footer-hide="true" :mask-closable="false" :closable="false">
             <div>
                 <div style="margin-bottom:30px;">

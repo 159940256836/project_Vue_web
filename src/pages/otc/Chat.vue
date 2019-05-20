@@ -93,16 +93,16 @@
                         </p>
                         </Col>
                         <Col span="3" class="order-info">
-                        <h5>{{msg.price}}</h5>
-                        <span>{{$t('otc.chat.transprice')}}(CNY)</span>
+                            <span>{{$t('otc.chat.transprice')}}(CNY)</span>
+                            <h5>{{msg.price}}</h5>
                         </Col>
                         <Col span="3" class="order-info">
-                        <h5>{{msg.amount}}</h5>
-                        <span>{{$t('otc.chat.transnum')}}({{msg.unit}})</span>
+                            <span>{{$t('otc.chat.transnum')}}({{msg.unit}})</span>
+                            <h5>{{msg.amount}}</h5>
                         </Col>
                         <Col span="3" class="order-info">
-                        <h5>{{msg.money}}</h5>
-                        <span>{{$t('otc.chat.transmoney')}}(CNY)</span>
+                            <span>{{$t('otc.chat.transmoney')}}(CNY)</span>
+                            <h5>{{msg.money}}</h5>
                         </Col>
                     </Row>
                     <Row class="chat-top" type="flex" justify="space-between" v-show="statusBtn!=0">

@@ -352,6 +352,19 @@ p.math_price {
     border: 0;
 }
 
+.ivu-modal {
+    width: 450px !important;
+}
+
+.ivu-modal-header .ivu-modal-header-inner {
+    color: #3399ff;
+    text-align: center;
+}
+
+.ivu-modal .ivu-modal-body .ivu-btn {
+    padding: 5px 35px;
+}
+
 .exchange .ivu-table-expanded-cell {
     background: #141724 !important;
 }
