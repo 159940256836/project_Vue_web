@@ -64,10 +64,11 @@ export default {
                 var resp = response.body;
                 if (resp.code == 0) {
                     this.$Message.success(this.$t("uc.finance.money.resetsuccess"));
-                    this.getMoney();
-                    // setTimeout(function () {
-                    //     window.location.reload();
-                    // }, 2000);
+                    // this.getMoney();
+                    setTimeout(function () {
+                        this.getMoney();
+                        // window.location.reload();
+                    }, 2000);
                 } else {
                     this.$Message.error(resp.message);
                 }
@@ -168,7 +169,7 @@ export default {
                             //   获取地址按钮;
                             actions.push(
                                 h("Button",
-                                    {   
+                                    {
                                         props: { type: "info", size: "small" },
                                         on: {
                                             click: function () {

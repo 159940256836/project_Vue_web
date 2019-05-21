@@ -709,8 +709,8 @@ export default {
     data() {
         let self = this;
         return {
-            night: require("../../assets/images/exchange/night.png"), // 黑色版本
-            day: require("../../assets/images/exchange/day.png"), // 白色版本
+            day: require("../../assets/images/exchange/night.png"), // 黑色版本
+            night: require("../../assets/images/exchange/day.png"), // 白色版本
             modal: false,
             LeversymbolMsg: {},
             btnList: [
@@ -1942,6 +1942,9 @@ export default {
                     "#a6d3a5";
                 config.overrides["mainSeriesProperties.candleStyle.downColor"] =
                     "#ffa5a6";
+                config.overrides["scalesProperties.lineColor"]= "#aaa"; // xy刻度线色值
+                        config.overrides["mainSeriesProperties.candleStyle.upColor"]= "#00b275"; // 第一根的颜色
+                config.overrides["mainSeriesProperties.candleStyle.downColor"]= "#f15057"; // 第二根的颜色
             }
             require(["@js/charting_library/charting_library.min.js"], function (tv) {
                 let widget = (window.tvWidget = new TradingView.widget(config));
@@ -2988,6 +2991,7 @@ export default {
          * 获取钱包信息
          */
         getWallet() {
+            if(this.isLogin && this.member.realName){
             this.$http
                 .post(this.host + "/margin-trade/lever_wallet/list", { symbol: this.currentCoin.symbol })
                 .then(response => {
@@ -3000,8 +3004,9 @@ export default {
                         this.wallet.base = 0;
                         this.wallet.coin = 0;
                     }
-                    // this.wallet.base = resp.data.balance || "";
                 });
+            }
+
         },
         //查询当前委托
         getCurrentOrder() {

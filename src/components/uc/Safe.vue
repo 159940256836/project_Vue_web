@@ -1,6 +1,5 @@
 <template>
     <div class="nav-rights">
-
         <div class="nav-right padding-right-clear">
             <div class="padding-right-clear padding-left-clear rightarea user account-box">
                 <div class="rightarea-con">

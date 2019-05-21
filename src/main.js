@@ -22,9 +22,14 @@ Vue.use(VueRouter);
 Vue.use(vueResource);
 Vue.use(VueI18n);
 
+<<<<<<< HEAD
+//Vue.prototype.host = "http://39.100.79.158:80"; //测试
+Vue.prototype.host = "http://www.coinmany.com"; //
+=======
 // Vue.prototype.host = "http://39.100.79.158:80"; //测试
 // Vue.prototype.host = "http://www.coinmany.com"; // 第一套
 Vue.prototype.host = "https://www.coinmany.com"; // 第二套
+>>>>>>> 0512f9f184d310a2d0235a2c530a30d30171bf3e
 Vue.prototype.api = Api;
 Vue.http.options.credentials = true;
 Vue.http.options.emulateJSON = true;
