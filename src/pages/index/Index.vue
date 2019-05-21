@@ -37,24 +37,7 @@
                 </div>
             </div>
             <div class="section" id="hot" v-if="hostSymbolList.length != 0">
-                <!--<<<<<<< HEAD
-                <div class="section-market">
-                    <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index">
-                        <p>
-                            <span class="pairs">{{item.symbol}}</span>
-                            <span class="pairs-sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">
-                                {{item.chg < 0 ? "":"+"}}{{parseFloat(item.chg * 100).toFixed(2) + '%'}}
-                            </span>
-                        </p>
-                        <p>
-                            <span class="pairs-sip sip" v-bind:class="item.chg < 0 ? 'red' : 'green'">{{item.volume}}</span>
-                            <span class="pairs-pri">{{item.closeStr - 0}}</span>
-                        </p>
-                        &lt;!&ndash;{{item.change}}
-                        <SvgLine :values="item.trend"></SvgLine>
-                    </div>
-                </div>
-                =======&ndash;&gt;-->
+
                 <!-- 首页行情图 -->
                 <section class="section-market">
                     <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index" style="float: left;">
