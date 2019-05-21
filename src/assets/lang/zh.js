@@ -803,6 +803,7 @@
             imgtip: '请上传您的收款码',
         },
         otcorder: {
+            all:'全部',
             unpaid: '未付款',
             paided: '已付款',
             finished: '已完成',
