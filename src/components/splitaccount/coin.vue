@@ -1,7 +1,7 @@
 <template>
     <div class="shaow">
         <div class="hidden-assets">
-            <span @click="aaaaa">隐藏资产为0的币种</span>
+            <span>隐藏资产为0的币种</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                 <span slot="open">开</span>
                 <span slot="close">关</span>
@@ -34,9 +34,6 @@ export default {
         this.getMoney();
     },
     methods: {
-        aaaaa(){
-        this.reload();
-        },
         closeModal(){
             this.modal = false;
         },
