@@ -66,6 +66,7 @@
                     <div class="symbol">
                         <div class="item">
                             <span class="coin">{{currentCoin.coin}}
+                                <!-- 5.20修改 -->
                                 <small>/{{currentCoin.base}} &nbsp;&nbsp;<span style="border:1px solid rgba(53,124,225,.4); borderColor: 'rgba(53,124,225,.4); display:inline-block; width:30px; text-align:center;line-height:18px;padding-top:2px; color:#357ce1">{{LeversymbolMsg.proportion}}</span></small>
                             </span>
                         </div>
@@ -883,7 +884,13 @@ export default {
                                     }
                                 }),
                                 h('div',[
-                                    h('span', params.row.coin),
+                                    h('span', {
+                                        style :{
+                                            position:'relative',
+                                            top:'-8px',
+                                        }
+                                    },
+                                     params.row.coin),
                                     h('span', {
                                           style: {
                                              display: 'inline-block',
@@ -894,7 +901,9 @@ export default {
                                              borderColor: 'rgba(53,124,225,.4)',
                                              color: '#357ce1',
                                              textAlign:'center',
-                                             paddingTop:'-2px'
+                                             paddingTop:'-2px',
+                                             position:'relative',
+                                             top:'-8px',
                                          }
                                     }, params.row.proportion)
                                 ])

@@ -754,7 +754,7 @@
             newfundpwd: '新资金密码',
             newpwdmsg1: '请输入6位以上大小写加数字新登录密码',
             newpwdmsg2: '新登录密码不一致',
-            pwdmsg1: '请输入不小于6位数字密码',
+            pwdmsg1: '请输入6位数字密码',
             pwdmsg2: '密码不一致',
             emailtip: '请输入邮箱号',
             codetip: '请输入验证码',

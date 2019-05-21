@@ -1,7 +1,7 @@
 <template>
     <div class="shaow">
         <div class="hidden-assets">
-            <span>隐藏资产为0的币种</span>
+            <span @click="aaaaa">隐藏资产为0的币种</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                 <span slot="open">开</span>
                 <span slot="close">关</span>
@@ -18,6 +18,7 @@ import transfermodal from "../transfer/Index"
 export default {
     // props: ["modal"],
     components:{transfermodal},
+    inject:['reload'],
     data() {
         return {
             modal:false,
@@ -33,6 +34,9 @@ export default {
         this.getMoney();
     },
     methods: {
+        aaaaa(){
+        this.reload();
+        },
         closeModal(){
             this.modal = false;
         },
@@ -60,14 +64,17 @@ export default {
         resetAddress(unit) {
             let params = {};
             params["unit"] = unit;
+            let that = this;
             this.$http.post(this.host + "/uc/asset/wallet/reset-address", params).then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
                     this.$Message.success(this.$t("uc.finance.money.resetsuccess"));
                     // this.getMoney();
                     setTimeout(function () {
-                        this.getMoney();
+                        that.getMoney();
                         // window.location.reload();
+                        that.reload()
+                      
                     }, 2000);
                 } else {
                     this.$Message.error(resp.message);
