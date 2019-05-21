@@ -884,7 +884,13 @@ export default {
                                     }
                                 }),
                                 h('div',[
-                                    h('span', params.row.coin),
+                                    h('span', {
+                                        style :{
+                                            position:'relative',
+                                            top:'-8px',
+                                        }
+                                    },
+                                     params.row.coin),
                                     h('span', {
                                           style: {
                                              display: 'inline-block',
@@ -895,7 +901,9 @@ export default {
                                              borderColor: 'rgba(53,124,225,.4)',
                                              color: '#357ce1',
                                              textAlign:'center',
-                                             paddingTop:'-2px'
+                                             paddingTop:'-2px',
+                                             position:'relative',
+                                             top:'-8px',
                                          }
                                     }, params.row.proportion)
                                 ])
