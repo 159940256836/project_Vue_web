@@ -696,8 +696,8 @@ export default {
     data() {
         let self = this;
         return {
-            night: require("../../assets/images/exchange/night.png"), // 黑色版本
-            day: require("../../assets/images/exchange/day.png"), // 白色版本
+            day: require("../../assets/images/exchange/night.png"), // 黑色版本
+            night: require("../../assets/images/exchange/day.png"), // 白色版本
             modal: false,
             btnList: [
                 {
@@ -1701,7 +1701,6 @@ export default {
                 this[silder] = val;
             },
             init() {
-                console.log(this.member,this.member.realName)
                 let params = this.$route.params.pathMatch;
                 if (params == undefined) {
                     this.$router.push("/exchange/" + this.defaultPath);
@@ -2005,6 +2004,9 @@ export default {
                         "#a6d3a5";
                     config.overrides["mainSeriesProperties.candleStyle.downColor"] =
                         "#ffa5a6";
+                    config.overrides["scalesProperties.lineColor"]= "#aaa"; // xy刻度线色值
+                    config.overrides["mainSeriesProperties.candleStyle.upColor"]= "#39c595"; // 第一根的颜色
+                    config.overrides["mainSeriesProperties.candleStyle.downColor"]= "#f96969"; // 第二根的颜色
                 }
                 require(["@js/charting_library/charting_library.min.js"], function (tv) {
                     let widget = (window.tvWidget = new TradingView.widget(config));
