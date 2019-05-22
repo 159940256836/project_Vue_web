@@ -19,7 +19,20 @@
                             <div class="inner-box deposit-address">
                                 <p class="describe">{{$t('uc.finance.recharge.address')}}</p>
                                 <div class="title">
-                                    <Input v-model="qrcode.value" readonly style="width: 400px"></Input>
+                                    <Input
+                                        v-model="qrcode.value"
+                                        readonly
+                                        style="width: 400px"
+                                    ></Input>
+                                    <!--<Button
+                                        v-if="buttonAdd"
+                                        class="copy-add"
+                                        @click="resetAddress"
+                                        :loading="loadingButton1"
+                                    >
+                                        {{ !loadingButton1 ? '获取充币地址' : '获取充币地址' }}
+                                        &lt;!&ndash;获取充币地址&ndash;&gt;
+                                    </Button>-->
                                     <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" id="copyBtn" class="link-copy">
                                         {{$t('uc.finance.recharge.copy')}}
                                     </a>
@@ -74,6 +87,8 @@ export default {
     },
     data() {
         return {
+            // buttonAdd: false,
+            // loadingButton1: false,
             isShowEwm: false,
             dataCount: 0,
             loading: true,
@@ -113,21 +128,53 @@ export default {
         },
         changeCoin(value) {
             const list = (this.coinList.length>0 && this.coinList.filter(ele=>ele.coin.unit == value)) || [];
+            // this.resetAddress();
+            // this.getMoney();
             if(list.length>0){
                 this.qrcode.value = list[0].address || '';
                 this.qrcode.coinName = list[0].coin.name.toLowerCase();
             }
+            // if (!this.qrcode.value) {
+            //     this.buttonAdd = true;
+            // } else {
+            //     this.buttonAdd = false;
+            // }
             // for (var i = 0; i < this.coinList.length; i++) {
             //     if (this.coinList[i].coin.unit == value) {
-                   
+
             //     }
             // }
             this.getCurrentCoinRecharge();
         },
+        // 获取充币地址
+        // resetAddress() {
+        //     if (!this.coinType) {
+        //         this.$Message.error("请选择币种");
+        //         return;
+        //     }
+        //     let params = {};
+        //     params["unit"] = this.coinType;
+        //     console.log(this.coinType);
+        //     let that = this;
+        //     this.loadingButton1 = true;
+        //     this.$http.post(this.host + "/uc/asset/wallet/reset-address", params).then(response => {
+        //         let resp = response.body;
+        //         if (resp.code == 0) {
+        //             this.$Message.success(this.$t("uc.finance.money.resetsuccess"));
+        //             this.loadingButton1 = false;
+        //             setTimeout(function () {
+        //                 that.getMoney();
+        //             }, 3000);
+        //         } else {
+        //             this.$Message.error(resp.message);
+        //             this.loadingButton1 = false;
+        //         }
+        //     });
+        // },
         getMoney() {
             //获取
             this.$http.post(this.host + this.api.uc.wallet).then(response => {
-                var resp = response.body;
+                let resp = response.body;
                 if (resp.code == 0) {
                    this.coinList =  (resp.data.length>0 && resp.data.filter(ele=>ele.coin.canRecharge ==1)) || [];
                    this.changeCoin(this.coinType);
@@ -143,18 +190,18 @@ export default {
             // this.$store.getters.isLogin && (memberId = this.$store.getters.member.id);
             const params = { unit: "", pageNo, pageSize:10, type:"0" };
             this.$http.post(this.host + "/uc/asset/transaction", params).then(response => {
-                    var resp = response.body;
-                    if (resp.code == 0) {
-                        if (resp.data) {
-                            this.allTableRecharge = resp.data.content || [];
-                            this.dataCount = resp.data.totalElements || 0;
-                            this.getCurrentCoinRecharge();
-                        }
-                        this.loading = false;
-                    } else {
-                        this.$Message.error(resp.message);
+                let resp = response.body;
+                if (resp.code == 0) {
+                    if (resp.data) {
+                        this.allTableRecharge = resp.data.content || [];
+                        this.dataCount = resp.data.totalElements || 0;
+                        this.getCurrentCoinRecharge();
                     }
-                });
+                    this.loading = false;
+                } else {
+                    this.$Message.error(resp.message);
+                }
+            });
         },
         getMember() {
             let self = this;
@@ -256,6 +303,14 @@ export default {
 
 .action-box .title .copy {
     user-select: text;
+}
+
+.action-box .title .copy-add {
+    height: 32px;
+    text-align: center;
+    font-size: 12px;
+    background: #3399ff;
+    color: #fff;
 }
 
 .action-box .title a.link-copy {
