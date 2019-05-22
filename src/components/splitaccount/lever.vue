@@ -284,7 +284,7 @@ export default {
                         style: {
                             marginRight: "8px",
                         }
-                    }, "转出");
+                    }, "划转");
                     const browAndReturn = h('Button', {
                         props: {
                             type: "primary",

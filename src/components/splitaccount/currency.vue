@@ -131,7 +131,7 @@ export default {
                         style: {
                             marginRight: "8px",
                         }
-                    }, "转出");
+                    }, "划转");
                     actions.push(btn);
                     return h("p", actions);
                 }
