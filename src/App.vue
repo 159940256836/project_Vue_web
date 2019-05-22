@@ -96,7 +96,7 @@
             </div>
         </header>
         <!--内容-->
-        <router-view></router-view>
+        <router-view v-if="isRouterAlive"></router-view>
         <!--底部-->
         <footer>
             <div class="footer" style="color:#8790a">
@@ -273,8 +273,14 @@ import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
     name: "app",
+      provide () {
+    return {
+      reload: this.reload
+    }
+  },
     data() {
         return {
+            isRouterAlive: true,
             // container_test:"container_test",
             pageView: "page-view",
             utc: null,
@@ -353,6 +359,12 @@ export default {
     },
     methods: {
         // header动画效果
+         reload () {
+      this.isRouterAlive = false
+      this.$nextTick(function () {
+        this.isRouterAlive = true
+      })
+    },
         handleScroll () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
             if (scrollTop > 0) {
