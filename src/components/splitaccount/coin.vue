@@ -73,9 +73,8 @@ export default {
                     setTimeout(function () {
                         that.getMoney();
                         // window.location.reload();
-                        that.reload()
-                      
-                    }, 2000);
+                        //that.reload();
+                    }, 3000);
                 } else {
                     this.$Message.error(resp.message);
                 }
