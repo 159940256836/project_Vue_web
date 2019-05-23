@@ -11,7 +11,7 @@
                     </Input>
                 </FormItem>
                 <FormItem prop="googleCode" v-if="openGooleCode">
-                    <Input type="text" @on-enter="handleSubmit('formInline')" v-model="formInline.googleCode" placeholder="$t('uc.login.google')">
+                    <Input type="text" @on-enter="handleSubmit('formInline')" v-model="formInline.googleCode" :placeholder="$t('uc.login.google')">
                     </Input>
                 </FormItem>
                 <p style="height:25px;">

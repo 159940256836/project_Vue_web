@@ -4,6 +4,11 @@ const c = require("./feelevel").zh; //积分说明页面
 const myAccount = require('./moneyIndexPage').zh; //个人资产
 const Ieo = require("./ieo").zh; //ieo
 const paper = require("./otcPaper").zh; //法币
+const pointPage = require("./point").zh; //积分管理
+const historyAndCu = require('./record').zh; //下单记录以及历史记录
+const ieoAdmin = require('./ieoAdmin').zh; //ieo管理
+const apiAdmin = require('./apiAdmin').zh; //ieo管理
+const coin = require("./coins").zh //币币
 module.exports = {
     openGoolePage: a,
     recommendPage: b,
@@ -11,6 +16,11 @@ module.exports = {
     myAccount: myAccount,
     Ieo: Ieo,
     paper: paper,
+    pointPage: pointPage,
+    historyAndCu: historyAndCu,
+    ieoAdmin: ieoAdmin,
+    apiAdmin: apiAdmin,
+    coin: coin,
     topInfo: {
         name: '币多网--国际数字加密资产交易平台',
     },
@@ -479,6 +489,8 @@ module.exports = {
             pointManagement: "积分管理",
             CandyGivingRecords: "糖果赠送记录",
             center: '财务中心',
+            Quantityofarrival: "到账数量",
+            currency: "币种",
             personalassets: '个人资产',
             billdetail: '资产流水',
             tradetail: '交易挖矿',
@@ -493,6 +505,7 @@ module.exports = {
                 operate: '操作',
                 charge: '充币',
                 pickup: '提币',
+
                 getaddress: '获取地址',
                 resetsuccess: '获取地址成功请稍后',
                 match: '配对',
