@@ -99,7 +99,7 @@
         <router-view v-if="isRouterAlive"></router-view>
         <!--底部-->
         <footer>
-            <div class="footer" style="color:#8790a">
+            <div class="footer">
                 <div class="footer_content">
                     <div class="footer-main">
                         <div class="footer_left">

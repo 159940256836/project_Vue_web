@@ -135,6 +135,9 @@ export default {
       this.tableOrder = [];
       let params = {};
       params["status"] = this.whichItem;
+      if(params.status==5){
+        params.status="";
+      }
       params["pageNo"] = 0;
       params["pageSize"] = this.pageSize;
       if (this.ordKeyword != "") {

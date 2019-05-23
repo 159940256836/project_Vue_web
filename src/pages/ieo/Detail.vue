@@ -12,7 +12,7 @@
                 <div>
                     <!-- <span class="type">{{status}}</span> -->
                     <!-- 5.13修改 -->
-                    <div class="type" :class="status == '进行中'? 'red':(status == '已完成' ? 'yellow' : ( status == '预热中' ? 'pink' : ''))">{{status}}</div>
+                    <div class="type" :class="status == $t('Ieo.underway')? 'red':(status == $t('Ieo.completed') ? 'yellow' : ( status == $t('Ieo.preheating') ? 'pink' : ''))">{{status}}</div>
                 </div>
             </div>
             <div class="ieoDetail">
@@ -22,34 +22,34 @@
                 <div class="detail">
                     <ul>
                         <li>
-                            <span class="span1">发售总量</span>
+                            <span class="span1">{{$t('Ieo.totalSales')}}</span>
                             <span class="span2">{{content.saleAmount|threeComma}}&nbsp;&nbsp;{{content.saleCoin}}</span>
                         </li>
                         <li>
-                            <span class="span1">预计上线时间</span>
+                            <span class="span1">{{$t('Ieo.onlineTime')}}</span>
                             <span class="span2">{{content.expectTime}}</span>
                         </li>
                         <li>
-                            <span class="span1">募集币种</span>
+                            <span class="span1">{{$t('Ieo.currency')}}</span>
                             <span class="specialColor span2">{{content.raiseCoin}}</span>
                         </li>
                         <li>
-                            <span class="span1">兑换比例</span>
+                            <span class="span1">{{$t('Ieo.ratio')}}</span>
                             <span class="span2">1{{content.raiseCoin}}={{content.ratio}}{{content.saleCoin}}</span>
                         </li>
                         <li>
-                            <span class="span1">手续费</span>
-                            <span class="specialColor span2">免手续费</span>
+                            <span class="span1">{{$t('Ieo.charge')}}</span>
+                            <span class="specialColor span2">{{$t('Ieo.fee')}}</span>
                         </li>
                         <li>
-                            <span class="span1">募集周期(UTC+8)</span>
+                            <span class="span1">{{$t('Ieo.cycle')}}(UTC+8)</span>
                             <span class="span2">{{content.startTime}}-{{content.endTime}}</span>
                         </li>
                     </ul>
                 </div>
                 <div class="progress">
                     <div class="left_circle"></div>
-                    <span>无折扣认购</span>
+                    <span>{{$t('Ieo.subscription')}}</span>
                     <div class="right_circle left_circle"></div>
                 </div>
                 <div class="time time11">
@@ -77,11 +77,11 @@
                         </Input>
                     </li>
                     <li>
-                        <Input class="pwda" type="password" v-model="password" placeholder="请输入交易密码" />
+                        <Input class="pwda" type="password" v-model="password" :placeholder="$t('Ieo.enter')" />
                     </li>
                     <li>
                         <div :class="status == '进行中'? 'red1':(status == '已完成' ? 'yellow1' : ( status == '预热中' ? 'pink1' : ''))" class="btn"><span long @click="startSale">{{text}}</span></div>
-                        <p>进行认购即为已阅读并同意<a href="">&lt&lt风险提示&gt&gt</a></p>
+                        <p>{{$t('Ieo.agree')}}<a href="">&lt&lt{{$t('Ieo.risk')}}&gt&gt</a></p>
                     </li>
                 </ul>
             </div>
@@ -89,8 +89,8 @@
         <div class="table1">
             <!-- 5.14修改 -->
             <div class="tabida">
-                <div @click="changeTab(1)" :class="tabid==1?'activee':''">售卖方式</div>
-                <div @click="changeTab(2)" :class="tabid==2?'activee':''">项目详情</div>
+                <div @click="changeTab(1)" :class="tabid==1?'activee':''">{{$t('Ieo.selling')}}</div>
+                <div @click="changeTab(2)" :class="tabid==2?'activee':''">{{$t('Ieo.project')}}</div>
             </div>
             <div class="tabida1" v-show="tabid==1">
                 <div>{{content.sellMode}}</div>
@@ -347,7 +347,7 @@ export default {
         line-height:46px;
 
         div{
-            width:102px;
+            width:122px;
             text-align:center;
         }
     }
@@ -482,7 +482,7 @@ $lineColor: rgb(71, 100, 146);
                 margin-top: 20px;
                 @extend %flex;
                 .left_circle {
-                    width: 45%;
+                    width: 39%;
                     height: 2px;
                     background: rgb(19, 31, 50);
                     position: relative;
