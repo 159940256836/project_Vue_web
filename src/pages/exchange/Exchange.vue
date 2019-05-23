@@ -42,7 +42,15 @@
                     <span @click="changePlate('buy')" class="handler handler-green" :class="{active:selectedPlate=='buy'}"></span>
                     <span @click="changePlate('sell')" class="handler handler-red" :class="{active:selectedPlate=='sell'}"></span>
                 </div>
-                <Table v-show="selectedPlate!='buy'" @on-current-change="buyPlate" highlight-row ref="currentRowTable" class="sell_table" :columns="plate.columns" :data="plate.askRows"></Table>
+                <Table
+                    v-show="selectedPlate!='buy'"
+                    @on-current-change="buyPlate"
+                    highlight-row
+                    ref="currentRowTable"
+                    class="sell_table"
+                    :columns="plate.columns"
+                    :data="plate.askRows"
+                ></Table>
                 <div class="plate-nowprice">
                     <span class="price" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.price | toFixed(baseCoinScale)}}</span>
                     <span v-if="currentCoin.change>0" class="buy">↑</span>
@@ -369,8 +377,18 @@
                 <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/entrust/history">查看更多>></router-link>
             </div>
             <div class="table">
-                <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows"></Table>
-                <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows"></Table>
+                <Table
+                    v-if="selectedOrder==='current'"
+                    :columns="currentOrder.columns"
+                    :data="currentOrder.rows"
+                    :loading="currentLoading"
+                ></Table>
+                <Table
+                    v-else
+                    :columns="historyOrder.columns"
+                    :data="historyOrder.rows"
+                    :loading="historyLoading"
+                ></Table>
             </div>
         </div>
     </div>
@@ -755,6 +773,8 @@ export default {
     data() {
         let self = this;
         return {
+            currentLoading: true,
+            historyLoading: true,
             day: require("../../assets/images/exchange/night.png"), // 黑色版本
             night: require("../../assets/images/exchange/day.png"), // 白色版本
             loadingButton1: false, // 接口请求loading
@@ -3169,6 +3189,7 @@ export default {
                 params["symbol"] = this.currentCoin.symbol;
                 this.currentOrder.rows = [];
                 let that = this;
+                this.currentLoading = true;
                 this.$http
                     .post(this.host + this.api.exchange.current, params)
                     .then(response => {
@@ -3183,6 +3204,7 @@ export default {
                                         : row.price;
                             });
                         }
+                        this.currentLoading = false;
                     });
             },
             getHistoryOrder(pageNo) {
@@ -3198,6 +3220,7 @@ export default {
                 params["pageSize"] = this.historyOrder.pageSize;
                 params["symbol"] = this.currentCoin.symbol;
                 let that = this;
+                this.historyLoading = true;
                 this.$http.post(this.host + this.api.exchange.history, params).then(response => {
                     let resp = response.body;
                     let rows = [];
@@ -3219,6 +3242,7 @@ export default {
                             }
                             this.historyOrder.rows = rows;
                         }
+                        this.historyLoading = false;
                     }
                     });
                 },
@@ -3243,11 +3267,13 @@ export default {
                     }
                 });
             },
-            refreshAccount: function () {
+
+            refreshAccount:function () {
                 this.getCurrentOrder();
                 this.getHistoryOrder();
                 this.getWallet();
             },
+
             timeFormat: function (tick) {
                 return moment(tick).format("HH:mm:ss");
             },
