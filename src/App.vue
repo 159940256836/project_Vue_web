@@ -17,17 +17,17 @@
                         <!--<router-link to="/">{{$t("header.index")}}</router-link>-->
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
                         <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
-                        <router-link to="/leverindex">杠杆交易</router-link>
-                        <router-link to="/Ieo">上币优选</router-link>
+                         <router-link to="/leverindex">{{$t("header.lever")}}</router-link>
+                          <router-link to="/Ieo">{{$t('header.asset')}}</router-link>
                         <!-- <router-link to="/help">帮助</router-link> -->
-                        <router-link to="/helpList">帮助</router-link>
+                        <router-link to="/helpList">{{$t('header.help')}}</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
 
 
                     </div>
                     <div class="nav-header">
                         <!--中英文切换-->
-                        <!--<div class="changelanguage">
+                        <div class="changelanguage">
                             <Dropdown @on-click="changelanguage">
                                 <a href="javascript:void(0)" style="font-size:14px;color:#fff;">
                                     {{languageValue}}
@@ -38,13 +38,13 @@
                                     <DropdownItem v-else name="cn">简体中文</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
-                        </div>-->
+                        </div>
                         <!-- 登录 -->
                         <!--:style="isLogin?'width:12%':'width:6%'"-->
                         <div class="isLoginWrapper">
                             <div class="login_register isLogin" v-if="isLogin" >
                                 <div class="mymsg">
-                                    <router-link to="/uc/safe">个人中心</router-link>
+                                    <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
                                 </div>
                                 <Dropdown>
                                     <a href="javascript:void(0)">

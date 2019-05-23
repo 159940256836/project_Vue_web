@@ -1,7 +1,7 @@
 <template>
     <div class="shaow" id="lever">
         <div class="hidden-assets">
-            <span>隐藏资产为0的币种:</span>
+            <span>{{$t('myAccount._display')}}:</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                 <span slot="open">开</span>
                 <span slot="close">关</span>
@@ -284,7 +284,7 @@ export default {
                         style: {
                             marginRight: "8px",
                         }
-                    }, "划转");
+                    }, self.$t("myAccount._rollout"));
                     const browAndReturn = h('Button', {
                         props: {
                             type: "primary",

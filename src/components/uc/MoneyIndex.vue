@@ -4,9 +4,9 @@
       <div class="bill_box rightarea padding-right-clear">
         <div class="bill_box rightarea padding-right-clear">
           <Tabs v-model="splitcomponentContent" @on-click="changeTab">
-            <TabPane label="币币账户" name="COIN"></TabPane>
-            <TabPane label="法币账户" name="CURRENCY"></TabPane>
-            <TabPane label="杠杆账户" name="LEVER"></TabPane>
+            <TabPane :label="$t('myAccount._BitcoinAccount')" name="COIN"></TabPane>
+            <TabPane :label="$t('myAccount._legaTenderAccount')" name="CURRENCY"></TabPane>
+            <TabPane :label="$t('myAccount._LeveragedAccounts')" name="LEVER"></TabPane>
           </Tabs>
           <!-- <keep-alive> -->
           <component :is="splitcomponent"></component>
