@@ -4,27 +4,27 @@
             <ul>
                 <li class="myLevel">{{mySelf.gradeCode}}</li>
                 <li>
-                    <p>币币手续费</p>
+                    <p>{{$t("leverDescPage._feeGread")}}</p>
                     <p>{{mySelf.exchangeFeeRate}}</p>
                 </li>
                 <li>
-                    <p>币币手续费</p>
+                    <p>{{$t("leverDescPage._legalServiceCharge")}}</p>
                     <p>{{mySelf.exchangeFeeRate}}</p>
                 </li>
                 <li>
-                    <p>币币手续费</p>
+                    <p>{{$t("leverDescPage._leverServiveCharge")}}</p>
                     <p>{{mySelf.exchangeFeeRate}}</p>
                 </li>
                 <li>
-                    每日提现额度（USDT）：{{mySelf.withdrawCoinAmount}}
+                    {{$t("leverDescPage._dayLimit")}}（USDT）：{{mySelf.withdrawCoinAmount}}
                 </li>
                 <li>
-                    每日提币笔数：{{mySelf.dayWithdrawCount}}
+                    {{$t("leverDescPage._daynumLimit")}}:{{mySelf.dayWithdrawCount}}
                 </li>
             </ul>
         </div>
         <div class="top">
-            <h4>等级说明</h4>
+            <h4>{{$t("leverDescPage._gradDes")}}</h4>
             <Table :columns="columns" :data="allSelf"></Table>
         </div>
     </div>
@@ -32,30 +32,7 @@
 <script>
 export default {
     data() {
-        const columns = [{
-            title: "等级",
-            key: "gradeCode"
-        },
-        {
-            title: "币币手续费",
-            key: "exchangeFeeRate"
-        }, {
-            title: "法币手续费",
-            key: "exchangeFeeRate"
-        }, {
-            title: "杠杆交易手续费",
-            key: "exchangeFeeRate"
-        }, {
-            title: "每日提现额度（USDT）",
-            key: "gradeBound",
-            width:200
-        }, {
-            title: "每日提币笔数",
-            key: "dayWithdrawCount"
-        }
-        ]
         return {
-            columns,
             mySelf: {},
             allSelf: []
         }
@@ -83,6 +60,19 @@ export default {
                 }
             })
         }
+    },
+    computed: {
+        columns() {
+            const arr = [];
+            arr.push({title: this.$t('leverDescPage._grade'),key: "gradeCode"});
+            arr.push({title: this.$t('leverDescPage._BitcoinServiceCharge'),key: "gradeCode"});
+            arr.push({title: this.$t('leverDescPage._legalServiceCharge'),key: "gradeCode"});
+            arr.push({title: this.$t('leverDescPage._leverServiveCharge'),key: "gradeCode"});
+            arr.push({title: this.$t('leverDescPage._dayLimit')+"（USDT）",key: "gradeCode"});
+            arr.push({title: this.$t('leverDescPage._daynumLimit'),key: "gradeCode"});
+            return arr;
+        }
+
     }
 }
 </script>
@@ -107,10 +97,10 @@ $color: #39f;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size:20px;
+            font-size: 20px;
         }
     }
-    h4{
+    h4 {
         font-size: 20px;
         line-height: 3;
     }

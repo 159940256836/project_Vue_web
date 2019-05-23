@@ -2,19 +2,19 @@
     <div class="nav-rights">
         <div class="nav-right col-xs-12 col-md-10 padding-right-clear">
             <div class="sharelink">
-                <p class="c1">推荐返佣</p>
-                <p class="c2">推荐好友来币多网注册交易，赚取佣金。</p>
+                <p class="c1">{{$t('recommendPage._commissionRecommended')}}</p>
+                <p class="c2">{{$t('recommendPage._recommendMoney')}}</p>
                 <div class="copyAndshare">
                     <div class="leftwrapper">
                         <div>
-                            <span class="abstract">我的推荐码：</span>
+                            <span class="abstract">{{$t('recommendPage._recommendCode')}}</span>
                             <span class="code">{{qrcode.code}}</span>
                             <a v-clipboard:copy="qrcode.code" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" class="link-copy">
                                 <img src="../../assets/images/copycode.png" alt="">
                             </a>
                         </div>
                         <div>
-                            <span class="abstract">我的推荐链接：</span>
+                            <span class="abstract">{{$t('recommendPage._recommendLink')}}</span>
                             <span class="code">{{qrcode.value}}</span>
                             <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" class="link-copy">
                                 <img src="../../assets/images/copycode.png" alt="">
@@ -33,14 +33,14 @@
                 <div class="message" v-if="this.changeActive==0">
                     <Table stripe :columns="tablePromoteFriends" :data="dataPromoteFriends.content||[]" :loading="loading" :disabled-hover="true"></Table>
                     <div class="page-wrap">
-                        <span>共{{dataPromoteFriends.totalElements}}条</span>
+                        <!-- <span>{{dataPromoteFriends.totalElements}}</span> -->
                         <Page :current="currentPage" :total="parseInt(dataPromoteFriends.totalElements)" @on-change="promoteFriendsPageChange"></Page>
                     </div>
                 </div>
                 <div class="message" v-else-if="this.changeActive==1">
                     <Table stripe :columns="tablePromoteMoney" :data="dataPromoteMoney||[]" :loading="loading" :disabled-hover="true"></Table>
                     <div class="page-wrap">
-                        <span>共{{dataPromoteMoney.totalElements}}条</span>
+                        <!-- <span>{{dataPromoteMoney.totalElements}}</span> -->
                         <Page :current="currentPage" :total="parseInt(dataPromoteMoney.totalElements)"  @on-change="promoteMoneyPageChange"></Page>
                     </div>
                 </div>
@@ -53,9 +53,11 @@ const getParamFun = (obj) => (pageNum) => Object.assign(obj, pageNum);
 const getParams = getParamFun({ pageSize: 10, type: "", createStartTime: "", createEndTime: '' });
 // 积分类型 PROMOTION_GIVING  LEGAL_RECHARGE_GIVING  COIN_RECHARGE_GIVING("")
 const map = new Map([[0,'推广'],[1,'法币充值赠送'],[2,'币币充值赠送']]);
+const mapEn = new Map([[0,'recommend'],[1,'Presentation of French Currency'],[2,'Currency recharge gift']]);
 export default {
     components: {},
     data() {
+        const m = this.$store.getters.lang == 'English' ?mapEn:map;
         return {
             buttonLists: [
                 {
@@ -99,7 +101,8 @@ export default {
                 {
                     title: this.$t("uc.extension.type"),
                     render:(h,params)=>{
-                        return h("div",{},map.get(params.row.type))
+                        
+                        return h("div",{},m.get(params.row.type))
                     }
                 },
                 {

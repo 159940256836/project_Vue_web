@@ -3,34 +3,34 @@
         <div class="wrapper">
             <div class="qrclass">
                 <img src="../../assets/images/goole_Android.png" alt="">
-                <div>android谷歌验证器下载</div>
+                <div>{{$t('openGoolePage._downloadAndroid')}}</div>
             </div>
             <div class="qrclass">
                 <img src="../../assets/images/goole_IOS.png" alt="">
-                <div>ios谷歌验证器下载</div>
+                <div>{{$t('openGoolePage._downloadIos')}}</div>
             </div>
             <div class="qrflex">
                   <div id="qrcode"></div>
             <div class="abstract">
-                <p>秘钥用于找回谷歌验证器请妥善保存</p>
+                <p>{{$t('openGoolePage._googleVerifyabs')}}</p>
                 <p>
                     <span>{{data.secret}}</span>
-                    <span v-clipboard:copy="data.secret" v-clipboard:success="onCopy" v-clipboard:error="onError" class="blue">复制</span>
+                    <span v-clipboard:copy="data.secret" v-clipboard:success="onCopy" v-clipboard:error="onError" class="blue">{{$t('openGoolePage._copy')}}</span>
                 </p>
             </div>
             </div>
         </div>
         <ul>
-            <li>①在手机谷歌验证器APP右上角点击加号，扫描网页上的二维码或输入网页提供的密钥</li>
-            <li>②在谷歌验证器上绑定新的谷歌密钥，在网页输入新的谷歌验证吗</li>
-            <li>③然后依次验证币多账号绑定的手机短信验证码、邮箱验证码、原有谷歌验证码，完成谷歌验证码更换</li>
+            <li>{{$t('openGoolePage._abs1')}}</li>
+            <li>{{$t('openGoolePage._abs2')}}</li>
+            <li>{{$t('openGoolePage._abs3')}}</li>
         </ul>
         <Form :model="formCode" label-position="top" :rules="ruleInline" ref="formCode" class="form">
-            <FormItem label="谷歌验证码" prop="code">
+            <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="code">
                 <Input v-model="formCode.code"></Input>
             </FormItem>
             <FormItem>
-                <Button type="primary" style="width:100%;" @click="sure('formCode')">确定</Button>
+                <Button type="primary" style="width:100%;" @click="sure('formCode')">{{$t('openGoolePage._sure')}}</Button>
             </FormItem>
         </Form>
 
@@ -52,7 +52,7 @@ export default {
                 code: ""
             },
             ruleInline: {
-                code: [{ required: true, message: '必填项', trigger: 'blur' }]
+                code: [{ required: true, message: this.$t('openGoolePage._mustFill'), trigger: 'blur' }]
             }
         }
     },
@@ -87,20 +87,20 @@ export default {
                         resolve(resp.data)
                     })
                 } else {
-                    this.$Notice.error("获取谷歌认证器失败");
+                    this.$Notice.error(resp.message);
                 }
             })
         },
         onCopy(e) {
             this.$Notice.success({
                 title: this.$t("common.tip"),
-                desc: "复制成功"
+                desc: "copy success"
             })
         },
         onError() {
             this.$Notice.error({
                 title: this.$t("common.tip"),
-                desc: "复制失败"
+                desc: "copy fail"
             })
         },
         sure(name) {
@@ -112,7 +112,7 @@ export default {
                 } else {
                     this.$Notice.erroe({
                         title: this.$t("common.tip"),
-                        desc: '谷歌验证码为必填项'
+                        desc: this.$t("openGoolePage._googleCodeRequire"),
                     })
                 }
             })
@@ -132,7 +132,7 @@ export default {
                 if (resp.code == 0) {
                     this.$Notice.success({
                         title: this.$t("common.tip"),
-                        desc: "谷歌验证成功"
+                        desc: resp.message
                     });
                     setTimeout(() => {
                         this.$router.push('/uc/safe')
