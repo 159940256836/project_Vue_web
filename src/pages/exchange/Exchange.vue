@@ -217,7 +217,7 @@
                                     <b>{{wallet.coin|toFloor(coinScale)}}</b>
                                     <span>{{currentCoin.coin}}</span>
                                     <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#39f;" @click="transFerFun">划转</span>
+                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">划转</span>
                                     <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                                     <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
@@ -2836,7 +2836,7 @@ export default {
                 params["amount"] = this.form.buy.limitAmount;
                 params["direction"] = "BUY";
                 params["type"] = "LIMIT_PRICE";
-                params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 this.loadingButton1 = true;
                 this.$http
                     .post(this.host + this.api.exchange.orderAdd, params)
@@ -2882,11 +2882,10 @@ export default {
                 params["price"] = this.form.sell.limitPrice;
                 //params["amount"] = this.form.sell.limitAmount;
                 params["amount"] = this.form.buy.marketAmount;
-                params["direction"] = "SELL";
-                params["type"] = "LIMIT_PRICE";
+                params["direction"] = "BUY";
+                params["type"] = "MARKET_PRICE";
                 console.log(this.form.buy.marketAmount)
-
-                params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 let that = this;
                 this.loadingButton2 = true;
                 this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {
@@ -2942,7 +2941,7 @@ export default {
                 params["direction"] = "BUY";
                 params["type"] = "CHECK_FULL_STOP";
                 params['triggerPrice'] = this.form.buy.stopPrice;
-                params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 this.loadingButton3 = true;
                 this.$http
                     .post(this.host + this.api.exchange.orderAdd, params)
@@ -3005,7 +3004,7 @@ export default {
                 params["amount"] = this.form.sell.limitAmount;
                 params["direction"] = "SELL";
                 params["type"] = "LIMIT_PRICE";
-                params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 let that = this;
                 this.loadingButton4 = true;
                 this.$http
@@ -3054,7 +3053,7 @@ export default {
                 params["amount"] = this.form.sell.marketAmount;
                 params["direction"] = "SELL";
                 params["type"] = "MARKET_PRICE";
-                params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 let that = this;
                 this.loadingButton5 = true;
                 this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {
@@ -3114,7 +3113,7 @@ export default {
                 params["direction"] = "SELL";
                 params["type"] = "CHECK_FULL_STOP";
                 params['triggerPrice'] = this.form.sell.stopPrice;
-                params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 let that = this;
                 this.loadingButton6 = true;
                 this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {

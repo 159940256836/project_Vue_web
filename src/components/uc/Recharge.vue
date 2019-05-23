@@ -24,15 +24,15 @@
                                         readonly
                                         style="width: 400px"
                                     ></Input>
-                                    <!--<Button
+                                    <Button
                                         v-if="buttonAdd"
                                         class="copy-add"
                                         @click="resetAddress"
                                         :loading="loadingButton1"
                                     >
                                         {{ !loadingButton1 ? '获取充币地址' : '获取充币地址' }}
-                                        &lt;!&ndash;获取充币地址&ndash;&gt;
-                                    </Button>-->
+                                        <!--获取充币地址-->
+                                    </Button>
                                     <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" id="copyBtn" class="link-copy">
                                         {{$t('uc.finance.recharge.copy')}}
                                     </a>
@@ -87,8 +87,8 @@ export default {
     },
     data() {
         return {
-            // buttonAdd: false,
-            // loadingButton1: false,
+            buttonAdd: false,
+            loadingButton1: false,
             isShowEwm: false,
             dataCount: 0,
             loading: true,
@@ -134,11 +134,11 @@ export default {
                 this.qrcode.value = list[0].address || '';
                 this.qrcode.coinName = list[0].coin.name.toLowerCase();
             }
-            // if (!this.qrcode.value) {
-            //     this.buttonAdd = true;
-            // } else {
-            //     this.buttonAdd = false;
-            // }
+            if (!this.qrcode.value) {
+                this.buttonAdd = true;
+            } else {
+                this.buttonAdd = false;
+            }
             // for (var i = 0; i < this.coinList.length; i++) {
             //     if (this.coinList[i].coin.unit == value) {
 
@@ -147,30 +147,30 @@ export default {
             this.getCurrentCoinRecharge();
         },
         // 获取充币地址
-        // resetAddress() {
-        //     if (!this.coinType) {
-        //         this.$Message.error("请选择币种");
-        //         return;
-        //     }
-        //     let params = {};
-        //     params["unit"] = this.coinType;
-        //     console.log(this.coinType);
-        //     let that = this;
-        //     this.loadingButton1 = true;
-        //     this.$http.post(this.host + "/uc/asset/wallet/reset-address", params).then(response => {
-        //         let resp = response.body;
-        //         if (resp.code == 0) {
-        //             this.$Message.success(this.$t("uc.finance.money.resetsuccess"));
-        //             this.loadingButton1 = false;
-        //             setTimeout(function () {
-        //                 that.getMoney();
-        //             }, 3000);
-        //         } else {
-        //             this.$Message.error(resp.message);
-        //             this.loadingButton1 = false;
-        //         }
-        //     });
-        // },
+        resetAddress() {
+            if (!this.coinType) {
+                this.$Message.error("请选择币种");
+                return;
+            }
+            let params = {};
+            params["unit"] = this.coinType;
+            console.log(this.coinType);
+            let that = this;
+            this.loadingButton1 = true;
+            this.$http.post(this.host + "/uc/asset/wallet/reset-address", params).then(response => {
+                let resp = response.body;
+                if (resp.code == 0) {
+                    this.$Message.success(this.$t("uc.finance.money.resetsuccess"));
+                    this.loadingButton1 = false;
+                    setTimeout(function () {
+                        that.getMoney();
+                    }, 3000);
+                } else {
+                    this.$Message.error(resp.message);
+                    this.loadingButton1 = false;
+                }
+            });
+        },
         getMoney() {
             //获取
             this.$http.post(this.host + this.api.uc.wallet).then(response => {

@@ -34,6 +34,10 @@
                     <Input type="password" v-model="formInline.password" :placeholder="$t('uc.regist.pwd')">
                     </Input>
                 </FormItem>
+                <FormItem prop="repassword">
+                    <Input type="password" v-model="formInline.repassword" :placeholder="$t('uc.regist.confrimpwd')">
+                    </Input>
+                </FormItem>
                 <FormItem prop="agentcode">
                     <Input type="text" v-model="formInline.agentcode" :placeholder="$t('uc.regist.agentcode')">
                     </Input>
@@ -165,7 +169,7 @@ export default {
     data() {
         const validateUser = (rule, value, callback) => {
             if (this.changeActive == 0) {
-                var reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+                let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
                 if (value == "") {
                     callback(new Error(this.$t("uc.regist.teltip")));
                 } else if (!reg.test(this.formInline.user)) {
@@ -174,7 +178,7 @@ export default {
                     callback();
                 }
             } else {
-                var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+                let reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
                 reg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
                 if (value == "") {
                     callback(new Error(this.$t("uc.regist.emailtip")));
@@ -276,6 +280,20 @@ export default {
                         trigger: "blur"
                     }
                 ],
+                // confirmPwd: [
+                //     {
+                //         required: true,
+                //         message: this.$t("uc.regist.pwdtip"),
+                //         trigger: "blur"
+                //     },
+                //     {
+                //         type: "string",
+                //         min: 6,
+                //         // message: this.$t("uc.regist.pwdmsg"),
+                //         message: '两次密码不一致请重新输入',
+                //         trigger: "blur"
+                //     }
+                // ],
                 repassword: [{ validator: validateRepassword, trigger: "blur" }],
             },
             key: "",
@@ -327,7 +345,7 @@ export default {
         },
         initGtCaptcha() {
             // 直接生成一个验证码对象
-            var captcha1 = new TencentCaptcha("2038419167", (res) => {
+            let captcha1 = new TencentCaptcha("2038419167", (res) => {
                 res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr);
                 (this.changeActive == 0) && this.success();
                 this.changeActive == 1 && this.emailSuccess();
@@ -335,7 +353,7 @@ export default {
             captcha1.show(); // 显示验证码
         },
         onAreaChange(value) {
-            for (var i = 0; i < this.areas.length; i++) {
+            for (let i = 0; i < this.areas.length; i++) {
                 if (this.areas[i].zhName == value) {
                     this.formInline.areaCode = this.areas[i].areaCode;
                 }
@@ -343,7 +361,7 @@ export default {
         },
         getAreas() {
             this.$http.post(this.host + this.api.common.area).then(response => {
-                var resp = response.body;
+                let resp = response.body;
                 this.areas = resp.data;
                 console.log(this.areas);
                 if(this.areas!=null){
@@ -372,7 +390,7 @@ export default {
         },
         emailSuccess() {//邮箱注册腾讯防水验证成功
             const forminline = this.formInline;
-            var params = {
+            let params = {
                 ticket: this.ticket,
                 randStr: this.randStr,
                 email: forminline.user,
@@ -383,7 +401,7 @@ export default {
                 superPartner: ""
             };
             this.$http.post(this.host + '/uc/register/email', params).then(response => {
-                var resp = response.body;
+                let resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
                         title: this.$t('common.tip'),
@@ -433,7 +451,7 @@ export default {
             }, 1000);
         },
         sendCode() {
-            var mobilePhone = this.formInline.user;
+            let mobilePhone = this.formInline.user;
             let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
             if (mobilePhone == "" || !reg.test(mobilePhone)) {
                 this.$Notice.error({
@@ -446,12 +464,12 @@ export default {
             }
         },
         success() {
-            var params = {};
+            let params = {};
             params["phone"] = this.formInline.user;
             params["country"] = this.formInline.country;
-            var reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+            let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
             reg.test(params["phone"]) && this.$http.post(this.host + "/uc/mobile/code", params).then(response => {
-                var resp = response.body;
+                let resp = response.body;
                 resp.code == 0 && this.$Notice.success({ title: this.$t("common.tip"), desc: resp.message });
                 resp.code == 0 && this.settime();
                 resp.code != 0 && this.$Notice.error({ title: this.$t("common.tip"), desc: resp.message });
@@ -459,7 +477,7 @@ export default {
             !reg.test(params["phone"]) && this.$Notice.error({ title: this.$t("common.tip"), desc: this.$t("uc.finance.withdraw.telerr") });
         },
         phoneRegister() {//手机注册
-            var params = {};
+            let params = {};
             params["phone"] = this.formInline.user;
             params["username"] = this.formInline.username;
             params["password"] = this.formInline.password;
@@ -470,7 +488,7 @@ export default {
             params["ticket"] = this.ticket;
             params["randStr"] = this.randStr;
             this.$http.post(this.host + "/uc/register/phone", params).then(response => {
-                var resp = response.body;
+                let resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
                         title: this.$t("common.tip"),
