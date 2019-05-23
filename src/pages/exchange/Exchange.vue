@@ -264,7 +264,7 @@
                                         >
                                             <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
                                             <span>
-                                                {{ !loadingButton4 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.buyin")}}
+                                                {{ !loadingButton4 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
                                             </span>
                                         </Button>
                                     </Form>
@@ -306,7 +306,7 @@
                                         >
                                             <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
                                             <span>
-                                                {{ !loadingButton6 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.buyin")}}
+                                                {{ !loadingButton6 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
                                             </span>
                                         </Button>
                                     </Form>
@@ -339,7 +339,7 @@
                                         >
                                             <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
                                             <span>
-                                                {{ !loadingButton5 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.buyin")}}
+                                                {{ !loadingButton5 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
                                             </span>
                                         </Button>
                                     </Form>
