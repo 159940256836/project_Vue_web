@@ -389,8 +389,18 @@
                 <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/level/history">{{$t('coin.view')}}>></router-link>
             </div>
             <div class="table">
-                <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows"></Table>
-                <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows"></Table>
+                <Table
+                    v-if="selectedOrder==='current'"
+                    :columns="currentOrder.columns"
+                    :data="currentOrder.rows"
+                    :loading="currentLoading"
+                ></Table>
+                <Table
+                    v-else
+                    :columns="historyOrder.columns"
+                    :data="historyOrder.rows"
+                    :loading="historyLoading"
+                ></Table>
             </div>
         </div>
     </div>
@@ -775,6 +785,8 @@ export default {
     data() {
         let self = this;
         return {
+            currentLoading: true,
+            historyLoading: true,
             day: require("../../assets/images/exchange/night.png"), // 黑色版本
             night: require("../../assets/images/exchange/day.png"), // 白色版本
             loadingButton1: false, // 接口请求loading
@@ -1720,7 +1732,6 @@ export default {
             // this.getPlateFull(); //深度图
             this.getTrade();
             if (this.isLogin && this.member.realName) {
-                console.log('222222222222222')
                 // this.getMember(); //获取是否实名认证
                 this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
                 this.getWallet(); //账户资产信息
@@ -2837,11 +2848,11 @@ export default {
             }
             let params = {};
             params["symbol"] = this.currentCoin.symbol;
-            params["price"] = 0;
+            params["price"] = this.form.sell.limitPrice;
             params["amount"] = this.form.buy.marketAmount;
             params["direction"] = "BUY";
             params["type"] = "MARKET_PRICE";
-            params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+            // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             let that = this;
             this.loadingButton2 = true;
             this.$http.post(this.host + '/margin-trade/order/add', params).then(response => {
@@ -2895,7 +2906,7 @@ export default {
             params["direction"] = "BUY";
             params["type"] = "CHECK_FULL_STOP";
             params['triggerPrice'] = this.form.buy.stopPrice;
-            params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+            // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             this.loadingButton3 = true;
             this.$http
                 .post(this.host + '/margin-trade/order/add', params)
@@ -3122,6 +3133,7 @@ export default {
             params["symbol"] = this.currentCoin.symbol;
             this.currentOrder.rows = [];
             let that = this;
+            this.currentLoading = true;
             this.$http.post(this.host + '/margin-trade/order/current', params).then(response => {
                 let resp = response.body;
                 if (resp.content) {
@@ -3136,7 +3148,7 @@ export default {
                         });
                     }
                 }
-
+                this.currentLoading = false;
             });
         },
         //查询历史委托
@@ -3152,11 +3164,12 @@ export default {
             params["pageSize"] = this.historyOrder.pageSize;
             params["symbol"] = this.currentCoin.symbol;
             let that = this;
+            this.historyLoading = true;
             this.$http.post(this.host + '/margin-trade/order/history', params)
                 .then(response => {
                     let resp = response.body;
                     let rows = [];
-                    if (resp.content) {
+                    if (resp.content!=undefined) {
                         if (resp.content.length > 0) {
                             this.historyOrder.total = resp.totalElements;
                             this.historyOrder.page = resp.number;
@@ -3174,6 +3187,7 @@ export default {
                             }
                             this.historyOrder.rows = rows;
                         }
+                        this.historyLoading = false;
                     }
                 });
         },

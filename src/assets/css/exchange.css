@@ -861,3 +861,9 @@ iframe {
 .exchange.day .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd .percentdiv {
     opacity: .1;
 }
+.ivu-table-wrapper > .ivu-spin-fix {
+    border-color: rgba(255, 255, 255, .05);
+}
+.ivu-spin-fix {
+    background: rgba(255, 255, 255, .05);
+}

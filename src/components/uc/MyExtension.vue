@@ -132,7 +132,7 @@ export default {
             this.changeActive = index;
         },
         qrcodeM() {
-            var promotionCode = this.user.promotionCode;
+            let promotionCode = this.user.promotionCode;
             this.qrcode.value = this.host + "/#/register?agent=" + promotionCode;
             this.qrcode.code = promotionCode;
         },
