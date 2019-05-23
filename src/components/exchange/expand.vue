@@ -22,7 +22,7 @@
                 <span class="expand-key">{{$t('exchange.expand.amount')}} </span>
             </Col>
             <Col span="4">
-              <span class="expand-key">成交额</span>
+              <span class="expand-key">{{$t('historyAndCu.turnoverAmount')}}</span>
             </Col>
             <Col span="4">
                 <span class="expand-key">{{$t('exchange.expand.fee')}}</span>

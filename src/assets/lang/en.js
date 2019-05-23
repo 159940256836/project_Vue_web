@@ -4,6 +4,10 @@ const c = require("./feelevel").en; //积分说明页面
 const myAccount = require('./moneyIndexPage').en; //个人资产
 const Ieo = require("./ieo").en; //ieo
 const paper = require("./otcPaper").en; //法币
+const pointPage = require("./point").en; //积分管理
+const historyAndCu = require('./record').en; //交易记录
+const ieoAdmin = require('./ieoAdmin').en; //ieo管理
+const apiAdmin = require('./apiAdmin').en; //ieo管理
 module.exports = {
     openGoolePage: a,
     recommendPage: b,
@@ -11,6 +15,10 @@ module.exports = {
     myAccount: myAccount,
     paper: paper,
     Ieo: Ieo,
+    pointPage: pointPage,
+    historyAndCu: historyAndCu,
+    ieoAdmin: ieoAdmin,
+    apiAdmin: apiAdmin,
     topInfo: {
         name: '币多网--International Digital encryption asset trading platform',
     },
@@ -475,8 +483,10 @@ module.exports = {
         },
         finance: {
             center: 'Finance center',
+            currency: "currency",
             CandyGivingRecords: "Candy giving records",
             pointManagement: "point management",
+            Quantityofarrival: "Quantity of arrival",
             personalassets: 'Personal assets',
             billdetail: 'Bill detail',
             charge: 'Charge',

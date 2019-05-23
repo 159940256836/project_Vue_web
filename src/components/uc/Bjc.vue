@@ -1,11 +1,11 @@
 <template>
     <div class="nav-rights">
         <div class="nav-right">
-            <p class="nowintegration">当前积分:{{integration}}</p>
+            <p class="nowintegration">{{$t('pointPage.currentPoint')}}:{{integration}}</p>
             <div class="blc_box">
-                <span>时间:&nbsp;</span>
-                <DatePicker type="daterange" placeholder="请输入你要查询的日期" style="width: 200px" v-model="rangeDate" :editable="false"></DatePicker>
-                <button class="search_btn" @click="serar">搜索</button>
+                <span>{{$t('pointPage.time')}}:&nbsp;</span>
+                <DatePicker type="daterange" :placeholder="$t('pointPage.enterTime')" style="width: 200px" v-model="rangeDate" :editable="false"></DatePicker>
+                <button class="search_btn" @click="serar">{{$t('pointPage.search')}}</button>
             </div>
             <div class="blc-table">
                 <Table stripe :columns="tableColumnsBlc" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
@@ -26,11 +26,11 @@ const FixAraible = (pageSize, type) => (pageNum) => (createStartTime) => (create
 });
 const getParams = FixAraible(10, '');
 const map = new Map([["0", "推广"], ['1', '法币充值赠送'], ['2', '币币充值赠送']]);
+const mapEn = new Map([["0", "recommend"], ['1', 'legal tender recharge gift'], ['2', 'Currency recharge gift']]);
 import moment from "moment";
 export default {
     components: {},
     data() {
-        let that = this;
         return {
             pageNo: 1,
             pageSize: 10,
@@ -40,20 +40,6 @@ export default {
             createStartTime: "",
             createEndTime: "",
             rangeDate: "",
-            tableColumnsBlc: [
-                {
-                    title: "类型",
-                    key: "type",
-                },
-                {
-                    title: "数量",
-                    key: "amount"
-                },
-                {
-                    title: "时间",
-                    key: "createTime",
-                },
-            ],
             tableMoney: [],
             loading: true,
             totalElement: 0
@@ -68,7 +54,7 @@ export default {
             const params = getParams(this.pageNum)(this.createStartTime)(this.createEndTime);
             this.getList(params).then(res => {
                 this.tableMoney = res.map(ele => ({
-                    type: map.get(String(ele.type)),
+                    type: ele.type,
                     amount: "+" + ele.amount,
                     createTime: ele.createTime
                 }));
@@ -107,6 +93,21 @@ export default {
         },
         formatTime(date) {
             return moment(date).format("YYYY-MM-DD HH:mm:ss")
+        }
+    },
+    computed: {
+        tableColumnsBlc() {
+            const arr = [];
+            arr.push({ title: this.$t('pointPage.type'), render:(h,params)=>{
+                return h("div",{},this.mapFun.get(String(params.row.type)));
+            }});
+            arr.push({ title: this.$t('pointPage.num'), key: "amount", });
+            arr.push({ title: this.$t('pointPage.time'), key: "createTime"});
+            return arr;
+        },
+        mapFun(){
+            const m = this.$store.getters.lang == "English" ? mapEn : map;
+            return m;
         }
     }
 };

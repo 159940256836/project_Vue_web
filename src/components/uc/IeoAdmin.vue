@@ -2,20 +2,20 @@
 <template>
     <div class="nav-rights">
         <Form class="form" :model="formItem" :label-width="65" inline>
-            <FormItem label="项目名称:">
+            <FormItem :label="$t('ieoAdmin.projectName')">
                 <Input v-model="formItem.ieoName" type="text"></Input>
             </FormItem>
-            <FormItem label="认购时间:">
+            <FormItem :label="$t('ieoAdmin.SubscriptionTime')">
                 <DatePicker type="daterange" v-model="formItem.date" style="width:180px;"></DatePicker>
             </FormItem>
-            <FormItem label="认购状态:">
-                <Select v-model="formItem.status" style="width:100px;">
-                    <Option value="0">失败</Option>
-                    <Option value="1">成功</Option>
+            <FormItem :label="$t('ieoAdmin.SubscriptionStatus')">
+                <Select v-model="formItem.status" style="width:100px;" :placeholder="select">
+                    <Option value="0">{{$t('ieoAdmin.failure')}}</Option>
+                    <Option value="1">{{$t('ieoAdmin.success')}}</Option>
                 </Select>
             </FormItem>
             <FormItem>
-                <Button type="primary" @click="search">搜索</Button>
+                <Button type="primary" @click="search">{{$t('historyAndCu.search')}}</Button>
                 <!-- <Button style="margin-left: 8px " @click="handleClear" class="clear_btn">清空条件</Button> -->
             </FormItem>
         </Form>
@@ -30,52 +30,9 @@ import moment from "moment";
 export default {
     name: "ieoadmin",
     data() {
-        const columns = [
-            {
-                title: "发售币种",
-                key: "saleCoin"
-            },
-            {
-                title: "项目名称",
-                key: "ieoName"
-            },
-            {
-                title: "发售总量",
-                key: "saleAmount"
-            },
-            {
-                title: "募集币种",
-                key: "raiseCoin"
-            },
-            {
-                title: "募集周期(UTF+8)",
-                width: 200,
-                render: (h, params) => {
-                    return h("span", {}, params.row.startTime + "-" + params.row.endTime)
-                }
-            },
-            {
-                title: "认购数量",
-                key: "receiveAmount"
-            },
-            {
-                title: "使用数量",
-                key: "payAmount"
-            },
-            {
-                title: "认购时间",
-                key: "createTime"
-            },
-            {
-                title: "认购状态",
-                render: (h, params) => {
-                    const str = params.row.status == 0 ? "失败" : "成功";
-                    return h("span", {}, str);
-                }
-            }
-        ]
+        
         return {
-            columns,
+            select:"select",
             total: 0,
             formItem: {
                 date: "",
@@ -155,6 +112,54 @@ export default {
         },
         formatTime(str) {
             return moment(str).format("YYYY-MM-DD HH:mm:ss");
+        }
+    },
+    computed:{
+        columns(){
+            const arr = [];
+            arr.push({
+                title: this.$t('ieoAdmin.currencySale'),
+                key: "saleCoin"
+            });
+            arr.push({
+                title: this.$t('ieoAdmin.projectName'),
+                 key: "ieoName"
+            });
+            arr.push({
+               title: this.$t('ieoAdmin.totalSale'),
+                key: "saleAmount"
+            });
+            arr.push({
+                title: this.$t('ieoAdmin.currenCollected'),
+                key: "raiseCoin"
+            });
+            arr.push({
+                title: this.$t('ieoAdmin.FundraisingCycle'),
+                width: 200,
+                render: (h, params) => {
+                    return h("span", {}, params.row.startTime + "-" + params.row.endTime)
+                }
+            });
+            arr.push({
+                title: this.$t('ieoAdmin.SubscriptionAmount'),
+                key: "receiveAmount"
+            });
+            arr.push({
+                title: this.$t('ieoAdmin.useAmount'),
+                key: "payAmount"
+            });
+            arr.push({
+                title: this.$t('ieoAdmin.SubscriptionTime'),
+                key: "createTime"
+            });
+            arr.push({
+                title: this.$t('ieoAdmin.SubscriptionStatus'),
+                render: (h, params) => {
+                    const str = params.row.status == 0 ? this.$t('ieoAdmin.failure') : this.$t('ieoAdmin.success');
+                    return h("span", {}, str);
+                }
+            });
+            return arr;
         }
     }
 }

@@ -12,7 +12,6 @@ const en = {
     subscription: 'Undiscounted subscription',
     underway: 'underway',
     completed: 'completed',
-    preheating: 'In the preheating',
     agree: 'By subscribing, you have read and agreed to the',
     risk: 'risk warning',
     enter: 'Please Enter Trading Password',
@@ -33,14 +32,13 @@ const zh = {
     cycle: '募集周期',
     fee: '免手续费',
     subscription: '无折扣认购',
-    underway: '进行中',
     completed: '已完成',
-    preheating: '预热中',
     agree: '进行认购即为已阅读并同意',
     risk: '风险提示',
     enter: '请输入交易密码',
     selling: '售卖方式',
     project: '项目详情',
+    total: '发售总量'
 }
 
 exports.en = en;
