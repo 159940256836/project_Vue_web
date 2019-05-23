@@ -46,10 +46,13 @@ export default {
                 if (resp.code == 0) {
                     this.tableMoney = resp.data;
                     this.showAccountData=this.tableMoney
+                    console.log(this.tableMoney,this.showAccountData);
                     for (let i = 0; i < this.tableMoney.length; i++) {
                         this.tableMoney[i]["coinType"] = this.tableMoney[i].coin.unit;
+                        console.log(this.tableMoney[i].balance,this.tableMoney[i].frozenBalance,this.tableMoney[i].releaseBalance);
                         if(this.tableMoney[i].balance != "0" || this.tableMoney[i].frozenBalance != "0" || this.tableMoney[i].releaseBalance != "0"){
                             this.hiddenAccountData.push(this.tableMoney[i]);
+                            console.log(this.hiddenAccountData);
                         }
                     }
                     this.loading = false;
@@ -61,6 +64,7 @@ export default {
         resetAddress(unit) {
             let params = {};
             params["unit"] = unit;
+            console.log(unit);
             let that = this;
             this.$http.post(this.host + "/uc/asset/wallet/reset-address", params).then(response => {
                 var resp = response.body;
@@ -69,10 +73,10 @@ export default {
                     // this.getMoney();
                     setTimeout(function () {
                         that.getMoney();
-                        // window.location.reload();
-                        that.reload()
-                      
-                    }, 2000);
+                        // that.reload();
+                        that.$router.push({path: '/uc/recharge', query: {name: unit }});
+                        window.location.reload();
+                    }, 3000);
                 } else {
                     this.$Message.error(resp.message);
                 }
@@ -178,6 +182,9 @@ export default {
                                         on: {
                                             click: function () {
                                                 self.resetAddress(params.row.coin.unit);
+                                                /*self.$router.push(
+                                                    "/uc/recharge?name=" + params.row.coin.unit
+                                                );*/
                                             }
                                         },
                                         style: {
@@ -224,7 +231,7 @@ export default {
                         style: {
                             marginRight: "8px",
                         }
-                    }, "转出");
+                    }, "划转");
                     actions.push(btn);
                     return h("p", actions);
                 }

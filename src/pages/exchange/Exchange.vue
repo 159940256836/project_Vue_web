@@ -52,13 +52,12 @@
                 <Table v-show="selectedPlate!='sell'" @on-current-change="sellPlate" highlight-row class="buy_table" :class="{hidden:selectedPlate==='all'}" :columns="plate.columns" :data="plate.bidRows"></Table>
             </div>
             <div class="center">
-                <div class="imgtable">
+                <div class="imgtable" :loading="loadingButton7">
                     <!-- <div class="handler">
             <span @click="changeImgTable('k')" :class="{active:currentImgTable==='k'}">k线图</span>
             <span @click="changeImgTable('s')" :class="{active:currentImgTable==='s'}">深度图</span>
           </div> -->
-                    <div id="kline_container" :class="{hidden:currentImgTable==='s'}">
-                    </div>
+                    <div id="kline_container" :class="{hidden:currentImgTable==='s'}"></div>
                     <!-- <DepthGraph :class="{hidden:currentImgTable==='k'}" ref="depthGraph"></DepthGraph> -->
                 </div>
                 <div class="trade_wrap">
@@ -131,7 +130,17 @@
                                             {{$t("exchange.amount")}}
                                             <span>{{form.buy.limitTurnover|toFloor(baseCoinScale)}}</span> {{currentCoin.base}}
                                         </div>
-                                        <Button class="bg-green" @click="buyWithLimitPrice" v-show="isLogin">{{$t("exchange.buyin")}}{{currentCoin.coin}}</Button>
+                                        <Button
+                                            class="bg-green"
+                                            @click="buyWithLimitPrice"
+                                            v-show="isLogin"
+                                            :loading="loadingButton1"
+                                        >
+                                            <!--{{$t("exchange.buyin")}}{{currentCoin.coin}}-->
+                                            <span>
+                                                {{ !loadingButton1 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
+                                            </span>
+                                        </Button>
                                     </Form>
                                 </div>
                                 <div class="bd bd_limited" v-show="btnList[2].check==true">
@@ -159,7 +168,17 @@
                                             {{$t("exchange.amount")}}
                                             <span>{{form.buy.stopTurnover|toFloor(baseCoinScale)}}</span> {{currentCoin.base}}
                                         </div>
-                                        <Button class="bg-green" @click="buyWithStopPrice" v-show="isLogin">{{$t("exchange.buyin")}}{{currentCoin.coin}}</Button>
+                                        <Button
+                                            class="bg-green"
+                                            @click="buyWithStopPrice"
+                                            v-show="isLogin"
+                                            :loading="loadingButton3"
+                                        >
+                                            <!--{{$t("exchange.buyin")}}{{currentCoin.coin}}-->
+                                            <span>
+                                                {{ !loadingButton3 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
+                                            </span>
+                                        </Button>
                                     </Form>
                                 </div>
                                 <div class="bd bd_market" v-show="btnList[1].check==true">
@@ -178,7 +197,17 @@
                                                 <div class="slider-block"></div>
                                             </div>
                                         </div>
-                                        <Button class="bg-green" @click="buyWithMarketPrice" v-show="isLogin">{{$t("exchange.buyin")}}{{currentCoin.coin}}</Button>
+                                        <Button
+                                            class="bg-green"
+                                            @click="buyWithMarketPrice"
+                                            v-show="isLogin"
+                                            :loading="loadingButton2"
+                                        >
+                                            <!--{{$t("exchange.buyin")}}{{currentCoin.coin}}-->
+                                            <span>
+                                                {{ !loadingButton2 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
+                                            </span>
+                                        </Button>
                                     </Form>
                                 </div>
                             </div>
@@ -219,7 +248,17 @@
                                             {{$t("exchange.amount")}}
                                             <span>{{form.sell.limitTurnover|toFloor(coinScale)}}</span> {{currentCoin.base}}
                                         </div>
-                                        <Button class="bg-red" @click="sellLimitPrice" v-show="isLogin">{{$t("exchange.sellout")}}{{currentCoin.coin}}</Button>
+                                        <Button
+                                            class="bg-red"
+                                            @click="sellLimitPrice"
+                                            v-show="isLogin"
+                                            :loading="loadingButton4"
+                                        >
+                                            <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
+                                            <span>
+                                                {{ !loadingButton4 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.buyin")}}
+                                            </span>
+                                        </Button>
                                     </Form>
                                 </div>
                                 <div class="bd bd_limited" v-show="btnList[2].check==true">
@@ -251,7 +290,17 @@
                                             {{$t("exchange.amount")}}
                                             <span>{{form.sell.stopTurnover|toFloor(coinScale)}}</span> {{currentCoin.base}}
                                         </div>
-                                        <Button class="bg-red" @click="sellStopPrice" v-show="isLogin">{{$t("exchange.sellout")}}{{currentCoin.coin}}</Button>
+                                        <Button
+                                            class="bg-red"
+                                            @click="sellStopPrice"
+                                            v-show="isLogin"
+                                            :loading="loadingButton6"
+                                        >
+                                            <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
+                                            <span>
+                                                {{ !loadingButton6 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.buyin")}}
+                                            </span>
+                                        </Button>
                                     </Form>
                                 </div>
                                 <div class="bd bd_market" v-show="btnList[1].check==true">
@@ -274,7 +323,17 @@
                                         <!--<FormItem>-->
                                         <!--<Slider v-model="value6" :step="25" show-stops min="0" max="100"></Slider>-->
                                         <!--</FormItem>-->
-                                        <Button class="bg-red" @click="sellMarketPrice" v-show="isLogin">{{$t("exchange.sellout")}}{{currentCoin.coin}}</Button>
+                                        <Button
+                                            class="bg-red"
+                                            @click="sellMarketPrice"
+                                            v-show="isLogin"
+                                            :loading="loadingButton5"
+                                        >
+                                            <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
+                                            <span>
+                                                {{ !loadingButton5 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.buyin")}}
+                                            </span>
+                                        </Button>
                                     </Form>
                                 </div>
                             </div>
@@ -698,6 +757,13 @@ export default {
         return {
             day: require("../../assets/images/exchange/night.png"), // 黑色版本
             night: require("../../assets/images/exchange/day.png"), // 白色版本
+            loadingButton1: false, // 接口请求loading
+            loadingButton2: false, // 接口请求loading
+            loadingButton3: false, // 接口请求loading
+            loadingButton4: false, // 接口请求loading
+            loadingButton5: false, // 接口请求loading
+            loadingButton6: false, // 接口请求loading
+            loadingButton7: false, // 接口请求loading
             modal: false,
             btnList: [
                 {
@@ -1648,7 +1714,7 @@ export default {
             // this.getTrade();
             // if (this.isLogin) {
             //   // this.getFavor();
-            //   this.getMember(); //获取是否实名认证
+            //   // this.getMember(); //获取是否实名认证
             //   this.getWallet();
             //   this.getCurrentOrder();
             //   this.getHistoryOrder();
@@ -2346,51 +2412,51 @@ export default {
                         }
                     });
             },
-            getPlateFull() {
-                //深度图
-                let params = {};
-                params["symbol"] = this.currentCoin.symbol;
-                this.$http
-                    .post(this.host + this.api.market.platefull, params)
-                    .then(response => {
-                        let resp = response.body;
-                        this.fullTrade = resp;
-                        resp.skin = this.skin;
-                        this.$refs.depthGraph.draw(resp);
-                    });
-            },
-            updatePlate(type, row) {
-                //发现该方法未被使用（zhp）
-                if (type == "sell") {
-                    for (let i = 0; i < this.plate.askRows.length; i++) {
-                        if (
-                            row.price > this.plate.askRows[i].price &&
-                            i != 0 &&
-                            this.plate.askRows[i].price > 0
-                        ) {
-                            this.plate.askRows.splice(i, 0, row);
-                            this.plate.askRows.shift();
-                            break;
-                        } else if (
-                            i == this.plate.askRows.length - 1 &&
-                            (row.price < this.plate.askRows[i].price ||
-                                this.plate.askRows[i].price == 0)
-                        ) {
-                            this.plate.askRows.push(row);
-                            this.plate.askRows.shift();
-                            break;
-                        }
-                    }
-                } else if (type == "buy") {
-                    for (let i = 0; i < this.plate.bidRows.length; i++) {
-                        if (row.price > this.plate.bidRows[i].price) {
-                            this.plate.bidRows.splice(i, 0, row);
-                            this.plate.bidRows.pop();
-                            break;
-                        }
-                    }
-                }
-            },
+            // getPlateFull() {
+            //     //深度图
+            //     let params = {};
+            //     params["symbol"] = this.currentCoin.symbol;
+            //     this.$http
+            //         .post(this.host + this.api.market.platefull, params)
+            //         .then(response => {
+            //             let resp = response.body;
+            //             this.fullTrade = resp;
+            //             resp.skin = this.skin;
+            //             this.$refs.depthGraph.draw(resp);
+            //         });
+            // },
+            // updatePlate(type, row) {
+            //     //发现该方法未被使用（zhp）
+            //     if (type == "sell") {
+            //         for (let i = 0; i < this.plate.askRows.length; i++) {
+            //             if (
+            //                 row.price > this.plate.askRows[i].price &&
+            //                 i != 0 &&
+            //                 this.plate.askRows[i].price > 0
+            //             ) {
+            //                 this.plate.askRows.splice(i, 0, row);
+            //                 this.plate.askRows.shift();
+            //                 break;
+            //             } else if (
+            //                 i == this.plate.askRows.length - 1 &&
+            //                 (row.price < this.plate.askRows[i].price ||
+            //                     this.plate.askRows[i].price == 0)
+            //             ) {
+            //                 this.plate.askRows.push(row);
+            //                 this.plate.askRows.shift();
+            //                 break;
+            //             }
+            //         }
+            //     } else if (type == "buy") {
+            //         for (let i = 0; i < this.plate.bidRows.length; i++) {
+            //             if (row.price > this.plate.bidRows[i].price) {
+            //                 this.plate.bidRows.splice(i, 0, row);
+            //                 this.plate.bidRows.pop();
+            //                 break;
+            //             }
+            //         }
+            //     }
+            // },
             getTrade() {
                 let params = {};
                 params["symbol"] = this.currentCoin.symbol;
@@ -2406,6 +2472,7 @@ export default {
                     });
             },
             startWebsock() {
+                // this.loadingButton7 = true;
                 if (this.stompClient) {
                     this.stompClient.ws.close();
                 }
@@ -2744,6 +2811,7 @@ export default {
                     path
                 });
             },
+            //限价买入
             buyWithLimitPrice() {
                 if (this.form.buy.limitAmount == "") {
                     this.$Notice.error({
@@ -2769,6 +2837,7 @@ export default {
                 params["direction"] = "BUY";
                 params["type"] = "LIMIT_PRICE";
                 params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                this.loadingButton1 = true;
                 this.$http
                     .post(this.host + this.api.exchange.orderAdd, params)
                     .then(response => {
@@ -2778,18 +2847,69 @@ export default {
                                 title: that.$t("exchange.tip"),
                                 desc: that.$t("exchange.success")
                             });
+                            this.loadingButton1 = false;
+                            this.form.buy.limitAmount = 0;
                             this.getWallet();
                             this.getCurrentOrder();
                             this.getHistoryOrder();
-                            this.form.buy.limitAmount = 0;
                         } else {
                             this.$Notice.error({
                                 title: that.$t("exchange.tip"),
                                 desc: resp.message
                             });
+                            this.loadingButton1 = false;
                         }
                     });
             },
+            //市价买入
+            buyWithMarketPrice() {
+                if (this.form.buy.marketAmount == "") {
+                    this.$Notice.error({
+                        title: this.$t("exchange.tip"),
+                        desc: this.$t("exchange.pricetip")
+                    });
+                    return;
+                }
+                if (this.form.buy.marketAmount > parseFloat(this.wallet.base)) {
+                    this.$Notice.error({
+                        title: this.$t("exchange.tip"),
+                        desc: this.$t("exchange.pricetipwarning") + this.wallet.base
+                    });
+                    return;
+                }
+                let params = {};
+                params["symbol"] = this.currentCoin.symbol;
+                params["price"] = this.form.sell.limitPrice;
+                //params["amount"] = this.form.sell.limitAmount;
+                params["amount"] = this.form.buy.marketAmount;
+                params["direction"] = "SELL";
+                params["type"] = "LIMIT_PRICE";
+                console.log(this.form.buy.marketAmount)
+
+                params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                let that = this;
+                this.loadingButton2 = true;
+                this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {
+                    let resp = response.body;
+
+                    if (resp.code == 0) {
+                        this.$Notice.success({
+                            title: that.$t("exchange.tip"),
+                            desc: that.$t("exchange.success")
+                        });
+                        this.loadingButton2 = false;
+                        this.form.buy.marketAmount=0;
+                        this.refreshAccount();
+                    } else {
+                        this.$Notice.error({
+                            title: that.$t("exchange.tip"),
+                            desc: resp.message
+                        });
+                        this.loadingButton2 = false;
+                    }
+                });
+            },
+            //止盈止损买入
             buyWithStopPrice() {
                 if (this.form.buy.stopPrice == "") {
                     this.$Notice.error({
@@ -2823,6 +2943,7 @@ export default {
                 params["type"] = "CHECK_FULL_STOP";
                 params['triggerPrice'] = this.form.buy.stopPrice;
                 params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                this.loadingButton3 = true;
                 this.$http
                     .post(this.host + this.api.exchange.orderAdd, params)
                     .then(response => {
@@ -2832,6 +2953,8 @@ export default {
                                 title: that.$t("exchange.tip"),
                                 desc: that.$t("exchange.success")
                             });
+                            this.loadingButton3 = false;
+                            this.form.buy.stopBuyAmount = 0;
                             this.getWallet();
                             this.getCurrentOrder();
                             this.getHistoryOrder();
@@ -2884,10 +3007,11 @@ export default {
                                 title: that.$t("exchange.tip"),
                                 desc: resp.message
                             });
-
+                            this.loadingButton3 = false;
                         }
                     });
             },
+            //限价卖出
             sellLimitPrice() {
                 // let userkey = localStorage.getItem('USERKEY');
                 // if (userkey != "aisizx") {
@@ -2927,6 +3051,7 @@ export default {
                 params["type"] = "LIMIT_PRICE";
                 params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 let that = this;
+                this.loadingButton4 = true;
                 this.$http
                         .post(this.host + this.api.exchange.orderAdd, params)
                         .then(response => {
@@ -2937,16 +3062,65 @@ export default {
                                     title: that.$t("exchange.tip"),
                                     desc: that.$t("exchange.success")
                                 });
-                                this.refreshAccount();
+                                this.loadingButton4 = false;
                                 this.form.sell.limitAmount = 0;
+                                this.refreshAccount();
                             } else {
                                 this.$Notice.error({
                                     title: that.$t("exchange.tip"),
                                     desc: resp.message
                                 });
+                                this.loadingButton4 = false;
                             }
                         });
             },
+            //市价卖出
+            sellMarketPrice() {
+                if (this.form.sell.marketAmount == "") {
+                    this.$Notice.error({
+                        title: this.$t("exchange.tip"),
+                        desc: this.$t("exchange.sellamounttip")
+                    });
+                    return;
+                }
+                if (this.form.sell.marketAmount > parseFloat(this.wallet.coin)) {
+                    this.$Notice.error({
+                        title: this.$t("exchange.tip"),
+                        // desc: this.$t("exchange.sellamounttipwarning") + this.wallet.coin
+                        desc: "最多能卖" + this.wallet.coin + "个"
+                    });
+                    return;
+                }
+
+                let params = {};
+                params["symbol"] = this.currentCoin.symbol;
+                params["price"] = 0;
+                params["amount"] = this.form.sell.marketAmount;
+                params["direction"] = "SELL";
+                params["type"] = "MARKET_PRICE";
+                params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                let that = this;
+                this.loadingButton5 = true;
+                this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {
+                    let resp = response.body;
+                    if (resp.code == 0) {
+                        this.$Notice.success({
+                            title: that.$t("exchange.tip"),
+                            desc: that.$t("exchange.success")
+                        });
+                        this.loadingButton5 = false;
+                        this.form.sell.marketAmount=0;
+                        this.refreshAccount();
+                    } else {
+                        this.$Notice.error({
+                            title: that.$t("exchange.tip"),
+                            desc: resp.message
+                        });
+                        this.loadingButton5 = false;
+                    }
+                });
+            },
+            //止盈止损卖出
             sellStopPrice() {
                 if (this.form.sell.stopPrice == "") {
                     this.$Notice.error({
@@ -2986,6 +3160,7 @@ export default {
                 params['triggerPrice'] = this.form.sell.stopPrice;
                 params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 let that = this;
+                this.loadingButton6 = true;
                 this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {
                     let resp = response.body;
                     if (resp.code == 0) {
@@ -2993,144 +3168,105 @@ export default {
                             title: that.$t("exchange.tip"),
                             desc: that.$t("exchange.success")
                         });
-                        this.refreshAccount();
+                        this.loadingButton6 = false;
                         this.form.sell.stopBuyAmount = 0;
+                        this.refreshAccount();
                     } else {
                         this.$Notice.error({
                             title: that.$t("exchange.tip"),
                             desc: resp.message
                         });
+                        this.loadingButton6 = false;
                     }
                 });
             },
-            sellMarketPrice() {
-                if (this.form.sell.marketAmount == "") {
-                    this.$Notice.error({
-                        title: this.$t("exchange.tip"),
-                        desc: this.$t("exchange.sellamounttip")
-                    });
-                    return;
-                }
-                if (this.form.sell.marketAmount > parseFloat(this.wallet.coin)) {
-                    this.$Notice.error({
-                        title: this.$t("exchange.tip"),
-                        // desc: this.$t("exchange.sellamounttipwarning") + this.wallet.coin
-                        desc: "最多能卖" + this.wallet.coin + "个"
-                    });
-                    return;
-                }
 
+            buyPlate(currentRow) {
+                this.form.buy.limitPrice = currentRow.price;
+                this.form.sell.limitPrice = currentRow.price;
+            },
+            sellPlate(currentRow) {
+                this.form.buy.limitPrice = currentRow.price;
+                this.form.sell.limitPrice = currentRow.price;
+            },
+            /**
+             * 获取钱包信息
+             */
+            getWallet() {
+                this.$http
+                    .post(this.host + this.api.uc.wallet + this.currentCoin.base, {})
+                    .then(response => {
+                        let resp = response.body;
+                        this.wallet.base = resp.data.balance || "";
+                    });
+                this.$http
+                    .post(this.host + this.api.uc.wallet + this.currentCoin.coin, {})
+                    .then(response => {
+                        let resp = response.body;
+                        this.wallet.coin = (resp.data && resp.data.balance) || '';
+                    });
+            },
+            getCurrentOrder() {
+                //查询当前委托
                 let params = {};
+                params["pageNo"] = 1;
+                params["pageSize"] = 100;
                 params["symbol"] = this.currentCoin.symbol;
-                params["price"] = 0;
-                params["amount"] = this.form.sell.marketAmount;
-                params["direction"] = "SELL";
-                params["type"] = "MARKET_PRICE";
-                params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
+                this.currentOrder.rows = [];
                 let that = this;
-                this.$http.post(this.host + this.api.exchange.orderAdd, params).then(response => {
-                    let resp = response.body;
-                    if (resp.code == 0) {
-                        this.$Notice.success({
-                            title: that.$t("exchange.tip"),
-                            desc: that.$t("exchange.success")
-                        });
-                        this.refreshAccount();
-                        this.form.sell.marketAmount=0;
-                    } else {
-                        this.$Notice.error({
-                            title: that.$t("exchange.tip"),
-                            desc: resp.message
-                        });
-                    }
-                });
-        },
-        buyPlate(currentRow) {
-            this.form.buy.limitPrice = currentRow.price;
-            this.form.sell.limitPrice = currentRow.price;
-        },
-        sellPlate(currentRow) {
-            this.form.buy.limitPrice = currentRow.price;
-            this.form.sell.limitPrice = currentRow.price;
-        },
-        /**
-         * 获取钱包信息
-         */
-        getWallet() {
-            this.$http
-                .post(this.host + this.api.uc.wallet + this.currentCoin.base, {})
-                .then(response => {
-                    let resp = response.body;
-                    this.wallet.base = resp.data.balance || "";
-                });
-            this.$http
-                .post(this.host + this.api.uc.wallet + this.currentCoin.coin, {})
-                .then(response => {
-                    let resp = response.body;
-                    this.wallet.coin = (resp.data && resp.data.balance) || '';
-                });
-        },
-        getCurrentOrder() {
-            //查询当前委托
-            let params = {};
-            params["pageNo"] = 1;
-            params["pageSize"] = 100;
-            params["symbol"] = this.currentCoin.symbol;
-            this.currentOrder.rows = [];
-            let that = this;
-            this.$http
-                .post(this.host + this.api.exchange.current, params)
-                .then(response => {
-                    let resp = response.body;
-                    if (resp.content && resp.content.length > 0) {
-                        this.currentOrder.rows = resp.content.slice(0, 3);
-                        this.currentOrder.rows.forEach((row, index) => {
-                            row.skin = that.skin;
-                            row.price =
-                                row.type == "MARKET_PRICE"
-                                    ? that.$t("exchange.marketprice")
-                                    : row.price;
-                        });
-                    }
-                });
-        },
-        getHistoryOrder(pageNo) {
-            //查询历史委托
-            // if (pageNo == undefined) {
-            //     pageNo = this.historyOrder.page;
-            // } else {
-            //     pageNo = pageNo - 1;
-            // }
-            this.historyOrder.rows = []; //清空数据
-            let params = {};
-            params["pageNo"] = 1;
-            params["pageSize"] = this.historyOrder.pageSize;
-            params["symbol"] = this.currentCoin.symbol;
-            let that = this;
-            this.$http.post(this.host + this.api.exchange.history, params).then(response => {
-                let resp = response.body;
-                let rows = [];
-                if(resp.content!=undefined){
-                    if (resp.content.length > 0) {
-                        this.historyOrder.total = resp.totalElements;
-                        this.historyOrder.page = resp.number;
-                        for (let i = 0; i < 3; i++) {
-                            let row = resp.content[i];
-                            if (row) {
+                this.$http
+                    .post(this.host + this.api.exchange.current, params)
+                    .then(response => {
+                        let resp = response.body;
+                        if (resp.content && resp.content.length > 0) {
+                            this.currentOrder.rows = resp.content.slice(0, 3);
+                            this.currentOrder.rows.forEach((row, index) => {
                                 row.skin = that.skin;
                                 row.price =
                                     row.type == "MARKET_PRICE"
                                         ? that.$t("exchange.marketprice")
                                         : row.price;
-                                // this.historyOrder.rows.push(row);
-                                rows.push(row);
-                            }
+                            });
                         }
-                        this.historyOrder.rows = rows;
-                    }
-                }
-                });
+                    });
             },
+            getHistoryOrder(pageNo) {
+                //查询历史委托
+                // if (pageNo == undefined) {
+                //     pageNo = this.historyOrder.page;
+                // } else {
+                //     pageNo = pageNo - 1;
+                // }
+                this.historyOrder.rows = []; //清空数据
+                let params = {};
+                params["pageNo"] = 1;
+                params["pageSize"] = this.historyOrder.pageSize;
+                params["symbol"] = this.currentCoin.symbol;
+                let that = this;
+                this.$http.post(this.host + this.api.exchange.history, params).then(response => {
+                    let resp = response.body;
+                    let rows = [];
+                    if(resp.content!=undefined){
+                        if (resp.content.length > 0) {
+                            this.historyOrder.total = resp.totalElements;
+                            this.historyOrder.page = resp.number;
+                            for (let i = 0; i < 3; i++) {
+                                let row = resp.content[i];
+                                if (row) {
+                                    row.skin = that.skin;
+                                    row.price =
+                                        row.type == "MARKET_PRICE"
+                                            ? that.$t("exchange.marketprice")
+                                            : row.price;
+                                    // this.historyOrder.rows.push(row);
+                                    rows.push(row);
+                                }
+                            }
+                            this.historyOrder.rows = rows;
+                        }
+                    }
+                    });
+                },
             cancel(index) {
                 let order = this.currentOrder.rows[index];
                 this.$Modal.confirm({
