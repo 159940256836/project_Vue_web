@@ -2882,7 +2882,7 @@ export default {
                 params["price"] = this.form.sell.limitPrice;
                 //params["amount"] = this.form.sell.limitAmount;
                 params["amount"] = this.form.buy.marketAmount;
-                params["direction"] = "SELL";
+                params["direction"] = "BUY";
                 params["type"] = "LIMIT_PRICE";
                 console.log(this.form.buy.marketAmount)
 

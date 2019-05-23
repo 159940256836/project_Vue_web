@@ -686,7 +686,7 @@
             country: '国家',
             smscode: '短信验证码',
             sendcode: '发送验证码',
-            pwd: '登录密码(六位以上大小写加数字)',
+            pwd: '登录密码(八位以上字母加数字)',
             confrimpwd: '确认密码',
             agentcode: '推荐码',
             agreement: '我已阅读并同意',
