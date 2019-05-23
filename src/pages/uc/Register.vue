@@ -345,7 +345,6 @@ export default {
             this.$http.post(this.host + this.api.common.area).then(response => {
                 var resp = response.body;
                 this.areas = resp.data;
-                console.log(this.areas);
                 if(this.areas!=null){
                     this.formInline.country = this.areas[0].zhName;
                     this.formInline.areaCode = this.areas[0].areaCode;

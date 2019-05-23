@@ -90,17 +90,14 @@ export default {
         }
         // this.getSupportCoin().then(res => {
         //     this.getLeverNum().then(res => {
-        //         console.log(this.leverList);
         //         // const leverSymbol = this.leverList.map(ele => ele.children.map(e => {
         //         //     return e.value;
         //         // }));
         //         const leverSymbol = this.leverList.map(ele => {
         //             return ele.children;
         //         }).map(ele => {
-        //             console.log(ele);
         //             return ele.value;
         //         });
-        //         console.log(leverSymbol);
         //         let list = res.map(ele => {
         //             if (leverSymbol[0].includes(ele.symbol)) {
         //                 ele.leverWalletList.map(e => {
@@ -112,7 +109,6 @@ export default {
         //                 })
         //             }
         //         });
-        //         console.log(list);
         //     })
         // })
     },
@@ -120,7 +116,6 @@ export default {
         init() {
             Promise.all([this.getLeverNum(), this.getOtcNum(), this.getExchangeList()]).then(res => {
                 this.data = [...this.leverList, ...this.otcList, ...this.exchangeList]
-                console.log(this.data)
             })
         },
         cancel() {

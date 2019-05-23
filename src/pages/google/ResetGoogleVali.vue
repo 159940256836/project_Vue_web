@@ -148,8 +148,6 @@ export default {
     },
     mounted() {
         const link = this.data.link;
-
-
     }
 }
 </script>

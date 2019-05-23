@@ -2866,7 +2866,6 @@ export default {
                 params["amount"] = this.form.buy.marketAmount;
                 params["direction"] = "SELL";
                 params["type"] = "LIMIT_PRICE";
-                console.log(this.form.buy.marketAmount)
 
                 params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
                 let that = this;
