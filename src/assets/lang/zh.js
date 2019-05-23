@@ -431,7 +431,7 @@ module.exports = {
             bibiManagement: "币币管理",
             otcManagement: "法币管理",
             ieoManagement: "IEO管理",
-            apiManagement: "api管理",
+            apiManagement: "API管理",
             leverManagement: "杠杆交易管理",
         },
         login: {
