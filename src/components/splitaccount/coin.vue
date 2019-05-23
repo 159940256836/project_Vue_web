@@ -1,7 +1,7 @@
 <template>
     <div class="shaow">
         <div class="hidden-assets">
-            <span>隐藏资产为0的币种</span>
+            <span @click="aaaaa">隐藏资产为0的币种</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                 <span slot="open">开</span>
                 <span slot="close">关</span>
@@ -18,6 +18,7 @@ import transfermodal from "../transfer/Index"
 export default {
     // props: ["modal"],
     components:{transfermodal},
+    inject:['reload'],
     data() {
         return {
             modal:false,
@@ -33,6 +34,9 @@ export default {
         this.getMoney();
     },
     methods: {
+        aaaaa(){
+        this.reload();
+        },
         closeModal(){
             this.modal = false;
         },
@@ -45,10 +49,13 @@ export default {
                 if (resp.code == 0) {
                     this.tableMoney = resp.data;
                     this.showAccountData=this.tableMoney
+                    console.log(this.tableMoney,this.showAccountData);
                     for (let i = 0; i < this.tableMoney.length; i++) {
                         this.tableMoney[i]["coinType"] = this.tableMoney[i].coin.unit;
+                        console.log(this.tableMoney[i].balance,this.tableMoney[i].frozenBalance,this.tableMoney[i].releaseBalance);
                         if(this.tableMoney[i].balance != "0" || this.tableMoney[i].frozenBalance != "0" || this.tableMoney[i].releaseBalance != "0"){
                             this.hiddenAccountData.push(this.tableMoney[i]);
+                            console.log(this.hiddenAccountData);
                         }
                     }
                     this.loading = false;
@@ -60,15 +67,19 @@ export default {
         resetAddress(unit) {
             let params = {};
             params["unit"] = unit;
+            console.log(unit);
+            let that = this;
             this.$http.post(this.host + "/uc/asset/wallet/reset-address", params).then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
                     this.$Message.success(this.$t("uc.finance.money.resetsuccess"));
                     // this.getMoney();
                     setTimeout(function () {
-                        this.getMoney();
-                        // window.location.reload();
-                    }, 2000);
+                        that.getMoney();
+                        // that.reload();
+                        that.$router.push({path: '/uc/recharge', query: {name: unit }});
+                        window.location.reload();
+                    }, 3000);
                 } else {
                     this.$Message.error(resp.message);
                 }
@@ -174,6 +185,9 @@ export default {
                                         on: {
                                             click: function () {
                                                 self.resetAddress(params.row.coin.unit);
+                                                /*self.$router.push(
+                                                    "/uc/recharge?name=" + params.row.coin.unit
+                                                );*/
                                             }
                                         },
                                         style: {
@@ -220,7 +234,7 @@ export default {
                         style: {
                             marginRight: "8px",
                         }
-                    }, "转出");
+                    }, "划转");
                     actions.push(btn);
                     return h("p", actions);
                 }

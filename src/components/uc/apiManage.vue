@@ -50,7 +50,16 @@
         </Modal>
         <Modal v-model="show" title="密钥" @on-ok="show=false" :mask-closable="false">
             <p class="screat">密钥只在新增时展示，请及时保存</p>
-            <p class="screat">{{screat}}</p>
+            <p class="screat">
+                <!--{{screat}}-->
+                <span>{{screat}}</span>
+                <span
+                    v-clipboard:copy="screat"
+                    v-clipboard:success="onCopy"
+                    v-clipboard:error="onError"
+                    class="blue"
+                >复制</span>
+            </p>
         </Modal>
     </div>
 </template>
@@ -76,19 +85,22 @@ export default {
             myColumns: [
                 {
                     title: "创建时间",
+                    width: 100,
                     key: "createTime"
                 },
                 {
                     title: "备注",
+                    width: 90,
                     key: "remark"
                 },
                 {
                     title: "API Key",
-                    width:150,
-                    key: "apiKey"
+                    width: 150,
+                    key: "apiKey",
                 },
                 {
                     title: "访问密钥",
+                    width: 100,
                     render: (h, params) => {
                         const text = "******";
                         return h("span", {}, text);
@@ -106,7 +118,7 @@ export default {
                     title: "剩余有效期（天）",
                     render: (h, params) => {
                         if (!params.row.bindIp) {
-                            let residue = +new Date(params.row.expireTime) - +new Date();
+                            let residue = + new Date(params.row.expireTime) - + new Date();
                             let lastTime = Math.floor(residue / 1000 / 60 / 60 / 24);
                             lastTime = lastTime <= 0 ? 0 : lastTime;
                             const timeDay = h("span", {}, lastTime);
@@ -164,30 +176,53 @@ export default {
         this.getAllAPI();
     },
     methods: {
+        onCopy(e) {
+            this.$Notice.success({
+                title: this.$t("common.tip"),
+                desc: "复制成功"
+            })
+        },
+        onError() {
+            this.$Notice.error({
+                title: this.$t("common.tip"),
+                desc: "复制失败"
+            })
+        },
         getAllAPI() {
             return this.$http.get(this.host + `/uc/open/get_key`).then(res => {
                 this.tableData = res.data.data;
+                console.log(this.tableData)
             });
         },
         make() {
+            const IP_REG = /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/
             if (this.formItem.remark == "") {
                 this.$Message.error("请输入备注信息");
                 return;
+            } else if (this.formItem.bindIp == "") {
+                this.$Message.error("请输入IP地址");
+                return;
+            } else if (!IP_REG.test(this.formItem.bindIp)) {
+                this.$Message.error("请输入正确IP地址");
+                return;
+            } else {
+                this.$http
+                    .post(this.host + "/uc/open/api/save", this.formItem)
+                    .then(res => {
+                        if (!res.data.code) {
+                            this.$Message.success("创建成功！");
+                            this.formItem.remark = "";
+                            this.formItem.bindIp = "";
+                            this.getAllAPI();
+                            this.screat = res.data.data;
+                            console.log(this.screat)
+                            this.show = true;
+                        } else {
+                            this.$Message.error(res.data.message + "，最多只能创建5条API Key");
+                        }
+                    });
             }
-            this.$http
-                .post(this.host + "/uc/open/api/save", this.formItem)
-                .then(res => {
-                    if (!res.data.code) {
-                        this.$Message.success("创建成功！");
-                        this.formItem.remark = "";
-                        this.formItem.bindIp = "";
-                        this.getAllAPI();
-                        this.screat = res.data.data;
-                        this.show = true;
-                    } else {
-                        this.$Message.error(res.data.message + "，最多只能创建5条API Key");
-                    }
-                });
+
         },
         ok() {
             this.$http
@@ -218,6 +253,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.blue {
+    cursor: pointer;
+    color: #fff;
+    background: #3399ff;
+    display: inline-block;
+    padding: 0 12px;
+    font-size: 12px;
+    border-radius: 3px;
+}
 .main {
     //   background-color: #eee;
     padding: 20px;

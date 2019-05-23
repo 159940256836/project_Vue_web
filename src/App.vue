@@ -17,8 +17,8 @@
                         <!--<router-link to="/">{{$t("header.index")}}</router-link>-->
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
                         <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
-                         <router-link to="/leverindex">杠杆交易</router-link>
-                          <router-link to="/Ieo">上币优选</router-link>
+                        <router-link to="/leverindex">杠杆交易</router-link>
+                        <router-link to="/Ieo">上币优选</router-link>
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">帮助</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
@@ -96,10 +96,10 @@
             </div>
         </header>
         <!--内容-->
-        <router-view></router-view>
+        <router-view v-if="isRouterAlive"></router-view>
         <!--底部-->
         <footer>
-            <div class="footer" style="color:#8790a">
+            <div class="footer">
                 <div class="footer_content">
                     <div class="footer-main">
                         <div class="footer_left">
@@ -273,8 +273,14 @@ import Vue from "vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
     name: "app",
+      provide () {
+    return {
+      reload: this.reload
+    }
+  },
     data() {
         return {
+            isRouterAlive: true,
             // container_test:"container_test",
             pageView: "page-view",
             utc: null,
@@ -353,6 +359,12 @@ export default {
     },
     methods: {
         // header动画效果
+         reload () {
+      this.isRouterAlive = false
+      this.$nextTick(function () {
+        this.isRouterAlive = true
+      })
+    },
         handleScroll () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
             if (scrollTop > 0) {

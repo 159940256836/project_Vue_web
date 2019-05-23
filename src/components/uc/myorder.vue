@@ -3,7 +3,17 @@
     <div class="nav-right">
       <div class="bill_box_order">
         <div class="order_box">
-          <Tabs value="name1" @on-click="showItem">
+          <Tabs value="name5" @on-click="showItem">
+            <TabPane :label="$t('uc.otcorder.all')" name="name5">
+              <div class="order-table">
+                <Table :no-data-text="$t('common.nodata')" stripe :columns="tableColumnsOrder" :data="tableOrder" :loading="loading" :disabled-hover="true"></Table>
+                <div style="margin: 10px;overflow: hidden" class="page">
+                  <div style="float: right;">
+                    <Page v-if="totalPage > 0" :total="totalNum" :current="currentPage" show-total @on-change="changePage" :page-size="pageSize"></Page>
+                  </div>
+                </div>
+              </div>
+            </TabPane>
             <TabPane :label="$t('uc.otcorder.unpaid')" name="name1">
               <div class="order-table">
                 <Table :no-data-text="$t('common.nodata')" stripe :columns="tableColumnsOrder" :data="tableOrder" :loading="loading" :disabled-hover="true"></Table>
@@ -69,7 +79,7 @@ export default {
     return {
       ordKeyword: "",
       choseBtn: 0,
-      whichItem: 1,
+      whichItem: 5,
       tableOrder: [],
       loading: true,
       totalPage: 0,
@@ -94,6 +104,8 @@ export default {
         this.getOrder(0, pageNo);
       } else if (this.whichItem == 4) {
         this.getOrder(4, pageNo);
+      }else if(this.whichItem == 5){
+        this.getOrder(null,pageNo)
       }
     },
     getOrder(status, pageNo) {
@@ -123,6 +135,9 @@ export default {
       this.tableOrder = [];
       let params = {};
       params["status"] = this.whichItem;
+      if(params.status==5){
+        params.status="";
+      }
       params["pageNo"] = 0;
       params["pageSize"] = this.pageSize;
       if (this.ordKeyword != "") {
@@ -152,6 +167,8 @@ export default {
         this.whichItem = 0;
       } else if (name == "name4") {
         this.whichItem = 4;
+      } else if(name == "name5"){
+        this.whichItem = 5;
       }
       this.changePage(0);
     },
