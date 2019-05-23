@@ -2,9 +2,9 @@
     <div class="nav-rights">
         <div class="nav-right">
             <div class="blc_box">
-                <span>赠送时间:&nbsp;</span>
-                <DatePicker type="daterange" placeholder="请输入你要查询的日期" style="width: 200px" v-model="rangeDate" :editable="false"></DatePicker>
-                <button class="search_btn" @click="serar">搜索</button>
+                <span>{{$t('pointPage.giftTime')}}:&nbsp;</span>
+                <DatePicker type="daterange" :placeholder="$t('pointPage.enterTime')" style="width: 200px" v-model="rangeDate" :editable="false"></DatePicker>
+                <button class="search_btn" @click="serar">{{$t('pointPage.search')}}</button>
             </div>
             <div class="blc-table">
                 <Table stripe :columns="tableColumnsBlc" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
@@ -38,22 +38,7 @@ export default {
             startTime: "",
             endTime: "",
             rangeDate: "",
-            tableColumnsBlc: [
-                {
-                    title: "活动名称",
-                    key: "giftName",
-                },
-                {
-                    title: "赠送数量",
-                    render:(h,params)=>{
-                        return h("div",{},params.row.giftAmount+" "+params.row.giftCoin)
-                    }
-                },
-                {
-                    title: "时间",
-                    key: "createTime",
-                },
-            ],
+
             tableMoney: [],
             loading: true,
             totalElement: 0
@@ -103,6 +88,26 @@ export default {
         },
         formatTime(date) {
             return moment(date).format("YYYY-MM-DD HH:mm:ss")
+        }
+    },
+    computed: {
+        tableColumnsBlc() {
+            const arr = [];
+            arr.push({
+                title: this.$t('pointPage.activity'),
+                key: "giftName",
+            });
+            arr.push({
+                title: this.$t('pointPage.QuantityGiven'),
+                render: (h, params) => {
+                    return h("div", {}, params.row.giftAmount + " " + params.row.giftCoin)
+                }
+            });
+            arr.push({
+                title: this.$t('pointPage.time'),
+                key: "createTime",
+            })
+            return arr;
         }
     }
 };

@@ -4,8 +4,8 @@
             <div class="hidden-assets">
             <span>{{$t('myAccount._display')}}:</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-                <span slot="open">开</span>
-                <span slot="close">关</span>
+                <span slot="open"></span>
+                <span slot="close"></span>
             </i-switch>
             </div>
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>

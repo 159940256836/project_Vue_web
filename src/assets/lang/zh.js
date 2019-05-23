@@ -4,6 +4,11 @@ const c = require("./feelevel").zh; //积分说明页面
 const myAccount = require('./moneyIndexPage').zh; //个人资产
 const Ieo = require("./ieo").zh; //ieo
 const paper = require("./otcPaper").zh; //法币
+const pointPage = require("./point").zh; //积分管理
+const historyAndCu = require('./record').zh; //下单记录以及历史记录
+const ieoAdmin = require('./ieoAdmin').zh; //ieo管理
+const apiAdmin = require('./apiAdmin').zh; //ieo管理
+const coin = require("./coins").zh //币币
 module.exports = {
     openGoolePage: a,
     recommendPage: b,
@@ -11,6 +16,11 @@ module.exports = {
     myAccount: myAccount,
     Ieo: Ieo,
     paper: paper,
+    pointPage: pointPage,
+    historyAndCu: historyAndCu,
+    ieoAdmin: ieoAdmin,
+    apiAdmin: apiAdmin,
+    coin: coin,
     topInfo: {
         name: '币多网--国际数字加密资产交易平台',
     },
@@ -479,6 +489,8 @@ module.exports = {
             pointManagement: "积分管理",
             CandyGivingRecords: "糖果赠送记录",
             center: '财务中心',
+            Quantityofarrival: "到账数量",
+            currency: "币种",
             personalassets: '个人资产',
             billdetail: '资产流水',
             tradetail: '交易挖矿',
@@ -493,6 +505,7 @@ module.exports = {
                 operate: '操作',
                 charge: '充币',
                 pickup: '提币',
+
                 getaddress: '获取地址',
                 resetsuccess: '获取地址成功请稍后',
                 match: '配对',
@@ -728,7 +741,7 @@ module.exports = {
             country: '国家',
             smscode: '短信验证码',
             sendcode: '发送验证码',
-            pwd: '登录密码(八位以上字母加数字)',
+            pwd: '登录密码(8-16位字母加数字)',
             confrimpwd: '确认密码',
             agentcode: '推荐码',
             agreement: '我已阅读并同意',
@@ -746,7 +759,7 @@ module.exports = {
             usernamemsg: '用户名长度不能少于3位,多于15位',
             countrytip: '请选择国家',
             smscodetip: '请输入短信验证码',
-            pwdtip: '请输入六位以上大小写加数字登录密码',
+            pwdtip: '请输入8-16位字母加数字登录密码',
             pwdmsg: '密码长度不能少于6位',
             telno: '手机号',
             email: '邮箱',
@@ -798,7 +811,7 @@ module.exports = {
             confirmpwd: '确认密码',
             oldfundpwd: '原资金密码',
             newfundpwd: '新资金密码',
-            newpwdmsg1: '请输入6位以上大小写加数字新登录密码',
+            newpwdmsg1: '请输入8-16位字母加数字新登录密码',
             newpwdmsg2: '新登录密码不一致',
             pwdmsg1: '请输入6位数字密码',
             pwdmsg2: '密码不一致',
