@@ -1,5 +1,12 @@
 <template>
     <div class="specail" style="min-height:519px;">
+        <div class="header-title">
+            <span>绑定谷歌</span>
+            <span @click="returnSuperior">
+                <Icon type="ios-undo" style="font-size: 18px;" />
+                返回安全设置
+            </span>
+        </div>
         <div class="wrapper">
             <div class="qrclass">
                 <img src="../../assets/images/goole_Android.png" alt="">
@@ -79,6 +86,10 @@ export default {
         })
     },
     methods: {
+        // 点击返回上个页面
+        returnSuperior () {
+            this.$router.push({path: '/uc/safe'})
+        },
         init() {
             return this.$http.get(this.host + `/uc/google/sendgoogle`).then(res => {
                 const resp = res.body;
@@ -148,8 +159,6 @@ export default {
     },
     mounted() {
         const link = this.data.link;
-
-
     }
 }
 </script>
@@ -163,6 +172,27 @@ $color: #2d8cf0;
 .specail {
     padding: 100px 25%;
     overflow: hidden;
+    .header-title {
+        height: 50px;
+        line-height: 50px;
+        color: #333;
+        font-size: 14px;
+        padding: 0 25px;
+        border-bottom: 1px solid #eee;
+        background: #fafafd;
+        box-sizing: border-box;
+        margin-bottom: 50px;
+        span {
+            &:first-child {
+                float: left;
+                font-weight: 600;
+            }
+            &:last-child {
+                float: right;
+                cursor: pointer;
+            }
+        }
+    }
     .wrapper {
         @extend %flex;
          margin-bottom: 30px;

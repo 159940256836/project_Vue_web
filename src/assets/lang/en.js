@@ -8,6 +8,7 @@ const pointPage = require("./point").en; //积分管理
 const historyAndCu = require('./record').en; //交易记录
 const ieoAdmin = require('./ieoAdmin').en; //ieo管理
 const apiAdmin = require('./apiAdmin').en; //ieo管理
+const coin = require("./coins").en;
 module.exports = {
     openGoolePage: a,
     recommendPage: b,
@@ -19,6 +20,7 @@ module.exports = {
     historyAndCu: historyAndCu,
     ieoAdmin: ieoAdmin,
     apiAdmin: apiAdmin,
+    coin: coin,
     topInfo: {
         name: '币多网--International Digital encryption asset trading platform',
     },

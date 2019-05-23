@@ -1,26 +1,41 @@
 <template>
-    <div class="openGoogleModal common">
-        <!-- <Modal v-model="openGoogleModal" :title="title" :footer-hide="true"> -->
-        <Form ref="formInline" :model="formInline" :rules="ruleInline" label-position="top">
-            <FormItem label="手机号">
-                <p style="background:rgb(247, 244, 253);padding:5px;font-size:16px;">{{phone|addStart}}</p>
-            </FormItem>
-            <FormItem label="短信验证码" prop="code">
-                <Input type="text" v-model="formInline.code" placeholder="短信验证码">
-                <Button slot="append" @click="getCode" :disabled="disabled">{{getCodeText}}</Button>
-                </Input>
-            </FormItem>
-            <FormItem label="谷歌验证码" prop="googleCode">
-                <Input type="text" v-model="formInline.googleCode" placeholder="谷歌验证码">
-                </Input>
-            </FormItem>
-        </Form>
-        <div class="btns" style="display:flex;justify-content:space-around;align-items:center;">
-            <Button @click="cancel">取消</Button>
-            <Button type="primary" @click="sureBtn('formInline')">确认</Button>
+    <div class="openGoogle common">
+        <div class="header-title">
+            <span>关闭谷歌</span>
+            <span @click="returnSuperior">
+                <Icon type="ios-undo" style="font-size: 18px;" />
+                返回安全设置
+            </span>
         </div>
-        <!-- </Modal> -->
+        <div class="openGoogleModal">
+            <!-- <Modal v-model="openGoogleModal" :title="title" :footer-hide="true"> -->
+            <Form ref="formInline" :model="formInline" :rules="ruleInline" label-position="top">
+                <FormItem label="手机号">
+                    <p style="background:rgb(247, 244, 253);padding:5px;font-size:16px;">
+                        {{phone|addStart}}
+                        <!--{{ phone.substring(0,2)}}
+                        ****
+                        {{ phone.substring(9,11)}}-->
+                    </p>
+                </FormItem>
+                <FormItem label="短信验证码" prop="code">
+                    <Input type="text" v-model="formInline.code" placeholder="短信验证码">
+                        <Button slot="append" @click="getCode" :disabled="disabled">{{getCodeText}}</Button>
+                    </Input>
+                </FormItem>
+                <FormItem label="谷歌验证码" prop="googleCode">
+                    <Input type="text" v-model="formInline.googleCode" placeholder="谷歌验证码">
+                    </Input>
+                </FormItem>
+            </Form>
+            <div class="btns" style="display:flex;justify-content:space-around;align-items:center;">
+                <Button @click="cancel">取消</Button>
+                <Button type="primary" @click="sureBtn('formInline')">确认</Button>
+            </div>
+            <!-- </Modal> -->
+        </div>
     </div>
+
 </template>
 <script>
 import { minHeightMinx } from "../../minxs/minxs"
@@ -53,13 +68,18 @@ export default {
         } else {
             this.$router.go(-1);
         }
+        this.getMember()
     },
     filters: {
         addStart(str) {
-            return str.slice(0, 3) + "****" + str.slice(7)
+            return str.slice(0, 3) + "****" + str.slice(8, 11)
         }
     },
     methods: {
+        // 点击返回上个页面
+        returnSuperior () {
+            this.$router.push({path: '/uc/safe'})
+        },
         jcgoogle(params) {
             this.$http.post(this.host+"/uc/google/jcgoogle",params).then(res=>{
                 const resp = res.body;
@@ -73,8 +93,8 @@ export default {
                     },1000)
                 }else{
                     this.$Notice.error({
-                        title: this.$t("common.tip"), 
-                        desc: resp.message 
+                        title: this.$t("common.tip"),
+                        desc: resp.message
                     });
                 }
             })
@@ -121,20 +141,44 @@ export default {
             })
         }
     }
-
 }
 </script>
 <style lang="scss" scoped>
-.openGoogleModal .ivu-btn-warning{
-    background:#3399ff !important;
-    border-color:#3399ff !important;
-    
+.openGoogle {
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 150px;
+    .openGoogleModal .ivu-btn-warning{
+        background:#3399ff !important;
+        border-color:#3399ff !important;
+    }
+    .openGoogleModal {
+        padding: 100px 25%;
+        overflow: hidden;
+        min-height: 609px !important;
+    }
+    .header-title {
+        height: 50px;
+        line-height: 50px;
+        color: #333;
+        font-size: 14px;
+        padding: 0 25px;
+        border-bottom: 1px solid #eee;
+        background: #fafafd;
+        box-sizing: border-box;
+        span {
+            &:first-child {
+                float: left;
+                font-weight: 600;
+            }
+            &:last-child {
+                float: right;
+                cursor: pointer;
+            }
+        }
+    }
 }
-.openGoogleModal {
-    padding: 100px 35%;
-    overflow: hidden;
-    min-height: 609px !important;
-}
+
 </style>
 
 

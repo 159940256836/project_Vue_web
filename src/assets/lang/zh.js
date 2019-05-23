@@ -8,6 +8,7 @@ const pointPage = require("./point").zh; //积分管理
 const historyAndCu = require('./record').zh; //下单记录以及历史记录
 const ieoAdmin = require('./ieoAdmin').zh; //ieo管理
 const apiAdmin = require('./apiAdmin').zh; //ieo管理
+const coin = require("./coins").zh //币币
 module.exports = {
     openGoolePage: a,
     recommendPage: b,
@@ -19,6 +20,7 @@ module.exports = {
     historyAndCu: historyAndCu,
     ieoAdmin: ieoAdmin,
     apiAdmin: apiAdmin,
+    coin: coin,
     topInfo: {
         name: '币多网--国际数字加密资产交易平台',
     },
