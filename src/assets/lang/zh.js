@@ -4,6 +4,7 @@ const c = require("./feelevel").zh; //积分说明页面
 const myAccount = require('./moneyIndexPage').zh; //个人资产
 const Ieo = require("./ieo").zh; //ieo
 const paper = require("./otcPaper").zh; //法币
+const coin = require("./coins").zh//币币
 module.exports = {
     openGoolePage: a,
     recommendPage: b,
@@ -11,6 +12,7 @@ module.exports = {
     myAccount: myAccount,
     Ieo: Ieo,
     paper: paper,
+    coin: coin,
     topInfo: {
         name: '币多网--国际数字加密资产交易平台',
     },

@@ -4,6 +4,7 @@ const c = require("./feelevel").en; //积分说明页面
 const myAccount = require('./moneyIndexPage').en; //个人资产
 const Ieo = require("./ieo").en; //ieo
 const paper = require("./otcPaper").en; //法币
+const coin = require("./coins").en;//币币
 module.exports = {
     openGoolePage: a,
     recommendPage: b,
@@ -11,6 +12,7 @@ module.exports = {
     myAccount: myAccount,
     paper: paper,
     Ieo: Ieo,
+    coin: coin,
     topInfo: {
         name: '币多网--International Digital encryption asset trading platform',
     },
