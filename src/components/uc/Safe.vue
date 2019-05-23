@@ -17,7 +17,7 @@
                             <div>用户UID:&nbsp;&nbsp;{{uid}}</div>
                             </Col>
                             <Col span="8">
-                            <div>用户等级:&nbsp;&nbsp;{{memberlevel}}</div>
+                            <div>{{$t("uc.safe.safelevel_low")}}:&nbsp;&nbsp;{{memberlevel}}</div>
                             </Col>
                         </Row>
                     </div>
@@ -766,16 +766,16 @@
                                 <div class="account-item-in" style="width: 100%;">
                                     <Icon type="social-googleplus-outline"  />
                                     <Icon type="logo-google" size="20" color="#00b5f6"/>
-                                    <span class="card-number">谷歌验证</span>
+                                    <span class="card-number">{{$t("uc.safe.GoogleAuthentication")}}</span>
                                     <p class="bankInfo" style="color: grey; width: 66%">
-                                        提现，修改密码，及安全设置的时候用以输入google验证码，详细信息请阅读
-                                        <a href="">使用指南</a>
+                                        {{$t('uc.safe.GoogleAuthenticationAbs')}}
+                                        <a href="">{{$t('uc.safe.userguide')}}</a>
                                     </p>
                                     <div class="google-info">
                                         <router-link to="/OpenGoogleVali">{{googleAuthentication}}</router-link>
                                         <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-                                            <span slot="open">开</span>
-                                            <span slot="close">关</span>
+                                            <span slot="open"></span>
+                                            <span slot="close"></span>
                                         </i-switch>
                                     </div>
                                 </div>

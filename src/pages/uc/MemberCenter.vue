@@ -175,11 +175,11 @@
     <div class="mymsg_wrapper">
         <div class="wrapper">
             <Menu :active-name="activename" :open-names="opennames" @on-open-change="sss" ref="test" :accordion="true">
-                <div class="title">个人中心</div>
+                <div class="title">{{$t("uc.title")}}</div>
                 <Submenu name="1">
                     <template slot="title">
                         <span class="isclick"></span>
-                        <span class="content">账户管理</span>
+                        <span class="content">{{$t("uc.menuTitle.AccountManagement")}}</span>
                     </template>
                     <Menu-item name="1-1">
                         <router-link to="/uc/safe">{{$t('uc.member.securitysetting')}}</router-link>
@@ -191,13 +191,13 @@
                         <router-link to="/uc/myextension">{{$t('uc.member.myextension')}}</router-link>
                     </Menu-item>
                     <Menu-item name="1-4">
-                        <router-link to="/uc/feeLevel">手续费等级</router-link>
+                        <router-link to="/uc/feeLevel">{{$t('uc.member.FeeGrade')}}</router-link>
                     </Menu-item>
                 </Submenu>
                 <Submenu name="2">
                     <template slot="title">
                         <span class="isclick"></span>
-                        <span class="content">资产管理</span>
+                        <span class="content">{{$t("uc.menuTitle.moneyManagement")}}</span>
                     </template>
                     <Menu-item name="2-1">
                         <router-link to="/uc/money">{{$t('uc.finance.personalassets')}}</router-link>
@@ -224,28 +224,28 @@
                         <router-link to="/uc/blc">币理财管理</router-link>
                     </Menu-item> -->
                     <Menu-item name="2-8">
-                        <router-link to="/uc/bjc">积分管理</router-link>
+                        <router-link to="/uc/bjc">{{$t('uc.finance.pointManagement')}}</router-link>
                     </Menu-item>
                     <Menu-item name="2-9">
-                        <router-link to="/uc/giveRecord">糖果赠送记录</router-link>
+                        <router-link to="/uc/giveRecord">{{$t('uc.finance.CandyGivingRecords')}}</router-link>
                     </Menu-item>
                 </Submenu>
                 <Submenu name="3">
                     <template slot="title">
                         <span class="isclick"></span>
-                        <span class="content">币币管理</span>
+                        <span class="content">{{$t("uc.menuTitle.bibiManagement")}}</span>
                     </template>
                     <Menu-item name="3-1">
-                        <router-link to="/uc/entrust/current">当前委托</router-link>
+                        <router-link to="/uc/entrust/current">{{$t("exchange.curdelegation")}}</router-link>
                     </Menu-item>
                     <Menu-item name="3-2">
-                        <router-link to="/uc/entrust/history">历史委托</router-link>
+                        <router-link to="/uc/entrust/history">{{$t("exchange.hisdelegation")}}</router-link>
                     </Menu-item>
                 </Submenu>
                 <Submenu name="4">
                     <template slot="title">
                         <span class="isclick"></span>
-                        <span class="content">法币管理</span>
+                        <span class="content">{{$t("uc.menuTitle.otcManagement")}}</span>
                     </template>
                     <Menu-item name="4-1">
                         <router-link to="/uc/ad">{{$t('otc.myad.title')}}</router-link>
@@ -257,31 +257,31 @@
                 <Submenu name="5">
                     <template slot="title">
                         <span class="isclick"></span>
-                        <span class="content">IEO管理</span>
+                        <span class="content">{{$t("uc.menuTitle.ieoManagement")}}</span>
                     </template>
                     <Menu-item name="5-1">
-                        <router-link to="/uc/ieoadmin">IEO管理</router-link>
+                        <router-link to="/uc/ieoadmin">{{$t("uc.menuTitle.ieoManagement")}}</router-link>
                     </Menu-item>
                 </Submenu>
                 <Submenu name="6">
                     <template slot="title">
                         <span class="isclick"></span>
-                        <span class="content">API管理</span>
+                        <span class="content">{{$t("uc.menuTitle.apiManagement")}}</span>
                     </template>
                     <MenuItem name="6-1">
-                    <router-link to="/uc/apiManage">API管理</router-link>
+                    <router-link to="/uc/apiManage">{{$t("uc.menuTitle.apiManagement")}}</router-link>
                     </MenuItem>
                 </Submenu>
                 <Submenu name="7">
                     <template slot="title">
                         <span class="isclick"></span>
-                        <span class="content">杠杆交易管理</span>
+                        <span class="content">{{$t("uc.menuTitle.leverManagement")}}</span>
                     </template>
                     <MenuItem name="7-1">
-                    <router-link to="/uc/level/current">当前委托</router-link>
+                    <router-link to="/uc/level/current">{{$t("exchange.curdelegation")}}</router-link>
                     </MenuItem>
                     <MenuItem name="7-2">
-                    <router-link to="/uc/level/history">历史委托</router-link>
+                    <router-link to="/uc/level/history">{{$t("exchange.hisdelegation")}}</router-link>
                     </MenuItem>
                 </Submenu>
             </Menu>
