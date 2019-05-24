@@ -238,7 +238,6 @@ export default {
         var actions = [];
         if (params.row.coin.canRecharge == 1) {
           if (params.row.address != null && params.row.address != "") {
-            //   console.log(self.$t('uc.finance.money.charge'));
             // 充币
             actions.push(
                 h(
@@ -288,7 +287,6 @@ export default {
           }
         }
         if (params.row.coin.canWithdraw == 1) {
-          // console.log(self.$t('uc.finance.money.pickup'));
           // 提币;
           actions.push(
               h(

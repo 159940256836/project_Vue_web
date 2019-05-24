@@ -363,7 +363,6 @@ export default {
             this.$http.post(this.host + this.api.common.area).then(response => {
                 let resp = response.body;
                 this.areas = resp.data;
-                console.log(this.areas);
                 if(this.areas!=null){
                     this.formInline.country = this.areas[0].zhName;
                     this.formInline.areaCode = this.areas[0].areaCode;
@@ -400,7 +399,7 @@ export default {
                 promotion: forminline.agentcode,
                 superPartner: ""
             };
-            this.$http.post(this.host + '/uc/register/email', params).then(response => {
+            this.$http.post(this.host + 'uc/register/email', params).then(response => {
                 let resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({

@@ -1055,9 +1055,11 @@ export default {
       this.advertiment.columns[0].title = this.$t("otc.merchant");
       this.advertiment.columns[1].title = this.$t("otc.volume");
       this.advertiment.columns[2].title = this.$t("otc.paymethod");
-      this.advertiment.columns[2].title = this.$t("otc.amount");
-      this.advertiment.columns[2].title = this.$t("otc.price_coin");
-      this.advertiment.columns[2].title = this.$t("otc.operate");
+      this.advertiment.columns[3].title = this.$t("otc.amount");
+      this.advertiment.columns[4].title = this.$t("paper.quota");
+      this.advertiment.columns[5].title = this.$t("paper.unit");
+      // this.advertiment.columns[2].title = this.$t("otc.price_coin");
+      this.advertiment.columns[6].title = this.$t("otc.operate");
     },
     loadAd(pageNo, advertiseType, table) {
       //获取广告

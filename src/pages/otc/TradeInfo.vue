@@ -309,7 +309,7 @@ export default {
           param["amount"] = this.nuyNum;
           param["remark"] = this.nuyNum;
           this.$http
-            .post(this.host + "/otc/order/sell", param)
+            .post(this.host + "otc/order/sell", param)
             .then(response => {
               this.btnDisabled = false;
               var resp = response.body;

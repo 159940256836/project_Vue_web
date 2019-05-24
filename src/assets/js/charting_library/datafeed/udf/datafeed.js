@@ -85,7 +85,6 @@ Datafeeds.UDFCompatibleDatafeed.prototype.onInitialized = function() {
 Datafeeds.UDFCompatibleDatafeed.prototype._logMessage = function(message) {
     if (this._enableLogging) {
         var now = new Date();
-        console.log(now.toLocaleTimeString() + '.' + now.getMilliseconds() + '> ' + message);
     }
 };
 
@@ -380,7 +379,6 @@ Datafeeds.UDFCompatibleDatafeed.prototype.getBars = function(symbolInfo, resolut
             onDataCallback(bars, { noData: nodata, nextTime: data.nb || data.nextTime });
         })
         .fail(function(arg) {
-            console.warn(['getBars(): HTTP error', arg]);
 
             if (!!onErrorCallback) {
                 onErrorCallback('network error: ' + JSON.stringify(arg));

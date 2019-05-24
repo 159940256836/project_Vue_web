@@ -9,6 +9,7 @@ const historyAndCu = require('./record').en; //交易记录
 const ieoAdmin = require('./ieoAdmin').en; //ieo管理
 const apiAdmin = require('./apiAdmin').en; //ieo管理
 const coin = require("./coins").en;
+const footer = require("./footer").en //底部
 module.exports = {
     openGoolePage: a,
     recommendPage: b,
@@ -21,6 +22,7 @@ module.exports = {
     ieoAdmin: ieoAdmin,
     apiAdmin: apiAdmin,
     coin: coin,
+    footer: footer,
     topInfo: {
         name: '币多网--International Digital encryption asset trading platform',
     },
@@ -40,13 +42,15 @@ module.exports = {
         index: 'INDEX',
         otc: 'OTC',
         exchange: 'EXCHANGE',
-        lever: "EVERAGED TRANSACTION",
+        // lever: "EVERAGED TRANSACTION",
+        lever: "Leveraged",
         xiaoxi: 'MESSAGE',
         help: "HELP",
         kefu: 'HELP',
         login: 'LOGIN',
         register: 'REGISTER',
-        asset: 'CLASSY COIN OPTIMIZATION',
+        // asset: 'CLASSY COIN OPTIMIZATION',
+        asset:'On the currency',
         otcOrder: 'ORDER',
         ucenter: 'ACCOUNT',
         service: 'Announcement',
@@ -221,7 +225,10 @@ module.exports = {
         chat: {
             seller: 'Seller',
             buyer: 'Buyer',
+            orderDetails: "The order details",
             exchangeamount: 'Exchange amount',
+            openDesktopAlerts: "Enable desktop message alerts",
+            openchoiceAlerts: "Enable voice message alerts",
             operatetip: 'Operate tip',
             operatetip_1: 'Please complete the payment in accordance with the account given by the other party within the time limit and click on this page.',
             finishpayment: 'payment completed',
@@ -434,13 +441,13 @@ module.exports = {
     uc: {
         title: "my center",
         menuTitle: {
-            AccountManagement: "Account management",
-            moneyManagement: "Asset Management",
-            bibiManagement: "Bitcoin management",
-            otcManagement: "legal tender management",
-            ieoManagement: "IEO management",
-            apiManagement: "API Management",
-            leverManagement: "leveraged Management"
+            AccountManagement: "Account",
+            moneyManagement: "Asset",
+            bibiManagement: "Bitcoin",
+            otcManagement: "Legal Tender",
+            ieoManagement: "IEO",
+            apiManagement: "API",
+            leverManagement: "leveraged"
         },
         login: {
             noaccount: 'No Account？To Regist',
@@ -766,7 +773,7 @@ module.exports = {
             safelevel_high: 'identityAuthentication',
             safelevel_medium: 'Audit failed',
             againVerify: "again verify",
-            GoogleAuthentication: "Google authentication",
+            GoogleAuthentication: "Google",
             GoogleAuthenticationAbs: 'When withdrawing deposits, changing passwords and security Settings, use the Google verification code you have entered. Please read the',
             userguide: "user guide",
             nickname: 'Nickname',
@@ -991,28 +998,6 @@ module.exports = {
         // message3: '币多网 Exchange supports 10,00 transactions per second, giving users a hearty transaction experience',
         message4: 'Multi-terminal APP, easily traded between',
         message5: '币多网 international digital encryption asset trading platform mobile client, focusing on palm trading experience',
-    },
-    footer: {
-        wechatkefu: "wechat service",
-        gsmc: 'International digital encrypt asset trading platform',
-        bah: 'No. 13026899 -3, Shanghai ICP',
-        gsjj: 'Profile',
-        gywm: 'About Us',
-        jrwm: 'Join Us',
-        biyong: 'BiYong',
-        lxwm: 'Contact us',
-        yqlj: 'Links',
-        bzzx: 'Help',
-        xsrm: " A beginner's course",
-        czzn: 'Recharge Guide',
-        jyzn: 'Trade Guide',
-        ptsm: 'Explain',
-        fysm: 'Fees',
-        fwtk: 'Service Policy',
-        fltk: 'legal Policy',
-        wechat: "Wechat Customer Service",
-        xszn: "Beginner's Guide",
-        cjwt: "FAQ"
     },
     index: {
         circulation: 'Safety and development fund circulation',

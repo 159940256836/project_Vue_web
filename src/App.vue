@@ -13,7 +13,7 @@
                     <div class="netLogo">
                         <router-link to="/"><img src="./assets/images/logo.png" alt=""></router-link>
                     </div>
-                    <div class="nav">
+                    <div class="nav" :class="locale == 'en' ? 'en' : ''">
                         <!--<router-link to="/">{{$t("header.index")}}</router-link>-->
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
                         <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
@@ -46,6 +46,17 @@
                                 <div class="mymsg">
                                     <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
                                 </div>
+                                 <Dropdown>
+                                    <a href="javascript:void(0)">
+                                        <span class="header-img">资产管理</span>
+                                        <Icon type="md-arrow-dropdown" size="16" />
+                                    </a>
+                                    <DropdownMenu slot="list">
+                                        <DropdownItem><span @click="goBi('/uc/recharge')">充币</span></DropdownItem>
+                                        <DropdownItem><span @click="goBi('/uc/withdraw')">提币</span></DropdownItem>
+
+                                    </DropdownMenu>
+                                </Dropdown>
                                 <Dropdown>
                                     <a href="javascript:void(0)">
                                         <!-- <Icon type="person"></Icon> -->
@@ -61,6 +72,7 @@
                                         </div>
                                     </DropdownMenu>
                                 </Dropdown>
+                                
                             </div>
                             <!-- 未登录 -->
                             <div class="login_register" v-else>
@@ -115,44 +127,44 @@
                             <!--下载支持-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>{{$t("footer.gsjj")}}</span>
+                                    <span>{{$t("footer.download")}}</span>
                                 </li>
                                 <li>
-                                    <router-link to="/">{{$t("footer.gywm")}}</router-link>
+                                    <router-link to="/">{{$t("footer.apiDoc")}}</router-link>
                                 </li>
                                  <li>
-                                    <router-link to="/">{{$t("footer.gywm1")}}</router-link>
+                                    <router-link to="/">{{$t("footer.appDownload")}}</router-link>
                                 </li>
                                  <li>
-                                    <router-link to="/">{{$t("footer.gywm2")}}</router-link>
+                                    <router-link to="/">{{$t("footer.otherDownload")}}</router-link>
                                 </li>
 
                             </ul>
                             <!--客户服务-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>{{$t("footer.bzzx")}}</span>
+                                    <span>{{$t("footer.helpCenter")}}</span>
                                 </li>
                                 <li>
-                                    <router-link to="/helplist?cate=0&cateTitle=使用教程">{{$t("footer.xszn")}}</router-link>
+                                    <router-link to="/helplist?cate=0&cateTitle=使用教程">{{$t("footer.RecommendedCommission")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/helplist?cate=1&cateTitle=常见问题">{{$t("footer.cjwt")}}</router-link>
+                                    <router-link to="/helplist?cate=1&cateTitle=常见问题">{{$t("footer.question")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">服务协议</router-link>
+                                    <router-link to="/">{{$t("footer.serviceArgee")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">交易费率</router-link>
+                                    <router-link to="/">{{$t("footer.transactionCosts")}}</router-link>
                                 </li>
                             </ul>
                             <!--投票上币-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>{{$t("footer.lxwm")}}</span>
+                                    <span>{{$t("footer.voteBi")}}</span>
                                 </li>
                                 <li class="wechatclick">
-                                    <router-link to="/">我要投票</router-link>
+                                    <router-link to="/">{{$t("footer.shallVote")}}</router-link>
                                     <!--                                <poptip width="200">-->
                                     <!--                                    <a href="javascript:;" class="wechat">客服邮箱</a>-->
                                     <!--                                    &lt;!&ndash; <div slot="content">-->
@@ -161,41 +173,41 @@
                                     <!--                                </poptip>-->
                                 </li>
                                 <li>
-                                    <router-link to="/">上币申请</router-link>
+                                    <router-link to="/">{{$t("footer.coinApp")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">节点中心</router-link>
+                                    <router-link to="/">{{$t("footer.nodeCenter")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">节点列表</router-link>
+                                    <router-link to="/">{{$t("footer.nodeListenning")}}</router-link>
                                 </li>
                             </ul>
                             <!--其他-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>其他</span>
+                                    <span>{{$t('footer.other')}}</span>
                                 </li>
                                 <li>
-                                    <router-link to="/">官方公告</router-link>
+                                    <router-link to="/">{{$t('footer.officeNotice')}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">做市商计划</router-link>
+                                    <router-link to="/">{{$t('footer.marketPlan')}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">子账号管理</router-link>
+                                    <router-link to="/">{{$t('footer.SubaccountManagement')}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">调查问卷</router-link>
+                                    <router-link to="/">{{$t('footer.questionnaire')}}</router-link>
                                 </li>
 
                             </ul>
                             <!--联系我们-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>联系我们</span>
+                                    <span>{{$t('footer.concatUs')}}</span>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">服务邮箱：service@coinmany.com</a>
+                                    <a href="javascript:;">{{$t('footer.email')}}：service@coinmany.com</a>
                                 </li>
                                 <!-- <li>
                                     <span style="color: #8790a1;">企业邮箱：service@coinmany.com</span>
@@ -209,7 +221,7 @@
                 </div>
                 <div class="info">
                     <div class="footer-info">
-                        <div class="info-title">友情链接:</div>
+                        <div class="info-title">{{$t('footer.friendLinks')}}:</div>
                         <div class="info-img">
                             <a href="javascript:;">
                                 <img src="./assets/images/footer/1.png" alt="">
@@ -274,12 +286,13 @@ import { mapGetters, mapActions } from "vuex";
 export default {
     name: "app",
       provide () {
-    return {
-      reload: this.reload
-    }
+        return {
+        reload: this.reload
+        }
   },
     data() {
         return {
+            locale: '',
             isRouterAlive: true,
             // container_test:"container_test",
             pageView: "page-view",
@@ -305,6 +318,9 @@ export default {
                     window.document.title = "币多网";
                     break;
             }
+        },
+        '$i18n.locale'(newVal) {
+            this.locale = newVal;
         },
         $route(to, from) {
             if (to.path === "/") {
@@ -360,11 +376,14 @@ export default {
     methods: {
         // header动画效果
          reload () {
-      this.isRouterAlive = false
-      this.$nextTick(function () {
-        this.isRouterAlive = true
-      })
-    },
+            this.isRouterAlive = false
+            this.$nextTick(function () {
+                this.isRouterAlive = true
+            })
+        },
+        goBi(url) {
+            this.$router.push(url)
+        },
         handleScroll () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
             if (scrollTop > 0) {
@@ -480,6 +499,9 @@ export default {
                                 vertical-align: middle;
                             }
                         }
+                    }
+                    .nav.en a{
+                        margin-right:20px;
                     }
                     .nav {
                         float: left;
@@ -1116,7 +1138,7 @@ body {
                 text-align: left;
                 ul {
                     float: left;
-                    margin: 0 35px;
+                    margin: 0 15px;
                 }
                 .footer_info {
                     .footer_title {

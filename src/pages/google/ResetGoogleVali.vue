@@ -1,10 +1,10 @@
 <template>
     <div class="specail" style="min-height:519px;">
         <div class="header-title">
-            <span>绑定谷歌</span>
+            <span>{{$t('openGoolePage._openGoogle')}}</span>
             <span @click="returnSuperior">
                 <Icon type="ios-undo" style="font-size: 18px;" />
-                返回安全设置
+                {{$t('openGoolePage._returnSetting')}}
             </span>
         </div>
         <div class="wrapper">
