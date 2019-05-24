@@ -159,16 +159,16 @@
                                 </div>
                                 <div class="bd bd_limited" v-show="btnList[2].check==true">
                                     <Form ref="formValidate" :label-width="50">
-                                        <FormItem label="触发价">
+                                        <FormItem :label="$t('coin.trigger')">
                                             <Input @on-keyup="keyEvent" v-model="form.buy.stopPrice" placeholder=""></Input>
                                             <label>{{currentCoin.base}}</label>
                                             <!-- <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.buy.stopPrice*CNYRate||0|toFixed(2)}} CNY</p> -->
                                         </FormItem>
-                                        <FormItem label="买入价">
+                                        <FormItem :label="$t('coin.buying')">
                                             <Input @on-keyup="keyEvent" v-model="form.buy.stopBuyPrice" :placeholder="$t('exchange.buynum')"></Input>
                                             <label>{{currentCoin.base}}</label>
                                         </FormItem>
-                                        <FormItem label="买入量">
+                                        <FormItem :label="$t('coin.volume')">
                                             <Input @on-keyup="keyEvent" v-model="form.buy.stopBuyAmount" :placeholder="$t('exchange.buynum')"></Input>
                                             <label>{{currentCoin.coin}}</label>
                                         </FormItem>
@@ -258,16 +258,16 @@
                                 </div>
                                 <div class="bd bd_limited" v-show="btnList[2].check==true">
                                     <Form ref="formValidate" :label-width="50">
-                                        <FormItem label="触发价">
-                                            <Input @on-keyup="keyEvent" v-model="form.sell.stopPrice" placeholder="触发价"></Input>
+                                        <FormItem :label="$t('coin.trigger')">
+                                            <Input @on-keyup="keyEvent" v-model="form.sell.stopPrice" :placeholder="$t('coin.trigger')"></Input>
                                             <label>{{currentCoin.base}}</label>
                                             <!-- <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.sell.limitPrice*CNYRate||0|toFixed(2)}} CNY</p> -->
                                         </FormItem>
-                                        <FormItem label="卖出价">
+                                        <FormItem :label="$t('coin.sellingRate')">
                                             <Input @on-keyup="keyEvent" v-model="form.sell.stopBuyPrice" :placeholder="$t('exchange.sellnum')"></Input>
                                             <label>{{currentCoin.base}}</label>
                                         </FormItem>
-                                        <FormItem label="卖出量">
+                                        <FormItem :label="$t('coin.sellingVolume')">
                                             <Input @on-keyup="keyEvent" v-model="form.sell.stopBuyAmount" :placeholder="$t('exchange.sellnum')"></Input>
                                             <label>{{currentCoin.coin}}</label>
                                         </FormItem>
