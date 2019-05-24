@@ -11,24 +11,24 @@
                 </span>
             </div>
             <div class="item">
-                <span class="text">{{$t('coin.last')}}</span>
+                <span class="text">最新价</span>
                 <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.close | toFixed(baseCoinScale)}}</span>
                 <span class="price-cny">￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}</span>
             </div>
             <div class="item">
-                <span class="text">{{$t('coin.up')}}</span>
+                <span class="text">24h涨跌</span>
                 <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.rose}}</span>
             </div>
             <div class="item">
-                <span class="text">{{$t('coin.celling')}}</span>
+                <span class="text">24h最高价</span>
                 <span class="num ">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
             </div>
             <div class="item">
-                <span class="text">{{$t('coin.floor')}}</span>
+                <span class="text">24h最低价</span>
                 <span class="num ">{{currentCoin.low | toFixed(baseCoinScale)}}</span>
             </div>
             <div class="item">
-                <span class="text">{{$t('coin.turnover')}}</span>
+                <span class="text">24h成交量</span>
                 <span class="num ">{{currentCoin.volume}} {{currentCoin.coin}}</span>
             </div>
             <div class="item" @click="changeSkin">
@@ -63,7 +63,7 @@
                 <div class="trade_wrap">
                     <div class="trade_panel trade_panel_logout">
                         <div class="mask" v-show="!isLogin">
-                            <span>{{$t('coin.please')}}
+                            <span>请先
                                 <router-link to="/login">
                                     <span style="color:#3399ff;">{{$t("common.login")}}</span>
                                 </router-link> /
@@ -73,9 +73,9 @@
                             </span>
                         </div>
                         <div class="mask" v-show="isLogin&&!member.realName">
-                            <span>{{$t('coin.please')}}
+                            <span>请先
                                 <router-link to="/uc/safe">
-                                    <span style="color:#3399ff;">{{$t('coin.real')}}</span>
+                                    <span style="color:#3399ff;">实名认证</span>
                                 </router-link>
                             </span>
                         </div>
@@ -104,7 +104,7 @@
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
                                     <router-link :to="rechargeUSDTUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">{{$t('coin.transfer')}}</span>
+                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">划转</span>
                                     <!-- <a :href="rechargeUSDTUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
@@ -140,16 +140,16 @@
                                 </div>
                                 <div class="bd bd_limited" v-show="btnList[2].check==true">
                                     <Form ref="formValidate" :label-width="50">
-                                        <FormItem label="触发价">
+                                        <FormItem :label="$t('coin.trigger')">
                                             <Input @on-keyup="keyEvent" v-model="form.buy.stopPrice" placeholder=""></Input>
                                             <label>{{currentCoin.base}}</label>
                                             <!-- <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.buy.stopPrice*CNYRate||0|toFixed(2)}} CNY</p> -->
                                         </FormItem>
-                                        <FormItem label="买入价">
+                                        <FormItem :label="$t('coin.buying')">
                                             <Input @on-keyup="keyEvent" v-model="form.buy.stopBuyPrice" :placeholder="$t('exchange.buynum')"></Input>
                                             <label>{{currentCoin.base}}</label>
                                         </FormItem>
-                                        <FormItem label="买入量">
+                                        <FormItem :label="$t('coin.volume')">
                                             <Input @on-keyup="keyEvent" v-model="form.buy.stopBuyAmount" :placeholder="$t('exchange.buynum')"></Input>
                                             <label>{{currentCoin.coin}}</label>
                                         </FormItem>
@@ -202,7 +202,7 @@
                                     <b>{{wallet.coin|toFloor(coinScale)}}</b>
                                     <span>{{currentCoin.coin}}</span>
                                     <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#39f;" @click="transFerFun">{{$t('coin.transfer')}}</span>
+                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">划转</span>
                                     <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                                     <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
@@ -236,23 +236,23 @@
                                         <Button class="bg-red" @click="sellLimitPrice" v-show="isLogin" :loading="loadingButton4">
                                             <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
                                             <span>
-                                                {{ !loadingButton4 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.buyin")}}
+                                                {{ !loadingButton4 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
                                             </span>
                                         </Button>
                                     </Form>
                                 </div>
                                 <div class="bd bd_limited" v-show="btnList[2].check==true">
                                     <Form ref="formValidate" :label-width="50">
-                                        <FormItem label="触发价">
-                                            <Input @on-keyup="keyEvent" v-model="form.sell.stopPrice" placeholder="触发价"></Input>
+                                        <FormItem :label="$t('coin.trigger')">
+                                            <Input @on-keyup="keyEvent" v-model="form.sell.stopPrice" :placeholder="$t('coin.trigger')"></Input>
                                             <label>{{currentCoin.base}}</label>
                                             <!-- <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.sell.limitPrice*CNYRate||0|toFixed(2)}} CNY</p> -->
                                         </FormItem>
-                                        <FormItem label="卖出价">
+                                        <FormItem :label="$t('coin.sellingRate')">
                                             <Input @on-keyup="keyEvent" v-model="form.sell.stopBuyPrice" :placeholder="$t('exchange.sellnum')"></Input>
                                             <label>{{currentCoin.base}}</label>
                                         </FormItem>
-                                        <FormItem label="卖出量">
+                                        <FormItem :label="$t('coin.sellingVolume')">
                                             <Input @on-keyup="keyEvent" v-model="form.sell.stopBuyAmount" :placeholder="$t('exchange.sellnum')"></Input>
                                             <label>{{currentCoin.coin}}</label>
                                         </FormItem>
@@ -273,7 +273,7 @@
                                         <Button class="bg-red" @click="sellStopPrice" v-show="isLogin" :loading="loadingButton6">
                                             <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
                                             <span>
-                                                {{ !loadingButton6 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.buyin")}}
+                                                {{ !loadingButton6 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
                                             </span>
                                         </Button>
                                     </Form>
@@ -301,7 +301,7 @@
                                         <Button class="bg-red" @click="sellMarketPrice" v-show="isLogin" :loading="loadingButton5">
                                             <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
                                             <span>
-                                                {{ !loadingButton5 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.buyin")}}
+                                                {{ !loadingButton5 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
                                             </span>
                                         </Button>
                                     </Form>
@@ -317,7 +317,7 @@
                         <span @click="changeBaseCion('usdt')" :class="{active:basecion==='usdt'}">USDT</span>
                         <span @click="changeBaseCion('btc')" :class="{active:basecion==='btc'}">BTC</span>
                         <span @click="changeBaseCion('eth')" :class="{active:basecion==='eth'}">ETH</span>
-                        <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">{{$t('coin.option')}}</span>
+                        <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">自选</span>
                         <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
                         <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
                     </div>
@@ -335,8 +335,8 @@
             <div class="order-handler">
                 <span @click="changeOrder('current')" :class="{active:selectedOrder==='current'}">{{$t('exchange.curdelegation')}}</span>
                 <span @click="changeOrder('history')" :class="{active:selectedOrder==='history'}">{{$t('exchange.hisdelegation')}}</span>
-                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/entrust/current">{{$t('coin.view')}}>></router-link>
-                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/entrust/history">{{$t('coin.view')}}>></router-link>
+                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/entrust/current">查看更多>></router-link>
+                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/entrust/history">查看更多>></router-link>
             </div>
             <div class="table">
                 <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows" :loading="currentLoading"></Table>
@@ -351,7 +351,6 @@ $night-bg: #0b1520;
 $night-headerbg: #27313e;
 $night-contentbg: #192330;
 $night-color: #fff;
-
 .exchange {
     color: #fff;
     background-color: #161b25;
@@ -628,36 +627,33 @@ $night-color: #fff;
                     }
                 }
             }
-            // > span {
-            //     background-color: #fafafa;
-            //     border-right: 1px solid #f0f0f0;
-            //     &.active {
-            //         background-color: #fff;
-            //         color: #3399ff;
-            //     }
-            //     &:last-child {
-            //         border-top-right-radius: 6px;
-            //     }
-            // }
-            .ivu-icon {
-                color: #333 !important;
-            }
         }
-        .trade_panel {
-            box-shadow: 0 0 2px #ccc;
-            .mask {
-                background-color: rgba(0, 0, 0, 0.4);
-                color: #fff;
-            }
+        // > span {
+        //     background-color: #fafafa;
+        //     border-right: 1px solid #f0f0f0;
+        //     &.active {
+        //         background-color: #fff;
+        //         color: #3399ff;
+        //     }
+        //     &:last-child {
+        //         border-top-right-radius: 6px;
+        //     }
+        // }
+        .ivu-icon {
+            color: #333 !important;
         }
-        .trade_panel .panel .hd {
-            border-bottom: none;
-            b {
-                color: #333;
-            }
-            a {
-                color: #3399ff;
-            }
+    }
+    .trade_panel {
+        box-shadow: 0 0 2px #ccc;
+        .mask {
+            background-color: rgba(0, 0, 0, 0.4);
+            color: #fff;
+        }
+    }
+    .trade_panel .panel .hd {
+        border-bottom: none;
+        b {
+            color: #333;
         }
         .right {
             .coin-menu {
@@ -715,10 +711,8 @@ const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CH
 
 import DepthGraph from "@components/exchange/DepthGraph.vue";
 import $ from "@js/jquery.min.js";
-// import { tableMixins } from "../../minxs/tablemin.js"
 export default {
     components: { expandRow, DepthGraph, transfermodal },
-    // mixins: [tableMixins],
     data() {
         let self = this;
         return {
@@ -845,14 +839,6 @@ export default {
                             return b1 - a1;
                         }
                     }
-                },
-                {
-                    text: self.$t("exchange.market_price"),
-                    check: false
-                },
-                {
-                    text: "止盈止损",
-                    check: false
                 }
             ],
             sliderStep: [25, 50, 75, 100],
@@ -1041,19 +1027,6 @@ export default {
                             } else {
                                 return b1 - a1;
                             }
-                        },
-                        render: (h, params) => {
-                            const row = params.row;
-                            const className = parseFloat(row.rose) < 0 ? "sell" : "buy";
-                            return h(
-                                "span",
-                                {
-                                    attrs: {
-                                        class: className
-                                    }
-                                },
-                                row.rose
-                            );
                         }
                     }
                 ]
@@ -1293,10 +1266,10 @@ export default {
                         key: "triggerPrice"
                     },
                     {
-                        title:self.$t("coin.type"),
+                        title: self.$t("coin.type"),
                         render(h, params) {
                             return h(
-                                "span",{},map.get(params.row.type)
+                                "span", {}, map.get(params.row.type)
                             );
                         }
                     },
@@ -1390,7 +1363,7 @@ export default {
                             });
                         }
                     },
-            
+
                     {
                         title: self.$t("exchange.time"),
                         key: "time",
@@ -1399,14 +1372,14 @@ export default {
                         }
                     },
                     {
-                        title:self.$t("coin.deal"),
+                        title: self.$t("coin.deal"),
                         key: "symbol"
                     },
                     {
                         title: self.$t("coin.type"),
                         render(h, params) {
-                             return h(
-                                "span",{},map.get(params.row.type)
+                            return h(
+                                "span", {}, map.get(params.row.type)
                             );
                         }
                     },
@@ -1926,7 +1899,7 @@ export default {
             this.btnList[0].text = this.$t("exchange.limited_price");
             this.btnList[1].text = this.$t("exchange.market_price");
             this.btnList[2].text = this.$t("coin.stop");
-            
+
             // window.tvWidget.options.time_frames[0].title = this.$t("exchange.realtime");
         },
         getCNYRate() {
