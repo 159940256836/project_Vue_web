@@ -13,21 +13,21 @@
                     <div class="netLogo">
                         <router-link to="/"><img src="./assets/images/logo.png" alt=""></router-link>
                     </div>
-                    <div class="nav">
+                    <div class="nav" :class="locale == 'en' ? 'en' : ''">
                         <!--<router-link to="/">{{$t("header.index")}}</router-link>-->
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
                         <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
-                        <router-link to="/leverindex">杠杆交易</router-link>
-                        <router-link to="/Ieo">上币优选</router-link>
+                         <router-link to="/leverindex">{{$t("header.lever")}}</router-link>
+                          <router-link to="/Ieo">{{$t('header.asset')}}</router-link>
                         <!-- <router-link to="/help">帮助</router-link> -->
-                        <router-link to="/helpList">帮助</router-link>
+                        <router-link to="/helpList">{{$t('header.help')}}</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
 
 
                     </div>
                     <div class="nav-header">
                         <!--中英文切换-->
-                        <!--<div class="changelanguage">
+                        <div class="changelanguage">
                             <Dropdown @on-click="changelanguage">
                                 <a href="javascript:void(0)" style="font-size:14px;color:#fff;">
                                     {{languageValue}}
@@ -38,14 +38,25 @@
                                     <DropdownItem v-else name="cn">简体中文</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
-                        </div>-->
+                        </div>
                         <!-- 登录 -->
                         <!--:style="isLogin?'width:12%':'width:6%'"-->
                         <div class="isLoginWrapper">
                             <div class="login_register isLogin" v-if="isLogin" >
                                 <div class="mymsg">
-                                    <router-link to="/uc/safe">个人中心</router-link>
+                                    <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
                                 </div>
+                                 <Dropdown>
+                                    <a href="javascript:void(0)">
+                                        <span class="header-img">资产管理</span>
+                                        <Icon type="md-arrow-dropdown" size="16" />
+                                    </a>
+                                    <DropdownMenu slot="list">
+                                        <DropdownItem><span @click="goBi('/uc/recharge')">充币</span></DropdownItem>
+                                        <DropdownItem><span @click="goBi('/uc/withdraw')">提币</span></DropdownItem>
+
+                                    </DropdownMenu>
+                                </Dropdown>
                                 <Dropdown>
                                     <a href="javascript:void(0)">
                                         <!-- <Icon type="person"></Icon> -->
@@ -61,6 +72,7 @@
                                         </div>
                                     </DropdownMenu>
                                 </Dropdown>
+                                
                             </div>
                             <!-- 未登录 -->
                             <div class="login_register" v-else>
@@ -274,12 +286,13 @@ import { mapGetters, mapActions } from "vuex";
 export default {
     name: "app",
       provide () {
-    return {
-      reload: this.reload
-    }
+        return {
+        reload: this.reload
+        }
   },
     data() {
         return {
+            locale: '',
             isRouterAlive: true,
             // container_test:"container_test",
             pageView: "page-view",
@@ -305,6 +318,9 @@ export default {
                     window.document.title = "币多网";
                     break;
             }
+        },
+        '$i18n.locale'(newVal) {
+            this.locale = newVal;
         },
         $route(to, from) {
             if (to.path === "/") {
@@ -360,11 +376,14 @@ export default {
     methods: {
         // header动画效果
          reload () {
-      this.isRouterAlive = false
-      this.$nextTick(function () {
-        this.isRouterAlive = true
-      })
-    },
+            this.isRouterAlive = false
+            this.$nextTick(function () {
+                this.isRouterAlive = true
+            })
+        },
+        goBi(url) {
+            this.$router.push(url)
+        },
         handleScroll () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
             if (scrollTop > 0) {
@@ -480,6 +499,9 @@ export default {
                                 vertical-align: middle;
                             }
                         }
+                    }
+                    .nav.en a{
+                        margin-right:20px;
                     }
                     .nav {
                         float: left;

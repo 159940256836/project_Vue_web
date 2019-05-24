@@ -7,7 +7,7 @@
                         <div class="carl">
                             <!-- <div class="laba"> -->
                             <img style="margin: 13px;" src="../../assets/images/laba_pri.png" alt="">
-<!--                            <Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />-->
+                            <!--                            <Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />-->
                             <!-- </div> -->
                             <div class="carsoul">
                                 <div v-for="(item,index) in FAQList" class="cal_content1">
@@ -48,9 +48,9 @@
                                 <span :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.chg | formateRate}}</span>
                             </p>
                             <p class="flex">
-                                 <span class="pairs-sip sip" :class="{green: item.isGreen}" v-if="item.isGreen">{{item.close}}</span>
-                                 <span class="pairs-pri" :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.close}}</span>
-                                 <span class="white">{{item.cny}}</span>
+                                <span class="pairs-sip sip" :class="{green: item.isGreen}" v-if="item.isGreen">{{item.close}}</span>
+                                <span class="pairs-pri" :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.close}}</span>
+                                <span class="white">{{item.cny}}</span>
                             </p>
                         </div>
                         <!-- {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}} -->
@@ -74,8 +74,8 @@
             <div class="section" id="page5">
                 <div class="section-main">
                     <ul class="download">
-                        <li class="qrcode">随时随地 多平台终端交易</li>
-                        <li class="description">覆盖iOS、Android、Windows、Mac多个平台，支持全业务功能</li>
+                        <li class="qrcode">{{$t("downLoadAbs.big")}}</li>
+                        <li class="description">{{$t("downLoadAbs.small")}}</li>
                         <li>
                             <ul class="os">
                                 <li>
@@ -104,23 +104,23 @@
                 <ul>
                     <li>
                         <div><img src="../../assets/images/feature_safe.png" alt=""></div>
-                        <p class="title">现货、杠杆交易</p>
-                        <p>三倍杠杆<br>高性能撮合交易</p>
+                        <p class="title">{{$t("sectionPage.ptaqTitle")}}</p>
+                        <p>{{$t("sectionPage.leverExchange")}}<br>{{$t("sectionPage.ptaqContent")}}</p>
                     </li>
                     <li>
                         <div><img src="../../assets/images/feature_fast.png" alt=""></div>
-                        <p class="title">OTC场外交易</p>
-                        <p>支持多种法币交易<br>平台担保、快速安全</p>
+                        <p class="title">{{$t("sectionPage.ptslTitle")}}</p>
+                        <p>{{$t("sectionPage.ptslContent")}}<br>{{$t("sectionPage.newsTitle")}}</p>
                     </li>
                     <li>
                         <div><img src="../../assets/images/feature_experience.png" alt=""></div>
-                        <p class="title">金融级安全系统</p>
-                        <p>多层、多集群系统架构<br>安全稳定运营超过4年</p>
+                        <p class="title">{{$t("sectionPage.part3Title")}}</p>
+                        <p>{{$t("sectionPage.part3Content")}}<br>{{$t("sectionPage.part3Content2")}}</p>
                     </li>
                     <li>
                         <div><img src="../../assets/images/serve24.png" alt=""></div>
-                        <p class="title">专业客户服务</p>
-                        <p>24h在线客服，服务数百万用户<br>及时响应用户问题</p>
+                        <p class="title">{{$t("sectionPage.part4Title")}}</p>
+                        <p>{{$t("sectionPage.part4Content")}}<br>{{$t("sectionPage.part4Content2")}}</p>
                     </li>
                 </ul>
             </div>
@@ -149,8 +149,8 @@ export default {
     data() {
         let self = this;
         return {
-            width:220,
-            height:50,
+            width: 220,
+            height: 50,
             loading: false,
             progress: 0,
             already: 0,
@@ -807,7 +807,7 @@ export default {
                 const list = resp.recommend.map(ele => ({
                     symbol: ele.symbol,
                     chg: ele.chg,
-                    isGreen:ele.chg>0?true:false,
+                    isGreen: ele.chg > 0 ? true : false,
                     close: ele.close,
                     cny: this.round(this.mul(ele.baseUsdRate, this.CNYRate), 2),
                     trend: ele.trend
@@ -999,7 +999,7 @@ export default {
                             this.hostSymbolList.splice(index, 1, {
                                 symbol: resp.symbol,
                                 chg: resp.chg,
-                                isGreen:resp.chg>0?true:false,
+                                isGreen: resp.chg > 0 ? true : false,
                                 close: resp.close,
                                 cny: this.round(this.mul(resp.baseUsdRate, this.CNYRate), 2),
                                 trend: resp.trend
@@ -1054,14 +1054,14 @@ export default {
             return Math.round(v * t) / t;
         },
         mul(a, b) {
-            if(b!=null){
+            if (b != null) {
                 var c = 0,
-                d = a.toString(),
-                e = b.toString();
-            }else{
+                    d = a.toString(),
+                    e = b.toString();
+            } else {
                 var c = 0,
-                d = a,
-                e = b
+                    d = a,
+                    e = b
             }
             try {
                 c += d.split(".")[1].length;
@@ -1255,34 +1255,34 @@ li {
                 margin-right: 0;
             }
             p {
-              &:first-child {
-                padding: 0 20px 3px;
-              }
-              &:nth-child(2) {
-                padding: 6px 20px 0;
-                line-height: 25px;
-              }
-              span {
-                  &:last-child {
-                      float: right;
-                  }
-              }
-              .pairs {
-                  color: #fff;
-                  font-size: 14px;
-                  font-weight: 600;
-              }
-              .sip {
-                font-size: 18px;
-                font-weight: bold;
-              }
-              .pairs-sip {
-                color: #03bf7b;
-              }
-              .pairs-pri {
-                  font-size: 18px;
-                  color: #a5a9be;
-              }
+                &:first-child {
+                    padding: 0 20px 3px;
+                }
+                &:nth-child(2) {
+                    padding: 6px 20px 0;
+                    line-height: 25px;
+                }
+                span {
+                    &:last-child {
+                        float: right;
+                    }
+                }
+                .pairs {
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+                .sip {
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+                .pairs-sip {
+                    color: #03bf7b;
+                }
+                .pairs-pri {
+                    font-size: 18px;
+                    color: #a5a9be;
+                }
             }
         }
     }
@@ -1399,7 +1399,6 @@ li {
                         background: none;
                     }
                 }
-
             }
         }
         .ivu-table-wrapper {
@@ -1415,7 +1414,6 @@ li {
                 }
             }
         }
-
     }
 }
 #page4 {

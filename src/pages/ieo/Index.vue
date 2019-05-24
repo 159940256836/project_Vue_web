@@ -2,10 +2,10 @@
     <div :class="ieo_box" id="centent">
         <div class="common speicial">
             <Tabs  value="all" @on-click="tablClick" class="father">
-                <TabPane label="全部" name="all"></TabPane>
-                <TabPane label="预热中" name="ready"></TabPane>
-                <TabPane label="进行中" name="doing"></TabPane>
-                <TabPane label="已结束" name="alreadyEnd"></TabPane>
+                <TabPane :label="$t('Ieo.all')" name="all"></TabPane>
+                <TabPane :label="$t('Ieo.preheating')" name="ready"></TabPane>
+                <TabPane :label="$t('Ieo.underway')" name="doing"></TabPane>
+                <TabPane :label="$t('Ieo.finished')" name="alreadyEnd"></TabPane>
             </Tabs>
             <div class="contentWrapper">
                  <template v-if="list.length == 0">

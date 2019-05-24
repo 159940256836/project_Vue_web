@@ -1,4 +1,26 @@
-﻿module.exports = {
+﻿const a = require("./googleverify").openGoogleMapZh; //开启googoe验证的页面
+const b = require("./recommendReturn").zh; //我的推荐页面
+const c = require("./feelevel").zh; //积分说明页面
+const myAccount = require('./moneyIndexPage').zh; //个人资产
+const Ieo = require("./ieo").zh; //ieo
+const paper = require("./otcPaper").zh; //法币
+const pointPage = require("./point").zh; //积分管理
+const historyAndCu = require('./record').zh; //下单记录以及历史记录
+const ieoAdmin = require('./ieoAdmin').zh; //ieo管理
+const apiAdmin = require('./apiAdmin').zh; //ieo管理
+const coin = require("./coins").zh //币币
+module.exports = {
+    openGoolePage: a,
+    recommendPage: b,
+    leverDescPage: c,
+    myAccount: myAccount,
+    Ieo: Ieo,
+    paper: paper,
+    pointPage: pointPage,
+    historyAndCu: historyAndCu,
+    ieoAdmin: ieoAdmin,
+    apiAdmin: apiAdmin,
+    coin: coin,
     topInfo: {
         name: '币多网--国际数字加密资产交易平台',
     },
@@ -17,19 +39,35 @@
     header: {
         index: '首页',
         exchange: '币币交易',
+        lever: "杠杆交易",
         otc: '法币交易',
-        asset: '财务中心',
+        asset: '上币优选',
+        help: "帮助",
         ucenter: '账户中心',
         service: '公告',
         downloadapp: "扫码进行下载安装",
         appdownlaod: 'APP下载'
     },
+    downLoadAbs: {
+        big: "随时随地 多平台终端交易",
+        small: "覆盖iOS、Android、Windows、Mac多个平台，支持全业务功能"
+    },
     sectionPage: {
-        ptaqTitle: '平台安全',
-        ptaqContent: '采用哈希算法加密，全球领先的安全认证',
-        ptslTitle: '平台实力',
-        ptslContent: '全球最大的比特币交易平台',
-        newsTitle: '多终端APP'
+        ptaqTitle: '现货',
+        leverExchange: "三倍杠杆",
+        ptaqContent: '高性能撮合交易',
+
+        ptslTitle: 'OTC场外交易',
+        ptslContent: '支持多种法币交易',
+        newsTitle: '平台担保、快速安全',
+
+        part3Title: "金融级安全系统",
+        part3Content: '多层、多集群系统架构',
+        part3Content2: "安全稳定运营超过4年",
+
+        part4Title: "专业客户服务",
+        part4Content: '24h在线客服，服务数百万用户',
+        part4Content2: "及时响应用户问题",
     },
     nav: {
         shouye: '首页',
@@ -396,6 +434,16 @@
         }
     },
     uc: {
+        title: "个人中心",
+        menuTitle: {
+            AccountManagement: "账户管理",
+            moneyManagement: "资产管理",
+            bibiManagement: "币币管理",
+            otcManagement: "法币管理",
+            ieoManagement: "IEO管理",
+            apiManagement: "api管理",
+            leverManagement: "杠杆交易管理",
+        },
         login: {
             noaccount: '没有账号？请点击注册',
             google: "请输入谷歌验证码",
@@ -413,6 +461,7 @@
             success: '登录成功',
         },
         forget: {
+            title: "忘记密码",
             hasaccount: '已有账号？请点击登录',
             login: '登录',
             sendcode: '发送验证码',
@@ -437,7 +486,11 @@
             smswarn: '请注意查收短信',
         },
         finance: {
+            pointManagement: "积分管理",
+            CandyGivingRecords: "糖果赠送记录",
             center: '财务中心',
+            Quantityofarrival: "到账数量",
+            currency: "币种",
             personalassets: '个人资产',
             billdetail: '资产流水',
             tradetail: '交易挖矿',
@@ -452,6 +505,7 @@
                 operate: '操作',
                 charge: '充币',
                 pickup: '提币',
+
                 getaddress: '获取地址',
                 resetsuccess: '获取地址成功请稍后',
                 match: '配对',
@@ -672,6 +726,7 @@
             securitycenter: '安全中心',
             securitysetting: '安全设置',
             accountsetting: '收款方式',
+            FeeGrade: "手续费等级",
             myextension: '我的推广',
         },
         order: {
@@ -686,7 +741,7 @@
             country: '国家',
             smscode: '短信验证码',
             sendcode: '发送验证码',
-            pwd: '登录密码(六位以上大小写加数字)',
+            pwd: '登录密码(8-16位字母加数字)',
             confrimpwd: '确认密码',
             agentcode: '推荐码',
             agreement: '我已阅读并同意',
@@ -704,7 +759,7 @@
             usernamemsg: '用户名长度不能少于3位,多于15位',
             countrytip: '请选择国家',
             smscodetip: '请输入短信验证码',
-            pwdtip: '请输入六位以上大小写加数字登录密码',
+            pwdtip: '请输入8-16位字母加数字登录密码',
             pwdmsg: '密码长度不能少于6位',
             telno: '手机号',
             email: '邮箱',
@@ -713,9 +768,13 @@
             agentcodee: "请输入正确的推荐码"
         },
         safe: {
-            safelevel_low: '安全等级：低',
-            safelevel_high: '安全等级：高',
-            safelevel_medium: '安全等级：中',
+            safelevel_low: '用户等级',
+            safelevel_high: '身份认证',
+            safelevel_medium: '审核未通过',
+            againVerify: "请重试",
+            GoogleAuthentication: "谷歌验证",
+            GoogleAuthenticationAbs: '提现，修改密码，及安全设置的时候用以输入google验证码，详细信息请阅读',
+            userguide: "使用指南",
             nickname: '昵称',
             bind: '绑定',
             binded: '已绑定',
@@ -752,7 +811,7 @@
             confirmpwd: '确认密码',
             oldfundpwd: '原资金密码',
             newfundpwd: '新资金密码',
-            newpwdmsg1: '请输入6位以上大小写加数字新登录密码',
+            newpwdmsg1: '请输入8-16位字母加数字新登录密码',
             newpwdmsg2: '新登录密码不一致',
             pwdmsg1: '请输入6位数字密码',
             pwdmsg2: '密码不一致',
@@ -803,7 +862,7 @@
             imgtip: '请上传您的收款码',
         },
         otcorder: {
-            all:'全部',
+            all: '全部',
             unpaid: '未付款',
             paided: '已付款',
             finished: '已完成',
@@ -953,8 +1012,8 @@
         bah: '沪ICP备13026899号-3',
         gsjj: '下载支持',
         gywm: 'API文档',
-        gywm1:'APP下载',
-        gywm2:'其他下载',
+        gywm1: 'APP下载',
+        gywm2: '其他下载',
         jrwm: '加入我们',
         lxwm: '投票上币',
         yqlj: '友情链接',

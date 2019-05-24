@@ -11,7 +11,7 @@
                     </Input>
                 </FormItem>
                 <FormItem prop="googleCode" v-if="openGooleCode">
-                    <Input type="text" @on-enter="handleSubmit('formInline')" v-model="formInline.googleCode" placeholder="谷歌验证码">
+                    <Input type="text" @on-enter="handleSubmit('formInline')" v-model="formInline.googleCode" :placeholder="$t('uc.login.google')">
                     </Input>
                 </FormItem>
                 <p style="height:25px;">
@@ -23,8 +23,8 @@
                     <Button class="login_btn"  @click="handleSubmit('formInline')">{{$t('uc.login.login')}}</Button>
                 </FormItem>
                 <div class='to_register'>
-                    <span>没有币多网账号</span>
-                    <router-link to="/register">立即注册</router-link>
+                    <span>{{$t("uc.login.noaccount")}}</span>
+                    <router-link to="/register">{{$t("uc.login.register")}}</router-link>
                 </div>
             </Form>
 

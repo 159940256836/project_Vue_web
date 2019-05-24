@@ -929,14 +929,14 @@ export default {
             key: "remainAmount"
           },
           {
-            title:"限额",
+            title: self.$t("paper.quota"),
             align:'center',
             render:(h, params)=>{
               return h('div',{},params.row.minLimit + "-" + params.row.maxLimit + "CNY")
             }
           },
           {
-            title:"单价",
+            title:self.$t("paper.unit"),
             align:'center',
             render:(h, params)=>{
               return h('div',{},params.row.price + "CNY")

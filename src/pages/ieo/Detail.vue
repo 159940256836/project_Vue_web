@@ -12,7 +12,7 @@
                 <div>
                     <!-- <span class="type">{{status}}</span> -->
                     <!-- 5.13修改 -->
-                    <div class="type" :class="status == '进行中'? 'red':(status == '已完成' ? 'yellow' : ( status == '预热中' ? 'pink' : ''))">{{status}}</div>
+                    <div class="type" :class="statusClass">{{statusStr}}</div>
                 </div>
             </div>
             <div class="ieoDetail">
@@ -22,34 +22,34 @@
                 <div class="detail">
                     <ul>
                         <li>
-                            <span class="span1">发售总量</span>
+                            <span class="span1">{{$t('Ieo.totalSales')}}</span>
                             <span class="span2">{{content.saleAmount|threeComma}}&nbsp;&nbsp;{{content.saleCoin}}</span>
                         </li>
                         <li>
-                            <span class="span1">预计上线时间</span>
+                            <span class="span1">{{$t('Ieo.onlineTime')}}</span>
                             <span class="span2">{{content.expectTime}}</span>
                         </li>
                         <li>
-                            <span class="span1">募集币种</span>
+                            <span class="span1">{{$t('Ieo.currency')}}</span>
                             <span class="specialColor span2">{{content.raiseCoin}}</span>
                         </li>
                         <li>
-                            <span class="span1">兑换比例</span>
+                            <span class="span1">{{$t('Ieo.ratio')}}</span>
                             <span class="span2">1{{content.raiseCoin}}={{content.ratio}}{{content.saleCoin}}</span>
                         </li>
                         <li>
-                            <span class="span1">手续费</span>
-                            <span class="specialColor span2">免手续费</span>
+                            <span class="span1">{{$t('Ieo.charge')}}</span>
+                            <span class="specialColor span2">{{$t('Ieo.fee')}}</span>
                         </li>
                         <li>
-                            <span class="span1">募集周期(UTC+8)</span>
+                            <span class="span1">{{$t('Ieo.cycle')}}(UTC+8)</span>
                             <span class="span2">{{content.startTime}}-{{content.endTime}}</span>
                         </li>
                     </ul>
                 </div>
                 <div class="progress">
                     <div class="left_circle"></div>
-                    <span>无折扣认购</span>
+                    <span>{{$t('Ieo.subscription')}}</span>
                     <div class="right_circle left_circle"></div>
                 </div>
                 <div class="time time11">
@@ -77,11 +77,11 @@
                         </Input>
                     </li>
                     <li>
-                        <Input class="pwda" type="password" v-model="password" placeholder="请输入交易密码" />
+                        <Input class="pwda" type="password" v-model="password" :placeholder="$t('Ieo.enter')" />
                     </li>
                     <li>
-                        <div :class="status == '进行中'? 'red1':(status == '已完成' ? 'yellow1' : ( status == '预热中' ? 'pink1' : ''))" class="btn"><span long @click="startSale">{{text}}</span></div>
-                        <p>进行认购即为已阅读并同意<a href="">&lt&lt风险提示&gt&gt</a></p>
+                        <div :class="status == '进行中'? 'red1':(status == '已完成' ? 'yellow1' : ( status == '预热中' ? 'pink1' : ''))" class="btn"><span long @click="startSale">{{statusStr}}</span></div>
+                        <p>{{$t('Ieo.agree')}}<a href="">&lt&lt{{$t('Ieo.risk')}}&gt&gt</a></p>
                     </li>
                 </ul>
             </div>
@@ -89,8 +89,8 @@
         <div class="table1">
             <!-- 5.14修改 -->
             <div class="tabida">
-                <div @click="changeTab(1)" :class="tabid==1?'activee':''">售卖方式</div>
-                <div @click="changeTab(2)" :class="tabid==2?'activee':''">项目详情</div>
+                <div @click="changeTab(1)" :class="tabid==1?'activee':''">{{$t('Ieo.selling')}}</div>
+                <div @click="changeTab(2)" :class="tabid==2?'activee':''">{{$t('Ieo.project')}}</div>
             </div>
             <div class="tabida1" v-show="tabid==1">
                 <div>{{content.sellMode}}</div>
@@ -111,10 +111,9 @@ import { fail } from 'assert';
 
 export default {
     name: "IeoDetail",
-    // mixins: [minHeightMinx],
     data() {
         return {
-            text:"",
+            text: "",
             raiseCoinNum: "",
             number: true,
             base: "",
@@ -122,13 +121,34 @@ export default {
             password: "",
             content: {},
             status,
-            tabid:1,
+            tabid: 1,
         }
     },
     computed: {
         isLogin: function () {
             return this.$store.getters.isLogin;
         },
+        statusStr() {
+            console.log(this.status);
+            if (this.status == '预热中') {
+                return this.$t('Ieo.preheating')
+            } else if (this.status == "进行中") {
+                return this.$t('Ieo.underway')
+            } else if (this.status == "已完成") {
+                return this.$t('Ieo.finished')
+            } else if (this.status == "去登录") {
+                return this.$t('uc.login.login')
+            }
+        },
+        statusClass() {
+            if (this.status == '预热中') {
+                return "pink"
+            } else if (this.status == "进行中") {
+                return "red"
+            } else if (this.status == "已完成") {
+                return "yellow"
+            }
+        }
     },
     created() {
         if (this.$route.params.id) {
@@ -144,8 +164,8 @@ export default {
         }
     },
     methods: {
-        changeTab(n){
-            this.tabid=n;
+        changeTab(n) {
+            this.tabid = n;
         },
         init(params) {
             this.getMsg(params)
@@ -165,12 +185,12 @@ export default {
                         this.content = resp.data[0] || {};
                         this.base = 1;
                         this.exchange = this.multity(1, this.content.ratio);
-                        if(!this.isLogin){
+                        if (!this.isLogin) {
                             this.raiseCoinNum = "--";
-                            this.text = "去登录";
+                            this.status = "去登录";
                             this.getStatus(this.content);
                             return;
-                        }else{
+                        } else {
                             this.getStatus(this.content);
                             resolve(this.content.raiseCoin);
                         }
@@ -206,13 +226,14 @@ export default {
         },
         startSale() {//发起募集
             // 5.14修改
-            if (this.status != '进行中') {
-                return false
-            }
-            if(!this.isLogin){
+            if (!this.isLogin) {
                 this.$router.push("/login");
                 return;
             }
+            if (this.status != '进行中') {
+                return false
+            }
+            
             if (this.isNaNFun(this.base)) {
                 this.$Message.error("请输入符合规格的持有币种");
                 return;
@@ -240,7 +261,7 @@ export default {
                     })
                 }
             })
-            this.password="";
+            this.password = "";
         },
         isNaNFun(num) {
             return isNaN(Number(num));
@@ -257,17 +278,22 @@ export default {
                 compareStAndNow = resultFun(nowTime, startTime) > 0,//查看当前时间是否在开始时间之后;
                 compareNowAndEnd = resultFun(endTime, nowTime) > 0;//查看当前时间是否在结束时间之前;
             let str = "";
-            if (!compareStAndNow) {
-                str = "预热中"
-            } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
-                str = "进行中"
-            } else if (!compareNowAndEnd || !surplusAmount) {
-                str = "已完成"
+            if (!this.isLogin) {
+                str = "去登录"
+            } else {
+                if (!compareStAndNow) {
+                    str = "预热中"
+                } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
+                    str = "进行中"
+                } else if (!compareNowAndEnd || !surplusAmount) {
+                    str = "已完成"
+                }
             }
-            this.text = this.status = str;
-            if(this.text=="进行中"){
-                this.text="确定"
-            }
+
+            this.status = str;
+            // if(this.status=="进行中"){
+            //     this.status="确定"
+            // }
         },
         formatTime(date) {
             return new Date(date).getTime();
@@ -276,95 +302,91 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.ieo_detail_box1{
-    background:#fff !important;
+.ieo_detail_box1 {
+    background: #fff !important;
 }
 
-.specialColor[data-v-2300a631]{
-    color:#333;
+.specialColor[data-v-2300a631] {
+    color: #333;
 }
-.type.pink:before{
-    background:#F15057 !important
+.type.pink:before {
+    background: #f15057 !important;
 }
-.type.yellow:before{
-    background:#AAA !important;
+.type.yellow:before {
+    background: #aaa !important;
 }
-.type.red:before{
-    background:#00B274 !important;
+.type.red:before {
+    background: #00b274 !important;
 }
-.time11{
-    margin-top:16px;
-    color:#666666;
-    font-size:14px;
-    height:12px;
-    line-height:12px;
+.time11 {
+    margin-top: 16px;
+    color: #666666;
+    font-size: 14px;
+    height: 12px;
+    line-height: 12px;
     margin-bottom: 35px;
 }
-.pink1{
-
-    background:#AAA !important;
+.pink1 {
+    background: #aaa !important;
 }
-.red1{
-    background:#3399FF !important;
-
+.red1 {
+    background: #3399ff !important;
 }
-.yellow1{
-    background:#AAA !important;
+.yellow1 {
+    background: #aaa !important;
 }
-.commona{  color:#333333;
+.commona {
+    color: #333333;
     // height:374px;
-    .top_box{
-        height:60px;
+    .top_box {
+        height: 60px;
     }
 }
-.activee{
-    background:#3399FF;
-    color:#fff;
+.activee {
+    background: #3399ff;
+    color: #fff;
 }
-.table1{
-    width:1200px;
-    margin-top:40px;
-    margin-left:10.7%;
-     .tabida1{
-        height:100px;
-        margin-top:20px;
-         width:1200px;
-         border:1px solid #DDDDDD;
-         font-size:14px;
-         color:#333333;
-         padding-left:22px;
-         div{
-             margin-top:22px;
-         }
-
-
+.table1 {
+    width: 1200px;
+    margin-top: 40px;
+    margin-left: 10.7%;
+    .tabida1 {
+        height: 100px;
+        margin-top: 20px;
+        width: 1200px;
+        border: 1px solid #dddddd;
+        font-size: 14px;
+        color: #333333;
+        padding-left: 22px;
+        div {
+            margin-top: 22px;
         }
-    .tabida{
-        display:flex;
-        height:46px;
-        border-bottom: 1px solid #E0E0E0;
-        font-size:16px;
-        line-height:46px;
+    }
+    .tabida {
+        display: flex;
+        height: 46px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 16px;
+        line-height: 46px;
 
-        div{
-            width:102px;
-            text-align:center;
+        div {
+            width: 122px;
+            text-align: center;
         }
     }
 }
 
-.ieo_detail_box[data-v-2300a631]{
-    background:#fff;
+.ieo_detail_box[data-v-2300a631] {
+    background: #fff;
 }
-.red{
-    color:#00B274 !important;
+.red {
+    color: #00b274 !important;
 }
-.yellow{
-    color:#AAA !important;
+.yellow {
+    color: #aaa !important;
 }
-.pink{
-
-    color:#F15057;
+.pink {
+    color: #f15057;
 }
 %flex {
     display: flex;
@@ -387,10 +409,10 @@ $lineColor: rgb(71, 100, 146);
     padding: 70px 10%;
     .common {
         // mine-height:200px;
-        width:1200px;
-        background:#fff;
-        color:#333333;
-        border:1px solid rgba(221, 221, 221, 1);
+        width: 1200px;
+        background: #fff;
+        color: #333333;
+        border: 1px solid rgba(221, 221, 221, 1);
         overflow: hidden;
         color: #333;
         // padding: 20px;
@@ -398,19 +420,19 @@ $lineColor: rgb(71, 100, 146);
         @extend %flex;
         flex-wrap: wrap;
         align-items: stretch;
-        margin:20px auto;
+        margin: 20px auto;
         .top_box {
             @extend %flex;
             width: 100%;
             // padding: 10px;
             // border-radius: 10px;
-            width:1200px;
+            width: 1200px;
             line-height: 2;
             font-size: 16px;
-            border-bottom: 1px solid #E0E0E0;
+            border-bottom: 1px solid #e0e0e0;
             .ieoLogo {
                 @extend %flex;
-                margin-left:20px;
+                margin-left: 20px;
                 img {
                     width: 30px;
                     margin-right: 20px;
@@ -439,15 +461,14 @@ $lineColor: rgb(71, 100, 146);
             flex-wrap: wrap;
             overflow: hidden;
             .leftWrapper {
-                margin-top:20px;
-                margin-left:20px;
+                margin-top: 20px;
+                margin-left: 20px;
                 width: 42%;
                 img {
                     // width:100%;
-                    width:352px;
-                    height:185px;
-                    background-size:contain;
-
+                    width: 352px;
+                    height: 185px;
+                    background-size: contain;
                 }
             }
             .detail {
@@ -466,14 +487,13 @@ $lineColor: rgb(71, 100, 146);
                         width: 100%;
                         line-height: 2.5;
                         @extend %flex;
-                        .span2{
-                            margin-right:22px;
+                        .span2 {
+                            margin-right: 22px;
                         }
-                        .span1{
-                            margin-left:14px;
+                        .span1 {
+                            margin-left: 14px;
                         }
                     }
-
                 }
             }
             .progress {
@@ -482,9 +502,9 @@ $lineColor: rgb(71, 100, 146);
                 margin-top: 20px;
                 @extend %flex;
                 .left_circle {
-                    width: 45%;
+                    width: 39%;
                     height: 2px;
-                    background: rgb(19, 31, 50);
+                   background: #3399ff !important;
                     position: relative;
                     &:before {
                         display: inline-block;
@@ -520,12 +540,12 @@ $lineColor: rgb(71, 100, 146);
             border-left: 1px dotted $lineColor;
             padding: 10px;
             ul {
-                margin-left:22px;
+                margin-left: 22px;
                 @extend %flex;
                 height: 100%;
                 flex-direction: column;
-                .ivu-input-group{
-                    border:1px solid #3399FF;
+                .ivu-input-group {
+                    border: 1px solid #3399ff;
                 }
                 li {
                     width: 100%;
@@ -535,16 +555,15 @@ $lineColor: rgb(71, 100, 146);
                         width: 100%;
                         margin-bottom: 15px;
                         text-align: center;
-                        background:#3399FF;
-                        color:#fff;
-                        line-height:2.5;
-                        span{
-                            display:block;
-                            width:100%;
-                            height:100%;
+                        background: #3399ff;
+                        color: #fff;
+                        line-height: 2.5;
+                        span {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
                         }
                     }
-
                 }
             }
         }
@@ -554,26 +573,26 @@ $lineColor: rgb(71, 100, 146);
 
 <style lang="scss">
 $lineColor: rgb(71, 100, 146);
-.pwda{
-    border: 1px solid #3399FF;
+.pwda {
+    border: 1px solid #3399ff;
 }
 .ieo_detail_box .common {
     .table {
-    width:1200px;
-    margin-top:40px;
-    height:46px;
-    .ivu-tabs-tab {
-        padding: 16px;
-        font-size: 26px;
-        font-weight: 700;
+        width: 1200px;
+        margin-top: 40px;
+        height: 46px;
+        .ivu-tabs-tab {
+            padding: 16px;
+            font-size: 26px;
+            font-weight: 700;
+        }
     }
-}
     .ivu-input {
-        background:#fff;
-        color:#333;
+        background: #fff;
+        color: #333;
         outline: none;
         // border: 1px solid #3399FF;
-        border:0;
+        border: 0;
 
         // color: #fff;
         &:hover {
@@ -586,7 +605,7 @@ $lineColor: rgb(71, 100, 146);
     }
     .ivu-input-group-append {
         background-color: transparent;
-        border-left: 1px solid #3399FF;
+        border-left: 1px solid #3399ff;
         border-radius: 0;
         span {
             font-size: 18px;
@@ -594,8 +613,8 @@ $lineColor: rgb(71, 100, 146);
     }
 }
 
-.ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631]{
-    background:#3399FF;
-    opacity:0.5;
+.ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631] {
+    background: #3399ff !important;
+    opacity: 0.5;
 }
 </style>

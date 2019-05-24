@@ -2,7 +2,7 @@
     <div class="ieoWrapper" @click='getDetail'>
         <div class="topBox">
             <div class="topBox specail"><img :src="content.picView" alt=""><span>{{content.saleCoin}}</span></div>
-             <div class="type" :class="status == '进行中'? 'red':(status == '已完成' ? 'yellow' : ( status == '预热中' ? 'pink' : ''))">{{status}}</div>
+             <div class="type" :class="statusClass">{{statusStr}}</div>
         </div>
         <div class="abstract">
             {{content.ieoName}}
@@ -12,15 +12,15 @@
         </div>
         <ul>
             <li>
-                <span>发售总量</span>
+                <span>{{$t('Ieo.totalSales')}}</span>
                 <span>{{content.saleAmount|threeComma}} {{content.saleCoin}}</span>
             </li>
             <li>
-                <span>募集周期</span>
+                <span>{{$t('Ieo.cycle')}}</span>
                 <span>{{content.startTime|ymdFormat}} - {{content.endTime|ymdFormat}}</span>
             </li>
             <li>
-                <span>募集币种</span>
+                <span>{{$t('Ieo.currency')}}</span>
                 <span>{{content.raiseCoin}}</span>
             </li>
         </ul>
@@ -67,6 +67,26 @@ export default {
                     id: this.content.id
                 }
             })
+        }
+    },
+    computed:{
+        statusStr(){
+            if(this.status == '预热中'){
+                return this.$t('Ieo.preheating')
+            }else if(this.status == "进行中"){
+                return this.$t('Ieo.underway')
+            }else if(this.status == "已完成"){
+                return this.$t('Ieo.finished')
+            }
+        },
+        statusClass(){
+            if(this.status == '预热中'){
+                return "pink"
+            }else if(this.status == "进行中"){
+                return "red"
+            }else if(this.status == "已完成"){
+                return "yellow"
+            }
         }
     }
 }

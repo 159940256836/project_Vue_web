@@ -3,9 +3,9 @@
     <div class="containers" id="List">
       <div class="fiat">
         <div class="to_business">
-          <h3>法币交易</h3>
-          <span>便捷、安全、快速买卖数字货币</span>
-          <a href="javascript:void(0)" @click="goBusiness">成为商家</a>
+          <h3>{{$t('paper.legal')}}</h3>
+          <span>{{$t('paper.curren')}}</span>
+          <a href="javascript:void(0)" @click="goBusiness">{{$t('paper.become')}}</a>
           <!-- <router-link to="/identbusiness">成为商家</router-link> -->
         </div>
       </div>
@@ -25,22 +25,22 @@
           <ul>
             <li>
               <div class="image"><img src="../../assets/images/price.png" alt=""></div>
-              <div class="title">市场一口价</div>
-              <div class="content1">根据市场价格实时波动</div>
+              <div class="title">{{$t('paper.market')}}</div>
+              <div class="content1">{{$t('paper.price')}}</div>
             </li>
             <li>
               <div class="image"><img src="../../assets/images/poundage.png" alt=""></div>
-              <div class="title">完全免手续费</div>
-              <div class="content1">用户所见即所得，买卖价格外，无需任何平台手续费</div>
+              <div class="title">{{$t('paper.charge')}}</div>
+              <div class="content1">{{$t('paper.users')}}</div>
             <li>
               <div class="image"><img src="../../assets/images/instant.png" alt=""></div>
-              <div class="title">即时成交</div>
-              <div class="content1">引入平台服务商家，智能匹配，成交订单，无须等待撮合</div>
+              <div class="title">{{$t('paper.instant')}}</div>
+              <div class="content1">{{$t('paper.deal')}}</div>
             </li>
             <li>
               <div class="image"><img src="../../assets/images/platedanbao.png" alt=""></div>
-              <div class="title">平台担保</div>
-              <div class="content1">平台认证商家，安全有保障，24小时客服为交易保驾护航</div>
+              <div class="title">{{$t('paper.plateform')}}</div>
+              <div class="content1">{{$t('paper.save')}}</div>
             </li>
           </ul>
         </div>

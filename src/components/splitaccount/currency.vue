@@ -2,10 +2,10 @@
     <div class="shaow">
         <div class="order-table">
             <div class="hidden-assets">
-            <span>隐藏资产为0的币种:</span>
+            <span>{{$t('myAccount._display')}}:</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-                <span slot="open">开</span>
-                <span slot="close">关</span>
+                <span slot="open"></span>
+                <span slot="close"></span>
             </i-switch>
             </div>
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
@@ -131,7 +131,7 @@ export default {
                         style: {
                             marginRight: "8px",
                         }
-                    }, "划转");
+                    }, self.$t("myAccount._rollout"));
                     actions.push(btn);
                     return h("p", actions);
                 }

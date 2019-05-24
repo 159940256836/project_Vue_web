@@ -1,10 +1,10 @@
 <template>
     <div class="shaow" id="lever">
         <div class="hidden-assets">
-            <span>隐藏资产为0的币种:</span>
+            <span>{{$t('myAccount._display')}}:</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-                <span slot="open">开</span>
-                <span slot="close">关</span>
+                <span slot="open"></span>
+                <span slot="close"></span>
             </i-switch>
         </div>
         <div class="order-table">
@@ -172,7 +172,7 @@ export default {
                 align: "center",
             });
             columns.push({
-                title: "可用",
+                title: this.$t("myAccount._available"),
                 align: "center",
                 render: (h, params) => {
                     const baseBalance = this.toFloor(params.row.leverWalletList[0].balance) + " " + params.row.leverWalletList[0].coin.name;
@@ -224,7 +224,7 @@ export default {
                 }
             });
             columns.push({
-               title:"可惜",
+                title:this.$t("myAccount._loanAvailable"),
                 align: "center",
                 render: (h, params) => {
                     const baseBalance = this.toFloor(params.row.baseLoanCount) + " " + params.row.leverWalletList[0].coin.name;
@@ -250,7 +250,7 @@ export default {
                 }
             });
             columns.push({
-                title: "风险率",
+                title: this.$t("myAccount._hazardRate"),
                 align: "center",
                 render: (h, params) => {
                     const dangerousRate = this.toFloor(params.row.riskRate) + "%";
@@ -258,7 +258,7 @@ export default {
                 }
             });
             columns.push({
-                title: '爆仓价',
+                title: this.$t("myAccount._BlowingUpPrice"),
                 align: "center",
                 render: (h, params) => {
                     const burstPrice = params.row.explosionPrice >= 0 ? params.row.explosionPrice : "--";
@@ -284,7 +284,7 @@ export default {
                         style: {
                             marginRight: "8px",
                         }
-                    }, "划转");
+                    }, self.$t("myAccount._rollout"));
                     const browAndReturn = h('Button', {
                         props: {
                             type: "primary",
@@ -302,7 +302,7 @@ export default {
                         style: {
                             marginRight: "8px",
                         }
-                    }, '借贷/归还');
+                    }, this.$t("myAccount._loanReturn"));
                     return h("p", [btn, browAndReturn]);
                 }
             });

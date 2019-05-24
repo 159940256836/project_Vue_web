@@ -1,12 +1,12 @@
 <template>
     <div class="tab">
-        <Modal v-model="modal" title="转出" :footer-hide="true" :mask-closable="false" :closable="false">
+        <Modal v-model="modal" :title="$t('coin.rollOut')" :footer-hide="true" :mask-closable="false" :closable="false">
             <div>
                 <div style="margin-bottom:30px;">
                     <div style="width: 100%;line-height: 25px;text-align: right;">
-                        <span style="padding-right: 5px;">从：</span>
+                        <span style="padding-right: 5px;">{{$t('coin.follow')}}：</span>
                         <Cascader
-                            style="width: 90%; float: right;"
+                            style="width: 85%; float: right;"
                             :data="data"
                             v-model="value"
                             :render-format="formatRender"
@@ -18,9 +18,9 @@
 
                 </div>
                 <div style="margin-bottom:25px;line-height: 25px;text-align: right;">
-                    <span style="padding-right: 5px;">到：</span>
+                    <span style="padding-right: 5px;">{{$t('coin.arrive')}}：</span>
                     <Cascader
-                        style="width: 90%; float: right;"
+                        style="width: 85%; float: right;"
                         :data="toData"
                         v-model="toValue"
                         :render-format="formatRender"
@@ -29,21 +29,21 @@
                 </div>
             </div>
             <div style="width: 100%;line-height: 25px;">
-                <span>数量：</span>
-                <Input v-model="num" placeholder="划转数量" style="width: 90%; float: right;">
+                <span>{{$t('coin.quantity')}}：</span>
+                <Input v-model="num" :placeholder="$t('coin.quantityTransferred')" style="width: 85%; float: right;">
             <span slot="append">
                 <span>{{unit}}</span>
-                <span class="all" @click="turnAll">全部</span>
+                <span class="all" @click="turnAll">{{$t('coin.all')}}</span>
             </span>
                 </Input>
             </div>
 
             <div style="margin-top:20px;padding-left: 5px;">
-                可用&nbsp;&nbsp;&nbsp;{{canUseNum}}&nbsp;&nbsp;&nbsp;{{unit}}
+                {{$t('coin.available')}}&nbsp;&nbsp;&nbsp;{{canUseNum}}&nbsp;&nbsp;&nbsp;{{unit}}
             </div>
             <div class="button" style="display:flex;justify-content:space-around;margin-top:20px;">
-                <Button @click="cancel" type="default">取消</Button>
-                <Button @click="sure" type="primary">保存</Button>
+                <Button @click="cancel" type="default">{{$t('coin.cancel')}}</Button>
+                <Button @click="sure" type="primary">{{$t('coin.save')}}</Button>
             </div>
         </Modal>
     </div>

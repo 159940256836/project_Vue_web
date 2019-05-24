@@ -14,7 +14,10 @@
                         </div>
                         <Row class="user-right">
                             <Col span="8">
-                            <div>用户等级:&nbsp;&nbsp;{{memberlevel}}</div>
+                            <div>用户UID:&nbsp;&nbsp;{{uid}}</div>
+                            </Col>
+                            <Col span="8">
+                            <div>{{$t("uc.safe.safelevel_low")}}:&nbsp;&nbsp;{{memberlevel}}</div>
                             </Col>
                         </Row>
                     </div>
@@ -34,19 +37,54 @@
                             <!-- 6 -->
                             <div class="account-item">
                                 <div class="account-item-in">
-                                    <Icon type="md-card" size="18" color="#00b5f6" />
+                                    <Icon
+                                        type="md-card"
+                                        size="18"
+                                        color="#00b5f6"
+                                    />
                                     <span class="card-number">身份认证</span>
-                                    <p v-if="user.realVerified==1" class="bankInfo" style="color: grey;">{{user.realName}}</p>
-                                    <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo" style="color: #3399ff;">
+                                    <p
+                                        v-if="user.realVerified==1"
+                                        class="bankInfo"
+                                        style="color: grey;"
+                                    >
+                                        {{user.realName}}
+                                    </p>
+                                    <p
+                                        v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null"
+                                        class="bankInfo"
+                                        style="color: #3399ff;"
+                                    >
                                         审核未通过{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}，请重试。
                                     </p>
-                                    <p v-else class="bankInfo" style="color: grey;">
+                                    <p
+                                        v-else
+                                        class="bankInfo"
+                                        style="color: grey;"
+                                    >
                                         {{$t('uc.safe.verifiedtip')}}
                                     </p>
-                                    <span v-if="user.realVerified==1">{{$t('uc.safe.binded')}}</span>
-                                    <span v-else-if="user.realAuditing==1">{{$t('uc.safe.binding')}}</span>
-                                    <a class="btn" @click="showItem(6)" v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" :title="user.realNameRejectReason">{{$t('uc.safe.bindretry')}}</a>
-                                    <a v-else class="btn" @click="showItem(6)">{{$t('uc.safe.bind')}}</a>
+                                    <span v-if="user.realVerified==1">
+                                        {{$t('uc.safe.binded')}}
+                                    </span>
+                                    <span v-else-if="user.realAuditing==1">
+                                        {{$t('uc.safe.binding')}}
+                                    </span>
+                                    <a
+                                        class="btn"
+                                        @click="showItem(6)"
+                                        v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null"
+                                        :title="user.realNameRejectReason"
+                                    >
+                                        {{$t('uc.safe.bindretry')}}
+                                    </a>
+                                    <a
+                                        v-else
+                                        class="btn"
+                                        @click="showItem(6)"
+                                    >
+                                        {{$t('uc.safe.bind')}}
+                                    </a>
                                 </div>
                                 <div class="account-detail" v-show="choseItem==6">
                                     <div class="detail-list" style="width: 100%;">
@@ -107,32 +145,79 @@
                                 <div class="account-item-in">
                                     <Icon type="ios-mail" size="20" color="#00b5f6;" />
                                     <span class="card-number">{{$t('uc.safe.email')}}</span>
-                                    <p v-if="user.emailVerified==1" class="bankInfo" style="color: grey;">
+                                    <p
+                                        v-if="user.emailVerified==1"
+                                        class="bankInfo"
+                                        style="color: grey;"
+                                    >
                                         {{user.email}}
                                     </p>
-                                    <p v-else class="bankInfo" style="color: grey;">
+                                    <p
+                                        v-else
+                                        class="bankInfo"
+                                        style="color: grey;"
+                                    >
                                         {{$t('uc.safe.bindemail')}}
                                     </p>
                                     <span v-if="user.emailVerified==1">{{$t('uc.safe.binded')}}</span>
-                                    <a v-else class="btn" @click="showItem(2)">{{$t('uc.safe.bind')}}</a>
+                                    <a
+                                        v-else
+                                        class="btn"
+                                        @click="showItem(2)"
+                                    >
+                                        {{$t('uc.safe.bind')}}
+                                    </a>
                                 </div>
-                                <div class="account-detail" v-show="choseItem==2">
+                                <div
+                                    class="account-detail"
+                                    v-show="choseItem==2"
+                                >
                                     <div class="detail-list">
-                                        <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="110">
+                                        <Form
+                                            ref="formValidate2"
+                                            :model="formValidate2"
+                                            :rules="ruleValidate"
+                                            :label-width="110"
+                                        >
                                             <!-- mail -->
-                                            <FormItem :label="$t('uc.safe.email')" prop="mail">
-                                                <Input v-model="formValidate2.mail" size="large"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.email')"
+                                                prop="mail"
+                                            >
+                                                <Input
+                                                    v-model="formValidate2.mail"
+                                                    size="large"
+                                                ></Input>
                                             </FormItem>
                                             <!-- 登录密码 -->
-                                            <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
-                                                <Input v-model="formValidate2.password" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.loginpwd')"
+                                                prop="password"
+                                            >
+                                                <Input
+                                                    v-model="formValidate2.password"
+                                                    size="large"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!-- 邮箱验证码 -->
-                                            <FormItem :label="$t('uc.safe.emailcode')" prop="vailCode1">
-                                                <Input v-model="formValidate2.vailCode1" size="large">
+                                            <FormItem
+                                                :label="$t('uc.safe.emailcode')"
+                                                prop="vailCode1"
+                                            >
+                                                <Input
+                                                    v-model="formValidate2.vailCode1"
+                                                    size="large"
+                                                >
                                                 <!-- <Button slot="append">点击获取</Button> -->
-                                                <div class="timebox" slot="append">
-                                                    <Button @click="send(1)" :disabled="sendMsgDisabled1">
+                                                <div
+                                                    class="timebox"
+                                                    slot="append"
+                                                >
+                                                    <Button
+                                                        @click="send(1)"
+                                                        :disabled="sendMsgDisabled1"
+                                                    >
                                                         <span v-if="sendMsgDisabled1">{{time1+$t('uc.safe.second')}}</span>
                                                         <span v-if="!sendMsgDisabled1">{{$t('uc.safe.clickget')}}</span>
                                                     </Button>
@@ -141,8 +226,18 @@
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="primary" @click="handleSubmit('formValidate2')">{{$t('uc.safe.save')}}</Button>
-                                                <Button @click="handleReset('formValidate2')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
+                                                <Button
+                                                    type="primary"
+                                                    @click="handleSubmit('formValidate2')"
+                                                >
+                                                    {{$t('uc.safe.save')}}
+                                                </Button>
+                                                <Button
+                                                    @click="handleReset('formValidate2')"
+                                                    style="margin-left: 8px"
+                                                >
+                                                    {{$t('uc.safe.reset')}}
+                                                </Button>
                                             </FormItem>
                                         </Form>
                                     </div>
@@ -151,34 +246,83 @@
                             <!-- 3 -->
                             <div class="account-item">
                                 <div class="account-item-in">
-                                    <Icon type="ios-call" color="#00b5f6" size="20" />
+                                    <Icon
+                                        type="ios-call"
+                                        color="#00b5f6"
+                                        size="20"
+                                    />
                                     <span class="card-number">{{$t('uc.safe.phone')}}</span>
-                                    <p v-if="user.phoneVerified==1" class="bankInfo" style="color: grey;">
+                                    <p
+                                        v-if="user.phoneVerified==1"
+                                        class="bankInfo"
+                                        style="color: grey;"
+                                    >
                                         {{user.mobilePhone}}
                                     </p>
-                                    <p v-else class="bankInfo" style="color: grey;">
+                                    <p
+                                        v-else class="bankInfo"
+                                        style="color: grey;"
+                                    >
                                         {{$t('uc.safe.bindphone')}}
                                     </p>
                                     <span v-if="user.phoneVerified==1">{{$t('uc.safe.binded')}}</span>
-                                    <a v-else class="btn" @click="showItem(3)">{{$t('uc.safe.bind')}}</a>
+                                    <a
+                                        v-else
+                                        class="btn"
+                                        @click="showItem(3)"
+                                    >
+                                        {{$t('uc.safe.bind')}}
+                                    </a>
                                 </div>
                                 <div class="account-detail" v-show="choseItem==3">
                                     <div class="detail-list">
-                                        <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="110">
+                                        <Form
+                                            ref="formValidate3"
+                                            :model="formValidate3"
+                                            :rules="ruleValidate"
+                                            :label-width="110"
+                                        >
                                             <!-- 手机 -->
-                                            <FormItem :label="$t('uc.safe.phone')" prop="mobile">
-                                                <Input v-model="formValidate3.mobile" size="large"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.phone')"
+                                                prop="mobile"
+                                            >
+                                                <Input
+                                                    v-model="formValidate3.mobile"
+                                                    size="large"
+                                                >
+                                                </Input>
                                             </FormItem>
                                             <!-- 登录密码 -->
-                                            <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
-                                                <Input v-model="formValidate3.password" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.loginpwd')"
+                                                prop="password"
+                                            >
+                                                <Input
+                                                    v-model="formValidate3.password"
+                                                    size="large"
+                                                    type="password"
+                                                >
+                                                </Input>
                                             </FormItem>
                                             <!-- 手机验证码 -->
-                                            <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode2">
-                                                <Input v-model="formValidate3.vailCode2" size="large">
+                                            <FormItem
+                                                :label="$t('uc.safe.phonecode')"
+                                                prop="vailCode2"
+                                            >
+                                                <Input
+                                                    v-model="formValidate3.vailCode2"
+                                                    size="large"
+                                                >
                                                 <!-- <Button slot="append">点击获取</Button> -->
-                                                <div class="timebox" slot="append">
-                                                    <Button @click="send(2)" :disabled="sendMsgDisabled2">
+                                                <div
+                                                    class="timebox"
+                                                    slot="append"
+                                                >
+                                                    <Button
+                                                        @click="send(2)"
+                                                        :disabled="sendMsgDisabled2"
+                                                    >
                                                         <span v-if="sendMsgDisabled2">{{time2+$t('uc.safe.second')}}</span>
                                                         <span v-if="!sendMsgDisabled2">{{$t('uc.safe.clickget')}}</span>
                                                     </Button>
@@ -187,8 +331,18 @@
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="primary" @click="handleSubmit('formValidate3')">{{$t('uc.safe.save')}}</Button>
-                                                <Button @click="handleReset('formValidate3')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
+                                                <Button
+                                                    type="primary"
+                                                    @click="handleSubmit('formValidate3')"
+                                                >
+                                                    {{$t('uc.safe.save')}}
+                                                </Button>
+                                                <Button
+                                                    @click="handleReset('formValidate3')"
+                                                    style="margin-left: 8px"
+                                                >
+                                                    {{$t('uc.safe.reset')}}
+                                                </Button>
                                             </FormItem>
                                         </Form>
                                     </div>
@@ -197,49 +351,128 @@
                             <!-- 4 登录密码-->
                             <div class="account-item">
                                 <div class="account-item-in">
-                                    <Icon type="ios-lock" size="20" color="#00b5f6;"></Icon>
+                                    <Icon
+                                        type="ios-lock"
+                                        size="20"
+                                        color="#00b5f6;"
+                                    ></Icon>
                                     <span class="card-number">{{$t('uc.safe.loginpwd')}}</span>
-                                    <p class="bankInfo" style="color: grey;">
+                                    <p
+                                        class="bankInfo"
+                                        style="color: grey;"
+                                    >
                                         {{$t('uc.safe.logintip')}}
                                     </p>
 
-                                    <a class="btn" v-if="user.phoneVerified==0" @click="noPhone">{{$t('uc.safe.edit')}}</a>
-                                    <a class="btn" v-else @click="showItem(4)">{{$t('uc.safe.edit')}}</a>
+                                    <a
+                                        class="btn"
+                                        v-if="user.phoneVerified==0"
+                                        @click="noPhone"
+                                    >
+                                        {{$t('uc.safe.edit')}}
+                                    </a>
+                                    <a
+                                        class="btn"
+                                        v-else
+                                        @click="showItem(4)"
+                                    >
+                                        {{$t('uc.safe.edit')}}
+                                    </a>
                                 </div>
-                                <div class="account-detail" v-show="choseItem==4">
+                                <div
+                                    class="account-detail"
+                                    v-show="choseItem==4"
+                                >
                                     <div class="detail-list">
-                                        <Form ref="formValidate4" :model="formValidate4" :rules="ruleValidate" :label-width="95">
+                                        <Form
+                                            ref="formValidate4"
+                                            :model="formValidate4"
+                                            :rules="ruleValidate"
+                                            :label-width="95"
+                                        >
                                             <!-- oldPw -->
-                                            <FormItem :label="$t('uc.safe.oldpwd')" prop="oldPw">
-                                                <Input v-model="formValidate4.oldPw" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.oldpwd')"
+                                                prop="oldPw"
+                                            >
+                                                <Input
+                                                    v-model="formValidate4.oldPw"
+                                                    size="large"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!-- newPw -->
-                                            <FormItem :label="$t('uc.safe.newpwd')" prop="newPw">
-                                                <Input v-model="formValidate4.newPw" :placeholder="$t('uc.safe.newpwdmsg1')" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.newpwd')"
+                                                prop="newPw"
+                                            >
+                                                <Input
+                                                    v-model="formValidate4.newPw"
+                                                    :placeholder="$t('uc.safe.newpwdmsg1')"
+                                                    size="large"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!-- newPwConfirm -->
-                                            <FormItem :label="$t('uc.safe.confirmnewpwd')" prop="newPwConfirm">
-                                                <Input v-model="formValidate4.newPwConfirm" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.confirmnewpwd')"
+                                                prop="newPwConfirm"
+                                            >
+                                                <Input
+                                                    v-model="formValidate4.newPwConfirm"
+                                                    size="large"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!-- 手机验证码 -->
-                                            <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
-                                                <Input v-model="formValidate4.vailCode3" size="large">
+                                            <FormItem
+                                                :label="$t('uc.safe.phonecode')"
+                                                prop="vailCode3"
+                                            >
+                                                <Input
+                                                    v-model="formValidate4.vailCode3"
+                                                    size="large"
+                                                >
                                                 <!-- <Button slot="append">点击获取</Button> -->
-                                                <div class="timebox" slot="append">
-                                                    <Button @click="send(3)" :disabled="sendMsgDisabled3">
+                                                <div
+                                                    class="timebox"
+                                                    slot="append"
+                                                >
+                                                    <Button
+                                                        @click="send(3)"
+                                                        :disabled="sendMsgDisabled3"
+                                                    >
                                                         <span v-if="sendMsgDisabled3">{{time3+$t('uc.safe.second')}}</span>
                                                         <span v-if="!sendMsgDisabled3">{{$t('uc.safe.clickget')}}</span>
                                                     </Button>
                                                 </div>
                                                 </Input>
                                             </FormItem>
-                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
-                                                <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
+                                            <FormItem
+                                                label="谷歌验证码"
+                                                prop="googleCode"
+                                                v-if="googleSwitch"
+                                            >
+                                                <Input
+                                                    v-model="formValidate4.googleCode"
+                                                    size="large"
+                                                    type="text"
+                                                ></Input>
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="primary" @click="handleSubmit('formValidate4')">{{$t('uc.safe.save')}}</Button>
-                                                <Button @click="handleReset('formValidate4')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
+                                                <Button
+                                                    type="primary"
+                                                    @click="handleSubmit('formValidate4')"
+                                                >
+                                                    {{$t('uc.safe.save')}}
+                                                </Button>
+                                                <Button
+                                                    @click="handleReset('formValidate4')"
+                                                    style="margin-left: 8px"
+                                                >
+                                                    {{$t('uc.safe.reset')}}
+                                                </Button>
                                             </FormItem>
                                         </Form>
                                     </div>
@@ -248,104 +481,281 @@
                             <!-- 5 资金密码-->
                             <div class="account-item">
                                 <div class="account-item-in">
-                                    <Icon type="logo-bitcoin" size="20" color="#00b5f6" />
+                                    <Icon
+                                        type="logo-bitcoin"
+                                        size="20"
+                                        color="#00b5f6"
+                                    />
                                     <span class="card-number">{{$t('uc.safe.fundpwd')}}</span>
-                                    <p class="bankInfo" style="color: grey;">
+                                    <p
+                                        class="bankInfo"
+                                        style="color: grey;"
+                                    >
                                         {{$t('uc.safe.fundtip')}}
                                     </p>
-                                    <a class="btn" v-if="user.phoneVerified==0" @click="noPhone">{{$t('uc.safe.set')}}</a>
-                                    <a class="btn" v-else-if="user.fundsVerified==0" @click="showItem(5)">{{$t('uc.safe.set')}}</a>
-                                    <a class="btn" v-else @click="showItemFundpwd()">{{$t('uc.safe.edit')}}</a>
+                                    <a
+                                        class="btn"
+                                        v-if="user.phoneVerified==0"
+                                        @click="noPhone"
+                                    >
+                                        {{$t('uc.safe.set')}}
+                                    </a>
+                                    <a
+                                        class="btn"
+                                        v-else-if="user.fundsVerified==0"
+                                        @click="showItem(5)"
+                                    >
+                                        {{$t('uc.safe.set')}}
+                                    </a>
+                                    <a
+                                        class="btn"
+                                        v-else
+                                        @click="showItemFundpwd()"
+                                    >
+                                        {{$t('uc.safe.edit')}}
+                                    </a>
                                 </div>
-                                <div class="account-detail" v-show="choseItem==5">
+                                <div
+                                    class="account-detail"
+                                    v-show="choseItem==5"
+                                >
                                     <!-- 设置 -->
-                                    <div class="detail-list" v-show="user.fundsVerified!=1">
-                                        <Form ref="formValidate7" :model="formValidate7" :rules="ruleValidate" :label-width="85">
+                                    <div
+                                        class="detail-list"
+                                        v-show="user.fundsVerified!=1"
+                                    >
+                                        <Form
+                                            ref="formValidate7"
+                                            :model="formValidate7"
+                                            :rules="ruleValidate"
+                                            :label-width="85"
+                                        >
                                             <!-- newMPw -->
-                                            <FormItem :label="$t('uc.safe.fundpwd')" prop="pw7">
-                                                <Input v-model="formValidate7.pw7" size="large" :placeholder="$t('uc.safe.pwdmsg1')" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.fundpwd')"
+                                                prop="pw7"
+                                            >
+                                                <Input
+                                                    v-model="formValidate7.pw7"
+                                                    size="large"
+                                                    :placeholder="$t('uc.safe.pwdmsg1')"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!-- newMPwConfirm -->
-                                            <FormItem :label="$t('uc.safe.confirmpwd')" prop="pw7Confirm">
-                                                <Input v-model="formValidate7.pw7Confirm" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.confirmpwd')"
+                                                prop="pw7Confirm"
+                                            >
+                                                <Input
+                                                    v-model="formValidate7.pw7Confirm"
+                                                    size="large"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!--<FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
                                                 <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
                                             </FormItem>-->
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="primary" @click="handleSubmit('formValidate7')">{{$t('uc.safe.save')}}</Button>
-                                                <Button @click="handleReset('formValidate7')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
+                                                <Button
+                                                    type="primary"
+                                                    @click="handleSubmit('formValidate7')"
+                                                >
+                                                    {{$t('uc.safe.save')}}
+                                                </Button>
+                                                <Button
+                                                    @click="handleReset('formValidate7')"
+                                                    style="margin-left: 8px"
+                                                >
+                                                    {{$t('uc.safe.reset')}}
+                                                </Button>
                                             </FormItem>
                                         </Form>
                                     </div>
                                     <!-- 修改资金密码 -->
-                                    <div class="detail-list" v-show="user.fundsVerified==1  && !fGetBackFundpwd">
-                                        <Form ref="formValidate5" :model="formValidate5" :rules="ruleValidate" :label-width="95">
+                                    <div
+                                        class="detail-list"
+                                        v-show="user.fundsVerified==1  && !fGetBackFundpwd"
+                                    >
+                                        <Form
+                                            ref="formValidate5"
+                                            :model="formValidate5"
+                                            :rules="ruleValidate"
+                                            :label-width="95"
+                                        >
                                             <!-- oldPw -->
-                                            <FormItem :label="$t('uc.safe.oldfundpwd')" prop="oldPw">
-                                                <Input v-model="formValidate5.oldPw" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.oldfundpwd')"
+                                                prop="oldPw"
+                                            >
+                                                <Input
+                                                    v-model="formValidate5.oldPw"
+                                                    size="large"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!-- newMPw -->
-                                            <FormItem :label="$t('uc.safe.newfundpwd')" prop="newMPw">
-                                                <Input v-model="formValidate5.newMPw" :placeholder="$t('uc.safe.pwdmsg1')" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.newfundpwd')"
+                                                prop="newMPw"
+                                            >
+                                                <Input
+                                                    v-model="formValidate5.newMPw"
+                                                    :placeholder="$t('uc.safe.pwdmsg1')"
+                                                    size="large" type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!-- newMPwConfirm -->
-                                            <FormItem :label="$t('uc.safe.confirmnewpwd')" prop="newMPwConfirm">
-                                                <Input v-model="formValidate5.newMPwConfirm" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.confirmnewpwd')"
+                                                prop="newMPwConfirm"
+                                            >
+                                                <Input
+                                                    v-model="formValidate5.newMPwConfirm"
+                                                    size="large"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
-                                            <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode5">
-                                                <Input v-model="formValidate5.vailCode5" size="large">
-                                                <div class="timebox" slot="append">
-                                                    <Button @click="send(5)" :disabled="sendMsgDisabled5">
+                                            <FormItem
+                                                :label="$t('uc.safe.phonecode')"
+                                                prop="vailCode5"
+                                            >
+                                                <Input
+                                                    v-model="formValidate5.vailCode5"
+                                                    size="large"
+                                                >
+                                                <div
+                                                    class="timebox"
+                                                    slot="append"
+                                                >
+                                                    <Button
+                                                        @click="send(5)"
+                                                        :disabled="sendMsgDisabled5"
+                                                    >
                                                         <span v-if="sendMsgDisabled5">{{time5+$t('uc.safe.second')}}</span>
                                                         <span v-if="!sendMsgDisabled5">{{$t('uc.safe.clickget')}}</span>
                                                     </Button>
                                                 </div>
                                                 </Input>
                                             </FormItem>
-                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
-                                                <Input v-model="formValidate5.googleCode" size="large" type="text"></Input>
+                                            <FormItem
+                                                label="谷歌验证码"
+                                                prop="googleCode"
+                                                v-if="googleSwitch"
+                                            >
+                                                <Input
+                                                    v-model="formValidate5.googleCode"
+                                                    size="large"
+                                                    type="text"
+                                                ></Input>
                                             </FormItem>
                                             <p style="text-align:right;">
-                                                <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#3399ff;">忘记密码?</a>
+                                                <a
+                                                    @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd"
+                                                    style="color:#3399ff;"
+                                                >
+                                                    忘记密码?
+                                                </a>
                                             </p>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="primary" @click="handleSubmit('formValidate5')">{{$t('uc.safe.save')}}</Button>
-                                                <Button @click="handleReset('formValidate5')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
+                                                <Button
+                                                    type="primary"
+                                                    @click="handleSubmit('formValidate5')"
+                                                >
+                                                    {{$t('uc.safe.save')}}
+                                                </Button>
+                                                <Button
+                                                    @click="handleReset('formValidate5')"
+                                                    style="margin-left: 8px"
+                                                >
+                                                    {{$t('uc.safe.reset')}}
+                                                </Button>
                                             </FormItem>
                                         </Form>
                                     </div>
                                     <!-- 找回 -->
-                                    <div class="detail-list" v-show="user.fundsVerified==1 && fGetBackFundpwd">
-                                        <Form ref="formValidate8" :model="formValidate8" :rules="ruleValidate" :label-width="85">
+                                    <div
+                                        class="detail-list"
+                                        v-show="user.fundsVerified==1 && fGetBackFundpwd"
+                                    >
+                                        <Form
+                                            ref="formValidate8"
+                                            :model="formValidate8"
+                                            :rules="ruleValidate"
+                                            :label-width="85"
+                                        >
                                             <!-- newMPw -->
-                                            <FormItem :label="$t('uc.safe.newfundpwd')" prop="newMPw8">
-                                                <Input v-model="formValidate8.newMPw8" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.newfundpwd')"
+                                                prop="newMPw8"
+                                            >
+                                                <Input
+                                                    v-model="formValidate8.newMPw8"
+                                                    size="large"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!-- newMPwConfirm -->
-                                            <FormItem :label="$t('uc.safe.confirmnewpwd')" prop="newMPwConfirm8">
-                                                <Input v-model="formValidate8.newMPwConfirm8" size="large" type="password"></Input>
+                                            <FormItem
+                                                :label="$t('uc.safe.confirmnewpwd')"
+                                                prop="newMPwConfirm8"
+                                            >
+                                                <Input
+                                                    v-model="formValidate8.newMPwConfirm8"
+                                                    size="large"
+                                                    type="password"
+                                                ></Input>
                                             </FormItem>
                                             <!-- 邮箱验证码 -->
-                                            <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode5">
-                                                <Input v-model="formValidate8.vailCode5" size="large">
-                                                <div class="timebox" slot="append">
-                                                    <Button @click="send(8)" :disabled="sendMsgDisabled8">
+                                            <FormItem
+                                                :label="$t('uc.safe.phonecode')"
+                                                prop="vailCode5"
+                                            >
+                                                <Input
+                                                    v-model="formValidate8.vailCode5"
+                                                    size="large"
+                                                >
+                                                <div
+                                                    class="timebox"
+                                                    slot="append"
+                                                >
+                                                    <Button
+                                                        @click="send(8)"
+                                                        :disabled="sendMsgDisabled8"
+                                                    >
                                                         <span v-if="sendMsgDisabled8">{{time8+$t('uc.safe.second')}}</span>
                                                         <span v-if="!sendMsgDisabled8">{{$t('uc.safe.clickget')}}</span>
                                                     </Button>
                                                 </div>
                                                 </Input>
                                             </FormItem>
-                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
-                                                <Input v-model="formValidate5.googleCode" size="large" type="text"></Input>
+                                            <FormItem
+                                                label="谷歌验证码"
+                                                prop="googleCode"
+                                                v-if="googleSwitch"
+                                            >
+                                                <Input
+                                                    v-model="formValidate5.googleCode"
+                                                    size="large"
+                                                    type="text"
+                                                ></Input>
                                             </FormItem>
                                             <!-- Button -->
                                             <FormItem>
-                                                <Button type="primary" @click="handleSubmit('formValidate8')">{{$t('uc.safe.save')}}</Button>
-                                                <Button @click="handleReset('formValidate8')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button>
+                                                <Button
+                                                    type="primary"
+                                                    @click="handleSubmit('formValidate8')"
+                                                >
+                                                    {{$t('uc.safe.save')}}
+                                                </Button>
+                                                <Button
+                                                    @click="handleReset('formValidate8')"
+                                                    style="margin-left: 8px"
+                                                >
+                                                    {{$t('uc.safe.reset')}}
+                                                </Button>
                                             </FormItem>
                                         </Form>
                                     </div>
@@ -356,16 +766,16 @@
                                 <div class="account-item-in" style="width: 100%;">
                                     <Icon type="social-googleplus-outline"  />
                                     <Icon type="logo-google" size="20" color="#00b5f6"/>
-                                    <span class="card-number">谷歌验证</span>
+                                    <span class="card-number">{{$t("uc.safe.GoogleAuthentication")}}</span>
                                     <p class="bankInfo" style="color: grey; width: 66%">
-                                        提现，修改密码，及安全设置的时候用以输入google验证码，详细信息请阅读
-                                        <a href="">使用指南</a>
+                                        {{$t('uc.safe.GoogleAuthenticationAbs')}}
+                                        <a href="">{{$t('uc.safe.userguide')}}</a>
                                     </p>
                                     <div class="google-info">
                                         <router-link to="/OpenGoogleVali">{{googleAuthentication}}</router-link>
                                         <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-                                            <span slot="open">开</span>
-                                            <span slot="close">关</span>
+                                            <span slot="open"></span>
+                                            <span slot="close"></span>
                                         </i-switch>
                                     </div>
                                 </div>
@@ -462,6 +872,7 @@ export default {
             }
         };
         return {
+            uid: '',
             googleSwitch: false,
             fGetBackFundpwd: false,
             imgPreview: "",
@@ -701,6 +1112,9 @@ export default {
         };
     },
     methods: {
+        userUid() {
+            this.uid = this.userId.id;
+        },
         checkGoogleValidtor(data) {//验证用户是否开启google验证
             this.$http.post(this.host + '/uc/get/user', data).then(res => {
                 const data = res.body;
@@ -1097,6 +1511,9 @@ export default {
         }
     },
     computed: {
+        userId: function () {
+            return JSON.parse(localStorage.getItem("MEMBER"));
+        },
         member: function () {
             return this.$store.getters.member;
         },
@@ -1105,6 +1522,7 @@ export default {
         }
     },
     created() {
+        this.userUid()
         this.getMember().then(res => {
             this.checkGoogleValidtor({ mobile: res.mobilePhone });
         });
@@ -1438,7 +1856,7 @@ button.ivu-btn.ivu-btn-primary {
 .user-icons {
     display: flex;
     align-self: center;
-    width: 300px;
+    width: 200px;
 }
 
 .user-icons .icons-in {
@@ -1470,7 +1888,7 @@ button.ivu-btn.ivu-btn-primary {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 225px;
+    width: 155px;
     height: 52px;
     overflow: hidden;
     font-size: 14px;

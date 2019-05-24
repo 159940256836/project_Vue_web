@@ -1,4 +1,26 @@
+const a = require("./googleverify").openGoogleMapEn; //开启googoe验证的页面
+const b = require("./recommendReturn").en; //我的推荐页面
+const c = require("./feelevel").en; //积分说明页面
+const myAccount = require('./moneyIndexPage').en; //个人资产
+const Ieo = require("./ieo").en; //ieo
+const paper = require("./otcPaper").en; //法币
+const pointPage = require("./point").en; //积分管理
+const historyAndCu = require('./record').en; //交易记录
+const ieoAdmin = require('./ieoAdmin').en; //ieo管理
+const apiAdmin = require('./apiAdmin').en; //ieo管理
+const coin = require("./coins").en;
 module.exports = {
+    openGoolePage: a,
+    recommendPage: b,
+    leverDescPage: c,
+    myAccount: myAccount,
+    paper: paper,
+    Ieo: Ieo,
+    pointPage: pointPage,
+    historyAndCu: historyAndCu,
+    ieoAdmin: ieoAdmin,
+    apiAdmin: apiAdmin,
+    coin: coin,
     topInfo: {
         name: '币多网--International Digital encryption asset trading platform',
     },
@@ -18,23 +40,42 @@ module.exports = {
         index: 'INDEX',
         otc: 'OTC',
         exchange: 'EXCHANGE',
+        // lever: "EVERAGED TRANSACTION",
+        lever: "Leveraged",
         xiaoxi: 'MESSAGE',
+        help: "HELP",
         kefu: 'HELP',
         login: 'LOGIN',
         register: 'REGISTER',
-        asset: 'ASSET',
+        // asset: 'CLASSY COIN OPTIMIZATION',
+        asset:'On the currency',
         otcOrder: 'ORDER',
         ucenter: 'ACCOUNT',
         service: 'Announcement',
         downloadapp: "Scan the code for download and installation",
         appdownlaod: 'Download APP'
     },
+    downLoadAbs: {
+        big: "whenever and wherever possible Multi-platform terminal transactions ",
+        small: "t covers multiple platforms of iOS, Android, Windows and Mac, and supports full-service functions"
+    },
+
     sectionPage: {
-        ptaqTitle: 'Platform Security',
-        ptaqContent: "The hash algorithm is used to encrypt the world's leading security authentication",
-        ptslTitle: 'Platform Strength',
-        ptslContent: "The world's largest bitcoin trading platform",
-        newsTitle: 'News Center'
+        ptaqTitle: 'spot goods',
+        leverExchange: "triple leverage",
+        ptaqContent: 'High-performance matchmaking trading',
+
+        ptslTitle: 'OTC curb exchange',
+        ptslContent: 'Support multiple legal tender business',
+        newsTitle: 'Platform guarantee, fast and safe',
+
+        part3Title: "Financial security system",
+        part3Content: 'Multi-tier, multi-cluster system architecture',
+        part3Content2: "Safe and stable operation for more than 4 years",
+
+        part4Title: "Professional customer service",
+        part4Content: ' 24h online customer service, serving millions of users',
+        part4Content2: "Respond to user questions timely",
     },
     nav: {
         ptjy: 'Platform Trading',
@@ -393,8 +434,19 @@ module.exports = {
         }
     },
     uc: {
+        title: "my center",
+        menuTitle: {
+            AccountManagement: "Account management",
+            moneyManagement: "Asset Management",
+            bibiManagement: "Bitcoin management",
+            otcManagement: "legal tender management",
+            ieoManagement: "IEO management",
+            apiManagement: "API Management",
+            leverManagement: "leveraged Management"
+        },
         login: {
             noaccount: 'No Account？To Regist',
+            google: "google Code",
             register: 'Sign Up',
             login: 'Log In',
             welcomelogin: 'Welcome',
@@ -410,6 +462,7 @@ module.exports = {
         },
         forget: {
             hasaccount: 'Have a Account？To Log In',
+            title: "Forget Password",
             login: 'Log In',
             sendcode: 'Send',
             newpwd: 'Enter new password',
@@ -434,6 +487,10 @@ module.exports = {
         },
         finance: {
             center: 'Finance center',
+            currency: "currency",
+            CandyGivingRecords: "Candy giving records",
+            pointManagement: "point management",
+            Quantityofarrival: "Quantity of arrival",
             personalassets: 'Personal assets',
             billdetail: 'Bill detail',
             charge: 'Charge',
@@ -665,6 +722,7 @@ module.exports = {
             securitycenter: 'Security center',
             securitysetting: 'Security setting',
             accountsetting: 'Account setting',
+            FeeGrade: "Fee grade",
             myextension: 'My extension',
         },
         order: {
@@ -706,9 +764,13 @@ module.exports = {
             agentcodee: "Please enter the correct recommendation code "
         },
         safe: {
-            safelevel_low: 'Security Level: Low',
-            safelevel_high: 'Security Level: High',
-            safelevel_medium: 'Security Level: Medium',
+            safelevel_low: 'user level ',
+            safelevel_high: 'identityAuthentication',
+            safelevel_medium: 'Audit failed',
+            againVerify: "again verify",
+            GoogleAuthentication: "Google authentication",
+            GoogleAuthenticationAbs: 'When withdrawing deposits, changing passwords and security Settings, use the Google verification code you have entered. Please read the',
+            userguide: "user guide",
             nickname: 'Nickname',
             bind: 'Bind',
             binded: 'Binded',

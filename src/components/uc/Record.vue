@@ -7,20 +7,20 @@
                         <span>
                             {{$t('uc.finance.record.start_end')}} ：
                         </span>
-                        <DatePicker v-model="rangeDate" @on-change="changedate" format="yyyy-MM-dd" type="daterange" style="width: 200px;margin-right:30px;" @on-clear="clear"></DatePicker>
+                        <DatePicker v-model="rangeDate" @on-change="changedate" format="yyyy-MM-dd" type="daterange" style="width: 200px;margin-right:10px;" @on-clear="clear"></DatePicker>
                         <!--<DatePicker v-model="startDate" type="date"></DatePicker>-->
                         <!--<span>-->
                         <!--{{$t('uc.finance.record.to')}}-->
                         <!--</span>-->
                         <!--<DatePicker v-model="endDate" type="date"></DatePicker>-->
-                        <span>币种：</span>
-                        <Select v-model="coinType" style="width:100px;margin-right:30px;" @on-change="getAddrList" clearable>
+                        <span>{{$t('uc.finance.currency')}}：</span>
+                        <Select v-model="coinType" style="width:100px;margin-right:30px;" @on-change="getAddrList" clearable :placeholder="select">
                             <Option v-for="item in coinList" :value="item.unit" :key="item.unit">{{ item.unit }}</Option>
                         </Select>
                         <span>
                             {{$t('uc.finance.record.operatetype')}} ：
                         </span>
-                        <Select v-model="recordValue" clearable style="width:200px" @on-change="getType">
+                        <Select v-model="recordValue" clearable style="width:200px" @on-change="getType" :placeholder="select">
                             <Option v-for="(item, index) in recordType" :value="index" :key="item">{{ item }}</Option>
                         </Select>
                         <Button type="warning" @click="queryOrder" style="padding: 6px 30px;margin-left:10px;background-color:#3399ff;border-color:#3399ff">{{$t('uc.finance.record.search')}}</Button>
@@ -39,35 +39,67 @@
     </div>
 </template>
 <script>
-const map = new Map([['0', '充值'],
-['1', '提现'],
-['2', '转账'],
-['3', '币币交易'],
-['4', '法币买入'],
-['5', '法币卖出'],
-['6', '活动奖励'],
-['7', '推广奖励'],
-['8', '分红'],
-['9', '投票'],
-['10', '人工充值'],
-['11', '配对'],
-['12', '缴纳商家认证保证金'],
-['13', '退回商家认证保证金'],
-['14', '法币充值'],
-['15', '币币兑换'],
-['16', '渠道推广'],
-['17', '划转入杠杆钱包'],
-['18', '从杠杆钱包划转出'],
-['19', '钱包空投'],
-['20', '锁仓'],
-['21', '解锁'],
-['22', '第三方转入'],
-['23', '第三方转出'],
-['24', '币币转入法币'],
-['25', '法币转入币币'],
-['26', '借贷流水'],
-['27', '还款流水'],
+const map = new Map([
+    ['0', '充值'],
+    ['1', '提现'],
+    ['2', '转账'],
+    ['3', '币币交易'],
+    ['4', '法币买入'],
+    ['5', '法币卖出'],
+    ['6', '活动奖励'],
+    ['7', '推广奖励'],
+    ['8', '分红'],
+    ['9', '投票'],
+    ['10', '人工充值'],
+    ['11', '配对'],
+    ['12', '缴纳商家认证保证金'],
+    ['13', '退回商家认证保证金'],
+    ['14', '法币充值'],
+    ['15', '币币兑换'],
+    ['16', '渠道推广'],
+    ['17', '划转入杠杆钱包'],
+    ['18', '从杠杆钱包划转出'],
+    ['19', '钱包空投'],
+    ['20', '锁仓'],
+    ['21', '解锁'],
+    ['22', '第三方转入'],
+    ['23', '第三方转出'],
+    ['24', '币币转入法币'],
+    ['25', '法币转入币币'],
+    ['26', '借贷流水'],
+    ['27', '还款流水'],
 ]);
+const mapEn = new Map([
+    ['0', 'recharge'],
+    ['1', 'withdraw deposit'],
+    ['2', 'transfer'],
+    ['3', 'currency deal'],
+    ['4', 'legal tender buying'],
+    ['5', 'legal tender selling'],
+    ['6', 'activity reward'],
+    ['7', 'Promotion rewards'],
+    ['8', 'dividend'],
+    ['9', 'voting'],
+    ['10', 'Artificial Recharge'],
+    ['11', 'pairing'],
+    ['12', 'pay the merchant certification deposit'],
+    ['13', 'Return the merchant certification deposit'],
+    ['14', 'legal tender recharge'],
+    ['15', 'currency exchange'],
+    ['16', 'Channel promotion'],
+    ['17', 'Transfer to lever wallet'],
+    ['18', 'Transfer out of the lever wallet'],
+    ['19', 'wallet airdrop'],
+    ['20', 'locked position'],
+    ['21', 'unlock'],
+    ['22', 'Third party transfer'],
+    ['23', 'Third party roll out'],
+    ['24', 'The bitcoins are transferred into legal tender'],
+    ['25', 'Legal tender is transferred into bitcoin'],
+    ['26', 'loan flow'],
+    ['27', 'repayment flow'],
+]);
+
 export default {
     components: {},
     data() {
@@ -77,8 +109,9 @@ export default {
             rangeDate: "",
             startTime: "",
             endTime: "",
+            select:'select',
             recordValue: "",
-            recordType: [...map.values()],
+            // recordType: [...map.values()],
             coinList: [],
             coinType: "",
             pageSize: 10,
@@ -199,6 +232,7 @@ export default {
         tableColumnsRecord() {
             let columns = [];
             var that = this;
+            const m = this.$store.getters.lang == "English" ? mapEn : map;
             columns.push({
                 title: this.$t("uc.finance.record.chargetime"),
                 align: "center",
@@ -212,38 +246,7 @@ export default {
                 render: function (h, params) {
                     let str = "";
                     let type = params.row.type.toString();
-                    // if (type == 0) {
-                    //     str = that.$t("uc.finance.record.charge");
-                    // } else if (type == 1) {
-                    //     str = that.$t("uc.finance.record.pickup");
-                    // } else if (type == 2) {
-                    //     str = that.$t("uc.finance.record.transaccount");
-                    // } else if (type == 3) {
-                    //     str = that.$t("uc.finance.record.exchange");
-                    // } else if (type == 4) {
-                    //     str = that.$t("uc.finance.record.otcbuy");
-                    // } else if (type == 5) {
-                    //     str = that.$t("uc.finance.record.otcsell");
-                    // } else if (type == 6) {
-                    //     str = that.$t("uc.finance.record.activityaward");
-                    // } else if (type == 7) {
-                    //     str = that.$t("uc.finance.record.promotionaward");
-                    // } else if (type == 8) {
-                    //     str = that.$t("uc.finance.record.dividend");
-                    // } else if (type == 9) {
-                    //     str = that.$t("uc.finance.record.vote");
-                    // } else if (type == 10) {
-                    //     str = that.$t("uc.finance.record.handrecharge");
-                    // } else if (type == 11) {
-                    //     str = that.$t("uc.finance.record.match");
-                    // } else if (type == 12) {
-                    //     str = that.$t("uc.finance.record.borrowing");
-                    // } else if (type == 13) {
-                    //     str = that.$t("uc.finance.record.repayment");
-                    // } else {
-                    //     str = "充值";
-                    // }
-                    return h("div", {}, map.get(type));
+                    return h("div", {}, m.get(type));
                 }
             });
             columns.push({
@@ -254,8 +257,7 @@ export default {
                 }
             });
             columns.push({
-                // title: this.$t("uc.finance.record.num"),
-                title: "到账数量", //到账数量
+                title: this.$t("uc.finance.Quantityofarrival"),
                 align: "center",
                 render(h, params) {
                     return h(
@@ -323,6 +325,10 @@ export default {
                 }
             });
             return columns;
+        },
+        recordType() {
+            const m = this.$store.getters.lang == "English" ? mapEn : map;
+            return [...m.values()];
         }
     }
 };
