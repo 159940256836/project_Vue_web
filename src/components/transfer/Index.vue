@@ -5,36 +5,24 @@
                 <div style="margin-bottom:30px;">
                     <div style="width: 100%;line-height: 25px;text-align: right;">
                         <span style="padding-right: 5px;">{{$t('coin.follow')}}：</span>
-                        <Cascader
-                            style="width: 85%; float: right;"
-                            :data="data"
-                            v-model="value"
-                            :render-format="formatRender"
-                            @on-change="getValue"
-                            @on-visible-change="visibleChange"
-                        >
+                        <Cascader style="width: 85%; float: right;" :data="data" v-model="value" :render-format="formatRender" @on-change="getValue" @on-visible-change="visibleChange" placeholder="select">
                         </Cascader>
                     </div>
 
                 </div>
                 <div style="margin-bottom:25px;line-height: 25px;text-align: right;">
                     <span style="padding-right: 5px;">{{$t('coin.arrive')}}：</span>
-                    <Cascader
-                        style="width: 85%; float: right;"
-                        :data="toData"
-                        v-model="toValue"
-                        :render-format="formatRender"
-                    >
+                    <Cascader style="width: 85%; float: right;" :data="toData" v-model="toValue" :render-format="formatRender" placeholder="select">
                     </Cascader>
                 </div>
             </div>
             <div style="width: 100%;line-height: 25px;">
                 <span>{{$t('coin.quantity')}}：</span>
                 <Input v-model="num" :placeholder="$t('coin.quantityTransferred')" style="width: 85%; float: right;">
-            <span slot="append">
-                <span>{{unit}}</span>
-                <span class="all" @click="turnAll">{{$t('coin.all')}}</span>
-            </span>
+                <span slot="append">
+                    <span>{{unit}}</span>
+                    <span class="all" @click="turnAll">{{$t('coin.all')}}</span>
+                </span>
                 </Input>
             </div>
 
@@ -80,41 +68,14 @@ export default {
         }
     },
     created() {
-        // Promise.all([this.getSupportCoin(), this.getExchangeList()]).then(res => {
-        //     this.data = [...this.leverList, ...this.otcList, ...this.exchangeList]
-        // });
-        // this.getLeverNum();
-        // this.getOtcNum();
         if (this.isLogin) {
             this.init();
         }
-        // this.getSupportCoin().then(res => {
-        //     this.getLeverNum().then(res => {
-        //         console.log(this.leverList);
-        //         // const leverSymbol = this.leverList.map(ele => ele.children.map(e => {
-        //         //     return e.value;
-        //         // }));
-        //         const leverSymbol = this.leverList.map(ele => {
-        //             return ele.children;
-        //         }).map(ele => {
-        //             console.log(ele);
-        //             return ele.value;
-        //         });
-        //         console.log(leverSymbol);
-        //         let list = res.map(ele => {
-        //             if (leverSymbol[0].includes(ele.symbol)) {
-        //                 ele.leverWalletList.map(e => {
-        //                     return {
-        //                         value: ele.symbol,
-        //                         canUse: e.balance,
-        //                         unit: e.coin.unit
-        //                     }
-        //                 })
-        //             }
-        //         });
-        //         console.log(list);
-        //     })
-        // })
+    },
+    watch:{
+        lang: function () {
+            this.updateLangData();
+        }
     },
     methods: {
         init() {
@@ -124,6 +85,11 @@ export default {
             })
         },
         cancel() {
+            this.value = [];
+            this.toValue = [];
+            this.num ='';
+            this.unit = '';
+            this.canUseNum = '';
             this.$emit("closetransferModal");
         },
         getOtcNum() {
@@ -169,8 +135,7 @@ export default {
                                     value: e.coin.unit,
                                     canUse: e.balance,
                                     label: e.coin.unit,
-                                }
-
+                                };
                             })
                         }
                     })
@@ -184,8 +149,8 @@ export default {
                         resolve("success");
                     })
                 } else {
-                    if(this.loginmsg!=undefined){
-                    this.$Message.error(this.loginmsg);
+                    if (this.loginmsg != undefined) {
+                        this.$Message.error(this.loginmsg);
                     }
                 }
             });
@@ -272,12 +237,12 @@ export default {
                     this.coinToOtc(params);
                 }
             };
-            if(this.value[0] == this.$t('coin.Leveraged')){
+            if (this.value[0] == this.$t('coin.Leveraged')) {
                 if (this.toValue[0] == this.$t('coin.bit')) {
                     const params = {
                         coinUnit: this.toValue[1],
                         amount: this.num,
-                        leverCoinSymbol:this.value[1]
+                        leverCoinSymbol: this.value[1]
                     }
                     this.leverToCoin(params);
                 }
@@ -285,7 +250,7 @@ export default {
 
             //
         },
-        leverToCoin(params){//杠杆转币币
+        leverToCoin(params) {//杠杆转币币
             this.$http.post(this.host + "/margin-trade/lever_wallet/turn_out", params).then(res => {
                 if (res.body.code == 0) {
                     this.$Notice.success({
@@ -397,29 +362,35 @@ export default {
                         resolve("success");
                     })
                 } else {
-                    if(this.loginmsg!=undefined){
+                    if (this.loginmsg != undefined) {
                         this.$Message.error(this.loginmsg);
                     }
                 }
             });
+        },
+        updateLangData(){
+           this.init();
         }
     },
     computed: {
         isLogin: function () {
             return this.$store.getters.isLogin;
+        },
+        lang:function(){
+            return this.$store.getters.lang;
         }
     }
 }
 </script>
 <style lang="scss" scoped>
-    .all {
-        cursor: pointer;
-        color:#2d8cf0;
-        margin-left:20px;
-    }
-    .button {
-        display:flex;
-        justify-content:space-around;
-        margin-top:20px;
-    }
+.all {
+    cursor: pointer;
+    color: #2d8cf0;
+    margin-left: 20px;
+}
+.button {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
 </style>

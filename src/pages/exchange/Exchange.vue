@@ -1711,7 +1711,9 @@ export default {
             this[silder] = val;
         },
         init() {
-            let params = this.$route.params.pathMatch;
+            var params = this.$route.params[0];
+           console.log(params);
+            // let params = this.$route.params.pathMatch;
             if (params == undefined) {
                 this.$router.push("/exchange/" + this.defaultPath);
                 params = this.defaultPath;
