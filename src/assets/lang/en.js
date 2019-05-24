@@ -434,13 +434,13 @@ module.exports = {
     uc: {
         title: "my center",
         menuTitle: {
-            AccountManagement: "Account management",
-            moneyManagement: "Asset Management",
-            bibiManagement: "Bitcoin management",
-            otcManagement: "legal tender management",
-            ieoManagement: "IEO management",
-            apiManagement: "API Management",
-            leverManagement: "leveraged Management"
+            AccountManagement: "Account",
+            moneyManagement: "Asset",
+            bibiManagement: "Bitcoin",
+            otcManagement: "Legal Tender",
+            ieoManagement: "IEO",
+            apiManagement: "API",
+            leverManagement: "leveraged"
         },
         login: {
             noaccount: 'No Account？To Regist',
@@ -766,7 +766,7 @@ module.exports = {
             safelevel_high: 'identityAuthentication',
             safelevel_medium: 'Audit failed',
             againVerify: "again verify",
-            GoogleAuthentication: "Google authentication",
+            GoogleAuthentication: "Google",
             GoogleAuthenticationAbs: 'When withdrawing deposits, changing passwords and security Settings, use the Google verification code you have entered. Please read the',
             userguide: "user guide",
             nickname: 'Nickname',

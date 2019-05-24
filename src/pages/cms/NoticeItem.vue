@@ -140,7 +140,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 280px;
-    background: linear-gradient(to right, #fea174, #fbd972);
+   background:url("../../assets/images/notice.jpg");;
     color: #fff;
     font-size: 40px;
   }
