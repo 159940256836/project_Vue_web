@@ -127,44 +127,44 @@
                             <!--下载支持-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>{{$t("footer.gsjj")}}</span>
+                                    <span>{{$t("footer.download")}}</span>
                                 </li>
                                 <li>
-                                    <router-link to="/">{{$t("footer.gywm")}}</router-link>
+                                    <router-link to="/">{{$t("footer.apiDoc")}}</router-link>
                                 </li>
                                  <li>
-                                    <router-link to="/">{{$t("footer.gywm1")}}</router-link>
+                                    <router-link to="/">{{$t("footer.appDownload")}}</router-link>
                                 </li>
                                  <li>
-                                    <router-link to="/">{{$t("footer.gywm2")}}</router-link>
+                                    <router-link to="/">{{$t("footer.otherDownload")}}</router-link>
                                 </li>
 
                             </ul>
                             <!--客户服务-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>{{$t("footer.bzzx")}}</span>
+                                    <span>{{$t("footer.helpCenter")}}</span>
                                 </li>
                                 <li>
-                                    <router-link to="/helplist?cate=0&cateTitle=使用教程">{{$t("footer.xszn")}}</router-link>
+                                    <router-link to="/helplist?cate=0&cateTitle=使用教程">{{$t("footer.RecommendedCommission")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/helplist?cate=1&cateTitle=常见问题">{{$t("footer.cjwt")}}</router-link>
+                                    <router-link to="/helplist?cate=1&cateTitle=常见问题">{{$t("footer.question")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">服务协议</router-link>
+                                    <router-link to="/">{{$t("footer.serviceArgee")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">交易费率</router-link>
+                                    <router-link to="/">{{$t("footer.transactionCosts")}}</router-link>
                                 </li>
                             </ul>
                             <!--投票上币-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>{{$t("footer.lxwm")}}</span>
+                                    <span>{{$t("footer.voteBi")}}</span>
                                 </li>
                                 <li class="wechatclick">
-                                    <router-link to="/">我要投票</router-link>
+                                    <router-link to="/">{{$t("footer.shallVote")}}</router-link>
                                     <!--                                <poptip width="200">-->
                                     <!--                                    <a href="javascript:;" class="wechat">客服邮箱</a>-->
                                     <!--                                    &lt;!&ndash; <div slot="content">-->
@@ -173,41 +173,41 @@
                                     <!--                                </poptip>-->
                                 </li>
                                 <li>
-                                    <router-link to="/">上币申请</router-link>
+                                    <router-link to="/">{{$t("footer.coinApp")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">节点中心</router-link>
+                                    <router-link to="/">{{$t("footer.nodeCenter")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">节点列表</router-link>
+                                    <router-link to="/">{{$t("footer.nodeListenning")}}</router-link>
                                 </li>
                             </ul>
                             <!--其他-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>其他</span>
+                                    <span>{{$t('footer.other')}}</span>
                                 </li>
                                 <li>
-                                    <router-link to="/">官方公告</router-link>
+                                    <router-link to="/">{{$t('footer.officeNotice')}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">做市商计划</router-link>
+                                    <router-link to="/">{{$t('footer.marketPlan')}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">子账号管理</router-link>
+                                    <router-link to="/">{{$t('footer.SubaccountManagement')}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">调查问卷</router-link>
+                                    <router-link to="/">{{$t('footer.questionnaire')}}</router-link>
                                 </li>
 
                             </ul>
                             <!--联系我们-->
                             <ul class="footer_info">
                                 <li class="footer_title">
-                                    <span>联系我们</span>
+                                    <span>{{$t('footer.concatUs')}}</span>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">服务邮箱：service@coinmany.com</a>
+                                    <a href="javascript:;">{{$t('footer.email')}}：service@coinmany.com</a>
                                 </li>
                                 <!-- <li>
                                     <span style="color: #8790a1;">企业邮箱：service@coinmany.com</span>
@@ -221,7 +221,7 @@
                 </div>
                 <div class="info">
                     <div class="footer-info">
-                        <div class="info-title">友情链接:</div>
+                        <div class="info-title">{{$t('footer.friendLinks')}}:</div>
                         <div class="info-img">
                             <a href="javascript:;">
                                 <img src="./assets/images/footer/1.png" alt="">
@@ -1138,7 +1138,7 @@ body {
                 text-align: left;
                 ul {
                     float: left;
-                    margin: 0 35px;
+                    margin: 0 15px;
                 }
                 .footer_info {
                     .footer_title {

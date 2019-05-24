@@ -399,7 +399,7 @@ export default {
                 promotion: forminline.agentcode,
                 superPartner: ""
             };
-            this.$http.post(this.host + '/uc/register/email', params).then(response => {
+            this.$http.post(this.host + 'uc/register/email', params).then(response => {
                 let resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
