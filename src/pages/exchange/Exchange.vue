@@ -11,24 +11,24 @@
                 </span>
             </div>
             <div class="item">
-                <span class="text">最新价</span>
+                <span class="text">{{$t('coin.last')}}</span>
                 <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.close | toFixed(baseCoinScale)}}</span>
                 <span class="price-cny">￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}</span>
             </div>
             <div class="item">
-                <span class="text">24h涨跌</span>
+                <span class="text">{{$t('coin.up')}}</span>
                 <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.rose}}</span>
             </div>
             <div class="item">
-                <span class="text">24h最高价</span>
+                <span class="text">{{$t('coin.celling')}}</span>
                 <span class="num ">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
             </div>
             <div class="item">
-                <span class="text">24h最低价</span>
+                <span class="text">{{$t('coin.floor')}}</span>
                 <span class="num ">{{currentCoin.low | toFixed(baseCoinScale)}}</span>
             </div>
             <div class="item">
-                <span class="text">24h成交量</span>
+                <span class="text">{{$t('coin.turnover')}}</span>
                 <span class="num ">{{currentCoin.volume}} {{currentCoin.coin}}</span>
             </div>
             <div class="item" @click="changeSkin">
@@ -104,7 +104,7 @@
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
                                     <router-link :to="rechargeUSDTUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">划转</span>
+                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">{{$t('coin.transfer')}}</span>
                                     <!-- <a :href="rechargeUSDTUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
@@ -202,7 +202,7 @@
                                     <b>{{wallet.coin|toFloor(coinScale)}}</b>
                                     <span>{{currentCoin.coin}}</span>
                                     <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">划转</span>
+                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">{{$t('coin.transfer')}}</span>
                                     <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                                     <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
@@ -317,7 +317,7 @@
                         <span @click="changeBaseCion('usdt')" :class="{active:basecion==='usdt'}">USDT</span>
                         <span @click="changeBaseCion('btc')" :class="{active:basecion==='btc'}">BTC</span>
                         <span @click="changeBaseCion('eth')" :class="{active:basecion==='eth'}">ETH</span>
-                        <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">自选</span>
+                        <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">{{$t('coin.option')}}</span>
                         <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
                         <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
                     </div>
@@ -335,8 +335,8 @@
             <div class="order-handler">
                 <span @click="changeOrder('current')" :class="{active:selectedOrder==='current'}">{{$t('exchange.curdelegation')}}</span>
                 <span @click="changeOrder('history')" :class="{active:selectedOrder==='history'}">{{$t('exchange.hisdelegation')}}</span>
-                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/entrust/current">查看更多>></router-link>
-                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/entrust/history">查看更多>></router-link>
+                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/entrust/current">{{$t('coin.view')}}>></router-link>
+                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/entrust/history">{{$t('coin.view')}}>></router-link>
             </div>
             <div class="table">
                 <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows" :loading="currentLoading"></Table>
