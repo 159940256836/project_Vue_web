@@ -1,16 +1,16 @@
 <template>
     <div class="openGoogle common">
         <div class="header-title">
-            <span>关闭谷歌</span>
+            <span>{{$t('openGoolePage._closeGoogle')}}</span>
             <span @click="returnSuperior">
                 <Icon type="ios-undo" style="font-size: 18px;" />
-                返回安全设置
+                {{$t('openGoolePage._returnSetting')}}
             </span>
         </div>
         <div class="openGoogleModal">
             <!-- <Modal v-model="openGoogleModal" :title="title" :footer-hide="true"> -->
             <Form ref="formInline" :model="formInline" :rules="ruleInline" label-position="top">
-                <FormItem label="手机号">
+                <FormItem :label="$t('openGoolePage._phone')">
                     <p style="background:rgb(247, 244, 253);padding:5px;font-size:16px;">
                         {{phone|addStart}}
                         <!--{{ phone.substring(0,2)}}
@@ -18,19 +18,19 @@
                         {{ phone.substring(9,11)}}-->
                     </p>
                 </FormItem>
-                <FormItem label="短信验证码" prop="code">
-                    <Input type="text" v-model="formInline.code" placeholder="短信验证码">
+                <FormItem :label="$t('openGoolePage._phoneCode')" prop="code">
+                    <Input type="text" v-model="formInline.code" :placeholder="$t('openGoolePage._phoneCode')">
                         <Button slot="append" @click="getCode" :disabled="disabled">{{getCodeText}}</Button>
                     </Input>
                 </FormItem>
-                <FormItem label="谷歌验证码" prop="googleCode">
-                    <Input type="text" v-model="formInline.googleCode" placeholder="谷歌验证码">
+                <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="googleCode">
+                    <Input type="text" v-model="formInline.googleCode" :placeholder="$t('openGoolePage._GoogleVerificationCode')">
                     </Input>
                 </FormItem>
             </Form>
             <div class="btns" style="display:flex;justify-content:space-around;align-items:center;">
-                <Button @click="cancel">取消</Button>
-                <Button type="primary" @click="sureBtn('formInline')">确认</Button>
+                <Button @click="cancel">{{$t('openGoolePage._cancel')}}</Button>
+                <Button type="primary" @click="sureBtn('formInline')">{{$t('openGoolePage._sure')}}</Button>
             </div>
             <!-- </Modal> -->
         </div>
@@ -44,7 +44,7 @@ export default {
     name: "closegoogleVali",
     data() {
         return {
-            getCodeText: "获取验证码",
+            getCodeText: this.$t('openGoolePage._sendCode'),
             phone: this.$route.params.phone,
             disabled: false,
             openGoogleModal: true,
@@ -52,12 +52,12 @@ export default {
             },
             ruleInline: {
                 code: [
-                    { required: true, message: '请填写正确的验证码', trigger: 'blur' },
-                    { type: 'string', min: 6, message: '请填写正确的验证码', trigger: 'blur' }
+                    { required: true, message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' },
+                    { type: 'string', min: 6, message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' }
                 ],
                 googleCode: [
-                    { required: true, message: '请填写正确的谷歌验证码', trigger: 'blur' },
-                    { type: 'string', min: 6, message: '请填写正确的谷歌验证码', trigger: 'blur' }
+                    { required: true, message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' },
+                    { type: 'string', min: 6, message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' }
                 ]
             }
         }
@@ -68,7 +68,7 @@ export default {
         } else {
             this.$router.go(-1);
         }
-        this.getMember()
+        // this.getMember()
     },
     filters: {
         addStart(str) {
@@ -122,7 +122,7 @@ export default {
                     this.getCodeText = --count;
                     if (count <= 0) {
                         clearInterval(timer);
-                        this.getCodeText = "获取验证码";
+                        this.getCodeText =  this.$t('openGoolePage._sendCode');
                         this.disabled = false;
                     }
                 }, 1000);

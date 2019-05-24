@@ -2,11 +2,11 @@
     <div class="leverBox">
         <div class="main-box">
             <div class="leftBox">
-                <h4>杠杆账户</h4>
+                <h4>{{$t('coin.Leveraged')}}</h4>
                 <ul>
                     <li>
-                        <div>交易对</div>
-                        <div>风险率</div>
+                        <div>{{$t('coin.deal')}}</div>
+                        <div>{{$t('coin.rate')}}</div>
                     </li>
                     <li
                         v-for="(item,index) in allLeverList"
@@ -22,23 +22,23 @@
             </div>
             <div class="rightBox">
                 <div class="tips">{{symbol}}
-                    <Icon type="ios-alert" color="#2d8cf0" />当风险率≤{{this.inseRate}}%时,账户将触发爆仓以归还借贷资金</div>
+                    <Icon type="ios-alert" color="#2d8cf0" />{{$t('coin.when')}}≤{{this.inseRate}}%{{$t('coin.repay')}}</div>
                 <ul>
                     <li v-for="(item,index) in symbolList" :key="index">
                         <div>
-                            <div class="title">可用&nbsp;&nbsp;{{item.baseUnit}}</div>
+                            <div class="title">{{$t('coin.available')}}&nbsp;&nbsp;{{item.baseUnit}}</div>
                             <div class="content">{{item.baseBanlance}}</div>
                         </div>
                         <div>
-                            <div class="title">可用&nbsp;&nbsp;{{item.coinUnit}}</div>
+                            <div class="title">{{$t('coin.available')}}&nbsp;&nbsp;{{item.coinUnit}}</div>
                             <div class="content">{{item.coinBalance}}</div>
                         </div>
                         <div>
-                            <div class="title">爆仓价</div>
+                            <div class="title">{{$t('coin.blowing')}}</div>
                             <div class="content">{{item.explosionPrice | defaultTxt}}</div>
                         </div>
                         <div>
-                            <div class="title">风险率&nbsp;&nbsp;
+                            <div class="title">{{$t('coin.rate')}}&nbsp;&nbsp;
                                 <Icon type="ios-alert" />
                             </div>
                             <div class="content">{{item.riskRate}}%</div>
@@ -48,50 +48,50 @@
                 <template v-for="(item, index) in symbolList">
                     <div class="twoBorow">
                         <div>
-                            <h4>{{item.baseUnit}}借贷</h4>
+                            <h4>{{item.baseUnit}}{{$t('coin.credit')}}</h4>
                             <ul>
                                 <li>
-                                    <div>已借</div>
+                                    <div>{{$t('coin.loaned')}}</div>
                                     <div>{{item.baseLoanCount}}</div>
                                 </li>
                                 <li>
-                                    <div>可借</div>
+                                    <div>{{$t('coin.loan')}}</div>
                                     <div>{{item.baseCanLoan}}</div>
                                 </li>
                                 <li>
-                                    <div style="text-align: right">利率</div>
+                                    <div style="text-align: right">{{$t('coin.interest ')}}</div>
                                     <div>{{item.baseINsertRate}}%</div>
                                 </li>
                             </ul>
-                            <p>借贷数量</p>
+                            <p>{{$t('coin.loanAmount')}}</p>
                             <Input v-model="baseInputvalue" style="width:80%; margin-bottom:20px;">
                                 <span slot="append">{{item.baseUnit}}</span>
                             </Input>
                             <Slider v-model="baseValue" style="width:80%;" show-tip="never" @on-change='getBaseValue'></Slider>
-                            <Button type="primary" style="width:80%" @click="borrow('base', item.baseUnit)">申请{{item.baseUnit}}</Button>
+                            <Button type="primary" style="width:80%" @click="borrow('base', item.baseUnit)">{{$t('coin.application')}}{{item.baseUnit}}</Button>
                         </div>
                         <div>
-                            <h4>{{item.coinUnit}}借贷</h4>
+                            <h4>{{item.coinUnit}}{{$t('coin.credit')}}</h4>
                             <ul>
                                 <li>
-                                    <div>已借</div>
+                                    <div>{{$t('coin.loaned')}}</div>
                                     <div>{{item.coinLoanCount}}</div>
                                 </li>
                                 <li>
-                                    <div>可借</div>
+                                    <div>{{$t('coin.loan')}}</div>
                                     <div>{{item.coinCanLoan}}</div>
                                 </li>
                                 <li>
-                                    <div style="text-align: right">利率</div>
+                                    <div style="text-align: right">{{$t('coin.interest ')}}</div>
                                     <div>{{item.coinINsertRate}}%</div>
                                 </li>
                             </ul>
-                            <p>借贷数量</p>
+                            <p>{{$t('coin.loanAmount')}}</p>
                             <Input v-model="baseCoinvalue" style="width:80%;margin-bottom:20px;">
                                 <span slot="append">{{item.coinUnit}}</span>
                             </Input>
                             <Slider v-model="coinValue" style="width:80%;" show-tip="never" @on-change='getCoinValue'></Slider>
-                            <Button type="primary" style="width:80%" @click="borrow('coin',item.coinUnit)">申请{{item.coinUnit}}</Button>
+                            <Button type="primary" style="width:80%" @click="borrow('coin',item.coinUnit)">{{$t('coin.application')}}{{item.coinUnit}}</Button>
                         </div>
                     </div>
                 </template>

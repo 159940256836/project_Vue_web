@@ -9,6 +9,7 @@ const historyAndCu = require('./record').zh; //下单记录以及历史记录
 const ieoAdmin = require('./ieoAdmin').zh; //ieo管理
 const apiAdmin = require('./apiAdmin').zh; //ieo管理
 const coin = require("./coins").zh //币币
+const footer = require("./footer").zh //底部
 module.exports = {
     openGoolePage: a,
     recommendPage: b,
@@ -21,6 +22,7 @@ module.exports = {
     ieoAdmin: ieoAdmin,
     apiAdmin: apiAdmin,
     coin: coin,
+    footer: footer,
     topInfo: {
         name: '币多网--国际数字加密资产交易平台',
     },
@@ -220,7 +222,10 @@ module.exports = {
         },
         chat: {
             seller: '卖家',
+            orderDetails: "订单详情",
             buyer: '买家',
+            openDesktopAlerts: "开启桌面消息提醒",
+            openchoiceAlerts: "开启声音消息提醒",
             exchangeamount: '交易金额',
             operatetip: '操作提示',
             operatetip_1: '请在规定的时限内按照对方给出的账号完成支付，并在本页面点击',
@@ -999,35 +1004,6 @@ module.exports = {
         message3: '多个数字币种7X24小时交易',
         message4: '多终端APP，方寸间轻松交易',
         message5: '币多网国际数字加密资产交易平台手机客户端，专注掌上交易体验',
-    },
-    footer: {
-        wechatkefu: "微信客服",
-        notice: '平台公告',
-        changjian: '常见问题',
-        shiyong: '使用协议',
-        feilv: '费率说明',
-        lianxi: '联系邮箱',
-        biyong: '币用',
-        gsmc: '国际数字加密资产交易平台',
-        bah: '沪ICP备13026899号-3',
-        gsjj: '下载支持',
-        gywm: 'API文档',
-        gywm1: 'APP下载',
-        gywm2: '其他下载',
-        jrwm: '加入我们',
-        lxwm: '投票上币',
-        yqlj: '友情链接',
-        bzzx: '帮助中心',
-        xsrm: '新手教程',
-        czzn: '充值指南',
-        jyzn: '交易指南',
-        ptsm: '平台说明',
-        fysm: '交易规则',
-        fwtk: '使用协议',
-        fltk: '资费说明',
-        wechat: "微信客服",
-        xszn: "新手指南",
-        cjwt: "常见问题"
     },
     financeNav: {
         wdzc: '我的资产'
