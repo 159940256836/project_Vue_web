@@ -264,7 +264,7 @@
                                                 </div>
                                                 </Input>
                                             </FormItem>
-                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
+                                            <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="googleCode" v-if="googleSwitch">
                                                 <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
                                             </FormItem>
                                             <!-- Button -->
@@ -349,7 +349,7 @@
                                                 </div>
                                                 </Input>
                                             </FormItem>
-                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
+                                            <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="googleCode" v-if="googleSwitch">
                                                 <Input v-model="formValidate5.googleCode" size="large" type="text"></Input>
                                             </FormItem>
                                             <p style="text-align:right;">
@@ -390,7 +390,7 @@
                                                 </div>
                                                 </Input>
                                             </FormItem>
-                                            <FormItem label="谷歌验证码" prop="googleCode" v-if="googleSwitch">
+                                            <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="googleCode" v-if="googleSwitch">
                                                 <Input v-model="formValidate5.googleCode" size="large" type="text"></Input>
                                             </FormItem>
                                             <!-- Button -->
@@ -577,13 +577,13 @@ export default {
             ruleValidate: {
                 googleCode5: [{
                     required: true,
-                    message: "请填写谷歌验证码",
+                    message: this.$t('openGoolePage._GoogleVerificationCode'),
                     trigger: "blur"
                 }],
                 googleCode: [
                     {
                         required: true,
-                        message: "请填写谷歌验证码",
+                        message: this.$t('openGoolePage._GoogleVerificationCode'),
                         trigger: "blur"
                     }
                 ],
@@ -1164,7 +1164,8 @@ export default {
         },
         lang() {
             return this.$store.state.lang;
-        }
+        },
+        
     },
     created() {
         this.userUid()
