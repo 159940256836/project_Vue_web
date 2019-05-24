@@ -517,7 +517,6 @@ export default {
             // 否则 提出当前数量减去手续费
             this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
             // 旧代码
-            // console.log(this.withdrawOutAmount,this.currentCoin.withdrawScale,this.withdrawAmount, this.withdrawFee)
             // this.withdrawOutAmount = this.round(
             //   this.accSub(this.withdrawAmount, this.withdrawFee),
             //   this.currentCoin.withdrawScale

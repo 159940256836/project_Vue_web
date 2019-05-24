@@ -12,11 +12,8 @@ exports = module.exports = {
                         if(iTop >= $(".layout").height()) {
                             //鼠标滑动样式改变
                             aDiv.each(function() {
-                                //console.log($(this).offset().top);
                                 if(winH + iTop - $(this).offset().top > winH / 2) {
-                                    //console.log(aNav);
                                     aNav.removeClass('active');
-                                    //console.log(aNav);
                                     aNav.siblings().hide();
                                     aNav.eq($(this).index()).addClass('active');
                                     aNav.eq($(this).index()).siblings().show();

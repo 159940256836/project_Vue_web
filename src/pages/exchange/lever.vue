@@ -137,7 +137,8 @@
                                         </FormItem>
                                         <FormItem>
                                             <Input @on-keyup="keyEvent" v-model="form.buy.limitAmount" :placeholder="$t('exchange.buynum')"></Input>
-                                            <label>{{currentCoin.coin}}</label>
+                                            <!-- <label>{{currentCoin.coin}}</label> -->
+                                              <label><span>最高能买入：</span>{{(this.wallet.base / this.form.buy.limitPrice).toFixed(4)}}</label>
                                         </FormItem>
                                         <div class="slider-wrap">
                                             <Slider class="silder-buy" v-model="sliderBuyLimitPercent" show-tip="always" :tip-format="tipFormat" :disabled="sliderBuyDisabled"></Slider>
@@ -1633,6 +1634,7 @@ export default {
                         resolve(data.data.web);
                     }).catch(reject => reject("BTC_USDT"));
                 }
+
             })
         },
         //去借贷或者归还

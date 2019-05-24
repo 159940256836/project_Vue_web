@@ -504,7 +504,7 @@ $lineColor: rgb(71, 100, 146);
                 .left_circle {
                     width: 39%;
                     height: 2px;
-                    background: rgb(19, 31, 50);
+                   background: #3399ff !important;
                     position: relative;
                     &:before {
                         display: inline-block;
@@ -614,7 +614,7 @@ $lineColor: rgb(71, 100, 146);
 }
 
 .ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631] {
-    background: #3399ff;
+    background: #3399ff !important;
     opacity: 0.5;
 }
 </style>

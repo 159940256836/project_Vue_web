@@ -21,10 +21,8 @@ var ImageResizer=function(opts){
     var _debug=function(str,styles){  
         if(settings.debug==true){  
             if(styles){  
-                console.log(str,styles);  
             }  
             else{  
-                console.log(str);  
             }  
         }  
     };  
@@ -80,8 +78,6 @@ var innerTools={
                 w:$(img)[0].naturalWidth,  
                 h:$(img)[0].naturalHeight  
             };  
-        console.log("真实尺寸：");  
-        console.log(_img_info);  
        var _resize_info={  
            w:0  
            ,h:0  
@@ -175,7 +171,6 @@ theH//destHeight
                 settings.onTmpImgGenerate(_tmp_img);  
                 //--计算尺寸。  
                 var _limitSizeInfo=innerTools.getResizeSizeFromImg(__tmpImg);  
-                console.log(_limitSizeInfo);  
                 var _img_info={  
                     w:$(__tmpImg)[0].naturalWidth,  
                     h:$(__tmpImg)[0].naturalHeight  
