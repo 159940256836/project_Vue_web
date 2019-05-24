@@ -83,8 +83,8 @@
                 </button>
               <div class="msg-notice">
 <!--                <Checkbox @on-change="handleCheckClick" v-model="fOpenNotice">开启windows消息提醒,不担心错过任何消息</Checkbox>-->
-                <Checkbox @on-change="handleNoticeClick" v-model="fOpenNotice">开启桌面消息提醒</Checkbox>
-                <Checkbox @on-change="handleAudioClick" v-model="fOpenAudio">开启声音消息提醒</Checkbox>
+                <Checkbox @on-change="handleNoticeClick" v-model="fOpenNotice">{{$t("otc.chat.openDesktopAlerts")}}</Checkbox>
+                <Checkbox @on-change="handleAudioClick" v-model="fOpenAudio">{{$t("otc.chat.openchoiceAlerts")}}</Checkbox>
               </div>
             </div>
 
@@ -160,7 +160,7 @@ export default {
                 }else if(Notification.permission == "denied") {
                   this.$Message.info('您已屏蔽消息提醒，如需开通，请查看帮助!');
                 }else {
-                  this.$Message.info("您已开启桌面消息提醒!");
+                  this.$Message.info();
                 }
               } else {
                 this.$Message.info('您的浏览器不支持该功能');

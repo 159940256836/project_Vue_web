@@ -2,7 +2,7 @@
     <div class="content-wrap">
         <div class="container chat-in-box" id="List">
             <p style="padding: 10px 0 10px 20px;font-size: 16px;">
-              <router-link to="/uc/order" style="color:#3399ff;">{{$t('otc.myorder')}}</router-link> ><span style="font-size:14px;">订单详情</span>
+              <router-link to="/uc/order" style="color:#3399ff;">{{$t('otc.myorder')}}</router-link> ><span style="font-size:14px;">{{$t('otc.chat.orderDetails')}}</span>
               </p>
             <Row class="chat-in">
                 <Col span="4">
@@ -51,7 +51,7 @@
                         <div class="bottom-btn">
                             <div style="padding-top:20px;">
                                 <h6 style="font-weight: 600">{{$t('otc.chat.orderstatus')}}:
-                                    <span>{{statusText}}</span>
+                                    <span>{{statusTextStr}}</span>
                                 </h6>
                                 <div v-show="statusBtn==1&&tradeType==0">
                                     <Button type="warning" @click="modal1 = true">{{$t('otc.chat.orderstatus_1')}}</Button>
@@ -75,7 +75,7 @@
                 <div class="rightbox">
                     <Row class="chat-top" type="flex" justify="space-between">
                         <Col span="3" class="order-time">
-                        <h5>{{statusText}}</h5>
+                        <h5>{{statusTextStr}}</h5>
                         <div v-show="statusBtn==1" class="reserve-time">{{reserveTime}}</div>
                         </Col>
                         <Col span="8" class="order-info">
@@ -229,7 +229,21 @@ export default {
     this.getDetail();
     this.initScok();
   },
-  computed: {},
+  computed: {
+      statusTextStr(){
+          if (this.statusText == 1) {
+              return this.$t("otc.chat.result_1");
+            } else if (this.statusText == 2) {
+              return this.$t("otc.chat.result_2");
+            } else if (this.statusText == 3) {
+              return this.$t("otc.chat.result_3");
+            } else if (this.statusText == 4) {
+              return this.$t("otc.chat.result_4");
+            } else if (this.statusText == 0) {
+              return this.$t("otc.chat.result_5");
+            }
+      }
+  },
   methods: {
     //让浏览器滚动条保持在最低部
     scrollToBottom: function() {
@@ -254,16 +268,16 @@ export default {
             self.$Message.success(confirmPayMsg.content);
             self.statusBtn = confirmPayMsg.status;
             if (confirmPayMsg.status == 1) {
-              self.statusText = self.$t("otc.chat.result_1");
+              self.statusText = 1;
               self.setReserveTime();
             } else if (confirmPayMsg.status == 2) {
-              self.statusText = self.$t("otc.chat.result_2");
+              self.statusText = 2;
             } else if (confirmPayMsg.status == 3) {
-              self.statusText = self.$t("otc.chat.result_3");
+              self.statusText = 3;
             } else if (confirmPayMsg.status == 4) {
-              self.statusText = self.$t("otc.chat.result_4");
+              self.statusText = 4;
             } else if (confirmPayMsg.status == 0) {
-              self.statusText = self.$t("otc.chat.result_5");
+              self.statusText = 0;
             }
           }
         );
@@ -451,16 +465,16 @@ export default {
             this.statusBtn = resp.data.status;
             this.tradeType = resp.data.type;
             if (resp.data.status == 1) {
-              this.statusText = this.$t("otc.chat.result_1");
+              this.statusText = 1;
               this.setReserveTime();
             } else if (resp.data.status == 2) {
-              this.statusText = this.$t("otc.chat.result_2");
+              this.statusText = 2;
             } else if (resp.data.status == 3) {
-              this.statusText = this.$t("otc.chat.result_3");
+              this.statusText = 3;
             } else if (resp.data.status == 4) {
-              this.statusText = this.$t("otc.chat.result_4");
+              this.statusText = 4;
             } else if (resp.data.status == 0) {
-              this.statusText = this.$t("otc.chat.result_5");
+              this.statusText = 0;
             }
           } else {
             this.$Message.error(resp.message);

@@ -1,7 +1,7 @@
 const tableMixins = {
     computed: {
         currentOrder() {
-            let rows = [];
+            // let rows = [];
             const self = this;
             const arr = [];
             // columns: [
@@ -238,22 +238,21 @@ const tableMixins = {
             }
         },
         btnList() {
-           const self = this;
-           const arr = [];
-                arr.push({
-                    text: self.$t("exchange.limited_price"),
-                    check: true
-                });
-                arr.push({
-                    text: self.$t("exchange.market_price"),
-                    check: false
-                });
-                arr.push({
-                    text:  this.$t("coin.stop"),
-                    // text:  "止盈止损",
-                    check: false
-                });
-          return arr;
+            const arr = [];
+            arr.push({
+                text: this.$t("exchange.limited_price"),
+                check: true
+            });
+            arr.push({
+                text: this.$t("exchange.market_price"),
+                check: false
+            });
+            arr.push({
+                text: this.$t("coin.stop"),
+                // text:  "止盈止损",
+                check: false
+            });
+            return arr;
         }
     }
 }

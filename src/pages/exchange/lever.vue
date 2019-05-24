@@ -775,13 +775,13 @@ const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CH
 
 import DepthGraph from "@components/exchange/DepthGraph.vue";
 import $ from "@js/jquery.min.js";
-import {tableMixins} from "../../minxs/tablemin.js"
+// import {tableMixins} from "../../minxs/tablemin.js"
 // <li @click="tab(0)" :class="{active:tab0Flag}">{{}}</li>
 // <li @click="tab(1)">{{$t("exchange.market_price")}}</li>
 // <li @click="tab(2)">止盈止损</li>
 export default {
-    components: { expandRow, DepthGraph, transfermodal, tableMixins },
-    mixins: [tableMixins],
+    components: { expandRow, DepthGraph, transfermodal },
+    // mixins: [tableMixins],
     data() {
         let self = this;
         return {
@@ -797,21 +797,21 @@ export default {
             loadingButton6: false, // 接口请求loading
             modal: false,
             LeversymbolMsg: {},
-            // btnList: [
-            //     {
-            //         text: self.$t("exchange.limited_price"),
-            //         check: true
-            //     },
-            //     {
-            //         text: self.$t("exchange.market_price"),
-            //         check: false
-            //     },
-            //     {
-            //         text:  this.$t("coin.stop"),
-            //         // text:  "止盈止损",
-            //         check: false
-            //     }
-            // ],
+            btnList: [
+                {
+                    text: self.$t("exchange.limited_price"),
+                    check: true
+                },
+                {
+                    text: self.$t("exchange.market_price"),
+                    check: false
+                },
+                {
+                    text:  this.$t("coin.stop"),
+                    // text:  "止盈止损",
+                    check: false
+                }
+            ],
             sliderStep: [25, 50, 75, 100],
             sliderBuyLimitPercent: 0,
             sliderSellLimitPercent: 0,
@@ -1244,233 +1244,233 @@ export default {
                 askRows: [],
                 bidRows: []
             },
-            // currentOrder: {
-            //     columns: [
-            //         {
-            //             type: "expand",
-            //             width: 40,
-            //             render: (h, params) => {
-            //                 return h(expandRow, {
-            //                     props: {
-            //                         skin: params.row.skin,
-            //                         rows: params.row.detail
-            //                     }
-            //                 });
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.time"),
-            //             key: "time",
-            //             render: (h, params) => {
-            //                 return h("span", {}, this.dateFormat(params.row.time));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("coin.deal"),
-            //             key: "symbol"
-            //         },
-            //         {
-            //             title: self.$t("coin.trigger"),
-            //             key: "triggerPrice"
-            //         },
-            //         {
-            //             title: self.$t("coin.type"),
-            //             render(h, params) {
-            //                 return h(
-            //                     "span", {}, map.get(params.row.type)
-            //                 );
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.direction"),
-            //             key: "direction",
-            //             render: (h, params) => {
-            //                 const row = params.row;
-            //                 const className = row.direction.toLowerCase();
-            //                 return h(
-            //                     "span",
-            //                     {
-            //                         attrs: {
-            //                             class: className
-            //                         }
-            //                     },
-            //                     row.direction == "BUY"
-            //                         ? self.$t("exchange.buyin")
-            //                         : self.$t("exchange.sellout")
-            //                 );
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.price"),
-            //             key: "price",
-            //             render(h, params) {
-            //                 return h("span", self.toFloor(params.row.price));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.num"),
-            //             key: "amount",
-            //             render(h, params) {
-            //                 return h("span", self.toFloor(params.row.amount));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.traded"),
-            //             key: "tradedAmount",
-            //             render(h, params) {
-            //                 return h("span", self.toFloor(params.row.tradedAmount));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("coin.amount"),
-            //             key: "turnover",
-            //             render(h, params) {
-            //                 return h("span", self.toFloor(params.row.turnover));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.action"),
-            //             key: "operate",
-            //             width: 110,
-            //             render: (h, params) => {
-            //                 return h(
-            //                     "Button",
-            //                     {
-            //                         props: {
-            //                             size: "small",
-            //                             type: "warning"
-            //                         },
-            //                         style: {},
-            //                         on: {
-            //                             click: () => {
-            //                                 // console.log("======开始撤单")
-            //                                 this.cancel(params.index);
-            //                             }
-            //                         }
-            //                     },
-            //                     self.$t("exchange.undo")
-            //                 );
-            //             }
-            //         }
-            //     ],
-            //     rows: []
-            // },
-            // historyOrder: {
-            //     pageSize: 10,
-            //     total: 10,
-            //     page: 1,
-            //     columns: [
-            //         {
-            //             type: "expand",
-            //             width: 40,
-            //             render: (h, params) => {
-            //                 return h(expandRow, {
-            //                     props: {
-            //                         skin: params.row.skin,
-            //                         rows: params.row.detail
-            //                     }
-            //                 });
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.time"),
-            //             key: "time",
-            //             render: (h, params) => {
-            //                 return h("span", {}, this.dateFormat(params.row.time));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("coin.deal"),
-            //             key: "symbol"
-            //         },
-            //         {
-            //             title: self.$t("coin.type"),
-            //             render(h, params) {
-            //                 return h(
-            //                     "span", {}, map.get(params.row.type)
-            //                 );
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.direction"),
-            //             key: "direction",
-            //             render: (h, params) => {
-            //                 const row = params.row;
-            //                 const className = row.direction.toLowerCase();
-            //                 return h(
-            //                     "span",
-            //                     {
-            //                         attrs: {
-            //                             class: className
-            //                         }
-            //                     },
-            //                     row.direction == "BUY"
-            //                         ? self.$t("exchange.buyin")
-            //                         : self.$t("exchange.sellout")
-            //                 );
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.price"),
-            //             key: "price",
-            //             render(h, params) {
-            //                 return h("span", self.toFloor(params.row.price));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.num"),
-            //             key: "amount",
-            //             render(h, params) {
-            //                 return h("span", self.toFloor(params.row.amount));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.done"),
-            //             key: "tradedAmount",
-            //             render(h, params) {
-            //                 return h("span", self.toFloor(params.row.tradedAmount));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("coin.amount"),
-            //             key: "turnover",
-            //             render(h, params) {
-            //                 return h("span", self.toFloor(params.row.turnover));
-            //             }
-            //         },
-            //         {
-            //             title: self.$t("exchange.status"),
-            //             key: "status",
-            //             render: (h, params) => {
-            //                 const status = params.row.status;
-            //                 if (status == "COMPLETED") {
-            //                     return h(
-            //                         "span",
-            //                         {
-            //                             style: {
-            //                                 color: "#3399ff"
-            //                             }
-            //                         },
-            //                         self.$t("exchange.finished")
-            //                     );
-            //                 } else if (status == "CANCELED") {
-            //                     return h(
-            //                         "span",
-            //                         {
-            //                             style: {
-            //                                 color: "#3399ff"
-            //                             }
-            //                         },
-            //                         self.$t("exchange.canceled")
-            //                     );
-            //                 } else {
-            //                     return h("span", {}, "--");
-            //                 }
-            //             }
-            //         }
-            //     ],
-            //     rows: []
-            // },
+            currentOrder: {
+                columns: [
+                    {
+                        type: "expand",
+                        width: 40,
+                        render: (h, params) => {
+                            return h(expandRow, {
+                                props: {
+                                    skin: params.row.skin,
+                                    rows: params.row.detail
+                                }
+                            });
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.time"),
+                        key: "time",
+                        render: (h, params) => {
+                            return h("span", {}, this.dateFormat(params.row.time));
+                        }
+                    },
+                    {
+                        title: self.$t("coin.deal"),
+                        key: "symbol"
+                    },
+                    {
+                        title: self.$t("coin.trigger"),
+                        key: "triggerPrice"
+                    },
+                    {
+                        title: self.$t("coin.type"),
+                        render(h, params) {
+                            return h(
+                                "span", {}, map.get(params.row.type)
+                            );
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.direction"),
+                        key: "direction",
+                        render: (h, params) => {
+                            const row = params.row;
+                            const className = row.direction.toLowerCase();
+                            return h(
+                                "span",
+                                {
+                                    attrs: {
+                                        class: className
+                                    }
+                                },
+                                row.direction == "BUY"
+                                    ? self.$t("exchange.buyin")
+                                    : self.$t("exchange.sellout")
+                            );
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.price"),
+                        key: "price",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.price));
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.num"),
+                        key: "amount",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.amount));
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.traded"),
+                        key: "tradedAmount",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.tradedAmount));
+                        }
+                    },
+                    {
+                        title: self.$t("coin.amount"),
+                        key: "turnover",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.turnover));
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.action"),
+                        key: "operate",
+                        width: 110,
+                        render: (h, params) => {
+                            return h(
+                                "Button",
+                                {
+                                    props: {
+                                        size: "small",
+                                        type: "warning"
+                                    },
+                                    style: {},
+                                    on: {
+                                        click: () => {
+                                            // console.log("======开始撤单")
+                                            this.cancel(params.index);
+                                        }
+                                    }
+                                },
+                                self.$t("exchange.undo")
+                            );
+                        }
+                    }
+                ],
+                rows: []
+            },
+            historyOrder: {
+                pageSize: 10,
+                total: 10,
+                page: 1,
+                columns: [
+                    {
+                        type: "expand",
+                        width: 40,
+                        render: (h, params) => {
+                            return h(expandRow, {
+                                props: {
+                                    skin: params.row.skin,
+                                    rows: params.row.detail
+                                }
+                            });
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.time"),
+                        key: "time",
+                        render: (h, params) => {
+                            return h("span", {}, this.dateFormat(params.row.time));
+                        }
+                    },
+                    {
+                        title: self.$t("coin.deal"),
+                        key: "symbol"
+                    },
+                    {
+                        title: self.$t("coin.type"),
+                        render(h, params) {
+                            return h(
+                                "span", {}, map.get(params.row.type)
+                            );
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.direction"),
+                        key: "direction",
+                        render: (h, params) => {
+                            const row = params.row;
+                            const className = row.direction.toLowerCase();
+                            return h(
+                                "span",
+                                {
+                                    attrs: {
+                                        class: className
+                                    }
+                                },
+                                row.direction == "BUY"
+                                    ? self.$t("exchange.buyin")
+                                    : self.$t("exchange.sellout")
+                            );
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.price"),
+                        key: "price",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.price));
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.num"),
+                        key: "amount",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.amount));
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.done"),
+                        key: "tradedAmount",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.tradedAmount));
+                        }
+                    },
+                    {
+                        title: self.$t("coin.amount"),
+                        key: "turnover",
+                        render(h, params) {
+                            return h("span", self.toFloor(params.row.turnover));
+                        }
+                    },
+                    {
+                        title: self.$t("exchange.status"),
+                        key: "status",
+                        render: (h, params) => {
+                            const status = params.row.status;
+                            if (status == "COMPLETED") {
+                                return h(
+                                    "span",
+                                    {
+                                        style: {
+                                            color: "#3399ff"
+                                        }
+                                    },
+                                    self.$t("exchange.finished")
+                                );
+                            } else if (status == "CANCELED") {
+                                return h(
+                                    "span",
+                                    {
+                                        style: {
+                                            color: "#3399ff"
+                                        }
+                                    },
+                                    self.$t("exchange.canceled")
+                                );
+                            } else {
+                                return h("span", {}, "--");
+                            }
+                        }
+                    }
+                ],
+                rows: []
+            },
             fullTrade: {}
         };
     },
@@ -1892,19 +1892,30 @@ export default {
             this.plate.columns[2].title = this.$t("exchange.num");
             // this.plate.columns[3].title = this.$t("exchange.total");
 
-            this.currentOrder.columns[0].title = this.$t("exchange.time");
-            this.currentOrder.columns[1].title = this.$t("exchange.direction");
-            this.currentOrder.columns[2].title = this.$t("exchange.price");
-            this.currentOrder.columns[3].title = this.$t("exchange.num");
-            this.currentOrder.columns[4].title = this.$t("exchange.traded");
-            this.currentOrder.columns[5].title = this.$t("exchange.action");
+            this.currentOrder.columns[1].title = this.$t("exchange.time");
+            this.currentOrder.columns[2].title = this.$t("coin.deal");
+            this.currentOrder.columns[3].title = this.$t("coin.trigger");
+            this.currentOrder.columns[4].title = this.$t("coin.type");
+            this.currentOrder.columns[5].title = this.$t("exchange.direction");
+            this.currentOrder.columns[6].title = this.$t("exchange.price");
+            this.currentOrder.columns[7].title = this.$t("exchange.num");
+            this.currentOrder.columns[8].title = this.$t("exchange.traded");
+            this.currentOrder.columns[9].title = this.$t("coin.amount");
+            this.currentOrder.columns[10].title = this.$t("exchange.action");
 
             this.historyOrder.columns[1].title = this.$t("exchange.time");
-            this.historyOrder.columns[2].title = this.$t("exchange.direction");
-            this.historyOrder.columns[3].title = this.$t("exchange.price");
-            this.historyOrder.columns[4].title = this.$t("exchange.delegationnum");
-            this.historyOrder.columns[5].title = this.$t("exchange.done");
-            this.historyOrder.columns[6].title = this.$t("exchange.status");
+            this.historyOrder.columns[2].title = this.$t("coin.deal");
+            this.historyOrder.columns[3].title = this.$t("coin.type");
+            this.historyOrder.columns[4].title = this.$t("exchange.direction");
+            this.historyOrder.columns[5].title = this.$t("exchange.price");
+            this.historyOrder.columns[6].title = this.$t("exchange.num");
+            this.historyOrder.columns[7].title = this.$t("exchange.done");
+            this.historyOrder.columns[8].title = this.$t("coin.amount");
+            this.historyOrder.columns[9].title = this.$t("exchange.status");
+
+            this.btnList[0].text = this.$t("exchange.limited_price");
+            this.btnList[1].text = this.$t("exchange.market_price");
+            this.btnList[2].text = this.$t("coin.stop");
 
             // window.tvWidget.options.time_frames[0].title = this.$t("exchange.realtime");
         },
