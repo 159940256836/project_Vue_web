@@ -33,7 +33,27 @@ const en = {
     quantityTransferred: 'quantity transferred',
     Leveraged: 'Leveraged Accounts' ,
     legal: 'legal tender account',
-    bit: 'Bitcoin account'
+    bit: 'Bitcoin account',
+    when: ' When the risk rate',
+    repay: 'the account will trigger a burst to repay the loan',
+    credit: 'debit and credit',
+    loaned: 'loaned',
+    loan: 'loan available ',
+    interest : 'interest ',
+    loanAmount:'loan amount',
+    application : 'application ',
+    current: 'current application',
+    repay: 'Repayment of loans',
+    should: 'Quantity should be returned ',
+    interest : 'interest ',
+    Quantityreturn: 'Quantity returned',
+    recode: 'application record  ',
+    applicationDate: 'application date',
+    currency: 'currency',
+    accumulatedInterest: 'accumulated interest',
+    state: 'state',
+    OutstandingQuantity: 'Outstanding quantity',
+    operation: 'operation'
 };
 const zh = {
     last: '最新价',
@@ -69,7 +89,27 @@ const zh = {
     quantityTransferred: '划转数量',
     Leveraged: '杠杆账户',
     legal: '法币账户',
-    bit: '币币账户'
+    bit: '币币账户',
+    when: '当风险率',
+    repay: '时,账户将触发爆仓以归还借贷资金',
+    credit: '借贷',
+    loaned: '已借',
+    loan: '可借',
+    interest : '利率',
+    loanAmount: '借贷数量',
+    application : '申请',
+    current: '当前申请',
+    repay: '归还借贷',
+    should: '应还数量',
+    interest : '利息',
+    Quantityreturn: '归还数量',
+    recode: '申请记录',
+    applicationDate: '申请时间',
+    currency: '币种',
+    accumulatedInterest: '利息累计',
+    state: '状态',
+    OutstandingQuantity: '未还数量',
+    operation: '操作'
 }
 exports.en = en;
 exports.zh = zh;

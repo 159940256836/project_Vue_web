@@ -139,8 +139,8 @@ export default {
                         }
                     });
                     const list = [{
-                        value: "法币账户",
-                        label: "法币账户",
+                        value: this.$t('coin.legal'),
+                        label: this.$t('coin.legal'),
                         children: temp
                     }];
                     this.otcList = list;
@@ -175,8 +175,8 @@ export default {
                         }
                     })
                     const list = [{
-                        value: "杠杆账户",
-                        label: "杠杆账户",
+                        value: this.$t('coin.Leveraged'),
+                        label: this.$t('coin.Leveraged'),
                         children: temp || []
                     }];
                     this.leverList = list;
@@ -206,18 +206,18 @@ export default {
                 let str = value[0];
                 this.unit = value[value.length - 1];
                 this.canUseNum = selectedData[selectedData.length - 1].canUse;
-                if (str === "杠杆账户") {
+                if (str === this.$t('coin.Leveraged')) {
                     this.toData = this.exchangeList;
-                } else if (str === "币币账户") {
+                } else if (str === this.$t('coin.bit')) {
                     const list = {
-                        value: "法币账户",
-                        label: "法币账户"
+                        value: this.$t('coin.legal'),
+                        label: this.$t('coin.legal')
                     }
                     this.toData = [...this.leverList, list];
-                } else if (str === "法币账户") {
+                } else if (str === this.$t('coin.legal')) {
                     const list = {
-                        value: "币币账户",
-                        label: "币币账户"
+                        value: this.$t('coin.bit'),
+                        label: this.$t('coin.bit')
                     }
                     this.toData = [list];
                 }
@@ -246,8 +246,8 @@ export default {
                 this.$Message.info("请选择您要转入的币种");
                 return;
             }
-            if (this.value[0] == "币币账户" || this.value[0] == "法币账户") {
-                if (this.toValue[0] == "杠杆账户") {
+            if (this.value[0] == this.$t('coin.bit') || this.value[0] == this.$t('coin.legal')) {
+                if (this.toValue[0] == this.$t('coin.Leveraged')) {
                     const params = {
                         coinUnit: this.value[1],
                         amount: this.num,
@@ -255,7 +255,7 @@ export default {
                     };
                     this.coinToLever(params);
                 };
-                if (this.toValue[0] == "法币账户") {
+                if (this.toValue[0] == this.$t('coin.legal')) {
                     const params = {
                         coinName: this.value[1],
                         amount: this.num,
@@ -263,7 +263,7 @@ export default {
                     }
                     this.coinToOtc(params);
                 };
-                if (this.toValue[0] == "币币账户") {
+                if (this.toValue[0] == this.$t('coin.bit')) {
                     const params = {
                         coinName: this.value[1],
                         amount: this.num,
@@ -272,8 +272,8 @@ export default {
                     this.coinToOtc(params);
                 }
             };
-            if(this.value[0] == "杠杆账户"){
-                if (this.toValue[0] == "币币账户") {
+            if(this.value[0] == this.$t('coin.Leveraged')){
+                if (this.toValue[0] == this.$t('coin.bit')) {
                     const params = {
                         coinUnit: this.toValue[1],
                         amount: this.num,
@@ -357,8 +357,8 @@ export default {
                         }]
                     }));
                     const leverList = [{
-                        value: '杠杆账户',
-                        label: `杠杆账户`,
+                        value: this.$t('coin.Leveraged'),
+                        label: this.$t('coin.Leveraged'),
                         children: temp
                     }];
                     this.leverList = leverList;
@@ -367,8 +367,8 @@ export default {
                         label: ele.unit,
                     }));
                     const otcList = [{
-                        value: "法币账户",
-                        label: "法币账户",
+                        value: this.$t('coin.legal'),
+                        label: this.$t('coin.legal'),
                         children: tempList
                     }];
                     this.otcList = otcList;
@@ -389,8 +389,8 @@ export default {
                             label: ele.coin.unit
                         }));
                         const exchangeList = [{
-                            value: "币币账户",
-                            label: "币币账户",
+                            value: this.$t('coin.bit'),
+                            label: this.$t('coin.bit'),
                             children: temp
                         }];
                         this.exchangeList = exchangeList;
