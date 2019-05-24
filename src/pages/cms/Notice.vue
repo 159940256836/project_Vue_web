@@ -1,7 +1,7 @@
 <template>
     <div class="notice common" style="min-height:519px">
         <div class="banner">
-            <span>公告板</span>
+            <span>{{$t('footer.bulletinboard')}}</span>
         </div>
         <div class="main" >
             <div class="list">

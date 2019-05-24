@@ -5,14 +5,14 @@
                 <div style="margin-bottom:30px;">
                     <div style="width: 100%;line-height: 25px;text-align: right;">
                         <span style="padding-right: 5px;">{{$t('coin.follow')}}：</span>
-                        <Cascader style="width: 85%; float: right;" :data="data" v-model="value" :render-format="formatRender" @on-change="getValue" @on-visible-change="visibleChange" placeholder="select">
+                        <Cascader style="width: 85%; float: right;" :data="data" v-model="value" :render-format="formatRender" @on-change="getValue" @on-visible-change="visibleChange" :placeholder='$t("uc.finance.withdraw.symboltip")'>
                         </Cascader>
                     </div>
 
                 </div>
                 <div style="margin-bottom:25px;line-height: 25px;text-align: right;">
                     <span style="padding-right: 5px;">{{$t('coin.arrive')}}：</span>
-                    <Cascader style="width: 85%; float: right;" :data="toData" v-model="toValue" :render-format="formatRender" placeholder="select">
+                    <Cascader style="width: 85%; float: right;" :data="toData" v-model="toValue" :render-format="formatRender" :placeholder='$t("uc.finance.withdraw.symboltip")'>
                     </Cascader>
                 </div>
             </div>
@@ -51,7 +51,7 @@ const isEmptyArr = arr => {
 }
 export default {
     name: "transfermodal",
-    props: ["modal"],
+    props: ["modal","getmoney"],
     data() {
         return {
             formatRender: formatFun,
@@ -81,7 +81,6 @@ export default {
         init() {
             Promise.all([this.getLeverNum(), this.getOtcNum(), this.getExchangeList()]).then(res => {
                 this.data = [...this.leverList, ...this.otcList, ...this.exchangeList]
-                console.log(this.data)
             })
         },
         cancel() {
@@ -260,6 +259,7 @@ export default {
                     this.datainit();
                     this.init();
                     this.$emit("closetransferModal");
+                    this.getmoney();
                 } else {
                     this.$Notice.error({
                         title: this.$t("exchange.tip"),
@@ -278,6 +278,7 @@ export default {
                     this.datainit();
                     this.init();
                     this.$emit("closetransferModal");
+                    this.getmoney();
                 } else {
                     this.$Notice.error({
                         title: this.$t("exchange.tip"),
@@ -296,6 +297,7 @@ export default {
                     this.datainit();
                     this.init();
                     this.$emit("closetransferModal");
+                    this.getmoney();
                 } else {
                     this.$Notice.error({
                         title: this.$t("exchange.tip"),

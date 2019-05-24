@@ -36,7 +36,7 @@
                 </FormItem>
             </Form>
         </Modal> -->
-        <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
+        <transfermodal :modal="modal" @closetransferModal="closeModal" :getmoney="getMoney"></transfermodal>
     </div>
 </template>
 <script>

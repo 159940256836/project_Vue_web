@@ -2,7 +2,7 @@
     <div class="help common">
         <img class="bannerimg" src="../../assets/images/help_banner.png">
         <div class="help_container">
-            <h1>帮助中心</h1>
+            <h1>{{$t("footer.helpCenter")}}</h1>
             <div class="main">
                 <div class="section" v-for="section in helpData">
                    <h3>{{section.title}}</h3>

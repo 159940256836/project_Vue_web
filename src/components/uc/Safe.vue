@@ -14,7 +14,7 @@
                         </div>
                         <Row class="user-right">
                             <Col span="8">
-                            <div>用户UID:&nbsp;&nbsp;{{uid}}</div>
+                            <div>UID:&nbsp;&nbsp;{{uid}}</div>
                             </Col>
                             <Col span="8">
                             <div>{{$t("uc.safe.safelevel_low")}}:&nbsp;&nbsp;{{memberlevel}}</div>
@@ -38,7 +38,7 @@
                             <div class="account-item">
                                 <div class="account-item-in">
                                     <Icon type="md-card" size="18" color="#00b5f6" />
-                                    <span class="card-number">身份认证</span>
+                                    <span class="card-number">{{$t('uc.safe.safelevel_high')}}</span>
                                     <p v-if="user.realVerified==1" class="bankInfo" style="color: grey;">
                                         {{user.realName}}
                                     </p>

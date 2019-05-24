@@ -10,7 +10,7 @@
         <div class="order-table">
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
         </div>
-        <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
+        <transfermodal :modal="modal" @closetransferModal="closeModal" :getmoney="getMoney"></transfermodal>
     </div>
 </template>
 <script>

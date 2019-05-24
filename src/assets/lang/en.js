@@ -768,7 +768,7 @@ module.exports = {
         },
         safe: {
             safelevel_low: 'user level ',
-            safelevel_high: 'identityAuthentication',
+            safelevel_high: 'Identity',
             safelevel_medium: 'Audit failed',
             againVerify: "again verify",
             GoogleAuthentication: "Google",

@@ -3,7 +3,7 @@
         <img class="bannerimg" src="../../assets/images/help_banner.png">
         <div class="help_container">
             <!-- <h1>{{cateTitle}}</h1> -->
-            <h1>帮助中心</h1>
+            <h1>{{$t("footer.helpCenter")}}</h1>
             <div class="list">
                 <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{cate:cate,id:item.id,cateTitle:cateTitle}}"> -->
                 <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}">

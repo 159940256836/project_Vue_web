@@ -20,7 +20,8 @@ const zh = {
     questionnaire: "调查问卷",
     concatUs: "联系我们",
     email: "服务邮箱",
-    friendLinks: "友情链接"
+    friendLinks: "友情链接",
+    bulletinboard:"公告板",
 }
 
 const en = {
@@ -45,7 +46,8 @@ const en = {
     questionnaire: "Questionnaire",
     concatUs: "Contact us",
     email: "Aervice mailbox",
-    friendLinks: "Blogroll"
+    friendLinks: "Blogroll",
+    bulletinboard:"Bulletin Board",
 }
 
 exports.zh = zh;

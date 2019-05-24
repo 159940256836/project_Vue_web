@@ -1,7 +1,7 @@
 <template>
     <div class="helpdetail">
         <div class="route-wrap">
-            <router-link to="helplist">帮助中心</router-link>
+            <router-link to="helplist">{{$t("footer.helpCenter")}}</router-link>
             <span>></span>
             <router-link :to="{path:'helplist',query:{cate:cate,cateTitle:cateTitle}}">{{cateTitle}}</router-link>
         </div>
