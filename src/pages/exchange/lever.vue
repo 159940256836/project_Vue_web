@@ -1218,15 +1218,15 @@ export default {
                         }
                     },
                     {
-                        title: "交易对",
+                        title: this.$t("coin.deal"),
                         key: "symbol"
                     },
                     {
-                        title: "触发价",
+                        title:this.$t("coin.trigger"),
                         key: "triggerPrice"
                     },
                     {
-                        title: "类型",
+                        title: this.$t("coin.type"),
                         render(h, params) {
                             return h(
                                 "span", {}, map.get(params.row.type)
@@ -1274,7 +1274,7 @@ export default {
                         }
                     },
                     {
-                        title: "成交金额",
+                        title: this.$t("coin.amount"),
                         key: "turnover",
                         render(h, params) {
                             return h("span", self.toFloor(params.row.turnover));
@@ -1332,11 +1332,11 @@ export default {
                         }
                     },
                     {
-                        title: "交易对",
+                        title: this.$t("coin.deal"),
                         key: "symbol"
                     },
                     {
-                        title: "类型",
+                        title:this.$t("coin.type"),
                         render(h, params) {
                             return h(
                                 "span", {}, map.get(params.row.type)
@@ -1384,7 +1384,7 @@ export default {
                         }
                     },
                     {
-                        title: "成交金额",
+                        title: this.$t("coin.amount"),
                         key: "turnover",
                         render(h, params) {
                             return h("span", self.toFloor(params.row.turnover));
