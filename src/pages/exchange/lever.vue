@@ -11,24 +11,24 @@
                 </span>
             </div>
             <div class="item">
-                <span class="text">最新价</span>
+                <span class="text">{{$t('coin.last')}}</span>
                 <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.close | toFixed(baseCoinScale)}}</span>
                 <span class="price-cny">￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}</span>
             </div>
             <div class="item">
-                <span class="text">24h涨跌</span>
+                <span class="text">{{$t('coin.up')}}</span>
                 <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.rose}}</span>
             </div>
             <div class="item">
-                <span class="text">24h最高价</span>
+                <span class="text">{{$t('coin.celling')}}</span>
                 <span class="num ">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
             </div>
             <div class="item">
-                <span class="text">24h最低价</span>
+                <span class="text">{{$t('coin.floor')}}</span>
                 <span class="num ">{{currentCoin.low | toFixed(baseCoinScale)}}</span>
             </div>
             <div class="item">
-                <span class="text">24h成交量</span>
+                <span class="text">{{$t('coin.turnover')}}</span>
                 <span class="num ">{{currentCoin.volume}} {{currentCoin.coin}}</span>
             </div>
             <div class="item" @click="changeSkin">
@@ -72,11 +72,11 @@
                         </div>
                         <div class="item">
                             <!-- 风险率 -->
-                            <span class="text">风险率</span>
+                            <span class="text">{{$t('coin.rate')}}</span>
                             <span class="num">{{LeversymbolMsg.riskRate?LeversymbolMsg.riskRate:'---'}}</span>
                         </div>
                         <div class="item">
-                            <span class="text">爆仓价</span>
+                            <span class="text">{{$t('coin.blowing')}}</span>
                             <span class="num">{{LeversymbolMsg.explosionPrice ? LeversymbolMsg.explosionPrice : '---'}}&nbsp;&nbsp;{{LeversymbolMsg.baseCoin}}</span>
                         </div>
                     </div>
@@ -103,8 +103,8 @@
                                 <template v-for="(item, index) in btnList">
                                     <li @click="tab(index)" :class="{active:item.check}" style="width:18%;text-align:center;">{{item.text}}</li>
                                 </template>
-                                <li style="color:#39f;width:30%;text-align:right;cursor: pointer;" @click="transFerFun" v-if="isLogin">划转</li>
-                                <li style="color:#39f;width:20%;cursor: pointer;" @click="toBorrow" v-if="isLogin">借贷/归还</li>
+                                <li style="color:#39f;width:30%;text-align:right;cursor: pointer;" @click="transFerFun" v-if="isLogin">{{$t('coin.transfer')}}</li>
+                                <li style="color:#39f;width:20%;cursor: pointer;" @click="toBorrow" v-if="isLogin">{{$t('coin.return')}}</li>
                                 <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
@@ -332,7 +332,7 @@
                         <span @click="changeBaseCion('usdt')" :class="{active:basecion==='usdt'}">USDT</span>
                         <span @click="changeBaseCion('btc')" :class="{active:basecion==='btc'}">BTC</span>
                         <span @click="changeBaseCion('eth')" :class="{active:basecion==='eth'}">ETH</span>
-                        <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">自选</span>
+                        <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">{{$t('coin.option')}}</span>
                         <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
                         <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
                     </div>
@@ -350,8 +350,8 @@
             <div class="order-handler">
                 <span @click="changeOrder('current')" :class="{active:selectedOrder==='current'}">{{$t('exchange.curdelegation')}}</span>
                 <span @click="changeOrder('history')" :class="{active:selectedOrder==='history'}">{{$t('exchange.hisdelegation')}}</span>
-                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/level/current">查看更多>></router-link>
-                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/level/history">查看更多>></router-link>
+                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/level/current">{{$t('coin.view')}}>></router-link>
+                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/level/history">{{$t('coin.view')}}>></router-link>
             </div>
             <div class="table">
                 <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows" :loading="currentLoading"></Table>
@@ -760,7 +760,7 @@ export default {
                     check: false
                 },
                 {
-                    text: "止盈止损",
+                    text: self.$t("coin.stop"),
                     check: false
                 }
             ],
