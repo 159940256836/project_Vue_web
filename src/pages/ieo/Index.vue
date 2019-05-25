@@ -19,7 +19,14 @@
                 </template>
             </div>
             <div class="page">
-                <Page v-show="total > 3" :total="total" size="small" :current="currentPage" :page-size="pageSize" @on-change="changePage" />
+                <Page
+                    v-show="total > 10"
+                    :total="total"
+                    size="small"
+                    :current="currentPage"
+                    :page-size="pageSize"
+                    @on-change="changePage"
+                />
             </div>
         </div>
     </div>

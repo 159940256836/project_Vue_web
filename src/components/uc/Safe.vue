@@ -239,7 +239,7 @@
                                 </div>
                                 <div class="account-detail" v-show="choseItem==4">
                                     <div class="detail-list">
-                                        <Form ref="formValidate4" :model="formValidate4" :rules="ruleValidate" :label-width="95">
+                                        <Form ref="formValidate4" :model="formValidate4" :rules="ruleValidate" :label-width="121">
                                             <!-- oldPw -->
                                             <FormItem :label="$t('uc.safe.oldpwd')" prop="oldPw">
                                                 <Input v-model="formValidate4.oldPw" size="large" type="password"></Input>
@@ -301,7 +301,7 @@
                                 <div class="account-detail" v-show="choseItem==5">
                                     <!-- 设置 -->
                                     <div class="detail-list" v-show="user.fundsVerified!=1">
-                                        <Form ref="formValidate7" :model="formValidate7" :rules="ruleValidate" :label-width="85">
+                                        <Form ref="formValidate7" :model="formValidate7" :rules="ruleValidate" :label-width="120">
                                             <!-- newMPw -->
                                             <FormItem :label="$t('uc.safe.fundpwd')" prop="pw7">
                                                 <Input v-model="formValidate7.pw7" size="large" :placeholder="$t('uc.safe.pwdmsg1')" type="password"></Input>
@@ -326,7 +326,7 @@
                                     </div>
                                     <!-- 修改资金密码 -->
                                     <div class="detail-list" v-show="user.fundsVerified==1  && !fGetBackFundpwd">
-                                        <Form ref="formValidate5" :model="formValidate5" :rules="ruleValidate" :label-width="95">
+                                        <Form ref="formValidate5" :model="formValidate5" :rules="ruleValidate" :label-width="121">
                                             <!-- oldPw -->
                                             <FormItem :label="$t('uc.safe.oldfundpwd')" prop="oldPw">
                                                 <Input v-model="formValidate5.oldPw" size="large" type="password"></Input>
@@ -370,7 +370,7 @@
                                     </div>
                                     <!-- 找回 -->
                                     <div class="detail-list" v-show="user.fundsVerified==1 && fGetBackFundpwd">
-                                        <Form ref="formValidate8" :model="formValidate8" :rules="ruleValidate" :label-width="85">
+                                        <Form ref="formValidate8" :model="formValidate8" :rules="ruleValidate" :label-width="121">
                                             <!-- newMPw -->
                                             <FormItem :label="$t('uc.safe.newfundpwd')" prop="newMPw8">
                                                 <Input v-model="formValidate8.newMPw8" size="large" type="password"></Input>
@@ -1165,7 +1165,7 @@ export default {
         lang() {
             return this.$store.state.lang;
         },
-        
+
     },
     created() {
         this.userUid()

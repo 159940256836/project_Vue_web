@@ -7,29 +7,81 @@
                         <span>
                             {{$t('uc.finance.record.start_end')}} ：
                         </span>
-                        <DatePicker v-model="rangeDate" @on-change="changedate" format="yyyy-MM-dd" type="daterange" style="width: 200px;margin-right:10px;" @on-clear="clear"></DatePicker>
+                        <DatePicker
+                            v-model="rangeDate"
+                            @on-change="changedate"
+                            format="yyyy-MM-dd"
+                            type="daterange"
+                            style="width: 200px;margin-right:10px;"
+                            @on-clear="clear"
+                        ></DatePicker>
                         <!--<DatePicker v-model="startDate" type="date"></DatePicker>-->
                         <!--<span>-->
                         <!--{{$t('uc.finance.record.to')}}-->
                         <!--</span>-->
                         <!--<DatePicker v-model="endDate" type="date"></DatePicker>-->
                         <span>{{$t('uc.finance.currency')}}：</span>
-                        <Select v-model="coinType" style="width:100px;margin-right:30px;" @on-change="getAddrList" clearable :placeholder="select">
-                            <Option v-for="item in coinList" :value="item.unit" :key="item.unit">{{ item.unit }}</Option>
+                        <Select
+                            v-model="coinType"
+                            style="width:100px;margin-right:30px;"
+                            @on-change="getAddrList"
+                            clearable
+                            :placeholder="select"
+                        >
+                            <Option
+                                v-for="item in coinList"
+                                :value="item.unit"
+                                :key="item.unit"
+                            >
+                                {{ item.unit }}
+                            </Option>
                         </Select>
                         <span>
                             {{$t('uc.finance.record.operatetype')}} ：
                         </span>
-                        <Select v-model="recordValue" clearable style="width:200px" @on-change="getType" :placeholder="select">
-                            <Option v-for="(item, index) in recordType" :value="index" :key="item">{{ item }}</Option>
+                        <Select
+                            v-model="recordValue"
+                            clearable
+                            style="width:200px"
+                            @on-change="getType"
+                            :placeholder="select"
+                        >
+                            <Option
+                                v-for="(item, index) in recordType"
+                                :value="index"
+                                :key="item"
+                            >
+                                {{ item }}
+                            </Option>
                         </Select>
-                        <Button type="warning" @click="queryOrder" style="padding: 6px 30px;margin-left:10px;background-color:#3399ff;border-color:#3399ff">{{$t('uc.finance.record.search')}}</Button>
+                        <Button
+                            type="warning"
+                            @click="queryOrder"
+                            style="padding: 6px 30px;margin-left:10px;background-color:#3399ff;border-color:#3399ff"
+                        >
+                            {{$t('uc.finance.record.search')}}
+                        </Button>
                     </div>
                     <div class="order-table">
-                        <Table stripe :no-data-text="$t('common.nodata')" :columns="tableColumnsRecord" :data="tableRecord" :disabled-hover="true" :loading="loading"></Table>
+                        <Table
+                            stripe
+                            :no-data-text="$t('common.nodata')"
+                            :columns="tableColumnsRecord"
+                            :data="tableRecord"
+                            :disabled-hover="true"
+                            :loading="loading"
+                        ></Table>
                         <div style="margin: 10px;overflow: hidden">
                             <div style="float: right;">
-                                <Page :total="total" :pageSize="pageSize" show-total :current="page" @on-change="changePage" id="record_pages"></Page>
+                                <Page
+                                    :total="total"
+                                    v-show="total > 10"
+                                    :pageSize="pageSize"
+                                    show-total
+                                    :current="page"
+                                    @on-change="changePage"
+                                    id="record_pages"
+                                ></Page>
                             </div>
                         </div>
                     </div>
@@ -137,14 +189,14 @@ export default {
         },
         queryOrder() {
             if (this.rangeDate.length == 0) {
-                this.$Message.error("请选择搜索日期范围");
+                this.$Message.error(this.$t('uc.finance.record.searchPla'));
                 return;
             } else {
                 try {
                     this.page = 1;
                     this.getList(this.page);
                 } catch (ex) {
-                    this.$Message.error("请选择搜索日期范围");
+                    this.$Message.error(this.$t('uc.finance.record.searchPla'));
                     return;
                 }
             }
@@ -233,16 +285,23 @@ export default {
             let columns = [];
             var that = this;
             const m = this.$store.getters.lang == "English" ? mapEn : map;
+            const T = this.$store.getters.lang == "English" ? 147 : '';
+            const Y = this.$store.getters.lang == "English" ? 109 : '';
+            const Y1 = this.$store.getters.lang == "English" ? 82 : '';
+            const F = this.$store.getters.lang == "English" ? 116 : '';
+            const F1 = this.$store.getters.lang == "English" ? 122 : '';
+            const C = this.$store.getters.lang == "English" ? 133 : '';
             columns.push({
                 title: this.$t("uc.finance.record.chargetime"),
                 align: "center",
-                width: 160,
+                width: T,
                 render: (h, params) => {
                     return h("div", {}, params.row.createTime);
                 }
             });
             columns.push({
                 title: this.$t("uc.finance.record.type"),
+                width: Y,
                 render: function (h, params) {
                     let str = "";
                     let type = params.row.type.toString();
@@ -251,6 +310,7 @@ export default {
             });
             columns.push({
                 title: this.$t("uc.finance.record.symbol"),
+                width: Y,
                 align: "center",
                 render: (h, param) => {
                     return h("div", {}, param.row.symbol);
@@ -258,6 +318,7 @@ export default {
             });
             columns.push({
                 title: this.$t("uc.finance.Quantityofarrival"),
+                width: C,
                 align: "center",
                 render(h, params) {
                     return h(
@@ -273,6 +334,7 @@ export default {
             });
             columns.push({
                 title: this.$t("uc.finance.record.shouldfee"), //"应付手续费"
+                width: Y,
                 align: "center",
                 render(h, params) {
                     return h(
@@ -288,6 +350,7 @@ export default {
             });
             columns.push({
                 title: this.$t("uc.finance.record.discountfee"), //"抵扣手续费"
+                width: F,
                 align: "center",
                 render(h, params) {
                     return h(
@@ -303,6 +366,7 @@ export default {
             });
             columns.push({
                 title: this.$t("uc.finance.record.realfee"), //"实际手续费"
+                width: F1,
                 align: "center",
                 render(h, params) {
                     return h(
@@ -319,6 +383,7 @@ export default {
             columns.push({
                 title: this.$t("uc.finance.record.status"),
                 // key: "status",
+                width: Y1,
                 align: "center",
                 render: (h, params) => {
                     return h("div", that.$t("uc.finance.record.finish"), "");

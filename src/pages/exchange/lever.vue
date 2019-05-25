@@ -1661,9 +1661,7 @@ export default {
             this[silder] = val;
         },
         init() {
-           var params = this.$route.params[0];
-           console.log(params);
-            // let params = this.$route.params.pathMatch;
+            let params = this.$route.params.pathMatch;
             if (params == undefined) {
                 this.$router.push("/leverindex/" + this.defaultPath);
                 params = this.defaultPath;
