@@ -107,6 +107,7 @@ module.exports = {
         low: "24h最低价"
     },
     exchange: {
+        bestbuy:"最高买入",
         coin: '币种',
         symbol: "交易对",
         lastprice: '最新价',

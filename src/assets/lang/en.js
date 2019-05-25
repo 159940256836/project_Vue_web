@@ -109,6 +109,7 @@ module.exports = {
         low: "lower"
     },
     exchange: {
+        bestbuy:"Best Buy",
         coin: 'Coin',
         symbol: 'Transaction pair',
         lastprice: 'Lastest',

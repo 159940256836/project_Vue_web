@@ -48,12 +48,12 @@
                                 </div>
                                  <Dropdown>
                                     <a href="javascript:void(0)">
-                                        <span class="header-img">资产管理</span>
+                                        <span class="header-img">{{$t("uc.menuTitle.moneyManagement")}}</span>
                                         <Icon type="md-arrow-dropdown" size="16" />
                                     </a>
                                     <DropdownMenu slot="list">
-                                        <DropdownItem><span @click="goBi('/uc/recharge')">充币</span></DropdownItem>
-                                        <DropdownItem><span @click="goBi('/uc/withdraw')">提币</span></DropdownItem>
+                                        <DropdownItem><span @click="goBi('/exchange/recharge')">{{$t("exchange.recharge")}}</span></DropdownItem>
+                                        <DropdownItem><span @click="goBi('/uc/withdraw')">{{$t("uc.finance.money.pickup")}}</span></DropdownItem>
 
                                     </DropdownMenu>
                                 </Dropdown>

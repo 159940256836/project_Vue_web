@@ -119,7 +119,7 @@
                                         <FormItem>
                                             <Input @on-keyup="keyEvent" v-model="form.buy.limitAmount" :placeholder="$t('exchange.buynum')"></Input>
                                             <!-- <label>{{currentCoin.coin}}</label> -->
-                                            <label><span>最高能买入：</span>{{(this.wallet.base / this.form.buy.limitPrice).toFixed(4)}}</label>
+                                            <label><span>{{$t("exchange.bestbuy")}}:</span>{{(this.wallet.base / this.form.buy.limitPrice).toFixed(4)}}</label>
                                         </FormItem>
                                         <div class="slider-wrap">
                                             <Slider class="silder-buy" v-model="sliderBuyLimitPercent" show-tip="always" :tip-format="tipFormat" :disabled="sliderBuyDisabled"></Slider>
@@ -1712,9 +1712,9 @@ export default {
             this[silder] = val;
         },
         init() {
-            var params = this.$route.params[0];
-           console.log(params);
-            // let params = this.$route.params.pathMatch;
+            //var params = this.$route.params[0];
+            //console.log(params);
+             let params = this.$route.params.pathMatch;
             if (params == undefined) {
                 this.$router.push("/exchange/" + this.defaultPath);
                 params = this.defaultPath;
