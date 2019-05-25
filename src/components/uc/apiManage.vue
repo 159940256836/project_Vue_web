@@ -296,8 +296,6 @@ export default {
         },
         // 编辑验证
         okUpdate () {
-
-            console.log(this.verifyEditor,this.codeEditorFormItem);
             if (this.editorFormItem.code == undefined) {
                 const lang = this.$store.getters.lang == "English"?'please scanner Correct IP Address':'请输入验证码'
                 this.$Message.error(lang);
