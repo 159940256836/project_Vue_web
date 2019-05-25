@@ -1309,8 +1309,8 @@ export default {
                 rows: []
             },
             historyOrder: {
-                pageSize: 10,
-                total: 10,
+                pageSize: 3,
+                total: 3,
                 page: 1,
                 columns: [
                     {
@@ -3095,7 +3095,7 @@ export default {
         getCurrentOrder() {
             let params = {};
             params["pageNum"] = 1;
-            params["pageSize"] = 100;
+            params["pageSize"] = 3;
             params["symbol"] = this.currentCoin.symbol;
             this.currentOrder.rows = [];
             let that = this;

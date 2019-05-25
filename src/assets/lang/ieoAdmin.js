@@ -13,13 +13,13 @@ const zh = {
 };
 const en = {
     projectName: "project name",
-    SubscriptionTime: "Subscription time",
-    SubscriptionStatus: "Subscription status",
+    SubscriptionTime: "Time",
+    SubscriptionStatus: "Status",
     failure: "failure",
     success: "success",
-    currencySale: "Currency for sale",
+    currencySale: "Currency sale",
     totalSale: "Total sales",
-    currenCollected: "Collected currency",
+    currenCollected: "Raise currency",
     FundraisingCycle: "Fundraising cycle (UTF+8)",
     SubscriptionAmount: "Subscription amount",
     useAmount: "usage quantity",

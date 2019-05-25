@@ -4,7 +4,7 @@
         <Form
             class="form"
             :model="formItem"
-            :label-width="65"
+            :label-width="95"
             inline
         >
             <FormItem :label="$t('ieoAdmin.projectName')">
@@ -145,43 +145,64 @@ export default {
     computed:{
         columns(){
             const arr = [];
+            const L = this.$store.getters.lang == "English" ? 115 : '';
+            const L0 = this.$store.getters.lang == "English" ? 'left' : '';
+            const L1 = this.$store.getters.lang == "English" ? 111 : '';
+            const L2 = this.$store.getters.lang == "English" ? 98 : '';
+            const L3 = this.$store.getters.lang == "English" ? 123 : '';
+            const L4 = this.$store.getters.lang == "English" ? 187 : 138;
+            const L5 = this.$store.getters.lang == "English" ? 82 : '';
+            const L6 = this.$store.getters.lang == "English" ? 140 : '';
+            const L7 = this.$store.getters.lang == "English" ? 105 : '';
+            const L9 = this.$store.getters.lang == "English" ? 80 : '';
+            const L90 = this.$store.getters.lang == "English" ? 'right' : '';
             arr.push({
                 title: this.$t('ieoAdmin.currencySale'),
+                fixed: L0,
+                width: L,
                 key: "saleCoin"
             });
             arr.push({
                 title: this.$t('ieoAdmin.projectName'),
-                 key: "ieoName"
+                width: L1,
+                key: "ieoName"
             });
             arr.push({
                title: this.$t('ieoAdmin.totalSale'),
+                width: L2,
                 key: "saleAmount"
             });
             arr.push({
                 title: this.$t('ieoAdmin.currenCollected'),
+                width: L3,
                 key: "raiseCoin"
             });
             arr.push({
                 title: this.$t('ieoAdmin.FundraisingCycle'),
-                width: 200,
+                width: L4,
                 render: (h, params) => {
-                    return h("span", {}, params.row.startTime + "-" + params.row.endTime)
+                    return h("span", {}, params.row.startTime + params.row.endTime)
                 }
             });
             arr.push({
                 title: this.$t('ieoAdmin.SubscriptionAmount'),
+                width: L6,
                 key: "receiveAmount"
             });
             arr.push({
                 title: this.$t('ieoAdmin.useAmount'),
+                width: L7,
                 key: "payAmount"
             });
             arr.push({
                 title: this.$t('ieoAdmin.SubscriptionTime'),
+                width: L5,
                 key: "createTime"
             });
             arr.push({
                 title: this.$t('ieoAdmin.SubscriptionStatus'),
+                fixed: L90,
+                width: L9,
                 render: (h, params) => {
                     const str = params.row.status == 0 ? this.$t('ieoAdmin.failure') : this.$t('ieoAdmin.success');
                     return h("span", {}, str);
@@ -212,4 +233,21 @@ export default {
 }
 </style>
 <style lang="scss">
+    .nav-rights .ivu-table-cell {
+        padding: 0 10px;
+    }
+    /*.ivu-table-overflowY::-webkit-scrollbar {!*滚动条整体样式*!*/
+    /*    width: 3px;     !*高宽分别对应横竖滚动条的尺寸*!*/
+    /*    height: 1px;*/
+    /*}*/
+    /*.ivu-table-overflowY::-webkit-scrollbar-thumb {!*滚动条里面小方块*!*/
+    /*    border-radius: 10px;*/
+    /*    background-color: rgba(255, 255, 255, .6);*/
+    /*    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);*/
+    /*}*/
+    /*.ivu-table-overflowY::-webkit-scrollbar-track {!*滚动条里面轨道*!*/
+    /*    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
+    /*    !*border-radius: 10px;*!*/
+    /*    background: rgba(255, 255, 255, .1);*/
+    /*}*/
 </style>
