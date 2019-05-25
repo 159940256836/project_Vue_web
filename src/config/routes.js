@@ -80,9 +80,6 @@ import Ieoadmin from '../components/uc/IeoAdmin.vue'
 //api管理
 import apiManage from '../components/uc/apiManage.vue'
 
-//邮箱
-import active from '../components/uc/recharge/active.vue'
-
 //杠杆账户管理 => 当前委托
 import levelCurrent from '../components/uc/levelCurrent.vue'
 
@@ -102,7 +99,6 @@ export default [
     { path: '/index', component: Index },
     { path: '/login', component: Login },
     { path: "/Ieo", name: "ieo", component: Ieo },
-    { path: "/active", name: "active", component: active },
     { path: "/Ieo/IeoDetail", name: "IeoDetail", component: IeoDetail },
     { path: '/login/returnUrl/:returnUrl', component: Login },
     { path: '/register', component: Register },
@@ -221,11 +217,6 @@ export default [
                 path: "apiManage",
                 name: "apiManage",
                 component: apiManage
-            },
-            {
-                path: "active:key",
-                name: "active",
-                component: active
             },
             {
                 path: "level/current",

@@ -1,18 +1,18 @@
 const en = {
     _feeGread: "Fee grade",
-    _BitcoinServiceCharge: 'Bitcoin service charge',
-    _dayLimit: 'Daily withdrawal limit',
-    _daynumLimit: 'Number of withdrawals per day',
+    _BitcoinServiceCharge: 'Coin fee',
+    _dayLimit: 'Withdrawal amount/day',
+    _daynumLimit: 'Withdraw frequency/day',
     _grade: 'grade',
     _gradDes: "Grade description ",
-    _legalServiceCharge: "service charge for legal tender",
-    _leverServiveCharge: "service charge for leveraged deals"
+    _legalServiceCharge: "Fiat fee",
+    _leverServiveCharge: "Lever fee"
 }
 const zh = {
-    _feeGread: "手续费等级：",
+    _feeGread: "手续费等级",
     _BitcoinServiceCharge: '币币手续费',
-    _dayLimit: '每日提现额度',
-    _daynumLimit: '每日提币笔数',
+    _dayLimit: '提现额度/日',
+    _daynumLimit: '提币次数/日',
     _grade: '等级',
     _gradDes: "等级说明",
     _legalServiceCharge: "法币手续费",

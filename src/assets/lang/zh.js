@@ -528,6 +528,7 @@ module.exports = {
                 to: '至',
                 operatetype: '操作类型',
                 search: '搜索',
+                searchPla: '搜索',
                 charge: '充值',
                 pickup: '提现',
                 transaccount: '转账',

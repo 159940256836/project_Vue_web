@@ -763,7 +763,6 @@ export default {
     created: function () {
         this.stop();
         this.init();
-        this.getRequest()
     },
     filters: {
         formateRate(str) {
@@ -789,23 +788,6 @@ export default {
         this.getHotSymbol();
     },
     methods: {
-        getRequest() {
-            let url = location.search; //获取url中"?"符后的字串
-            let theRequest = new Object();
-            console.log(url, theRequest);
-            if (url.indexOf("?") != -1) {
-                let str = url.substr(1);
-                let strs = str.split("&");
-                for(let i = 0; i < strs.length; i ++) {
-                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
-                }
-            }
-            this.request = theRequest.key
-            console.log(this.request)
-            if(!this.request === this.request) {
-                this.$router.push("/active");
-            }
-        },
         /**
          * 切割大数组成小数组
          */

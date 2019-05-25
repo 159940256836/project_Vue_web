@@ -78,7 +78,7 @@ const zh = {
     volume: '买入量',
     sellingRate: '卖出价',
     sellingVolume: '卖出量',
-    rollOut: '转出',
+    rollOut: '划转',
     follow: '从',
     arrive: '到',
     quantity: '数量',

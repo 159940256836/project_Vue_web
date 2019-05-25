@@ -1,27 +1,55 @@
 
 <template>
     <div class="nav-rights">
-        <Form class="form" :model="formItem" :label-width="65" inline>
+        <Form
+            class="form"
+            :model="formItem"
+            :label-width="65"
+            inline
+        >
             <FormItem :label="$t('ieoAdmin.projectName')">
-                <Input v-model="formItem.ieoName" type="text"></Input>
+                <Input
+                    v-model="formItem.ieoName"
+                    type="text"
+                ></Input>
             </FormItem>
             <FormItem :label="$t('ieoAdmin.SubscriptionTime')">
-                <DatePicker type="daterange" v-model="formItem.date" style="width:180px;"></DatePicker>
+                <DatePicker
+                    type="daterange"
+                    v-model="formItem.date"
+                    style="width:180px;"
+                ></DatePicker>
             </FormItem>
             <FormItem :label="$t('ieoAdmin.SubscriptionStatus')">
-                <Select v-model="formItem.status" style="width:100px;" :placeholder="select">
+                <Select
+                    v-model="formItem.status"
+                    style="width:100px;"
+                    :placeholder="select"
+                >
                     <Option value="0">{{$t('ieoAdmin.failure')}}</Option>
                     <Option value="1">{{$t('ieoAdmin.success')}}</Option>
                 </Select>
             </FormItem>
             <FormItem>
-                <Button type="primary" @click="search">{{$t('historyAndCu.search')}}</Button>
+                <Button
+                    type="primary"
+                    @click="search"
+                >{{$t('historyAndCu.search')}}</Button>
                 <!-- <Button style="margin-left: 8px " @click="handleClear" class="clear_btn">清空条件</Button> -->
             </FormItem>
         </Form>
         <div class="page">
-            <Table :columns="columns" :data="data"></Table>
-            <Page :current="pageNo" :total="total"  @on-change="changePage" class="pageWrapper"></Page>
+            <Table
+                :columns="columns"
+                :data="data"
+            ></Table>
+            <Page
+                :current="pageNo"
+                v-show="total > 10"
+                :total="total"
+                @on-change="changePage"
+                class="pageWrapper"
+            ></Page>
         </div>
     </div>
 </template>
@@ -30,7 +58,7 @@ import moment from "moment";
 export default {
     name: "ieoadmin",
     data() {
-        
+
         return {
             select:"select",
             total: 0,

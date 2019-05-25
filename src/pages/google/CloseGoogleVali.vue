@@ -72,7 +72,9 @@ export default {
     },
     filters: {
         addStart(str) {
-            return str.slice(0, 3) + "****" + str.slice(8, 11)
+            if (str) {
+                return str.slice(0, 3) + "****" + str.slice(8, 11)
+            }
         }
     },
     methods: {

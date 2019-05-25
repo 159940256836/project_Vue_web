@@ -9,14 +9,26 @@
                         <div>
                             <span class="abstract">{{$t('recommendPage._recommendCode')}}</span>
                             <span class="code">{{qrcode.code}}</span>
-                            <a v-clipboard:copy="qrcode.code" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" class="link-copy">
+                            <a
+                                v-clipboard:copy="qrcode.code"
+                                v-clipboard:success="onCopy"
+                                v-clipboard:error="onError"
+                                href="javascript:;"
+                                class="link-copy"
+                            >
                                 <img src="../../assets/images/copycode.png" alt="">
                             </a>
                         </div>
                         <div>
                             <span class="abstract">{{$t('recommendPage._recommendLink')}}</span>
                             <span class="code">{{qrcode.value}}</span>
-                            <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" class="link-copy">
+                            <a
+                                v-clipboard:copy="qrcode.value"
+                                v-clipboard:success="onCopy"
+                                v-clipboard:error="onError"
+                                href="javascript:;"
+                                class="link-copy"
+                            >
                                 <img src="../../assets/images/copycode.png" alt="">
                             </a>
                         </div>
@@ -28,20 +40,56 @@
             </div>
             <div class="bill_box rightarea padding-right-clear record account-box">
                 <ButtonGroup>
-                    <Button v-for="(list,index) in buttonLists" :key="list.text" class="btStyle" :class="{active:changeActive == index}" @click="actives(index)">{{list.text}}</Button>
+                    <Button
+                        v-for="(list,index) in buttonLists"
+                        :key="list.text"
+                        class="btStyle"
+                        :class="{active:changeActive == index}"
+                        @click="actives(index)"
+                    >
+                        {{list.text}}
+                    </Button>
                 </ButtonGroup>
-                <div class="message" v-if="this.changeActive==0">
-                    <Table stripe :columns="tablePromoteFriends" :data="dataPromoteFriends.content||[]" :loading="loading" :disabled-hover="true"></Table>
+                <div
+                     class="message"
+                     v-if="this.changeActive==0"
+                >
+                    <Table
+                        stripe
+                        :columns="tablePromoteFriends"
+                        :data="dataPromoteFriends.content||[]"
+                        :loading="loading"
+                        :disabled-hover="true"
+                    ></Table>
                     <div class="page-wrap">
                         <!-- <span>{{dataPromoteFriends.totalElements}}</span> -->
-                        <Page :current="currentPage" :total="parseInt(dataPromoteFriends.totalElements)" @on-change="promoteFriendsPageChange"></Page>
+                        <Page
+                            :current="currentPage"
+                            v-show="dataPromoteFriends.totalElements > 10"
+                            :total="parseInt(dataPromoteFriends.totalElements)"
+                            @on-change="promoteFriendsPageChange"
+                        ></Page>
                     </div>
                 </div>
-                <div class="message" v-else-if="this.changeActive==1">
-                    <Table stripe :columns="tablePromoteMoney" :data="dataPromoteMoney||[]" :loading="loading" :disabled-hover="true"></Table>
+                <div
+                     class="message"
+                     v-else-if="this.changeActive==1"
+                >
+                    <Table
+                        stripe
+                        :columns="tablePromoteMoney"
+                        :data="dataPromoteMoney||[]"
+                        :loading="loading"
+                        :disabled-hover="true"
+                    ></Table>
                     <div class="page-wrap">
                         <!-- <span>{{dataPromoteMoney.totalElements}}</span> -->
-                        <Page :current="currentPage" :total="parseInt(dataPromoteMoney.totalElements)"  @on-change="promoteMoneyPageChange"></Page>
+                        <Page
+                            :current="currentPage"
+                            v-show="dataPromoteFriends.totalElements > 10"
+                            :total="parseInt(dataPromoteMoney.totalElements)"
+                            @on-change="promoteMoneyPageChange"
+                        ></Page>
                     </div>
                 </div>
             </div>
@@ -101,7 +149,7 @@ export default {
                 {
                     title: this.$t("uc.extension.type"),
                     render:(h,params)=>{
-                        
+
                         return h("div",{},m.get(params.row.type))
                     }
                 },

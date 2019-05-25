@@ -16,10 +16,13 @@
                     <p>{{mySelf.exchangeFeeRate}}</p>
                 </li>
                 <li>
-                    {{$t("leverDescPage._dayLimit")}}（USDT）：{{mySelf.withdrawCoinAmount}}
+                    <p>{{$t("leverDescPage._dayLimit")}}(USDT)</p>
+                    <p>{{mySelf.withdrawCoinAmount}}</p>
+
                 </li>
                 <li>
-                    {{$t("leverDescPage._daynumLimit")}}:{{mySelf.dayWithdrawCount}}
+                    <p>{{$t("leverDescPage._daynumLimit")}}</p>
+                    <p>{{mySelf.dayWithdrawCount}}</p>
                 </li>
             </ul>
         </div>
@@ -64,12 +67,34 @@ export default {
     computed: {
         columns() {
             const arr = [];
-            arr.push({title: this.$t('leverDescPage._grade'),key: "gradeCode"});
-            arr.push({title: this.$t('leverDescPage._BitcoinServiceCharge'),key: "gradeCode"});
-            arr.push({title: this.$t('leverDescPage._legalServiceCharge'),key: "gradeCode"});
-            arr.push({title: this.$t('leverDescPage._leverServiveCharge'),key: "gradeCode"});
-            arr.push({title: this.$t('leverDescPage._dayLimit')+"（USDT）",key: "gradeCode"});
-            arr.push({title: this.$t('leverDescPage._daynumLimit'),key: "gradeCode"});
+            const E = this.$store.getters.lang == "English" ? 230 : '';
+            const L = this.$store.getters.lang == "English" ? 200 : '';
+            arr.push({
+                title: this.$t('leverDescPage._grade'),
+                key: "gradeCode"
+            });
+            arr.push({
+                title: this.$t('leverDescPage._BitcoinServiceCharge'),
+                key: "gradeCode"
+            });
+            arr.push({
+                title: this.$t('leverDescPage._legalServiceCharge'),
+                key: "gradeCode"
+            });
+            arr.push({
+                title: this.$t('leverDescPage._leverServiveCharge'),
+                key: "gradeCode"
+            });
+            arr.push({
+                title: this.$t('leverDescPage._dayLimit')+"（USDT）",
+                width: E,
+                key: "gradeCode"
+            });
+            arr.push({
+                title: this.$t('leverDescPage._daynumLimit'),
+                width: L,
+                key: "gradeCode"
+            });
             return arr;
         }
 
