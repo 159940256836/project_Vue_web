@@ -30,7 +30,7 @@
                                         @click="resetAddress"
                                         :loading="loadingButton1"
                                     >
-                                        {{ !loadingButton1 ? '获取充币地址' : '获取充币地址' }}
+                                        {{ !loadingButton1 ? $t("uc.finance.money.getaddress") : $t("uc.finance.money.getaddress")}}
                                         <!--获取充币地址-->
                                     </Button>
                                     <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" id="copyBtn" class="link-copy">

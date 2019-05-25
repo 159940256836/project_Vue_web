@@ -46,14 +46,14 @@
                                 <div class="mymsg">
                                     <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
                                 </div>
-                                 <Dropdown>
+                                 <Dropdown @on-click="goBi">
                                     <a href="javascript:void(0)">
                                         <span class="header-img">{{$t("uc.menuTitle.moneyManagement")}}</span>
                                         <Icon type="md-arrow-dropdown" size="16" />
                                     </a>
                                     <DropdownMenu slot="list">
-                                        <DropdownItem><span @click="goBi('/exchange/recharge')">{{$t("exchange.recharge")}}</span></DropdownItem>
-                                        <DropdownItem><span @click="goBi('/uc/withdraw')">{{$t("uc.finance.money.pickup")}}</span></DropdownItem>
+                                        <DropdownItem name="recharge"><span>{{$t("exchange.recharge")}}</span></DropdownItem>
+                                        <DropdownItem name="pickup"><span>{{$t("uc.finance.money.pickup")}}</span></DropdownItem>
 
                                     </DropdownMenu>
                                 </Dropdown>
@@ -381,8 +381,13 @@ export default {
                 this.isRouterAlive = true
             })
         },
-        goBi(url) {
-            this.$router.push(url)
+        goBi(name) {
+               if (name == "recharge") {
+                    this.$router.push("/uc/recharge");
+                }
+            if (name == "pickup") {
+                this.$router.push("/uc/withdraw");
+            }
         },
         handleScroll () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
