@@ -3,11 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="32a51e65-7534-4edf-98b0-2e900b68b614" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/lang/ieo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/lang/ieo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/lang/ieoAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/lang/ieoAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/uc/IeoAdmin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/uc/IeoAdmin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/exchange/Exchange.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/exchange/Exchange.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/exchange/lever.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/exchange/lever.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/webpack.prod.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/webpack.prod.conf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/lang/en.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/lang/en.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/lang/zh.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/lang/zh.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/splitaccount/coin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/splitaccount/coin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/uc/levelCurrent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/uc/levelCurrent.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/uc/levelHistory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/uc/levelHistory.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -24,39 +25,45 @@
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/pages/index/Index.vue">
+            <entry file="file://$PROJECT_DIR$/src/components/uc/IeoAdmin.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="133">
-                  <caret line="1459" column="29" lean-forward="true" selection-start-line="1459" selection-start-column="29" selection-end-line="1459" selection-end-column="29" />
+                <state relative-caret-position="396">
+                  <caret line="238" column="5" lean-forward="true" selection-start-line="236" selection-start-column="4" selection-end-line="238" selection-end-column="5" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/components/uc/levelHistory.vue">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="63">
+                  <caret line="245" column="20" lean-forward="true" selection-start-line="245" selection-start-column="20" selection-end-line="245" selection-end-column="20" />
                   <folding>
-                    <element signature="n#style#0;n#router-link#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#section#0;n#div#1;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#div#4;n#div#0;n#div#0;n#template#0;n#!!top" />
-                    <element signature="e#7752#7807#0" expanded="true" />
-                    <element signature="e#8050#34293#0" />
+                    <element signature="n#style#0;n#!!top" />
+                    <element signature="n#style#1;n#!!top" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main.js">
+            <entry file="file://$PROJECT_DIR$/src/components/uc/levelCurrent.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="389">
-                  <caret line="36" column="17" lean-forward="true" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
+                <state relative-caret-position="294">
+                  <caret line="169" column="13" selection-start-line="169" selection-start-column="13" selection-end-line="169" selection-end-column="13" />
                   <folding>
-                    <element signature="e#140#161#0" expanded="true" />
-                    <element signature="e#515#543#0" expanded="true" />
+                    <element signature="n#style#0;n#!!top" />
+                    <element signature="n#style#1;n#!!top" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/components/uc/IeoAdmin.vue">
+            <entry file="file://$PROJECT_DIR$/build/webpack.prod.conf.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="599">
-                  <caret line="203" column="26" selection-start-line="203" selection-start-column="26" selection-end-line="203" selection-end-column="26" />
+                <state relative-caret-position="364">
+                  <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
                 </state>
               </provider>
             </entry>
@@ -118,46 +125,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/assets/lang/zh.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="406">
-                  <caret line="536" column="14" selection-start-line="536" selection-start-column="14" selection-end-line="536" selection-end-column="14" />
+                <state relative-caret-position="427">
+                  <caret line="151" column="25" lean-forward="true" selection-start-line="151" selection-start-column="8" selection-end-line="151" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/components/uc/Withdraw.vue">
+            <entry file="file://$PROJECT_DIR$/src/assets/lang/en.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="595">
-                  <caret line="714" column="23" lean-forward="true" selection-start-line="714" selection-start-column="23" selection-end-line="714" selection-end-column="23" />
-                  <folding>
-                    <element signature="n#style#0;n#Poptip#0;n#div#0;n#div#0;n#div#1;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#Slider#0;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-                    <element signature="n#div#2;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#InputNumber#0;n#div#0;n#div#0;n#div#2;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#InputNumber#0;n#div#0;n#div#1;n#div#2;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#Button#0;n#div#3;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#div#5;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" />
-                    <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#div#5;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#0;n#section#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#0;n#div#0;n#Modal#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#span#1;n#div#0;n#Modal#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/pages/otc/Trade.vue">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="366">
-                  <caret line="1019" column="36" lean-forward="true" selection-start-line="1019" selection-start-column="36" selection-end-line="1019" selection-end-column="36" />
-                  <folding>
-                    <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#TabPane#0;n#Tabs#0;n#section#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                    <element signature="n#style#0;n#!!top" />
-                    <element signature="n#style#1;n#!!top" />
-                  </folding>
+                <state relative-caret-position="322">
+                  <caret line="154" column="25" lean-forward="true" selection-start-line="154" selection-start-column="25" selection-end-line="154" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
@@ -170,7 +148,7 @@
             <entry file="file://$PROJECT_DIR$/src/assets/lang/zh.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="280">
-                  <caret line="530" column="25" selection-start-line="530" selection-start-column="16" selection-end-line="530" selection-end-column="25" />
+                  <caret line="531" column="25" selection-start-line="531" selection-start-column="16" selection-end-line="531" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
@@ -181,10 +159,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Confirm card number</find>
-      <find>资金密码</find>
-      <find>fundpwd</find>
-      <find>tablePromoteFriends</find>
       <find>dataPromoteFriends</find>
       <find>.ivu-btn-primary</find>
       <find>totalElements</find>
@@ -204,13 +178,17 @@
       <find>http://</find>
       <find>section-main</find>
       <find>Currency for sale</find>
-      <find>finance</find>
       <find>raise currency</find>
       <find>Subscription time</find>
       <find>getCurrentOrder</find>
       <find>pageSize</find>
       <find>historyOrder</find>
       <find>getHistoryOrder</find>
+      <find>finance</find>
+      <find>未成交</find>
+      <find>traded</find>
+      <find>console</find>
+      <find>UglifyJsPlugin</find>
     </findStrings>
     <replaceStrings>
       <replace>var</replace>
@@ -223,9 +201,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/lever/alreadyReturn.vue" />
-        <option value="$PROJECT_DIR$/src/components/exchange/SvgLine.vue" />
-        <option value="$PROJECT_DIR$/src/pages/otc/AdPublish.vue" />
         <option value="$PROJECT_DIR$/src/components/lever/noReturn.vue" />
         <option value="$PROJECT_DIR$/src/pages/bjc/Bijingcai.vue" />
         <option value="$PROJECT_DIR$/src/pages/lever/Index.vue" />
@@ -246,7 +221,6 @@
         <option value="$PROJECT_DIR$/src/pages/uc/MemberCenter.vue" />
         <option value="$PROJECT_DIR$/src/components/uc/recharge/active.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
-        <option value="$PROJECT_DIR$/src/components/splitaccount/coin.vue" />
         <option value="$PROJECT_DIR$/src/components/uc/apiManage.vue" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/active.html" />
@@ -263,17 +237,21 @@
         <option value="$PROJECT_DIR$/src/components/uc/FeeLevel.vue" />
         <option value="$PROJECT_DIR$/src/assets/lang/coins.js" />
         <option value="$PROJECT_DIR$/src/assets/lang/moneyIndexPage.js" />
-        <option value="$PROJECT_DIR$/src/assets/lang/zh.js" />
         <option value="$PROJECT_DIR$/src/components/uc/Record.vue" />
         <option value="$PROJECT_DIR$/src/components/uc/Withdraw.vue" />
         <option value="$PROJECT_DIR$/src/pages/otc/Trade.vue" />
-        <option value="$PROJECT_DIR$/src/assets/lang/en.js" />
         <option value="$PROJECT_DIR$/src/pages/index/Index.vue" />
         <option value="$PROJECT_DIR$/src/assets/lang/ieo.js" />
         <option value="$PROJECT_DIR$/src/assets/lang/ieoAdmin.js" />
         <option value="$PROJECT_DIR$/src/pages/exchange/Exchange.vue" />
         <option value="$PROJECT_DIR$/src/pages/exchange/lever.vue" />
         <option value="$PROJECT_DIR$/src/components/uc/IeoAdmin.vue" />
+        <option value="$PROJECT_DIR$/src/components/uc/levelHistory.vue" />
+        <option value="$PROJECT_DIR$/src/assets/lang/zh.js" />
+        <option value="$PROJECT_DIR$/src/assets/lang/en.js" />
+        <option value="$PROJECT_DIR$/src/components/uc/levelCurrent.vue" />
+        <option value="$PROJECT_DIR$/src/components/splitaccount/coin.vue" />
+        <option value="$PROJECT_DIR$/build/webpack.prod.conf.js" />
       </list>
     </option>
   </component>
@@ -298,13 +276,12 @@
             <path>
               <item name="multi_currency_net" type="b2602c69:ProjectViewProjectNode" />
               <item name="multi_currency_net" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="multi_currency_net" type="b2602c69:ProjectViewProjectNode" />
               <item name="multi_currency_net" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="multi_currency_net" type="b2602c69:ProjectViewProjectNode" />
@@ -407,7 +384,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="268042000" />
+    <option name="totallyTimeSpent" value="271364000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -504,27 +481,6 @@
     <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/splitaccount/currency.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/assets/charting_library/static/bundles/common.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="70" column="12" lean-forward="true" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/otc/Chat.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -812,13 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/lang/en.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="587" column="31" selection-start-line="587" selection-start-column="31" selection-end-line="587" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/ieo/Index.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -917,13 +866,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/lang/zh.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="536" column="14" selection-start-line="536" selection-start-column="14" selection-end-line="536" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/exchange/DepthGraph.vue">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -965,8 +907,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/uc/IeoAdmin.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="203" column="26" selection-start-line="203" selection-start-column="26" selection-end-line="203" selection-end-column="26" />
+        <state relative-caret-position="396">
+          <caret line="238" column="5" lean-forward="true" selection-start-line="236" selection-start-column="4" selection-end-line="238" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/uc/levelHistory.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="245" column="20" lean-forward="true" selection-start-line="245" selection-start-column="20" selection-end-line="245" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#!!top" />
+            <element signature="n#style#1;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/lang/zh.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="151" column="25" lean-forward="true" selection-start-line="151" selection-start-column="8" selection-end-line="151" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/lang/en.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="154" column="25" lean-forward="true" selection-start-line="154" selection-start-column="25" selection-end-line="154" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/uc/levelCurrent.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="169" column="13" selection-start-line="169" selection-start-column="13" selection-end-line="169" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#!!top" />
+            <element signature="n#style#1;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/webpack.prod.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
         </state>
       </provider>
     </entry>

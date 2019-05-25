@@ -149,6 +149,7 @@ module.exports = {
         stall: '档位',
         total: '累计',
         traded: '已成交',
+        unsettled: '未成交',
         action: '操作',
         undo: '撤单',
         delegationnum: '委托量',

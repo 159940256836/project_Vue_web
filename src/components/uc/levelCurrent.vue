@@ -76,7 +76,13 @@
         :loading="loading"
       ></Table>
       <div class="page">
-        <Page :total="total" :pageSize="pageSize" :current="pageNum" @on-change="loadDataPage"></Page>
+        <Page
+          v-show="total > 10"
+          :total="total"
+          :pageSize="pageSize"
+          :current="pageNum"
+          @on-change="loadDataPage"
+        ></Page>
       </div>
     </div>
   </div>
@@ -237,7 +243,7 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == "en" ? 64 : "",
+        width: this.locale == "en" ? 100 : 150,
         title: this.$t("exchange.time"),
         key: "time",
         minWidth: 55,
@@ -246,12 +252,12 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == "en" ? 86 : "",
+        width: this.locale == "en" ? 95 : 105,
         title: this.$t("historyAndCu.symbol"),
         key: "symbol"
       });
       arr.push({
-        width: this.locale == "en" ? 61 : 60,
+        width: this.locale == "en" ? 105 : 60,
         title: this.$t("historyAndCu.type"),
         render(h, params) {
           const type = params.row.type;
@@ -264,7 +270,7 @@ export default {
         key: "triggerPrice"
       });
       arr.push({
-        width: this.locale == "en" ? 130 : 60,
+        width: this.locale == "en" ? 90 : 60,
         title: this.$t("exchange.direction"),
         key: "direction",
         render: (h, params) => {
@@ -333,7 +339,7 @@ export default {
       });
       arr.push({
         width: this.locale == "en" ? 75 : "",
-        title: this.$t("exchange.traded"),
+        title: this.$t("exchange.unsettled"),
         key: "turnover",
         render: (h, params) => {
           return h(

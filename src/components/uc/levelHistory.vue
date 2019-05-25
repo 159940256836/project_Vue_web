@@ -32,6 +32,9 @@
 .table .ivu-table-cell-expand {
   color: #f0a70a;
 }
+.entrusthistory .ivu-table-cell {
+  padding: 0 10px;
+}
 .form .clear_btn {
   &:hover {
     color: #39f;
@@ -47,9 +50,6 @@
   }
 }
 </style>
-
-
-
 <template>
   <div class="entrusthistory">
     <Form class="form" :model="formItem" :label-width="65" inline>
@@ -75,18 +75,36 @@
                 </Select>
       </FormItem>-->
       <FormItem>
-        <Button type="primary" @click="handleSubmit">{{$t('historyAndCu.search')}}</Button>
+        <Button
+          type="primary"
+          @click="handleSubmit"
+        >
+          {{$t('historyAndCu.search')}}
+        </Button>
         <Button
           style="margin-left: 8px"
           @click="handleClear"
           class="clear_btn"
-        >{{$t('historyAndCu.clear')}}</Button>
+        >
+          {{$t('historyAndCu.clear')}}
+        </Button>
       </FormItem>
     </Form>
     <div class="table">
-      <Table :columns="columns" :data="orders" :loading="loading" :no-data-text="$t('common.nodata')"></Table>
+      <Table
+        :columns="columns"
+        :data="orders"
+        :loading="loading"
+        :no-data-text="$t('common.nodata')"
+      ></Table>
       <div class="page">
-        <Page :total="total" :pageSize="pageSize" :current="pageNum" @on-change="loadDataPage"></Page>
+        <Page
+          v-show="total > 10"
+          :total="total"
+          :pageSize="pageSize"
+          :current="pageNum"
+          @on-change="loadDataPage"
+        ></Page>
       </div>
     </div>
   </div>
@@ -223,7 +241,7 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == "en" ? 64 : "",
+        width: this.locale == "en" ? 90 : "",
         title: this.$t("exchange.time"),
         key: "time",
         minWidth: 55,
@@ -232,12 +250,12 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == "en" ? 86 : "",
+        width: this.locale == "en" ? 90 : "",
         title: this.$t("historyAndCu.symbol"),
         key: "symbol"
       });
       arr.push({
-        width: this.locale == "en" ? 61 : 60,
+        width: this.locale == "en" ? 88 : 60,
         title: this.$t("historyAndCu.type"),
         render(h, params) {
           const type = params.row.type;
@@ -250,7 +268,7 @@ export default {
         key: "triggerPrice"
       });
       arr.push({
-        width: this.locale == "en" ? 130 : 60,
+        width: this.locale == "en" ? 80 : 60,
         title: this.$t("exchange.direction"),
         key: "direction",
         render: (h, params) => {

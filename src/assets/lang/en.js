@@ -151,6 +151,7 @@ module.exports = {
         stall: 'Stall',
         total: 'Total',
         traded: 'Done',
+        unsettled: 'Unsettled',
         action: 'Action',
         undo: 'Undo',
         delegationnum: 'Delegate Amount',
