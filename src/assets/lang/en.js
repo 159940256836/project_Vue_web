@@ -55,7 +55,8 @@ module.exports = {
         ucenter: 'ACCOUNT',
         service: 'Announcement',
         downloadapp: "Scan the code for download and installation",
-        appdownlaod: 'Download APP'
+        appdownlaod: 'Download APP',
+        choose:'Please select a',
     },
     downLoadAbs: {
         big: "whenever and wherever possible Multi-platform terminal transactions ",

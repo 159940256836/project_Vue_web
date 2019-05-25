@@ -48,7 +48,8 @@ module.exports = {
         ucenter: '账户中心',
         service: '公告',
         downloadapp: "扫码进行下载安装",
-        appdownlaod: 'APP下载'
+        appdownlaod: 'APP下载',
+        choose:"请选择",
     },
     downLoadAbs: {
         big: "随时随地 多平台终端交易",

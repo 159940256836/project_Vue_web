@@ -4,7 +4,7 @@
             <div class="add_ad">
                 <Button icon="plus-round" @click="publish">{{$t('otc.myad.post')}}</Button>
             </div>
-            <Alert>{{$t('otc.myad.alert')}}</Alert>
+            <Alert :class="locale == 'en' ? 'en' : ''">{{$t('otc.myad.alert')}}</Alert>
             <div class="order-table">
                 <Table :columns="tableColumnsAdv" :data="tableAdv" :no-data-text="$t('common.nodata')" :loading="loading" class="tables" :disabled-hover="true"></Table>
                 <div style="margin: 10px;overflow: hidden" id="pages">
@@ -22,6 +22,7 @@ export default {
   data() {
     let self = this;
     return {
+      locale:'',
       loginmsg: this.$t("common.logintip"),
       dataCount: 0,
       tableAdv: [],
@@ -260,7 +261,15 @@ export default {
   watch: {
     lang: function() {
       this.updateLangData();
+    },
+    //5.25修改
+    '$i18n.locale': {
+      handler(newVal) {
+        this.locale = newVal;
+      },
+      immediate: true,
     }
+    
   },
   created() {
     this.getAd();
@@ -268,6 +277,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.nav-rights .my_ad_box .ivu-alert.ivu-alert-info[data-v-50c44f70].en{
+  text-align:left;
+}
+.ivu-alert.en{
+  padding:8px 0 8px 0
+}
+
 .nav-rights {
   padding: 0 0 0 20px;
   .my_ad_box {
