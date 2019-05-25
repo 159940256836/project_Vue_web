@@ -59,7 +59,7 @@ module.exports = {
     },
     downLoadAbs: {
         big: "whenever and wherever possible Multi-platform terminal transactions ",
-        small: "t covers multiple platforms of iOS, Android, Windows and Mac, and supports full-service functions"
+        small: "covers multiple platforms of iOS, Android, Windows and Mac, and supports full-service functions"
     },
 
     sectionPage: {

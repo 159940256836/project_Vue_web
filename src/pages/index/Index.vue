@@ -1466,7 +1466,7 @@ li {
     align-items: flex-start;
     .section-main {
         width: 1200px;
-        margin: 110px auto 0;
+        margin: 90px auto 0;
         display: flex;
         .download {
             flex: 1;
