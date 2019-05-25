@@ -706,8 +706,8 @@ export default {
         a {
           display: inline-block;
           color: #3399ff;
-          width: 100px;
           height: 30px;
+          padding: 0 10px;
           border: 1px solid #3399ff;
           line-height: 30px;
           text-align: center;

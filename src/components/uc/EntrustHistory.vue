@@ -52,22 +52,22 @@
 
 <template>
     <div class="entrusthistory">
-        <Form class="form" :model="formItem" :label-width="65" inline>
-            <FormItem :label="$t('historyAndCu.stEnTime')">
+        <Form class="form" :model="formItem" :label-width="60" inline>
+            <FormItem :label-width="locale == 'en' ? 144 : 60 " :label="$t('historyAndCu.stEnTime')">
                 <DatePicker type="daterange" v-model="formItem.date" style="width:180px;"></DatePicker>
             </FormItem>
             <FormItem :label="$t('historyAndCu.symbol')">
-                <Select v-model="formItem.symbol" style="width:100px;">
+                <Select v-model="formItem.symbol" style="width:100px;" :placeholder="$t('header.choose')">
                     <Option v-for="(item,index) in symbol" :key="index" :value="item.symbol">{{item.symbol}}</Option>
                 </Select>
             </FormItem>
             <FormItem :label="$t('historyAndCu.type')">
-                <Select v-model="formItem.type" style="width:70px;">
+                <Select v-model="formItem.type" style="width:70px;" :placeholder="$t('header.choose')">
                     <Option v-for="(item, index) in exchangeType" :value="item[0]" :key="index">{{item[1]}}</Option>
                 </Select>
             </FormItem>
             <FormItem :label="$t('historyAndCu.direction')">
-                <Select v-model="formItem.direction" style="width:70px;">
+                <Select v-model="formItem.direction" style="width:70px;" :placeholder="$t('header.choose')">
                     <Option value="0">{{$t('historyAndCu.buy')}}</Option>
                     <Option value="1">{{$t('historyAndCu.sell')}}</Option>
                 </Select>
@@ -78,7 +78,7 @@
             </FormItem>
         </Form>
         <div class="table">
-            <Table :columns="columns" :data="orders" :loading="loading"></Table>
+            <Table :no-data-text="$t('common.nodata')" :columns="columns" :data="orders" :loading="loading"></Table>
             <div class="page">
                 <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page>
             </div>
@@ -95,6 +95,7 @@ export default {
     data() {
         const self = this;
         return {
+            locale:'',
             loading: false,
             pageSize: 10,
             pageNo: 1,
@@ -114,6 +115,14 @@ export default {
         this.getHistoryOrder();
         this.getSymbol();
     },
+     watch: {
+    "$i18n.locale": {
+      handler(newVal) {
+        this.locale = newVal;
+      },
+      immediate: true
+    }
+  },
     methods: {
         dateFormat: function (tick) {
             return moment(tick).format("YYYY-MM-DD HH:mm:ss");

@@ -138,7 +138,7 @@
                                         <FormItem>
                                             <Input @on-keyup="keyEvent" v-model="form.buy.limitAmount" :placeholder="$t('exchange.buynum')"></Input>
                                             <!-- <label>{{currentCoin.coin}}</label> -->
-                                              <label><span>{{$t("exchange.bestbuy")}}:：</span>{{(this.wallet.base / this.form.buy.limitPrice).toFixed(4)}}</label>
+                                              <label><span>{{$t("exchange.bestbuy")}}:</span>{{(this.wallet.base / this.form.buy.limitPrice).toFixed(4)}}</label>
                                         </FormItem>
                                         <div class="slider-wrap">
                                             <Slider class="silder-buy" v-model="sliderBuyLimitPercent" show-tip="always" :tip-format="tipFormat" :disabled="sliderBuyDisabled"></Slider>
@@ -1309,8 +1309,8 @@ export default {
                 rows: []
             },
             historyOrder: {
-                pageSize: 10,
-                total: 10,
+                pageSize: 3,
+                total: 3,
                 page: 1,
                 columns: [
                     {
@@ -1661,8 +1661,6 @@ export default {
             this[silder] = val;
         },
         init() {
-        //    var params = this.$route.params[0];
-        //    console.log(params);
             let params = this.$route.params.pathMatch;
             if (params == undefined) {
                 this.$router.push("/leverindex/" + this.defaultPath);
@@ -3097,7 +3095,7 @@ export default {
         getCurrentOrder() {
             let params = {};
             params["pageNum"] = 1;
-            params["pageSize"] = 100;
+            params["pageSize"] = 3;
             params["symbol"] = this.currentCoin.symbol;
             this.currentOrder.rows = [];
             let that = this;

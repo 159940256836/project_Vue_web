@@ -46,13 +46,13 @@ export default {
                 if (resp.code == 0) {
                     this.tableMoney = resp.data;
                     this.showAccountData=this.tableMoney
-                    console.log(this.tableMoney,this.showAccountData);
+                    // console.log(this.tableMoney,this.showAccountData);
                     for (let i = 0; i < this.tableMoney.length; i++) {
                         this.tableMoney[i]["coinType"] = this.tableMoney[i].coin.unit;
-                        console.log(this.tableMoney[i].balance,this.tableMoney[i].frozenBalance,this.tableMoney[i].releaseBalance);
+                        // console.log(this.tableMoney[i].balance,this.tableMoney[i].frozenBalance,this.tableMoney[i].releaseBalance);
                         if(this.tableMoney[i].balance != "0" || this.tableMoney[i].frozenBalance != "0" || this.tableMoney[i].releaseBalance != "0"){
                             this.hiddenAccountData.push(this.tableMoney[i]);
-                            console.log(this.hiddenAccountData);
+                            // console.log(this.hiddenAccountData);
                         }
                     }
                     this.loading = false;

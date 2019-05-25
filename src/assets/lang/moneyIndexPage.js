@@ -1,6 +1,6 @@
 const en = {
-    _BitcoinAccount: "Bitcoin account",
-    _legaTenderAccount: 'legal tender account',
+    _BitcoinAccount: "Bitcoin Accounts",
+    _legaTenderAccount: 'Fiat Accounts',
     _LeveragedAccounts: 'Leveraged Accounts',
     _display: "The currency in which the hidden asset is 0 ",
     _open: "open",
@@ -19,7 +19,7 @@ const zh = {
     _display: "隐藏资产为0的币种",
     _open: "开",
     _close: "关",
-    _rollout: "转出",
+    _rollout: "划转",
     _available: '可用',
     _loanAvailable: "可借",
     _loanReturn: '借贷归还',

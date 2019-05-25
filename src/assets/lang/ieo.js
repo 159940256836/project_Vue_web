@@ -4,7 +4,7 @@ const en = {
     finished: 'finished',
     totalSales: 'totalSales',
     onlineTime: 'Expected online time',
-    currency: 'Collected currency',
+    currency: 'Raise currency',
     ratio: 'exchange ratio',
     charge: 'service charge',
     cycle: 'Fundraising cycle',

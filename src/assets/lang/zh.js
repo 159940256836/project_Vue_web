@@ -48,7 +48,8 @@ module.exports = {
         ucenter: '账户中心',
         service: '公告',
         downloadapp: "扫码进行下载安装",
-        appdownlaod: 'APP下载'
+        appdownlaod: 'APP下载',
+        choose:"请选择",
     },
     downLoadAbs: {
         big: "随时随地 多平台终端交易",
@@ -148,6 +149,7 @@ module.exports = {
         stall: '档位',
         total: '累计',
         traded: '已成交',
+        unsettled: '未成交',
         action: '操作',
         undo: '撤单',
         delegationnum: '委托量',
@@ -527,6 +529,7 @@ module.exports = {
                 to: '至',
                 operatetype: '操作类型',
                 search: '搜索',
+                searchPla: '搜索',
                 charge: '充值',
                 pickup: '提现',
                 transaccount: '转账',

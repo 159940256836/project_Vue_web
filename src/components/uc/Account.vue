@@ -25,7 +25,7 @@
                             </div>
                             <div class="account-detail" v-show="choseItem==1">
                                 <div class="detail-list">
-                                    <Form ref="formValidate1" :model="formValidate1" :rules="ruleValidate" :label-width="85">
+                                    <Form ref="formValidate1" :model="formValidate1" :rules="ruleValidate" :label-width="135">
                                         <!-- name -->
                                         <FormItem :label="$t('uc.account.name')" prop="name">
                                             <Input disabled size="large" v-model="formValidate1.name"></Input>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="account-detail" v-show="choseItem==2">
                                 <div class="detail-list">
-                                    <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="95">
+                                    <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="115">
                                       <Row>
                                         <Col span="8">
                                         <input type="hidden" name="aliPreview" :value="aliPreview" />
@@ -88,7 +88,7 @@
                                         </div>
                                         </Col>
 
-                                        <Col span="16">
+                                        <Col span="16" style="padding-top: 20px">
                                         <!-- name -->
                                         <FormItem :label="$t('uc.account.name')" prop="name">
                                             <Input disabled size="large" v-model="formValidate2.name"></Input>
@@ -129,7 +129,7 @@
                             </div>
                             <div class="account-detail" v-show="choseItem==3">
                                 <div class="detail-list">
-                                    <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="85">
+                                    <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="115">
                                       <Row>
                                         <Col span="8">
                                           <input type="hidden" name="wePreview" :value="wePreview" />
@@ -140,7 +140,7 @@
                                             </Upload>
                                           </div>
                                         </Col>
-                                        <Col span="16">
+                                        <Col span="16" style="padding-top: 20px;">
                                         <!-- name -->
                                         <FormItem :label="$t('uc.account.name')" prop="name">
                                             <Input disabled size="large" v-model="formValidate3.name"></Input>
@@ -395,7 +395,7 @@ export default {
                 if (valid) {
                     this.submit(name)
                 } else {
-                    
+
                 }
             })
         },
@@ -939,6 +939,7 @@ p.describe {
     /* border: #c5cdd7 solid 1px; */
 }
 .ivu-btn-primary{
+    width: 100%;
     background-color: #3399ff;
     border-color: #3399ff;
 }

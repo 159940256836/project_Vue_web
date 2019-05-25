@@ -643,6 +643,15 @@ $night-color: #fff;
         .ivu-icon {
             color: #333 !important;
         }
+        .right {
+            flex: 0 0 24%;
+            .coin-menu {
+                height: 480px;
+                background-color: #fff;
+                margin-bottom: 20px;
+                border-radius: 6px;
+            }
+        }
     }
     .trade_panel {
         box-shadow: 0 0 2px #ccc;
@@ -743,105 +752,105 @@ export default {
                     check: false
                 }
             ],
-            sliderStep: [25, 50, 75, 100],
-            sliderBuyLimitPercent: 0,
-            sliderSellLimitPercent: 0,
-            sliderBuyMarketPercent: 0,
-            sliderSellMarketPercent: 0,
-            sliderBuyStopPercent: 0,
-            sliderSellStopPercent: 0,
-            memberRate: 0, //用户身份，用于是否允许开启BHB抵扣手续费
-            // userRealVerified: false, //是否实名认证
-            collecRequesting: false,
-            currentCoinIsFavor: false,
-            isUseBHB: false, //是否试用BHB抵扣手续费
-            skin: "night", //皮肤样式day&night
-            currentImgTable: "k",
-            stopLoss: false,
-            selectedOrder: "current", //当前显示的委托记录
-            selectedPlate: "all", //当前显示的买卖盘
-            CNYRate: null,
-            datafeed: null,
-            defaultPath: "btc_usdt",
-            basecion: "usdt",
-            coinScale: 4,
-            baseCoinScale: 2,
-            symbolFee: 0.001,
-            currentCoin: {
-                base: "",
-                coin: "",
-                symbol: ""
-            },
-            favorColumns: [
-                {
-                    title: this.$t("exchange.symbol"),
-                    key: "coin",
-                    sortable: false,
-                    className: "coin-menu-symbol",
-                    render: (h, params) => {
-                        return h("div", [
-                            h("Icon", {
-                                props: {
-                                    // color:"red",
-                                    type: params.row.isFavor
-                                        ? "android-star"
-                                        : "android-star-outline"
-                                },
-                                nativeOn: {
-                                    click: () => {
-                                        event.stopPropagation(); //阻止事件冒泡
-                                        if (this.isLogin) {
-                                            if (
-                                                event.currentTarget.className ==
-                                                "ivu-icon ivu-icon-android-star"
-                                            ) {
-                                                this.cancelCollect(params.index, params.row);
-                                                event.currentTarget.className ==
-                                                    "ivu-icon ivu-icon-android-star-outline";
-                                            } else {
-                                                this.collect(params.index, params.row);
-                                                event.currentTarget.className =
-                                                    "ivu-icon ivu-icon-android-star";
-                                            }
-                                        } else {
-                                            this.$Message.warning("请先登录");
-                                        }
-                                    }
-                                }
-                            }),
-                            h("span", params.row.symbol)
-                        ]);
-                    }
-                },
-                {
-                    title: this.$t("exchange.lastprice"),
-                    key: "close",
-                    sortable: true,
-                    sortMethod: function (a, b, type) {
-                        let a1 = parseFloat(a);
-                        let b1 = parseFloat(b);
-                        if (type == "asc") {
-                            return a1 - b1;
-                        } else {
-                            return b1 - a1;
-                        }
-                    }
-                },
-                {
-                    title: this.$t("exchange.daychange"),
-                    key: "rose",
-                    sortable: true,
-                    sortMethod: function (a, b, type) {
-                        let a1 = a.replace(/[^\d|.|-]/g, "") - 0;
-                        let b1 = b.replace(/[^\d|.|-]/g, "") - 0;
-                        if (type == "asc") {
-                            return a1 - b1;
-                        } else {
-                            return b1 - a1;
-                        }
-                    }
-                }
-            ],
+            // sliderStep: [25, 50, 75, 100],
+            // sliderBuyLimitPercent: 0,
+            // sliderSellLimitPercent: 0,
+            // sliderBuyMarketPercent: 0,
+            // sliderSellMarketPercent: 0,
+            // sliderBuyStopPercent: 0,
+            // sliderSellStopPercent: 0,
+            // memberRate: 0, //用户身份，用于是否允许开启BHB抵扣手续费
+            // // userRealVerified: false, //是否实名认证
+            // collecRequesting: false,
+            // currentCoinIsFavor: false,
+            // isUseBHB: false, //是否试用BHB抵扣手续费
+            // skin: "night", //皮肤样式day&night
+            // currentImgTable: "k",
+            // stopLoss: false,
+            // selectedOrder: "current", //当前显示的委托记录
+            // selectedPlate: "all", //当前显示的买卖盘
+            // CNYRate: null,
+            // datafeed: null,
+            // defaultPath: "btc_usdt",
+            // basecion: "usdt",
+            // coinScale: 4,
+            // baseCoinScale: 2,
+            // symbolFee: 0.001,
+            // currentCoin: {
+            //     base: "",
+            //     coin: "",
+            //     symbol: ""
+            // },
+            // favorColumns: [
+            //     {
+            //         title: this.$t("exchange.symbol"),
+            //         key: "coin",
+            //         sortable: false,
+            //         className: "coin-menu-symbol",
+            //         render: (h, params) => {
+            //             return h("div", [
+            //                 h("Icon", {
+            //                     props: {
+            //                         // color:"red",
+            //                         type: params.row.isFavor
+            //                             ? "android-star"
+            //                             : "android-star-outline"
+            //                     },
+            //                     nativeOn: {
+            //                         click: () => {
+            //                             event.stopPropagation(); //阻止事件冒泡
+            //                             if (this.isLogin) {
+            //                                 if (
+            //                                     event.currentTarget.className ==
+            //                                     "ivu-icon ivu-icon-android-star"
+            //                                 ) {
+            //                                     this.cancelCollect(params.index, params.row);
+            //                                     event.currentTarget.className ==
+            //                                         "ivu-icon ivu-icon-android-star-outline";
+            //                                 } else {
+            //                                     this.collect(params.index, params.row);
+            //                                     event.currentTarget.className =
+            //                                         "ivu-icon ivu-icon-android-star";
+            //                                 }
+            //                             } else {
+            //                                 this.$Message.warning("请先登录");
+            //                             }
+            //                         }
+            //                     }
+            //                 }),
+            //                 h("span", params.row.symbol)
+            //             ]);
+            //         }
+            //     },
+            //     {
+            //         title: this.$t("exchange.lastprice"),
+            //         key: "close",
+            //         sortable: true,
+            //         sortMethod: function (a, b, type) {
+            //             let a1 = parseFloat(a);
+            //             let b1 = parseFloat(b);
+            //             if (type == "asc") {
+            //                 return a1 - b1;
+            //             } else {
+            //                 return b1 - a1;
+            //             }
+            //         }
+            //     },
+            //     {
+            //         title: this.$t("exchange.daychange"),
+            //         key: "rose",
+            //         sortable: true,
+            //         sortMethod: function (a, b, type) {
+            //             let a1 = a.replace(/[^\d|.|-]/g, "") - 0;
+            //             let b1 = b.replace(/[^\d|.|-]/g, "") - 0;
+            //             if (type == "asc") {
+            //                 return a1 - b1;
+            //             } else {
+            //                 return b1 - a1;
+            //             }
+            //         }
+            //     }
+            // ],
             sliderStep: [25, 50, 75, 100],
             sliderBuyLimitPercent: 0,
             sliderSellLimitPercent: 0,
@@ -1348,8 +1357,8 @@ export default {
                 rows: []
             },
             historyOrder: {
-                pageSize: 10,
-                total: 10,
+                pageSize: 3,
+                total: 3,
                 page: 1,
                 columns: [
                     {
@@ -3123,7 +3132,7 @@ export default {
             //查询当前委托
             let params = {};
             params["pageNo"] = 1;
-            params["pageSize"] = 100;
+            params["pageSize"] = 3;
             params["symbol"] = this.currentCoin.symbol;
             this.currentOrder.rows = [];
             let that = this;
