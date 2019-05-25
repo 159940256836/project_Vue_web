@@ -84,7 +84,7 @@
       </FormItem>
     </Form>
     <div class="table">
-      <Table :columns="columns" :data="orders" :loading="loading"></Table>
+      <Table :columns="columns" :data="orders" :loading="loading" :no-data-text="$t('common.nodata')"></Table>
       <div class="page">
         <Page :total="total" :pageSize="pageSize" :current="pageNum" @on-change="loadDataPage"></Page>
       </div>
