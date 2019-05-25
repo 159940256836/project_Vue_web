@@ -42,6 +42,7 @@
             <Table
                 :columns="columns"
                 :data="data"
+                :no-data-text="$t('common.nodata')"
             ></Table>
             <Page
                 :current="pageNo"
