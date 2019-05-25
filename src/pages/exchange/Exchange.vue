@@ -643,6 +643,15 @@ $night-color: #fff;
         .ivu-icon {
             color: #333 !important;
         }
+        .right {
+            flex: 0 0 24%;
+            .coin-menu {
+                height: 480px;
+                background-color: #fff;
+                margin-bottom: 20px;
+                border-radius: 6px;
+            }
+        }
     }
     .trade_panel {
         box-shadow: 0 0 2px #ccc;
