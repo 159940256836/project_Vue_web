@@ -316,6 +316,7 @@ export default {
         }
       });
       arr.push({
+        width: this.locale == "en" ? 132 : "",
         title: this.$t("historyAndCu.turnoverAmount"),
         key: "turnover",
         render: (h, params) => {
