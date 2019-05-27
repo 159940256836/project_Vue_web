@@ -39,6 +39,28 @@ module.exports = {
         update: '修改',
         please: '请先',
     },
+    foot :{
+        Standardates:"费率标准",
+        Tradrate:"交易对费率",
+        Gradrate:'等级费率',
+        Otcurrenrates:'otc币种费率',
+        Currencrates:'币种费率',
+        Standardates:'费率标准',
+        Tradingn:'交易对',
+        Thenamohe:'名称',
+        Miniwithdrawfee:'最小提币手续费',
+        Maximuthdrawafee:'最大提币手续费',
+        Mineree:'矿工费',
+        Clasame:'等级名称',
+        Commissratio:'手续费比例',
+        Dailthdrawamit:'每日提币数量限制',
+        Setturrencndliarge:'结算币种手续费',
+        Baseee:'基币手续费',
+        currency:'币种',
+        Transactiate:'交易手续费率',
+
+        
+    },
     header: {
         index: '首页',
         exchange: '币币交易',
