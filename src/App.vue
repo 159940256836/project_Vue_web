@@ -72,7 +72,7 @@
                                         </div>
                                     </DropdownMenu>
                                 </Dropdown>
-                                
+
                             </div>
                             <!-- 未登录 -->
                             <div class="login_register" v-else>
@@ -125,7 +125,7 @@
                         </div>
                         <div class="footer_right">
                             <!--下载支持-->
-                            <ul class="footer_info">
+                            <ul class="footer_info" :class="this.$store.getters.lang == 'English' ? 'margin10' : 'margin40'">
                                 <li class="footer_title">
                                     <span>{{$t("footer.download")}}</span>
                                 </li>
@@ -141,7 +141,7 @@
 
                             </ul>
                             <!--客户服务-->
-                            <ul class="footer_info">
+                            <ul class="footer_info" :class="this.$store.getters.lang == 'English' ? 'margin10' : 'margin40'">
                                 <li class="footer_title">
                                     <span>{{$t("footer.helpCenter")}}</span>
                                 </li>
@@ -159,7 +159,7 @@
                                 </li>
                             </ul>
                             <!--投票上币-->
-                            <ul class="footer_info">
+                            <ul class="footer_info" :class="this.$store.getters.lang == 'English' ? 'margin10' : 'margin40'">
                                 <li class="footer_title">
                                     <span>{{$t("footer.voteBi")}}</span>
                                 </li>
@@ -183,7 +183,7 @@
                                 </li>
                             </ul>
                             <!--其他-->
-                            <ul class="footer_info">
+                            <ul class="footer_info" :class="this.$store.getters.lang == 'English' ? 'margin10' : 'margin40'">
                                 <li class="footer_title">
                                     <span>{{$t('footer.other')}}</span>
                                 </li>
@@ -1143,7 +1143,13 @@ body {
                 text-align: left;
                 ul {
                     float: left;
-                    margin: 0 15px;
+                }
+                .margin10 {
+                    cursor: pointer;
+                    margin: 0 10px 0 0;
+                }
+                .margin40 {
+                    margin: 0 50px 0 0;
                 }
                 .footer_info {
                     .footer_title {

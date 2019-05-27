@@ -751,7 +751,11 @@
   align-items: center;
   color: white;
 }
-
+.ivu-table-column-center .ivu-table-cell {
+  &:last-child {
+    padding-left: 0;
+  }
+}
 .ivu-table-cell .user-avatar-public {
   width:45px;
   display: inline-block;
@@ -1006,15 +1010,21 @@ export default {
           {
             title: self.$t("otc.operate"),
             key: "buyBtn",
-            width:80,
-            align:"center",
+            width: 80,
+            align: "center",
+            paddingLeft: '0',
             render: function(h, params) {
-              return h("p", [
-                h(
-                  "a",
+              return h(
+                  "p",
                   {
                     style: {
-                      color: params.row.advertiseType == 0 ? "#f15057" : "#00b275",
+                      color: '#fff',
+                      width: '68px',
+                      height: '30px',
+                      lineHeight: '30px',
+                      borderRadius: '5px',
+                      cursor: 'pointer',
+                      background:params.row.advertiseType == 0 ? "#f15057" : "#00b275"
                     },
                     on: {
                       click: () => {
@@ -1028,7 +1038,7 @@ export default {
                           }, 2000);
                         } else {
                           self.$router.push(
-                            "/otc/tradeInfo?tradeId=" + params.row.advertiseId
+                              "/otc/tradeInfo?tradeId=" + params.row.advertiseId
                           );
                         }
                       }
@@ -1048,13 +1058,23 @@ export default {
                   //         width: "80%",
                   //       }
                   //     },
-                      params.row.advertiseType == 0
-                        ? self.$t("otc.sell")
-                        : self.$t("otc.buy")
-                    // )
+                  params.row.advertiseType == 0
+                      ? self.$t("otc.sell")
+                      : self.$t("otc.buy")
+                  // )
                   // ]
-                )
-              ]);
+              )
+              // h("p",{
+              //   style: {
+              //     width: '68px',
+              //     height: '30px',
+              //     lineHeight: '30px',
+              //     borderRadius: '5px',
+              //     background:params.row.advertiseType == 0 ? "#f15057" : "#00b275"
+              //   },
+              // }, [
+              //
+              // ]);
             }
           }
         ]

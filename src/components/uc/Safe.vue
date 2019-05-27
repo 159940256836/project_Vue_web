@@ -1532,7 +1532,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .user-icons {
-    display: flex;
+    /*display: flex;*/
     align-self: center;
     width: 200px;
 }
@@ -1555,6 +1555,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .user-icons .user-name {
+
     margin-left: 10px;
     display: flex;
     justify-content: flex-start;
@@ -1563,6 +1564,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .user-icons .user-name span {
+    padding-left: 15px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -1625,6 +1627,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .user-avatar-public {
+    float: left;
     background: #fff;
     border-radius: 50%;
     height: 52px;

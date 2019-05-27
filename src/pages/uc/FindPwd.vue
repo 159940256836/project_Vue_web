@@ -276,7 +276,6 @@ export default {
         //     this.ruleInline.code[0].message = this.$t("uc.forget.emailcodetip");
         //   }
         // },
-
         // initGtCaptcha() {
         //   var that = this;
         //   this.$http.get(this.host + this.api.uc.captcha).then(function(res) {
@@ -388,6 +387,12 @@ export default {
             }
         },
         handleSubmit(name) {
+            // 新加代码
+            // 判断手机号邮箱不能为空
+            if(!this.formInline.user) {
+                this.$Message.error(this.$t("uc.login.loginvalidate"));
+                return false
+            }
             this.$refs[name].validate(valid => {
                 if (valid) {
                     if (emailReg.test(this.formInline.user)) {

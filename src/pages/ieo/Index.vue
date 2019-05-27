@@ -9,7 +9,7 @@
             </Tabs>
             <div class="contentWrapper">
                  <template v-if="list.length == 0">
-                    <img src="../../assets/images/noData.png" alt="" style="width:30%;margin-top: 55px;">
+                    <img src="../../assets/images/noData.png" alt="" style="width:15%;margin-top: 55px;">
                 </template>
                 <!-- <template v-else>
 
