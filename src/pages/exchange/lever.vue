@@ -67,7 +67,11 @@
                         <div class="item">
                             <span class="coin">{{currentCoin.coin}}
                                 <!-- 5.20修改 -->
-                                <small>/{{currentCoin.base}} &nbsp;&nbsp;<span style="border:1px solid rgba(53,124,225,.4); borderColor: 'rgba(53,124,225,.4); display:inline-block; width:30px; text-align:center;line-height:18px;padding-top:2px; color:#357ce1">{{LeversymbolMsg.proportion}}</span></small>
+                                <small>/{{currentCoin.base}} &nbsp;&nbsp;
+                                    <span style="border:1px solid rgba(53,124,225,.4); borderColor: 'rgba(53,124,225,.4); display:inline-block; text-align:center;line-height:18px;padding:2px 5px; color:#357ce1">
+                                        {{LeversymbolMsg.proportion}}
+                                    </span>
+                                </small>
                             </span>
                         </div>
                         <div class="item">
@@ -1686,7 +1690,7 @@ export default {
             this.getTrade();
             if (this.isLogin && this.member.realName) {
                 // this.getMember(); //获取是否实名认证
-                this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
+                // this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
                 this.getWallet(); //账户资产信息
                 this.getCurrentOrder(); //当前委托
                 this.getHistoryOrder(); //历史委托
@@ -1723,17 +1727,17 @@ export default {
         changeBaseCion(str) {
             this.basecion = str;
         },
-        getMemberRate() {
-            //   this.$http
-            //     .post(this.host + "/uc/wealth/query", {
-            //       memberId: this.member.id
-            //     })
-            //     .then(res => {
-            //       if (res.status == 200 && res.body.code == 0) {
-            //         this.memberRate = res.body.data.memberRate;
-            //       }
-            //     });
-        },
+        // getMemberRate() {
+        //   this.$http
+        //     .post(this.host + "/uc/wealth/query", {
+        //       memberId: this.member.id
+        //     })
+        //     .then(res => {
+        //       if (res.status == 200 && res.body.code == 0) {
+        //         this.memberRate = res.body.data.memberRate;
+        //       }
+        //     });
+        // },
         // getMember() {
         //   //获取个人安全信息
         //   this.$http
@@ -1833,12 +1837,12 @@ export default {
             this.coins.columns[0].title = this.$t("exchange.coin");
             this.coins.columns[1].title = this.$t("exchange.lastprice");
             this.coins.columns[2].title = this.$t("exchange.daychange");
-            // this.coins.columns[3].title = this.$t("exchange.favorite");
+            this.coins.columns[3].title = this.$t("exchange.favorite");
 
             this.trade.columns[0].title = this.$t("exchange.num");
             this.trade.columns[1].title = this.$t("exchange.price");
             this.trade.columns[2].title = this.$t("exchange.direction");
-            // this.trade.columns[3].title = this.$t("exchange.time");
+            this.trade.columns[3].title = this.$t("exchange.time");
 
             this.currentOrder.columns[1].title = this.$t("exchange.time");
             this.currentOrder.columns[2].title = this.$t("coin.deal");
