@@ -86,7 +86,9 @@
                     </div>
                     <div class="trade_panel trade_panel_logout">
                         <div class="mask" v-show="!isLogin">
-                            <span>请先
+                            <span>
+                                <!--请先-->
+                                {{$t("common.please")}}
                                 <router-link to="/login">
                                     <span style="color:#3399ff;">{{$t("common.login")}}</span>
                                 </router-link> /
@@ -96,9 +98,14 @@
                             </span>
                         </div>
                         <div class="mask" v-show="isLogin&&!member.realName">
-                            <span>请先
+                            <span>
+                                <!--请先-->
+                                {{$t("common.please")}}
                                 <router-link to="/uc/safe">
-                                    <span style="color:#3399ff;">实名认证</span>
+                                    <span style="color:#3399ff;">
+                                        <!--实名认证-->
+                                        {{$t("uc.safe.verified")}}
+                                    </span>
                                 </router-link>
                             </span>
                         </div>
@@ -341,26 +348,85 @@
                         <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
                         <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
                     </div>
-                    <Table @on-current-change="gohref" highlight-row id="USDT" v-show="basecion==='usdt'" :columns="coins.columns" :data="coins.USDT"></Table>
-                    <Table @on-current-change="gohref" highlight-row id="BTC" v-show="basecion==='btc'" :columns="coins.columns" :data="coins.BTC"></Table>
-                    <Table @on-current-change="gohref" highlight-row id="ETH" v-show="basecion==='eth'" :columns="coins.columns" :data="coins.ETH"></Table>
-                    <Table @on-current-change="gohref" highlight-row v-show="basecion==='favor'" no-data-text="暂无记录" id="collect" :columns="favorColumns" :data="coins.favor"></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="USDT"
+                        v-show="basecion==='usdt'"
+                        :columns="coins.columns"
+                        :data="coins.USDT"
+                    ></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="BTC"
+                        v-show="basecion==='btc'"
+                        :columns="coins.columns"
+                        :data="coins.BTC"
+                    ></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="ETH"
+                        v-show="basecion==='eth'"
+                        :columns="coins.columns"
+                        :data="coins.ETH"
+                    ></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        v-show="basecion==='favor'"
+                        :no-data-text="$t('common.nodata')"
+                        id="collect"
+                        :columns="favorColumns"
+                        :data="coins.favor"
+                    ></Table>
                 </div>
                 <div class="trade-wrap">
                     <Table height="480" :columns="trade.columns" :data="trade.rows"></Table>
                 </div>
             </div>
         </div>
-        <div class="order" v-show="isLogin">
+        <div class="order" v-show="this.isLogin && this.member.realName">
             <div class="order-handler">
-                <span @click="changeOrder('current')" :class="{active:selectedOrder==='current'}">{{$t('exchange.curdelegation')}}</span>
-                <span @click="changeOrder('history')" :class="{active:selectedOrder==='history'}">{{$t('exchange.hisdelegation')}}</span>
-                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/level/current">{{$t('coin.view')}}>></router-link>
-                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/level/history">{{$t('coin.view')}}>></router-link>
+                <span
+                    @click="changeOrder('current')"
+                    :class="{active:selectedOrder==='current'}"
+                >
+                    {{$t('exchange.curdelegation')}}</span>
+                <span
+                    @click="changeOrder('history')"
+                    :class="{active:selectedOrder==='history'}"
+                >
+                    {{$t('exchange.hisdelegation')}}</span>
+                <router-link
+                    v-show="selectedOrder==='current'"
+                    class="linkmore" to="/uc/level/current"
+                >
+                    {{$t('coin.view')}}>>
+                </router-link>
+                <router-link
+                    v-show="selectedOrder==='history'"
+                    class="linkmore" to="/uc/level/history"
+                >
+                    {{$t('coin.view')}}>>
+                </router-link>
             </div>
             <div class="table">
-                <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows" :loading="currentLoading"></Table>
-                <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows" :loading="historyLoading"></Table>
+                <Table
+                    v-if="selectedOrder==='current'"
+                    :columns="currentOrder.columns"
+                    :data="currentOrder.rows"
+                    :loading="currentLoading"
+                    :no-data-text="$t('common.nodata')"
+                ></Table>
+                <Table
+                    v-else
+                    :columns="historyOrder.columns"
+                    :data="historyOrder.rows"
+                    :loading="historyLoading"
+                    :no-data-text="$t('common.nodata')"
+                ></Table>
             </div>
         </div>
     </div>
@@ -830,7 +896,7 @@ export default {
                                                     "ivu-icon ivu-icon-android-star";
                                             }
                                         } else {
-                                            this.$Message.warning("请先登录");
+                                            this.$Message.warning(this.$t('common.logintip'));
                                         }
                                     }
                                 }
@@ -920,7 +986,7 @@ export default {
                                                         "ivu-icon ivu-icon-android-star";
                                                 }
                                             } else {
-                                                this.$Message.warning("请先登录");
+                                                this.$Message.warning(this.$t('common.logintip'));
                                             }
                                         }
                                     }
@@ -936,14 +1002,13 @@ export default {
                                     h('span', {
                                         style: {
                                             display: 'inline-block',
-                                            width: '25px',
                                             height: '18px',
                                             marginLeft: '10px',
                                             border: '1px solid rgba(53,124,225,.4)',
                                             borderColor: 'rgba(53,124,225,.4)',
                                             color: '#357ce1',
                                             textAlign: 'center',
-                                            paddingTop: '-2px',
+                                            padding: '0 5px',
                                             position: 'relative',
                                             top: '-8px',
                                         }
@@ -1837,12 +1902,12 @@ export default {
             this.coins.columns[0].title = this.$t("exchange.coin");
             this.coins.columns[1].title = this.$t("exchange.lastprice");
             this.coins.columns[2].title = this.$t("exchange.daychange");
-            this.coins.columns[3].title = this.$t("exchange.favorite");
+            // this.coins.columns[3].title = this.$t("exchange.favorite");
 
             this.trade.columns[0].title = this.$t("exchange.num");
             this.trade.columns[1].title = this.$t("exchange.price");
             this.trade.columns[2].title = this.$t("exchange.direction");
-            this.trade.columns[3].title = this.$t("exchange.time");
+            // this.trade.columns[3].title = this.$t("exchange.time");
 
             this.currentOrder.columns[1].title = this.$t("exchange.time");
             this.currentOrder.columns[2].title = this.$t("coin.deal");

@@ -61,10 +61,22 @@
                             <div class="action-body">
                                 <p class="acb-p1">{{$t('uc.finance.recharge.record')}}</p>
                                 <div class="order-table">
-                                    <Table stripe :columns="tableColumnsRecharge" :data="tableRecharge" :loading="loading"></Table>
+                                    <Table
+                                        stripe
+                                        :columns="tableColumnsRecharge"
+                                        :data="tableRecharge"
+                                        :loading="loading"
+                                        :no-data-text="$t('common.nodata')"
+                                    ></Table>
                                     <div style="margin: 10px;overflow: hidden">
                                         <div style="float: right;">
-                                            <Page :total="dataCount" :current="1" @on-change="changePage" class="recharge_btn"></Page>
+                                            <Page
+                                                v-show="dataCount > 10"
+                                                :total="dataCount"
+                                                :current="1"
+                                                @on-change="changePage"
+                                                class="recharge_btn"
+                                            ></Page>
                                         </div>
                                     </div>
                                 </div>

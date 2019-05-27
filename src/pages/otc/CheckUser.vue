@@ -75,7 +75,14 @@
                     <Tabs value="name1">
                         <TabPane :label="$t('otc.checkuser.tablabel1')" name="name1" >
                             <div class="order-table">
-                                <Table stripe :columns="tableColumnsOrderSell" :data="tableOrderSell" :loading="loading" :disabled-hover="true"></Table>
+                                <Table
+                                    :no-data-text="$t('common.nodata')"
+                                    stripe
+                                    :columns="tableColumnsOrderSell"
+                                    :data="tableOrderSell"
+                                    :loading="loading"
+                                    :disabled-hover="true"
+                                ></Table>
                                 <!-- <div style="margin: 10px;overflow: hidden">
                                                                             <div style="float: right;">
                                                                                 <Page :total="100" :current="1" @on-change="changePage"></Page>
@@ -85,7 +92,14 @@
                         </TabPane>
                         <TabPane :label="$t('otc.checkuser.tablabel2')" name="name2">
                             <div class="order-table">
-                                <Table stripe :columns="tableColumnsOrderBuy" :data="tableOrderBuy" :loading="loading" :disabled-hover="true"></Table>
+                                <Table
+                                    :no-data-text="$t('common.nodata')"
+                                    stripe
+                                    :columns="tableColumnsOrderBuy"
+                                    :data="tableOrderBuy"
+                                    :loading="loading"
+                                    :disabled-hover="true"
+                                ></Table>
                                 <!-- <div style="margin: 10px;overflow: hidden">
                                                                             <div style="float: right;">
                                                                                 <Page :total="100" :current="1" @on-change="changePage"></Page>

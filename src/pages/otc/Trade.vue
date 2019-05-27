@@ -25,11 +25,11 @@
             <div class="page_change">
               <div style="float: right;">
                 <Page
-                      v-if="advertiment.ask.totalElement > 10"
-                      :pageSize="advertiment.ask.pageNumber"
-                      :total="advertiment.ask.totalElement"
-                      :current="advertiment.ask.currentPage"
-                      @on-change="changePage"
+                    v-if="advertiment.ask.totalElement > 10"
+                    :pageSize="advertiment.ask.pageNumber"
+                    :total="advertiment.ask.totalElement"
+                    :current="advertiment.ask.currentPage"
+                    @on-change="changePage"
                 ></Page>
               </div>
             </div>

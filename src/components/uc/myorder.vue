@@ -6,60 +6,144 @@
           <Tabs value="name5" @on-click="showItem">
             <TabPane :label="$t('uc.otcorder.all')" name="name5">
               <div class="order-table">
-                <Table :no-data-text="$t('common.nodata')" stripe :columns="tableColumnsOrder" :data="tableOrder" :loading="loading" :disabled-hover="true"></Table>
+                <Table
+                      :no-data-text="$t('common.nodata')"
+                      stripe
+                      :columns="tableColumnsOrder"
+                      :data="tableOrder"
+                      :loading="loading"
+                      :disabled-hover="true"
+                ></Table>
                 <div style="margin: 10px;overflow: hidden" class="page">
                   <div style="float: right;">
-                    <Page v-if="totalPage > 0" :total="totalNum" :current="currentPage" show-total @on-change="changePage" :page-size="pageSize"></Page>
+                    <Page
+                          v-if="totalPage > 10"
+                          :total="totalNum"
+                          :current="currentPage"
+                          show-total
+                          @on-change="changePage"
+                          :page-size="pageSize"
+                    ></Page>
                   </div>
                 </div>
               </div>
             </TabPane>
             <TabPane :label="$t('uc.otcorder.unpaid')" name="name1">
               <div class="order-table">
-                <Table :no-data-text="$t('common.nodata')" stripe :columns="tableColumnsOrder" :data="tableOrder" :loading="loading" :disabled-hover="true"></Table>
+                <Table
+                  :no-data-text="$t('common.nodata')"
+                  stripe
+                  :columns="tableColumnsOrder"
+                  :data="tableOrder"
+                  :loading="loading"
+                  :disabled-hover="true"
+                ></Table>
                 <div style="margin: 10px;overflow: hidden" class="page">
                   <div style="float: right;">
-                    <Page v-if="totalPage > 0" :total="totalNum" :current="currentPage" show-total @on-change="changePage" :page-size="pageSize"></Page>
+                    <Page
+                      v-if="totalPage > 10"
+                      :total="totalNum"
+                      :current="currentPage"
+                      show-total
+                      @on-change="changePage"
+                      :page-size="pageSize"
+                    ></Page>
                   </div>
                 </div>
               </div>
             </TabPane>
             <TabPane :label="$t('uc.otcorder.paided')" name="name2">
               <div class="order-table">
-                <Table :no-data-text="$t('common.nodata')" stripe :columns="tableColumnsOrder" :data="tableOrder" :loading="loading" :disabled-hover="true"></Table>
+                <Table
+                  :no-data-text="$t('common.nodata')"
+                  stripe
+                  :columns="tableColumnsOrder"
+                  :data="tableOrder"
+                  :loading="loading"
+                  :disabled-hover="true"
+                ></Table>
                 <div style="margin: 10px;overflow: hidden" class="page">
                   <div style="float: right;">
-                    <Page v-if="totalPage > 0" :total="totalNum" :current="currentPage" show-total @on-change="changePage" :page-size="pageSize"></Page>
+                    <Page
+                      v-if="totalPage > 10"
+                      :total="totalNum"
+                      :current="currentPage"
+                      show-total
+                      @on-change="changePage"
+                      :page-size="pageSize"
+                    ></Page>
                   </div>
                 </div>
               </div>
             </TabPane>
             <TabPane :label="$t('uc.otcorder.finished')" name="name3">
               <div class="order-table">
-                <Table :no-data-text="$t('common.nodata')" stripe :columns="tableColumnsOrder" :data="tableOrder" :loading="loading" :disabled-hover="true"></Table>
+                <Table
+                  :no-data-text="$t('common.nodata')"
+                  stripe
+                  :columns="tableColumnsOrder"
+                  :data="tableOrder"
+                  :loading="loading"
+                  :disabled-hover="true"
+                ></Table>
                 <div style="margin: 10px;overflow: hidden" class="page">
                   <div style="float: right;">
-                    <Page v-if="totalPage > 0" :total="totalNum" :current="currentPage" show-total @on-change="changePage" :page-size="pageSize"></Page>
+                    <Page
+                      v-if="totalPage > 0"
+                      :total="totalNum"
+                      :current="currentPage"
+                      show-total
+                      @on-change="changePage"
+                      :page-size="pageSize"
+                    ></Page>
                   </div>
                 </div>
               </div>
             </TabPane>
             <TabPane :label="$t('uc.otcorder.canceled')" name="name0">
               <div class="order-table">
-                <Table :no-data-text="$t('common.nodata')" stripe :columns="tableColumnsOrder" :data="tableOrder" :loading="loading" :disabled-hover="true"></Table>
+                <Table
+                  :no-data-text="$t('common.nodata')"
+                  stripe
+                  :columns="tableColumnsOrder"
+                  :data="tableOrder"
+                  :loading="loading"
+                  :disabled-hover="true"
+                ></Table>
                 <div style="margin: 10px;overflow: hidden" class="page">
                   <div style="float: right;">
-                    <Page v-if="totalPage > 0" :total="totalNum" :pageSize="pageSize" show-total :current="currentPage" @on-change="changePage"></Page>
+                    <Page
+                      v-if="totalPage > 10"
+                      :total="totalNum"
+                      :pageSize="pageSize"
+                      show-total
+                      :current="currentPage"
+                      @on-change="changePage"
+                    ></Page>
                   </div>
                 </div>
               </div>
             </TabPane>
             <TabPane :label="$t('uc.otcorder.appealing')" name="name4">
               <div class="order-table">
-                <Table :no-data-text="$t('common.nodata')" stripe :columns="tableColumnsOrder" :data="tableOrder" :loading="loading" :disabled-hover="true"></Table>
+                <Table
+                  :no-data-text="$t('common.nodata')"
+                  stripe
+                  :columns="tableColumnsOrder"
+                  :data="tableOrder"
+                  :loading="loading"
+                  :disabled-hover="true"
+                ></Table>
                 <div style="margin: 10px;overflow: hidden" class="page">
                   <div style="float: right;">
-                    <Page v-if="totalPage > 0" :total="totalNum" :current="currentPage" show-total @on-change="changePage" :page-size="pageSize"></Page>
+                    <Page
+                      v-if="totalPage > 10"
+                      :total="totalNum"
+                      :current="currentPage"
+                      show-total
+                      @on-change="changePage"
+                      :page-size="pageSize"
+                    ></Page>
                   </div>
                 </div>
               </div>

@@ -1,3 +1,4 @@
+
 <template>
     <div>
         <div id="fullpage">
@@ -10,9 +11,22 @@
                             <!--                            <Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />-->
                             <!-- </div> -->
                             <div class="carsoul">
-                                <div v-for="(item,index) in FAQList" class="cal_content1">
-                                    <div v-for="(con,j) in item" class="cal_content" @mouseover="stop()" @mouseout="startMove()">
-                                        <router-link style="color: #a8b0c0;" :to="{path: '/notice/index', query: { 'id': con.id }}">{{strde(con.title)}}</router-link>
+                                <div
+                                    v-for="(item,index) in FAQList"
+                                    class="cal_content1"
+                                >
+                                    <div
+                                        v-for="(con,j) in item"
+                                        class="cal_content"
+                                        @mouseover="stop()"
+                                        @mouseout="startMove()"
+                                    >
+                                        <router-link
+                                            style="color: #a8b0c0;"
+                                            :to="{path: '/notice/index', query: { 'id': con.id }}"
+                                        >
+                                            {{strde(con.title)}}
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
@@ -23,12 +37,31 @@
                     </div>
                 </div>
                 <div class="bannerWrapper">
-                    <Carousel autoplay :arrow="showArrow" :autoplay-speed="speed" v-model="valueCal">
-                        <CarouselItem v-for="(itemArr,index) in picList" :key="index">
+                    <Carousel
+                            autoplay
+                            :arrow="showArrow"
+                            :autoplay-speed="speed"
+                            v-model="valueCal"
+                    >
+                        <CarouselItem
+                            v-for="(itemArr,index) in picList"
+                            :key="index"
+                        >
                             <div class="bannerBox">
-                                <div v-for="(item, index) in itemArr" :key="index">
-                                    <div :style="'background-image: url('+item.url+')'" class="carousel-item">
-                                        <a v-show="item.linkUrl&&item.linkUrl!=' '&&item.linkUrl!='1'" style="display:block;width:100%;height: 100%;" :href="item.linkUrl" target="_blank"></a>
+                                <div
+                                    v-for="(item, index) in itemArr"
+                                    :key="index"
+                                >
+                                    <div
+                                        :style="'background-image:url('+item.url+')'"
+                                        class="carousel-item"
+                                    >
+                                        <a
+                                            v-show="item.linkUrl&&item.linkUrl!=' '&&item.linkUrl!='1'"
+                                            style="display:block;width:100%;height: 100%;"
+                                            :href="item.linkUrl"
+                                            target="_blank"
+                                        ></a>
                                     </div>
                                 </div>
                             </div>
@@ -36,25 +69,62 @@
                     </Carousel>
                 </div>
             </div>
-            <div class="section" id="hot" v-if="hostSymbolList.length != 0">
+            <div
+                class="section"
+                id="hot"
+                v-if="hostSymbolList.length != 0"
+            >
 
                 <!-- 首页行情图 -->
                 <section class="section-market">
-                    <div class="market-box" v-for="(item,index) in hostSymbolList" :key="index" style="float: left;">
+                    <div
+                        class="market-box"
+                        v-for="(item,index) in hostSymbolList"
+                        :key="index"
+                        style="float: left;"
+                    >
                         <div>
                             <p class="flex">
                                 <span class="pairs">{{item.symbol}}</span>
-                                <span class="pairs-sip" :class="{green: item.isGreen}" v-if="item.isGreen">{{item.chg | formateRate}}</span>
-                                <span :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.chg | formateRate}}</span>
+                                <span
+                                    class="pairs-sip"
+                                    :class="{green: item.isGreen}"
+                                    v-if="item.isGreen"
+                                >
+                                    {{item.chg | formateRate}}
+                                </span>
+                                <span
+                                    :class="{red: !item.isGreen}"
+                                    v-if="!item.isGreen"
+                                >
+                                    {{item.chg | formateRate}}
+                                </span>
                             </p>
                             <p class="flex">
-                                <span class="pairs-sip sip" :class="{green: item.isGreen}" v-if="item.isGreen">{{item.close}}</span>
-                                <span class="pairs-pri" :class="{red: !item.isGreen}" v-if="!item.isGreen">{{item.close}}</span>
+                                <span
+                                    class="pairs-sip sip"
+                                    :class="{green: item.isGreen}"
+                                    v-if="item.isGreen"
+                                >
+                                    {{item.close}}
+                                </span>
+                                <span
+                                    class="pairs-pri"
+                                    :class="{red: !item.isGreen}"
+                                    v-if="!item.isGreen"
+                                >
+                                    {{item.close}}
+                                </span>
                                 <span class="white">{{item.cny}}</span>
                             </p>
                         </div>
                         <!-- {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}} -->
-                        <SvgLine :values="item.trend" :width="width" :height="height" :rose="item.chg.toString()"></SvgLine>
+                        <SvgLine
+                            :values="item.trend"
+                            :width="width"
+                            :height="height"
+                            :rose="item.chg.toString()"
+                        ></SvgLine>
                     </div>
                 </section>
             </div>
@@ -62,12 +132,35 @@
             <div class="section" id="page2">
                 <div class="page2nav">
                     <ul class="brclearfix">
-                        <li v-show="!(index==3&&!isLogin)" v-for="(item,index) in indexBtn" @click="addClass(index)" :class="{'active':index==choseBtn,'ivu-btn-default':index!=choseBtn}" :key="index">{{item.text}}</li>
+                        <li
+                            v-show="!(index==3&&!isLogin)"
+                            v-for="(item,index) in indexBtn"
+                            @click="addClass(index)"
+                            :class="{'active':index==choseBtn,'ivu-btn-default':index!=choseBtn}"
+                            :key="index"
+                        >
+                            {{item.text}}
+                        </li>
                     </ul>
                 </div>
                 <div class="ptjy">
-                    <Table v-if="choseBtn==3" :columns="favorColumns" :data="dataIndex" class="tables" :disabled-hover="true" :loading="loading"></Table>
-                    <Table v-else :columns="coins.columns" :data="dataIndex" class="tables" :disabled-hover="true" :loading="loading"></Table>
+                    <Table
+                        v-if="choseBtn==3"
+                        :columns="favorColumns"
+                        :data="dataIndex"
+                        class="tables"
+                        :disabled-hover="true"
+                        :loading="loading"
+                        :no-data-text="$t('common.nodata')"
+                    ></Table>
+                    <Table
+                        v-else :columns="coins.columns"
+                        :data="dataIndex"
+                        class="tables"
+                        :disabled-hover="true"
+                        :loading="loading"
+                        :no-data-text="$t('common.nodata')"
+                    ></Table>
                 </div>
             </div>
             <!-- 下载部分 -->

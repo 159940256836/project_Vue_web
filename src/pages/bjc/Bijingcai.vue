@@ -33,9 +33,17 @@
       <div class="bjc_table">
         <p class="title">开奖记录</p>
 
-        <Table :columns="columns1" :data="data1"></Table>
+        <Table
+          :columns="columns1"
+          :data="data1"
+          :no-data-text="$t('common.nodata')"
+        ></Table>
         <div style="margin-top:20px;text-align:right;margin-right:20px;">
-          <Page :total="total" @on-change="changepage" />
+          <Page
+              v-show="total > 10"
+              :total="total"
+              @on-change="changepage"
+          ></Page>
         </div>
       </div>
     </div>
@@ -46,7 +54,10 @@
     </Modal>
     <Modal v-model="modal2" :footer-hide="true" width="900px">
       <p slot="header">开奖详情</p>
-      <Table :columns="columns2" :data="data2"></Table>
+      <Table
+        :columns="columns2"
+        :data="data2"
+      ></Table>
     </Modal>
   </div>
 </template>

@@ -38,18 +38,52 @@
         <div class="main">
             <div class="left plate-wrap">
                 <div class="handlers">
-                    <span @click="changePlate('all')" class="handler handler-all" :class="{active:selectedPlate=='all'}"></span>
-                    <span @click="changePlate('buy')" class="handler handler-green" :class="{active:selectedPlate=='buy'}"></span>
-                    <span @click="changePlate('sell')" class="handler handler-red" :class="{active:selectedPlate=='sell'}"></span>
+                    <span
+                        @click="changePlate('all')"
+                        class="handler handler-all"
+                        :class="{active:selectedPlate=='all'}"
+                    ></span>
+                    <span
+                        @click="changePlate('buy')"
+                        class="handler handler-green"
+                        :class="{active:selectedPlate=='buy'}"
+                    ></span>
+                    <span
+                        @click="changePlate('sell')"
+                        class="handler handler-red"
+                        :class="{active:selectedPlate=='sell'}"
+                    ></span>
                 </div>
-                <Table v-show="selectedPlate!='buy'" @on-current-change="buyPlate" highlight-row ref="currentRowTable" class="sell_table" :columns="plate.columns" :data="plate.askRows"></Table>
+                <Table
+                    :no-data-text="$t('common.nodata')"
+                    v-show="selectedPlate!='buy'"
+                    @on-current-change="buyPlate"
+                    highlight-row
+                    ref="currentRowTable"
+                    class="sell_table"
+                    :columns="plate.columns"
+                    :data="plate.askRows"
+                ></Table>
                 <div class="plate-nowprice">
-                    <span class="price" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.price | toFixed(baseCoinScale)}}</span>
+                    <span class="price"
+                          :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                    >
+                        {{currentCoin.price | toFixed(baseCoinScale)}}
+                    </span>
                     <span v-if="currentCoin.change>0" class="buy">↑</span>
                     <span v-else class="sell">↓</span>
                     <span class="price-cny"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>
                 </div>
-                <Table v-show="selectedPlate!='sell'" @on-current-change="sellPlate" highlight-row class="buy_table" :class="{hidden:selectedPlate==='all'}" :columns="plate.columns" :data="plate.bidRows"></Table>
+                <Table
+                    :no-data-text="$t('common.nodata')"
+                    v-show="selectedPlate!='sell'"
+                    @on-current-change="sellPlate"
+                    highlight-row
+                    class="buy_table"
+                    :class="{hidden:selectedPlate==='all'}"
+                    :columns="plate.columns"
+                    :data="plate.bidRows"
+                ></Table>
             </div>
             <div class="center">
                 <div class="imgtable" :loading="loadingButton7">
@@ -63,7 +97,9 @@
                 <div class="trade_wrap">
                     <div class="trade_panel trade_panel_logout">
                         <div class="mask" v-show="!isLogin">
-                            <span>请先
+                            <span>
+                                <!--请先-->
+                                {{$t("common.please")}}
                                 <router-link to="/login">
                                     <span style="color:#3399ff;">{{$t("common.login")}}</span>
                                 </router-link> /
@@ -73,9 +109,14 @@
                             </span>
                         </div>
                         <div class="mask" v-show="isLogin&&!member.realName">
-                            <span>请先
+                            <span>
+                                <!--请先-->
+                                {{$t("common.please")}}
                                 <router-link to="/uc/safe">
-                                    <span style="color:#3399ff;">实名认证</span>
+                                    <span style="color:#3399ff;">
+                                        <!--实名认证-->
+                                        {{$t("uc.safe.verified")}}
+                                    </span>
                                 </router-link>
                             </span>
                         </div>
@@ -112,7 +153,11 @@
                                 <div class="bd bd_limited" v-show="btnList[0].check==true">
                                     <Form ref="formValidate">
                                         <FormItem>
-                                            <Input @on-keyup="keyEvent" v-model="form.buy.limitPrice" :placeholder="$t('exchange.buyprice')"></Input>
+                                            <Input
+                                                @on-keyup="keyEvent"
+                                                v-model="form.buy.limitPrice"
+                                                :placeholder="$t('exchange.buyprice')"
+                                            ></Input>
                                             <label>{{currentCoin.base}}</label>
                                             <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.buy.limitPrice*CNYRate||0|toFixed(2)}} CNY</p>
                                         </FormItem>
@@ -322,26 +367,96 @@
                         <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
                         <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
                     </div>
-                    <Table @on-current-change="gohref" highlight-row id="USDT" v-show="basecion==='usdt'" :columns="coins.columns" :data="coins.USDT"></Table>
-                    <Table @on-current-change="gohref" highlight-row id="BTC" v-show="basecion==='btc'" :columns="coins.columns" :data="coins.BTC"></Table>
-                    <Table @on-current-change="gohref" highlight-row id="ETH" v-show="basecion==='eth'" :columns="coins.columns" :data="coins.ETH"></Table>
-                    <Table @on-current-change="gohref" highlight-row v-show="basecion==='favor'" no-data-text="暂无记录" id="collect" :columns="favorColumns" :data="coins.favor"></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="USDT"
+                        v-show="basecion==='usdt'"
+                        :columns="coins.columns"
+                        :data="coins.USDT"
+                    ></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="BTC"
+                        v-show="basecion==='btc'"
+                        :columns="coins.columns"
+                        :data="coins.BTC"
+                    ></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="ETH"
+                        v-show="basecion==='eth'"
+                        :columns="coins.columns"
+                        :data="coins.ETH"
+                    ></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        v-show="basecion==='favor'"
+                        :no-data-text="$t('common.nodata')"
+                        id="collect" :columns="favorColumns"
+                        :data="coins.favor"
+                    ></Table>
                 </div>
                 <div class="trade-wrap">
-                    <Table height="400" :columns="trade.columns" :data="trade.rows"></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        height="400"
+                        :columns="trade.columns"
+                        :data="trade.rows"
+                    ></Table>
                 </div>
             </div>
         </div>
-        <div class="order" v-show="isLogin">
+        <div class="order" v-show="this.isLogin && this.member.realName">
             <div class="order-handler">
-                <span @click="changeOrder('current')" :class="{active:selectedOrder==='current'}">{{$t('exchange.curdelegation')}}</span>
-                <span @click="changeOrder('history')" :class="{active:selectedOrder==='history'}">{{$t('exchange.hisdelegation')}}</span>
-                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/entrust/current">{{$t('coin.view')}}>></router-link>
-                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/entrust/history">{{$t('coin.view')}}>></router-link>
+                <span
+                    @click="changeOrder('current')"
+                    :class="{active:selectedOrder==='current'}"
+                >
+                    {{$t('exchange.curdelegation')}}
+                </span>
+                <span
+                    @click="changeOrder('history')"
+                    :class="{active:selectedOrder==='history'}"
+                >
+                    {{$t('exchange.hisdelegation')}}
+                </span>
+                <router-link
+                    v-show="selectedOrder==='current'"
+                    class="linkmore"
+                    to="/uc/entrust/current"
+                >
+                    {{$t('coin.view')}}>>
+                </router-link>
+                <router-link
+                    v-show="selectedOrder==='history'"
+                    class="linkmore"
+                    to="/uc/entrust/history"
+                >
+                    {{$t('coin.view')}}>>
+                </router-link>
             </div>
             <div class="table">
-                <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows" :loading="currentLoading"></Table>
-                <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows" :loading="historyLoading"></Table>
+                <Table
+                    v-if="selectedOrder==='current'"
+                    :columns="currentOrder.columns"
+                    :data="currentOrder.rows"
+                    :loading="currentLoading"
+                    :no-data-text="$t('common.nodata')"
+                ></Table>
+                <Table
+                    v-else
+                    :columns="historyOrder.columns"
+                    :data="historyOrder.rows"
+                    :loading="historyLoading"
+                    :no-data-text="$t('common.nodata')"
+                ></Table>
             </div>
         </div>
     </div>
@@ -912,7 +1027,7 @@ export default {
                                                     "ivu-icon ivu-icon-android-star";
                                             }
                                         } else {
-                                            this.$Message.warning("请先登录");
+                                            this.$Message.warning(this.$t('common.logintip'));
                                         }
                                     }
                                 }
@@ -1002,7 +1117,7 @@ export default {
                                                         "ivu-icon ivu-icon-android-star";
                                                 }
                                             } else {
-                                                this.$Message.warning("请先登录");
+                                                this.$Message.warning(this.$t('common.logintip'));
                                             }
                                         }
                                     }
@@ -1888,17 +2003,17 @@ export default {
             this.coins.columns[0].title = this.$t("exchange.coin");
             this.coins.columns[1].title = this.$t("exchange.lastprice");
             this.coins.columns[2].title = this.$t("exchange.daychange");
-            this.coins.columns[3].title = this.$t("exchange.favorite");
+            // this.coins.columns[3].title = this.$t("exchange.favorite");
 
             this.trade.columns[0].title = this.$t("exchange.num");
             this.trade.columns[1].title = this.$t("exchange.price");
             this.trade.columns[2].title = this.$t("exchange.direction");
-            this.trade.columns[3].title = this.$t("exchange.time");
+            // this.trade.columns[3].title = this.$t("exchange.time");
 
             this.plate.columns[0].title = this.$t("exchange.stall");
             this.plate.columns[1].title = this.$t("exchange.price");
             this.plate.columns[2].title = this.$t("exchange.num");
-            this.plate.columns[3].title = this.$t("exchange.total");
+            // this.plate.columns[3].title = this.$t("exchange.total");
 
             this.currentOrder.columns[1].title = this.$t("exchange.time");
             this.currentOrder.columns[2].title = this.$t("coin.deal");

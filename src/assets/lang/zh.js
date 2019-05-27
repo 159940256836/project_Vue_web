@@ -37,6 +37,7 @@ module.exports = {
         nodata: '暂无记录',
         set: '设置',
         update: '修改',
+        please: '请先',
     },
     header: {
         index: '首页',

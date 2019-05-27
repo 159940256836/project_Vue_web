@@ -10,10 +10,20 @@
             <div class="content">
                 <p class="rule">{{$t('feereturn.recordtitle')}}</p>
                 <div v-if=" lang == '简体中文' ">
-                    <Table size="small" :columns="columns2" :data="data1"></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        size="small"
+                        :columns="columns2"
+                        :data="data1"
+                    ></Table>
                 </div>
                 <div v-else>
-                    <Table size="small" :columns="columns1" :data="data1"></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        size="small"
+                        :columns="columns1"
+                        :data="data1"
+                    ></Table>
                 </div>
             </div>
         </div>
@@ -83,8 +93,8 @@ export default {
                         align:'center'
                     }
                 ],
-            
-            
+
+
             data1: [{
                         time: '2018-06-29',
                         averageprice: 0.00075244 ,
