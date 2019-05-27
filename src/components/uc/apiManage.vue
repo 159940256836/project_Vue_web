@@ -153,7 +153,8 @@ export default {
         code: ""
       },
       tableData: [],
-      id: ""
+      id: "",
+      phoneStatus: ''
     };
   },
   //5.25加
@@ -167,6 +168,7 @@ export default {
   },
   created() {
     this.getAllAPI();
+    this.getMember()
   },
   methods: {
     sendCode(index) {
@@ -220,6 +222,18 @@ export default {
     },
     // 添加api校验
     codeVerify() {
+      let that = this
+      if (this.phoneStatus.phoneVerified == 0) {
+        const lang =
+            this.$store.getters.lang == "English"
+                ? "Please bind the mobile phone first"
+                : "请先绑定手机";
+        this.$Message.error(lang);
+        setTimeout(function () {
+          that.$router.push("/uc/Safe");
+        }, 1000);
+        return false;
+      }
       const IP_REG = /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/;
       if (this.formItem.remark == "") {
         const lang =
@@ -327,6 +341,21 @@ export default {
           this.getAllAPI();
         } else {
           this.$Message.error(res.body.message);
+        }
+      });
+    },
+    getMember() {
+      //获取个人安全信息
+      return this.$http.post(this.host + "/uc/approve/security/setting").then(response => {
+        let resp = response.body;
+        if (resp.code == 0) {
+          return new Promise((resolve, reject) => {
+            this.phoneStatus = resp.data;
+            console.log(resp.data)
+            resolve(resp.data);
+          })
+        } else {
+          this.$Message.error(this.loginmsg);
         }
       });
     }

@@ -50,8 +50,8 @@
 
 <template>
   <div class="entrustcurrent">
-    <Form class="form" :model="formItem" label-width=60  inline>
-      <FormItem :label-width="locale == 'en' ? 144 : 60 " :label="$t('historyAndCu.stEnTime')">
+    <Form class="form" :model="formItem" :label-width="60"  inline>
+      <FormItem :label-width="locale == 'en' ? 95 : 60 " :label="$t('historyAndCu.stEnTime')">
         <DatePicker type="daterange" v-model="formItem.date" style="width:180px;"></DatePicker>
       </FormItem>
       <FormItem :label="$t('historyAndCu.symbol')">
@@ -80,9 +80,20 @@
       </FormItem>
     </Form>
     <div class="table">
-      <Table :no-data-text="$t('common.nodata')" :columns="columns" :data="orders" :loading="loading"></Table>
+      <Table
+        :no-data-text="$t('common.nodata')"
+        :columns="columns"
+        :data="orders"
+        :loading="loading"
+      ></Table>
       <div class="page">
-        <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page>
+        <Page
+          v-show="total > 10"
+          :total="total"
+          :pageSize="pageSize"
+          :current="pageNo"
+          @on-change="loadDataPage"
+        ></Page>
       </div>
     </div>
   </div>
@@ -224,6 +235,15 @@ export default {
     columns() {
       const arr = [];
       const m = this.$store.getters.lang == "English" ? mapEn : map;
+      const m1 = this.$store.getters.lang == "English" ? 65 : '';
+      const m2 = this.$store.getters.lang == "English" ? 90 : '';
+      const m3 = this.$store.getters.lang == "English" ? 80 : 120;
+      const m4 = this.$store.getters.lang == "English" ? 110 : '';
+      const m5 = this.$store.getters.lang == "English" ? 100 : 60;
+      const m6 = this.$store.getters.lang == "English" ? 70 : '';
+      const m7 = this.$store.getters.lang == "English" ? 85 : '';
+      const m8 = this.$store.getters.lang == "English" ? 135 : 100;
+      const m9 = this.$store.getters.lang == "English" ? 80 : 110;
       arr.push({
         type: "expand",
         width: 30,
@@ -237,7 +257,7 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == 'en' ? 65 : '',
+        width: m1,
         title: this.$t("exchange.time"),
         key: "time",
         minWidth: 55,
@@ -246,25 +266,25 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == 'en' ? 90 : '',
+        width: m2,
         title: this.$t("historyAndCu.symbol"),
         key: "symbol"
       });
       arr.push({
         title: this.$t("historyAndCu.type"),
-        width: this.locale == 'en' ? 80 : 120,
+        width: m3,
         render(h, params) {
           const type = params.row.type;
           return h("span", {}, m.get(type));
         }
       });
       arr.push({
-        width: this.locale == 'en' ? 110 : '',
+        width: m4,
         title: this.$t("historyAndCu.triggerPrice"),
         key: "triggerPrice"
       });
       arr.push({
-        width: this.locale == 'en' ? 100 : 60,
+        width: m5,
         title: this.$t("exchange.direction"),
         key: "direction",
         render: (h, params) => {
@@ -284,7 +304,7 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == 'en' ? 70 : '',
+        width: m6,
         title: this.$t("exchange.price"),
         key: "price",
         render: (h, params) => {
@@ -300,7 +320,7 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == 'en' ? 85 : '',
+        width: m7,
         title: this.$t("exchange.num"),
         key: "amount",
         render: (h, params) => {
@@ -331,7 +351,7 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == 'en' ? 135 : '',
+        width: m8,
         title: this.$t("historyAndCu.turnoverAmount"),
         key: "turnover",
         render: (h, params) => {
@@ -347,7 +367,7 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == 'en' ? 80 : 110,
+        width: m9,
         title: this.$t("exchange.action"),
         key: "operate",
         render: (h, params) => {

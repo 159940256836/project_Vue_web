@@ -257,7 +257,7 @@ export default {
         key: "symbol"
       });
       arr.push({
-        width: this.locale == "en" ? 105 : 60,
+        width: this.locale == "en" ? 103 : 60,
         title: this.$t("historyAndCu.type"),
         render(h, params) {
           const type = params.row.type;
@@ -306,7 +306,7 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == "en" ? 85 : "",
+        width: this.locale == "en" ? 83 : "",
         title: this.$t("exchange.num"),
         key: "amount",
         render: (h, params) => {
@@ -338,7 +338,7 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == "en" ? 75 : "",
+        width: this.locale == "en" ? 93 : "",
         title: this.$t("exchange.unsettled"),
         key: "turnover",
         render: (h, params) => {
@@ -354,10 +354,9 @@ export default {
         }
       });
       arr.push({
-        width: this.locale == "en" ? 70 : 110,
+        width: this.locale == "en" ? 75 : 110,
         title: this.$t("exchange.action"),
         key: "operate",
-        width: 110,
         render: (h, params) => {
           return h(
             "Button",
