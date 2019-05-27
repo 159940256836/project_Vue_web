@@ -130,14 +130,16 @@
                                     <span>{{$t("footer.download")}}</span>
                                 </li>
                                 <li>
-                                    <router-link to="/">{{$t("footer.apiDoc")}}</router-link>
+                                    <!-- <router-link to="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</router-link> -->
+                                      <a href="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</a>
+                                    
                                 </li>
-                                 <li>
+                                 <!-- <li>
                                     <router-link to="/">{{$t("footer.appDownload")}}</router-link>
                                 </li>
                                  <li>
                                     <router-link to="/">{{$t("footer.otherDownload")}}</router-link>
-                                </li>
+                                </li> -->
 
                             </ul>
                             <!--客户服务-->
@@ -154,8 +156,9 @@
                                 <li>
                                     <router-link to="/">{{$t("footer.serviceArgee")}}</router-link>
                                 </li>
+                                <!-- 交易费率 -->
                                 <li>
-                                    <router-link to="/">{{$t("footer.transactionCosts")}}</router-link>
+                                    <router-link to="/transactionCosts">{{$t("footer.transactionCosts")}}</router-link>
                                 </li>
                             </ul>
                             <!--投票上币-->

@@ -298,6 +298,7 @@ export default {
         text-align:center;
         color:#3399FFFF;
         line-height: 44px;
+        cursor: pointer;
       }
       .right{
         margin-left:21px;

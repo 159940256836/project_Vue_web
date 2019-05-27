@@ -54,6 +54,8 @@ import identbusiness from '../pages/uc/IdentBusiness'
 import Blc from '../pages/blc/Bilicai'
 import meblc from "../components/uc/Blc"
 import mebjc from "../components/uc/Bjc"
+//费率  transactionCosts
+import transactionCosts from '../components/footerList/transactionCosts'
 // import mymsg from ''
 // 平台的小时分配和昨天的分配路由
 // import platedistribute from "../pages/plate/distribution.vue"
@@ -95,6 +97,7 @@ import LeverIndex from "../pages/lever/Index.vue"
 //杠杆交易
 import Lever from "../pages/exchange/lever.vue"
 export default [
+    { path: '/transactionCosts', component: transactionCosts },
     { path: '/', component: Index },
     { path: '/index', component: Index },
     { path: '/login', component: Login },
