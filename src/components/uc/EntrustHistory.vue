@@ -78,9 +78,20 @@
             </FormItem>
         </Form>
         <div class="table">
-            <Table :no-data-text="$t('common.nodata')" :columns="columns" :data="orders" :loading="loading"></Table>
+            <Table
+                :no-data-text="$t('common.nodata')"
+                :columns="columns"
+                :data="orders"
+                :loading="loading"
+            ></Table>
             <div class="page">
-                <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page>
+                <Page
+                    v-show="total > 10"
+                    :total="total"
+                    :pageSize="pageSize"
+                    :current="pageNo"
+                    @on-change="loadDataPage"
+                ></Page>
             </div>
         </div>
     </div>

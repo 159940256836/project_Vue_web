@@ -38,18 +38,52 @@
         <div class="main">
             <div class="left plate-wrap">
                 <div class="handlers">
-                    <span @click="changePlate('all')" class="handler handler-all" :class="{active:selectedPlate=='all'}"></span>
-                    <span @click="changePlate('buy')" class="handler handler-green" :class="{active:selectedPlate=='buy'}"></span>
-                    <span @click="changePlate('sell')" class="handler handler-red" :class="{active:selectedPlate=='sell'}"></span>
+                    <span
+                        @click="changePlate('all')"
+                        class="handler handler-all"
+                        :class="{active:selectedPlate=='all'}"
+                    ></span>
+                    <span
+                        @click="changePlate('buy')"
+                        class="handler handler-green"
+                        :class="{active:selectedPlate=='buy'}"
+                    ></span>
+                    <span
+                        @click="changePlate('sell')"
+                        class="handler handler-red"
+                        :class="{active:selectedPlate=='sell'}"
+                    ></span>
                 </div>
-                <Table v-show="selectedPlate!='buy'" @on-current-change="buyPlate" highlight-row ref="currentRowTable" class="sell_table" :columns="plate.columns" :data="plate.askRows"></Table>
+                <Table
+                    :no-data-text="$t('common.nodata')"
+                    v-show="selectedPlate!='buy'"
+                    @on-current-change="buyPlate"
+                    highlight-row
+                    ref="currentRowTable"
+                    class="sell_table"
+                    :columns="plate.columns"
+                    :data="plate.askRows"
+                ></Table>
                 <div class="plate-nowprice">
-                    <span class="price" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.price | toFixed(baseCoinScale)}}</span>
+                    <span class="price"
+                          :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                    >
+                        {{currentCoin.price | toFixed(baseCoinScale)}}
+                    </span>
                     <span v-if="currentCoin.change>0" class="buy">↑</span>
                     <span v-else class="sell">↓</span>
                     <span class="price-cny"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>
                 </div>
-                <Table v-show="selectedPlate!='sell'" @on-current-change="sellPlate" highlight-row class="buy_table" :class="{hidden:selectedPlate==='all'}" :columns="plate.columns" :data="plate.bidRows"></Table>
+                <Table
+                    :no-data-text="$t('common.nodata')"
+                    v-show="selectedPlate!='sell'"
+                    @on-current-change="sellPlate"
+                    highlight-row
+                    class="buy_table"
+                    :class="{hidden:selectedPlate==='all'}"
+                    :columns="plate.columns"
+                    :data="plate.bidRows"
+                ></Table>
             </div>
             <div class="center">
                 <div class="imgtable" :loading="loadingButton7">
@@ -63,7 +97,9 @@
                 <div class="trade_wrap">
                     <div class="trade_panel trade_panel_logout">
                         <div class="mask" v-show="!isLogin">
-                            <span>请先
+                            <span>
+                                <!--请先-->
+                                {{$t("common.please")}}
                                 <router-link to="/login">
                                     <span style="color:#3399ff;">{{$t("common.login")}}</span>
                                 </router-link> /
@@ -73,9 +109,14 @@
                             </span>
                         </div>
                         <div class="mask" v-show="isLogin&&!member.realName">
-                            <span>请先
+                            <span>
+                                <!--请先-->
+                                {{$t("common.please")}}
                                 <router-link to="/uc/safe">
-                                    <span style="color:#3399ff;">实名认证</span>
+                                    <span style="color:#3399ff;">
+                                        <!--实名认证-->
+                                        {{$t("uc.safe.verified")}}
+                                    </span>
                                 </router-link>
                             </span>
                         </div>
@@ -112,7 +153,11 @@
                                 <div class="bd bd_limited" v-show="btnList[0].check==true">
                                     <Form ref="formValidate">
                                         <FormItem>
-                                            <Input @on-keyup="keyEvent" v-model="form.buy.limitPrice" :placeholder="$t('exchange.buyprice')"></Input>
+                                            <Input
+                                                @on-keyup="keyEvent"
+                                                v-model="form.buy.limitPrice"
+                                                :placeholder="$t('exchange.buyprice')"
+                                            ></Input>
                                             <label>{{currentCoin.base}}</label>
                                             <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.buy.limitPrice*CNYRate||0|toFixed(2)}} CNY</p>
                                         </FormItem>
@@ -322,26 +367,96 @@
                         <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
                         <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
                     </div>
-                    <Table @on-current-change="gohref" highlight-row id="USDT" v-show="basecion==='usdt'" :columns="coins.columns" :data="coins.USDT"></Table>
-                    <Table @on-current-change="gohref" highlight-row id="BTC" v-show="basecion==='btc'" :columns="coins.columns" :data="coins.BTC"></Table>
-                    <Table @on-current-change="gohref" highlight-row id="ETH" v-show="basecion==='eth'" :columns="coins.columns" :data="coins.ETH"></Table>
-                    <Table @on-current-change="gohref" highlight-row v-show="basecion==='favor'" no-data-text="暂无记录" id="collect" :columns="favorColumns" :data="coins.favor"></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="USDT"
+                        v-show="basecion==='usdt'"
+                        :columns="coins.columns"
+                        :data="coins.USDT"
+                    ></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="BTC"
+                        v-show="basecion==='btc'"
+                        :columns="coins.columns"
+                        :data="coins.BTC"
+                    ></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="ETH"
+                        v-show="basecion==='eth'"
+                        :columns="coins.columns"
+                        :data="coins.ETH"
+                    ></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        v-show="basecion==='favor'"
+                        :no-data-text="$t('common.nodata')"
+                        id="collect" :columns="favorColumns"
+                        :data="coins.favor"
+                    ></Table>
                 </div>
                 <div class="trade-wrap">
-                    <Table height="400" :columns="trade.columns" :data="trade.rows"></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        height="400"
+                        :columns="trade.columns"
+                        :data="trade.rows"
+                    ></Table>
                 </div>
             </div>
         </div>
-        <div class="order" v-show="isLogin">
+        <div class="order" v-show="this.isLogin && this.member.realName">
             <div class="order-handler">
-                <span @click="changeOrder('current')" :class="{active:selectedOrder==='current'}">{{$t('exchange.curdelegation')}}</span>
-                <span @click="changeOrder('history')" :class="{active:selectedOrder==='history'}">{{$t('exchange.hisdelegation')}}</span>
-                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/entrust/current">{{$t('coin.view')}}>></router-link>
-                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/entrust/history">{{$t('coin.view')}}>></router-link>
+                <span
+                    @click="changeOrder('current')"
+                    :class="{active:selectedOrder==='current'}"
+                >
+                    {{$t('exchange.curdelegation')}}
+                </span>
+                <span
+                    @click="changeOrder('history')"
+                    :class="{active:selectedOrder==='history'}"
+                >
+                    {{$t('exchange.hisdelegation')}}
+                </span>
+                <router-link
+                    v-show="selectedOrder==='current'"
+                    class="linkmore"
+                    to="/uc/entrust/current"
+                >
+                    {{$t('coin.view')}}>>
+                </router-link>
+                <router-link
+                    v-show="selectedOrder==='history'"
+                    class="linkmore"
+                    to="/uc/entrust/history"
+                >
+                    {{$t('coin.view')}}>>
+                </router-link>
             </div>
             <div class="table">
-                <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows" :loading="currentLoading"></Table>
-                <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows" :loading="historyLoading"></Table>
+                <Table
+                    v-if="selectedOrder==='current'"
+                    :columns="currentOrder.columns"
+                    :data="currentOrder.rows"
+                    :loading="currentLoading"
+                    :no-data-text="$t('common.nodata')"
+                ></Table>
+                <Table
+                    v-else
+                    :columns="historyOrder.columns"
+                    :data="historyOrder.rows"
+                    :loading="historyLoading"
+                    :no-data-text="$t('common.nodata')"
+                ></Table>
             </div>
         </div>
     </div>
@@ -726,8 +841,8 @@ export default {
     data() {
         let self = this;
         return {
-            currentLoading: true,
-            historyLoading: true,
+            currentLoading: true, // 当前委单默认loading
+            historyLoading: true, // 历史委单默认loading
             day: require("../../assets/images/exchange/night.png"), // 黑色版本
             night: require("../../assets/images/exchange/day.png"), // 白色版本
             loadingButton1: false, // 接口请求loading
@@ -862,7 +977,7 @@ export default {
             // userRealVerified: false, //是否实名认证
             collecRequesting: false,
             currentCoinIsFavor: false,
-            isUseBHB: false, //是否试用BHB抵扣手续费
+            // isUseBHB: false, //是否试用BHB抵扣手续费
             skin: "night", //皮肤样式day&night
             currentImgTable: "k",
             stopLoss: false,
@@ -912,7 +1027,7 @@ export default {
                                                     "ivu-icon ivu-icon-android-star";
                                             }
                                         } else {
-                                            this.$Message.warning("请先登录");
+                                            this.$Message.warning(this.$t('common.logintip'));
                                         }
                                     }
                                 }
@@ -1002,7 +1117,7 @@ export default {
                                                         "ivu-icon ivu-icon-android-star";
                                                 }
                                             } else {
-                                                this.$Message.warning("请先登录");
+                                                this.$Message.warning(this.$t('common.logintip'));
                                             }
                                         }
                                     }
@@ -1037,6 +1152,19 @@ export default {
                             } else {
                                 return b1 - a1;
                             }
+                        },
+                        render: (h, params) => {
+                            const row = params.row;
+                            const className = parseFloat(row.rose) < 0 ? "sell" : "buy";
+                            return h(
+                                "span",
+                                {
+                                    attrs: {
+                                        class: className
+                                    }
+                                },
+                                row.rose
+                            );
                         }
                     }
                 ]
@@ -1583,12 +1711,12 @@ export default {
         lang: function () {
             this.updateLangData();
         },
-        currentCoin: function () {
-            this.updateTitle();
-        },
-        "currentCoin.price": function () {
-            this.updateTitle();
-        },
+        // currentCoin: function () {
+        //     this.updateTitle();
+        // },
+        // "currentCoin.price": function () {
+        //     this.updateTitle();
+        // },
         $route(to, from) {
             this.init();
         },
@@ -1687,27 +1815,27 @@ export default {
                 }
             })
         },
-        //金额只能为正整数
-        checkNum(element) {
-            let val = element.value;
-            //匹配非数字
-            let reg = new RegExp("([^0-9]*)", "g");
-            let ma = val.match(reg);
-            //如果有非数字，替换成""
-            if (ma.length > 0) {
-                for (let k in ma) {
-                    if (ma[k] != "") {
-                        val = val.replace(ma[k], "");
-                    }
-                }
-            }
-            //可以为0，但不能以0开头
-            if (val.startsWith("0") && val.length > 1) {
-                val = val.substring(1, val.length);
-            }
-            //赋值，这样实现的效果就是用户按下非数字不会有任何反应
-            element.value = val;
-        },
+        // //金额只能为正整数
+        // checkNum(element) {
+        //     let val = element.value;
+        //     //匹配非数字
+        //     let reg = new RegExp("([^0-9]*)", "g");
+        //     let ma = val.match(reg);
+        //     //如果有非数字，替换成""
+        //     if (ma.length > 0) {
+        //         for (let k in ma) {
+        //             if (ma[k] != "") {
+        //                 val = val.replace(ma[k], "");
+        //             }
+        //         }
+        //     }
+        //     //可以为0，但不能以0开头
+        //     if (val.startsWith("0") && val.length > 1) {
+        //         val = val.substring(1, val.length);
+        //     }
+        //     //赋值，这样实现的效果就是用户按下非数字不会有任何反应
+        //     element.value = val;
+        // },
         tab(index) {
             this.btnList.map((ele, i) => {
                 if (i == index) {
@@ -1747,7 +1875,7 @@ export default {
             this.getTrade();
             if (this.isLogin && this.member.realName) {
                 // this.getMember(); //获取是否实名认证
-                this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
+                // this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
                 this.getWallet(); //账户资产信息
                 this.getCurrentOrder(); //当前委托
                 this.getHistoryOrder(); //历史委托
@@ -1765,17 +1893,17 @@ export default {
         changeBaseCion(str) {
             this.basecion = str;
         },
-        getMemberRate() {
-            //   this.$http
-            //     .post(this.host + "/uc/wealth/query", {
-            //       memberId: this.member.id
-            //     })
-            //     .then(res => {
-            //       if (res.status == 200 && res.body.code == 0) {
-            //         this.memberRate = res.body.data.memberRate;
-            //       }
-            //     });
-        },
+        // getMemberRate() {
+        //   this.$http
+        //     .post(this.host + "/uc/wealth/query", {
+        //       memberId: this.member.id
+        //     })
+        //     .then(res => {
+        //       if (res.status == 200 && res.body.code == 0) {
+        //         this.memberRate = res.body.data.memberRate;
+        //       }
+        //     });
+        // },
         // getMember() {
         //   //获取个人安全信息
         //   this.$http
@@ -1790,31 +1918,31 @@ export default {
         //       }
         //     });
         // },
-        changeUseBHB() {
-            if (this.memberRate > 0) {
-                //会员身份：0普通，1超级群主，3超级合伙人
-                this.$Modal.confirm({
-                    content: "使用BHB抵扣手续费的交易不参与交易挖矿，是否使用？",
-                    okText: "使用，不参与交易挖矿",
-                    cancelText: "不使用，参与交易挖矿",
-                    width: "460",
-                    onOk: () => {
-                        this.isUseBHB = true;
-                    },
-                    onCancel: () => {
-                        this.isUseBHB = false;
-                    }
-                });
-            } else {
-                this.$Modal.warning({
-                    content: "您当前不符合开通条件，详见使用帮助。",
-                    okText: "关闭",
-                    onOk: () => {
-                        this.isUseBHB = false;
-                    }
-                });
-            }
-        },
+        // changeUseBHB() {
+        //     if (this.memberRate > 0) {
+        //         //会员身份：0普通，1超级群主，3超级合伙人
+        //         this.$Modal.confirm({
+        //             content: "使用BHB抵扣手续费的交易不参与交易挖矿，是否使用？",
+        //             okText: "使用，不参与交易挖矿",
+        //             cancelText: "不使用，参与交易挖矿",
+        //             width: "460",
+        //             onOk: () => {
+        //                 this.isUseBHB = true;
+        //             },
+        //             onCancel: () => {
+        //                 this.isUseBHB = false;
+        //             }
+        //         });
+        //     } else {
+        //         this.$Modal.warning({
+        //             content: "您当前不符合开通条件，详见使用帮助。",
+        //             okText: "关闭",
+        //             onOk: () => {
+        //                 this.isUseBHB = false;
+        //             }
+        //         });
+        //     }
+        // },
         changeSkin() {
             const currentSkin = this.skin;
             if (currentSkin === "day") {
@@ -1859,18 +1987,18 @@ export default {
                 (height = doc.documentElement.clientHeight);
             obk.style.minHeight = height - 100 + "px";
         },
-        updateTitle() {
-            // let title =
-            //   this.currentCoin.price +
-            //   " " +
-            //   this.currentCoin.rose +
-            //   " " +
-            //   this.currentCoin.coin +
-            //   "/" +
-            //   this.currentCoin.base;
-            // title += "币多网--国际数字加密资产交易平台";
-            // window.document.title = title;
-        },
+        // updateTitle() {
+        // let title =
+        //   this.currentCoin.price +
+        //   " " +
+        //   this.currentCoin.rose +
+        //   " " +
+        //   this.currentCoin.coin +
+        //   "/" +
+        //   this.currentCoin.base;
+        // title += "币多网--国际数字加密资产交易平台";
+        // window.document.title = title;
+        // },
         updateLangData() {
             this.coins.columns[0].title = this.$t("exchange.coin");
             this.coins.columns[1].title = this.$t("exchange.lastprice");
@@ -2439,7 +2567,6 @@ export default {
                 });
         },
         startWebsock() {
-            // this.loadingButton7 = true;
             if (this.stompClient) {
                 this.stompClient.ws.close();
             }
@@ -2708,10 +2835,8 @@ export default {
                         if (resp.code == 0) {
                             this.$Message.info(this.$t("exchange.do_favorite"));
                             // this.getCoin(symbol).isFavor = true;
-
                             // row.isFavor = true;
                             // this.coins.favor.push(row);
-
                             // this.currentCoinIsFavor = true;
                             // this.getFavor();
                             this.getSymbol(); //刷新状态
@@ -2851,7 +2976,7 @@ export default {
             params["amount"] = this.form.buy.marketAmount;
             params["direction"] = "BUY";
             params["type"] = "MARKET_PRICE";
-            console.log(this.form.buy.marketAmount)
+            // console.log(this.form.buy.marketAmount)
             // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
             let that = this;
             this.loadingButton2 = true;

@@ -9,7 +9,7 @@
                 <Table :columns="tableColumnsAdv" :data="tableAdv" :no-data-text="$t('common.nodata')" :loading="loading" class="tables" :disabled-hover="true"></Table>
                 <div style="margin: 10px;overflow: hidden" id="pages">
                     <div style="float: right;">
-                        <Page v-if="totalPage > 0" :pageSize="pageNumber" :total="totalPage" :current="currentPage" @on-change="changePage"></Page>
+                        <Page v-if="totalPage > 10" :pageSize="pageNumber" :total="totalPage" :current="currentPage" @on-change="changePage"></Page>
                     </div>
                 </div>
             </div>
@@ -269,7 +269,7 @@ export default {
       },
       immediate: true,
     }
-    
+
   },
   created() {
     this.getAd();

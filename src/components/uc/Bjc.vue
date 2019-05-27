@@ -8,9 +8,22 @@
                 <button class="search_btn" @click="serar">{{$t('pointPage.search')}}</button>
             </div>
             <div class="blc-table">
-                <Table stripe :columns="tableColumnsBlc" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
+                <Table
+                    :no-data-text="$t('common.nodata')"
+                    stripe
+                    :columns="tableColumnsBlc"
+                    :data="tableMoney"
+                    :loading="loading"
+                    :disabled-hover="true"
+                ></Table>
                 <div class="page-wrap">
-                    <Page :current="pageNo" :total="parseInt(totalElement)" :page-size="pageSize" @on-change="changePage"></Page>
+                    <Page
+                        v-show="totalElement > 10"
+                        :current="pageNo"
+                        :total="parseInt(totalElement)"
+                        :page-size="pageSize"
+                        @on-change="changePage"
+                    ></Page>
                 </div>
             </div>
         </div>

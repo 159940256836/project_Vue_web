@@ -78,7 +78,14 @@
                                                 <div>{{$t('uc.safe.upload_positive')}}</div>
                                                 <img id="frontCardImg" style="width: 270px;height: 175px;" :src="frontCardImg">
                                                 <div class="acc_sc">
-                                                    <Upload ref="upload1" :before-upload="beforeUpload" :on-success="frontHandleSuccess" :headers="uploadHeaders" :action="uploadUrl">
+                                                    <Upload
+                                                        ref="upload1"
+                                                        :before-upload="beforeUpload"
+                                                        :on-success="frontHandleSuccess"
+                                                        :headers="uploadHeaders"
+                                                        :action="uploadUrl"
+                                                        accept=".jpg,.jpeg,.png,.gif"
+                                                    >
                                                         <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
                                                     </Upload>
                                                 </div>
@@ -88,7 +95,14 @@
                                                 <div>{{$t('uc.safe.upload_negative')}}</div>
                                                 <img id="backCardImg" style="width: 270px;height: 175px;" :src="backCardImg">
                                                 <div class="acc_sc">
-                                                    <Upload ref="upload2" :before-upload="beforeUpload" :on-success="backHandleSuccess" :headers="uploadHeaders" :action="uploadUrl">
+                                                    <Upload
+                                                        ref="upload2"
+                                                        :before-upload="beforeUpload"
+                                                        :on-success="backHandleSuccess"
+                                                        :headers="uploadHeaders"
+                                                        :action="uploadUrl"
+                                                        accept=".jpg,.jpeg,.png,.gif"
+                                                    >
                                                         <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
                                                     </Upload>
                                                 </div>
@@ -98,7 +112,14 @@
                                                 <div>{{$t('uc.safe.upload_hand')}}</div>
                                                 <img id="handCardImg" style="width: 270px;height: 175px;" :src="handCardImg">
                                                 <div class="acc_sc">
-                                                    <Upload ref="upload3" :before-upload="beforeUpload" :on-success="handHandleSuccess" :headers="uploadHeaders" :action="uploadUrl">
+                                                    <Upload
+                                                        ref="upload3"
+                                                        :before-upload="beforeUpload"
+                                                        :on-success="handHandleSuccess"
+                                                        :headers="uploadHeaders"
+                                                        :action="uploadUrl"
+                                                        accept=".jpg,.jpeg,.png,.gif"
+                                                    >
                                                         <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
                                                     </Upload>
                                                 </div>
@@ -785,6 +806,18 @@ export default {
 
         },
         beforeUpload(data) {
+            // console.log(data)
+            // let name = data.name;//截取后4位
+            // name.substring(name.length-3);
+            // console.log(name.substring(name.length - 3));
+            // this.$Notice.warning({
+            //     title: '文件格式不正确',
+            //     desc: '文件 ' + name + ' 格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。'
+            // })
+            // if (name !== 'jpg') {:on-format-error="handleFormatError"
+            //     this.$Message.error('文件格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。');
+            //     return false;
+            // }
             if (data && data.size >= 1024000 * 2) {
                 this.$Message.error("上传图片大小不能超过2M");
                 return false;
@@ -1499,7 +1532,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .user-icons {
-    display: flex;
+    /*display: flex;*/
     align-self: center;
     width: 200px;
 }
@@ -1522,6 +1555,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .user-icons .user-name {
+
     margin-left: 10px;
     display: flex;
     justify-content: flex-start;
@@ -1530,6 +1564,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .user-icons .user-name span {
+    padding-left: 15px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -1592,6 +1627,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .user-avatar-public {
+    float: left;
     background: #fff;
     border-radius: 50%;
     height: 52px;

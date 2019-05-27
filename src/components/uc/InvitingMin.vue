@@ -27,10 +27,23 @@
                         <span style="color: #eb6f6c">{{$t('uc.finance.inviting.start_end')}} ：</span>&nbsp;&nbsp;<span>{{$t('uc.finance.inviting.chargetime')}}</span>
                     </div>
                     <div class="order-table">
-                        <Table stripe :no-data-text="$t('common.nodata')" :columns="tableColumnsRecord" :data="tableRecord"></Table>
+                        <Table
+                            stripe
+                            :no-data-text="$t('common.nodata')"
+                            :columns="tableColumnsRecord"
+                            :data="tableRecord"
+                        ></Table>
                         <div style="margin: 10px;overflow: hidden" >
                             <div style="float: right;">
-                                <Page :total="total" :pageSize="pageSize" show-total :current="page+1" @on-change="changePage" id="record_pages"></Page>
+                                <Page
+                                    v-show="total"
+                                    :total="total"
+                                    :pageSize="pageSize"
+                                    show-total
+                                    :current="page+1"
+                                    @on-change="changePage"
+                                    id="record_pages"
+                                ></Page>
                             </div>
                         </div>
                     </div>
@@ -124,7 +137,7 @@
             init(page){
                  let memberId = 0;
                 !this.$store.getters.isLogin && this.$router.push('/login');
-                this.$store.getters.isLogin && (memberId = this.$store.getters.member.id); 
+                this.$store.getters.isLogin && (memberId = this.$store.getters.member.id);
                 let startTime = "";
                 let endTime = "";
                 let url = this.api.uc.mylist;
@@ -152,18 +165,18 @@
             },
             dateform(time){
                 var date = new Date(time);
-                var y = date.getFullYear();  
-                var m = date.getMonth() + 1;  
-                m = m < 10 ? ('0' + m) : m;  
-                var d = date.getDate();  
-                d = d < 10 ? ('0' + d) : d;  
+                var y = date.getFullYear();
+                var m = date.getMonth() + 1;
+                m = m < 10 ? ('0' + m) : m;
+                var d = date.getDate();
+                d = d < 10 ? ('0' + d) : d;
                 var h = date.getHours();
                 h = h < 10 ? ('0' + h) : h;
                 var minute = date.getMinutes();
                 var second = date.getSeconds();
-                minute = minute < 10 ? ('0' + minute) : minute;  
-                second = second < 10 ? ('0' + second) : second; 
-                return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second; 
+                minute = minute < 10 ? ('0' + minute) : minute;
+                second = second < 10 ? ('0' + second) : second;
+                return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
             },
             changePage(pageindex) {
                 this.init(pageindex);
@@ -188,7 +201,7 @@
                 rangedate && (date = rangedate.split("~"));
                 let memberId = 0;
                 !this.$store.getters.isLogin && this.$router.push('/login');
-                this.$store.getters.isLogin && (memberId = this.$store.getters.member.id); 
+                this.$store.getters.isLogin && (memberId = this.$store.getters.member.id);
                 let url = this.api.uc.mylist;
                 let startTime = new Date(date[0]).getTime(),
                     endTime = new Date(date[1]).getTime(),
@@ -207,7 +220,7 @@
                         this.$Message.error(res.body.message);
                     }
                 });
-               
+
             },
             getList(pageNo) {
                 //获取tableWithdraw

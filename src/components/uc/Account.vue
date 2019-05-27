@@ -82,7 +82,13 @@
                                         <input type="hidden" name="aliPreview" :value="aliPreview" />
                                         <img :alt="$t('uc.account.imgtip')" id="aliImg" style="width: 200px;height: 200px;" :src=aliImg>
                                         <div class="acc_sc">
-                                          <Upload ref="upload1" :on-success="aliHandleSuccess" :headers="uploadHeaders" :action="uploadUrl">
+                                          <Upload
+                                            ref="upload1"
+                                            :on-success="aliHandleSuccess"
+                                            :headers="uploadHeaders"
+                                            :action="uploadUrl"
+                                            accept=".jpg,.jpeg,.png,.gif"
+                                          >
                                             <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
                                           </Upload>
                                         </div>
@@ -135,7 +141,13 @@
                                           <input type="hidden" name="wePreview" :value="wePreview" />
                                           <img :alt="$t('uc.account.imgtip')" id="weImg" style="width: 200px;height: 200px;" :src=weImg>
                                           <div class="acc_sc">
-                                            <Upload ref="upload2" :on-success="weHandleSuccess" :headers="uploadHeaders" :action="uploadUrl">
+                                            <Upload
+                                              ref="upload2"
+                                              :on-success="weHandleSuccess"
+                                              :headers="uploadHeaders"
+                                              :action="uploadUrl"
+                                              accept=".jpg,.jpeg,.png,.gif"
+                                            >
                                               <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
                                             </Upload>
                                           </div>

@@ -67,7 +67,11 @@
                         <div class="item">
                             <span class="coin">{{currentCoin.coin}}
                                 <!-- 5.20修改 -->
-                                <small>/{{currentCoin.base}} &nbsp;&nbsp;<span style="border:1px solid rgba(53,124,225,.4); borderColor: 'rgba(53,124,225,.4); display:inline-block; width:30px; text-align:center;line-height:18px;padding-top:2px; color:#357ce1">{{LeversymbolMsg.proportion}}</span></small>
+                                <small>/{{currentCoin.base}} &nbsp;&nbsp;
+                                    <span style="border:1px solid rgba(53,124,225,.4); borderColor: 'rgba(53,124,225,.4); display:inline-block; text-align:center;line-height:18px;padding:2px 5px; color:#357ce1">
+                                        {{LeversymbolMsg.proportion}}
+                                    </span>
+                                </small>
                             </span>
                         </div>
                         <div class="item">
@@ -82,7 +86,9 @@
                     </div>
                     <div class="trade_panel trade_panel_logout">
                         <div class="mask" v-show="!isLogin">
-                            <span>请先
+                            <span>
+                                <!--请先-->
+                                {{$t("common.please")}}
                                 <router-link to="/login">
                                     <span style="color:#3399ff;">{{$t("common.login")}}</span>
                                 </router-link> /
@@ -92,9 +98,14 @@
                             </span>
                         </div>
                         <div class="mask" v-show="isLogin&&!member.realName">
-                            <span>请先
+                            <span>
+                                <!--请先-->
+                                {{$t("common.please")}}
                                 <router-link to="/uc/safe">
-                                    <span style="color:#3399ff;">实名认证</span>
+                                    <span style="color:#3399ff;">
+                                        <!--实名认证-->
+                                        {{$t("uc.safe.verified")}}
+                                    </span>
                                 </router-link>
                             </span>
                         </div>
@@ -337,26 +348,85 @@
                         <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
                         <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
                     </div>
-                    <Table @on-current-change="gohref" highlight-row id="USDT" v-show="basecion==='usdt'" :columns="coins.columns" :data="coins.USDT"></Table>
-                    <Table @on-current-change="gohref" highlight-row id="BTC" v-show="basecion==='btc'" :columns="coins.columns" :data="coins.BTC"></Table>
-                    <Table @on-current-change="gohref" highlight-row id="ETH" v-show="basecion==='eth'" :columns="coins.columns" :data="coins.ETH"></Table>
-                    <Table @on-current-change="gohref" highlight-row v-show="basecion==='favor'" no-data-text="暂无记录" id="collect" :columns="favorColumns" :data="coins.favor"></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="USDT"
+                        v-show="basecion==='usdt'"
+                        :columns="coins.columns"
+                        :data="coins.USDT"
+                    ></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="BTC"
+                        v-show="basecion==='btc'"
+                        :columns="coins.columns"
+                        :data="coins.BTC"
+                    ></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="ETH"
+                        v-show="basecion==='eth'"
+                        :columns="coins.columns"
+                        :data="coins.ETH"
+                    ></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        v-show="basecion==='favor'"
+                        :no-data-text="$t('common.nodata')"
+                        id="collect"
+                        :columns="favorColumns"
+                        :data="coins.favor"
+                    ></Table>
                 </div>
                 <div class="trade-wrap">
                     <Table height="480" :columns="trade.columns" :data="trade.rows"></Table>
                 </div>
             </div>
         </div>
-        <div class="order" v-show="isLogin">
+        <div class="order" v-show="this.isLogin && this.member.realName">
             <div class="order-handler">
-                <span @click="changeOrder('current')" :class="{active:selectedOrder==='current'}">{{$t('exchange.curdelegation')}}</span>
-                <span @click="changeOrder('history')" :class="{active:selectedOrder==='history'}">{{$t('exchange.hisdelegation')}}</span>
-                <router-link v-show="selectedOrder==='current'" class="linkmore" to="/uc/level/current">{{$t('coin.view')}}>></router-link>
-                <router-link v-show="selectedOrder==='history'" class="linkmore" to="/uc/level/history">{{$t('coin.view')}}>></router-link>
+                <span
+                    @click="changeOrder('current')"
+                    :class="{active:selectedOrder==='current'}"
+                >
+                    {{$t('exchange.curdelegation')}}</span>
+                <span
+                    @click="changeOrder('history')"
+                    :class="{active:selectedOrder==='history'}"
+                >
+                    {{$t('exchange.hisdelegation')}}</span>
+                <router-link
+                    v-show="selectedOrder==='current'"
+                    class="linkmore" to="/uc/level/current"
+                >
+                    {{$t('coin.view')}}>>
+                </router-link>
+                <router-link
+                    v-show="selectedOrder==='history'"
+                    class="linkmore" to="/uc/level/history"
+                >
+                    {{$t('coin.view')}}>>
+                </router-link>
             </div>
             <div class="table">
-                <Table v-if="selectedOrder==='current'" :columns="currentOrder.columns" :data="currentOrder.rows" :loading="currentLoading"></Table>
-                <Table v-else :columns="historyOrder.columns" :data="historyOrder.rows" :loading="historyLoading"></Table>
+                <Table
+                    v-if="selectedOrder==='current'"
+                    :columns="currentOrder.columns"
+                    :data="currentOrder.rows"
+                    :loading="currentLoading"
+                    :no-data-text="$t('common.nodata')"
+                ></Table>
+                <Table
+                    v-else
+                    :columns="historyOrder.columns"
+                    :data="historyOrder.rows"
+                    :loading="historyLoading"
+                    :no-data-text="$t('common.nodata')"
+                ></Table>
             </div>
         </div>
     </div>
@@ -826,7 +896,7 @@ export default {
                                                     "ivu-icon ivu-icon-android-star";
                                             }
                                         } else {
-                                            this.$Message.warning("请先登录");
+                                            this.$Message.warning(this.$t('common.logintip'));
                                         }
                                     }
                                 }
@@ -916,7 +986,7 @@ export default {
                                                         "ivu-icon ivu-icon-android-star";
                                                 }
                                             } else {
-                                                this.$Message.warning("请先登录");
+                                                this.$Message.warning(this.$t('common.logintip'));
                                             }
                                         }
                                     }
@@ -932,14 +1002,13 @@ export default {
                                     h('span', {
                                         style: {
                                             display: 'inline-block',
-                                            width: '25px',
                                             height: '18px',
                                             marginLeft: '10px',
                                             border: '1px solid rgba(53,124,225,.4)',
                                             borderColor: 'rgba(53,124,225,.4)',
                                             color: '#357ce1',
                                             textAlign: 'center',
-                                            paddingTop: '-2px',
+                                            padding: '0 5px',
                                             position: 'relative',
                                             top: '-8px',
                                         }
@@ -1686,7 +1755,7 @@ export default {
             this.getTrade();
             if (this.isLogin && this.member.realName) {
                 // this.getMember(); //获取是否实名认证
-                this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
+                // this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
                 this.getWallet(); //账户资产信息
                 this.getCurrentOrder(); //当前委托
                 this.getHistoryOrder(); //历史委托
@@ -1723,17 +1792,17 @@ export default {
         changeBaseCion(str) {
             this.basecion = str;
         },
-        getMemberRate() {
-            //   this.$http
-            //     .post(this.host + "/uc/wealth/query", {
-            //       memberId: this.member.id
-            //     })
-            //     .then(res => {
-            //       if (res.status == 200 && res.body.code == 0) {
-            //         this.memberRate = res.body.data.memberRate;
-            //       }
-            //     });
-        },
+        // getMemberRate() {
+        //   this.$http
+        //     .post(this.host + "/uc/wealth/query", {
+        //       memberId: this.member.id
+        //     })
+        //     .then(res => {
+        //       if (res.status == 200 && res.body.code == 0) {
+        //         this.memberRate = res.body.data.memberRate;
+        //       }
+        //     });
+        // },
         // getMember() {
         //   //获取个人安全信息
         //   this.$http

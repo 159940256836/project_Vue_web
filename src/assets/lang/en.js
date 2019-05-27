@@ -37,6 +37,7 @@ module.exports = {
         nodata: 'No Data',
         set: 'Set',
         update: 'Modify',
+        please: 'Please',
     },
     header: {
         index: 'INDEX',
@@ -92,12 +93,12 @@ module.exports = {
         total: "Amount of excavable ore 6 billion BHB"
     },
     service: {
-        USDT: 'USDT Service',
-        BTC: 'BTC Service',
-        ETH: 'ETH Service',
-        CUSTOM: 'Custom Service',
+        USDT: 'USDT',
+        BTC: 'BTC',
+        ETH: 'ETH',
+        CUSTOM: 'Optional',
         COIN: 'Coin',
-        symbol: 'Transaction pair',
+        symbol: 'Pair',
         favor: 'favor',
         NewPrice: "Lastest",
         ExchangeNum: 'Amount',

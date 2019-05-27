@@ -35,10 +35,23 @@
                             <div class="action-body">
                                 <p class="acb-p1 describe">{{$t('uc.finance.withdraw.addresslist')}}</p>
                                 <div class="order-table">
-                                    <Table stripe :columns="tableColumnsRecharge" :data="dataRecharge" :disabled-hover="true"></Table>
+                                    <Table
+                                        stripe
+                                        :columns="tableColumnsRecharge"
+                                        :data="dataRecharge"
+                                        :disabled-hover="true"
+                                        :no-data-text="$t('common.nodata')"
+                                    ></Table>
                                     <div style="margin: 10px;overflow: hidden">
                                         <div style="float: right;">
-                                            <Page :total="dataCount" :current="1" @on-change="changePage" :loading="loading" class="recharge_btn"></Page>
+                                            <Page
+                                                v-show="dataCount > 10"
+                                                :total="dataCount"
+                                                :current="1"
+                                                @on-change="changePage"
+                                                :loading="loading"
+                                                class="recharge_btn"
+                                            ></Page>
                                         </div>
                                     </div>
 

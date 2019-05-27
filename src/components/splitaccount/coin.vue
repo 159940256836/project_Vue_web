@@ -8,7 +8,14 @@
             </i-switch>
         </div>
         <div class="order-table">
-            <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
+            <Table
+                stripe
+                :columns="tableColumnsMoney"
+                :data="tableMoney"
+                :loading="loading"
+                :disabled-hover="true"
+                :no-data-text="$t('common.nodata')"
+            ></Table>
         </div>
         <transfermodal :modal="modal" @closetransferModal="closeModal" :getmoney="getMoney"></transfermodal>
     </div>

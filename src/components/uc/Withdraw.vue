@@ -1126,6 +1126,7 @@ table.table .table-inner.action-box {
 }
 
 .ivu-btn-primary {
+  color: #fff;
   background-color: #3399ff;
   border-color: #3399ff;
 }
