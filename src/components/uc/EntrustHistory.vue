@@ -53,7 +53,7 @@
 <template>
     <div class="entrusthistory">
         <Form class="form" :model="formItem" :label-width="60" inline>
-            <FormItem :label-width="locale == 'en' ? 144 : 60 " :label="$t('historyAndCu.stEnTime')">
+            <FormItem :label-width="locale == 'en' ? 95 : 60 " :label="$t('historyAndCu.stEnTime')">
                 <DatePicker type="daterange" v-model="formItem.date" style="width:180px;"></DatePicker>
             </FormItem>
             <FormItem :label="$t('historyAndCu.symbol')">
@@ -202,6 +202,15 @@ export default {
     computed: {
         columns() {
             const m = this.$store.getters.lang == "English" ? mapEn : map;
+            const m1 = this.$store.getters.lang == "English" ? 65 : '';
+            const m2 = this.$store.getters.lang == "English" ? 90 : '';
+            const m3 = this.$store.getters.lang == "English" ? 80 : 120;
+            const m4 = this.$store.getters.lang == "English" ? 110 : '';
+            const m5 = this.$store.getters.lang == "English" ? 100 : 60;
+            const m6 = this.$store.getters.lang == "English" ? 70 : '';
+            const m7 = this.$store.getters.lang == "English" ? 85 : '';
+            const m8 = this.$store.getters.lang == "English" ? 135 : 100;
+            const m9 = this.$store.getters.lang == "English" ? 80 : 110;
             const arr = [];
             arr.push({
                 type: "expand",
@@ -216,6 +225,7 @@ export default {
                 }
             });
             arr.push({
+                width: m1,
                 title: this.$t("exchange.time"),
                 key: "time",
                 minWidth: 55,
@@ -224,25 +234,27 @@ export default {
                 }
             });
             arr.push({
+                width: m2,
                 title: this.$t("historyAndCu.symbol"),
                 key: "symbol"
             });
             arr.push({
                 title: this.$t("historyAndCu.type"),
-                width: 60,
+                width: m3,
                 render(h, params) {
                     const type = params.row.type;
                     return h("span", {}, m.get(type));
                 }
             });
             arr.push({
+                width: m4,
                 title: this.$t("historyAndCu.triggerPrice"),
                 key: "triggerPrice"
             });
             arr.push({
                 title: this.$t("exchange.direction"),
                 key: "direction",
-                width: 60,
+                width: m5,
                 render: (h, params) => {
                     const row = params.row;
                     const className = row.direction.toLowerCase();
@@ -260,6 +272,7 @@ export default {
                 }
             });
             arr.push({
+                width: m6,
                 title: this.$t("exchange.price"),
                 key: "price",
                 render:(h, params)=>{
@@ -275,6 +288,7 @@ export default {
                 }
             });
             arr.push({
+                width: m7,
                 title: this.$t("exchange.num"),
                 key: "amount",
                 render:(h, params)=>{
@@ -305,6 +319,7 @@ export default {
                 }
             });
             arr.push({
+                width: m8,
                 title: this.$t("historyAndCu.turnoverAmount"),
                 key: "turnover",
                 render:(h, params)=>{
