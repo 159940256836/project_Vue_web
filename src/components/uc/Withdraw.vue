@@ -226,7 +226,8 @@
               <Input type="password" v-model="fundpwd" :placeholder="$t('otc.chat.msg7')"></Input>
             </p> -->
             <p slot="header">
-                提示
+                <!--提示-->
+                {{$t('us.identity.tips')}}
             </p>
             <Form
                 class="withdraw-form-inline"
@@ -253,10 +254,11 @@
               </input>
             </FormItem>
             <FormItem v-if="googleSwitch">
+                <!--请输入谷歌验证码-->
                 <Input
                     type="text"
                     v-model="formInline.googleCode"
-                    placeholder="请输入谷歌验证码"
+                    :placeholder="$t('uc.login.google')"
                 ></Input>
             </FormItem>
             <FormItem>
@@ -271,10 +273,18 @@
       <div slot="footer">
         <span
             style="margin-right:50px"
-            @click="cancel">取消</span>
+            @click="cancel"
+        >
+            <!--取消-->
+            {{$t('common.cancel')}}
+        </span>
         <span
             style="background:#3399ff;color:#fff;width:80px;border-radius:30px;display:inline-block;text-align:center;height:30px;line-height: 30px;"
-            @click="ok">确定</span>
+            @click="ok"
+        >
+            <!--确定-->
+            {{$t('common.confirm')}}
+        </span>
       </div>
     </Modal>
   </div>
@@ -392,7 +402,8 @@ export default {
         ok() {
             if (this.formInline.code == "") {
                 this.modal = true;
-                this.$Message.error("请填写短信验证码");
+                /*请填写短信验证码*/
+                this.$Message.error(this.$t("otc.chat.msg8tip"));
                 return;
             }
             if (this.formInline.fundpwd == "") {
@@ -404,7 +415,8 @@ export default {
             if (this.googleSwitch) {
                 if (this.formInline.googleCode == "") {
                     this.modal = true;
-                    this.$Message.error("请填写谷歌验证码");
+                    /*"请填写谷歌验证码"*/
+                    this.$Message.error(this.$t("otc.chat.msg9tip"));
                     return;
                 } else {
                     params.googleCode = this.formInline.googleCode;

@@ -6,30 +6,55 @@
                 <Icon v-else type="ios-star-outline" color="#3399ff" size="24" />
             </div>
             <div class="item">
-                <span class="coin">{{currentCoin.coin}}
-                    <small>/{{currentCoin.base}}</small>
+                <span class="coin">
+                    {{currentCoin.coin?currentCoin.coin:'---'}}
+                    <small>/{{currentCoin.base?currentCoin.base:'---'}}</small>
                 </span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.last')}}</span>
-                <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.close | toFixed(baseCoinScale)}}</span>
-                <span class="price-cny">￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}</span>
+                <span
+                    class="num"
+                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                    v-if="currentCoin.close"
+                >
+                    {{currentCoin.close | toFixed(baseCoinScale)}}
+                </span>
+                <span
+                    class="num"
+                    v-else
+                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                >
+                    ---
+                </span>
+                <span class="price-cny">
+                    ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
+                </span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.up')}}</span>
-                <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.rose}}</span>
+                <span
+                    class="num"
+                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                >
+                    {{currentCoin.rose?currentCoin.rose:'---'}}
+                </span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.celling')}}</span>
-                <span class="num ">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-if="currentCoin.high">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-else>---</span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.floor')}}</span>
-                <span class="num ">{{currentCoin.low | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-if="currentCoin.low >= 0">
+                    {{currentCoin.low | toFixed(baseCoinScale)}}
+                </span>
+                <span class="num" v-else>---</span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.turnover')}}</span>
-                <span class="num ">{{currentCoin.volume}} {{currentCoin.coin}}</span>
+                <span class="num">{{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}</span>
             </div>
             <div class="item" @click="changeSkin">
                 <img :src="skin == 'night' ? night : day" alt="">
@@ -65,10 +90,19 @@
                     :data="plate.askRows"
                 ></Table>
                 <div class="plate-nowprice">
-                    <span class="price"
-                          :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                    <span
+                        class="price"
+                        :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                        v-if="currentCoin.price"
                     >
                         {{currentCoin.price | toFixed(baseCoinScale)}}
+                    </span>
+                    <span
+                        class="price"
+                        :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                        v-else
+                    >
+                        ---
                     </span>
                     <span v-if="currentCoin.change>0" class="buy">↑</span>
                     <span v-else class="sell">↓</span>
@@ -2377,6 +2411,7 @@ export default {
                     this.coins[coin.base].push(coin);
                     if (coin.symbol == this.currentCoin.symbol) {
                         this.currentCoin = coin;
+                        console.log(this.currentCoin)
                         this.form.buy.limitPrice = this.form.sell.limitPrice = coin.price;
                     }
                 }
@@ -3318,24 +3353,22 @@ export default {
         },
         cancel(index) {
             let order = this.currentOrder.rows[index];
-            this.$Modal.confirm({
-                content: this.$t("exchange.undotip"),
-                onOk: () => {
-                    this.$http.post(
-                        this.host + this.api.exchange.orderCancel + "/" + order.orderId,
-                        {}).then(response => {
-                            let resp = response.body;
-                            if (resp.code == 0) {
-                                this.refreshAccount();
-                            } else {
-                                this.$Notice.error({
-                                    title: this.$t("exchange.tip"),
-                                    desc: resp.message
-                                });
-                            }
-                        });
+            // this.$Modal.confirm({
+            //     content: this.$t("exchange.undotip"),
+            //     onOk: () => {
+            this.$http.post(this.host + this.api.exchange.orderCancel + "/" + order.orderId,{}).then(response => {
+                let resp = response.body;
+                if (resp.code == 0) {
+                    this.refreshAccount();
+                } else {
+                    this.$Notice.error({
+                        title: this.$t("exchange.tip"),
+                        desc: resp.message
+                    });
                 }
             });
+            //     }
+            // });
         },
 
         refreshAccount: function () {

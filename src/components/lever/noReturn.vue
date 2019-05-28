@@ -165,11 +165,13 @@ export default {
     },
     sure() {
       if (this.value == "") {
-        this.$Message.error("请输入您要还的个数");
+          /*请输入您要还的个数*/
+        this.$Message.error(this.$t('coin.return'));
         return;
       }
       if (isNaN(Number(this.value))) {
-        this.$Message.error("请输入数字类型");
+          /*请输入数字类型*/
+        this.$Message.error(this.$t('coin.numericTypes'));
         return;
       }
       const params = {

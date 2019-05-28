@@ -140,7 +140,7 @@ export default {
     }
   },
   created() {
-    this.getHistoryOrder();
+    this.getCurrentOrder();
     this.getSymbol();
   },
   methods: {
@@ -152,11 +152,11 @@ export default {
     },
     loadDataPage(data) {
       this.pageNo = data;
-      this.getHistoryOrder();
+      this.getCurrentOrder();
     },
     handleSubmit() {
       this.pageNo = 1;
-      this.getHistoryOrder();
+      this.getCurrentOrder();
     },
     handleClear() {
       this.formItem = {
@@ -166,8 +166,8 @@ export default {
         date: ""
       };
     },
-    getHistoryOrder() {
-      //查询历史委托
+    getCurrentOrder() {
+      //查询当前委托
       this.loading = true;
       const { symbol, type, direction, date: rangeDate } = this.formItem,
         startTime = new Date(rangeDate[0]).getTime() || "",
@@ -211,31 +211,31 @@ export default {
       });
     },
     cancel(orderId) {
-      this.$Modal.confirm({
-        content: this.$t("exchange.undotip"),
-        onOk: () => {
-          this.$http
-            .post(this.host + this.api.exchange.orderCancel + "/" + orderId, {})
-            .then(response => {
-              var resp = response.body;
-              if (resp.code == 0) {
-                this.getHistoryOrder();
-              } else {
-                this.$Notice.error({
-                  title: this.$t("exchange.tip"),
-                  desc: resp.message
-                });
-              }
+      // this.$Modal.confirm({
+      //   content: this.$t("exchange.undotip"),
+      //   onOk: () => {
+      this.$http
+        .post(this.host + this.api.exchange.orderCancel + "/" + orderId, {})
+        .then(response => {
+          var resp = response.body;
+          if (resp.code == 0) {
+            this.getCurrentOrder();
+          } else {
+            this.$Notice.error({
+              title: this.$t("exchange.tip"),
+              desc: resp.message
             });
-        }
-      });
+          }
+        });
+      //   }
+      // });
     }
   },
   computed: {
     columns() {
       const arr = [];
       const m = this.$store.getters.lang == "English" ? mapEn : map;
-      const m1 = this.$store.getters.lang == "English" ? 65 : '';
+      const m1 = this.$store.getters.lang == "English" ? 65 : 100;
       const m2 = this.$store.getters.lang == "English" ? 90 : '';
       const m3 = this.$store.getters.lang == "English" ? 80 : 120;
       const m4 = this.$store.getters.lang == "English" ? 110 : '';

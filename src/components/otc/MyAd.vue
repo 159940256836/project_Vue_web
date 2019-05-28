@@ -200,7 +200,8 @@ export default {
                           }
                         });
                       } else {
-                        self.$Message.error("下架广告后才可以删除！");
+                          /*下架广告后才可以删除*/
+                        self.$Message.error(self.$t("common.info"));
                       }
                     }
                   }

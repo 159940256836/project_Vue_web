@@ -199,15 +199,18 @@ export default {
         },
         sure() {
             if (this.num == '') {
-                this.$Message.info("请输入您要转出的个数");
+                /*请输入您要转出的个数*/
+                this.$Message.info(this.$t('coin.outNumber'));
                 return;
             }
             if (this.value.length == 0) {
-                this.$Message.info("请选择您要转出的币种");
+                /*请选择您要转出的币种*/
+                this.$Message.info(this.$t('coin.outCurrency'));
                 return;
             };
             if (this.toValue.length == 0) {
-                this.$Message.info("请选择您要转入的币种");
+                /*请选择您要转入的币种*/
+                this.$Message.info(this.$t('coin.toCurrency'));
                 return;
             }
             if (this.value[0] == this.$t('coin.bit') || this.value[0] == this.$t('coin.legal')) {
@@ -254,7 +257,7 @@ export default {
                 if (res.body.code == 0) {
                     this.$Notice.success({
                         title: this.$t("exchange.tip"),
-                        desc: "操作成功"
+                        desc: this.$t('coin.operateSuccessfully')
                     });
                     this.datainit();
                     this.init();
@@ -273,7 +276,7 @@ export default {
                 if (res.body.code == 0) {
                     this.$Notice.success({
                         title: this.$t("exchange.tip"),
-                        desc: "操作成功"
+                        desc: this.$t("exchange.operateSuccessfully")
                     });
                     this.datainit();
                     this.init();
@@ -292,7 +295,7 @@ export default {
                 if (res.body.code == 0) {
                     this.$Notice.success({
                         title: this.$t("exchange.tip"),
-                        desc: "操作成功"
+                        desc: this.$t("exchange.operateSuccessfully")
                     });
                     this.datainit();
                     this.init();

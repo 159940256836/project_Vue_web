@@ -17,7 +17,7 @@ const en = {
     real: 'verify your real name',
     rate: 'hazard rate',
     blowing: 'Blowing up price',
-    return: 'loan return ',
+    return1: 'loan return ',
     buying: 'buying rate',
     volume: 'buying volume',
     sellingRate: 'selling rate',
@@ -53,7 +53,14 @@ const en = {
     accumulatedInterest: 'accumulated interest',
     state: 'state',
     OutstandingQuantity: 'Outstanding quantity',
-    operation: 'operation'
+    operation: 'operation',
+    return: 'Please enter the number you want to return',
+    numericTypes: 'Please enter a numeric type',
+    outNumber: 'Please enter the number you want to roll out',
+    outCurrency: 'Please select the currency you want to transfer out',
+    toCurrency: 'Please select the currency you want to transfer to',
+    toCurrency1: 'Please enter the number of COINS you want to borrow',
+    successful: 'Borrowing successful',
 };
 const zh = {
     last: '最新价',
@@ -73,7 +80,7 @@ const zh = {
     real: '实名认证',
     rate: '风险率',
     blowing: '爆仓价',
-    return: '借贷归还',
+    return1: '借贷归还',
     buying: '买入价',
     volume: '买入量',
     sellingRate: '卖出价',
@@ -109,7 +116,14 @@ const zh = {
     accumulatedInterest: '利息累计',
     state: '状态',
     OutstandingQuantity: '未还数量',
-    operation: '操作'
+    operation: '操作',
+    return: '请输入您要还的个数',
+    numericTypes: '请输入数字类型',
+    outNumber: '请输入您要转出的个数',
+    outCurrency: '请选择您要转出的币种',
+    toCurrency: '请选择您要转入的币种',
+    toCurrency1: '请输入您要借贷的币的个数',
+    successful: '借贷成功',
 }
 exports.en = en;
 exports.zh = zh;

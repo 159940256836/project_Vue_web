@@ -56,6 +56,12 @@ import meblc from "../components/uc/Blc"
 import mebjc from "../components/uc/Bjc"
 //费率  transactionCosts
 import transactionCosts from '../components/footerList/transactionCosts'
+//法律声明
+import law from '../components/footerList/law'
+//隐私协议
+import Privgreement from '../components/footerList/Privgreement'
+//用户协议
+import Usereement from '../components/footerList/Usereement'
 // import mymsg from ''
 // 平台的小时分配和昨天的分配路由
 // import platedistribute from "../pages/plate/distribution.vue"
@@ -97,6 +103,9 @@ import LeverIndex from "../pages/lever/Index.vue"
 //杠杆交易
 import Lever from "../pages/exchange/lever.vue"
 export default [
+    { path: '/Usereement', component: Usereement },
+    { path: '/Privgreement', component: Privgreement },
+    { path: '/law', component: law },
     { path: '/transactionCosts', component: transactionCosts },
     { path: '/', component: Index },
     { path: '/index', component: Index },

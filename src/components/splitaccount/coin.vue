@@ -1,7 +1,8 @@
 <template>
     <div class="shaow">
         <div class="hidden-assets">
-            <span>隐藏资产为0的币种</span>
+            <!--隐藏资产为0的币种-->
+            <span>{{$t('uc.finance.money.hiddenAssets')}}</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                 <span slot="open"></span>
                 <span slot="close"></span>

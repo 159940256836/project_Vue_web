@@ -201,7 +201,8 @@ export default {
         },
         isEmpty(str) {
             if (!str) {
-                this.$Message.error("请输入您要借贷的币的个数");
+                /*请输入您要借贷的币的个数*/
+                this.$Message.error('coin.toCurrency1');
                 return false;
             } else {
                 return true;
@@ -209,7 +210,8 @@ export default {
         },
         isNum(str) {
             if (isNaN(Number(str))) {
-                this.$Message.error("请输入数字类型");
+                /*请输入数字类型*/
+                this.$Message.error(this.$t('coin.numericTypes'));
                 return false;
             } else {
                 return true;
@@ -225,7 +227,8 @@ export default {
         toBorrow(params) {
             this.$http.post(this.host + "/margin-trade/loan/loan", params).then(res => {
                 if (res.body.code == 0) {
-                    this.$Message.success("借贷成功");
+                    /*借贷成功*/
+                    this.$Message.success(this.$t('coin.successful'));
                     ++this.noReruenRepayment;
                     this.getSymbolAccount(this.symbol);
                 } else {

@@ -6,30 +6,52 @@
                 <Icon v-else type="ios-star-outline" color="#3399ff" size="24" />
             </div>
             <div class="item">
-                <span class="coin">{{currentCoin.coin}}
-                    <small>/{{currentCoin.base}}</small>
+                <span class="coin">
+                    {{currentCoin.coin?currentCoin.coin:'---'}}
+                    <small>/{{currentCoin.base?currentCoin.base:'---'}}</small>
                 </span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.last')}}</span>
-                <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.close | toFixed(baseCoinScale)}}</span>
-                <span class="price-cny">￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}</span>
+                <span
+                    class="num"
+                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                    v-if="currentCoin.close"
+                >
+                    {{currentCoin.close | toFixed(baseCoinScale)}}
+                </span>
+                <span
+                    class="num"
+                    v-else
+                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                >
+                    ---
+                </span>
+                <span class="price-cny">
+                    ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
+                </span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.up')}}</span>
-                <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.rose}}</span>
+                <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">
+                    {{currentCoin.rose?currentCoin.rose:'---'}}
+                </span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.celling')}}</span>
-                <span class="num ">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-if="currentCoin.high">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-else>---</span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.floor')}}</span>
-                <span class="num ">{{currentCoin.low | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-if="currentCoin.low >= 0">
+                    {{currentCoin.low | toFixed(baseCoinScale)}}
+                </span>
+                <span class="num" v-else>---</span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.turnover')}}</span>
-                <span class="num ">{{currentCoin.volume}} {{currentCoin.coin}}</span>
+                <span class="num">{{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}</span>
             </div>
             <div class="item" @click="changeSkin">
                 <img :src="skin == 'night' ? night : day" alt="">
@@ -45,12 +67,35 @@
                 </div>
                 <Table v-show="selectedPlate!='buy'" @on-current-change="buyPlate" highlight-row ref="currentRowTable" class="sell_table" :columns="plate.columns" :data="plate.askRows"></Table>
                 <div class="plate-nowprice">
-                    <span class="price" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.price | toFixed(baseCoinScale)}}</span>
+                    <span
+                      class="price"
+                      :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                      v-if="currentCoin.price"
+                    >
+                        {{currentCoin.price | toFixed(baseCoinScale)}}
+                    </span>
+                    <span
+                        class="price"
+                        :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                        v-else
+                    >
+                        ---
+                    </span>
                     <span v-if="currentCoin.change>0" class="buy">↑</span>
                     <span v-else class="sell">↓</span>
-                    <span class="price-cny"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>
+                    <span class="price-cny" v-if="currentCoin.usdRate"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>
+                    <span class="price-cny" v-else>---</span>
                 </div>
-                <Table v-show="selectedPlate!='sell'" @on-current-change="sellPlate" highlight-row class="buy_table" :class="{hidden:selectedPlate==='all'}" :columns="plate.columns" :data="plate.bidRows"></Table>
+                <Table
+                    :no-data-text="$t('common.nodata')"
+                    v-show="selectedPlate!='sell'"
+                    @on-current-change="sellPlate"
+                    highlight-row
+                    class="buy_table"
+                    :class="{hidden:selectedPlate==='all'}"
+                    :columns="plate.columns"
+                    :data="plate.bidRows"
+                ></Table>
             </div>
             <div class="center">
                 <div class="imgtable">
@@ -115,7 +160,7 @@
                                     <li @click="tab(index)" :class="{active:item.check}" style="width:18%;text-align:center;">{{item.text}}</li>
                                 </template>
                                 <li style="color:#39f;width:30%;text-align:right;cursor: pointer;" @click="transFerFun" v-if="isLogin">{{$t('coin.transfer')}}</li>
-                                <li style="color:#39f;width:20%;cursor: pointer;" @click="toBorrow" v-if="isLogin">{{$t('coin.return')}}</li>
+                                <li style="color:#39f;width:20%;cursor: pointer;" @click="toBorrow" v-if="isLogin">{{$t('coin.return1')}}</li>
                                 <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
@@ -3226,23 +3271,23 @@ export default {
         // 当前委托撤销
         cancel(index) {
             let order = this.currentOrder.rows[index];
-            this.$Modal.confirm({
-                content: this.$t("exchange.undotip"),
-                onOk: () => {
-                    this.$http.get(this.host + '/margin-trade/order/cancel/' + order.orderId)
-                        .then(response => {
-                            let resp = response.body;
-                            if (resp.code == 0) {
-                                this.refreshAccount();
-                            } else {
-                                this.$Notice.error({
-                                    title: this.$t("exchange.tip"),
-                                    desc: resp.message
-                                });
-                            }
+            // this.$Modal.confirm({
+            //     content: this.$t("exchange.undotip"),
+            //     onOk: () => {
+            this.$http.get(this.host + '/margin-trade/order/cancel/' + order.orderId)
+                .then(response => {
+                    let resp = response.body;
+                    if (resp.code == 0) {
+                        this.refreshAccount();
+                    } else {
+                        this.$Notice.error({
+                            title: this.$t("exchange.tip"),
+                            desc: resp.message
                         });
-                }
-            });
+                    }
+                });
+            //     }
+            // });
         },
         refreshAccount() {
             this.getCurrentOrder();

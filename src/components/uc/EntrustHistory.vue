@@ -202,7 +202,7 @@ export default {
     computed: {
         columns() {
             const m = this.$store.getters.lang == "English" ? mapEn : map;
-            const m1 = this.$store.getters.lang == "English" ? 65 : '';
+            const m1 = this.$store.getters.lang == "English" ? 65 : 100;
             const m2 = this.$store.getters.lang == "English" ? 90 : '';
             const m3 = this.$store.getters.lang == "English" ? 80 : 120;
             const m4 = this.$store.getters.lang == "English" ? 110 : '';
