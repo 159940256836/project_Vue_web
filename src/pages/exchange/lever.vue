@@ -44,7 +44,9 @@
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.floor')}}</span>
-                <span class="num" v-if="currentCoin.low">{{currentCoin.low | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-if="currentCoin.low >= 0">
+                    {{currentCoin.low | toFixed(baseCoinScale)}}
+                </span>
                 <span class="num" v-else>---</span>
             </div>
             <div class="item">
@@ -158,7 +160,7 @@
                                     <li @click="tab(index)" :class="{active:item.check}" style="width:18%;text-align:center;">{{item.text}}</li>
                                 </template>
                                 <li style="color:#39f;width:30%;text-align:right;cursor: pointer;" @click="transFerFun" v-if="isLogin">{{$t('coin.transfer')}}</li>
-                                <li style="color:#39f;width:20%;cursor: pointer;" @click="toBorrow" v-if="isLogin">{{$t('coin.return')}}</li>
+                                <li style="color:#39f;width:20%;cursor: pointer;" @click="toBorrow" v-if="isLogin">{{$t('coin.return1')}}</li>
                                 <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
@@ -3272,23 +3274,23 @@ export default {
         // 当前委托撤销
         cancel(index) {
             let order = this.currentOrder.rows[index];
-            this.$Modal.confirm({
-                content: this.$t("exchange.undotip"),
-                onOk: () => {
-                    this.$http.get(this.host + '/margin-trade/order/cancel/' + order.orderId)
-                        .then(response => {
-                            let resp = response.body;
-                            if (resp.code == 0) {
-                                this.refreshAccount();
-                            } else {
-                                this.$Notice.error({
-                                    title: this.$t("exchange.tip"),
-                                    desc: resp.message
-                                });
-                            }
+            // this.$Modal.confirm({
+            //     content: this.$t("exchange.undotip"),
+            //     onOk: () => {
+            this.$http.get(this.host + '/margin-trade/order/cancel/' + order.orderId)
+                .then(response => {
+                    let resp = response.body;
+                    if (resp.code == 0) {
+                        this.refreshAccount();
+                    } else {
+                        this.$Notice.error({
+                            title: this.$t("exchange.tip"),
+                            desc: resp.message
                         });
-                }
-            });
+                    }
+                });
+            //     }
+            // });
         },
         refreshAccount() {
             this.getCurrentOrder();

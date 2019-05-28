@@ -47,7 +47,9 @@
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.floor')}}</span>
-                <span class="num" v-if="currentCoin.low">{{currentCoin.low | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-if="currentCoin.low >= 0">
+                    {{currentCoin.low | toFixed(baseCoinScale)}}
+                </span>
                 <span class="num" v-else>---</span>
             </div>
             <div class="item">
@@ -1883,7 +1885,9 @@ export default {
         init() {
             //var params = this.$route.params[0];
             //console.log(params);
-             let params = this.$route.params.pathMatch;
+            let params = this.$route.params.pathMatch;
+
+            console.log(params)
             if (params == undefined) {
                 this.$router.push("/exchange/" + this.defaultPath);
                 params = this.defaultPath;
@@ -2411,6 +2415,7 @@ export default {
                     this.coins[coin.base].push(coin);
                     if (coin.symbol == this.currentCoin.symbol) {
                         this.currentCoin = coin;
+                        console.log(this.currentCoin)
                         this.form.buy.limitPrice = this.form.sell.limitPrice = coin.price;
                     }
                 }
@@ -3352,24 +3357,22 @@ export default {
         },
         cancel(index) {
             let order = this.currentOrder.rows[index];
-            this.$Modal.confirm({
-                content: this.$t("exchange.undotip"),
-                onOk: () => {
-                    this.$http.post(
-                        this.host + this.api.exchange.orderCancel + "/" + order.orderId,
-                        {}).then(response => {
-                            let resp = response.body;
-                            if (resp.code == 0) {
-                                this.refreshAccount();
-                            } else {
-                                this.$Notice.error({
-                                    title: this.$t("exchange.tip"),
-                                    desc: resp.message
-                                });
-                            }
-                        });
+            // this.$Modal.confirm({
+            //     content: this.$t("exchange.undotip"),
+            //     onOk: () => {
+            this.$http.post(this.host + this.api.exchange.orderCancel + "/" + order.orderId,{}).then(response => {
+                let resp = response.body;
+                if (resp.code == 0) {
+                    this.refreshAccount();
+                } else {
+                    this.$Notice.error({
+                        title: this.$t("exchange.tip"),
+                        desc: resp.message
+                    });
                 }
             });
+            //     }
+            // });
         },
 
         refreshAccount: function () {
