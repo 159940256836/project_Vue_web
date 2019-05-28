@@ -5,7 +5,7 @@
       <!-- 法律声明 -->
       <div class="title_a">{{$t("foot.Legatices")}}</div>
     </div>
-    <div class="contenta">
+    <div class="contenta contentb">
       <div class="contenta_cont">
         <!-- 法律声明 -->
         <div class="contenta_cont_title">{{$t("foot.Legatices")}}</div>
