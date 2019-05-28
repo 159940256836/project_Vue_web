@@ -567,7 +567,7 @@ export default {
                                                     "ivu-icon ivu-icon-ios-star";
                                             }
                                         } else {
-                                            this.$Message.warning("请先登录");
+                                            this.$Message.warning(this.$t('common.logintip'));
                                         }
                                     }
                                 }

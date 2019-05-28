@@ -38,6 +38,12 @@ module.exports = {
         set: '设置',
         update: '修改',
         please: '请先',
+        cancel: '取消',
+        confirm: '确定',
+        pleaseChoose: '请选择搜索日期范围',
+        logIn: '去登录',
+        hint: '温馨提示',
+        hint1: '暂无该产品',
     },
     foot :{
         Standardates:"费率标准",
@@ -327,7 +333,7 @@ module.exports = {
    
 
 
-        
+
     },
     header: {
         index: '首页',
@@ -467,6 +473,7 @@ module.exports = {
             fee: '手续费',
         },
         realtime: '分时',
+        operateSuccessfully: '操作成功',
     },
     otc: {
         ad: '广告中心',
@@ -501,6 +508,7 @@ module.exports = {
             shelf: '上架',
             dropoff: '下架',
             delete: '删除',
+            info: '下架广告后才可以删除!'
         },
         myorder: '我的订单',
         chatline: {
@@ -569,6 +577,13 @@ module.exports = {
             result_5: '已取消',
             msg7: '资金密码',
             msg7tip: '请填写资金密码',
+            msg8tip: '请填写短信验证码',
+            msg9tip: '请填写谷歌验证码',
+            msg10tip: '对方已付款，请查收并确认放行',
+            msg11tip: '对方已取消订单',
+            msg12tip: '对方已申诉',
+            msg13tip: '对方已放行,请查收',
+            appeal: '付款完成30分钟后才允许申诉',
         },
         checkuser: {
             emaildone: '邮件已认证',
@@ -712,6 +727,7 @@ module.exports = {
             submittip2: '请先进行手机等一系列认证',
             submittip3: '请先进行资金密码等一系列认证',
             submittip4: '请至少绑定一种支付方式',
+            certification: '请先申请商家认证',
         },
         index: {
             title: '优质广告推荐',
@@ -808,6 +824,7 @@ module.exports = {
                 assets:'资产',
 
                 getaddress: '获取地址',
+                qrcode: '充币地址二维码',
                 resetsuccess: '获取地址成功请稍后',
                 match: '配对',
                 matchtip1: '可配对GCX的数量',
@@ -815,7 +832,8 @@ module.exports = {
                 matcherr1: '请输入有效的数量!',
                 matcherr2: '超出最大配对数量!',
                 matchsuccess: '配对成功!',
-                needreleased: "待释放资产"
+                needreleased: "待释放资产",
+                hiddenAssets: "隐藏资产为0的币种",
             },
             record: {
                 start_end: '起止时间',
@@ -1097,6 +1115,7 @@ module.exports = {
             bindemail: '绑定邮箱',
             loginpwd: '登录密码',
             emailcode: '邮箱验证码',
+            code: '验证码',
             clickget: '点击获取',
             second: '秒',
             phone: '手机',
@@ -1184,6 +1203,7 @@ module.exports = {
         },
         identity: {
             certified: "已认证",
+            upload: "上传图片大小不能超过2M",
             placeholder: "请填写取消原因",
             apply: '申请成为商家',
             become: '成为币多网认证商家， 享更多交易特权',
@@ -1288,6 +1308,7 @@ module.exports = {
         useprotocol: '使用协议',
         feenote: '资费说明',
         merchantprocotol: '商家协议',
+        notice1: '平台公告',
     },
     description: {
         // message1: 'SSL、动态身份验证等银行级别安全技术，\n保障交易安全；支持多种数字货币交易',
@@ -1301,6 +1322,13 @@ module.exports = {
         message3: '多个数字币种7X24小时交易',
         message4: '多终端APP，方寸间轻松交易',
         message5: '币多网国际数字加密资产交易平台手机客户端，专注掌上交易体验',
+        browser: '您的浏览器不支持 audio 标签',
+        browser1: '请点击允许进行开启!',
+        browser2: '您已屏蔽消息提醒，如需开通，请查看帮助!',
+        browser3: '您的浏览器不支持该功能',
+        browser4: '您已关闭桌面消息提醒!',
+        browser5: '您已开启声音消息提醒!',
+        browser6: '您已关闭声音消息提醒!',
     },
     financeNav: {
         wdzc: '我的资产'
@@ -1335,10 +1363,10 @@ module.exports = {
         yesterdaytit: "昨日天分配收入折合",
         yesterdaytotal: "昨日平台总收入折合",
         yesterdayxiangqing: "昨日收入分配详情",
-        /*yesterday:{
-          total:"平台总手续费",
-          allocated:"待分配收入",
-        }*/
+        yesterday:{
+            total:"平台总手续费",
+            allocated:"待分配收入",
+        }
     },
     feereturn: {
         ruletitle: "返还规则",
@@ -1354,6 +1382,12 @@ module.exports = {
     aboutUs: {
         c1: "币多网（币火）国际数字加密资产交易平台是一个综合数字资产交易平台,我们拥有领先的技术实力、优质的客户服务和良好的用户体验,为广大数字货币爱好者提供一个自由的网上交换的平台。",
         c2: "币多网（币火）国际数字加密资产交易平台同时还提供数字货币白皮书规划、加密算法调整、数字货币研发、交易平台上架一条龙的区块链服务。",
-        c3: "币多网（币火）国际数字加密资产交易平台海外运营中心分别设立在新加坡，柬埔寨，马绍尔。国内北京，郑州，深圳三大办事处；中国总部设立在海南陵水清水湾国际信息产业园。"
-    }
+        c3: "币多网（币火）国际数字加密资产交易平台海外运营中心分别设立在新加坡，柬埔寨，马绍尔。国内北京，郑州，深圳三大办事处；中国总部设立在海南陵水清水湾国际信息产业园。",
+        c4: "关于币多网",
+        c5: "币多网理念",
+        c6: "当下数字资产发展如火如荼，良莠不齐。币多网会筛选优质数字资产，重视项目的透明度和治理结构，在自有评级体系形成的筛选标准之上，参考市场投资者的决策，共同发掘优质数字资产价值。",
+        c7: "我们的理念是：与每一位自由汇集于此的成员共同塑造一方价值流通、合抱共耕的优质生态土壤。",
+        c8: "币多网目标",
+        c9: "我们的理念是：与每一位自由汇集于此的成员共同塑造一方价值流通、合抱共耕的优质生态土壤。",
+    },
 }

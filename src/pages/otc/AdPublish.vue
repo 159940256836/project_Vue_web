@@ -553,7 +553,8 @@ export default {
         if (certifiedBusinessStatus == 2) {
           this.getAccount();
         } else {
-          this.$Message.warning("请先申请商家认证!");
+          /*请先申请商家认证?*/
+          this.$Message.warning(this.$t('otc.publishad.certification'));
           this.$router.push("/identbusiness");
         }
       });

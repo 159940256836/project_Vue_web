@@ -187,7 +187,8 @@ export default {
                         this.exchange = this.multity(1, this.content.ratio);
                         if (!this.isLogin) {
                             this.raiseCoinNum = "--";
-                            this.status = "去登录";
+                            /*去登录*/
+                            this.status = this.$t('common.logIn');
                             this.getStatus(this.content);
                             return;
                         } else {
@@ -197,8 +198,10 @@ export default {
                     });
                 } else {
                     this.$Notice.error({
-                        title: "温馨提示",
-                        desc: "暂无该产品"
+                        /*温馨提示*/
+                        title: this.$t('common.hint'),
+                        /*暂无该产品*/
+                        desc: this.$t('common.hint1')
                     });
                 }
             })
@@ -233,13 +236,14 @@ export default {
             if (this.status != '进行中') {
                 return false
             }
-            
+
             if (this.isNaNFun(this.base)) {
                 this.$Message.error("请输入符合规格的持有币种");
                 return;
             }
             if (this.password.length == 0) {
-                this.$Message.error("请输入交易密码");
+                /*请输入交易密码*/
+                this.$Message.error(this.$t('Ieo.enter'));
                 return;
             }
             const params = {
@@ -249,14 +253,15 @@ export default {
             };
             this.$http.post(this.host + "/uc/ieo/order", params).then(res => {
                 const resp = res.body;
+                /*温馨提示*/
                 if (resp.code == 0) {
                     this.$Notice.success({
-                        title: "温馨提示",
+                        title: this.$t('common.hint'),
                         desc: resp.message
                     })
                 } else {
                     this.$Notice.error({
-                        title: "温馨提示",
+                        title: this.$t('common.hint'),
                         desc: resp.message
                     })
                 }
@@ -278,15 +283,19 @@ export default {
                 compareStAndNow = resultFun(nowTime, startTime) > 0,//查看当前时间是否在开始时间之后;
                 compareNowAndEnd = resultFun(endTime, nowTime) > 0;//查看当前时间是否在结束时间之前;
             let str = "";
+            /*去登录*/
             if (!this.isLogin) {
-                str = "去登录"
+                str = this.$t('common.logIn')
             } else {
                 if (!compareStAndNow) {
-                    str = "预热中"
+                    /*预热中*/
+                    str = this.$t('Ieo.preheating')
                 } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
-                    str = "进行中"
+                    /*进行中*/
+                    str = this.$t('Ieo.underway')
                 } else if (!compareNowAndEnd || !surplusAmount) {
-                    str = "已完成"
+                    /*已完成*/
+                    str = this.$t('Ieo.finished')
                 }
             }
 

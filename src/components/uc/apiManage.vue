@@ -46,8 +46,20 @@
         </FormItem>
       </Form>
       <div slot="footer">
-        <Button type="text" size="large" @click="editor=false">取消</Button>
-        <Button type="primary" size="large" @click="update">确定</Button>
+        <Button
+          type="text"
+          size="large"
+          @click="editor=false"
+        >
+          {{ $t('common.cancel') }}
+        </Button>
+        <Button
+          type="primary"
+          size="large"
+          @click="update"
+        >
+          {{ $t('common.confirm') }}
+        </Button>
       </div>
     </Modal>
     <!--删除-->
@@ -97,8 +109,22 @@
         </FormItem>
       </Form>
       <div slot="footer">
-        <Button type="text" size="large" @click="verify=false">取消</Button>
-        <Button type="primary" size="large" @click="make">确定</Button>
+        <Button
+          type="text"
+          size="large"
+          @click="verify=false"
+        >
+          <!--取消-->
+          {{ $t('common.cancel') }}
+        </Button>
+        <Button
+          type="primary"
+          size="large"
+          @click="make"
+        >
+          <!--确定-->
+          {{ $t('common.confirm') }}
+        </Button>
       </div>
     </Modal>
     <!--编辑短信校验-->
@@ -117,8 +143,22 @@
           </FormItem>
         </Form>
         <div slot="footer">
-          <Button type="text" size="large" @click="verifyEditor=false">取消</Button>
-          <Button type="primary" size="large" @click="okUpdate">确定</Button>
+          <Button
+            type="text"
+            size="large"
+            @click="verifyEditor=false"
+          >
+            <!--取消-->
+            {{ $t('common.cancel') }}
+          </Button>
+          <Button
+            type="primary"
+            size="large"
+            @click="okUpdate"
+          >
+            <!--确定-->
+            {{ $t('common.confirm') }}
+          </Button>
         </div>
       </Modal>
     </div>

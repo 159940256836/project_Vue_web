@@ -11,7 +11,7 @@
             >
                 <div class="time_download">
                     <div class="netLogo">
-                        <router-link to="/"><img src="./assets/images/logo.png" alt=""></router-link>
+                        <router-link to="/"><img style="width: 80%;" src="./assets/images/logo.png" alt=""></router-link>
                     </div>
                     <div class="nav" :class="locale == 'en' ? 'en' : ''">
                         <!--<router-link to="/">{{$t("header.index")}}</router-link>-->
@@ -133,7 +133,7 @@
                                 <li>
                                     <!-- <router-link to="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</router-link> -->
                                       <a href="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</a>
-                                    
+
                                 </li>
                                  <!-- <li>
                                     <router-link to="/">{{$t("footer.appDownload")}}</router-link>
@@ -517,7 +517,7 @@ export default {
                     overflow: hidden;
                     min-width: 1050px;
                     .netLogo {
-                        width: 145px;
+                        width: 40px;
                         float: left;
                             img {
                                 vertical-align: middle;

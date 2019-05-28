@@ -10,7 +10,9 @@ const en = {
     _loanAvailable: "loan available",
     _loanReturn: 'loan return',
     _hazardRate: 'hazard rate',
-    _BlowingUpPrice: 'Blowing up price'
+    _BlowingUpPrice: 'Blowing up price',
+    _outCurrency: 'Please enter the currency you want to transfer out',
+    _outNumber: 'Please enter the number you want to roll out',
 }
 const zh = {
     _BitcoinAccount: "币币账户",
@@ -24,7 +26,9 @@ const zh = {
     _loanAvailable: "可借",
     _loanReturn: '借贷归还',
     _hazardRate: '风险率',
-    _BlowingUpPrice: '爆仓价'
+    _BlowingUpPrice: '爆仓价',
+    _outCurrency: '请输入你要转出的币种',
+    _outNumber: '请输入你要转出的个数',
 }
 exports.en = en;
 exports.zh = zh;

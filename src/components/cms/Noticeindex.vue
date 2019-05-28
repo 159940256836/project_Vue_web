@@ -4,13 +4,24 @@
             <div class="bill_box rightarea padding-right-clear">
                 <section class="trade-group merchant-top">
                     <i class="merchant-icon tips"></i>
-                    <span class="tips-word">平台公告</span>
+                    <!--平台公告-->
+                    <span class="tips-word">{{ $t('cms.notice1') }}</span>
                 </section>
                 <section class="noticeBox">
-                    <Table stripe :columns="tableColumnsAdv" :data="tableData1" :show-header="sasa"></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        stripe
+                        :columns="tableColumnsAdv"
+                        :data="tableData1"
+                        :show-header="sasa"
+                    ></Table>
                     <div style="margin: 10px;overflow: hidden">
                         <div style="float: right;">
-                            <Page :total="100" :current="1" @on-change="changePage"></Page>
+                            <Page
+                                :total="100"
+                                :current="1"
+                                @on-change="changePage"
+                            ></Page>
                         </div>
                     </div>
                 </section>

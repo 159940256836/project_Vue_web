@@ -60,23 +60,23 @@ export default {
   },
   methods:{
       draw(){
-        var opts = this.opts;
-        var values = this.values;
+        let opts = this.opts;
+        let values = this.values;
         if (values.length == 1) values.push(values[0])
-        var max = Math.max.apply(Math, opts.max == undefined ? values : values.concat(opts.max))
+        let max = Math.max.apply(Math, opts.max == undefined ? values : values.concat(opts.max))
             , min = Math.min.apply(Math, opts.min == undefined ? values : values.concat(opts.min))
 
-        var strokeWidth = opts.strokeWidth
+        let strokeWidth = opts.strokeWidth
             , width = opts.width
             , height = opts.height - strokeWidth
             , diff = max - min
 
-        var xScale = this.x = function(input) {
+        let xScale = this.x = function(input) {
             return input * (width / (values.length - 1))
         }
 
-        var yScale = this.y = function(input) {
-            var y = height
+        let yScale = this.y = function(input) {
+            let y = height
 
             if (diff) {
                 y -= ((input - min) / diff) * height
@@ -85,11 +85,11 @@ export default {
             return y + strokeWidth / 2
         }
 
-        var zero = yScale(Math.max(min, 0));
+        let zero = yScale(Math.max(min, 0));
         this.coords = [];
         this.coords = [0, zero]
 
-        for (var i = 0; i < values.length; i++) {
+        for (let i = 0; i < values.length; i++) {
             this.coords.push(
             xScale(i),
             yScale(values[i])

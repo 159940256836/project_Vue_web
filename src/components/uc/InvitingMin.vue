@@ -184,7 +184,8 @@
             queryOrder(){
                 let rangedate = "";
                 if (this.rangeDate.length == 0) {
-                    this.$Message.error("请选择搜索日期范围");
+                    /*请选择搜索日期范围*/
+                    this.$Message.error(this.$t('common.pleaseChoose'));
                     return;
                 }else {
                     try {
@@ -192,7 +193,7 @@
                         rangedate += "~";
                         rangedate += this.rangeDate[1].getFullYear() + "-" + (this.rangeDate[1].getMonth() + 1) + "-" + this.rangeDate[1].getDate();
                     }catch(ex) {
-                        this.$Message.error("请选择搜索日期范围");
+                        this.$Message.error(this.$t('common.pleaseChoose'));
                         return;
                     }
                 }

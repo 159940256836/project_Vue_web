@@ -101,11 +101,13 @@ export default {
         ok() {
             const result = isCheck(this.value).map(value => value[1]).fold(x => "err", x => x);
             if (result == "err") {
-                this.$Message.error("请输入你要转出的币种");
+                /*请输入你要转出的币种*/
+                this.$Message.error(this.$t('myAccount._outCurrency'));
                 return;
             }
             if (this.num == 0) {
-                this.$Message.error("请输入你要转出的个数");
+                /*请输入你要转出的个数*/
+                this.$Message.error(this.$t('myAccount._outNumber'));
                 return;
             }
             const params = {

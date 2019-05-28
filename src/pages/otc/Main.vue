@@ -212,7 +212,8 @@ export default {
           path: "/identbusiness"
         });
       } else {
-        this.$Message.warning("请先登录");
+        /*请先登录*/
+        this.$Message.warning(this.$t('common.logintip'));
       }
     },
     menuSelected(menuName) {

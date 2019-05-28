@@ -19,10 +19,18 @@
                 <span class="circle">●</span>
             </div>
             <div v-if=" lang==='简体中文' ">
-              <Table size="small" :columns="columns2" :data="data1"></Table>
+              <Table
+                  size="small"
+                  :columns="columns2"
+                  :data="data1"
+              ></Table>
             </div>
             <div v-else>
-              <Table size="small" :columns="columns1" :data="data1"></Table>
+              <Table
+                  size="small"
+                  :columns="columns1"
+                  :data="data1"
+              ></Table>
             </div>
         </div>
     </div>
@@ -52,12 +60,14 @@ export default {
                         title: 'Coin',
                         key: 'coin'
                     },
+                     /*待分配收入*/
                     {
-                        title: "待分配收入",
+                        title: this.$t("plate.yesterday.total"),
                         key: 'total'
                     },
+                     /*平台总手续费*/
                     {
-                        title: "平台总手续费",
+                        title: this.$t("plate.yesterday.allocated"),
                         key: 'allocated'
                     }
                 ],

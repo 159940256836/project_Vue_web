@@ -2,10 +2,18 @@
     <div class="noReturn">
         <h4>{{$t('coin.recode')}}</h4>
         <div>
-            <Table :columns="columns" :data="data"></Table>
+            <Table
+                :no-data-text="$t('common.nodata')"
+                :columns="columns"
+                :data="data"
+            ></Table>
         </div>
         <div class="lever-list" style="">
-            <Page v-show="totalElement > 10" :total="totalElement" @on-change="changePage" />
+            <Page
+                v-show="totalElement > 10"
+                :total="totalElement"
+                @on-change="changePage"
+            />
         </div>
     </div>
 </template>

@@ -43,7 +43,8 @@
                                         {{user.realName}}
                                     </p>
                                     <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo" style="color: #3399ff;">
-                                        审核未通过{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}，请重试。
+                                        <!--审核未通过 ，请重试-->
+                                        {{'uc.safe.safelevel_medium'}}{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}，{{'uc.safe.againVerify'}}。
                                     </p>
                                     <p v-else class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.verifiedtip')}}
@@ -375,7 +376,8 @@
                                             </FormItem>
                                             <p style="text-align:right;">
                                                 <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#3399ff;">
-                                                    忘记密码?
+                                                    <!--忘记密码?-->
+                                                    {{'uc.login.forget'}}
                                                 </a>
                                             </p>
                                             <!-- Button -->
@@ -819,7 +821,8 @@ export default {
             //     return false;
             // }
             if (data && data.size >= 1024000 * 2) {
-                this.$Message.error("上传图片大小不能超过2M");
+                /*上传图片大小不能超过2M*/
+                this.$Message.error(this.$t('uc.identity.upload'));
                 return false;
             }
         },
