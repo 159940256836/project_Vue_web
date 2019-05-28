@@ -22,9 +22,15 @@ const zh = {
     email: "服务邮箱",
     friendLinks: "友情链接",
     bulletinboard:"公告板",
+    Legaotices:"法律声明",
+    Privgreement:"隐私协议",
+    Usereement:"用户协议",
 }
 
 const en = {
+    Usereement:'User agreement',
+    Privgreement:'Privacy agreement',
+    Legaotices:'Legal notices',
     download: "Download support",
     apiDoc: "Api document",
     appDownload: "APP Download",
