@@ -6,30 +6,50 @@
                 <Icon v-else type="ios-star-outline" color="#3399ff" size="24" />
             </div>
             <div class="item">
-                <span class="coin">{{currentCoin.coin}}
-                    <small>/{{currentCoin.base}}</small>
+                <span class="coin">
+                    {{currentCoin.coin?currentCoin.coin:'---'}}
+                    <small>/{{currentCoin.base?currentCoin.base:'---'}}</small>
                 </span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.last')}}</span>
-                <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.close | toFixed(baseCoinScale)}}</span>
-                <span class="price-cny">￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}</span>
+                <span
+                    class="num"
+                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                    v-if="currentCoin.close"
+                >
+                    {{currentCoin.close | toFixed(baseCoinScale)}}
+                </span>
+                <span
+                    class="num"
+                    v-else
+                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                >
+                    ---
+                </span>
+                <span class="price-cny">
+                    ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
+                </span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.up')}}</span>
-                <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.rose}}</span>
+                <span class="num" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">
+                    {{currentCoin.rose?currentCoin.rose:'---'}}
+                </span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.celling')}}</span>
-                <span class="num ">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-if="currentCoin.high">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-else>---</span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.floor')}}</span>
-                <span class="num ">{{currentCoin.low | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-if="currentCoin.low">{{currentCoin.low | toFixed(baseCoinScale)}}</span>
+                <span class="num" v-else>---</span>
             </div>
             <div class="item">
                 <span class="text">{{$t('coin.turnover')}}</span>
-                <span class="num ">{{currentCoin.volume}} {{currentCoin.coin}}</span>
+                <span class="num">{{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}</span>
             </div>
             <div class="item" @click="changeSkin">
                 <img :src="skin == 'night' ? night : day" alt="">
@@ -45,12 +65,35 @@
                 </div>
                 <Table v-show="selectedPlate!='buy'" @on-current-change="buyPlate" highlight-row ref="currentRowTable" class="sell_table" :columns="plate.columns" :data="plate.askRows"></Table>
                 <div class="plate-nowprice">
-                    <span class="price" :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}">{{currentCoin.price | toFixed(baseCoinScale)}}</span>
+                    <span
+                      class="price"
+                      :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                      v-if="currentCoin.price"
+                    >
+                        {{currentCoin.price | toFixed(baseCoinScale)}}
+                    </span>
+                    <span
+                        class="price"
+                        :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                        v-else
+                    >
+                        ---
+                    </span>
                     <span v-if="currentCoin.change>0" class="buy">↑</span>
                     <span v-else class="sell">↓</span>
-                    <span class="price-cny"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>
+                    <span class="price-cny" v-if="currentCoin.usdRate"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>
+                    <span class="price-cny" v-else>---</span>
                 </div>
-                <Table v-show="selectedPlate!='sell'" @on-current-change="sellPlate" highlight-row class="buy_table" :class="{hidden:selectedPlate==='all'}" :columns="plate.columns" :data="plate.bidRows"></Table>
+                <Table
+                    :no-data-text="$t('common.nodata')"
+                    v-show="selectedPlate!='sell'"
+                    @on-current-change="sellPlate"
+                    highlight-row
+                    class="buy_table"
+                    :class="{hidden:selectedPlate==='all'}"
+                    :columns="plate.columns"
+                    :data="plate.bidRows"
+                ></Table>
             </div>
             <div class="center">
                 <div class="imgtable">

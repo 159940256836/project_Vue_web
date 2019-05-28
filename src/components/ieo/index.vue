@@ -48,11 +48,14 @@ export default {
             compareNowAndEnd = resultFun(endTime, nowTime);//查看当前时间是否在结束时间之前;
         let str = "";
         if (!compareStAndNow) {
-            str = "预热中"
+            /*预热中*/
+            str = this.$t('Ieo.preheating')
         } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
-            str = "进行中"
+            /*进行中*/
+            str = this.$t('Ieo.underway')
         } else if (!compareNowAndEnd || !surplusAmount) {
-            str = "已完成"
+            /*已完成*/
+            str = this.$t('Ieo.finished')
         }
         this.status = str;
     },
@@ -97,7 +100,7 @@ export default {
 }
 .red{
     color:#00B274 !important;
-   
+
 }
 .type.yellow:before{
     background:#AAAAAA !important;

@@ -38,6 +38,8 @@ module.exports = {
         set: 'Set',
         update: 'Modify',
         please: 'Please',
+        cancel: 'cancel',
+        confirm: 'confirm',
     },
     foot :{
         Standardates:'Standard rates',
@@ -199,6 +201,7 @@ module.exports = {
             fee: 'fee',
         },
         realtime: 'realtime',
+        operateSuccessfully: 'operate successfully',
     },
     otc: {
         ad: 'Advertising',
@@ -233,6 +236,7 @@ module.exports = {
             shelf: 'shelf',
             dropoff: 'dropoff',
             delete: 'delete',
+            info: 'Removed from the advertising can be deleted!'
         },
         myorder: 'My Order',
         chatline: {
@@ -300,6 +304,12 @@ module.exports = {
             result_5: 'Canceled',
             msg7: 'Fund Password',
             msg7tip: 'please enter fund password',
+            msg8tip: 'Please fill in the SMS verification code',
+            msg9tip: 'Please fill in the Google verification code',
+            msg10tip: 'The other side has paid, please check and confirm release',
+            msg11tip: 'The other party has cancelled the order',
+            msg12tip: 'The other party has complained.',
+            msg13tip: 'The other party has released it, please check',
         },
         checkuser: {
             emaildone: 'Email certified',
@@ -442,6 +452,7 @@ module.exports = {
             submittip2: 'Please conduct a series of certifications such as mobile phones',
             submittip3: 'Please proceed with a series of certifications such as capital passwords',
             submittip4: 'Please bind at least one payment method',
+            certification: 'Please apply for merchant certification first',
         },
         index: {
             title: 'Good advertising recommendation',
@@ -509,6 +520,7 @@ module.exports = {
             smscodetip: 'Enter sms verification code',
             email: 'Email',
             emailcode: 'Email verification code',
+            code: 'code',
             emailtip: 'Enter email',
             emailcodetip: 'Enter email verification code',
             resetpwdsuccess: 'Reset password success',
@@ -535,6 +547,7 @@ module.exports = {
                 charge: 'Charge',
                 pickup: 'Pick up',
                 getaddress: 'Get Address',
+                qrcode: 'Qr code for charging currency address',
                 resetsuccess: 'Reset Success',
                 match: 'Match',
                 matchtip1: 'Available Match GCX Amount',
@@ -542,7 +555,8 @@ module.exports = {
                 matcherr1: 'Please enter a valid quantity!',
                 matcherr2: 'Exceeds the maximum number of matches!',
                 matchsuccess: 'Match Success!',
-                needreleased: "Stay release"
+                needreleased: "Stay release",
+                hiddenAssets: "The currency in which the hidden asset is 0",
             },
             trade: {
                 accumulative_return: 'Mining fees have been repaid (BHB) : ',
@@ -906,6 +920,7 @@ module.exports = {
         },
         identity: {
             certified: "already certified",
+            upload: "Upload images cannot exceed 2M in size",
             placeholder: "Please fill in the reason for cancellation",
             apply: 'Apply to become business',
             become: "Become 币多网 Certified Business and enjoy more transaction privileges",
@@ -1009,6 +1024,7 @@ module.exports = {
         useprotocol: 'Use Agreement',
         feenote: 'Charge description',
         merchantprocotol: 'Merchant Agreement',
+        notice1: 'Platform announcement',
     },
     description: {
         title1: 'security',
@@ -1022,6 +1038,13 @@ module.exports = {
         // message3: '币多网 Exchange supports 10,00 transactions per second, giving users a hearty transaction experience',
         message4: 'Multi-terminal APP, easily traded between',
         message5: '币多网 international digital encryption asset trading platform mobile client, focusing on palm trading experience',
+        browser: 'Your browser does not support the audio tag',
+        browser1: 'Please click allow to open!',
+        browser2: 'You have blocked the message reminder, if you need to open, please check the help!',
+        browser3: 'Your browser does not support this feature',
+        browser4: 'You have turned off desktop message alerts!',
+        browser5: 'You have turned on voice message alerts!',
+        browser6: 'You have turned off sound message alerts!',
     },
     index: {
         circulation: 'Safety and development fund circulation',
@@ -1072,6 +1095,12 @@ module.exports = {
     aboutUs: {
         c1: "币多网 international digital encryption asset trading platform is a comprehensive digital asset trading platform. We have the leading technology strength, the excellent customer service and a good user experience, and provide a free online exchange platform for the majority of digital currency enthusiasts.",
         c2: "币多网 international digital encryption asset trading platform also provides one-stop blockchain service, including planning of digital currency white paper , adjustment of encryption algorithm, research and development of digital currency, launched of trading platform.",
-        c3: "币多网 international digital encrypted asset trading platform overseas operation centers are set up in Singapore, Cambodia and Marshall respectively. There are three offices in Beijing, Zhengzhou and Shenzhen. The Chinese headquarters is set up in Qingshuiwan international information industrial park in Lingshui, Hainan province."
+        c3: "币多网 international digital encrypted asset trading platform overseas operation centers are set up in Singapore, Cambodia and Marshall respectively. There are three offices in Beijing, Zhengzhou and Shenzhen. The Chinese headquarters is set up in Qingshuiwan international information industrial park in Lingshui, Hainan province.",
+        c4: "About bitcoin",
+        c5: "The idea of bitcoin and the Internet",
+        c6: "The current development of digital assets in full swing, good and bad.It will screen high-quality digital assets, attach importance to the transparency and governance structure of projects, and jointly explore the value of high-quality digital assets based on the screening criteria formed by its own rating system and the decisions of market investors.",
+        c7: "Our philosophy is to work with all members who are free to come together to create a quality ecological soil for value exchange and co-cultivation.",
+        c8: "Bitcoin multi-net target",
+        c9: "Our philosophy is to work with all members who are free to come together to create a quality ecological soil for value exchange and co-cultivation.",
     }
 }

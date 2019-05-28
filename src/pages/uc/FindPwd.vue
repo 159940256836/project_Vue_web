@@ -13,7 +13,7 @@
                     </Input>
                 </FormItem>
                 <FormItem prop="code">
-                    <Input type="text" v-model="formInline.code" placeholder="验证码">
+                    <Input type="text" v-model="formInline.code" :placeholder="$t('uc.safe.code')">
                     </Input>
                     <input id="sendCode" type="Button" :value="sendcodeValue" :disabled="codedisabled">
                     </input>

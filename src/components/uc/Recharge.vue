@@ -40,7 +40,8 @@
                                         {{$t('uc.finance.recharge.qrcode')}}
                                         <Modal v-model="isShowEwm">
                                             <!--<div v-show="isShowEwm" class="show-qrcode">-->
-                                            <p slot="header" style="text-align: center;">充币地址二维码</p>
+                                            <!--充币地址二维码-->
+                                            <p slot="header" style="text-align: center;">{{'uc.finance.money.qrcode'}}</p>
                                             <div class="show-qrcode" style="text-align: center;">
                                                 <!--<qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
                                                 <qriously :value="qrcode.value" :size="qrcode.size" />
@@ -161,7 +162,8 @@ export default {
         // 获取充币地址
         resetAddress() {
             if (!this.coinType) {
-                this.$Message.error("请选择币种");
+                /*请选择币种*/
+                this.$Message.error(this.$t('uc.finance.withdraw.symboltip'));
                 return;
             }
             let params = {};

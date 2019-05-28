@@ -286,10 +286,14 @@ export default {
     sendOrderStatusNotice: function(type) {
       if (this.reserveInteval != null) clearInterval(this.reserveInteval);
       var content = "";
-      if (type == 1) content = "对方已付款，请查收并确认放行!";
-      else if (type == 3) content = "对方已取消订单!";
-      else if (type == 4) content = "对方已申诉!";
-      else if (type == 5) content = "对方已放行,请查收!";
+        /*对方已付款，请查收并确认放行!*/
+      if (type == 1) content = this.$t("otc.chat.msg10tip");
+        /*对方已取消订单!*/
+      else if (type == 3) content = this.$t("otc.chat.msg11tip");
+        /*对方已申诉!*/
+      else if (type == 4) content = this.$t("otc.chat.msg12tip");
+        /*对方已放行,请查收!*/
+      else if (type == 5) content = this.$t("otc.chat.msg13tip");
       var jsonParam = {
         uidTo: this.msg.hisId,
         uidFrom: this.msg.myId,
@@ -347,7 +351,7 @@ export default {
       var payTime = new Date(this.msg.payTime).getTime();
       if (parseInt((nowTime - payTime) / 1000) < 1800) {
         //付款时间小于30分钟不允许申诉
-        this.$Message.info("付款完成30分钟后才允许申诉!");
+        this.$Message.info(this.$t('otc.chat.appeal'));
         return;
       } else {
         this.modal4 = true;

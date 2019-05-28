@@ -187,12 +187,14 @@ export default {
                         title: 'Coin',
                         key: 'coin'
                     },
+                   /*待分配收入*/
                     {
-                        title: "待分配收入",
+                        title: this.$t("plate.yesterday.total"),
                         key: 'total'
                     },
+                   /*平台总手续费*/
                     {
-                        title: "平台总手续费",
+                        title: this.$t("plate.yesterday.allocated"),
                         key: 'allocated'
                     }
                 ],

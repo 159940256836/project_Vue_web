@@ -70,7 +70,10 @@
             </h5>
             <!---->
           <div class="audio-wrap">
-            <audio id="noticeMusic" :src="audioSrc">您的浏览器不支持 audio 标签。</audio>
+            <audio id="noticeMusic" :src="audioSrc">
+                <!--您的浏览器不支持 audio 标签。-->
+                {{$t('description.browser')}}
+            </audio>
           </div>
             <div class="send-msg-box">
                 <div class="img-btn" style="background: #fff;cursor: default;">
@@ -152,28 +155,34 @@ export default {
             if (this.fOpenNotice) {
               if (window.Notification) {
                 if (Notification.permission == "default") {
-                  this.$Message.info('请点击允许进行开启!');
+                    /*请点击允许进行开启*/
+                  this.$Message.info(this.$t('description.browser1'));
                   Notification.requestPermission().then(function(result) {
                     // result可能是是granted, denied, 或default.
-                    if(result == "denied") this.$Message.info('您已屏蔽消息提醒，如需开通，请查看帮助!');
+                      /*'您已屏蔽消息提醒，如需开通，请查看帮助!'*/
+                    if(result == "denied") this.$Message.info(this.$t('description.browser2'));
                   });
                 }else if(Notification.permission == "denied") {
-                  this.$Message.info('您已屏蔽消息提醒，如需开通，请查看帮助!');
+                  this.$Message.info(this.$t('description.browser2'));
                 }else {
                   this.$Message.info();
                 }
               } else {
-                this.$Message.info('您的浏览器不支持该功能');
+                  /*'您的浏览器不支持该功能'*/
+                this.$Message.info(this.$t('description.browser3'));
               }
             }else {
-              this.$Message.info("您已关闭桌面消息提醒!");
+                /*"您已关闭桌面消息提醒!"*/
+              this.$Message.info(this.$t('description.browser4'));
             }
         },
         handleAudioClick:function () {
           if (this.fOpenAudio) {
-            this.$Message.info("您已开启声音消息提醒!");
+              /*您已开启声音消息提醒*/
+            this.$Message.info(this.$t('description.browser5'));
           }else {
-            this.$Message.info("您已关闭声音消息提醒!");
+              /*您已关闭声音消息提醒*/
+            this.$Message.info(this.$t('description.browser6'));
           }
         },
         connect: function() {

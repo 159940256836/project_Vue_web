@@ -132,7 +132,7 @@
                                 <li>
                                     <!-- <router-link to="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</router-link> -->
                                       <a href="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</a>
-                                    
+
                                 </li>
                                  <!-- <li>
                                     <router-link to="/">{{$t("footer.appDownload")}}</router-link>
