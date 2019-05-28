@@ -54,6 +54,7 @@
                                     <DropdownMenu slot="list">
                                         <DropdownItem name="recharge"><span>{{$t("exchange.recharge")}}</span></DropdownItem>
                                         <DropdownItem name="pickup"><span>{{$t("uc.finance.money.pickup")}}</span></DropdownItem>
+                                        <DropdownItem name="asset"><span>{{$t("uc.finance.money.assets")}}</span></DropdownItem>
 
                                     </DropdownMenu>
                                 </Dropdown>
@@ -193,7 +194,7 @@
                                 <li>
                                     <router-link to="/">{{$t('footer.officeNotice')}}</router-link>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <router-link to="/">{{$t('footer.marketPlan')}}</router-link>
                                 </li>
                                 <li>
@@ -201,6 +202,18 @@
                                 </li>
                                 <li>
                                     <router-link to="/">{{$t('footer.questionnaire')}}</router-link>
+                                </li> -->
+                                 <li>
+                                     <!-- 法律声明 -->
+                                    <router-link to="/law">{{$t('footer.Legaotices')}}</router-link>
+                                </li>
+                                <li>
+                                    <!-- 隐私协议 -->
+                                    <router-link to="/Privgreement">{{$t('footer.Privgreement')}}</router-link>
+                                </li>
+                                <li>
+                                    <!-- 用户协议 -->
+                                    <router-link to="/Usereement">{{$t('footer.Usereement')}}</router-link>
                                 </li>
 
                             </ul>
@@ -390,6 +403,9 @@ export default {
                 }
             if (name == "pickup") {
                 this.$router.push("/uc/withdraw");
+            }
+            if(name == 'asset'){
+                this.$router.push("/uc/record");
             }
         },
         handleScroll () {

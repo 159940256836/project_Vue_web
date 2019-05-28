@@ -8,11 +8,7 @@
       <div class="content_top">
         <div class="content_top_list">
           <!-- 交易对费率  等级费率   otc币种费率  币种费率-->
-          <div
-            class="right"
-            @click="listTab(1)"
-            :class="tabid==1?'active':''"
-          >{{$t("foot.Tradrate")}}</div>
+          <div  class="right" @click="listTab(1)" :class="tabid==1?'active':''">{{$t("foot.Tradrate")}}</div>
           <div @click="listTab(2)" :class="tabid==2?'active':''">{{$t("foot.Gradrate")}}</div>
           <div @click="listTab(3)" :class="tabid==3?'active':''">{{$t("foot.Otcurrenrates")}}</div>
           <div @click="listTab(4)" :class="tabid==4?'active':''">{{$t("foot.Currencrates")}}</div>
@@ -32,7 +28,7 @@
       <div class="content_content" v-show="tabid==2">
         <div class="content_tab">
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
-          <div class="content_tab_title1">{{$t("foot.Tradrate")}}</div>
+          <div class="content_tab_title1">{{$t("foot.Gradrate")}}</div>
           <div class="content_tab_buy">
             <Table :columns="columns1" :data="data1">
               <template slot-scope="{ row }" slot="exchangeFeeRate">
@@ -46,7 +42,7 @@
       <div class="content_content" v-show="tabid==3">
         <div class="content_tab">
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
-          <div class="content_tab_title1">{{$t("foot.Tradrate")}}</div>
+          <div class="content_tab_title1">{{$t("foot.Otcurrenrates")}}</div>
           <div class="content_tab_buy">
             <Table :columns="columns3" :data="data3"></Table>
           </div>
@@ -57,7 +53,7 @@
       <div class="content_content" v-show="tabid==4">
         <div class="content_tab">
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
-          <div class="content_tab_title1">{{$t("foot.Tradrate")}}</div>
+          <div class="content_tab_title1">{{$t("foot.Currencrates")}}</div>
           <div class="content_tab_buy">
             <Table :columns="columns4" :data="data4"></Table>
           </div>
