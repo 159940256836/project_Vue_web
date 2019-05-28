@@ -11,7 +11,7 @@
             >
                 <div class="time_download">
                     <div class="netLogo">
-                        <router-link to="/"><img src="./assets/images/logo.png" alt=""></router-link>
+                        <router-link to="/"><img style="width: 80%;" src="./assets/images/logo.png" alt=""></router-link>
                     </div>
                     <div class="nav" :class="locale == 'en' ? 'en' : ''">
                         <!--<router-link to="/">{{$t("header.index")}}</router-link>-->
@@ -130,14 +130,16 @@
                                     <span>{{$t("footer.download")}}</span>
                                 </li>
                                 <li>
-                                    <router-link to="/">{{$t("footer.apiDoc")}}</router-link>
+                                    <!-- <router-link to="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</router-link> -->
+                                      <a href="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</a>
+                                    
                                 </li>
-                                 <li>
+                                 <!-- <li>
                                     <router-link to="/">{{$t("footer.appDownload")}}</router-link>
                                 </li>
                                  <li>
                                     <router-link to="/">{{$t("footer.otherDownload")}}</router-link>
-                                </li>
+                                </li> -->
 
                             </ul>
                             <!--客户服务-->
@@ -154,8 +156,9 @@
                                 <li>
                                     <router-link to="/">{{$t("footer.serviceArgee")}}</router-link>
                                 </li>
+                                <!-- 交易费率 -->
                                 <li>
-                                    <router-link to="/">{{$t("footer.transactionCosts")}}</router-link>
+                                    <router-link to="/transactionCosts">{{$t("footer.transactionCosts")}}</router-link>
                                 </li>
                             </ul>
                             <!--投票上币-->
@@ -498,7 +501,7 @@ export default {
                     overflow: hidden;
                     min-width: 1050px;
                     .netLogo {
-                        width: 145px;
+                        width: 40px;
                         float: left;
                             img {
                                 vertical-align: middle;
