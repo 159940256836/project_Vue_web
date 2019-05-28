@@ -61,6 +61,7 @@ export default {
     },
     created() {
         this.init();
+        this.settiele();
     },
     methods: {
         changeTab(n){

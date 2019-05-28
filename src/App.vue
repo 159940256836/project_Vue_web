@@ -488,7 +488,7 @@ export default {
                     colorDark: "#000000",
                     colorLight: "#ffffff",
                 });
-        window.addEventListener('scroll', this.handleScroll)
+        window.addEventListener('scroll', this.handleScroll);
     },
     beforeDestroy () {
         window.removeEventListener('scroll', this.handleScroll)

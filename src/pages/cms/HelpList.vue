@@ -108,6 +108,7 @@ export default {
         // this.cate = cate;
         // this.cateTitle = cateTitle;
         this.getAllData();
+        this.settiele();
     },
     watch: {
         $route(to, from) {

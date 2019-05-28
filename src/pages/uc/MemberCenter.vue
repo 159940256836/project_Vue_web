@@ -330,6 +330,7 @@ export default {
         this.init();
         const path = this.$route.path;
         this.heightLightMenu(path);
+        this.settiele();
     },
     methods: {
         init() {

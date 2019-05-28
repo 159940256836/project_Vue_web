@@ -1204,6 +1204,7 @@ export default {
 
     },
     created() {
+        this.settiele();
         this.userUid()
         this.getMember().then(res => {
             this.checkGoogleValidtor({ mobile: res.mobilePhone });
