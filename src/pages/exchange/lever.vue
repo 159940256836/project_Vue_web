@@ -1692,7 +1692,9 @@ export default {
         //   this.getCurrentOrder();
         //   this.getHistoryOrder();
         // }
-        // // this.setback();
+        if(this.isLogin){
+        this.getMember();
+        }
     },
     methods: {
         getdefaultSymbol() {
@@ -1734,6 +1736,9 @@ export default {
             if (params == undefined) {
                 this.$router.push("/leverindex/" + this.defaultPath);
                 params = this.defaultPath;
+            }else{
+                let title =params.replace("_","/").toUpperCase()+" 币多网"
+                this.settiele(title)
             }
             const basecion = params.split("_")[1];
             if (basecion) {
@@ -1770,7 +1775,6 @@ export default {
         getSymboLeverMsg() {
             this.$http.post(this.host + "/margin-trade/lever_wallet/list", { symbol: this.currentCoin.symbol }).then(res => {
                 const data = res.body;
-                console.log(data);
                 if (data.code == 0) {
                     const list = data.data.map(ele => ({
                         symbol: ele.symbol,
@@ -1779,10 +1783,8 @@ export default {
                         riskRate: ele.riskRate + "%",
                         baseCoin: this.currentCoin.base
                     }));
-
                     const [{ symbol, explosionPrice, proportion, riskRate, baseCoin }] = list;
                     this.LeversymbolMsg = { symbol, explosionPrice, proportion, riskRate, baseCoin };
-                    console.log(this.LeversymbolMsg);
                 }
             })
         },
@@ -1803,20 +1805,15 @@ export default {
         //       }
         //     });
         // },
-        // getMember() {
-        //   //获取个人安全信息
-        //   this.$http
-        //     .post(this.host + "/uc/approve/security/setting")
-        //     .then(response => {
-        //       let resp = response.body;
-        //       if (resp.code == 0) {
-        //         this.user = resp.data;
-        //         this.userRealVerified = resp.data.realVerified; //0,1
-        //       } else {
-        //         this.$Message.error(this.$t("common.logintip"));
-        //       }
-        //     });
-        // },
+        getMember() {
+          //获取个人安全信息
+          this.$http
+            .post(this.host + "/uc/approve/security/setting")
+            .then(response => {
+              let resp = response.body;
+              this.member.realName=resp.data.realName;
+            });
+        },
         // changeUseBHB() {
         //     if (this.memberRate > 0) {
         //         //会员身份：0普通，1超级群主，3超级合伙人

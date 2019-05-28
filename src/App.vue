@@ -14,7 +14,7 @@
                         <router-link to="/"><img style="width: 80%;" src="./assets/images/logo.png" alt=""></router-link>
                     </div>
                     <div class="nav" :class="locale == 'en' ? 'en' : ''">
-                        <!--<router-link to="/">{{$t("header.index")}}</router-link>-->
+                        <!-- <router-link to="/">{{$t("header.index")}}</router-link> -->
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
                         <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
                          <router-link to="/leverindex">{{$t("header.lever")}}</router-link>
@@ -22,7 +22,6 @@
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">{{$t('header.help')}}</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
-
 
                     </div>
                     <div class="nav-header">

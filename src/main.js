@@ -22,7 +22,7 @@ Vue.use(VueRouter);
 Vue.use(vueResource);
 Vue.use(VueI18n);
 
- Vue.prototype.host = "http://192.168.124.43"; // 测试环境
+Vue.prototype.host = "http://192.168.124.43"; // 测试环境
 // Vue.prototype.host = "http://www.coinmany.com"; // 第一套
 //Vue.prototype.host = "https://manager.coinmany.com/"; // 正式
 
@@ -120,6 +120,11 @@ const threeComma = (num) => {
 Vue.filter('threeComma', threeComma);
 
 Vue.prototype.toFloor = toFloor;
+Vue.prototype.settiele = (name)=>{
+    if(name!=undefined){
+        window.document.title=name;
+    }
+}
 
 new Vue({
     el: '#app',
