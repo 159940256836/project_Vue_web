@@ -154,7 +154,7 @@
                                     <router-link to="/helplist?cate=1&cateTitle=常见问题">{{$t("footer.question")}}</router-link>
                                 </li>
                                 <li>
-                                    <router-link to="/">{{$t("footer.serviceArgee")}}</router-link>
+                                    <router-link to="/Agreement">{{$t("footer.serviceArgee")}}</router-link>
                                 </li>
                                 <!-- 交易费率 -->
                                 <li>
@@ -191,7 +191,7 @@
                                     <span>{{$t('footer.other')}}</span>
                                 </li>
                                 <li>
-                                    <router-link to="/">{{$t('footer.officeNotice')}}</router-link>
+                                    <router-link to="/notice">{{$t('footer.officeNotice')}}</router-link>
                                 </li>
                                 <!-- <li>
                                     <router-link to="/">{{$t('footer.marketPlan')}}</router-link>

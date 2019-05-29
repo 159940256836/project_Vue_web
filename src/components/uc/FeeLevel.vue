@@ -1,6 +1,6 @@
 <template>
     <div class="nav-rights">
-        <div class="top">
+        <div class="fee-top">
             <ul>
                 <li class="myLevel">{{mySelf.gradeCode}}</li>
                 <li>
@@ -108,7 +108,7 @@ export default {
     align-items: center;
 }
 $color: #39f;
-.top {
+.fee-top {
     padding: 10px;
     ul {
         @extend %flex;
