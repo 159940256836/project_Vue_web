@@ -470,14 +470,6 @@ export default {
         }
     },
     mounted () {
-        //二维码链接修改
-         new QRCode(document.getElementById("qrcode-and"), {
-                    text: 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/app.apk',
-                    width: 100,
-                    height: 100,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                });
         window.addEventListener('scroll', this.handleScroll);
     },
     beforeDestroy () {

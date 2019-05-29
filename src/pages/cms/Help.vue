@@ -1,6 +1,6 @@
 <template>
     <div class="help common">
-        <img class="bannerimg" src="../../assets/images/help_banner.png">
+        <img class="bannerimg" src="../../assets/images/help_banner.jpg">
         <div class="help_container">
             <h1>{{$t("footer.helpCenter")}}</h1>
             <div class="main">
@@ -43,6 +43,7 @@
         font-size: 32px;
         line-height: 1;
         padding: 50px 0;
+        color:white;
     }
 }
 .help .main {

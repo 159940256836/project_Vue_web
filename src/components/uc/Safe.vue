@@ -381,7 +381,7 @@
                                             <p style="text-align:right;">
                                                 <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#3399ff;">
                                                     <!--忘记密码?-->
-                                                    {{'uc.login.forget'}}
+                                                    {{$t('uc.login.forget')}}
                                                 </a>
                                             </p>
                                             <!-- Button -->
