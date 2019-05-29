@@ -82,23 +82,12 @@
                         </div>
                         <!-- app二维码 -->
                         <div class="rightwrapper">
-                            <poptip placement="bottom" width="270" class="appdownload">
+                            <poptip placement="bottom"  class="appdownload">
                                 <a href="javascript:;" style="font-size:14px;">{{$t("header.appdownlaod")}}
                                 </a>
-                                <div class="api" slot="content">
+                                <div class="api" slot="content" style="width:90%;">
                                     <div class="ios">
-                                        <img src="../src/assets/images/app_ios.png" alt="">
-                                        <div class="tips">
-                                            <img src="../src/assets/images/ios.png" alt="">
-                                            <span>IOS</span>
-                                        </div>
-                                    </div>
-                                    <div class="andrio">
-                                        <div  style="margin-top: 4px" id="qrcode-and"></div>
-                                        <div class="tips" style="margin-top: 7px">
-                                            <img src="../src/assets/images/andraio.png" alt="">
-                                            <span>Android</span>
-                                        </div>
+                                        <img src="../src/assets/images/qrcode.png" alt="">
                                     </div>
                                 </div>
                             </poptip>
@@ -496,7 +485,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
     %flex {
         align-items: center;
     }
@@ -584,8 +572,8 @@ export default {
                                 float: left;
                                 text-align: center;
                                 img {
-                                    width: 106px;
-                                    height: 106px;
+                                    width: 115px;
+                                    height: 110px;
                                     margin: 0 auto;
                                 }
                                 .tips {
