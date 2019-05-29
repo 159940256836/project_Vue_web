@@ -739,7 +739,7 @@ module.exports = {
             moneyManagement: "Asset",
             bibiManagement: "Bitcoin",
             otcManagement: "Legal Tender",
-            ieoManagement: "IEO",
+            ieoManagement: "Optimization",
             apiManagement: "API",
             leverManagement: "leveraged"
         },
@@ -966,9 +966,9 @@ module.exports = {
             withdraw: {
                 pickup: 'Pick up',
                 addressmanager: 'Address management',
-                symbol: 'Coin',
+                symbol: 'Select Coin',
                 address: 'Address',
-                num: 'Amount',
+                num: 'Available Amount',
                 avabalance: 'Available Balance',
                 msg1: 'The amount of coins is lower than',
                 msg2: 'Automatically arrives at account, otherwise manual review is required',
