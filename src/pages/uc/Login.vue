@@ -4,27 +4,69 @@
             <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
                 <div class="login_title">{{$t('uc.login.login')}}</div>
                 <FormItem prop="user">
-                    <Input @on-enter="handleSubmit('formInline')" name="user" type="text" v-model="formInline.user" :placeholder="$t('uc.login.usertip')" class="user" @on-blur="userBlur" />
+                    <Input
+                        @on-enter="handleSubmit('formInline')"
+                        name="user"
+                        type="text"
+                        v-model="formInline.user"
+                        :placeholder="$t('uc.login.usertip')"
+                        class="user"
+                        @on-blur="userBlur"
+                    />
                 </FormItem>
                 <FormItem prop="password">
-                    <Input @on-enter="handleSubmit('formInline')" type="password" v-model="formInline.password" :placeholder="$t('uc.login.pwdtip')">
+                    <Input
+                        @on-enter="handleSubmit('formInline')"
+                        type="password"
+                        v-model="formInline.password"
+                        :placeholder="$t('uc.login.pwdtip')"
+                    >
                     </Input>
                 </FormItem>
-                <FormItem prop="googleCode" v-if="openGooleCode">
-                    <Input type="text" @on-enter="handleSubmit('formInline')" v-model="formInline.googleCode" :placeholder="$t('uc.login.google')">
+                <FormItem
+                    prop="googleCode"
+                    v-if="openGoogleCode"
+                >
+                    <Input
+                        type="text"
+                        @on-enter="handleSubmit('formInline')"
+                        v-model="formInline.googleCode"
+                        :placeholder="$t('uc.login.google')"
+                    >
                     </Input>
                 </FormItem>
+                <!--手机短信验证 5.29-->
+                <!--<FormItem
+                    prop="vailCode3"
+                    v-if="openPhoneCode"
+                >
+                    <Input v-model="formInline.phoneCode" size="large">
+                        <div class="timebox" slot="append">
+                            <Button @click="sendPhoneCode" :disabled="sendMsgDisabled">
+                                <span v-if="sendMsgDisabled">{{time+$t('uc.safe.second')}}</span>
+                                <span v-if="!sendMsgDisabled">{{$t('uc.safe.clickget')}}</span>
+                            </Button>
+                        </div>
+                    </Input>
+                </FormItem>-->
                 <p style="height:25px;">
                     <router-link to="/findPwd" style="color:#979797;float:right;padding-right:10px;font-size:12px;">
                         {{$t('uc.login.forget')}}
                     </router-link>
                 </p>
                 <FormItem style="margin-bottom:10px;">
-                    <Button class="login_btn"  @click="handleSubmit('formInline')">{{$t('uc.login.login')}}</Button>
+                    <Button
+                        class="login_btn"
+                        @click="handleSubmit('formInline')"
+                    >
+                        {{$t('uc.login.login')}}
+                    </Button>
                 </FormItem>
                 <div class='to_register'>
                     <span>{{$t("uc.login.noaccount")}}</span>
-                    <router-link to="/register">{{$t("uc.login.register")}}</router-link>
+                    <router-link to="/register">
+                        {{$t("uc.login.register")}}
+                    </router-link>
                 </div>
             </Form>
 
@@ -89,14 +131,19 @@ export default {
     data() {
         const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
         return {
-            openGooleCode: false,//是否开启google验证;
-            openGoole: "", //  获取谷歌验证状态
+            openGoogleCode: false,//是否开启google验证;
+            openGoogle: "", //  获取谷歌验证状态
+            /*添加短信验证 yangxiaoxi 5.29*/
+            // openPhoneCode: true,//是否开启Phone验证;
+            // sendMsgDisabled: false,
+            // codeTime: 60, // 发送验证码倒计时
             captchaObj: null,
             _captchaResult: null,
             formInline: {
                 user: "",
                 password: "",
-                googleCode: ""
+                googleCode: "",
+                phoneCode: ""
             },
             ruleInline: {
                 password: [
@@ -124,7 +171,26 @@ export default {
         }
     },
     methods: {
-
+        // /*手机发送验证码*/
+        // sendPhoneCode() {
+        //     let me = this;
+        //     //获取手机code
+        //     this.$http.post(this.host + "/uc/register/phone").then(response => {
+        //         let resp = response.body;
+        //         if (resp.code == 0) {
+        //             this.sendMsgDisabled = true;
+        //             let interval = window.setInterval(function() {
+        //                 if (me.codeTime-- <= 0) {
+        //                     me.codeTime = 60;
+        //                     me.sendMsgDisabled = false;
+        //                     window.clearInterval(interval);
+        //                 }
+        //             }, 1000);
+        //         } else {
+        //             this.$Message.error(resp.message);
+        //         }
+        //     });
+        // },
         //用户名输入以后判断用户是否开启谷歌验证
         userBlur() {
             const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
@@ -133,9 +199,9 @@ export default {
             if (pattern.test(tel) || reg.test(tel)) {
                 this.isNeedGoogle(tel).then(res => {
                     if (res == 1) {//1为开启谷歌验证
-                        this.openGooleCode = true;
+                        this.openGoogleCode = true;
                     } else {
-                        this.openGooleCode = false;
+                        this.openGoogleCode = false;
                     }
                 })
             }
@@ -177,7 +243,7 @@ export default {
             const formParams = this.formInline;
             params.username = formParams.user;
             params.password = formParams.password;
-            if (this.openGooleCode) {
+            if (this.openGoogleCode) {
                 params.code = formParams.googleCode
             }
             return this.login(params);
@@ -191,6 +257,7 @@ export default {
             }
             // 判断是否绑定谷歌
             if(this.openGoole == 1) {
+                // this.openPhoneCode = false;
                 // 判断谷歌验证码不能为空
                 if (!this.formInline.googleCode) {
                     this.$Message.error(this.$t("uc.login.google"));
@@ -199,6 +266,13 @@ export default {
                     this.initGtCaptcha();
                 }
             } else {
+                // // 判断手机验证码不能为空
+                // if (!this.formInline.phoneCode) {
+                //     this.$Message.error(this.$t("uc.login.phone"));
+                //     return false
+                // } else  {
+                //     this.initGtCaptcha();
+                // }
                 // 谷歌验证调用
                 this.initGtCaptcha();
             }

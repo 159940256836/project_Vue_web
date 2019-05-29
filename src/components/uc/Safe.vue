@@ -42,9 +42,10 @@
                                     <p v-if="user.realVerified==1" class="bankInfo" style="color: grey;">
                                         {{user.realName}}
                                     </p>
-                                    <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo" style="color: #3399ff;">
+                                    <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo">
                                         <!--审核未通过 ，请重试-->
-                                        {{'uc.safe.safelevel_medium'}}{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}，{{'uc.safe.againVerify'}}。
+                                        {{$t('uc.safe.safelevel_medium')}}
+                                        <span style="color: #3399ff;">{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}</span>
                                     </p>
                                     <p v-else class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.verifiedtip')}}
@@ -65,19 +66,22 @@
                                 <div class="account-detail" v-show="choseItem==6">
                                     <div class="detail-list" style="width: 100%;">
                                         <Form ref="formValidate6" :model="formValidate6" :rules="ruleValidate" :label-width="85" style="text-align:center;">
+                                            <div class="validate">
+                                                <FormItem :label="$t('uc.safe.realname')" prop="realName">
+                                                    <Input v-model="formValidate6.realName" size="large"></Input>
+                                                </FormItem>
+                                                <!-- 身份证号 -->
+                                                <FormItem :label="$t('uc.safe.idcard')" prop="idCard">
+                                                    <Input v-model="formValidate6.idCard" size="large"></Input>
+                                                </FormItem>
+                                            </div>
                                             <!-- 真实姓名 -->
-                                            <FormItem :label="$t('uc.safe.realname')" prop="realName">
-                                                <Input v-model="formValidate6.realName" size="large"></Input>
-                                            </FormItem>
-                                            <!-- 身份证号 -->
-                                            <FormItem :label="$t('uc.safe.idcard')" prop="idCard">
-                                                <Input v-model="formValidate6.idCard" size="large"></Input>
-                                            </FormItem>
-                                            <div style="height:350px;">
+
+                                            <div style="height:300px;">
                                                 <Col span="8">
                                                 <input type="hidden" name="imgPreview" :value="imgPreview" />
-                                                <div>{{$t('uc.safe.upload_positive')}}</div>
-                                                <img id="frontCardImg" style="width: 270px;height: 175px;" :src="frontCardImg">
+                                                <div style="margin-bottom: 10px;">{{$t('uc.safe.upload_positive')}}</div>
+                                                <img id="frontCardImg" style="width: 230px;height: 140px;" :src="frontCardImg">
                                                 <div class="acc_sc">
                                                     <Upload
                                                         ref="upload1"
@@ -93,8 +97,8 @@
                                                 </Col>
                                                 <Col span="8">
                                                 <input type="hidden" name="imgNext" :value="imgNext" />
-                                                <div>{{$t('uc.safe.upload_negative')}}</div>
-                                                <img id="backCardImg" style="width: 270px;height: 175px;" :src="backCardImg">
+                                                <div style="margin-bottom: 10px;">{{$t('uc.safe.upload_negative')}}</div>
+                                                <img id="backCardImg" style="width: 230px;height: 140px;" :src="backCardImg">
                                                 <div class="acc_sc">
                                                     <Upload
                                                         ref="upload2"
@@ -110,8 +114,8 @@
                                                 </Col>
                                                 <Col span="8">
                                                 <input type="hidden" name="imgLast" :value="imgLast" />
-                                                <div>{{$t('uc.safe.upload_hand')}}</div>
-                                                <img id="handCardImg" style="width: 270px;height: 175px;" :src="handCardImg">
+                                                <div style="margin-bottom: 12px;">{{$t('uc.safe.upload_hand')}}</div>
+                                                <img id="handCardImg" style="width: 230px;height: 132px;" :src="handCardImg">
                                                 <div class="acc_sc">
                                                     <Upload
                                                         ref="upload3"
@@ -1237,6 +1241,21 @@ button.ivu-btn {
 button.ivu-btn.ivu-btn-primary {
     box-shadow: 0 0 0 2px rgba(45, 140, 240, 0);
 }
+.acc_sc {
+    margin-top: 10px;
+}
+.validate {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 40px;
+    .ivu-form-item-required {
+        width: 380px;
+        float: left;
+        &:last-child {
+            margin-left: 45px;
+        }
+    }
+}
 .nav-right {
     padding-left: 15px;
     .user .user-top-icon {
@@ -1264,7 +1283,7 @@ button.ivu-btn.ivu-btn-primary {
     }
 }
 .account-box .account-in .account-item .account-detail {
-    padding: 30px 0;
+    padding: 30px 40px;
     background: white;
     margin: 6px 0;
 }
