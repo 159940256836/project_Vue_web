@@ -24,7 +24,7 @@
                 <Select
                     v-model="formItem.status"
                     style="width:100px;"
-                    :placeholder="select"
+                    :placeholder="$t('header.choose')"
                 >
                     <Option value="0">{{$t('ieoAdmin.failure')}}</Option>
                     <Option value="1">{{$t('ieoAdmin.success')}}</Option>

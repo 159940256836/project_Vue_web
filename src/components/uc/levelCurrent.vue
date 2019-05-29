@@ -55,7 +55,7 @@
         <DatePicker type="daterange" v-model="formItem.date" style="width:180px;"></DatePicker>
       </FormItem>-->
       <FormItem :label="$t('historyAndCu.symbol')">
-        <Select v-model="formItem.symbol" style="width:100px;" placeholder="select">
+        <Select v-model="formItem.symbol" style="width:100px;" :placeholder="$t('header.choose')">
           <Option v-for="(item,index) in symbol " :value="item.symbol " :key="index">{{item.symbol}}</Option>
         </Select>
       </FormItem>

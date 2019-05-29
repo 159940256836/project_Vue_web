@@ -1,6 +1,6 @@
 <template>
     <div class="help common">
-        <img class="bannerimg" src="../../assets/images/help_banner.png">
+        <img class="bannerimg" src="../../assets/images/help_banner.jpg">
         <div class="help_container">
             <!-- <h1>{{cateTitle}}</h1> -->
             <h1>{{$t("footer.helpCenter")}}</h1>
@@ -58,6 +58,7 @@
         line-height: 1;
         padding: 110px 0;
         text-align: center;
+        color:white;
     }
 }
 .list {
