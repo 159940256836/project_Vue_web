@@ -88,6 +88,9 @@
                                 <div class="api" slot="content" style="width:90%;">
                                     <div class="ios">
                                         <img src="../src/assets/images/qrcode.png" alt="">
+                                        <div class="tips">
+                                            <span>app下载</span>
+                                        </div>
                                     </div>
                                 </div>
                             </poptip>
@@ -388,12 +391,10 @@ export default {
         goBi(name) {
                if (name == "recharge") {
                     this.$router.push("/uc/recharge");
-                }
-            if (name == "pickup") {
+                }else if (name == "pickup") {
                 this.$router.push("/uc/withdraw");
-            }
-            if(name == 'asset'){
-                this.$router.push("/uc/record");
+            }else if(name == 'asset'){
+                this.$router.push("/uc/money");
             }
         },
         handleScroll () {
@@ -502,7 +503,7 @@ export default {
                 .time_download {
                     align-items: center;
                     overflow: hidden;
-                    min-width: 1050px;
+                    min-width: 1100px;
                     .netLogo {
                         width: 40px;
                         float: left;
@@ -577,7 +578,7 @@ export default {
                                     margin: 0 auto;
                                 }
                                 .tips {
-                                    height: 30px;
+                                    // height: 30px;
                                     img {
                                         width: 14px;
                                         height: 14px;

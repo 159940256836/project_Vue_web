@@ -338,7 +338,7 @@ module.exports = {
         service: 'Announcement',
         downloadapp: "Scan the code for download and installation",
         appdownlaod: 'Download APP',
-        choose:'Please select a',
+        choose:'Please select',
     },
     downLoadAbs: {
         big: "whenever and wherever possible Multi-platform terminal transactions ",

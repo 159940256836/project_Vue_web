@@ -26,7 +26,7 @@
                             style="width:100px;margin-right:30px;"
                             @on-change="getAddrList"
                             clearable
-                            :placeholder="select"
+                            :placeholder="$t('header.choose')"
                         >
                             <Option
                                 v-for="item in coinList"
@@ -44,7 +44,7 @@
                             clearable
                             style="width:200px"
                             @on-change="getType"
-                            :placeholder="select"
+                            :placeholder="$t('header.choose')"
                         >
                             <Option
                                 v-for="(item, index) in recordType"
