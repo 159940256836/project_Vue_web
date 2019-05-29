@@ -8,7 +8,8 @@ const zh = {
     triggerPrice: "触发价",
     turnoverAmount: "成交金额",
     buy: "买入",
-    sell: "卖出"
+    sell: "卖出",
+    repealAll: "撤销全部委单"
 };
 
 const en = {
@@ -21,7 +22,8 @@ const en = {
     triggerPrice: "Trigger price",
     turnoverAmount: "turnover amount",
     buy: "buy",
-    sell: "sell"
+    sell: "sell",
+    repealAll: "Repeal all appoint"
 }
 
 exports.zh = zh;

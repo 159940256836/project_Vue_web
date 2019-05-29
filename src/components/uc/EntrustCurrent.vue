@@ -1,8 +1,8 @@
 <style lang="scss" scoped>
 .entrustcurrent {
   float: left;
-  width: 82%;
-  padding-left: 30px;
+  width: 83%;
+  padding-left: 20px;
 }
 .page {
   text-align: right;
@@ -20,6 +20,15 @@
   border-radius: 6px;
   overflow: hidden;
 }
+
+.repeal {
+  border: 0;
+  color: #3399FF;
+  font-size: 12px;
+  padding: 3px 5px;
+  cursor: pointer;
+}
+
 .form.ivu-form-inline .ivu-form-item {
   display: inline-block;
 }
@@ -70,14 +79,27 @@
           <Option value="1">{{$t('historyAndCu.sell')}}</Option>
         </Select>
       </FormItem>
-      <FormItem>
-        <Button type="primary" @click="handleSubmit">{{$t('historyAndCu.search')}}</Button>
+      <div style="margin-bottom: 22px;">
+        <Button
+          v-if="orders.length > 0"
+          type="primary"
+          @click="repeal()"
+        >
+          <!--撤销全部委单-->
+          {{$t('historyAndCu.repealAll')}}
+        </Button>
+        <Button
+          type="primary"
+          @click="handleSubmit"
+        >
+          {{$t('historyAndCu.search')}}
+        </Button>
         <Button
           style="margin-left: 8px "
           @click="handleClear "
           class="clear_btn"
         >{{$t('historyAndCu.clear')}}</Button>
-      </FormItem>
+      </div>
     </Form>
     <div class="table">
       <Table
@@ -217,7 +239,7 @@ export default {
       this.$http
         .post(this.host + this.api.exchange.orderCancel + "/" + orderId, {})
         .then(response => {
-          var resp = response.body;
+          let resp = response.body;
           if (resp.code == 0) {
             this.getCurrentOrder();
           } else {
@@ -229,21 +251,41 @@ export default {
         });
       //   }
       // });
+    },
+    // 一键撤单
+    repeal () {
+      this.$Modal.confirm({
+        content: this.$t("exchange.undotip"),
+        onOk: () => {
+          this.$http.post(this.host + this.api.exchange.orderCancelAll).then(response => {
+            let resp = response.body;
+            if (resp.code == 0) {
+              this.getCurrentOrder();
+            } else {
+              this.$Notice.error({
+                title: this.$t("exchange.tip"),
+                desc: resp.message
+              });
+            }
+          });
+        }
+      });
     }
   },
   computed: {
     columns() {
       const arr = [];
       const m = this.$store.getters.lang == "English" ? mapEn : map;
-      const m1 = this.$store.getters.lang == "English" ? 65 : 100;
-      const m2 = this.$store.getters.lang == "English" ? 90 : '';
+      const m1 = this.$store.getters.lang == "English" ? 100 : 100;
+      const m2 = this.$store.getters.lang == "English" ? 98 : 97;
       const m3 = this.$store.getters.lang == "English" ? 80 : 120;
-      const m4 = this.$store.getters.lang == "English" ? 110 : '';
-      const m5 = this.$store.getters.lang == "English" ? 100 : 60;
+      const m4 = this.$store.getters.lang == "English" ? 109 : '';
+      const m5 = this.$store.getters.lang == "English" ? 88 : 60;
       const m6 = this.$store.getters.lang == "English" ? 70 : '';
       const m7 = this.$store.getters.lang == "English" ? 85 : '';
       const m8 = this.$store.getters.lang == "English" ? 135 : 100;
       const m9 = this.$store.getters.lang == "English" ? 80 : 110;
+      const m10 = this.$store.getters.lang == "English" ? 70 : '';
       arr.push({
         type: "expand",
         width: 30,
@@ -260,7 +302,6 @@ export default {
         width: m1,
         title: this.$t("exchange.time"),
         key: "time",
-        minWidth: 55,
         render: (h, params) => {
           return h("span", {}, this.dateFormat(params.row.time));
         }
@@ -336,6 +377,7 @@ export default {
         }
       });
       arr.push({
+        width: m10,
         title: this.$t("exchange.traded"),
         key: "tradedAmount",
         render: (h, params) => {
