@@ -326,11 +326,11 @@ module.exports = {
 
 
 
-        
-        
-      
-       
-   
+
+
+
+
+
 
 
 
@@ -762,6 +762,7 @@ module.exports = {
         login: {
             noaccount: '没有账号？请点击注册',
             google: "请输入谷歌验证码",
+            // phone: "请输入手机验证码",
             register: '注册',
             login: '登录',
             welcomelogin: '欢迎登录',
@@ -813,7 +814,7 @@ module.exports = {
             invitingmining: '邀请挖矿奖励',
             charge: '充币',
             pickup: '提币',
-            
+
             money: {
                 cointype: '币种名称',
                 balance: '可用资产',
