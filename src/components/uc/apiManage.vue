@@ -21,7 +21,7 @@
             <ul>
               <li>
                 {{$t('apiAdmin.part1')}}
-                <router-link to>{{$t('apiAdmin.apiDoc')}}</router-link>
+                <a href="https://coinmany.github.io/" target="_blank">{{$t('apiAdmin.apiDoc')}}</a>
                 {{$t('apiAdmin.howUse')}}
               </li>
               <li>{{$t('apiAdmin.part2')}}</li>

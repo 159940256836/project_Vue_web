@@ -87,7 +87,7 @@
                                                 class="label-pointer"
                                                 id="valueAvailable"
                                             >
-                                                {{currentCoin.balance|toFloor}}
+                                                {{!currentCoin.balance?'---':currentCoin.balance|toFloor}}
                                             </span>
                                         </span>
                                         <span v-if="currentCoin.enableAutoWithdraw == 0">
@@ -522,6 +522,11 @@ export default {
             return Math.round(v * t) / t;
         },
         computerAmount() {
+            let r = /^[0-9]+\.?[0-9]{0,9}$/;　　//正数
+            if (!r) {
+                this.withdrawOutAmount = 0
+                return false;
+            }
             /*let num = this.round(
                 this.accSub(this.withdrawAmount, this.withdrawFee),
                 this.currentCoin.withdrawScale

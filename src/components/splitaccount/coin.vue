@@ -83,7 +83,7 @@ export default {
                         that.getMoney();
                         // that.reload();
                         that.$router.push({path: '/uc/recharge', query: {name: unit }});
-                        window.location.reload();
+                        // window.location.reload();
                     }, 3000);
                 } else {
                     this.$Message.error(resp.message);
