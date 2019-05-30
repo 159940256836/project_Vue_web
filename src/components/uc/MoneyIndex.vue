@@ -361,10 +361,11 @@ export default {
                                 background: #fff;
                                 height: 25px;
                                 padding: 0 10px;
+                                border:0 !important;
                                 span {
                                     display: inline-block;
                                     line-height: 25px;
-                                    font-size: 14px;
+                                    font-size: 12px;
                                 }
                             }
                             p .ivu-btn.ivu-btn-info {

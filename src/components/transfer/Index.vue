@@ -125,19 +125,23 @@ export default {
             return this.$http.post(this.host + "/margin-trade/lever_wallet/list").then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
-                    const temp = resp.data.length > 0 && resp.data.map(ele => {
-                        return {
-                            value: ele.symbol,
-                            label: ele.symbol,
-                            children: ele.leverWalletList.map(e => {
-                                return {
-                                    value: e.coin.unit,
-                                    canUse: e.balance,
-                                    label: e.coin.unit,
-                                };
-                            })
-                        }
-                    })
+                    if(resp.data!=null){
+                        const temp = resp.data.length > 0 && resp.data.map(ele => {
+                            return {
+                                value: ele.symbol,
+                                label: ele.symbol,
+                                children: ele.leverWalletList.map(e => {
+                                    return {
+                                        value: e.coin.unit,
+                                        canUse: e.balance,
+                                        label: e.coin.unit,
+                                    };
+                                })
+                            }
+                        })
+                    }else{
+                        var temp = [];
+                    }
                     const list = [{
                         value: this.$t('coin.Leveraged'),
                         label: this.$t('coin.Leveraged'),

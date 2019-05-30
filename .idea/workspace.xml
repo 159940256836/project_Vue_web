@@ -4,8 +4,14 @@
     <list default="true" id="32a51e65-7534-4edf-98b0-2e900b68b614" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ieo/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ieo/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/transfer/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/transfer/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/uc/FeeLevel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/uc/FeeLevel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/uc/MoneyIndex.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/uc/MoneyIndex.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/uc/apiManage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/uc/apiManage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/cms/HelpList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/cms/HelpList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ieo/Detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ieo/Detail.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/otc/TradeInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/otc/TradeInfo.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/uc/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/uc/Register.vue" afterDir="false" />
     </list>
@@ -91,7 +97,7 @@
         <entry file="file://$PROJECT_DIR$/src/pages/uc/Register.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="455">
-              <caret line="51" column="22" lean-forward="true" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+              <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -124,11 +130,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="24" column="44" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+            <state relative-caret-position="192">
+              <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#140#161#0" expanded="true" />
@@ -138,11 +144,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/uc/apiManage.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="292" column="10" lean-forward="true" selection-start-line="292" selection-start-column="10" selection-end-line="292" selection-end-column="10" />
+            <state relative-caret-position="139">
+              <caret line="294" column="23" lean-forward="true" selection-start-line="294" selection-start-column="23" selection-end-line="294" selection-end-column="23" />
               <folding>
                 <element signature="n#style#0;n#!!top" />
               </folding>
@@ -217,9 +223,9 @@
       <find>tableColumnsRecord</find>
       <find>tableRecord</find>
       <find>airdropId_</find>
-      <find>请输入正确IP地址</find>
       <find>currentOrder</find>
       <find>wallet.base</find>
+      <find>请输入正确IP地址</find>
     </findStrings>
     <replaceStrings>
       <replace>var</replace>
@@ -280,9 +286,9 @@
         <option value="$PROJECT_DIR$/src/pages/exchange/lever.vue" />
         <option value="$PROJECT_DIR$/src/pages/otc/TradeInfo.vue" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/pages/uc/Register.vue" />
         <option value="$PROJECT_DIR$/src/components/uc/apiManage.vue" />
+        <option value="$PROJECT_DIR$/src/main.js" />
       </list>
     </option>
   </component>
@@ -426,12 +432,12 @@
       <workItem from="1559092031557" duration="3505000" />
       <workItem from="1559096242637" duration="3818000" />
       <workItem from="1559101296539" duration="4534000" />
-      <workItem from="1559115907028" duration="35100000" />
+      <workItem from="1559115907028" duration="35451000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="382621000" />
+    <option name="totallyTimeSpent" value="382972000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -451,7 +457,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.44143167" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.329718" />
-      <window_info anchor="bottom" content_ui="combo" id="Terminal" order="10" weight="0.5965293" />
+      <window_info active="true" anchor="bottom" content_ui="combo" id="Terminal" order="10" visible="true" weight="0.5965293" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.329718" />
       <window_info anchor="bottom" id="TypeScript" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -814,18 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="24" column="44" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#140#161#0" expanded="true" />
-            <element signature="e#515#543#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/footerList/Usereement.vue">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -938,16 +932,28 @@
     <entry file="file://$PROJECT_DIR$/src/pages/uc/Register.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
-          <caret line="51" column="22" lean-forward="true" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/uc/apiManage.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="292" column="10" lean-forward="true" selection-start-line="292" selection-start-column="10" selection-end-line="292" selection-end-column="10" />
+        <state relative-caret-position="139">
+          <caret line="294" column="23" lean-forward="true" selection-start-line="294" selection-start-column="23" selection-end-line="294" selection-end-column="23" />
           <folding>
             <element signature="n#style#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#140#161#0" expanded="true" />
+            <element signature="e#515#543#0" expanded="true" />
           </folding>
         </state>
       </provider>
