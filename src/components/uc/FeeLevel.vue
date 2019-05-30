@@ -26,7 +26,7 @@
                 </li>
             </ul>
         </div>
-        <div class="top">
+        <div class="feelevelTop">
             <h4>{{$t("leverDescPage._gradDes")}}</h4>
             <Table :columns="columns" :data="allSelf"></Table>
         </div>
@@ -108,8 +108,13 @@ export default {
     align-items: center;
 }
 $color: #39f;
+    .feelevelTop{
+        margin-top:40px;
+        margin-left:20px;
+    }
 .fee-top {
     padding: 10px;
+
     ul {
         @extend %flex;
         .myLevel {

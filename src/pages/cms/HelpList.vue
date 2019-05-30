@@ -52,7 +52,7 @@
     padding: 0 12%;
     height: 100%;
     margin-top:-210px;
-    min-height: 387px;
+    min-height: 389px;
     > h1 {
         font-size: 32px;
         line-height: 1;

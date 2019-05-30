@@ -62,8 +62,8 @@
                                     <label>{{$t('otc.tradeinfo.price')}}</label>
                                     <span>{{user.price}} CNY / {{user.unit}}</span>
                                     <!-- <span @click="update">
-                                                                                                                            <a href="javascript:;">刷新</a>
-                                                                                                                        </span> -->
+                                              <a href="javascript:;">刷新</a>
+                                          </span> -->
                                 </p>
                                 <p>
                                     <label>{{$t('otc.tradeinfo.num')}}</label>
