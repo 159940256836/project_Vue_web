@@ -2,7 +2,7 @@
     <div class="ieoWrapper" @click='getDetail'>
         <div class="topBox">
             <div class="topBox specail"><img :src="content.picView" alt=""><span>{{content.saleCoin}}</span></div>
-             <div class="type" :class="statusClass">{{statusStr}}</div>
+             <div class="type" :class="statusClass">{{str}}</div>
         </div>
         <div class="abstract">
             {{content.ieoName}}
@@ -49,15 +49,18 @@ export default {
         let str = "";
         if (!compareStAndNow) {
             /*预热中*/
+            this.status = '预热中';
             str = this.$t('Ieo.preheating')
         } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
             /*进行中*/
+            this.status = '进行中';
             str = this.$t('Ieo.underway')
         } else if (!compareNowAndEnd || !surplusAmount) {
             /*已完成*/
+            this.status = '已完成';
             str = this.$t('Ieo.finished')
         }
-        this.status = str;
+        this.str = str;
     },
     methods: {
         formatTime(date) {
