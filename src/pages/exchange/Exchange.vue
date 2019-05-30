@@ -450,31 +450,44 @@
         <div class="order" v-show="this.isLogin && this.member.realName">
             <div class="order-handler">
                 <span
+                    class="order-list"
                     @click="changeOrder('current')"
                     :class="{active:selectedOrder==='current'}"
                 >
                     {{$t('exchange.curdelegation')}}
                 </span>
                 <span
+                    class="order-list"
                     @click="changeOrder('history')"
                     :class="{active:selectedOrder==='history'}"
                 >
                     {{$t('exchange.hisdelegation')}}
                 </span>
-                <router-link
-                    v-show="selectedOrder==='current'"
-                    class="linkmore"
-                    to="/uc/entrust/current"
-                >
-                    {{$t('coin.view')}}>>
-                </router-link>
-                <router-link
-                    v-show="selectedOrder==='history'"
-                    class="linkmore"
-                    to="/uc/entrust/history"
-                >
-                    {{$t('coin.view')}}>>
-                </router-link>
+                <div class="single">
+                    <span
+                        v-if="currentOrder.rows.length > 0 && selectedOrder === 'current'"
+                        class="repeal"
+                        @click="repeal()"
+                    >
+                        <!--撤销全部委单-->
+                        {{$t('exchange.curdelRepealAll')}}
+                    </span>
+                    <router-link
+                        v-show="selectedOrder==='current'"
+                        class="linkmore"
+                        to="/uc/entrust/current"
+                    >
+                        {{$t('coin.view')}}>>
+                    </router-link>
+                    <router-link
+                        v-show="selectedOrder==='history'"
+                        class="linkmore"
+                        to="/uc/entrust/history"
+                    >
+                        {{$t('coin.view')}}>>
+                    </router-link>
+                </div>
+
             </div>
             <div class="table">
                 <Table
@@ -710,7 +723,7 @@ $night-color: #fff;
             font-size: 0;
             border-radius: 6px;
             // line-height: 38px;
-            > span {
+            > .order-list {
                 padding: 0 20px;
                 font-size: 14px;
                 display: inline-block;
@@ -727,6 +740,23 @@ $night-color: #fff;
                 }
                 &:last-child {
                     border-top-right-radius: 6px;
+                }
+            }
+            .single {
+                width: 350px;
+                float: right;
+                position: relative;
+                .repeal {
+                    position: absolute;
+                    right: 115px;
+                    top: 8px;
+                    border: 0;
+                    color: #3399FF;
+                    font-size: 14px;
+                    padding: 3px 5px;
+                    border-radius: 5px;
+                    background: #161b25;
+                    cursor: pointer;
                 }
             }
         }
@@ -3351,6 +3381,7 @@ export default {
                 }
             });
         },
+        // 撤单
         cancel(index) {
             let order = this.currentOrder.rows[index];
             // this.$Modal.confirm({
@@ -3370,7 +3401,25 @@ export default {
             //     }
             // });
         },
-
+        // 一键撤单
+        repeal () {
+            this.$Modal.confirm({
+                content: this.$t("exchange.undotip"),
+                onOk: () => {
+                    this.$http.post(this.host + this.api.exchange.orderCancelAll).then(response => {
+                        let resp = response.body;
+                        if (resp.code == 0) {
+                            this.refreshAccount();
+                        } else {
+                            this.$Notice.error({
+                                title: this.$t("exchange.tip"),
+                                desc: resp.message
+                            });
+                        }
+                    });
+                }
+            });
+        },
         refreshAccount: function () {
             this.getCurrentOrder();
             this.getHistoryOrder();

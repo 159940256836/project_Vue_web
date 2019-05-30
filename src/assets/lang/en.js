@@ -481,6 +481,7 @@ module.exports = {
         sellout: 'Sell',
         selltip: 'Optimum Sell',
         curdelegation: 'Delegate',
+        curdelRepealAll: 'Repeal all appoint',
         hisdelegation: 'History Delegate',
         realtransaction: 'Market Trades',
         num: 'Amount',

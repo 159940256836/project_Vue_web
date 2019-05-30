@@ -1,8 +1,8 @@
 <style lang="scss" scoped>
 .entrusthistory {
     float: left;
-    width: 82%;
-    padding-left: 30px;
+    width: 83%;
+    padding-left: 20px;
 }
 .page {
     text-align: right;
@@ -202,15 +202,16 @@ export default {
     computed: {
         columns() {
             const m = this.$store.getters.lang == "English" ? mapEn : map;
-            const m1 = this.$store.getters.lang == "English" ? 65 : 100;
-            const m2 = this.$store.getters.lang == "English" ? 90 : '';
+            const m1 = this.$store.getters.lang == "English" ? 100 : 100;
+            const m2 = this.$store.getters.lang == "English" ? 97 : 95;
             const m3 = this.$store.getters.lang == "English" ? 80 : 120;
             const m4 = this.$store.getters.lang == "English" ? 110 : '';
-            const m5 = this.$store.getters.lang == "English" ? 100 : 60;
+            const m5 = this.$store.getters.lang == "English" ? 88 : 60;
             const m6 = this.$store.getters.lang == "English" ? 70 : '';
             const m7 = this.$store.getters.lang == "English" ? 85 : '';
-            const m8 = this.$store.getters.lang == "English" ? 135 : 100;
-            const m9 = this.$store.getters.lang == "English" ? 80 : 110;
+            const m8 = this.$store.getters.lang == "English" ? 133 : 100;
+            const m9 = this.$store.getters.lang == "English" ? 75 : 110;
+            const m10 = this.$store.getters.lang == "English" ? 87 : 110;
             const arr = [];
             arr.push({
                 type: "expand",
@@ -304,6 +305,7 @@ export default {
                 }
             });
             arr.push({
+                width: m9,
                 title: this.$t("exchange.done"),
                 key: "tradedAmount",
                 render:(h, params)=>{
@@ -337,7 +339,7 @@ export default {
             arr.push({
                 title: this.$t("exchange.status"),
                 key: "status",
-                width: 80,
+                width: m10,
                 render: (h, params) => {
                     const status = params.row.status;
                     if (status == "COMPLETED") {

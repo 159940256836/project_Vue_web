@@ -484,6 +484,7 @@ module.exports = {
         sellout: '卖出',
         selltip: '以市场上最优价格卖出',
         curdelegation: '当前委托',
+        curdelRepealAll: '撤销全部委单',
         hisdelegation: '委托历史',
         realtransaction: '实时成交',
         num: '数量',
