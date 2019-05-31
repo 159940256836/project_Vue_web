@@ -102,6 +102,10 @@ import LeverIndex from "../pages/lever/Index.vue"
 
 //杠杆交易
 import Lever from "../pages/exchange/lever.vue"
+//移动端注册  registe
+
+import mobilereg from "../components/yidong/registers";
+import registe from "../components/yidong/registe";
 export default [
     { path: '/Usereement', component: Usereement },
     { path: '/Privgreement', component: Privgreement },
@@ -110,6 +114,12 @@ export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
     { path: '/login', component: Login },
+    { path: '/mobilereg', component: mobilereg, meta: {
+        hide: true
+    }},
+    { path: '/registe', component: registe, meta: {
+        hide: true
+    }},
     { path: "/Ieo", name: "ieo", component: Ieo },
     { path: "/Ieo/IeoDetail", name: "IeoDetail", component: IeoDetail },
     { path: '/login/returnUrl/:returnUrl', component: Login },
