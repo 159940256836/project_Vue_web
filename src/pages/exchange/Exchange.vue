@@ -1358,20 +1358,24 @@ export default {
                         }
                     },
                     {
+                        /*时间*/
                         title: self.$t("exchange.time"),
                         key: "time",
                         render: (h, params) => {
                             return h("span", {}, this.dateFormat(params.row.time));
                         }
                     },
+                        /*交易对*/
                     {
                         title: self.$t("coin.deal"),
                         key: "symbol"
                     },
-                    {
-                        title: self.$t("coin.trigger"),
-                        key: "triggerPrice"
-                    },
+                        /*触发价*/
+                    // {
+                    //     title: self.$t("coin.trigger"),
+                    //     key: "triggerPrice"
+                    // },
+                        /*类型*/
                     {
                         title: self.$t("coin.type"),
                         render(h, params) {
@@ -1380,6 +1384,7 @@ export default {
                             );
                         }
                     },
+                        /*方向*/
                     {
                         title: self.$t("exchange.direction"),
                         key: "direction",
@@ -1399,6 +1404,7 @@ export default {
                             );
                         }
                     },
+                        /*价格*/
                     {
                         title: self.$t("exchange.price"),
                         key: "price",
@@ -1406,6 +1412,7 @@ export default {
                             return h("span", self.toFloor(params.row.price));
                         }
                     },
+                        /*数量*/
                     {
                         title: self.$t("exchange.num"),
                         key: "amount",
@@ -1413,6 +1420,7 @@ export default {
                             return h("span", self.toFloor(params.row.amount));
                         }
                     },
+                        /*已成交*/
                     {
                         title: self.$t("exchange.traded"),
                         key: "tradedAmount",
@@ -1420,6 +1428,7 @@ export default {
                             return h("span", self.toFloor(params.row.tradedAmount));
                         }
                     },
+                        /*成交金额*/
                     {
                         title: self.$t("coin.amount"),
                         key: "turnover",
@@ -1427,6 +1436,7 @@ export default {
                             return h("span", self.toFloor(params.row.turnover));
                         }
                     },
+                        /*操作*/
                     {
                         title: self.$t("exchange.action"),
                         key: "operate",
@@ -1984,7 +1994,7 @@ export default {
 
             this.currentOrder.columns[1].title = this.$t("exchange.time");
             this.currentOrder.columns[2].title = this.$t("coin.deal");
-            this.currentOrder.columns[3].title = this.$t("coin.trigger");
+            // this.currentOrder.columns[3].title = this.$t("coin.trigger");
             this.currentOrder.columns[4].title = this.$t("coin.type");
             this.currentOrder.columns[5].title = this.$t("exchange.direction");
             this.currentOrder.columns[6].title = this.$t("exchange.price");

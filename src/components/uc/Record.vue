@@ -285,7 +285,7 @@ export default {
             let columns = [];
             var that = this;
             const m = this.$store.getters.lang == "English" ? mapEn : map;
-            const T = this.$store.getters.lang == "English" ? 147 : '';
+            const T = this.$store.getters.lang == "English" ? 147 : 100;
             const Y = this.$store.getters.lang == "English" ? 109 : '';
             const Y1 = this.$store.getters.lang == "English" ? 82 : '';
             const F = this.$store.getters.lang == "English" ? 116 : '';

@@ -99,8 +99,10 @@
 <script>
 var moment = require("moment");
 import expandRow from "@components/exchange/expand.vue";
-const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CHECK_FULL_STOP', '止盈止损']]);
-const mapEn = new Map([['LIMIT_PRICE', 'limited price'], ['MARKET_PRICE', 'market price'], ['CHECK_FULL_STOP', 'top profit and stop loss']]);
+// const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CHECK_FULL_STOP', '止盈止损']]);
+const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价']]);
+// const mapEn = new Map([['LIMIT_PRICE', 'limited price'], ['MARKET_PRICE', 'market price'], ['CHECK_FULL_STOP', 'top profit and stop loss']]);
+const mapEn = new Map([['LIMIT_PRICE', 'limited price'], ['MARKET_PRICE', 'market price']]);
 export default {
     components: { expandRow },
     data() {
@@ -247,11 +249,11 @@ export default {
                     return h("span", {}, m.get(type));
                 }
             });
-            arr.push({
-                width: m4,
-                title: this.$t("historyAndCu.triggerPrice"),
-                key: "triggerPrice"
-            });
+            // arr.push({
+            //     width: m4,
+            //     title: this.$t("historyAndCu.triggerPrice"),
+            //     key: "triggerPrice"
+            // });
             arr.push({
                 title: this.$t("exchange.direction"),
                 key: "direction",
