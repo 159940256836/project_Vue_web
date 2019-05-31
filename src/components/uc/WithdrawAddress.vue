@@ -63,19 +63,18 @@
             </div>
         </div>
         <!-- model -->
-        <Modal v-model="modal2" width="360">
-            <p slot="header" style="color:#f60;text-align:center">
-                 <Icon type="ios-mail" size="20" color="#00b5f6;"/>
+        <Modal v-model="modal2" width="400">
+            <p slot="header" style="color:#39f;text-align:center">
                 <span>{{$t('uc.finance.withdraw.safevalidate')}}</span>
             </p>
             <div style="text-align:center">
                 <Form ref="formValidateAddr" :model="formValidateAddr" :rules="ruleValidate" :label-width="85">
                     <!-- 手机号 -->
-                    <FormItem :label="$t('uc.finance.withdraw.telno')" prop="mobileNo" v-show="validPhone">
+                    <FormItem :label="$t('uc.finance.withdraw.telno')" prop="mobileNo" v-show="validPhone" style="width:90%">
                         <Input disabled size="large" v-model="formValidateAddr.mobileNo"></Input>
                     </FormItem>
                     <!-- 手机验证码 -->
-                    <FormItem :label="$t('uc.finance.withdraw.smscode')" prop="vailCode2" v-show="validPhone">
+                    <FormItem :label="$t('uc.finance.withdraw.smscode')" prop="vailCode2" v-show="validPhone" style="width:90%">
                         <Input v-model="formValidateAddr.vailCode2" size="large">
                         <!-- <Button slot="append">点击获取</Button> -->
                         <div class="timebox" slot="append">
@@ -88,11 +87,11 @@
                         </Input>
                     </FormItem>
                     <!-- 邮箱 -->
-                    <FormItem :label="$t('uc.finance.withdraw.email')" prop="email" v-show="validEmail">
+                    <FormItem :label="$t('uc.finance.withdraw.email')" prop="email" v-show="validEmail" style="width:90%">
                         <Input disabled v-model="formValidateAddr.email" size="large"></Input>
                     </FormItem>
                     <!-- 邮箱验证码 -->
-                    <FormItem :label="$t('uc.finance.withdraw.emailcode')" prop="vailCode1" v-show="validEmail">
+                    <FormItem :label="$t('uc.finance.withdraw.emailcode')" prop="vailCode1" v-show="validEmail" style="width:90%">
                         <Input v-model="formValidateAddr.vailCode1" size="large">
                         <!-- <Button slot="append">点击获取</Button> -->
                         <div class="timebox" slot="append">
@@ -105,7 +104,7 @@
                     </FormItem>
                 </Form>
             </div>
-            <div slot="footer">
+            <div slot="footer" style="width: 50%;margin-left:25%;">
                 <Button type="primary" size="large" long @click="handleSubmit('formValidateAddr')">{{$t('uc.finance.withdraw.save')}}</Button>
             </div>
         </Modal>

@@ -36,11 +36,11 @@
                 </Input>
             </div>
 
-            <div style="margin-top:5px;padding-left:35px;" v-if="!currencyData.modal">
+            <div style="margin-top:5px;padding-left:35px;" v-if="currencyData.modal">
                 {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{canUseNum}}
             </div>
             <div style="margin-top:5px;padding-left:35px;" v-else>
-                {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{usenum}}
+                {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{this.currencyData.balance}}
             </div>
             <div class="button">
                 <Button @click="cancel" type="default">{{$t('coin.cancel')}}</Button>
@@ -70,7 +70,6 @@ export default {
             formatRender: formatFun,
             unit: "",
             canUseNum: "",
-            usenum:this.currencyData.balance,
             num: "",
             data: [],
             leverList: [],
@@ -100,7 +99,6 @@ export default {
             }
         },
         init() {
-
             Promise.all([this.getLeverNum(), this.getOtcNum(), this.getExchangeList()]).then(res => {
                 this.data = [...this.leverList, ...this.otcList, ...this.exchangeList]
             })

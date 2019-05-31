@@ -41,7 +41,7 @@
                                         <Modal v-model="isShowEwm">
                                             <!--<div v-show="isShowEwm" class="show-qrcode">-->
                                             <!--充币地址二维码-->
-                                            <p slot="header" style="text-align: center;">{{'uc.finance.money.qrcode'}}</p>
+                                            <p slot="header" style="text-align: center;">{{$t('uc.finance.money.qrcode')}}</p>
                                             <div class="show-qrcode" style="text-align: center;">
                                                 <!--<qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
                                                 <qriously :value="qrcode.value" :size="qrcode.size" />

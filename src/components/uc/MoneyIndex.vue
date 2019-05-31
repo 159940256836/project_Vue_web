@@ -375,6 +375,11 @@ export default {
                                     color: #39f;
                                 }
                             }
+                            p .ivu-btn.ivu-btn-info:active{
+                              color:white;
+                              background:white;
+                              border-color:white;
+                            }
                             p .ivu-btn.ivu-btn-error {
                                 border: 1px solid #f15057;
                                 border-radius: 20px;
