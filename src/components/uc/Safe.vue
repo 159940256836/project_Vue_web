@@ -683,7 +683,7 @@ export default {
                         required: true,
                         type: "string",
                         min: 6,
-                        message: this.$t("uc.safe.newpwdmsg2"),
+                        message: this.$t("uc.safe.confirmpwd"),
                         trigger: "blur"
                     },
                     { validator: validatePassCheck, trigger: "blur" }
