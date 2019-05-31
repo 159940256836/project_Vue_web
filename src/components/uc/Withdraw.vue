@@ -14,7 +14,7 @@
                                 <span class="describe">{{$t('uc.finance.withdraw.symbol')}}</span>
                                 <Select
                                     v-model="coinType"
-                                    style="width:280px;margin-left:60px;"
+                                    style="width:350px;margin-left:60px;"
                                     @on-change="getAddrList"
                                 >
                                     <Option
@@ -33,7 +33,7 @@
                                         <Select
                                             ref="address"
                                             v-model="withdrawAdress"
-                                            style="width:280px;margin-left:60px;"
+                                            style="width:350px;margin-left:60px;"
                                             filterable
                                             clearable
                                             @on-query-change="onAddressChange"
@@ -72,7 +72,7 @@
                                             :placeholder="$t('uc.finance.withdraw.numtip1')"
                                             size="large"
                                             :max="currentCoin.maxAmount"
-                                            style="width:280px;margin-left:55px;"
+                                            style="width:350px;margin-left:55px;"
                                         >
                                         </InputNumber>
                                         <span class="input-group-addon addon-tag uppercase firstt">
@@ -133,7 +133,7 @@
                                         :min="currentCoin.minTxFee"
                                         :max="currentCoin.maxTxFee"
                                         size="large"
-                                        style="width:280px;margin-left:60px;"
+                                        style="width:350px;margin-left:60px;"
                                     >
                                     </InputNumber>
                                     <span class="input-group-addon addon-tag uppercase">
@@ -156,7 +156,7 @@
                                         v-model="withdrawOutAmount"
                                         :placeholder="$t('uc.finance.withdraw.arriamount')"
                                         size="large"
-                                        style="width:280px;margin-left:55px;"
+                                        style="width:350px;margin-left:55px;"
                                     >
                                     </InputNumber>
                                     <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->

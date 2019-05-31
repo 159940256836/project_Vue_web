@@ -36,7 +36,7 @@
                 </Input>
             </div>
 
-            <div style="margin-top:5px;padding-left:35px;" v-if="!currencyData.modal">
+            <div style="margin-top:5px;padding-left:35px;" v-if="currencyData.modal">
                 {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{canUseNum}}
             </div>
             <div style="margin-top:5px;padding-left:35px;" v-else>
