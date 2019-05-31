@@ -892,7 +892,7 @@ p.describe {
 .action-foot {
     margin-top: 20px;
     margin-left: 177PX;
-    width: 280px;
+    width: 350px;
 }
 
 .hb-night .btn.btn-primary,
