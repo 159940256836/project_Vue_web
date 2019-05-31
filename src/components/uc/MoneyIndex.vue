@@ -241,7 +241,7 @@ export default {
             // 充币
             actions.push(
                 h(
-                    "Button",
+                    "span",
                     {
                       // 充币;
                       props: {
@@ -251,7 +251,7 @@ export default {
                       on: {
                         click: function () {
                           self.$router.push(
-                              "/uc/recharge?name=" + params.row.coin.unit
+                              // "/uc/recharge?name=" + params.row.coin.unit
                           );
                         }
                       },
@@ -266,7 +266,7 @@ export default {
             //   获取地址按钮;
             actions.push(
                 h(
-                    "Button",
+                    "span",
                     {
                       props: {
                         type: "info",
@@ -290,7 +290,7 @@ export default {
           // 提币;
           actions.push(
               h(
-                  "Button",
+                  "span",
                   {
                     props: {
                       type: "error",
@@ -315,7 +315,7 @@ export default {
           // 配对;
           actions.push(
               h(
-                  "Button",
+                  "span",
                   {
                     props: {
                       type: "success",

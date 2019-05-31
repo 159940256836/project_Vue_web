@@ -42,7 +42,7 @@
             <div style="margin-top:5px;padding-left:35px;" v-else>
                 {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{usenum}}
             </div>
-            <div class="button" style="display:flex;justify-content:space-around;margin-top:20px;">
+            <div class="button">
                 <Button @click="cancel" type="default">{{$t('coin.cancel')}}</Button>
                 <Button @click="sure" type="primary">{{$t('coin.save')}}</Button>
             </div>
@@ -100,7 +100,7 @@ export default {
             }
         },
         init() {
-            
+
             Promise.all([this.getLeverNum(), this.getOtcNum(), this.getExchangeList()]).then(res => {
                 this.data = [...this.leverList, ...this.otcList, ...this.exchangeList]
             })
@@ -410,15 +410,15 @@ export default {
     color: #2d8cf0;
 }
 .button {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+    display:flex;
+    justify-content:space-around;
+    margin-top:20px;
 }
 #select{
     .ivu-select-selection{
         div{
             span{
-                text-align: left;       
+                text-align: left;
             }
         }
     }
