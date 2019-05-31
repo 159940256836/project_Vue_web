@@ -216,9 +216,12 @@
                                 <li>
                                     <a href="javascript:;">{{$t('footer.email')}}：service@coinmany.com</a>
                                 </li>
-                                <!-- <li>
-                                    <span style="color: #8790a1;">企业邮箱：service@coinmany.com</span>
-                                </li> -->
+                                <li>
+                                    <a href="javascript:;">{{$t('footer.customerservice2')}}：3039059895</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">{{$t('footer.customerservice1')}}：729045745</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
