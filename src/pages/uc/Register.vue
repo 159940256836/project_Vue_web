@@ -46,7 +46,9 @@
                     <label>
                         <Checkbox v-model="agree">{{$t('uc.regist.agreement')}}</Checkbox>
                     </label>
-                    <a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>
+                    <!-- 用户协议 -->
+                    <router-link to="/Usereement">《{{$t('uc.regist.userprotocol')}}》</router-link>
+                    <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
                 </div>
                 <FormItem>
                     <Button class="register_btn" @click="handleSubmit('formInline')">{{$t('uc.regist.regist')}}</Button>

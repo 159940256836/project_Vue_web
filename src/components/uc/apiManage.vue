@@ -21,7 +21,7 @@
             <ul>
               <li>
                 {{$t('apiAdmin.part1')}}
-                <router-link to>{{$t('apiAdmin.apiDoc')}}</router-link>
+                <a href="https://coinmany.github.io/" target="_blank">{{$t('apiAdmin.apiDoc')}}</a>
                 {{$t('apiAdmin.howUse')}}
               </li>
               <li>{{$t('apiAdmin.part2')}}</li>
@@ -282,21 +282,24 @@ export default {
             : "请输入备注信息";
         this.$Message.error(lang);
         return;
-      } else if (this.formItem.bindIp == "") {
-        const lang =
-          this.$store.getters.lang == "English"
-            ? "please scanner IP Address"
-            : "请输入IP地址";
-        this.$Message.error(lang);
-        return;
-      } else if (!IP_REG.test(this.formItem.bindIp)) {
-        const lang =
-          this.$store.getters.lang == "English"
-            ? "please scanner Correct IP Address"
-            : "请输入正确IP地址";
-        this.$Message.error(lang);
-        return;
-      } else {
+      }
+      // else if (this.formItem.bindIp == "") {
+      //   const lang =
+      //     this.$store.getters.lang == "English"
+      //       ? "please scanner IP Address"
+      //       : "请输入IP地址";
+      //   this.$Message.error(lang);
+      //   return;
+      // }
+      // else if (!IP_REG.test(this.formItem.bindIp)) {
+      //   const lang =
+      //     this.$store.getters.lang == "English"
+      //       ? "please scanner Correct IP Address"
+      //       : "请输入正确IP地址";
+      //   this.$Message.error(lang);
+      //   return;
+      // }
+      else {
         this.verify = true;
       }
     },
@@ -344,22 +347,22 @@ export default {
         this.$Message.error(lang);
         return;
       }
-      if (!this.editorFormItem.bindIp) {
-        const lang =
-          this.$store.getters.lang == "English"
-            ? "please scanner IP Address"
-            : "请输入IP地址";
-        this.$Message.error(lang);
-        return;
-      }
-      if (!IP_REG.test(this.editorFormItem.bindIp)) {
-        const lang =
-          this.$store.getters.lang == "English"
-            ? "please scanner Correct IP Address"
-            : "请输入正确IP地址";
-        this.$Message.error(lang);
-        return;
-      }
+      // if (!this.editorFormItem.bindIp) {
+      //   const lang =
+      //     this.$store.getters.lang == "English"
+      //       ? "please scanner IP Address"
+      //       : "请输入IP地址";
+      //   this.$Message.error(lang);
+      //   return;
+      // }
+      // if (!IP_REG.test(this.editorFormItem.bindIp)) {
+      //   const lang =
+      //     this.$store.getters.lang == "English"
+      //       ? "please scanner Correct IP Address"
+      //       : "请输入正确IP地址";
+      //   this.$Message.error(lang);
+      //   return;
+      // }
       this.$http
         .post(this.host + "/uc/open/api/update", this.editorFormItem)
         .then(res => {

@@ -12,7 +12,7 @@
                 <div>
                     <!-- <span class="type">{{status}}</span> -->
                     <!-- 5.13修改 -->
-                    <div class="type" :class="statusClass">{{statusStr}}</div>
+                    <div class="type" :class="statusClass">{{str}}</div>
                 </div>
             </div>
             <div class="ieoDetail">
@@ -129,7 +129,6 @@ export default {
             return this.$store.getters.isLogin;
         },
         statusStr() {
-            console.log(this.status);
             if (this.status == '预热中') {
                 return this.$t('Ieo.preheating')
             } else if (this.status == "进行中") {
@@ -289,17 +288,20 @@ export default {
             } else {
                 if (!compareStAndNow) {
                     /*预热中*/
+                    this.status = '预热中';
                     str = this.$t('Ieo.preheating')
                 } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
                     /*进行中*/
+                    this.status = '进行中';
                     str = this.$t('Ieo.underway')
                 } else if (!compareNowAndEnd || !surplusAmount) {
                     /*已完成*/
+                    this.status = '已完成';
                     str = this.$t('Ieo.finished')
                 }
             }
 
-            this.status = str;
+            this.str = str;
             // if(this.status=="进行中"){
             //     this.status="确定"
             // }

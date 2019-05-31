@@ -17,7 +17,7 @@
                         <!-- <router-link to="/">{{$t("header.index")}}</router-link> -->
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
                         <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
-                         <router-link to="/leverindex">{{$t("header.lever")}}</router-link>
+                         <!--<router-link to="/leverindex">{{$t("header.lever")}}</router-link>-->
                           <router-link to="/Ieo">{{$t('header.asset')}}</router-link>
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">{{$t('header.help')}}</router-link>

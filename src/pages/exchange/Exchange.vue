@@ -218,12 +218,13 @@
                                         </Button>
                                     </Form>
                                 </div>
-                                <div class="bd bd_limited" v-show="btnList[2].check==true">
+                                <!--止盈止损买入-->
+                                <!--<div class="bd bd_limited" v-show="btnList[2].check==true">
                                     <Form ref="formValidate" :label-width="50">
                                         <FormItem :label="$t('coin.trigger')">
                                             <Input @on-keyup="keyEvent" v-model="form.buy.stopPrice" placeholder=""></Input>
                                             <label>{{currentCoin.base}}</label>
-                                            <!-- <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.buy.stopPrice*CNYRate||0|toFixed(2)}} CNY</p> -->
+                                            &lt;!&ndash; <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.buy.stopPrice*CNYRate||0|toFixed(2)}} CNY</p> &ndash;&gt;
                                         </FormItem>
                                         <FormItem :label="$t('coin.buying')">
                                             <Input @on-keyup="keyEvent" v-model="form.buy.stopBuyPrice" :placeholder="$t('exchange.buynum')"></Input>
@@ -244,13 +245,13 @@
                                             <span>{{form.buy.stopTurnover|toFloor(baseCoinScale)}}</span> {{currentCoin.base}}
                                         </div>
                                         <Button class="bg-green" @click="buyWithStopPrice" v-show="isLogin" :loading="loadingButton3">
-                                            <!--{{$t("exchange.buyin")}}{{currentCoin.coin}}-->
+                                            &lt;!&ndash;{{$t("exchange.buyin")}}{{currentCoin.coin}}&ndash;&gt;
                                             <span>
                                                 {{ !loadingButton3 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
                                             </span>
                                         </Button>
                                     </Form>
-                                </div>
+                                </div>-->
                                 <div class="bd bd_market" v-show="btnList[1].check==true">
                                     <Form ref="formValidate">
                                         <FormItem>
@@ -321,12 +322,13 @@
                                         </Button>
                                     </Form>
                                 </div>
-                                <div class="bd bd_limited" v-show="btnList[2].check==true">
+                                <!--止盈止损卖出-->
+                                <!--<div class="bd bd_limited" v-show="btnList[2].check==true">
                                     <Form ref="formValidate" :label-width="50">
                                         <FormItem :label="$t('coin.trigger')">
                                             <Input @on-keyup="keyEvent" v-model="form.sell.stopPrice" :placeholder="$t('coin.trigger')"></Input>
                                             <label>{{currentCoin.base}}</label>
-                                            <!-- <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.sell.limitPrice*CNYRate||0|toFixed(2)}} CNY</p> -->
+                                            &lt;!&ndash; <p class="math_price">≈ {{currentCoin.usdRate/currentCoin.close*form.sell.limitPrice*CNYRate||0|toFixed(2)}} CNY</p> &ndash;&gt;
                                         </FormItem>
                                         <FormItem :label="$t('coin.sellingRate')">
                                             <Input @on-keyup="keyEvent" v-model="form.sell.stopBuyPrice" :placeholder="$t('exchange.sellnum')"></Input>
@@ -336,28 +338,28 @@
                                             <Input @on-keyup="keyEvent" v-model="form.sell.stopBuyAmount" :placeholder="$t('exchange.sellnum')"></Input>
                                             <label>{{currentCoin.coin}}</label>
                                         </FormItem>
-                                        <!-- <Slider class="silder-sell" v-model="sliderSellLimitPercent" :step="25" show-stops :tip-format="tipFormat"></Slider> -->
+                                        &lt;!&ndash; <Slider class="silder-sell" v-model="sliderSellLimitPercent" :step="25" show-stops :tip-format="tipFormat"></Slider> &ndash;&gt;
                                         <div class="slider-wrap">
                                             <Slider class="silder-sell" v-model="sliderSellStopPercent" show-tip="always" :tip-format="tipFormat" :disabled="sliderSellDisabled"></Slider>
                                             <div class="slider-stop" v-for="item in sliderStep" :style="'left: '+item+'%;'" @click="silderGo('sliderSellStopPercent',item)">
                                                 <div class="slider-block"></div>
                                             </div>
                                         </div>
-                                        <!--<FormItem>-->
-                                        <!--<Slider v-model="value6" :step="25" show-stops min="0" max="100"></Slider>-->
-                                        <!--</FormItem>-->
+                                        &lt;!&ndash;<FormItem>&ndash;&gt;
+                                        &lt;!&ndash;<Slider v-model="value6" :step="25" show-stops min="0" max="100"></Slider>&ndash;&gt;
+                                        &lt;!&ndash;</FormItem>&ndash;&gt;
                                         <div class="total sell_total">
                                             {{$t("exchange.amount")}}
                                             <span>{{form.sell.stopTurnover|toFloor(coinScale)}}</span> {{currentCoin.base}}
                                         </div>
                                         <Button class="bg-red" @click="sellStopPrice" v-show="isLogin" :loading="loadingButton6">
-                                            <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
+                                            &lt;!&ndash;{{$t("exchange.sellout")}}{{currentCoin.coin}}&ndash;&gt;
                                             <span>
                                                 {{ !loadingButton6 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
                                             </span>
                                         </Button>
                                     </Form>
-                                </div>
+                                </div>-->
                                 <div class="bd bd_market" v-show="btnList[1].check==true">
                                     <Form ref="formValidate">
                                         <FormItem>
@@ -896,7 +898,8 @@ import transfermodal from "../../components/transfer/Index";
 let Stomp = require("stompjs");
 let SockJS = require("sockjs-client");
 let moment = require("moment");
-const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CHECK_FULL_STOP', '止盈止损']]);
+// const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CHECK_FULL_STOP', '止盈止损']]);
+const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价']]);
 
 import DepthGraph from "@components/exchange/DepthGraph.vue";
 import $ from "@js/jquery.min.js";
@@ -925,111 +928,13 @@ export default {
                 {
                     text: self.$t("exchange.market_price"),
                     check: false
-                },
+                }
+                /*,
                 {
                     text: self.$t("coin.stop"),
                     check: false
-                }
+                }*/
             ],
-            // sliderStep: [25, 50, 75, 100],
-            // sliderBuyLimitPercent: 0,
-            // sliderSellLimitPercent: 0,
-            // sliderBuyMarketPercent: 0,
-            // sliderSellMarketPercent: 0,
-            // sliderBuyStopPercent: 0,
-            // sliderSellStopPercent: 0,
-            // memberRate: 0, //用户身份，用于是否允许开启BHB抵扣手续费
-            // // userRealVerified: false, //是否实名认证
-            // collecRequesting: false,
-            // currentCoinIsFavor: false,
-            // isUseBHB: false, //是否试用BHB抵扣手续费
-            // skin: "night", //皮肤样式day&night
-            // currentImgTable: "k",
-            // stopLoss: false,
-            // selectedOrder: "current", //当前显示的委托记录
-            // selectedPlate: "all", //当前显示的买卖盘
-            // CNYRate: null,
-            // datafeed: null,
-            // defaultPath: "btc_usdt",
-            // basecion: "usdt",
-            // coinScale: 4,
-            // baseCoinScale: 2,
-            // symbolFee: 0.001,
-            // currentCoin: {
-            //     base: "",
-            //     coin: "",
-            //     symbol: ""
-            // },
-            // favorColumns: [
-            //     {
-            //         title: this.$t("exchange.symbol"),
-            //         key: "coin",
-            //         sortable: false,
-            //         className: "coin-menu-symbol",
-            //         render: (h, params) => {
-            //             return h("div", [
-            //                 h("Icon", {
-            //                     props: {
-            //                         // color:"red",
-            //                         type: params.row.isFavor
-            //                             ? "android-star"
-            //                             : "android-star-outline"
-            //                     },
-            //                     nativeOn: {
-            //                         click: () => {
-            //                             event.stopPropagation(); //阻止事件冒泡
-            //                             if (this.isLogin) {
-            //                                 if (
-            //                                     event.currentTarget.className ==
-            //                                     "ivu-icon ivu-icon-android-star"
-            //                                 ) {
-            //                                     this.cancelCollect(params.index, params.row);
-            //                                     event.currentTarget.className ==
-            //                                         "ivu-icon ivu-icon-android-star-outline";
-            //                                 } else {
-            //                                     this.collect(params.index, params.row);
-            //                                     event.currentTarget.className =
-            //                                         "ivu-icon ivu-icon-android-star";
-            //                                 }
-            //                             } else {
-            //                                 this.$Message.warning("请先登录");
-            //                             }
-            //                         }
-            //                     }
-            //                 }),
-            //                 h("span", params.row.symbol)
-            //             ]);
-            //         }
-            //     },
-            //     {
-            //         title: this.$t("exchange.lastprice"),
-            //         key: "close",
-            //         sortable: true,
-            //         sortMethod: function (a, b, type) {
-            //             let a1 = parseFloat(a);
-            //             let b1 = parseFloat(b);
-            //             if (type == "asc") {
-            //                 return a1 - b1;
-            //             } else {
-            //                 return b1 - a1;
-            //             }
-            //         }
-            //     },
-            //     {
-            //         title: this.$t("exchange.daychange"),
-            //         key: "rose",
-            //         sortable: true,
-            //         sortMethod: function (a, b, type) {
-            //             let a1 = a.replace(/[^\d|.|-]/g, "") - 0;
-            //             let b1 = b.replace(/[^\d|.|-]/g, "") - 0;
-            //             if (type == "asc") {
-            //                 return a1 - b1;
-            //             } else {
-            //                 return b1 - a1;
-            //             }
-            //         }
-            //     }
-            // ],
             sliderStep: [25, 50, 75, 100],
             sliderBuyLimitPercent: 0,
             sliderSellLimitPercent: 0,
@@ -2100,7 +2005,7 @@ export default {
 
             this.btnList[0].text = this.$t("exchange.limited_price");
             this.btnList[1].text = this.$t("exchange.market_price");
-            this.btnList[2].text = this.$t("coin.stop");
+            // this.btnList[2].text = this.$t("coin.stop");
 
             // window.tvWidget.options.time_frames[0].title = this.$t("exchange.realtime");
         },
