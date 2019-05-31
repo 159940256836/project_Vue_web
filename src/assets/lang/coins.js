@@ -61,6 +61,7 @@ const en = {
     toCurrency: 'Please select the currency you want to transfer to',
     toCurrency1: 'Please enter the number of COINS you want to borrow',
     successful: 'Borrowing successful',
+    selectcurrency:"Select currency"
 };
 const zh = {
     last: '最新价',
@@ -113,6 +114,7 @@ const zh = {
     recode: '申请记录',
     applicationDate: '申请时间',
     currency: '币种',
+    selectcurrency:'选择币种',
     accumulatedInterest: '利息累计',
     state: '状态',
     OutstandingQuantity: '未还数量',

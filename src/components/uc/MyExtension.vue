@@ -184,7 +184,7 @@ export default {
         qrcodeM() {
             console.log(this.user);
             let promotionCode = this.user.promotionCode;
-            this.qrcode.value = this.host + "/#/register?agent=" + promotionCode;
+            this.qrcode.value = this.url + "/#/register?agent=" + promotionCode;
             this.qrcode.code = promotionCode;
         },
         onCopy(e) {

@@ -36,7 +36,7 @@
                 </FormItem>
             </Form>
         </Modal> -->
-        <transfermodal :modal="modal" @closetransferModal="closeModal" :getmoney="getMoney"></transfermodal>
+        <transfermodal :modal="modal" @closetransferModal="closeModal" :getmoney="getMoney" :currencyData="currencyData"></transfermodal>
     </div>
 </template>
 <script>
@@ -71,7 +71,18 @@ export default {
             loading: true,
             googleSwitch:false,
             hiddenAccountData:[],
-            showAccountData:[]
+            showAccountData:[],
+            currencyname:"",
+            tocurrencyname:"",
+            currencyData:{
+                currencyname:"",
+                tocurrencyname:"",
+                type:"",
+                currency:"",
+                modal:true, //判断是否开启币种选框
+                balance1:"",
+                balance2:""
+            }
         }
     },
     created() {
@@ -148,6 +159,7 @@ export default {
                if(resp.data!=null){
                 for(let i=0;i<resp.data.length;i++){
                     let data=resp.data[i];
+                    
                     if(data.leverWalletList[0].balance != "0" || data.leverWalletList[0].frozenBalance != "0" || data.leverWalletList[0].status != "0"){
                         this.hiddenAccountData.push(data);
                     }
@@ -276,17 +288,45 @@ export default {
                     const btn = h('Button', {
                         props: {
                             type: "info",
-
                         },
                         on: {
                             click: () => {
+                                console.log(this.showAccountData)
                                 this.modal = true;
+                                this.currencyData.currencyname=this.$t('myAccount._BitcoinAccount');
+                                this.currencyData.tocurrencyname=this.$t('myAccount._LeveragedAccounts');
+                                this.currencyData.type="转入";
+                                this.currencyData.currency=this.tableMoney[params.index].symbol.split('/');
+                                this.currencyData.balance1="";
+                                this.currencyData.balance2="";
                             }
                         },
                         style: {
                             marginRight: "8px",
                         }
                     }, self.$t("myAccount._rollout"));
+
+                    const outbtn = h('Button', {
+                        props: {
+                            type: "info",
+                        },
+                        on: {
+                            click: () => {
+                                this.modal = true;
+                                this.currencyData.currencyname=this.$t('myAccount._LeveragedAccounts');
+                                this.currencyData.tocurrencyname=this.$t('myAccount._BitcoinAccount');
+                                this.currencyData.type="转出";
+                                this.currencyData.currency=this.tableMoney[params.index].symbol.split('/');
+                                this.currencyData.balance1=this.tableMoney[params.index].leverWalletList[0].balance;
+                                this.currencyData.balance2=this.tableMoney[params.index].leverWalletList[1].balance;
+                                console.log(this.currencyData)
+                            }
+                        },
+                        style: {
+                            marginRight: "8px",
+                        }
+                    }, self.$t("myAccount.rollout"));
+
                     const browAndReturn = h('Button', {
                         props: {
                             type: "primary",
@@ -305,7 +345,7 @@ export default {
                             marginRight: "8px",
                         }
                     }, this.$t("myAccount._loanReturn"));
-                    return h("p", [btn, browAndReturn]);
+                    return h("p", [btn, outbtn,browAndReturn]);
                 }
             });
             return columns;
@@ -314,6 +354,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+.ivu-table-cell{
+    p{
+        display: flex;
+    }
+}
 </style>

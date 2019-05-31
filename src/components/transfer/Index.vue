@@ -5,29 +5,42 @@
                 <div style="margin-bottom:30px;">
                     <div style="width: 100%;line-height: 25px;text-align: right;">
                         <span style="padding-right: 5px;">{{$t('coin.follow')}}：</span>
-                        <Cascader style="width: 85%; float: right;" :data="data" v-model="value" :render-format="formatRender" @on-change="getValue" @on-visible-change="visibleChange" :placeholder='$t("uc.finance.withdraw.symboltip")'>
-                        </Cascader>
+                        <!-- <Cascader style="width: 85%; float: right;" :data="data" v-model="value" :render-format="formatRender" @on-change="getValue" @on-visible-change="visibleChange" :placeholder='$t("uc.finance.withdraw.symboltip")'>
+                        </Cascader> -->
+                        <Input v-model="currencyData.currencyname" style="width: 85%; float: right;" disabled></Input>
                     </div>
 
                 </div>
                 <div style="margin-bottom:25px;line-height: 25px;text-align: right;">
                     <span style="padding-right: 5px;">{{$t('coin.arrive')}}：</span>
-                    <Cascader style="width: 85%; float: right;" :data="toData" v-model="toValue" :render-format="formatRender" :placeholder='$t("uc.finance.withdraw.symboltip")'>
-                    </Cascader>
+                    <!-- <Cascader style="width: 85%; float: right;" :data="toData" v-model="toValue" :render-format="formatRender" :placeholder='$t("uc.finance.withdraw.symboltip")'>
+                    </Cascader> -->
+                    <Input v-model="currencyData.tocurrencyname" style="width: 85%; float: right;" disabled></Input>
+                </div>
+                <div v-if="currencyData.modal" style="margin-bottom:25px;line-height: 25px;text-align: right;">
+                    <span style="padding-right: 5px;">{{$t('coin.selectcurrency')}}：</span>
+                    <Select v-model="leveraged"  style="width: 85%; float: right;" id="select" @on-change="change">
+                        <Option v-for="(index,i) in currencyData.currency" :key="i" :value="index">{{index}}</Option>
+                    </Select>
                 </div>
             </div>
             <div style="width: 100%;line-height: 25px;">
-                <span>{{$t('coin.quantity')}}：</span>
+                <span style="margin-left:18px;line-height: 30px;">{{$t('coin.quantity')}}：</span>
                 <Input v-model="num" :placeholder="$t('coin.quantityTransferred')" style="width: 85%; float: right;">
-                <span slot="append">
-                    <span>{{unit}}</span>
+                <span slot="append" v-if="!currencyData.modal">
                     <span class="all" @click="turnAll">{{$t('coin.all')}}</span>
+                </span>
+                <span slot="append" v-else>
+                    <span class="all" @click="All">{{$t('coin.all')}}</span>
                 </span>
                 </Input>
             </div>
 
-            <div style="margin-top:20px;padding-left: 5px;">
-                {{$t('coin.available')}}&nbsp;&nbsp;&nbsp;{{canUseNum}}&nbsp;&nbsp;&nbsp;{{unit}}
+            <div style="margin-top:5px;padding-left:35px;" v-if="!currencyData.modal">
+                {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{canUseNum}}
+            </div>
+            <div style="margin-top:5px;padding-left:35px;" v-else>
+                {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{usenum}}
             </div>
             <div class="button" style="display:flex;justify-content:space-around;margin-top:20px;">
                 <Button @click="cancel" type="default">{{$t('coin.cancel')}}</Button>
@@ -51,26 +64,27 @@ const isEmptyArr = arr => {
 }
 export default {
     name: "transfermodal",
-    props: ["modal","getmoney"],
+    props: ["modal","getmoney","currencyData"],
     data() {
         return {
             formatRender: formatFun,
-            unit: "--",
-            canUseNum: "--",
+            unit: "",
+            canUseNum: "",
+            usenum:this.currencyData.balance,
             num: "",
             data: [],
-            value: [],
-            toData: [],
-            toValue: [],
             leverList: [],
             otcList: [],
-            exchangeList: []
+            exchangeList: [],
+            leveraged:""
         }
     },
     created() {
         if (this.isLogin) {
             this.init();
         }
+        this.leveraged="";
+        this.canUseNum = '';
     },
     watch:{
         lang: function () {
@@ -78,85 +92,96 @@ export default {
         }
     },
     methods: {
+        change(value){
+            if(value==this.currencyData.currency[0]){
+                this.canUseNum=this.currencyData.balance2;
+            }else{
+                this.canUseNum=this.currencyData.balance1;
+            }
+        },
         init() {
+            
             Promise.all([this.getLeverNum(), this.getOtcNum(), this.getExchangeList()]).then(res => {
                 this.data = [...this.leverList, ...this.otcList, ...this.exchangeList]
             })
+            this.leveraged="";
         },
         cancel() {
-            this.value = [];
-            this.toValue = [];
+            this.value = "";
+            this.toValue = "";
             this.num ='';
             this.unit = '';
+            this.canUseNum = '';
+            this.leveraged="";
             this.canUseNum = '';
             this.$emit("closetransferModal");
         },
         getOtcNum() {
-            return this.$http.post(this.host + "/uc/otc/wallet/get").then(response => {//查询法币种类的个数
-                var resp = response.body;
-                if (resp.code == 0) {
-                    // if (resp.data.length > 0) {
-                    const temp = resp.data.length > 0 && resp.data.map(ele => {
-                        return {
-                            value: ele.coin.unit,
-                            label: ele.coin.unit,
-                            canUse: ele.balance
-                        }
-                    });
-                    const list = [{
-                        value: this.$t('coin.legal'),
-                        label: this.$t('coin.legal'),
-                        children: temp
-                    }];
-                    this.otcList = list;
-                    // } else {
-                    //     this.otcList = [];
-                    // }
+            // return this.$http.post(this.host + "/uc/otc/wallet/get").then(response => {//查询法币种类的个数
+            //     var resp = response.body;
+            //     if (resp.code == 0) {
+            //         // if (resp.data.length > 0) {
+            //         const temp = resp.data.length > 0 && resp.data.map(ele => {
+            //             return {
+            //                 value: ele.coin.unit,
+            //                 label: ele.coin.unit,
+            //                 canUse: ele.balance
+            //             }
+            //         });
+            //         const list = [{
+            //             value: this.$t('coin.legal'),
+            //             label: this.$t('coin.legal'),
+            //             children: temp
+            //         }];
+            //         this.otcList = list;
+            //         // } else {
+            //         //     this.otcList = [];
+            //         // }
 
-                    return new Promise((resolve, reject) => {
-                        resolve("success");
-                    })
-                } else {
-                    this.$Message.error(resp.message);
-                }
-            });
+            //         return new Promise((resolve, reject) => {
+            //             resolve("success");
+            //         })
+            //     } else {
+            //         this.$Message.error(resp.message);
+            //     }
+            // });
         },
         getLeverNum() {
-            return this.$http.post(this.host + "/margin-trade/lever_wallet/list").then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                    if(resp.data!=null){
-                        const temp = resp.data.length > 0 && resp.data.map(ele => {
-                            return {
-                                value: ele.symbol,
-                                label: ele.symbol,
-                                children: ele.leverWalletList.map(e => {
-                                    return {
-                                        value: e.coin.unit,
-                                        canUse: e.balance,
-                                        label: e.coin.unit,
-                                    };
-                                })
-                            }
-                        })
-                    }else{
-                        var temp = [];
-                    }
-                    const list = [{
-                        value: this.$t('coin.Leveraged'),
-                        label: this.$t('coin.Leveraged'),
-                        children: temp || []
-                    }];
-                    this.leverList = list;
-                    return new Promise((resolve, reject) => {
-                        resolve("success");
-                    })
-                } else {
-                    if (this.loginmsg != undefined) {
-                        this.$Message.error(this.loginmsg);
-                    }
-                }
-            });
+            // return this.$http.post(this.host + "/margin-trade/lever_wallet/list").then(response => {
+            //     var resp = response.body;
+            //     if (resp.code == 0) {
+            //         if(resp.data!=null){
+            //             const temp = resp.data.length > 0 && resp.data.map(ele => {
+            //                 return {
+            //                     value: ele.symbol,
+            //                     label: ele.symbol,
+            //                     children: ele.leverWalletList.map(e => {
+            //                         return {
+            //                             value: e.coin.unit,
+            //                             canUse: e.balance,
+            //                             label: e.coin.unit,
+            //                         };
+            //                     })
+            //                 }
+            //             })
+            //         }else{
+            //             var temp = [];
+            //         }
+            //         const list = [{
+            //             value: this.$t('coin.Leveraged'),
+            //             label: this.$t('coin.Leveraged'),
+            //             children: temp || []
+            //         }];
+            //         this.leverList = list;
+            //         return new Promise((resolve, reject) => {
+            //             resolve("success");
+            //         })
+            //     } else {
+            //         if (this.loginmsg != undefined) {
+            //             this.$Message.error(this.loginmsg);
+            //         }
+            //     }
+            // });
         },
         visibleChange(flag) {
             if (flag) {
@@ -167,35 +192,42 @@ export default {
             }
         },
         turnAll() {
-            this.num = this.canUseNum;
+            this.num = this.currencyData.balance;
         },
-        getValue(value, selectedData) {
-            if (value.length > 0) {
-                let str = value[0];
-                this.unit = value[value.length - 1];
-                this.canUseNum = selectedData[selectedData.length - 1].canUse;
-                if (str === this.$t('coin.Leveraged')) {
-                    this.toData = this.exchangeList;
-                } else if (str === this.$t('coin.bit')) {
-                    const list = {
-                        value: this.$t('coin.legal'),
-                        label: this.$t('coin.legal')
-                    }
-                    this.toData = [...this.leverList, list];
-                } else if (str === this.$t('coin.legal')) {
-                    const list = {
-                        value: this.$t('coin.bit'),
-                        label: this.$t('coin.bit')
-                    }
-                    this.toData = [list];
-                }
-            } else {
-                this.toData = [];
-                this.toValue = [];
-                this.unit = "--";
-                this.canUseNum = "--";
+        All(){
+            if(this.leveraged==this.currencyData.currency[0]){
+                this.num=this.currencyData.balance2;
+            }else{
+                this.num=this.currencyData.balance1;
             }
         },
+        // getValue(value, selectedData) {
+        //     if (value.length > 0) {
+        //         let str = value[0];
+        //         this.unit = value[value.length - 1];
+        //         this.canUseNum = selectedData[selectedData.length - 1].canUse;
+        //         if (str === this.$t('coin.Leveraged')) {
+        //             this.toData = this.exchangeList;
+        //         } else if (str === this.$t('coin.bit')) {
+        //             const list = {
+        //                 value: this.$t('coin.legal'),
+        //                 label: this.$t('coin.legal')
+        //             }
+        //             this.toData = [...this.leverList, list];
+        //         } else if (str === this.$t('coin.legal')) {
+        //             const list = {
+        //                 value: this.$t('coin.bit'),
+        //                 label: this.$t('coin.bit')
+        //             }
+        //             this.toData = [list];
+        //         }
+        //     } else {
+        //         this.toData = [];
+        //         this.toValue = [];
+        //         this.unit = "--";
+        //         this.canUseNum = "--";
+        //     }
+        // },
         datainit() {
             this.value = this.toValue = [];
             this.unit = this.canUseNum = "--";
@@ -207,61 +239,29 @@ export default {
                 this.$Message.info(this.$t('coin.outNumber'));
                 return;
             }
-            if (this.value.length == 0) {
-                /*请选择您要转出的币种*/
-                this.$Message.info(this.$t('coin.outCurrency'));
-                return;
-            };
-            if (this.toValue.length == 0) {
-                /*请选择您要转入的币种*/
-                this.$Message.info(this.$t('coin.toCurrency'));
-                return;
+            if((this.currencyData.currencyname.indexOf(this.$t('myAccount._BitcoinAccount'))!=-1&&this.currencyData.tocurrencyname.indexOf(this.$t('myAccount._legaTenderAccount'))!=-1)||(this.currencyData.currencyname.indexOf(this.$t('myAccount._legaTenderAccount'))!=-1&&this.currencyData.tocurrencyname.indexOf(this.$t('myAccount._BitcoinAccount'))!=-1)){
+                    this.coinToOtc(this.currencyData);
             }
-            if (this.value[0] == this.$t('coin.bit') || this.value[0] == this.$t('coin.legal')) {
-                if (this.toValue[0] == this.$t('coin.Leveraged')) {
-                    const params = {
-                        coinUnit: this.value[1],
-                        amount: this.num,
-                        leverCoinSymbol: this.toValue[1]
-                    };
-                    this.coinToLever(params);
-                };
-                if (this.toValue[0] == this.$t('coin.legal')) {
-                    const params = {
-                        coinName: this.value[1],
-                        amount: this.num,
-                        direction: 0
-                    }
-                    this.coinToOtc(params);
-                };
-                if (this.toValue[0] == this.$t('coin.bit')) {
-                    const params = {
-                        coinName: this.value[1],
-                        amount: this.num,
-                        direction: 1
-                    }
-                    this.coinToOtc(params);
-                }
-            };
-            if (this.value[0] == this.$t('coin.Leveraged')) {
-                if (this.toValue[0] == this.$t('coin.bit')) {
-                    const params = {
-                        coinUnit: this.toValue[1],
-                        amount: this.num,
-                        leverCoinSymbol: this.value[1]
-                    }
-                    this.leverToCoin(params);
-                }
+            else if(this.currencyData.currencyname.indexOf(this.$t('myAccount._BitcoinAccount'))!=-1&&this.currencyData.tocurrencyname.indexOf(this.$t('myAccount._LeveragedAccounts'))!=-1){
+                this.coinToLever(this.currencyData);
+            }else if(this.currencyData.currencyname.indexOf(this.$t('myAccount._LeveragedAccounts'))!=-1&&this.currencyData.tocurrencyname.indexOf(this.$t('myAccount._BitcoinAccount'))!=-1){
+                this.leverToCoin(this.currencyData);
             }
-
-            //
         },
-        leverToCoin(params) {//杠杆转币币
+        leverToCoin(data) {//杠杆转币币
+           data.type=="转入"?data.type=0:data.type=1;
+           console.log(this.leveraged);
+           let leverCoinSymbol=data.currency.join("/");
+            let params={
+                coinUnit:this.leveraged,
+                leverCoinSymbol:leverCoinSymbol,
+                amount:this.num
+            };
             this.$http.post(this.host + "/margin-trade/lever_wallet/turn_out", params).then(res => {
                 if (res.body.code == 0) {
                     this.$Notice.success({
                         title: this.$t("exchange.tip"),
-                        desc: this.$t('coin.operateSuccessfully')
+                        desc: this.$t('exchange.operateSuccessfully')
                     });
                     this.datainit();
                     this.init();
@@ -275,7 +275,13 @@ export default {
                 }
             })
         },
-        coinToOtc(params) {//币币与发币互转;
+        coinToOtc(data) {//币币与发币互转;
+        data.type=="转入"?data.type=0:data.type=1;
+            let params={
+                coinName:data.currency,
+                direction:data.type,
+                amount:this.num
+            };
             this.$http.post(this.host + "/uc/otc/wallet/transfer", params).then(res => {
                 if (res.body.code == 0) {
                     this.$Notice.success({
@@ -294,7 +300,14 @@ export default {
                 }
             })
         },
-        coinToLever(params) {//币币转杠杆
+        coinToLever(data) {//币币转杠杆
+        data.type=="转入"?data.type=0:data.type=1;
+        let leverCoinSymbol=data.currency.join("/");
+            let params={
+                coinUnit:this.leveraged,
+                leverCoinSymbol:leverCoinSymbol,
+                amount:this.num
+            };
             this.$http.post(this.host + "/margin-trade/lever_wallet/change_into", params).then(res => {
                 if (res.body.code == 0) {
                     this.$Notice.success({
@@ -391,15 +404,28 @@ export default {
     }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .all {
     cursor: pointer;
     color: #2d8cf0;
-    margin-left: 20px;
 }
 .button {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
+}
+#select{
+    .ivu-select-selection{
+        div{
+            span{
+                text-align: left;       
+            }
+        }
+    }
+    .ivu-select-dropdown-list{
+            li{
+                text-align: left;
+            }
+        }
 }
 </style>

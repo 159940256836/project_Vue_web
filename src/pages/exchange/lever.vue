@@ -161,7 +161,7 @@
                                 </template>
                                 <li style="color:#39f;width:30%;text-align:right;cursor: pointer;" @click="transFerFun" v-if="isLogin">{{$t('coin.transfer')}}</li>
                                 <li style="color:#39f;width:20%;cursor: pointer;" @click="toBorrow" v-if="isLogin">{{$t('coin.return1')}}</li>
-                                <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
+                                <transfermodal :modal="modal" @closetransferModal="closeModal" :currencyData="currencyData" :getmoney="getmoney"></transfermodal>
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
                             <span @click="market_price" :class="{active:showMarket}">{{$t("exchange.market_price")}}</span>
@@ -1570,7 +1570,16 @@ export default {
                 ],
                 rows: []
             },
-            fullTrade: {}
+            fullTrade: {},
+            currencyData:{
+                currencyname:"币币账户",
+                tocurrencyname:"杠杆账户",
+                type:"转入",
+                currency:this.$route.params.pathMatch,
+                modal:true, //判断是否开启币种选框
+                balance1:"",
+                balance2:""
+            }
         };
     },
     computed: {
@@ -1750,6 +1759,11 @@ export default {
         }
     },
     created: function () {
+        if(this.currencyData.currency!=undefined){
+        this.currencyData.currency=this.currencyData.currency.toUpperCase().split('_');
+        }else{
+            this.currencyData.currency=this.defaultPath.toUpperCase().split('_');
+        }
         this.getdefaultSymbol().then(res => {
             this.defaultPath = res;
             this.init();
@@ -1882,6 +1896,7 @@ export default {
         //       }
         //     });
         // },
+        getmoney(){},
         getMember() {
           //获取个人安全信息
           this.$http
@@ -2827,6 +2842,7 @@ export default {
         },
         transFerFun() {
             this.modal = true;
+            console.log(this.currencyData);
         },
         closeModal() {
             this.getWallet();
@@ -3232,7 +3248,6 @@ export default {
                         }
                     });
             }
-
         },
         //查询当前委托
         getCurrentOrder() {

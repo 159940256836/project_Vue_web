@@ -179,7 +179,7 @@
                                     <b>{{wallet.base|toFloor(baseCoinScale)}}</b>
                                     <span>{{currentCoin.base}}</span>
                                     <router-link :to="rechargeUSDTUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">{{$t('coin.transfer')}}</span>
+                                    <!-- <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">{{$t('coin.transfer')}}</span> -->
                                     <!-- <a :href="rechargeUSDTUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>
@@ -282,7 +282,7 @@
                                     <b>{{wallet.coin|toFloor(coinScale)}}</b>
                                     <span>{{currentCoin.coin}}</span>
                                     <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link>
-                                    <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">{{$t('coin.transfer')}}</span>
+                                    <!-- <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">{{$t('coin.transfer')}}</span> -->
                                     <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
                                     <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
@@ -3481,9 +3481,9 @@ export default {
                 }
             }
         },
-        transFerFun() {
-            this.modal = true;
-        },
+        // transFerFun() {
+        //     this.modal = true;
+        // },
         closeModal() {
             this.getWallet();
             this.modal = false;

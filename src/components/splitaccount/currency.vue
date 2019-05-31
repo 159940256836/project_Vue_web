@@ -16,7 +16,7 @@
                 :disabled-hover="true"
             ></Table>
         </div>
-        <transfermodal :modal="modal" @closetransferModal="closeModal" :getmoney="getMoney"></transfermodal>
+        <transfermodal :modal="modal" @closetransferModal="closeModal" :getmoney="getMoney" :currencyData="currencyData" ></transfermodal>
     </div>
 </template>
 <script>
@@ -31,7 +31,15 @@ export default {
             loading: true,
             googleSwitch:false,
             hiddenAccountData:[],
-            showAccountData:[]
+            showAccountData:[],
+            currencyData:{
+                currencyname:"",
+                tocurrencyname:"",
+                type:"",
+                currency:"",
+                modal:false,
+                balance:""
+            }
         }
     },
     created() {
@@ -125,6 +133,7 @@ export default {
                 align: "center",
                 render: (h, params) =>{
                     var actions = [];
+                    
                     const btn = h('Button', {
                         props: {
                             type: "info",
@@ -132,13 +141,38 @@ export default {
                         on:{
                             click:()=>{
                                 this.modal = true;
+                                this.currencyData.currencyname=this.$t('myAccount._BitcoinAccount')+this.tableMoney[params.index].coinType;
+                                this.currencyData.tocurrencyname=this.$t('myAccount._legaTenderAccount')+this.tableMoney[params.index].coinType;
+                                this.currencyData.type="转入";
+                                this.currencyData.currency=this.tableMoney[params.index].coinType;
+                                this.currencyData.balance="";
                             }
                         },
                         style: {
                             marginRight: "8px",
                         }
                     }, self.$t("myAccount._rollout"));
+
+                    const outbtn = h('Button', {
+                        props: {
+                            type: "info",
+                        },
+                        on:{
+                            click:()=>{
+                                this.modal = true;
+                                this.currencyData.currencyname=this.$t('myAccount._legaTenderAccount')+this.tableMoney[params.index].coinType;
+                                this.currencyData.tocurrencyname=this.$t('myAccount._BitcoinAccount')+this.tableMoney[params.index].coinType;
+                                this.currencyData.type="转出";
+                                this.currencyData.currency=this.tableMoney[params.index].coinType;
+                                this.currencyData.balance=this.tableMoney[params.index].balance;
+                            }
+                        },
+                        style: {
+                            marginRight: "8px",
+                        }
+                    }, self.$t("myAccount.rollout"));
                     actions.push(btn);
+                    actions.push(outbtn);
                     return h("p", actions);
                 }
             });

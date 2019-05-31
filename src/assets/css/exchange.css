@@ -353,7 +353,7 @@ p.math_price {
 }
 
 .ivu-modal {
-    width: 450px !important;
+    width: 450px;
 }
 
 .ivu-modal-header .ivu-modal-header-inner {

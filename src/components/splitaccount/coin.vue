@@ -18,7 +18,7 @@
                 :no-data-text="$t('common.nodata')"
             ></Table>
         </div>
-        <transfermodal :modal="modal" @closetransferModal="closeModal" :getmoney="getMoney"></transfermodal>
+        <transfermodal @closetransferModal="closeModal" :getmoney="getMoney" :currencyData="currencyData"></transfermodal>
     </div>
 </template>
 <script>
@@ -34,7 +34,16 @@ export default {
             loading: true,
             googleSwitch:false,
             hiddenAccountData:[],
-            showAccountData:[]
+            showAccountData:[],
+            currencyData:{
+                currencyname:"",
+                tocurrencyname:"",
+                type:"",
+                currency:"",
+                modal:true, //判断是否开启币种选框
+                balance1:"",
+                balance2:""
+            }
         }
     },
     created() {
@@ -98,7 +107,7 @@ export default {
             columns.push({
                 title: this.$t("uc.finance.money.cointype"),
                 key: "coinType",
-                width: 100,
+                // width: 100,
                 align: "center"
             });
             columns.push({
@@ -106,6 +115,7 @@ export default {
                 key: "balance",
                 align: "center",
                 render(h, params) {
+                    console.log(params.row.balance);
                     return h(
                         "span",
                         {
@@ -151,7 +161,7 @@ export default {
             columns.push({
                 title: this.$t("uc.finance.money.operate"),
                 key: "price1",
-                width: 400,
+                width: 300,
                 align: "center",
                 render: (h, params)=> {
                     var actions = [];
@@ -227,20 +237,6 @@ export default {
                             )
                         );
                     }
-                    const btn = h('Button', {
-                        props: {
-                            type: "info",
-                        },
-                        on: {
-                            click: () => {
-                                this.modal = true;
-                            }
-                        },
-                        style: {
-                            marginRight: "8px",
-                        }
-                    }, self.$t("myAccount._rollout"));
-                    actions.push(btn);
                     return h("p", actions);
                 }
             });

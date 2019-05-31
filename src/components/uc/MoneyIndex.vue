@@ -6,7 +6,7 @@
           <Tabs v-model="splitcomponentContent" @on-click="changeTab">
             <TabPane :label="$t('myAccount._BitcoinAccount')" name="COIN"></TabPane>
             <TabPane :label="$t('myAccount._legaTenderAccount')" name="CURRENCY"></TabPane>
-            <TabPane :label="$t('myAccount._LeveragedAccounts')" name="LEVER"></TabPane>
+            <!-- <TabPane :label="$t('myAccount._LeveragedAccounts')" name="LEVER"></TabPane> -->
           </Tabs>
           <!-- <keep-alive> -->
           <component :is="splitcomponent"></component>
@@ -395,12 +395,16 @@ export default {
             }
     }
     .hidden-assets{
-          display: flex;
+    display: flex;
     justify-content: flex-end;
     }
+     #moneyindex .ivu-table-row .ivu-table-cell{
+       display: flex;
+       justify-content: center;
+     }
     #moneyindex .ivu-table-row .ivu-table-cell p{
       float: right;
-    margin-right: 85px;
+      //margin-right: 85px;
     }
     #lever .ivu-table-row .ivu-table-cell p{
     margin:0;
