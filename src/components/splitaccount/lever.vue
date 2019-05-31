@@ -159,7 +159,7 @@ export default {
                if(resp.data!=null){
                 for(let i=0;i<resp.data.length;i++){
                     let data=resp.data[i];
-                    
+
                     if(data.leverWalletList[0].balance != "0" || data.leverWalletList[0].frozenBalance != "0" || data.leverWalletList[0].status != "0"){
                         this.hiddenAccountData.push(data);
                     }
@@ -285,7 +285,7 @@ export default {
                 width:200,
                 render: (h, params) => {
                     const data = params.row;
-                    const btn = h('Button', {
+                    const btn = h('span', {
                         props: {
                             type: "info",
                         },
@@ -303,10 +303,12 @@ export default {
                         },
                         style: {
                             marginRight: "8px",
+                            color: "#3399ff",
+                            cursor: "pointer"
                         }
                     }, self.$t("myAccount._rollout"));
 
-                    const outbtn = h('Button', {
+                    const outbtn = h('span', {
                         props: {
                             type: "info",
                         },
@@ -324,6 +326,8 @@ export default {
                         },
                         style: {
                             marginRight: "8px",
+                            color: "#3399ff",
+                            cursor: "pointer"
                         }
                     }, self.$t("myAccount.rollout"));
 
@@ -343,6 +347,8 @@ export default {
                         },
                         style: {
                             marginRight: "8px",
+                            color: "#3399ff",
+                            cursor: "pointer"
                         }
                     }, this.$t("myAccount._loanReturn"));
                     return h("p", [btn, outbtn,browAndReturn]);

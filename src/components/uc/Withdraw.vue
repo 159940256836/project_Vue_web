@@ -233,7 +233,7 @@
             </p> -->
             <p slot="header">
                 <!--提示-->
-                {{$t('us.identity.tips')}}
+                {{$t('uc.identity.tips')}}
             </p>
             <Form
                 class="withdraw-form-inline"

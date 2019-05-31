@@ -133,8 +133,8 @@ export default {
                 align: "center",
                 render: (h, params) =>{
                     var actions = [];
-                    
-                    const btn = h('Button', {
+
+                    const btn = h('span', {
                         props: {
                             type: "info",
                         },
@@ -150,10 +150,12 @@ export default {
                         },
                         style: {
                             marginRight: "8px",
+                            color: "#3399ff",
+                            cursor: "pointer"
                         }
                     }, self.$t("myAccount._rollout"));
 
-                    const outbtn = h('Button', {
+                    const outbtn = h('span', {
                         props: {
                             type: "info",
                         },
@@ -169,6 +171,8 @@ export default {
                         },
                         style: {
                             marginRight: "8px",
+                            color: "#3399ff",
+                            cursor: "pointer"
                         }
                     }, self.$t("myAccount.rollout"));
                     actions.push(btn);

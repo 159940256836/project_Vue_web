@@ -170,12 +170,14 @@ export default {
                             // 充币
                             actions.push(
                                 h(
-                                    "Button",
+                                    "span",
                                     {
                                         // 充币;
                                         props: {
                                             type: "primary",
-                                            size: "small"
+                                            size: "small",
+                                            color: "#3399ff",
+                                            cursor: "pointer"
                                         },
                                         on: {
                                             click: function () {
@@ -194,7 +196,7 @@ export default {
                         } else {
                             //   获取地址按钮;
                             actions.push(
-                                h("Button",
+                                h("span",
                                     {
                                         props: { type: "info", size: "small" },
                                         on: {
@@ -206,7 +208,9 @@ export default {
                                             }
                                         },
                                         style: {
-                                            marginRight: "8px"
+                                            marginRight: "8px",
+                                            color: "#3399ff",
+                                            cursor: "pointer"
                                         }
                                     },
                                     self.$t("uc.finance.money.getaddress")
@@ -217,10 +221,10 @@ export default {
                     if (params.row.coin.canWithdraw == 1) {
                         // 提币;
                         actions.push(
-                            h("Button", {
+                            h("span", {
                                 props: {
                                     type: "error",
-                                    size: "small"
+                                    size: "small",
                                 },
                                 on: {
                                     click: function () {
@@ -230,7 +234,9 @@ export default {
                                     }
                                 },
                                 style: {
-                                    marginRight: "8px"
+                                    marginRight: "8px",
+                                    color: "#f15057",
+                                    cursor: "pointer"
                                 }
                             },
                                 self.$t("uc.finance.money.pickup")
