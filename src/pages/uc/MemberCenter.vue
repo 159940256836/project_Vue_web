@@ -272,7 +272,7 @@
                     <router-link to="/uc/apiManage">{{$t("uc.menuTitle.apiManagement")}}</router-link>
                     </MenuItem>
                 </Submenu>
-                <Submenu name="7">
+               <!-- <Submenu name="7">
                     <template slot="title">
                         <span class="isclick"></span>
                         <span class="content">{{$t("uc.menuTitle.leverManagement")}}</span>
@@ -283,7 +283,7 @@
                     <MenuItem name="7-2">
                     <router-link to="/uc/level/history">{{$t("exchange.hisdelegation")}}</router-link>
                     </MenuItem>
-                </Submenu>
+                </Submenu>-->
             </Menu>
             <router-view></router-view>
         </div>
@@ -320,9 +320,9 @@ export default {
                 "/uc/withdraw/address": "2-4",
                 "/uc/ad/create": "4-1",
                 "/uc/ieoadmin": "5-1",
-                "/uc/apiManage": "6-1",
-                "/uc/level/current": "7-1",
-                "/uc/level/history": "7-2"
+                "/uc/apiManage": "6-1"
+                // "/uc/level/current": "7-1",
+                // "/uc/level/history": "7-2"
             }
         };
     },
@@ -372,12 +372,12 @@ export default {
                 case "6-1":
                     this.$router.push("/uc/apiManage");
                     break;
-                case "7-1":
-                    this.$router.push("/uc/level/current");
-                    break;
-                case "7-2":
-                    this.$router.push("/uc/level/history");
-                    break;
+                // case "7-1":
+                //     this.$router.push("/uc/level/current");
+                //     break;
+                // case "7-2":
+                //     this.$router.push("/uc/level/history");
+                //     break;
                 default:
                     this.$router.push("/uc/safe");
                     break;
