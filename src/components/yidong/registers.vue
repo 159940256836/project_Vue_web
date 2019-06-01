@@ -9,9 +9,9 @@
           <span>你的好友</span>
           <span>{{mobile}}</span>
       </div>
-      <div class="zhuceId">邀请您注册BDW</div>
+      <div @click="bdmMax" class="zhuceId">邀请您注册BDW</div>
       <div class="btn">
-          <button>立即注册</button>
+          <button @click='reg'>立即注册</button>
       </div>
   </div>
    
@@ -29,6 +29,9 @@ export default {
     }
   },
   methods: {
+      bdmMax(){
+          this.$router.push('/bdm')
+      },
       reg() {
           var par = '?agent=' + this.agent;
           this.$router.push('/registe' + par);

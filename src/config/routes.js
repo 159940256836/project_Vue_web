@@ -60,6 +60,8 @@ import transactionCosts from '../components/footerList/transactionCosts'
 import law from '../components/footerList/law'
 //隐私协议
 import Privgreement from '../components/footerList/Privgreement'
+//bdm协议
+import bdm from '../components/footerList/bdm'
 //用户协议
 import Usereement from '../components/footerList/Usereement'
 // import mymsg from ''
@@ -107,6 +109,7 @@ import Lever from "../pages/exchange/lever.vue"
 import mobilereg from "../components/yidong/registers";
 import registe from "../components/yidong/registe";
 export default [
+    { path: '/bdm', component: bdm },
     { path: '/Usereement', component: Usereement },
     { path: '/Privgreement', component: Privgreement },
     { path: '/law', component: law },
