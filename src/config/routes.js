@@ -60,6 +60,8 @@ import transactionCosts from '../components/footerList/transactionCosts'
 import law from '../components/footerList/law'
 //隐私协议
 import Privgreement from '../components/footerList/Privgreement'
+//bdm协议
+import bdm from '../components/footerList/bdm'
 //用户协议
 import Usereement from '../components/footerList/Usereement'
 // import mymsg from ''
@@ -102,7 +104,12 @@ import LeverIndex from "../pages/lever/Index.vue"
 
 //杠杆交易
 import Lever from "../pages/exchange/lever.vue"
+//移动端注册  registe
+
+import mobilereg from "../components/yidong/registers";
+import registe from "../components/yidong/registe";
 export default [
+    { path: '/bdm', component: bdm },
     { path: '/Usereement', component: Usereement },
     { path: '/Privgreement', component: Privgreement },
     { path: '/law', component: law },
@@ -110,6 +117,12 @@ export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
     { path: '/login', component: Login },
+    { path: '/mobilereg', component: mobilereg, meta: {
+        hide: true
+    }},
+    { path: '/registe', component: registe, meta: {
+        hide: true
+    }},
     { path: "/Ieo", name: "ieo", component: Ieo },
     { path: "/Ieo/IeoDetail", name: "IeoDetail", component: IeoDetail },
     { path: '/login/returnUrl/:returnUrl', component: Login },

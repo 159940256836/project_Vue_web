@@ -1,7 +1,7 @@
 <template>
     <div class="page-view">
         <!--头部-->
-        <header>
+        <header v-show="!$route.meta.hide">
             <div
                 class="page-content"
                 :style="{
@@ -102,7 +102,7 @@
         <!--内容-->
         <router-view v-if="isRouterAlive"></router-view>
         <!--底部-->
-        <footer>
+        <footer v-show="!$route.meta.hide">
             <div class="footer">
                 <div class="footer_content">
                     <div class="footer-main">
