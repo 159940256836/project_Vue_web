@@ -14,7 +14,7 @@
                                 <span class="describe">{{$t('uc.finance.withdraw.symbol')}}</span>
                                 <Select
                                     v-model="coinType"
-                                    style="width:350px;margin-left:60px;"
+                                    style="width:350px;margin-left:10px;"
                                     @on-change="getAddrList"
                                 >
                                     <Option
@@ -33,8 +33,7 @@
                                         <Select
                                             ref="address"
                                             v-model="withdrawAdress"
-                                            style="width:350px;margin-left:60px;"
-                                            filterable
+                                            style="width:350px;margin-left:10px;"
                                             clearable
                                             @on-query-change="onAddressChange"
                                         >
@@ -53,7 +52,7 @@
                         <div class="availablenum form-group-container">
                             <div class="form-group form-amount">
                                 <!--可用余额-->
-                                <span class="label-amount">
+                                <span class="label-amount describe">
                                     {{$t('uc.finance.withdraw.num')}}
                                 </span>
                                 <!--提币数量-->
@@ -72,7 +71,7 @@
                                             :placeholder="$t('uc.finance.withdraw.numtip1')"
                                             size="large"
                                             :max="currentCoin.maxAmount"
-                                            style="width:350px;margin-left:55px;"
+                                            style="width:350px;margin-left:5px;"
                                         >
                                         </InputNumber>
                                         <span class="input-group-addon addon-tag uppercase firstt">
@@ -84,7 +83,7 @@
                                         <span>
                                             {{$t('uc.finance.withdraw.avabalance')}}：
                                             <span
-                                                class="label-pointer"
+                                                class="label-pointer describe"
                                                 id="valueAvailable"
                                             >
                                                 {{!currentCoin.balance?'---':currentCoin.balance|toFloor}}
@@ -116,7 +115,7 @@
                         <!--手续费-->
                         <div class="availablenum form-group-container form-group-container2">
                             <div class="form-group form-fee">
-                                <span class="label-amount" style="width:50px;">
+                                <span class="label-amount describe">
                                     {{$t('uc.finance.withdraw.fee')}}
                                     <!--<p class="label-fr">-->
                                     <!--<span>{{$t('uc.finance.withdraw.range')}}：{{currentCoin.minTxFee}} - {{currentCoin.maxTxFee}}</span>-->
@@ -133,7 +132,7 @@
                                         :min="currentCoin.minTxFee"
                                         :max="currentCoin.maxTxFee"
                                         size="large"
-                                        style="width:350px;margin-left:60px;"
+                                        style="width:350px;margin-left:5px;"
                                     >
                                     </InputNumber>
                                     <span class="input-group-addon addon-tag uppercase">
@@ -146,7 +145,7 @@
                         <div class="availablenum form-group-container form-group-container2">
                             <!--到账数量-->
                             <div class="form-group">
-                                <span>{{$t('uc.finance.withdraw.arriamount')}}</span>
+                                <span class="describe">{{$t('uc.finance.withdraw.arriamount')}}</span>
                                 <div
                                     class="input-group"
                                     style="margin-top:14px;position:relative;display:inline-block"
@@ -156,7 +155,7 @@
                                         v-model="withdrawOutAmount"
                                         :placeholder="$t('uc.finance.withdraw.arriamount')"
                                         size="large"
-                                        style="width:350px;margin-left:55px;"
+                                        style="width:350px;margin-left:5px;"
                                     >
                                     </InputNumber>
                                     <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->
@@ -729,7 +728,7 @@ export default {
             display: inline-block;
         }
         .label-fr{
-            margin-left: 115px;
+            margin-left: 135px;
         }
     }
 }
@@ -855,9 +854,9 @@ export default {
     text-overflow: ellipsis;
 }
 
-p.describe {
-    font-size: 16px;
-    font-weight: 600;
+.describe {
+    display: inline-block;
+    width:120px;
 }
 
 .acb-p1 {
@@ -891,7 +890,7 @@ p.describe {
 
 .action-foot {
     margin-top: 20px;
-    margin-left: 177PX;
+    margin-left:190PX;
     width: 350px;
 }
 
