@@ -25,6 +25,8 @@ const zh = {
     Legaotices:"法律声明",
     Privgreement:"隐私协议",
     Usereement:"用户协议",
+    customerservice1:"QQ群",
+    customerservice2:"客服QQ号",
 }
 
 const en = {
@@ -54,6 +56,8 @@ const en = {
     email: "Aervice mailbox",
     friendLinks: "Blogroll",
     bulletinboard:"Bulletin Board",
+    customerservice1:"QQ group",
+    customerservice2:"Customer service qq"
 }
 
 exports.zh = zh;

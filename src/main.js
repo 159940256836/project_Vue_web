@@ -25,6 +25,7 @@ Vue.prototype.host = "http://192.168.124.43"; // 测试环境
 // Vue.prototype.host = "http://www.coinmany.com"; // 第一套
 // Vue.prototype.host = "https://manager.coinmany.com/"; // 正式
 Vue.prototype.url="https://www.coinmany.com" //链接地址
+// Vue.prototype.url="http://192.168.124.45" //链接地址
 Vue.prototype.api = Api;
 Vue.http.options.credentials = true;
 Vue.http.options.emulateJSON = true;

@@ -38,10 +38,10 @@
                 </div>
                 <div class="bannerWrapper">
                     <Carousel
-                            autoplay
-                            :arrow="showArrow"
-                            :autoplay-speed="speed"
-                            v-model="valueCal"
+                        autoplay
+                        :arrow="showArrow"
+                        :autoplay-speed="speed"
+                        v-model="valueCal"
                     >
                         <CarouselItem
                             v-for="(itemArr,index) in picList"
@@ -1210,7 +1210,7 @@ export default {
                     coin.isFavor = false;
                     this.coins._map[coin.symbol] = coin;
                     this.coins[coin.base].push(coin);
-
+                    console.log(this.coins[coin.base]);
                 };
                 if (this.isLogin) {
                     this.getFavor();

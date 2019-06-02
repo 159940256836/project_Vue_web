@@ -284,7 +284,7 @@
                                     <span>{{currentCoin.coin}}</span>
                                     <router-link :to="rechargeCoinUrl">{{$t("exchange.recharge")}}</router-link>
                                     <!-- <span style="float:right;margin-right:10px; color:#39f;cursor: pointer;" @click="transFerFun">{{$t('coin.transfer')}}</span> -->
-                                    <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal>
+                                    <!-- <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal> -->
                                     <!-- <a :href="rechargeCoinUrl">{{$t("exchange.recharge")}}</a> -->
                                 </div>
                                 <div class="hd" v-else>

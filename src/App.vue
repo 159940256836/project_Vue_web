@@ -1,7 +1,7 @@
 <template>
     <div class="page-view">
         <!--头部-->
-        <header>
+        <header v-show="!$route.meta.hide">
             <div
                 class="page-content"
                 :style="{
@@ -102,7 +102,7 @@
         <!--内容-->
         <router-view v-if="isRouterAlive"></router-view>
         <!--底部-->
-        <footer>
+        <footer v-show="!$route.meta.hide">
             <div class="footer">
                 <div class="footer_content">
                     <div class="footer-main">
@@ -216,9 +216,12 @@
                                 <li>
                                     <a href="javascript:;">{{$t('footer.email')}}：service@coinmany.com</a>
                                 </li>
-                                <!-- <li>
-                                    <span style="color: #8790a1;">企业邮箱：service@coinmany.com</span>
-                                </li> -->
+                                <li>
+                                    <a href="javascript:;">{{$t('footer.customerservice2')}}：3039059895</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">{{$t('footer.customerservice1')}}：729045745</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -840,7 +843,14 @@ ul,li{
         }
     }
 }
-html,
+html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+        "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
 body {
     height: 100%;
     margin: 0;

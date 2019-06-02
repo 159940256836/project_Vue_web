@@ -25,8 +25,7 @@
                 </FormItem>
                 <FormItem
                     prop="googleCode"
-                    v-if="openGoogleCode"
-                >
+                    v-if="openGoogleCode">
                     <Input
                         type="text"
                         @on-enter="handleSubmit('formInline')"
