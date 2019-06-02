@@ -531,6 +531,7 @@ export default {
                 USDT: [],
                 BTC: [],
                 ETH: [],
+                BC: [],
                 favor: [],
                 columns: [
                     {
@@ -837,6 +838,9 @@ export default {
                     text: this.$t("service.ETH")
                 },
                 {
+                    text: this.$t("service.BC")
+                },
+                {
                     text: this.$t("service.CUSTOM")
                 }
             ],
@@ -936,6 +940,9 @@ export default {
                 },
                 {
                     text: this.$t("service.ETH")
+                },
+                {
+                    text: this.$t("service.BC")
                 },
                 {
                     text: this.$t("service.CUSTOM")
@@ -1178,6 +1185,8 @@ export default {
             } else if (index == 2) {
                 this.dataIndex = this.coins.ETH;
             } else if (index == 3) {
+                this.dataIndex = this.coins.BC;
+            }else if (index == 4) {
                 this.dataIndex = this.coins.favor;
 
                 // if (this.isLogin) {
