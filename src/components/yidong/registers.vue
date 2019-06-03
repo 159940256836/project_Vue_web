@@ -1,9 +1,9 @@
 <template>
-  <div class="aaa">
+  <div class="registers">
       <!-- <div>{{agent}}</div>
       <div>{{mobile}}</div>
      <div @click='reg'>注册</div> -->
-     <div class="top">
+     <div class="toppp">
      </div>
       <div class="agent">
           <span>你的好友</span>
@@ -53,7 +53,8 @@ export default {
 
 <style scoped lang="scss">
 @import"../../styles/index.css";
-.top{
+.registers{
+    .toppp{
     width:100%;
     height:4.44rem;
     background:url("../../assets/img/yd1.png") 0 0 no-repeat;
@@ -92,5 +93,8 @@ export default {
    }
 
 }
+    
+}
+
 
 </style>
