@@ -74,7 +74,6 @@
                 id="hot"
                 v-if="hostSymbolList.length != 0"
             >
-
                 <!-- 首页行情图 -->
                 <section class="section-market">
                     <div
@@ -243,7 +242,6 @@ export default {
     data() {
         let self = this;
         return {
-            request: '',
             width: 220,
             height: 50,
             loading: false,
@@ -460,6 +458,7 @@ export default {
                     title: self.$t("service.PriceTrend"),
                     align: "center",
                     render: function (h, params) {
+                        // debugger
                         let valus = null;
                         let len = params.row.trend.length;
                         valus = len > 0 ? params.row.trend
@@ -757,8 +756,11 @@ export default {
                         title: self.$t("service.PriceTrend"),
                         align: "center",
                         render: function (h, params) {
+                            // console.log(params.row.trend);
                             let valus = null;
                             let len = params.row.trend.length;
+                            // console.log(params.row.trend);
+                            // debugger
                             valus =
                                 len > 0
                                     ? params.row.trend
@@ -881,7 +883,6 @@ export default {
         }
     },
     mounted: function () {
-        console.log('1');
         this.getCNYRate();
         this.getSymbol();
         this.getHotSymbol();
@@ -907,13 +908,13 @@ export default {
                 const list = resp.recommend.map(ele => ({
                     symbol: ele.symbol,
                     chg: ele.chg,
-                    isGreen: ele.chg > 0 ? true : false,
+                    isGreen:ele.chg>0?true:false,
                     close: ele.close,
                     cny: this.round(this.mul(ele.baseUsdRate, this.CNYRate), 2),
                     trend: ele.trend
                 }))
                 this.hostSymbolList = list;
-                console.log(resp,this.hostSymbolList);
+                // console.log(resp,this.hostSymbolList);
                 this.startWebsockHotlist();
             })
         },
@@ -934,7 +935,6 @@ export default {
             }
         },
         updateLangData() {
-            console.log(this.favorColumns);
             this.indexBtn = [
                 {
                     text: this.$t("service.USDT")
@@ -952,7 +952,6 @@ export default {
                     text: this.$t("service.CUSTOM")
                 }
             ];
-            console.log(this.indexBtn);
             this.coins.columns[0].title = this.$t("service.favor");
             this.coins.columns[1].title = this.$t("service.COIN");
             this.coins.columns[2].title = this.$t("service.NewPrice");
@@ -972,15 +971,14 @@ export default {
             this.favorColumns[6].title = this.$t("service.ExchangeNum");
             this.favorColumns[7].title = this.$t("service.PriceTrend");
             this.favorColumns[8].title = this.$t("service.Exchange");
-
             // this.coins.columns[4].title = this.$t("service.OpenPrice");
         },
-        openActivity(url) {
-        },
+        // openActivity(url) {
+        // },
         init() {
-            console.log(this.coins.columns[7],this.favorColumns);
-            //   this.$store.commit("navigate", "nav-index");
-            //   this.$store.state.HeaderActiveName = "1-1";
+            // console.log(this.coins.columns[7],this.favorColumns);
+            // this.$store.commit("navigate", "nav-index");
+            // this.$store.state.HeaderActiveName = "1-1";
             this.loadPicData();//获取轮播图
             this.addClass(0);
             // this.getmoneyData();
@@ -1136,6 +1134,7 @@ export default {
                 stompClient.subscribe("/topic/market/thumb", function (msg) {
                     var resp = JSON.parse(msg.body);
                     var coin = that.getCoin(resp.symbol);
+                    // console.log(coin);
                     if (coin != null) {
                         // coin.price = resp.close.toFixed(2);
                         coin.price = resp.close;
@@ -1184,8 +1183,9 @@ export default {
             );
         },
         addClass(index) {
+            console.log(index, this.coins);
+
             this.choseBtn = index;
-            console.log(this.choseBtn, index);
             if (index == 0) {
                 this.dataIndex = this.coins.USDT;
             } else if (index == 1) {
@@ -1203,11 +1203,13 @@ export default {
                 //   this.$router.push("/login");
                 // }
             }
+            console.log(this.dataIndex);
         },
         getSymbol() {
             this.loading = true;
             this.$http.post(this.host + this.api.market.thumbTrend, {}).then(response => {
                 var resp = response.body;
+                // console.log(resp);
                 for (var i = 0; i < resp.length; i++) {
                     var coin = resp[i];
                     coin.price = resp[i].close;
@@ -1218,13 +1220,12 @@ export default {
                     coin.isFavor = false;
                     this.coins._map[coin.symbol] = coin;
                     this.coins[coin.base].push(coin);
-                    // console.log(coin.price,coin.rose,coin.base,coin.href, this.coins._map[coin.symbol]);
+                    // console.log(coin.base, coin.href);
                 };
                 if (this.isLogin) {
                     this.getFavor();
                 }
                 this.startWebsock();
-                console.log('1');
                 this.loading = false;
             });
         },
@@ -1642,8 +1643,6 @@ li {
     }
 }
 </style>
-
-
 <style lang="scss">
 .bannerWrapper .ivu-carousel {
     height: 100%;
@@ -1872,5 +1871,7 @@ li {
     margin-top: 10px;
 }
 </style>
+
+
 
 

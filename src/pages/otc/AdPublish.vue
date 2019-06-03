@@ -22,7 +22,7 @@
           <div class="formbox send-form">
             <Form ref="form" :model="form" :rules="ruleValidate" :label-width="90">
               <FormItem :label="$t('otc.publishad.iwant')" prop="advertiseType">
-                <RadioGroup v-model="form.advertiseType">
+                <RadioGroup v-model="form.advertiseType" @on-change="changeCoin">
                   <Radio label="1" :disabled='isId'>{{$t('otc.publishad.sellonline')}}</Radio>
                   <Radio label="0" :disabled='isId'>{{$t('otc.publishad.buyonline')}}</Radio>
                 </RadioGroup>
@@ -41,21 +41,53 @@
               <FormItem :label="$t('otc.publishad.currency')" prop="rmb">
                 <Input v-model="form.rmb" disabled placeholder=""></Input>
               </FormItem>
-              <FormItem :label="$t('otc.publishad.openfixedprice')">
+              <FormItem v-if="symbol != 'BC'" :label="$t('otc.publishad.openfixedprice')">
                 <i-switch v-model="form.fixed" size="large">
                   <span slot="open">{{$t('otc.publishad.open')}}</span>
                   <span slot="close">{{$t('otc.publishad.close')}}</span>
                 </i-switch>
               </FormItem>
               <p class="msg" v-show="form.fixed">{{$t('otc.publishad.usetip')}}</p>
-              <FormItem :label="$t('otc.publishad.premiseprice')" prop="premisePrice" v-show="!form.fixed" class="ivu-form-item-required">
-                <Input v-model="form.premisePrice" @keyup.native="handleInput(form.premisePrice)" :placeholder="$t('otc.publishad.premisepricetip')">
+              <FormItem
+                :label="$t('otc.publishad.premiseprice')"
+                prop="premisePrice"
+                v-show="!form.fixed"
+                class="ivu-form-item-required"
+              >
+                <Input
+                  v-model="form.premisePrice"
+                  @keyup.native="handleInput(form.premisePrice)"
+                  :placeholder="$t('otc.publishad.premisepricetip')"
+                ></Input>
                 <span slot="append">%</span>
+              </FormItem>
+              <FormItem
+                v-if="symbol != 'BC'"
+                :label="$t('otc.publishad.fixedprice')"
+                prop="fixedPrice"
+                v-show="form.fixed"
+                class="ivu-form-item-required">
+                <Input
+                  v-model="form.fixedPrice"
+                  @keyup.native="handleInput(form.fixedPrice)"
+                  :placeholder="$t('otc.publishad.fixedpricetip')"
+                >
+                <span slot="append">{{form.rmb}}</span>
                 </Input>
               </FormItem>
-              <FormItem :label="$t('otc.publishad.fixedprice')" prop="fixedPrice" v-show="form.fixed" class="ivu-form-item-required">
-                <Input v-model="form.fixedPrice" @keyup.native="handleInput(form.fixedPrice)" :placeholder="$t('otc.publishad.fixedpricetip')">
-                <span slot="append">{{form.rmb}}</span>
+              <FormItem
+                v-else
+                :label="$t('otc.publishad.fixedprice')"
+                prop="fixedPrice"
+                v-show="form.fixed"
+                class="ivu-form-item-required">
+                <Input
+                  v-model="form.fixedPrice"
+                  @keyup.native="handleInput(form.fixedPrice)"
+                  :placeholder="$t('otc.publishad.fixedpricetip')"
+                  disabled
+                >
+                  <span slot="append">{{form.rmb}}</span>
                 </Input>
               </FormItem>
               <!-- 1 -->
@@ -251,6 +283,7 @@ export default {
         rmb: "",
         fixed: false,
         premisePrice: "",
+        regularPrice: "",
         fixedPrice: "",
         number: "",
         timeLimit: "",
@@ -367,6 +400,7 @@ export default {
     },
     changeCoin() {
       let coinItem = this.getCoin(this.form.coin);
+      console.log(coinItem);
       if (coinItem != null) {
         this.cankao = coinItem.marketPrice + "";
         let lv = (1 + this.form.premisePrice / 100).toFixed(4);
@@ -374,6 +408,20 @@ export default {
           this.cankao.replace(/,/g, "").replace(/[^\d|.]/g, "") - 0;
         this.price = (cankoNew * lv).toLocaleString(); // + ' CNY/' + coinItem.unit;
         this.symbol = coinItem.unit;
+        console.log(this.symbol);
+      }
+      /*当购买类型为 卖出 1 时 并且 当前交易币种为BC时 默认显示固定价格 并且固定价格为1
+      否则购买类型为 买入0 时 并且当前交易对币种为BC时 默认显示固定价格 并且固定价格为 0.99
+      当购买或者出售时必中不是 BC 那么默认显示 溢出价 价格自定义*/
+      if (this.form.advertiseType == '1' && this.symbol == 'BC') {
+        this.form.fixed = true;
+        this.form.fixedPrice = '1'
+      } else if (this.form.advertiseType == '0' && this.symbol == 'BC') {
+        this.form.fixed = true;
+        this.form.fixedPrice = '0.99'
+      } else {
+        this.form.fixed = false;
+        this.form.fixedPrice = ''
       }
     },
     mul(a, b) {
