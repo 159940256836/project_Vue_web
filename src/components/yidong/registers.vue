@@ -52,7 +52,9 @@ export default {
 
 <style scoped lang="scss">
 @import"../../styles/index.css";
+
 .registers{
+    background:#fff;
     .toppp{
     width:100%;
     height:4.44rem;
@@ -76,7 +78,6 @@ export default {
 .btn{
     width:3.33rem;
     height:0.8rem;
-    background:#3399FFFF;
    border-radius:5px;
    margin:0 auto;
    button{
@@ -87,7 +88,7 @@ export default {
        text-align:center;
        outline: none;
        border:0;
-       background:#3399FFFF;
+       background:#3399FF !important;
 
    }
 
@@ -96,4 +97,16 @@ export default {
 }
 
 
+</style>
+<style>
+html,body{
+    height:100%;
+}
+.registers{
+    background:#fff;
+    height:100%;
+}
+.page-view{
+    height:100%;
+}
 </style>
