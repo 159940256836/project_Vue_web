@@ -1,8 +1,17 @@
 <template>
     <svg :style="{ height: opts.height + 'px', width: opts.width + 'px' }">
-        <polygon :fill="pColor" :points="polygonPoints">
+        <polygon
+            :fill="pColor"
+            :points="polygonPoints"
+        >
         </polygon>
-       <polyline fill="none" :points="polylinePoints" :stroke="sColor" :stroke-width="opts.strokeWidth" stroke-linecap="square">
+       <polyline
+           fill="none"
+           :points="polylinePoints"
+           :stroke="sColor"
+           :stroke-width="opts.strokeWidth"
+           stroke-linecap="square"
+       >
        </polyline>
     </svg>
 </template>
@@ -35,17 +44,18 @@ export default {
         }
     },
     created:function(){
-        this.opts.width = this.width || 210;
-        this.opts.height = this.height || 50;
-        this.opts.rose = this.rose || 0;
-        if (parseFloat(this.opts.rose) < 0) {
-          this.pColor = "rgba(222, 33, 29, .2)";
-          this.sColor = "rgba(222, 33 , 29, .6)";
-        }else {
-          this.pColor = "rgba(3, 191, 123, .2)";
-          this.sColor = "rgba(3, 191, 123, .6)";
-        }
-        this.draw();
+      // console.log(this.props, this.opts);
+      this.opts.width = this.width || 120;
+      this.opts.height = this.height || 50;
+      this.opts.rose = this.rose || 0;
+      if (parseFloat(this.opts.rose) < 0) {
+        this.pColor = "rgba(222, 33, 29, .2)";
+        this.sColor = "rgba(222, 33 , 29, .6)";
+      }else {
+        this.pColor = "rgba(3, 191, 123, .2)";
+        this.sColor = "rgba(3, 191, 123, .6)";
+      }
+      this.draw();
     },
     computed:{
         polylinePoints:function(){
@@ -60,6 +70,7 @@ export default {
   },
   methods:{
       draw(){
+        // console.log(this.values);
         let opts = this.opts;
         let values = this.values;
         if (values.length == 1) values.push(values[0])
