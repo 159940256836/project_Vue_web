@@ -1,31 +1,31 @@
 <template>
     <div class="tab">
-        <Modal v-model="modal" :title="$t('coin.rollOut')" :footer-hide="true" :mask-closable="false" :closable="false">
+        <Modal width="480" v-model="modal" :title="$t('coin.rollOut')" :footer-hide="true" :mask-closable="false" :closable="false">
             <div>
-                <div style="margin-bottom:30px;">
-                    <div style="width: 100%;line-height: 25px;text-align: right;">
-                        <span style="padding-right: 5px;">{{$t('coin.follow')}}：</span>
+                <div style="margin-bottom:15px;">
+                    <div style="width:85%;line-height: 25px;text-align: right;margin-left: 3%;">
+                        <span style="width:55px;display: inline-block;line-height: 35px;padding-right: 10px;">{{$t('coin.follow')}}:</span>
                         <!-- <Cascader style="width: 85%; float: right;" :data="data" v-model="value" :render-format="formatRender" @on-change="getValue" @on-visible-change="visibleChange" :placeholder='$t("uc.finance.withdraw.symboltip")'>
                         </Cascader> -->
                         <Input v-model="currencyData.currencyname" style="width: 85%; float: right;" disabled></Input>
                     </div>
 
                 </div>
-                <div style="margin-bottom:25px;line-height: 25px;text-align: right;">
-                    <span style="padding-right: 5px;">{{$t('coin.arrive')}}：</span>
+                <div style="width: 85%;margin-bottom:15px;line-height: 25px;text-align: right;margin-left: 3%;">
+                    <span style="width:55px;display: inline-block;line-height: 35px;padding-right: 10px;">{{$t('coin.arrive')}}:</span>
                     <!-- <Cascader style="width: 85%; float: right;" :data="toData" v-model="toValue" :render-format="formatRender" :placeholder='$t("uc.finance.withdraw.symboltip")'>
                     </Cascader> -->
                     <Input v-model="currencyData.tocurrencyname" style="width: 85%; float: right;" disabled></Input>
                 </div>
-                <div v-if="currencyData.modal" style="margin-bottom:25px;line-height: 25px;text-align: right;">
-                    <span style="padding-right: 5px;">{{$t('coin.selectcurrency')}}：</span>
+                <div v-if="currencyData.modal" style="width: 85%;margin-bottom:25px;line-height: 25px;text-align: right;margin-left: 3%;">
+                    <span style="padding-right: 5px;">{{$t('coin.selectcurrency')}}:</span>
                     <Select v-model="leveraged"  style="width: 85%; float: right;" id="select" @on-change="change">
                         <Option v-for="(index,i) in currencyData.currency" :key="i" :value="index">{{index}}</Option>
                     </Select>
                 </div>
             </div>
-            <div style="width: 100%;line-height: 25px;">
-                <span style="margin-left:18px;line-height: 30px;">{{$t('coin.quantity')}}：</span>
+            <div style="width:85%;line-height: 25px;margin-left: 3%;">
+                <span style="width:50px;display: inline-block;line-height: 35px;text-align:right;">{{$t('coin.quantity')}}:</span>
                 <Input v-model="num" :placeholder="$t('coin.quantityTransferred')" style="width: 85%; float: right;">
                 <span slot="append" v-if="!currencyData.modal">
                     <span class="all" @click="turnAll">{{$t('coin.all')}}</span>
@@ -36,10 +36,10 @@
                 </Input>
             </div>
 
-            <div style="margin-top:5px;padding-left:35px;" v-if="currencyData.modal">
+            <div style="margin-top:5px;padding-left:75px;" v-if="currencyData.modal">
                 {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{canUseNum}}
             </div>
-            <div style="margin-top:5px;padding-left:35px;" v-else>
+            <div style="margin-top:5px;padding-left:75px;" v-else>
                 {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{this.currencyData.balance}}
             </div>
             <div class="button">
@@ -409,8 +409,11 @@ export default {
 }
 .button {
     display:flex;
-    justify-content:space-around;
+    justify-content:space-evenly;
     margin-top:20px;
+    button{
+        width:100px;
+    }
 }
 #select{
     .ivu-select-selection{

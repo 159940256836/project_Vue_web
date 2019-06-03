@@ -361,9 +361,12 @@ export default {
 </script>
 
 <style lang="scss">
+#lever{
 .ivu-table-cell{
     p{
         display: flex;
     }
 }
+}
+
 </style>

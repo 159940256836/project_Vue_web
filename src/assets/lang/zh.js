@@ -437,6 +437,7 @@ module.exports = {
         USDT: 'USDT',
         BTC: 'BTC',
         ETH: 'ETH',
+        BC: 'BC',
         CUSTOM: '自选',
         COIN: '币种',
         favor: '收藏',

@@ -38,10 +38,10 @@
                 </div>
                 <div class="bannerWrapper">
                     <Carousel
-                            autoplay
-                            :arrow="showArrow"
-                            :autoplay-speed="speed"
-                            v-model="valueCal"
+                        autoplay
+                        :arrow="showArrow"
+                        :autoplay-speed="speed"
+                        v-model="valueCal"
                     >
                         <CarouselItem
                             v-for="(itemArr,index) in picList"
@@ -531,6 +531,7 @@ export default {
                 USDT: [],
                 BTC: [],
                 ETH: [],
+                BC: [],
                 favor: [],
                 columns: [
                     {
@@ -837,6 +838,9 @@ export default {
                     text: this.$t("service.ETH")
                 },
                 {
+                    text: this.$t("service.BC")
+                },
+                {
                     text: this.$t("service.CUSTOM")
                 }
             ],
@@ -936,6 +940,9 @@ export default {
                 },
                 {
                     text: this.$t("service.ETH")
+                },
+                {
+                    text: this.$t("service.BC")
                 },
                 {
                     text: this.$t("service.CUSTOM")
@@ -1178,6 +1185,8 @@ export default {
             } else if (index == 2) {
                 this.dataIndex = this.coins.ETH;
             } else if (index == 3) {
+                this.dataIndex = this.coins.BC;
+            }else if (index == 4) {
                 this.dataIndex = this.coins.favor;
 
                 // if (this.isLogin) {
@@ -1201,7 +1210,7 @@ export default {
                     coin.isFavor = false;
                     this.coins._map[coin.symbol] = coin;
                     this.coins[coin.base].push(coin);
-
+                    console.log(this.coins[coin.base]);
                 };
                 if (this.isLogin) {
                     this.getFavor();

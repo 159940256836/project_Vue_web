@@ -1037,7 +1037,7 @@ module.exports = {
                 numtip1: 'Enter the number of coins',
                 fee: 'Fees',
                 range: 'Range',
-                arriamount: 'The number of arrivals',
+                arriamount: 'number arrivals',
                 msg3: 'The minimum number of coins is',
                 msg4: 'currency',
                 msg5: 'In order to ensure the security of funds, when your account security policy changes, passwords are changed, and you use the new address to withdraw coins, we will conduct a manual audit of the coins. Please be patient and wait for the staff to call or email.',

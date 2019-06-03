@@ -175,9 +175,7 @@ export default {
                                         // 充币;
                                         props: {
                                             type: "primary",
-                                            size: "small",
-                                            color: "#3399ff",
-                                            cursor: "pointer"
+                                            size: "small"
                                         },
                                         on: {
                                             click: function () {
@@ -187,7 +185,9 @@ export default {
                                             }
                                         },
                                         style: {
-                                            marginRight: "8px"
+                                            marginRight: "8px",
+                                            color: "#3399ff",
+                                            cursor: "pointer"
                                         }
                                     },
                                     self.$t("uc.finance.money.charge")
