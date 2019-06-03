@@ -364,6 +364,7 @@ export default {
         if (res.ret == 0) {
           this.ticket1 = res.ticket;
           this.randStr1 = res.randstr;
+           console.log(this.randStr1);
           this.emailMax();
         }
       });
@@ -385,7 +386,7 @@ export default {
         if (res.ret == 0) {
           this.ticket = res.ticket;
           this.randStr = res.randstr;
-          console.log(this.randStr);
+         
           this.sendCode();
         }
 
