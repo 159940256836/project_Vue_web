@@ -255,7 +255,6 @@ export default {
       let email = this.email1;
       let password = this.newpwd1;
       let country = this.country1;
-      // let promotion = this.agentcode;
       let promotion = this.agentcode ? this.agentcode : "";
       let pwdagain = this.pwdagain1;
       let ticket = this.ticket1;
@@ -291,7 +290,7 @@ export default {
         this.$Message.error("请输入8-16位字母加数字登录密码");
         return false;
       }
-      if (this.newpwd != this.pwdagain) {
+      if (this.newpwd1 != this.pwdagain1) {
         this.$Message.error("两次密码不一致");
         return false;
       }
@@ -407,12 +406,15 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/index.css";
+.rejs{
+  background:#fff;
+}
 .btn {
   margin-top: 0.82rem;
   width: 5.07rem;
   height: 0.8rem;
   line-height: 0.8rem;
-  background: #3399ffff;
+  background: #3399ff;
   border-radius: 0.4rem;
   text-align: center;
   color: #fff;
@@ -421,7 +423,7 @@ export default {
     width: 5.07rem;
     height: 0.8rem;
     line-height: 0.8rem;
-    background: #3399ffff !important;
+    background: #3399ff !important;
     border-radius: 0.4rem;
     text-align: center;
     color: #fff;
@@ -456,8 +458,8 @@ export default {
   margin-top: 0.5rem;
   padding-left: 1.42rem;
   .actives {
-    color: #3399ffff;
-    border-bottom: 1px solid #3399ffff;
+    color: #3399ff;
+    border-bottom: 1px solid #3399ff;
   }
   div {
     width: 1.5rem;
@@ -490,5 +492,10 @@ export default {
       // padding-bottom: 0.18rem;
     }
   }
+}
+</style>
+<style>
+.rejs{
+  background:#fff;
 }
 </style>
