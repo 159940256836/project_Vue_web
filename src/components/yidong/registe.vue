@@ -43,7 +43,7 @@
         >{{setnum1}}</span>
       </div>
       <div class="phone">
-        <input type="password" v-model="newpwd" maxlength="18" placeholder="请设置登录密码">
+        <input type="password" v-model="newpwd" maxlength="18" placeholder="请输入8-16位字母加数字登录密码">
       </div>
       <div class="phone">
         <input type="password" v-model="pwdagain" maxlength="18" placeholder="请确认登录密码">
@@ -103,7 +103,7 @@
         >验证码</span>
       </div>-->
       <div class="phone">
-        <input type="password" v-model="newpwd1" placeholder="请设置登录密码">
+        <input type="password" v-model="newpwd1" placeholder="请输入8-16位字母加数字登录密码">
       </div>
       <div class="phone">
         <input type="password" v-model="pwdagain1" placeholder="请确认登录密码">
@@ -143,7 +143,6 @@ export default {
       setnum1: "获取验证码",
       username: "",
       agreee: true,
-
       email1: "",
       username1: "",
       newpwd1: "",
@@ -422,7 +421,7 @@ export default {
     width: 5.07rem;
     height: 0.8rem;
     line-height: 0.8rem;
-    background: #3399ffff;
+    background: #3399ffff !important;
     border-radius: 0.4rem;
     text-align: center;
     color: #fff;
@@ -461,12 +460,13 @@ export default {
     border-bottom: 1px solid #3399ffff;
   }
   div {
-    width: 1.29rem;
+    width: 1.5rem;
     height: 0.31rem;
     line-height: 0.43em;
     font-size: 0.32rem;
     color: #666666ff;
     margin-left: 0.69rem;
+    text-align:center;
   }
 }
 </style>
@@ -486,7 +486,7 @@ export default {
     }
     .ivu-select {
       margin-top: 0.49rem;
-      padding-bottom: 0.18rem;
+      // padding-bottom: 0.18rem;
     }
   }
 }
