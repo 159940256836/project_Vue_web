@@ -1,5 +1,5 @@
 <template>
-    <div class="login_form">
+    <div class="login_form" id="logo">
         <div class="login_right">
             <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
                 <FormItem style="text-align:center;">
@@ -49,7 +49,7 @@
 .login_form {
     // background: #f9f9f9 url(../../assets/images/login_bg.jpg) no-repeat center
     //     center;
-    background: #fff url('../../assets/images/login_bg.png') no-repeat center;
+    background: #fff url('../../assets/images/login_bg1.jpg') no-repeat center;
     height: 760px;
     position: relative;
     overflow: hidden;
@@ -63,9 +63,9 @@
         top: 50%;
         margin-left: -175px;
         margin-top: -255px;
-        -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        // -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        // -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         border-top: 4px solid #3399ff;
         .tel-title {
             font-size: 25px;
@@ -246,6 +246,9 @@ export default {
     created: function () {
         this.init();
         // this.actives(this.changeActive);
+    },
+    mounted:function(){
+        document.getElementById("logo").style.height=document.documentElement.clientHeight+"px";
     },
     computed: {
         isLogin: function () {

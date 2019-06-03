@@ -8,7 +8,7 @@
                         <div class="carl">
                             <!-- <div class="laba"> -->
                             <img style="margin: 13px;" src="../../assets/images/laba_pri.png" alt="">
-                            <!--                            <Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />-->
+                            <!--<Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />-->
                             <!-- </div> -->
                             <div class="carsoul">
                                 <div
@@ -901,6 +901,7 @@ export default {
         */
         getHotSymbol() {
             this.$http.get(this.host + '/market/overview').then(res => {
+                console.log(res)
                 const resp = res.body;
                 const list = resp.recommend.map(ele => ({
                     symbol: ele.symbol,
