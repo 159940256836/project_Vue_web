@@ -43,7 +43,7 @@
         >{{setnum1}}</span>
       </div>
       <div class="phone">
-        <input type="password" v-model="newpwd" maxlength="18" placeholder="请设置登录密码">
+        <input type="password" v-model="newpwd" maxlength="18" placeholder="请输入8-16位字母加数字登录密码">
       </div>
       <div class="phone">
         <input type="password" v-model="pwdagain" maxlength="18" placeholder="请确认登录密码">
@@ -91,7 +91,7 @@
         </i-option>
       </i-select>
       <div class="phone">
-        <input placeholder="输入用户名" v-model="username1">
+        <input placeholder="输入3-20位用户名" v-model="username1">
       </div>
       <div class="phone">
         <input placeholder="邮箱" v-model="email1">
@@ -103,7 +103,7 @@
         >验证码</span>
       </div>-->
       <div class="phone">
-        <input type="password" v-model="newpwd1" placeholder="请设置登录密码">
+        <input type="password" v-model="newpwd1" placeholder="请输入8-16位字母加数字登录密码">
       </div>
       <div class="phone">
         <input type="password" v-model="pwdagain1" placeholder="请确认登录密码">
@@ -129,6 +129,7 @@
   </div>
 </template>
 <script>
+import { setTimeout } from "timers";
 export default {
   data() {
     return {
@@ -143,7 +144,6 @@ export default {
       setnum1: "获取验证码",
       username: "",
       agreee: true,
-
       email1: "",
       username1: "",
       newpwd1: "",
@@ -159,7 +159,8 @@ export default {
       let code = this.checkcode;
       let password = this.newpwd;
       let country = this.country;
-      let promotion = this.agentcode;
+      let promotion = this.agentcode ? this.agentcode : "";
+
       let pwdagain = this.pwdagain;
       let ticket = this.ticket;
       let randStr = this.randStr;
@@ -193,11 +194,6 @@ export default {
         this.$Message.error("请输入8-16位字母加数字登录密码");
         return false;
       }
-      //  let regg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-      // if(!regg.test(this.password)){
-      //    this.$Message.error("密码不合法")
-      //    return fasle;
-      // }
       if (this.newpwd != this.pwdagain) {
         this.$Message.error("两次密码不一致");
         return false;
@@ -211,7 +207,11 @@ export default {
         let res = response.body;
         if (res.code == 0) {
           this.$Message.success("注册成功");
-           window.location.href="https://download.coinmany.com/"
+          setTimeout(() => {
+            window.location.href = "https://download.coinmany.com/";
+          }, 2000);
+
+          //  window.location.href="https://download.coinmany.com/"
         } else {
           this.$Message.error(res.message);
         }
@@ -230,15 +230,6 @@ export default {
         this.$Message.error("请输入国家");
         return false;
       }
-      // if (!data.phone) {
-      //   this.$Message.error("请输入手机号");
-      //   return false;
-      // }
-      // let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
-      // if (!reg.test(this.telname)) {
-      //   this.$Message.error("请输入正确的手机号");
-      //   return false;
-      // }
       this.$http.post(this.host + "/uc/mobile/code", data).then(respo => {
         let resp = respo.body;
         if (resp.code == 0) {
@@ -258,18 +249,26 @@ export default {
         }
       });
     },
-
     //邮箱注册
     emailMax() {
       let username = this.username1;
       let email = this.email1;
       let password = this.newpwd1;
       let country = this.country1;
-      let promotion = this.agentcode;
+      // let promotion = this.agentcode;
+      let promotion = this.agentcode ? this.agentcode : "";
       let pwdagain = this.pwdagain1;
       let ticket = this.ticket1;
       let randStr = this.randStr1;
-      let data = { username, email, password, country, promotion,ticket,randStr };
+      let data = {
+        username,
+        email,
+        password,
+        country,
+        promotion,
+        ticket,
+        randStr
+      };
       if (!data.country) {
         this.$Message.error("请输入国家");
         return false;
@@ -283,7 +282,7 @@ export default {
         return false;
       }
       let regg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
-        if (!regg.test(this.email1)) {
+      if (!regg.test(this.email1)) {
         this.$Message.error("请输入正确的邮箱");
         return false;
       }
@@ -296,10 +295,6 @@ export default {
         this.$Message.error("两次密码不一致");
         return false;
       }
-      // if (!data.promotion) {
-      //   this.$Message.error("请输入邀请码");
-      //   return false;
-      // }
       if (!this.agreee) {
         this.$Message.error("请同意");
         return false;
@@ -309,7 +304,9 @@ export default {
         let res = response.body;
         if (res.code == 0) {
           this.$Message.success("注册成功");
-          window.location.href="https://download.coinmany.com/"
+          setTimeout(() => {
+            window.location.href = "https://download.coinmany.com/";
+          }, 2000);
         } else {
           this.$Message.error(res.message);
         }
@@ -323,7 +320,7 @@ export default {
       let email = this.email1;
       let password = this.newpwd1;
       let country = this.country1;
-      let promotion = this.agentcode;
+      let promotion = this.agentcode ? this.agentcode : "";
       let pwdagain = this.pwdagain1;
       let ticket = this.ticket1;
       let randStr = this.randStr1;
@@ -366,7 +363,7 @@ export default {
         console.log(res);
         if (res.ret == 0) {
           this.ticket1 = res.ticket;
-          this.randStr1 = res.randStr;
+          this.randStr1 = res.randstr;
           this.emailMax();
         }
       });
@@ -387,7 +384,8 @@ export default {
         console.log(res);
         if (res.ret == 0) {
           this.ticket = res.ticket;
-          this.randStr = res.randStr;
+          this.randStr = res.randstr;
+          console.log(this.randStr);
           this.sendCode();
         }
 
@@ -417,12 +415,12 @@ export default {
   border-radius: 0.4rem;
   text-align: center;
   color: #fff;
-  margin-left:0.4rem;
+  margin-left: 0.4rem;
   button {
     width: 5.07rem;
     height: 0.8rem;
     line-height: 0.8rem;
-    background: #3399ffff;
+    background: #3399ffff !important;
     border-radius: 0.4rem;
     text-align: center;
     color: #fff;
@@ -436,7 +434,7 @@ export default {
   box-sizing: border-box;
   border-bottom: 1px solid #ddd;
   input {
-    margin-left:0.14rem;
+    margin-left: 0.14rem;
     width: 5.6rem;
     margin-top: 0.3rem;
     font-size: 0.28rem;
@@ -461,18 +459,20 @@ export default {
     border-bottom: 1px solid #3399ffff;
   }
   div {
-    width: 1.29rem;
+    width: 1.5rem;
     height: 0.31rem;
     line-height: 0.43em;
     font-size: 0.32rem;
     color: #666666ff;
     margin-left: 0.69rem;
+    text-align: center;
   }
 }
 </style>
 <style lang="scss">
-.ivu-select-single .ivu-select-selection .ivu-select-placeholder, .ivu-select-single .ivu-select-selection .ivu-select-selected-value{
-  font-size:0.28rem;
+.ivu-select-single .ivu-select-selection .ivu-select-placeholder,
+.ivu-select-single .ivu-select-selection .ivu-select-selected-value {
+  font-size: 0.28rem;
 }
 .rejs {
   .content {
@@ -486,9 +486,8 @@ export default {
     }
     .ivu-select {
       margin-top: 0.49rem;
-      padding-bottom: 0.18rem;
+      // padding-bottom: 0.18rem;
     }
   }
 }
-
 </style>
