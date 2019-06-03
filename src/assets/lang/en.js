@@ -434,6 +434,7 @@ module.exports = {
         USDT: 'USDT',
         BTC: 'BTC',
         ETH: 'ETH',
+        BC: 'BC',
         CUSTOM: 'Optional',
         COIN: 'Coin',
         symbol: 'Pair',

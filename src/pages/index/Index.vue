@@ -133,7 +133,7 @@
                 <div class="page2nav">
                     <ul class="brclearfix">
                         <li
-                            v-show="!(index==3&&!isLogin)"
+                            v-show="!(index==4&&!isLogin)"
                             v-for="(item,index) in indexBtn"
                             @click="addClass(index)"
                             :class="{'active':index==choseBtn,'ivu-btn-default':index!=choseBtn}"
@@ -145,7 +145,7 @@
                 </div>
                 <div class="ptjy">
                     <Table
-                        v-if="choseBtn==3"
+                        v-if="choseBtn==4"
                         :columns="favorColumns"
                         :data="dataIndex"
                         class="tables"
@@ -154,7 +154,8 @@
                         :no-data-text="$t('common.nodata')"
                     ></Table>
                     <Table
-                        v-else :columns="coins.columns"
+                        v-else
+                        :columns="coins.columns"
                         :data="dataIndex"
                         class="tables"
                         :disabled-hover="true"
@@ -880,6 +881,7 @@ export default {
         }
     },
     mounted: function () {
+        console.log('1');
         this.getCNYRate();
         this.getSymbol();
         this.getHotSymbol();
@@ -912,6 +914,7 @@ export default {
                     trend: ele.trend
                 }))
                 this.hostSymbolList = list;
+                console.log(resp,this.hostSymbolList);
                 this.startWebsockHotlist();
             })
         },
@@ -932,6 +935,7 @@ export default {
             }
         },
         updateLangData() {
+            console.log(this.favorColumns);
             this.indexBtn = [
                 {
                     text: this.$t("service.USDT")
@@ -949,7 +953,7 @@ export default {
                     text: this.$t("service.CUSTOM")
                 }
             ];
-
+            console.log(this.indexBtn);
             this.coins.columns[0].title = this.$t("service.favor");
             this.coins.columns[1].title = this.$t("service.COIN");
             this.coins.columns[2].title = this.$t("service.NewPrice");
@@ -975,6 +979,7 @@ export default {
         openActivity(url) {
         },
         init() {
+            console.log(this.coins.columns[7],this.favorColumns);
             //   this.$store.commit("navigate", "nav-index");
             //   this.$store.state.HeaderActiveName = "1-1";
             this.loadPicData();//获取轮播图
@@ -1108,6 +1113,7 @@ export default {
                             });
                         }
                     });
+                    // console.log('startWebsockHotlist');
                     // if (list.length > 0) {
                     // this.hostSymbolList.forEach((ele, index) => {
                     //     if (ele.symbol == list[0].symbol) {
@@ -1146,6 +1152,7 @@ export default {
                         coin.low = resp.low;
                         coin.turnover = parseInt(resp.volume);
                     }
+                    // console.log('startWebsock');
                 });
             });
         },
@@ -1179,6 +1186,7 @@ export default {
         },
         addClass(index) {
             this.choseBtn = index;
+            console.log(this.choseBtn, index);
             if (index == 0) {
                 this.dataIndex = this.coins.USDT;
             } else if (index == 1) {
@@ -1187,7 +1195,7 @@ export default {
                 this.dataIndex = this.coins.ETH;
             } else if (index == 3) {
                 this.dataIndex = this.coins.BC;
-            }else if (index == 4) {
+            } else if (index == 4) {
                 this.dataIndex = this.coins.favor;
 
                 // if (this.isLogin) {
@@ -1211,12 +1219,13 @@ export default {
                     coin.isFavor = false;
                     this.coins._map[coin.symbol] = coin;
                     this.coins[coin.base].push(coin);
-                    console.log(this.coins[coin.base]);
+                    // console.log(coin.price,coin.rose,coin.base,coin.href, this.coins._map[coin.symbol]);
                 };
                 if (this.isLogin) {
                     this.getFavor();
                 }
                 this.startWebsock();
+                console.log('1');
                 this.loading = false;
             });
         },
