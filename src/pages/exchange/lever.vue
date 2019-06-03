@@ -135,10 +135,10 @@
                                 <!--请先-->
                                 {{$t("common.please")}}
                                 <router-link to="/login">
-                                    <span style="color:#3399ff;">{{$t("common.login")}}</span>
+                                    <span style="color:#3399ff; font-size:24px ">{{$t("common.login")}}</span>
                                 </router-link> /
                                 <router-link to="/register">
-                                    <span style="color:#f67951;">{{$t("common.register")}}</span>
+                                    <span style="color:#f67951; font-size:24px">{{$t("common.register")}}</span>
                                 </router-link>
                             </span>
                         </div>
