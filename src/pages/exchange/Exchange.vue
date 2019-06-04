@@ -147,7 +147,7 @@
                                 <!--请先-->
                                 {{$t("common.please")}}
                                 <router-link to="/uc/safe">
-                                    <span style="color:#3399ff;">
+                                    <span style="color:#3399ff; font-size:24px">
                                         <!--实名认证-->
                                         {{$t("uc.safe.verified")}}
                                     </span>

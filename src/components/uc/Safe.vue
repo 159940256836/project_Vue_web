@@ -552,9 +552,9 @@ export default {
             imgLast: "",
             loginmsg: this.$t("common.logintip"),
             memberlevel: "",
-            frontCardImg: require("../../assets/images/frontCardImg.png"),
-            backCardImg: require("../../assets/images/backCardImg.png"),
-            handCardImg: require("../../assets/images/HandCardImg.png"),
+            frontCardImg: require("../../assets/images/frontCardImg1.jpg"),
+            backCardImg: require("../../assets/images/backCardImg1.jpg"),
+            handCardImg: require("../../assets/images/HandCardImg1.jpg"),
 
             uploadHeaders: { "x-auth-token": localStorage.getItem("TOKEN") },
             uploadUrl: this.host + "/uc/upload/oss/image",

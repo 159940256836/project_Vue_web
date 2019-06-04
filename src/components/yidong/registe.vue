@@ -55,7 +55,6 @@
         <label>
           <Checkbox v-model="agreee">我已阅读并同意</Checkbox>
         </label>
-        <!-- 用户协议 -->
         <router-link
           to="/Usereement"
           style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem"
@@ -115,7 +114,6 @@
         <label>
           <Checkbox v-model="agreee">我已阅读并同意</Checkbox>
         </label>
-        <!-- 用户协议 -->
         <router-link
           to="/Usereement"
           style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem"
