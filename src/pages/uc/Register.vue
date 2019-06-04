@@ -1,5 +1,5 @@
 <template>
-    <div class="login_form">
+    <div class="login_form" id="logo">
         <div class="login_right">
             <Form v-if="allowRegister" ref="formInline" :model="formInline" :rules="ruleInline" inline>
                 <FormItem style="text-align:center;">
@@ -59,7 +59,7 @@
 </template>
 <style scoped lang="scss">
 .login_form {
-    background: #f9f9f9 url(../../assets/images/login_bg.png) no-repeat center
+    background: #f9f9f9 url(../../assets/images/login_bg1.jpg) no-repeat center
         center;
     height: 760px;
     position: relative;
@@ -75,7 +75,7 @@
         // transform: translate(50%, 50%, 0);
         margin-left: -175px;
         margin-top: -255px;
-        box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         border-top: 4px solid #3399ff;
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
@@ -326,6 +326,9 @@ export default {
         window.scrollTo(0, 0);
         this.init();
         this.actives(this.changeActive);
+    },
+    mounted:function(){
+        document.getElementById("logo").style.height=document.documentElement.clientHeight+"px";
     },
     methods: {
         updateLangData() {
