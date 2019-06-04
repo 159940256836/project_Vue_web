@@ -397,7 +397,7 @@ export default {
     }
   },
   mounted() {
-    this.agentcode = this.$route.query.agent;
+    this.agentcode = this.$route.query.agent ? this.$route.query.agent : '';
   },
   component() {},
   created() {}
