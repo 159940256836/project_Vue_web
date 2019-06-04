@@ -349,7 +349,7 @@ export default {
         this.$Message.error("请输入8-16位字母加数字登录密码");
         return false;
       }
-      if (this.newpwd != this.pwdagain) {
+      if (this.newpwd1 != this.pwdagain1) {
         this.$Message.error("两次密码不一致");
         return false;
       }
