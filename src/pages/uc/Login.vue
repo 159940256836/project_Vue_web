@@ -35,19 +35,19 @@
                     </Input>
                 </FormItem>
                 <!--手机短信验证 5.29-->
-                <!--<FormItem
+                <FormItem
                     prop="vailCode3"
                     v-if="openPhoneCode"
                 >
                     <Input v-model="formInline.phoneCode" size="large">
                         <div class="timebox" slot="append">
                             <Button @click="sendPhoneCode" :disabled="sendMsgDisabled">
-                                <span v-if="sendMsgDisabled">{{time+$t('uc.safe.second')}}</span>
+                                <span v-if="sendMsgDisabled">{{codeTime+$t('uc.safe.second')}}</span>
                                 <span v-if="!sendMsgDisabled">{{$t('uc.safe.clickget')}}</span>
                             </Button>
                         </div>
                     </Input>
-                </FormItem>-->
+                </FormItem>
                 <p style="height:25px;">
                     <router-link to="/findPwd" style="color:#979797;float:right;padding-right:10px;font-size:12px;">
                         {{$t('uc.login.forget')}}
@@ -133,9 +133,9 @@ export default {
             openGoogleCode: false,//是否开启google验证;
             openGoogle: "", //  获取谷歌验证状态
             /*添加短信验证 yangxiaoxi 5.29*/
-            // openPhoneCode: true,//是否开启Phone验证;
-            // sendMsgDisabled: false,
-            // codeTime: 60, // 发送验证码倒计时
+            openPhoneCode: false,//是否开启Phone验证;
+            sendMsgDisabled: false,
+            codeTime: 60, // 发送验证码倒计时
             captchaObj: null,
             _captchaResult: null,
             formInline: {
@@ -173,26 +173,31 @@ export default {
         }
     },
     methods: {
+       
         // /*手机发送验证码*/
-        // sendPhoneCode() {
-        //     let me = this;
-        //     //获取手机code
-        //     this.$http.post(this.host + "/uc/register/phone").then(response => {
-        //         let resp = response.body;
-        //         if (resp.code == 0) {
-        //             this.sendMsgDisabled = true;
-        //             let interval = window.setInterval(function() {
-        //                 if (me.codeTime-- <= 0) {
-        //                     me.codeTime = 60;
-        //                     me.sendMsgDisabled = false;
-        //                     window.clearInterval(interval);
-        //                 }
-        //             }, 1000);
-        //         } else {
-        //             this.$Message.error(resp.message);
-        //         }
-        //     });
-        // },
+        sendPhoneCode() {
+            console.log(this)
+            let me = this;
+            //获取手机code
+            this.$http.post(this.host + "/uc/mobile/login/code",{
+                phone: this.formInline.user
+            }).then(response => {
+                console.log(response)
+                let resp = response.body;
+                if (resp.code == 0) {
+                    this.sendMsgDisabled = true;
+                    let interval = window.setInterval(function() {
+                        if (me.codeTime-- <= 0) {
+                            me.codeTime = 60;
+                            me.sendMsgDisabled = false;
+                            window.clearInterval(interval);
+                        }
+                    }, 1000);
+                } else {
+                    this.$Message.error(resp.message);
+                }
+            });
+        },
         //用户名输入以后判断用户是否开启谷歌验证
         userBlur() {
             const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
@@ -200,11 +205,18 @@ export default {
             let tel = this.formInline.user;
             if (pattern.test(tel) || reg.test(tel)) {
                 this.isNeedGoogle(tel).then(res => {
+                    console.log(res)
                     if (res == 1) {//1为开启谷歌验证
                         this.openGoogleCode = true;
+                        this.openPhoneCode = false;
+                    } else if (res == 2) {//2为开启手机验证
+                        this.openGoogleCode = false;
+                        this.openPhoneCode = true;
                     } else {
                         this.openGoogleCode = false;
+                        this.openPhoneCode = false;
                     }
+                    
                 })
             }
         },
@@ -248,6 +260,9 @@ export default {
             if (this.openGoogleCode) {
                 params.code = formParams.googleCode
             }
+            if (this.openPhoneCode) {
+                params.sms = this.formInline.phoneCode;
+            }
             return this.login(params);
         },
         loginCheck () {
@@ -258,7 +273,7 @@ export default {
                 return false
             }
             // 判断是否绑定谷歌
-            if(this.openGoole == 1) {
+            if(this.openGoogleCode) {
                 // this.openPhoneCode = false;
                 // 判断谷歌验证码不能为空
                 if (!this.formInline.googleCode) {
@@ -267,7 +282,18 @@ export default {
                 } else  {
                     this.initGtCaptcha();
                 }
-            } else {
+            } else if(this.openPhoneCode) {
+                  // // 判断手机验证码不能为空
+                if (!this.formInline.phoneCode) {
+                    this.$Message.error(this.$t("uc.login.phone"));
+                    return false
+                } else  {
+                    this.initGtCaptcha();
+                }
+                // 谷歌验证调用
+                //this.initGtCaptcha();
+
+            }else {
                 // // 判断手机验证码不能为空
                 // if (!this.formInline.phoneCode) {
                 //     this.$Message.error(this.$t("uc.login.phone"));
@@ -281,11 +307,11 @@ export default {
         },
         handleSubmit(name) {
             // 5.20修改
-            this.loginCheck()
+            
              this.$refs[name].validate(valid => {
                  //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
                 if (valid) {
-
+                    this.loginCheck()
                     const params = {};
                     const formParams = this.formInline;
                     params.username = formParams.user;
