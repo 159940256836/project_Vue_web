@@ -98,7 +98,7 @@
       </div>
       <!-- <div class="phone" style="display:flex;">
         <input style="width:5rem" placeholder="邮箱验证码">
-        <span 
+        <span
           style="display:inline-block;color:#3399FFFF;width:2rem;height:0.58rem;line-height:0.58rem;border:1px solid rgba(51,153,255,1); border-radius:29rem; text-align:center; margin-top:0.15rem"
         >验证码</span>
       </div>-->
@@ -175,7 +175,7 @@ export default {
         randStr
       };
       if (!data.country) {
-        this.$Message.error("请输入国家");
+        this.$Message.error("请选择国家");
         return false;
       }
       if (!data.username) {
@@ -206,7 +206,7 @@ export default {
         console.log(response);
         let res = response.body;
         if (res.code == 0) {
-          this.$Message.success("注册成功");
+          this.$Message.success(res.message);
           setTimeout(() => {
             window.location.href = "https://download.coinmany.com/";
           }, 2000);
@@ -227,14 +227,14 @@ export default {
         return false;
       }
       if (!data.country) {
-        this.$Message.error("请输入国家");
+        this.$Message.error("请选择国家");
         return false;
       }
       this.$http.post(this.host + "/uc/mobile/code", data).then(respo => {
         let resp = respo.body;
         if (resp.code == 0) {
           // this.initGtCaptcha();
-          this.$Message.success("操作成功");
+          this.$Message.success(resp.message);
           var count = 60;
           that.timer = setInterval(() => {
             count--;
@@ -269,7 +269,7 @@ export default {
         randStr
       };
       if (!data.country) {
-        this.$Message.error("请输入国家");
+        this.$Message.error("请选择国家");
         return false;
       }
       if (!data.username) {
@@ -302,7 +302,7 @@ export default {
         console.log(response);
         let res = response.body;
         if (res.code == 0) {
-          this.$Message.success("注册成功");
+          this.$Message.success(res.message);
           setTimeout(() => {
             window.location.href = "https://download.coinmany.com/";
           }, 2000);
@@ -333,7 +333,7 @@ export default {
         randStr
       };
       if (!data.country) {
-        this.$Message.error("请输入国家");
+        this.$Message.error("请选择国家");
         return false;
       }
       if (!data.username) {
@@ -385,7 +385,7 @@ export default {
         if (res.ret == 0) {
           this.ticket = res.ticket;
           this.randStr = res.randstr;
-         
+
           this.sendCode();
         }
 
