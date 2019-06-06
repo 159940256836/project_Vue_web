@@ -534,12 +534,12 @@ export default {
                 .ivu-form-item-content {
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
-                            border: none;
-                            border-bottom: 1px solid #f5f5f5;
+                            height: 42px !important;
+                            border: 1px solid #DDDDDD;
                             font-size: 14px;
+                            border-radius: 0;
                             &:focus {
-                                border: none;
-                                border-bottom: 1px solid #f5f5f5;
+                                border: 1px solid #DDDDDD;
                                 -moz-box-shadow: 2px 2px 5px #fff,
                                     -2px -2px 4px #fff;
                                 -webkit-box-shadow: 2px 2px 5px #fff,
