@@ -456,11 +456,14 @@ export default {
                     this.initGtCaptcha();
                 }
             }
+            this.initGtCaptcha();
         },
         handleSubmit(name) {
             // 5.20修改
-             this.$refs[name].validate(valid => {
+            console.log(name);
+            this.$refs[name].validate(valid => {
                  //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
+                console.log(valid);
                 if (valid) {
                     this.loginCheck()
                     const params = {};
