@@ -3,7 +3,7 @@ export default {
         area: '/uc/support/country'
     },
     uc: { //会员中心接口
-        login: '/uc/login',
+        login: '/uc/v2/login',
         register: '/uc/register',
         wallet: '/uc/asset/wallet/',
         captcha: '/uc/start/captcha',

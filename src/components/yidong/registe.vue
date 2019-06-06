@@ -55,7 +55,6 @@
         <label>
           <Checkbox v-model="agreee">我已阅读并同意</Checkbox>
         </label>
-        <!-- 用户协议 -->
         <router-link
           to="/Usereement"
           style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem"
@@ -115,7 +114,6 @@
         <label>
           <Checkbox v-model="agreee">我已阅读并同意</Checkbox>
         </label>
-        <!-- 用户协议 -->
         <router-link
           to="/Usereement"
           style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem"
@@ -349,7 +347,7 @@ export default {
         this.$Message.error("请输入8-16位字母加数字登录密码");
         return false;
       }
-      if (this.newpwd != this.pwdagain) {
+      if (this.newpwd1 != this.pwdagain1) {
         this.$Message.error("两次密码不一致");
         return false;
       }
@@ -397,7 +395,7 @@ export default {
     }
   },
   mounted() {
-    this.agentcode = this.$route.query.agent;
+    this.agentcode = this.$route.query.agent ? this.$route.query.agent : '';
   },
   component() {},
   created() {}
@@ -423,6 +421,7 @@ export default {
     width: 5.07rem;
     height: 0.8rem;
     line-height: 0.8rem;
+    font-size: 0.3;
     background: #3399ff !important;
     border-radius: 0.4rem;
     text-align: center;

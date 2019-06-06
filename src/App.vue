@@ -102,7 +102,7 @@
         <!--内容-->
         <router-view v-if="isRouterAlive"></router-view>
         <!--底部-->
-        <footer v-show="!$route.meta.hide">
+        <footer v-if="pathNameState" v-show="!$route.meta.hide">
             <div class="footer">
                 <div class="footer_content">
                     <div class="footer-main">
@@ -222,6 +222,11 @@
                                 <li>
                                     <a href="javascript:;">{{$t('footer.customerservice1')}}：729045745</a>
                                 </li>
+                                <li>
+                                    <!-- 微信客服号：客服1:biduokefu1 客服2:biduokefu2 -->
+                                    <a href="javascript:;">{{$t("footer.WeChatcustomervi")}}：{{$t("footer.Customvic")}}:biduokefu1 &nbsp;&nbsp; {{$t("footer.Customervic")}}:biduokefu2</a>
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -316,11 +321,14 @@ export default {
             },
             styleTop: 30,
             topPadding: '0 5%',
-            topBackgroundColor: 'rgba(28, 36, 53)'
+            topBackgroundColor: 'rgba(28, 36, 53)',
+            pathName: '',
+            pathNameState: true
         };
     },
     watch: {
-        activeNav: function () {
+        activeNav: function (newVal) {
+            console.log(newVal);
             switch (this.activeNav) {
                 case "nav-exchange":
                     break;
@@ -333,6 +341,14 @@ export default {
             this.locale = newVal;
         },
         $route(to, from) {
+            this.pathName = to.path
+            if (this.pathName == '/login'||this.pathName == '/register') {
+                this.pathNameState = false
+            } else {
+                this.pathNameState = true
+            }
+
+            console.log(this.pathName);
             if (to.path === "/") {
                 this.pageView = "page-view";
                 // this.container_test = "";
@@ -900,9 +916,9 @@ body {
 
 .login_title {
     color: #000;
-    text-align: center;
     height: 80px;
     font-size: 25px;
+    line-height: 80px;
 }
 .login_right .ivu-select-dropdown {
     background: #fff;

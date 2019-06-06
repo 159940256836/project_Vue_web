@@ -1,5 +1,6 @@
 <template>
     <div class="login_form" id="logo">
+        <div class="wrap-mask"></div>
         <div class="login_right">
             <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
                 <FormItem style="text-align:center;">
@@ -9,25 +10,51 @@
                     </ButtonGroup>
                 </FormItem>
                 <FormItem prop="user">
-                    <Input type="text" v-model="formInline.user" :placeholder="$t('uc.login.usertip')">
+                    <Input
+                        type="text"
+                        v-model="formInline.user"
+                        :placeholder="$t('uc.login.usertip')"
+                    >
                     </Input>
                 </FormItem>
                 <FormItem prop="code">
-                    <Input type="text" v-model="formInline.code" :placeholder="$t('uc.safe.code')">
+                    <Input
+                        class="code-input"
+                        type="text"
+                        v-model="formInline.code"
+                        :placeholder="$t('uc.safe.code')"
+                    >
                     </Input>
-                    <input id="sendCode" type="Button" :value="sendcodeValue" :disabled="codedisabled">
+                    <input
+                        id="sendCode"
+                        type="Button"
+                        :value="sendcodeValue"
+                        :disabled="codedisabled">
                     </input>
                 </FormItem>
                 <FormItem prop="password">
-                    <Input type="password" v-model="formInline.password" :placeholder="$t('uc.forget.newpwd')">
+                    <Input
+                        type="password"
+                        v-model="formInline.password"
+                        :placeholder="$t('uc.forget.newpwd')"
+                    >
                     </Input>
                 </FormItem>
                 <FormItem prop="repassword">
-                    <Input type="password" v-model="formInline.repassword" :placeholder="$t('uc.forget.confirmpwd')">
+                    <Input
+                        type="password"
+                        v-model="formInline.repassword"
+                        :placeholder="$t('uc.forget.confirmpwd')"
+                    >
                     </Input>
                 </FormItem>
                 <FormItem>
-                    <Button class="login_btn" @click="handleSubmit('formInline')">{{$t('uc.forget.save')}}</Button>
+                    <Button
+                        class="login_btn"
+                        @click="handleSubmit('formInline')"
+                    >
+                        {{$t('uc.forget.save')}}
+                    </Button>
                 </FormItem>
             </Form>
         </div>
@@ -49,19 +76,25 @@
 .login_form {
     // background: #f9f9f9 url(../../assets/images/login_bg.jpg) no-repeat center
     //     center;
-    background: #fff url('../../assets/images/login_bg1.jpg') no-repeat center;
+    background: #f9f9f9 url('../../assets/images/brnner.png') no-repeat center !important;
     height: 760px;
     position: relative;
     overflow: hidden;
+    .wrap-mask {
+        height:100%;
+        width:100%;
+        background: rgba(0,0,0,.6);
+    }
     .login_right {
-        padding: 20px 30px;
+        background: url("../../assets/images/forget-pass.png") no-repeat center !important;
+        padding: 20px 40px;
         position: absolute;
         background: #fff;
-        width: 350px;
+        width: 465px;
         height: auto;
         left: 50%;
         top: 50%;
-        margin-left: -175px;
+        margin-left: -232px;
         margin-top: -255px;
         // -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         // -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
@@ -80,7 +113,7 @@
                         border-color: #3399ff;
                         color: #fff;
                         font-size: 18px;
-                        border-radius: 30px;
+                        border-radius: 0;
                         &:focus {
                             -moz-box-shadow: 2px 2px 5px #fff,
                                 -2px -2px 4px #fff;
@@ -96,13 +129,13 @@
                     }
                     #sendCode {
                         position: absolute;
-                        border: 1px solid #3399ff;
+                        border: 1px solid #DDDDDD;
                         background: #fdfaf3;
-                        top: -10px;
+                        top: 0px;
                         outline: none;
-                        right: 0;
-                        width: 30%;
-                        border-radius: 20px;
+                        line-height: 40px;
+                        right: 0px;
+                        width: 27%;
                         color: #3399ff;
                         cursor: pointer;
                     }
@@ -129,6 +162,9 @@
             }
         }
     }
+}
+.code-input {
+    width: 297px;
 }
 /* 验证码 */
 #captcha {

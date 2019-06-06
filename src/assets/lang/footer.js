@@ -27,6 +27,9 @@ const zh = {
     Usereement:"用户协议",
     customerservice1:"QQ群",
     customerservice2:"客服QQ号",
+    WeChatcustomervi:"微信客服号",
+    Customvic:"客服1",
+    Customervic:"客服2",
 }
 
 const en = {
@@ -57,7 +60,10 @@ const en = {
     friendLinks: "Blogroll",
     bulletinboard:"Bulletin Board",
     customerservice1:"QQ group",
-    customerservice2:"Customer service qq"
+    customerservice2:"Customer service qq",
+    WeChatcustomervi:"WeChat",
+    Customvic:' 1',
+    Customervic:' 2',
 }
 
 exports.zh = zh;
