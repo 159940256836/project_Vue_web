@@ -26,8 +26,9 @@
                         </Input>
                     </FormItem>
                     <FormItem
-                            prop="googleCode"
-                            v-if="openGoogleCode">
+                        prop="googleCode"
+                        v-if="openGoogleCode"
+                    >
                         <Input
                             type="text"
                             @on-enter="handleSubmit('formInline')"
@@ -38,15 +39,61 @@
                     </FormItem>
                     <!--手机短信验证 5.29-->
                     <FormItem
+                        class="code-title"
                         prop="vailCode3"
                         v-if="openPhoneCode"
                     >
-                        <Input v-model="formInline.phoneCode" size="large">
-                            <div class="timebox" slot="append">
-                                <Button @click="sendPhoneCode" :disabled="sendMsgDisabled">
-                                    <span v-if="sendMsgDisabled">{{codeTime+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
+                        <Input
+                            v-model="formInline.phoneCode"
+                            size="large"
+                            :placeholder="$t('uc.login.phone')"
+                        >
+                            <div
+                                class="timebox"
+                                slot="append"
+                            >
+                                <div
+                                    class="button-code"
+                                    @click="sendPhoneCode(1)"
+                                    :disabled="sendMsgDisabled"
+                                >
+                                    <span v-if="sendMsgDisabled">
+                                        {{codeTime+$t('uc.safe.second')}}
+                                    </span>
+                                    <span v-if="!sendMsgDisabled">
+                                        {{$t('uc.safe.clickget')}}
+                                    </span>
+                                </div>
+                            </div>
+                        </Input>
+                    </FormItem>
+                    <!--邮箱验证码 6.06-->
+                    <FormItem
+                        class="code-title"
+                        prop="vailCode4"
+                        v-if="openEmailCode"
+                    >
+                        <Input
+                            v-model="formInline.emailCode"
+                            size="large"
+                            :placeholder="$t('uc.login.email')"
+                        >
+                            <div
+                                class="timebox"
+                                slot="append"
+                            >
+                                <div
+                                    class="button-code"
+                                    @click="sendPhoneCode(2)"
+                                    :disabled="sendMsgDisabled1"
+                                >
+                                    <span v-if="sendMsgDisabled1">
+                                        {{codeTime1+$t('uc.safe.second')}}
+                                    </span>
+                                    <span v-if="!sendMsgDisabled1">
+                                        {{$t('uc.safe.clickget')}}
+                                    </span>
+                                </div>
                             </div>
                         </Input>
                     </FormItem>
@@ -100,7 +147,7 @@ $primary-color: #3399ff;
     }
     .login_right {
         background: url("../../assets/images/login-watermark.png") no-repeat center !important;
-        padding: 20px 30px 65px 45px;
+        padding: 0 30px 0 45px;
         position: absolute;
         background: #fff;
         width: 767px;
@@ -116,6 +163,15 @@ $primary-color: #3399ff;
             height: 100%;
             float: left;
             padding-top: 30px;
+            .button-code {
+                border-radius: 0;
+            }
+            .code-title {
+                width: 346px;
+            }
+            .timebox {
+                cursor: pointer;
+            }
          }
         .right-login {
             width: 290px;
@@ -182,19 +238,26 @@ export default {
     data() {
         const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
         return {
-            openGoogleCode: false,//是否开启google验证;
-            openGoogle: "", //  获取谷歌验证状态
+            openGoogleCode: false,//是否开启google验证状态;
+            openGoogle: "", //  获取谷歌验证
             /*添加短信验证 yangxiaoxi 5.29*/
             openPhoneCode: false,//是否开启Phone验证;
-            sendMsgDisabled: false,
+            // 6.06
+            openEmailCode: false,//是否开启email验证;
+            sendMsgDisabled: false, // 手机短信验证码
+            // 6.06
+            sendMsgDisabled1: false, // 邮箱短信验证
             codeTime: 60, // 发送验证码倒计时
+            // 6.06
+            codeTime1: 60, // 邮箱短信验证倒计时
             captchaObj: null,
             _captchaResult: null,
             formInline: {
                 user: "",
                 password: "",
                 googleCode: "",
-                phoneCode: ""
+                phoneCode: "",
+                emailCode: ""
             },
             ruleInline: {
                 password: [
@@ -225,30 +288,51 @@ export default {
         }
     },
     methods: {
-
         // /*手机发送验证码*/
-        sendPhoneCode() {
+        sendPhoneCode(index) {
             console.log(this)
             let me = this;
-            //获取手机code
-            this.$http.post(this.host + "/uc/mobile/login/code",{
-                phone: this.formInline.user
-            }).then(response => {
-                console.log(response)
-                let resp = response.body;
-                if (resp.code == 0) {
-                    this.sendMsgDisabled = true;
-                    let interval = window.setInterval(function() {
-                        if (me.codeTime-- <= 0) {
-                            me.codeTime = 60;
-                            me.sendMsgDisabled = false;
-                            window.clearInterval(interval);
-                        }
-                    }, 1000);
-                } else {
-                    this.$Message.error(resp.message);
-                }
-            });
+            if (index == 1) {
+                //获取手机code
+                this.$http.post(this.host + "/uc/mobile/login/code",{
+                    phone: this.formInline.user
+                }).then(response => {
+                    console.log(response)
+                    let resp = response.body;
+                    if (resp.code == 0) {
+                        this.sendMsgDisabled = true;
+                        let interval = window.setInterval(function() {
+                            if (me.codeTime-- <= 0) {
+                                me.codeTime = 60;
+                                me.sendMsgDisabled = false;
+                                window.clearInterval(interval);
+                            }
+                        }, 1000);
+                    } else {
+                        this.$Message.error(resp.message);
+                    }
+                });
+            } else {
+                //获取邮箱code
+                this.$http.post(this.host + "/uc/email/login/code",{
+                    email: this.formInline.user
+                }).then(response => {
+                    console.log(response)
+                    let resp = response.body;
+                    if (resp.code == 0) {
+                        this.sendMsgDisabled1 = true;
+                        let interval = window.setInterval(function() {
+                            if (me.codeTime1-- <= 0) {
+                                me.codeTime1 = 60;
+                                me.sendMsgDisabled1 = false;
+                                window.clearInterval(interval);
+                            }
+                        }, 1000);
+                    } else {
+                        this.$Message.error(resp.message);
+                    }
+                });
+            }
         },
         //用户名输入以后判断用户是否开启谷歌验证
         userBlur() {
@@ -258,17 +342,33 @@ export default {
             if (pattern.test(tel) || reg.test(tel)) {
                 this.isNeedGoogle(tel).then(res => {
                     console.log(res)
-                    if (res == 1) {//1为开启谷歌验证
-                        this.openGoogleCode = true;
-                        this.openPhoneCode = false;
-                    } else if (res == 2) {//2为开启手机验证
-                        this.openGoogleCode = false;
-                        this.openPhoneCode = true;
-                    } else {
-                        this.openGoogleCode = false;
-                        this.openPhoneCode = false;
+                    // 6.06改写
+                    switch(res){
+                        case 0:
+                            // 0为无需输入任何验证
+                            this.openGoogleCode = false;
+                            this.openPhoneCode = false;
+                            this.openEmailCode = false;
+                            break;
+                        case 1:
+                            // 1为开启谷歌验证
+                            this.openGoogleCode = true;
+                            this.openPhoneCode = false;
+                            this.openEmailCode = false;
+                            break;
+                        case 2:
+                            // 2为开启手机验证
+                            this.openGoogleCode = false;
+                            this.openPhoneCode = true;
+                            this.openEmailCode = false;
+                            break;
+                        case 3:
+                            // 3为开启邮箱验证
+                            this.openGoogleCode = false;
+                            this.openPhoneCode = false;
+                            this.openEmailCode = true;
                     }
-
+                    console.log(res)
                 })
             }
         },
@@ -291,7 +391,7 @@ export default {
         },
         /**验证用户是否开启了谷歌验证  返回值1为开启*/
         isNeedGoogle(tel) {
-            return this.$http.post(this.host + '/uc/get/user', { mobile: tel }).then(res => {
+            return this.$http.post(this.host + '/uc/v2/get/user', { username: tel }).then(res => {
                 const resp = res.body;
                 this.openGoole = res.body.data
                 if (resp.code == 0) {
@@ -313,8 +413,12 @@ export default {
                 params.code = formParams.googleCode
             }
             if (this.openPhoneCode) {
-                params.sms = this.formInline.phoneCode;
+                params.checkCode = this.formInline.phoneCode;
             }
+            // 6.06
+             if (this.openEmailCode) {
+                 params.checkCode = this.formInline.emailCode;
+             }
             return this.login(params);
         },
         loginCheck () {
@@ -342,24 +446,19 @@ export default {
                 } else  {
                     this.initGtCaptcha();
                 }
-                // 谷歌验证调用
-                //this.initGtCaptcha();
-
-            }else {
-                // // 判断手机验证码不能为空
-                // if (!this.formInline.phoneCode) {
-                //     this.$Message.error(this.$t("uc.login.phone"));
-                //     return false
-                // } else  {
-                //     this.initGtCaptcha();
-                // }
-                // 谷歌验证调用
-                this.initGtCaptcha();
+            } else if(this.openPhoneCode) {
+                // 6.06
+                // // 判断邮箱验证码不能为空
+                if (!this.formInline.emailCode) {
+                    this.$Message.error(this.$t("uc.login.email"));
+                    return false
+                } else  {
+                    this.initGtCaptcha();
+                }
             }
         },
         handleSubmit(name) {
             // 5.20修改
-
              this.$refs[name].validate(valid => {
                  //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
                 if (valid) {
@@ -418,6 +517,11 @@ $white:#fff;
                         }
                     }
                 }
+            }
+            .ivu-input-group-append {
+                width: 105px;
+                line-height: 26px;
+                border-radius: 0;
             }
         }
     }

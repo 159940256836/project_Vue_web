@@ -838,6 +838,8 @@ module.exports = {
         login: {
             noaccount: '没有账号？',
             google: "请输入谷歌验证码",
+            phone: "请输入手机验证码",
+            email: "请输入邮箱验证码",
             registerLog: "马上注册",
             register: '注册',
             login: '欢迎登陆BDW',
