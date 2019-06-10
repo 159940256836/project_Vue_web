@@ -1,74 +1,133 @@
 <template>
     <div class="login_form" id="logo">
+        <div class="wrap-mask"></div>
         <div class="login_right">
-            <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-                <div class="login_title">{{$t('uc.login.login')}}</div>
-                <FormItem prop="user">
-                    <Input
-                        @on-enter="handleSubmit('formInline')"
-                        name="user"
-                        type="text"
-                        v-model="formInline.user"
-                        :placeholder="$t('uc.login.usertip')"
-                        class="user"
-                        @on-blur="userBlur"
-                    />
-                </FormItem>
-                <FormItem prop="password">
-                    <Input
-                        @on-enter="handleSubmit('formInline')"
-                        type="password"
-                        v-model="formInline.password"
-                        :placeholder="$t('uc.login.pwdtip')"
+            <div class="left-login">
+                <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
+                    <div class="login_title">{{$t('uc.login.login')}}</div>
+                    <FormItem prop="user">
+                        <Input
+                            @on-enter="handleSubmit('formInline')"
+                            name="user"
+                            type="text"
+                            v-model="formInline.user"
+                            :placeholder="$t('uc.login.usertip')"
+                            class="user"
+                            @on-blur="userBlur"
+                        />
+                    </FormItem>
+                    <FormItem prop="password">
+                        <Input
+                            @on-enter="handleSubmit('formInline')"
+                            type="password"
+                            v-model="formInline.password"
+                            :placeholder="$t('uc.login.pwdtip')"
+                        >
+                        </Input>
+                    </FormItem>
+                    <FormItem
+                        prop="googleCode"
+                        v-if="openGoogleCode"
                     >
-                    </Input>
-                </FormItem>
-                <FormItem
-                    prop="googleCode"
-                    v-if="openGoogleCode">
-                    <Input
-                        type="text"
-                        @on-enter="handleSubmit('formInline')"
-                        v-model="formInline.googleCode"
-                        :placeholder="$t('uc.login.google')"
+                        <Input
+                            type="text"
+                            @on-enter="handleSubmit('formInline')"
+                            v-model="formInline.googleCode"
+                            :placeholder="$t('uc.login.google')"
+                        >
+                        </Input>
+                    </FormItem>
+                    <!--手机短信验证 5.29-->
+                    <FormItem
+                        class="code-title"
+                        prop="vailCode3"
+                        v-if="openPhoneCode"
                     >
-                    </Input>
-                </FormItem>
-                <!--手机短信验证 5.29-->
-                <!--<FormItem
-                    prop="vailCode3"
-                    v-if="openPhoneCode"
-                >
-                    <Input v-model="formInline.phoneCode" size="large">
-                        <div class="timebox" slot="append">
-                            <Button @click="sendPhoneCode" :disabled="sendMsgDisabled">
-                                <span v-if="sendMsgDisabled">{{time+$t('uc.safe.second')}}</span>
-                                <span v-if="!sendMsgDisabled">{{$t('uc.safe.clickget')}}</span>
-                            </Button>
-                        </div>
-                    </Input>
-                </FormItem>-->
-                <p style="height:25px;">
-                    <router-link to="/findPwd" style="color:#979797;float:right;padding-right:10px;font-size:12px;">
-                        {{$t('uc.login.forget')}}
-                    </router-link>
-                </p>
-                <FormItem style="margin-bottom:10px;">
-                    <Button
-                        class="login_btn"
-                        @click="handleSubmit('formInline')"
+                        <Input
+                            v-model="formInline.phoneCode"
+                            size="large"
+                            :placeholder="$t('uc.login.phone')"
+                        >
+                            <div
+                                class="timebox"
+                                slot="append"
+                            >
+                                <div
+                                    class="button-code"
+                                    @click="sendPhoneCode(1)"
+                                    :disabled="sendMsgDisabled"
+                                >
+                                    <span v-if="sendMsgDisabled">
+                                        {{codeTime+$t('uc.safe.second')}}
+                                    </span>
+                                    <span v-if="!sendMsgDisabled">
+                                        {{$t('uc.safe.clickget')}}
+                                    </span>
+                                </div>
+                            </div>
+                        </Input>
+                    </FormItem>
+                    <!--邮箱验证码 6.06-->
+                    <FormItem
+                        class="code-title"
+                        prop="vailCode4"
+                        v-if="openEmailCode"
                     >
-                        {{$t('uc.login.login')}}
-                    </Button>
-                </FormItem>
-                <div class='to_register'>
-                    <span>{{$t("uc.login.noaccount")}}</span>
-                    <router-link to="/register">
-                        {{$t("uc.login.register")}}
-                    </router-link>
-                </div>
-            </Form>
+                        <Input
+                            v-model="formInline.emailCode"
+                            size="large"
+                            :placeholder="$t('uc.login.email')"
+                        >
+                            <div
+                                class="timebox"
+                                slot="append"
+                            >
+                                <div
+                                    class="button-code"
+                                    @click="sendPhoneCode(2)"
+                                    :disabled="sendMsgDisabled1"
+                                >
+                                    <span v-if="sendMsgDisabled1">
+                                        {{codeTime1+$t('uc.safe.second')}}
+                                    </span>
+                                    <span v-if="!sendMsgDisabled1">
+                                        {{$t('uc.safe.clickget')}}
+                                    </span>
+                                </div>
+                            </div>
+                        </Input>
+                    </FormItem>
+                    <div class='to_register'>
+                        <span>{{$t("uc.login.noaccount")}}</span>
+                        <router-link to="/register">
+                            {{$t("uc.login.registerLog")}}
+                        </router-link>
+                        <router-link to="/findPwd" style="color:#979797;float:right;padding-right:10px;font-size:12px;">
+                            {{$t('uc.login.forget')}}
+                        </router-link>
+                    </div>
+                    <FormItem style="margin-bottom:10px;">
+                        <Button
+                            class="login_btn"
+                            @click="handleSubmit('formInline')"
+                        >
+                            {{$t('uc.forget.login')}}
+                        </Button>
+                    </FormItem>
 
+                </Form>
+            </div>
+            <div class="right-login">
+                <div class="right-border">
+                    <div class="right-main">
+                        <div class="right-img">
+                            <img src="../../assets/images/qrcode.png" alt="">
+                        </div>
+                        <p style="margin-top: 15px;">下载BDW App 随时随地，便捷交易</p>
+                        <p>扫描二维码即可下载BDW App</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -76,33 +135,80 @@
 /* 验证码 */
 $primary-color: #3399ff;
 .login_form {
-    background: #fff url('../../assets/images/login_bg1.jpg') no-repeat center;
+    background: #fff url('../../assets/images/brnner.png') no-repeat center;
     height: 760px;
     position: relative;
     overflow: hidden;
     padding-top: 60px;
+    .wrap-mask {
+        height:100%;
+        width:100%;
+        background: rgba(0,0,0,.6);
+    }
     .login_right {
-        padding: 20px 30px 10px 30px;
+        background: url("../../assets/images/login-watermark.png") no-repeat center !important;
+        padding: 0 30px 0 45px;
         position: absolute;
         background: #fff;
-        width: 350px;
+        width: 767px;
+        height: 440px;
         left: 50%;
         top: 50%;
-        margin-left: -175px;
-        margin-top: -165px;
+        margin-left: -381px;
+        margin-top: -220px;
         // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         border-top: 4px solid $primary-color;
+        .left-login {
+            width: 50%;
+            height: 100%;
+            float: left;
+            padding-top: 30px;
+            .button-code {
+                border-radius: 0;
+            }
+            .code-title {
+                width: 346px;
+            }
+            .timebox {
+                cursor: pointer;
+            }
+         }
+        .right-login {
+            width: 290px;
+            float: right;
+            margin-top: 109px;
+            .right-border {
+                height: 230px;
+                border-left: 1px solid rgba(221,221,221,1);
+                .right-main {
+                    float: right;
+                    width: 270px;
+                    text-align: center;
+                    .right-img {
+                        img {
+                            width: 50%;
+                        }
+                    }
+                    p {
+                        color: #000;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 .ivu-form-item-content {
                     .login_btn.ivu-btn {
                         width: 100%;
+                        height: 48px;
                         background-color: $primary-color;
                         outline: none;
                         border-color: $primary-color;
                         color: #fff;
                         font-size: 18px;
-                        border-radius: 30px;
+                        border-radius: 0;
+                        margin-top: 15px;
                         &:focus {
                             box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
                         }
@@ -112,13 +218,15 @@ $primary-color: #3399ff;
         }
     }
     .to_register {
+        height: 20px;
+        line-height: 25px;
         overflow: hidden;
         font-size: 12px;
         span {
             float: left;
         }
         a {
-            float: right;
+            float: left;
             color: $primary-color;
         }
     }
@@ -130,19 +238,26 @@ export default {
     data() {
         const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
         return {
-            openGoogleCode: false,//是否开启google验证;
-            openGoogle: "", //  获取谷歌验证状态
+            openGoogleCode: false,//是否开启google验证状态;
+            openGoogle: "", //  获取谷歌验证
             /*添加短信验证 yangxiaoxi 5.29*/
-            // openPhoneCode: true,//是否开启Phone验证;
-            // sendMsgDisabled: false,
-            // codeTime: 60, // 发送验证码倒计时
+            openPhoneCode: false,//是否开启Phone验证;
+            // 6.06
+            openEmailCode: false,//是否开启email验证;
+            sendMsgDisabled: false, // 手机短信验证码
+            // 6.06
+            sendMsgDisabled1: false, // 邮箱短信验证
+            codeTime: 60, // 发送验证码倒计时
+            // 6.06
+            codeTime1: 60, // 邮箱短信验证倒计时
             captchaObj: null,
             _captchaResult: null,
             formInline: {
                 user: "",
                 password: "",
                 googleCode: "",
-                phoneCode: ""
+                phoneCode: "",
+                emailCode: ""
             },
             ruleInline: {
                 password: [
@@ -174,25 +289,51 @@ export default {
     },
     methods: {
         // /*手机发送验证码*/
-        // sendPhoneCode() {
-        //     let me = this;
-        //     //获取手机code
-        //     this.$http.post(this.host + "/uc/register/phone").then(response => {
-        //         let resp = response.body;
-        //         if (resp.code == 0) {
-        //             this.sendMsgDisabled = true;
-        //             let interval = window.setInterval(function() {
-        //                 if (me.codeTime-- <= 0) {
-        //                     me.codeTime = 60;
-        //                     me.sendMsgDisabled = false;
-        //                     window.clearInterval(interval);
-        //                 }
-        //             }, 1000);
-        //         } else {
-        //             this.$Message.error(resp.message);
-        //         }
-        //     });
-        // },
+        sendPhoneCode(index) {
+            console.log(this)
+            let me = this;
+            if (index == 1) {
+                //获取手机code
+                this.$http.post(this.host + "/uc/mobile/login/code",{
+                    phone: this.formInline.user
+                }).then(response => {
+                    console.log(response)
+                    let resp = response.body;
+                    if (resp.code == 0) {
+                        this.sendMsgDisabled = true;
+                        let interval = window.setInterval(function() {
+                            if (me.codeTime-- <= 0) {
+                                me.codeTime = 60;
+                                me.sendMsgDisabled = false;
+                                window.clearInterval(interval);
+                            }
+                        }, 1000);
+                    } else {
+                        this.$Message.error(resp.message);
+                    }
+                });
+            } else {
+                //获取邮箱code
+                this.$http.post(this.host + "/uc/email/login/code",{
+                    email: this.formInline.user
+                }).then(response => {
+                    console.log(response)
+                    let resp = response.body;
+                    if (resp.code == 0) {
+                        this.sendMsgDisabled1 = true;
+                        let interval = window.setInterval(function() {
+                            if (me.codeTime1-- <= 0) {
+                                me.codeTime1 = 60;
+                                me.sendMsgDisabled1 = false;
+                                window.clearInterval(interval);
+                            }
+                        }, 1000);
+                    } else {
+                        this.$Message.error(resp.message);
+                    }
+                });
+            }
+        },
         //用户名输入以后判断用户是否开启谷歌验证
         userBlur() {
             const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
@@ -200,11 +341,34 @@ export default {
             let tel = this.formInline.user;
             if (pattern.test(tel) || reg.test(tel)) {
                 this.isNeedGoogle(tel).then(res => {
-                    if (res == 1) {//1为开启谷歌验证
-                        this.openGoogleCode = true;
-                    } else {
-                        this.openGoogleCode = false;
+                    console.log(res)
+                    // 6.06改写
+                    switch(res){
+                        case 0:
+                            // 0为无需输入任何验证
+                            this.openGoogleCode = false;
+                            this.openPhoneCode = false;
+                            this.openEmailCode = false;
+                            break;
+                        case 1:
+                            // 1为开启谷歌验证
+                            this.openGoogleCode = true;
+                            this.openPhoneCode = false;
+                            this.openEmailCode = false;
+                            break;
+                        case 2:
+                            // 2为开启手机验证
+                            this.openGoogleCode = false;
+                            this.openPhoneCode = true;
+                            this.openEmailCode = false;
+                            break;
+                        case 3:
+                            // 3为开启邮箱验证
+                            this.openGoogleCode = false;
+                            this.openPhoneCode = false;
+                            this.openEmailCode = true;
                     }
+                    console.log(res)
                 })
             }
         },
@@ -227,7 +391,7 @@ export default {
         },
         /**验证用户是否开启了谷歌验证  返回值1为开启*/
         isNeedGoogle(tel) {
-            return this.$http.post(this.host + '/uc/get/user', { mobile: tel }).then(res => {
+            return this.$http.post(this.host + '/uc/v2/get/user', { username: tel }).then(res => {
                 const resp = res.body;
                 this.openGoole = res.body.data
                 if (resp.code == 0) {
@@ -248,6 +412,13 @@ export default {
             if (this.openGoogleCode) {
                 params.code = formParams.googleCode
             }
+            if (this.openPhoneCode) {
+                params.checkCode = this.formInline.phoneCode;
+            }
+            // 6.06
+             if (this.openEmailCode) {
+                 params.checkCode = this.formInline.emailCode;
+             }
             return this.login(params);
         },
         loginCheck () {
@@ -258,7 +429,7 @@ export default {
                 return false
             }
             // 判断是否绑定谷歌
-            if(this.openGoole == 1) {
+            if(this.openGoogleCode) {
                 // this.openPhoneCode = false;
                 // 判断谷歌验证码不能为空
                 if (!this.formInline.googleCode) {
@@ -267,25 +438,34 @@ export default {
                 } else  {
                     this.initGtCaptcha();
                 }
-            } else {
-                // // 判断手机验证码不能为空
-                // if (!this.formInline.phoneCode) {
-                //     this.$Message.error(this.$t("uc.login.phone"));
-                //     return false
-                // } else  {
-                //     this.initGtCaptcha();
-                // }
-                // 谷歌验证调用
-                this.initGtCaptcha();
+            } else if(this.openPhoneCode) {
+                  // // 判断手机验证码不能为空
+                if (!this.formInline.phoneCode) {
+                    this.$Message.error(this.$t("uc.login.phone"));
+                    return false
+                } else  {
+                    this.initGtCaptcha();
+                }
+            } else if(this.openPhoneCode) {
+                // 6.06
+                // // 判断邮箱验证码不能为空
+                if (!this.formInline.emailCode) {
+                    this.$Message.error(this.$t("uc.login.email"));
+                    return false
+                } else  {
+                    this.initGtCaptcha();
+                }
             }
+            this.initGtCaptcha();
         },
         handleSubmit(name) {
             // 5.20修改
-            this.loginCheck()
-             this.$refs[name].validate(valid => {
+            console.log(name);
+            this.$refs[name].validate(valid => {
                  //首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
+                console.log(valid);
                 if (valid) {
-
+                    this.loginCheck()
                     const params = {};
                     const formParams = this.formInline;
                     params.username = formParams.user;
@@ -316,7 +496,8 @@ export default {
 };
 </script>
 <style lang="scss">
-$changeColor:#f5f5f5;
+$changeColor:#DDDDDD;
+$focusColor:#3399FF;
 $white:#fff;
 .login_form {
     .login_right {
@@ -325,17 +506,25 @@ $white:#fff;
                 .ivu-form-item-content {
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
+                            width: 100%;
+                            height: 48px;
                             font-size: 14px;
-                            border: none;
-                            border-bottom: 1px solid $changeColor;
+                            border-radius: 0;
+                            border: 1px solid $changeColor;
+                            padding-left: 20px;
+                            box-sizing: border-box;
                             &:focus {
-                                border: none;
-                                border-bottom: 1px solid $changeColor;
+                                border: 1px solid $focusColor;
                                 box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
                             }
                         }
                     }
                 }
+            }
+            .ivu-input-group-append {
+                width: 105px;
+                line-height: 26px;
+                border-radius: 0;
             }
         }
     }

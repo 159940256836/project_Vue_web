@@ -1,5 +1,5 @@
 <template>
-  <div class="registers"> 
+  <div class="registers" id='reg'>
       <!-- <div>{{agent}}</div>
       <div>{{mobile}}</div>
      <div @click='reg'>注册</div> -->
@@ -14,7 +14,7 @@
           <button @click='reg'>立即注册</button>
       </div>
   </div>
-   
+
 </template>
 
 
@@ -38,8 +38,8 @@ export default {
   },
   mounted(){
       this.agent = this.$route.query.agent;
-      this.mobile = this.$route.query.mobile ? this.$route.query.mobile.substr(0,3) + '****' + this.$route.query.mobile.substr(7,4): ''
-      console.log(localStorage)
+      this.mobile = this.$route.query.mobile ? this.$route.query.mobile.substr(0,3) + '****' + this.$route.query.mobile.substr(7,4): '';
+      document.getElementById('reg').style.height = document.documentElement.clientHeight + 'px';
   },
   component(){
 
@@ -52,7 +52,6 @@ export default {
 
 <style scoped lang="scss">
 @import"../../styles/index.css";
-
 .registers{
     background:#fff;
     .toppp{
@@ -86,6 +85,7 @@ export default {
    button{
        width:3.33rem;
        height:0.8rem;
+       font-size: 0.3rem;
        color:#fff;
        line-height:0.8rem;
        text-align:center;
@@ -96,12 +96,6 @@ export default {
    }
 
 }
-    
-}
-</style>
-<style>
-html,body{
-    height:100%;
-}
 
+}
 </style>

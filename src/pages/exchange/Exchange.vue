@@ -507,13 +507,17 @@
                     :columns="currentOrder.columns"
                     :data="currentOrder.rows"
                     :loading="currentLoading"
+                    @on-expand="getOrderDetails"
                     :no-data-text="$t('common.nodata')"
-                ></Table>
+                >
+                </Table>
                 <Table
                     v-else
+                    ref="table"
                     :columns="historyOrder.columns"
                     :data="historyOrder.rows"
                     :loading="historyLoading"
+                    @on-expand="getOrderDetails"
                     :no-data-text="$t('common.nodata')"
                 ></Table>
             </div>
@@ -767,7 +771,7 @@ $night-color: #fff;
                     font-size: 14px;
                     padding: 3px 5px;
                     border-radius: 5px;
-                    background: #161b25;
+                    background: transparent;
                     cursor: pointer;
                 }
             }
@@ -1353,6 +1357,8 @@ export default {
                 askRows: [],
                 bidRows: []
             },
+            arr: [],
+            expands: [],
             currentOrder: {
                 columns: [
                     {
@@ -1362,8 +1368,13 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: params.row.detail
-                                }
+                                    rows: this.arr
+                                },
+                                nativeOn: {
+                                    click: () => {
+                                        this.getOrderDetails(params.index)
+                                    }
+                                },
                             });
                         }
                     },
@@ -1485,8 +1496,13 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: params.row.detail
-                                }
+                                    rows: this.arr
+                                },
+                                nativeOn: {
+                                    click: () => {
+                                      this.getOrderDetails(params.index)
+                                    }
+                                },
                             });
                         }
                     },
@@ -1806,6 +1822,7 @@ export default {
                 }
             })
         },
+
         // //金额只能为正整数
         // checkNum(element) {
         //     let val = element.value;
@@ -2079,7 +2096,7 @@ export default {
                     "move_logo_to_main_pane"
                 ],
                 custom_css_url: "bundles/common.css",
-                supported_resolutions: ["1", "5", "15", "30", "60", "1D", "1W", "1M"],
+                supported_resolutions: ["1", "5", "15", "30", "60", "240", "1D", "1W", "1M"],
                 charts_storage_url: "http://saveload.tradingview.com",
                 charts_storage_api_version: "1.1",
                 client_id: "tradingview.com",
@@ -2118,17 +2135,38 @@ export default {
                         description: "realtime",
                         title: that.$t("exchange.realtime")
                     },
-                    { text: "1min", resolution: "1", description: "1min" },
-                    { text: "5min", resolution: "5", description: "5min" },
-                    { text: "15min", resolution: "15", description: "15min" },
-                    { text: "30min", resolution: "30", description: "30min" },
+                    {
+                        text: "1min",
+                        resolution: "1",
+                        description: "1min"
+                    },
+                    {
+                        text: "5min",
+                        resolution: "5",
+                        description: "5min"
+                    },
+                    {
+                        text: "15min",
+                        resolution: "15",
+                        description: "15min"
+                    },
+                    {
+                        text: "30min",
+                        resolution: "30",
+                        description: "30min"
+                    },
                     {
                         text: "1hour",
                         resolution: "60",
                         description: "1hour",
                         title: "1hour"
                     },
-                    /*{ text: "4hour", resolution: "240", description: "4hour",title: "4hour" },*/
+                    // {
+                    //     text: "4hour",
+                    //     resolution: "240",
+                    //     description: "4hour",
+                    //     title: "4hour"
+                    // },
                     {
                         text: "1day",
                         resolution: "1D",
@@ -2141,7 +2179,11 @@ export default {
                         description: "1week",
                         title: "1week"
                     },
-                    { text: "1mon", resolution: "1M", description: "1mon" }
+                    {
+                        text: "1mon",
+                        resolution: "1M",
+                        description: "1mon"
+                    }
                 ]
             };
             if (that.skin === "day") {
@@ -2158,6 +2200,8 @@ export default {
             }
             require(["@js/charting_library/charting_library.min.js"], function (tv) {
                 let widget = (window.tvWidget = new TradingView.widget(config));
+                console.log(widget);
+                /*onChartReady 自定义初始化指标线（平均移动线等），设置颜色*/
                 widget.onChartReady(function () {
                     widget.chart().executeActionById("drawingToolbarAction");
                     widget
@@ -2267,7 +2311,21 @@ export default {
                             widget.setSymbol("", "60");
                         })
                         .append("<span>H1</span>");
-
+                    widget
+                        .createButton()
+                        .attr("title", "H4")
+                        .on("click", function () {
+                            if ($(this).hasClass("selected")) return;
+                            $(this)
+                                .addClass("selected")
+                                .parent(".group")
+                                .siblings(".group")
+                                .find(".button.selected")
+                                .removeClass("selected");
+                            widget.chart().setChartType(1);
+                            widget.setSymbol("", "240");
+                        })
+                        .append("<span>H4</span>");
                     widget
                         .createButton()
                         .attr("title", "D1")
@@ -3215,7 +3273,6 @@ export default {
                 }
             });
         },
-
         buyPlate(currentRow) {
             this.form.buy.limitPrice = currentRow.price;
             this.form.sell.limitPrice = currentRow.price;
@@ -3345,12 +3402,23 @@ export default {
                 }
             });
         },
+        // 币币订单详情
+        getOrderDetails(index) {
+            console.log(index.orderId);
+            return this.$http.post(this.host + this.api.exchange.orderDetails, {
+                orderId: index.orderId
+            }).then(res => {
+                const data = res.body;
+                if (data.code == 0) {
+                    this.arr = data.data
+                }
+            })
+        },
         refreshAccount: function () {
             this.getCurrentOrder();
             this.getHistoryOrder();
             this.getWallet();
         },
-
         timeFormat: function (tick) {
             return moment(tick).format("HH:mm:ss");
         },

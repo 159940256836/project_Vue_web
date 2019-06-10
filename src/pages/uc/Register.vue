@@ -1,57 +1,134 @@
 <template>
     <div class="login_form" id="logo">
+        <div class="wrap-mask"></div>
         <div class="login_right">
-            <Form v-if="allowRegister" ref="formInline" :model="formInline" :rules="ruleInline" inline>
-                <FormItem style="text-align:center;">
+            <Form
+                v-if="allowRegister"
+                ref="formInline"
+                :model="formInline"
+                :rules="ruleInline"
+                inline
+            >
+                <p class="login_title">{{$t('uc.login.login')}}</p>
+                <FormItem style="width: 100%;border-bottom: 1px solid #ddd;">
                     <ButtonGroup>
-                        <Button v-for="(list,index) in buttonLists" :key="list.text" :class="{ active:changeActive == index}" @click="actives(index)">{{list.text}}</Button>
+                        <Button
+                            v-for="(list,index) in buttonLists"
+                            :key="list.text"
+                            :class="{ active:changeActive == index}"
+                            @click="actives(index)"
+                        >
+                            {{list.text}}
+                        </Button>
                     </ButtonGroup>
                 </FormItem>
-                <FormItem prop="country">
+                <!--<FormItem prop="country">
                     <Select v-model="formInline.country" :placeholder="$t('uc.regist.country')" @on-change="onAreaChange">
                         <Option v-for="(area,index) in areas" :value="area.zhName" :key="index">{{area.zhName}}</Option>
                     </Select>
-                </FormItem>
+                </FormItem>-->
                 <FormItem prop="username">
-                    <Input type="text" v-model="formInline.username" :placeholder="$t('uc.regist.username')">
+                    <Input
+                        type="text"
+                        v-model="formInline.username"
+                        :placeholder="$t('uc.regist.username')"
+                    >
                     </Input>
                 </FormItem>
-                <FormItem prop="user">
-                    <Input v-if="changeActive == 0" type="text" v-model="formInline.user" :placeholder="key">
-
+                <FormItem>
+                    <Select
+                        prop="country"
+                        class="select-input"
+                        v-model="formInline.country"
+                        :placeholder="$t('uc.regist.country')"
+                        @on-change="onAreaChange"
+                    >
+                        <Option
+                            v-for="(area,index) in areas"
+                            :value="area.zhName"
+                            :key="index"
+                        >
+                            {{area.zhName}}
+                        </Option>
+                    </Select>
+                    <Input
+                        prop="user"
+                        class="select-input1"
+                        v-if="changeActive == 0"
+                        type="text" v-model="formInline.user"
+                        :placeholder="key"
+                    >
                     </Input>
-                    <Input v-else type="text" v-model="formInline.user" :placeholder="key">
+                    <Input
+                        v-else
+                        class="select-input1"
+                        type="text"
+                        v-model="formInline.user"
+                        :placeholder="key"
+                    >
                     </Input>
                 </FormItem>
 
                 <FormItem prop="code" v-show="showCode">
-                    <Input type="text" v-model="formInline.code" :placeholder="$t('uc.regist.smscode')">
+                    <Input
+                        class="code-input"
+                        type="text"
+                        v-model="formInline.code"
+                        :placeholder="$t('uc.regist.smscode')"
+                    >
                     </Input>
-                    <input id="sendCode" @click="sendCode();" type="Button" :value="sendcodeValue" :disabled='codedisabled'>
+                    <input
+                        id="sendCode"
+                        @click="sendCode()"
+                        type="Button"
+                        :value="sendcodeValue"
+                        :disabled='codedisabled'
+                    >
                     </input>
                 </FormItem>
                 <FormItem prop="password">
-                    <Input type="password" v-model="formInline.password" :placeholder="$t('uc.regist.pwd')">
+                    <Input
+                        type="password"
+                        v-model="formInline.password"
+                        :placeholder="$t('uc.regist.pwd')"
+                    >
                     </Input>
                 </FormItem>
                 <FormItem prop="repassword">
-                    <Input type="password" v-model="formInline.repassword" :placeholder="$t('uc.regist.confrimpwd')">
+                    <Input
+                        type="password"
+                        v-model="formInline.repassword"
+                        :placeholder="$t('uc.regist.confrimpwd')"
+                    >
                     </Input>
                 </FormItem>
                 <FormItem prop="agentcode">
-                    <Input type="text" v-model="formInline.agentcode" :placeholder="$t('uc.regist.agentcode')">
+                    <Input
+                        type="text"
+                        v-model="formInline.agentcode"
+                        :placeholder="$t('uc.regist.agentcode')"
+                    >
                     </Input>
                 </FormItem>
                 <div class="check-agree" style="">
                     <label>
-                        <Checkbox v-model="agree">{{$t('uc.regist.agreement')}}</Checkbox>
+                        <Checkbox v-model="agree">
+                            {{$t('uc.regist.agreement')}}
+                        </Checkbox>
                     </label>
                     <!-- 用户协议 -->
-                    <router-link to="/Usereement">《{{$t('uc.regist.userprotocol')}}》</router-link>
+                    <router-link to="/Usereement">
+                        《{{$t('uc.regist.userprotocol')}}》
+                    </router-link>
                     <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
                 </div>
                 <FormItem>
-                    <Button class="register_btn" @click="handleSubmit('formInline')">{{$t('uc.regist.regist')}}</Button>
+                    <Button
+                        class="register_btn"
+                        @click="handleSubmit('formInline')"
+                    >
+                        {{$t('uc.regist.regist')}}
+                    </Button>
                 </FormItem>
             </Form>
         </div>
@@ -59,19 +136,25 @@
 </template>
 <style scoped lang="scss">
 .login_form {
-    background: #f9f9f9 url(../../assets/images/login_bg1.jpg) no-repeat center
+    background: #f9f9f9 url('../../assets/images/brnner.png') no-repeat center
         center;
     height: 760px;
     position: relative;
     overflow: hidden;
+    .wrap-mask {
+        height:100%;
+        width:100%;
+        background: rgba(0,0,0,.6);
+    }
     .login_right {
-        padding: 20px 30px;
+        background: url("../../assets/images/register.png") no-repeat center !important;
+        padding: 0 42px;
         position: absolute;
         background: #fff;
-        width: 350px;
+        width: 465px;
         // height: 485px;
         left: 50%;
-        top: 50%;
+        top: 42%;
         // transform: translate(50%, 50%, 0);
         margin-left: -175px;
         margin-top: -255px;
@@ -86,7 +169,7 @@
                         outline: none;
                         border-color: #3399ff;
                         color: #fff;
-                        border-radius: 30px;
+                        border-radius: 0;
                         font-size: 18px;
                         margin-top: 20px;
                         &:focus {
@@ -101,13 +184,13 @@
                     }
                     #sendCode {
                         position: absolute;
-                        border: 1px solid #3399ff;
+                        border: 1px solid #DDDDDD;
                         background: #fdfaf3;
-                        top: -10px;
+                        top: 0px;
                         outline: none;
-                        right: 0;
-                        width: 30%;
-                        border-radius: 20px;
+                        line-height: 40px;
+                        right: 0px;
+                        width: 27%;
                         color: #3399ff;
                         cursor: pointer;
                     }
@@ -141,6 +224,17 @@
     text-align: center;
     height: 80px;
     font-size: 25px;
+}
+.select-input {
+    border-radius: 0;
+    width: 100px;
+}
+.select-input1 {
+    width: 281px;
+    float: right;
+}
+.code-input {
+    width: 281px;
 }
 
 #captcha {
@@ -520,6 +614,8 @@ export default {
 };
 </script>
 <style lang="scss">
+$changeColor:#DDDDDD;
+$focusColor:#3399FF;
 .login_form {
     $main_theme: #3399ff;
     .login_right {
@@ -528,26 +624,38 @@ export default {
                 .ivu-form-item-content {
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
-                            border: none;
-                            border-bottom: 1px solid #f5f5f5;
+                            width: 100%;
+                            height: 42px;
                             font-size: 14px;
+                            border-radius: 0;
+                            border: 1px solid $changeColor;
+                            padding-left: 20px;
+                            box-sizing: border-box;
                             &:focus {
-                                border: none;
-                                border-bottom: 1px solid #f5f5f5;
-                                box-shadow: 2px 2px 5px transparent,
-                                    -2px -2px 4px transparent;
+                                border: 1px solid $focusColor;
+                                box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
                             }
                         }
                     }
-                    .ivu-btn.active,
+                    .ivu-btn.active {
+                        font-size: 14px;
+                        font-weight: 500;
+                        border-radius: 0;
+                        border-color: #fff;
+                        border-bottom: 2px solid $main_theme !important;
+                    }
                     .ivu-btn:active {
+                        font-size: 14px;
                         color: $main_theme;
-                        border-color: $main_theme;
+                        border-bottom: 2px solid $main_theme;
                     }
                     .ivu-btn {
+                        font-size: 14px;
+                        border-color: #fff;
+                        background: transparent;
                         &:hover {
                             color: $main_theme;
-                            border-color: $main_theme;
+                            border-bottom: 2px solid $main_theme;
                         }
                         &:focus {
                             box-shadow: 2px 2px 5px transparent,
@@ -555,6 +663,21 @@ export default {
                         }
                     }
                 }
+            }
+            .ivu-select {
+                height: 42px;
+                border-radius: 0;
+            }
+            .ivu-select-single .ivu-select-selection {
+                height: 42px;
+                border-radius: 0;
+                border-right: 0;
+            }
+            .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
+                height: 42px;
+                border-radius: 0;
+                line-height: 42px;
+                border-right: 0;
             }
             .check-agree {
                 .ivu-checkbox-wrapper {
