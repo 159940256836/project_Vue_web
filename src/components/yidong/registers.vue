@@ -1,5 +1,5 @@
 <template>
-  <div class="registers">
+  <div class="registers"> 
       <!-- <div>{{agent}}</div>
       <div>{{mobile}}</div>
      <div @click='reg'>注册</div> -->
@@ -61,6 +61,9 @@ export default {
     background:url("../../assets/img/yd1.png") 0 0 no-repeat;
     background-size: 100%;
 }
+    .page-view{
+    height:100%;
+}
 .agent{
     margin-top:1.34rem;
     color:#666666FF;
@@ -95,18 +98,10 @@ export default {
 }
     
 }
-
-
 </style>
 <style>
 html,body{
     height:100%;
 }
-.registers{
-    background:#fff;
-    height:100%;
-}
-.page-view{
-    height:100%;
-}
+
 </style>
