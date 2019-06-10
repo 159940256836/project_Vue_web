@@ -54,7 +54,7 @@
             rows: Array
         },
         created(){
-            console.log(this.rows, this.$parent,this.props,this.$parent.$props.data);
+            // console.log(this.rows, this.$parent,this.props,this.$parent.$props.data);
         }
     };
 </script>

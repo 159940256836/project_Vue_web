@@ -507,7 +507,6 @@
                     :columns="currentOrder.columns"
                     :data="currentOrder.rows"
                     :loading="currentLoading"
-                    @on-expand="getOrderDetails"
                     :no-data-text="$t('common.nodata')"
                 >
                 </Table>
@@ -1359,6 +1358,7 @@ export default {
             },
             arr: [],
             expands: [],
+            isEdit: '',
             currentOrder: {
                 columns: [
                     {
@@ -1369,12 +1369,7 @@ export default {
                                 props: {
                                     skin: params.row.skin,
                                     rows: this.arr
-                                },
-                                nativeOn: {
-                                    click: () => {
-                                        this.getOrderDetails(params.index)
-                                    }
-                                },
+                                }
                             });
                         }
                     },
@@ -2200,7 +2195,7 @@ export default {
             }
             require(["@js/charting_library/charting_library.min.js"], function (tv) {
                 let widget = (window.tvWidget = new TradingView.widget(config));
-                console.log(widget);
+                // console.log(widget);
                 /*onChartReady 自定义初始化指标线（平均移动线等），设置颜色*/
                 widget.onChartReady(function () {
                     widget.chart().executeActionById("drawingToolbarAction");
@@ -3403,16 +3398,71 @@ export default {
             });
         },
         // 币币订单详情
-        getOrderDetails(index) {
-            console.log(index.orderId);
+        rowClassName(row, index) {
+            console.log(row, row.orderId, status);
+            // if(status){
+            //     this.arr.splice()
+            //     this.arr.filter((item, index)=>{
+            //         if(item.id == row.id){
+            //             item._expanded = true;   //展开选中的行
+            //             // this.$set(item, "_text", "收起所有经停站")
+            //             item._text = "收起所有经停站"
+            //         }else{
+            //             item._expanded = false;   //其他行关闭
+            //             item._text = "查看所有经停站"
+            //         }
+            //         return item;
+            //     });
+            //     this.arr = this.arr
+            // }
+        },
+        getOrderDetails(row, index) {
+            console.log(row, row.orderId, index);
             return this.$http.post(this.host + this.api.exchange.orderDetails, {
-                orderId: index.orderId
+                orderId: row.orderId
             }).then(res => {
                 const data = res.body;
                 if (data.code == 0) {
-                    this.arr = data.data
+                    console.log(data.data);
+                    // this.arr = data.data
+                    if (index) {
+                        this.currentOrder.rows.splice()
+                        this.currentOrder.rows.filter((item, index)=>{
+                            console.log(item, index);
+                            if(item.orderId == row.orderId){
+                                console.log(item.orderId, row.orderId);
+                                item._expanded = false
+                            } else {
+                                item._expanded = false;
+                            }
+                            return item;
+                        })
+                        this.arr = data.data
+                    }
                 }
             })
+            // if (status) {
+            //     console.log(this.arr.splice());
+            //     this.arr.filter((item, index)=>{
+            //         console.log(item, index);
+            //         // if(item.id == row.id){
+            //         //
+            //         // }
+            //     })
+            // }
+            // this.currentOrder.columns.splice();
+            // this.currentOrder.columns[this.arr].isEdit=0;
+            // this.currentOrder.columns[this.arr]._expanded = false;
+            // let order = this.arr[index];
+            // console.log(index, order);
+            // return this.$http.post(this.host + this.api.exchange.orderDetails, {
+            //     orderId: index.orderId
+            // }).then(res => {
+            //     const data = res.body;
+            //     if (data.code == 0) {
+            //         this.arr[index] = data.data
+            //     }
+            // })
         },
         refreshAccount: function () {
             this.getCurrentOrder();
