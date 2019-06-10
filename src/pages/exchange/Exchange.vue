@@ -507,13 +507,17 @@
                     :columns="currentOrder.columns"
                     :data="currentOrder.rows"
                     :loading="currentLoading"
+                    @on-expand="getOrderDetails"
                     :no-data-text="$t('common.nodata')"
-                ></Table>
+                >
+                </Table>
                 <Table
                     v-else
+                    ref="table"
                     :columns="historyOrder.columns"
                     :data="historyOrder.rows"
                     :loading="historyLoading"
+                    @on-expand="getOrderDetails"
                     :no-data-text="$t('common.nodata')"
                 ></Table>
             </div>
@@ -767,7 +771,7 @@ $night-color: #fff;
                     font-size: 14px;
                     padding: 3px 5px;
                     border-radius: 5px;
-                    background: #161b25;
+                    background: transparent;
                     cursor: pointer;
                 }
             }
@@ -1353,6 +1357,8 @@ export default {
                 askRows: [],
                 bidRows: []
             },
+            arr: [],
+            expands: [],
             currentOrder: {
                 columns: [
                     {
@@ -1362,8 +1368,13 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: params.row.detail
-                                }
+                                    rows: this.arr
+                                },
+                                nativeOn: {
+                                    click: () => {
+                                        this.getOrderDetails(params.index)
+                                    }
+                                },
                             });
                         }
                     },
@@ -1485,8 +1496,13 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: params.row.detail
-                                }
+                                    rows: this.arr
+                                },
+                                nativeOn: {
+                                    click: () => {
+                                      this.getOrderDetails(params.index)
+                                    }
+                                },
                             });
                         }
                     },
@@ -1806,6 +1822,7 @@ export default {
                 }
             })
         },
+
         // //金额只能为正整数
         // checkNum(element) {
         //     let val = element.value;
@@ -3256,7 +3273,6 @@ export default {
                 }
             });
         },
-
         buyPlate(currentRow) {
             this.form.buy.limitPrice = currentRow.price;
             this.form.sell.limitPrice = currentRow.price;
@@ -3386,12 +3402,23 @@ export default {
                 }
             });
         },
+        // 币币订单详情
+        getOrderDetails(index) {
+            console.log(index.orderId);
+            return this.$http.post(this.host + this.api.exchange.orderDetails, {
+                orderId: index.orderId
+            }).then(res => {
+                const data = res.body;
+                if (data.code == 0) {
+                    this.arr = data.data
+                }
+            })
+        },
         refreshAccount: function () {
             this.getCurrentOrder();
             this.getHistoryOrder();
             this.getWallet();
         },
-
         timeFormat: function (tick) {
             return moment(tick).format("HH:mm:ss");
         },

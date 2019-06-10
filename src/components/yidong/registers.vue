@@ -14,7 +14,7 @@
           <button @click='reg'>立即注册</button>
       </div>
   </div>
-   
+
 </template>
 
 
@@ -82,6 +82,7 @@ export default {
    button{
        width:3.33rem;
        height:0.8rem;
+       font-size: 0.3rem;
        color:#fff;
        line-height:0.8rem;
        text-align:center;
@@ -92,6 +93,6 @@ export default {
    }
 
 }
-    
+
 }
 </style>

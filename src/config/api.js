@@ -35,7 +35,8 @@ export default {
         favorAdd: '/exchange/favor/add', //添加自选
         favorDelete: '/exchange/favor/delete', //删除自选
         orderCancel: '/exchange/order/cancel', //取消委托
-        orderCancelAll: '/exchange/order/cancelOrderAll' // 一键撤单
+        orderCancelAll: '/exchange/order/cancelOrderAll', // 一键撤单
+        orderDetails: '/exchange/order/orderDetails', // 币币订单详情
     },
     otc: {
         coin: '/otc/coin/all', //查询支持的币种

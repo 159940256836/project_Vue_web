@@ -39,7 +39,7 @@
         <span
           @click="initGtCaptcha();"
           :class="setnum1!='获取验证码'?'dis':''"
-          style="color:#3399FFFF; display:inline-block; width:2rem;height:0.58rem;line-height:0.58rem;border:1px solid rgba(51,153,255,1); border-radius:29rem; text-align:center; margin-top:0.15rem"
+          style="color:#3399FFFF; display:inline-block; width:2rem;height:0.58rem;line-height:0.58rem;border:1px solid rgba(51,153,255,1); border-radius:29rem;font-size: 0.2rem; text-align:center; margin-top:0.15rem"
         >{{setnum1}}</span>
       </div>
       <div class="phone">
@@ -116,7 +116,7 @@
         </label>
         <router-link
           to="/Usereement"
-          style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem"
+          style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem;font-size: 0.2rem;"
         >《用户名协议》</router-link>
         <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
       </div>
@@ -421,7 +421,7 @@ export default {
     width: 5.07rem;
     height: 0.8rem;
     line-height: 0.8rem;
-    font-size: 0.3;
+    font-size: 0.3rem;
     background: #3399ff !important;
     border-radius: 0.4rem;
     text-align: center;
@@ -474,7 +474,15 @@ export default {
 <style lang="scss">
 .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
 .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
+  height: 0.6rem;
   font-size: 0.28rem;
+  line-height: 0.6rem;
+}
+.ivu-select-dropdown .ivu-select-item {
+  font-size: 0.13rem !important;
+}
+.ivu-checkbox-wrapper {
+  font-size: 0.2rem;
 }
 .rejs {
   .content {
@@ -482,6 +490,8 @@ export default {
     width: 5.74rem;
     padding-bottom: 2.17rem;
     .ivu-select-single .ivu-select-selection {
+      height: 0.6rem;
+      padding-left: 0.1rem;
       border: 0;
       border-bottom: 1px solid #ddd;
       border-radius: 0;
