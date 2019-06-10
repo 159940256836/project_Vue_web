@@ -229,6 +229,7 @@ var SockJS = require("sockjs-client");
 var moment = require("moment");
 import SvgLine from "@components/exchange/SvgLine.vue";
 import $ from "@js/jquery.min.js";
+import { debug } from 'util';
 const Right = x => ({
     map: f => Right(f(x)),
     fold: (f, g) => g(x)
@@ -756,11 +757,8 @@ export default {
                         title: self.$t("service.PriceTrend"),
                         align: "center",
                         render: function (h, params) {
-                            // console.log(params.row.trend);
                             let valus = null;
                             let len = params.row.trend.length;
-                            // console.log(params.row.trend);
-                            // debugger
                             valus =
                                 len > 0
                                     ? params.row.trend
@@ -863,6 +861,7 @@ export default {
     created: function () {
         this.stop();
         this.init();
+        this.settiele();
     },
     filters: {
         formateRate(str) {
@@ -884,7 +883,7 @@ export default {
     },
     mounted: function () {
         this.getCNYRate();
-        this.getSymbol();
+        //  this.getSymbol();
         this.getHotSymbol();
     },
     methods: {
@@ -904,7 +903,6 @@ export default {
         */
         getHotSymbol() {
             this.$http.get(this.host + '/market/overview').then(res => {
-                console.log(res)
                 const resp = res.body;
                 const list = resp.recommend.map(ele => ({
                     symbol: ele.symbol,
@@ -915,7 +913,6 @@ export default {
                     trend: ele.trend
                 }))
                 this.hostSymbolList = list;
-                // console.log(resp,this.hostSymbolList);
                 this.startWebsockHotlist();
             })
         },
@@ -1135,7 +1132,6 @@ export default {
                 stompClient.subscribe("/topic/market/thumb", function (msg) {
                     var resp = JSON.parse(msg.body);
                     var coin = that.getCoin(resp.symbol);
-                    // console.log(coin);
                     if (coin != null) {
                         // coin.price = resp.close.toFixed(2);
                         coin.price = resp.close;
@@ -1151,7 +1147,6 @@ export default {
                         coin.low = resp.low;
                         coin.turnover = parseInt(resp.volume);
                     }
-                    // console.log('startWebsock');
                 });
             });
         },
@@ -1184,9 +1179,8 @@ export default {
             );
         },
         addClass(index) {
-            console.log(index, this.coins);
-
             this.choseBtn = index;
+            this.getSymbol();
             if (index == 0) {
                 this.dataIndex = this.coins.USDT;
             } else if (index == 1) {
@@ -1197,20 +1191,13 @@ export default {
                 this.dataIndex = this.coins.BC;
             } else if (index == 4) {
                 this.dataIndex = this.coins.favor;
-
-                // if (this.isLogin) {
-                //   this.dataIndex = this.coins.favor;
-                // } else {
-                //   this.$router.push("/login");
-                // }
             }
-            console.log(this.dataIndex);
         },
         getSymbol() {
             this.loading = true;
-            this.$http.post(this.host + this.api.market.thumbTrend, {}).then(response => {
+            this.coins.USDT=[];this.coins.BTC=[];this.coins.ETH=[];this.coins.BC=[];
+             this.$http.post(this.host + this.api.market.thumbTrend, {}).then(response => {
                 var resp = response.body;
-                // console.log(resp);
                 for (var i = 0; i < resp.length; i++) {
                     var coin = resp[i];
                     coin.price = resp[i].close;
@@ -1221,7 +1208,6 @@ export default {
                     coin.isFavor = false;
                     this.coins._map[coin.symbol] = coin;
                     this.coins[coin.base].push(coin);
-                    // console.log(coin.base, coin.href);
                 };
                 if (this.isLogin) {
                     this.getFavor();
@@ -1229,6 +1215,7 @@ export default {
                 this.startWebsock();
                 this.loading = false;
             });
+             
         },
         // getFavor() {
         //   //查询自选
