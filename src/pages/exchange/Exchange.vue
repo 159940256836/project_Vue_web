@@ -507,13 +507,17 @@
                     :columns="currentOrder.columns"
                     :data="currentOrder.rows"
                     :loading="currentLoading"
+                    @on-expand="onExpand"
                     :no-data-text="$t('common.nodata')"
-                ></Table>
+                >
+                </Table>
                 <Table
                     v-else
+                    ref="table"
                     :columns="historyOrder.columns"
                     :data="historyOrder.rows"
                     :loading="historyLoading"
+                    @on-expand="onExpand"
                     :no-data-text="$t('common.nodata')"
                 ></Table>
             </div>
@@ -767,7 +771,7 @@ $night-color: #fff;
                     font-size: 14px;
                     padding: 3px 5px;
                     border-radius: 5px;
-                    background: #161b25;
+                    background: transparent;
                     cursor: pointer;
                 }
             }
@@ -1353,6 +1357,8 @@ export default {
                 askRows: [],
                 bidRows: []
             },
+            historyTableData: [],
+            currentTableData: [],
             currentOrder: {
                 columns: [
                     {
@@ -1362,7 +1368,7 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: params.row.detail
+                                    rows: this.currentTableData
                                 }
                             });
                         }
@@ -1485,9 +1491,9 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: params.row.detail
+                                    rows: this.historyTableData
                                 }
-                            });
+                            })
                         }
                     },
 
@@ -1776,6 +1782,7 @@ export default {
         })
     },
     mounted: function () {
+        // console.log(this.tableData);
         // this.getCNYRate();
         // this.getSymbolScale();
         // this.getSymbol();
@@ -1806,6 +1813,7 @@ export default {
                 }
             })
         },
+
         // //金额只能为正整数
         // checkNum(element) {
         //     let val = element.value;
@@ -2183,7 +2191,7 @@ export default {
             }
             require(["@js/charting_library/charting_library.min.js"], function (tv) {
                 let widget = (window.tvWidget = new TradingView.widget(config));
-                console.log(widget);
+                // console.log(widget);
                 /*onChartReady 自定义初始化指标线（平均移动线等），设置颜色*/
                 widget.onChartReady(function () {
                     widget.chart().executeActionById("drawingToolbarAction");
@@ -3256,7 +3264,6 @@ export default {
                 }
             });
         },
-
         buyPlate(currentRow) {
             this.form.buy.limitPrice = currentRow.price;
             this.form.sell.limitPrice = currentRow.price;
@@ -3386,12 +3393,77 @@ export default {
                 }
             });
         },
+        // 币币订单详情
+        // 展开原生事件  点击左侧展收起
+        onExpand(row, status){
+            console.log(row, status);
+            if (this.selectedOrder==='current') {
+                if(status){
+                    this.currentOrder.rows.splice()
+                    this.currentOrder.rows.filter((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = true;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                    // this.historyTableData = this.TableData1
+                } else {
+                    this.currentTableData.splice()
+                    this.currentTableData.map((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = false;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                }
+            } else {
+                if(status){
+                    this.historyOrder.rows.splice()
+                    this.historyOrder.rows.filter((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = true;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                    // this.historyTableData = this.TableData1
+                } else {
+                    this.historyTableData.splice()
+                    this.historyTableData.map((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = false;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                }
+            }
+
+            return this.$http.post(this.host + this.api.exchange.orderDetails, {
+                orderId: row.orderId
+            }).then(res => {
+                const data = res.body;
+                if (data.code == 0) {
+                    console.log(data.data);
+                    if (this.selectedOrder==='current') {
+                        this.currentTableData = data.data
+                    } else {
+                        this.historyTableData = data.data
+                    }
+                }
+            })
+        },
         refreshAccount: function () {
             this.getCurrentOrder();
             this.getHistoryOrder();
             this.getWallet();
         },
-
         timeFormat: function (tick) {
             return moment(tick).format("HH:mm:ss");
         },

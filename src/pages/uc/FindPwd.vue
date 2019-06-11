@@ -83,10 +83,10 @@
     .wrap-mask {
         height:100%;
         width:100%;
-        background: rgba(0,0,0,.6);
+        background: rgba(0,0,0,.3);
     }
     .login_right {
-        background: url("../../assets/images/forget-pass.png") no-repeat center !important;
+        background: #fff url("../../assets/images/forget-pass.png") no-repeat center !important;
         padding: 20px 40px;
         position: absolute;
         background: #fff;
@@ -99,7 +99,7 @@
         // -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         // -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        border-top: 4px solid #3399ff;
+        /*border-top: 4px solid #3399ff;*/
         .tel-title {
             font-size: 25px;
         }

@@ -44,7 +44,6 @@ export default {
         }
     },
     created:function(){
-      // console.log(this.props, this.opts);
       this.opts.width = this.width || 120;
       this.opts.height = this.height || 50;
       this.opts.rose = this.rose || 0;
@@ -65,12 +64,8 @@ export default {
           return this.coords.join( );
       }
   },
-  mounted:function(){
-
-  },
   methods:{
       draw(){
-        // console.log(this.values);
         let opts = this.opts;
         let values = this.values;
         if (values.length == 1) values.push(values[0])

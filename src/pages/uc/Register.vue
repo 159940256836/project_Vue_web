@@ -144,10 +144,10 @@
     .wrap-mask {
         height:100%;
         width:100%;
-        background: rgba(0,0,0,.6);
+        background: rgba(0,0,0,.3);
     }
     .login_right {
-        background: url("../../assets/images/register.png") no-repeat center !important;
+        background: #fff url("../../assets/images/register.png") no-repeat center !important;
         padding: 0 42px;
         position: absolute;
         background: #fff;
@@ -159,7 +159,7 @@
         margin-left: -175px;
         margin-top: -255px;
         // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        border-top: 4px solid #3399ff;
+        /*border-top: 4px solid #3399ff;*/
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 .ivu-form-item-content {
