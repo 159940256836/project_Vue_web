@@ -21,11 +21,23 @@
       <p class="pp2">2.3.{{$t("foot.p285")}}</p>
       <p class="pp2">2.4.{{$t("foot.p286")}}</p>
       <p class="pp1">{{$t("foot.p287")}}</p>
-      <p class="pp2">3.1{{$t("foot.p288")}}。</p>
+      <p class="pp2">3.1{{$t("foot.p288")}}</p>
       <p class="pp2">3.2{{$t("foot.p289")}}</p>
       <p class="pp2">3.3{{$t("foot.p290")}}</p>
       <p class="pp2">3.4{{$t("foot.p291")}}</p>
-      <p class="pp2">4.5{{$t("foot.p292")}}</p>
+      <p class="pp2">3.5{{$t("foot.p292")}}</p>
+      <p class="pp2">3.6{{$t("foot.p293")}}</p>
+      <p class="pp2">3.7{{$t("foot.p294")}}</p>
+      <p class="pp1">{{$t("foot.p295")}}</p>
+      <p class="pp2">{{$t("foot.p296")}}</p>
+      <p class="pp2">i.{{$t("foot.p297")}}</p>
+      <p class="pp2">ii.{{$t("foot.p298")}}</p>
+      <p class="pp2">iii.{{$t("foot.p299")}}</p>
+      <p class="pp2">iv.{{$t("foot.p300")}}</p>
+      <p class="pp2">v.{{$t("foot.p301")}}</p>
+      <p class="pp2">{{$t("foot.p302")}}</p>
+      <p class="pp1">{{$t("foot.p303")}}</p>
+      <p class="pp2">{{$t("foot.p304")}}</p>
     </div>
   </div>
 </template>
