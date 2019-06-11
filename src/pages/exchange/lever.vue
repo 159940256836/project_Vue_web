@@ -447,14 +447,14 @@
                 >
                     {{$t('exchange.hisdelegation')}}</span>
                 <div class="single">
-                    <!--<span
+                    <span
                         v-if="currentOrder.rows.length > 0 && selectedOrder === 'current'"
                         class="repeal"
                         @click="repeal()"
                     >
-                        &lt;!&ndash;撤销全部委单&ndash;&gt;
+                        <!--撤销全部委单-->
                         {{$t('exchange.curdelRepealAll')}}
-                    </span>-->
+                    </span>
                     <router-link
                         v-show="selectedOrder==='current'"
                         class="linkmore"
@@ -478,6 +478,7 @@
                     :columns="currentOrder.columns"
                     :data="currentOrder.rows"
                     :loading="currentLoading"
+                    @on-expand="onExpand"
                     :no-data-text="$t('common.nodata')"
                 ></Table>
                 <Table
@@ -485,6 +486,7 @@
                     :columns="historyOrder.columns"
                     :data="historyOrder.rows"
                     :loading="historyLoading"
+                    @on-expand="onExpand"
                     :no-data-text="$t('common.nodata')"
                 ></Table>
             </div>
@@ -1343,6 +1345,8 @@ export default {
                 askRows: [],
                 bidRows: []
             },
+            historyTableData: [],
+            currentTableData: [],
             currentOrder: {
                 columns: [
                     {
@@ -1352,7 +1356,7 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: params.row.detail
+                                    rows: this.currentTableData
                                 }
                             });
                         }
@@ -1466,7 +1470,7 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: params.row.detail
+                                    rows: this.historyTableData
                                 }
                             });
                         }
@@ -3337,24 +3341,88 @@ export default {
             // });
         },
         // // 一键撤单
-        // repeal () {
-        //     this.$Modal.confirm({
-        //         content: this.$t("exchange.undotip"),
-        //         onOk: () => {
-        //             this.$http.post(this.host + this.api.exchange.orderCancelAll).then(response => {
-        //                 let resp = response.body;
-        //                 if (resp.code == 0) {
-        //                     this.refreshAccount();
-        //                 } else {
-        //                     this.$Notice.error({
-        //                         title: this.$t("exchange.tip"),
-        //                         desc: resp.message
-        //                     });
-        //                 }
-        //             });
-        //         }
-        //     });
-        // },
+        repeal () {
+            this.$Modal.confirm({
+                content: this.$t("exchange.undotip"),
+                onOk: () => {
+                    this.$http.post(this.host + this.api.exchange.orderCancelAll).then(response => {
+                        let resp = response.body;
+                        if (resp.code == 0) {
+                            this.refreshAccount();
+                        } else {
+                            this.$Notice.error({
+                                title: this.$t("exchange.tip"),
+                                desc: resp.message
+                            });
+                        }
+                    });
+                }
+            });
+        },
+        // 币币订单详情
+        // 展开原生事件  点击左侧展收起
+        onExpand(row, status){
+            if (this.selectedOrder==='current') {
+                if(status){
+                    this.currentOrder.rows.splice()
+                    this.currentOrder.rows.filter((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = true;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                } else {
+                    this.currentTableData.splice()
+                    this.currentTableData.map((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = false;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                }
+            } else {
+                if(status){
+                    this.historyOrder.rows.splice()
+                    this.historyOrder.rows.filter((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = true;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                    // this.historyTableData = this.TableData1
+                } else {
+                    this.historyTableData.splice()
+                    this.historyTableData.map((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = false;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                }
+            }
+
+            return this.$http.post(this.host + this.api.exchange.orderDetails, {
+                orderId: row.orderId
+            }).then(res => {
+                const data = res.body;
+                if (data.code == 0) {
+                    console.log(data.data);
+                    if (this.selectedOrder==='current') {
+                        this.currentTableData = data.data
+                    } else {
+                        this.historyTableData = data.data
+                    }
+                }
+            })
+        },
         refreshAccount() {
             this.getCurrentOrder();
             this.getHistoryOrder();

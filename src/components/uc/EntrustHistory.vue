@@ -47,9 +47,6 @@
     }
 }
 </style>
-
-
-
 <template>
     <div class="entrusthistory">
         <Form class="form" :model="formItem" :label-width="60" inline>
@@ -83,6 +80,7 @@
                 :columns="columns"
                 :data="orders"
                 :loading="loading"
+                @on-expand="onExpand"
             ></Table>
             <div class="page">
                 <Page
@@ -121,7 +119,8 @@ export default {
                 date: ""
             },
 
-            orders: []
+            orders: [],
+            historyTableData: []
         };
     },
     created() {
@@ -192,6 +191,40 @@ export default {
                     this.loading = false;
                 });
         },
+        // 币币订单详情
+        // 展开原生事件  点击左侧展收起
+        onExpand(row, status){
+            if(status){
+                this.orders.splice()
+                this.orders.filter((item, index)=>{
+                    if(item.orderId == row.orderId){
+                        item._expanded = true;   //展开选中的行
+                    }else{
+                        item._expanded = false;   //其他行关闭
+                    }
+                    return item;
+                });
+            } else {
+                this.historyTableData.splice()
+                this.historyTableData.map((item, index)=>{
+                    if(item.orderId == row.orderId){
+                        item._expanded = false;   //展开选中的行
+                    }else{
+                        item._expanded = false;   //其他行关闭
+                    }
+                    return item;
+                });
+            }
+
+            return this.$http.post(this.host + this.api.exchange.orderDetails, {
+                orderId: row.orderId
+            }).then(res => {
+                const data = res.body;
+                if (data.code == 0) {
+                    this.historyTableData = data.data
+                }
+            })
+        },
         getSymbol() {
             this.$http.post(this.host + this.api.market.thumb, {}).then(response => {
                 var resp = response.body;
@@ -222,7 +255,7 @@ export default {
                     return h(expandRow, {
                         props: {
                             skin: params.row.skin,
-                            rows: params.row.detail
+                            rows: this.historyTableData
                         }
                     });
                 }

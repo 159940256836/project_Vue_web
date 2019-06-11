@@ -507,6 +507,7 @@
                     :columns="currentOrder.columns"
                     :data="currentOrder.rows"
                     :loading="currentLoading"
+                    @on-expand="onExpand"
                     :no-data-text="$t('common.nodata')"
                 >
                 </Table>
@@ -516,7 +517,7 @@
                     :columns="historyOrder.columns"
                     :data="historyOrder.rows"
                     :loading="historyLoading"
-                    @on-expand="getOrderDetails"
+                    @on-expand="onExpand"
                     :no-data-text="$t('common.nodata')"
                 ></Table>
             </div>
@@ -1356,9 +1357,8 @@ export default {
                 askRows: [],
                 bidRows: []
             },
-            arr: [],
-            expands: [],
-            isEdit: '',
+            historyTableData: [],
+            currentTableData: [],
             currentOrder: {
                 columns: [
                     {
@@ -1368,7 +1368,7 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: this.arr
+                                    rows: this.currentTableData
                                 }
                             });
                         }
@@ -1491,14 +1491,9 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: this.arr
-                                },
-                                nativeOn: {
-                                    click: () => {
-                                      this.getOrderDetails(params.index)
-                                    }
-                                },
-                            });
+                                    rows: this.historyTableData
+                                }
+                            })
                         }
                     },
 
@@ -1787,6 +1782,7 @@ export default {
         })
     },
     mounted: function () {
+        // console.log(this.tableData);
         // this.getCNYRate();
         // this.getSymbolScale();
         // this.getSymbol();
@@ -3398,71 +3394,70 @@ export default {
             });
         },
         // 币币订单详情
-        rowClassName(row, index) {
-            console.log(row, row.orderId, status);
-            // if(status){
-            //     this.arr.splice()
-            //     this.arr.filter((item, index)=>{
-            //         if(item.id == row.id){
-            //             item._expanded = true;   //展开选中的行
-            //             // this.$set(item, "_text", "收起所有经停站")
-            //             item._text = "收起所有经停站"
-            //         }else{
-            //             item._expanded = false;   //其他行关闭
-            //             item._text = "查看所有经停站"
-            //         }
-            //         return item;
-            //     });
-            //     this.arr = this.arr
-            // }
-        },
-        getOrderDetails(row, index) {
-            console.log(row, row.orderId, index);
+        // 展开原生事件  点击左侧展收起
+        onExpand(row, status){
+            console.log(row, status);
+            if (this.selectedOrder==='current') {
+                if(status){
+                    this.currentOrder.rows.splice()
+                    this.currentOrder.rows.filter((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = true;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                    // this.historyTableData = this.TableData1
+                } else {
+                    this.currentTableData.splice()
+                    this.currentTableData.map((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = false;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                }
+            } else {
+                if(status){
+                    this.historyOrder.rows.splice()
+                    this.historyOrder.rows.filter((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = true;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                    // this.historyTableData = this.TableData1
+                } else {
+                    this.historyTableData.splice()
+                    this.historyTableData.map((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = false;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                }
+            }
+
             return this.$http.post(this.host + this.api.exchange.orderDetails, {
                 orderId: row.orderId
             }).then(res => {
                 const data = res.body;
                 if (data.code == 0) {
                     console.log(data.data);
-                    // this.arr = data.data
-                    if (index) {
-                        this.currentOrder.rows.splice()
-                        this.currentOrder.rows.filter((item, index)=>{
-                            console.log(item, index);
-                            if(item.orderId == row.orderId){
-                                console.log(item.orderId, row.orderId);
-                                item._expanded = false
-                            } else {
-                                item._expanded = false;
-                            }
-                            return item;
-                        })
-                        this.arr = data.data
+                    if (this.selectedOrder==='current') {
+                        this.currentTableData = data.data
+                    } else {
+                        this.historyTableData = data.data
                     }
                 }
             })
-            // if (status) {
-            //     console.log(this.arr.splice());
-            //     this.arr.filter((item, index)=>{
-            //         console.log(item, index);
-            //         // if(item.id == row.id){
-            //         //
-            //         // }
-            //     })
-            // }
-            // this.currentOrder.columns.splice();
-            // this.currentOrder.columns[this.arr].isEdit=0;
-            // this.currentOrder.columns[this.arr]._expanded = false;
-            // let order = this.arr[index];
-            // console.log(index, order);
-            // return this.$http.post(this.host + this.api.exchange.orderDetails, {
-            //     orderId: index.orderId
-            // }).then(res => {
-            //     const data = res.body;
-            //     if (data.code == 0) {
-            //         this.arr[index] = data.data
-            //     }
-            // })
         },
         refreshAccount: function () {
             this.getCurrentOrder();
