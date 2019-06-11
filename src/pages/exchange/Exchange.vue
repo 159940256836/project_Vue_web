@@ -477,7 +477,7 @@
                 </span>
                 <div class="single">
                     <span
-                        v-if="currentOrder.rows.length > 0 && selectedOrder === 'current'"
+                        v-if="currentOrder.rows.length > 2 && selectedOrder === 'current'"
                         class="repeal"
                         @click="repeal()"
                     >
@@ -3529,3 +3529,4 @@ export default {
     }
 };
 </script>
+

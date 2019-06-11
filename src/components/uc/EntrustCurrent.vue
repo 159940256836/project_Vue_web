@@ -81,7 +81,7 @@
       </FormItem>
       <div style="margin-bottom: 22px;">
         <Button
-          v-if="orders.length > 0"
+          v-if="orders.length > 2"
           type="primary"
           @click="repeal()"
         >
