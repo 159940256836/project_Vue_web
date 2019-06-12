@@ -9,7 +9,7 @@
               <i class="iconfont icon-hongjiantou"></i>
             </h6>
             <p>{{$t('otc.publishad.msg1')}}
-              <router-link to="/otc/trade/usdt">{{$t('otc.publishad.tradead')}}</router-link>
+              <router-link to="/otc/trade/bc">{{$t('otc.publishad.tradead')}}</router-link>
               。
             </p>
             <p>{{$t('otc.publishad.msg2')}}{{$t('otc.publishad.msg3')}}。</p>

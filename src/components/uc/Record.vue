@@ -24,16 +24,15 @@
                         <Select
                             v-model="coinType"
                             style="width:100px;margin-right:30px;"
-                            @on-change="getAddrList"
                             clearable
                             :placeholder="$t('header.choose')"
                         >
                             <Option
                                 v-for="item in coinList"
-                                :value="item.unit"
-                                :key="item.unit"
+                                :value="item.coin.unit"
+                                :key="item.coin.unit"
                             >
-                                {{ item.unit }}
+                                {{ item.coin.unit }}
                             </Option>
                         </Select>
                         <span>
@@ -43,7 +42,6 @@
                             v-model="recordValue"
                             clearable
                             style="width:200px"
-                            @on-change="getType"
                             :placeholder="$t('header.choose')"
                         >
                             <Option
@@ -202,22 +200,17 @@ export default {
             }
         },
         getAddrList() {
-            //获取地址
+            //获取个人资产币种
             this.$http
-                .post(this.host + "/uc/withdraw/support/coin/info")
+                .post(this.host + "/uc/asset/wallet/")
                 .then(response => {
                     var resp = response.body;
-                    if (resp.code == 0 && resp.data.length > 0) {
+                    if (resp.code == 0) {
                         this.coinList = resp.data;
-                        if (this.coinType) {
-                            this.coinType = this.coinType;
-                        }
                     } else {
                         this.$Message.error(resp.message);
                     }
                 });
-        },
-        getType() {
         },
         dateform(time) {
             var date = new Date(time);
@@ -328,7 +321,7 @@ export default {
                                 title: params.row.amount
                             }
                         },
-                        Math.abs(that.toFloor(params.row.amount)) || 0
+                        that.toFloor(params.row.amount) || 0
                     );
                 }
             });

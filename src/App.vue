@@ -16,7 +16,7 @@
                     <div class="nav" :class="locale == 'en' ? 'en' : ''">
                         <!-- <router-link to="/">{{$t("header.index")}}</router-link> -->
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
-                        <router-link to="/otc/trade/usdt">{{$t("header.otc")}}</router-link>
+                        <router-link to="/otc/trade/bc">{{$t("header.otc")}}</router-link>
                          <!--<router-link to="/leverindex">{{$t("header.lever")}}</router-link>-->
                           <router-link to="/Ieo">{{$t('header.asset')}}</router-link>
                         <!-- <router-link to="/help">帮助</router-link> -->
@@ -108,11 +108,18 @@
                     <div class="footer-main">
                         <div class="footer_left">
                             <img src="./assets/images/logo.png" style="margin:0"></img>
-                            <div>
-                                <img src="./assets/images/in.png" alt="">
-                                <img src="./assets/images/twitter.png" alt="">
-                                <img src="./assets/images/telegram.png" alt="">
-                                <img src="./assets/images/facebook.png" alt="">
+                            <div class="left-icon">
+                                <a href="http://www.service@coinmany.com">
+                                    <img src="./assets/images/twitter.png" alt="">
+                                </a>
+                                <div class="qrcode">
+                                    <img src="./assets/images/facebook.png" alt="">
+                                    <div id="facebook"></div>
+                                </div>
+                                <div class="qrcode1">
+                                    <img src="./assets/images/telegram.png" alt="">
+                                    <div id="facebook1"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="footer_right">
@@ -341,6 +348,7 @@ export default {
             this.locale = newVal;
         },
         $route(to, from) {
+            console.log(to);
             this.pathName = to.path
             if (this.pathName == '/login'||this.pathName == '/register') {
                 this.pathNameState = false
@@ -398,6 +406,23 @@ export default {
         } else {
             this.pageView = "page-view2";
         }
+        this.$nextTick(() => {
+            const link = 16604775806;
+            new QRCode(document.getElementById("facebook"), {
+                text: link,
+                width: 100,
+                height: 100,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+            });
+            new QRCode(document.getElementById("facebook1"), {
+                text: link,
+                width: 100,
+                height: 100,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+            });
+        })
     },
     methods: {
         // header动画效果
@@ -1143,8 +1168,7 @@ body {
 
 .footer {
     min-width: 1260px;
-    height: 400px;
-    overflow: hidden;
+    padding-top: 1px;
     color: #53575c;
     background: #1c2435;
     .footer_content {
@@ -1161,6 +1185,50 @@ body {
                 p {
                     margin: 10px 0;
                     color: rgba(255, 255, 255, 0.6);
+                }
+                .left-icon {
+                    a, div {
+                        margin-right: 10px;
+                        font-size: 14px;
+                        color: #fff;
+                        float: left;
+                    }
+                    .qrcode {
+                        cursor: pointer;
+                        position: relative;
+                        #facebook {
+                            background: #eee;
+                            position: absolute;
+                            top: -125px;
+                            left: 0;
+                            display: none;
+                            z-index: 9;
+                            width: 126px;
+                            text-align: center;
+                            padding: 0 13px;
+                        }
+                    }
+                    .qrcode1 {
+                        cursor: pointer;
+                        position: relative;
+                        #facebook1 {
+                            background: #eee;
+                            position: absolute;
+                            top: -125px;
+                            left: 0;
+                            display: none;
+                            z-index: 9;
+                            width: 126px;
+                            text-align: center;
+                            padding: 0 13px;
+                        }
+                    }
+                    .qrcode:hover #facebook{
+                        display: block;
+                    }
+                    .qrcode1:hover #facebook1{
+                        display: block;
+                    }
                 }
             }
             .footer_right {

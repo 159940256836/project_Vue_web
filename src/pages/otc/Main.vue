@@ -11,10 +11,18 @@
       </div>
       <div class="fiat-main">
         <div class="content">
-          <Menu ref="navMenu" mode="horizontal" width="auto" :active-name="activeMenuName" @on-select="menuSelected" class='tradelist'>
+          <Menu
+            ref="navMenu"
+            mode="horizontal"
+            width="auto"
+            :active-name="activeMenuName"
+            @on-select="menuSelected"
+            class='tradelist'
+          >
             <MenuGroup>
-              <template v-for="(coin,index) in coins">
-                <MenuItem :name="'coin-'+index"> {{coin.unit}}
+              <template v-for="(coin, index) in coins">
+                <MenuItem :name="'coin-' + index">
+                  {{ coin.unit }}
                 </MenuItem>
               </template>
             </MenuGroup>
@@ -225,8 +233,10 @@ export default {
       }
     },
     activeMenu() {
-      let coin = this.$route.params[0] || "USDT";
+      console.log(this.$route.params);
+      let coin = this.$route.params[0] || "BC";
       coin = coin.toUpperCase();
+      console.log(coin);
       switch (coin) {
         case "BTC":
          // this.activeMenuName = "coin-0";
@@ -239,6 +249,10 @@ export default {
         case "ETH":
         //  this.activeMenuName = "coin-2";
          this.activeMenuName = "ETH";
+          break;
+        case "BC":
+          //  this.activeMenuName = "coin-2";
+          this.activeMenuName = "BC";
           break;
         default:
         //  this.activeMenuName = "coin-1";

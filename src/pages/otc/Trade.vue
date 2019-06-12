@@ -1078,7 +1078,8 @@ export default {
             }
           }
         ]
-      }
+      },
+      coinData: "",
     };
   },
   computed: {
@@ -1115,7 +1116,16 @@ export default {
       // this.advertiment.columns[2].title = this.$t("otc.price_coin");
       this.advertiment.columns[6].title = this.$t("otc.operate");
     },
+    getMethodCurrency () {
+       return this.$http.post(this.host + this.api.otc.coin).then(response => {
+        if (response.body.code == 0) {
+          this.coinData = response.body.data[0].unit;
+          // console.log(this.coinData, response.body.data[0].unit);
+        }
+      });
+    },
     loadAd(pageNo, advertiseType, table) {
+      console.log(this.coin);
       //获取广告
       let params = {};
       table.rows = [];
@@ -1124,10 +1134,10 @@ export default {
       params["pageNo"] = pageNo;
       params["pageSize"] = table.pageNumber;
       params["advertiseType"] = advertiseType;
-      params["unit"] = this.coin;
-      //unit
-      if(params.unit==undefined){
-          params.unit="usdt";
+      params["unit"] = this.coin
+      if (params.unit == undefined) {
+        console.log(0);
+        params["unit"] = this.coinData;
       }
       this.$http
         .post(this.host + this.api.otc.advertise, params)
@@ -1154,8 +1164,10 @@ export default {
     },
     reloadAd() {
       // this.tabPage = "buy";
-      this.loadAd(1, 0, this.advertiment.bid);
-      this.loadAd(1, 1, this.advertiment.ask);
+      this.getMethodCurrency().then(()=>{
+        this.loadAd(1, 0, this.advertiment.bid)
+        this.loadAd(1, 1, this.advertiment.ask);
+      })
     },
     strpro(str) {
       let newStr = str;
@@ -1172,6 +1184,7 @@ export default {
     }
   },
   created() {
+    this.getMethodCurrency();
     this.reloadAd();
   }
 };
