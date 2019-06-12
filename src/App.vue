@@ -120,6 +120,12 @@
                                     <img src="./assets/images/telegram.png" alt="">
                                     <div id="facebook1"></div>
                                 </div>
+                                <div class="qrcode2">
+                                    <img src="./assets/images/wechar.png" alt="">
+                                    <div id="facebook2">
+                                        <img src="./assets/images/wachar_qc.jpg" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="footer_right">
@@ -231,7 +237,9 @@
                                 </li>
                                 <li>
                                     <!-- 微信客服号：客服1:biduokefu1 客服2:biduokefu2 -->
-                                    <a href="javascript:;">{{$t("footer.WeChatcustomervi")}}：{{$t("footer.Customvic")}}:biduokefu1 &nbsp;&nbsp; {{$t("footer.Customervic")}}:biduokefu2</a>
+                                    <a href="javascript:;">{{$t("footer.WeChatcustomervi")}}：{{$t("footer.Customvic")}}:biduokefu1
+<!--                                        &nbsp;&nbsp; {{$t("footer.Customervic")}}:biduokefu2-->
+                                    </a>
                                 </li>
 
                             </ul>
@@ -1223,10 +1231,30 @@ body {
                             padding: 0 13px;
                         }
                     }
+                    .qrcode2 {
+                        cursor: pointer;
+                        position: relative;
+                        #facebook2 {
+                            position: absolute;
+                            top: -125px;
+                            left: 0;
+                            display: none;
+                            z-index: 9;
+                            width: 126px;
+                            text-align: center;
+                            padding: 0 13px;
+                            img {
+                                width: 120px;
+                            }
+                        }
+                    }
                     .qrcode:hover #facebook{
                         display: block;
                     }
                     .qrcode1:hover #facebook1{
+                        display: block;
+                    }
+                    .qrcode2:hover #facebook2{
                         display: block;
                     }
                 }
