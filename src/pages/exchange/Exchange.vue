@@ -477,7 +477,7 @@
                 </span>
                 <div class="single">
                     <span
-                        v-if="currentOrder.rows.length > 0 && selectedOrder === 'current'"
+                        v-if="currentOrder.rows.length > 2 && selectedOrder === 'current'"
                         class="repeal"
                         @click="repeal()"
                     >
@@ -507,8 +507,8 @@
                     :columns="currentOrder.columns"
                     :data="currentOrder.rows"
                     :loading="currentLoading"
+                    @on-expand="onExpand"
                     :no-data-text="$t('common.nodata')"
-                    @on-expand="getOrderDetails"
                 >
                 </Table>
                 <Table
@@ -517,6 +517,7 @@
                     :columns="historyOrder.columns"
                     :data="historyOrder.rows"
                     :loading="historyLoading"
+                    @on-expand="onExpand"
                     :no-data-text="$t('common.nodata')"
                 ></Table>
             </div>
@@ -1356,8 +1357,8 @@ export default {
                 askRows: [],
                 bidRows: []
             },
-            arr: [],
-            expands: [],
+            historyTableData: [],
+            currentTableData: [],
             currentOrder: {
                 columns: [
                     {
@@ -1367,14 +1368,8 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: this.arr
-                                },
-                                class:"rrr"
-                                // nativeOn: {
-                                //     click: (e) => {
-                                //         this.getOrderDetails(params.index)
-                                //     }
-                                // },
+                                    rows: this.currentTableData
+                                }
                             });
                         }
                     },
@@ -1497,15 +1492,9 @@ export default {
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
-                                    rows: this.arr
-                                },
-                                nativeOn: {
-                                    click: (e) => {
-                                        console.log(e)
-                                      this.getOrderDetails(params.index)
-                                    }
-                                },
-                            });
+                                    rows: this.historyTableData
+                                }
+                            })
                         }
                     },
 
@@ -1794,6 +1783,7 @@ export default {
         })
     },
     mounted: function () {
+        // console.log(this.tableData);
         // this.getCNYRate();
         // this.getSymbolScale();
         // this.getSymbol();
@@ -3405,15 +3395,76 @@ export default {
             });
         },
         // 币币订单详情
+<<<<<<< HEAD
         getOrderDetails(index,status) {            
             $(".rrr").parent().parent().hide();
             console.log(index,status,this)
              this.$http.post(this.host + this.api.exchange.orderDetails, {
                 orderId: index.orderId
+=======
+        // 展开原生事件  点击左侧展收起
+        onExpand(row, status){
+            console.log(row, status);
+            if (this.selectedOrder==='current') {
+                if(status){
+                    this.currentOrder.rows.splice()
+                    this.currentOrder.rows.filter((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = true;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                    // this.historyTableData = this.TableData1
+                } else {
+                    this.currentTableData.splice()
+                    this.currentTableData.map((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = false;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                }
+            } else {
+                if(status){
+                    this.historyOrder.rows.splice()
+                    this.historyOrder.rows.filter((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = true;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                    // this.historyTableData = this.TableData1
+                } else {
+                    this.historyTableData.splice()
+                    this.historyTableData.map((item, index)=>{
+                        if(item.orderId == row.orderId){
+                            item._expanded = false;   //展开选中的行
+                        }else{
+                            item._expanded = false;   //其他行关闭
+                        }
+                        return item;
+                    });
+                }
+            }
+
+            return this.$http.post(this.host + this.api.exchange.orderDetails, {
+                orderId: row.orderId
+>>>>>>> 015113ce7504733664e9dd605efe650392e405ef
             }).then(res => {
                 const data = res.body;
                 if (data.code == 0) {
-                    this.arr = data.data
+                    console.log(data.data);
+                    if (this.selectedOrder==='current') {
+                        this.currentTableData = data.data
+                    } else {
+                        this.historyTableData = data.data
+                    }
                 }
             })
         },
@@ -3487,3 +3538,4 @@ export default {
     }
 };
 </script>
+

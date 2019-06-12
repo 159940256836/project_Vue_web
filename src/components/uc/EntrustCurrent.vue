@@ -81,7 +81,7 @@
       </FormItem>
       <div style="margin-bottom: 22px;">
         <Button
-          v-if="orders.length > 0"
+          v-if="orders.length > 2"
           type="primary"
           @click="repeal()"
         >
@@ -107,6 +107,7 @@
         :columns="columns"
         :data="orders"
         :loading="loading"
+        @on-expand="onExpand"
       ></Table>
       <div class="page">
         <Page
@@ -158,7 +159,8 @@ export default {
         direction: "",
         date: ""
       },
-      orders: []
+      orders: [],
+      currentTableData: []
     };
   },
   watch: {
@@ -195,6 +197,41 @@ export default {
         direction: "",
         date: ""
       };
+    },
+    // 币币订单详情
+    // 展开原生事件  点击左侧展收起
+    onExpand(row, status){
+      if(status){
+        this.orders.splice()
+        this.orders.filter((item, index)=>{
+          if(item.orderId == row.orderId){
+            item._expanded = true;   //展开选中的行
+          }else{
+            item._expanded = false;   //其他行关闭
+          }
+          return item;
+        });
+        // this.historyTableData = this.TableData1
+      } else {
+        this.currentTableData.splice()
+        this.currentTableData.map((item, index)=>{
+          if(item.orderId == row.orderId){
+            item._expanded = false;   //展开选中的行
+          }else{
+            item._expanded = false;   //其他行关闭
+          }
+          return item;
+        });
+      }
+
+      return this.$http.post(this.host + this.api.exchange.orderDetails, {
+        orderId: row.orderId
+      }).then(res => {
+        const data = res.body;
+        if (data.code == 0) {
+          this.currentTableData = data.data
+        }
+      })
     },
     getCurrentOrder() {
       //查询当前委托
@@ -301,7 +338,7 @@ export default {
           return h(expandRow, {
             props: {
               skin: params.row.skin,
-              rows: params.row.detail
+              rows: this.currentTableData
             }
           });
         }

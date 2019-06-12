@@ -143,10 +143,10 @@ $primary-color: #3399ff;
     .wrap-mask {
         height:100%;
         width:100%;
-        background: rgba(0,0,0,.6);
+        background: rgba(0,0,0,.3);
     }
     .login_right {
-        background: url("../../assets/images/login-watermark.png") no-repeat center !important;
+        background: #fff url("../../assets/images/login-watermark.png") no-repeat center !important;
         padding: 0 30px 0 45px;
         position: absolute;
         background: #fff;
@@ -157,7 +157,7 @@ $primary-color: #3399ff;
         margin-left: -381px;
         margin-top: -220px;
         // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        border-top: 4px solid $primary-color;
+        /*border-top: 4px solid $primary-color;*/
         .left-login {
             width: 50%;
             height: 100%;
