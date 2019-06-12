@@ -507,8 +507,8 @@
                     :columns="currentOrder.columns"
                     :data="currentOrder.rows"
                     :loading="currentLoading"
-                    @on-expand="getOrderDetails"
                     :no-data-text="$t('common.nodata')"
+                    @on-expand="getOrderDetails"
                 >
                 </Table>
                 <Table
@@ -517,7 +517,6 @@
                     :columns="historyOrder.columns"
                     :data="historyOrder.rows"
                     :loading="historyLoading"
-                    @on-expand="getOrderDetails"
                     :no-data-text="$t('common.nodata')"
                 ></Table>
             </div>
@@ -1370,11 +1369,12 @@ export default {
                                     skin: params.row.skin,
                                     rows: this.arr
                                 },
-                                nativeOn: {
-                                    click: () => {
-                                        this.getOrderDetails(params.index)
-                                    }
-                                },
+                                class:"rrr"
+                                // nativeOn: {
+                                //     click: (e) => {
+                                //         this.getOrderDetails(params.index)
+                                //     }
+                                // },
                             });
                         }
                     },
@@ -1493,13 +1493,15 @@ export default {
                         type: "expand",
                         width: 40,
                         render: (h, params) => {
+                            // console.log(params);
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
                                     rows: this.arr
                                 },
                                 nativeOn: {
-                                    click: () => {
+                                    click: (e) => {
+                                        console.log(e)
                                       this.getOrderDetails(params.index)
                                     }
                                 },
@@ -2200,7 +2202,7 @@ export default {
             }
             require(["@js/charting_library/charting_library.min.js"], function (tv) {
                 let widget = (window.tvWidget = new TradingView.widget(config));
-                console.log(widget);
+                // console.log(widget);
                 /*onChartReady 自定义初始化指标线（平均移动线等），设置颜色*/
                 widget.onChartReady(function () {
                     widget.chart().executeActionById("drawingToolbarAction");
@@ -2424,7 +2426,7 @@ export default {
                     this.coins[coin.base].push(coin);
                     if (coin.symbol == this.currentCoin.symbol) {
                         this.currentCoin = coin;
-                        console.log(this.currentCoin)
+                        // console.log(this.currentCoin)
                         this.form.buy.limitPrice = this.form.sell.limitPrice = coin.price;
                     }
                 }
@@ -3403,9 +3405,10 @@ export default {
             });
         },
         // 币币订单详情
-        getOrderDetails(index) {
-            console.log(index.orderId);
-            return this.$http.post(this.host + this.api.exchange.orderDetails, {
+        getOrderDetails(index,status) {            
+            $(".rrr").parent().parent().hide();
+            console.log(index,status,this)
+             this.$http.post(this.host + this.api.exchange.orderDetails, {
                 orderId: index.orderId
             }).then(res => {
                 const data = res.body;

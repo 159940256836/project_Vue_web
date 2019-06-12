@@ -224,7 +224,7 @@
                                 </li>
                                 <li>
                                     <!-- 微信客服号：客服1:biduokefu1 客服2:biduokefu2 -->
-                                    <a href="javascript:;">{{$t("footer.WeChatcustomervi")}}：{{$t("footer.Customvic")}}:biduokefu1 &nbsp;&nbsp; {{$t("footer.Customervic")}}:biduokefu2</a>
+                                    <a href="javascript:;">{{$t("footer.WeChatcustomervi")}}:biduokefu1</a>
                                 </li>
 
                             </ul>
