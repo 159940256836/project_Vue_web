@@ -1488,6 +1488,7 @@ export default {
                         type: "expand",
                         width: 40,
                         render: (h, params) => {
+                            // console.log(params);
                             return h(expandRow, {
                                 props: {
                                     skin: params.row.skin,
@@ -2415,7 +2416,7 @@ export default {
                     this.coins[coin.base].push(coin);
                     if (coin.symbol == this.currentCoin.symbol) {
                         this.currentCoin = coin;
-                        console.log(this.currentCoin)
+                        // console.log(this.currentCoin)
                         this.form.buy.limitPrice = this.form.sell.limitPrice = coin.price;
                     }
                 }

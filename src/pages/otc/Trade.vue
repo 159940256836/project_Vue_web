@@ -1079,7 +1079,7 @@ export default {
           }
         ]
       },
-      coinData: "",
+      coinData: ""
     };
   },
   computed: {
@@ -1136,13 +1136,11 @@ export default {
       params["advertiseType"] = advertiseType;
       params["unit"] = this.coin
       if (params.unit == undefined) {
-        console.log(0);
         params["unit"] = this.coinData;
       }
       this.$http
         .post(this.host + this.api.otc.advertise, params)
         .then(response => {
-
           var resp = response.body;
           if (resp.code == 0) {
             if (resp.data.context) {
@@ -1186,6 +1184,10 @@ export default {
   created() {
     this.getMethodCurrency();
     this.reloadAd();
+  },
+  mounted(){
+    this.getMethodCurrency();
+    console.log(this.coinsData);
   }
 };
 </script>
