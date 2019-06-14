@@ -157,8 +157,8 @@ export default {
             loading: false,
             ordKeyword: "",
             rangeDate: "",
-            startTime: "",
-            endTime: "",
+            startDate: "",
+            endDate: "",
             select:'select',
             recordValue: "",
             // recordType: [...map.values()],
@@ -177,8 +177,8 @@ export default {
     methods: {
         changedate() {
             if (this.rangeDate[0]) {
-                this.startTime = this.dateform(this.rangeDate[0]);
-                this.endTime = this.dateform(this.rangeDate[1]);
+                this.startDate = this.dateform(this.rangeDate[0]);
+                this.endDate = this.dateform(this.rangeDate[1]);
             }
         },
         changePage(pageindex) {
@@ -232,12 +232,12 @@ export default {
             let memberId = 0;
             !this.$store.getters.isLogin && this.$router.push("/login");
             this.$store.getters.isLogin && (memberId = this.$store.getters.member.id);
-            let startTime = "";
-            let endTime = "";
+            let startDate = "";
+            let endDate = "";
             let symbol = "";
             let type = "";
-            this.startTime && (startTime = this.startTime);
-            this.endTime && (endTime = this.endTime);
+            this.startDate && (startDate = this.startDate);
+            this.endDate && (endDate = this.endDate);
             this.coinType && (symbol = this.coinType);
             if (this.recordValue == 0 || this.recordValue) {
                 type = this.recordValue;
@@ -247,8 +247,8 @@ export default {
             let params = {
                 pageNo,
                 pageSize: this.pageSize,
-                startTime,
-                endTime,
+                startDate,
+                endDate,
                 memberId,
                 symbol,
                 type
@@ -269,8 +269,8 @@ export default {
             });
         },
         clear() {
-            this.startTime = "";
-            this.endTime = "";
+            this.startDate = "";
+            this.endDate = "";
         }
     },
     computed: {

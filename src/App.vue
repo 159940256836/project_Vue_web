@@ -523,6 +523,15 @@ export default {
     },
     mounted () {
         window.addEventListener('scroll', this.handleScroll);
+        // (function (w, d, n, a, j) {
+        //     w[n] = w[n] || function () {
+        //         (w[n].a = w[n].a || []).push(arguments);
+        //     };
+        //     j = d.createElement('script');
+        //     j.async = true;
+        //     j.src ='https://qiyukf.com/script/9c6f0b24f2440c442569e7e5195f7ccf.js';
+        //     d.body.appendChild(j);
+        //     })(window, document, 'ysf');
     },
     beforeDestroy () {
         window.removeEventListener('scroll', this.handleScroll)
