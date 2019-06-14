@@ -337,7 +337,7 @@ export default {
                                 title: params.row.fee
                             }
                         },
-                        Math.abs(that.toFloor(params.row.fee)) || 0
+                        that.toFloor(params.row.fee) || 0
                     );
                 }
             });
@@ -369,7 +369,7 @@ export default {
                                     title: params.row.fee
                                 }
                             },
-                            Math.abs(that.toFloor(params.row.fee)) || 0
+                            that.toFloor(params.row.fee) || 0
                         );
                     }
                 });

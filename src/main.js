@@ -24,8 +24,8 @@ Vue.use(VueI18n);
 Vue.prototype.host = "http://192.168.124.43"; // 测试环境
 // Vue.prototype.host = "http://www.coinmany.com"; // 第一套
 // Vue.prototype.host = "https://manager.coinmany.com/"; // 正式
-Vue.prototype.url="https://www.coinmany.com" //链接地址
-// Vue.prototype.url="http://192.168.124.45" //链接地址
+// Vue.prototype.url="https://www.coinmany.com" //链接地址
+Vue.prototype.url="http://192.168.124.45" //链接地址
 Vue.prototype.api = Api;
 Vue.http.options.credentials = true;
 Vue.http.options.emulateJSON = true;
@@ -82,27 +82,10 @@ Vue.filter('toPercent', function(point) {
     return str;
 });
 //数字进行下舍入(舍去)
-function toFloor(number, scale = 8) {
+function toFloor(number) {
     if (new Number(number) == 0) { //如果是"0.0000000000000000"
         return 0;
     }
-    let str = number + ""; //转字符串
-    if (str.indexOf('e') > -1 || str.indexOf('E') > -1) { //科学计数法
-        let num = new Number(number).toFixed(scale + 1),
-            str = num + "";
-        return str.substring(0, str.length - 1);
-    } else if (str.indexOf(".") > -1) { //小数
-        if (scale == 0) {
-            return str.substring(0, str.indexOf("."));
-        }
-        return str.substring(0, str.indexOf(".") + scale + 1); //截取指定位数
-    } else { //整数
-        return str;
-    }
-}
-
-// 科学计数法
-Vue.filter('scientificToNumber', function (number) {
     var str = (number + '').toString()
     if (str.indexOf('.') == -1) {
         var reg = /^(\d+)(e)([\-]?\d+)$/
@@ -139,7 +122,20 @@ Vue.filter('scientificToNumber', function (number) {
             return '0.' + zero + arr[1].replace('.', '')
         }
     }
-})
+    // let str = number + ""; //转字符串
+    // if (str.indexOf('e') > -1 || str.indexOf('E') > -1) { //科学计数法
+    //     let num = new Number(number).toFixed(scale + 1),
+    //         str = num + "";
+    //     return str.substring(0, str.length - 1);
+    // } else if (str.indexOf(".") > -1) { //小数
+    //     if (scale == 0) {
+    //         return str.substring(0, str.indexOf("."));
+    //     }
+    //     return str.substring(0, str.indexOf(".") + scale + 1); //截取指定位数
+    // } else { //整数
+    //     return str;
+    // }
+}
 
 Vue.filter('toFloor', (number, scale) => {
     return toFloor(number, scale);
