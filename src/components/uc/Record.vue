@@ -341,38 +341,38 @@ export default {
                     );
                 }
             });
+            // columns.push({
+            //     title: this.$t("uc.finance.record.discountfee"), //"抵扣手续费"
+            //     width: F,
+            //     align: "center",
+            //     render(h, params) {
+            //         return h(
+            //             "span",
+            //             {
+            //                 attrs: {
+            //                     title: params.row.discount_fee
+            //                 }
+            //             },
+            //             Math.abs(that.toFloor(params.row.discount_fee)) || 0
+            //         );
+            //     }
+            // });
             columns.push({
-                title: this.$t("uc.finance.record.discountfee"), //"抵扣手续费"
-                width: F,
-                align: "center",
-                render(h, params) {
-                    return h(
-                        "span",
-                        {
-                            attrs: {
-                                title: params.row.discount_fee
-                            }
-                        },
-                        Math.abs(that.toFloor(params.row.discount_fee)) || 0
-                    );
-                }
-            });
-            columns.push({
-                title: this.$t("uc.finance.record.realfee"), //"实际手续费"
-                width: F1,
-                align: "center",
-                render(h, params) {
-                    return h(
-                        "span",
-                        {
-                            attrs: {
-                                title: params.row.real_fee
-                            }
-                        },
-                        Math.abs(that.toFloor(params.row.real_fee)) || 0
-                    );
-                }
-            });
+                    title: this.$t("uc.finance.record.realfee"), //"实际手续费"
+                    width: F1,
+                    align: "center",
+                    render(h, params) {
+                        return h(
+                            "span",
+                            {
+                                attrs: {
+                                    title: params.row.fee
+                                }
+                            },
+                            Math.abs(that.toFloor(params.row.fee)) || 0
+                        );
+                    }
+                });
             columns.push({
                 title: this.$t("uc.finance.record.status"),
                 // key: "status",

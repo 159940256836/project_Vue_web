@@ -101,6 +101,46 @@ function toFloor(number, scale = 8) {
     }
 }
 
+// 科学计数法
+Vue.filter('scientificToNumber', function (number) {
+    var str = (number + '').toString()
+    if (str.indexOf('.') == -1) {
+        var reg = /^(\d+)(e)([\-]?\d+)$/
+        var arr, len,
+            zero = ''
+
+        /* 6e7或6e+7 都会自动转换数值 */
+        if ((!reg.test(str))) {
+            return number
+        } else {
+            /* 6e-7 需要手动转换 */
+            arr = reg.exec(str)
+            len = Math.abs(arr[3]) - 1
+            for (var i = 0; i < len; i++) {
+                zero += '0'
+            }
+            return '0.' + zero + arr[1]
+        }
+    } else {
+        var reg = /^(\d+[.]?\d+)(e)([\-]?\d+)$/
+        var arr, len,
+            zero = ''
+
+        /* 6e7或6e+7 都会自动转换数值 */
+        if ((!reg.test(str))) {
+            return number
+        } else {
+            /* 6e-7 需要手动转换 */
+            arr = reg.exec(str)
+            len = Math.abs(arr[3]) - 1
+            for (var i = 0; i < len; i++) {
+                zero += '0'
+            }
+            return '0.' + zero + arr[1].replace('.', '')
+        }
+    }
+})
+
 Vue.filter('toFloor', (number, scale) => {
     return toFloor(number, scale);
 });
