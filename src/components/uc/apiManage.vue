@@ -455,10 +455,10 @@ export default {
         width: this.locale == 'en' ? 150 : '',
         render: (h, params) => {
           if (params.row.bindIp) {
-            let residue = Date.parse(params.row.expireTime) - Date.parse(params.row.createTime);
+            let residue = Date.parse(params.row.expireTime) - Date.parse(new Date());
             let lastTime = residue / 1000 / 60 / 60 / 24;
             lastTime = lastTime <= 0 ? 0 : lastTime;
-            const timeDay = h("span", {}, lastTime);
+            const timeDay = h("span", {}, Math.round(lastTime));
             return [timeDay];
           }
         }
