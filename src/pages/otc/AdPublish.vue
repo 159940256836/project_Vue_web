@@ -62,7 +62,7 @@
                 <span slot="append">%</span>
               </FormItem>
               <FormItem
-                v-if="symbol != 'BC'"
+                v-if="symbol !== 'BC'"
                 :label="$t('otc.publishad.fixedprice')"
                 prop="fixedPrice"
                 v-show="form.fixed"
@@ -399,8 +399,9 @@ export default {
       }
     },
     changeCoin() {
+      console.log(this.symbol);
       let coinItem = this.getCoin(this.form.coin);
-      console.log(coinItem);
+      console.log(coinItem, this.form.coin);
       if (coinItem != null) {
         this.cankao = coinItem.marketPrice + "";
         let lv = (1 + this.form.premisePrice / 100).toFixed(4);
@@ -699,7 +700,9 @@ export default {
         });
     }
   },
-  mounted() {},
+  mounted() {
+    this.changeCoin()
+  },
   computed: {
     wantHistory() {
       return this.form.advertiseType;
@@ -735,6 +738,7 @@ export default {
     }
   },
   created() {
+    this.changeCoin()
     this.getMember();
     this.getAreas();
     let lv = (1 + this.form.premisePrice / 100).toFixed(4);

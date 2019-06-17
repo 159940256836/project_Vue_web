@@ -227,19 +227,39 @@
                                     <span>{{$t('footer.concatUs')}}</span>
                                 </li>
                                 <li>
+                                    <!--服务邮箱-->
                                     <a href="javascript:;">{{$t('footer.email')}}：service@coinmany.com</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">{{$t('footer.customerservice2')}}：3039059895</a>
+                                    <!--客服QQ-->
+                                    <p class="facebook4">
+                                        {{$t('footer.customerservice2')}}：3039059895
+                                        <span id="facebook4">
+                                            <img src="./assets/images/qqkefu.jpg" alt="">
+                                        </span>
+                                    </p>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">{{$t('footer.customerservice1')}}：729045745</a>
+                                    <!--QQ群-->
+                                    <p class="facebook5">
+                                        {{$t('footer.customerservice1')}}：729045745
+                                        <span id="facebook5">
+                                            <img src="./assets/images/qqqun.jpg" alt="">
+                                        </span>
+                                    </p>
                                 </li>
                                 <li>
                                     <!-- 微信客服号：客服1:biduokefu1 客服2:biduokefu2 -->
-                                    <a href="javascript:;">{{$t("footer.WeChatcustomervi")}}：{{$t("footer.Customvic")}}:biduokefu1
-<!--                                        &nbsp;&nbsp; {{$t("footer.Customervic")}}:biduokefu2-->
-                                    </a>
+                                    <p>
+                                        <span class="facebook3">
+                                             {{$t("footer.WeChatcustomervi")}}：biduokefu1
+                                            <span id="facebook3">
+                                                <img src="./assets/images/kefu.jpg" alt="">
+                                            </span>
+                                        </span>
+
+                                        <!--&nbsp;&nbsp; {{$t("footer.Customervic")}}:biduokefu2-->
+                                    </p>
                                 </li>
 
                             </ul>
@@ -338,7 +358,9 @@ export default {
             topPadding: '0 5%',
             topBackgroundColor: 'rgba(28, 36, 53)',
             pathName: '',
-            pathNameState: true
+            pathNameState: true,
+            weChat1: false, // 微信客服1
+            weChat2: false // 微信客服2
         };
     },
     watch: {
@@ -416,6 +438,7 @@ export default {
         }
         this.$nextTick(() => {
             const link = 16604775806;
+            const weChat = 'biduokefu1';
             new QRCode(document.getElementById("facebook"), {
                 text: link,
                 width: 100,
@@ -1299,6 +1322,39 @@ body {
                             line-height: 26px;
                             color: #8790a1;
                         }
+                    }
+                    .facebook3,
+                    .facebook4,
+                    .facebook5 {
+                        cursor: pointer;
+                        position: relative;
+                        #facebook3,
+                        #facebook4,
+                        #facebook5 {
+                            position: absolute;
+                            top: -135px;
+                            left: 85px;
+                            display: none;
+                            z-index: 9;
+                            text-align: center;
+                            padding: 13px 13px;
+                            img {
+                                width: 120px;
+                            }
+                        }
+                        #facebook4,
+                        #facebook5 {
+                            top: -180px;
+                        }
+                    }
+                    .facebook3:hover #facebook3 {
+                        display: block;
+                    }
+                    .facebook4:hover #facebook4 {
+                        display: block;
+                    }
+                    .facebook5:hover #facebook5 {
+                        display: block;
                     }
                 }
             }

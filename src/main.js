@@ -21,7 +21,7 @@ Vue.use(VueClipboard)
 Vue.use(VueRouter);
 Vue.use(vueResource);
 Vue.use(VueI18n);
-Vue.prototype.host = "http://192.168.124.43"; // 测试环境
+Vue.prototype.host = "http://192.168.124.43/"; // 测试环境
 // Vue.prototype.host = "http://www.coinmany.com"; // 第一套
 // Vue.prototype.host = "https://manager.coinmany.com/"; // 正式
 // Vue.prototype.url="https://www.coinmany.com" //链接地址
