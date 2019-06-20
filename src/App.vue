@@ -266,7 +266,7 @@
                         </div>
                     </div>
                    <!-- <div class="footer-info">
-                        风险提示：区块链资产（数字货币和数字权益）交易具有极高的风险（技术缺陷、暴涨暴跌、庄家操控、团队解散等）, 币多网仅为区块链资产的爱好者提供一个自由的网上交换平台, 对资产的投资价值不承担任何审查、担保、赔偿的责任, 如果您不能接受, 请谨慎交易。
+                        风险提示：区块链资产（数字货币和数字权益）交易具有极高的风险（技术缺陷、暴涨暴跌、庄家操控、团队解散等）, bdw仅为区块链资产的爱好者提供一个自由的网上交换平台, 对资产的投资价值不承担任何审查、担保、赔偿的责任, 如果您不能接受, 请谨慎交易。
                     </div>-->
                 </div>
                 <div class="info">
@@ -351,7 +351,7 @@ export default {
             content: " ",
             wechat: this.$t("footer.wechat"),
             topInfo: {
-                name: "币多网",
+                name: "bdw",
                 createTime: "2018-01-10 11:37:27"
             },
             styleTop: 30,
@@ -370,7 +370,7 @@ export default {
                 case "nav-exchange":
                     break;
                 default:
-                    window.document.title = "币多网";
+                    window.document.title = "bdw";
                     break;
             }
         },

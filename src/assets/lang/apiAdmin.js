@@ -8,7 +8,7 @@ const zh = {
     mark: "备注",
     bindAddress: "绑定IP地址的密钥有效期为90天",
     hint: '提示',
-    part1: "币多网为您提供了强大的API,您可以通过API使用行情查询、自动交易等服务。通过",
+    part1: "bdw为您提供了强大的API,您可以通过API使用行情查询、自动交易等服务。通过",
     apiDoc: "API文档",
     howUse: "查看如何使用。",
     part2: "每个用户最多创建5组API Key",

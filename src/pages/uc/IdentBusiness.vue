@@ -23,7 +23,7 @@
           <!-- 申请认证商家 -->
           <h3>{{$t('uc.identity.apply')}}</h3>
           <p style="font-size: 14px;margin-top: 10px">
-            <!-- 成为币多网认证商家，享更多交易特权 -->
+            <!-- 成为bdw认证商家，享更多交易特权 -->
             <!-- {{$t('uc.identity.become')}} -->
           </p>
         </div>
@@ -278,7 +278,7 @@ export default {
       isShowSubmitted: false,
       isShowSuccess: false,
       activeStepIndex: 0,
-      emailAdress: "kefu@币多网.pro",
+      emailAdress: "kefu@bdw.pro",
       steps: [
         this.$t("uc.identity.prepare"),
         this.$t("uc.identity.review"),

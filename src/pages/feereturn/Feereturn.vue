@@ -70,7 +70,7 @@ export default {
                         maxWidth:100
                     },
                     {//当日BHB均价 eth
-                        title: "当日币多网均价(ETH)",
+                        title: "当日bdw均价(ETH)",
                         key: 'averageprice',
                         align:'center',
                         // width:180

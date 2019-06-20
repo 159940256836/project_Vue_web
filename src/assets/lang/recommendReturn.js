@@ -6,7 +6,7 @@ const en = {
 }
 const zh = {
     _commissionRecommended: "推荐返佣",
-    _recommendMoney: '推荐好友来币多网注册交易，赚取佣金。',
+    _recommendMoney: '推荐好友来bdw注册交易，赚取佣金。',
     _recommendCode: '我的推荐码',
     _recommendLink: '我的推荐链接'
 }
