@@ -323,7 +323,7 @@
                             </a>
                         </div>
                     </div>
-                    © 2019 coinmany.com. All Rights Reserved
+                    © 2019 bdw.top. All Rights Reserved
                 </div>
             </div>
         </footer>
@@ -546,15 +546,16 @@ export default {
     },
     mounted () {
         window.addEventListener('scroll', this.handleScroll);
-        // (function (w, d, n, a, j) {
-        //     w[n] = w[n] || function () {
-        //         (w[n].a = w[n].a || []).push(arguments);
-        //     };
-        //     j = d.createElement('script');
-        //     j.async = true;
-        //     j.src ='https://qiyukf.com/script/9c6f0b24f2440c442569e7e5195f7ccf.js';
-        //     d.body.appendChild(j);
-        //     })(window, document, 'ysf');
+        (function (w, d, n, a, j) {
+            w[n] = w[n] || function () {
+                (w[n].a = w[n].a || []).push(arguments);
+            };
+            j = d.createElement('script');
+            j.async = true;
+            // j.src ='https://qiyukf.com/script/9c6f0b24f2440c442569e7e5195f7ccf.js';
+            j.src ='https://1589850.s2.udesk.cn:443/';
+            d.body.appendChild(j);
+        })(window, document, 'ysf');
     },
     beforeDestroy () {
         window.removeEventListener('scroll', this.handleScroll)
