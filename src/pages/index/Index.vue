@@ -11,10 +11,7 @@
                             <!--<Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />-->
                             <!-- </div> -->
                             <div class="carsoul">
-                                <div
-                                    v-for="(item,index) in FAQList"
-                                    class="cal_content1"
-                                >
+                                <div v-for="(item,index) in FAQList" class="cal_content1">
                                     <div
                                         v-for="(con,j) in item"
                                         class="cal_content"
@@ -27,7 +24,7 @@
                                         >
                                             {{strde(con.title)}}
                                         </router-link>
-                                    </div>
+                                </div>
                                 </div>
                             </div>
                             <div class="more">
@@ -454,7 +451,6 @@ export default {
                 //     }
                 //   }
                 // },
-
                 {
                     title: self.$t("service.PriceTrend"),
                     align: "center",
