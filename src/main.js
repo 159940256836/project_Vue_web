@@ -82,23 +82,59 @@ Vue.filter('toPercent', function(point) {
     return str;
 });
 //数字进行下舍入(舍去)
-function toFloor(number, scale = 8) {
+function toFloor(number) {
     if (new Number(number) == 0) { //如果是"0.0000000000000000"
         return 0;
     }
-    let str = number + ""; //转字符串
-    if (str.indexOf('e') > -1 || str.indexOf('E') > -1) { //科学计数法
-        let num = new Number(number).toFixed(scale + 1),
-            str = num + "";
-        return str.substring(0, str.length - 1);
-    } else if (str.indexOf(".") > -1) { //小数
-        if (scale == 0) {
-            return str.substring(0, str.indexOf("."));
+    var str = (number + '').toString()
+    if (str.indexOf('.') == -1) {
+        var reg = /^(\d+)(e)([\-]?\d+)$/
+        var arr, len,
+            zero = ''
+
+        /* 6e7或6e+7 都会自动转换数值 */
+        if ((!reg.test(str))) {
+            return number
+        } else {
+            /* 6e-7 需要手动转换 */
+            arr = reg.exec(str)
+            len = Math.abs(arr[3]) - 1
+            for (var i = 0; i < len; i++) {
+                zero += '0'
+            }
+            return '0.' + zero + arr[1]
         }
-        return str.substring(0, str.indexOf(".") + scale + 1); //截取指定位数
-    } else { //整数
-        return str;
+    } else {
+        var reg = /^(\d+[.]?\d+)(e)([\-]?\d+)$/
+        var arr, len,
+            zero = ''
+
+        /* 6e7或6e+7 都会自动转换数值 */
+        if ((!reg.test(str))) {
+            return number
+        } else {
+            /* 6e-7 需要手动转换 */
+            arr = reg.exec(str)
+            len = Math.abs(arr[3]) - 1
+            for (var i = 0; i < len; i++) {
+                zero += '0'
+            }
+            return '0.' + zero + arr[1].replace('.', '')
+        }
     }
+    // let str = number + ""; //转字符串
+    // if (str.indexOf('e') > -1 || str.indexOf('E') > -1) { //科学计数法
+    //     let num = new Number(number).toFixed(scale + 1),
+    //         str = num + "";
+    //     return str.substring(0, str.length - 1);
+    // } else if (str.indexOf(".") > -1) { //小数
+    //     if (scale == 0) {
+    //         return str.substring(0, str.indexOf("."));
+    //     }
+    //     return str.substring(0, str.indexOf(".") + scale + 1); //截取指定位数
+    // } else { //整数
+    //     return str;
+    // }
 }
 
 Vue.filter('toFloor', (number, scale) => {
@@ -124,7 +160,7 @@ Vue.prototype.settiele = (name)=>{
     if(name!=undefined){
         window.document.title=name;
     }else{
-        window.document.title="币多网"
+        window.document.title="bdw"
     }
 }
 

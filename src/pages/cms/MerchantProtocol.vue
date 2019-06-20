@@ -15,7 +15,7 @@
 
         <p class=MsoNormal align=left style='text-align:left'><span style='font-family:
 Microsoft YaHei'>请确认，在开始“认证商家”前，您已详细阅读了本协议所有内容，一旦您开始认证流程，即表示您充分理解并同意接受本协议的全部内容。为了提高交易的安全性和本平台注册用户身份的可信度，<span
-          lang=EN-US>币多网(币火)</span>（以下简称本网站）向您提供认证服务。您申请认证，本网站有权采取各种其认为必要手段对用户的身份进行识别。但是，作为普通的网络服务提供商，本网站所能采取的方法有限，而且在网络上进行用户身份识别也存在一定的困难，因此，本网站对完成认证的用户身份的准确性和绝对真实性不做任何保证。</span></p>
+          lang=EN-US>bdw(币火)</span>（以下简称本网站）向您提供认证服务。您申请认证，本网站有权采取各种其认为必要手段对用户的身份进行识别。但是，作为普通的网络服务提供商，本网站所能采取的方法有限，而且在网络上进行用户身份识别也存在一定的困难，因此，本网站对完成认证的用户身份的准确性和绝对真实性不做任何保证。</span></p>
 
         <p class=MsoNormal align=left style='text-align:left'><span lang=EN-US
                                                                     style=''>&nbsp;</span></p>
@@ -122,7 +122,7 @@ Microsoft YaHei'>下列情况时本网站无需承担任何责任：</span></p>
 
     </div>
     <div v-else class="content">
-      <p>Please confirm that you have read all the contents of this agreement before you start the certification merchant, and once you start the authentication process, you fully understand and agree to accept the full content of t his agreement. In order to improve the security of the transaction and the trustworthiness of the registered user of this platform, 币多网 (hereinafter referred to as this website) provides authentication services to you. You apply for authentication, this website has the right to take all the means it deems necessary to identify the user. However, as a general network service provider, there are limited methods available on this site and there are so me difficulties in implementing user identification on the web, this website does not guarantee the accuracy and absolute authenticity of the user identity that completes the authentication.</p>
+      <p>Please confirm that you have read all the contents of this agreement before you start the certification merchant, and once you start the authentication process, you fully understand and agree to accept the full content of t his agreement. In order to improve the security of the transaction and the trustworthiness of the registered user of this platform, bdw (hereinafter referred to as this website) provides authentication services to you. You apply for authentication, this website has the right to take all the means it deems necessary to identify the user. However, as a general network service provider, there are limited methods available on this site and there are so me difficulties in implementing user identification on the web, this website does not guarantee the accuracy and absolute authenticity of the user identity that completes the authentication.</p>
       <p><b>1.Understanding and recognition of Certification Service</b></p>
       <p>1.1 The authentication service is an identification service provided by this website. Unless otherwise agreed in this agreement, once you have completed authentication in the account of this website, the corresponding identification information and authentication results will not be modified or cancelled for any reason; if your identity is altered after authentication ha s been completed, you should provide the credentials issued by the appropriate authority to this website to help you change the corresponding authentication information of your account. </p>
       <p>1.2 This website reserves the right to modify or alter the contents of this agreement at any time and to publish the text of the changed agreement through this website at any time without notice to you. After any modification or modification of this agreement, you continue to use the services provided by this website, that is to say that you have read, understood and agreed to accept the content of the changed agreement; if you do not agree t o the content of the changed agreement, the service of this website should be discontinued immediately.</p>
@@ -131,7 +131,7 @@ Microsoft YaHei'>下列情况时本网站无需承担任何责任：</span></p>
       <p>2.1. Management of authentication data: The authentication information that you submit to this website at the time of authentication is irrevocably authorized to be retained by this website. This website undertakes not to publish, edit or disclose your authentication information except for statutory or contractual matters and will not use the non-public contents of this website for commercial purposes, except for the following cases:</p>
       <p>A.you authorize the information disclosed on this website;
 </p>
-      <p>B.This web site is made available to the National Judiciary and Executive Branch; 
+      <p>B.This web site is made available to the National Judiciary and Executive Branch;
 </p>
       <p>C.This website is made available to the relevant enterprises of this website;
 </p>
@@ -151,18 +151,18 @@ Microsoft YaHei'>下列情况时本网站无需承担任何责任：</span></p>
 </p>
       <p>5.2 Any temporary closure due to hacking, computer virus or seizures, technical adjustments in the telecommunications sector, temporary closure due to government control and third-party reasons (including major routes of international exports and failures on the part of international export telecommunications providers, fire, flood, lightning, earthquake, flood, typhoon, Tornado, volcanic eruption, epidemic of epidemic and infectious diseases, strikes, wars or acts of violence or similar incidents) and other non-fault-caused authentication information, loss, theft, or tampering.
 </p>
-      
+
       <p>5.3 Any legal disputes and consequences arising from the disclosure of bank account information resulting from other websites linked to this website, such as internet banking.
 </p>
       <p>5.4 Any error, incomplete or inaccurate information provided by users to this website which results in failure to authenticate or suffer any other loss is not relevant to this website.
 </p>
-      <p><b>6.Special Declaration</b> 
+      <p><b>6.Special Declaration</b>
 </p>
       <p>This site is not liable for any of the following cases:</p>
       <p>This site will carry on the basic information examination and the margin request to the certification merchant. This does not mean that the certification merchant  is completely trusted and does not mean there is any guarantee relationship between this site and the certification merchant. Please strictly follow the process of transaction, to do a good job of checking the information of the parties, communicate in detail, and ensure their own transaction and asset safety! At the same time, based on the specificity of digital asset transactions, you need to pay particular attention to the risks of anti-money laundering and to understand the identity of your counter-parties as required by KYC principles. Otherwise, you may face the risk of asset freezing if the counter-party is suspected of committing a crime.</p>
-     
-    
-    
+
+
+
     </div>
   </div>
 </template>

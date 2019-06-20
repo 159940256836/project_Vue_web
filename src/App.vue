@@ -227,26 +227,46 @@
                                     <span>{{$t('footer.concatUs')}}</span>
                                 </li>
                                 <li>
+                                    <!--服务邮箱-->
                                     <a href="javascript:;">{{$t('footer.email')}}：service@coinmany.com</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">{{$t('footer.customerservice2')}}：3039059895</a>
+                                    <!--客服QQ-->
+                                    <p class="facebook4">
+                                        {{$t('footer.customerservice2')}}：3039059895
+                                        <span id="facebook4">
+                                            <img src="./assets/images/qqkefu.jpg" alt="">
+                                        </span>
+                                    </p>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">{{$t('footer.customerservice1')}}：729045745</a>
+                                    <!--QQ群-->
+                                    <p class="facebook5">
+                                        {{$t('footer.customerservice1')}}：729045745
+                                        <span id="facebook5">
+                                            <img src="./assets/images/qqqun.jpg" alt="">
+                                        </span>
+                                    </p>
                                 </li>
                                 <li>
                                     <!-- 微信客服号：客服1:biduokefu1 客服2:biduokefu2 -->
-                                    <a href="javascript:;">{{$t("footer.WeChatcustomervi")}}：{{$t("footer.Customvic")}}:biduokefu1
-<!--                                        &nbsp;&nbsp; {{$t("footer.Customervic")}}:biduokefu2-->
-                                    </a>
+                                    <p>
+                                        <span class="facebook3">
+                                             {{$t("footer.WeChatcustomervi")}}：biduokefu1
+                                            <span id="facebook3">
+                                                <img src="./assets/images/kefu.jpg" alt="">
+                                            </span>
+                                        </span>
+
+                                        <!--&nbsp;&nbsp; {{$t("footer.Customervic")}}:biduokefu2-->
+                                    </p>
                                 </li>
 
                             </ul>
                         </div>
                     </div>
                    <!-- <div class="footer-info">
-                        风险提示：区块链资产（数字货币和数字权益）交易具有极高的风险（技术缺陷、暴涨暴跌、庄家操控、团队解散等）, 币多网仅为区块链资产的爱好者提供一个自由的网上交换平台, 对资产的投资价值不承担任何审查、担保、赔偿的责任, 如果您不能接受, 请谨慎交易。
+                        风险提示：区块链资产（数字货币和数字权益）交易具有极高的风险（技术缺陷、暴涨暴跌、庄家操控、团队解散等）, bdw仅为区块链资产的爱好者提供一个自由的网上交换平台, 对资产的投资价值不承担任何审查、担保、赔偿的责任, 如果您不能接受, 请谨慎交易。
                     </div>-->
                 </div>
                 <div class="info">
@@ -303,7 +323,7 @@
                             </a>
                         </div>
                     </div>
-                    © 2019 coinmany.com. All Rights Reserved
+                    © 2019 bdw.top. All Rights Reserved
                 </div>
             </div>
         </footer>
@@ -331,14 +351,16 @@ export default {
             content: " ",
             wechat: this.$t("footer.wechat"),
             topInfo: {
-                name: "币多网",
+                name: "bdw",
                 createTime: "2018-01-10 11:37:27"
             },
             styleTop: 30,
             topPadding: '0 5%',
             topBackgroundColor: 'rgba(28, 36, 53)',
             pathName: '',
-            pathNameState: true
+            pathNameState: true,
+            weChat1: false, // 微信客服1
+            weChat2: false // 微信客服2
         };
     },
     watch: {
@@ -348,7 +370,7 @@ export default {
                 case "nav-exchange":
                     break;
                 default:
-                    window.document.title = "币多网";
+                    window.document.title = "bdw";
                     break;
             }
         },
@@ -416,6 +438,7 @@ export default {
         }
         this.$nextTick(() => {
             const link = 16604775806;
+            const weChat = 'biduokefu1';
             new QRCode(document.getElementById("facebook"), {
                 text: link,
                 width: 100,
@@ -523,6 +546,16 @@ export default {
     },
     mounted () {
         window.addEventListener('scroll', this.handleScroll);
+        (function (w, d, n, a, j) {
+            w[n] = w[n] || function () {
+                (w[n].a = w[n].a || []).push(arguments);
+            };
+            j = d.createElement('script');
+            j.async = true;
+            // j.src ='https://qiyukf.com/script/9c6f0b24f2440c442569e7e5195f7ccf.js';
+            j.src ='https://1589850.s2.udesk.cn:443/';
+            d.body.appendChild(j);
+        })(window, document, 'ysf');
     },
     beforeDestroy () {
         window.removeEventListener('scroll', this.handleScroll)
@@ -1290,6 +1323,39 @@ body {
                             line-height: 26px;
                             color: #8790a1;
                         }
+                    }
+                    .facebook3,
+                    .facebook4,
+                    .facebook5 {
+                        cursor: pointer;
+                        position: relative;
+                        #facebook3,
+                        #facebook4,
+                        #facebook5 {
+                            position: absolute;
+                            top: -135px;
+                            left: 85px;
+                            display: none;
+                            z-index: 9;
+                            text-align: center;
+                            padding: 13px 13px;
+                            img {
+                                width: 120px;
+                            }
+                        }
+                        #facebook4,
+                        #facebook5 {
+                            top: -180px;
+                        }
+                    }
+                    .facebook3:hover #facebook3 {
+                        display: block;
+                    }
+                    .facebook4:hover #facebook4 {
+                        display: block;
+                    }
+                    .facebook5:hover #facebook5 {
+                        display: block;
                     }
                 }
             }

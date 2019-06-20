@@ -1832,7 +1832,7 @@ export default {
                 this.$router.push("/leverindex/" + this.defaultPath);
                 params = this.defaultPath;
             }else{
-                let title =params.replace("_","/").toUpperCase()+" 币多网"
+                let title =params.replace("_","/").toUpperCase()+" bdw"
                 this.settiele(title)
             }
             const basecion = params.split("_")[1];
@@ -1988,7 +1988,7 @@ export default {
             //   this.currentCoin.coin +
             //   "/" +
             //   this.currentCoin.base;
-            // title += "币多网--国际数字加密资产交易平台";
+            // title += "bdw--国际数字加密资产交易平台";
             // window.document.title = title;
         },
         updateLangData() {

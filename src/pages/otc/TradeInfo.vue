@@ -89,9 +89,16 @@
                             <div class="trade-operation">
                                 <div class="trade-price-input">
                                     <p class="price-input-list">
-                                        <Poptip trigger="focus" :content="text1" style="width: 100%;">
-                                            <Input @on-change="transform1" @on-keyup="keyEvent1" v-model="buyPrice" size="large" :placeholder="$t('otc.tradeinfo.amounttip')" style="width: 420px">
-                                            <span slot="prepend">CNY</span>
+                                        <Poptip trigger="focus" :content="text2" style="width: 100%;">
+                                            <Input
+                                                @on-change="transform2"
+                                                @on-keyup="keyEvent2"
+                                                v-model="nuyNum"
+                                                size="large"
+                                                :placeholder="$t('otc.tradeinfo.numtip')"
+                                                style="width: 420px"
+                                            >
+                                                <span slot="prepend">{{user.unit}}</span>
                                             </Input>
                                         </Poptip>
                                     </p>
@@ -99,20 +106,41 @@
                                         <Icon type="md-swap" />
                                     </span>
                                     <p class="price-input-list">
-                                        <Poptip trigger="focus" :content="text2" style="width: 100%;">
-                                            <Input @on-change="transform2" @on-keyup="keyEvent2" v-model="nuyNum" size="large" :placeholder="$t('otc.tradeinfo.numtip')" style="width: 420px">
-                                            <span slot="prepend">{{user.unit}}</span>
+                                        <Poptip
+                                            trigger="focus"
+                                            :content="text1"
+                                            style="width: 100%;"
+                                        >
+                                            <Input
+                                                disabled
+                                                @on-change="transform1"
+                                                @on-keyup="keyEvent1"
+                                                v-model="buyPrice"
+                                                size="large"
+                                                :placeholder="$t('otc.tradeinfo.amounttip')"
+                                                style="width: 420px"
+                                            >
+                                                <span slot="prepend">CNY</span>
                                             </Input>
                                         </Poptip>
                                     </p>
                                 </div>
-                                <textarea v-model="remark" type="text" :placeholder="$t('otc.tradeinfo.remarktip')" class="text-inputs"></textarea>
+                                <textarea
+                                    v-model="remark"
+                                    type="text"
+                                    :placeholder="$t('otc.tradeinfo.remarktip')"
+                                    class="text-inputs"
+                                ></textarea>
                                 <div class="price-box">
                                     <p class="show-price">
                                         <em>{{type}}:</em>
                                         <span>&nbsp;&nbsp;{{buyPrice}} CNY / {{nuyNum}} {{user.unit}}</span>
                                     </p>
-                                    <button class="btn-trade-in" @click="submit" :disabled="btnDisabled">{{btnType}}</button>
+                                    <button
+                                        class="btn-trade-in"
+                                        @click="submit"
+                                        :disabled="btnDisabled"
+                                    >{{btnType}}</button>
                                 </div>
                             </div>
                             <div class="trade-remark">
@@ -212,7 +240,7 @@ export default {
                       this.submitBtn = false;
                       return false;
        }
-   
+
 
     },
     transform2() {
@@ -309,7 +337,7 @@ export default {
           param["amount"] = this.nuyNum;
           param["remark"] = this.nuyNum;
           this.$http
-            .post(this.host + "otc/order/sell", param)
+            .post(this.host + "/otc/order/sell", param)
             .then(response => {
               this.btnDisabled = false;
               var resp = response.body;

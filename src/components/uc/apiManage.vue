@@ -166,6 +166,7 @@
 </template>
 
 <script>
+import moment from "moment";
 export default {
   data() {
     return {
@@ -194,7 +195,8 @@ export default {
       },
       tableData: [],
       id: "",
-      phoneStatus: ''
+      phoneStatus: '',
+      dataTime: ''
     };
   },
   //5.25加
@@ -253,11 +255,20 @@ export default {
         desc: "fail"
       });
     },
+    // 时间格式转换
+    formatTime(date) {
+      return moment(date).format("YYYY-MM-DD")
+    },
     getAllAPI() {
       return this.$http.get(this.host + `/uc/open/get_key`).then(res => {
-        console.log(res);
+        // console.log(res);
         this.tableData = res.body.data;
-        console.log(this.tableData);
+
+        console.log(this.formatTime(Date.parse(this.tableData[0].expireTime)),this.formatTime(Date.parse(this.tableData[0].createTime)));
+        console.log(Date.parse(this.tableData[0].expireTime)) - Date.parse(this.tableData[0].createTime);
+        let time1 = Date.parse(this.tableData[0].expireTime) - Date.parse(this.tableData[0].createTime)
+        this.dataTime = time1/24/60/60/1000
+        console.log(time1/24/60/60/1000);
       });
     },
     // 添加api校验
@@ -394,7 +405,7 @@ export default {
         if (resp.code == 0) {
           return new Promise((resolve, reject) => {
             this.phoneStatus = resp.data;
-            console.log(resp.data)
+            // console.log(resp.data)
             resolve(resp.data);
           })
         } else {
@@ -443,11 +454,11 @@ export default {
         title: this.$t("apiAdmin.ioDays"),
         width: this.locale == 'en' ? 150 : '',
         render: (h, params) => {
-          if (!params.row.bindIp) {
-            let residue = +new Date(params.row.expireTime) - +new Date();
-            let lastTime = Math.floor(residue / 1000 / 60 / 60 / 24);
+          if (params.row.bindIp) {
+            let residue = Date.parse(params.row.expireTime) - Date.parse(new Date());
+            let lastTime = residue / 1000 / 60 / 60 / 24;
             lastTime = lastTime <= 0 ? 0 : lastTime;
-            const timeDay = h("span", {}, lastTime);
+            const timeDay = h("span", {}, Math.round(lastTime));
             return [timeDay];
           }
         }
