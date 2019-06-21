@@ -356,7 +356,7 @@ export default {
         return false;
       }
       // 直接生成一个验证码对象
-      let captcha1 = new TencentCaptcha("2038419167", res => {
+      let captcha1 = new TencentCaptcha("2087858432", res => {
         console.log(res);
         if (res.ret == 0) {
           this.ticket1 = res.ticket;
@@ -378,7 +378,7 @@ export default {
         return false;
       }
       // 直接生成一个验证码对象
-      let captcha1 = new TencentCaptcha("2038419167", res => {
+      let captcha1 = new TencentCaptcha("2087858432", res => {
         console.log(res);
         if (res.ret == 0) {
           this.ticket = res.ticket;
