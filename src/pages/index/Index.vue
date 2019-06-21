@@ -1331,7 +1331,7 @@ li {
     align-items: center;
 }
 #banner {
-    background: url("../../assets/images/bannerBk.jpg") no-repeat center center;
+    background: url("../../assets/images/bannerBk.png") no-repeat center center;
     background-size: cover;
     overflow: hidden;
     height: 400px;
