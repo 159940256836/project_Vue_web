@@ -502,7 +502,8 @@ export default {
                 promotion: forminline.agentcode,
                 superPartner: ""
             };
-            this.$http.post(this.host + '/uc/register/email', params).then(response => {
+            this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
+            // this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
                 let resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
@@ -589,7 +590,8 @@ export default {
             params["superPartner"] = this.formInline.superType;
             params["ticket"] = this.ticket;
             params["randStr"] = this.randStr;
-            this.$http.post(this.host + "/uc/register/phone", params).then(response => {
+            // this.$http.post(this.host + "/uc/register/phone", params).then(response => { 旧接口
+            this.$http.post(this.host + "/uc/register/nweLoginByPhone", params).then(response => { // 新接口
                 let resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
