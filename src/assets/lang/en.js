@@ -849,6 +849,7 @@ module.exports = {
             email: "email Code",
             register: 'Sign Up',
             login: 'Log In',
+            registered: 'Welcome Register',
             welcomelogin: 'Welcome',
             usertip: 'Tel',
             pwdtip: 'Password',

@@ -855,6 +855,7 @@ module.exports = {
             registerLog: "马上注册",
             register: '注册',
             login: '欢迎登陆BDW',
+            registered :'欢迎注册BDW',
             welcomelogin: '欢迎登录',
             usertip: '手机号/邮箱',
             pwdtip: '密码',
