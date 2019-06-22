@@ -127,42 +127,43 @@
   </div>
 </template>
 <script>
-import { setTimeout } from "timers";
+import { setTimeout } from 'timers'
 export default {
   data() {
     return {
       tabId: 1,
-      model9: "",
-      telname: "",
-      checkcode: "",
-      newpwd: "",
-      pwdagain: "",
-      agentcode: "",
-      country: "",
-      setnum1: "获取验证码",
-      username: "",
+      model9: '',
+      telname: '',
+      checkcode: '',
+      newpwd: '',
+      pwdagain: '',
+      agentcode: '',
+      country: '',
+      setnum1: '获取验证码',
+      username: '',
       agreee: true,
-      email1: "",
-      username1: "",
-      newpwd1: "",
-      pwdagain1: "",
-      country1: ""
-    };
+      email1: '',
+      username1: '',
+      newpwd1: '',
+      pwdagain1: '',
+      country1: ''
+    }
   },
   methods: {
-    //手机号注册
+    // 手机号注册
     handleSubmita() {
-      let username = this.username;
-      let phone = this.telname;
-      let code = this.checkcode;
-      let password = this.newpwd;
-      let country = this.country;
-      let promotion = this.agentcode ? this.agentcode : "";
+      const username = this.username
+      const phone = this.telname
+      const code = this.checkcode
+      const password = this.newpwd
+      const country = this.country
+      const promotion = this.agentcode ? this.agentcode : ''
 
-      let pwdagain = this.pwdagain;
-      let ticket = this.ticket;
-      let randStr = this.randStr;
-      let data = {
+      // eslint-disable-next-line no-unused-vars
+      const pwdagain = this.pwdagain
+      const ticket = this.ticket
+      const randStr = this.randStr
+      const data = {
         username,
         phone,
         code,
@@ -171,93 +172,94 @@ export default {
         promotion,
         ticket,
         randStr
-      };
+      }
       if (!data.country) {
-        this.$Message.error("请选择国家");
-        return false;
+        this.$Message.error('请选择国家')
+        return false
       }
       if (!data.username) {
-        this.$Message.error("请输入用户名");
-        return false;
+        this.$Message.error('请输入用户名')
+        return false
       }
       if (!data.phone) {
-        this.$Message.error("请输入电话号码");
-        return false;
+        this.$Message.error('请输入电话号码')
+        return false
       }
       if (!data.code) {
-        this.$Message.error("请输入验证码");
-        return false;
+        this.$Message.error('请输入验证码')
+        return false
       }
       if (!data.password) {
-        this.$Message.error("请输入8-16位字母加数字登录密码");
-        return false;
+        this.$Message.error('请输入8-16位字母加数字登录密码')
+        return false
       }
       if (this.newpwd != this.pwdagain) {
-        this.$Message.error("两次密码不一致");
-        return false;
+        this.$Message.error('两次密码不一致')
+        return false
       }
       if (!this.agreee) {
-        this.$Message.error("请同意");
-        return false;
+        this.$Message.error('请同意')
+        return false
       }
-      this.$http.post(this.host + "/uc/register/phone", data).then(response => {
-        console.log(response);
-        let res = response.body;
+      this.$http.post(this.host + '/uc/register/phone', data).then(response => {
+        console.log(response)
+        const res = response.body
         if (res.code == 0) {
-          this.$Message.success(res.message);
+          this.$Message.success(res.message)
           setTimeout(() => {
-            window.location.href = "https://download.coinmany.com/";
-          }, 2000);
+            window.location.href = 'https://download.coinmany.com/'
+          }, 2000)
 
           //  window.location.href="https://download.coinmany.com/"
         } else {
-          this.$Message.error(res.message);
+          this.$Message.error(res.message)
         }
-      });
+      })
     },
-    //发送验证码
+    // 发送验证码
     sendCode() {
-      let phone = this.telname;
-      let country = this.country;
-      let data = { country, phone };
-      var that = this;
-      if (this.setnum1 != "获取验证码") {
-        return false;
+      const phone = this.telname
+      const country = this.country
+      const data = { country, phone }
+      var that = this
+      if (this.setnum1 !== '获取验证码') {
+        return false
       }
       if (!data.country) {
-        this.$Message.error("请选择国家");
-        return false;
+        this.$Message.error('请选择国家')
+        return false
       }
-      this.$http.post(this.host + "/uc/mobile/code", data).then(respo => {
-        let resp = respo.body;
-        if (resp.code == 0) {
+      this.$http.post(this.host + '/uc/mobile/code', data).then(respo => {
+        const resp = respo.body
+        if (resp.code === 0) {
           // this.initGtCaptcha();
-          this.$Message.success(resp.message);
-          var count = 60;
+          this.$Message.success(resp.message)
+          var count = 60
           that.timer = setInterval(() => {
-            count--;
-            that.setnum1 = count;
+            count--
+            that.setnum1 = count
             if (count <= 0) {
-              that.setnum1 = "获取验证码";
-              clearInterval(that.timer);
+              that.setnum1 = '获取验证码'
+              clearInterval(that.timer)
             }
-          }, 1000);
+          }, 1000)
         } else {
-          this.$Message.error(resp.message);
+          this.$Message.error(resp.message)
         }
-      });
+      })
     },
-    //邮箱注册
+    // 邮箱注册
     emailMax() {
-      let username = this.username1;
-      let email = this.email1;
-      let password = this.newpwd1;
-      let country = this.country1;
-      let promotion = this.agentcode ? this.agentcode : "";
-      let pwdagain = this.pwdagain1;
-      let ticket = this.ticket1;
-      let randStr = this.randStr1;
-      let data = {
+      const username = this.username1
+      const email = this.email1
+      const password = this.newpwd1
+      const country = this.country1
+      const promotion = this.agentcode ? this.agentcode : ''
+      // eslint-disable-next-line no-unused-vars
+      const pwdagain = this.pwdagain1
+      const ticket = this.ticket1
+      const randStr = this.randStr1
+      const data = {
         username,
         email,
         password,
@@ -265,63 +267,63 @@ export default {
         promotion,
         ticket,
         randStr
-      };
+      }
       if (!data.country) {
-        this.$Message.error("请选择国家");
-        return false;
+        this.$Message.error('请选择国家')
+        return false
       }
       if (!data.username) {
-        this.$Message.error("请输入用户名");
-        return false;
+        this.$Message.error('请输入用户名')
+        return false
       }
       if (!data.email) {
-        this.$Message.error("请输入邮箱");
-        return false;
+        this.$Message.error('请输入邮箱')
+        return false
       }
-      let regg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
+      const regg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/
       if (!regg.test(this.email1)) {
-        this.$Message.error("请输入正确的邮箱");
-        return false;
+        this.$Message.error('请输入正确的邮箱')
+        return false
       }
 
       if (!data.password) {
-        this.$Message.error("请输入8-16位字母加数字登录密码");
-        return false;
+        this.$Message.error('请输入8-16位字母加数字登录密码')
+        return false
       }
       if (this.newpwd1 != this.pwdagain1) {
-        this.$Message.error("两次密码不一致");
-        return false;
+        this.$Message.error('两次密码不一致')
+        return false
       }
       if (!this.agreee) {
-        this.$Message.error("请同意");
-        return false;
+        this.$Message.error('请同意')
+        return false
       }
-      this.$http.post(this.host + "/uc/register/email", data).then(response => {
-        console.log(response);
-        let res = response.body;
+      this.$http.post(this.host + '/uc/register/email', data).then(response => {
+        console.log(response)
+        const res = response.body
         if (res.code == 0) {
-          this.$Message.success(res.message);
+          this.$Message.success(res.message)
           setTimeout(() => {
-            window.location.href = "https://download.coinmany.com/";
-          }, 2000);
+            window.location.href = 'https://download.coinmany.com/'
+          }, 2000)
         } else {
-          this.$Message.error(res.message);
+          this.$Message.error(res.message)
         }
-      });
+      })
     },
     regMax(n) {
-      this.tabId = n;
+      this.tabId = n
     },
     initGtCaptcha2() {
-      let username = this.username1;
-      let email = this.email1;
-      let password = this.newpwd1;
-      let country = this.country1;
-      let promotion = this.agentcode ? this.agentcode : "";
-      let pwdagain = this.pwdagain1;
-      let ticket = this.ticket1;
-      let randStr = this.randStr1;
-      let data = {
+      const username = this.username1
+      const email = this.email1
+      const password = this.newpwd1
+      const country = this.country1
+      const promotion = this.agentcode ? this.agentcode : ''
+      const pwdagain = this.pwdagain1
+      const ticket = this.ticket1
+      const randStr = this.randStr1
+      const data = {
         username,
         email,
         password,
@@ -329,77 +331,77 @@ export default {
         promotion,
         ticket,
         randStr
-      };
+      }
       if (!data.country) {
-        this.$Message.error("请选择国家");
-        return false;
+        this.$Message.error('请选择国家')
+        return false
       }
       if (!data.username) {
-        this.$Message.error("请输入用户名");
-        return false;
+        this.$Message.error('请输入用户名')
+        return false
       }
       if (!data.email) {
-        this.$Message.error("请输入邮箱");
-        return false;
+        this.$Message.error('请输入邮箱')
+        return false
       }
 
       if (!data.password) {
-        this.$Message.error("请输入8-16位字母加数字登录密码");
-        return false;
+        this.$Message.error('请输入8-16位字母加数字登录密码')
+        return false
       }
       if (this.newpwd1 != this.pwdagain1) {
-        this.$Message.error("两次密码不一致");
-        return false;
+        this.$Message.error('两次密码不一致')
+        return false
       }
       if (!this.agreee) {
-        this.$Message.error("请同意");
-        return false;
+        this.$Message.error('请同意')
+        return false
       }
       // 直接生成一个验证码对象
-      let captcha1 = new TencentCaptcha("2038419167", res => {
-        console.log(res);
+      const captcha1 = new TencentCaptcha('2038419167', res => {
+        console.log(res)
         if (res.ret == 0) {
-          this.ticket1 = res.ticket;
-          this.randStr1 = res.randstr;
-           console.log(this.randStr1);
-          this.emailMax();
+          this.ticket1 = res.ticket
+          this.randStr1 = res.randstr
+          console.log(this.randStr1)
+          this.emailMax()
         }
-      });
-      captcha1.show(); // 显示验证码
+      })
+      captcha1.show() // 显示验证码
     },
     initGtCaptcha() {
       if (!this.telname) {
-        this.$Message.error("请输入电话号码");
-        return false;
+        this.$Message.error('请输入电话号码')
+        return false
       }
-      let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+      const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
       if (!reg.test(this.telname)) {
-        this.$Message.error("请输入正确的手机号");
-        return false;
+        this.$Message.error('请输入正确的手机号')
+        return false
       }
       // 直接生成一个验证码对象
-      let captcha1 = new TencentCaptcha("2038419167", res => {
-        console.log(res);
+      const captcha1 = new TencentCaptcha('2038419167', res => {
+        console.log(res)
         if (res.ret == 0) {
-          this.ticket = res.ticket;
-          this.randStr = res.randstr;
+          this.ticket = res.ticket
+          this.randStr = res.randstr
 
-          this.sendCode();
+          this.sendCode()
         }
 
         // res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr);
         // (this.changeActive == 0) && this.success();
-        //this.changeActive == 1 && this.emailSuccess();
-      });
-      captcha1.show(); // 显示验证码
+        // this.changeActive == 1 && this.emailSuccess();
+      })
+      captcha1.show() // 显示验证码
     }
   },
   mounted() {
-    this.agentcode = this.$route.query.agent ? this.$route.query.agent : '';
+    this.agentcode = this.$route.query.agent ? this.$route.query.agent : ''
   },
   component() {},
   created() {}
-};
+}
 </script>
 
 <style scoped lang="scss">
