@@ -263,6 +263,7 @@ export default {
             // pageSize: 50,
             // totalNum: 0,
             FAQList: [],
+            indexBtnBC: '123456',
             favorColumns: [
                 {
                     title: self.$t("service.favor"),
@@ -327,6 +328,7 @@ export default {
                         }
                     },
                     render: function (h, params) {
+                        console.log(window.indexBtnBC, this.indexBtnBC);
                         // var rmb = self.round(self.mul(params.row.price, 6.5), 2);
                         // if (self.CNYRate != null)
                         //   rmb = self.round(self.mul(params.row.price, self.CNYRate), 2);
@@ -337,7 +339,8 @@ export default {
                         const nogreen =
                             parseFloat(params.row.rose) < 0 ? "inline-block" : "none";
                         return h("div", [
-                            h("span", {}, params.row.price + " /￥" + rmb),
+                            // h("span", {}, params.row.price + " /￥" + rmb),
+                            h("span", {}, window.indexBtnBC === 'BC' ? (params.row.price + " /￥" + params.row.price):(params.row.price + " /￥" + rmb)),
                             h(
                                 "Icon",
                                 {
@@ -626,6 +629,8 @@ export default {
                             }
                         },
                         render: function (h, params) {
+                            // let window = this.indexBtnBC
+                            // console.log(window.indexBtnBC);
                             // var rmb = self.round(self.mul(params.row.price, 6.5), 2);
                             // if (self.CNYRate != null)
                             //   rmb = self.round(self.mul(params.row.price, self.CNYRate), 2);
@@ -636,7 +641,7 @@ export default {
                             const nogreen =
                                 parseFloat(params.row.rose) < 0 ? "inline-block" : "none";
                             return h("div", [
-                                h("span", {}, params.row.price + " /￥" + rmb),
+                                h("span", {}, window.indexBtnBC === 'BC' ? params.row.price + " /￥" + params.row.price:params.row.price + " /￥" + rmb),
                                 h(
                                     "Icon",
                                     {
@@ -1193,6 +1198,8 @@ export default {
             );
         },
         addClass(index) {
+            window.indexBtnBC = '';
+            console.log(this.indexBtnBC, window.indexBtnBC);
             this.choseBtn = index;
             this.getSymbol();
             if (index == 0) {
@@ -1202,6 +1209,8 @@ export default {
             } else if (index == 2) {
                 this.dataIndex = this.coins.ETH;
             } else if (index == 3) {
+                this.indexBtnBC = this.indexBtn[3].text;
+                window.indexBtnBC =this.indexBtnBC;
                 this.dataIndex = this.coins.BC;
             } else if (index == 4) {
                 this.dataIndex = this.coins.favor;
