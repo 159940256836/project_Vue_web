@@ -67,7 +67,6 @@
   </div>
 </template>
 
-
 <style scoped lang="scss">
 #List .nav-right {
   color: #26264c;
@@ -78,6 +77,12 @@
 }
 </style>
 <style lang="scss">
+  .el-table .warning-row {
+    background: #f7faff;
+  }
+  .el-table .success-row {
+    background: #ebf1fb;
+  }
 #List .nav-right {
   color: #26264c;
   padding-right: 0;
@@ -107,7 +112,7 @@
         .ivu-tabs-tabpane {
           .ivu-table-wrapper {
             border: none;
-            box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+            /*box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
             .ivu-table-body{
               .ivu-table-tbody{
                 .ivu-table-row{
@@ -744,25 +749,35 @@
 .user-avatar-public > .user-avatar-in {
   background: #3399ff;
   border-radius: 50%;
-  height: 35px;
-  width: 35px;
+  height: 20px;
+  width: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
 }
+.ivu-table-wrapper .ivu-table:after,
+.ivu-table-wrapper .ivu-table:before {
+  background: #111530 !important;
+}
+
 .ivu-table-column-center .ivu-table-cell {
   &:last-child {
     padding-left: 0;
   }
 }
 .ivu-table-cell .user-avatar-public {
-  width:45px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
   display: inline-block;
-  margin: 10px 10px 10px 0;
+  margin: 5px 10px 5px 0;
   vertical-align: middle;
 }
-
+.ivu-table-wrapper .ivu-table .ivu-table-header th {
+  color: #8090AF;
+  background-color: #111530;
+}
 .ivu-table-cell .user-avatar-public > .user-avatar-in {
   transform: translate(5px, 5px);
 }
@@ -799,8 +814,6 @@
 //   }
 // }
 </style>
-
-
 
 <script>
 export default {
@@ -958,8 +971,7 @@ export default {
           {
             title: self.$t("otc.paymethod"),
             key: "payMode",
-            align:"center",
-            // width:130
+            align:"center"
           },
           {
             align:"center",
@@ -977,7 +989,13 @@ export default {
             title:self.$t("paper.unit"),
             align:'center',
             render:(h, params)=>{
-              return h('div',{},params.row.price + "CNY")
+              return h('div',
+                {
+                  style: {
+                    color: "#3399ff"
+                  }
+                },
+                params.row.price + "CNY")
             }
           },
           // {
@@ -1018,13 +1036,11 @@ export default {
                   "p",
                   {
                     style: {
-                      color: '#fff',
-                      width: '68px',
-                      height: '30px',
-                      lineHeight: '30px',
-                      borderRadius: '5px',
+                      color: params.row.advertiseType == 0 ? "rgba(241, 80, 87)" : "rgb(0, 178, 117)",
+                      height: '25px',
+                      lineHeight: '25px',
                       cursor: 'pointer',
-                      background:params.row.advertiseType == 0 ? "#f15057" : "#00b275"
+                      border: params.row.advertiseType == 0 ? "1px solid rgba(241, 80, 87)" : "1px solid rgb(0, 178, 117)",
                     },
                     on: {
                       click: () => {

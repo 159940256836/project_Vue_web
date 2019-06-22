@@ -1,5 +1,5 @@
 ﻿<template>
-  <div style=" background: #ececec;padding: 81px;padding-top: 80px;">
+  <div class="merchant">
     <div class="content">
       <!---->
       <!--<div class="tit">{{$t('uc.identity.apply')}}</div>-->
@@ -18,6 +18,50 @@
       <!--</div>-->
       <!--</div>-->
       <!--</div>-->
+      <!-- 认证商家第一步 -->
+      <div class="ipshang" :class="certStatus != 0 ? 'applying' : '' ">
+        <div class="ident-title" v-if="certStatus == 3">
+          <h3 style="font-size: 20px">{{$t('uc.identity.apply')}}</h3>
+          <p style="font-size: 14px;margin-top: 10px"> {{$t('uc.identity.become')}}</p>
+        </div>
+        <div class="ident-title" v-else-if="certStatus == 2">
+          <h3>{{$t("uc.identity.getquan")}}</h3>
+        </div>
+        <!-- 第一步 -->
+        <Row style="margin-top:40px;">
+          <Col span="8">
+            <div class="business-function">
+              <img alt="" src="../../assets/images/fait/business_show.png">
+              <p class="business-info">{{$t('uc.identity.seat')}}</p>
+              <span class="business-span">{{$t("uc.identity.zhusnhu")}}</span>
+            </div>
+          </Col>
+          <Col span="8">
+            <div class="business-function">
+              <img alt="" src="../../assets/images/fait/business_service.png">
+              <p class="business-info">{{$t('uc.identity.service')}}</p>
+              <span class="business-span">{{$t("uc.identity.service")}}</span>
+            </div>
+          </Col>
+          <Col span="8">
+            <div class="business-function">
+              <img alt="" src="../../assets/images/fait/business_fee.png">
+              <p class="business-info">{{$t('uc.identity.lowfee')}}</p>
+              <span class="business-span">{{$t("uc.identity.lowfee")}}</span>
+            </div>
+          </Col>
+        </Row>
+        <!-- 同意第一步的协议 -->
+        <div v-show="certStatus === 0" style="text-align: center;font-size: 16px;margin-top:50px">
+          <Checkbox v-model="single"></Checkbox>
+          <span>{{$t("uc.identity.read")}}</span>
+          <router-link target="_blank" to="/helpdetail?cate=1&id=6&cateTitle=常见问题" class="cur" style="color:#3399ff">{{$t('uc.identity.agreement')}}</router-link>
+        </div>
+        <!-- 同意第一步的按钮 -->
+        <div v-show="certStatus === 0" class="sq">
+          <Button @click="apply" style="background:#3399ff;color:#fff;outline:none;">{{$t("uc.identity.lijishenqing")}}</Button>
+        </div>
+      </div>
       <div style="width: 80%;margin: 0 auto;margin-bottom: 60px;">
         <div class="ident-title" v-if="certStatus === 0">
           <!-- 申请认证商家 -->
@@ -83,50 +127,6 @@
           <div style="margin-top: 30px;font-size: 16px;text-align: center;">
             <a @click="returnAdit" style="color: #aaa;">{{$t("uc.identity.shenqingtuibao")}}</a>
           </div>
-        </div>
-      </div>
-      <!-- 认证商家第一步 -->
-      <div class="ipshang" :class="certStatus != 0 ? 'applying' : '' ">
-        <div class="ident-title" v-if="certStatus == 3">
-          <h3 style="font-size: 20px">{{$t('uc.identity.apply')}}</h3>
-          <p style="font-size: 14px;margin-top: 10px"> {{$t('uc.identity.become')}}</p>
-        </div>
-        <div class="ident-title" v-else-if="certStatus == 2">
-          <h3>{{$t("uc.identity.getquan")}}</h3>
-        </div>
-        <!-- 第一步 -->
-        <Row style="margin-top:40px;">
-          <Col span="8">
-          <div class="business-function">
-            <img alt="" src="../../assets/images/business_show.png" width="300px">
-            <p style="padding: 20px 0;font-weight: 600;font-size: 18px">{{$t('uc.identity.seat')}}</p>
-            <span style="font-size: 14px;overflow:hidden; overflow: hidden;text-overflow:ellipsis;display: block;white-space:nowrap;color:#999;">{{$t("uc.identity.zhusnhu")}}</span>
-          </div>
-          </Col>
-          <Col span="8">
-          <div class="business-function">
-            <img alt="" src="../../assets/images/business_service.png" width="300px">
-            <p style="padding: 20px 0;font-weight: 600;font-size: 18px">{{$t('uc.identity.service')}}</p>
-            <span style="font-size: 14px;color:#999;">{{$t("uc.identity.service")}}</span>
-          </div>
-          </Col>
-          <Col span="8">
-          <div class="business-function">
-            <img alt="" src="../../assets/images/business_fee.png" width="300px">
-            <p style="padding: 20px 0;font-weight: 600;font-size: 18px">{{$t('uc.identity.lowfee')}}</p>
-            <span style="font-size: 14px;color:#999;">{{$t("uc.identity.lowfee")}}</span>
-          </div>
-          </Col>
-        </Row>
-        <!-- 同意第一步的协议 -->
-        <div v-show="certStatus === 0" style="text-align: center;font-size: 16px;margin-top:50px">
-          <Checkbox v-model="single"></Checkbox>
-          <span>{{$t("uc.identity.read")}}</span>
-          <router-link target="_blank" to="/helpdetail?cate=1&id=6&cateTitle=常见问题" class="cur" style="color:#3399ff">{{$t('uc.identity.agreement')}}</router-link>
-        </div>
-        <!-- 同意第一步的按钮 -->
-        <div v-show="certStatus === 0" class="sq">
-          <Button @click="apply" style="background:#3399ff;color:#fff;outline:none;">{{$t("uc.identity.lijishenqing")}}</Button>
         </div>
       </div>
 
@@ -556,6 +556,10 @@ export default {
 </script>
 
 <style scoped>
+.merchant {
+  background: #0e0e28;
+  padding: 150px 0;
+}
 .previewImg {
   position: absolute;
   width: 100%;
@@ -567,8 +571,6 @@ export default {
   width: 1200px;
   margin: 0 auto;
   padding-top: 30px;
-  height: 100%;
-  background: #fff;
 }
 .ip .ivu-col {
   line-height: 37px;
@@ -579,7 +581,6 @@ export default {
   overflow: hidden;
 }
 .ipshang.applying {
-  background: #f5f5f5;
   padding: 40px 0;
 }
 .sq {
@@ -731,12 +732,28 @@ export default {
   display: block;
 }
 .business-function {
-  width: 300px;
+  width: 320px;
+  height: 332px;
   margin: 0 auto;
-  border: 1px solid #d4d4d4;
   padding-bottom: 20px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  background: #191D3A;
+}
+.business-function img {
+  margin: 60px 0 20px;
+}
+.business-function .business-info {
+  padding: 20px 0;
+  font-size: 18px;
+  color: #3399ff;
+}
+.business-function .business-span {
+  font-size: 14px;
+  margin: 10px 0;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  display: block;
+  white-space:nowrap;
+  color:#8090AF;
 }
 </style>
 <style>
