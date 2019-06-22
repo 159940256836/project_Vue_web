@@ -1,5 +1,5 @@
 <template>
-    <div class="notice common" style="min-height:519px">
+    <div class="notice common announcement_notice" style="min-height:519px">
         <div class="banner">
             <span>{{$t('footer.bulletinboard')}}</span>
         </div>
@@ -36,25 +36,41 @@
     </div>
 </template>
 <style lang="scss" scoped>
+
 .notice {
     padding-top: 60px;
     .banner {
+        // 6.22修改
         display: flex;
-        justify-content: center;
+        // justify-content: center;
         align-items: center;
-        height: 280px;
-        background: url("../../assets/images/notice.jpg");
+        // height: 280px;
+        // background: url("../../assets/images/notice.jpg");
+         height:85px;
+         width:1200px;
         color: #fff;
+        margin:0 auto;
+       
         font-size: 40px;
+        background:#0e0e28;
+        span{
+            margin-left:31px;
+        }
+
     }
     .main {
-        width: 70%;
+        // 6.22修改
+        // width: 70%;
+        width:1200px;
+        border:1px solid rgba(17,21,48,1);
         margin: 0 auto;
         background-color: #fff;
         color: #333;
-        box-shadow: 0 0 2px #ccc;
-        margin-top: -50px;
-        border-radius: 6px;
+        // box-shadow: 0 0 2px #ccc;
+        background:#0e0e28;
+        // 6.22修改
+        // margin-top: -50px;
+        // border-radius: 6px;
         padding: 50px 100px;
         margin-bottom: 50px;
         .list {
