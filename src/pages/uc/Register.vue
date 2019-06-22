@@ -9,7 +9,7 @@
                 :rules="ruleInline"
                 inline
             >
-                <p class="login_title">{{$t('uc.login.login')}}</p>
+                <p class="login_title">{{$t('uc.login.registered')}}</p>
                 <FormItem style="width: 100%;border-bottom: 1px solid #ddd;">
                     <ButtonGroup>
                         <Button
