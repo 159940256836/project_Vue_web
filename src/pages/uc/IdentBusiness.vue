@@ -24,8 +24,12 @@
           <h3 style="font-size: 20px">{{$t('uc.identity.apply')}}</h3>
           <p style="font-size: 14px;margin-top: 10px"> {{$t('uc.identity.become')}}</p>
         </div>
-        <div class="ident-title" v-else-if="certStatus == 2">
-          <h3>{{$t("uc.identity.getquan")}}</h3>
+        <div
+          class="ident-title"
+          v-else-if="certStatus == 2"
+        >
+          <p>{{$t("uc.identity.getquan1")}}</p>
+          <p>成为币多OTC加V用户，获得广告发布权限，享受更多交易特权</p>
         </div>
         <!-- 第一步 -->
         <Row style="margin-top:40px;">
@@ -63,7 +67,10 @@
         </div>
       </div>
       <div style="width: 80%;margin: 0 auto;margin-bottom: 60px;">
-        <div class="ident-title" v-if="certStatus === 0">
+        <div
+          class="ident-title ident-info"
+          v-if="certStatus === 0"
+        >
           <!-- 申请认证商家 -->
           <h3>{{$t('uc.identity.apply')}}</h3>
           <p style="font-size: 14px;margin-top: 10px">
@@ -71,22 +78,40 @@
             <!-- {{$t('uc.identity.become')}} -->
           </p>
         </div>
-        <div class="ident-title" v-else-if="certStatus == 1">
+        <div
+          class="ident-title ident-info"
+          v-else-if="certStatus == 1"
+        >
           <h3>{{$t('uc.identity.tijiao')}}</h3>
         </div>
-        <div class="ident-title" v-else-if="certStatus == 2">
+        <div
+          class="ident-title ident-info"
+          v-else-if="certStatus == 2"
+        >
           <h3>{{$t('uc.identity.tijiaosuc')}}</h3>
         </div>
-        <div class="ident-title" v-else-if="certStatus == 3">
+        <div
+          class="ident-title ident-info"
+          v-else-if="certStatus == 3"
+        >
           <h3>{{$t("uc.identity.tijiaofail")}}</h3>
         </div>
-        <div class="ident-title" v-else-if="certStatus == 5">
+        <div
+          class="ident-title ident-info"
+          v-else-if="certStatus == 5"
+        >
           <h3>{{$t("uc.identity.zhuxiaotijiao")}}</h3>
         </div>
-        <div class="ident-title" v-else-if="certStatus == 6">
+        <div
+          class="ident-title ident-info"
+          v-else-if="certStatus == 6"
+        >
           <h3>{{$t("uc.identity.shenhefail")}}</h3>
         </div>
-        <div class="ident-title" v-else-if="certStatus == 7">
+        <div
+          class="ident-title ident-info"
+          v-else-if="certStatus == 7"
+        >
           <h3>{{$t("uc.identity.shenhesuc")}}</h3>
         </div>
         <!-- prepare:准备资料； review：提交审核； result:审核结果；certified：已认证 ; shenheshibai：审核失败-->
@@ -233,18 +258,33 @@
             </Col>
           </Row>
           <FormItem style="margin-top: 20px;">
-            <Button style="width:100%;background:#3399ff;color:#fff;border:1px solid #3399ff;" type="info" @click="apply3('apply_form')" :disabled="applyBtn">{{$t("uc.identity.lijishenqing")}}</Button>
+            <Button
+              style="width:100%;background:#3399ff;color:#fff;border:1px solid #3399ff;"
+              type="info"
+              @click="apply3('apply_form')"
+              :disabled="applyBtn"
+            >
+              {{ $t("uc.identity.lijishenqing") }}
+            </Button>
           </FormItem>
         </Form>
       </div>
       <p slot="footer"></p>
     </Modal>
 
-    <Modal v-model="modal_return" @on-ok="returnAudit">
-      <p slot="header" style="text-align: center;">{{$t("uc.identity.tips")}}</p>
-      <p style="text-align: center;font-size: 14px;">{{$t("uc.identity.wufachexiao")}}</p>
-      <p style="text-align: center;font-size: 14px;">{{$t("uc.identity.suredo")}}</p>
-      <Input v-model="returnReason" type="textarea" :placeholder=placeholder :rows="4"></Input>
+    <Modal
+      v-model="modal_return"
+      @on-ok="returnAudit"
+    >
+      <p slot="header">{{$t("uc.identity.tips")}}</p>
+      <p style="font-size: 14px;color: #8090AF;">{{$t("uc.identity.wufachexiao")}}</p>
+      <p style="font-size: 14px;color: #8090AF;">{{$t("uc.identity.suredo")}}</p>
+      <Input
+        v-model="returnReason"
+        type="textarea"
+        :placeholder=placeholder
+        :rows="4"
+      />
     </Modal>
   </div>
 
@@ -558,7 +598,7 @@ export default {
 <style scoped>
 .merchant {
   background: #0e0e28;
-  padding: 150px 0;
+  padding: 80px 0;
 }
 .previewImg {
   position: absolute;
@@ -696,6 +736,7 @@ export default {
   display: none;
 }
 .apply-note {
+  color: #8090AF;
   font-size: 14px;
 }
 .apply-note h3 {
@@ -714,15 +755,33 @@ export default {
   text-align: center;
 }
 .apply-title h3 {
+  color: #8090AF;
   font-size: 20px;
 }
 .apply-title p {
+  color: #8090AF;
   font-size: 14px;
   padding: 10px 0;
 }
 .ident-title {
   text-align: center;
   font-size: 20px;
+  height: 100px;
+}
+.ident-info {
+  color: #8090AF;
+  line-height: 100px;
+}
+.ident-title p:first-child {
+  font-size: 46px;
+  color: #fff;
+  font-weight: 100;
+}
+.ident-title p:last-child {
+  font-size: 18px;
+  color: #8090AF;
+  font-weight: 100;
+  margin: 15px 0 65px;
 }
 .apply-step {
   padding: 50px 0;
@@ -785,43 +844,83 @@ export default {
       }
     }
     button.ivu-btn {
-      &:focus {
+      /*&:focus {
         -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
         -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
         box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-      }
+      }*/
       &:hover {
         border: 1px solid #3399ff;
       }
     }
   }
 }
+
 .v-transfer-dom {
   .ivu-modal-wrap {
+    .ivu-modal-header {
+      border-bottom: 1px solid #2A3850;
+      text-align: left;
+      p{
+        font-size: 16px;
+        color: #fff;
+      }
+    }
+    textarea.ivu-input {
+      margin-top: 10px;
+      background: #191D3A;
+      box-shadow: 2px 2px 5px #191D3A;
+      color: #fff;
+      border: 1px solid #2A3850;
+    }
     .ivu-modal-content {
+      background: #191D3A;
       .apply-content {
+
         form.apply-form.ivu-form.ivu-form-label-top {
+          .ivu-form-item-label {
+            color: #8090AF;
+          }
           .ivu-form-item-content {
             .ivu-input {
+              border: 1px solid;
+              background: transparent;
+              color: #8090AF;
               &:hover {
                 border-color: #3399ff;
               }
               &:focus {
                 border-color: #3399ff;
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
               }
             }
+
             .ivu-select.ivu-select-single {
+              .ivu-select-dropdown {
+                background: #111530;
+                color: #8090AF;
+                .ivu-select-item {
+                  &:hover {
+                    background: #191D3A;
+                    color: #3399ff;
+                  }
+                }
+
+              }
               .ivu-select-selection {
-                // border-color:#3399ff;
+                background: transparent;
+                border: 1px solid;
+                .ivu-select-selected-value {
+                  color: #8090AF;
+                }
                 &:hover {
                   border-color: #3399ff;
                 }
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
               }
             }
             .ivu-select-visible .ivu-select-selection {
@@ -830,23 +929,31 @@ export default {
           }
           .ivu-row {
             .ivu-upload.ivu-upload-drag {
+              background: transparent;
               &:hover {
                 border-color: #3399ff;
+              }
+            }
+          }
+          .ivu-col {
+            .ivu-upload {
+              span {
+                color: #8090AF;
               }
             }
           }
           .ivu-form-item-content {
             button {
               &:focus {
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
               }
             }
           }
         }
       }
-      .ivu-modal-body {
+      /*.ivu-modal-body {
         .apply-note {
           button {
             &:focus {
@@ -856,7 +963,7 @@ export default {
             }
           }
         }
-      }
+      }*/
       .ivu-modal-footer {
         border: none;
         .ivu-btn-primary {
@@ -867,12 +974,21 @@ export default {
         .ivu-btn-text {
           &:hover,
           &:focus {
+            border: 1px solid #3399ff;
+            background: transparent;
             color: #3399ff;
           }
         }
       }
     }
   }
+}
+.ivu-steps .ivu-steps-head {
+  background: transparent;
+}
+.ivu-steps .ivu-steps-title {
+  background: #0e0e28;
+  padding-top: 4px;
 }
 .ivu-btn-primary {
   background: #3399ff;
@@ -917,7 +1033,7 @@ li.ivu-upload-list-file.ivu-upload-list-file-finish {
       }
       .ivu-steps-main {
         .ivu-steps-title {
-          color: #666;
+          color: #8090AF;
         }
       }
     }

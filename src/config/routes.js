@@ -49,6 +49,8 @@ import EntrustCurrent from '../components/uc/EntrustCurrent' //当前委托记�
 import EntrustHistory from '../components/uc/EntrustHistory' //历史委托记录
 import OtcAd from '../components/otc/MyAd'
 import adPublish from '../pages/otc/AdPublish'
+import PublishAdver from '../pages/otc/PublishAdver'
+
 import identbusiness from '../pages/uc/IdentBusiness'
 // 币理财
 import Blc from '../pages/blc/Bilicai'
@@ -144,6 +146,8 @@ export default [
     { path: '*', component: Index },
     { path: '/blc', component: Blc },
     { path: '/bjc', component: Bjc },
+    // 发布广告
+    { path: '/PublishAdver', component: PublishAdver },
     // 平台手续费返还
     { path: "/feereturn", component: feereturn },
     // {

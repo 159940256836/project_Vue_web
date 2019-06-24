@@ -118,6 +118,10 @@
                 .ivu-table-row{
                   .ivu-table-cell.ivu-table-cell-ellipsis{
                     .user-face.user-avatar-public{
+                      img {
+                        width: 20px;
+                        height: 20px;
+                      }
                       span{
                         background:#3399ff;
                       }
@@ -742,7 +746,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 1px 5px 0 rgba(71, 78, 114, 0.24);
+  box-shadow: none;
   position: relative;
 }
 
@@ -773,6 +777,8 @@
   display: inline-block;
   margin: 5px 10px 5px 0;
   vertical-align: middle;
+  text-align: center;
+  line-height: 42px;
 }
 .ivu-table-wrapper .ivu-table .ivu-table-header th {
   color: #8090AF;

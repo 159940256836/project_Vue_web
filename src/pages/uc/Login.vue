@@ -109,8 +109,9 @@
                     <FormItem style="margin-bottom:10px;">
                         <Button
                             class="login_btn"
-                            @click="handleSubmit('formInline')"
+                            @click="login"
                         >
+                            <!--@click="handleSubmit('formInline')"-->
                             {{$t('uc.forget.login')}}
                         </Button>
                     </FormItem>
@@ -474,23 +475,29 @@ export default {
                 }
             })
         },
-        login(params) {
+        // login(params) {
+        login() {
+            const params = {};
+            const formParams = this.formInline;
+            params.username = formParams.user;
+            params.password = formParams.password;
+            params.code = formParams.googleCode;
             this.$http.post(this.host + this.api.uc.login, params).then(response => {
-                    var resp = response.body;
-                    if (resp.code == 0) {
-                        this.$Message.success(this.$t("uc.login.success"));
-                        this.$store.commit("setMember", response.body.data);
-                        if (
-                            this.$route.query.key != null &&
-                            this.$route.query.key != ""
-                        ) {
-                            localStorage.setItem("USERKEY", this.$route.query.key);
-                        }
-                        this.$router.push("/");
-                    } else {
-                        this.$Message.error(resp.message);
+                var resp = response.body;
+                if (resp.code == 0) {
+                    this.$Message.success(this.$t("uc.login.success"));
+                    this.$store.commit("setMember", response.body.data);
+                    if (
+                        this.$route.query.key != null &&
+                        this.$route.query.key != ""
+                    ) {
+                        localStorage.setItem("USERKEY", this.$route.query.key);
                     }
-                });
+                    this.$router.push("/");
+                } else {
+                    this.$Message.error(resp.message);
+                }
+            });
         }
     },
 };

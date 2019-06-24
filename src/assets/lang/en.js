@@ -1301,6 +1301,7 @@ module.exports = {
             reason: "reason",
             shenqingtuibao: "Apply for loan",
             getquan: "You have the following permissions",
+            getquan1: "Apply for business",
             read: "I read and agree",
             lijishenqing: "Apply immediately",
             tips: "prompt",

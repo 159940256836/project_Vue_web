@@ -1,17 +1,98 @@
 <template>
   <div class="content-wraps">
     <div class="containers" id="List">
-      <div class="fiat">
+      <!--登陆之前-->
+      <div
+        class="fiat"
+        v-if="!isLogin"
+      >
         <div class="to_business">
-          <p>{{$t('paper.legal')}}</p>
-          <span>{{$t('paper.curren')}}</span>
+          <p>{{ $t('paper.legal') }}</p>
+          <span>{{ $t('paper.curren') }}</span>
           <a
             href="javascript:void(0)"
             @click="goBusiness"
           >
-            {{$t('paper.become')}}
+            {{ $t('paper.become') }}
           </a>
           <!-- <router-link to="/identbusiness">成为商家</router-link> -->
+        </div>
+      </div>
+      <!--登录之后显示-->
+      <div
+        class="fiat-login"
+        v-else
+      >
+        <div class="fiat-login-main">
+          <div class="fiat-login-title">
+            <img src="../../assets/images/fait/user.png" alt="">
+          </div>
+          <div class="fiat-login-title">
+            <p>
+              <span>当前等级认证</span>
+              <span>1</span>
+            </p>
+            <p>
+              <span>当前资产总估值</span>
+              <span>0.000000</span>
+            </p>
+          </div>
+          <div class="fiat-login-title">
+            <p>
+              <span>可用</span>
+              <span>1</span>
+            </p>
+            <p>
+              <span>冻结</span>
+              <span>0.000000</span>
+            </p>
+          </div>
+          <div class="fiat-login-title">
+            <div class="login-title">
+              <img
+                src="../../assets/images/fait/tip.png"
+                alt=""
+              >
+              <!--新手指南-->
+              {{$t("footer.RecommendedCommission")}}
+            </div>
+            <!--发布广告-->
+            <div class="fiat-title">
+              <router-link to="/PublishAdver">
+                <button>
+                  {{ $t('otc.myad.post') }}
+                </button>
+              </router-link>
+            </div>
+            <!--查看订单-->
+            <div class="fiat-title-info">
+              <router-link to="/uc/ad/create">
+                <button>
+                  查看订单
+                </button>
+              </router-link>
+            </div>
+          </div>
+          <div class="fiat-login-title">
+            <p>
+              <span>总单数</span>
+              <span>0</span>
+            </p>
+            <p>
+              <span>完成率</span>
+              <span>0%</span>
+            </p>
+          </div>
+          <div class="fiat-login-title">
+            <p>
+              <span>单词限额</span>
+              <span>1</span>
+            </p>
+            <p>
+              <span>今日交易金额</span>
+              <span>0</span>
+            </p>
+          </div>
         </div>
       </div>
       <div class="main-box">
@@ -35,7 +116,10 @@
             </Menu>
             <router-view></router-view>
           </div>
-          <div class="advantage">
+          <div
+            class="advantage"
+            v-if="!isLogin"
+          >
             <ul>
               <li>
                 <div class="image"><img src="../../assets/images/fait/price.png" alt=""></div>
@@ -58,6 +142,13 @@
               </li>
             </ul>
           </div>
+          <div
+            class="advantage"
+            v-else
+          >
+            <p class="advantage-title">{{ $t('otc.myad.title') }}</p>
+            <myAdvertising></myAdvertising>
+          </div>
         </div>
       </div>
     </div>
@@ -71,6 +162,70 @@
     width: 100%;
     padding-top: 39px;
     /*margin: 20px 0;*/
+    .fiat-login {
+      background: #0e0e28;
+      padding-top: 50px;
+      .fiat-login-main {
+        width: 1200px;
+        height: 180px;
+        background: #111530;
+        margin: 21px auto 0;
+        padding: 25px;
+        display: flex;
+        .fiat-login-title {
+          flex: 1;
+          .login-title {
+            color: #8090AF;
+            img {
+              width: 16px;
+              height: 16px;
+              vertical-align:middle;
+              margin: 0 5px 0 3px;
+            }
+          }
+          .fiat-title {
+            margin-top: 10px;
+            button {
+              cursor: pointer;
+              color: #fff;
+              width: 100px;
+              height: 32px;
+              background: transparent;
+              border: 1px solid #282F4C;
+            }
+          }
+          .fiat-title-info {
+            margin-top: 10px;
+            button {
+              cursor: pointer;
+              color: #fff;
+              width: 100px;
+              height: 32px;
+              background: #5E6B89;
+              border: 0;
+              outline:none;
+            }
+          }
+          img {
+            margin-top: 30px;
+          }
+          p {
+            height: 62px;
+            color: #8090AF;
+            span {
+              width: 100%;
+              display: inline-block;
+              &:first-child {
+                margin-bottom: 10px;
+              }
+            }
+            &:last-child {
+              margin-top: 10px;
+            }
+          }
+        }
+      }
+    }
     .fiat {
     border-radius: 5px;
     height: 510px;
@@ -111,7 +266,7 @@
     .fiat-main {
       width: 1200px;
       margin: 0 auto;
-      padding: 50px 0;
+      padding: 25px 0;
       .content {
         width: 100%;
         /*margin: 20px auto;*/
@@ -120,6 +275,12 @@
         box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
       }
       .advantage {
+        .advantage-title {
+          height: 60px;
+          line-height: 60px;
+          font-size: 20px;
+          color: #fff;
+        }
         /*-moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
@@ -167,6 +328,14 @@
     .content {
       .ivu-menu-item-group-title {
         height: 20px;
+      }
+      .ivu-tabs-bar {
+        border-bottom: none;
+      }
+      .ivu-tabs-nav-scroll {
+        margin-top: 20px;
+        height: 50px;
+        background: #191D3A;
       }
       .ivu-menu-light {
         height: 55px;
@@ -253,7 +422,9 @@
 }
 </style>
 <script>
+import myAdvertising from "../../components/otc/MyAd";
 export default {
+  components: { myAdvertising },
   data() {
     return {
       coins: [],

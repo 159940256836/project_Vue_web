@@ -576,138 +576,138 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-    %flex {
-        align-items: center;
-    }
-    .page-view {
-        header {
-            width: 100%;
-            height: 60px;
-            line-height: 60px;
-            position: fixed;
-            z-index: 999;
-            background-color: #1c2435;
+%flex {
+    align-items: center;
+}
+.page-view {
+    header {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        position: fixed;
+        z-index: 999;
+        background-color: #1c2435;
+        transition: all .5s;
+        .page-content {
             transition: all .5s;
-            .page-content {
-                transition: all .5s;
-                .time_download {
-                    align-items: center;
-                    overflow: hidden;
-                    min-width: 1100px;
-                    .netLogo {
-                        width: 40px;
-                        float: left;
-                            img {
-                                vertical-align: middle;
-                            }
-                        }
-                    }
-                    .nav.en a{
-                        margin-right:20px;
-                    }
-                    .nav {
-                        float: left;
-                        margin-left: 30px;
-                        a {
-                            font-size: 14px;
-                            color: #fff;
-                            display: inline-block;
-                            margin-right:40px;
-                            text-align: center;
-                            // &:nth-child(5) {
-                            //     padding-right: 19px;
-                            // }
-                        }
-                        // a.router-link-exact-active.router-link-active {
-                        //     color: #2d8cf0;
-                        // }
-                        // 5.15修改
-                        a.router-link-active {
-                            color: #2d8cf0;
-                        }
-                    }
-                    .nav-header {
-                        float: right;
-                        .isLoginWrapper {
-                            float: right;
-                            .login_register {
-                                display: flex;;
-                                a {
-                                    color: #fff;
-                                    margin: 0 20px 0 10px;
-                                    .header-icon {
-                                        margin-left: 15px;
-                                    }
-                                    .header-img {
-                                        margin-left: 10px;
-                                    }
-                                }
-                            }
-                        }
-                        .rightwrapper {
-                            float: right;
-                            .appdownload {
-                                float: left;
-                                padding-right: 30px;
-                                .ivu-poptip-rel {
-                                    a {
-                                        color: #fff;
-                                    }
-                                    i.ivu-icon.ivu-icon-arrow-down-b {
-                                        margin-left: 5px;
-                                    }
-                                }
-                            }
-                            .ios,
-                            .andrio {
-                                float: left;
-                                text-align: center;
-                                img {
-                                    width: 115px;
-                                    height: 110px;
-                                    margin: 0 auto;
-                                }
-                                .tips {
-                                    // height: 30px;
-                                    img {
-                                        width: 14px;
-                                        height: 14px;
-                                        margin-top: 5px;
-                                    }
-                                    span {
-                                        font-size: 14px;
-                                    }
-                                }
-                            }
-                            .andrio {
-                                float: right;
-                            }
-                            .ivu-dropdown-rel a {
-                                color: #fff;
-                            }
-                            .ivu-select-dropdown {
-                                z-index: 901;
-                                #change_language_theme {
-                                    li {
-                                        background: #fff;
-                                        color: #333;
-                                    }
-                                }
-                            }
-                        }
-                        .changelanguage {
-                            float: right;
-                            /*width: 7%;*/
-                            justify-content: flex-end;
-                            #change_language_theme .ivu-dropdown-item{
-                                color: #000;
-                            }
+            .time_download {
+                align-items: center;
+                overflow: hidden;
+                min-width: 1100px;
+                .netLogo {
+                    width: 40px;
+                    float: left;
+                        img {
+                            vertical-align: middle;
                         }
                     }
                 }
-        }
+                .nav.en a{
+                    margin-right:20px;
+                }
+                .nav {
+                    float: left;
+                    margin-left: 30px;
+                    a {
+                        font-size: 14px;
+                        color: #fff;
+                        display: inline-block;
+                        margin-right:40px;
+                        text-align: center;
+                        // &:nth-child(5) {
+                        //     padding-right: 19px;
+                        // }
+                    }
+                    // a.router-link-exact-active.router-link-active {
+                    //     color: #2d8cf0;
+                    // }
+                    // 5.15修改
+                    a.router-link-active {
+                        color: #2d8cf0;
+                    }
+                }
+                .nav-header {
+                    float: right;
+                    .isLoginWrapper {
+                        float: right;
+                        .login_register {
+                            display: flex;;
+                            a {
+                                color: #fff;
+                                margin: 0 20px 0 10px;
+                                .header-icon {
+                                    margin-left: 15px;
+                                }
+                                .header-img {
+                                    margin-left: 10px;
+                                }
+                            }
+                        }
+                    }
+                    .rightwrapper {
+                        float: right;
+                        .appdownload {
+                            float: left;
+                            padding-right: 30px;
+                            .ivu-poptip-rel {
+                                a {
+                                    color: #fff;
+                                }
+                                i.ivu-icon.ivu-icon-arrow-down-b {
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+                        .ios,
+                        .andrio {
+                            float: left;
+                            text-align: center;
+                            img {
+                                width: 115px;
+                                height: 110px;
+                                margin: 0 auto;
+                            }
+                            .tips {
+                                // height: 30px;
+                                img {
+                                    width: 14px;
+                                    height: 14px;
+                                    margin-top: 5px;
+                                }
+                                span {
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                        .andrio {
+                            float: right;
+                        }
+                        .ivu-dropdown-rel a {
+                            color: #fff;
+                        }
+                        .ivu-select-dropdown {
+                            z-index: 901;
+                            #change_language_theme {
+                                li {
+                                    background: #fff;
+                                    color: #333;
+                                }
+                            }
+                        }
+                    }
+                    .changelanguage {
+                        float: right;
+                        /*width: 7%;*/
+                        justify-content: flex-end;
+                        #change_language_theme .ivu-dropdown-item{
+                            color: #000;
+                        }
+                    }
+                }
+            }
     }
-    .wechatclick .api2 {
+}
+.wechatclick .api2 {
         overflow: hidden;
         display: flex;
         justify-content: space-between;
@@ -756,16 +756,16 @@ ul,li{
                 }
                 &:focus {
                     border-color: #3399ff;
-                    -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                    -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                    box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                    -moz-box-shadow: none;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
                 }
             }
             .ivu-input-number.ivu-input-number-focused {
                 border-color: #3399ff;
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
             }
         }
         .ivu-modal-confirm-body {
@@ -791,9 +791,9 @@ ul,li{
 .ivu-modal-confirm-footer {
     .ivu-btn {
         &:focus {
-            -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-            -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-            box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
         }
     }
 }
@@ -1515,9 +1515,9 @@ body {
     }
     &:focus {
         border-color: #3399ff;
-        -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-        -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-        box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
     }
 }
 /*下拉框样式重置*/
@@ -1526,9 +1526,9 @@ body {
 }
 .ivu-select-visible .ivu-select-selection {
     border-color: #3399ff;
-    -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-    -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-    box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 .ivu-select-selected-value {
     color: #333;
