@@ -330,7 +330,7 @@
                             </a>
                         </div>
                     </div>
-                    © 2019 coinmany.com. All Rights Reserved
+                    © 2019 bdw.top. All Rights Reserved
                 </div>
             </div>
         </footer>

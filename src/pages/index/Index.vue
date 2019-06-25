@@ -145,6 +145,7 @@
                         :disabled-hover="true"
                         :loading="loading"
                         :no-data-text="$t('common.nodata')"
+                        :row-class-name="rowClassName"
                     ></Table>
                     <Table
                         v-else
@@ -154,9 +155,69 @@
                         :disabled-hover="true"
                         :loading="loading"
                         :no-data-text="$t('common.nodata')"
+                        :row-class-name="rowClassName"
                     ></Table>
                 </div>
-            </div>
+                <div class="seemore">
+                    查看更多
+                </div>
+              </div>
+              <div class="section" id="page5">
+                  <div class="showsection">
+                      <img src="../../assets/img/01.png" alt="">
+                      <div>现货交易</div>
+                      <span>多币种支持，高流动性 <br />高性能撮合交易</span>
+                  </div>
+                    <div class="showsection">
+                      <img src="../../assets/img/02.png" alt="">
+                      <div>OTC场外交易</div>
+                      <span>支持多种法币交易 <br />平台担保、快速安全</span>
+                  </div>
+                    <div class="showsection">
+                      <img src="../../assets/img/03.png" alt="">
+                      <div>金融级安全系统</div>
+                      <span>多层、多集群系统架构 <br />安全稳定运营超过4年</span>
+                  </div>
+                    <div class="showsection">
+                      <img src="../../assets/img/03.png" alt="">
+                      <div>专业客户服务</div>
+                      <span>24h在线客服，服务数百万用户<br /> 及时响应用户问题</span>
+                    </div>
+              </div>
+              <div class="section" id="page4">
+                <div class="left">
+                    <span class="text">支持多个平台终端交易</span>
+                    <p>即时随地、放心交易，一切尽在掌握之中</p>
+                    <div class="qrcode">
+                      <div class="Qrleft">
+                        <div class="android">
+                          <Icon type="logo-android" color="white" size="20" style="margin:0 15px"/>
+                          <span>android</span>
+                        </div>
+                        <div class="ipone">
+                          <Icon type="logo-apple" color="white" size="20" style="margin:0 15px"/>
+                          <span>iphone</span>
+                        </div>
+                      </div>
+                      <div class="Qrright">
+                          <img src="../../assets/img/qr.png" alt="">
+                      </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <img src="../../assets/img/shouye.png" alt="">
+                </div>
+              </div>
+              <div class="section" id="page1">
+                <div>
+                  <div>马上交易</div>
+                  <div>注册账号、跟BDW来一场不一样的资产交易之旅</div>
+                </div>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
             </div>
             <!--币种列表-->
             <!-- 下载部分 -->
@@ -485,51 +546,51 @@ export default {
                 //     }
                 //   }
                 // },
-        {
-          title: self.$t('service.PriceTrend'),
-          align: 'center',
-          render: function(h, params) {
-                        // debugger
-            let valus = null
-            const len = params.row.trend.length
-            valus = len > 0 ? params.row.trend
-                            : [
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0
-                            ]
-            return h(SvgLine, {
-              props: {
-                values: valus,
-                rose: params.row.rose,
-                width: 100,
-                height: 40
-              }
-            })
-          }
-        },
+        // {
+        //   title: self.$t('service.PriceTrend'),
+        //   align: 'center',
+        //   render: function(h, params) {
+        //                 // debugger
+        //     let valus = null
+        //     const len = params.row.trend.length
+        //     valus = len > 0 ? params.row.trend
+        //                     : [
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0
+        //                     ]
+        //     return h(SvgLine, {
+        //       props: {
+        //         values: valus,
+        //         rose: params.row.rose,
+        //         width: 100,
+        //         height: 40
+        //       }
+        //     })
+        //   }
+        // },
         {
           title: self.$t('service.Exchange'),
                     // align: "center",
@@ -783,53 +844,53 @@ export default {
                     //     }
                     //   }
                     // },
-          {
-            title: self.$t('service.PriceTrend'),
-            align: 'center',
-            render: function(h, params) {
-              let valus = null
-              const len = params.row.trend.length
-              valus =
-                                len > 0
-                                    ? params.row.trend
-                                    : [
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0
-                                    ]
-              return h(SvgLine, {
-                props: {
-                  values: valus,
-                  rose: params.row.rose,
-                  width: 100,
-                  height: 40,
-                  background: parseFloat(params.row.rose) < 0 ? 'red' : 'green'
-                }
-              })
-            }
-          },
+        //   {
+        //     title: self.$t('service.PriceTrend'),
+        //     align: 'center',
+        //     render: function(h, params) {
+        //       let valus = null
+        //       const len = params.row.trend.length
+        //       valus =
+        //                         len > 0
+        //                             ? params.row.trend
+        //                             : [
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0
+        //                             ]
+        //       return h(SvgLine, {
+        //         props: {
+        //           values: valus,
+        //           rose: params.row.rose,
+        //           width: 100,
+        //           height: 40,
+        //           background: parseFloat(params.row.rose) < 0 ? 'red' : 'green'
+        //         }
+        //       })
+        //     }
+        //   },
           {
             title: self.$t('service.Exchange'),
             align: 'center',
@@ -961,6 +1022,15 @@ export default {
         this.startWebsockHotlist()
       })
     },
+    rowClassName(row, index) {
+      console.log(row, index)
+      if (index % 2 === 1) {
+        return 'demo-table-info-row'
+      } else if (index % 2 !== 1) {
+        return 'demo-table-error-row'
+      }
+      return ''
+    },
     strde(str) {
       str = str.trim()
       return str.length > 30 ? str.slice(0, 30) + '...' : str
@@ -1002,7 +1072,7 @@ export default {
       this.coins.columns[4].title = this.$t('service.high')
       this.coins.columns[5].title = this.$t('service.low')
       this.coins.columns[6].title = this.$t('service.ExchangeNum')
-      this.coins.columns[7].title = this.$t('service.PriceTrend')
+    //   this.coins.columns[7].title = this.$t('service.PriceTrend')
       this.coins.columns[8].title = this.$t('service.Exchange')
 
       this.favorColumns[0].title = this.$t('service.favor')
@@ -1012,7 +1082,7 @@ export default {
       this.favorColumns[4].title = this.$t('service.high')
       this.favorColumns[5].title = this.$t('service.low')
       this.favorColumns[6].title = this.$t('service.ExchangeNum')
-      this.favorColumns[7].title = this.$t('service.PriceTrend')
+    //   this.favorColumns[7].title = this.$t('service.PriceTrend')
       this.favorColumns[8].title = this.$t('service.Exchange')
             // this.coins.columns[4].title = this.$t("service.OpenPrice");
     },
@@ -1141,11 +1211,11 @@ export default {
                 // 订阅价格变化消息
         stompClient.subscribe('/topic/market/thumb', (msg) => {
           var resp = JSON.parse(msg.body)
-          const list = this.hostSymbolList.filter(ele => ele.symbol == resp.symbol)
+          const list = this.hostSymbolList.filter(ele => ele.symbol === resp.symbol)
           const isHot = list.length > 0 ? Right(resp) : Left(null)
-          const result = isHot.map(obj => obj.symbol == resp.symbol).fold(x => null, x => x)
+          const result = isHot.map(obj => obj.symbol === resp.symbol).fold(x => null, x => x)
           result && this.hostSymbolList.forEach((ele, index) => {
-            if (ele.symbol == resp.symbol) {
+            if (ele.symbol === resp.symbol) {
               this.hostSymbolList.splice(index, 1, {
                 symbol: resp.symbol,
                 chg: resp.chg,
@@ -1353,34 +1423,36 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss" >
+<style lang="scss">
 ul,
 li {
     list-style-type: none;
 }
+
 %flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 #banner {
-    // background: url("../../assets/images/bannerBk.jpg") no-repeat center center;
-    // background-size: cover;
+    /* // background: url("../../assets/images/bannerBk.jpg") no-repeat center center;
+    // background-size: cover; */
     overflow: hidden;
     height: 400px;
     position: relative;
+
     .bannerWrapper {
-        position: absolute;
-        bottom: 0;
-        left: 18.5%;
-        right: 18.5%;
-        top: 170px;
-        .bannerBox {
-            @extend %flex;
-            > div {
-                width: 23%;
-            }
-        }
+      position: absolute;
+      bottom: 0;
+      left: 18.5%;
+      right: 18.5%;
+      top: 170px;
+      .bannerBox {
+          @extend %flex;
+          > div {
+            width: 23%;
+          }
+      }
     }
 }
 #hot {
@@ -1552,143 +1624,185 @@ li {
               background:#191D3A;
             }
             .ivu-table {
-                .ivu-table-header {
-                    .ivu-table-column-center {
-                        background: none;
-                    }
+              .ivu-table-header {
+                .ivu-table-column-center {
+                    border: 0;
+                    background: none;
                 }
+              }
             }
+        .ivu-table-wrapper .ivu-table:after{
+            background-color:transparent;
+        }
         }
         .ivu-table-wrapper {
             .ivu-table {
                 .ivu-table-row {
-                    &:nth-of-type(odd) {
-                        background: #fff;
+                    &:nth-of-type(odd) td{
+                        background: rgba(17,22,52,1);
                     }
-
-                    &:nth-of-type(even) {
-                        background: #fafafd;
+                    &:nth-of-type(even) td{
+                        background: #11132C;
                     }
                 }
             }
         }
+    }
+    .seemore{
+        height:42px;
+        line-height: 42px;
+        background:rgba(17,22,52,1);
+        text-align: center;
+        color:#8090AF;
+        cursor: pointer;
     }
 }
 #page4 {
-    background: #fff;
     height: auto;
     width: 1200px;
-    margin: 100px auto;
-    ul {
-        width: 100%;
-        margin: 0 auto;
-        @extend %flex;
-        li {
-            width: 200px;
-            padding: 0 15px;
-            div {
-                width: 90px;
-                height: 90px;
-                border-radius: 50%;
-                vertical-align: middle;
-                text-align: center;
-                margin: 0 auto;
-                img {
-                    height: 55px;
-                    margin-top: 28px;
-                }
-            }
-            p {
-                font-size: 15px;
-                margin: 20px 0;
-                text-align: center;
-                color: #666;
-            }
-            p.title {
-                color: #333;
-                font-size: 18px;
-                font-weight: 600;
-            }
+    margin: 50px auto;
+    min-height: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left{
+        float:left;
+        .text{
+          font-size:30px;
+          margin-bottom:20px;
+          color:#FFFFFF;
+          display: inline-block;
         }
+        p{
+          font-size:14px;
+          color:#FFFFFF;
+          margin-bottom:28px;
+        }
+        .qrcode{
+          display: flex;
+          width:300px;
+          .Qrleft{
+            .android{
+              width: 130px;
+              height: 40px; 
+              background:rgba(25,29,58,1);
+              border:1px solid rgba(85,99,130,1);
+              margin-bottom:12px;
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              span{
+                font-size:8px;
+                color:white;
+              }
+            }
+            .ipone{
+              width: 130px;
+              height: 40px;
+              background:rgba(25,29,58,1);
+              border:1px solid rgba(85,99,130,1);
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              span{
+                font-size:8px;
+                color:white;
+              }
+            }
+            .click{
+              background:rgba(94,107,137,1);
+            }
+          }
+          .Qrright{
+            margin-left:15px;
+            img{
+              widows:90px;
+              height:90px;
+            }
+          }
+        }
+    }
+    .right{
+        float:right;
     }
 }
 #page5 {
-    height: 460px;
-    /*padding: 140px 14% 0;*/
-    position: relative;
-    background: url("../../assets/images/app-download.png") no-repeat 0 0;
-    background-size: 100% 460px;
-    overflow: hidden;
-    @extend %flex;
-    align-items: flex-start;
-    .section-main {
-        width: 1200px;
-        margin: 90px auto 0;
+    width:1200px;
+    height: 500px;
+    margin:0 auto;
+    display: flex;
+    justify-content:space-between;
+    .showsection{
         display: flex;
-        .download {
-            flex: 1;
-            list-style-type: none;
-            color: #fff;
-            text-align: left;
-            line-height: 40px;
-            .qrcode {
-                font-size: 45px;
-            }
-            .description {
-                font-size: 18px;
-                margin: 20px 0;
-            }
-            .os {
-                @extend %flex;
-                flex-wrap: wrap;
-                width: 510px;
-                li {
-                    width: 135px;
-                    background: #fff;
-                    padding: 0 10px;
-                    border-radius: 5px;
-                    color: #333;
-                    margin-bottom: 20px;
-                    @extend %flex;
-                    box-sizing: border-box;
-                    span {
-                        font-size: 16px;
-                    }
-                }
-            }
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        img{
+            margin-top:12px;
         }
-        .phone_image {
-            width: 565px;
-            img {
-                width: 100%;
-            }
+        div{
+            font-weight: MicrosoftYaHei;
+            color:#FFFFFF;
+            font-size:9px;
+            margin-bottom:9px;
+        }
+        span{
+            color:#8090AF;
+            text-align: center;
         }
     }
+}
+#page1{
+  height:75px;
+  background:#0E0E28;
 }
 </style>
 <style lang="scss">
 #page2 {
-    .ptjy {
-        .tables {
-            .ivu-table {
-                .ivu-table-header {
-                    th {
-                        color: #8090AF;
-                        background: #191D3A;
-                    }
+  .ptjy {
+    .tables {
+        .ivu-table {
+              background-color:transparent;
+            .ivu-table-header {
+                th {
+                    color: #8090AF;
+                    background: #191D3A;
+                    border:0;
                 }
-                .ivu-table-header,
-                .ivu-table-body {
-                    .ivu-table-cell {
-                        padding: 5px 0;
-                    }
+            }
+            .ivu-table-header,
+            .ivu-table-body {
+                .ivu-table-cell {
+                    padding: 5px 0;
                 }
             }
         }
+        .ivu-table:before{
+            background-color:transparent;
+        }
+        .ivu-table:after{
+            width:0;
+            background-color:transparent;
+        }
     }
+  }
 }
 </style>
 <style lang="scss">
+.ivu-table-wrapper > .ivu-spin-fix{
+    background: rgba(17,22,52,1)
+}
+.ivu-table-wrapper>.ivu-spin-fix{
+    border:0;
+}
+.demo-table-info-row td{
+  background: #191D3A !important;
+  border:0;
+}
+.demo-table-error-row td{
+  background: rgba(17,22,52,1) !important;
+  border:0;
+}
 .bannerWrapper .ivu-carousel {
     height: 100%;
 }
@@ -1718,7 +1832,7 @@ li {
     background: #fff;
   .Central{
     background:url("../../assets/images/bg.png");
-    height:980px;
+    height:auto;
   }
 }
 
