@@ -1069,6 +1069,7 @@ export default {
     }
   }
   .ivu-form .ivu-form-item-label {
+    padding: 13px 12px 10px 0;
     color: #8090AF;
   }
   .ivu-form-item-content {

@@ -840,7 +840,6 @@ $night-color: #fff;
     .main {
         .left {
             background-color: #fff;
-            box-shadow: 0 0 2px #ccc;
             .handlers {
                 background-color: #fff;
             }
@@ -852,7 +851,6 @@ $night-color: #fff;
         }
         .imgtable {
             /*border-radius: 6px;*/
-            box-shadow: 0 0 2px #ccc;
             .handler {
                 > span {
                     border: 1px solid #333;
@@ -860,7 +858,6 @@ $night-color: #fff;
             }
         }
         .trade_wrap {
-            box-shadow: 0 0 2px #ccc;
             .trade_menu {
                 background-color: #fafafa;
                 > ul {
@@ -905,7 +902,6 @@ $night-color: #fff;
         }
     }
     .trade_panel {
-        box-shadow: 0 0 2px #ccc;
         .mask {
             background-color: rgba(0, 0, 0, 0.4);
             color: #fff;
@@ -919,10 +915,8 @@ $night-color: #fff;
         .right {
             .coin-menu {
                 background-color: #fff;
-                box-shadow: 0 2px 2px #ccc;
             }
             .trade-wrap {
-                box-shadow: 0 0 2px #ccc;
                 /*border-radius: 6px;*/
             }
             // .ivu-table-wrapper{
@@ -2113,7 +2107,7 @@ export default {
                 symbol: that.symbol,
                 interval: "5", // K线默认时间传值
                 timezone: "Asia/Shanghai",
-                toolbar_bg: "#222c41",
+                toolbar_bg: "#0E0E28",
                 container_id: "kline_container",
                 datafeed: that.datafeed,
                 library_path:

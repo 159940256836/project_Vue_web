@@ -1,174 +1,157 @@
 <template>
     <div class="content-wrap">
-            <div class="container" id="List">
-                <Row>
-                    <Col span="4">
-                    <div class="leftmenu left-box">
-                        <div class="user-info">
-                            <div class="avatar-box">
-                                <div class="user-face user-avatar-public">
-                                    <span class="user-avatar-in">{{usernameS}}</span>
-                                    <!-- <span class="online-status-box user-states ">
-                                                    <span class="circles"></span>
-                                                </span> -->
-                                </div>
-                                <div class="user-name">
-                                </div>
-                            </div>
-                            <!-- 个人姓名改为昵称 -->
-                            <span class="ml10" style="width: 105px;">{{strpro(user.username)}}</span>
-                        </div>
-                        <div class="deal-market-info">
-                            <p v-if="user.emailVerified==1">
-                                <i class="iconfont icon-youxiang111"></i>
-                                <span class="unmarket">{{$t('otc.tradeinfo.emaildone')}}</span>
-                            </p>
-                            <p v-else>
-                                <i class="iconfont icon-youxiang"></i>
-                                <span class="unmarket">{{$t('otc.tradeinfo.emailundo')}}</span>
-                            </p>
-                            <p v-if="user.phoneVerified==1">
-                                <i class="iconfont icon-dianhua111"></i>
-                                <span class="">{{$t('otc.tradeinfo.teldone')}}</span>
-                            </p>
-                            <p v-else>
-                                <i class="iconfont icon-dianhua"></i>
-                                <span class="">{{$t('otc.tradeinfo.telundo')}}</span>
-                            </p>
-                            <p v-if="user.idCardVerified==1">
-                                <i class="iconfont icon-renzheng111"></i>
-                                <span class="">{{$t('otc.tradeinfo.idcarddone')}}</span>
-                            </p>
-                            <p v-else>
-                                <i class="iconfont icon-renzheng"></i>
-                                <span class="unmarket">{{$t('otc.tradeinfo.idcardundo')}}</span>
-                            </p>
-                        </div>
-                        <div class="deal-user-trade-info">
-                            <p>{{$t('otc.tradeinfo.exchangetimes')}}：
-                                <em class="trade-times">{{user.transactions}}</em>
-                            </p>
-                            <!-- <p>平均放行：
-                                <em>0.21 分钟</em>
-                            </p> -->
-                        </div>
+        <div class="container" id="List">
+            <div class="leftmenu left-box">
+                <div class="user-info user-title">
+                    <div class="avatar-box">
+                        <img src="../../assets/images/fait/user.png">
+                        <!--<div class="user-face user-avatar-public">
+                            <span class="user-avatar-in">{{usernameS}}</span>
+                            &lt;!&ndash; <span class="online-status-box user-states ">
+                                <span class="circles"></span>
+                            </span> &ndash;&gt;
+                        </div>-->
                     </div>
-                    </Col>
-                    <Col span="20">
-                    <div class="right-safe">
-                        <div class="trade-right-box">
-                            <div class="trade-price">
-                                <p>
-                                    <label>{{$t('otc.tradeinfo.price')}}</label>
-                                    <span>{{user.price}} CNY / {{user.unit}}</span>
-                                    <!-- <span @click="update">
-                                              <a href="javascript:;">刷新</a>
-                                          </span> -->
-                                </p>
-                                <p>
-                                    <label>{{$t('otc.tradeinfo.num')}}</label>
-                                    <span>{{user.number}}&nbsp;{{user.unit}}</span>
-                                </p>
-                                <p>
-                                    <label>{{$t('otc.tradeinfo.paymethod')}}</label>
-                                    <span>{{user.payMode}}</span>
-                                </p>
-                                <p>
-                                    <label>{{$t('otc.tradeinfo.exchangelimitamount')}}</label>
-                                    <span>{{user.minLimit}} - {{user.maxLimit}} CNY</span>
-                                </p>
-                                <p>
-                                    <label>{{$t('otc.tradeinfo.location')}}</label>
-                                    <span>{{$t('otc.tradeinfo.location_text')}}</span>
-                                </p>
-                                <p>
-                                    <label>{{$t('otc.tradeinfo.exchangeperiod')}}</label>
-                                    <span>{{user.timeLimit}}{{$t('otc.tradeinfo.minute')}}</span>
-                                </p>
-                            </div>
-                            <div class="trade-operation">
-                                <div class="trade-price-input">
-                                    <p class="price-input-list">
-                                        <Poptip trigger="focus" :content="text2" style="width: 100%;">
-                                            <Input
-                                                @on-change="transform2"
-                                                @on-keyup="keyEvent2"
-                                                v-model="nuyNum"
-                                                size="large"
-                                                :placeholder="$t('otc.tradeinfo.numtip')"
-                                                style="width: 420px"
-                                            >
-                                                <span slot="prepend">{{user.unit}}</span>
-                                            </Input>
-                                        </Poptip>
-                                    </p>
-                                    <span class="exchange1">
-                                        <Icon type="md-swap" />
-                                    </span>
-                                    <p class="price-input-list">
-                                        <Poptip
-                                            trigger="focus"
-                                            :content="text1"
-                                            style="width: 100%;"
-                                        >
-                                            <Input
-                                                disabled
-                                                @on-change="transform1"
-                                                @on-keyup="keyEvent1"
-                                                v-model="buyPrice"
-                                                size="large"
-                                                :placeholder="$t('otc.tradeinfo.amounttip')"
-                                                style="width: 420px"
-                                            >
-                                                <span slot="prepend">CNY</span>
-                                            </Input>
-                                        </Poptip>
-                                    </p>
-                                </div>
-                                <textarea
-                                    v-model="remark"
-                                    type="text"
-                                    :placeholder="$t('otc.tradeinfo.remarktip')"
-                                    class="text-inputs"
-                                ></textarea>
-                                <div class="price-box">
-                                    <p class="show-price">
-                                        <em>{{type}}:</em>
-                                        <span>&nbsp;&nbsp;{{buyPrice}} CNY / {{nuyNum}} {{user.unit}}</span>
-                                    </p>
-                                    <button
-                                        class="btn-trade-in"
-                                        @click="submit"
-                                        :disabled="btnDisabled"
-                                    >{{btnType}}</button>
-                                </div>
-                            </div>
-                            <div class="trade-remark">
-                                <h5 class="titles">
-                                    <span>{{$t('otc.tradeinfo.remarktitle')}}</span>
-                                </h5>
-                                <p class="content">
-                                    {{user.remark}}
-                                </p>
-                                <h5 class="titles">
-                                    <span>{{$t('otc.tradeinfo.exchangetitle')}}</span>
-                                </h5>
-                                <div class="content">
-                                    <p>{{$t('otc.tradeinfo.exchange_tip1')}}</p>
-                                    <p>{{$t('otc.tradeinfo.exchange_tip2')}}</p>
-                                    <p>{{$t('otc.tradeinfo.exchange_tip3')}}</p>
-                                    <p>{{$t('otc.tradeinfo.exchange_tip4')}}</p>
-                                    <p>{{$t('otc.tradeinfo.exchange_tip5')}}</p>
-                                </div>
-                            </div>
-                            <div class="modal">
-                                <!---->
-                            </div>
-                        </div>
+                    <!-- 个人姓名改为昵称 -->
+                    <p class="ml10" style="margin-top: 5px;">{{ $t('uc.safe.nickname') }}：{{ strpro(user.username) }}</p>
+                    <p class="ml10">{{$t('otc.tradeinfo.exchangetimes')}}：{{ user.transactions }}</p>
+                </div>
+                <div class="user-info">
+                    <p>
+                        <img src="../../assets/images/fait/email.png">
+                        <span class="unmarket">
+                            {{ user.emailVerified==1 ? $t('otc.tradeinfo.emaildone'):$t('otc.tradeinfo.emailundo') }}
+                        </span>
+                    </p>
+                    <p>
+                        <img src="../../assets/images/fait/phone.png">
+                        <span class="">{{ user.phoneVerified==1 ? $t('otc.tradeinfo.teldone'):$t('otc.tradeinfo.telundo')}}</span>
+                    </p>
+                    <p>
+                        <img src="../../assets/images/fait/idcard.png">
+                        <span class="">{{ user.idCardVerified==1 ? $t('otc.tradeinfo.idcarddone'):$t('otc.tradeinfo.idcardundo')}}</span>
+                    </p>
+                </div>
+                <div class="user-info">
+                    <div class="user-title-p">
+                        <p>{{ $t('otc.tradeinfo.price') }}</p>
+                        <p>{{ user.price }} CNY / {{ user.unit }}</p>
+                        <p>{{ $t('otc.tradeinfo.num') }}</p>
+                        <p>{{ user.number }}&nbsp;{{ user.unit }}</p>
                     </div>
-                    </Col>
-                </Row>
+                </div>
+                <div class="user-info">
+                    <div class="user-title-p">
+                        <p>{{ $t('otc.tradeinfo.paymethod') }}</p>
+                        <p>{{ user.payMode }}</p>
+                        <p>{{ $t('otc.tradeinfo.exchangelimitamount') }}</p>
+                        <p>{{ user.minLimit }} - {{ user.maxLimit }} CNY</p>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <div class="user-title-p">
+                        <p>{{ $t('otc.tradeinfo.location') }}</p>
+                        <p>{{ $t('otc.tradeinfo.location_text') }}</p>
+                        <p>{{ $t('otc.tradeinfo.exchangeperiod') }}</p>
+                        <p>{{ user.timeLimit}}{{$t('otc.tradeinfo.minute') }}</p>
+                    </div>
+                </div>
             </div>
+            <div class="right-safe">
+                <div class="trade-right-box">
+                    <div class="trade-operation">
+                        <div>
+                            <Poptip
+                                trigger="focus"
+                                :content="text2"
+                                style="width: 100%;"
+                            >
+                                <Input
+                                    @on-change="transform2"
+                                    @on-keyup="keyEvent2"
+                                    v-model="nuyNum"
+                                    size="large"
+                                    :placeholder="$t('otc.tradeinfo.numtip')"
+                                    style="width: 420px"
+                                >
+                                    <span slot="prepend">{{ user.unit }}</span>
+                                </Input>
+                            </Poptip>
+                        </div>
+                        <div class="icon-main">
+                            <span class="exchange1">
+                                <Icon type="md-swap" style="transform:rotate(90deg);"/>
+                            </span>
+                        </div>
+                        <div>
+                            <Poptip
+                                trigger="focus"
+                                :content="text1"
+                                style="width: 100%;"
+                            >
+                                <Input
+                                    disabled
+                                    @on-change="transform1"
+                                    @on-keyup="keyEvent1"
+                                    v-model="buyPrice"
+                                    size="large"
+                                    :placeholder="$t('otc.tradeinfo.amounttip')"
+                                    style="width: 420px"
+                                >
+                                    <span slot="prepend">CNY</span>
+                                </Input>
+                            </Poptip>
+                        </div>
+                        <div class="trade-textarea">
+                            <textarea
+                                v-model="remark"
+                                type="text"
+                                :placeholder="$t('otc.tradeinfo.remarktip')"
+                                class="text-inputs"
+                            ></textarea>
+                        </div>
+                        <div class="trade-price-box">
+                            <p class="show-price">
+                                <span>{{type}}:</span>
+                                <span>&nbsp;&nbsp;{{buyPrice}} CNY / {{nuyNum}} {{user.unit}}</span>
+                            </p>
+                            <button
+                                class="btn-trade-in"
+                                @click="submit"
+                                :disabled="btnDisabled"
+                            >
+                                {{btnType}}
+                            </button>
+                        </div>
+                    </div>
+                    <!--备注信息-->
+                    <div class="trade-remark-box">
+                        <h5 class="titles">
+                            <span>{{$t('otc.tradeinfo.remarktitle')}}</span>
+                        </h5>
+                        <p class="content">
+                            {{user.remark}}
+                        </p>
+                    </div>
+                    <!--交易须知-->
+                    <div class="trade-remark">
+                        <h5 class="titles">
+                            <span>{{$t('otc.tradeinfo.exchangetitle')}}</span>
+                        </h5>
+                        <div class="content">
+                            <p>{{$t('otc.tradeinfo.exchange_tip1')}}</p>
+                            <p>{{$t('otc.tradeinfo.exchange_tip2')}}</p>
+                            <p>{{$t('otc.tradeinfo.exchange_tip3')}}</p>
+                            <p>{{$t('otc.tradeinfo.exchange_tip4')}}</p>
+                            <p>{{$t('otc.tradeinfo.exchange_tip5')}}</p>
+                        </div>
+                    </div>
+                    <div class="modal">
+                        <!---->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -447,7 +430,6 @@ export default {
 /* right */
 
 .trade-right-box {
-  margin-left: 20px;
   text-align: left;
 }
 
@@ -475,10 +457,10 @@ export default {
 }
 
 .trade-right-box .trade-operation {
-  padding: 20px;
-  background-color: white;
-  border: 1px solid #ebeff5;
-  margin-bottom: 20px;
+    height: 430px;
+    background-color: #111530;
+    margin-bottom: 20px;
+    padding: 40px 425px;
 }
 
 .trade-right-box .trade-operation .trade-price-input {
@@ -500,21 +482,32 @@ export default {
   width: 300px;
 }
 
-.trade-right-box .trade-operation .trade-price-input .exchange1 {
-  width: 10%;
-  text-align: center;
-  font-size: 24px;
+.trade-right-box .trade-operation .icon-main {
+    margin-bottom: 6px;
 }
 
+.trade-right-box .trade-operation .icon-main .exchange1 {
+    width: 10%;
+    text-align: center;
+    font-size: 22px;
+    color: #58698A;
+}
+
+.trade-right-box .trade-operation .trade-textarea {
+    margin-top: 30px;
+}
+.trade-right-box .trade-operation .trade-textarea textarea {
+    color: #8090AF;
+}
 .trade-right-box .trade-operation .text-inputs {
-  background-color: white;
-  border: 1px solid #c5cdd7;
+  background-color: transparent;
+  border: 1px solid #58698A;
   outline: none;
   display: block;
   height: 100px;
-  width: 100%;
+  width: 350px;
   resize: none;
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 20px;
 }
 
@@ -527,17 +520,11 @@ export default {
   align-items: center;
 }
 
-.trade-right-box .trade-operation .price-box .show-price {
-  border: 1px solid #c5cdd7;
-  width: 80%;
-  height: 58px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-left: 10px;
+.trade-right-box .trade-operation .trade-price-box .show-price {
+    width: 70%;
+    height: 35px;
+    float: left;
+    line-height: 35px;
 }
 
 .trade-right-box .trade-operation .price-box .show-price em {
@@ -546,45 +533,60 @@ export default {
   color: #0d214e;
 }
 
-.trade-right-box .trade-operation .price-box .show-price span {
+.trade-right-box .trade-operation .trade-price-box .show-price span {
   font-size: 18px;
-  color: #3399ff;
-  font-weight: bolder;
+  color: #8090AF;
 }
 
-.trade-right-box .trade-operation .price-box .btn-trade-in {
-  outline: medium;
-  border: 0;
-  color: white;
-  padding: 14px 20px;
-  background-color: #3399ff;
-  cursor: pointer;
-  width: 20%;
-  text-align: center;
-  font-size: 20px;
+.trade-right-box .trade-operation .trade-price-box .btn-trade-in {
+    width: 90px;
+    height: 35px;
+    outline: medium;
+    border: 0;
+    color: white;
+    background-color: #3399ff;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    float: right;
 }
-
+.trade-remark-box {
+    min-height: 100px;
+    background-color: #111530;
+    margin-bottom: 20px;
+}
 .trade-right-box .trade-remark {
-  background-color: white;
-  border: 1px solid #ebeff5;
+  background-color: #111530;
   padding: 30px 36px;
   margin-bottom: 30px;
 }
 
-.trade-right-box .trade-remark .titles {
-  margin-bottom: 15px;
+.trade-right-box .trade-remark-box .titles {
+    margin: 0 25px 15px;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #58698A;
 }
 
-.trade-right-box .trade-remark .titles span {
+.trade-right-box .trade-remark-box .titles span {
   font-size: 16px;
-  color: #0d214e;
+  color: #8090AF;
   padding-right: 30px;
 }
 
+.trade-right-box .trade-remark-box .content {
+    padding: 0 25px 20px;
+}
+.trade-right-box .trade-remark .titles {
+    padding-bottom: 15px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+}
 .trade-right-box .trade-remark .content {
   margin-bottom: 30px;
   font-size: 14px;
-  color: #8994a3;
+  color: #8090AF;
   line-height: 1.8;
 }
 
@@ -601,40 +603,75 @@ export default {
 }
 
 .content-wrap {
-  background: #f5f5f5;
+  background: #0e0e28;
   min-height: 600px;
-  padding-top: 80px;
+  padding-top: 60px;
 }
 
 .container {
-  width: 85%;
+  width: 1200px;
   margin: 0 auto;
-  min-width: 1200px;
-  background: white;
+    padding-bottom: 60px;
 }
 
 /* left */
 
 .leftmenu {
-  margin-bottom: 60px;
-  background: #fff;
-  position: relative;
-  min-height: 1px;
-  padding: 50px 15px 50px 10px;
+    padding: 26px 20px;
+    margin: 60px 0 25px;
+    background: #111530;
+    position: relative;
+    min-height: 1px;
+    height: 180px;
+    color: #8090AF;
+}
+
+.left-box {
+    display: flex;
 }
 
 .left-box .user-info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-bottom: 15px;
-  border-bottom: 1px dashed #ebeff5;
+    flex: 1;
+}
+.left-box .user-info img {
+    vertical-align: middle;
+}
+.left-box .user-info:nth-child(2) {
+    border-right: 1px solid #26324B;
 }
 
+.left-box .user-info:nth-child(2) p {
+    height: 40px;
+    line-height: 40px;
+}
+.left-box .user-info:nth-child(2) p img {
+    margin-right: 12px;
+}
+.left-box .user-info.user-title {
+    text-align: left;
+}
+.left-box .user-info .user-title-p {
+    width: 135px;
+    height: 100%;
+    float: right;
+}
+.left-box .user-info .user-title-p p {
+    height: 30px;
+    line-height: 30px;
+}
+.left-box .user-info .user-title-p p:nth-child(3) {
+    margin-top: 8px;
+ }
+.left-box .user-info:last-child .user-title-p {
+    width: 110px;
+    margin-right: 50px;
+}
+.left-box .user-info:last-child .user-title-p p{
+    text-align: right;
+}
 .avatar-box {
+    margin-top: 9px;
+    padding-left: 35px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -644,7 +681,6 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column;
 }
 
 .user-avatar-public {
@@ -686,9 +722,12 @@ export default {
   color: #fff;
 }
 
-.left-box span.ml10 {
-  color: #0d214e;
-  margin-left: 5px;
+.left-box p.ml10 {
+    height: 30px;
+    color: #8090AF;
+    margin-left: 5px;
+    padding-left: 20px;
+    line-height: 30px;
 }
 
 .left-box .deal-market-info {
@@ -765,6 +804,34 @@ export default {
   font-style: normal;
   color: #0d214e;
 }
+</style>
+<style lang="scss">
+    .ivu-input-group-append,
+    .ivu-input-group-prepend {
+        width: 60px;
+        background: transparent;
+        border-radius: 0;
+        border: 1px solid #58698A;
+        border-right: 0;
+        color: #8090AF;
+    }
+    .ivu-input,
+    .ivu-input[disabled] {
+        background: transparent;
+        border-radius: 0;
+        border: 1px solid #58698A;
+    }
+    .ivu-input[disabled] {
+        &:hover {
+            border: 1px solid #58698A;
+        }
+    }
+    .ivu-input-group-large .ivu-input {
+        color: #8090AF;
+    }
+    .ivu-input-group {
+        width: 350px !important;
+    }
 </style>
 
 

@@ -45,16 +45,42 @@
                                 <div class="mymsg">
                                     <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
                                 </div>
-                                 <Dropdown @on-click="goBi">
+                                <!--@on-click="goBi"-->
+                                 <Dropdown>
                                     <a href="javascript:void(0)">
                                         <span class="header-img">{{$t("uc.menuTitle.moneyManagement")}}</span>
                                         <Icon type="md-arrow-dropdown" size="16" />
                                     </a>
                                     <DropdownMenu slot="list">
-                                        <DropdownItem name="recharge"><span>{{$t("exchange.recharge")}}</span></DropdownItem>
-                                        <DropdownItem name="pickup"><span>{{$t("uc.finance.money.pickup")}}</span></DropdownItem>
-                                        <DropdownItem name="asset"><span>{{$t("uc.finance.money.assets")}}</span></DropdownItem>
-
+                                        <!--个人资产-->
+                                        <DropdownItem name="asset">
+                                            <router-link to="/personal">{{ $t('uc.finance.personalassets') }}</router-link>
+                                            <!--<span>{{$t("uc.finance.personalassets")}}</span>-->
+                                        </DropdownItem>
+                                        <!--资产流水-->
+                                        <DropdownItem name="assetsWater">
+                                            <span>{{ $t("uc.finance.billdetail") }}</span>
+                                        </DropdownItem>
+                                        <!--充币-->
+                                        <DropdownItem name="recharge">
+                                            <span>{{ $t("uc.finance.charge") }}</span>
+                                        </DropdownItem>
+                                        <!--提币-->
+                                        <DropdownItem name="pickup">
+                                            <span>{{ $t("uc.finance.pickup") }}</span>
+                                        </DropdownItem>
+                                        <!--提币地址管理-->
+                                        <DropdownItem name="rechargeAddress">
+                                            <span>{{ $t("uc.finance.withdraw.addressmanager") }}</span>
+                                        </DropdownItem>
+                                        <!--积分管理-->
+                                        <DropdownItem name="pointManage">
+                                            <span>{{ $t("uc.finance.pointManagement") }}</span>
+                                        </DropdownItem>
+                                        <!--糖果赠送管理-->
+                                        <DropdownItem name="CandyGiftManage">
+                                            <span>{{ $t("uc.finance.CandyGivingRecords") }}</span>
+                                        </DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Dropdown>
@@ -464,13 +490,29 @@ export default {
             })
         },
         goBi(name) {
-               if (name == "recharge") {
-                    this.$router.push("/uc/recharge");
-                }else if (name == "pickup") {
-                this.$router.push("/uc/withdraw");
-            }else if(name == 'asset'){
-                this.$router.push("/uc/money");
-            }
+             switch (name) {
+                 case 'asset':
+                     this.$router.push("/uc/personal");
+                     break;
+                 case 'assetsWater':
+                     this.$router.push("/uc/record");
+                     break;
+                 case 'recharge':
+                     this.$router.push("/uc/recharge");
+                     break;
+                 case 'pickup':
+                     this.$router.push("/uc/withdraw");
+                     break;
+                 case 'rechargeAddress':
+                     this.$router.push("/uc/Recharge");
+                     break;
+                 case 'pointManage':
+                     this.$router.push("/uc/bjc");
+                     break;
+                 case 'CandyGiftManage':
+                     this.$router.push("/uc/giveRecord");
+                     break;
+             }
         },
         handleScroll () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -686,11 +728,12 @@ export default {
                             color: #fff;
                         }
                         .ivu-select-dropdown {
+                            background: #10122B;
                             z-index: 901;
                             #change_language_theme {
                                 li {
-                                    background: #fff;
-                                    color: #333;
+                                    background: transparent;
+                                    color: #3399ff;
                                 }
                             }
                         }
@@ -882,6 +925,16 @@ ul,li{
     background: #fff;
     color: #3399ff;
 }
+.ivu-select-dropdown {
+    background: #10122B;
+    .ivu-dropdown-item {
+        color: #8090AF;
+        &:hover {
+            background: transparent;
+            color: #3399ff;
+        }
+    }
+}
 .page-view {
     .page-content {
         .layout {
@@ -1060,7 +1113,7 @@ body {
 }
 
 .layout-ceiling-main .ivu-select-dropdown {
-    background: #ffffff;
+    background: #10122B;
     margin-left: 25px;
     .ivu-dropdown-item {
         color: #333;
@@ -1541,6 +1594,8 @@ body {
     border: none;
 }
 .ivu-table-wrapper > .ivu-spin-fix {
+    border: 0;
+    background-color: rgba(255,255,255,.1);
     border-color: #fff;
 }
 /*加载样式重置*/

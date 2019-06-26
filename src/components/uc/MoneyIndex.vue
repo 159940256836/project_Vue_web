@@ -3,9 +3,18 @@
     <div class="nav-right col-xs-12 col-md-10 padding-right-clear">
       <div class="bill_box rightarea padding-right-clear">
         <div class="bill_box rightarea padding-right-clear">
-          <Tabs v-model="splitcomponentContent" @on-click="changeTab">
-            <TabPane :label="$t('myAccount._BitcoinAccount')" name="COIN"></TabPane>
-            <TabPane :label="$t('myAccount._legaTenderAccount')" name="CURRENCY"></TabPane>
+          <Tabs
+            v-model="splitcomponentContent"
+            @on-click="changeTab"
+          >
+            <TabPane
+              :label="$t('myAccount._BitcoinAccount')"
+              name="COIN"
+            ></TabPane>
+            <TabPane
+              :label="$t('myAccount._legaTenderAccount')"
+              name="CURRENCY"
+            ></TabPane>
             <!-- <TabPane :label="$t('myAccount._LeveragedAccounts')" name="LEVER"></TabPane> -->
           </Tabs>
           <!-- <keep-alive> -->
@@ -345,64 +354,110 @@ export default {
 }
 </script>
 <style lang="scss">
+  .ivu-btn {
+    border-radius: 0;
+  }
+  .ivu-modal-header-inner {
+    color: #fff;
+  }
+  .ivu-modal-header {
+    border-bottom: 1px solid #2A3850;
+  }
+  .ivu-input,
+  .ivu-input-group-append {
+    height: 40px;
+    border-radius: 0;
+  }
+  .ivu-input-group-append {
+    padding: 4px 30px;
+    background: transparent;
+    border-left: 0;
+    border: 1px solid #58698A;
+  }
+  .ivu-input[disabled] {
+    background: #111530;
+    height: 40px;
+    &:hover {
+      border-color: #58698A;
+    }
+  }
+
+  .ivu-btn-default {
+    background: transparent;
+    border: 1px solid #8090AF;
+    color: #8090AF;
+    &:hover {
+      background: #111530;
+    }
+  }
 .nav-right {
+  .ivu-tabs-bar {
+    margin-bottom: 0;
+  }
   .ivu-tabs-nav .ivu-tabs-tab-active{
     color:#2d8cf0 !important;
   }
     .rightarea.bill_box {
-        .shaow {
-            padding: 5px;
-        }
-                .ivu-table-body {
-                    td {
-                        background: none;
-                        .ivu-table-cell {
-                            p .ivu-btn {
-                                background: #fff;
-                                height: 25px;
-                                padding: 0 10px;
-                                border:0 !important;
-                                span {
-                                    display: inline-block;
-                                    line-height: 25px;
-                                    font-size: 12px;
-                                }
-                            }
-                            p .ivu-btn.ivu-btn-info {
-                                border: 1px solid #39f;
-                                border-radius: 20px;
-                                span {
-                                    color: #39f;
-                                }
-                            }
-                            p .ivu-btn.ivu-btn-info:active{
-                              color:white;
-                              background:white;
-                              border-color:white;
-                            }
-                            p .ivu-btn.ivu-btn-error {
-                                border: 1px solid #f15057;
-                                border-radius: 20px;
-                                span {
-                                    color: #f15057;
-                                }
-                            }
-                            p .ivu-btn.ivu-btn-primary {
-                                border: 1px solid #00b275;
-                                border-radius: 20px;
-                                span {
-                                    color: #00b275;
-                                }
-                            }
-                        }
-                    }
-                }
+      .ivu-table-body {
+        td {
+          .ivu-table-cell {
+            p .ivu-btn {
+              background: #fff;
+              height: 25px;
+              padding: 0 10px;
+              border:0 !important;
+              span {
+                  display: inline-block;
+                  line-height: 25px;
+                  font-size: 12px;
+              }
             }
+            p .ivu-btn.ivu-btn-info {
+              border: 1px solid #39f;
+              border-radius: 20px;
+              span {
+                  color: #39f;
+              }
+            }
+            p .ivu-btn.ivu-btn-info:active{
+              color:white;
+              background:white;
+              border-color:white;
+            }
+            p .ivu-btn.ivu-btn-error {
+              border: 1px solid #f15057;
+              border-radius: 20px;
+              span {
+                  color: #f15057;
+              }
+            }
+            p .ivu-btn.ivu-btn-primary {
+              border: 1px solid #00b275;
+              border-radius: 20px;
+              span {
+                  color: #00b275;
+              }
+            }
+          }
+        }
+      }
     }
-    .hidden-assets{
-    display: flex;
-    justify-content: flex-end;
+}
+    .shaow {
+      position: relative;
+      .hidden-assets{
+        position: absolute;
+        width: 300px;
+        top: -58px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+        right: 35px;
+      }
     }
+
      #moneyindex .ivu-table-row .ivu-table-cell{
        display: flex;
        justify-content: center;
@@ -420,10 +475,8 @@ export default {
 .nav-right {
     height: auto;
     overflow: hidden;
-    padding: 0 0 0 15px;
     background: #fff;
     .rightarea.bill_box {
-        padding-left: 15px;
         width: 100%;
         height: auto;
         overflow: hidden;

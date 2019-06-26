@@ -1,19 +1,185 @@
 <template>
     <div class="content-wrap">
         <div class="container chat-in-box" id="List">
-            <p style="padding: 10px 0 10px 20px;font-size: 16px;">
-              <router-link to="/uc/order" style="color:#3399ff;">{{$t('otc.myorder')}}</router-link> ><span style="font-size:14px;">{{$t('otc.chat.orderDetails')}}</span>
+            <p style="padding: 10px 0 10px 20px;font-size: 18px;">
+              <router-link
+                  to="/uc/order"
+                  style="color:#3399ff;"
+              >
+                  {{$t('otc.myorder')}}
+              </router-link> >
+                <span style="font-size:16px;color: #8090AF;">{{$t('otc.chat.orderDetails')}}</span>
               </p>
+
             <Row class="chat-in">
-                <Col span="4">
+                <div class="trading">
+                    <table class="gridtable">
+                        <tr>
+                            <th>
+                                <span v-if="tradeType==0">{{$t('otc.chat.seller')}}:</span>
+                                <span v-else>{{$t('otc.chat.buyer')}}:</span>
+                            </th>
+                            <th>{{ $t('otc.chat.order') }}</th>
+                            <th>{{ $t('otc.chat.transmoney') }}(CNY)</th>
+                            <th>{{ $t('otc.chat.transprice') }}(CNY)</th>
+                            <th>{{ $t('otc.chat.transnum') }}({{ msg.unit }})</th>
+                            <th>{{ $t('otc.chat.orderstatus') }}</th>
+                            <th v-if="reserveTime !== '0'">
+                                {{ $t('otc.chat.timeRemain') }}
+                            </th>
+                            <th>{{ $t('exchange.action') }}</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <router-link :to="{ path: '/checkuser', query: { 'id': msg.otherSide }}">
+                                <!-- {{msg.otherSide && msg.otherSide.length>2 && strpro(msg.otherSide)}} -->
+                                    {{msg.otherSide}}
+                                </router-link>
+                            </th>
+                            <th>{{ msg.orderSn }}</th>
+                            <th>{{ msg.money }}</th>
+                            <th>{{ msg.price }}</th>
+                            <th>{{ msg.amount }}</th>
+                            <th>
+                                <span>{{ statusTextStr }}</span>
+                            </th>
+                            <th v-if="reserveTime !== '0'">
+                                <span v-show="statusBtn==1">{{ reserveTime }}</span>
+                            </th>
+                            <th>
+                                <div v-show="statusBtn==1&&tradeType==0">
+                                    <Button
+                                        type="warning"
+                                        @click="modal1 = true"
+                                    >
+                                        {{$t('otc.chat.orderstatus_1')}}
+                                    </Button>
+                                    <Button
+                                        @click="modal3 = true"
+                                        type="error"
+                                    >
+                                        {{$t('otc.chat.orderstatus_4')}}
+                                    </Button>
+                                </div>
+                                <div v-show="statusBtn==2&&tradeType==0">
+                                    <Button
+                                        type="warning"
+                                        @click="appearOrder"
+                                    >
+                                        {{$t('otc.chat.orderstatus_2')}}
+                                    </Button>
+                                    <Button
+                                            @click="modal3 = true"
+                                            type="error"
+                                    >
+                                        {{$t('otc.chat.orderstatus_4')}}
+                                    </Button>
+                                </div>
+                                <div v-show="statusBtn==2&&tradeType==1">
+                                    <Button
+                                            type="warning"
+                                            @click="modal5 = true"
+                                    >
+                                        {{$t('otc.chat.orderstatus_3')}}
+                                    </Button>
+                                    <Button
+                                        @click="appearOrder"
+                                        type="error"
+                                    >
+                                        {{$t('otc.chat.orderstatus_5')}}
+                                    </Button>
+                                </div>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="account-main">
+                    <div class="account-left">
+                        <div class="account-info" v-if="bankInfo&&bankInfo!=null">
+                            <i class="icons bankfor"></i>
+                            <span>{{ payInfo != null ? payInfo.realName : "" }} </span>
+                            <span>{{ bankInfo.branch }}</span>
+                            <span>{{ bankInfo.cardNo }}</span>
+                        </div>
+                        <div class="account-info" v-else>
+                            <i class="icons bankfor"></i>
+                            <span>{{$t('otc.chat.tip1')}}</span>
+                        </div>
+                        <div class="account-info" v-if="alipay&&alipay!=null">
+                            <i class="icons alipay"></i>
+                            <span>{{$t('otc.chat.zfb')}}</span>
+                            <span>{{alipay.aliNo}}</span>
+                            <span
+                                v-if="alipay&&alipay!=null&&alipay.qrCodeUrl!=null&&alipay.qrCodeUrl!=''"
+                            >
+                                <a @click="showQRCode(1)">
+                                    {{$t('otc.chat.qrcode')}}
+                                </a>
+                            </span>
+                        </div>
+                        <div class="account-info" v-else>
+                            <i class="icons alipay"></i>
+                            <p>{{$t('otc.chat.tip2')}}</p>
+                        </div>
+                        <div class="account-info" v-if="wechatPay&&wechatPay!=null">
+                            <i class="icons wechat"></i>
+                            <span>{{$t('otc.chat.wx')}}</span>
+                            <span>{{wechatPay.wechat}}</span>
+                            <p
+                                v-if="wechatPay&&wechatPay!=null&&wechatPay.qrWeCodeUrl!=null&&wechatPay.qrWeCodeUrl!=''"
+                            >
+                                <a @click="showQRCode(2)">
+                                    {{$t('otc.chat.qrcode')}}
+                                </a>
+                            </p>
+                        </div>
+                        <div class="account-info" v-else>
+                            <i class="icons wechat"></i>
+                            <span>{{$t('otc.chat.tip3')}}</span>
+                        </div>
+                    </div>
+                    <div class="account-border"></div>
+                    <div class="account-right">
+                        <div style="padding: 13px 0;" v-if="tradeType==0">
+                            <h5 class="account-tip">{{$t('otc.chat.operatetip')}}:</h5>
+                            <div class="account-text">
+                                <p>1、{{$t('otc.chat.operatetip_1')}}“
+                                    <em>{{$t('otc.chat.finishpayment')}}</em>”。{{$t('otc.chat.operatetip_1_1')}}。</p>
+                                <p>2、{{$t('otc.chat.operatetip_1_2')}}。</p>
+                            </div>
+                            <span>
+                                <b style="color: #fff">{{$t('otc.chat.note')}}：</b>
+                            </span><br>
+                            <span style="color: #8090AF">{{$t('otc.chat.notetip')}}</span><br>
+                        </div>
+                        <div style="padding: 13px 0;" v-else>
+                            <h5 class="account-tip">{{$t('otc.chat.operatetip')}}:</h5>
+                            <div class="account-text">
+                                <p>1、{{$t('otc.chat.operatetip_2_1')}}“
+                                    <em>{{$t('otc.chat.confirmrelease')}}</em>”{{$t('otc.chat.paydigital')}}！</p>
+                                <p>2、{{$t('otc.chat.operatetip_2_2')}}</p>
+                                <p>3、{{$t('otc.chat.operatetip_2_3')}}</p>
+                            </div>
+                            <span>
+                                <b style="color: #fff">{{$t('otc.chat.note')}}：</b>
+                            </span><br>
+                            <span style="color: #8090AF">{{$t('otc.chat.notetip')}}</span><br>
+                        </div>
+                    </div>
+                </div>
+                <p style="color: #fff;height: 40px;line-height: 40px;font-size: 18px;">{{ $t('otc.chat.online_message') }}</p>
+                <div class="online-chat">
+                    <chatline :msg="msg"></chatline>
+                </div>
+                <!--<Col span="4">
                 <div class="leftmenu left-box chat-right">
                     <div class="chat-right-in">
                         <h6 class="h6-flex">
-                            <span v-if="tradeType==0">{{$t('otc.chat.seller')}}:</span>
+                            <span v-if="tradeType==0">{{ $t('otc.chat.seller') }}:</span>
                             <span v-else>{{$t('otc.chat.buyer')}}:</span>
                             <router-link :to="{ path: '/checkuser', query: { 'id': msg.otherSide }}">
-                            <!-- {{msg.otherSide && msg.otherSide.length>2 && strpro(msg.otherSide)}} -->
-                            {{msg.otherSide}}
+                            &lt;!&ndash; {{msg.otherSide && msg.otherSide.length>2 && strpro(msg.otherSide)}} &ndash;&gt;
+                                {{msg.otherSide}}
                             </router-link>
                         </h6>
                               <Poptip v-if="tradeType==0&&msg.memberMobile" class="pop-tel" :content="msg.memberMobile">
@@ -50,22 +216,53 @@
                         </div>
                         <div class="bottom-btn">
                             <div style="padding-top:20px;">
-                                <h6 style="font-weight: 600">{{$t('otc.chat.orderstatus')}}:
+                                <h6 style="font-weight: 600">
+                                    {{$t('otc.chat.orderstatus')}}:
                                     <span>{{statusTextStr}}</span>
                                 </h6>
                                 <div v-show="statusBtn==1&&tradeType==0">
-                                    <Button type="warning" @click="modal1 = true">{{$t('otc.chat.orderstatus_1')}}</Button>
-                                    <Button @click="modal3 = true" type="error">{{$t('otc.chat.orderstatus_4')}}</Button>
+                                    <Button
+                                        type="warning"
+                                        @click="modal1 = true"
+                                    >
+                                        {{$t('otc.chat.orderstatus_1')}}
+                                    </Button>
+                                    <Button
+                                        @click="modal3 = true"
+                                        type="error"
+                                    >
+                                        {{$t('otc.chat.orderstatus_4')}}
+                                    </Button>
                                 </div>
                                 <div v-show="statusBtn==2&&tradeType==0">
-                                    <Button type="warning" @click="appearOrder">{{$t('otc.chat.orderstatus_2')}}</Button>
-                                    <Button @click="modal3 = true" type="error">{{$t('otc.chat.orderstatus_4')}}</Button>
+                                    <Button
+                                        type="warning"
+                                        @click="appearOrder"
+                                    >
+                                        {{$t('otc.chat.orderstatus_2')}}
+                                    </Button>
+                                    <Button
+                                        @click="modal3 = true"
+                                        type="error"
+                                    >
+                                        {{$t('otc.chat.orderstatus_4')}}
+                                    </Button>
                                 </div>
                                 <div v-show="statusBtn==2&&tradeType==1">
-                                    <Button type="warning" @click="modal5 = true">{{$t('otc.chat.orderstatus_3')}}</Button>
-                                    <Button @click="appearOrder" type="error">{{$t('otc.chat.orderstatus_5')}}</Button>
+                                    <Button
+                                        type="warning"
+                                        @click="modal5 = true"
+                                    >
+                                        {{$t('otc.chat.orderstatus_3')}}
+                                    </Button>
+                                    <Button
+                                        @click="appearOrder"
+                                        type="error"
+                                    >
+                                        {{$t('otc.chat.orderstatus_5')}}
+                                    </Button>
                                 </div>
-                                <!-- <Button type="primary" v-show="statusBtn==2" @click="modal4 = true" long></Button> -->
+                                &lt;!&ndash; <Button type="primary" v-show="statusBtn==2" @click="modal4 = true" long></Button> &ndash;&gt;
                             </div>
                         </div>
                     </div>
@@ -86,7 +283,7 @@
                         <p>
                             {{$t('otc.chat.and')}}
                             <router-link :to="{ path: '/checkuser', query: { 'id': msg.otherSide }}">
-                            <!-- {{msg.otherSide && msg.otherSide.length>2 && strpro(msg.otherSide)}} -->
+                            &lt;!&ndash; {{msg.otherSide && msg.otherSide.length>2 && strpro(msg.otherSide)}} &ndash;&gt;
                             {{msg.otherSide}}
                             </router-link>
                             {{$t('otc.chat.transition')}}
@@ -145,7 +342,7 @@
                     </Row>
                     <chatline :msg="msg"></chatline>
                 </div>
-                </Col>
+                </Col>-->
             </Row>
         </div>
         <Modal v-model="modal1" :title="$t('otc.chat.tip')" @on-ok="ok1">
@@ -451,7 +648,9 @@ export default {
         .then(response => {
           var resp = response.body;
           if (resp.code == 0) {
-            this.msg = resp.data;
+              console.log(resp, this.msg);
+              this.msg = resp.data;
+              this.detailRecords = this.msg
             this.payInfo = this.msg.payInfo;
             if (this.payInfo == null) {
               this.bankInfo = this.alipay = this.wechatPay == null;
@@ -600,7 +799,7 @@ export default {
   background-image: url(../../assets/img/bankcard.png);
 }
 .content-wrap {
-  background: #f5f5f5;
+  background: #0e0e28;
   min-height: 600px;
   padding-top: 80px;
 }
@@ -668,13 +867,85 @@ export default {
 /* -- */
 
 .content-wrap {
-  background: #f5f5f5;
+  background: #0e0e28;
   min-height: 515px;
 }
 
 .container {
+    width: 1200px;
   /*padding-top: 30px;*/
-  margin: 0 auto;
+    margin: 0 auto;
+    background: #0e0e28;
 }
 </style>
-
+<style lang="scss" scoped>
+    .chat-in {
+        .trading,
+        .account-main,
+        .online-chat {
+            background: #191D3A;
+        }
+        .trading {
+            margin-bottom: 20px;
+            display: flex;
+            .gridtable {
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                tr {
+                    height: 50px;
+                    flex: 1;
+                    th {
+                        color: #8090AF;
+                        span {
+                            color: #8090AF;
+                        }
+                    }
+                }
+            }
+        }
+        .account-main {
+            height: 230px;
+            padding: 35px 30px;
+            margin-bottom: 20px;
+            display: flex;
+            .account-left {
+                flex: 1;
+                .account-info {
+                    height: 50px;
+                    line-height: 50px;
+                    span {
+                        margin-left: 8px;
+                        color: #8090AF;
+                    }
+                }
+            }
+            .account-border {
+                width: 1px;
+                height: 118px;
+                background: #2A3850;
+                margin: 20px 0 0 50px;
+            }
+            .account-right {
+                flex: 4;
+                margin-left: 56px;
+                .account-tip {
+                    font-size:14px;
+                    color:#fff;
+                }
+                .account-text {
+                    color: #8090AF;
+                    margin-bottom: 10px;
+                    p {
+                        line-height: 25px;
+                    }
+                }
+            }
+        }
+        .online-chat {
+            height: 625px;
+            margin-bottom: 50px;
+        }
+    }
+</style>
+<style lang="scss"></style>

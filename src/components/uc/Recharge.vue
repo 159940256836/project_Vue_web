@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-rights">
+    <div>
         <div class="nav-right">
             <div class="bill_box">
                 <!-- <section class="trade-group merchant-top">
@@ -9,55 +9,82 @@
                 <section>
                     <div class="table-inner action-box open">
                         <!-- <i class="angle" style="right: 71px;"></i> -->
-                        <div class="action-inner">
-                            <div class="inner-left">
-                                <p class="describe">{{$t('uc.finance.recharge.symbol')}}</p>
-                                <Select v-model="coinType" style="width:100px;margin-top: 23px;" @on-change="changeCoin">
-                                    <Option v-for="item in coinList" :value="item.coin.unit" :key="item.coin.unit">{{ item.coin.unit }}</Option>
-                                </Select>
-                            </div>
-                            <div class="inner-box deposit-address">
-                                <p class="describe">{{$t('uc.finance.recharge.address')}}</p>
-                                <div class="title">
-                                    <Input
-                                        v-model="qrcode.value"
-                                        readonly
-                                        style="width: 400px"
-                                    ></Input>
-                                    <Button
-                                        v-if="buttonAdd"
-                                        class="copy-add"
-                                        @click="resetAddress"
-                                        :loading="loadingButton1"
+                        <div class="action-main">
+                            <div class="action-inner">
+                                <div class="inner-left">
+                                    <span class="describe">{{$t('uc.finance.recharge.symbol')}}</span>:&nbsp;&nbsp;
+                                    <Select
+                                        v-model="coinType"
+                                        style="width:128px;"
+                                        @on-change="changeCoin"
                                     >
-                                        {{ !loadingButton1 ? $t("uc.finance.money.getaddress") : $t("uc.finance.money.getaddress")}}
-                                        <!--获取充币地址-->
-                                    </Button>
-                                    <a v-clipboard:copy="qrcode.value" v-clipboard:success="onCopy" v-clipboard:error="onError" href="javascript:;" id="copyBtn" class="link-copy">
-                                        {{$t('uc.finance.recharge.copy')}}
-                                    </a>
-                                    <a id="showQRcode" class="link-qrcode" href="javascript:;" @click="showEwm">
-                                        {{$t('uc.finance.recharge.qrcode')}}
-                                        <Modal v-model="isShowEwm">
-                                            <!--<div v-show="isShowEwm" class="show-qrcode">-->
-                                            <!--充币地址二维码-->
-                                            <p slot="header" style="text-align: center;">{{$t('uc.finance.money.qrcode')}}</p>
-                                            <div class="show-qrcode" style="text-align: center;">
-                                                <!--<qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
-                                                <qriously :value="qrcode.value" :size="qrcode.size" />
-                                            </div>
-                                            <div slot="footer"></div>
-                                        </Modal>
-                                    </a>
+                                        <Option
+                                            v-for="item in coinList"
+                                            :value="item.coin.unit"
+                                            :key="item.coin.unit"
+                                        >
+                                            {{ item.coin.unit }}
+                                        </Option>
+                                    </Select>
+                                </div>
+                                <div class="inner-box deposit-address">
+                                    <span class="describe">{{$t('uc.finance.recharge.address')}}</span>:
+                                    <div class="title">
+                                        <Input
+                                            v-model="qrcode.value"
+                                            readonly
+                                            style="width: 400px"
+                                        />
+                                        <span
+                                            v-if="buttonAdd"
+                                            class="copy-add"
+                                            @click="resetAddress"
+                                            :loading="loadingButton1"
+                                        >
+                                            {{ !loadingButton1 ? $t("uc.finance.money.getaddress") : $t("uc.finance.money.getaddress")}}
+                                            <!--获取充币地址-->
+                                        </span>
+                                        <a
+                                            v-clipboard:copy="qrcode.value"
+                                            v-clipboard:success="onCopy"
+                                            v-clipboard:error="onError"
+                                            href="javascript:;"
+                                            id="copyBtn"
+                                            class="link-copy"
+                                        >
+                                            {{$t('uc.finance.recharge.copy')}}
+                                        </a>
+                                        <a
+                                            id="showQRcode"
+                                            class="link-qrcode"
+                                            href="javascript:;"
+                                            @click="showEwm"
+                                        >
+                                            {{$t('uc.finance.recharge.qrcode')}}
+                                            <Modal v-model="isShowEwm">
+                                                <!--<div v-show="isShowEwm" class="show-qrcode">-->
+                                                <!--充币地址二维码-->
+                                                <p slot="header" style="text-align: center;">
+                                                    {{$t('uc.finance.money.qrcode')}}
+                                                </p>
+                                                <div class="show-qrcode" style="text-align: center;">
+                                                    <!--<qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
+                                                    <qriously :value="qrcode.value" :size="qrcode.size" />
+                                                </div>
+                                                <div slot="footer"></div>
+                                            </Modal>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="action-content">
+                                <div class="action-body">
+                                    <p class="acb-p1">{{$t('common.tip')}}</p>
+                                    <p class="acb-p2">• {{$t('uc.finance.recharge.msg1')}}<br>• {{$t('uc.finance.recharge.msg2')}}<br>• {{$t('uc.finance.recharge.msg3')}}<br>• {{$t('uc.finance.recharge.msg4')}}<br>• {{$t('uc.finance.recharge.msg5')}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="action-content">
-                            <div class="action-body">
-                                <p class="acb-p1">{{$t('common.tip')}}</p>
-                                <p class="acb-p2">• {{$t('uc.finance.recharge.msg1')}}<br>• {{$t('uc.finance.recharge.msg2')}}<br>• {{$t('uc.finance.recharge.msg3')}}<br>• {{$t('uc.finance.recharge.msg4')}}<br>• {{$t('uc.finance.recharge.msg5')}}</p>
-                            </div>
-                        </div>
+
                         <div class="action-content">
                             <div class="action-body">
                                 <p class="acb-p1">{{$t('uc.finance.recharge.record')}}</p>
@@ -124,6 +151,7 @@ export default {
             if (this.coinType != "") {
                 var temp = [];
                 this.tableRecharge = this.allTableRecharge.filter(ele=>ele.symbol == this.coinType);
+                console.log(this.tableRecharge);
             } else {
                 this.tableRecharge = this.allTableRecharge;
             }
@@ -143,7 +171,7 @@ export default {
             const list = (this.coinList.length>0 && this.coinList.filter(ele=>ele.coin.unit == value)) || [];
             // this.resetAddress();
             // this.getMoney();
-            if(list.length>0){
+            if(list.length>0) {
                 this.qrcode.value = list[0].address || '';
                 this.qrcode.coinName = list[0].coin.name.toLowerCase();
             }
@@ -287,51 +315,89 @@ export default {
     }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .table-inner {
     position: relative;
     text-align: left;
     border-radius: 3px;
+    .action-main {
+        background: #111530;
+        height:314px;
+        padding: 25px;
+        .action-inner {
+            width: 100%;
+            display: table;
+            .inner-box.deposit-address {
+                width: 80%;
+                line-height: 50px;
+            }
+        }
+
+        .action-inner {
+            .inner-box {
+                display: table-cell;
+                width: 100%;
+                .title {
+                    position: relative;
+                    .copy {
+                        user-select: text;
+                    }
+                    .copy-add {
+                        width: 90px;
+                        height: 30px;
+                        text-align: center;
+                        position: absolute;
+                        top: 14px;
+                        left: 37%;
+                        line-height: 30px;
+                        display: inline-block;
+                        font-size: 14px;
+                        color: #3399ff;
+                        cursor: pointer;
+                        border-left: 1px solid #58698A;
+                    }
+                    a.link-copy {
+                        font-size: 14px;
+                        margin-left: 20px;
+                        color: #3399ff;
+                    }
+
+                }
+            }
+        }
+    }
 }
 
 .acb-p1 {
-    font-size: 18px;
+    color: #fff;
+    font-size: 16px;
     font-weight: 600;
     line-height: 50px;
 }
 
 .acb-p2 {
+    color: #8090AF;
     font-size: 14px;
     line-height: 24px;
 }
 
-.action-inner {
-    width: 100%;
-    display: table;
-}
+/*.action-box .title .copy {*/
+/*    user-select: text;*/
+/*}*/
 
-.action-inner .inner-box {
-    display: table-cell;
-    width: 100%;
-}
+/*.action-box .title .copy-add {*/
+/*    height: 32px;*/
+/*    text-align: center;*/
+/*    font-size: 12px;*/
+/*    background: #3399ff;*/
+/*    color: #fff;*/
+/*}*/
 
-.action-box .title .copy {
-    user-select: text;
-}
-
-.action-box .title .copy-add {
-    height: 32px;
-    text-align: center;
-    font-size: 12px;
-    background: #3399ff;
-    color: #fff;
-}
-
-.action-box .title a.link-copy {
-    font-size: 14px;
-    margin-left: 20px;
-    color: #3399ff;
-}
+/*.action-box .title a.link-copy {*/
+/*    font-size: 14px;*/
+/*    margin-left: 20px;*/
+/*    color: #3399ff;*/
+/*}*/
 
 .hb-night a {
     text-decoration: none;
@@ -367,9 +433,9 @@ export default {
 }
 
 .action-box .title {
-    margin-top: 20px;
     font-size: 20px;
-    user-select: none;
+    width: 91%;
+    float: right;
 }
 
 .action-box .title .show-qrcode {
@@ -379,13 +445,12 @@ export default {
     padding: 10px;
 }
 
-.action-inner .inner-box.deposit-address {
-    width: 80%;
-}
-
-p.describe {
-    font-size: 16px;
-    font-weight: 600;
+/*.action-inner .inner-box.deposit-address {*/
+/*    width: 80%;*/
+/*}*/
+span.describe {
+    color: #8090AF;
+    font-size: 14px;
 }
 .merchant-icon {
     display: inline-block;
@@ -409,7 +474,6 @@ p.describe {
 .nav-right {
     height: auto;
     overflow: hidden;
-    padding: 0 15px;
 }
 
 .order_box {
@@ -460,4 +524,78 @@ p.describe {
 .recharge_btn .ivu-page-item-active {
     background-color: red !important;
 }
+
+</style>
+<style lang="scss">
+    .order-table {
+        .ivu-table-wrapper {
+            .ivu-table {
+                .ivu-table-row {
+                    &:hover {
+                        background: #111530;
+                    }
+                    td {
+                        border-bottom: 0;
+                        background: #111530;
+
+                    }
+                }
+
+                .ivu-table-header {
+                    th {
+                        border-bottom: 0;
+                        background: #191D3A;
+                    }
+                }
+            }
+        }
+    }
+    .ivu-select-selection {
+        width: 130px;
+        height: 32px;
+        background: transparent;
+        border: 1px solid rgba(88, 105, 138, 1);
+        border-radius: 0;
+    }
+    .ivu-input-wrapper {
+        width: 400px;
+    }
+    .ivu-select-dropdown {
+        .ivu-select-item {
+            &:hover {
+                background: #0e0e28;
+                color: #3399ff;
+            }
+        }
+    }
+    .ivu-table-wrapper {
+        margin-right: -1px;
+        .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+        .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+            background: #10122B;
+        }
+    }
+    .ivu-select-selected-value {
+        color: #8090AF;
+    }
+    .ivu-select-dropdown {
+        li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+            background: transparent;
+        }
+    }
+    .ivu-table {
+        &:before {
+            height: 0;
+        }
+        .ivu-table-header {
+            th {
+                background: #191D3A;
+            }
+        }
+    }
+    .ivu-input {
+        border: 1px solid #58698A;
+        background: transparent;
+        border-radius: 0;
+    }
 </style>

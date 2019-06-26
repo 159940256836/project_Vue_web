@@ -270,9 +270,6 @@
       .content {
         width: 100%;
         /*margin: 20px auto;*/
-        /*-moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
       }
       .advantage {
         .advantage-title {
@@ -281,9 +278,6 @@
           font-size: 20px;
           color: #fff;
         }
-        /*-moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
         ul {
           display: flex;
           justify-content: center;

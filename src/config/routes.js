@@ -50,6 +50,7 @@ import EntrustHistory from '../components/uc/EntrustHistory' //历史委托记�
 import OtcAd from '../components/otc/MyAd'
 import adPublish from '../pages/otc/AdPublish'
 import PublishAdver from '../pages/otc/PublishAdver'
+import personal from '../pages/uc/Personal'
 
 import identbusiness from '../pages/uc/IdentBusiness'
 // 币理财
@@ -148,6 +149,41 @@ export default [
     { path: '/bjc', component: Bjc },
     // 发布广告
     { path: '/PublishAdver', component: PublishAdver },
+    {
+        path: '/personal',
+        component: personal,
+        children: [
+            {
+                path: 'money',
+                component: moneyindex
+            },
+            {
+                path: 'record',
+                component: record
+            },
+            {
+                path: 'recharge',
+                component: recharge
+            },
+            {
+                path: 'withdraw',
+                component: withdraw
+            },
+            {
+                path: 'withdraw/address',
+                component: withdrawAddr
+            },
+            {
+                path: 'bjc',
+                component: mebjc
+            },
+            {
+                path: "giveRecord",
+                name: "giveRecord",
+                component: GiveRecord
+            }
+        ]
+    },
     // 平台手续费返还
     { path: "/feereturn", component: feereturn },
     // {
@@ -215,7 +251,6 @@ export default [
     //             path: 'withdraw/address',
     //             component: withdrawAddr
     //         },
-
     //         {
     //             path: 'trade',
     //             component: trade
@@ -233,7 +268,8 @@ export default [
     {
         path: '/uc',
         component: membercenter,
-        children: [{
+        children: [
+            {
                 path: '',
                 component: safe
             },
@@ -257,11 +293,11 @@ export default [
                 name: "levelHistory",
                 component: levelHistory
             },
-            {
-                path: "giveRecord",
-                name: "giveRecord",
-                component: GiveRecord
-            },
+            // {
+            //     path: "giveRecord",
+            //     name: "giveRecord",
+            //     component: GiveRecord
+            // },
             {
                 path: 'safe',
                 component: safe
@@ -278,26 +314,26 @@ export default [
                 path: 'myextension',
                 component: myextension
             },
-            {
-                path: 'money',
-                component: moneyindex
-            },
-            {
-                path: 'record',
-                component: record
-            },
-            {
-                path: 'recharge',
-                component: recharge
-            },
-            {
-                path: 'withdraw',
-                component: withdraw
-            },
-            {
-                path: 'withdraw/address',
-                component: withdrawAddr
-            },
+            // {
+            //     path: 'money',
+            //     component: moneyindex
+            // },
+            // {
+            //     path: 'record',
+            //     component: record
+            // },
+            // {
+            //     path: 'recharge',
+            //     component: recharge
+            // },
+            // {
+            //     path: 'withdraw',
+            //     component: withdraw
+            // },
+            // {
+            //     path: 'withdraw/address',
+            //     component: withdrawAddr
+            // },
             {
                 path: 'ad',
                 component: OtcAd
@@ -337,10 +373,10 @@ export default [
                 path: 'blc',
                 component: meblc
             },
-            {
-                path: 'bjc',
-                component: mebjc
-            }
+            // {
+            //     path: 'bjc',
+            //     component: mebjc
+            // }
         ]
     },
     {
