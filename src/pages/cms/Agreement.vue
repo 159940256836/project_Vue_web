@@ -1,16 +1,15 @@
 <template>
-    <div class="agreement">
-        <div class="top">
-            <!-- 法律声明 -->
+    <div class="agreement new_agreement">
+        <!-- <div class="top">
             <div class="title_a">{{$t("foot.agreement")}}</div>
-        </div>
+        </div> -->
         <div class="content-wrap">
             <div class="contenta_cont_title">{{$t("foot.agreement_title")}}</div>
             <div class="ww">
                 <div class="container" id="List">
                     <div class="agreen-cont">
                         <!--服务协议-->
-                        <h4 class="h4">{{$t("foot.p216")}}</h4>
+                        <p class="h4">{{$t("foot.p216")}}</p>
                         <h4>{{$t("foot.p217")}}</h4>
                         <p>{{$t("foot.p218")}}</p>
                         <p>{{$t("foot.p218")}}</p>
@@ -71,6 +70,42 @@
     </div>
 </template>
 <style scoped lang="scss">
+.new_agreement{
+    background:#0e0e28 !important;
+    padding-top:60px;
+    h4{
+        color:#fff !important;
+    }
+    .content-wrap{
+        margin:0 auto;
+        padding-top:38px;
+    }
+   .content-wrap[data-v-2a3df2d0]{
+        border:0 !important;
+        padding-bottom: 120px;
+    }
+    .container{
+        background:rgba(17,21,48,1) !important;
+        order:1px solid rgba(17,21,48,1) !important;;
+        color:#8090AF !important;;
+        font-size:14px !important;;
+        padding:30px !important;
+        margin-top:22px !important;
+    }
+    .contenta_cont_title{
+    width:1200px !important;
+    margin-left:0 !important;
+    border:0 !important;
+    // background:rgba(25,29,58,1);
+    // border:1px solid rgba(17,21,48,1);
+    height:20px !important;
+    line-height:20px !important;
+    color:#fff !important;
+    font-size:20px !important;
+    // padding-left:30px !important;
+    // margin-top:120px;
+    }
+}
 .agreement {
     background-color: #f7f7fa;
     .top {
@@ -91,35 +126,35 @@
     }
     .content-wrap {
         width: 1200px;
-        margin: 120px auto;
+        // margin: 120px auto;
         border: 1px solid #ddd;
-        padding: 30px;
+        // padding: 30px;
         .contenta_cont_title {
             width: 1138px;
             height: 90px;
-            color: #333333ff;
+            // color: #333333ff;
             font-size: 18px;
             border-bottom: 1px solid #ddddddff;
             line-height: 90px;
-            text-align: center;
+            // text-align: center;
         }
         .ww {
             .container {
                 .agreen-cont {
                     .h4{
-                        color: #333;
+                        // color: #333;
                         text-indent: 25px;
                         line-height: 26px;
                         font-weight: 500;
                     }
                     h4{
-                        color: #333;
+                        // color: #333;
                         margin: 10px 0;
                         font-size: 14px;
                         font-weight: 600;
                     }
                     p {
-                        color: #333;
+                        // color: #333;
                         line-height: 25px;
                     }
                     .text-index {

@@ -109,7 +109,7 @@
                         <Col span="8" class="order-info" v-if="bankInfo&&bankInfo!=null">
                         <i class="icons bankfor"></i>
                         <span>{{payInfo != null ? payInfo.realName : ""}} </span>
-                        <p>{{bankInfo.branch}}</p>
+                        <p>{{ bankInfo.bank }} - {{bankInfo.branch}}</p>
                         <p>{{bankInfo.cardNo}}</p>
                         </Col>
                         <Col span="8" class="order-info" v-else>

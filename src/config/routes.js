@@ -146,6 +146,14 @@ export default [
     { path: '/bjc', component: Bjc },
     // 平台手续费返还
     { path: "/feereturn", component: feereturn },
+    {
+        //我的订单页
+        path: '/order', component: resolve => require(['@/pages/order/index.vue'], resolve)      
+    },
+    {
+        //我的账号管理页
+        path: '/account', name: 'account',component: resolve => require(['@/pages/account/index.vue'], resolve)      
+    },
     // {
     //     path: "/distribute",
     //     component: platedistribute,

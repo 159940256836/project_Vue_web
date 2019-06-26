@@ -1,6 +1,29 @@
 <template>
-    <div class="ieoWrapper" @click='getDetail'>
-        <div class="topBox">
+    <div class="ieoWrapper i_content" @click='getDetail'>
+        <div class="i_con">
+            <div class="i_left">
+                <div class="i_left_img">
+                    <img :src="content.picView" alt="">
+                </div>
+                <div class="i_center" style="color:#8090AF; font-size:14px">
+                    <div><span style="color:#3399FF; font-size:20px;">{{content.ieoName}}</span><span style="margin-left:33px; font-size:16px;">{{content.haveCoin}}</span></div>
+                    <div style="margin-top:38px;">{{$t('Ieo.totalSales')}}</div>
+                    <div style="margin-top:32px">{{$t('Ieo.cycle')}}</div>
+                    <div style="margin-top:34px">{{$t('Ieo.currency')}}</div>
+                    
+                </div>
+            </div>
+            <div style="color:#3399FF; font-size:14px">
+                <div style="font-size:16px;" class="type" :class="statusClass">{{str}}</div>
+                <div style="margin-top:36px;">{{content.saleAmount|threeComma}} {{content.saleCoin}}</div>
+                <div style="margin-top:33px;">{{content.startTime|ymdFormat}} - {{content.endTime|ymdFormat}}</div>
+                 <div style="margin-top:36px">{{content.raiseCoin}}</div>
+            </div>
+        </div>
+
+
+<!-- 
+        <div class="topBox"> 
             <div class="topBox specail"><img :src="content.picView" alt=""><span>{{content.saleCoin}}</span></div>
              <div class="type" :class="statusClass">{{str}}</div>
         </div>
@@ -23,7 +46,7 @@
                 <span>{{$t('Ieo.currency')}}</span>
                 <span>{{content.raiseCoin}}</span>
             </li>
-        </ul>
+        </ul> -->
     </div>
 </template>
 <script>
@@ -98,20 +121,83 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+// lhl
+.i_content{
+    // padding-top: 42px;
+    .i_con{
+        display: flex;
+        border-bottom: 1px solid rgba(107,120,149,1);
+        padding-bottom: 40px;
+        justify-content: space-between;
+        .i_left{
+            display: flex;
+            .i_left_img{
+                width:305px;
+                height:195px;
+                img{
+                    width:305px;
+                    height:195px;
+                }
+            }
+            .i_center{
+                margin-left:45px;
+                text-align:left;
+            }
+        }
+    }
+}
+.ieoWrapper_content{
+    .ieoWrapper{
+        width:1120px !important;
+        height:277px !important;
+        margin-left:40px !important;
+        border-bottom:1px solid #2A3850 !important;
+    }
+}
 .type.red:before{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    left: 34px;
+    top: 50%;
+    margin-top: -4px;
+    border-radius: 50%;
     background:#00B274 !important;
 }
 .red{
     color:#00B274 !important;
 
 }
+.type{
+    position: relative;
+}
 .type.yellow:before{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    left: 34px;
+    top: 50%;
+    margin-top: -4px;
+    border-radius: 50%;
     background:#AAAAAA !important;
 }
 .yellow{
     color:#AAAAAA !important
 }
 .type.pink:before{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 8px;
+    height: 8px;
+    left: 34px;
+    top: 50%;
+    margin-top: -4px;
+    border-radius: 50%;
     background:#F15057 !important
 }
 .pink{
@@ -127,12 +213,12 @@ export default {
     align-items: center;
 }
 .ieoWrapper {
-    border:1px solid #DDDDDD;
-    width: 31.8%;
-    background: rgb(17, 20, 36);
-    padding: 10px;
-    border-radius: 5px;
-    color: #fff;
+    // border:1px solid #DDDDDD;
+    // width: 31.8%;
+    // background: rgb(17, 20, 36);
+    // padding: 10px;
+    // border-radius: 5px;
+    // color: #fff;
     .topBox {
         @extend %flex;
         margin-bottom: 10px;
@@ -179,6 +265,7 @@ export default {
         }
     }
 }
+
 </style>
 
 

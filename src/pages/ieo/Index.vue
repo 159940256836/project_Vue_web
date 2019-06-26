@@ -1,32 +1,35 @@
 <template>
-    <div :class="ieo_box" id="centent">
-        <div class="common speicial">
-            <Tabs  value="all" @on-click="tablClick" class="father">
-                <TabPane :label="$t('Ieo.all')" name="all"></TabPane>
-                <TabPane :label="$t('Ieo.preheating')" name="ready"></TabPane>
-                <TabPane :label="$t('Ieo.underway')" name="doing"></TabPane>
-                <TabPane :label="$t('Ieo.finished')" name="alreadyEnd"></TabPane>
-            </Tabs>
-            <div class="contentWrapper">
-                 <template v-if="list.length == 0">
-                    <img src="../../assets/images/noData.png" alt="" style="width:15%;margin-top: 55px;">
-                </template>
-                <!-- <template v-else>
+    <div :class="ieo_box" id="centent" style="min-height:100vh">
+        <div class="ieo_box_banner ieo_box_banner_top"></div>
+        <div class="ieo_common" style="padding-bottom:100px;padding-top:38px;">
+            <div class="common speicial common_speicial">
+                <Tabs  value="all" @on-click="tablClick" class="father">
+                    <TabPane :label="$t('Ieo.all')" name="all"></TabPane>
+                    <TabPane :label="$t('Ieo.preheating')" name="ready"></TabPane>
+                    <TabPane :label="$t('Ieo.underway')" name="doing"></TabPane>
+                    <TabPane :label="$t('Ieo.finished')" name="alreadyEnd"></TabPane>
+                </Tabs>
+                <div class="contentWrapper contentWrapper_content">
+                    <template v-if="list.length == 0">
+                        <img src="../../assets/images/noData.png" alt="" style="width:15%;margin-top: 55px;">
+                    </template>
+                    <!-- <template v-else>
 
-                </template> -->
-                <template v-for="(item, index) in list">
-                    <ieoAbstract :content="item"></ieoAbstract>
-                </template>
-            </div>
-            <div class="page">
-                <Page
-                    v-show="total > 10"
-                    :total="total"
-                    size="small"
-                    :current="currentPage"
-                    :page-size="pageSize"
-                    @on-change="changePage"
-                />
+                    </template> -->
+                    <template v-for="(item, index) in list">
+                        <ieoAbstract :content="item"></ieoAbstract>
+                    </template>
+                </div>
+                <div class="page">
+                    <Page
+                        v-show="total > 10"
+                        :total="total"
+                        size="small"
+                        :current="currentPage"
+                        :page-size="pageSize"
+                        @on-change="changePage"
+                    />
+                </div>
             </div>
         </div>
     </div>
@@ -115,30 +118,57 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+// lhl
+.common_speicial{
+    padding-top:0 !important;
+    background:#0e0e28 !important;
+}
+.ieo_common{
+    background: #0e0e28;
+    
+}
+.ieo_box_banner{
+    padding-top:60px;
+    width:100%;
+    height:510px;
+}
+.ieo_box_banner_top{
+    background:url(../../assets/img/IEObanner.png) 0 0 no-repeat;
+}
 
 .ivu-tabs{
     width:1200px;
+    color:#fff;
 }
 .common {
     /*padding: 100px 18.75%;*/
     /*min-width: ;*/
     background: #fff;
     width: 1200px;
-    margin: 0 auto 100px;
-    padding-top: 150px;
+    margin: 0 auto 0;
+    padding-bottom: 100px;
+    padding-top: 38px;
     min-height: 700px !important;
     overflow: hidden;
+    .contentWrapper_content{
+        margin-top:25px;
+        padding: 0 40px;
+        background:rgba(17,21,48,1);
+    }
     .contentWrapper {
         text-align: center;
         width:1200px;
         overflow: hidden;
+        
         // border:1px solid rgba(221, 221, 221, 1)
     }
     .ieoWrapper {
-        float: left;
-        margin-right: 27px;
-        background:#fff;
+        // float: left;
+        // margin-right: 27px;
+        //background:#fff;
         color:#333333;
+        margin-top:42px;
+        margin-bottom: 40px !important;
 
     }
     .ieoWrapper:nth-child(3) {
@@ -152,6 +182,10 @@ export default {
 </style>
 <style lang="scss">
 $pageTheme: rgb(13, 70, 125);
+// .father .ivu-tabs-tab-active{
+//     background:transparent !important;
+//     border-bottom:1px solid #3399FF !important;
+// }
 .father .ivu-tabs-nav .ivu-tabs-tab-active{
     color:#fff !important;
 }
@@ -161,7 +195,7 @@ $pageTheme: rgb(13, 70, 125);
     }
 }
 .father .ivu-tabs-bar{
-    border-bottom: 1px solid #E0E0E0;
+    // border-bottom: 1px solid #E0E0E0;
 }
 .tab-pane{
     display: flex;
@@ -187,6 +221,10 @@ $pageTheme: rgb(13, 70, 125);
     //     background: #dcdee2;
     // }
 }
+.father .ivu-tabs-bar{
+    border-bottom: 0;
+    background:rgba(25,29,58,1);
+}
 .speicial {
       .ivu-tabs-tab {
         width:102px;
@@ -196,6 +234,10 @@ $pageTheme: rgb(13, 70, 125);
         // padding: 16px;
         text-align:center;
         line-height:30px;
+        .ivu-tabs-bar{
+            width:1200px;
+            background:#191D3AFF !important;
+        }
     }
     // .ivu-page-item-active {
     //     background-color: $pageTheme;
@@ -247,16 +289,32 @@ $pageTheme: rgb(13, 70, 125);
 // }
 //5.13修改
 .father .ivu-tabs-tab-active{
-    background:#3399FF;
+    // background:#3399FF;
     color:#fff;
     z-index:99;
     &:hover {
         color: #fff;
     }
 }
-
+.father .ivu-tabs-tab-active{
+    position: relative;
+}
+.father .ivu-tabs-tab-active::before{
+    content: '';
+    display: block;
+    width: 60%;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #3399FF;
+}
 .father .ivu-tabs-nav .ivu-tabs-tab{
     margin-right:0;
+}
+.father .ivu-tabs-nav .ivu-tabs-tab-active{
+    color:#3399FF !important;
 }
 // .father .ivu-tabs-nav .ivu-tabs-tab:hover{
 //     color:#fff;

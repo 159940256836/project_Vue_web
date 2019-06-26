@@ -1835,7 +1835,7 @@ li {
                 }
             }
             .ivu-table-tip{
-              td{
+              td {
                 background:#191D3A;
               }
             }

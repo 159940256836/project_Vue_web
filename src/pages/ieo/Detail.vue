@@ -1,6 +1,6 @@
 <template>
-    <div class="ieo_detail_box ieo_detail_box1">
-        <div class="common  commona" style="min-height: 1px;">
+    <div class="ieo_detail_box ieo_detail_box1 ieo_detail_box_ieo_detail_box1 ">
+        <div class="common  commona" style="min-height: 1px; background:#111530FF;">
             <div class="top_box">
                 <div class="ieoLogo">
                     <img :src="content.picView" alt="">
@@ -60,28 +60,30 @@
             <div class="subscription_ratio">
                 <ul>
                     <li>
+                        <div style="color:#8090AF">
+                            <span class="img_box"><img src="../../assets/img/biaoqing.png" /></span>{{this.raiseCoinNum}}<span>{{content.raiseCoin}}</span>
+                        </div>
                         <div>
-                            <Icon type="ios-card-outline" size="25" />{{this.raiseCoinNum}}<span>{{content.raiseCoin}}</span></div>
-                        <div>
-                            <Icon type="ios-card" color="rgb(19,133,211)" size="25" />
+                            <span class="img_box"><img style="color:rgb(19,133,211)" src="../../assets/img/biaoqing.png" /></span>
+                            <!-- <Icon type="ios-card" color="rgb(19,133,211)" size="25" /> -->
                         </div>
                     </li>
-                    <li class="li1">
+                    <li class="li1 li10">
                         <Input v-model="base" @on-change="changeNum">
                         <span slot="append">{{content.raiseCoin}}</span>
                         </Input>
                     </li>
-                    <li>
+                    <li class="li10">
                         <Input v-model="exchange" disabled>
                         <span slot="append">{{content.saleCoin}}</span>
                         </Input>
                     </li>
-                    <li>
+                    <li class="li10">
                         <Input class="pwda" type="password" v-model="password" :placeholder="$t('Ieo.enter')" />
                     </li>
                     <li>
                         <div :class="status == '进行中'? 'red1':(status == '已完成' ? 'yellow1' : ( status == '预热中' ? 'pink1' : ''))" class="btn"><span long @click="startSale">{{statusStr}}</span></div>
-                        <p>{{$t('Ieo.agree')}}<a href="">&lt&lt{{$t('Ieo.risk')}}&gt&gt</a></p>
+                        <p>{{$t('Ieo.agree')}}<a href="">&lt;&lt;{{$t('Ieo.risk')}}&gt;&gt;</a></p>
                     </li>
                 </ul>
             </div>
@@ -313,8 +315,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
+    
+.ieo_detail_box_ieo_detail_box1{
+    background:#0e0e28 !important;
+}
 .ieo_detail_box1 {
-    background: #fff !important;
+    // background: #fff !important;
 }
 
 .specialColor[data-v-2300a631] {
@@ -348,41 +355,47 @@ export default {
 }
 .commona {
     color: #333333;
-    // height:374px;
     .top_box {
-        height: 60px;
+        height: 55px;
+        background:rgba(25,29,58,1);
+        line-height:55px;
+        >div{
+            color:#fff;
+            font-size:16px;
+        }
     }
 }
 .activee {
-    background: #3399ff;
-    color: #fff;
+    color: #3399FF;
+    border-bottom:2px solid #3399FF;
 }
 .table1 {
     width: 1200px;
     margin-top: 40px;
-    margin-left: 10.7%;
+    margin:40px auto 164px;
+    // margin-left: 10.7%;
     .tabida1 {
-        height: 100px;
-        margin-top: 20px;
         width: 1200px;
-        border: 1px solid #dddddd;
         font-size: 14px;
-        color: #333333;
-        padding-left: 22px;
-        div {
-            margin-top: 22px;
-        }
+        color: #8090AF;
+        background:rgba(17,21,48,1);
+        padding:58px 25px 67px 32px;
     }
     .tabida {
         display: flex;
-        height: 46px;
-        border-bottom: 1px solid #e0e0e0;
+        height: 55px;
         font-size: 16px;
-        line-height: 46px;
+        line-height: 55px;
+        background:rgba(25,29,58,1);
+        color:#fff;
+        padding-left:28px;
 
         div {
-            width: 122px;
+            width: 70px;
             text-align: center;
+        }
+        div:nth-child(2){
+            margin-left:20px;
         }
     }
 }
@@ -415,6 +428,15 @@ $lineColor: rgb(71, 100, 146);
 .specialColor {
     color: $color;
 }
+.img_box{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+    img{
+        width:21px;
+        height:16px;
+    }
+}
 .ieo_detail_box {
     background: rgb(25, 26, 28);
     padding: 70px 10%;
@@ -423,7 +445,7 @@ $lineColor: rgb(71, 100, 146);
         width: 1200px;
         background: #fff;
         color: #333333;
-        border: 1px solid rgba(221, 221, 221, 1);
+        // border: 1px solid rgba(221, 221, 221, 1);
         overflow: hidden;
         color: #333;
         // padding: 20px;
@@ -440,13 +462,17 @@ $lineColor: rgb(71, 100, 146);
             width: 1200px;
             line-height: 2;
             font-size: 16px;
-            border-bottom: 1px solid #e0e0e0;
+            // border-bottom: 1px solid #e0e0e0;
             .ieoLogo {
                 @extend %flex;
                 margin-left: 20px;
                 img {
                     width: 30px;
                     margin-right: 20px;
+                }
+                span{
+                    color:#3399FFFF;
+                    font-size:20px;
                 }
             }
             .type {
@@ -500,9 +526,12 @@ $lineColor: rgb(71, 100, 146);
                         @extend %flex;
                         .span2 {
                             margin-right: 22px;
+                            color:#3399FFFF;
+                            font-size:12px;
                         }
                         .span1 {
                             margin-left: 14px;
+                            color:#8090AFFF;
                         }
                     }
                 }
@@ -543,6 +572,7 @@ $lineColor: rgb(71, 100, 146);
                 width: 100%;
                 margin-top: 20px;
                 padding: 0 20px;
+                color:#8090AFFF;
                 @extend %flex;
             }
         }
@@ -556,7 +586,7 @@ $lineColor: rgb(71, 100, 146);
                 height: 100%;
                 flex-direction: column;
                 .ivu-input-group {
-                    border: 1px solid #3399ff;
+                    // border: 1px solid #3399ff;
                 }
                 li {
                     width: 100%;
@@ -584,8 +614,12 @@ $lineColor: rgb(71, 100, 146);
 
 <style lang="scss">
 $lineColor: rgb(71, 100, 146);
+// lhl
+.pwda input::-webkit-input-placeholder{
+    color:#8090AF !important;
+}
 .pwda {
-    border: 1px solid #3399ff;
+    // border: 1px solid #3399ff;
 }
 .ieo_detail_box .common {
     .table {
@@ -600,8 +634,9 @@ $lineColor: rgb(71, 100, 146);
     }
     .ivu-input {
         background: #fff;
-        color: #333;
+        color: #8090AF !important;
         outline: none;
+        border-radius: 0;
         // border: 1px solid #3399FF;
         border: 0;
 
@@ -616,7 +651,7 @@ $lineColor: rgb(71, 100, 146);
     }
     .ivu-input-group-append {
         background-color: transparent;
-        border-left: 1px solid #3399ff;
+        // border-left: 1px solid #3399ff;
         border-radius: 0;
         span {
             font-size: 18px;
@@ -625,7 +660,24 @@ $lineColor: rgb(71, 100, 146);
 }
 
 .ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631] {
-    background: #3399ff !important;
-    opacity: 0.5;
+    background:rgba(42,56,80,1) !important;
+    // opacity: 0.5;
+}
+.ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631]:before{
+    background:#2A3850;
+}
+.ieo_detail_box .common .ieoDetail .progress span[data-v-2300a631]{
+    color:#8090AF;
+    font-size:14px;
+}
+.li10 .ivu-input{
+    background: transparent !important;
+    border: 1px solid rgba(42,56,80,1) !important;
+    border-left: 0;
+}
+.li10 .ivu-input-group-append{
+    border-top: 1px solid rgba(42,56,80,1) !important;
+    border-right: 1px solid rgba(42,56,80,1) !important;
+    border-bottom: 1px solid rgba(42,56,80,1) !important;
 }
 </style>
