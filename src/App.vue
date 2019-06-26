@@ -44,11 +44,8 @@
                         <div class="isLoginWrapper">
                             <div class="login_register isLogin" v-if="isLogin" >
                                 <div class="mymsg">
-<<<<<<< HEAD
                                     <router-link to="/order">{{$t("uc.order.myorder")}}</router-link>
-=======
                                     <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
->>>>>>> d884cd6efa8d2a6bd3e400632eecd5c495768082
                                 </div>
                                 
 
@@ -78,15 +75,11 @@
                                                 <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
                                             </DropdownItem>   
                                         </div>
-<<<<<<< HEAD
                                         <DropdownItem> 
                                             <router-link to="/account">
                                                  {{$t("uc.menuTitle.AccountManagement")}}
                                             </router-link>
                                         </DropdownItem>
-=======
-                                        
->>>>>>> d884cd6efa8d2a6bd3e400632eecd5c495768082
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Dropdown>
