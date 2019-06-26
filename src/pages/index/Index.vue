@@ -189,18 +189,28 @@
                     <span class="text">{{$t("sectionPage.terminal")}}</span>
                     <p>{{$t("sectionPage.Instant")}}</p>
                     <div class="qrcode">
-                      <div class="Qrleft">
-                        <div class="android">
+                      <div class="Qrleft" v-show="this.checkoutapp">
+                        <div class="android" @click="checkoutfasle">
                           <Icon type="logo-android" color="white" size="20" style="margin:0 15px"/>
                           <span>android</span>
                         </div>
-                        <div class="ipone">
+                        <div class="ipone click" @click="checkouttrue">
                           <Icon type="logo-apple" color="white" size="20" style="margin:0 15px"/>
                           <span>iphone</span>
                         </div>
                       </div>
+                      <div class="Qrleft" v-show="!checkoutapp">
+                          <div class="android click" @click="checkoutfasle">
+                            <Icon type="logo-android" color="white" size="20" style="margin:0 15px"/>
+                            <span>android</span>
+                          </div>
+                          <div class="ipone" @click="checkouttrue">
+                            <Icon type="logo-apple" color="white" size="20" style="margin:0 15px"/>
+                            <span>iphone</span>
+                          </div>
+                      </div>
                       <div class="Qrright">
-                          <img src="../../assets/img/qr.png" alt="" />
+                          <img src='../../assets/images/qrcode.png' alt="" />
                       </div>
                     </div>
                 </div>
@@ -353,6 +363,7 @@ export default {
       yesDayMineAmountBHB: 0,
       CNYRate: null,
       dataIndex: [],
+      checkoutapp: 'true',
             // pageNo: 1,
             // pageSize: 50,
             // totalNum: 0,
@@ -988,13 +999,19 @@ export default {
       c = h.getElementsByTagName(c)[0]
       c.parentNode.insertBefore(g, c)
     })(window, document,
-                'script', 'https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js', 'ud')
+      'script', 'https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js', 'ud')
     ud({
       'code': '1ga0keb',
       'link': 'https://18986831987.s2.udesk.cn/im_client/?web_plugin_id=8943'
     })
   },
   methods: {
+    checkouttrue() {
+      this.checkoutapp = true
+    },
+    checkoutfasle() {
+      this.checkoutapp = false
+    },
         /**
          * 切割大数组成小数组
          */
@@ -1442,7 +1459,6 @@ li {
     overflow: hidden;
     height: 400px;
     position: relative;
-
     .bannerWrapper {
       position: absolute;
       bottom: 0;
@@ -1450,6 +1466,7 @@ li {
       right: 18.5%;
       top: 170px;
       .bannerBox {
+        background:#191D3A;
           @extend %flex;
           > div {
             width: 23%;
@@ -1816,6 +1833,11 @@ li {
                     background: #191D3A;
                     border:0;
                 }
+            }
+            .ivu-table-tip{
+              td{
+                background:#191D3A;
+              }
             }
             .ivu-table-header,
             .ivu-table-body {
