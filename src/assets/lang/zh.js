@@ -562,6 +562,7 @@ module.exports = {
         },
         realtime: '分时',
         operateSuccessfully: '操作成功',
+        view: '查看'
     },
     otc: {
         ad: '广告中心',
@@ -1285,13 +1286,18 @@ module.exports = {
             orderno: '订单号',
             created: '创建时间',
             symbol: '交易币种',
-            type: '交易类型',
+            class: '类型',
+            class_market_price: '市价',
+            type: '方向',
             type_sell: '卖出',
             type_buy: '买入',
             tradename: '交易对象',
             amount: '数量',
             money: '金额',
             fee: '手续费',
+            detail: '详情',
+            view: '查看',
+            search: '搜索'
         },
         identity: {
             certified: "已认证",

@@ -1,6 +1,6 @@
 <style scoped>
     .expand-row{
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
     td.ivu-table-expanded-cell{
         padding: 10px 50px;
@@ -8,9 +8,24 @@
     .expand-row .ivu-col{
         line-height: 20px;
     }
+    .expand {
+        border: 1px solid #2A3850;
+        padding: 16px 20px;
+        color: #8090AF;
+    }
+
+    .expand  .ivu-row {
+        padding-bottom: 16px;
+        border-bottom: 1px solid #2A3850;
+    }
+
+    .expand  .ivu-row:last-child{
+        padding-bottom: 0;
+        border-bottom: none;
+    }
 </style>
 <template>
-    <div>
+    <div class="expand">
         <Row class="expand-row" :class="skin">
             <Col span="8">
                 <span class="expand-key">{{$t('exchange.expand.time')}} </span>
@@ -53,7 +68,8 @@
             skin:String,
             rows: Array
         },
-        created(){
+        updated(){
+            console.log(this.skin)
             // console.log(this.rows, this.$parent,this.props,this.$parent.$props.data);
         }
     };

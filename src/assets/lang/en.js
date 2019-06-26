@@ -560,6 +560,7 @@ module.exports = {
         },
         realtime: 'realtime',
         operateSuccessfully: 'operate successfully',
+        view: 'view'
     },
     otc: {
         ad: 'Advertising',
@@ -1272,13 +1273,18 @@ module.exports = {
             orderno: 'OrderNo',
             created: 'Time',
             symbol: 'Coin',
-            type: 'Type',
+            class: 'Type',
+            class_market_price: 'market price',
+            type: 'Direction',
             type_sell: 'sell',
             type_buy: 'buy',
             tradename: 'TradeName',
             amount: 'Amount',
             money: 'Money',
             fee: 'Fee',
+            detail: 'Detail',
+            view: 'View',
+            search: 'Search'
         },
         identity: {
             certified: "already certified",
