@@ -146,6 +146,9 @@ export default [
     { path: '/bjc', component: Bjc },
     // 平台手续费返还
     { path: "/feereturn", component: feereturn },
+    {
+        path: '/order', component: resolve => require(['@/pages/order/index.vue'], resolve)      
+    },
     // {
     //     path: "/distribute",
     //     component: platedistribute,
