@@ -1,25 +1,29 @@
 <template>
-    <div class="helpdetail">
-        <div class="route-wrap">
-            <router-link to="helplist">{{$t("footer.helpCenter")}}</router-link>
-            <span>></span>
-            <router-link :to="{path:'helplist',query:{cate:cate,cateTitle:cateTitle}}">{{cateTitle}}</router-link>
-        </div>
-        <div class="main">
-            <!-- <div class="menu">
-                <p>此组别内的文章</p>
-                <div class="titles">
-                    <div class="route" v-for="item in topList" @click="clickTitle(item.id)" :class="{active:item.id==article.id}">
-                        <span>{{item.title}}</span>
+    <div class="helplist_helpdetail">
+        <div class="helpdetail ">
+            <div class="route-wrap helpdetail_route-wrap">
+                <router-link to="helplist">{{$t("footer.helpCenter")}}</router-link>
+                <span>></span>
+                <router-link :to="{path:'helplist',query:{cate:cate,cateTitle:cateTitle}}">{{cateTitle}}</router-link>
+            </div>
+            <div class="main">
+                <!-- <div class="menu">
+                    <p>此组别内的文章</p>
+                    <div class="titles">
+                        <div class="route" v-for="item in topList" @click="clickTitle(item.id)" :class="{active:item.id==article.id}">
+                            <span>{{item.title}}</span>
+                        </div>
                     </div>
-                </div>
-                <router-link :to="{path:'helplist',query:{cate:cate,cateTitle:cateTitle}}">查看更多>></router-link>
-            </div> -->
-            <div class="content-wrap" style="background:#fff">
-                <h3 class="title">{{article.title}}</h3>
-                <p class="time">{{article.createTime}}</p>
-                <div class="content">
-                    <div v-html="article.content"></div>
+                    <router-link :to="{path:'helplist',query:{cate:cate,cateTitle:cateTitle}}">查看更多>></router-link>
+                </div> -->
+                <div class="content-wrap" style="background:#fff">
+                    <div class="helpdetail_title helpdetail_title_new">
+                        <h3 class="title">{{article.title}}</h3>
+                        <p class="time">{{article.createTime}}</p>
+                    </div>
+                    <div class="content">
+                            <div v-html="article.content"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,11 +122,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+// lhl
+.helplist_helpdetail{
+    background:#0e0e28;
+    
+}
 .helpdetail {
-    width: 70%;
+    // width: 70%;
     margin: 0 auto;
     padding: 80px 0;
     font-size: 14px;
+    width:1200px;
 }
 .main {
     display: flex;
@@ -166,30 +176,52 @@ export default {
     .content-wrap {
         flex: 1 1 100%;
         width: 100%;
-        margin-left: 35px;
+        // margin-left: 35px;
+       background:#0e0e28 !important;
+        .helpdetail_title{
+            height:85px;
+            background:#111530FF;
+            // color:#fff;
+            padding-top:25px;
+        }
+      
         .title {
-            font-size: 28px;
             line-height: 1;
             margin-bottom: 20px;
+            font-size:16px;
+            color:#8090AF;
+            margin-left:30px;
+            
         }
         .time {
-            color: #999;
+            color: #fff;
             line-height: 1;
             margin-bottom: 20px;
         }
         .content {
-            border-top: 1px solid #f0f0f0;
-            padding: 40px 0;
+            // border-top: 1px solid #f0f0f0;
+            padding: 29px 29px 45px 29px;
+            background:#111530FF;
+            margin-top:22px;
+            // color:#8090AFFF !important;
+            color: #8090AF !important;
+            font-size:14px;
+
         }
     }
 }
-
+.helpdetail_route-wrap{
+    width:1200px;
+    margin:0 auto;
+}
 .route-wrap {
-    font-size: 14px;
-    color: #3399ff;
+    color: #fff;
     margin-bottom: 40px;
+    height:56px;
+    line-height:56px;
     a {
-        color: #3399ff;
+        color: #fff;
+        font-size:16px;
     }
 }
 </style>
@@ -200,7 +232,10 @@ export default {
     }
 }
 .main .content-wrap .title,.main .content-wrap .time{
-    text-align: center;
+    // text-align: center;
+    font-size:16px;
+    color:#8090AF !important;
+    margin-left:30px;
 }
 </style>
 

@@ -1,12 +1,17 @@
 
 <template>
-  <div class="transactionCosts">
-    <div class="top">
-      <!-- 用户协议 -->
+  <div class="transactionCosts new_Usereement">
+    <!-- <div class="top">
       <div class="title_a">{{$t("foot.Usment")}}</div>
-    </div>
+    </div> -->
     <div class="contenta">
-      <div class="contenta_cont">
+      <div class="contenta_title">{{ $t("footer.Usegreement") }}</div>
+      <div class="contenta_list">
+        <div @click="contentaTab(1)" :class="tabid==1?'activeaa':''" class="list1">{{ $t("footer.Precautions") }}</div>
+        <div @click="contentaTab(2)" :class="tabid==2?'activeaa':''">{{ $t("footer.Usegreement") }}</div>
+        <div @click="contentaTab(3)" :class="tabid==3?'activeaa':''">{{ $t("footer.Policnderstanding") }}</div>
+      </div>
+      <div class="contenta_cont contenta_contone" v-show="tabid==1">
         <!-- <div class="contenta_cont_title">用户协议</div> -->
         <div class="contenta_cont_content">
           <p class="contenta_aa">{{$t("foot.p19")}}</p>
@@ -31,10 +36,10 @@
       </div>
     </div>
 
-    <div class="contenta">
+    <div class="contenta contenta_two" v-show="tabid==2">
       <div class="contenta_cont">
-        <div class="contenta_cont_title">{{$t("foot.p37")}}</div>
-        <div class="contenta_cont_content">
+        <!-- <div class="contenta_cont_title">{{$t("foot.p37")}}</div> -->
+        <div class="contenta_cont_content new_tabid2">
           <p class="contenta_aa">{{$t("foot.p38")}}：</p>
           <p class="contenta_cc">1.1{{$t("foot.p39")}}</p>
           <p class="contenta_cc">1.2{{$t("foot.p40")}}</p>
@@ -185,10 +190,10 @@
       </div>
     </div>
 
-    <div class="contenta contentb">
+    <div class="contenta contentb" v-show="tabid==3">
       <div class="contenta_cont">
-        <div class="contenta_cont_title">{{$t("foot.p183")}}</div>
-        <div class="contenta_cont_content">
+        <!-- <div class="contenta_cont_title">{{$t("foot.p183")}}</div> -->
+        <div class="contenta_cont_content new_tabid2">
           <p class="contenta_aa">{{$t("foot.p184")}}</p>
           <p class="contenta_cc">1.1{{$t("foot.p185")}}</p>
           <p class="contenta_cc">1.2{{$t("foot.p186")}}</p>
@@ -244,17 +249,72 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      tabid:1,
+    };
   },
   mounted() {
     this.getDate();
   },
 
   computed: {},
-  methods: {}
+  methods: {
+    contentaTab(n){
+      this.tabid=n;
+      console.log(2)
+    }
+  }
 };
 </script>
 <style lang="scss">
+.contenta_aa{
+  color:#fff !important;
+}
+.contenta_bb{
+  color:#fff !important;
+}
+.new_tabid2{
+  position:relative;
+  top:-50px;
+}
+.contenta_contone{
+  margin-bottom: 80px !important;
+}
+.contenta_two{
+  padding-bottom: 100px !important;
+}
+.contenta{
+  padding-top:0 !important;
+}
+.activeaa{
+  color:#3399FF;
+  border-bottom:1px solid #3399FF;
+}
+.new_Usereement{
+  background:#0e0e28 !important;
+   .contenta_cont{
+    border:0 !important;
+  }
+  .contenta_cont_content{
+    background:rgba(17,21,48,1);
+    border:1px solid rgba(17,21,48,1);
+    color:#8090AF !important;
+    font-size:14px !important;
+  }
+  .contenta_cont_title{
+    width:1200px !important;
+    margin-left:0 !important;
+    border:0 !important;
+    background:rgba(25,29,58,1);
+    border:1px solid rgba(17,21,48,1);
+    height:64px !important;
+    line-height:64px !important;
+    color:#8090AF !important;
+    font-size:16px !important;
+    padding-left:30px !important;
+
+  }
+}
 .contentb {
   padding-bottom: 140px !important;
 }
@@ -264,46 +324,71 @@ export default {
   top: 60px;
   padding-top: 50px;
   padding-bottom: 50px;
+  .contenta_list{
+    display:flex;
+    width:1200px;
+    background:rgba(17,21,48,1);
+    height:64px;
+    line-height:64px;
+    font-size:14px;
+    color:#fff;
+    margin: 26px auto 22px;
+    .list1{
+      margin-left:30px;
+    }
+    >div{
+      width:130px;
+      text-align:center;
+      margin-right:15px;
+    }
+  }
+  .contenta_title{
+    font-size:20px;
+    color:#fff;
+    width:1200px;
+    padding-top:39px;
+    margin:0 auto;
+  }
   .contenta_cont_content {
     padding: 30px;
     .contenta_aa {
       font-size: 14px;
-      color: #333;
+      // color: #333;
       font-weight: bold;
     }
     .contenta_bb {
       margin-top: 30px;
       font-size: 14px;
-      color: #333;
+      // color: #333;
       font-weight: bold;
     }
     .contenta_cc {
       text-indent: 14px;
       font-size: 14px;
-      color: #333;
+      // color: #333;
       line-height: 28px;
     }
   }
   .contenta_cont {
     width: 1200px;
     margin: 0 auto;
-    border: 1px solid #ddd;
+    // border: 1px solid #ddd;
     .contenta_cont_title {
       width: 1138px;
       margin-left: 31px;
       height: 90px;
-      color: #333333ff;
+      // color: #333333ff;
       font-size: 18px;
       border-bottom: 1px solid #ddddddff;
       line-height: 90px;
-      text-align: center;
+      // text-align: center;
     }
   }
 }
 .top {
   width: 100%;
-  height: 242px;
-  background: url(../../assets/images/fl1.png) 0 0 no-repeat;
+  // height: 242px;
+  // background: url(../../assets/images/fl1.png) 0 0 no-repeat;
   height: auto;
   position: relative;
   top: 60px;
@@ -312,7 +397,7 @@ export default {
     height: 242px;
     line-height: 242px;
     margin: 0 auto;
-    color: #ffffffff;
+    // color: #ffffffff;
     font-size: 46px;
   }
 }

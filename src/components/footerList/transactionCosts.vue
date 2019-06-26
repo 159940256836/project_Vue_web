@@ -1,24 +1,23 @@
 <template>
-  <div class="transactionCosts">
+  <div class="transactionCosts new_transactionCosts">
     <div class="top">
-      <!-- 费率标准 -->
-      <div class="title_a">{{$t("foot.Standardates")}}</div>
+      <div class="title_a">{{ $t("foot.Transactiate") }}</div>
     </div>
-    <div class="content">
+    <div class="content bg">
       <div class="content_top">
         <div class="content_top_list">
           <!-- 交易对费率  等级费率   otc币种费率  币种费率-->
           <div  class="right" @click="listTab(1)" :class="tabid==1?'active':''">{{$t("foot.Tradrate")}}</div>
-          <div @click="listTab(2)" :class="tabid==2?'active':''">{{$t("foot.Gradrate")}}</div>
-          <div @click="listTab(3)" :class="tabid==3?'active':''">{{$t("foot.Otcurrenrates")}}</div>
-          <div @click="listTab(4)" :class="tabid==4?'active':''">{{$t("foot.Currencrates")}}</div>
+          <div @click="listTab(2)" :class="tabid==2?'active':''">{{ $t("foot.Gradrate") }}</div>
+          <div @click="listTab(3)" :class="tabid==3?'active':''">{{ $t("foot.Otcurrenrates") }}</div>
+          <div @click="listTab(4)" :class="tabid==4?'active':''">{{ $t("foot.Currencrates") }}</div>
         </div>
       </div>
       <div class="content_content" v-show="tabid==1">
         <div class="content_tab">
           <!-- 费率标准 交易对费率 -->
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
-          <div class="content_tab_title1">{{$t("foot.Tradrate")}}</div>
+          <!-- <div class="content_tab_title1">{{$t("foot.Tradrate")}}</div> -->
           <div class="content_tab_buy">
             <Table :columns="columns2" :data="data2"></Table>
           </div>
@@ -28,7 +27,7 @@
       <div class="content_content" v-show="tabid==2">
         <div class="content_tab">
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
-          <div class="content_tab_title1">{{$t("foot.Gradrate")}}</div>
+          <!-- <div class="content_tab_title1">{{$t("foot.Gradrate")}}</div> -->
           <div class="content_tab_buy">
             <Table :columns="columns1" :data="data1">
               <template slot-scope="{ row }" slot="exchangeFeeRate">
@@ -42,7 +41,7 @@
       <div class="content_content" v-show="tabid==3">
         <div class="content_tab">
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
-          <div class="content_tab_title1">{{$t("foot.Otcurrenrates")}}</div>
+          <!-- <div class="content_tab_title1">{{$t("foot.Otcurrenrates")}}</div> -->
           <div class="content_tab_buy">
             <Table :columns="columns3" :data="data3"></Table>
           </div>
@@ -53,7 +52,7 @@
       <div class="content_content" v-show="tabid==4">
         <div class="content_tab">
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
-          <div class="content_tab_title1">{{$t("foot.Currencrates")}}</div>
+          <!-- <div class="content_tab_title1">{{$t("foot.Currencrates")}}</div> -->
           <div class="content_tab_buy">
             <Table :columns="columns4" :data="data4"></Table>
           </div>
@@ -150,20 +149,23 @@ export default {
       listbb.push({
         // 等级名称
         title: this.$t("foot.Clasame"),
-        key: "gradeName"
+        key: "gradeName",
+        width:160,
+        align:"center"
       });
       listbb.push({
         // 手续费比例
         title: this.$t("foot.Commissratio"),
         slot: "exchangeFeeRate",
-        align: "center"
+        align: "center",
+        width:200,
       });
 
       listbb.push({
         // 每日提币数量限制
         title: this.$t("foot.Dailthdrawamit"),
         key: "dayWithdrawCount",
-        align: "right"
+        align: "left",
       });
       return listbb;
     },
@@ -172,19 +174,23 @@ export default {
       listcc.push({
         // 交易对
         title: this.$t("foot.Tradingn"),
-        key: "symbol"
+        key: "symbol",
+        width: 160,
+        align: "center"
+
       });
       listcc.push({
         // 结算币种手续费
         title: this.$t("foot.Setturrencndliarge"),
         key: "baseFee",
+        width: 300,
         align: "center"
       });
       listcc.push({
         // 基币手续费
         title: this.$t("foot.Baseee"),
         key: "fee",
-        align: "right"
+        align: "left"
       });
       return listcc;
     },
@@ -195,13 +201,15 @@ export default {
         // 币种
         title: this.$t("foot.currency"),
         key: "unit",
-        align: "center"
+        align: "center",
+        width:160,
       });
       listdd.push({
         // 交易手续费率
         title: this.$t("foot.Transactiate"),
         key: "jyRate",
-        align: "center"
+        align: "left",
+       
       });
       return listdd;
     },
@@ -211,25 +219,30 @@ export default {
       listaa.push({
         //  title: '名称',
         title: this.$t("foot.Thenamohe"),
-        key: "name"
+        key: "name",
+        width:160,
+        align:'center',
       });
       listaa.push({
         //  最小提币手续费
         title: this.$t("foot.Miniwithdrawfee"),
         key: "minTxFee",
-        align: "center"
+        align: "center",
+        width:200,
       });
       listaa.push({
         // 最大提币手续费
         title: this.$t("foot.Maximuthdrawafee"),
         key: "maxTxFee",
-        align: "center"
+        align: "center",
+        width:250,
       });
       listaa.push({
         //  矿工费
         title: this.$t("foot.Mineree"),
         key: "minerFee",
-        align: "right"
+        align: "left",
+       
       });
       return listaa;
     }
@@ -254,20 +267,66 @@ export default {
 };
 </script>
 <style lang="scss">
+
+.content .content_content .content_tab .content_tab_buy{
+  width:1200px !important;
+}
+.new_transactionCosts{
+  background:#0e0e28 !important;
+  padding-top:29px;
+  .content_tab_title{
+    font-size:16px !important;
+    color:#fff !important;
+    margin-bottom: 22px;
+  }
+  .content_tab_buy{
+    background:#0e0e28 !important;
+  }
+  .content .content_content{
+    margin-top:36px !important;
+    padding-top:0 !important;
+    top:0 !important;
+  }
+  .content_tab{
+  border:0 !important;
+  }
+  .content .content_top .content_top_list div{
+    color:#fff !important;
+  }
+  .content .content_top .content_top_list .active{
+    background:transparent !important;
+    border-bottom: 1px solid #3399FF !important;
+    color:#3399FF !important;
+  }
+  .content_top_list{
+    height:65px !important;
+   background:rgba(17,21,48,1) !important;
+   margin-top:16px !important;
+  }
+  .top{
+      height:30px !important;
+      line-height:30px !important;
+    }
+  .content_top{
+     background:#0e0e28 !important;
+     font-size:20px !important;
+  }
+}
 .top {
   width: 100%;
   height: 242px;
-  background: url(../../assets/images/fl1.png) 0 0 no-repeat;
+  // background: url(../../assets/images/fl1.png) 0 0 no-repeat;
   height: auto;
   position: relative;
   top: 60px;
   .title_a {
     width: 1200px;
-    height: 242px;
-    line-height: 242px;
+    // height: 242px;
+    // line-height: 242px;
     margin: 0 auto;
     color: #ffffffff;
-    font-size: 46px;
+    // font-size: 46px;
+    font-size:20px;
   }
 }
 .content {
@@ -279,22 +338,22 @@ export default {
     position: relative;
     top: 60px;
     .content_tab {
-      padding: 0 47px;
+      // padding: 0 47px;
       width: 1200px;
       margin: 0 auto;
       border: 1px solid #ddddddff;
       padding-bottom: 45px;
       .content_tab_title {
         /*width:1107px;*/
-        height: 90px;
-        line-height: 90px;
-        text-align: center;
-        border-bottom: 1px solid #ddddddff;
+        // height: 90px;
+        // line-height: 90px;
+        // text-align: center;
+        // border-bottom: 1px solid #ddddddff;
         color: #333333ff;
         font-size: 18px;
       }
       .content_tab_title1 {
-        width: 1107px;
+        // width: 1107px;
         height: 56px;
         line-height: 56px;
         background: #378febff;
@@ -379,4 +438,60 @@ export default {
     }
   }
 }
+.bg{
+  thead {
+    height:50px;
+    background:rgba(25,29,58,1) !important;
+    color:#8090AF !important;
+    font-size:14px !important;
+  }
+  tr:nth-child(2n){
+    background:rgba(16,18,43,1);
+  }
+  .ivu-table-wrapper{
+    border:0 !important;
+    background:rgba(17,21,48,1);
+    border:1px solid rgba(17,21,48,1);
+  }
+  .ivu-table-tbody{
+    color:#fff;
+  }
+  .ivu-table-wrapper .ivu-table .ivu-table-header th{
+    background: transparent;
+  }
+  .ivu-table th{
+    background: transparent;
+  }
+  .ivu-table{
+    background: transparent;
+  }
+  .content .content_content .content_tab .content_tab_buy{
+    //border: 0 !important;
+   // background:rgba(17,21,48,1);
+    //border:1px solid rgba(17,21,48,1);
+  }
+  .content_tab_buy{
+    border: 0 !important;
+  }
+  .ivu-table td{
+    background: transparent;
+  }
+  .ivu-table td, .ivu-table th{
+    border: 0;
+  }
+}
+
+
+
+ .ivu-table-wrapper .ivu-table:before {
+      background: transparent;
+    }
+    div.ivu-card-body {
+      padding: 0;
+    }
+    div.ivu-table-wrapper {
+      border: none;
+    }
+    .ivu-table:before{content:'';width:100%;height:0px;position:absolute;left:0;bottom:0;z-index:1}
+    .ivu-table:after{content:'';width:0px;height:100%;position:absolute;top:0;right:0;z-index:3}
 </style>

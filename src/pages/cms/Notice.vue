@@ -1,6 +1,6 @@
 <template>
-    <div class="notice common announcement_notice" style="min-height:519px">
-        <div class="banner">
+    <div class="notice common announcement_notice" style="min-height:519px; height:100vh">
+        <div class="banner notice_banner ">
             <span>{{$t('footer.bulletinboard')}}</span>
         </div>
         <div class="main" >
@@ -13,9 +13,16 @@
                     </span>
                 </div>
             </div>
-            <div class="page">
+            <!-- <div class="page">
                 <Page v-show="showPage" :total="totalNum" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page>
+            </div> -->
+             <div class="page Pagination_page">
+                  <template>
+                     <Page v-show="showPage" :total="totalNum" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage" show-elevator />
+                </template>
+                <!-- <Page v-show="showPage" :total="totalNum" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page> -->
             </div>
+           
         </div>
         <!-- <div class="help_container">
           <div style="line-height: 40px;font-size:16px;"><router-link to="/help" style="color:#3399ff;">{{$t('cms.servicecenter')}}</router-link>->{{$t('cms.notice')}}</div>
@@ -36,7 +43,10 @@
     </div>
 </template>
 <style lang="scss" scoped>
-
+// lhl
+.announcement_notice{
+     background:#0e0e28;
+}
 .notice {
     padding-top: 60px;
     .banner {
@@ -50,8 +60,8 @@
          width:1200px;
         color: #fff;
         margin:0 auto;
-       
-        font-size: 40px;
+        font-size:20px;
+        color:#fff;
         background:#0e0e28;
         span{
             margin-left:31px;
@@ -62,23 +72,26 @@
         // 6.22修改
         // width: 70%;
         width:1200px;
-        border:1px solid rgba(17,21,48,1);
         margin: 0 auto;
         background-color: #fff;
-        color: #333;
+        color: #8090AFFF;
         // box-shadow: 0 0 2px #ccc;
         background:#0e0e28;
+        font-size:14px;
         // 6.22修改
         // margin-top: -50px;
         // border-radius: 6px;
-        padding: 50px 100px;
         margin-bottom: 50px;
+        padding-bottom: 159px;
         .list {
             font-size: 14px;
+             border:1px solid rgba(17,21,48,1);
+             background:rgba(17,21,48,1);
             .item {
-                line-height: 40px;
-                border-bottom: 1px solid #f0f0f0;
+                line-height: 50px;
+                // border-bottom: 1px solid #f0f0f0;
                 cursor: pointer;
+                padding:0 31px;
                 .iconimg {
                     width: 14px;
                     vertical-align: sub;
@@ -89,6 +102,12 @@
                     color: #999;
                     font-size: 14px;
                 }
+            }
+            .item:nth-child(2n-1){
+                background:#191d3a;
+            }
+            .item:nth-child(2n){
+               background:#10122BFF;
             }
         }
         .page {
@@ -180,5 +199,29 @@ export default {
             color: #3399ff;
         }
     }
+}
+.Pagination_page{
+    .ivu-page-next, .ivu-page-prev{
+        background: transparent !important;
+    }
+    .ivu-page-item-jump-next, .ivu-page-item-jump-prev, .ivu-page-next, .ivu-page-prev{
+        border: 0;
+    }
+    .ivu-page .ivu-page-item:hover{
+        border: 0;
+    }
+    .ivu-page-item{
+        background: transparent;
+        border: none;
+    }
+    .ivu-page-options-elevator input{
+        background: transparent;
+        border: 1px solid rgba(128,144,175,1);
+        text-align:center;
+        color:#fff;
+        width:38px;
+        height:20px;
+    }
+    
 }
 </style>

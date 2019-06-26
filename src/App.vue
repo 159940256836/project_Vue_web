@@ -10,6 +10,7 @@
                 }"
             >
                 <div class="time_download">
+                    
                     <div class="netLogo">
                         <router-link to="/"><img style="width: 80%;" src="./assets/images/logo.png" alt=""></router-link>
                     </div>
@@ -43,8 +44,13 @@
                         <div class="isLoginWrapper">
                             <div class="login_register isLogin" v-if="isLogin" >
                                 <div class="mymsg">
-                                    <router-link to="/">{{$t("uc.order.myorder")}}</router-link>
+                                    <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
                                 </div>
+                                
+
+                                <!-- <div class="mymsg">
+                                    <router-link to="/">{{$t("uc.order.myorder")}}</router-link>
+                                </div> -->
                                  <Dropdown @on-click="goBi">
                                     <a href="javascript:void(0)">
                                         <span class="header-img">{{$t("uc.menuTitle.moneyManagement")}}</span>
@@ -66,8 +72,9 @@
                                         <div @click="logout">
                                             <DropdownItem>
                                                 <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
-                                            </DropdownItem>
+                                            </DropdownItem>   
                                         </div>
+                                        
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Dropdown>
@@ -109,7 +116,7 @@
         <!--内容-->
         <router-view v-if="isRouterAlive"></router-view>
         <!--底部-->
-        <footer v-if="pathNameState" v-show="!$route.meta.hide">
+        <footer class="app_footer" v-if="pathNameState" v-show="!$route.meta.hide">
             <div class="footer">
                 <div class="footer_content">
                     <div class="footer-main">
@@ -465,6 +472,9 @@ export default {
   },
   methods: {
         // header动画效果
+    gobia(url){
+        this.$router.path(url)
+    },
     reload() {
       this.isRouterAlive = false
       this.$nextTick(function() {
@@ -570,6 +580,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.app_footer{
+    background:rgba(17,19,44,1) !important;
+}
     %flex {
         align-items: center;
     }
@@ -1219,8 +1232,9 @@ body {
 .footer {
     min-width: 1260px;
     padding-top: 1px;
-    color: #53575c;
-    background: #1c2435;
+    // 6.25修改  lhl
+    color: #8090AF;
+    // background: #1c2435;
     .footer_content {
         width: 1200px;
         margin: 60px auto 30px;

@@ -1683,7 +1683,7 @@ li {
     background-repeat: no-repeat;
     background-position: center;
     height: 400px;
-    background-size: contain;
+    // background-size: contain;
 }
 
 .demo-carousel1 {
