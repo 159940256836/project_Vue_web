@@ -158,36 +158,36 @@
                         :row-class-name="rowClassName"
                     ></Table>
                 </div>
-                <div class="seemore">
+                <!-- <div class="seemore">
                     查看更多
-                </div>
+                </div> -->
               </div>
               <div class="section" id="page5">
                   <div class="showsection">
                       <img src="../../assets/img/01.png" alt="">
-                      <div>现货交易</div>
-                      <span>多币种支持，高流动性 <br />高性能撮合交易</span>
+                      <div>{{$t("sectionPage.spotTrading")}}</div>
+                      <span>{{$t("sectionPage.multiCurrency")}} <br />{{$t("sectionPage.performance")}}</span>
                   </div>
                     <div class="showsection">
                       <img src="../../assets/img/02.png" alt="">
-                      <div>OTC场外交易</div>
-                      <span>支持多种法币交易 <br />平台担保、快速安全</span>
+                      <div>{{$t("sectionPage.OTCtransaction")}}</div>
+                      <span>{{$t("sectionPage.Support")}} <br />{{$t("sectionPage.guarantee")}}</span>
                   </div>
                     <div class="showsection">
                       <img src="../../assets/img/03.png" alt="">
-                      <div>金融级安全系统</div>
-                      <span>多层、多集群系统架构 <br />安全稳定运营超过4年</span>
+                      <div>{{$t("sectionPage.Financial")}}</div>
+                      <span>{{$t("sectionPage.multilayer")}} <br />{{$t("sectionPage.operation")}}</span>
                   </div>
                     <div class="showsection">
                       <img src="../../assets/img/03.png" alt="">
-                      <div>专业客户服务</div>
-                      <span>24h在线客服，服务数百万用户<br /> 及时响应用户问题</span>
+                      <div>{{$t("sectionPage.Professional")}}</div>
+                      <span>{{$t("sectionPage.online")}}<br /> {{$t("sectionPage.Respond")}}</span>
                     </div>
               </div>
               <div class="section" id="page4">
                 <div class="left">
-                    <span class="text">支持多个平台终端交易</span>
-                    <p>即时随地、放心交易，一切尽在掌握之中</p>
+                    <span class="text">{{$t("sectionPage.terminal")}}</span>
+                    <p>{{$t("sectionPage.Instant")}}</p>
                     <div class="qrcode">
                       <div class="Qrleft">
                         <div class="android">
@@ -211,8 +211,8 @@
               <div class="section" id="page1">
                 <div class="content">
                     <div class="page1left">
-                      <div class="trading">马上交易</div>
-                      <div class="registered">注册账号、跟BDW来一场不一样的资产交易之旅</div>
+                      <div class="trading">{{$t("sectionPage.soontrading")}}</div>
+                      <div class="registered">{{$t("sectionPage.Registeraccount")}}</div>
                     </div>
                     <div class="page1right">
                       <router-link class="login"  to="/login">{{$t("common.login")}}</router-link>

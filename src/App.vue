@@ -257,16 +257,14 @@
                                 </li>
                                 <li>
                                     <!-- 微信客服号：客服1:biduokefu1 客服2:biduokefu2 -->
-                                    <p>
+                                    <!-- <p>
                                         <span class="facebook3">
                                              {{$t("footer.WeChatcustomervi")}}：biduokefu1
                                             <span id="facebook3">
                                                 <img src="./assets/images/kefu.jpg" alt="">
                                             </span>
                                         </span>
-
-                                        <!--&nbsp;&nbsp; {{$t("footer.Customervic")}}:biduokefu2-->
-                                    </p>
+                                    </p> -->
                                 </li>
 
                             </ul>

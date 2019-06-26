@@ -453,10 +453,22 @@ module.exports = {
     part3Title: 'Financial security system',
     part3Content: 'Multi-tier, multi-cluster system architecture',
     part3Content2: 'Safe and stable operation for more than 4 years',
-
+    spotTrading: 'spot trading',
     part4Title: 'Professional customer service',
     part4Content: ' 24h online customer service, serving millions of users',
-    part4Content2: 'Respond to user questions timely'
+    part4Content2: 'Respond to user questions timely',
+    multiCurrency: 'Multi-currency support, high liquidity',
+    performance: 'High performance dealmaking',
+    OTCtransaction: 'OTCtransaction',
+    Support: 'Support a variety of legal tender transactions',
+    guarantee: 'Platform guarantee, fast and safe',
+    Financial: 'Financial grade security system',
+    multilayer: 'Multi-layer, multi-cluster system architecture',
+    operation: 'Safe and stable operation for more than 4 years',
+    terminal: 'Support multiple platform terminal trading',
+    Instant: 'Instant, anywhere, assured trading, all under control',
+    soontrading: 'Soon trading',
+    Registeraccount: 'Register an account, and BDW to a different asset trading journey'
   },
   nav: {
     ptjy: 'Platform Trading',
