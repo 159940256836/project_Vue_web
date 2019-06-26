@@ -200,22 +200,24 @@
                         </div>
                       </div>
                       <div class="Qrright">
-                          <img src="../../assets/img/qr.png" alt="">
+                          <img src="../../assets/img/qr.png" alt="" />
                       </div>
                     </div>
                 </div>
                 <div class="right">
-                    <img src="../../assets/img/shouye.png" alt="">
+                    <img src="../../assets/img/shouye.png" alt="" />
                 </div>
               </div>
               <div class="section" id="page1">
-                <div>
-                  <div>马上交易</div>
-                  <div>注册账号、跟BDW来一场不一样的资产交易之旅</div>
-                </div>
-                <div>
-                  <div></div>
-                  <div></div>
+                <div class="content">
+                    <div class="page1left">
+                      <div class="trading">马上交易</div>
+                      <div class="registered">注册账号、跟BDW来一场不一样的资产交易之旅</div>
+                    </div>
+                    <div class="page1right">
+                      <router-link class="login"  to="/login">{{$t("common.login")}}</router-link>
+                      <router-link class="registe" to="/register">{{$t("common.register")}}</router-link>
+                    </div>
                 </div>
               </div>
             </div>
@@ -1747,14 +1749,59 @@ li {
             margin-bottom:9px;
         }
         span{
-            color:#8090AF;
+            color :#8090AF;
             text-align: center;
         }
     }
 }
 #page1{
-  height:75px;
+  height:100px;
   background:#0E0E28;
+  .content{
+    width:1200px;
+    height: 100px;
+    margin:0 auto;
+    display:flex;
+    justify-content: space-between;
+    .page1left{
+      .trading{
+        color:#8090AF;
+        font-size:22px;
+        margin-top:15px;
+        margin-bottom:13px;
+      }
+      .registered{
+        color:#8090AF;
+        font-size:12px;
+      }
+    }
+    .page1right{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      font-size:12px;
+      .login{
+        width:100px;
+        height:35px;
+        line-height:35px;
+        text-align:center;
+        background:rgba(27,31,60,1);
+        color:white;
+        cursor: pointer;
+      }
+      .registe{
+        width:100px;
+        height:35px;
+        line-height:35px;
+        text-align:center;
+        margin-left:20px;
+        background:rgba(94,107,137,1);
+        border:1px solid rgba(94,107,137,1);
+        color:white;
+        cursor: pointer;
+      }
+    }
+  }
 }
 </style>
 <style lang="scss">
