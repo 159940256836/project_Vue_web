@@ -1,8 +1,8 @@
 <template>
-  <div class="notice">
-    <div class="banner">
-    </div>
-    <div class="content-wrap">
+  <div class="notice notice_box">
+    <!-- <div class="banner">
+    </div> -->
+    <div class="content-wrap notice_content-wrap">
       <!-- <router-link class="link" to="../notice">
         <公告列表</router-link>
           <div class="header">
@@ -26,7 +26,7 @@
           </div> -->
         <div class="content">
             <h4 class="title">{{data.title}}</h4>
-            <div v-html="data.content"></div>
+            <div class="content_box" v-html="data.content"></div>
         </div>
         
     </div>
@@ -100,16 +100,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// lhl
 .notice {
   background: #fff;
   padding-bottom: 20px;
   overflow-x: hidden;
   min-height: 800px;
 }
+.notice_box{
+  background:#0e0e28 !important;
+}
 .content-wrap {
   width: 1200px;
   margin: 0 auto;
   background: #fff;
+}
+.notice_content-wrap{
+  margin-top:85px !important;
+  width:1200px !important;
+  background:#0e0e28 !important;
+  border:0 !important;
+
 }
 .header {
   text-align: right;
@@ -129,7 +140,14 @@ export default {
     .title{
         font-size: 20px;
         line-height: 3;
-        text-align: center;
+        // text-align: center;
+        height:64px;
+        line-height:64px;
+        background:rgba(25,29,58,1);
+        padding-left:30px;
+        color:#8090AF;
+        font-size:16px;
+
     }
 }
 </style>
@@ -137,10 +155,10 @@ export default {
 .notice {
   .banner {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     height: 280px;
-   background:url("../../assets/images/notice.jpg");;
+   background:url("../../assets/images/notice.jpg");
     color: #fff;
     font-size: 40px;
   }
@@ -151,10 +169,10 @@ export default {
     margin: 0 auto;
     background-color: #fff;
     color: #333;
-    box-shadow: 0 0 2px #ccc;
+    // box-shadow: 0 0 2px #ccc;
     margin-top: -50px;
-    border-radius: 6px;
-    padding: 50px 100px;
+    // border-radius: 6px;
+    // padding: 50px 100px;
     margin-bottom: 50px;
     padding-bottom: 110px;
     .link {
@@ -169,6 +187,12 @@ export default {
       }
     }
     .content {
+      .content_box{
+        background:rgba(17,21,48,1) !important;
+        margin-top:22px;
+        padding:28px 28px 40px 30px;
+        color:#8090AF;
+      }
       span {
         .MsoNormal {
           font-weight: 100;
