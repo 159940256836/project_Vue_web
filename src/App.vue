@@ -43,7 +43,7 @@
                         <div class="isLoginWrapper">
                             <div class="login_register isLogin" v-if="isLogin" >
                                 <div class="mymsg">
-                                    <router-link to="/">{{$t("uc.order.myorder")}}</router-link>
+                                    <router-link to="/order">{{$t("uc.order.myorder")}}</router-link>
                                 </div>
                                  <Dropdown @on-click="goBi">
                                     <a href="javascript:void(0)">
@@ -68,6 +68,11 @@
                                                 <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
                                             </DropdownItem>
                                         </div>
+                                        <DropdownItem> 
+                                            <router-link to="/account">
+                                                 {{$t("uc.menuTitle.AccountManagement")}}
+                                            </router-link>
+                                        </DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Dropdown>

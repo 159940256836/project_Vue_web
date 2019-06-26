@@ -47,6 +47,10 @@
     }
     text-align: center;
 }
+
+.entrusthistory .ivu-table .ivu-table-tip td {
+    background: transparent;
+}
 .table .ivu-table-cell-expand {
     color: #3399ff;
 }
@@ -438,7 +442,6 @@ export default {
                 .post(this.host + "/exchange/order/personal/history", params)
                 .then(response => {
                     var resp = response.body;
-                    console.log(resp.content)
                     let rows = [];
                     if (resp.content.length > 0) {
                         this.total = resp.totalElements;
