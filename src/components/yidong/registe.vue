@@ -358,8 +358,8 @@ export default {
         return false
       }
       // 直接生成一个验证码对象
-      const captcha1 = new TencentCaptcha('2038419167', res => {
-        console.log(res)
+      let captcha1 = new TencentCaptcha("2087858432", res => {
+        console.log(res);
         if (res.ret == 0) {
           this.ticket1 = res.ticket
           this.randStr1 = res.randstr

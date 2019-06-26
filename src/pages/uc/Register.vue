@@ -9,7 +9,7 @@
                 :rules="ruleInline"
                 inline
             >
-                <p class="login_title">{{$t('uc.login.login')}}</p>
+                <p class="login_title">{{$t('uc.login.registered')}}</p>
                 <FormItem style="width: 100%;border-bottom: 1px solid #ddd;">
                     <ButtonGroup>
                         <Button
@@ -448,7 +448,7 @@ export default {
         },
         initGtCaptcha() {
             // 直接生成一个验证码对象
-            let captcha1 = new TencentCaptcha("2038419167", (res) => {
+            let captcha1 = new TencentCaptcha("2087858432", (res) => {
                 res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr);
                 (this.changeActive == 0) && this.success();
                 this.changeActive == 1 && this.emailSuccess();
@@ -502,7 +502,8 @@ export default {
                 promotion: forminline.agentcode,
                 superPartner: ""
             };
-            this.$http.post(this.host + '/uc/register/email', params).then(response => {
+            this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
+            // this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
                 let resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
@@ -589,7 +590,8 @@ export default {
             params["superPartner"] = this.formInline.superType;
             params["ticket"] = this.ticket;
             params["randStr"] = this.randStr;
-            this.$http.post(this.host + "/uc/register/phone", params).then(response => {
+            // this.$http.post(this.host + "/uc/register/phone", params).then(response => { 旧接口
+            this.$http.post(this.host + "/uc/register/nweLoginByPhone", params).then(response => { // 新接口
                 let resp = response.body;
                 if (resp.code == 0) {
                     this.$Notice.success({
