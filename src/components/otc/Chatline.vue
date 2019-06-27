@@ -1,8 +1,29 @@
 <template>
     <div>
+        <div class="info-text">
+            <div class="msg-notice">
+                <!--                <Checkbox @on-change="handleCheckClick" v-model="fOpenNotice">开启windows消息提醒,不担心错过任何消息</Checkbox>-->
+                <Checkbox
+                    style="float: left"
+                    @on-change="handleNoticeClick"
+                    v-model="fOpenNotice"
+                >
+                    {{$t("otc.chat.openDesktopAlerts")}}
+                </Checkbox>
+                <Checkbox
+                    @on-change="handleAudioClick"
+                    v-model="fOpenAudio"
+                >
+                    {{$t("otc.chat.openchoiceAlerts")}}
+                </Checkbox>
+            </div>
+            <h5 class="spe_show">
+                {{$t('otc.chatline.warning')}}
+            </h5>
+        </div>
         <div class="chat-line">
             <div class="scroll-chat" id="scrollChat">
-                <div class="chat-container-box" id="sysbox">
+                <!--<div class="chat-container-box" id="sysbox">
                     <div class="system-box">
                         <p class="msg-content" v-show="msg.status==1">{{$t('otc.chatline.status_1')}}</p>
                         <p class="msg-content" v-show="msg.status==2">{{$t('otc.chatline.status_2')}}</p>
@@ -10,7 +31,7 @@
                         <p class="msg-content" v-show="msg.status==4">{{$t('otc.chatline.status_4')}}</p>
                         <p class="msg-content" v-show="msg.status==0">{{$t('otc.chatline.status_5')}}</p>
                     </div>
-                </div>
+                </div>-->
                 <h5 class="more" v-show="currentPage<totalPage||currentPage==totalPage">
                     <Icon type="ios-clock-outline" class="clock"></Icon>
                     <span @click="getBefore">{{$t('otc.chatline.loadmore')}}</span>
@@ -41,7 +62,7 @@
                     <div class="chat-container-box" v-show="item.uidFrom==msg.myId">
                         <div class="user-chat-box self-chat-box">
                             <div class="user-content-box">
-                                <p class="user-name">{{user.username}}</p>
+                                <!--<p class="user-name">{{user.username}}</p>-->
                                 <div class="chat-info">
                                     <div class="user-desc self-desc">
                                         <p class="icon"></p>
@@ -64,10 +85,10 @@
 
             </div>
             <!---->
-            <h5 class="spe_show">
+            <!--<h5 class="spe_show">
                 <i class="iconfont icon-warning"></i>
                 {{$t('otc.chatline.warning')}}
-            </h5>
+            </h5>-->
             <!---->
           <div class="audio-wrap">
             <audio id="noticeMusic" :src="audioSrc">
@@ -75,22 +96,33 @@
                 {{$t('description.browser')}}
             </audio>
           </div>
-            <div class="send-msg-box">
-                <div class="img-btn" style="background: #fff;cursor: default;">
-                    <!-- <Icon type="image" class="img-icons"></Icon>
-                                            <input title="上传图片" type="file" accept="image/jpg,image/jpeg,image/png" class="input-file"> -->
-                </div>
-                <input v-model="mytext" @keyup.enter="sendName" autocomplete="off" type="text" :placeholder="$t('otc.chatline.contenttip')" style=" background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
-                <button class="send-btn" @click="sendName">
-                    <Icon type="md-paper-plane" size="28" color="#3399ff"/>
+        </div>
+        <div class="send-msg-box">
+            <!--<div class="img-btn" style="background: #fff;cursor: default;">
+                <Icon type="image" class="img-icons"></Icon>
+                <input
+                    title="上传图片"
+                    type="file"
+                    accept="image/jpg,image/jpeg,image/png"
+                    class="input-file"
+                >
+            </div>-->
+            <div class="msg-box">
+                <input
+                    class="msg-input"
+                    v-model="mytext"
+                    @keyup.enter="sendName"
+                    autocomplete="off"
+                    type="text"
+                    :placeholder="$t('otc.chatline.contenttip')"
+                >
+                <button
+                    class="send-btn"
+                    @click="sendName"
+                >
+                    {{ $t('otc.send') }}
                 </button>
-              <div class="msg-notice">
-<!--                <Checkbox @on-change="handleCheckClick" v-model="fOpenNotice">开启windows消息提醒,不担心错过任何消息</Checkbox>-->
-                <Checkbox @on-change="handleNoticeClick" v-model="fOpenNotice">{{$t("otc.chat.openDesktopAlerts")}}</Checkbox>
-                <Checkbox @on-change="handleAudioClick" v-model="fOpenAudio">{{$t("otc.chat.openchoiceAlerts")}}</Checkbox>
-              </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -300,13 +332,19 @@ export default {
     }
 }
 </script>
-<style scoped>
-  .msg-notice{
-    width: 20%;
+<style scoped lang="scss">
+  /*.msg-notice{*/
+  /*  width: 20%;*/
+  /*}*/
+  .msg-notice,
+  .spe_show {
+      height: 50px;
+      line-height: 50px;
+      padding: 0 30px;
   }
-  .msg-notice>label{
-    margin-top: 8px;
-  }
+  /*.msg-notice>label{*/
+  /*  margin-top: 8px;*/
+  /*}*/
 .chat-in-box .chat-in .chat-line .spe_show {
     background-color: #fdf1e9;
     color: #ed2525;
@@ -316,14 +354,13 @@ export default {
 
 .chat-in-box .chat-in .chat-line {
     background-color: white;
-    padding: 100px 24px 100px 24px;
+    /*padding: 100px 24px 100px 24px;*/
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    border: 1px solid #ebeff5;
+    /*border: 1px solid #ebeff5;*/
     width: 95%;
     margin: 0 auto;
     position: relative;
-    min-height: 650px;
     transform: translate(0, 0);
 }
 
@@ -342,11 +379,40 @@ export default {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    height: 557px;
-    overflow-y: auto;
+    height: 400px;
     padding-right: 10px;
+    overflow-x: hidden;
+    border: 1px solid #2A3850;
+    background: #10122B;
 }
+  .scroll-chat::-webkit-scrollbar {
+      width: 4px; /*对垂直流动条有效*/
+      height: 10px; /*对水平流动条有效*/
+  }
 
+  /*定义滚动条的轨道颜色、内阴影及圆角*/
+  .scroll-chat::-webkit-scrollbar-track{
+      background-color: #131738;
+      border-radius: 3px;
+  }
+
+
+  /*定义滑块颜色、内阴影及圆角*/
+  .scroll-chat::-webkit-scrollbar-thumb{
+      border-radius: 7px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #21254D;
+  }
+
+  /*!*定义两端按钮的样式*!*/
+  /*.scroll-chat::-webkit-scrollbar-button {*/
+  /*    background-color:cyan;*/
+  /*}*/
+
+  /*!*定义右下角汇合处的样式*!*/
+  /*.scroll-chat::-webkit-scrollbar-corner {*/
+  /*    background:khaki;*/
+  /*}*/
 .chat-in-box .chat-in .chat-line .scroll-chat .more {
     text-align: center;
     color: #3399ff;
@@ -496,43 +562,42 @@ export default {
 .chat-container-box .user-chat-box .user-content-box .chat-info .self-desc {
     margin-left: 0;
     margin-right: 16px;
-    background-color: #3399ff;
-    color: #fff;
+    background-color: #8090AF;
+    color: #10122B;
 }
 
 .chat-container-box .user-chat-box .user-content-box .chat-info .self-desc .icon {
     height: 0;
     width: 0;
     border: 8px solid transparent;
-    border-left: 14px solid #3399ff;
+    border-left: 14px solid #8090AF;
     position: absolute;
     top: 6px;
     right: -18px;
     left: unset;
 }
 
-.chat-in-box .chat-in .chat-line .send-msg-box {
+.send-msg-box {
     display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    width: 94%;
-    position: absolute;
-    bottom: 21px;
-    left: 25px;
-    -webkit-box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+    padding: 0 30px;
+    .msg-box {
+        width: 100%;
+        .msg-input {
+            background-attachment: scroll;
+            background-size: 16px 18px;
+            background-position: 98% 50%;
+        }
+    }
 }
 
-.chat-in-box .chat-in .chat-line .send-msg-box .img-btn {
+/*
+.send-msg-box .img-btn {
     position: relative;
     overflow: hidden;
     background-color: transparent;
     width: 10%;
     min-width: 60px;
-    /* border: 1px solid #dfe8f2; */
+    !* border: 1px solid #dfe8f2; *!
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -546,56 +611,54 @@ export default {
     background: #ebeff5;
 }
 
-.chat-in-box .chat-in .chat-line .send-msg-box .img-btn .input-file {
+.send-msg-box .img-btn .input-file {
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
     width: 100%;
 }
+*/
 
-.chat-in-box .chat-in .chat-line .send-msg-box input {
+.send-msg-box input {
     height: 60px;
-    border: 1px solid transparent;
-    border-left: none;
-    background-color: transparent;
+    border: 1px solid #2A3850;
+    border-top: 0;
+    background: #111530;
     padding: 10px;
     outline: none;
-    width: 80%;
+    width: 88%;
 }
 
-.chat-in-box .chat-in .chat-line .send-msg-box .send-btn {
+.send-msg-box .send-btn {
     height: 60px;
     border: none;
-    background-color: transparent;
-    color: white;
+    color: #fff;
     width: 12%;
     outline: none;
     font-size: 18px;
+    margin-left: -4px;
     cursor: pointer;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background: #ebeff5;
+    background: #3399ff;
 }
 
-.chat-in-box .chat-in .chat-line .send-msg-box .img-btn .img-icons {
+/*.send-msg-box .img-btn .img-icons {
     font-size: 24px;
     color: #3399ff;
-}
+}*/
 
-.chat-in-box .chat-in .chat-line .send-msg-box .send-btn .iconfont {
+.send-msg-box .send-btn .iconfont {
     font-size: 28px;
     color: #3399ff;
 }
 </style>
-
+<style lang="scss">
+    .ivu-checkbox-inner {
+        border: 1px solid #3399ff;
+        background: #111530;
+        border-radius: 50%;
+    }
+</style>
 
 
 

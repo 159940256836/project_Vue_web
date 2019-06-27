@@ -67,10 +67,6 @@
         props: {
             skin:String,
             rows: Array
-        },
-        updated(){
-            console.log(this.skin)
-            // console.log(this.rows, this.$parent,this.props,this.$parent.$props.data);
         }
     };
 </script>

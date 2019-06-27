@@ -1,15 +1,35 @@
 <template>
     <div class="nav-rights">
         <div class="my_ad_box">
-            <div class="add_ad">
-                <Button icon="plus-round" @click="publish">{{$t('otc.myad.post')}}</Button>
-            </div>
-            <Alert :class="locale == 'en' ? 'en' : ''">{{$t('otc.myad.alert')}}</Alert>
+            <!--<div class="add_ad">
+                <Button
+                    icon="plus-round"
+                    @click="publish"
+                >
+                    {{$t('otc.myad.post')}}
+                </Button>
+            </div>-->
+            <!--<Alert :class="locale == 'en' ? 'en' : ''">
+                {{$t('otc.myad.alert')}}
+            </Alert>-->
             <div class="order-table">
-                <Table :columns="tableColumnsAdv" :data="tableAdv" :no-data-text="$t('common.nodata')" :loading="loading" class="tables" :disabled-hover="true"></Table>
+                <Table
+                    :columns="tableColumnsAdv"
+                    :data="tableAdv"
+                    :no-data-text="$t('common.nodata')"
+                    :loading="loading"
+                    class="tables"
+                    :disabled-hover="true"
+                ></Table>
                 <div style="margin: 10px;overflow: hidden" id="pages">
                     <div style="float: right;">
-                        <Page v-if="totalPage > 10" :pageSize="pageNumber" :total="totalPage" :current="currentPage" @on-change="changePage"></Page>
+                        <Page
+                            v-if="totalPage > 10"
+                            :pageSize="pageNumber"
+                            :total="totalPage"
+                            :current="currentPage"
+                            @on-change="changePage"
+                        ></Page>
                     </div>
                 </div>
             </div>
@@ -244,15 +264,15 @@ export default {
           //this.dataCount = resp.data.length
           this.totalPage = resp.data.totalElements;
         } else {
-          // this.$Message.error(resp.message);
+          this.$Message.error(resp.message);
           // this.$Message.error(this.$t('common.logintip'));
-          this.$Message.error(this.loginmsg);
+          // this.$Message.error(this.loginmsg);
         }
       });
-    },
-    publish() {
-      this.$router.push(this.api.otc.createAd);
     }
+    // publish() {
+    //   this.$router.push(this.api.otc.createAd);
+    // }
   },
   computed: {
     lang: function() {
@@ -286,7 +306,6 @@ export default {
 }
 
 .nav-rights {
-  padding: 0 0 0 20px;
   .my_ad_box {
     .add_ad {
       margin-bottom: 20px;
@@ -315,6 +334,21 @@ export default {
 .nav-rights {
   .my_ad_box {
     .order-table {
+        .ivu-table-wrapper {
+            .ivu-table {
+                td {
+                    background-color: #111530;
+                    color: #8090AF;
+                }
+                .ivu-table-header {
+                    th {
+                        padding: 15px 0;
+                        background: #191D3A;
+                        border-color: transparent;
+                    }
+                }
+            }
+        }
       .ivu-table {
         .ivu-table-header,
         .ivu-table-body {

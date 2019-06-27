@@ -2,7 +2,7 @@
 <template>
     <main class="box-wrap">
         <div class="box" id="box">
-            <h2 class="title">{{ title }}</h2>
+            <h2 class="title">{{ this.$t('otc.myorder') }}</h2>
             <Tabs name="tab1">
                 <TabPane 
                 :label="this.$t('uc.menuTitle.bibiManagement')" 
@@ -14,7 +14,7 @@
                 :label="this.$t('uc.menuTitle.otcManagement')" 
                 tab="tab1"
                 >            
-                    <LegalTender2 />  
+                    <LegalTender />  
                 </TabPane>
             </Tabs>
         </div>
@@ -24,7 +24,6 @@
 <script>
 // import './nav.scss'//引入nav样式
 import LegalTender from './legalTender.vue'
-import LegalTender2 from './legalTender2.vue'
 import Coins from './coins.vue'
 
 export default {
@@ -35,7 +34,6 @@ export default {
     },
     components: {
         LegalTender,
-        LegalTender2,
         Coins
     },
     methods: {

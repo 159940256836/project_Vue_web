@@ -1,7 +1,10 @@
 <template>
     <div class="nav-rights">
         <div class="nav-right">
-            <p class="nowintegration">{{$t('pointPage.currentPoint')}}:{{integration}}</p>
+            <p class="nowintegration">
+                <span>{{ $t('pointPage.currentPoint') }}：</span>
+                <span>{{ integration }}</span>
+            </p>
             <div class="blc_box">
                 <span>{{$t('pointPage.time')}}:&nbsp;</span>
                 <DatePicker type="daterange" :placeholder="$t('pointPage.enterTime')" style="width: 200px" v-model="rangeDate" :editable="false"></DatePicker>
@@ -129,25 +132,42 @@ export default {
 .nav-right {
     height: auto;
     overflow: hidden;
-    padding: 0 15px;
     .nowintegration {
-        font-size: 24px;
-        line-height: 2;
+        height: 60px;
+        line-height: 60px;
+        font-size: 20px;
+        margin-bottom: 20px;
+        background: #111530;
+        padding: 0 28px;
+        span {
+            &:first-child {
+                color: #fff;
+            }
+            &:last-child {
+                color: #3399ff;
+            }
+        }
     }
     .blc_box {
+        height: 60px;
+        line-height: 60px;
+        padding: 0 28px;
+        background: #111530;
         span {
             font-size: 14px;
         }
         .search_btn {
             height: 32px;
+            line-height: 32px;
             width: 86px;
             background: #3399ff;
             color: #fff;
             font-size: 14px;
             border: none;
             outline: none;
-            border-radius: 5px;
-            margin-left: 10px;
+            float: right;
+            margin: 14px;
+            cursor: pointer;
         }
     }
     .blc-table {

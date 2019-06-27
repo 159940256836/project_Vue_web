@@ -1,56 +1,154 @@
 <template>
   <div class="content-wraps">
     <div class="containers" id="List">
-      <div class="fiat">
+      <!--登陆之前-->
+      <div
+        class="fiat"
+        v-if="!isLogin"
+      >
         <div class="to_business">
-          <h3>{{$t('paper.legal')}}</h3>
-          <span>{{$t('paper.curren')}}</span>
-          <a href="javascript:void(0)" @click="goBusiness">{{$t('paper.become')}}</a>
+          <p>{{ $t('paper.legal') }}</p>
+          <span>{{ $t('paper.curren') }}</span>
+          <a
+            href="javascript:void(0)"
+            @click="goBusiness"
+          >
+            {{ $t('paper.become') }}
+          </a>
           <!-- <router-link to="/identbusiness">成为商家</router-link> -->
         </div>
       </div>
-      <div class="fiat-main">
-        <div class="content">
-          <Menu
-            ref="navMenu"
-            mode="horizontal"
-            width="auto"
-            :active-name="activeMenuName"
-            @on-select="menuSelected"
-            class='tradelist'
-          >
-            <MenuGroup>
-              <template v-for="(coin, index) in coins">
-                <MenuItem :name="'coin-' + index">
-                  {{ coin.unit }}
-                </MenuItem>
-              </template>
-            </MenuGroup>
-          </Menu>
-          <router-view></router-view>
+      <!--登录之后显示-->
+      <div
+        class="fiat-login"
+        v-else
+      >
+        <div class="fiat-login-main">
+          <div class="fiat-login-title">
+            <img src="../../assets/images/fait/user.png" alt="">
+          </div>
+          <div class="fiat-login-title">
+            <p>
+              <span>当前等级认证</span>
+              <span>1</span>
+            </p>
+            <p>
+              <span>当前资产总估值</span>
+              <span>0.000000</span>
+            </p>
+          </div>
+          <div class="fiat-login-title">
+            <p>
+              <span>可用</span>
+              <span>1</span>
+            </p>
+            <p>
+              <span>冻结</span>
+              <span>0.000000</span>
+            </p>
+          </div>
+          <div class="fiat-login-title">
+            <div class="login-title">
+              <img
+                src="../../assets/images/fait/tip.png"
+                alt=""
+              >
+              <!--新手指南-->
+              {{$t("footer.RecommendedCommission")}}
+            </div>
+            <!--发布广告-->
+            <div class="fiat-title">
+              <router-link to="/PublishAdver">
+                <button>
+                  {{ $t('otc.myad.post') }}
+                </button>
+              </router-link>
+            </div>
+            <!--查看订单-->
+            <div class="fiat-title-info">
+              <router-link to="/order">
+                <button>
+                  查看订单
+                </button>
+              </router-link>
+            </div>
+          </div>
+          <div class="fiat-login-title">
+            <p>
+              <span>总单数</span>
+              <span>0</span>
+            </p>
+            <p>
+              <span>完成率</span>
+              <span>0%</span>
+            </p>
+          </div>
+          <div class="fiat-login-title">
+            <p>
+              <span>单次限额</span>
+              <span>1</span>
+            </p>
+            <p>
+              <span>今日交易金额</span>
+              <span>0</span>
+            </p>
+          </div>
         </div>
-        <div class="advantage">
-          <ul>
-            <li>
-              <div class="image"><img src="../../assets/images/price.png" alt=""></div>
-              <div class="title">{{$t('paper.market')}}</div>
-              <div class="content1">{{$t('paper.price')}}</div>
-            </li>
-            <li>
-              <div class="image"><img src="../../assets/images/poundage.png" alt=""></div>
-              <div class="title">{{$t('paper.charge')}}</div>
-              <div class="content1">{{$t('paper.users')}}</div>
-            <li>
-              <div class="image"><img src="../../assets/images/instant.png" alt=""></div>
-              <div class="title">{{$t('paper.instant')}}</div>
-              <div class="content1">{{$t('paper.deal')}}</div>
-            </li>
-            <li>
-              <div class="image"><img src="../../assets/images/platedanbao.png" alt=""></div>
-              <div class="title">{{$t('paper.plateform')}}</div>
-              <div class="content1">{{$t('paper.save')}}</div>
-            </li>
-          </ul>
+      </div>
+      <div class="main-box">
+        <div class="fiat-main">
+          <div class="content">
+            <Menu
+              ref="navMenu"
+              mode="horizontal"
+              width="auto"
+              :active-name="activeMenuName"
+              @on-select="menuSelected"
+              class='tradelist'
+            >
+              <MenuGroup>
+                <template v-for="(coin, index) in coins">
+                  <MenuItem :name="'coin-' + index">
+                    {{ coin.unit }}
+                  </MenuItem>
+                </template>
+              </MenuGroup>
+            </Menu>
+            <router-view></router-view>
+          </div>
+          <div
+            class="advantage"
+            v-if="!isLogin"
+          >
+            <ul>
+              <li>
+                <div class="image"><img src="../../assets/images/fait/price.png" alt=""></div>
+                <div class="title">{{$t('paper.market')}}</div>
+                <div class="content1">{{$t('paper.price')}}</div>
+              </li>
+              <li>
+                <div class="image"><img src="../../assets/images/fait/poundage.png" alt=""></div>
+                <div class="title">{{$t('paper.charge')}}</div>
+                <div class="content1">{{$t('paper.users')}}</div>
+              <li>
+                <div class="image"><img src="../../assets/images/fait/instant.png" alt=""></div>
+                <div class="title">{{$t('paper.instant')}}</div>
+                <div class="content1">{{$t('paper.deal')}}</div>
+              </li>
+              <li>
+                <div class="image"><img src="../../assets/images/fait/platedanbao.png" alt=""></div>
+                <div class="title">{{$t('paper.plateform')}}</div>
+                <div class="content1">{{$t('paper.save')}}</div>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="advantage"
+            v-else
+          >
+            <p class="advantage-title">{{ $t('otc.myad.title') }}</p>
+            <myAdvertising></myAdvertising>
+          </div>
         </div>
       </div>
     </div>
@@ -59,23 +157,89 @@
 
 <style scoped lang="scss">
 .content-wraps {
-  background-color: #fff;
+  /*background-color: #fff;*/
   .containers {
     width: 100%;
+    padding-top: 39px;
     /*margin: 20px 0;*/
+    .fiat-login {
+      background: #0e0e28;
+      padding-top: 50px;
+      .fiat-login-main {
+        width: 1200px;
+        height: 180px;
+        background: #111530;
+        margin: 21px auto 0;
+        padding: 25px;
+        display: flex;
+        .fiat-login-title {
+          flex: 1;
+          .login-title {
+            color: #8090AF;
+            img {
+              width: 16px;
+              height: 16px;
+              vertical-align:middle;
+              margin: 0 5px 0 3px;
+            }
+          }
+          .fiat-title {
+            margin-top: 10px;
+            button {
+              cursor: pointer;
+              color: #fff;
+              width: 100px;
+              height: 32px;
+              background: transparent;
+              border: 1px solid #282F4C;
+            }
+          }
+          .fiat-title-info {
+            margin-top: 10px;
+            button {
+              cursor: pointer;
+              color: #fff;
+              width: 100px;
+              height: 32px;
+              background: #5E6B89;
+              border: 0;
+              outline:none;
+            }
+          }
+          img {
+            margin-top: 30px;
+          }
+          p {
+            height: 62px;
+            color: #8090AF;
+            span {
+              width: 100%;
+              display: inline-block;
+              &:first-child {
+                margin-bottom: 10px;
+              }
+            }
+            &:last-child {
+              margin-top: 10px;
+            }
+          }
+        }
+      }
+    }
     .fiat {
     border-radius: 5px;
-    height: 400px;
-    background: url("../../assets/images/fiat_banner.jpg") no-repeat center center;
-    background-size: 100%;
+    height: 510px;
+    /*background: url("../../assets/images/fiat_banner.jpg") no-repeat center center;*/
+    background: url("../../assets/images/fait/fait-banner.png") no-repeat center center;
+    /*background-size: 100%;*/
     display: flex; //flex布局
     justify-content: center; //使子项目水平居中
     align-items: center; //使子项目垂直居中
     .to_business {
       color: #fff;
       text-align: center;
-      h3 {
-        font-size: 46px;
+      p {
+        font-size: 55px;
         letter-spacing: 20px;
       }
       span {
@@ -87,35 +251,38 @@
         width: 220px;
         height: 45px;
         display: inline-block;
-        background: #fff;
-        border-radius: 5px;
-        font-size: 20px;
+        font-size: 18px;
         line-height: 45px;
-        color: #000;
         margin-top: 20px;
+        border: 1px solid #aaa;
+        color: #fff;
+        border-radius: 5px;
       }
     }
   }
   }
-  .fiat-main {
-    width: 1200px;
-    margin: 50px auto;
+  .main-box {
+    background: #0e0e28;
+    .fiat-main {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 25px 0;
       .content {
         width: 100%;
-        margin: 20px auto;
-        -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        /*margin: 20px auto;*/
       }
       .advantage {
-        -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
+        .advantage-title {
+          height: 60px;
+          line-height: 60px;
+          font-size: 20px;
+          color: #fff;
+        }
         ul {
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 30px;
+          padding: 100px 0;
           li {
             width: 25%;
             list-style-type: none;
@@ -124,27 +291,28 @@
               text-align: center;
             }
             div.image {
-              width: 50px;
-              height: 50px;
-              margin: 20px auto;
+              width: 70px;
+              height: 115px;
+              margin: 0 auto;
               img {
-                width: 100%;
+                margin-top: 30px;
               }
             }
             div.title {
               line-height: 30px;
               font-size: 16px;
-              color: #333;
+              color: #fff;
             }
             div.content1 {
               padding: 20px 40px;
               line-height: 20px;
               font-size: 12px;
-              color: #999;
+              color: #8090AF;
             }
           }
         }
       }
+    }
   }
 }
 </style>
@@ -152,6 +320,29 @@
 .content-wraps {
   .containers {
     .content {
+      .ivu-menu-item-group-title {
+        height: 20px;
+      }
+      .ivu-tabs-bar {
+        border-bottom: none;
+      }
+      .ivu-tabs-nav-scroll {
+        margin-top: 20px;
+        height: 50px;
+        background: #191D3A;
+      }
+      .ivu-menu-light {
+        height: 55px;
+        background: #191D3A;
+      }
+      .ivu-tabs-nav .ivu-tabs-tab {
+        line-height: 34px;
+        color: #fff;
+      }
+      .ivu-menu-horizontal .ivu-menu-item {
+        margin: 0 20px;
+        padding: 0;
+      }
       ul.tradelist.ivu-menu.ivu-menu-light.ivu-menu-horizontal {
         &:after {
           background: none;
@@ -159,6 +350,7 @@
         .ivu-menu-item-group {
           li.ivu-menu-item {
             border: none;
+            color: #fff;
             &:hover {
               color: #3399ff;
               border-bottom: 0;
@@ -166,11 +358,36 @@
           }
           li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
             color: #3399ff;
-            border-bottom: none;
+            border-bottom: 2px solid #3399ff;
+            height: 35px;
           }
         }
       }
+      .ivu-table-large td {
+        height: 50px;
+      }
+      .ivu-table td, .ivu-table th {
+        border: 0;
+      }
+      /*#list1 li:nth-of-type(odd){ background:#00ccff;*/
+      /*#list1 li:nth-of-type(even){ background:#ffcc00;}*/
+      &:nth-of-type(odd) {
+        .ivu-table td {
+          background: #111530;
+          color: #fff;
+        }
+      }
+      &:nth-of-type(even) {
+        .ivu-table td {
+          background: #fff;
+          color: #fff;
+        }
+      }
+      /*.ivu-table td {*/
+      /*  background: #111530;*/
+      /*}*/
       .nav-right.tradeCenter .list-content .ivu-tabs .ivu-tabs-tabpane {
+        background: #0e0e28;
         .ivu-table-wrapper {
           .ivu-table {
             &:before {
@@ -180,9 +397,18 @@
               background: #fff;
             }
           }
-          .ivu-spin.ivu-spin-large.ivu-spin-fix {
-            border-color: #fff;
+          .ivu-spin-fix {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            z-index: 8;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(14, 14, 40, .6);
           }
+          /*.ivu-spin.ivu-spin-large.ivu-spin-fix {*/
+          /*  border-color: #fff;*/
+          /*}*/
         }
       }
     }
@@ -190,7 +416,9 @@
 }
 </style>
 <script>
+import myAdvertising from "../../components/otc/MyAd";
 export default {
+  components: { myAdvertising },
   data() {
     return {
       coins: [],

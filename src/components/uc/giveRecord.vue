@@ -2,9 +2,21 @@
     <div class="nav-rights">
         <div class="nav-right">
             <div class="blc_box">
-                <span>{{$t('pointPage.giftTime')}}:&nbsp;</span>
-                <DatePicker type="daterange" :placeholder="$t('pointPage.enterTime')" style="width: 200px" v-model="rangeDate" :editable="false"></DatePicker>
-                <button class="search_btn" @click="serar">{{$t('pointPage.search')}}</button>
+                <span>{{$t('pointPage.giftTime')}}：</span>
+                <DatePicker
+                    type="daterange"
+                    :placeholder="$t('pointPage.enterTime')"
+                    style="width: 260px"
+                    v-model="rangeDate"
+                    :editable="false"
+                >
+                </DatePicker>
+                <button
+                    class="search_btn"
+                    @click="serar"
+                >
+                    {{$t('pointPage.search')}}
+                </button>
             </div>
             <div class="blc-table">
                 <Table
@@ -129,25 +141,31 @@ export default {
 .nav-right {
     height: auto;
     overflow: hidden;
-    padding: 0 15px;
     .nowintegration {
         font-size: 24px;
         line-height: 2;
     }
     .blc_box {
+        height: 60px;
+        line-height: 60px;
+        background: #111530;
+        padding: 0 28px;
         span {
             font-size: 14px;
         }
         .search_btn {
             height: 32px;
+            line-height: 32px;
             width: 86px;
             background: #3399ff;
             color: #fff;
             font-size: 14px;
             border: none;
             outline: none;
-            border-radius: 5px;
-            margin-left: 10px;
+            margin: 14px;
+            float: right;
+            border-radius: 0;
+            cursor: pointer;
         }
     }
     .blc-table {

@@ -1,53 +1,121 @@
 <template>
   <div class="my_ad_container">
-    <div class="contbox">
-      <Spin v-show="isSpinShow" class="my_ad_container_spin" fix></Spin>
-      <div class="">
-        <div class="send-box">
-          <div class="title-box">
-            <h6 class="titles">{{$t('otc.publishad.createad')}}
-              <i class="iconfont icon-hongjiantou"></i>
-            </h6>
-            <p>{{$t('otc.publishad.msg1')}}
-              <router-link to="/otc/trade/bc">{{$t('otc.publishad.tradead')}}</router-link>
-              。
-            </p>
-            <p>{{$t('otc.publishad.msg2')}}{{$t('otc.publishad.msg3')}}。</p>
-            <p>{{$t('otc.publishad.msg4')}}
-              <router-link to="/uc/ad">{{$t('otc.publishad.myad')}}</router-link>
-              。
-            </p>
-          </div>
-          <!--  -->
-          <div class="formbox send-form">
-            <Form ref="form" :model="form" :rules="ruleValidate" :label-width="90">
-              <FormItem :label="$t('otc.publishad.iwant')" prop="advertiseType">
-                <RadioGroup v-model="form.advertiseType" @on-change="changeCoin">
-                  <Radio label="1" :disabled='isId'>{{$t('otc.publishad.sellonline')}}</Radio>
-                  <Radio label="0" :disabled='isId'>{{$t('otc.publishad.buyonline')}}</Radio>
+    <Spin v-show="isSpinShow" class="my_ad_container_spin" fix></Spin>
+    <div class="send-box">
+      <div class="title-box">
+        <h6 class="titles">{{ $t('otc.publishad.createad') }}
+          <i class="iconfont icon-hongjiantou"></i>
+        </h6>
+        <p>
+          {{ $t('otc.publishad.msg1') }}
+          <router-link to="/otc/trade/bc">
+            {{ $t('otc.publishad.tradead') }}
+          </router-link>
+          。
+        </p>
+        <p>{{$t('otc.publishad.msg2')}}
+          {{$t('otc.publishad.msg3')}}。
+        </p>
+        <p>{{$t('otc.publishad.msg4')}}
+          <router-link to="/uc/ad">
+            {{$t('otc.publishad.myad')}}
+          </router-link>
+          。
+        </p>
+      </div>
+      <!--  -->
+      <div class="formbox send-form">
+        <div style="background: #191D3A">
+          <Form
+            ref="form"
+            :model="form"
+            :rules="ruleValidate"
+            :label-width="90"
+          >
+            <div class="publish-left">
+              <FormItem
+                :label="$t('otc.publishad.iwant')"
+                prop="advertiseType"
+              >
+                <RadioGroup
+                  v-model="form.advertiseType"
+                  @on-change="changeCoin"
+                >
+                  <Radio
+                    label="1"
+                    :disabled='isId'
+                  >
+                    {{$t('otc.publishad.sellonline')}}
+                  </Radio>
+                  <Radio
+                    label="0"
+                    :disabled='isId'
+                  >
+                    {{$t('otc.publishad.buyonline')}}
+                  </Radio>
                 </RadioGroup>
               </FormItem>
-              <FormItem :label="$t('otc.publishad.exchangecoin')" prop="coin">
-                <Select v-model="form.coin" :disabled='isId' @on-change="changeCoin">
-                  <Option v-for="(item, index) in coinList" :value="item.id" :key="index">{{item.unit}}</Option>
+              <FormItem
+                :label="$t('otc.publishad.exchangecoin')"
+                prop="coin"
+              >
+                <Select
+                  v-model="form.coin" :disabled='isId'
+                  @on-change="changeCoin"
+                >
+                  <Option
+                    v-for="(item, index) in coinList"
+                    :value="item.id"
+                    :key="index"
+                  >
+                    {{item.unit}}
+                  </Option>
                 </Select>
               </FormItem>
-              <FormItem :label="$t('otc.publishad.country')" prop="country">
-                <Select v-model="form.country" @on-change="onAreaChange">
-                  <Option v-for="(area,index) in areas" :value="area.zhName" :key="index">{{area.zhName}}</Option>
+              <FormItem
+                :label="$t('otc.publishad.country')"
+                prop="country"
+              >
+                <Select
+                  v-model="form.country"
+                  @on-change="onAreaChange"
+                >
+                  <Option
+                    v-for="(area,index) in areas"
+                    :value="area.zhName"
+                    :key="index"
+                  >
+                    {{area.zhName}}
+                  </Option>
                 </Select>
               </FormItem>
               <!-- 1 -->
-              <FormItem :label="$t('otc.publishad.currency')" prop="rmb">
-                <Input v-model="form.rmb" disabled placeholder=""></Input>
+              <FormItem
+                :label="$t('otc.publishad.currency')"
+                prop="rmb"
+              >
+                <Input
+                  style="background: #191D3A;width: 370px;"
+                  v-model="form.rmb"
+                  disabled
+                  placeholder=""
+                />
               </FormItem>
-              <FormItem v-if="symbol != 'BC'" :label="$t('otc.publishad.openfixedprice')">
-                <i-switch v-model="form.fixed" size="large">
+              <FormItem
+                v-if="symbol != 'BC'"
+                :label="$t('otc.publishad.openfixedprice')"
+              >
+                <i-switch
+                  v-model="form.fixed"
+                  size="large"
+                >
                   <span slot="open">{{$t('otc.publishad.open')}}</span>
                   <span slot="close">{{$t('otc.publishad.close')}}</span>
                 </i-switch>
               </FormItem>
-              <p class="msg" v-show="form.fixed">{{$t('otc.publishad.usetip')}}</p>
+              <p class="msg" v-show="form.fixed">
+                {{$t('otc.publishad.usetip')}}
+              </p>
               <FormItem
                 :label="$t('otc.publishad.premiseprice')"
                 prop="premisePrice"
@@ -58,7 +126,7 @@
                   v-model="form.premisePrice"
                   @keyup.native="handleInput(form.premisePrice)"
                   :placeholder="$t('otc.publishad.premisepricetip')"
-                ></Input>
+                />
                 <span slot="append">%</span>
               </FormItem>
               <FormItem
@@ -66,13 +134,14 @@
                 :label="$t('otc.publishad.fixedprice')"
                 prop="fixedPrice"
                 v-show="form.fixed"
-                class="ivu-form-item-required">
+                class="ivu-form-item-required"
+              >
                 <Input
                   v-model="form.fixedPrice"
                   @keyup.native="handleInput(form.fixedPrice)"
                   :placeholder="$t('otc.publishad.fixedpricetip')"
                 >
-                <span slot="append">{{form.rmb}}</span>
+                  <span slot="append">{{form.rmb}}</span>
                 </Input>
               </FormItem>
               <FormItem
@@ -80,7 +149,8 @@
                 :label="$t('otc.publishad.fixedprice')"
                 prop="fixedPrice"
                 v-show="form.fixed"
-                class="ivu-form-item-required">
+                class="ivu-form-item-required"
+              >
                 <Input
                   v-model="form.fixedPrice"
                   @keyup.native="handleInput(form.fixedPrice)"
@@ -94,45 +164,100 @@
               <p class="msg">{{$t('otc.publishad.marketprice')}}：
                 <span class="cankao">{{cankao}}</span>
               </p>
-              <p class="msg" v-show="!form.fixed">{{$t('otc.publishad.marketpricetip')}}{{wantstyle}}。</p>
+              <p class="msg" v-show="!form.fixed">
+                {{$t('otc.publishad.marketpricetip')}}{{wantstyle}}。
+              </p>
               <div class="ivu-form-item">
-                <label class="ivu-form-item-label" style="width: 90px;">{{$t('otc.publishad.exchangeprice')}}</label>
+                <label class="ivu-form-item-label" style="width: 90px;">
+                  {{$t('otc.publishad.exchangeprice')}}
+                </label>
                 <div class="ivu-form-item-content" style="margin-left: 90px;">
                   <div class="ivu-input-wrapper ivu-input-type" id="price">
                     {{price}}&nbsp;CNY/{{symbol}}
                   </div>
                 </div>
               </div>
-              <p class="msg">{{$t('otc.publishad.formual')}}：（Bitstamp+Bitfinex+Coinbase）/ 3 *{{gongshi.toFixed(4) }}</p>
-              <FormItem :label="wantstyle+$t('otc.publishad.num')" prop="number">
-                <Input v-model="form.number" :placeholder="$t('otc.publishad.num_text1')+wantstyle+$t('otc.publishad.num_text2')"></Input>
+              <p class="msg">
+                {{$t('otc.publishad.formual')}}：（Bitstamp+Bitfinex+Coinbase）/ 3 *{{gongshi.toFixed(4) }}
+              </p>
+              <FormItem
+                :label="wantstyle+$t('otc.publishad.num')"
+                prop="number"
+              >
+                <Input
+                  v-model="form.number"
+                  :placeholder="$t('otc.publishad.num_text1')+wantstyle+$t('otc.publishad.num_text2')"
+                />
               </FormItem>
               <FormItem :label="$t('otc.publishad.exchangeperiod')" prop="timeLimit">
-                <Input v-model="form.timeLimit" @keyup.native="handleInput(form.timeLimit)" :placeholder="$t('otc.publishad.exchangeperiod_text1')+'('+wantTime+$t('otc.publishad.minute')+')'">
-                <span slot="append">{{$t('otc.publishad.minute')}}</span>
+                <Input
+                  v-model="form.timeLimit"
+                  @keyup.native="handleInput(form.timeLimit)"
+                  :placeholder="$t('otc.publishad.exchangeperiod_text1')+'('+wantTime+$t('otc.publishad.minute')+')'"
+                >
+                  <span slot="append">{{$t('otc.publishad.minute')}}</span>
                 </Input>
               </FormItem>
               <p class="msg">{{$t('otc.publishad.tip1')}} </p>
+              <router-link to="/uc/account" style="padding-left: 90px;color:#3399ff;">
+                {{$t('otc.publishad.tip2')}}
+              </router-link>
+            </div>
 
-              <router-link to="/uc/account" style="padding-left: 90px;color:#3399ff;">{{$t('otc.publishad.tip2')}}</router-link>
-              <FormItem :label="$t('otc.publishad.paymode')" prop="payMode">
-                <Select v-model="form.payMode" multiple>
-                  <Option v-for="(item,index) in payModeList" :value="item.value" :key="item.value" :disabled="item.isOpen">{{ item.label }}</Option>
+            <div class="publish-right">
+              <FormItem
+                :label="$t('otc.publishad.paymode')"
+                prop="payMode"
+              >
+                <Select
+                  v-model="form.payMode"
+                  multiple
+                >
+                  <Option
+                    v-for="(item,index) in payModeList"
+                    :value="item.value"
+                    :key="item.value" :disabled="item.isOpen"
+                  >
+                    {{ item.label }}
+                  </Option>
                 </Select>
               </FormItem>
 
-              <FormItem :label="$t('otc.publishad.minlimit')" prop="minLimit">
-                <Input v-model="form.minLimit" @keyup.native="handleInput(form.minLimit)" :placeholder="$t('otc.publishad.tip3')">
-                <span slot="append">CNY</span>
+              <FormItem
+                :label="$t('otc.publishad.minlimit')"
+                prop="minLimit"
+              >
+                <Input
+                  v-model="form.minLimit"
+                  @keyup.native="handleInput(form.minLimit)"
+                  :placeholder="$t('otc.publishad.tip3')"
+                >
+                  <span slot="append">CNY</span>
                 </Input>
               </FormItem>
-              <FormItem :label="$t('otc.publishad.maxlimit')" prop="maxLimit">
-                <Input v-model="form.maxLimit" @keyup.native="handleInput(form.maxLimit)" :placeholder="$t('otc.publishad.tip4')">
-                <span slot="append">CNY</span>
+              <FormItem
+                :label="$t('otc.publishad.maxlimit')"
+                prop="maxLimit"
+              >
+                <Input
+                  v-model="form.maxLimit"
+                  @keyup.native="handleInput(form.maxLimit)"
+                  :placeholder="$t('otc.publishad.tip4')"
+                >
+                  <span slot="append">CNY</span>
                 </Input>
               </FormItem>
-              <FormItem :label="$t('otc.publishad.remark')" prop="remark">
-                <Input v-model="form.remark" type="textarea" :autosize="{minRows: 4,maxRows: 6}" :placeholder="$t('otc.publishad.tip5')"></Input>
+              <FormItem
+                :label="$t('otc.publishad.remark')"
+                prop="remark"
+              >
+                <Input
+                        class="textarea"
+                  v-model="form.remark"
+                  type="textarea"
+                  :autosize="{minRows: 2,maxRows: 6}"
+                  :placeholder="$t('otc.publishad.tip5')"
+                />
               </FormItem>
               <FormItem :label="$t('otc.publishad.openautoreply')">
                 <i-switch v-model="form.autoReply" size="large">
@@ -141,18 +266,40 @@
                 </i-switch>
               </FormItem>
               <p class="msg">{{$t('otc.publishad.msg5')}}</p>
-              <FormItem :label="$t('otc.publishad.autoreply')" prop="autoword" v-show="form.autoReply">
-                <Input v-model="form.autoword" type="textarea" :autosize="{minRows: 4,maxRows: 6}" :placeholder="$t('otc.publishad.autoreplytip')"></Input>
+              <FormItem
+                :label="$t('otc.publishad.autoreply')"
+                prop="autoword"
+                v-show="form.autoReply"
+              >
+                <Input
+                  v-model="form.autoword" type="textarea"
+                  :autosize="{minRows: 4,maxRows: 6}"
+                  :placeholder="$t('otc.publishad.autoreplytip')"
+                />
               </FormItem>
-              <FormItem :label="$t('otc.publishad.fundpwd')" prop="priceW">
-                <Input v-model="form.priceW" :placeholder="$t('otc.publishad.fundpwdtip')" type="password"></Input>
+              <FormItem
+                :label="$t('otc.publishad.fundpwd')"
+                prop="priceW"
+              >
+                <Input
+                  v-model="form.priceW"
+                  :placeholder="$t('otc.publishad.fundpwdtip')"
+                  type="password"
+                />
               </FormItem>
               <FormItem>
-                <Button style="background:#3399ff;color:#fff;border:1px solid #3399ff;" long @click="handleSubmit('form')" :disabled="disAllowBtn">{{$t('otc.publishad.submit')}}</Button>
+                <Button
+                  class="bun"
+                  long
+                  @click="handleSubmit('form')"
+                  :disabled="disAllowBtn"
+                >
+                  {{$t('otc.publishad.submit')}}
+                </Button>
                 <!-- <Button type="ghost" @click="handleReset('form')" style="margin-left: 8px">Reset</Button> -->
               </FormItem>
-            </Form>
-          </div>
+            </div>
+          </Form>
         </div>
       </div>
     </div>
@@ -770,60 +917,86 @@ export default {
 <style>
 .my_ad_container .my_ad_container_spin.ivu-spin-fix .ivu-spin-main {
   top: 200px;
+  background: rgba(25, 29, 58, .6);
+}
+.ivu-spin-fix {
+  background: rgba(25, 29, 58, .3);
 }
 </style>
 
 <style scoped lang="scss">
 .my_ad_container {
-  width: 80%;
-  float: right;
+  float: left;
+  padding-bottom: 193px;
 }
 .cankao {
-  color: #e24a64;
+  color: #3399ff;
 }
 .contbox {
   position: relative;
 }
 #price {
   font-size: 18px;
-  color: #e24a64;
+  color: #3399ff;
 }
-
+.textarea {
+  height: 100px !important;
+  line-height: 20px !important;
+  min-height: 100px !important;
+}
 .send-box .send-form .msg {
   padding-left: 90px;
   margin-bottom: 10px;
   position: relative;
   top: -4px;
 }
-
+.bun {
+  height: 40px;
+  background:#3399ff;
+  color:#fff;
+  border:1px solid #3399ff;
+  border-radius: 0;
+}
 .formbox {
-  width: 50%;
-  padding-top: 30px;
+  float: left;
+  padding: 30px 0 80px;
+  background: #191D3A;
+  margin-top: 30px;
 }
 
+.formbox .publish-left {
+  width: 48%;
+  float: left;
+}
+.formbox .publish-right {
+  width: 52%;
+  float: left;
+  padding: 60px 0 0 85px;
+}
 .send-box {
-  background-color: #fff;
-  color: #9194a5;
+  color: #8090AF;
   padding: 32px;
+  float: left;
 }
 
 .title-box {
-  /*border-left: 1px dashed #ebeff5;*/
-  border-bottom: 1px dashed #ccc;
-  padding-bottom: 30px;
+  width: 100%;
+  float: left;
   text-align: left;
-  padding-left: 18px;
+  padding: 20px;
+  background: #111530;
 }
 
 .title-box .titles {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: normal;
-  color: #242a4a;
+  color: #fff;
 
   margin-bottom: 15px;
 }
 
 .title-box p {
+  color: #8090AF;
   line-height: 2;
 }
 
@@ -843,4 +1016,89 @@ export default {
 .container {
   margin: 0 auto;
 }
+</style>
+<style lang="scss">
+  .ivu-select-selection {
+    width: 370px;
+    height: 40px;
+    background: transparent;
+    border-radius: 0;
+    border: 1px solid #2A3850;
+    .ivu-select-selected-value {
+      height: 40px;
+      line-height: 40px;
+      color: #8090AF;
+    }
+  }
+  .ivu-select-single {
+    .ivu-select-selection {
+      height: 40px;
+      line-height: 40px;
+      .ivu-select-selected-value {
+        height: 40px;
+        line-height: 40px;
+        color: #8090AF;
+      }
+    }
+  }
+  .ivu-select-multiple {
+    .ivu-select-selection {
+      .ivu-select-placeholder {
+        height: 40px;
+        line-height: 40px;
+      }
+    }
+  }
+  .ivu-select-dropdown {
+    min-width: 370px !important;
+    background: #191D3A;
+    .ivu-select-item-selected {
+      background: #191D3A;
+    }
+    .ivu-select-item {
+      &:hover {
+        background: #191D3A;
+        color: #8090AF;
+      }
+    }
+    li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+      background: transparent;
+      &:hover {
+        background: transparent;
+        color: #8090AF;
+      }
+    }
+  }
+  .ivu-form .ivu-form-item-label {
+    padding: 13px 12px 10px 0;
+    color: #8090AF;
+  }
+  .ivu-form-item-content {
+    width: 370px;
+    .ivu-input {
+      background: transparent;
+      border-radius: 0;
+      border: 1px solid #2A3850;
+      height: 40px;
+      line-height: 40px;
+      color: #8090AF;
+      &:hover {
+        border: 1px solid #2A3850;
+      }
+    }
+    .ivu-input-group-append {
+      width: 60px;
+      background: transparent;
+      border: 1px solid #2A3850;
+      border-left: 0;
+      border-radius: 0;
+    }
+    .ivu-switch {
+      background: #3399ff;
+      border: 1px solid #3399ff;
+    }
+    .ivu-radio-inner {
+      background: transparent;
+    }
+  }
 </style>

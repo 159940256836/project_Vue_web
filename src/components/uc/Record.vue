@@ -12,7 +12,7 @@
                             @on-change="changedate"
                             format="yyyy-MM-dd"
                             type="daterange"
-                            style="width: 200px;margin-right:10px;"
+                            style="margin-right:10px;"
                             @on-clear="clear"
                         ></DatePicker>
                         <!--<DatePicker v-model="startDate" type="date"></DatePicker>-->
@@ -23,7 +23,7 @@
                         <span>{{$t('uc.finance.currency')}}：</span>
                         <Select
                             v-model="coinType"
-                            style="width:100px;margin-right:30px;"
+                            style="width:128px;margin-right:30px;"
                             clearable
                             :placeholder="$t('header.choose')"
                         >
@@ -41,7 +41,7 @@
                         <Select
                             v-model="recordValue"
                             clearable
-                            style="width:200px"
+                            style="width:128px"
                             :placeholder="$t('header.choose')"
                         >
                             <Option
@@ -173,6 +173,12 @@ export default {
     created: function () {
         this.getList(this.page);
         this.getAddrList();
+        // const name = this.$route.path
+        // console.log(name, this.$route.path);
+        // if (name === '/personal/record') {
+        //     this.getList(this.page);
+        //     this.getAddrList();
+        // }
     },
     methods: {
         changedate() {
@@ -278,23 +284,15 @@ export default {
             let columns = [];
             var that = this;
             const m = this.$store.getters.lang == "English" ? mapEn : map;
-            const T = this.$store.getters.lang == "English" ? 147 : 100;
-            const Y = this.$store.getters.lang == "English" ? 109 : '';
-            const Y1 = this.$store.getters.lang == "English" ? 82 : '';
-            const F = this.$store.getters.lang == "English" ? 116 : '';
-            const F1 = this.$store.getters.lang == "English" ? 122 : '';
-            const C = this.$store.getters.lang == "English" ? 133 : '';
             columns.push({
                 title: this.$t("uc.finance.record.chargetime"),
                 align: "center",
-                width: T,
                 render: (h, params) => {
                     return h("div", {}, params.row.createTime);
                 }
             });
             columns.push({
                 title: this.$t("uc.finance.record.type"),
-                width: Y,
                 render: function (h, params) {
                     let str = "";
                     let type = params.row.type.toString();
@@ -303,7 +301,6 @@ export default {
             });
             columns.push({
                 title: this.$t("uc.finance.record.symbol"),
-                width: Y,
                 align: "center",
                 render: (h, param) => {
                     return h("div", {}, param.row.symbol);
@@ -311,7 +308,6 @@ export default {
             });
             columns.push({
                 title: this.$t("uc.finance.Quantityofarrival"),
-                width: C,
                 align: "center",
                 render(h, params) {
                     return h(
@@ -327,7 +323,6 @@ export default {
             });
             columns.push({
                 title: this.$t("uc.finance.record.shouldfee"), //"应付手续费"
-                width: Y,
                 align: "center",
                 render(h, params) {
                     return h(
@@ -359,7 +354,6 @@ export default {
             // });
             columns.push({
                     title: this.$t("uc.finance.record.realfee"), //"实际手续费"
-                    width: F1,
                     align: "center",
                     render(h, params) {
                         return h(
@@ -376,7 +370,6 @@ export default {
             columns.push({
                 title: this.$t("uc.finance.record.status"),
                 // key: "status",
-                width: Y1,
                 align: "center",
                 render: (h, params) => {
                     return h("div", that.$t("uc.finance.record.finish"), "");
@@ -396,39 +389,104 @@ export default {
     .nav-right {
         height: auto;
         overflow: hidden;
-        padding: 0 15px;
         .bill_flow_box .rightarea-con {
             .form-group {
+                height: 60px;
+                line-height: 60px;
                 margin-bottom: 20px;
                 text-align: left;
+                background: #111530;
+                padding-left: 20px;
+                span {
+                    color: #8090AF;
+                    margin-left: 10px;
+                }
             }
         }
+    }
+    .order-table {
+        margin-right: -1px;
     }
 }
 </style>
 <style lang="scss">
+    .ivu-select-dropdown {
+        width: 128px;
+    }
+    .ivu-input-suffix {
+        right: 10px;
+    }
+    .ivu-date-picker-with-range {
+        .ivu-date-picker-with-range {
+            background: #10122B;
+        }
+    }
+    .ivu-select .ivu-select-dropdown {
+        width: 128px;
+    }
 .nav-rights {
     .nav-right {
         .bill_flow_box .rightarea-con {
             .form-group {
+                .ivu-btn {
+                    border-radius: 0;
+                    float: right;
+                    margin: 14px 30px 0;
+                }
                 .ivu-date-picker {
+                    width: 260px !important;
                     .ivu-date-picker-rel {
                         .ivu-input {
+                            width: 260px !important;
+                            background: transparent;
+                            color: #fff;
+                            border-radius: 0;
+                            border: 1px solid #58698A;
                             &:hover {
                                 border-color: #3399ff;
                             }
                             &:focus {
                                 border-color: #3399ff;
-                                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                             }
+                        }
+                    }
+                }
+                .ivu-select-selection {
+                    background: transparent;
+                    color: #fff;
+                    border-radius: 0;
+                    border: 1px solid #58698A;
+                }
+                .ivu-select-dropdown {
+                    min-width: 128px;
+                    &::-webkit-scrollbar {
+                        width: 4px; /*对垂直流动条有效*/
+                        height: 10px; /*对水平流动条有效*/
+                    }
+
+                    /*定义滚动条的轨道颜色、内阴影及圆角*/
+                    &::-webkit-scrollbar-track{
+                        background-color: #111530;
+                        border-radius: 3px;
+                    }
+                    &::-webkit-scrollbar-thumb{
+                        border-radius: 7px;
+                        background-color: #8090AF;
+                    }
+                    .ivu-select-item {
+                        &:hover {
+                            background: transparent;
+                            color: #8090AF;
                         }
                     }
                 }
                 .ivu-date-picker-focused {
                     .ivu-date-picker-rel {
                         .ivu-input {
-                            border-color: #3399ff;
-                            box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                            color: #fff;
+                            border-radius: 0;
+                            background: transparent;
+
                             &:focus {
                                 border-color: #3399ff;
                             }
@@ -437,22 +495,54 @@ export default {
                 }
             }
         }
+        .ivu-table-wrapper {
+            .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+            .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+                background: #10122B;
+            }
+            .ivu-table {
+                &:before {
+                    height: 0;
+                }
+                td {
+                    background: #111530;
+                    border-bottom: 0;
+                    color: #8090AF;
+                }
+
+                background: #191D3A;
+                .ivu-table-header {
+                    background: #191D3A;
+                    th {
+                        color: #8090AF;
+                        height: 50px;
+                        background: #191D3A;
+                        border-bottom: 0;
+                    }
+                }
+            }
+        }
     }
 }
 #record_pages li.ivu-page-item.ivu-page-item-active {
-    background-color: #3399ff;
-    border-color: #3399ff;
+    background-color: #111530;
+    border-color: #191f44;
     a {
-        color: #fff;
+        color: #3399ff;
     }
 }
 #record_pages li.ivu-page-item.ivu-page-item-active {
     &:hover {
-        background-color: #3399ff;
+        background-color: #111530;
         a {
-            color: #fff;
+            color: #3399ff;
         }
     }
+}
+.ivu-page-item {
+    background: #111530;
+    color: #8090AF;
+    border: 1px solid #191f44;
 }
 .ivu-page-item:hover {
     color: #3399ff;

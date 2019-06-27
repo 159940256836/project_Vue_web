@@ -258,12 +258,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 1px 5px 0 rgba(71, 78, 114, 0.24);
+  box-shadow: none;
   position: relative;
 }
 
 .card-item:hover .user-avatar-public {
-  box-shadow: 0 1px 5px 0 #F55F45;
+  box-shadow: none;
 }
 
 .adv_box .user-avatar-public>.user-avatar-in {
