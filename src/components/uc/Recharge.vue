@@ -103,7 +103,7 @@
                                                 :total="dataCount"
                                                 :current="1"
                                                 @on-change="changePage"
-                                                class="recharge_btn"
+                                                id="record_pages"
                                             ></Page>
                                         </div>
                                     </div>
@@ -507,23 +507,6 @@ span.describe {
     display: flex;
     /* border: #c5cdd7 solid 1px; */
 }
-#recharge_btn .ivu-page li.ivu-page-item-active {
-    background-color: #3399ff !important;
-    border-color: #3399ff !important;
-}
-#recharge_btn li.ivu-page-item-active:hover {
-    color: #3399ff !important;
-}
-.ivu-page-item-active {
-    background-color: #3399ff;
-    border-color: #3399ff;
-}
-.ivu-page-item:hover {
-    color: #3399ff;
-}
-.recharge_btn .ivu-page-item-active {
-    background-color: red !important;
-}
 
 </style>
 <style lang="scss">
@@ -535,6 +518,7 @@ span.describe {
                         background: #111530;
                     }
                     td {
+                        color: #8090AF;
                         border-bottom: 0;
                         background: #111530;
 
@@ -545,6 +529,7 @@ span.describe {
                     th {
                         border-bottom: 0;
                         background: #191D3A;
+                        color: #8090AF;
                     }
                 }
             }
@@ -584,11 +569,15 @@ span.describe {
         }
     }
     .ivu-table {
+        td {
+            background: #111530;
+        }
         &:before {
             height: 0;
         }
         .ivu-table-header {
             th {
+                color: #8090AF;
                 background: #191D3A;
             }
         }
@@ -597,5 +586,28 @@ span.describe {
         border: 1px solid #58698A;
         background: transparent;
         border-radius: 0;
+    }
+    #record_pages li.ivu-page-item.ivu-page-item-active {
+        background-color: #111530;
+        border-color: #191f44;
+        a {
+            color: #3399ff;
+        }
+    }
+    #record_pages li.ivu-page-item.ivu-page-item-active {
+        &:hover {
+            background-color: #111530;
+            a {
+                color: #3399ff;
+            }
+        }
+    }
+    .ivu-page-item {
+        background: #111530;
+        color: #8090AF;
+        border: 1px solid #191f44;
+    }
+    .ivu-page-item:hover {
+        color: #3399ff;
     }
 </style>

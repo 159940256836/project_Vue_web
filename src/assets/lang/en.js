@@ -378,7 +378,7 @@ module.exports = {
         p269: 'BDW will announce and revise the privacy policy at BDW website from time to time. The privacy policy constitutes an effective part of this agreement.',
         //bdw协议
         p270:'BDW Trading Platform Service Agreement',
-        p271:'The BDW Trading Platform Service Agreement (hereinafter referred to as “this Agreement”) is a supplement to the User Agreement of the Multi-Net (www.coinmany.com) (hereinafter referred to as “the Website”).  Applicable to the related services provided on this website. The User Agreement and other terms of this website continue to apply to all users of this website. Please read and understand this agreement carefully before proceeding to the next step through this website. If you continue to the next step through this website, or use the related services of the company in any way, you are deemed to have read and understand and agree to  this agreement.',
+        p271:'The BDW Trading Platform Service Agreement (hereinafter referred to as “this Agreement”) is a supplement to the User Agreement of the Multi-Net (www.bdw.top) (hereinafter referred to as “the Website”).  Applicable to the related services provided on this website. The User Agreement and other terms of this website continue to apply to all users of this website. Please read and understand this agreement carefully before proceeding to the next step through this website. If you continue to the next step through this website, or use the related services of the company in any way, you are deemed to have read and understand and agree to  this agreement.',
         p272:'This Agreement may be modified, altered or updated by this Website at any time without prior notice to you. You should check frequently to confirm that your copying and understanding of this Agreement is timely and accurate. Any continued use of any of the services on this website after the effective date of any modification, change or update is deemed to be your acceptance of the new modifications, changes or new agreement. All contents of this website are provided in multiple languages for the convenience of users. In case of conflict or omission, the Chinese content shall prevail.',
         p273:'BDW special statement',
         p274:'Because of the asset transactions and flows involved, please ensure the security of the terminals used.',
@@ -560,6 +560,7 @@ module.exports = {
         },
         realtime: 'realtime',
         operateSuccessfully: 'operate successfully',
+        view: 'view'
     },
     otc: {
         ad: 'Advertising',
@@ -852,6 +853,7 @@ module.exports = {
             email: "email Code",
             register: 'Sign Up',
             login: 'Log In',
+            registered: 'Welcome Register',
             welcomelogin: 'Welcome',
             usertip: 'Tel',
             pwdtip: 'Password',
@@ -1265,6 +1267,7 @@ module.exports = {
             save_failure: 'Failure!',
         },
         otcorder: {
+            all: 'All',
             unpaid: 'Unpaid',
             paided: 'Paided',
             finished: 'Finished',
@@ -1274,13 +1277,18 @@ module.exports = {
             orderno: 'OrderNo',
             created: 'Time',
             symbol: 'Coin',
-            type: 'Type',
+            class: 'Type',
+            class_market_price: 'market price',
+            type: 'Direction',
             type_sell: 'sell',
             type_buy: 'buy',
             tradename: 'TradeName',
             amount: 'Amount',
             money: 'Money',
             fee: 'Fee',
+            detail: 'Detail',
+            view: 'View',
+            search: 'Search'
         },
         identity: {
             certified: "already certified",

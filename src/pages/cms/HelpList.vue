@@ -1,9 +1,16 @@
 <template>
-    <div class="help common">
-        <img class="bannerimg" src="../../assets/images/help_banner.jpg">
+    <div class="help common help_common">
+        <div class="bannerimg">
+            <span>{{$t("footer.helpCenter")}}</span>
+        </div>
+         <!-- <img class="bannerimg"> -->
         <div class="help_container">
             <!-- <h1>{{cateTitle}}</h1> -->
-            <h1>{{$t("footer.helpCenter")}}</h1>
+            <!-- <h1>{{$t("footer.helpCenter")}}</h1> -->
+            <div style="display:flex; height:50px;line-height:50px; text-align:center; background:#191d3a !important">
+                <div style="margin-left:10px; width:120px; text-aling:center;" v-for="(item, index) in selectList" :key='index' class="select_list" :class="cate == item.status ? 'on' : ''" @click="changeStatus(item.status)">{{item.klassName}}</div>
+            </div>
+            <div></div>
             <div class="list">
                 <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{cate:cate,id:item.id,cateTitle:cateTitle}}"> -->
                 <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}">
@@ -15,13 +22,38 @@
                 </router-link>
                 <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}"></router-link> -->
             </div>
-            <!-- <div class="page">
-                <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="pageChange"></Page>
-            </div> -->
+            <div v-show="list.length == 0" style="text-align:center">
+                <img src="../../assets/images/noData.png" alt="" style="width:15%;margin-top: 55px;">
+            </div>
+            <div class="page Pagination_page" v-show="showPage">
+                <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="pageChange" show-elevator></Page>
+   
+            </div>
         </div>
+        <!-- 6.24修改 -->
+       
+
     </div>
 </template>
 <style lang="scss" scoped>
+// lhl
+.select_list{
+    // background:#2d8cf0;
+    color:#fff;
+}
+.select_list.on{
+    color: #2d8cf0;
+}
+.helpList_page{
+    margin-top:20px;
+    text-align:right;
+}
+.help .bannerimg[data-v-9dbbb4ae]{
+    width:1200px;
+}
+.help_common{
+    background:#0e0e28 !important;
+}
 .helplist {
     width: 60%;
     margin: 0 auto;
@@ -46,13 +78,29 @@
 }
 .help .bannerimg {
     display: block;
-    width: 100%;
+    // 6.22修改
+    // width: 100%;
+    // width:1200px;
+    height:85px;
+    margin:0 auto;
+    font-size:20px;
+    color:#FFFFFFFF;
+    background:#0e0e28;
+    line-height:85px;
+    span{
+        margin-left:31px;
+    }
+    
+   
 }
 .help_container {
-    padding: 0 12%;
+   width:1200px;
+   margin:0 auto;
     height: 100%;
-    margin-top:-210px;
+    // margin-top:-210px;
     min-height: 389px;
+    background:rgba(17,21,48,1);
+    border:1px solid rgba(17,21,48,1);
     > h1 {
         font-size: 32px;
         line-height: 1;
@@ -63,12 +111,14 @@
 }
 .list {
     font-size: 16px;
+    margin-top:15px;
     .item {
-        color: #333;
+        color: #8090AFFF;
         display: block;
-        line-height: 40px;
-        border-bottom: 1px solid #f0f0f0;
+        line-height: 50px;
+        // border-bottom: 1px solid #f0f0f0;
         cursor: pointer;
+        padding:0 31px;
         .iconimg {
             width: 14px;
             vertical-align: sub;
@@ -76,9 +126,15 @@
         }
         .time {
             float: right;
-            color: #999;
+            color: #8090AFFF;
             font-size: 14px;
         }
+    }
+    .item:nth-child(2n-1){
+        background:#191d3a;
+    }
+     .item:nth-child(2n){
+        background:#10122BFF;
     }
 }
 .route-wrap {
@@ -92,6 +148,32 @@
     text-align: right;
 }
 </style>
+<style lang="scss">
+.Pagination_page{
+    .ivu-page-next, .ivu-page-prev{
+        background: transparent !important;
+    }
+    .ivu-page-item-jump-next, .ivu-page-item-jump-prev, .ivu-page-next, .ivu-page-prev{
+        border: 0;
+    }
+    .ivu-page .ivu-page-item:hover{
+        border: 0;
+    }
+    .ivu-page-item{
+        background: transparent;
+        border: none;
+    }
+    .ivu-page-options-elevator input{
+        background: transparent;
+        border: 1px solid rgba(128,144,175,1);
+        text-align:center;
+        color:#fff;
+        width:38px;
+        height:20px;
+    }
+    
+}
+</style>
 <script>
 export default {
     data() {
@@ -100,7 +182,9 @@ export default {
             pageNo: 1,
             pageSize: 10,
             total: 0,
-            list: []
+            list: [],
+            cate:0,
+            showPage: false
         };
     },
     created() {
@@ -108,12 +192,22 @@ export default {
         // const { cate, cateTitle } = this.$route.query;
         // this.cate = cate;
         // this.cateTitle = cateTitle;
-        this.getAllData();
+        this.getData();
         this.settiele();
+    },
+    computed: {
+        selectList() {
+            var list = [];
+            list.push({ status: 0, klassName: this.$t("footer.RecommendedCommission")});
+            list.push({ status: 1, klassName: this.$t("footer.question") });
+            list.push({ status: 2, klassName: this.$t("footer.Recharguide") });
+            list.push({ status: 3, klassName: this.$t("footer.Tradiguide") });
+            return list
+        }
     },
     watch: {
         $route(to, from) {
-            this.getAllData();
+            //this.getAllData();
         }
     },
     methods: {
@@ -121,12 +215,23 @@ export default {
             this.pageNo = data;
             this.getData();
         },
+        changeStatus(n) {
+            this.pageNo = 1;
+            this.cate = n;
+            this.getData();
+        },
         getAllData(){//查询所有帮助
+            let params = {
+                pageNo: this.pageNo,
+                pageSize: this.pageSize,
+                cate: this.cate
+            };
             this.$http
-                .post(this.host + "/uc/ancillary/system/help", {})
+                // .post(this.host + "/uc/ancillary/system/help", params)
+                .post(this.host + "/uc/ancillary/more/help/page", params)
                 .then(res => {
                     if (res.status == 200 && res.body.code == 0) {
-                        this.list = res.body.data;
+                        this.list = res.body.data.content;
                     } else {
                         this.$Message.error(res.body.message);
                     }
@@ -142,11 +247,18 @@ export default {
                 .post(this.host + "/uc/ancillary/more/help/page", params)
                 .then(res => {
                     if (res.status == 200 && res.body.code == 0) {
+                        if (res.body.data.totalElements > 10) {
+                            this.showPage = true;
+                        } else {
+                            this.showPage = false;
+                        }
                         this.list = res.body.data.content;
+                        this.total = res.body.data.totalElements;
                     } else {
                         this.$Message.error(res.body.message);
                     }
                 });
+                
         }
     },
     mounted() {

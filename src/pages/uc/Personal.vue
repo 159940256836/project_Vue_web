@@ -2,7 +2,6 @@
   .mymsg_wrapper {
     background: #0e0e28;
     padding-top: 100px;
-
     .wrapper {
       width: 1200px;
       margin: 0 auto;
@@ -35,6 +34,20 @@
     }
   }
 </style>
+<style lang="scss">
+  .ivu-date-picker-with-range {
+    .ivu-date-picker-with-range {
+      background: #10122B;
+    }
+  }
+  .ivu-page-total {
+    color: #8090AF;
+  }
+  .ivu-page-next, .ivu-page-prev {
+    background: #111530;
+    border: 1px solid #191f44;
+  }
+</style>
 <template>
   <div class="mymsg_wrapper">
     <div class="wrapper">
@@ -42,50 +55,58 @@
         {{ $t('financeNav.wdzc') }}
       </div>
       <Tabs
-        name="asset"
+        name="tab1"
+        v-model="activeName"
         @on-click="changeTab"
       >
         <TabPane
           :label="$t('uc.finance.personalassets')"
-          name="asset"
+          name="money"
+          tab="tab1"
         >
-          <MoneyIndex></MoneyIndex>
+          <Money/>
         </TabPane>
         <TabPane
           :label="$t('uc.finance.billdetail')"
-          name="assetsWater"
+          name="record"
+          tab="tab1"
         >
-          <Record></Record>
+          <Record/>
         </TabPane>
         <Tab-pane
           :label="$t('uc.finance.charge')"
           name="recharge"
+          tab="tab1"
         >
-          <Recharge></Recharge>
+          <Recharge v-if="activeName === 'recharge'"/>
         </Tab-pane>
         <TabPane
           :label="$t('uc.finance.pickup')"
-          name="pickup"
+          name="withdraw"
+          tab="tab1"
         >
-          <Withdraw></Withdraw>
+          <Withdraw v-if="activeName === 'withdraw'"/>
         </TabPane>
         <TabPane
           :label="$t('uc.finance.withdraw.addressmanager')"
-          name="rechargeAddress"
+          name="withdrawAddress"
+          tab="tab1"
         >
-          <WithdrawAddress></WithdrawAddress>
+          <WithdrawAddress v-if="activeName === 'withdrawAddress'"/>
         </TabPane>
         <TabPane
           :label="$t('uc.finance.pointManagement')"
-          name="pointManage"
+          name="bjc"
+          tab="tab1"
         >
-          <Bjc></Bjc>
+          <Bjc v-if="activeName === 'bjc'"/>
         </TabPane>
         <TabPane
           :label="$t('uc.finance.CandyGivingRecords')"
-          name="CandyGiftManage"
+          name="giveRecord"
+          tab="tab1"
         >
-          <GiveRecord></GiveRecord>
+          <GiveRecord v-if="activeName === 'giveRecord'"/>
         </TabPane>
       </Tabs>
       <!--<Menu
@@ -128,7 +149,7 @@
 
 </template>
 <script>
-import MoneyIndex from "../../components/uc/MoneyIndex";
+import Money from "../../components/uc/MoneyIndex";
 import Record from "../../components/uc/Record";
 import Recharge from "../../components/uc/Recharge";
 import Withdraw from "../../components/uc/Withdraw";
@@ -136,10 +157,11 @@ import WithdrawAddress from "../../components/uc/WithdrawAddress";
 import Bjc from "../../components/uc/Bjc";
 import GiveRecord from "../../components/uc/giveRecord";
 export default {
-    components: { MoneyIndex, Record, Recharge, Withdraw, WithdrawAddress, Bjc, GiveRecord },
+    components: { Money, Record, Recharge, Withdraw, WithdrawAddress, Bjc, GiveRecord },
   // mixins: [minHeightMinx],
   data() {
     return {
+      activeName: 'money'
       // activename: "1-1",
       // opennames: ["1"],
       // routeArr: {
@@ -153,6 +175,36 @@ export default {
     };
   },
   created: function () {
+    this.changeTab()
+    console.log(this.$route.path);
+    const name = this.$route.path
+    // console.log(name.replace("/personal",""));
+    switch (name) {
+        case "/personal" || 'moneyindex':
+          this.activeName = 'money'
+          break;
+        case "/personal/record":
+          this.activeName = 'record'
+          break;
+        case "/personal/recharge":
+          this.activeName = 'recharge'
+          break;
+        case "/personal/withdraw":
+          this.activeName = 'withdraw'
+          break;
+        case "/personal/withdrawAddr":
+          this.activeName = 'withdrawAddress'
+          break;
+        case "/personal/bjc":
+          this.activeName = 'bjc'
+          break;
+        case "/personal/giveRecord":
+          this.activeName = 'giveRecord'
+          break;
+        default:
+          this.activeName = 'money'
+          break;
+      }
     // this.init();
     // const path = this.$route.path;
     // this.heightLightMenu(path);
@@ -227,10 +279,36 @@ export default {
     // }
   },
   watch: {
-    // $route(to, form) {
-    //   console.log(to, form);
-    //   this.heightLightMenu(to.path);
-    // }
+    $route(to, form) {
+      console.log(to, form, to.path);
+      switch (to.path) {
+        case "/personal":
+          this.activeName = 'money'
+          break;
+        case "/personal/record":
+          this.activeName = 'record'
+          break;
+        case "/personal/recharge":
+          this.activeName = 'recharge'
+          break;
+        case "/personal/withdraw":
+          this.activeName = 'withdraw'
+          break;
+        case "/personal/withdrawAddr":
+          this.activeName = 'withdrawAddress'
+          break;
+        case "/personal/bjc":
+          this.activeName = 'bjc'
+          break;
+        case "/personal/giveRecord":
+          this.activeName = 'giveRecord'
+          break;
+        default:
+          this.activeName = 'money'
+          break;
+      }
+      // this.heightLightMenu(to.path);
+    }
   },
   mounted: function () {
     // this.$nextTick(function () {

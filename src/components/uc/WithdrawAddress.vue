@@ -7,11 +7,11 @@
                         <div class="action-inner">
                             <div class="inner-left deposit-address">
                                 <span class="describe">
-                                    {{$t('uc.finance.withdraw.symbol')}}
+                                    {{ $t('uc.finance.withdraw.symbol') }}
                                 </span>：
                                 <Select
                                     v-model="coinType"
-                                    style="width:100px;"
+                                    style="width:128px;"
                                     size="large"
                                 >
                                     <Option
@@ -29,7 +29,7 @@
                                 <div class="title">
                                     <Input
                                         v-model="withdrawAddr"
-                                        style="width: 90%;"
+                                        style="width: 200px;"
                                         size="large"
                                     />
                                 </div>
@@ -41,7 +41,7 @@
                                 <div class="title">
                                     <Input
                                         v-model="remark"
-                                        style="width:100%;"
+                                        style="width: 200px;"
                                         size="large"
                                     />
                                 </div>
@@ -445,6 +445,9 @@ export default {
 
 <style scoped lang="scss">
 .nav-rights {
+    .ivu-input-large {
+        height: 30px;
+    }
   .nav-right {
     .bill_box_address {
       .table-inner {
@@ -549,8 +552,11 @@ span.describe {
     }
 }
 .nav-rights {
+    .ivu-input-large,
+    .ivu-select-placeholder,
     .ivu-select-selection {
-        width: 130px;
+        height: 30px !important;
+        line-height: 30px !important;
     }
     .ivu-input {
         color: #8090AF;
@@ -577,7 +583,7 @@ span.describe {
                             padding: 6px 16px;
 
                             &:hover {
-                                background: #fff;
+                                background: #10122B;
                                 color: #3399ff;
                             }
                         }
@@ -603,9 +609,11 @@ span.describe {
                         /*分页*/
                         .ivu-page {
                             .ivu-page-item.ivu-page-item-active {
-                                background-color: #3399ff;
-                                border-color: #3399ff;
-                                color: #fff;
+                                background-color: #111530;
+                                border-color: #191f44;
+                                a {
+                                    color: #3399ff;
+                                }
 
                                 &:hover {
                                     a {
@@ -615,15 +623,13 @@ span.describe {
                             }
 
                             .ivu-page-item {
-                                &:hover {
-                                    border: 1px solid #3399ff;
-
-                                    a {
-                                        color: #3399ff;
-                                    }
-                                }
+                                background: #111530;
+                                color: #8090AF;
+                                border: 1px solid #191f44;
                             }
-
+                            .ivu-page-item:hover {
+                                color: #3399ff;
+                            }
                             .ivu-page-prev,
                             .ivu-page-next {
                                 &:hover {

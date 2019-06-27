@@ -1245,7 +1245,12 @@ table.table .table-inner.action-box {
 ivu-poptip-body-content-inner {
     color: #fff;
 }
-.ivu-poptip-arrow {
+.ivu-poptip-inner {
+    background: #10122B;
+    color: #8090AF;
+}
+.ivu-poptip-popper[x-placement^=bottom] .ivu-poptip-arrow:after {
+    border-bottom-color: #10122B;
 }
 .withdraw {
     .ivu-select-single {
@@ -1350,14 +1355,17 @@ ivu-poptip-body-content-inner {
           #pages {
             .ivu-page {
               .ivu-page-item.ivu-page-item-active {
-                background-color: #3399ff;
-                border-color: #3399ff;
-                color: #fff;
+                  background-color: #111530;
+                  border-color: #191f44;
+                  a {
+                      color: #3399ff;
+                  }
 
                 &:hover {
-                  a {
-                    color: #fff;
-                  }
+                    background-color: #111530;
+                    a {
+                        color: #3399ff;
+                    }
                 }
               }
 

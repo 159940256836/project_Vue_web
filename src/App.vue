@@ -1,15 +1,15 @@
 <template>
     <div class="page-view">
-        <!--头部-->
         <header v-show="!$route.meta.hide">
             <div
                 class="page-content"
-                :style="{
+                :style = "{
                   padding: $route.path==='/'? topPadding : '0 5%',
                   backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
                 }"
             >
                 <div class="time_download">
+
                     <div class="netLogo">
                         <router-link to="/"><img style="width: 80%;" src="./assets/images/logo.png" alt=""></router-link>
                     </div>
@@ -28,9 +28,9 @@
                         <!--中英文切换-->
                         <div class="changelanguage">
                             <Dropdown @on-click="changelanguage">
-                                <a href="javascript:void(0)" style="font-size:14px;color:#fff;">
-                                    {{languageValue}}
-                                    <Icon type="arrow-down-b"></Icon>
+                                <a href="javascript:void(0)" style="height: 60px;display: flex;align-items: center;">
+                                    <!-- {{languageValue}} -->
+                                    <img src="./assets/img/china.png" alt="">
                                 </a>
                                 <DropdownMenu slot="list" id="change_language_theme">
                                     <DropdownItem v-if="languageValue=='简体中文'" name="en">English</DropdownItem>
@@ -43,22 +43,24 @@
                         <div class="isLoginWrapper">
                             <div class="login_register isLogin" v-if="isLogin" >
                                 <div class="mymsg">
+                                    <router-link to="/order">{{$t("uc.order.myorder")}}</router-link>
                                     <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
                                 </div>
                                 <!--@on-click="goBi"-->
-                                 <Dropdown>
+                                 <Dropdown @on-click="goBi">
                                     <a href="javascript:void(0)">
                                         <span class="header-img">{{$t("uc.menuTitle.moneyManagement")}}</span>
                                         <Icon type="md-arrow-dropdown" size="16" />
                                     </a>
                                     <DropdownMenu slot="list">
                                         <!--个人资产-->
-                                        <DropdownItem name="asset">
-                                            <router-link to="/personal">{{ $t('uc.finance.personalassets') }}</router-link>
-                                            <!--<span>{{$t("uc.finance.personalassets")}}</span>-->
+                                        <DropdownItem name="moneyindex">
+<!--                                            <router-link to="/personal/money">{{ $t('uc.finance.personalassets') }}</router-link>-->
+                                            <span>{{$t("uc.finance.personalassets")}}</span>
                                         </DropdownItem>
                                         <!--资产流水-->
-                                        <DropdownItem name="assetsWater">
+                                        <DropdownItem name="record">
+<!--                                          <router-link to="/personal/record">{{ $t('uc.finance.billdetail') }}</router-link>-->
                                             <span>{{ $t("uc.finance.billdetail") }}</span>
                                         </DropdownItem>
                                         <!--充币-->
@@ -66,27 +68,26 @@
                                             <span>{{ $t("uc.finance.charge") }}</span>
                                         </DropdownItem>
                                         <!--提币-->
-                                        <DropdownItem name="pickup">
+                                        <DropdownItem name="withdraw">
                                             <span>{{ $t("uc.finance.pickup") }}</span>
                                         </DropdownItem>
                                         <!--提币地址管理-->
-                                        <DropdownItem name="rechargeAddress">
+                                        <DropdownItem name="withdrawAddr">
                                             <span>{{ $t("uc.finance.withdraw.addressmanager") }}</span>
                                         </DropdownItem>
                                         <!--积分管理-->
-                                        <DropdownItem name="pointManage">
+                                        <DropdownItem name="mebjc">
                                             <span>{{ $t("uc.finance.pointManagement") }}</span>
                                         </DropdownItem>
                                         <!--糖果赠送管理-->
-                                        <DropdownItem name="CandyGiftManage">
+                                        <DropdownItem name="giveRecord">
                                             <span>{{ $t("uc.finance.CandyGivingRecords") }}</span>
                                         </DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
+
                                 <Dropdown>
                                     <a href="javascript:void(0)">
-                                        <!-- <Icon type="person"></Icon> -->
-                                        <Icon type="md-person" class="header-icon" size="20" />
                                         <span class="header-img">{{strpo(member.username)}}</span>
                                         <Icon type="md-arrow-dropdown" size="16" />
                                     </a>
@@ -96,9 +97,23 @@
                                                 <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
                                             </DropdownItem>
                                         </div>
+                                        <DropdownItem>
+                                            <router-link to="/account">
+                                                 {{$t("uc.menuTitle.AccountManagement")}}
+                                            </router-link>
+                                        </DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
-
+                                <Dropdown>
+                                    <a href="javascript:void(0)" style="height: 60px;display: flex;align-items: center;">
+                                        <img src="./assets/img/notice.png" alt="">
+                                    </a>
+                                </Dropdown>
+                                <!-- <Dropdown>
+                                    <a href="javascript:void(0)" style="height: 60px;display: flex;align-items: center;">
+                                        <img src="./assets/img/set.png" alt="">
+                                    </a>
+                                </Dropdown> -->
                             </div>
                             <!-- 未登录 -->
                             <div class="login_register" v-else>
@@ -128,7 +143,7 @@
         <!--内容-->
         <router-view v-if="isRouterAlive"></router-view>
         <!--底部-->
-        <footer v-if="pathNameState" v-show="!$route.meta.hide">
+        <footer class="app_footer" v-if="pathNameState" v-show="!$route.meta.hide">
             <div class="footer">
                 <div class="footer_content">
                     <div class="footer-main">
@@ -349,139 +364,140 @@
                             </a>
                         </div>
                     </div>
-                    © 2019 coinmany.com. All Rights Reserved
+                    © 2019 bdw.top. All Rights Reserved
                 </div>
             </div>
         </footer>
     </div>
 </template>
 <script>
-import QRCode from 'qrcode2';
-import Vue from "vue";
-import { mapGetters, mapActions } from "vuex";
+import QRCode from 'qrcode2'
+import Vue from 'vue'
+import { mapGetters, mapActions } from 'vuex'
 export default {
-    name: "app",
-      provide () {
-        return {
-        reload: this.reload
-        }
+  name: 'App',
+  provide() {
+    return {
+      reload: this.reload
+    }
   },
-    data() {
-        return {
-            locale: '',
-            isRouterAlive: true,
+  data() {
+    return {
+      locale: '',
+      isRouterAlive: true,
             // container_test:"container_test",
-            pageView: "page-view",
-            utc: null,
-            time: null,
-            content: " ",
-            wechat: this.$t("footer.wechat"),
-            topInfo: {
-                name: "bdw",
-                createTime: "2018-01-10 11:37:27"
-            },
-            styleTop: 30,
-            topPadding: '0 5%',
-            topBackgroundColor: 'rgba(28, 36, 53)',
-            pathName: '',
-            pathNameState: true,
-            weChat1: false, // 微信客服1
-            weChat2: false // 微信客服2
-        };
+      pageView: 'page-view',
+      utc: null,
+      time: null,
+      content: ' ',
+      wechat: this.$t('footer.wechat'),
+      topInfo: {
+        name: 'bdw',
+        createTime: '2018-01-10 11:37:27'
+      },
+      styleTop: 30,
+      topPadding: '0 5%',
+      topBackgroundColor: 'rgba(28, 36, 53)',
+      pathName: '',
+      pathNameState: true,
+      weChat1: false, // 微信客服1
+      weChat2: false // 微信客服2
+    }
+  },
+  watch: {
+    activeNav: function(newVal) {
+      console.log(newVal)
+      switch (this.activeNav) {
+        case 'nav-exchange':
+          break
+        default:
+          window.document.title = 'bdw'
+          break
+      }
     },
-    watch: {
-        activeNav: function (newVal) {
-            console.log(newVal);
-            switch (this.activeNav) {
-                case "nav-exchange":
-                    break;
-                default:
-                    window.document.title = "bdw";
-                    break;
-            }
-        },
-        '$i18n.locale'(newVal) {
-            this.locale = newVal;
-        },
-        $route(to, from) {
-            console.log(to);
-            this.pathName = to.path
-            if (this.pathName == '/login'||this.pathName == '/register') {
-                this.pathNameState = false
-            } else {
-                this.pathNameState = true
-            }
+    '$i18n.locale'(newVal) {
+      this.locale = newVal
+    },
+    $route(to, from) {
+      console.log(to)
+      this.pathName = to.path
+      if (this.pathName === '/login' || this.pathName === '/register') {
+        this.pathNameState = false
+      } else {
+        this.pathNameState = true
+      }
 
-            console.log(this.pathName);
-            if (to.path === "/") {
-                this.pageView = "page-view";
+      console.log(this.pathName)
+      if (to.path === '/') {
+        this.pageView = 'page-view'
                 // this.container_test = "";
-            } else {
-                if (to.path.indexOf("exchange") > 0 && this.exchangeSkin == "night") {
-                    this.pageView = "page-view";
-                } else {
-                    this.pageView = "page-view2";
-                }
-                // this.container_test = "container_test";
-            }
-        },
-        exchangeSkin() {
-            if (this.exchangeSkin === "day") {
-                this.pageView = "page-view2";
-            } else {
-                this.pageView = "page-view";
-            }
-        }
-    },
-    computed: {
-        activeNav: function () {
-            return this.$store.state.activeNav;
-        },
-        isLogin: function () {
-            return this.$store.getters.isLogin;
-        },
-        member: function () {
-            return this.$store.getters.member;
-        },
-        languageValue: function () {
-            var curlang = this.$store.getters.lang;
-            if (curlang == "English") this.$i18n.locale = "en";
-            return curlang;
-        },
-        lang() {
-            return this.$store.state.lang;
-        },
-        exchangeSkin() {
-            return this.$store.state.exchangeSkin;
-        }
-    },
-    created: function () {
-        this.initialize();
-        if (this.$route.path === "/") {
-            this.pageView = "page-view";
+      } else {
+        if (to.path.indexOf('exchange') > 0 && this.exchangeSkin == 'night') {
+          this.pageView = 'page-view'
         } else {
-            this.pageView = "page-view2";
+          this.pageView = 'page-view2'
         }
-        this.$nextTick(() => {
-            const link = 16604775806;
-            const weChat = 'biduokefu1';
-            new QRCode(document.getElementById("facebook"), {
-                text: link,
-                width: 100,
-                height: 100,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-            });
-            new QRCode(document.getElementById("facebook1"), {
-                text: link,
-                width: 100,
-                height: 100,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-            });
-        })
+                // this.container_test = "container_test";
+      }
     },
-    methods: {
+    exchangeSkin() {
+      if (this.exchangeSkin === 'day') {
+        this.pageView = 'page-view2'
+      } else {
+        this.pageView = 'page-view'
+      }
+    }
+  },
+  computed: {
+    activeNav: function() {
+      return this.$store.state.activeNav
+    },
+    isLogin: function() {
+      return this.$store.getters.isLogin
+    },
+    member: function() {
+      return this.$store.getters.member
+    },
+    languageValue: function() {
+      var curlang = this.$store.getters.lang
+      if (curlang == 'English') this.$i18n.locale = 'en'
+      return curlang
+    },
+    lang() {
+      return this.$store.state.lang
+    },
+    exchangeSkin() {
+      return this.$store.state.exchangeSkin
+    }
+  },
+  created: function() {
+    this.initialize()
+    if (this.$route.path === '/') {
+      this.pageView = 'page-view'
+    } else {
+      this.pageView = 'page-view2'
+    }
+    this.$nextTick(() => {
+      const link = 16604775806
+      // eslint-disable-next-line no-unused-vars
+      const weChat = 'biduokefu1'
+      new QRCode(document.getElementById('facebook'), {
+        text: link,
+        width: 100,
+        height: 100,
+        colorDark: '#000000',
+        colorLight: '#ffffff'
+      })
+      new QRCode(document.getElementById('facebook1'), {
+        text: link,
+        width: 100,
+        height: 100,
+        colorDark: '#000000',
+        colorLight: '#ffffff'
+      })
+    })
+  },
+  methods: {
         // header动画效果
          reload () {
             this.isRouterAlive = false
@@ -490,29 +506,31 @@ export default {
             })
         },
         goBi(name) {
-             switch (name) {
-                 case 'asset':
-                     this.$router.push("/uc/personal");
-                     break;
-                 case 'assetsWater':
-                     this.$router.push("/uc/record");
-                     break;
-                 case 'recharge':
-                     this.$router.push("/uc/recharge");
-                     break;
-                 case 'pickup':
-                     this.$router.push("/uc/withdraw");
-                     break;
-                 case 'rechargeAddress':
-                     this.$router.push("/uc/Recharge");
-                     break;
-                 case 'pointManage':
-                     this.$router.push("/uc/bjc");
-                     break;
-                 case 'CandyGiftManage':
-                     this.$router.push("/uc/giveRecord");
-                     break;
-             }
+          console.log(name);
+          switch (name) {
+            case 'moneyindex':
+              console.log(name);
+              this.$router.push("/personal");
+              break;
+            case 'record':
+              this.$router.push("/personal/record");
+              break;
+            case 'recharge':
+              this.$router.push("/personal/recharge");
+              break;
+            case 'withdraw':
+              this.$router.push("/personal/withdraw");
+              break;
+            case 'withdrawAddr':
+              this.$router.push("/personal/withdrawAddr");
+              break;
+            case 'mebjc':
+              this.$router.push("/personal/bjc");
+              break;
+            case 'giveRecord':
+              this.$router.push("/personal/giveRecord");
+              break;
+          }
         },
         handleScroll () {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -523,80 +541,70 @@ export default {
                 this.styleTop = 30
                 this.topPadding = '0 5%'
                 // this.topBackgroundColor = 'rgba(0,0,0,.5)'
-            }
-        },
-        strpo(str) {
-            if (str.length > 4) {
-                str = str.slice(0, 4) + "···";
-            } else {
-                str = str;
-            }
-            return str;
-        },
-        initialize() {
-            this.$store.commit("navigate", "nav-index");
-            this.$store.commit("recoveryMember");
-            this.$store.commit("initLang");
-            // this.loadTopInfo();
-            this.checkLogin();
-        },
-        loadTopInfo() {
-            /*获取首页顶部公告*/
-            let param = {};
-            param["sysAdvertiseLocation"] = 2;
-            this.$http
-                .post(this.host + "/uc/ancillary/system/advertise", param)
-                .then(response => {
-                    var result = response.body;
-                    if (result.code == 0 && result.data.length > 0) {
-                        this.topInfo = result.data[0];
-                    }
-                });
-        },
-        logout() {
-            this.$http.post(this.host + "/uc/loginout", {}).then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                    this.$Message.success(resp.message);
-                    this.$store.commit("setMember", null);
-                    setTimeout(() => {
-                        location.href = "/";
-                    }, 1500);
-                } else {
-                    this.$Message.error(resp.message);
-                }
-            });
-        },
-        checkLogin() {
-            this.$http.post(this.host + "/uc/check/login", {}).then(response => {
-                var result = response.body;
-                if (result.code == 0 && result.data == false) {
-                    this.$store.commit("setMember", null);
-                }
-            });
-        },
-        changelanguage: function (name) {
-            if (name == "en") {
-                this.$store.commit("setlang", "English");
-                this.$i18n.locale = "en";
-            }
-            if (name == "cn") {
-                this.$store.commit("setlang", "简体中文");
-                this.$i18n.locale = "zh";
-            }
         }
     },
-    mounted () {
-        window.addEventListener('scroll', this.handleScroll);
-        // (function (w, d, n, a, j) {
-        //     w[n] = w[n] || function () {
-        //         (w[n].a = w[n].a || []).push(arguments);
-        //     };
-        //     j = d.createElement('script');
-        //     j.async = true;
-        //     j.src ='https://qiyukf.com/script/9c6f0b24f2440c442569e7e5195f7ccf.js';
-        //     d.body.appendChild(j);
-        //     })(window, document, 'ysf');
+    strpo(str) {
+      if (str.length > 4) {
+        str = str.slice(0, 4) + '···'
+      } else {
+        str = str
+      }
+      return str
+    },
+    initialize() {
+      this.$store.commit('navigate', 'nav-index')
+      this.$store.commit('recoveryMember')
+      this.$store.commit('initLang')
+            // this.loadTopInfo();
+      this.checkLogin()
+    },
+    loadTopInfo() {
+            /* 获取首页顶部公告*/
+      const param = {}
+      param['sysAdvertiseLocation'] = 2
+      this.$http
+                .post(this.host + '/uc/ancillary/system/advertise', param)
+                .then(response => {
+                  var result = response.body
+                  if (result.code == 0 && result.data.length > 0) {
+                    this.topInfo = result.data[0]
+                  }
+                })
+    },
+    logout() {
+      this.$http.post(this.host + '/uc/loginout', {}).then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
+          this.$Message.success(resp.message)
+          this.$store.commit('setMember', null)
+          setTimeout(() => {
+            location.href = '/'
+          }, 1500)
+        } else {
+          this.$Message.error(resp.message)
+        }
+      })
+    },
+    checkLogin() {
+      this.$http.post(this.host + '/uc/check/login', {}).then(response => {
+        var result = response.body
+        if (result.code == 0 && result.data == false) {
+          this.$store.commit('setMember', null)
+        }
+      })
+    },
+    changelanguage: function(name) {
+      if (name === 'en') {
+        this.$store.commit('setlang', 'English')
+        this.$i18n.locale = 'en'
+      }
+      if (name === 'cn') {
+        this.$store.commit('setlang', '简体中文')
+        this.$i18n.locale = 'zh'
+      }
+    }
+  },
+  mounted() {
         (function(a,h,c,b,f,g){
             a["UdeskApiObject"] = f;a[f]=a[f]||function(){
                 (a[f].d=a[f].d||[]).push(arguments)
@@ -840,11 +848,7 @@ ul,li{
         }
     }
 }
-/*.ivu-table-wrapper {
-    -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-    -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-    box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-}*/
+
 .ivu-table-wrapper {
     .ivu-table {
         &:before {
@@ -1276,8 +1280,9 @@ body {
 .footer {
     min-width: 1260px;
     padding-top: 1px;
-    color: #53575c;
-    background: #1c2435;
+    // 6.25修改  lhl
+    color: #8090AF;
+    background: #11132C;
     .footer_content {
         width: 1200px;
         margin: 60px auto 30px;
@@ -1486,7 +1491,7 @@ body {
                     .login_register {
                         .ivu-menu-light.ivu-menu-vertical
                             .ivu-menu-item-active:not(.ivu-menu-submenu) {
-                            color: #fff;
+                            color: #8090AF;
                         }
                     }
                     .isLogin {

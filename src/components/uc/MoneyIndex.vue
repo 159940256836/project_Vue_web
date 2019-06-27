@@ -5,14 +5,17 @@
         <div class="bill_box rightarea padding-right-clear">
           <Tabs
             v-model="splitcomponentContent"
+            name="tab1-1"
             @on-click="changeTab"
           >
             <TabPane
               :label="$t('myAccount._BitcoinAccount')"
+              tab="tab1-1"
               name="COIN"
             ></TabPane>
             <TabPane
               :label="$t('myAccount._legaTenderAccount')"
+              tab="tab1-1"
               name="CURRENCY"
             ></TabPane>
             <!-- <TabPane :label="$t('myAccount._LeveragedAccounts')" name="LEVER"></TabPane> -->
@@ -365,7 +368,6 @@ export default {
   }
   .ivu-input,
   .ivu-input-group-append {
-    height: 40px;
     border-radius: 0;
   }
   .ivu-input-group-append {
@@ -448,7 +450,7 @@ export default {
       .hidden-assets{
         position: absolute;
         width: 300px;
-        top: -58px;
+        top: -40px;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;

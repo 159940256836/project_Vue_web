@@ -66,7 +66,7 @@
             </div>
             <!--查看订单-->
             <div class="fiat-title-info">
-              <router-link to="/uc/ad/create">
+              <router-link to="/order">
                 <button>
                   查看订单
                 </button>
@@ -85,7 +85,7 @@
           </div>
           <div class="fiat-login-title">
             <p>
-              <span>单词限额</span>
+              <span>单次限额</span>
               <span>1</span>
             </p>
             <p>

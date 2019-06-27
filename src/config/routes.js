@@ -57,24 +57,24 @@ import identbusiness from '../pages/uc/IdentBusiness'
 import Blc from '../pages/blc/Bilicai'
 import meblc from "../components/uc/Blc"
 import mebjc from "../components/uc/Bjc"
-//费率  transactionCosts
+// 费率  transactionCosts
 import transactionCosts from '../components/footerList/transactionCosts'
-//法律声明
+// 法律声明
 import law from '../components/footerList/law'
-//隐私协议
+// 隐私协议
 import Privgreement from '../components/footerList/Privgreement'
-//bdm协议
+// bdm协议
 import bdm from '../components/footerList/bdm'
-//用户协议
+// 用户协议
 import Usereement from '../components/footerList/Usereement'
 // import mymsg from ''
 // 平台的小时分配和昨天的分配路由
 // import platedistribute from "../pages/plate/distribution.vue"
 // import today from "../components/plate/Today"
 // import yesterday from "../components/plate/Yesterday"
-import Bjc from "../pages/bjc/Bijingcai"
+import Bjc from '../pages/bjc/Bijingcai'
 // 平台手续费返还
-import feereturn from "../pages/feereturn/Feereturn"
+import feereturn from '../pages/feereturn/Feereturn'
 
 // ieo
 import Ieo from "../pages/ieo/Index.vue"
@@ -93,16 +93,16 @@ import Ieoadmin from '../components/uc/IeoAdmin.vue'
 //api管理
 import apiManage from '../components/uc/apiManage.vue'
 
-//杠杆账户管理 => 当前委托
+// 杠杆账户管理 => 当前委托
 import levelCurrent from '../components/uc/levelCurrent.vue'
 
-//杠杆账户管理 => 历史委托
+// 杠杆账户管理 => 历史委托
 import levelHistory from '../components/uc/levelHistory.vue'
 
 // 糖果赠送记录
-import GiveRecord from '../components/uc/giveRecord.vue'
+import giveRecord from '../components/uc/giveRecord.vue'
 
-//归还赠送记录
+// 归还赠送记录
 import LeverIndex from "../pages/lever/Index.vue"
 
 //杠杆交易
@@ -121,7 +121,7 @@ export default [
     { path: '/index', component: Index },
     { path: '/login', component: Login },
     { path: '/mobilereg', component: mobilereg, meta: {
-        hide: true
+      hide: true
     }},
     { path: '/registe', component: registe, meta: {
         hide: true
@@ -154,38 +154,52 @@ export default [
         component: personal,
         children: [
             {
-                path: 'money',
+                path: '',
+                name: "moneyindex",
                 component: moneyindex
             },
             {
                 path: 'record',
+                name: "record",
                 component: record
             },
             {
                 path: 'recharge',
+                name: "recharge",
                 component: recharge
             },
             {
                 path: 'withdraw',
+                name: "withdraw",
                 component: withdraw
             },
             {
-                path: 'withdraw/address',
+                path: 'withdrawAddr',
+                name: "withdrawAddr",
                 component: withdrawAddr
             },
             {
                 path: 'bjc',
+                name: "mebjc",
                 component: mebjc
             },
             {
                 path: "giveRecord",
                 name: "giveRecord",
-                component: GiveRecord
+                component: giveRecord
             }
         ]
     },
     // 平台手续费返还
     { path: "/feereturn", component: feereturn },
+    {
+        //我的订单页
+        path: '/order', component: resolve => require(['@/pages/order/index.vue'], resolve)
+    },
+    {
+        //我的账号管理页
+        path: '/account', name: 'account',component: resolve => require(['@/pages/account/index.vue'], resolve)
+    },
     // {
     //     path: "/distribute",
     //     component: platedistribute,

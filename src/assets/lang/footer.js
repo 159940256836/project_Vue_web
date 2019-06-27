@@ -6,6 +6,8 @@ const zh = {
     helpCenter: "帮助中心",
     RecommendedCommission: "新手指南",
     question: "常见问题",
+    Recharguide:"充值指南",
+    Tradiguide:"交易指南",
     serviceArgee: "服务协议",
     transactionCosts: "交易费率",
     voteBi: "投票上币",
@@ -30,9 +32,19 @@ const zh = {
     WeChatcustomervi:"微信客服号",
     Customvic:"客服1",
     Customervic:"客服2",
+    Transactiate:"交易费率",
+    Usegreement:"用户协议",
+    Precautions:"注意事项",
+    Policnderstanding:"政策了解",
 }
 
 const en = {
+    Policnderstanding:'Policy understanding',
+    Precautions:'Precautions',
+    Usegreement:'User Agreement',
+    Transactiate:'Transaction rate',
+    Tradiguide:'Trading guide',
+    Recharguide:'Recharge guide',
     Usereement:'User agreement',
     Privgreement:'Privacy agreement',
     Legaotices:'Legal notices',

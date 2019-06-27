@@ -23,7 +23,7 @@
                         <span>{{$t('uc.finance.currency')}}：</span>
                         <Select
                             v-model="coinType"
-                            style="width:100px;margin-right:30px;"
+                            style="width:128px;margin-right:30px;"
                             clearable
                             :placeholder="$t('header.choose')"
                         >
@@ -173,6 +173,12 @@ export default {
     created: function () {
         this.getList(this.page);
         this.getAddrList();
+        // const name = this.$route.path
+        // console.log(name, this.$route.path);
+        // if (name === '/personal/record') {
+        //     this.getList(this.page);
+        //     this.getAddrList();
+        // }
     },
     methods: {
         changedate() {
@@ -404,10 +410,21 @@ export default {
 }
 </style>
 <style lang="scss">
-.nav-rights {
     .ivu-select-dropdown {
         width: 128px;
     }
+    .ivu-input-suffix {
+        right: 10px;
+    }
+    .ivu-date-picker-with-range {
+        .ivu-date-picker-with-range {
+            background: #10122B;
+        }
+    }
+    .ivu-select .ivu-select-dropdown {
+        width: 128px;
+    }
+.nav-rights {
     .nav-right {
         .bill_flow_box .rightarea-con {
             .form-group {
@@ -490,7 +507,7 @@ export default {
                 td {
                     background: #111530;
                     border-bottom: 0;
-                    color: #fff;
+                    color: #8090AF;
                 }
 
                 background: #191D3A;
@@ -508,19 +525,24 @@ export default {
     }
 }
 #record_pages li.ivu-page-item.ivu-page-item-active {
-    background-color: #3399ff;
-    border-color: #3399ff;
+    background-color: #111530;
+    border-color: #191f44;
     a {
-        color: #fff;
+        color: #3399ff;
     }
 }
 #record_pages li.ivu-page-item.ivu-page-item-active {
     &:hover {
-        background-color: #3399ff;
+        background-color: #111530;
         a {
-            color: #fff;
+            color: #3399ff;
         }
     }
+}
+.ivu-page-item {
+    background: #111530;
+    color: #8090AF;
+    border: 1px solid #191f44;
 }
 .ivu-page-item:hover {
     color: #3399ff;

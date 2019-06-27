@@ -95,9 +95,10 @@
                 prop="rmb"
               >
                 <Input
-                  style="background: #191D3A"
+                  style="background: #191D3A;width: 370px;"
                   v-model="form.rmb"
-                  disabled placeholder=""
+                  disabled
+                  placeholder=""
                 />
               </FormItem>
               <FormItem
