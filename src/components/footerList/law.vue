@@ -46,7 +46,9 @@ export default {
 };
 </script>
 <style lang="scss">
+
 .law{
+  padding-bottom: 120px;
   .contenta_newtile{
     padding-top:38px;
   }
@@ -81,7 +83,7 @@ export default {
 .contenta {
   width: 100%;
   position: relative;
-  top: 60px;
+  // top: 60px;
   padding-top: 50px;
   // padding-bottom: 148px;
   .contenta_cont_content {
