@@ -40,9 +40,13 @@ const zh = {
     Myscores:"我的积分",
     Currentoints:"当前积分",
     ruleofactivity:"活动规则",
+    APmanagement:"API管理",
+    Mypromotion:"我的推广",
     RegisteringDW:"注册BDW交易所即赠送100个糖果价值约1000人民币，邀请一级赠送20枚糖果价值约200人民币，2级送10枚糖果价值约100人民币，8月份糖果即可在交易所交易变现"
 };
 const en = {
+    Mypromotion:"My promotion",
+    APmanagement:'API management',
     RegisteringDW :'Registering BDW Exchange will give 100 candy worth about 1000 RMB, invite 20 gifts for the first grade to be worth about 200 RMB, and 2 for 10 candy worth about 100 RMB. In August, the candy can be traded on the exchange.',
     ruleofactivity:'rule of activity',
     Currentoints:"Current points",
