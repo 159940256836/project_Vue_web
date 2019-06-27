@@ -2,38 +2,63 @@
     <div class="nav-rights">
         <div class="nav-right">
             <div class="bill_box_address">
-                <section class="trade-group merchant-top">
-                    <!-- <i class="merchant-icon tips"></i> -->
-                    <h1 class="tips-word1">{{$t('uc.finance.withdraw.addressmanager')}}</h1>
-                </section>
                 <section>
                     <div class="table-inner">
                         <div class="action-inner">
-                            <div class="inner-left">
-                                <p class="describe">{{$t('uc.finance.withdraw.symbol')}}</p>
-                                <Select v-model="coinType" style="width:100px;margin-top: 10px;" size="large">
-                                    <Option v-for="item in coinList" :value="item" :key="item">{{ item }}</Option>
+                            <div class="inner-left deposit-address">
+                                <span class="describe">
+                                    {{ $t('uc.finance.withdraw.symbol') }}
+                                </span>：
+                                <Select
+                                    v-model="coinType"
+                                    style="width:128px;"
+                                    size="large"
+                                >
+                                    <Option
+                                        v-for="item in coinList"
+                                        :value="item" :key="item"
+                                    >
+                                        {{ item }}
+                                    </Option>
                                 </Select>
                             </div>
-                            <div class="inner-box deposit-address mt25">
-                                <p class="describe">{{$t('uc.finance.withdraw.address')}}</p>
+                            <div class="inner-box deposit-address">
+                                <span class="describe">
+                                    {{$t('uc.finance.withdraw.address')}}：
+                                </span>
                                 <div class="title">
-                                    <Input v-model="withdrawAddr" style="width: 90%;margin-top:10px;" size="large"></Input>
+                                    <Input
+                                        v-model="withdrawAddr"
+                                        style="width: 200px;"
+                                        size="large"
+                                    />
                                 </div>
                             </div>
-                            <div class="mt25">
-                                <p class="describe">{{$t('uc.finance.withdraw.remark')}}</p>
+                            <div class="inner-box deposit-address">
+                                <span class="describe">
+                                    {{$t('uc.finance.withdraw.remark')}}：
+                                </span>
                                 <div class="title">
-                                    <Input v-model="remark" style="width:100%;margin-top:10px;" size="large"></Input>
+                                    <Input
+                                        v-model="remark"
+                                        style="width: 200px;"
+                                        size="large"
+                                    />
                                 </div>
                             </div>
+                            <Button
+                                id="addrSubmit"
+                                @click='addAddr'
+                                size="large"
+                                style=""
+                            >
+                                {{$t('uc.finance.withdraw.add')}}
+                            </Button>
                         </div>
-                        <div class="btnbox">
-                            <Button id="addrSubmit" @click='addAddr' size="large" style="height:32px;width:86px;color:#fff;background:#3399ff;border:1px solid #3399ff;">{{$t('uc.finance.withdraw.add')}}</Button>
-                        </div>
+                        <!--<div class="btnbox"></div>-->
                         <div class="action-content">
                             <div class="action-body">
-                                <p class="acb-p1 describe">{{$t('uc.finance.withdraw.addresslist')}}</p>
+                                <!--<p class="acb-p1 describe">{{$t('uc.finance.withdraw.addresslist')}}</p>-->
                                 <div class="order-table">
                                     <Table
                                         stripe
@@ -155,11 +180,11 @@ export default {
           render: (h, params) => {
             return h("div", [
               h(
-                "Button",
+                "span",
                 {
-                  props: {
-                    type: "error",
-                    size: "small"
+                  style:{
+                      color: '#3399ff',
+                      cursor: 'pointer'
                   },
                   on: {
                     click: () => {
@@ -420,25 +445,29 @@ export default {
 
 <style scoped lang="scss">
 .nav-rights {
+    .ivu-input-large {
+        height: 30px;
+    }
   .nav-right {
     .bill_box_address {
-      section.trade-group.merchant-top {
-        .tips-word1 {
-          margin-bottom: 20px;
-          text-align: left;
-          font-weight: normal;
-          margin-left:30px;
-        }
-      }
       .table-inner {
         .action-inner {
-          display: table;
-          padding: 0 30px;
-          width: 100%;
-          .inner-left {
-            display: table-cell;
-            width: 15%;
-          }
+            background: #111530;
+            display: table;
+            height: 60px;
+            line-height: 60px;
+            width: 100%;
+            .inner-left {
+                width: 20%;
+            }
+              .inner-left,
+              .inner-box {
+                  margin-left: 28px;
+                display: table-cell;
+                  .describe {
+                      float: left;
+                  }
+              }
         }
       }
     }
@@ -450,22 +479,34 @@ export default {
 }
 
 .deposit-address {
-  width: 45% !important;
+    float: left;
+  /*width: 25%;*/
+    .title {
+        float: left;
+    }
 }
-
+#addrSubmit {
+    height: 32px;
+    width: 86px;
+    color: #fff;
+    background: #3399ff;
+    float: right;
+    border-radius: 0;
+    margin: 14px;
+    border: 0;
+}
 .mt25 {
   display: table-cell;
   width: 43%;
 }
 
-p.describe {
-  font-size: 16px;
-  font-weight: 600;
+span.describe {
+  font-size: 14px;
 }
 
-.action-content {
-  padding: 0 30px;
-}
+/*.action-content {*/
+/*  padding: 0 30px;*/
+/*}*/
 /* common */
 .order-table {
   margin-top: 20px;
@@ -482,106 +523,129 @@ p.describe {
 }
 </style>
 <style lang="scss">
-.nav-rights {
-  .nav-right {
-    .bill_box_address {
-      .table-inner {
-        .action-inner {
-          .inner-left {
-            /*左侧边框*/
-            .ivu-select.ivu-select-single {
-              .ivu-select-selection {
-                &:hover {
-                  border-color: #3399ff;
-                }
-              }
-              .ivu-select-selection.ivu-select-selection-focused {
-                border-color: #3399ff;
-              }
-            }
-            .ivu-select.ivu-select-visible.ivu-select-single {
-              .ivu-select-selection {
-                border-color: #3399ff;
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-              }
-            }
-            .ivu-select-dropdown .ivu-select-item {
-              padding: 6px 16px;
-              &:hover {
-                background: #fff;
-                color: #3399ff;
-              }
-            }
-            .ivu-select-dropdown {
-              li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-                background: #fff;
-                color: #3399ff;
-              }
-              li.ivu-select-item.ivu-select-item-selected {
-                background: #fff;
-                color: #495060;
-                &:hover {
-                  color: #3399ff;
-                }
-              }
-            }
-          }
-          .mt25 .ivu-input{
-              &:hover{
-                  border-color:#3399ff;
-              }
-              &:focus{
-                  border-color:#3399ff;
-                  -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                  -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                  box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-              }
-          }
+.ivu-modal-content {
+    background: #111530;
+    .ivu-modal-confirm-head {
+        text-align: left;
+        height: 35px;
+        border-bottom: 1px solid #2A3850;
+        .ivu-modal-confirm-head-title {
+            color: #fff;
+            margin-left: 0;
         }
-        .btnbox .ivu-btn {
-            &:focus{
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                  -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                  box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-            }
-        }
-        .action-content .action-body {
-        /*分页*/
-          .ivu-page {
-            .ivu-page-item.ivu-page-item-active {
-              background-color: #3399ff;
-              border-color: #3399ff;
-              color: #fff;
-              &:hover {
-                a {
-                  color: #fff;
-                }
-              }
-            }
-            .ivu-page-item {
-              &:hover {
-                border: 1px solid #3399ff;
-                a {
-                  color: #3399ff;
-                }
-              }
-            }
-            .ivu-page-prev,
-            .ivu-page-next {
-              &:hover {
-                border: 1px solid #3399ff;
-                a {
-                  color: #3399ff;
-                }
-              }
-            }
-          }
-      }
-      }
     }
-  }
+    .ivu-modal-confirm-body {
+        padding-left: 20px;
+    }
+
+    .ivu-modal-confirm-head-icon-confirm {
+        display: none;
+        .ivu-modal-confirm-body {
+        }
+    }
+    .ivu-btn-text {
+        color: #8090AF;
+        border: 1px solid #8090AF;
+        &:hover {
+            background: transparent;
+        }
+    }
+}
+.nav-rights {
+    .ivu-input-large,
+    .ivu-select-placeholder,
+    .ivu-select-selection {
+        height: 30px !important;
+        line-height: 30px !important;
+    }
+    .ivu-input {
+        color: #8090AF;
+    }
+    .nav-right {
+        .bill_box_address {
+            .table-inner {
+                .action-inner {
+                    .inner-left {
+                        /*左侧边框*/
+                        .ivu-select.ivu-select-single {
+                            .ivu-select-selection {
+                                &:hover {
+                                    border-color: #3399ff;
+                                }
+                            }
+
+                            .ivu-select-selection.ivu-select-selection-focused {
+                                border-color: #3399ff;
+                            }
+                        }
+
+                        .ivu-select-dropdown .ivu-select-item {
+                            padding: 6px 16px;
+
+                            &:hover {
+                                background: #10122B;
+                                color: #3399ff;
+                            }
+                        }
+
+                        .ivu-select-dropdown {
+                            li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+                                background: #fff;
+                                color: #3399ff;
+                            }
+
+                            li.ivu-select-item.ivu-select-item-selected {
+                                background: #fff;
+                                color: #495060;
+
+                                &:hover {
+                                    color: #3399ff;
+                                }
+                            }
+                        }
+                    }
+
+                    .action-content .action-body {
+                        /*分页*/
+                        .ivu-page {
+                            .ivu-page-item.ivu-page-item-active {
+                                background-color: #111530;
+                                border-color: #191f44;
+                                a {
+                                    color: #3399ff;
+                                }
+
+                                &:hover {
+                                    a {
+                                        color: #fff;
+                                    }
+                                }
+                            }
+
+                            .ivu-page-item {
+                                background: #111530;
+                                color: #8090AF;
+                                border: 1px solid #191f44;
+                            }
+                            .ivu-page-item:hover {
+                                color: #3399ff;
+                            }
+                            .ivu-page-prev,
+                            .ivu-page-next {
+                                &:hover {
+                                    border: 1px solid #3399ff;
+
+                                    a {
+                                        color: #3399ff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 </style>
 

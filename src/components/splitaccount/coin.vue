@@ -18,7 +18,12 @@
                 :no-data-text="$t('common.nodata')"
             ></Table>
         </div>
-        <transfermodal @closetransferModal="closeModal" :getmoney="getMoney" :currencyData="currencyData"></transfermodal>
+        <transfermodal
+            @closetransferModal="closeModal"
+            :getmoney="getMoney"
+            :currencyData="currencyData"
+        >
+        </transfermodal>
     </div>
 </template>
 <script>
@@ -166,58 +171,59 @@ export default {
                 render: (h, params)=> {
                     var actions = [];
                     if (params.row.coin.canRecharge == 1) {
-                        if (params.row.address != null && params.row.address != "") {
-                            // 充币
-                            actions.push(
-                                h(
-                                    "span",
-                                    {
-                                        // 充币;
-                                        props: {
-                                            type: "primary",
-                                            size: "small"
-                                        },
-                                        on: {
-                                            click: function () {
-                                                self.$router.push(
-                                                    "/uc/recharge?name=" + params.row.coin.unit
-                                                );
-                                            }
-                                        },
-                                        style: {
-                                            marginRight: "8px",
-                                            color: "#3399ff",
-                                            cursor: "pointer"
+                        // 充币
+                        actions.push(
+                            h(
+                                "span",
+                                {
+                                    // 充币;
+                                    props: {
+                                        type: "primary",
+                                        size: "small"
+                                    },
+                                    on: {
+                                        click: function () {
+                                            self.$router.push(
+                                                "/personal/recharge?name=" + params.row.coin.unit
+                                            );
                                         }
                                     },
-                                    self.$t("uc.finance.money.charge")
-                                )
-                            );
-                        } else {
-                            //   获取地址按钮;
-                            actions.push(
-                                h("span",
-                                    {
-                                        props: { type: "info", size: "small" },
-                                        on: {
-                                            click: function () {
-                                                self.resetAddress(params.row.coin.unit);
-                                                /*self.$router.push(
-                                                    "/uc/recharge?name=" + params.row.coin.unit
-                                                );*/
-                                            }
-                                        },
-                                        style: {
-                                            marginRight: "8px",
-                                            color: "#3399ff",
-                                            cursor: "pointer"
-                                        }
-                                    },
-                                    self.$t("uc.finance.money.getaddress")
-                                )
-                            );
-                        }
+                                    style: {
+                                        marginRight: "8px",
+                                        color: "#3399ff",
+                                        cursor: "pointer"
+                                    }
+                                },
+                                self.$t("uc.finance.money.charge")
+                            )
+                        );
                     }
+                   /* else {
+                        //   获取地址按钮;
+                        actions.push(
+                            h("span",
+                                {
+                                    props: { type: "info", size: "small" },
+                                    on: {
+                                        click: function () {
+                                            self.resetAddress(params.row.coin.unit);
+                                            /!*self.$router.push(
+                                                "/uc/recharge?name=" + params.row.coin.unit
+                                            );*!/
+                                        }
+                                    },
+                                    style: {
+                                        marginRight: "8px",
+                                        color: "#3399ff",
+                                        cursor: "pointer"
+                                    }
+                                },
+                                self.$t("uc.finance.money.getaddress")
+                            )
+                        );
+                    }*
+
+                    */
                     if (params.row.coin.canWithdraw == 1) {
                         // 提币;
                         actions.push(
@@ -229,7 +235,7 @@ export default {
                                 on: {
                                     click: function () {
                                         self.$router.push(
-                                            "/uc/withdraw?name=" + params.row.coin.unit
+                                            "/personal/withdraw?name=" + params.row.coin.unit
                                         );
                                     }
                                 },

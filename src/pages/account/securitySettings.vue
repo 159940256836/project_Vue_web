@@ -266,7 +266,7 @@
                             <Input v-model="formValidate2.password" size="large" type="password" style="width:300px;"></Input>
                         </FormItem>
                         <!-- 邮箱验证码 -->
-                        <FormItem :label="$t('uc.safe.emailcode')" prop="vailCode1">
+                        <FormItem  class="defeat-ivu" :label="$t('uc.safe.emailcode')" prop="vailCode1">
                             <Input v-model="formValidate2.vailCode1" size="large" style="width:300px;border-right:none;">
                             <!-- <Button slot="append">点击获取</Button> -->
                             <div class="timebox" slot="append">

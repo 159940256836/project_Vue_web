@@ -3,7 +3,6 @@
     <div>
         <div id="fullpage">
             <div class="section" id="banner">
-
                 <!-- <div class="bannerWrapper"> -->
                     <Carousel
                         autoplay
@@ -16,22 +15,17 @@
                             :key="index"
                         >
                             <div class="bannerBox">
-                                <div
-                                    v-for="(item, index) in itemArr"
-                                    :key="index"
-                                >
                                     <div
-                                        :style="'background-image:url('+item.url+')'"
+                                        :style="'background-image:url('+itemArr.url+')'"
                                         class="carousel-item"
                                     >
                                         <a
-                                            v-show="item.linkUrl&&item.linkUrl!=' '&&item.linkUrl!='1'"
+                                            v-show="itemArr.linkUrl&&itemArr.linkUrl!=' '&&itemArr.linkUrl!='1'"
                                             style="display:block;width:100%;height: 100%;"
-                                            :href="item.linkUrl"
+                                            :href="itemArr.linkUrl"
                                             target="_blank"
                                         ></a>
                                     </div>
-                                </div>
                             </div>
                         </CarouselItem>
                     </Carousel>
@@ -42,65 +36,66 @@
                 id="hot"
                 v-if="hostSymbolList.length != 0"
             >
-                <!-- 首页行情图 -->
-                <section class="section-market">
-                    <div
-                        class="market-box"
-                        v-for="(item,index) in hostSymbolList"
-                        :key="index"
-                        style="float: left;"
-                    >
-                        <div>
-                            <p class="flex">
-                                <span class="pairs">{{item.symbol}}</span>
-                                <span
-                                    class="pairs-sip"
-                                    :class="{green: item.isGreen}"
-                                    v-if="item.isGreen"
-                                >
-                                    {{item.chg | formateRate}}
-                                </span>
-                                <span
-                                    :class="{red: !item.isGreen}"
-                                    v-if="!item.isGreen"
-                                >
-                                    {{item.chg | formateRate}}
-                                </span>
-                            </p>
-                            <p class="flex">
-                                <span
-                                    class="pairs-sip sip"
-                                    :class="{green: item.isGreen}"
-                                    v-if="item.isGreen"
-                                >
-                                    {{item.close}}
-                                </span>
-                                <span
-                                    class="pairs-pri"
-                                    :class="{red: !item.isGreen}"
-                                    v-if="!item.isGreen"
-                                >
-                                    {{item.close}}
-                                </span>
-                                <span class="white">{{item.cny}}</span>
-                            </p>
-                        </div>
-                        <!-- {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}} -->
-                        <SvgLine
-                            :values="item.trend"
-                            :width="width"
-                            :height="height"
-                            :rose="item.chg.toString()"
-                        ></SvgLine>
+            <!-- 首页行情图 -->
+            <section class="section-market">
+                <div
+                    class="market-box"
+                    v-for="(item,index) in hostSymbolList"
+                    :key="index"
+                    style="float: left;"
+                >
+                    <div>
+                        <p class="flex">
+                            <span class="pairs">{{item.symbol}}</span>
+                            <span
+                                class="pairs-sip"
+                                :class="{green: item.isGreen}"
+                                v-if="item.isGreen"
+                            >
+                                {{item.chg | formateRate}}
+                            </span>
+                            <span
+                                :class="{red: !item.isGreen}"
+                                v-if="!item.isGreen"
+                            >
+                                {{item.chg | formateRate}}
+                            </span>
+                        </p>
+                        <p class="flex">
+                            <span
+                                class="pairs-sip sip"
+                                :class="{green: item.isGreen}"
+                                v-if="item.isGreen"
+                            >
+                                {{item.close}}
+                            </span>
+                            <span
+                                class="pairs-pri"
+                                :class="{red: !item.isGreen}"
+                                v-if="!item.isGreen"
+                            >
+                                {{item.close}}
+                            </span>
+                            <span class="white" style="color:#CDD2E5">{{item.cny}}</span>
+                        </p>
                     </div>
-                </section>
+                    <!-- {{item.symbol}}-----{{item.baseUsdRate}}----{{item.chg}}----{{item.change}}====={{item.volume}} -->
+                    <SvgLine
+                        :values="item.trend"
+                        :width="width"
+                        :height="height"
+                        :rose="item.chg.toString()"
+                        style="margin-left:15px;"
+                    ></SvgLine>
+                </div>
+            </section>
             </div>
             <!-- 公告轮播 -->
             <div id="pagetips">
                 <div class="topnav">
                     <div class="carl">
                         <!-- <div class="laba"> -->
-                        <img style="margin: 13px;" src="../../assets/images/laba_pri.png" alt="">
+                        <img style="margin: 13px;margin-left:-60%;" src="../../assets/images/laba_pri.png" alt="">
                         <!--<Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />-->
                         <!-- </div> -->
                         <div class="carsoul">
@@ -120,14 +115,126 @@
                             </div>
                             </div>
                         </div>
-                        <div class="more">
+                        <!-- <div class="more">
                             <router-link to="/notice">更多>></router-link>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
+            <div class="Central">
+              <div class="section" id="page2">
+                <div class="page2nav">
+                    <ul class="brclearfix">
+                        <li
+                            v-show="!(index==4&&!isLogin)"
+                            v-for="(item,index) in indexBtn"
+                            @click="addClass(index)"
+                            :class="{'active':index==choseBtn,'ivu-btn-default':index!=choseBtn}"
+                            :key="index"
+                        >
+                            {{item.text}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="ptjy">
+                    <Table
+                        v-if="choseBtn==4"
+                        :columns="favorColumns"
+                        :data="dataIndex"
+                        class="tables"
+                        :disabled-hover="true"
+                        :loading="loading"
+                        :no-data-text="$t('common.nodata')"
+                        :row-class-name="rowClassName"
+                    ></Table>
+                    <Table
+                        v-else
+                        :columns="coins.columns"
+                        :data="dataIndex"
+                        class="tables"
+                        :disabled-hover="true"
+                        :loading="loading"
+                        :no-data-text="$t('common.nodata')"
+                        :row-class-name="rowClassName"
+                    ></Table>
+                </div>
+                <!-- <div class="seemore">
+                    查看更多
+                </div> -->
+              </div>
+              <div class="section" id="page5">
+                  <div class="showsection">
+                      <img src="../../assets/img/01.png" alt="">
+                      <div>{{$t("sectionPage.spotTrading")}}</div>
+                      <span>{{$t("sectionPage.multiCurrency")}} <br />{{$t("sectionPage.performance")}}</span>
+                  </div>
+                    <div class="showsection">
+                      <img src="../../assets/img/02.png" alt="">
+                      <div>{{$t("sectionPage.OTCtransaction")}}</div>
+                      <span>{{$t("sectionPage.Support")}} <br />{{$t("sectionPage.guarantee")}}</span>
+                  </div>
+                    <div class="showsection">
+                      <img src="../../assets/img/03.png" alt="">
+                      <div>{{$t("sectionPage.Financial")}}</div>
+                      <span>{{$t("sectionPage.multilayer")}} <br />{{$t("sectionPage.operation")}}</span>
+                  </div>
+                    <div class="showsection">
+                      <img src="../../assets/img/03.png" alt="">
+                      <div>{{$t("sectionPage.Professional")}}</div>
+                      <span>{{$t("sectionPage.online")}}<br /> {{$t("sectionPage.Respond")}}</span>
+                    </div>
+              </div>
+              <div class="section" id="page4">
+                <div class="left">
+                    <span class="text">{{$t("sectionPage.terminal")}}</span>
+                    <p>{{$t("sectionPage.Instant")}}</p>
+                    <div class="qrcode">
+                      <div class="Qrleft" v-show="this.checkoutapp">
+                        <div class="android" @click="checkoutfasle">
+                          <Icon type="logo-android" color="white" size="20" style="margin:0 15px"/>
+                          <span>android</span>
+                        </div>
+                        <div class="ipone click" @click="checkouttrue">
+                          <Icon type="logo-apple" color="white" size="20" style="margin:0 15px"/>
+                          <span>iphone</span>
+                        </div>
+                      </div>
+                      <div class="Qrleft" v-show="!checkoutapp">
+                          <div class="android click" @click="checkoutfasle">
+                            <Icon type="logo-android" color="white" size="20" style="margin:0 15px"/>
+                            <span>android</span>
+                          </div>
+                          <div class="ipone" @click="checkouttrue">
+                            <Icon type="logo-apple" color="white" size="20" style="margin:0 15px"/>
+                            <span>iphone</span>
+                          </div>
+                      </div>
+                      <div class="Qrright">
+                          <img src='../../assets/images/qrcode.png' alt="" />
+                      </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <img src="../../assets/img/shouye.png" alt="" />
+                </div>
+              </div>
+              <div class="section" id="page1">
+                <div class="content">
+                    <div class="page1left">
+                      <div class="trading">{{$t("sectionPage.soontrading")}}</div>
+                      <div class="registered">{{$t("sectionPage.Registeraccount")}}</div>
+                    </div>
+                    <div class="page1right">
+                      <router-link class="login"  to="/login">{{$t("common.login")}}</router-link>
+                      <router-link class="registe" to="/register">{{$t("common.register")}}</router-link>
+                    </div>
+                </div>
+              </div>
+            </div>
             <!--币种列表-->
-            <div class="section" id="page2">
+            <!-- 下载部分 -->
+            <!-- 网站功能模块 -->
+            <!-- <div class="section" id="page2">
                 <div class="page2nav">
                     <ul class="brclearfix">
                         <li
@@ -162,7 +269,6 @@
                     ></Table>
                 </div>
             </div>
-            <!-- 下载部分 -->
             <div class="section" id="page5">
                 <div class="section-main">
                     <ul class="download">
@@ -191,7 +297,6 @@
                 </div>
 
             </div>
-            <!-- 网站功能模块 -->
             <div class="section" id="page4">
                 <ul>
                     <li>
@@ -215,7 +320,7 @@
                         <p>{{$t("sectionPage.part4Content")}}<br>{{$t("sectionPage.part4Content2")}}</p>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
         <div id="onlineservice">
             <a href="http://kefu.caymanex.pro:80/im/text/15FwEk.html" target="_blank"></a>
@@ -242,7 +347,7 @@ export default {
   data() {
     const self = this
     return {
-      width: 220,
+      width: 230,
       height: 50,
       loading: false,
       progress: 0,
@@ -258,6 +363,7 @@ export default {
       yesDayMineAmountBHB: 0,
       CNYRate: null,
       dataIndex: [],
+      checkoutapp: 'true',
             // pageNo: 1,
             // pageSize: 50,
             // totalNum: 0,
@@ -281,24 +387,24 @@ export default {
               nativeOn: {
                 click: () => {
                   if (this.isLogin) {
-                        event.stopPropagation() // 阻止事件冒泡
-                        if (
+                    event.stopPropagation() // 阻止事件冒泡
+                    if (
                                             event.currentTarget.className ==
                                             'ivu-icon ivu-icon-ios-star'
                                         ) {
                                             // 解除收藏
-                          this.cancelCollect(params.index, params.row)
-                          event.currentTarget.className ==
+                      this.cancelCollect(params.index, params.row)
+                      event.currentTarget.className ==
                                                 'ivu-icon ivu-icon-ios-star-outline'
-                        } else {
+                    } else {
                                             // 收藏
-                          this.collect(params.index, params.row)
-                          event.currentTarget.className =
+                      this.collect(params.index, params.row)
+                      event.currentTarget.className =
                                                 'ivu-icon ivu-icon-ios-star'
-                        }
-                      } else {
-                        this.$Message.warning('请先登录')
-                      }
+                    }
+                  } else {
+                    this.$Message.warning('请先登录')
+                  }
                 }
               }
             })
@@ -453,51 +559,51 @@ export default {
                 //     }
                 //   }
                 // },
-        {
-          title: self.$t('service.PriceTrend'),
-          align: 'center',
-          render: function(h, params) {
-                        // debugger
-            let valus = null
-            const len = params.row.trend.length
-            valus = len > 0 ? params.row.trend
-                            : [
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0,
-                              0
-                            ]
-            return h(SvgLine, {
-              props: {
-                values: valus,
-                rose: params.row.rose,
-                width: 100,
-                height: 40
-              }
-            })
-          }
-        },
+        // {
+        //   title: self.$t('service.PriceTrend'),
+        //   align: 'center',
+        //   render: function(h, params) {
+        //                 // debugger
+        //     let valus = null
+        //     const len = params.row.trend.length
+        //     valus = len > 0 ? params.row.trend
+        //                     : [
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0,
+        //                       0
+        //                     ]
+        //     return h(SvgLine, {
+        //       props: {
+        //         values: valus,
+        //         rose: params.row.rose,
+        //         width: 100,
+        //         height: 40
+        //       }
+        //     })
+        //   }
+        // },
         {
           title: self.$t('service.Exchange'),
                     // align: "center",
@@ -516,8 +622,8 @@ export default {
                 },
                 on: {
                   click: function() {
-                        self.$router.push('/exchange/' + params.row.href)
-                      }
+                    self.$router.push('/exchange/' + params.row.href)
+                  }
                 }
               })
             ])
@@ -550,26 +656,26 @@ export default {
                 },
                 nativeOn: {
                   click: (event) => {
-                        if (this.isLogin) {
-                          event.stopPropagation() // 阻止事件冒泡
-                          if (
+                    if (this.isLogin) {
+                      event.stopPropagation() // 阻止事件冒泡
+                      if (
                                                 event.currentTarget.className ==
                                                 'ivu-icon ivu-icon-ios-star'
                                             ) {
                                                 // 解除收藏
-                              this.cancelCollect(params.index, params.row)
-                              event.currentTarget.className ==
+                        this.cancelCollect(params.index, params.row)
+                        event.currentTarget.className ==
                                                     'ivu-icon ivu-icon-ios-star-outline'
-                            } else {
+                      } else {
                                                 // 收藏
-                              this.collect(params.index, params.row)
-                              event.currentTarget.className =
+                        this.collect(params.index, params.row)
+                        event.currentTarget.className =
                                                     'ivu-icon ivu-icon-ios-star'
-                            }
-                        } else {
-                          this.$Message.warning(this.$t('common.logintip'))
-                        }
                       }
+                    } else {
+                      this.$Message.warning(this.$t('common.logintip'))
+                    }
+                  }
                 }
               })
             }
@@ -587,23 +693,23 @@ export default {
               } else if (params.row.coin == 'ETH') {
                 iconName = '以太币'
               } else if (params.row.coin == 'GCC') {
-                    iconName = '银河链'
-                  }
+                iconName = '银河链'
+              }
               return h('div', [
                 h(
                                     'span',
                   {
                     attrs: {
                                             // class: className
-                        }
+                    }
                   },
                                     params.row.memberName
                                 ),
                 h('span', {
                   style: {
-                        fontSize: '16px',
-                        fontWeight: 800
-                      }
+                    fontSize: '16px',
+                    fontWeight: 800
+                  }
                 }, params.row.coin)
               ])
             }
@@ -639,17 +745,17 @@ export default {
                                     'Icon',
                   {
                     props: {
-                          type: 'arrow-up-c'
-                        },
+                      type: 'arrow-up-c'
+                    },
                     style: {
-                          display: isgreen,
-                          fontSize: '16px',
-                          marginLeft: '5px',
-                          verticalAlign: 'middle'
-                        },
+                      display: isgreen,
+                      fontSize: '16px',
+                      marginLeft: '5px',
+                      verticalAlign: 'middle'
+                    },
                     class: {
-                          green: true
-                        }
+                      green: true
+                    }
                   },
                                     '↑'
                                 ),
@@ -657,17 +763,17 @@ export default {
                                     'Icon',
                   {
                     props: {
-                          type: 'arrow-down-c'
-                        },
+                      type: 'arrow-down-c'
+                    },
                     style: {
-                          display: nogreen,
-                          fontSize: '16px',
-                          marginLeft: '5px',
-                          verticalAlign: 'middle'
-                        },
+                      display: nogreen,
+                      fontSize: '16px',
+                      marginLeft: '5px',
+                      verticalAlign: 'middle'
+                    },
                     class: {
-                          red: true
-                        }
+                      red: true
+                    }
                   },
                                     '↓'
                                 )
@@ -751,53 +857,53 @@ export default {
                     //     }
                     //   }
                     // },
-          {
-            title: self.$t('service.PriceTrend'),
-            align: 'center',
-            render: function(h, params) {
-              let valus = null
-              const len = params.row.trend.length
-              valus =
-                                len > 0
-                                    ? params.row.trend
-                                    : [
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0,
-                                      0
-                                    ]
-              return h(SvgLine, {
-                props: {
-                  values: valus,
-                  rose: params.row.rose,
-                  width: 100,
-                  height: 40,
-                  background: parseFloat(params.row.rose) < 0 ? 'red' : 'green'
-                }
-              })
-            }
-          },
+        //   {
+        //     title: self.$t('service.PriceTrend'),
+        //     align: 'center',
+        //     render: function(h, params) {
+        //       let valus = null
+        //       const len = params.row.trend.length
+        //       valus =
+        //                         len > 0
+        //                             ? params.row.trend
+        //                             : [
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0,
+        //                               0
+        //                             ]
+        //       return h(SvgLine, {
+        //         props: {
+        //           values: valus,
+        //           rose: params.row.rose,
+        //           width: 100,
+        //           height: 40,
+        //           background: parseFloat(params.row.rose) < 0 ? 'red' : 'green'
+        //         }
+        //       })
+        //     }
+        //   },
           {
             title: self.$t('service.Exchange'),
             align: 'center',
@@ -808,18 +914,18 @@ export default {
               return h('div', [
                 h('img', {
                   attrs: {
-                        src: require('../../assets/images/to_del.png')
-                      },
+                    src: require('../../assets/images/to_del.png')
+                  },
                   style: {
-                        width: '18px',
-                        cursor: 'pointer',
-                        marginLeft: '10px'
-                      },
+                    width: '18px',
+                    cursor: 'pointer',
+                    marginLeft: '10px'
+                  },
                   on: {
-                        click: function() {
-                          self.$router.push('/exchange/' + params.row.href)
-                        }
-                      }
+                    click: function() {
+                      self.$router.push('/exchange/' + params.row.href)
+                    }
+                  }
                 })
               ])
             }
@@ -846,7 +952,7 @@ export default {
       choseBtn: 0,
       valueCal: 0,
       showArrow: 'never',
-      speed: 1000,
+      speed: 3000,
       symbol: '',
       usdtData: [],
       usdtList: [],
@@ -893,13 +999,19 @@ export default {
       c = h.getElementsByTagName(c)[0]
       c.parentNode.insertBefore(g, c)
     })(window, document,
-                'script', 'https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js', 'ud')
+      'script', 'https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js', 'ud')
     ud({
       'code': '1ga0keb',
       'link': 'https://18986831987.s2.udesk.cn/im_client/?web_plugin_id=8943'
     })
   },
   methods: {
+    checkouttrue() {
+      this.checkoutapp = true
+    },
+    checkoutfasle() {
+      this.checkoutapp = false
+    },
         /**
          * 切割大数组成小数组
          */
@@ -928,6 +1040,15 @@ export default {
         this.hostSymbolList = list
         this.startWebsockHotlist()
       })
+    },
+    rowClassName(row, index) {
+      console.log(row, index)
+      if (index % 2 === 1) {
+        return 'demo-table-info-row'
+      } else if (index % 2 !== 1) {
+        return 'demo-table-error-row'
+      }
+      return ''
     },
     strde(str) {
       str = str.trim()
@@ -970,7 +1091,7 @@ export default {
       this.coins.columns[4].title = this.$t('service.high')
       this.coins.columns[5].title = this.$t('service.low')
       this.coins.columns[6].title = this.$t('service.ExchangeNum')
-      this.coins.columns[7].title = this.$t('service.PriceTrend')
+    //   this.coins.columns[7].title = this.$t('service.PriceTrend')
       this.coins.columns[8].title = this.$t('service.Exchange')
 
       this.favorColumns[0].title = this.$t('service.favor')
@@ -980,7 +1101,7 @@ export default {
       this.favorColumns[4].title = this.$t('service.high')
       this.favorColumns[5].title = this.$t('service.low')
       this.favorColumns[6].title = this.$t('service.ExchangeNum')
-      this.favorColumns[7].title = this.$t('service.PriceTrend')
+    //   this.favorColumns[7].title = this.$t('service.PriceTrend')
       this.favorColumns[8].title = this.$t('service.Exchange')
             // this.coins.columns[4].title = this.$t("service.OpenPrice");
     },
@@ -1088,8 +1209,11 @@ export default {
                 .then(response => {
                   var result = response.body
                   if (result.code == 0 && result.data.length > 0) {
+                    console.log(result.data)
                     const picList = result.data
-                    this.picList = this.splitArray(picList)
+                    // this.picList = this.splitArray(picList);
+                    this.picList = picList
+                    console.log(this.picList)
                   }
                 })
     },
@@ -1106,11 +1230,11 @@ export default {
                 // 订阅价格变化消息
         stompClient.subscribe('/topic/market/thumb', (msg) => {
           var resp = JSON.parse(msg.body)
-          const list = this.hostSymbolList.filter(ele => ele.symbol == resp.symbol)
+          const list = this.hostSymbolList.filter(ele => ele.symbol === resp.symbol)
           const isHot = list.length > 0 ? Right(resp) : Left(null)
-          const result = isHot.map(obj => obj.symbol == resp.symbol).fold(x => null, x => x)
+          const result = isHot.map(obj => obj.symbol === resp.symbol).fold(x => null, x => x)
           result && this.hostSymbolList.forEach((ele, index) => {
-            if (ele.symbol == resp.symbol) {
+            if (ele.symbol === resp.symbol) {
               this.hostSymbolList.splice(index, 1, {
                 symbol: resp.symbol,
                 chg: resp.chg,
@@ -1318,52 +1442,59 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss" >
+<style lang="scss">
 ul,
 li {
     list-style-type: none;
 }
+
 %flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 #banner {
-    // background: url("../../assets/images/bannerBk.jpg") no-repeat center center;
-    // background-size: cover;
+    /* // background: url("../../assets/images/bannerBk.jpg") no-repeat center center;
+    // background-size: cover; */
     overflow: hidden;
     height: 400px;
     position: relative;
     .bannerWrapper {
-        position: absolute;
-        bottom: 0;
-        left: 18.5%;
-        right: 18.5%;
-        top: 170px;
-        .bannerBox {
-            @extend %flex;
-            > div {
-                width: 23%;
-            }
-        }
+      position: absolute;
+      bottom: 0;
+      left: 18.5%;
+      right: 18.5%;
+      top: 170px;
+      .bannerBox {
+        background:#191D3A;
+          @extend %flex;
+          > div {
+            width: 23%;
+          }
+      }
     }
 }
 #hot {
     padding: 23px 0;
-    background-color: #1c2435;
+    background-color: #11132C;
     @extend %flex;
     .section-market {
-        width: 1200px;
-        margin: 0 auto;
+        // width: 1200px;
+        // margin: 0 auto;
+        width: 100%;
+        display: flex;
+        justify-content:center;
         .market-box {
-            width: 220px;
-            height: 120px;
-            border-radius: 8px;
-            background: rgb(37, 43, 56);
-            float: left;
-            margin-right: 25px;
-            padding: 13px 0 0;
-            overflow: hidden;
+        width: 270px;
+        height: 120px;
+        /* border-radius: 8px; */
+        /* background: #252b38; */
+        float: left;
+        padding-right: 45px;
+        margin-right: 25px;
+        padding: 13px 0;
+        overflow: hidden;
+        border-right: 1px solid rgba(42,56,80,1);
             &:last-child {
                 margin-right: 0;
             }
@@ -1381,7 +1512,7 @@ li {
                     }
                 }
                 .pairs {
-                    color: #fff;
+                    color: #8090AF;
                     font-size: 14px;
                     font-weight: 600;
                 }
@@ -1398,17 +1529,17 @@ li {
                 }
             }
         }
+        .market-box:last-child{
+            border:0;
+        }
     }
     /*> div {*/
     /*    width: 20%;*/
     /*}*/
 }
 #pagetips {
-    position: absolute;
-    top: 0;
-    left: 20%;
-    right: 20%;
-    background: rgba(0, 0, 0, 0);
+    background:rgba(25,29,58,1);
+    height:40px;
     overflow: hidden;
     .topnav {
         width: 100%;
@@ -1422,6 +1553,7 @@ li {
             @extend %flex;
             align-items: flex-start;
             color: #fff;
+            justify-content: center;
             .laba {
                 width: 5%;
                 img {
@@ -1429,9 +1561,8 @@ li {
                 }
             }
             .carsoul {
-                width: 100%;
-                margin-left: 20px;
-                position: absolute;
+              position:absolute;
+              left: 21%;
                 a {
                     color: #fff;
                     font-size: 14px;
@@ -1465,185 +1596,282 @@ li {
     }
 }
 #page2 {
-    background: #fff;
     width: 1200px;
     height: auto;
     min-height: 320px;
-    margin: 40px auto;
+    padding: 30px auto;
+    margin: 0 auto;
+    padding-top: 30px;
     .page2nav {
         line-height: 40px;
         font-size: 20px;
         .brclearfix {
             font-weight: 600;
-            border: 1px solid #eee;
+            border: 1px solid #191D3A;
             border-bottom: 0;
-            background: #fafafd;
+            background: #191D3A;
             li {
                 float: left;
                 cursor: pointer;
-                color: #333;
-                background: #fafafa;
+                // color: #333;
+                background: #191D3A;
                 list-style: none;
                 font-size: 16px;
                 padding: 0 30px;
+                color:#FFFFFF;
                 /*box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
                 &:hover {
                     color: #3399ff;
                 }
             }
             li.active {
-                background: #fff;
+                background: #191D3A;
                 color: #3399ff;
-                border-bottom: 2px solid #3399ff;
+                border-bottom: 2px solid #191D3A;
                 position: relative;
             }
         }
     }
     .ptjy {
-        border: 1px solid #eee;
+        border:1px solid rgba(25,29,58,1);
         height: 100%;
         .tables {
             border: none;
             /*<!--box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;-->*/
             /*border-top: 2px solid #39f;*/
-            .ivu-table {
-                .ivu-table-header {
-                    .ivu-table-column-center {
-                        background: none;
-                    }
-                }
+            .ivu-table:before {
+              background:#191D3A;
             }
+            .ivu-table {
+              .ivu-table-header {
+                .ivu-table-column-center {
+                    border: 0;
+                    background: none;
+                }
+              }
+            }
+        .ivu-table-wrapper .ivu-table:after{
+            background-color:transparent;
+        }
         }
         .ivu-table-wrapper {
             .ivu-table {
                 .ivu-table-row {
-                    &:nth-of-type(odd) {
-                        background: #fff;
+                    &:nth-of-type(odd) td{
+                        background: rgba(17,22,52,1);
                     }
-
-                    &:nth-of-type(even) {
-                        background: #fafafd;
+                    &:nth-of-type(even) td{
+                        background: #11132C;
                     }
                 }
             }
         }
+    }
+    .seemore{
+        height:42px;
+        line-height: 42px;
+        background:rgba(17,22,52,1);
+        text-align: center;
+        color:#8090AF;
+        cursor: pointer;
     }
 }
 #page4 {
-    background: #fff;
     height: auto;
     width: 1200px;
-    margin: 100px auto;
-    ul {
-        width: 100%;
-        margin: 0 auto;
-        @extend %flex;
-        li {
-            width: 200px;
-            padding: 0 15px;
-            div {
-                width: 90px;
-                height: 90px;
-                border-radius: 50%;
-                vertical-align: middle;
-                text-align: center;
-                margin: 0 auto;
-                img {
-                    height: 55px;
-                    margin-top: 28px;
-                }
-            }
-            p {
-                font-size: 15px;
-                margin: 20px 0;
-                text-align: center;
-                color: #666;
-            }
-            p.title {
-                color: #333;
-                font-size: 18px;
-                font-weight: 600;
-            }
+    margin: 50px auto;
+    min-height: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left{
+        float:left;
+        .text{
+          font-size:30px;
+          margin-bottom:20px;
+          color:#FFFFFF;
+          display: inline-block;
         }
+        p{
+          font-size:14px;
+          color:#FFFFFF;
+          margin-bottom:28px;
+        }
+        .qrcode{
+          display: flex;
+          width:300px;
+          .Qrleft{
+            .android{
+              width: 130px;
+              height: 40px; 
+              background:rgba(25,29,58,1);
+              border:1px solid rgba(85,99,130,1);
+              margin-bottom:12px;
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              span{
+                font-size:8px;
+                color:white;
+              }
+            }
+            .ipone{
+              width: 130px;
+              height: 40px;
+              background:rgba(25,29,58,1);
+              border:1px solid rgba(85,99,130,1);
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              span{
+                font-size:8px;
+                color:white;
+              }
+            }
+            .click{
+              background:rgba(94,107,137,1);
+            }
+          }
+          .Qrright{
+            margin-left:15px;
+            img{
+              widows:90px;
+              height:90px;
+            }
+          }
+        }
+    }
+    .right{
+        float:right;
     }
 }
 #page5 {
-    height: 460px;
-    /*padding: 140px 14% 0;*/
-    position: relative;
-    background: url("../../assets/images/app-download.png") no-repeat 0 0;
-    background-size: 100% 460px;
-    overflow: hidden;
-    @extend %flex;
-    align-items: flex-start;
-    .section-main {
-        width: 1200px;
-        margin: 90px auto 0;
+    width:1200px;
+    height: 500px;
+    margin:0 auto;
+    display: flex;
+    justify-content:space-between;
+    .showsection{
         display: flex;
-        .download {
-            flex: 1;
-            list-style-type: none;
-            color: #fff;
-            text-align: left;
-            line-height: 40px;
-            .qrcode {
-                font-size: 45px;
-            }
-            .description {
-                font-size: 18px;
-                margin: 20px 0;
-            }
-            .os {
-                @extend %flex;
-                flex-wrap: wrap;
-                width: 510px;
-                li {
-                    width: 135px;
-                    background: #fff;
-                    padding: 0 10px;
-                    border-radius: 5px;
-                    color: #333;
-                    margin-bottom: 20px;
-                    @extend %flex;
-                    box-sizing: border-box;
-                    span {
-                        font-size: 16px;
-                    }
-                }
-            }
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        img{
+            margin-top:12px;
         }
-        .phone_image {
-            width: 565px;
-            img {
-                width: 100%;
-            }
+        div{
+            font-weight: MicrosoftYaHei;
+            color:#FFFFFF;
+            font-size:9px;
+            margin-bottom:9px;
+        }
+        span{
+            color :#8090AF;
+            text-align: center;
         }
     }
+}
+#page1{
+  height:100px;
+  background:#0E0E28;
+  .content{
+    width:1200px;
+    height: 100px;
+    margin:0 auto;
+    display:flex;
+    justify-content: space-between;
+    .page1left{
+      .trading{
+        color:#8090AF;
+        font-size:22px;
+        margin-top:15px;
+        margin-bottom:13px;
+      }
+      .registered{
+        color:#8090AF;
+        font-size:12px;
+      }
+    }
+    .page1right{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      font-size:12px;
+      .login{
+        width:100px;
+        height:35px;
+        line-height:35px;
+        text-align:center;
+        background:rgba(27,31,60,1);
+        color:white;
+        cursor: pointer;
+      }
+      .registe{
+        width:100px;
+        height:35px;
+        line-height:35px;
+        text-align:center;
+        margin-left:20px;
+        background:rgba(94,107,137,1);
+        border:1px solid rgba(94,107,137,1);
+        color:white;
+        cursor: pointer;
+      }
+    }
+  }
 }
 </style>
 <style lang="scss">
 #page2 {
-    .ptjy {
-        .tables {
-            .ivu-table {
-                .ivu-table-header {
-                    th {
-                        color: #999;
-                        background: none;
-                    }
+  .ptjy {
+    .tables {
+        .ivu-table {
+              background-color:transparent;
+            .ivu-table-header {
+                th {
+                    color: #8090AF;
+                    background: #191D3A;
+                    border:0;
                 }
-                .ivu-table-header,
-                .ivu-table-body {
-                    .ivu-table-cell {
-                        padding: 5px 0;
-                    }
+            }
+            .ivu-table-tip{
+              td {
+                background:#191D3A;
+              }
+            }
+            .ivu-table-header,
+            .ivu-table-body {
+                .ivu-table-cell {
+                    padding: 5px 0;
                 }
             }
         }
+        .ivu-table:before{
+            background-color:transparent;
+        }
+        .ivu-table:after{
+            width:0;
+            background-color:transparent;
+        }
     }
+  }
 }
 </style>
 <style lang="scss">
+.ivu-table-wrapper > .ivu-spin-fix{
+    background: rgba(17,22,52,1)
+}
+.ivu-table-wrapper>.ivu-spin-fix{
+    border:0;
+}
+.demo-table-info-row td{
+  background: #191D3A !important;
+  border:0;
+}
+.demo-table-error-row td{
+  background: rgba(17,22,52,1) !important;
+  border:0;
+}
 .bannerWrapper .ivu-carousel {
     height: 100%;
 }
@@ -1671,6 +1899,10 @@ li {
     padding-top: 60px;
     min-width: 1260px;
     background: #fff;
+  .Central{
+    background:url("../../assets/images/bg.png");
+    height:auto;
+  }
 }
 
 .section {
@@ -1683,7 +1915,7 @@ li {
     background-repeat: no-repeat;
     background-position: center;
     height: 400px;
-    // background-size: contain;
+    background-size: cover;
 }
 
 .demo-carousel1 {

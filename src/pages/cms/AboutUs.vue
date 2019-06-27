@@ -1,62 +1,62 @@
 <style lang="scss" scoped>
-.about_us_container{
-  background-color: #eee;
-  padding: 60px 0 20px 0;
-  .wrapper{
-    margin: 30px 12%;
-    background-color: #fff;
-    padding: 0 40px;
-    h2{
-      font-weight: 400;
-      height:50px;
-      font-size:20px;
-      border-bottom: 1px solid #eee;
-      line-height: 50px;
-    }
-    .wrapper_logo ul{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 30px;
-      border-bottom: 1px solid #eee;
-              height:240px;
-      li{
-        width: 33.3%;
+  .about_us_container{
+    background: #eee;
+    padding: 60px 0 20px 0;
+    .wrapper{
+      margin: 30px 12%;
+      background-color: #fff;
+      padding: 0 40px;
+      h2{
+        font-weight: 400;
+        height:50px;
+        font-size:20px;
+        border-bottom: 1px solid #eee;
+        line-height: 50px;
+      }
+      .wrapper_logo ul{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 30px;
+        border-bottom: 1px solid #eee;
+                height:240px;
+        li{
+          width: 33.3%;
 
-        list-style-type: none;
-        border-right: 1px solid #eee;
-        text-align: center;
-        h5{
-          line-height:50px;
-          font-size:20px;
-        }
-        span{
-          color: #999;
-          font-size: 14px;
+          list-style-type: none;
+          border-right: 1px solid #eee;
+          text-align: center;
+          h5{
+            line-height:50px;
+            font-size:20px;
+          }
+          span{
+            color: #999;
+            font-size: 14px;
+          }
         }
       }
-    }
-    .content_wrapper{
-      padding: 20px 0;
-      .content1{
-        border-bottom: 1px solid #eee;
-        padding-bottom: 20px;
-        margin-bottom: 20px;
-        h5{
-          font-size: 18px;
-          line-height: 40px;
-          font-weight: 500;
-        }
-        p{
-          font-size:14px;
-          line-height:20px;
-          color: #666;
-          // margin-bottom: 14px;
+      .content_wrapper{
+        padding: 20px 0;
+        .content1{
+          border-bottom: 1px solid #eee;
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          h5{
+            font-size: 18px;
+            line-height: 40px;
+            font-weight: 500;
+          }
+          p{
+            font-size:14px;
+            line-height:20px;
+            color: #666;
+            // margin-bottom: 14px;
+          }
         }
       }
     }
   }
-}
 </style>
 
 <template>

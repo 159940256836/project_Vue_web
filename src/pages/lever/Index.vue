@@ -264,7 +264,7 @@ export default {
         .leftBox {
             width: 20%;
             min-height: 483px;
-            box-shadow: 0 0 25px #EEE;
+            box-shadow: none;
             padding: 10px;
             border: 1px solid #eee;
             .active {

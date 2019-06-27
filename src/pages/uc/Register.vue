@@ -676,7 +676,7 @@ $focusColor:#3399FF;
                 border-right: 0;
             }
             .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
-                height: 42px;
+                height: 48px;
                 border-radius: 0;
                 line-height: 42px;
                 border-right: 0;
