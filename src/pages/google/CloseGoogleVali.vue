@@ -1,12 +1,5 @@
 <template>
     <div class="openGoogle common">
-        <div class="header-title">
-            <span>{{$t('openGoolePage._closeGoogle')}}</span>
-            <span @click="returnSuperior">
-                <Icon type="ios-undo" style="font-size: 18px;" />
-                {{$t('openGoolePage._returnSetting')}}
-            </span>
-        </div>
         <div class="openGoogleModal">
             <!-- <Modal v-model="openGoogleModal" :title="title" :footer-hide="true"> -->
             <Form ref="formInline" :model="formInline" :rules="ruleInline" label-position="top">
@@ -29,8 +22,8 @@
                 </FormItem>
             </Form>
             <div class="btns" style="display:flex;justify-content:space-around;align-items:center;">
-                <Button @click="cancel">{{$t('openGoolePage._cancel')}}</Button>
-                <Button type="primary" @click="sureBtn('formInline')">{{$t('openGoolePage._sure')}}</Button>
+                <!-- <Button @click="cancel">{{$t('openGoolePage._cancel')}}</Button> -->
+                <Button type="primary" @click="sureBtn('formInline')" style="width:100%;border-radius:0;">{{$t('openGoolePage._sure')}}</Button>
             </div>
             <!-- </Modal> -->
         </div>
@@ -38,9 +31,9 @@
 
 </template>
 <script>
-import { minHeightMinx } from "../../minxs/minxs"
+// import { minHeightMinx } from "../../minxs/minxs"
 export default {
-    mixins: [minHeightMinx],
+    // mixins: [minHeightMinx],
     name: "closegoogleVali",
     data() {
         return {
@@ -66,7 +59,7 @@ export default {
         if (this.$route.params.phone) {
             this.phone = this.$route.params.phone;
         } else {
-            this.$router.go(-1);
+            this.$router.push('/account');
         }
         // this.getMember()
     },
@@ -80,7 +73,7 @@ export default {
     methods: {
         // 点击返回上个页面
         returnSuperior () {
-            this.$router.push({path: '/uc/safe'})
+            this.$router.push({path: '/account'})
         },
         jcgoogle(params) {
             this.$http.post(this.host+"/uc/google/jcgoogle",params).then(res=>{
@@ -147,17 +140,14 @@ export default {
 </script>
 <style lang="scss" scoped>
 .openGoogle {
-    width: 1200px;
     margin: 0 auto;
-    padding-top: 150px;
     .openGoogleModal .ivu-btn-warning{
         background:#3399ff !important;
         border-color:#3399ff !important;
     }
     .openGoogleModal {
-        padding: 100px 25%;
+        padding: 0 27px;
         overflow: hidden;
-        min-height: 609px !important;
     }
     .header-title {
         height: 50px;
@@ -182,5 +172,15 @@ export default {
 }
 
 </style>
+
+<style lang="scss">
+.openGoogle {
+    color: red;
+    .ivu-form-item-required .ivu-form-item-label:before {
+        content: ''
+    }
+}
+</style>
+
 
 
