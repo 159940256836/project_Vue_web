@@ -1,12 +1,12 @@
 <template>
-    <div class="specail" style="min-height:519px;">
-        <div class="header-title">
+    <div class="specail">
+        <!-- <div class="header-title">
             <span>{{$t('openGoolePage._openGoogle')}}</span>
             <span @click="returnSuperior">
                 <Icon type="ios-undo" style="font-size: 18px;" />
                 {{$t('openGoolePage._returnSetting')}}
             </span>
-        </div>
+        </div> -->
         <div class="wrapper">
             <div class="qrclass">
                 <img src="../../assets/images/goole_Android.png" alt="">
@@ -17,7 +17,7 @@
                 <div>{{$t('openGoolePage._downloadIos')}}</div>
             </div>
             <div class="qrflex">
-                  <div id="qrcode"></div>
+                  <div id="qrcode" style="border:1px solid #fff"></div>
             <div class="abstract">
                 <p>{{$t('openGoolePage._googleVerifyabs')}}</p>
                 <p>
@@ -33,7 +33,7 @@
             <li>{{$t('openGoolePage._abs3')}}</li>
         </ul>
         <Form :model="formCode" label-position="top" :rules="ruleInline" ref="formCode" class="form">
-            <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="code">
+            <FormItem :label="$t('openGoolePage._GoogleVerificationCode')">
                 <Input v-model="formCode.code"></Input>
             </FormItem>
             <FormItem>
@@ -45,9 +45,9 @@
 </template>
 <script>
 import QRCode from 'qrcode2';
-import { minHeightMinx } from "../../minxs/minxs.js"
+// import { minHeightMinx } from "../../minxs/minxs.js"
 export default {
-    mixins: [minHeightMinx],
+    // mixins: [minHeightMinx],
     name: "resetgooglevali",
     data() {
         return {
@@ -88,7 +88,7 @@ export default {
     methods: {
         // 点击返回上个页面
         returnSuperior () {
-            this.$router.push({path: '/uc/safe'})
+            this.$router.push({path: '/account'})
         },
         init() {
             return this.$http.get(this.host + `/uc/google/sendgoogle`).then(res => {
@@ -146,7 +146,7 @@ export default {
                         desc: resp.message
                     });
                     setTimeout(() => {
-                        this.$router.push('/uc/safe')
+                        this.$router.push('/account')
                     })
                 }else{
                     this.$Notice.error({
@@ -170,7 +170,8 @@ export default {
 }
 $color: #2d8cf0;
 .specail {
-    padding: 100px 25%;
+    color: #8090AF;
+    padding: 0 27px;
     overflow: hidden;
     .header-title {
         height: 50px;
@@ -219,7 +220,11 @@ $color: #2d8cf0;
     }
     .form {
         margin-top: 40px;
-        background-color: #fff;
+        background-color: transparent;
+    }
+
+    .ivu-form-item-required .ivu-form-item-label:before {
+        content: ''
     }
 }
     .qrflex{
@@ -238,12 +243,31 @@ $color: #2d8cf0;
 </style>
 <style lang="scss">
 .common.specail .ivu-input {
-    background-color: #fff;
-    border: 1px solid #eee;
+    background-color: transparent;
+    border: 1px solid #8090AF;
     color: #000;
-    &:hover {
-        border-color: #3399ff;
+    // &:hover {
+    //     border-color: #3399ff;
+    // }
+}
+
+.specail {
+    .ivu-form-item-label {
+        color: #8090AF;
+        font-size: 14px;
+    }
+    .ivu-input {
+        margin-top: 10px;
+        background-color: transparent;
+        border: 1px solid #8090AF;
+        border-radius: 0;
+    }
+    .ivu-btn {
+        border-radius: 0;
+        
     }
 }
+
+
 </style>
 
