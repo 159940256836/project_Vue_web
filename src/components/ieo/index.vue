@@ -5,7 +5,7 @@
                 <div class="i_left_img">
                     <img :src="content.picView" alt="">
                 </div>
-                <div class="i_center" style="color:#8090AF; font-size:14px">
+                <div class="i_center" style="color:#8090AF; font-size:14px;">
                     <div><span style="color:#3399FF; font-size:20px;">{{content.ieoName}}</span><span style="margin-left:33px; font-size:16px;">{{content.haveCoin}}</span></div>
                     <div style="margin-top:38px;">{{$t('Ieo.totalSales')}}</div>
                     <div style="margin-top:32px">{{$t('Ieo.cycle')}}</div>
@@ -13,7 +13,7 @@
                     
                 </div>
             </div>
-            <div style="color:#3399FF; font-size:14px">
+            <div style="color:#3399FF; font-size:14px; text-align:right;">
                 <div style="font-size:16px;" class="type" :class="statusClass">{{str}}</div>
                 <div style="margin-top:36px;">{{content.saleAmount|threeComma}} {{content.saleCoin}}</div>
                 <div style="margin-top:33px;">{{content.startTime|ymdFormat}} - {{content.endTime|ymdFormat}}</div>
