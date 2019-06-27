@@ -173,12 +173,6 @@ export default {
     created: function () {
         this.getList(this.page);
         this.getAddrList();
-        // const name = this.$route.path
-        // console.log(name, this.$route.path);
-        // if (name === '/personal/record') {
-        //     this.getList(this.page);
-        //     this.getAddrList();
-        // }
     },
     methods: {
         changedate() {

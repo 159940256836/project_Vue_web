@@ -4,7 +4,7 @@
             <div class="bill_box rightarea padding-right-clear record account-box">
                 <section class="trade-group merchant-top">
                     <i class="merchant-icon tips"></i>
-                    <span class="tips-word">{{$t('uc.account.pagetitle')}}</span>
+                    <span class="tips-word">{{ $t('uc.account.pagetitle') }}</span>
                     <span class="tips-g">{{$t('uc.account.pagetip')}}</span>
                 </section>
                 <section class="accountContent">

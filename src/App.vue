@@ -1,16 +1,15 @@
 <template>
     <div class="page-view">
-        <!--头部-->
         <header v-show="!$route.meta.hide">
             <div
                 class="page-content"
-                :style="{
+                :style = "{
                   padding: $route.path==='/'? topPadding : '0 5%',
                   backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
                 }"
             >
                 <div class="time_download">
-                    
+
                     <div class="netLogo">
                         <router-link to="/"><img style="width: 80%;" src="./assets/images/logo.png" alt=""></router-link>
                     </div>
@@ -47,20 +46,43 @@
                                     <router-link to="/order">{{$t("uc.order.myorder")}}</router-link>
                                     <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
                                 </div>
-                                
-
-                                <!-- <div class="mymsg">
-                                    <router-link to="/">{{$t("uc.order.myorder")}}</router-link>
-                                </div> -->
+                                <!--@on-click="goBi"-->
                                  <Dropdown @on-click="goBi">
                                     <a href="javascript:void(0)">
                                         <span class="header-img">{{$t("uc.menuTitle.moneyManagement")}}</span>
                                         <Icon type="md-arrow-dropdown" size="16" />
                                     </a>
                                     <DropdownMenu slot="list">
-                                        <DropdownItem name="recharge"><span>{{$t("exchange.recharge")}}</span></DropdownItem>
-                                        <DropdownItem name="pickup"><span>{{$t("uc.finance.money.pickup")}}</span></DropdownItem>
-                                        <DropdownItem name="asset"><span>{{$t("uc.finance.money.assets")}}</span></DropdownItem>
+                                        <!--个人资产-->
+                                        <DropdownItem name="moneyindex">
+<!--                                            <router-link to="/personal/money">{{ $t('uc.finance.personalassets') }}</router-link>-->
+                                            <span>{{$t("uc.finance.personalassets")}}</span>
+                                        </DropdownItem>
+                                        <!--资产流水-->
+                                        <DropdownItem name="record">
+<!--                                          <router-link to="/personal/record">{{ $t('uc.finance.billdetail') }}</router-link>-->
+                                            <span>{{ $t("uc.finance.billdetail") }}</span>
+                                        </DropdownItem>
+                                        <!--充币-->
+                                        <DropdownItem name="recharge">
+                                            <span>{{ $t("uc.finance.charge") }}</span>
+                                        </DropdownItem>
+                                        <!--提币-->
+                                        <DropdownItem name="withdraw">
+                                            <span>{{ $t("uc.finance.pickup") }}</span>
+                                        </DropdownItem>
+                                        <!--提币地址管理-->
+                                        <DropdownItem name="withdrawAddr">
+                                            <span>{{ $t("uc.finance.withdraw.addressmanager") }}</span>
+                                        </DropdownItem>
+                                        <!--积分管理-->
+                                        <DropdownItem name="mebjc">
+                                            <span>{{ $t("uc.finance.pointManagement") }}</span>
+                                        </DropdownItem>
+                                        <!--糖果赠送管理-->
+                                        <DropdownItem name="giveRecord">
+                                            <span>{{ $t("uc.finance.CandyGivingRecords") }}</span>
+                                        </DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
 
@@ -73,9 +95,9 @@
                                         <div @click="logout">
                                             <DropdownItem>
                                                 <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
-                                            </DropdownItem>   
+                                            </DropdownItem>
                                         </div>
-                                        <DropdownItem> 
+                                        <DropdownItem>
                                             <router-link to="/account">
                                                  {{$t("uc.menuTitle.AccountManagement")}}
                                             </router-link>
@@ -475,34 +497,49 @@ export default {
   },
   methods: {
         // header动画效果
-    gobia(url){
-        this.$router.path(url)
-    },
-    reload() {
-      this.isRouterAlive = false
-      this.$nextTick(function() {
-        this.isRouterAlive = true
-      })
-    },
-    goBi(name) {
-      if (name === 'recharge') {
-        this.$router.push('/uc/recharge')
-      } else if (name === 'pickup') {
-        this.$router.push('/uc/withdraw')
-      } else if (name === 'asset') {
-        this.$router.push('/uc/money')
-      }
-    },
-    handleScroll() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      if (scrollTop > 0) {
-        this.styleTop = 0
-        this.topPadding = '0 17%'
-      } else {
-        this.styleTop = 30
-        this.topPadding = '0 5%'
+         reload () {
+            this.isRouterAlive = false
+            this.$nextTick(function () {
+                this.isRouterAlive = true
+            })
+        },
+        goBi(name) {
+          console.log(name);
+          switch (name) {
+            case 'moneyindex':
+              console.log(name);
+              this.$router.push("/personal");
+              break;
+            case 'record':
+              this.$router.push("/personal/record");
+              break;
+            case 'recharge':
+              this.$router.push("/personal/recharge");
+              break;
+            case 'withdraw':
+              this.$router.push("/personal/withdraw");
+              break;
+            case 'withdrawAddr':
+              this.$router.push("/personal/withdrawAddr");
+              break;
+            case 'mebjc':
+              this.$router.push("/personal/bjc");
+              break;
+            case 'giveRecord':
+              this.$router.push("/personal/giveRecord");
+              break;
+          }
+        },
+        handleScroll () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+            if (scrollTop > 0) {
+                this.styleTop = 0
+                this.topPadding = '0 17%'
+            } else {
+                this.styleTop = 30
+                this.topPadding = '0 5%'
                 // this.topBackgroundColor = 'rgba(0,0,0,.5)'
-      }
+        }
     },
     strpo(str) {
       if (str.length > 4) {
@@ -566,160 +603,160 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll)
-        // (function (w, d, n, a, j) {
-        //     w[n] = w[n] || function () {
-        //         (w[n].a = w[n].a || []).push(arguments);
-        //     };
-        //     j = d.createElement('script');
-        //     j.async = true;
-        //     j.src ='https://qiyukf.com/script/9c6f0b24f2440c442569e7e5195f7ccf.js';
-        //     d.body.appendChild(j);
-        //     })(window, document, 'ysf');
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll)
-  }
-}
+        (function(a,h,c,b,f,g){
+            a["UdeskApiObject"] = f;a[f]=a[f]||function(){
+                (a[f].d=a[f].d||[]).push(arguments)
+            };
+            g=h.createElement(c);
+            g.async=1;
+            g.charset="utf-8";
+            g.src=b;c=h.getElementsByTagName(c)[0];
+            c.parentNode.insertBefore(g,c)
+        })(window,document,"script","https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js","ud");
+        ud({
+            "code": "a35673e",
+            "link": "https://1589850.s2.udesk.cn/im_client/?web_plugin_id=9272"
+        });
+    },
+    beforeDestroy () {
+        window.removeEventListener('scroll', this.handleScroll)
+    }
+};
 </script>
 <style lang="scss" scoped>
-.app_footer{
-    background:rgba(17,19,44,1) !important;
+%flex {
+    align-items: center;
 }
-    %flex {
-        align-items: center;
-    }
-    .page-view {
-        header {
-            width: 100%;
-            height: 60px;
-            line-height: 60px;
-            position: fixed;
-            z-index: 999;
-            background-color: #10122b;
+.page-view {
+    header {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+        position: fixed;
+        z-index: 999;
+        background-color: #1c2435;
+        transition: all .5s;
+        .page-content {
             transition: all .5s;
-            .page-content {
-                transition: all .5s;
-                .time_download {
-                    align-items: center;
-                    overflow: hidden;
-                    min-width: 1100px;
-                    .netLogo {
-                        width: 40px;
-                        float: left;
-                            img {
-                                vertical-align: middle;
-                            }
-                        }
-                    }
-                    .nav.en a{
-                        margin-right:20px;
-                    }
-                    .nav {
-                        float: left;
-                        margin-left: 42px;
-                        a {
-                            font-size: 14px;
-                            color: #8090AF;
-                            display: inline-block;
-                            margin-right:40px;
-                            text-align: center;
-                            // &:nth-child(5) {
-                            //     padding-right: 19px;
-                            // }
-                        }
-                        // a.router-link-exact-active.router-link-active {
-                        //     color: #2d8cf0;
-                        // }
-                        // 5.15修改
-                        a.router-link-active {
-                            color: #2d8cf0;
-                        }
-                    }
-                    .nav-header {
-                        float: right;
-                        .isLoginWrapper {
-                            float: right;
-                            .login_register {
-                                display: flex;;
-                                a {
-                                    color: #8090AF;
-                                    margin: 0 20px 0 10px;
-                                    .header-icon {
-                                        margin-left: 15px;
-                                    }
-                                    .header-img {
-                                        margin-left: 10px;
-                                    }
-                                }
-                            }
-                        }
-                        .rightwrapper {
-                            float: right;
-                            .appdownload {
-                                float: left;
-                                padding-right: 30px;
-                                .ivu-poptip-rel {
-                                    a {
-                                        color: #8090AF;
-                                    }
-                                    i.ivu-icon.ivu-icon-arrow-down-b {
-                                        margin-left: 5px;
-                                    }
-                                }
-                            }
-                            .ios,
-                            .andrio {
-                                float: left;
-                                text-align: center;
-                                img {
-                                    width: 115px;
-                                    height: 110px;
-                                    margin: 0 auto;
-                                }
-                                .tips {
-                                    // height: 30px;
-                                    img {
-                                        width: 14px;
-                                        height: 14px;
-                                        margin-top: 5px;
-                                    }
-                                    span {
-                                        font-size: 14px;
-                                    }
-                                }
-                            }
-                            .andrio {
-                                float: right;
-                            }
-                            .ivu-dropdown-rel a {
-                                color: #fff;
-                            }
-                            .ivu-select-dropdown {
-                                z-index: 901;
-                                #change_language_theme {
-                                    li {
-                                        background: #fff;
-                                        color: #333;
-                                    }
-                                }
-                            }
-                        }
-                        .changelanguage {
-                            float: right;
-                            /*width: 7%;*/
-                            height:60px;
-                            align-content: center;
-                            justify-content: flex-end;
-                            #change_language_theme .ivu-dropdown-item{
-                                color: #000;
-                            }
+            .time_download {
+                align-items: center;
+                overflow: hidden;
+                min-width: 1100px;
+                .netLogo {
+                    width: 40px;
+                    float: left;
+                        img {
+                            vertical-align: middle;
                         }
                     }
                 }
-        }
+                .nav.en a{
+                    margin-right:20px;
+                }
+                .nav {
+                    float: left;
+                    margin-left: 30px;
+                    a {
+                        font-size: 14px;
+                        color: #fff;
+                        display: inline-block;
+                        margin-right:40px;
+                        text-align: center;
+                        // &:nth-child(5) {
+                        //     padding-right: 19px;
+                        // }
+                    }
+                    // a.router-link-exact-active.router-link-active {
+                    //     color: #2d8cf0;
+                    // }
+                    // 5.15修改
+                    a.router-link-active {
+                        color: #2d8cf0;
+                    }
+                }
+                .nav-header {
+                    float: right;
+                    .isLoginWrapper {
+                        float: right;
+                        .login_register {
+                            display: flex;;
+                            a {
+                                color: #fff;
+                                margin: 0 20px 0 10px;
+                                .header-icon {
+                                    margin-left: 15px;
+                                }
+                                .header-img {
+                                    margin-left: 10px;
+                                }
+                            }
+                        }
+                    }
+                    .rightwrapper {
+                        float: right;
+                        .appdownload {
+                            float: left;
+                            padding-right: 30px;
+                            .ivu-poptip-rel {
+                                a {
+                                    color: #fff;
+                                }
+                                i.ivu-icon.ivu-icon-arrow-down-b {
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+                        .ios,
+                        .andrio {
+                            float: left;
+                            text-align: center;
+                            img {
+                                width: 115px;
+                                height: 110px;
+                                margin: 0 auto;
+                            }
+                            .tips {
+                                // height: 30px;
+                                img {
+                                    width: 14px;
+                                    height: 14px;
+                                    margin-top: 5px;
+                                }
+                                span {
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                        .andrio {
+                            float: right;
+                        }
+                        .ivu-dropdown-rel a {
+                            color: #fff;
+                        }
+                        .ivu-select-dropdown {
+                            background: #10122B;
+                            z-index: 901;
+                            #change_language_theme {
+                                li {
+                                    background: transparent;
+                                    color: #3399ff;
+                                }
+                            }
+                        }
+                    }
+                    .changelanguage {
+                        float: right;
+                        /*width: 7%;*/
+                        justify-content: flex-end;
+                        #change_language_theme .ivu-dropdown-item{
+                            color: #000;
+                        }
+                    }
+                }
+            }
     }
-    .wechatclick .api2 {
+}
+.wechatclick .api2 {
         overflow: hidden;
         display: flex;
         justify-content: space-between;
@@ -768,16 +805,16 @@ ul,li{
                 }
                 &:focus {
                     border-color: #3399ff;
-                    -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                    -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                    box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                    -moz-box-shadow: none;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
                 }
             }
             .ivu-input-number.ivu-input-number-focused {
                 border-color: #3399ff;
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
             }
         }
         .ivu-modal-confirm-body {
@@ -803,17 +840,13 @@ ul,li{
 .ivu-modal-confirm-footer {
     .ivu-btn {
         &:focus {
-            -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-            -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-            box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+            -moz-box-shadow: none;
+            -webkit-box-shadow: none;
+            box-shadow: none;
         }
     }
 }
-/*.ivu-table-wrapper {
-    -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-    -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-    box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-}*/
+
 .ivu-table-wrapper {
     .ivu-table {
         &:before {
@@ -893,6 +926,16 @@ ul,li{
     li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
     background: #fff;
     color: #3399ff;
+}
+.ivu-select-dropdown {
+    background: #10122B;
+    .ivu-dropdown-item {
+        color: #8090AF;
+        &:hover {
+            background: transparent;
+            color: #3399ff;
+        }
+    }
 }
 .page-view {
     .page-content {
@@ -1072,7 +1115,7 @@ body {
 }
 
 .layout-ceiling-main .ivu-select-dropdown {
-    background: #ffffff;
+    background: #10122B;
     margin-left: 25px;
     .ivu-dropdown-item {
         color: #333;
@@ -1237,7 +1280,7 @@ body {
     padding-top: 1px;
     // 6.25修改  lhl
     color: #8090AF;
-    // background: #1c2435;
+    background: #11132C;
     .footer_content {
         width: 1200px;
         margin: 60px auto 30px;
@@ -1528,9 +1571,9 @@ body {
     }
     &:focus {
         border-color: #3399ff;
-        -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-        -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-        box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
     }
 }
 /*下拉框样式重置*/
@@ -1539,9 +1582,9 @@ body {
 }
 .ivu-select-visible .ivu-select-selection {
     border-color: #3399ff;
-    -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-    -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-    box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 .ivu-select-selected-value {
     color: #333;
@@ -1554,6 +1597,8 @@ body {
     border: none;
 }
 .ivu-table-wrapper > .ivu-spin-fix {
+    border: 0;
+    background-color: rgba(255,255,255,.1);
     border-color: #fff;
 }
 /*加载样式重置*/

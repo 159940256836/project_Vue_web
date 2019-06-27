@@ -1,8 +1,7 @@
 .exchange {
     width: 100%;
     height: 100%;
-    padding: 4% 4%;
-    background: #263142;
+    padding: 4% 10px;
 }
 
 .sidebar {
@@ -47,28 +46,44 @@
 .sc_filter {
     /* padding: 0 7%; */
     font-size: 0;
-    background-color: #1c2435;
+    /*background-color: #13152F;*/
 }
 
 .day .sc_filter {
     background-color: #fff;
     margin-right: -2px;
 }
-
+/*6.20杨孝喜 开始*/
+.bazaar-info,
+.recent-deal {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+    background: #13152F;
+    font-weight: 600;
+}
+.handicap {
+    font-weight: 600;
+    width: 60%;
+    display: inline-block;
+    text-align: left;
+}
+/*6.20杨孝喜 结束*/
 .sc_filter span {
     padding: 0 20px;
     font-size: 14px;
     display: inline-block;
-    color: #fff;
+    color: #8090AF;
     cursor: pointer;
     line-height: 40px;
-    background-color: #192330;
+    background-color: #0E0E28;
 }
 
 .day .sc_filter span {
     color: #333;
     background-color: #fafafa;
     box-shadow: 0 0 2px #ccc;
+    border-bottom: 2px solid transparent;
 }
 
 .sc_filter>span:first-child {
@@ -81,8 +96,9 @@
 
 .sc_filter span.active,
 .sc_filter i.active {
-    background-color: #222c41;
-    color: #3399ff;
+    border-bottom: 2px solid #3399FF;
+    /*background-color: #13152F;*/
+    /*color: #3399ff;*/
 }
 
 .day .sc_filter span.active,
@@ -150,7 +166,6 @@ span.price {
     margin-bottom: 20px;
     overflow: hidden;
     height: 480px;
-    border-radius: 6px;
 }
 
 #kline_container.hidden,
@@ -164,7 +179,6 @@ span.price {
     left: 0;
     width: 100%;
     height: 480px;
-    border-radius: 6px;
 }
 
 .trade_container dark hide {
@@ -174,8 +188,7 @@ span.price {
 .trade_panel {
     float: left;
     width: 100%;
-    background: #1c2435;
-    border-radius: 6px;
+    background: #0E0E28;
 }
 
 .day .trade_panel {
@@ -208,7 +221,7 @@ ul li {
 }
 
 .trade_bd {
-    padding: 10px 30px;
+    padding: 25px 40px 35px;
     overflow: hidden;
 }
 
@@ -216,7 +229,7 @@ ul li {
     position: relative;
     z-index: 2;
     float: left;
-    width: 50%;
+    width: 45%;
     height: 340px;
     margin-top: 0;
     margin-right: 0;
@@ -256,16 +269,26 @@ ul li {
     padding-right: 15px;
 }
 
+.trade_panel .border-height {
+    display: inline-block;
+    height: 220px;
+    width: 1px;
+    background: #2A3850;
+    margin: 65px 0 0 45px;
+}
+
 .trade_panel .panel.panel_sell {
     padding-left: 15px;
+    float: right;
 }
 
 .trade_wrap .ivu-input {
-    background: #1c2435;
-    border: 1px solid rgba(69, 83, 112, .5);
+    background: transparent;
+    border: 1px solid #2A3850;
     color: #fff;
     height: 40px;
     text-indent: 20px;
+    border-radius: 0;
 }
 
 .trade_wrap .ivu-input-wrapper {
@@ -280,7 +303,8 @@ ul li {
 }
 
 .order .ivu-table-wrapper .ivu-table .ivu-table-header th {
-    background-color: #222c41;
+    background-color: #0E0E28;
+    padding: 15px 0;
 }
 
 .day .trade_wrap .ivu-input {
@@ -307,7 +331,7 @@ p.math_price {
 }
 
 .total {
-    margin-bottom: 10px;
+    margin: 20px 0 25px;
     height: 20px;
     color: #7c7f82;
 }
@@ -366,7 +390,7 @@ p.math_price {
 }
 
 .exchange .ivu-table-expanded-cell {
-    background: #141724 !important;
+    background: #0E0E28 !important;
 }
 
 .exchange.day .ivu-table-expanded-cell {
@@ -382,7 +406,7 @@ p.math_price {
 }
 
 .exchange .ivu-table th span {
-    color: #61688A;
+    color: #8090AF;
 }
 
 
@@ -402,14 +426,14 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 /*定义滚动条的轨道颜色、内阴影及圆角*/
 .exchange .ivu-table-overflowY::-webkit-scrollbar-track{
     -webkit-box-shadow: inset 0 0 6px #27313e;
-    background-color: #192330;
+    background-color: #13152F;
     border-radius: 3px;
 }
 /*定义滑块颜色、内阴影及圆角*/
 .exchange .ivu-table-overflowY::-webkit-scrollbar-thumb{
     border-radius: 7px;
-    -webkit-box-shadow: inset 0 0 6px #27313e;
-    background-color: #27313e;
+    -webkit-box-shadow: inset 0 0 6px #0E0E28;
+    background-color: #191d3a;
 }
 
 .exchange.day .ivu-table-overflowY::-webkit-scrollbar {
@@ -433,9 +457,9 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
     cursor: pointer;
 }
 
-.main .trade-wrap .ivu-table {
-    border-radius: 6px;
-}
+/*.main .trade-wrap .ivu-table {*/
+/*    border-radius: 6px;*/
+/*}*/
 
 .exchange .ivu-table th,
 .exchange .ivu-table td {
@@ -577,6 +601,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
     font-size: 16px;
     padding: 8px 15px;
     color: #fff;
+    border-radius: 0;
 }
 
 .trade_wrap .ivu-btn:hover {
@@ -606,13 +631,20 @@ iframe {
 }
 
 .exchange .ivu-table-wrapper {
+    height: 438px;
     box-shadow: none;
     border: 0;
 }
 
-.exchange .ivu-table-wrapper tbody.ivu-table-tbody .ivu-table-row td {
-    background-color: transparent;
+.exchange .order .table .ivu-table-wrapper {
+    height: 255px;
+    box-shadow: none;
+    border: 0;
 }
+
+/*.exchange .ivu-table-wrapper tbody.ivu-table-tbody .ivu-table-row td {*/
+/*    background-color: #0E0E28;*/
+/*}*/
 
 
 /* .day .exchange .coin-menu .ivu-table-wrapper{
@@ -655,7 +687,7 @@ iframe {
 
 .exchange .main .ivu-table .ivu-table-header th {
     line-height: 40px;
-    background-color: #222c41;
+    background-color: #0E0E28;
 }
 
 .exchange.day .ivu-table .ivu-table-header th {
@@ -665,7 +697,7 @@ iframe {
 }
 
 .exchange .ivu-table {
-    background-color: #1c2435;
+    background-color: #0E0E28;
 }
 
 .exchange.day .ivu-table {
@@ -673,8 +705,23 @@ iframe {
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td {
-    border-bottom: 1px solid #27313e;
-    border-color: #27313e;
+    border-bottom: 1px solid #1B1F3C;
+    border-color: #1B1F3C;
+}
+.exchange .ivu-table-wrapper .ivu-table .ivu-table-row tr:hover {
+    border-bottom: 1px solid #1B1F3C;
+    border-color: #1B1F3C;
+}
+.exchange .ivu-table-wrapper .ivu-table .ivu-table-row-highlight {
+    border-bottom: 1px solid #1B1F3C;
+    border-color: #1B1F3C;
+}
+
+.ivu-table-row-highlight td,
+.ivu-table-stripe .ivu-table-body tr.ivu-table-row-highlight:nth-child(2n) td,
+.ivu-table-stripe .ivu-table-fixed-body tr.ivu-table-row-highlight:nth-child(2n) td,
+tr.ivu-table-row-highlight.ivu-table-row-hover td{
+    background-color: transparent;
 }
 
 .exchange.day .ivu-table-wrapper .ivu-table .ivu-table-row td {
@@ -712,29 +759,33 @@ iframe {
 .exchange .ivu-slider-wrap {
     height: 6px;
     margin: 0;
+    background-color: rgb(32, 39, 64);
 }
 
 .exchange .slider-wrap {
     position: relative;
-    margin: 30px 0 16px 0;
+    margin: 40px 0 16px 7px;
 }
 
 .exchange .slider-wrap .slider-stop {
     position: absolute;
-    top: -5px;
+    top: -4px;
     cursor: pointer;
-    width: 16px;
-    height: 16px;
-    margin-left: -8px;
+    width: 14px;
+    height: 15px;
+    border: 2px solid #0E0E28;
+    margin-left: -12px;
+    border-radius: 50%;
 }
 
 .exchange .slider-wrap .slider-block {
-    margin-top: 5px;
-    margin-left: 5px;
-    width: 6px;
-    height: 6px;
-    background-color: #ccc;
-    border-radius: 6px;
+    margin-top: 0px;
+    margin-left: 0px;
+    width: 10px;
+    border-radius: 5px;
+    height: 10px;
+    background-color: rgb(32, 39, 64);
+    /*border-radius: 6px;*/
 }
 
 .exchange .ivu-slider-bar {
@@ -752,6 +803,7 @@ iframe {
 
 .exchange .silder-buy .ivu-slider-button {
     border-color: #00b275;
+    background-color: #0E0E28;
 }
 
 .exchange .silder-sell .ivu-slider-bar {
@@ -761,6 +813,7 @@ iframe {
 
 .exchange .silder-sell .ivu-slider-button {
     border-color: #f15057;
+    background-color: #0E0E28;
 }
 
 .exchange .ivu-slider-stop {
@@ -829,7 +882,7 @@ iframe {
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-header {
-    background-color: #27313e;
+    background-color: #0E0E28;
 }
 
 .exchange.day .ivu-table-header {
@@ -861,9 +914,9 @@ iframe {
 .exchange.day .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd .percentdiv {
     opacity: .1;
 }
-.exchange .ivu-table-wrapper > .ivu-spin-fix {
-    border-color: rgba(255, 255, 255, .05);
-}
-.exchange .ivu-spin-fix {
-    background: rgba(255, 255, 255, .05);
-}
+/*.exchange .ivu-table-wrapper > .ivu-spin-fix {*/
+/*    border-color: rgba(255, 255, 255, .05);*/
+/*}*/
+/*.exchange .ivu-spin-fix {*/
+/*    background: rgba(255, 255, 255, .05);*/
+/*}*/

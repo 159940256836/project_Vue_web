@@ -28,7 +28,7 @@
             <h4 class="title">{{data.title}}</h4>
             <div class="content_box" v-html="data.content"></div>
         </div>
-        
+
     </div>
   </div>
 </template>
@@ -169,7 +169,6 @@ export default {
     margin: 0 auto;
     background-color: #fff;
     color: #333;
-    // box-shadow: 0 0 2px #ccc;
     margin-top: -50px;
     // border-radius: 6px;
     // padding: 50px 100px;

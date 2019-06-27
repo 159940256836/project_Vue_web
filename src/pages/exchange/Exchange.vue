@@ -1,131 +1,149 @@
 /* eslint-disable eqeqeq */
 <template>
     <div class="container exchange" :class="skin">
-        <div class="symbol">
-            <div class="item" @click="currentCoinFavorChange">
-                <Icon v-if="currentCoinIsFavor" type="ios-star" color="#3399ff" size="24" />
-                <Icon v-else type="ios-star-outline" color="#3399ff" size="24" />
-            </div>
-            <div class="item">
-                <span class="coin">
-                    {{currentCoin.coin?currentCoin.coin:'---'}}
-                    <small>/{{currentCoin.base?currentCoin.base:'---'}}</small>
-                </span>
-            </div>
-            <div class="item">
-                <span class="text">{{$t('coin.last')}}</span>
-                <span
-                    class="num"
-                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
-                    v-if="currentCoin.close"
-                >
-                    {{currentCoin.close | toFixed(baseCoinScale)}}
-                </span>
-                <span
-                    class="num"
-                    v-else
-                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
-                >
-                    ---
-                </span>
-                <span class="price-cny">
-                    ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
-                </span>
-            </div>
-            <div class="item">
-                <span class="text">{{$t('coin.up')}}</span>
-                <span
-                    class="num"
-                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
-                >
-                    {{currentCoin.rose?currentCoin.rose:'---'}}
-                </span>
-            </div>
-            <div class="item">
-                <span class="text">{{$t('coin.celling')}}</span>
-                <span class="num" v-if="currentCoin.high">{{currentCoin.high | toFixed(baseCoinScale)}}</span>
-                <span class="num" v-else>---</span>
-            </div>
-            <div class="item">
-                <span class="text">{{$t('coin.floor')}}</span>
-                <span class="num" v-if="currentCoin.low >= 0">
-                    {{currentCoin.low | toFixed(baseCoinScale)}}
-                </span>
-                <span class="num" v-else>---</span>
-            </div>
-            <div class="item">
-                <span class="text">{{$t('coin.turnover')}}</span>
-                <span class="num">{{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}</span>
-            </div>
-            <div class="item" @click="changeSkin">
-                <img :src="skin == 'night' ? night : day" alt="">
-            </div>
-        </div>
+
         <div class="main">
-            <div class="left plate-wrap">
-                <div class="handlers">
-                    <span
-                        @click="changePlate('all')"
-                        class="handler handler-all"
-                        :class="{active:selectedPlate=='all'}"
-                    ></span>
-                    <span
-                        @click="changePlate('buy')"
-                        class="handler handler-green"
-                        :class="{active:selectedPlate=='buy'}"
-                    ></span>
-                    <span
-                        @click="changePlate('sell')"
-                        class="handler handler-red"
-                        :class="{active:selectedPlate=='sell'}"
-                    ></span>
+            <div class="right">
+                <div class="coin-menu">
+                    <div class="bazaar-info">
+                        市场信息
+                    </div>
+                    <div class="sc_filter">
+                        <span @click="changeBaseCion('usdt')" :class="{active:basecion==='usdt'}">USDT</span>
+                        <span @click="changeBaseCion('btc')" :class="{active:basecion==='btc'}">BTC</span>
+                        <span @click="changeBaseCion('eth')" :class="{active:basecion==='eth'}">ETH</span>
+                        <span @click="changeBaseCion('bc')" :class="{active:basecion==='bc'}">BC</span>
+                        <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">{{$t('coin.option')}}</span>
+                        <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
+                        <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
+                    </div>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="USDT"
+                        v-show="basecion==='usdt'"
+                        :columns="coins.columns"
+                        :data="coins.USDT"
+                    ></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="BTC"
+                        v-show="basecion==='btc'"
+                        :columns="coins.columns"
+                        :data="coins.BTC"
+                    ></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="ETH"
+                        v-show="basecion==='eth'"
+                        :columns="coins.columns"
+                        :data="coins.ETH"
+                    ></Table>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        @on-current-change="gohref"
+                        highlight-row
+                        id="BC"
+                        v-show="basecion==='bc'"
+                        :columns="coins.columns"
+                        :data="coins.BC"
+                    ></Table>
+                    <Table
+                        @on-current-change="gohref"
+                        highlight-row
+                        v-show="basecion==='favor'"
+                        :no-data-text="$t('common.nodata')"
+                        id="collect" :columns="favorColumns"
+                        :data="coins.favor"
+                    ></Table>
                 </div>
-                <Table
-                    :no-data-text="$t('common.nodata')"
-                    v-show="selectedPlate!='buy'"
-                    @on-current-change="buyPlate"
-                    highlight-row
-                    ref="currentRowTable"
-                    class="sell_table"
-                    :columns="plate.columns"
-                    :data="plate.askRows"
-                ></Table>
-                <div class="plate-nowprice">
-                    <span
-                        class="price"
-                        :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
-                        v-if="currentCoin.price"
-                    >
-                        {{currentCoin.price | toFixed(baseCoinScale)}}
-                    </span>
-                    <span
-                        class="price"
-                        :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
-                        v-else
-                    >
-                        ---
-                    </span>
-                    <span v-if="currentCoin.change>0" class="buy">↑</span>
-                    <span v-else class="sell">↓</span>
-                    <span class="price-cny"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>
+                <div class="trade-wrap">
+                    <div class="recent-deal">
+                        最近成交
+                    </div>
+                    <Table
+                        :no-data-text="$t('common.nodata')"
+                        height="400"
+                        :columns="trade.columns"
+                        :data="trade.rows"
+                    ></Table>
                 </div>
-                <Table
-                    :no-data-text="$t('common.nodata')"
-                    v-show="selectedPlate!='sell'"
-                    @on-current-change="sellPlate"
-                    highlight-row
-                    class="buy_table"
-                    :class="{hidden:selectedPlate==='all'}"
-                    :columns="plate.columns"
-                    :data="plate.bidRows"
-                ></Table>
             </div>
             <div class="center">
+                <div class="symbol">
+                    <div class="item" @click="currentCoinFavorChange">
+                        <Icon v-if="currentCoinIsFavor" type="ios-star" color="#3399ff" size="24" />
+                        <Icon v-else type="ios-star-outline" color="#3399ff" size="24" />
+                    </div>
+                    <div class="item">
+                        <span class="coin">
+                            {{currentCoin.coin?currentCoin.coin:'---'}}
+                            <small>/{{currentCoin.base?currentCoin.base:'---'}}</small>
+                        </span>
+                    </div>
+                    <div class="item">
+                        <span class="text">{{$t('coin.last')}}</span>
+                        <span
+                            class="num"
+                            :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                            v-if="currentCoin.close"
+                        >
+                            {{currentCoin.close | toFixed(baseCoinScale)}}
+                        </span>
+                        <span
+                            class="num"
+                            v-else
+                            :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                        >
+                            ---
+                        </span>
+                        <span class="price-cny">
+                            ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
+                        </span>
+                    </div>
+                    <div class="item">
+                        <span class="text">{{$t('coin.up')}}</span>
+                        <span
+                            class="num"
+                            :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                        >
+                            {{currentCoin.rose?currentCoin.rose:'---'}}
+                        </span>
+                    </div>
+                    <div class="item">
+                        <span class="text">{{$t('coin.celling')}}</span>
+                        <span class="num" v-if="currentCoin.high">
+                            {{currentCoin.high | toFixed(baseCoinScale)}}
+                        </span>
+                        <span class="num" v-else>---</span>
+                    </div>
+                    <div class="item">
+                        <span class="text">{{$t('coin.floor')}}</span>
+                        <span class="num" v-if="currentCoin.low >= 0">
+                            {{currentCoin.low | toFixed(baseCoinScale)}}
+                        </span>
+                        <span class="num" v-else>---</span>
+                    </div>
+                    <div class="item">
+                        <span class="text">{{$t('coin.turnover')}}</span>
+                        <span class="num">
+                            {{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}
+                        </span>
+                    </div>
+                    <!--<div class="item" @click="changeSkin">
+                        <img :src="skin == 'night' ? night : day" alt="">
+                    </div>-->
+                </div>
                 <div class="imgtable" :loading="loadingButton7">
                     <!-- <div class="handler">
-            <span @click="changeImgTable('k')" :class="{active:currentImgTable==='k'}">k线图</span>
-            <span @click="changeImgTable('s')" :class="{active:currentImgTable==='s'}">深度图</span>
-          </div> -->
+                        <span @click="changeImgTable('k')" :class="{active:currentImgTable==='k'}">k线图</span>
+                        <span @click="changeImgTable('s')" :class="{active:currentImgTable==='s'}">深度图</span>
+                      </div> -->
                     <div id="kline_container" :class="{hidden:currentImgTable==='s'}"></div>
                     <!-- <DepthGraph :class="{hidden:currentImgTable==='k'}" ref="depthGraph"></DepthGraph> -->
                 </div>
@@ -278,6 +296,7 @@
                                     </Form>
                                 </div>
                             </div>
+                            <span class="border-height"></span>
                             <div class="panel panel_sell">
                                 <div v-if="isLogin" class="hd hd_login">
                                     <span>{{$t("exchange.canuse")}}</span>
@@ -394,70 +413,85 @@
                     </div>
                 </div>
             </div>
-            <div class="right">
-                <div class="coin-menu">
-                    <div class="sc_filter">
-                        <span @click="changeBaseCion('usdt')" :class="{active:basecion==='usdt'}">USDT</span>
-                        <span @click="changeBaseCion('btc')" :class="{active:basecion==='btc'}">BTC</span>
-                        <span @click="changeBaseCion('eth')" :class="{active:basecion==='eth'}">ETH</span>
-                        <span @click="changeBaseCion('bc')" :class="{active:basecion==='bc'}">BC</span>
-                        <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">{{$t('coin.option')}}</span>
-                        <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
-                        <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
-                    </div>
-                    <Table
-                        :no-data-text="$t('common.nodata')"
-                        @on-current-change="gohref"
-                        highlight-row
-                        id="USDT"
-                        v-show="basecion==='usdt'"
-                        :columns="coins.columns"
-                        :data="coins.USDT"
-                    ></Table>
-                    <Table
-                        :no-data-text="$t('common.nodata')"
-                        @on-current-change="gohref"
-                        highlight-row
-                        id="BTC"
-                        v-show="basecion==='btc'"
-                        :columns="coins.columns"
-                        :data="coins.BTC"
-                    ></Table>
-                    <Table
-                        :no-data-text="$t('common.nodata')"
-                        @on-current-change="gohref"
-                        highlight-row
-                        id="ETH"
-                        v-show="basecion==='eth'"
-                        :columns="coins.columns"
-                        :data="coins.ETH"
-                    ></Table>
-                    <Table
-                        :no-data-text="$t('common.nodata')"
-                        @on-current-change="gohref"
-                        highlight-row
-                        id="BC"
-                        v-show="basecion==='bc'"
-                        :columns="coins.columns"
-                        :data="coins.BC"
-                    ></Table>
-                    <Table
-                        @on-current-change="gohref"
-                        highlight-row
-                        v-show="basecion==='favor'"
-                        :no-data-text="$t('common.nodata')"
-                        id="collect" :columns="favorColumns"
-                        :data="coins.favor"
-                    ></Table>
+            <div class="left plate-wrap">
+                <div class="handlers">
+                    <span class="handicap">盘口</span>
+                    <!--<span
+                        @click="changePlate('all')"
+                        class="handler handler-all"
+                        :class="{active:selectedPlate=='all'}"
+                    ></span>
+                    <span
+                        @click="changePlate('buy')"
+                        class="handler handler-green"
+                        :class="{active:selectedPlate=='buy'}"
+                    ></span>
+                    <span
+                        @click="changePlate('sell')"
+                        class="handler handler-red"
+                        :class="{active:selectedPlate=='sell'}"
+                    ></span>-->
+                    <span
+                        @click="changePlate('all')"
+                        class="handler"
+                        :class="{active:selectedPlate=='all'}"
+                    >
+                        全部
+                    </span>
+                    <span
+                        @click="changePlate('buy')"
+                        class="handler"
+                        :class="{active:selectedPlate=='buy'}"
+                    >
+                        买单
+                    </span>
+                    <span
+                        @click="changePlate('sell')"
+                        class="handler"
+                        :class="{active:selectedPlate=='sell'}"
+                    >
+                        卖单
+                    </span>
                 </div>
-                <div class="trade-wrap">
-                    <Table
-                        :no-data-text="$t('common.nodata')"
-                        height="400"
-                        :columns="trade.columns"
-                        :data="trade.rows"
-                    ></Table>
+                <Table
+                    :no-data-text="$t('common.nodata')"
+                    v-show="selectedPlate!='buy'"
+                    @on-current-change="buyPlate"
+                    highlight-row
+                    ref="currentRowTable"
+                    class="sell_table"
+                    :columns="plate.columns"
+                    :data="plate.askRows"
+                ></Table>
+                <div class="plate-nowprice">
+                    <span
+                        class="price"
+                        :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                        v-if="currentCoin.price"
+                    >
+                        {{currentCoin.price | toFixed(baseCoinScale)}}
+                    </span>
+                    <span
+                        class="price"
+                        :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                        v-else
+                    >
+                        ---
+                    </span>
+                    <span v-if="currentCoin.change>0" class="buy">↑</span>
+                    <span v-else class="sell">↓</span>
+                    <span class="price-cny"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>
                 </div>
+                <Table
+                    :no-data-text="$t('common.nodata')"
+                    v-show="selectedPlate!='sell'"
+                    @on-current-change="sellPlate"
+                    highlight-row
+                    class="buy_table"
+                    :class="{hidden:selectedPlate==='all'}"
+                    :columns="plate.columns"
+                    :data="plate.bidRows"
+                ></Table>
             </div>
         </div>
         <div class="order" v-show="this.isLogin && this.member.realName">
@@ -533,50 +567,63 @@ $night-contentbg: #192330;
 $night-color: #fff;
 .exchange {
     color: #fff;
-    background-color: #161b25;
+    background-color: #191d3a;
     .main {
         display: flex;
         .left {
             flex: 0 0 24%;
-            background-color: #192330;
-            border-radius: 6px;
-            margin-right: 1%;
+            background-color: #0E0E28;
             .handlers {
-                font-size: 0;
-                padding: 10px 20px;
-                background-color: #222c41;
-                border-top-left-radius: 6px;
-                border-top-right-radius: 6px;
+                text-align: right;
+                font-size: 14px;
+                height: 50px;
+                line-height: 30px;
+                padding: 10px 0;
+                background-color: #13152F;
                 .handler {
                     display: inline-block;
                     margin-right: 10px;
-                    width: 20px;
-                    height: 20px;
+                    font-size: 12px;
                     background-size: 100% 100%;
                     cursor: pointer;
-                    &.handler-all {
-                        background-image: url("../../assets/images/exchange/plate_all.png");
-                        &.active {
-                            background-image: url("../../assets/images/exchange/plate_all_active.png");
-                        }
+                    height: 20px;
+                    line-height: 20px;
+                    padding: 0 7px;
+                    border-radius: 5px;
+                    &.active {
+                        background: #3399ff;
+                        color: #fff;
+                        /*background-image: url("../../assets/images/exchange/plate_all_active.png");*/
                     }
-                    &.handler-green {
-                        background-image: url("../../assets/images/exchange/plate_green.png");
-                        &.active {
-                            background-image: url("../../assets/images/exchange/plate_green_active.png");
-                        }
-                    }
-                    &.handler-red {
-                        background-image: url("../../assets/images/exchange/plate_red.png");
-                        &.active {
-                            background-image: url("../../assets/images/exchange/plate_red_active.png");
-                        }
-                    }
+                    /*&.handler-all {*/
+                    /*    font-size: 12px;*/
+                    /*    color: #fff;*/
+                    /*    height: 25px;*/
+                    /*    line-height: 25px;*/
+                    /*    !*background-image: url("../../assets/images/exchange/plate_all.png");*!*/
+                    /*    &.active {*/
+                    /*        background: #3399ff;*/
+                    /*        color: #fff;*/
+                    /*        !*background-image: url("../../assets/images/exchange/plate_all_active.png");*!*/
+                    /*    }*/
+                    /*}*/
+                    /*&.handler-green {*/
+                    /*    background-image: url("../../assets/images/exchange/plate_green.png");*/
+                    /*    &.active {*/
+                    /*        background-image: url("../../assets/images/exchange/plate_green_active.png");*/
+                    /*    }*/
+                    /*}*/
+                    /*&.handler-red {*/
+                    /*    background-image: url("../../assets/images/exchange/plate_red.png");*/
+                    /*    &.active {*/
+                    /*        background-image: url("../../assets/images/exchange/plate_red_active.png");*/
+                    /*    }*/
+                    /*}*/
                 }
             }
             .plate-nowprice {
                 text-align: center;
-                background-color: #222c41;
+                background-color: #13152F;
                 line-height: 1;
                 display: flex;
                 align-items: center;
@@ -592,17 +639,18 @@ $night-color: #fff;
                     font-size: 14px;
                     margin-left: 10px;
                     font-weight: 400;
+                    color: #8090AF;
                 }
             }
         }
         .center {
             flex: 0 0 50%;
-            margin-right: 1%;
+            margin-right: 10px;
             .imgtable {
                 height: 480px;
                 position: relative;
                 overflow: hidden;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
                 .handler {
                     position: absolute;
                     top: 10px;
@@ -625,20 +673,22 @@ $night-color: #fff;
             .trade_wrap {
                 .trade_menu {
                     position: relative;
-                    background-color: #222c41;
-                    border-top-left-radius: 6px;
-                    border-top-right-radius: 6px;
+                    background-color: #13152F;
+                    /*border-top-left-radius: 6px;*/
+                    /*border-top-right-radius: 6px;*/
                     font-size: 0;
-                    height: 40px;
-                    line-height: 40px;
+                    height: 50px;
+                    line-height: 50px;
                     > ul {
                         display: flex;
                         li {
                             font-size: 16px;
                             padding: 0 20px;
                             cursor: pointer;
+                            border-bottom: 2px solid transparent;
                             &.active {
-                                background-color: #1c2435;
+                                background-color: #13152F;
+                                border-bottom: 2px solid #3399ff;
                                 color: #3399ff;
                             }
                             &:first-child {
@@ -671,7 +721,7 @@ $night-color: #fff;
                         align-items: center;
                         z-index: 100;
                         font-size: 24px;
-                        border-radius: 6px;
+                        /*border-radius: 6px;*/
                         color: #bcd7e6;
                     }
                 }
@@ -688,23 +738,24 @@ $night-color: #fff;
         }
         .right {
             flex: 0 0 24%;
+            margin-right: 10px;
             .coin-menu {
-                height: 480px;
-                background-color: #1c2435;
-                margin-bottom: 20px;
-                border-radius: 6px;
+                height: 531px;
+                background-color: #0E0E28;
+                margin-bottom: 10px;
+                /*border-radius: 6px;*/
             }
         }
     }
     .symbol {
+        height: 50px;
+        line-height: 50px;
+        padding: 0 20px;
+        background: #13152F;
         display: flex;
         justify-content: space-between;
-        padding: 15px 30px;
-        margin-bottom: 20px;
+        /*margin-bottom: 20px;*/
         align-items: center;
-        background-color: #1c2435;
-        line-height: 1;
-        border-radius: 6px;
         .item {
             .price-cny {
                 font-size: 12px;
@@ -715,10 +766,13 @@ $night-color: #fff;
             }
             .text {
                 width: 100%;
-                display: block;
+                /*display: block;*/
                 font-size: 12px;
-                color: #999;
+                color: #F0F0F0;
                 margin-bottom: 5px;
+            }
+            .text1 {
+                color: #8090AF;
             }
             .num {
                 font-size: 14px;
@@ -737,7 +791,6 @@ $night-color: #fff;
         margin-top: 20px;
         .order-handler {
             font-size: 0;
-            border-radius: 6px;
             > .order-list {
                 padding: 0 20px;
                 font-size: 14px;
@@ -745,10 +798,12 @@ $night-color: #fff;
                 color: #fff;
                 cursor: pointer;
                 line-height: 40px;
-                background-color: #192330;
+                background-color: transparent;
                 &.active {
                     color: #3399ff;
-                    background-color: #222c41;
+                    border-bottom: 2px solid #3399ff;
+                    background-color: transparent;
+                    border-radius: 0;
                 }
                 &:first-child {
                     border-top-left-radius: 6px;
@@ -783,7 +838,6 @@ $night-color: #fff;
     .main {
         .left {
             background-color: #fff;
-            box-shadow: 0 0 2px #ccc;
             .handlers {
                 background-color: #fff;
             }
@@ -794,8 +848,7 @@ $night-color: #fff;
             }
         }
         .imgtable {
-            border-radius: 6px;
-            box-shadow: 0 0 2px #ccc;
+            /*border-radius: 6px;*/
             .handler {
                 > span {
                     border: 1px solid #333;
@@ -803,7 +856,6 @@ $night-color: #fff;
             }
         }
         .trade_wrap {
-            box-shadow: 0 0 2px #ccc;
             .trade_menu {
                 background-color: #fafafa;
                 > ul {
@@ -842,13 +894,12 @@ $night-color: #fff;
             .coin-menu {
                 height: 480px;
                 background-color: #fff;
-                margin-bottom: 20px;
-                border-radius: 6px;
+                margin-bottom: 10px;
+                /*border-radius: 6px;*/
             }
         }
     }
     .trade_panel {
-        box-shadow: 0 0 2px #ccc;
         .mask {
             background-color: rgba(0, 0, 0, 0.4);
             color: #fff;
@@ -862,11 +913,9 @@ $night-color: #fff;
         .right {
             .coin-menu {
                 background-color: #fff;
-                box-shadow: 0 2px 2px #ccc;
             }
             .trade-wrap {
-                box-shadow: 0 0 2px #ccc;
-                border-radius: 6px;
+                /*border-radius: 6px;*/
             }
             // .ivu-table-wrapper{
             //         box-shadow:0 0 2px #ccc;
@@ -2041,75 +2090,74 @@ export default {
       this.$http
                 .post(this.host + '/market/exchange-rate/usd-cny')
                 .then(response => {
-                  const resp = response.body
-                  this.CNYRate = resp.data
-                })
-    },
-    getCoin(symbol) {
-      return this.coins._map[symbol]
-    },
-    getKline() {
-      const that = this
-      const config = {
-        autosize: true,
-        fullscreen: true,
-        symbol: that.symbol,
-        interval: '5', // K线默认时间传值
-        timezone: 'Asia/Shanghai',
-        toolbar_bg: '#222c41',
-        container_id: 'kline_container',
-        datafeed: that.datafeed,
-        library_path:
-                    process.env.NODE_ENV === 'production'
-                        ? '/assets/charting_library/'
-                        : 'src/assets/js/charting_library/',
-        locale: 'zh',
-        debug: false,
-        drawings_access: {
-          type: 'black',
-          tools: [{ name: 'Regression Trend' }]
+                    let resp = response.body;
+                    this.CNYRate = resp.data;
+                });
         },
-        disabled_features: [
-          'header_resolutions',
-          'timeframes_toolbar',
-          'header_symbol_search',
-          'header_chart_type',
-          'header_compare',
-          'header_undo_redo',
-          'header_screenshot',
-          'header_saveload',
-          'use_localstorage_for_settings',
-          'left_toolbar',
-          'volume_force_overlay'
-        ],
-        enabled_features: [
-          'hide_last_na_study_output',
-          'move_logo_to_main_pane'
-        ],
-        custom_css_url: 'bundles/common.css',
-        supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M'],
-        charts_storage_url: 'http://saveload.tradingview.com',
-        charts_storage_api_version: '1.1',
-        client_id: 'tradingview.com',
-        user_id: 'public_user_id',
-        overrides: {
+        getCoin(symbol) {
+            return this.coins._map[symbol];
+        },
+        getKline() {
+            let that = this;
+            let config = {
+                autosize: true,
+                fullscreen: true,
+                symbol: that.symbol,
+                interval: "5", // K线默认时间传值
+                timezone: "Asia/Shanghai",
+                toolbar_bg: "#0E0E28",
+                container_id: "kline_container",
+                datafeed: that.datafeed,
+                library_path:
+                    process.env.NODE_ENV === "production"
+                        ? "/assets/charting_library/"
+                        : "src/assets/js/charting_library/",
+                locale: "zh",
+                debug: false,
+                drawings_access: {
+                    type: "black",
+                    tools: [{ name: "Regression Trend" }]
+                },
+                disabled_features: [
+                    "header_resolutions",
+                    "timeframes_toolbar",
+                    "header_symbol_search",
+                    "header_chart_type",
+                    "header_compare",
+                    "header_undo_redo",
+                    "header_screenshot",
+                    "header_saveload",
+                    "use_localstorage_for_settings",
+                    "left_toolbar",
+                    "volume_force_overlay"
+                ],
+                enabled_features: [
+                    "hide_last_na_study_output",
+                    "move_logo_to_main_pane"
+                ],
+                custom_css_url: "bundles/common.css",
+                supported_resolutions: ["1", "5", "15", "30", "60", "240", "1D", "1W", "1M"],
+                charts_storage_url: "http://saveload.tradingview.com",
+                charts_storage_api_version: "1.1",
+                client_id: "tradingview.com",
+                user_id: "public_user_id",
+                overrides: {
                     // 背景色网格颜色
-          'paneProperties.background': '#1c2435',
-          'paneProperties.vertGridProperties.style': 0,
-          'paneProperties.vertGridProperties.color': 'rgba(255,255,255,.04)',
-          'paneProperties.horzGridProperties.color': 'rgba(255,255,255,.04)',
-                    // "scalesProperties.textColor" : "#AAA",
-          'scalesProperties.textColor': '#61688A',
-          'mainSeriesProperties.candleStyle.upColor': '#00b275',
-          'mainSeriesProperties.candleStyle.downColor': '#f15057',
-          'mainSeriesProperties.candleStyle.drawBorder': false,
-          'mainSeriesProperties.candleStyle.wickUpColor': '#00b275',
-          'mainSeriesProperties.candleStyle.wickDownColor': '#f15057',
-          'paneProperties.legendProperties.showLegend': false,
-          'mainSeriesProperties.areaStyle.color1': 'rgba(71, 78, 112, 0.5)',
-          'mainSeriesProperties.areaStyle.color2': 'rgba(71, 78, 112, 0.5)',
-          'mainSeriesProperties.areaStyle.linecolor': '#9194a4',
-                    // "scalesProperties.lineColor": "#000", // xy刻度线色值
+                    "paneProperties.background": "#131630",
+                    'paneProperties.vertGridProperties.style': 0,
+                    "paneProperties.vertGridProperties.color": "rgba(255,255,255,.04)",
+                    "paneProperties.horzGridProperties.color": "rgba(255,255,255,.04)",
+                    "scalesProperties.textColor": "#61688A",
+                    "mainSeriesProperties.candleStyle.upColor": "#00b275",
+                    "mainSeriesProperties.candleStyle.downColor": "#f15057",
+                    "mainSeriesProperties.candleStyle.drawBorder": false,
+                    "mainSeriesProperties.candleStyle.wickUpColor": "#00b275",
+                    "mainSeriesProperties.candleStyle.wickDownColor": "#f15057",
+                    "paneProperties.legendProperties.showLegend": false,
+                    "mainSeriesProperties.areaStyle.color1": "rgba(71, 78, 112, 0.5)",
+                    "mainSeriesProperties.areaStyle.color2": "rgba(71, 78, 112, 0.5)",
+                    "mainSeriesProperties.areaStyle.linecolor": "#9194a4",
+                    "scalesProperties.lineColor": "#8090AF", // xy刻度线色值
                     // "paneProperties.crossHairProperties.color": "#00b275", // 十字光标颜色
           'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
           'mainSeriesProperties.candleStyle.borderDownColor': '#f15057' // 开高低收卖出标线
@@ -2152,12 +2200,12 @@ export default {
             description: '1hour',
             title: '1hour'
           },
-                    // {
-                    //     text: "4hour",
-                    //     resolution: "240",
-                    //     description: "4hour",
-                    //     title: "4hour"
-                    // },
+        // {
+        //     text: "4hour",
+        //     resolution: "240",
+        //     description: "4hour",
+        //     title: "4hour"
+        // },
           {
             text: '1day',
             resolution: '1D',
@@ -2196,196 +2244,194 @@ export default {
         widget.onChartReady(function() {
           widget.chart().executeActionById('drawingToolbarAction')
           widget
-                        .chart()
-                        .createStudy('Moving Average', false, false, [5], null, {
-                          'plot.color': '#965FC4'
-                        })
+            .chart()
+            .createStudy('Moving Average', false, false, [5], null, {
+              'plot.color': '#965FC4'
+            })
           widget
-                        .chart()
-                        .createStudy('Moving Average', false, false, [10], null, {
-                          'plot.color': '#84AAD5'
-                        })
+            .chart()
+            .createStudy('Moving Average', false, false, [10], null, {
+              'plot.color': '#84AAD5'
+            })
 
           widget
-                        .createButton()
-                        .attr('title', 'realtime')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(3)
-                          widget.setSymbol('', '1')
-                        })
-                        .append('<span>分时</span>')
+            .createButton()
+            .attr('title', 'realtime')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(3)
+              widget.setSymbol('', '1')
+            })
+            .append('<span>分时</span>')
+          widget
+            .createButton()
+            .attr('title', 'M1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '1')
+            })
+            .append('<span>M1</span>')
+          widget
+            .createButton()
+            .attr('title', 'M5')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '5')
+            })
+            .append('<span>M5</span>')
+            .addClass('selected') // 静态默认分时
 
           widget
-                        .createButton()
-                        .attr('title', 'M1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '1')
-                        })
-                        .append('<span>M1</span>')
+        .createButton()
+        .attr('title', 'M15')
+        .on('click', function() {
+          if ($(this).hasClass('selected')) return
+          $(this)
+                .addClass('selected')
+                .parent('.group')
+                .siblings('.group')
+                .find('.button.selected')
+                .removeClass('selected')
+          widget.chart().setChartType(1)
+          widget.setSymbol('', '15')
+        })
+        .append('<span>M15</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'M5')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '5')
-                        })
-                        .append('<span>M5</span>')
-                        .addClass('selected') // 静态默认分时
+            .createButton()
+            .attr('title', 'M30')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '30')
+            })
+            .append('<span>M30</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'M15')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '15')
-                        })
-                        .append('<span>M15</span>')
+            .createButton()
+            .attr('title', 'H1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '60')
+            })
+            .append('<span>H1</span>')
+          widget
+            .createButton()
+            .attr('title', 'H4')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '240')
+            })
+            .append('<span>H4</span>')
+          widget
+            .createButton()
+            .attr('title', 'D1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '1D')
+            })
+            .append('<span>D1</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'M30')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '30')
-                        })
-                        .append('<span>M30</span>')
+            .createButton()
+            .attr('title', 'W1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '1W')
+            })
+            .append('<span>W1</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'H1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '60')
-                        })
-                        .append('<span>H1</span>')
-          widget
-                        .createButton()
-                        .attr('title', 'H4')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '240')
-                        })
-                        .append('<span>H4</span>')
-          widget
-                        .createButton()
-                        .attr('title', 'D1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '1D')
-                        })
-                        .append('<span>D1</span>')
-
-          widget
-                        .createButton()
-                        .attr('title', 'W1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '1W')
-                        })
-                        .append('<span>W1</span>')
-
-          widget
-                        .createButton()
-                        .attr('title', 'M1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '1M')
-                        })
-                        .append('<span>M1</span>')
+            .createButton()
+            .attr('title', 'M1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '1M')
+            })
+            .append('<span>M1</span>')
         })
       })
     },
     getFavor() {
             // 查询自选(收藏)
       this.$http
-                .post(this.host + this.api.exchange.favorFind, {})
-                .then(response => {
-                  this.coins.favor = []
-                  this.currentCoinIsFavor = false
-                  const resp = response.body
-                  for (let i = 0; i < resp.length; i++) {
-                    const coin = this.getCoin(resp[i].symbol)
-                    if (coin != null) {
-                      coin.isFavor = true
-                      this.coins.favor.push(coin)
-                    }
-                    if (this.currentCoin.symbol == resp[i].symbol) {
-                      this.currentCoinIsFavor = true
-                    }
-                  }
-                })
+        .post(this.host + this.api.exchange.favorFind, {})
+        .then(response => {
+          this.coins.favor = []
+          this.currentCoinIsFavor = false
+          const resp = response.body
+          for (let i = 0; i < resp.length; i++) {
+            const coin = this.getCoin(resp[i].symbol)
+            if (coin != null) {
+              coin.isFavor = true
+              this.coins.favor.push(coin)
+            }
+            if (this.currentCoin.symbol == resp[i].symbol) {
+              this.currentCoinIsFavor = true
+            }
+          }
+        })
     },
     getSymbol() {
       this.$http.post(this.host + this.api.market.thumb, {}).then(response => {
@@ -2404,9 +2450,9 @@ export default {
                         this.baseCoinScale
                     )
           coin.rose =
-                        resp[i].chg > 0
-                            ? '+' + (resp[i].chg * 100).toFixed(2) + '%'
-                            : (resp[i].chg * 100).toFixed(2) + '%'
+            resp[i].chg > 0
+                ? '+' + (resp[i].chg * 100).toFixed(2) + '%'
+                : (resp[i].chg * 100).toFixed(2) + '%'
           coin.coin = resp[i].symbol.split('/')[0]
           coin.base = resp[i].symbol.split('/')[1]
           coin.href = (coin.coin + '_' + coin.base).toLowerCase()
@@ -2455,44 +2501,43 @@ export default {
                   this.plate.askRows = []
                   this.plate.bidRows = []
                   const resp = response.body
-
-                  if (resp.ask && resp.ask.items) {
-                    for (let i = 0; i < resp.ask.items.length; i++) {
-                      if (i == 0) {
-                        resp.ask.items[i].totalAmount = resp.ask.items[i].amount
-                      } else {
-                        resp.ask.items[i].totalAmount =
-                                    resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount
-                      }
-                    }
-                    if (resp.ask.items.length >= this.plate.maxPostion) {
-                      for (let i = this.plate.maxPostion; i > 0; i--) {
-                        const ask = resp.ask.items[i - 1]
-                        ask.direction = 'SELL'
-                        ask.position = i
-                        this.plate.askRows.push(ask)
-                      }
-                      const rows = this.plate.askRows,
-                        len = rows.length,
-                        totle = rows[0].totalAmount
-                      this.plate.askTotle = totle
-                    } else {
-                      for (let i = 12; i > resp.ask.items.length; i--) {
-                        const ask = { price: 0, amount: 0 }
-                        ask.direction = 'SELL'
-                        ask.position = i
-                        ask.totalAmount = ask.amount
-                        this.plate.askRows.push(ask)
-                      }
-                      for (let i = resp.ask.items.length; i > 0; i--) {
-                        const ask = resp.ask.items[i - 1]
-                        ask.direction = 'SELL'
-                        ask.position = i
-                        this.plate.askRows.push(ask)
-                      }
-                      const rows = this.plate.askRows,
-                        len = rows.length,
-                        totle =
+                    if (resp.ask && resp.ask.items) {
+                        for (let i = 0; i < resp.ask.items.length; i++) {
+                            if (i == 0) {
+                                resp.ask.items[i].totalAmount = resp.ask.items[i].amount;
+                            } else {
+                                resp.ask.items[i].totalAmount =
+                                    resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount;
+                            }
+                        }
+                        if (resp.ask.items.length >= this.plate.maxPostion) {
+                            for (let i = this.plate.maxPostion; i > 0; i--) {
+                                let ask = resp.ask.items[i - 1];
+                                ask.direction = "SELL";
+                                ask.position = i;
+                                this.plate.askRows.push(ask);
+                            }
+                            const rows = this.plate.askRows,
+                                len = rows.length,
+                                totle = rows[0].totalAmount;
+                            this.plate.askTotle = totle;
+                        } else {
+                            for (let i = 12; i > resp.ask.items.length; i--) {
+                                let ask = { price: 0, amount: 0 };
+                                ask.direction = "SELL";
+                                ask.position = i;
+                                ask.totalAmount = ask.amount;
+                                this.plate.askRows.push(ask);
+                            }
+                            for (let i = resp.ask.items.length; i > 0; i--) {
+                                let ask = resp.ask.items[i - 1];
+                                ask.direction = "SELL";
+                                ask.position = i;
+                                this.plate.askRows.push(ask);
+                            }
+                            const rows = this.plate.askRows,
+                                len = rows.length
+                                totle =
                                     rows[this.plate.maxPostion - resp.ask.items.length]
                                         .totalAmount
                       this.plate.askTotle = totle

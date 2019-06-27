@@ -1,89 +1,96 @@
 <template>
-    <div class="nav-rights withdraw">
+    <div class="withdraw">
         <div class="nav-right">
             <div class="rightarea">
-                <section class="trade-groups merchant-tops">
-                    <!-- <i class="merchant-icon tips"></i>
-          <span class="tips-word">{{$t('uc.finance.withdraw.pickup')}}</span> -->
-                    <router-link to="/uc/withdraw/address">{{$t('uc.finance.withdraw.addressmanager')}}</router-link>
-                </section>
+                <!--<section class="trade-groups merchant-tops">
+                    &lt;!&ndash; <i class="merchant-icon tips"></i>
+          <span class="tips-word">{{$t('uc.finance.withdraw.pickup')}}</span> &ndash;&gt;
+                    <router-link to="/uc/withdraw/address">
+                        {{$t('uc.finance.withdraw.addressmanager')}}
+                    </router-link>
+                </section>-->
                 <section>
                     <div class="operationform">
-                        <div class="action-inner">
-                            <div class="inner-left">
-                                <span class="describe">{{$t('uc.finance.withdraw.symbol')}}</span>
-                                <Select
-                                    v-model="coinType"
-                                    style="width:350px;margin-left:10px;"
-                                    @on-change="getAddrList"
-                                >
-                                    <Option
-                                        v-for="item in coinList"
-                                        :value="item.unit"
-                                        :key="item.unit"
+                        <div class="operationform-title">{{ $t('uc.finance.pickup') }}</div>
+                        <div class="operationform-from">
+                            <div class="action-inner">
+                                <div class="inner-left">
+                                    <span class="describe">{{$t('uc.finance.withdraw.symbol')}}</span>：
+                                    <Select
+                                        v-model="coinType"
+                                        style="width:270px; margin-left:10px;"
+                                        @on-change="getAddrList"
                                     >
-                                        {{ item.unit }}
-                                    </Option>
-                                </Select>
-                            </div>
-                            <div class="inner-box">
-                                <div class="inner-left form-group form-address">
-                                    <span for="controlAddress" class="controlAddress describe">{{$t('uc.finance.withdraw.address')}}</span>
-                                    <div class="control-input-group">
-                                        <Select
-                                            ref="address"
-                                            v-model="withdrawAdress"
-                                            style="width:350px;margin-left:10px;"
-                                            clearable
-                                            @on-query-change="onAddressChange"
+                                        <Option
+                                            v-for="item in coinList"
+                                            :value="item.unit"
+                                            :key="item.unit"
                                         >
-                                            <Option
-                                                v-for="item in currentCoin.addresses"
-                                                :value="item.address"
-                                                :key="item.address"
+                                            {{ item.unit }}
+                                        </Option>
+                                    </Select>
+                                </div>
+                                <div class="inner-box">
+                                    <div class="inner-left form-group form-address">
+                                        <span
+                                            for="controlAddress"
+                                            class="controlAddress describe"
+                                        >
+                                            {{$t('uc.finance.withdraw.address')}}
+                                        </span>：
+                                        <div class="control-input-group">
+                                            <Select
+                                                ref="address"
+                                                v-model="withdrawAdress"
+                                                style="width:270px;margin-left:10px;"
+                                                clearable
+                                                @on-query-change="onAddressChange"
                                             >
-                                                {{ item.remark +'('+ item.address+')'}}
-                                            </Option>
-                                        </Select>
+                                                <Option
+                                                    v-for="item in currentCoin.addresses"
+                                                    :value="item.address"
+                                                    :key="item.address"
+                                                >
+                                                    {{ item.remark +'('+ item.address+')'}}
+                                                </Option>
+                                            </Select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="availablenum form-group-container">
-                            <div class="form-group form-amount">
-                                <!--可用余额-->
-                                <span class="label-amount describe">
-                                    {{$t('uc.finance.withdraw.num')}}
-                                </span>
-                                <!--提币数量-->
-                                <div class="input-group">
-                                    <Poptip
-                                        trigger="focus"
-                                        :content="$t('uc.finance.withdraw.tip1')+currentCoin.withdrawScale+$t('uc.finance.withdraw.tip11')+
-                                        currentCoin.minAmount+' ,'+$t('uc.finance.withdraw.tip2')+currentCoin.maxAmount"
-                                        style="width: 100%;"
-                                    >
-                                        <!--当前币种可用为零 该input禁止输入-->
-                                        <InputNumber
-                                            :disabled="currentCoin.balance == 0"
-                                            @keyup.native="computerAmount"
-                                            v-model="withdrawAmount"
-                                            :placeholder="$t('uc.finance.withdraw.numtip1')"
-                                            size="large"
-                                            :max="currentCoin.maxAmount"
-                                            style="width:350px;margin-left:5px;"
+                            <div class="availablenum form-group-container">
+                                <div class="form-group form-amount">
+                                    <!--可用余额-->
+                                    <span class="label-amount describe">
+                                        {{$t('uc.finance.withdraw.num')}}
+                                    </span>：
+                                    <!--提币数量-->
+                                    <div class="input-group">
+                                        <Poptip
+                                            trigger="focus"
+                                            :content="$t('uc.finance.withdraw.tip1')+currentCoin.withdrawScale+$t('uc.finance.withdraw.tip11')+
+                                    currentCoin.minAmount+' ,'+$t('uc.finance.withdraw.tip2')+currentCoin.maxAmount"
                                         >
-                                        </InputNumber>
-                                        <span class="input-group-addon addon-tag uppercase firstt">
-                                            {{currentCoin.unit}}
-                                        </span>
-                                    </Poptip>
-                                </div>
+                                            <!--当前币种可用为零 该input禁止输入-->
+                                            <Input
+                                                :disabled="currentCoin.balance == 0"
+                                                @keyup.native="computerAmount"
+                                                v-model="withdrawAmount"
+                                                :placeholder="$t('uc.finance.withdraw.numtip1')"
+                                                size="large"
+                                                :max="currentCoin.maxAmount"
+                                                style="width:350px;margin-left:5px;"
+                                            />
+                                            <span class="input-group-addon addon-tag uppercase first">
+                                                {{currentCoin.unit}}
+                                            </span>
+                                        </Poptip>
+                                    </div>
                                     <p class="label-fr">
                                         <span>
                                             {{$t('uc.finance.withdraw.avabalance')}}：
                                             <span
-                                                class="label-pointer describe"
+                                                class="label-pointer"
                                                 id="valueAvailable"
                                             >
                                                 {{!currentCoin.balance?'---':currentCoin.balance|toFloor}}
@@ -102,109 +109,113 @@
                                             </a>
                                         </span>
                                     </p>
+                                </div>
                             </div>
-                        </div>
-                         <Slider
-                             v-if="currentCoin.maxTxFee > currentCoin.minTxFee"
-                             v-model="withdrawFee"
-                             show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10"
-                             :max="currentCoin.maxTxFee"
-                             :min="currentCoin.minTxFee"
-                         >
-                         </Slider>
-                        <!--手续费-->
-                        <div class="availablenum form-group-container form-group-container2">
-                            <div class="form-group form-fee">
+                            <Slider
+                                v-if="currentCoin.maxTxFee > currentCoin.minTxFee"
+                                v-model="withdrawFee"
+                                show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10"
+                                :max="currentCoin.maxTxFee"
+                                :min="currentCoin.minTxFee"
+                            >
+                            </Slider>
+                            <!--手续费-->
+                            <div class="availablenum form-group-container form-group-container2">
+                                <div class="form-group form-fee">
                                 <span class="label-amount describe">
                                     {{$t('uc.finance.withdraw.fee')}}
                                     <!--<p class="label-fr">-->
                                     <!--<span>{{$t('uc.finance.withdraw.range')}}：{{currentCoin.minTxFee}} - {{currentCoin.maxTxFee}}</span>-->
                                     <!--</p>-->
-                                </span>
-                                <div
-                                    class="input-group"
-                                    style="margin-top:14px;position:relative;display:inline-block;"
-                                >
-                                    <!--<Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">-->
-                                    <InputNumber
-                                        readonly
-                                        v-model="withdrawFee"
-                                        :min="currentCoin.minTxFee"
-                                        :max="currentCoin.maxTxFee"
-                                        size="large"
-                                        style="width:350px;margin-left:5px;"
+                                </span>：
+                                    <div
+                                        class="input-group"
+                                        style="margin-top:14px;position:relative;display:inline-block;"
                                     >
-                                    </InputNumber>
-                                    <span class="input-group-addon addon-tag uppercase">
-                                        {{currentCoin.unit}}
-                                    </span>
-                                    <!--</Poptip>-->
+                                        <!--<Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">-->
+                                        <Input
+                                            readonly
+                                            v-model="withdrawFee"
+                                            :min="currentCoin.minTxFee"
+                                            :max="currentCoin.maxTxFee"
+                                            size="large"
+                                            style="width:350px;margin-left:5px;"
+                                        />
+                                        <span class="input-group-addon addon-tag uppercase">
+                                            {{currentCoin.unit}}
+                                        </span>
+                                        <!--</Poptip>-->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="availablenum form-group-container form-group-container2">
-                            <!--到账数量-->
-                            <div class="form-group">
-                                <span class="describe">{{$t('uc.finance.withdraw.arriamount')}}</span>
-                                <div
-                                    class="input-group"
-                                    style="margin-top:14px;position:relative;display:inline-block"
-                                >
-                                    <InputNumber
-                                        readonly
-                                        v-model="withdrawOutAmount"
-                                        :placeholder="$t('uc.finance.withdraw.arriamount')"
-                                        size="large"
-                                        style="width:350px;margin-left:5px;"
+                            <div class="availablenum form-group-container form-group-container2">
+                                <!--到账数量-->
+                                <div class="form-group">
+                                    <span class="describe">
+                                        {{$t('uc.finance.withdraw.arriamount')}}
+                                    </span>：
+                                    <div
+                                        class="input-group"
+                                        style="margin-top:14px;position:relative;display:inline-block"
                                     >
-                                    </InputNumber>
-                                    <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->
-                                    <span class="input-group-addon addon-tag uppercase">
-                                        {{currentCoin.unit}}
-                                    </span>
+                                        <Input
+                                            readonly
+                                            v-model="withdrawOutAmount"
+                                            :placeholder="$t('uc.finance.withdraw.arriamount')"
+                                            size="large"
+                                            style="width:350px;margin-left:5px;"
+                                        />
+                                        <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->
+                                        <span class="input-group-addon addon-tag uppercase">
+                                            {{currentCoin.unit}}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="action-foot">
+                                <!--提币数量等于零 或者 小于最小提币数量 该按钮禁用-->
+                                <Button
+                                        id="withdrawSubmit"
+                                        long
+                                        size="large"
+                                        type="primary"
+                                        style="height:40px;"
+                                        @click="apply"
+                                        :disabled="withdrawAmount == 0 || withdrawAmount < currentCoin.minAmount"
+                                >
+                                    {{$t('uc.finance.withdraw.pickup')}}
+                                </Button>
+                            </div>
                         </div>
-                        <div class="action-foot">
-                            <!--提币数量等于零 或者 小于最小提币数量 该按钮禁用-->
-                            <Button
-                                id="withdrawSubmit"
-                                long
-                                size="large"
-                                type="primary"
-                                style="height:40px;"
-                                @click="apply"
-                                :disabled="withdrawAmount == 0 || withdrawAmount < currentCoin.minAmount"
-                            >
-                                {{$t('uc.finance.withdraw.pickup')}}
-                            </Button>
-                        </div>
-                    </div>
-                    <div class="table-inner action-box">
-                        <!-- <i class="angle" style="right: 27px;"></i> -->
                         <div class="action-content pt10">
                             <div class="action-body">
                                 <p class="acb-p1">
                                     {{$t('common.tip')}}
                                 </p>
-                                <p class="acb-p2">• {{$t('uc.finance.withdraw.msg3')}}：{{currentCoin.minAmount}}{{$t('uc.finance.withdraw.msg4')}}。<br>• {{$t('uc.finance.withdraw.msg5')}}<br>• {{$t('uc.finance.withdraw.msg6')}} </p>
+                                <p class="acb-p2">
+                                    • {{$t('uc.finance.withdraw.msg3')}}：{{currentCoin.minAmount}}{{$t('uc.finance.withdraw.msg4')}}。<br>
+                                    • {{$t('uc.finance.withdraw.msg5')}}<br>
+                                    • {{$t('uc.finance.withdraw.msg6')}}
+                                </p>
                             </div>
                         </div>
+                    </div>
+                    <div class="table-inner action-box">
+                        <!-- <i class="angle" style="right: 27px;"></i> -->
                         <div class="action-content">
                             <div class="action-body">
                                 <p class="acb-p1">{{$t('uc.finance.withdraw.record')}}</p>
                                 <div class="order-table">
-                                    <p class="acb-p2" style="margin-bottom:10px;">
+                                    <!--<p class="acb-p2" style="margin-bottom:10px;">
                                         • {{$t('uc.finance.withdraw.click')}}
                                         <i class="ivu-icon ivu-icon-funnel"></i>
                                         {{$t('uc.finance.withdraw.filtrate')}}
-                                    </p>
+                                    </p>-->
                                     <Table
                                         stripe
                                         :columns="tableColumnsWithdraw"
                                         :data="tableWithdraw"
                                         :loading="loading"
-                                        style="border-top: 1px solid #f5f5f5;"
                                     >
                                     </Table>
                                     <div id="pages">
@@ -697,21 +708,43 @@ export default {
 <style lang="scss">
 .withdraw-form-inline {
     padding: 20px 40px 0 40px;
-    .ivu-input {
-        height: 40px;
-        line-height: 40px;
+}
+.input-group,
+.ivu-input-wrapper {
+    width: 270px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.ivu-table-filter-list .ivu-table-filter-select-item {
+    color: #fff;
+    &:hover {
+        background: transparent;
+        color: #3399ff;
     }
 }
 </style>
 
 <style scoped lang="scss">
 .operationform{
-    margin-top: 15px;
+    padding:0 28px 30px;
+    background: #111530;
+    .operationform-title {
+        height: 50px;
+        line-height: 50px;
+        color: #fff;
+        border-bottom: 1px solid #2A3850;
+        margin-bottom: 35px;
+        padding-left: 10px;
+    }
+    .operationform-from {
+        margin: 0 240px 60px;
+    }
     .inner-left{
-    display: flex;
-    align-items: center;
-    margin-left:60px;
-    margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        margin-left:60px;
+        margin-bottom: 15px;
     }
     .controlAddress{
         font-size:14px;
@@ -728,7 +761,7 @@ export default {
             display: inline-block;
         }
         .label-fr{
-            margin-left: 135px;
+            margin: 10px 0 0 145px;
         }
     }
 }
@@ -746,7 +779,7 @@ export default {
   line-height: 20px;
   border-left: 1px solid #dddee1;
 }
-.nav-rights {
+.withdraw {
     .nav-right {
         height: auto;
         overflow: hidden;
@@ -766,7 +799,6 @@ export default {
         }
       }
       .action-box {
-        padding: 10px 20px 20px;
         .form-group-container {
           .form-group.form-amount {
             .input-group .ivu-poptip {
@@ -857,21 +889,26 @@ export default {
 .describe {
     display: inline-block;
     width:120px;
+    text-align: right;
+    color: #8090AF;
 }
 
 .acb-p1 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     line-height: 50px;
+    color: #fff;
 }
 
 .acb-p2 {
+    color: #8090AF;
     font-size: 14px;
-    line-height: 24px;
+    line-height: 30px;
 }
 
 .action-content.pt10 {
     padding-top: 10px;
+    border-top: 1px solid #2A3850;
 }
 
 .action-content {
@@ -889,9 +926,9 @@ export default {
 }
 
 .action-foot {
-    margin-top: 20px;
-    margin-left:190PX;
-    width: 350px;
+    margin-top: 35px;
+    margin-left: 205px;
+    width: 270px;
 }
 
 .hb-night .btn.btn-primary,
@@ -952,12 +989,12 @@ export default {
     background: none;
     cursor: default;
     position: absolute;
-    right: 26px;
-    top: 6px;
+    right: 7px;
+    top: 2px;
 }
 
-.form-group-container .form-group span.addon-tag:last-child.firstt {
-    top: 8px;
+.form-group-container .form-group span.addon-tag:last-child.first {
+    right: 93px;
 }
 
 // .form-group-container2 {
@@ -1176,9 +1213,10 @@ table.table .table-inner.action-box {
 }
 
 .ivu-btn-primary {
-  color: #fff;
-  background-color: #3399ff;
-  border-color: #3399ff;
+    color: #fff;
+    background-color: #3399ff;
+    border-radius: 0;
+    border: 0;
 }
 #pages {
     margin: 10px;
@@ -1204,7 +1242,23 @@ table.table .table-inner.action-box {
 }
 </style>
 <style lang="scss">
-.nav-rights {
+ivu-poptip-body-content-inner {
+    color: #fff;
+}
+.ivu-poptip-inner {
+    background: #10122B;
+    color: #8090AF;
+}
+.ivu-poptip-popper[x-placement^=bottom] .ivu-poptip-arrow:after {
+    border-bottom-color: #10122B;
+}
+.withdraw {
+    .ivu-select-single {
+        .ivu-select-selection {
+            width: 270px;
+            line-height: 35px;
+        }
+    }
   .nav-right {
     .rightarea {
       .action-box {
@@ -1214,6 +1268,7 @@ table.table .table-inner.action-box {
             /*左侧边框*/
             .ivu-select.ivu-select-single {
               .ivu-select-selection {
+                  width: 270px;
                 &:hover {
                   border-color: #3399ff;
                 }
@@ -1227,9 +1282,6 @@ table.table .table-inner.action-box {
             .ivu-select.ivu-select-visible.ivu-select-single {
               .ivu-select-selection {
                 border-color: #3399ff;
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
               }
             }
 
@@ -1273,13 +1325,6 @@ table.table .table-inner.action-box {
                     border-color: #3399ff;
                   }
                 }
-
-                .ivu-input-number-focused {
-                  border-color: #3399ff;
-                  -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                  -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                  box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                }
               }
 
               .ivu-input-number {
@@ -1288,23 +1333,6 @@ table.table .table-inner.action-box {
                 &:hover {
                   border-color: #3399ff;
                 }
-              }
-
-              .ivu-input-number-focused {
-                border-color: #3399ff;
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-              }
-            }
-          }
-
-          .action-foot {
-            #withdrawSubmit {
-              &:focus {
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
               }
             }
           }
@@ -1327,14 +1355,17 @@ table.table .table-inner.action-box {
           #pages {
             .ivu-page {
               .ivu-page-item.ivu-page-item-active {
-                background-color: #3399ff;
-                border-color: #3399ff;
-                color: #fff;
+                  background-color: #111530;
+                  border-color: #191f44;
+                  a {
+                      color: #3399ff;
+                  }
 
                 &:hover {
-                  a {
-                    color: #fff;
-                  }
+                    background-color: #111530;
+                    a {
+                        color: #3399ff;
+                    }
                 }
               }
 
@@ -1361,7 +1392,6 @@ table.table .table-inner.action-box {
             }
           }
         }
-
         .v-transfer-dom .ivu-poptip-content .ivu-poptip-inner {
           .ivu-poptip-body .ivu-table-filter-list-single {
             .ivu-table-filter-select-item {
@@ -1379,6 +1409,37 @@ table.table .table-inner.action-box {
       }
     }
   }
+    .ivu-table-wrapper {
+        margin-right: -1px;
+        .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+        .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+            background: #10122B;
+        }
+    }
+    .ivu-select-selection {
+        width: 270px;
+        height: 35px;
+        line-height: 35px;
+        &:hover {
+            border-color: #3399ff;
+        }
+        .ivu-select-placeholder,
+        .ivu-select-selected-value {
+            height: 35px;
+            line-height: 35px;
+        }
+    }
+    .ivu-select-item-selected {
+        background: transparent;
+    }
+    .ivu-input {
+        width: 270px;
+        height: 35px;
+        line-height: 35px;
+        border-radius: 0;
+        background: transparent;
+        border-color: #58698A;
+    }
 }
 </style>
 
