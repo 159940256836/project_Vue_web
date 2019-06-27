@@ -102,6 +102,16 @@
                                                  {{$t("uc.menuTitle.AccountManagement")}}
                                             </router-link>
                                         </DropdownItem>
+                                         <DropdownItem>
+                                            <router-link to="/newMyExtension">
+                                                 {{$t("apiAdmin.Mypromotion")}}
+                                            </router-link>
+                                        </DropdownItem>
+                                         <DropdownItem>
+                                            <router-link to="/apiapimanagement">
+                                                 {{$t("apiAdmin.APmanagement")}}
+                                            </router-link>
+                                        </DropdownItem>
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Dropdown>

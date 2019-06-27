@@ -267,55 +267,10 @@ export default {
 };
 </script>
 <style lang="scss">
-.contenta_aa{
-  color:#fff !important;
-}
-.contenta_bb{
-  color:#fff !important;
-}
-.new_tabid2{
-  position:relative;
-  top:-50px;
-}
-.contenta_contone{
-  margin-bottom: 80px !important;
-}
-.contenta_two{
-  padding-bottom: 100px !important;
-}
-.contenta{
-  padding-top:0 !important;
-}
-.activeaa{
-  color:#3399FF;
-  border-bottom:1px solid #3399FF;
-}
+
 .new_Usereement{
   background:#0e0e28 !important;
-   .contenta_cont{
-    border:0 !important;
-  }
-  .contenta_cont_content{
-    background:rgba(17,21,48,1);
-    border:1px solid rgba(17,21,48,1);
-    color:#8090AF !important;
-    font-size:14px !important;
-  }
-  .contenta_cont_title{
-    width:1200px !important;
-    margin-left:0 !important;
-    border:0 !important;
-    background:rgba(25,29,58,1);
-    border:1px solid rgba(17,21,48,1);
-    height:64px !important;
-    line-height:64px !important;
-    color:#8090AF !important;
-    font-size:16px !important;
-    padding-left:30px !important;
-
-  }
-}
-.contentb {
+  .contentb {
   padding-bottom: 140px !important;
 }
 .contenta {
@@ -401,4 +356,53 @@ export default {
     font-size: 46px;
   }
 }
+  .contenta_aa{
+  color:#fff !important;
+}
+.contenta_bb{
+  color:#fff !important;
+}
+.new_tabid2{
+  position:relative;
+  top:-50px;
+}
+.contenta_contone{
+  margin-bottom: 80px !important;
+}
+.contenta_two{
+  padding-bottom: 100px !important;
+}
+.contenta{
+  padding-top:0 !important;
+}
+.activeaa{
+  color:#3399FF;
+  border-bottom:1px solid #3399FF;
+}
+   .contenta_cont{
+    border:0 !important;
+  }
+  .contenta_cont_content{
+    background:rgba(17,21,48,1);
+    border:1px solid rgba(17,21,48,1);
+    color:#8090AF !important;
+    font-size:14px !important;
+  }
+  .contenta_cont_title{
+    width:1200px !important;
+    margin-left:0 !important;
+    border:0 !important;
+    background:rgba(25,29,58,1);
+    border:1px solid rgba(17,21,48,1);
+    height:64px !important;
+    line-height:64px !important;
+    color:#8090AF !important;
+    font-size:16px !important;
+    padding-left:30px !important;
+
+  }
+}
+
+
+
 </style>

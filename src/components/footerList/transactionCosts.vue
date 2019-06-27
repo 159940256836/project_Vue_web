@@ -1,7 +1,7 @@
 <template>
   <div class="transactionCosts new_transactionCosts">
-    <div class="top">
-      <div class="title_a">{{ $t("foot.Transactiate") }}</div>
+    <div class="top11111">
+      <div class="title_a">交易费率</div>
     </div>
     <div class="content bg">
       <div class="content_top">
@@ -13,7 +13,7 @@
           <div @click="listTab(4)" :class="tabid==4?'active':''">{{ $t("foot.Currencrates") }}</div>
         </div>
       </div>
-      <div class="content_content" v-show="tabid==1">
+      <div class="content_content" id="content" v-show="tabid==1">
         <div class="content_tab">
           <!-- 费率标准 交易对费率 -->
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <!-- 等级费率 -->
-      <div class="content_content" v-show="tabid==2">
+      <div class="content_content" id="content" v-show="tabid==2">
         <div class="content_tab">
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
           <!-- <div class="content_tab_title1">{{$t("foot.Gradrate")}}</div> -->
@@ -38,7 +38,7 @@
         </div>
       </div>
       <!-- otc币种费率 -->
-      <div class="content_content" v-show="tabid==3">
+      <div class="content_content" id="content"  v-show="tabid==3">
         <div class="content_tab">
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
           <!-- <div class="content_tab_title1">{{$t("foot.Otcurrenrates")}}</div> -->
@@ -49,7 +49,7 @@
       </div>
 
       <!-- 币种费率 -->
-      <div class="content_content" v-show="tabid==4">
+      <div class="content_content" id="content" v-show="tabid==4">
         <div class="content_tab">
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
           <!-- <div class="content_tab_title1">{{$t("foot.Currencrates")}}</div> -->
@@ -267,13 +267,50 @@ export default {
 };
 </script>
 <style lang="scss">
-
+.ivu-table:before{
+  height: 0 !important;
+}
+.ivu-table:after{
+  width: 0 !important;
+}
+.new_transactionCosts .ivu-table td, .ivu-table th{
+  border-bottom: none !important;
+}
 .content .content_content .content_tab .content_tab_buy{
   width:1200px !important;
+}
+.top11111{
+  width: 1200px;
+    // height: 242px;
+    // line-height: 242px;
+    margin: 0 auto;
+    color: #ffffffff;
+    margin-top:60px;
+    background:#0e0e28;
+    // font-size: 46px;
+    font-size:20px;
+
 }
 .new_transactionCosts{
   background:#0e0e28 !important;
   padding-top:29px;
+  .top {
+  width: 100%;
+  height: 242px;
+  // background: url(../../assets/images/fl1.png) 0 0 no-repeat;
+  height: auto;
+  position: relative;
+  top: 60px;
+  .title_a {
+    width: 1200px;
+    // height: 242px;
+    // line-height: 242px;
+    margin: 0 auto;
+    color: #ffffffff;
+    // font-size: 46px;
+    font-size:20px;
+  }
+}
   .content_tab_title{
     font-size:16px !important;
     color:#fff !important;
@@ -283,7 +320,7 @@ export default {
     background:#0e0e28 !important;
   }
   .content .content_content{
-    margin-top:36px !important;
+    // margin-top:36px !important;
     padding-top:0 !important;
     top:0 !important;
   }
@@ -312,23 +349,7 @@ export default {
      font-size:20px !important;
   }
 }
-.top {
-  width: 100%;
-  height: 242px;
-  // background: url(../../assets/images/fl1.png) 0 0 no-repeat;
-  height: auto;
-  position: relative;
-  top: 60px;
-  .title_a {
-    width: 1200px;
-    // height: 242px;
-    // line-height: 242px;
-    margin: 0 auto;
-    color: #ffffffff;
-    // font-size: 46px;
-    font-size:20px;
-  }
-}
+
 .content {
   width: 100%;
   .content_content {
@@ -409,7 +430,7 @@ export default {
     height: 104px;
     background: #f7f7f7ff;
     position: relative;
-    top: 60px;
+    // top: 60px;
     .content_top_list {
       width: 1200px;
       height: 104px;

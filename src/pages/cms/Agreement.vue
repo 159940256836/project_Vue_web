@@ -73,6 +73,10 @@
 .new_agreement{
     background:#0e0e28 !important;
     padding-top:60px;
+    padding-bottom: 50px;
+    .content-wrap{
+        border:0 !important;
+    }
     h4{
         color:#fff !important;
     }

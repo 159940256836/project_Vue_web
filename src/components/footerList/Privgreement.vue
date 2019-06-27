@@ -83,6 +83,7 @@ export default {
 </script>
 <style lang="scss">
 .Privgreement_new{
+  padding-bottom: 120px;
   .pre_title{
     padding-top:38px;
   }
@@ -111,11 +112,10 @@ export default {
     font-size:14px !important;
   }
 }
-.contenta {
+.Privgreement_new .contenta {
   width: 100%;
   position: relative;
   top: 60px;
-  padding-top: 50px;
   // padding-bottom: 148px;
   .contenta_cont_content {
     padding: 30px;
@@ -154,7 +154,7 @@ export default {
   }
 }
 
-.top {
+.Privgreement_new .top {
   width: 100%;
   height: 242px;
   background: url(../../assets/images/fl1.png) 0 0 no-repeat;

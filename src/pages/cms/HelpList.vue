@@ -1,6 +1,6 @@
 <template>
     <div class="help common help_common">
-        <div class="bannerimg">
+        <div class="bannerimg" style="width:1200px;">
             <span>{{$t("footer.helpCenter")}}</span>
         </div>
          <!-- <img class="bannerimg"> -->
