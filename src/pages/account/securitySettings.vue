@@ -173,7 +173,8 @@
                 width="875"
                 >
                 <div class="detail-list" style="width: 100%;">
-                    <h3 style="color:#3697FE;font-weight:400;">请上传资料完成实名认证</h3>
+                    <!-- 请上传资料完成实名认证 -->
+                    <h3 style="color:#3697FE;font-weight:400;">{{ $t("new.nformationto") }}</h3>
                     <Form ref="formValidate6" :model="formValidate6" :rules="ruleValidate" :label-width="85" style="text-align:center;">
                         <div class="validate" style="text-align:center;color:#8090AF;">
                             <FormItem :label="$t('uc.safe.realname')" prop="realName" >
@@ -243,7 +244,7 @@
                         <span v-else class="uploadimgtip">Tip: uploaded pictures only support.Jpg,.Gif,.Png,.Jpeg format, and recommended size is 100kb-1024kb, otherwise it may fail to upload.</span>
                         <!-- Button -->
                         <FormItem style="text-align:center;">
-                            <Button type="primary" @click="handleSubmit('formValidate6')" style="margin-left: -85px;width:400px;border-radius:0;height:40px;font-size:19px;">{{$t('uc.safe.SubmitCertification')}}</Button>
+                            <Button type="primary" @click="handleSubmit('formValidate6')" style="margin-left: -85px;width:400px;border-radius:0;height:40px;font-size:19px;">{{$t('new.Uploartification')}}</Button>
                             <!-- <Button @click="handleReset('formValidate6')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button> -->
                         </FormItem>
                     </Form>
@@ -280,7 +281,7 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate2')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('uc.safe.confirm')}}
+                                {{$t('new.confirmaaa')}}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate2')" style="margin-left: 8px">
                                 {{$t('uc.safe.reset')}}
@@ -322,7 +323,7 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate3')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('uc.safe.confirm')}}
+                                {{$t('new.confirmaaa')}}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate3')" style="margin-left: 8px;">
                                 {{$t('uc.safe.reset')}}
@@ -332,7 +333,7 @@
                 </div>
             </Modal>
             <Modal
-                :title="$t('uc.safe.change_login_password')"
+                :title="$t('new.Modifpassword')"
                 v-model="modal4"
                 :styles="{top: '100px'}"
                 width="534"
@@ -369,7 +370,7 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate4')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('uc.safe.confirm')}}
+                                {{ $t('new.confirmaaa') }}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate4')" style="margin-left: 8px">
                                 {{$t('uc.safe.reset')}}
@@ -379,7 +380,7 @@
                 </div>
             </Modal>
             <Modal
-                :title="!fGetBackFundpwd ? $t('uc.safe.change_fund_password') : $t('uc.safe.retrieve_fund_password')"
+                :title="!fGetBackFundpwd ? $t('new.Modifyassword') : $t('uc.safe.retrieve_fund_password')"
                 v-model="modal5"
                 :styles="{top: '100px'}"
                 width="534"
@@ -445,7 +446,7 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate5')" style="width: 300px;border-radius:0;">
-                                {{$t('uc.safe.confirm')}}
+                                {{ $t('new.confirmaaa') }}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate5')" style="margin-left: 8px">
                                 {{$t('uc.safe.reset')}}
