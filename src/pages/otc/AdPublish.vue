@@ -60,7 +60,8 @@
                 prop="coin"
               >
                 <Select
-                  v-model="form.coin" :disabled='isId'
+                  v-model="form.coin"
+                  :disabled='isId'
                   @on-change="changeCoin"
                 >
                   <Option
