@@ -675,7 +675,7 @@ export default {
                   class: className
                 },
                 style: {
-                  color: 'red'
+                  color: '#F15057'
                 }
               },
               this.$t('exchange.buyin')
@@ -688,7 +688,7 @@ export default {
                   class: className
                 },
                 style: {
-                  color: 'red'
+                  color: '#00B275'
                 }
               },
               this.$t('exchange.sellout')
