@@ -30,7 +30,7 @@
              
             </Form>
             <div style="margin-left:60px; font-size:12px; color:#8090AF">{{$t('apiAdmin.Thekeybound')}}</div>
-            <Button type="primary" @click="codeVerify" style="width: 80%;display:block;margin-left:64px; margin-top:17px;margin-buttom:115px;">{{$t('apiAdmin.create')}}</Button>
+            <Button type="primary" @click="codeVerify" style="width: 85%;display:block;margin-left:64px; margin-top:17px;margin-buttom:115px;">{{$t('apiAdmin.create')}}</Button>
           </div>
           
       </Card>
@@ -425,7 +425,7 @@ export default {
       arr.push({
         title: this.$t("apiAdmin.createTime"),
         // width: 100,
-        width: this.locale == 'en' ? 110 : 100,
+        // width: this.locale == 'en' ? 110 : 100,
         key: "createTime"
       });
       arr.push({
@@ -440,7 +440,8 @@ export default {
       });
       arr.push({
         title: this.$t("apiAdmin.accessKey"),
-        width: this.locale == 'en' ? 130 : 100,
+        //6.28修改
+        // width: this.locale == 'en' ? 130 : 100,
         render: (h, params) => {
           const text = "******";
           return h("span", {}, text);
@@ -448,7 +449,8 @@ export default {
       });
       arr.push({
         title: this.$t("apiAdmin.bindIpAddress"),
-        width: this.locale == 'en' ? 130 : '',
+        //6.28修改
+        // width: this.locale == 'en' ? 130 : '',
         render: (h, params) => {
           let txts = params.row.bindIp.split(",");
           txts = txts.length > 1 ? txts[0] + "  " + "..." : txts;
@@ -457,7 +459,8 @@ export default {
       });
       arr.push({
         title: this.$t("apiAdmin.ioDays"),
-        width: this.locale == 'en' ? 150 : '',
+        //6.28修改
+        // width: this.locale == 'en' ? 150 : '',
         render: (h, params) => {
           if (params.row.bindIp) {
             let residue = Date.parse(params.row.expireTime) - Date.parse(new Date());

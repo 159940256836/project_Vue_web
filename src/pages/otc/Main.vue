@@ -29,21 +29,25 @@
           </div>
           <div class="fiat-login-title">
             <p>
-              <span>当前等级认证</span>
+              <!-- 当前等级认证 -->
+              <span>{{ $t("new.Currenrtification") }}</span>
               <span>1</span>
             </p>
             <p>
-              <span>当前资产总估值</span>
+              <!-- 当前资产总估值 -->
+              <span>{{ $t("new.Currentasset") }}</span>
               <span>0.000000</span>
             </p>
           </div>
           <div class="fiat-login-title">
             <p>
-              <span>可用</span>
+              <!-- 可用 -->
+              <span>{{ $t("new.Available") }}</span>
               <span>1</span>
             </p>
             <p>
-              <span>冻结</span>
+              <!-- 冻结 -->
+              <span>{{ $t("new.freeze") }}</span>
               <span>0.000000</span>
             </p>
           </div>
@@ -68,28 +72,33 @@
             <div class="fiat-title-info">
               <router-link to="/order">
                 <button>
-                  查看订单
+                  <!-- 查看订单 -->
+                  {{ $t("new.checkorder") }}
                 </button>
               </router-link>
             </div>
           </div>
           <div class="fiat-login-title">
             <p>
-              <span>总单数</span>
+              <!-- 总单数 -->
+              <span> {{ $t("new.Totalingular") }}</span>
               <span>0</span>
             </p>
             <p>
-              <span>完成率</span>
+              <!-- 完成率 -->
+              <span>{{ $t("new.Completiorate") }}</span>
               <span>0%</span>
             </p>
           </div>
           <div class="fiat-login-title">
             <p>
-              <span>单次限额</span>
+              <!-- 单次限额 -->
+              <span>{{ $t("new.Singlelimit") }}</span>
               <span>1</span>
             </p>
             <p>
-              <span>今日交易金额</span>
+              <!-- 今日交易金额 -->
+              <span>{{ $t("new.today") }}</span>
               <span>0</span>
             </p>
           </div>

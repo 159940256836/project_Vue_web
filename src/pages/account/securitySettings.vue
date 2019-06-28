@@ -332,7 +332,7 @@
                 </div>
             </Modal>
             <Modal
-                :title="$t('uc.safe.change_login_password')"
+                :title="$t('new.Modifpassword')"
                 v-model="modal4"
                 :styles="{top: '100px'}"
                 width="534"
@@ -369,7 +369,7 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate4')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('uc.safe.confirm')}}
+                                {{ $t('new.confirmaaa') }}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate4')" style="margin-left: 8px">
                                 {{$t('uc.safe.reset')}}
@@ -379,7 +379,7 @@
                 </div>
             </Modal>
             <Modal
-                :title="!fGetBackFundpwd ? $t('uc.safe.change_fund_password') : $t('uc.safe.retrieve_fund_password')"
+                :title="!fGetBackFundpwd ? $t('new.Modifyassword') : $t('uc.safe.retrieve_fund_password')"
                 v-model="modal5"
                 :styles="{top: '100px'}"
                 width="534"
@@ -445,7 +445,7 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate5')" style="width: 300px;border-radius:0;">
-                                {{$t('uc.safe.confirm')}}
+                                {{ $t('new.confirmaaa') }}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate5')" style="margin-left: 8px">
                                 {{$t('uc.safe.reset')}}
