@@ -3,7 +3,7 @@
         <div class="container chat-in-box" id="List">
             <p style="padding: 10px 0 10px 20px;font-size: 18px;">
               <router-link
-                  to="/uc/order"
+                  to="/order"
                   style="color:#3399ff;"
               >
                   {{$t('otc.myorder')}}
@@ -31,7 +31,7 @@
                         </tr>
                         <tr>
                             <th>
-                                <router-link :to="{ path: '/checkuser', query: { 'id': msg.otherSide }}">
+                                <router-link :to="{ path: '/checkuser', query: { 'id': msg.hisId }}">
                                 <!-- {{msg.otherSide && msg.otherSide.length>2 && strpro(msg.otherSide)}} -->
                                     {{msg.otherSide}}
                                 </router-link>

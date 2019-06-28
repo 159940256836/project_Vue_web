@@ -1,8 +1,8 @@
 <template>
 <div class="content-wrap" id="List">
     <div class="container">
-        <Row>
-            <Col span="4">
+        <h2 class="title">{{ this.$t('otc.myorder')+' > ' + '订单详情' }}</h2>
+        <div class="right-safe">
             <div class="leftmenu left-box">
                 <div class="user-info">
                     <div class="avatar-box">
@@ -13,10 +13,10 @@
                         <div class="user-name">
                         </div>
                     </div>
-                    <span class="ml10">
-                      {{user.username}}
-                      <!-- {{user.username && user.username && strpro(user.username)}} -->
-                      </span>
+                    <p class="ml10">
+                    {{'ID:'+user.username}}
+                    <!-- {{user.username && user.username && strpro(user.username)}} -->
+                    </p>
                 </div>
                 <div class="deal-market-info">
                     <p v-if="user.emailVerified==1">
@@ -44,6 +44,24 @@
                         <span class="unmarket">{{$t('otc.checkuser.idcardundo')}}</span>
                     </p>
                 </div>
+                <div class="trade-right-box">
+                    <div class="trade-price">
+                        <Row class="tit">
+                            <Col span="10" style="width:270px;">
+                              <p>{{$t('otc.checkuser.language')}}</p>
+                              <p>{{$t('otc.checkuser.languagetext')}}</p>
+                            </Col>
+                            <Col span="6" style="text-align:left">
+                              <p>{{$t('otc.checkuser.registtime')}}</p> 
+                              <p>{{user.createTime}}</p>
+                            </Col>
+                            <Col span="6" style="text-align:right">
+                              <p>{{$t('otc.checkuser.exchangetimes')}}</p> 
+                              <p>{{user.transactions}}</p>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
                 <!-- <div class="deal-user-trade-info">
                                                     <p>交易次数：
                                                         <em class="trade-times">{{user.transactions}}</em>
@@ -53,65 +71,45 @@
                                                     </p>
                                                 </div> -->
             </div>
-            </Col>
-            <Col span="20">
-            <div class="right-safe">
-                <div class="trade-right-box">
-                    <div class="trade-price">
-                        <Row class="tit">
-                            <Col span="6">{{$t('otc.checkuser.language')}}: {{$t('otc.checkuser.languagetext')}}</Col>
-                            <Col span="6">{{$t('otc.checkuser.registtime')}}: {{user.createTime}}</Col>
-                            <Col span="6">{{$t('otc.checkuser.exchangetimes')}}: {{user.transactions}}</Col>
-                        </Row>
-                    </div>
-                </div>
-                <div class="trade-operation">
-                    <div class="trade-group merchant-top">
-                        <i class="merchant-icon tips"></i>
-                        <span class="tips-word">{{user.username && user.username && strpro(user.username)}}{{$t('otc.checkuser.exchangeinfo')}}</span>
-                    </div>
-                </div>
-                <div class="demo-tabs-style1 tabbox">
-                    <Tabs value="name1">
-                        <TabPane :label="$t('otc.checkuser.tablabel1')" name="name1" >
-                            <div class="order-table">
-                                <Table
-                                    :no-data-text="$t('common.nodata')"
-                                    stripe
-                                    :columns="tableColumnsOrderSell"
-                                    :data="tableOrderSell"
-                                    :loading="loading"
-                                    :disabled-hover="true"
-                                ></Table>
-                                <!-- <div style="margin: 10px;overflow: hidden">
-                                                                            <div style="float: right;">
-                                                                                <Page :total="100" :current="1" @on-change="changePage"></Page>
-                                                                            </div>
-                                                                        </div> -->
-                            </div>
-                        </TabPane>
-                        <TabPane :label="$t('otc.checkuser.tablabel2')" name="name2">
-                            <div class="order-table">
-                                <Table
-                                    :no-data-text="$t('common.nodata')"
-                                    stripe
-                                    :columns="tableColumnsOrderBuy"
-                                    :data="tableOrderBuy"
-                                    :loading="loading"
-                                    :disabled-hover="true"
-                                ></Table>
-                                <!-- <div style="margin: 10px;overflow: hidden">
-                                                                            <div style="float: right;">
-                                                                                <Page :total="100" :current="1" @on-change="changePage"></Page>
-                                                                            </div>
-                                                                        </div> -->
-                            </div>
-                        </TabPane>
-                    </Tabs>
-                </div>
+            <div class="demo-tabs-style1 tabbox">
+                <Tabs value="name1">
+                    <TabPane :label="$t('otc.checkuser.tablabel1')" name="name1" >
+                        <div class="order-table">
+                            <Table
+                                :no-data-text="$t('common.nodata')"
+                                stripe
+                                :columns="tableColumnsOrderSell"
+                                :data="tableOrderSell"
+                                :loading="loading"
+                                :disabled-hover="true"
+                            ></Table>
+                            <!-- <div style="margin: 10px;overflow: hidden">
+                                                                        <div style="float: right;">
+                                                                            <Page :total="100" :current="1" @on-change="changePage"></Page>
+                                                                        </div>
+                                                                    </div> -->
+                        </div>
+                    </TabPane>
+                    <TabPane :label="$t('otc.checkuser.tablabel2')" name="name2">
+                        <div class="order-table">
+                            <Table
+                                :no-data-text="$t('common.nodata')"
+                                stripe
+                                :columns="tableColumnsOrderBuy"
+                                :data="tableOrderBuy"
+                                :loading="loading"
+                                :disabled-hover="true"
+                            ></Table>
+                            <!-- <div style="margin: 10px;overflow: hidden">
+                                                                        <div style="float: right;">
+                                                                            <Page :total="100" :current="1" @on-change="changePage"></Page>
+                                                                        </div>
+                                                                    </div> -->
+                        </div>
+                    </TabPane>
+                </Tabs>
             </div>
-            </Col>
-        </Row>
+        </div>
     </div>
 </div>
 </template>
@@ -205,7 +203,7 @@ export default {
                     } else if (!self.member.realName) {
                       self.$Message.error(self.$t("otc.checkuser.operatemsg"));
                       setTimeout(() => {
-                        self.$router.push("/uc/safe");
+                        self.$router.push("/account");
                       }, 2000);
                     } else {
                       self.$router.push(
@@ -220,15 +218,12 @@ export default {
               },
               [
                 h(
-                  "Button",
+                  "span",
                   {
-                    props: {
-                      type: "success",
-                      long: true
-                    },
                     style: {
                       marginRight: "8px",
-                      width: "80%"
+                      width: "80%",
+                      color: '#F15057'
                     }
                   },
                   self.$t("otc.checkuser.buyin")
@@ -345,8 +340,8 @@ export default {
     getAdv() {
       //获取个人账户信息
       this.$http
-        .post(this.host + "/otc/advertise/member", {
-          name: this.$route.query.id
+        .post(this.host + "otc/advertise/returnMember", {
+          id: this.$route.query.id
         })
         .then(response => {
           var resp = response.body;
@@ -382,26 +377,29 @@ export default {
 
 <style scoped>
 .container {
-  padding-top: 30px;
   margin: 0 auto;
   width: 1200px;
-  background: white;
+  background: #0e0e28;
+  color: #fff;
+  overflow: hidden;
 }
 .content-wrap {
-  background: #f5f5f5;
+  background: #0e0e28;
   min-height: 600px;
   padding-top: 80px;
 }
 /* right */
-
-.tabbox {
-  margin-left: 20px;
-  background: #fff;
-  padding: 20px 15px;
+.title {
+    font-weight: normal;
+    font-size: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 39px;
+    margin-bottom: 26px;
 }
 
 .merchant-top {
-  height: 50px;
+  height: 55px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -410,7 +408,7 @@ export default {
   align-items: center;
   background: #fff;
   padding: 0 15px;
-  color: #0d214e;
+  color: #111530;
   margin-left: 20px;
 }
 
@@ -436,22 +434,24 @@ export default {
 }
 
 .trade-right-box {
-  margin-left: 33px;
-  margin-right:15px;
+  float: left;
   text-align: left;
+  width: 650px;
 }
 
 .trade-right-box .trade-price {
-  padding: 15px 0;
-  background-color: white;
-  border: 1px solid #ebeff5;
-  margin-bottom: 20px;
+  padding: 24px 0;
+  background-color: transparent;
 }
 
 .trade-right-box .trade-price p {
-  color: #0d214e;
+  color: #8090AF;
   font-size: 14px;
-  line-height: 2.8;
+  line-height: 2.6;
+}
+
+.trade-right-box .trade-price p:nth-child(2n) {
+  color: #fff;
 }
 
 .trade-right-box .trade-price p label {
@@ -588,7 +588,7 @@ export default {
 }
 
 .trade-right-box .trade-remark .titles span {
-  font-size: 16px;
+  font-size: 22px;
   color: #0d214e;
   padding-right: 30px;
 }
@@ -615,22 +615,18 @@ export default {
 /* left */
 
 .leftmenu {
-  margin-bottom: 60px;
-  background: #fff;
+  margin-bottom: 22px;
+  background: #111530;
   position: relative;
-  min-height: 1px;
-  padding: 50px 15px 50px 10px;
+  padding: 27px 43px;
+  height: 188px;
 }
 
 .left-box .user-info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  float: left;
+  height: 100%;
+  width: 65px;
   padding-bottom: 15px;
-  border-bottom: 1px dashed #ebeff5;
 }
 
 .avatar-box {
@@ -685,14 +681,22 @@ export default {
   color: #fff;
 }
 
-.left-box span.ml10 {
+.left-box p.ml10 {
   color: #0d214e;
-  margin-left: 5px;
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+  color: #8090AF;
+  width: 65px;
 }
 
 .left-box .deal-market-info {
-  padding: 20px 0 20px 20px;
-  border-bottom: 1px dashed #ebeff5;
+  float: left;
+  color: #8090AF;
+  margin-top: -6px;
+  margin-left: 105px;
+  width: 252px;
+  border-right: 1px solid #26324B;
 }
 
 .left-box .deal-market-info p {
@@ -703,7 +707,7 @@ export default {
   -ms-flex-align: center;
   align-items: center;
   font-size: 14px;
-  color: #0d214e;
+  margin-bottom: 18px;
 }
 
 .iconfont {
@@ -769,7 +773,13 @@ export default {
 <style lang="scss">
     .right-safe{
         .ivu-tabs{
+              * {
+                background: transparent;
+                // border: none;
+              }
             .ivu-tabs-bar{
+                border-bottom: none;
+                background: #191D3A;
                 .ivu-tabs-nav-container{
                     .nav-text.ivu-tabs-nav{
                         .ivu-tabs-tab.ivu-tabs-tab-active.ivu-tabs-tab-focused{
@@ -787,24 +797,94 @@ export default {
                 }
             }
         }
+        .ivu-tabs-nav {
+          padding-left: 10px;
+          color: #fff;
+        }
+        .order-table .ivu-table-header tr {
+          height: 50px;
+        }
     }
     .right-safe .demo-tabs-style1.tabbox{
       .ivu-tabs{
+        th,td {
+          border-bottom: none;
+        }
         // overflow:hidden;
         padding-bottom: 20px;
         .ivu-tabs-content.ivu-tabs-content-animated{
-          width: 99.3%;
+          width: 100%;
           margin: 0 auto;
-          .ivu-tabs-tabpane{
-            .order-table .ivu-table-wrapper .ivu-table.ivu-table-stripe{
-              .ivu-table-body .ivu-table-tbody .ivu-table-row td{
-                background:#fff;
-              }
-            }
+          // .ivu-tabs-tabpane{
+          //   .order-table .ivu-table-wrapper .ivu-table.ivu-table-stripe{
+          //     .ivu-table-body .ivu-table-tbody .ivu-table-row td{
+          //       background: #191D3A;
+          //     }
+          //   }
+          // }
+          .order-table .ivu-table-wrapper .ivu-table .ivu-table-header th {
+            background: #191D3A;
+          }
+          .order-table .ivu-table-wrapper .ivu-table:before {
+            height: 0;
           }
         }
       }
     }
+
+    .right-safe .ivu-table th,
+    .right-safe .ivu-table td {
+      background: #2A3850;
+    }
+
+    .right-safe  .ivu-table  .ivu-table-tip td {
+      background: transparent;
+    }
+
+
+    .right-safe .ivu-table-wrapper .ivu-table {
+        color: #fff;       
+    }
+
+    .right-safe .ivu-table-wrapper  .ivu-table-stripe {
+        background: transparent;
+    }
+
+    .right-safe .ivu-tabs-nav .ivu-tabs-tab {
+      padding: 18px 16px;
+    }
+
+    .right-safe .ivu-tabs-nav .ivu-tabs-tab:hover {
+      color: #3399FF;
+    }
+
+    .right-safe .ivu-table-wrapper .ivu-table .ivu-table-header th {
+        background: #191D3A;
+        color: #8090AF;
+        //表格标题颜色
+    }
+    .right-safe .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td, 
+    .right-safe .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+        background: #10122B;
+        //表格双数行样式
+    }
+    .right-safe .ivu-table-wrapper .ivu-table .ivu-table-row td {
+        background: #090e2e;
+        //表格单数行样式
+    }
+
+    //去Table边框
+    .right-safe .ivu-table-wrapper .ivu-table:before {
+      background: transparent;
+    }
+    .right-safe div.ivu-card-body {
+      padding: 0;
+    }
+    .right-safe div.ivu-table-wrapper {
+      border: none;
+    }
+    .right-safe .ivu-table:before{content:'';width:100%;height:0px;position:absolute;left:0;bottom:0;z-index:1}
+    .right-safe .ivu-table:after{content:'';width:0px;height:100%;position:absolute;top:0;right:0;z-index:3}
 </style>
 
 

@@ -480,6 +480,9 @@ export default {
 
 <style lang="scss">
 .bill_box_order {
+    * {
+      box-shadow: none !important; 
+    }
     .order_box {
       .ivu-tabs {
         // overflow:initial;
@@ -564,8 +567,12 @@ export default {
                 }
                 tbody {
                     background: transparent;
-                    .ivu-table-cell {
-                        padding-left: 28px;
+                    .ivu-table-cell  {
+                      padding: 0;
+                      text-align: center;
+                    }
+                    tr td:first-child .ivu-table-cell {
+                        padding-left: 6px;
                     }
                 }
                 }            

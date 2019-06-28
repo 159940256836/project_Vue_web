@@ -20,6 +20,7 @@ Vue.use(VueRouter)
 Vue.use(vueResource)
 Vue.use(VueI18n)
 Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
+// Vue.prototype.host = 'http://192.168.124.14/' // 陈然
 // Vue.prototype.host = "http://www.coinmany.com"; // 第一套
 // Vue.prototype.host = "https://manager.coinmany.com/"; // 正式
 // Vue.prototype.host = 'http://47.103.47.131/'// 正式
