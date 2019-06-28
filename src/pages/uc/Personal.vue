@@ -21,34 +21,13 @@
   }
 </style>
 <style lang="scss">
-  .ivu-table-wrapper {
-    .ivu-table {
-      .ivu-table-header {
-        th {
-          background: #111530;
-          border-bottom: 0;
-          color: #8090AF;
-        }
-      }
-    }
-  }
-  .ivu-tabs-nav-scroll {
-    height: 60px;
-    background: #111530;
-    .ivu-tabs-nav .ivu-tabs-tab-active {
-      color: #3399ff !important;
-    }
-    .ivu-tabs-nav .ivu-tabs-tab {
-      padding: 19px 16px;
-      color: #fff;
-    }
-  }
 </style>
 <style lang="scss">
  .mymsg_wrapper  .ivu-table-wrapper tbody.ivu-table-tbody .ivu-table-row td{
   // //background:transparent !important;
 }
 
+.mymsg_wrapper {
   .ivu-date-picker-with-range {
     .ivu-date-picker-with-range {
       background: #10122B;
@@ -61,6 +40,20 @@
     background: #111530;
     border: 1px solid #191f44;
   }
+    .ivu-tabs-nav-scroll {
+    height: 60px;
+    background: #111530;
+    .ivu-tabs-nav .ivu-tabs-tab-active {
+      color: #3399ff !important;
+    }
+    .ivu-tabs-nav .ivu-tabs-tab {
+      padding: 19px 16px;
+      color: #fff;
+    }
+  }
+}
+
+  
 </style>
 <template>
   <div class="mymsg_wrapper">

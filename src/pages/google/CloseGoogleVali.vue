@@ -4,24 +4,26 @@
             <!-- <Modal v-model="openGoogleModal" :title="title" :footer-hide="true"> -->
             <Form ref="formInline" :model="formInline" :rules="ruleInline" label-position="top">
                 <FormItem :label="$t('openGoolePage._phone')">
-                    <p style="background:rgb(247, 244, 253);padding:5px;font-size:16px;">
+                    <p class="unchangeable">
                         {{phone|addStart}}
                         <!--{{ phone.substring(0,2)}}
                         ****
                         {{ phone.substring(9,11)}}-->
                     </p>
                 </FormItem>
-                <FormItem :label="$t('openGoolePage._phoneCode')" prop="code">
-                    <Input type="text" v-model="formInline.code" :placeholder="$t('openGoolePage._phoneCode')">
-                        <Button slot="append" @click="getCode" :disabled="disabled">{{getCodeText}}</Button>
+                <FormItem :label="$t('openGoolePage._phoneCode')" prop="code" class="defeat-ivu">
+                    <Input type="text" v-model="formInline.code" :placeholder="$t('openGoolePage._phoneCode')" style="width:300px;border-right: none;">s                     
+                        <div class="timebox" slot="append">
+                            <Button @click="getCode" :disabled="disabled">{{getCodeText}}</Button>
+                        </div>
                     </Input>
                 </FormItem>
                 <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="googleCode">
-                    <Input type="text" v-model="formInline.googleCode" :placeholder="$t('openGoolePage._GoogleVerificationCode')">
+                    <Input  type="text" v-model="formInline.googleCode" :placeholder="$t('openGoolePage._GoogleVerificationCode')" style="width:300px;">
                     </Input>
                 </FormItem>
             </Form>
-            <div class="btns" style="display:flex;justify-content:space-around;align-items:center;">
+            <div class="btns" style="display:flex;justify-content:space-around;align-items:center;width:300px;margin-right: 14px;float: right;">
                 <!-- <Button @click="cancel">{{$t('openGoolePage._cancel')}}</Button> -->
                 <Button type="primary" @click="sureBtn('formInline')" style="width:100%;border-radius:0;">{{$t('openGoolePage._sure')}}</Button>
             </div>
@@ -184,7 +186,56 @@ export default {
     .ivu-form-item-required .ivu-form-item-label:before {
         content: ''
     }
+    .ivu-input {
+        border-radius: 0;
+        background: transparent;
+        color: #fff;
+        
+    }
+    .ivu-form-item-label {
+        width: 80px;
+        color: #fff;
+    }
+    .ivu-form-item-content {
+        display: inline-block;
+        
+    }
+
+    .ivu-form-item-error .ivu-input{
+        border: 1px solid #8090AF;
+    }
+    
+    .defeat-ivu {
+        .ivu-form-item-error .ivu-input{
+            border: 1px solid #8090AF;
+            border-right: none;
+        }
+        .ivu-input{
+            border: 1px solid #8090AF;
+            border-right: none;
+        }
+        .timebox {
+        border-left: 1px solid #8090AF;
+        }
+        .ivu-input-group-append, .ivu-input-group-prepend {
+            border: 1px solid #8090AF;
+            border-left: none;
+            border-radius: 0;
+        }
+    }
+
+
+    .ivu-form-item-content {
+        .unchangeable {
+            padding: 0;
+            background: transparent;
+            width: 300px;
+            font-size:16px;
+            border: 1px solid #8090AF;
+        }
+    }
 }
+
 </style>
 
 

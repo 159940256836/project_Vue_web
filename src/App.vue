@@ -30,11 +30,18 @@
                             <Dropdown @on-click="changelanguage">
                                 <a href="javascript:void(0)" style="height: 60px;display: flex;align-items: center;">
                                     <!-- {{languageValue}} -->
-                                    <img src="./assets/img/china.png" alt="">
+                                    <img src="./assets/img/china.png" v-if="languageValue=='简体中文'" alt="">
+                                    <img src="./assets/img/flag.png" v-else alt="">
                                 </a>
                                 <DropdownMenu slot="list" id="change_language_theme">
-                                    <DropdownItem v-if="languageValue=='简体中文'" name="en">English</DropdownItem>
-                                    <DropdownItem v-else name="cn">简体中文</DropdownItem>
+                                    <DropdownItem v-if="languageValue=='简体中文'" name="en">
+                                        <img src="./assets/img/flag.png" alt="">
+                                        English
+                                    </DropdownItem>
+                                    <DropdownItem v-else name="cn">
+                                        <img src="./assets/img/china.png" alt="">
+                                        简体中文
+                                    </DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
                         </div>
@@ -757,7 +764,7 @@ export default {
                         /*width: 7%;*/
                         justify-content: flex-end;
                         #change_language_theme .ivu-dropdown-item{
-                            color: #000;
+                            color: #8090AF;
                         }
                     }
                 }
@@ -1135,7 +1142,7 @@ body {
     background: #10122B;
     margin-left: 25px;
     .ivu-dropdown-item {
-        color: #333;
+        color: #8090AF;
     }
 }
 

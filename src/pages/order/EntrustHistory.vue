@@ -167,6 +167,19 @@
             background-color: #8090AF;
         }
     }
+
+    .ivu-date-picker-with-range {
+    .ivu-date-picker-with-range {
+        background: #10122B;
+        }
+    }
+    .ivu-page-total {
+        color: #8090AF;
+    }
+    .ivu-page-next, .ivu-page-prev {
+        background: #111530;
+        border: 1px solid #191f44;
+    }
 }
 
 .entrusthistory {
