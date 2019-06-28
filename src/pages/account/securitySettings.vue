@@ -1863,6 +1863,29 @@ button.ivu-btn.ivu-btn-primary {
         .ivu-form-item-required .ivu-form-item-label:before {
             content: ''
         }
+
+        .ivu-form-item-error .ivu-input{
+        border: 1px solid #8090AF;
+    }
+    
+        .defeat-ivu {
+            .ivu-form-item-error .ivu-input{
+                border: 1px solid #8090AF;
+                border-right: none;
+            }
+            .ivu-input{
+                border: 1px solid #8090AF;
+                border-right: none;
+            }
+            .timebox {
+            border-left: 1px solid #8090AF;
+            }
+            .ivu-input-group-append, .ivu-input-group-prepend {
+                border: 1px solid #8090AF;
+                border-left: none;
+                border-radius: 0;
+            }
+        }
     }
     .ivu-btn-default {
         border: 1px solid #8090AF;
@@ -1884,19 +1907,6 @@ button.ivu-btn.ivu-btn-primary {
         border-left: none;
     }
 
-    .defeat-ivu {
-        .timebox {
-            border-left: 1px solid #8090AF;
-        }
-        .ivu-input {
-            border-right: none;
-            
-        }
-        .ivu-input-group-append, .ivu-input-group-prepend {
-            border: 1px solid #8090AF;
-            border-left: none;
-        }
-    }
 
 </style>
 
