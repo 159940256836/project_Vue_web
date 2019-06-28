@@ -480,7 +480,19 @@
                     </span>
                     <span v-if="currentCoin.change>0" class="buy">↑</span>
                     <span v-else class="sell">↓</span>
-                    <span class="price-cny"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>
+                    <span
+                        v-if="currentCoinBC == 'BC'"
+                        class="price-cny"
+                    >
+                        ≈ {{currentCoin.price * 1 | toFixed(2)}} CNY
+                    </span>
+                    <span
+                        v-else
+                        class="price-cny"
+                    >
+                        ≈ {{currentCoin.usdRate * CNYRate | toFixed(2)}} CNY
+                    </span>
+                    <!--<span class="price-cny"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>-->
                 </div>
                 <Table
                     :no-data-text="$t('common.nodata')"
@@ -716,7 +728,7 @@ $night-color: #fff;
                         width: 100%;
                         height: 100%;
                         display: flex;
-                        background-color: rgba(40, 49, 62, 0.6);
+                        background-color: rgba(14, 14, 40, 0.7);
                         justify-content: center;
                         align-items: center;
                         z-index: 100;
@@ -1407,6 +1419,7 @@ export default {
       },
       historyTableData: [],
       currentTableData: [],
+      currentCoinBC: '',
       currentOrder: {
         columns: [
           {
@@ -1913,6 +1926,7 @@ export default {
       const base = params.toUpperCase().split('_')[1]
       this.currentCoin.symbol = coin + '/' + base
       this.currentCoin.coin = coin
+      this.currentCoinBC = base
       this.currentCoin.base = base
       this.$store.commit('navigate', 'nav-exchange')
       this.$store.commit('setSkin', this.skin)
