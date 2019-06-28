@@ -1055,24 +1055,24 @@ export default {
                 },
                 nativeOn: {
                   click: () => {
-                        event.stopPropagation() // 阻止事件冒泡
-                        if (this.isLogin) {
-                          if (
+                    event.stopPropagation() // 阻止事件冒泡
+                    if (this.isLogin) {
+                      if (
                                                 event.currentTarget.className ==
                                                 'ivu-icon ivu-icon-android-star'
                                             ) {
-                              this.cancelCollect(params.index, params.row)
-                              event.currentTarget.className ==
+                        this.cancelCollect(params.index, params.row)
+                        event.currentTarget.className ==
                                                     'ivu-icon ivu-icon-android-star-outline'
-                            } else {
-                              this.collect(params.index, params.row)
-                              event.currentTarget.className =
+                      } else {
+                        this.collect(params.index, params.row)
+                        event.currentTarget.className =
                                                     'ivu-icon ivu-icon-android-star'
-                            }
-                        } else {
-                          this.$Message.warning(this.$t('common.logintip'))
-                        }
                       }
+                    } else {
+                      this.$Message.warning(this.$t('common.logintip'))
+                    }
+                  }
                 }
               }),
               h('span', params.row.symbol)
@@ -1139,31 +1139,31 @@ export default {
                 h('Icon', {
                   props: {
                                         // color:"red",
-                        type: params.row.isFavor
+                    type: params.row.isFavor
                                             ? 'android-star'
                                             : 'android-star-outline'
-                      },
+                  },
                   nativeOn: {
-                        click: () => {
-                          event.stopPropagation() // 阻止事件冒泡
-                          if (this.isLogin) {
-                              if (
+                    click: () => {
+                      event.stopPropagation() // 阻止事件冒泡
+                      if (this.isLogin) {
+                        if (
                                                     event.currentTarget.className ==
                                                     'ivu-icon ivu-icon-android-star'
                                                 ) {
-                                  this.cancelCollect(params.index, params.row)
-                                  event.currentTarget.className ==
+                          this.cancelCollect(params.index, params.row)
+                          event.currentTarget.className ==
                                                         'ivu-icon ivu-icon-android-star-outline'
-                                } else {
-                                  this.collect(params.index, params.row)
-                                  event.currentTarget.className =
+                        } else {
+                          this.collect(params.index, params.row)
+                          event.currentTarget.className =
                                                         'ivu-icon ivu-icon-android-star'
-                                }
-                            } else {
-                              this.$Message.warning(this.$t('common.logintip'))
-                            }
                         }
+                      } else {
+                        this.$Message.warning(this.$t('common.logintip'))
                       }
+                    }
+                  }
                 }),
                 h('span', params.row.coin)
               ])
@@ -1324,7 +1324,7 @@ export default {
               let str = ''
               let price = ''
               const className = params.row.direction.toLowerCase()
-              params.row.price == 0 && (str = h('span', {}, '--'))
+              params.row.price === 0 && (str = h('span', {}, '--'))
               params.row.price != 0 &&
                                 (price = params.row.price.toFixed(this.baseCoinScale)) &&
                                 (str = h(
@@ -1529,8 +1529,8 @@ export default {
                   style: {},
                   on: {
                     click: () => {
-                          this.cancel(params.index)
-                        }
+                      this.cancel(params.index)
+                    }
                   }
                 },
                                 self.$t('exchange.undo')
@@ -1635,19 +1635,19 @@ export default {
                                     'span',
                   {
                     style: {
-                          color: '#3399ff'
-                        }
+                      color: '#3399ff'
+                    }
                   },
                                     self.$t('exchange.finished')
                                 )
               } else if (status == 'CANCELED') {
                 return h(
                                     'span',
-                      {
-                        style: {
-                          color: '#3399ff'
-                        }
-                      },
+                  {
+                    style: {
+                      color: '#3399ff'
+                    }
+                  },
                                     self.$t('exchange.canceled')
                                 )
               } else {
@@ -3483,7 +3483,7 @@ export default {
         if (status) {
           this.historyOrder.rows.splice()
           this.historyOrder.rows.filter((item, index) => {
-            if (item.orderId == row.orderId) {
+            if (item.orderId === row.orderId) {
               item._expanded = true   // 展开选中的行
             } else {
               item._expanded = false   // 其他行关闭
@@ -3494,7 +3494,7 @@ export default {
         } else {
           this.historyTableData.splice()
           this.historyTableData.map((item, index) => {
-            if (item.orderId == row.orderId) {
+            if (item.orderId === row.orderId) {
               item._expanded = false   // 展开选中的行
             } else {
               item._expanded = false   // 其他行关闭

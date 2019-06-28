@@ -26,6 +26,36 @@ module.exports = {
   topInfo: {
     name: 'bdw--国际数字加密资产交易平台'
   },
+  new: {
+    Currenrtification: '当前等级认证',
+    Currentasset: '当前资产总估值',
+    Available: '可用',
+    freeze: '冻结',
+    checkorder: '查看订单',
+    Totalingular: '总单数',
+    Completiorate: '完成率',
+    Singlelimit: '单次限额',
+    today: '今日交易金额',
+    Myrder: '我的订单',
+    Modifpassword: '修改登录密码',
+    confirmaaa: '确认',
+    Modifyassword: '修改资金密码',
+    Bindount: '绑定银行卡账号',
+    Binaccount: '绑定支付宝账号',
+    Pleascode: '请上传支付宝二维码',
+    WeChaccount: '绑定微信账号',
+    Pleasuplode: '请上传微信二维码',
+    markeprice: '市价',
+    View111: '查看',
+    searchfor: '搜索',
+    Details: '详情',
+    Typesof: '类型',
+    All: '全部',
+    Mssets: '我的资产',
+    nformationto: '请上传资料完成实名认证',
+    Uploartification: '上传认证'
+
+  },
   common: {
     login: '登录',
     register: '注册',
@@ -77,7 +107,6 @@ module.exports = {
     Anyonewho: '凡以任何方式登录本网站或直接、间接使用本网站服务者，视为自愿接受本网站声明的约束。',
     Theth: '第五条',
     conflicwith: '本声明未涉及的问题参见有关法律法规，当本声明与相关法律法规冲突时，以相关法律法规为准。',
-
     PrivacPolicy: '隐私条款',
     Firstothdes: '一、双方',
     websitedicated: '本网站是一个专门供用户进行数字资产交易和提供相关服务（以下称“本服务”或 “服务”）的平台。为了本协议表述之方便，公司和本网站在本协议中合称使用“我们”或其他第一人称称呼。',
@@ -418,7 +447,6 @@ module.exports = {
     p302: '您同意，您与BDW的合同关系终止后，BDW仍享有下列权利：继续保存您的用户信息及您使用BDW服务期间的所有交易信息。您在使用BDW服务期间存在违法行为或违反本协议或规则的行为的，BDW仍可依据本协议向您主张权利。BDW中止或终止向您提供BDW服务后，对于您在服务中止或终止之前的交易行为依下列原则处理，您应独力处理并完全承担进行以下处理所产生的任何争议、损失或增加的任何费用，并应确保BDW免于因此产生任何损失或承担任何费用：您在服务中止或终止之前已经上传至BDW的比特币等虚拟货币等虚拟货币尚未交易的，BDW有权在中止或终止服务的同时删除此项物品的相关信息；您在服务中止或终止之前已经与其他会员达成买卖合同，但合同尚未实际履行的，BDW有权删除该买卖合同及其交易比特币等虚拟货币等虚拟货币的相关信息；您在服务中止或终止之前已经与其他会员达成买卖合同且已部分履行的，BDW可以不删除该项交易，但BDW有权在中止或终止服务的同时将相关情形通知您的交易对方。',
     p303: '五、隐私权政策',
     p304: 'BDW将在BDW站公布并不定时修订隐私权政策，隐私权政策构成本协议的有效组成部分。'
-
   },
   header: {
     index: '首页',
@@ -930,7 +958,6 @@ module.exports = {
         charge: '充币',
         pickup: '提币',
         assets: '资产',
-
         getaddress: '获取地址',
         qrcode: '充币地址二维码',
         resetsuccess: '获取地址成功请稍后',
@@ -1487,11 +1514,6 @@ module.exports = {
     rulecontent: '白皮书里已经对BHB的分配比例有详细的说明。51%比例的BHB通过“交易即挖矿”的方式逐步回馈给交易用户。一旦51%的BHB全部回馈完成，“挖矿”即自动终止。',
     recordtitle: '返还记录',
     recordcontent: '每日（UTC+8，以下同）都会将前一日的用户所产生交易手续费，100%折算成BHB返还给用户，折算价格按前一交易日BHB的均价（均价计算方式为总成交金额/总成交量）。我们将于每日上午11点，开始发放前一日交易手续费折合BHB的返还。'
-    /* time:"日期",
-    todaycharge:"当日bdw均价(ETH)",
-    totalChange:'当日总手续费折合(ETH)',
-    returnCharge:"当日挖矿手续费返还(BHB)",
-    todayChargeReturn:"当日挖矿收入倍增计划返还（BHB）"*/
   },
   aboutUs: {
     c1: 'bdw（币火）国际数字加密资产交易平台是一个综合数字资产交易平台,我们拥有领先的技术实力、优质的客户服务和良好的用户体验,为广大数字货币爱好者提供一个自由的网上交换的平台。',
@@ -1505,4 +1527,3 @@ module.exports = {
     c9: '我们的理念是：与每一位自由汇集于此的成员共同塑造一方价值流通、合抱共耕的优质生态土壤。'
   }
 }
-

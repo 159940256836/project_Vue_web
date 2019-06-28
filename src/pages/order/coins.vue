@@ -22,9 +22,9 @@ import EntrustCurrent from './EntrustCurrent.vue'
 import EntrustHistory from './EntrustHistory.vue'
 
 export default {
-    components: {
-        EntrustCurrent,
-        EntrustHistory
-    }
+  components: {
+    EntrustCurrent,
+    EntrustHistory
+  }
 }
 </script>

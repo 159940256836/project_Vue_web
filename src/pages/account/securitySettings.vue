@@ -130,15 +130,9 @@
                                     <a class="btn" v-else-if="user.fundsVerified==0" @click="modal5 = true">
                                         {{$t('uc.safe.set')}}
                                     </a>
-                                    <a class="btn" v-else @click="showItemFundpwd()">
+                                    <a class="btn" v-else @click="showItemFundpwd()" style="margin-right:26px;margin-bottom:6px;">
                                         {{$t('uc.safe.edit')}}
                                     </a>
-                                </div>
-                                <div class="account-detail" v-show="choseItem==5">
-                                    <!-- 设置 -->
-                                    
-                                    <!-- 修改资金密码 -->
-                                    
                                 </div>
                             </div>
                             <!-- 6 谷歌-->
@@ -152,7 +146,7 @@
                                         <a href="">{{$t('uc.safe.userguide')}}</a>
                                     </p>
                                     <div class="google-info">
-                                        <router-link to="/openGoogleVali">{{googleAuthentication}}</router-link>
+                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="modal10 = true">{{googleAuthentication}}</span>
                                         <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                                             <span slot="open"></span>
                                             <span slot="close"></span>
@@ -166,6 +160,7 @@
             </div>
         </div>
         <div class="popups-box">
+            <!-- 身份认证弹窗 -->
             <Modal
                 :title="$t('uc.safe.safelevel_high')"
                 v-model="modal6"
@@ -173,7 +168,8 @@
                 width="875"
                 >
                 <div class="detail-list" style="width: 100%;">
-                    <h3 style="color:#3697FE;font-weight:400;">请上传资料完成实名认证</h3>
+                    <!-- 请上传资料完成实名认证 -->
+                    <h3 style="color:#3697FE;font-weight:400;">{{ $t("new.nformationto") }}</h3>
                     <Form ref="formValidate6" :model="formValidate6" :rules="ruleValidate" :label-width="85" style="text-align:center;">
                         <div class="validate" style="text-align:center;color:#8090AF;">
                             <FormItem :label="$t('uc.safe.realname')" prop="realName" >
@@ -243,12 +239,13 @@
                         <span v-else class="uploadimgtip">Tip: uploaded pictures only support.Jpg,.Gif,.Png,.Jpeg format, and recommended size is 100kb-1024kb, otherwise it may fail to upload.</span>
                         <!-- Button -->
                         <FormItem style="text-align:center;">
-                            <Button type="primary" @click="handleSubmit('formValidate6')" style="margin-left: -85px;width:400px;border-radius:0;height:40px;font-size:19px;">{{$t('uc.safe.SubmitCertification')}}</Button>
+                            <Button type="primary" @click="handleSubmit('formValidate6')" style="margin-left: -85px;width:400px;border-radius:0;height:40px;font-size:19px;">{{$t('new.Uploartification')}}</Button>
                             <!-- <Button @click="handleReset('formValidate6')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button> -->
                         </FormItem>
                     </Form>
                 </div>
             </Modal>
+            <!-- 邮箱弹窗 -->
             <Modal
                 :title="$t('uc.safe.bindemail')"
                 v-model="modal2"
@@ -280,7 +277,7 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate2')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('uc.safe.confirm')}}
+                                {{$t('new.confirmaaa')}}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate2')" style="margin-left: 8px">
                                 {{$t('uc.safe.reset')}}
@@ -289,6 +286,7 @@
                     </Form>
                 </div>
             </Modal>
+            <!-- 手机弹窗 -->
             <Modal
                 :title="$t('uc.safe.bindphone')"
                 v-model="modal3"
@@ -322,7 +320,7 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate3')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('uc.safe.confirm')}}
+                                {{$t('new.confirmaaa')}}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate3')" style="margin-left: 8px;">
                                 {{$t('uc.safe.reset')}}
@@ -331,6 +329,7 @@
                     </Form>
                 </div>
             </Modal>
+            <!-- 登陆密码弹窗 -->
             <Modal
                 :title="$t('new.Modifpassword')"
                 v-model="modal4"
@@ -364,7 +363,7 @@
                             </Input>
                         </FormItem>
                         <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="googleCode" v-if="googleSwitch">
-                            <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
+                            <Input v-model="formValidate4.googleCode" size="large" type="text" style="width:300px;"></Input>
                         </FormItem>
                         <!-- Button -->
                         <FormItem>
@@ -378,6 +377,7 @@
                     </Form>
                 </div>
             </Modal>
+            <!-- 资金密码弹窗 -->
             <Modal
                 :title="!fGetBackFundpwd ? $t('new.Modifyassword') : $t('uc.safe.retrieve_fund_password')"
                 v-model="modal5"
@@ -423,7 +423,7 @@
                         <FormItem :label="$t('uc.safe.confirmnewpwd')" prop="newMPwConfirm">
                             <Input v-model="formValidate5.newMPwConfirm" size="large" type="password" style="width: 300px;"></Input>
                         </FormItem>
-                        <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode5">
+                        <FormItem class="defeat-ivu" :label="$t('uc.safe.phonecode')" prop="vailCode5">
                             <Input v-model="formValidate5.vailCode5" size="large" style="width: 300px;">
                             <div class="timebox" slot="append">
                                 <Button @click="send(5)" :disabled="sendMsgDisabled5">
@@ -437,7 +437,7 @@
                             <Input v-model="formValidate5.googleCode" size="large" type="text" style="width: 300px;"></Input>
                         </FormItem>
                         <p style="text-align:right;">
-                            <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#3399ff;">
+                            <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#3399ff;margin-right:24px;margin-bottom:10px;">
                                 <!--忘记密码?-->
                                 {{$t('uc.login.forget')}}
                             </a>
@@ -465,7 +465,7 @@
                             <Input v-model="formValidate8.newMPwConfirm8" size="large" type="password" style="width: 300px;"></Input>
                         </FormItem>
                         <!-- 邮箱验证码 -->
-                        <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode5">
+                        <FormItem class="defeat-ivu" :label="$t('uc.safe.phonecode')" prop="vailCode5">
                             <Input v-model="formValidate8.vailCode5" size="large" style="width: 300px;">
                             <div class="timebox" slot="append">
                                 <Button @click="send(8)" :disabled="sendMsgDisabled8">
@@ -476,7 +476,7 @@
                             </Input>
                         </FormItem>
                         <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="googleCode" v-if="googleSwitch">
-                            <Input v-model="formValidate5.googleCode" size="large" type="text"></Input>
+                            <Input v-model="formValidate5.googleCode" size="large" type="text" style="width:300px;"></Input>
                         </FormItem>
                         <!-- Button -->
                         <FormItem>
@@ -490,6 +490,7 @@
                     </Form>
                 </div>
             </Modal>
+            <!-- 绑定谷歌验证弹窗 -->
             <Modal
                 :title="$t('uc.safe.binding_google')"
                 v-model="modal7"
@@ -499,6 +500,7 @@
                 >
                 <ResetGoogleVali />
             </Modal>
+            <!-- 解除谷歌验证弹窗 -->
             <Modal
                 :title="$t('uc.safe.remove_google')"
                 v-model="modal8"
@@ -506,9 +508,17 @@
                 width="534"
                 @on-cancel="googleModalCancel"
                 >
-                <CloseGoogleVali />         
+                <CloseGoogleVali :phone="user.mobilePhone" />         
             </Modal>
-            
+            <!-- 重置谷歌验证弹窗 -->
+            <Modal
+                :title="$t('uc.safe.binding_google')"
+                v-model="modal10"
+                :styles="{top: '100px'}"
+                width="714"
+                >
+                <ResetGoogleVali />
+            </Modal>
         </div>
 
     </div>
@@ -608,7 +618,8 @@ export default {
             modal6: false,   
             modal7: false,    
             modal8: false,
-            modal9: true,
+            modal9: false,
+            modal10: false,
             uid: '',
             googleSwitch: false,
             fGetBackFundpwd: false,
@@ -1753,6 +1764,9 @@ button.ivu-btn.ivu-btn-primary {
 <style lang="scss">
 
     .popups-box {
+    * {
+        box-shadow: none !important; 
+    }
         .vertical-center-modal{
             display: flex;
             align-items: center;
@@ -1841,6 +1855,7 @@ button.ivu-btn.ivu-btn-primary {
             background: transparent;
             border: 1px solid #8090AF;
             border-radius: 0;
+            color: #fff;
         }
         .ivu-form-item-label {
             color: #8090AF !important;

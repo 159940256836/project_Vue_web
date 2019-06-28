@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 
 <template>
     <div>
@@ -792,7 +793,7 @@ export default {
             sortMethod: function(a, b, type) {
               const a1 = a.replace(/[^\d|.|-]/g, '') - 0
               const b1 = b.replace(/[^\d|.|-]/g, '') - 0
-              if (type == 'asc') {
+              if (type === 'asc') {
                 return a1 - b1
               } else {
                 return b1 - a1
@@ -837,7 +838,7 @@ export default {
             sortMethod: function(a, b, type) {
               const a1 = parseFloat(a)
               const b1 = parseFloat(b)
-              if (type == 'asc') {
+              if (type === 'asc') {
                 return a1 - b1
               } else {
                 return b1 - a1
@@ -1003,6 +1004,7 @@ export default {
       c.parentNode.insertBefore(g, c)
     })(window, document,
       'script', 'https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js', 'ud')
+    // eslint-disable-next-line no-undef
     ud({
       'code': '1ga0keb',
       'link': 'https://18986831987.s2.udesk.cn/im_client/?web_plugin_id=8943'
@@ -1163,8 +1165,8 @@ export default {
       param['pageSize'] = this.pageSize
       this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
         var resp = response.body
-        if (resp.code == 0) {
-          if (resp.data.content.length == 0) return
+        if (resp.code === 0) {
+          if (resp.data.content.length === 0) return
           const FAQList = resp.data.content
           const len = FAQList.length
           const n = 2 // 假设每行显示2个
@@ -1298,10 +1300,12 @@ export default {
     },
     mul(a, b) {
       if (b != null) {
+        // eslint-disable-next-line one-var
         var c = 0,
           d = a.toString(),
           e = b.toString()
       } else {
+        // eslint-disable-next-line one-var
         var c = 0,
           d = a,
           e = b
