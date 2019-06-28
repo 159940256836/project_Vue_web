@@ -588,6 +588,9 @@ export default {
 
 </style>
 <style lang="scss">
+.bcd .card3 .ivu-table-tbody .ivu-table-column-center .ivu-table-cell{
+  text-align:right;
+}
 .card2 .ivu-form .ivu-form-item-label{
   text-align:left;
   font-size:14px;
