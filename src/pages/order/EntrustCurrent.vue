@@ -1,9 +1,9 @@
 <style lang="scss" scoped>
 .entrustcurrent {
-  * {
+   * {
         box-shadow: none !important; 
-    }
-  float: left;
+    } 
+     float: left;
   width: 100%;
   .form {
     padding-left: 28px;
@@ -146,7 +146,7 @@
             background-color: #8090AF;
         }
     }
-}
+    }
 
 .entrustcurrent {
   .ivu-tabs {
@@ -630,7 +630,7 @@ export default {
                   class: className
                 },
                 style: {
-                  color: '#F15057'
+                  color: 'red'
                 }
               },
               this.$t("exchange.buyin")
@@ -643,7 +643,7 @@ export default {
                   class: className
                 },
                 style: {
-                  color: '#00B275'
+                  color: 'red'
                 }
               },
               this.$t("exchange.sellout")
