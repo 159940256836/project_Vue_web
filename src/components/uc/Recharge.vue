@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="nav-right">
+        <div class="nav-recharge">
             <div class="bill_box">
                 <!-- <section class="trade-group merchant-top">
                     <i class="merchant-icon tips"></i>
@@ -316,6 +316,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+    .show-qrcode {
+        width: 217px;
+        height: 217px;
+        margin: 0 auto;
+        background: #8090AF;
+        padding: 9px;
+    }
 .table-inner {
     position: relative;
     text-align: left;
@@ -347,7 +354,7 @@ export default {
                         height: 30px;
                         text-align: center;
                         position: absolute;
-                        top: 14px;
+                        top: 12px;
                         left: 37%;
                         line-height: 30px;
                         display: inline-block;
@@ -510,6 +517,18 @@ span.describe {
 
 </style>
 <style lang="scss">
+    .ivu-modal-header {
+        background: #111530;
+        p {
+            color: #8090AF;
+        }
+    }
+    .ivu-modal-content {
+        background: #111530;
+    }
+    .ivu-modal-footer {
+        border-top: 0;
+    }
     .order-table {
         .ivu-table-wrapper {
             .ivu-table {
@@ -583,6 +602,7 @@ span.describe {
         }
     }
     .ivu-input {
+        height: 32px;
         border: 1px solid #58698A;
         background: transparent;
         border-radius: 0;

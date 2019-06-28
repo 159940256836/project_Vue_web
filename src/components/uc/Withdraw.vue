@@ -307,237 +307,236 @@
 </template>
 <script>
 export default {
-    data() {
-        return {
-            googleSwitch: false,
-            user: {},
-            codeIsSending: false,
-            sendcodeValue: this.$t("uc.regist.sendcode"),
-            countdown: 60,
-            formInline: {
-                code: "",
-                fundpwd: "",
-                googleCode: ""
-            },
-            modal: false,
-            fundpwd: "",
-            currentCoin: {},
-            transaction: {
-                page: 0,
-                pageSize: 10,
-                total: 0
-            },
-            loading: true,
-            withdrawAdress: "",
-            inputAddress: "", //用户输入的地址
-            withdrawAmount: 0, // 默认提币数量
-            withdrawFee: 0, // 默认提币手续费
-            withdrawOutAmount: 0, // 默认到账数量
-            coinType: "",
-            coinList: [],
-            tableWithdraw: [],
-            allTableWithdraw: []
-        };
-    },
-    watch: {
-        currentCoin: function () {
-            this.withdrawFee =
+  data() {
+    return {
+      googleSwitch: false,
+      user: {},
+      codeIsSending: false,
+      sendcodeValue: this.$t('uc.regist.sendcode'),
+      countdown: 60,
+      formInline: {
+        code: '',
+        fundpwd: '',
+        googleCode: ''
+      },
+      modal: false,
+      fundpwd: '',
+      currentCoin: {},
+      transaction: {
+        page: 0,
+        pageSize: 10,
+        total: 0
+      },
+      loading: true,
+      withdrawAdress: '',
+      inputAddress: '', // 用户输入的地址
+      withdrawAmount: 0, // 默认提币数量
+      withdrawFee: 0, // 默认提币手续费
+      withdrawOutAmount: 0, // 默认到账数量
+      coinType: '',
+      coinList: [],
+      tableWithdraw: [],
+      allTableWithdraw: []
+    }
+  },
+  watch: {
+    currentCoin: function() {
+      this.withdrawFee =
                 this.currentCoin.minTxFee +
-                (this.currentCoin.maxTxFee - this.currentCoin.minTxFee) / 2;
-        }
+                (this.currentCoin.maxTxFee - this.currentCoin.minTxFee) / 2
+    }
+  },
+  methods: {
+    cancel() {
+      this.modal = false
+      this.formInline.code = ''
+      this.formInline.fundpwd = ''
+      this.formInline.googleCode = ''
     },
-    methods: {
-        cancel() {
-            this.modal = false;
-            this.formInline.code = "";
-            this.formInline.fundpwd = "";
-            this.formInline.googleCode = "";
-        },
-        sendCode() {
-            this.$http.post(this.host + "/uc/mobile/withdraw/code").then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                    this.settime();
-                    this.$Notice.success({
-                        title: this.$t("common.tip"),
-                        desc: resp.message
-                    });
-                } else {
-                    this.$Notice.error({
-                        title: this.$t("common.tip"),
-                        desc: resp.message
-                    });
-                }
-            });
-        },
-        settime() {
-            this.sendcodeValue = this.countdown;
-            this.codeIsSending = true;
-            let timercode = setInterval(() => {
-                this.countdown--;
-                this.sendcodeValue = this.countdown;
-                if (this.countdown <= 0) {
-                    clearInterval(timercode);
-                    this.sendcodeValue = this.$t("uc.regist.sendcode");
-                    this.countdown = 60;
-                    this.codeIsSending = false;
-                }
-            }, 1000);
-        },
-        changePage(index) {
-            this.transaction.page = index - 1;
-            this.getList();
-        },
-        onAddressChange(data) {
-            this.inputAddress = data;
-        },
-        clearValues() {
-            if (this.$refs.address) {
-                this.$refs.address.setQuery(" ");
-            }
-            this.withdrawAdress = "";
-            this.inputAddress = "";
-            this.withdrawAmount = 0;
+    sendCode() {
+      this.$http.post(this.host + '/uc/mobile/withdraw/code').then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
+          this.settime()
+          this.$Notice.success({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
+        } else {
+          this.$Notice.error({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
+        }
+      })
+    },
+    settime() {
+      this.sendcodeValue = this.countdown
+      this.codeIsSending = true
+      const timercode = setInterval(() => {
+        this.countdown--
+        this.sendcodeValue = this.countdown
+        if (this.countdown <= 0) {
+          clearInterval(timercode)
+          this.sendcodeValue = this.$t('uc.regist.sendcode')
+          this.countdown = 60
+          this.codeIsSending = false
+        }
+      }, 1000)
+    },
+    changePage(index) {
+      this.transaction.page = index - 1
+      this.getList()
+    },
+    onAddressChange(data) {
+      this.inputAddress = data
+    },
+    clearValues() {
+      if (this.$refs.address) {
+        this.$refs.address.setQuery(' ')
+      }
+      this.withdrawAdress = ''
+      this.inputAddress = ''
+      this.withdrawAmount = 0
             // this.withdrawFee= 0;
-            this.withdrawOutAmount = 0;
-        },
-        getCurrentCoinRecharge() {
-            if (this.coinType != "") {
-                var temp = [];
-                for (var i = 0; i < this.allTableWithdraw.length; i++) {
+      this.withdrawOutAmount = 0
+    },
+    getCurrentCoinRecharge() {
+      if (this.coinType != '') {
+        var temp = []
+        for (var i = 0; i < this.allTableWithdraw.length; i++) {
                     //   if (this.allTableWithdraw[i].symbol == this.coinType) {
-                    if (this.allTableWithdraw[i].coin.unit == this.coinType) {
-                        temp.push(this.allTableWithdraw[i]);
-                    }
-                }
-                this.tableWithdraw = temp;
-            } else {
-                this.tableWithdraw = this.allTableWithdraw;
-            }
-        },
-        ok() {
-            if (this.formInline.code == "") {
-                this.modal = true;
-                /*请填写短信验证码*/
-                this.$Message.error(this.$t("otc.chat.msg8tip"));
-                return;
-            }
-            if (this.formInline.fundpwd == "") {
-                this.modal = true;
-                this.$Message.error(this.$t("otc.chat.msg7tip"));
-                return;
-            }
-            let params = {};
-            if (this.googleSwitch) {
-                if (this.formInline.googleCode == "") {
-                    this.modal = true;
-                    /*"请填写谷歌验证码"*/
-                    this.$Message.error(this.$t("otc.chat.msg9tip"));
-                    return;
-                } else {
-                    params.googleCode = this.formInline.googleCode;
-                }
-            }
+          if (this.allTableWithdraw[i].coin.unit == this.coinType) {
+            temp.push(this.allTableWithdraw[i])
+          }
+        }
+        this.tableWithdraw = temp
+      } else {
+        this.tableWithdraw = this.allTableWithdraw
+      }
+    },
+    ok() {
+      if (this.formInline.code == '') {
+        this.modal = true
+                /* 请填写短信验证码*/
+        this.$Message.error(this.$t('otc.chat.msg8tip'))
+        return
+      }
+      if (this.formInline.fundpwd == '') {
+        this.modal = true
+        this.$Message.error(this.$t('otc.chat.msg7tip'))
+        return
+      }
+      const params = {}
+      if (this.googleSwitch) {
+        if (this.formInline.googleCode == '') {
+          this.modal = true
+                    /* "请填写谷歌验证码"*/
+          this.$Message.error(this.$t('otc.chat.msg9tip'))
+          return
+        } else {
+          params.googleCode = this.formInline.googleCode
+        }
+      }
 
-
-            params["unit"] = this.currentCoin.unit;
-            params["address"] = this.withdrawAdress;
-            params["amount"] = this.withdrawAmount;
-            params["fee"] = this.withdrawFee;
-            params["jyPassword"] = this.formInline.fundpwd;
-            params["code"] = this.formInline.code;
-            params["googleCode"] = this.formInline.googleCode;
-            this.$http.post(this.host + "/uc/withdraw/apply", params).then(response => {
-                this.fundpwd = "";
-                var resp = response.body;
-                if (resp.code == 0) {
-                    this.modal = false;
-                    this.formInline.code = "";
-                    this.formInline.fundpwd = "";
-                    this.transaction.page = 0;
-                    this.getList();
-                    this.clearValues();
-                    this.$Message.success(resp.message);
-                } else {
-                    this.$Message.error(resp.message);
-                }
-            });
-        },
-        getAddrList() {
-            //初始化页面上的值
-            this.clearValues();
-            //获取地址
-            this.$http.post(this.host + "/uc/withdraw/support/coin/info").then(response => {
-                var resp = response.body;
-                if (resp.code == 0 && resp.data.length > 0) {
-                    this.coinList = resp.data;
-                    if (this.coinType) {
-                        for (let i = 0; i < resp.data.length; i++) {
-                            if (this.coinType == resp.data[i].unit) {
-                                this.currentCoin = resp.data[i];
-                                break;
-                            }
-                        }
-                    } else {
-                        this.currentCoin = this.coinList[0];
-                        this.coinType = this.currentCoin.unit;
-                    }
-                } else {
-                    this.$Message.error(resp.message);
-                }
-            });
-        },
-        getList() {
-            this.loading = true;
-            //获取tableWithdraw
-            let params = {};
-            params["page"] = this.transaction.page;
-            params["pageSize"] = this.transaction.pageSize;
-            this.$http
-                .post(this.host + "/uc/withdraw/record", params)
+      params['unit'] = this.currentCoin.unit
+      params['address'] = this.withdrawAdress
+      params['amount'] = this.withdrawAmount
+      params['fee'] = this.withdrawFee
+      params['jyPassword'] = this.formInline.fundpwd
+      params['code'] = this.formInline.code
+      params['googleCode'] = this.formInline.googleCode
+      this.$http.post(this.host + '/uc/withdraw/apply', params).then(response => {
+        this.fundpwd = ''
+        var resp = response.body
+        if (resp.code == 0) {
+          this.modal = false
+          this.formInline.code = ''
+          this.formInline.fundpwd = ''
+          this.transaction.page = 0
+          this.getList()
+          this.clearValues()
+          this.$Message.success(resp.message)
+        } else {
+          this.$Message.error(resp.message)
+        }
+      })
+    },
+    getAddrList() {
+            // 初始化页面上的值
+      this.clearValues()
+            // 获取地址
+      this.$http.post(this.host + '/uc/withdraw/support/coin/info').then(response => {
+        var resp = response.body
+        if (resp.code == 0 && resp.data.length > 0) {
+          this.coinList = resp.data
+          if (this.coinType) {
+            for (let i = 0; i < resp.data.length; i++) {
+              if (this.coinType == resp.data[i].unit) {
+                this.currentCoin = resp.data[i]
+                break
+              }
+            }
+          } else {
+            this.currentCoin = this.coinList[0]
+            this.coinType = this.currentCoin.unit
+          }
+        } else {
+          this.$Message.error(resp.message)
+        }
+      })
+    },
+    getList() {
+      this.loading = true
+            // 获取tableWithdraw
+      const params = {}
+      params['page'] = this.transaction.page
+      params['pageSize'] = this.transaction.pageSize
+      this.$http
+                .post(this.host + '/uc/withdraw/record', params)
                 .then(response => {
-                    var resp = response.body;
-                    if (resp.code == 0) {
-                        this.tableWithdraw = resp.data.content;
-                        this.transaction.total = resp.data.totalElements;
-                        this.transaction.page = resp.data.number;
-                    } else {
-                        this.$Message.error(resp.message);
-                    }
-                    this.loading = false;
-                });
-        },
-        accSub(arg1, arg2) {
-            var r1, r2, m, n;
-            try {
-                r1 = arg1.toString().split(".")[1].length;
-            } catch (e) {
-                r1 = 0;
-            }
-            try {
-                r2 = arg2.toString().split(".")[1].length;
-            } catch (e) {
-                r2 = 0;
-            }
-            m = Math.pow(10, Math.max(r1, r2));
-            //last modify by deeka
-            //动态控制精度长度
-            n = r1 >= r2 ? r1 : r2;
-            return ((arg1 * m - arg2 * m) / m).toFixed(n);
-        },
-        round(v, e) {
-            var t = 1;
-            for (; e > 0; t *= 10, e--);
-            for (; e < 0; t /= 10, e++);
-            return Math.round(v * t) / t;
-        },
-        computerAmount() {
-            let r = /^[0-9]+\.?[0-9]{0,9}$/;　　//正数
-            if (!r) {
-                this.withdrawOutAmount = 0
-                return false;
-            }
-            /*let num = this.round(
+                  var resp = response.body
+                  if (resp.code == 0) {
+                    this.tableWithdraw = resp.data.content
+                    this.transaction.total = resp.data.totalElements
+                    this.transaction.page = resp.data.number
+                  } else {
+                    this.$Message.error(resp.message)
+                  }
+                  this.loading = false
+                })
+    },
+    accSub(arg1, arg2) {
+      var r1, r2, m, n
+      try {
+        r1 = arg1.toString().split('.')[1].length
+      } catch (e) {
+        r1 = 0
+      }
+      try {
+        r2 = arg2.toString().split('.')[1].length
+      } catch (e) {
+        r2 = 0
+      }
+      m = Math.pow(10, Math.max(r1, r2))
+            // last modify by deeka
+            // 动态控制精度长度
+      n = r1 >= r2 ? r1 : r2
+      return ((arg1 * m - arg2 * m) / m).toFixed(n)
+    },
+    round(v, e) {
+      var t = 1
+      for (; e > 0; t *= 10, e--);
+      for (; e < 0; t /= 10, e++);
+      return Math.round(v * t) / t
+    },
+    computerAmount() {
+      const r = /^[0-9]+\.?[0-9]{0,9}$/　　// 正数
+      if (!r) {
+        this.withdrawOutAmount = 0
+        return false
+      }
+            /* let num = this.round(
                 this.accSub(this.withdrawAmount, this.withdrawFee),
                 this.currentCoin.withdrawScale
             );
@@ -548,162 +547,162 @@ export default {
             //     this.withdrawAmount = this.currentCoin.maxAmount
             // }
             // 否则 提出当前数量减去手续费
-            this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
+      this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
             // 旧代码
             // this.withdrawOutAmount = this.round(
             //   this.accSub(this.withdrawAmount, this.withdrawFee),
             //   this.currentCoin.withdrawScale
             // );
-        },
-        computerAmount2() {
-            this.withdrawAmount =
-                (this.withdrawAmount + "").replace(/([0-9]+\.[0-9]{6})[0-9]*/, "$1") -
-                0;
-            this.withdrawOutAmount = this.round(
+    },
+    computerAmount2() {
+      this.withdrawAmount =
+                (this.withdrawAmount + '').replace(/([0-9]+\.[0-9]{6})[0-9]*/, '$1') -
+                0
+      this.withdrawOutAmount = this.round(
                 this.accSub(this.withdrawAmount, this.withdrawFee),
                 this.currentCoin.withdrawScale
-            );
-        },
-        valid() {
-            this.withdrawAdress = this.withdrawAdress || this.inputAddress;
-            if (this.coinType == "") {
-                this.$Message.error(this.$t("uc.finance.withdraw.symboltip"));
-                return false;
-            } else if (this.withdrawAdress == "") {
-                this.$Message.error(this.$t("uc.finance.withdraw.addresstip"));
-                return false;
-            } else if (
-                this.withdrawAmount == "" ||
-                this.withdrawAmount == 0 ||
+            )
+    },
+    valid() {
+      this.withdrawAdress = this.withdrawAdress || this.inputAddress
+      if (this.coinType === '') {
+        this.$Message.error(this.$t('uc.finance.withdraw.symboltip'))
+        return false
+      } else if (this.withdrawAdress === '') {
+        this.$Message.error(this.$t('uc.finance.withdraw.addresstip'))
+        return false
+      } else if (
+                this.withdrawAmount === '' ||
+                this.withdrawAmount === 0 ||
                 this.withdrawAmount - 0 < this.currentCoin.minAmount
             ) {
-                this.$Message.error(
-                    this.$t("uc.finance.withdraw.numtip2") + this.currentCoin.minAmount
-                );
-                return false;
-            } else if (this.withdrawAmount - 0 < this.withdrawFee) {
-                this.$Message.error(this.$t("uc.finance.withdraw.numtip3"));
-                return false;
-            } else if (
-                this.withdrawFee == "" ||
-                this.withdrawFee == 0 ||
+        this.$Message.error(
+                    this.$t('uc.finance.withdraw.numtip2') + this.currentCoin.minAmount
+                )
+        return false
+      } else if (this.withdrawAmount - 0 < this.withdrawFee) {
+        this.$Message.error(this.$t('uc.finance.withdraw.numtip3'))
+        return false
+      } else if (
+                this.withdrawFee === '' ||
+                this.withdrawFee === 0 ||
                 this.withdrawFee - 0 > this.currentCoin.maxTxFee ||
                 this.withdrawFee - 0 < this.currentCoin.minTxFee
             ) {
-                this.$Message.error(
-                    this.$t("uc.finance.withdraw.feetip1") + this.currentCoin.minTxFee + " , " + this.$t("uc.finance.withdraw.feetip2") + this.currentCoin.maxTxFee
-                );
-                return false;
-            } else {
-                return true;
-            }
-        },
-        apply() {
-            this.formInline.code = ""
-            this.formInline.fundpwd = ""
-            this.formInline.googleCode = ""
-            if (this.valid()) {
-                this.modal = true;
-                let timercode = setInterval(() => {
-                    if (this.countdown <= 0) {
-                        clearInterval(timercode);
-                        this.sendcodeValue = this.$t("uc.regist.sendcode");
-                        this.codeIsSending = false;
-                    }
-                }, 1000)
-            }
-        },
-        getMember() {
-            //获取个人安全信息
-            this.$http.post(this.host + "/uc/approve/security/setting").then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                    this.user = resp.data;
-                } else {
-                    this.$Message.error(this.loginmsg);
-                }
-            });
-        }
+        this.$Message.error(
+                    this.$t('uc.finance.withdraw.feetip1') + this.currentCoin.minTxFee + ' , ' + this.$t('uc.finance.withdraw.feetip2') + this.currentCoin.maxTxFee
+                )
+        return false
+      } else {
+        return true
+      }
     },
-    created() {
-        // this.getMember();
-        this.$http.options.emulateJSON = false;
-        this.coinType = this.$route.query.name || "";
-        this.getAddrList();
-        this.getList(0, 10, 1);
-
-        this.$http.post(this.host + '/uc/get/user', { mobile: this.$store.getters.member.mobile }).then(res => {
-            const data = res.body;
-            if (data.code == 0) {
-                this.googleSwitch = !!data.data;
-            }
-        })
+    apply() {
+      this.formInline.code = ''
+      this.formInline.fundpwd = ''
+      this.formInline.googleCode = ''
+      if (this.valid()) {
+        this.modal = true
+        const timercode = setInterval(() => {
+          if (this.countdown <= 0) {
+            clearInterval(timercode)
+            this.sendcodeValue = this.$t('uc.regist.sendcode')
+            this.codeIsSending = false
+          }
+        }, 1000)
+      }
     },
-    computed: {
-        member: function () {
-            return this.$store.getters.member;
-        },
-        tableColumnsWithdraw() {
-            let columns = [],
-                filters = [];
-            if (this.coinList.length > 0) {
-                this.coinList.forEach(v => {
-                    filters.push({
-                        label: v.unit,
-                        value: v.unit
-                    });
-                });
-            }
-            columns.push({
-                title: this.$t("uc.finance.withdraw.time"),
-                width: 180,
-                key: "createTime"
-            });
-            columns.push({
-                title: this.$t("uc.finance.withdraw.symbol"),
-                key: "symbol",
-                filters,
-                filterMultiple: false,
-                filterMethod(value, row) {
-                    return row.coin.unit === value;
-                },
-                render: function (h, params) {
-                    return h("span", params.row.coin.unit);
-                }
-            });
-            columns.push({
-                title: this.$t("uc.finance.withdraw.address"),
-                key: "address"
-            });
-            columns.push({
-                title: this.$t("uc.finance.withdraw.num"),
-                key: "totalAmount"
-            });
-            columns.push({
-                title: this.$t("uc.finance.withdraw.fee"),
-                key: "fee"
-            });
-            columns.push({
-                title: this.$t("uc.finance.withdraw.status"),
-                key: "status",
-                render: (h, params) => {
-                    let text = "";
-                    if (params.row.status == 0) {
-                        text = this.$t("uc.finance.withdraw.status_1");
-                    } else if (params.row.status == 1) {
-                        text = this.$t("uc.finance.withdraw.status_2");
-                    } else if (params.row.status == 2) {
-                        text = this.$t("uc.finance.withdraw.status_3");
-                    } else if (params.row.status == 3) {
-                        text = this.$t("uc.finance.withdraw.status_4");
-                    }
-                    return h("div", [h("p", text)]);
-                }
-            });
-            return columns;
+    getMember() {
+            // 获取个人安全信息
+      this.$http.post(this.host + '/uc/approve/security/setting').then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
+          this.user = resp.data
+        } else {
+          this.$Message.error(this.loginmsg)
         }
+      })
     }
-};
+  },
+  created() {
+        // this.getMember();
+    this.$http.options.emulateJSON = false
+    this.coinType = this.$route.query.name || ''
+    this.getAddrList()
+    this.getList(0, 10, 1)
+
+    this.$http.post(this.host + '/uc/get/user', { mobile: this.$store.getters.member.mobile }).then(res => {
+      const data = res.body
+      if (data.code == 0) {
+        this.googleSwitch = !!data.data
+      }
+    })
+  },
+  computed: {
+    member: function() {
+      return this.$store.getters.member
+    },
+    tableColumnsWithdraw() {
+      let columns = [],
+        filters = []
+      if (this.coinList.length > 0) {
+        this.coinList.forEach(v => {
+          filters.push({
+            label: v.unit,
+            value: v.unit
+          })
+        })
+      }
+      columns.push({
+        title: this.$t('uc.finance.withdraw.time'),
+        width: 180,
+        key: 'createTime'
+      })
+      columns.push({
+        title: this.$t('uc.finance.withdraw.symbol'),
+        key: 'symbol',
+        filters,
+        filterMultiple: false,
+        filterMethod(value, row) {
+          return row.coin.unit === value
+        },
+        render: function(h, params) {
+          return h('span', params.row.coin.unit)
+        }
+      })
+      columns.push({
+        title: this.$t('uc.finance.withdraw.address'),
+        key: 'address'
+      })
+      columns.push({
+        title: this.$t('uc.finance.withdraw.num'),
+        key: 'totalAmount'
+      })
+      columns.push({
+        title: this.$t('uc.finance.withdraw.fee'),
+        key: 'fee'
+      })
+      columns.push({
+        title: this.$t('uc.finance.withdraw.status'),
+        key: 'status',
+        render: (h, params) => {
+          let text = ''
+          if (params.row.status == 0) {
+            text = this.$t('uc.finance.withdraw.status_1')
+          } else if (params.row.status == 1) {
+            text = this.$t('uc.finance.withdraw.status_2')
+          } else if (params.row.status == 2) {
+            text = this.$t('uc.finance.withdraw.status_3')
+          } else if (params.row.status == 3) {
+            text = this.$t('uc.finance.withdraw.status_4')
+          }
+          return h('div', [h('p', text)])
+        }
+      })
+      return columns
+    }
+  }
+}
 </script>
 <style lang="scss">
 .withdraw-form-inline {
@@ -1245,10 +1244,10 @@ table.table .table-inner.action-box {
 ivu-poptip-body-content-inner {
     color: #fff;
 }
-.ivu-poptip-inner {
-    background: #10122B;
-    color: #8090AF;
-}
+// .ivu-poptip-inner {
+//     background: #10122B;
+//     color: #8090AF;
+// }
 .ivu-poptip-popper[x-placement^=bottom] .ivu-poptip-arrow:after {
     border-bottom-color: #10122B;
 }

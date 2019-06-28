@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 
 <template>
     <div>
@@ -368,6 +369,7 @@ export default {
             // pageSize: 50,
             // totalNum: 0,
       FAQList: [],
+      indexBtnBC: '',
       favorColumns: [
         {
           title: self.$t('service.favor'),
@@ -442,7 +444,8 @@ export default {
             const nogreen =
                             parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
             return h('div', [
-              h('span', {}, params.row.price + ' /￥' + rmb),
+              // h('span', {}, params.row.price + ' /￥' + rmb),
+              h("span", {}, window.indexBtnBC === 'BC' ? (params.row.price + " /￥" + params.row.price):(params.row.price + " /￥" + rmb)),
               h(
                                 'Icon',
                 {
@@ -740,7 +743,8 @@ export default {
               const nogreen =
                                 parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
               return h('div', [
-                h('span', {}, params.row.price + ' /￥' + rmb),
+                // h('span', {}, params.row.price + ' /￥' + rmb),
+                h("span", {}, window.indexBtnBC === 'BC' ? params.row.price + " /￥" + params.row.price:params.row.price + " /￥" + rmb),
                 h(
                                     'Icon',
                   {
@@ -789,7 +793,7 @@ export default {
             sortMethod: function(a, b, type) {
               const a1 = a.replace(/[^\d|.|-]/g, '') - 0
               const b1 = b.replace(/[^\d|.|-]/g, '') - 0
-              if (type == 'asc') {
+              if (type === 'asc') {
                 return a1 - b1
               } else {
                 return b1 - a1
@@ -834,7 +838,7 @@ export default {
             sortMethod: function(a, b, type) {
               const a1 = parseFloat(a)
               const b1 = parseFloat(b)
-              if (type == 'asc') {
+              if (type === 'asc') {
                 return a1 - b1
               } else {
                 return b1 - a1
@@ -1000,6 +1004,7 @@ export default {
       c.parentNode.insertBefore(g, c)
     })(window, document,
       'script', 'https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js', 'ud')
+    // eslint-disable-next-line no-undef
     ud({
       'code': '1ga0keb',
       'link': 'https://18986831987.s2.udesk.cn/im_client/?web_plugin_id=8943'
@@ -1160,8 +1165,8 @@ export default {
       param['pageSize'] = this.pageSize
       this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
         var resp = response.body
-        if (resp.code == 0) {
-          if (resp.data.content.length == 0) return
+        if (resp.code === 0) {
+          if (resp.data.content.length === 0) return
           const FAQList = resp.data.content
           const len = FAQList.length
           const n = 2 // 假设每行显示2个
@@ -1295,10 +1300,12 @@ export default {
     },
     mul(a, b) {
       if (b != null) {
+        // eslint-disable-next-line one-var
         var c = 0,
           d = a.toString(),
           e = b.toString()
       } else {
+        // eslint-disable-next-line one-var
         var c = 0,
           d = a,
           e = b
@@ -1316,6 +1323,7 @@ export default {
       )
     },
     addClass(index) {
+      window.indexBtnBC = '';
       this.choseBtn = index
       this.getSymbol()
       if (index == 0) {
@@ -1325,6 +1333,8 @@ export default {
       } else if (index == 2) {
         this.dataIndex = this.coins.ETH
       } else if (index == 3) {
+        this.indexBtnBC = this.indexBtn[3].text;
+        window.indexBtnBC =this.indexBtnBC;
         this.dataIndex = this.coins.BC
       } else if (index == 4) {
         this.dataIndex = this.coins.favor
@@ -1703,7 +1713,7 @@ li {
           .Qrleft{
             .android{
               width: 130px;
-              height: 40px; 
+              height: 40px;
               background:rgba(25,29,58,1);
               border:1px solid rgba(85,99,130,1);
               margin-bottom:12px;

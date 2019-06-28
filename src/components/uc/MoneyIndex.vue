@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-rights" id="moneyindex">
+  <div class="order-table" id="moneyindex">
     <div class="nav-right col-xs-12 col-md-10 padding-right-clear">
       <div class="bill_box rightarea padding-right-clear">
         <div class="bill_box rightarea padding-right-clear">
@@ -106,7 +106,6 @@ export default {
     //             data[i].coinType = data[i].coin.unit;
     //             this.tableMoney.push(data[i])
     //           }
-
     //         }
     //         this.loading = false;
     //       } else {
@@ -369,6 +368,7 @@ export default {
   .ivu-input,
   .ivu-input-group-append {
     border-radius: 0;
+    border-right: 0;
   }
   .ivu-input-group-append {
     padding: 4px 30px;
@@ -376,7 +376,8 @@ export default {
     border-left: 0;
     border: 1px solid #58698A;
   }
-  .ivu-input[disabled] {
+  .ivu-input[disabled],
+  .ivu-input {
     background: #111530;
     height: 40px;
     &:hover {
@@ -392,13 +393,13 @@ export default {
       background: #111530;
     }
   }
-.nav-right {
-  .ivu-tabs-bar {
-    margin-bottom: 0;
-  }
-  .ivu-tabs-nav .ivu-tabs-tab-active{
-    color:#2d8cf0 !important;
-  }
+  .nav-right {
+    .ivu-tabs-bar {
+      margin-bottom: 0;
+    }
+    .ivu-tabs-nav .ivu-tabs-tab-active{
+      color:#2d8cf0 !important;
+    }
     .rightarea.bill_box {
       .ivu-table-body {
         td {
@@ -409,16 +410,16 @@ export default {
               padding: 0 10px;
               border:0 !important;
               span {
-                  display: inline-block;
-                  line-height: 25px;
-                  font-size: 12px;
+                display: inline-block;
+                line-height: 25px;
+                font-size: 12px;
               }
             }
             p .ivu-btn.ivu-btn-info {
               border: 1px solid #39f;
               border-radius: 20px;
               span {
-                  color: #39f;
+                color: #39f;
               }
             }
             p .ivu-btn.ivu-btn-info:active{
@@ -430,68 +431,72 @@ export default {
               border: 1px solid #f15057;
               border-radius: 20px;
               span {
-                  color: #f15057;
+                color: #f15057;
               }
             }
             p .ivu-btn.ivu-btn-primary {
               border: 1px solid #00b275;
               border-radius: 20px;
               span {
-                  color: #00b275;
+                color: #00b275;
               }
             }
           }
         }
       }
     }
-}
-    .shaow {
-      position: relative;
-      .hidden-assets{
-        position: absolute;
-        width: 300px;
-        top: -40px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-pack: end;
-        justify-content: flex-end;
-        right: 35px;
-      }
+  }
+  .shaow {
+    position: relative;
+    .hidden-assets{
+      position: absolute;
+      width: 300px;
+      top: -40px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-pack: end;
+      justify-content: flex-end;
+      right: 35px;
     }
+  }
 
-     #moneyindex .ivu-table-row .ivu-table-cell{
-       display: flex;
-       justify-content: center;
-     }
-    #moneyindex .ivu-table-row .ivu-table-cell p{
-      float: right;
-      //margin-right: 85px;
-    }
-    #lever .ivu-table-row .ivu-table-cell p{
+  #moneyindex .ivu-table-row .ivu-table-cell{
+    display: flex;
+    justify-content: center;
+  }
+  #moneyindex .ivu-table-row .ivu-table-cell p{
+    float: right;
+    //margin-right: 85px;
+  }
+  #lever .ivu-table-row .ivu-table-cell p {
     margin:0;
-    }
+  }
+
 </style>
 
 <style scoped lang="scss">
-.nav-right {
-    height: auto;
-    overflow: hidden;
-    background: #fff;
-    .rightarea.bill_box {
+  .order-table {
+    .nav-right {
+      height: auto;
+      overflow: hidden;
+      background: #fff;
+      .rightarea.bill_box {
         width: 100%;
         height: auto;
         overflow: hidden;
         .order-table {
-            .ivu-table-wrapper {
-                .ivu-table .ivu-table-header {
-                    tr th {
-                        background: none;
-                    }
-                }
+          .ivu-table-wrapper {
+            .ivu-table .ivu-table-header {
+              tr th {
+                background: none;
+              }
             }
+          }
         }
+      }
     }
-}
+  }
+
 
 </style>

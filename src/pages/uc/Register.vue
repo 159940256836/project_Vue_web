@@ -147,19 +147,15 @@
         background: rgba(0,0,0,.3);
     }
     .login_right {
-        background: #fff url("../../assets/images/register.png") no-repeat center !important;
+        // background: #fff url("../../assets/images/register.png") no-repeat center !important;
         padding: 0 42px;
         position: absolute;
-        background: #fff;
+        background: #10122B;
         width: 465px;
-        // height: 485px;
         left: 50%;
         top: 42%;
-        // transform: translate(50%, 50%, 0);
         margin-left: -175px;
         margin-top: -255px;
-        // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
-        /*border-top: 4px solid #3399ff;*/
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 .ivu-form-item-content {
@@ -185,7 +181,7 @@
                     #sendCode {
                         position: absolute;
                         border: 1px solid #DDDDDD;
-                        background: #fdfaf3;
+                        background: #10122B;
                         top: 0px;
                         outline: none;
                         line-height: 40px;
@@ -193,6 +189,8 @@
                         width: 27%;
                         color: #3399ff;
                         cursor: pointer;
+                        border:1px solid;
+                        border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
                     }
                 }
             }
@@ -220,7 +218,7 @@
 }
 
 .login_title {
-    color: #000;
+    color: #3399FF;
     text-align: center;
     height: 80px;
     font-size: 25px;
@@ -262,120 +260,120 @@
 </style>
 <script>
 export default {
-    data() {
-        const validateUser = (rule, value, callback) => {
-            if (this.changeActive == 0) {
-                let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
-                if (value == "") {
-                    callback(new Error(this.$t("uc.regist.teltip")));
-                } else if (!reg.test(this.formInline.user)) {
-                    callback(new Error(this.$t("uc.regist.telerr")));
-                } else {
-                    callback();
-                }
-            } else {
-                let reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-                reg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
-                if (value == "") {
-                    callback(new Error(this.$t("uc.regist.emailtip")));
-                } else if (!reg.test(this.formInline.user)) {
-                    callback(new Error(this.$t("uc.regist.emailerr")));
-                } else {
-                    callback();
-                }
-            }
-        };
-        const validateRepassword = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.regist.confirmpwdtip")));
-            } else if (value !== this.formInline.password) {
-                callback(new Error(this.$t("uc.regist.confirmpwderr")));
-            } else {
-                callback();
-            }
-        };
-        return {
-            codedisabled: false,
-            sendcodeValue: this.$t("uc.regist.sendcode"),
-            ticket: "",
-            randStr: "",
-            captchaObj: null,
-            modal1: false,
-            _captchaResult: null,
-            agree: true,
-            allowRegister: true,
-            buttonLists: [
-                {
-                    text: this.$t("uc.regist.telregist")
-                },
-                {
-                    text: this.$t("uc.regist.emailregist")
-                }
-            ],
-            areas: [],
-            changeActive: 0,
-            showCode: true,
-            countdown: 60,
-            formInline: {
-                username: "",
-                country: "",
-                user: "",
-                code: "",
-                areaCode: "",
-                password: "",
-                repassword: "",
-                agentcode:
-                    typeof this.$route.query.agent == "undefined"
-                        ? ""
+  data() {
+    const validateUser = (rule, value, callback) => {
+      if (this.changeActive == 0) {
+        const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
+        if (value == '') {
+          callback(new Error(this.$t('uc.regist.teltip')))
+        } else if (!reg.test(this.formInline.user)) {
+          callback(new Error(this.$t('uc.regist.telerr')))
+        } else {
+          callback()
+        }
+      } else {
+        let reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
+        reg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/
+        if (value == '') {
+          callback(new Error(this.$t('uc.regist.emailtip')))
+        } else if (!reg.test(this.formInline.user)) {
+          callback(new Error(this.$t('uc.regist.emailerr')))
+        } else {
+          callback()
+        }
+      }
+    }
+    const validateRepassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.regist.confirmpwdtip')))
+      } else if (value !== this.formInline.password) {
+        callback(new Error(this.$t('uc.regist.confirmpwderr')))
+      } else {
+        callback()
+      }
+    }
+    return {
+      codedisabled: false,
+      sendcodeValue: this.$t('uc.regist.sendcode'),
+      ticket: '',
+      randStr: '',
+      captchaObj: null,
+      modal1: false,
+      _captchaResult: null,
+      agree: true,
+      allowRegister: true,
+      buttonLists: [
+        {
+          text: this.$t('uc.regist.telregist')
+        },
+        {
+          text: this.$t('uc.regist.emailregist')
+        }
+      ],
+      areas: [],
+      changeActive: 0,
+      showCode: true,
+      countdown: 60,
+      formInline: {
+        username: '',
+        country: '',
+        user: '',
+        code: '',
+        areaCode: '',
+        password: '',
+        repassword: '',
+        agentcode:
+                    typeof this.$route.query.agent === 'undefined'
+                        ? ''
                         : this.$route.query.agent,
-                superType:
-                    typeof this.$route.query.type == "undefined"
-                        ? ""
+        superType:
+                    typeof this.$route.query.type === 'undefined'
+                        ? ''
                         : this.$route.query.type
-            },
-            ruleInline: {
-                username: [
-                    {
-                        required: true,
-                        message: this.$t("uc.regist.usernametip"),
-                        trigger: "blur"
-                    },
-                    {
-                        type: "string",
-                        min: 3,
-                        max: 15,
-                        message: this.$t("uc.regist.usernamemsg"),
-                        trigger: "blur"
-                    }
-                ],
-                country: [
-                    {
-                        required: true,
-                        message: this.$t("uc.regist.countrytip"),
-                        trigger: "blur"
-                    }
-                ],
-                user: [{ validator: validateUser, trigger: "blur" }],
-                code: [
-                    {
-                        required: true,
-                        message: this.$t("uc.regist.smscodetip"),
-                        trigger: "blur"
-                    }
-                ],
-                password: [
-                    {
-                        required: true,
-                        message: this.$t("uc.regist.pwdtip"),
-                        trigger: "blur"
-                    },
-                    {
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.regist.pwdmsg"),
-                        trigger: "blur"
-                    }
-                ],
+      },
+      ruleInline: {
+        username: [
+          {
+            required: true,
+            message: this.$t('uc.regist.usernametip'),
+            trigger: 'blur'
+          },
+          {
+            type: 'string',
+            min: 3,
+            max: 15,
+            message: this.$t('uc.regist.usernamemsg'),
+            trigger: 'blur'
+          }
+        ],
+        country: [
+          {
+            required: true,
+            message: this.$t('uc.regist.countrytip'),
+            trigger: 'blur'
+          }
+        ],
+        user: [{ validator: validateUser, trigger: 'blur' }],
+        code: [
+          {
+            required: true,
+            message: this.$t('uc.regist.smscodetip'),
+            trigger: 'blur'
+          }
+        ],
+        password: [
+          {
+            required: true,
+            message: this.$t('uc.regist.pwdtip'),
+            trigger: 'blur'
+          },
+          {
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.regist.pwdmsg'),
+            trigger: 'blur'
+          }
+        ],
                 // confirmPwd: [
                 //     {
                 //         required: true,
@@ -390,230 +388,230 @@ export default {
                 //         trigger: "blur"
                 //     }
                 // ],
-                repassword: [{ validator: validateRepassword, trigger: "blur" }],
-            },
-            key: "",
-            code: ""
-        };
-    },
-    watch: {
-        changeActive: function (val) {
-            this.$refs["formInline"].resetFields();
-        },
-        lang: function () {
-            this.updateLangData();
-        }
-    },
-    computed: {
-        lang: function () {
-            return this.$store.state.lang;
-        },
-        isLogin: function () {
-            return this.$store.getters.isLogin;
-        }
-    },
-      created: function () {
-        if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-            var par = '?' + location.href.split('?')[1];
-            this.$router.replace('/mobilereg' + par)
-        }
-        window.scrollTo(0, 0);
-        this.init();
-        this.actives(this.changeActive);
-    },
-    mounted:function(){
-        document.getElementById("logo").style.height=document.documentElement.clientHeight+"px";
-    },
-    methods: {
-        updateLangData() {
-            this.buttonLists = [
-                {
-                    text: this.$t("uc.regist.telregist")
-                },
-                {
-                    text: this.$t("uc.regist.emailregist")
-                }
-            ];
-            if (this.changeActive == 0) {
-                this.key = this.$t("uc.regist.telno");
-            } else {
-                this.key = this.$t("uc.regist.email");
-            }
-        },
-        init() {
-            if (this.isLogin) {
-                this.$router.push("/");
-            }
-            this.getAreas();
-        },
-        initGtCaptcha() {
-            // 直接生成一个验证码对象
-            let captcha1 = new TencentCaptcha("2087858432", (res) => {
-                res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr);
-                (this.changeActive == 0) && this.success();
-                this.changeActive == 1 && this.emailSuccess();
-            });
-            captcha1.show(); // 显示验证码
-        },
-        onAreaChange(value) {
-            for (let i = 0; i < this.areas.length; i++) {
-                if (this.areas[i].zhName == value) {
-                    this.formInline.areaCode = this.areas[i].areaCode;
-                }
-            }
-        },
-        getAreas() {
-            this.$http.post(this.host + this.api.common.area).then(response => {
-                let resp = response.body;
-                this.areas = resp.data;
-                if(this.areas!=null){
-                    this.formInline.country = this.areas[0].zhName;
-                    this.formInline.areaCode = this.areas[0].areaCode;
-                }
-            });
-        },
-        actives: function (index) {
-            this.changeActive = index;
-            if (this.changeActive == 0) {
-                this.showCode = true;
-                this.key = this.$t("uc.regist.telno");
-                this.ruleInline.code = [
-                    {
-                        required: true,
-                        message: this.$t("uc.regist.smscodetip"),
-                        trigger: "blur"
-                    }
-                ];
-            } else {
-                this.showCode = false;
-                this.key = this.$t("uc.regist.email");
-                this.ruleInline.code = [];
-            }
-        },
-        emailSuccess() {//邮箱注册腾讯防水验证成功
-            const forminline = this.formInline;
-            let params = {
-                ticket: this.ticket,
-                randStr: this.randStr,
-                email: forminline.user,
-                password: forminline.password,
-                username: forminline.username,
-                country: forminline.country,
-                promotion: forminline.agentcode,
-                superPartner: ""
-            };
-            this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
-            // this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
-                let resp = response.body;
-                if (resp.code == 0) {
-                    this.$Notice.success({
-                        title: this.$t('common.tip'),
-                        desc: resp.message
-                    });
-                    setTimeout(() => {
-                        this.$router.push('login');
-                    }, 3000)
-                } else {
-                    this.$Notice.error({
-                        title: this.$t('common.tip'),
-                        desc: resp.message
-                    });
-                }
-            });
-        },
-        handleSubmit(name) {
-            this.$refs[name].validate(valid => {
-                if (valid) {
-                    if (this.agree == true) {
-                        if (this.changeActive == 1) {
-                            this.afterValidate();
-                        } else {
-                            this.phoneRegister();
-                        }
-                    } else {
-                        this.$Notice.error({
-                            title: this.$t("common.tip"),
-                            desc: this.$t("uc.regist.agreementtip")
-                        });
-                    }
-                }
-            });
-        },
-        settime() {
-            this.sendcodeValue = this.countdown;
-            this.codedisabled = true;
-            let timercode = setInterval(() => {
-                this.countdown--;
-                this.sendcodeValue = this.countdown;
-                if (this.countdown <= 0) {
-                    clearInterval(timercode);
-                    this.codedisabled = false;
-                    this.sendcodeValue = this.$t("uc.regist.sendcode");
-                    this.countdown = 60;
-                }
-            }, 1000);
-        },
-        sendCode() {
-            let mobilePhone = this.formInline.user;
-            let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
-            if (mobilePhone == "" || !reg.test(mobilePhone)) {
-                this.$Notice.error({
-                    title: this.$t("common.tip"),
-                    desc: this.$t("uc.regist.teltip")
-                });
-                return;
-            } else {
-                this.initGtCaptcha();
-            }
-        },
-        success() {
-            let params = {};
-            params["phone"] = this.formInline.user;
-            params["country"] = this.formInline.country;
-            let reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
-            reg.test(params["phone"]) && this.$http.post(this.host + "/uc/mobile/code", params).then(response => {
-                let resp = response.body;
-                resp.code == 0 && this.$Notice.success({ title: this.$t("common.tip"), desc: resp.message });
-                resp.code == 0 && this.settime();
-                resp.code != 0 && this.$Notice.error({ title: this.$t("common.tip"), desc: resp.message });
-            });
-            !reg.test(params["phone"]) && this.$Notice.error({ title: this.$t("common.tip"), desc: this.$t("uc.finance.withdraw.telerr") });
-        },
-        phoneRegister() {//手机注册
-            let params = {};
-            params["phone"] = this.formInline.user;
-            params["username"] = this.formInline.username;
-            params["password"] = this.formInline.password;
-            params["code"] = this.formInline.code;
-            params["country"] = this.formInline.country;
-            params["promotion"] = this.formInline.agentcode;
-            params["superPartner"] = this.formInline.superType;
-            params["ticket"] = this.ticket;
-            params["randStr"] = this.randStr;
-            // this.$http.post(this.host + "/uc/register/phone", params).then(response => { 旧接口
-            this.$http.post(this.host + "/uc/register/nweLoginByPhone", params).then(response => { // 新接口
-                let resp = response.body;
-                if (resp.code == 0) {
-                    this.$Notice.success({
-                        title: this.$t("common.tip"),
-                        desc: resp.message
-                    });
-                    setTimeout(() => {
-                        this.$router.push("login");
-                    }, 3000);
-                } else {
-                    this.$Notice.error({
-                        title: this.$t("common.tip"),
-                        desc: resp.message
-                    });
-                }
-            });
-        },
-        afterValidate() {
-            this.initGtCaptcha();
-        }
+        repassword: [{ validator: validateRepassword, trigger: 'blur' }]
+      },
+      key: '',
+      code: ''
     }
-};
+  },
+  watch: {
+    changeActive: function(val) {
+      this.$refs['formInline'].resetFields()
+    },
+    lang: function() {
+      this.updateLangData()
+    }
+  },
+  computed: {
+    lang: function() {
+      return this.$store.state.lang
+    },
+    isLogin: function() {
+      return this.$store.getters.isLogin
+    }
+  },
+  created: function() {
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+      var par = '?' + location.href.split('?')[1]
+      this.$router.replace('/mobilereg' + par)
+    }
+    window.scrollTo(0, 0)
+    this.init()
+    this.actives(this.changeActive)
+  },
+  mounted: function() {
+    document.getElementById('logo').style.height = document.documentElement.clientHeight + 'px'
+  },
+  methods: {
+    updateLangData() {
+      this.buttonLists = [
+        {
+          text: this.$t('uc.regist.telregist')
+        },
+        {
+          text: this.$t('uc.regist.emailregist')
+        }
+      ]
+      if (this.changeActive == 0) {
+        this.key = this.$t('uc.regist.telno')
+      } else {
+        this.key = this.$t('uc.regist.email')
+      }
+    },
+    init() {
+      if (this.isLogin) {
+        this.$router.push('/')
+      }
+      this.getAreas()
+    },
+    initGtCaptcha() {
+            // 直接生成一个验证码对象
+      const captcha1 = new TencentCaptcha('2087858432', (res) => {
+        res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr);
+        (this.changeActive == 0) && this.success()
+        this.changeActive == 1 && this.emailSuccess()
+      })
+      captcha1.show() // 显示验证码
+    },
+    onAreaChange(value) {
+      for (let i = 0; i < this.areas.length; i++) {
+        if (this.areas[i].zhName == value) {
+          this.formInline.areaCode = this.areas[i].areaCode
+        }
+      }
+    },
+    getAreas() {
+      this.$http.post(this.host + this.api.common.area).then(response => {
+        const resp = response.body
+        this.areas = resp.data
+        if (this.areas != null) {
+          this.formInline.country = this.areas[0].zhName
+          this.formInline.areaCode = this.areas[0].areaCode
+        }
+      })
+    },
+    actives: function(index) {
+      this.changeActive = index
+      if (this.changeActive == 0) {
+        this.showCode = true
+        this.key = this.$t('uc.regist.telno')
+        this.ruleInline.code = [
+          {
+            required: true,
+            message: this.$t('uc.regist.smscodetip'),
+            trigger: 'blur'
+          }
+        ]
+      } else {
+        this.showCode = false
+        this.key = this.$t('uc.regist.email')
+        this.ruleInline.code = []
+      }
+    },
+    emailSuccess() { // 邮箱注册腾讯防水验证成功
+      const forminline = this.formInline
+      const params = {
+        ticket: this.ticket,
+        randStr: this.randStr,
+        email: forminline.user,
+        password: forminline.password,
+        username: forminline.username,
+        country: forminline.country,
+        promotion: forminline.agentcode,
+        superPartner: ''
+      }
+      this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
+            // this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
+        const resp = response.body
+        if (resp.code == 0) {
+          this.$Notice.success({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
+          setTimeout(() => {
+            this.$router.push('login')
+          }, 3000)
+        } else {
+          this.$Notice.error({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
+        }
+      })
+    },
+    handleSubmit(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          if (this.agree == true) {
+            if (this.changeActive == 1) {
+              this.afterValidate()
+            } else {
+              this.phoneRegister()
+            }
+          } else {
+            this.$Notice.error({
+              title: this.$t('common.tip'),
+              desc: this.$t('uc.regist.agreementtip')
+            })
+          }
+        }
+      })
+    },
+    settime() {
+      this.sendcodeValue = this.countdown
+      this.codedisabled = true
+      const timercode = setInterval(() => {
+        this.countdown--
+        this.sendcodeValue = this.countdown
+        if (this.countdown <= 0) {
+          clearInterval(timercode)
+          this.codedisabled = false
+          this.sendcodeValue = this.$t('uc.regist.sendcode')
+          this.countdown = 60
+        }
+      }, 1000)
+    },
+    sendCode() {
+      const mobilePhone = this.formInline.user
+      const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
+      if (mobilePhone == '' || !reg.test(mobilePhone)) {
+        this.$Notice.error({
+          title: this.$t('common.tip'),
+          desc: this.$t('uc.regist.teltip')
+        })
+        return
+      } else {
+        this.initGtCaptcha()
+      }
+    },
+    success() {
+      const params = {}
+      params['phone'] = this.formInline.user
+      params['country'] = this.formInline.country
+      const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
+      reg.test(params['phone']) && this.$http.post(this.host + '/uc/mobile/code', params).then(response => {
+        const resp = response.body
+        resp.code == 0 && this.$Notice.success({ title: this.$t('common.tip'), desc: resp.message })
+        resp.code == 0 && this.settime()
+        resp.code != 0 && this.$Notice.error({ title: this.$t('common.tip'), desc: resp.message })
+      })
+      !reg.test(params['phone']) && this.$Notice.error({ title: this.$t('common.tip'), desc: this.$t('uc.finance.withdraw.telerr') })
+    },
+    phoneRegister() { // 手机注册
+      const params = {}
+      params['phone'] = this.formInline.user
+      params['username'] = this.formInline.username
+      params['password'] = this.formInline.password
+      params['code'] = this.formInline.code
+      params['country'] = this.formInline.country
+      params['promotion'] = this.formInline.agentcode
+      params['superPartner'] = this.formInline.superType
+      params['ticket'] = this.ticket
+      params['randStr'] = this.randStr
+            // this.$http.post(this.host + "/uc/register/phone", params).then(response => { 旧接口
+      this.$http.post(this.host + '/uc/register/nweLoginByPhone', params).then(response => { // 新接口
+        const resp = response.body
+        if (resp.code == 0) {
+          this.$Notice.success({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
+          setTimeout(() => {
+            this.$router.push('login')
+          }, 3000)
+        } else {
+          this.$Notice.error({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
+        }
+      })
+    },
+    afterValidate() {
+      this.initGtCaptcha()
+    }
+  }
+}
 </script>
 <style lang="scss">
 $changeColor:#DDDDDD;
@@ -623,7 +621,9 @@ $focusColor:#3399FF;
     .login_right {
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
+                border:0 !important;
                 .ivu-form-item-content {
+                    border:0;
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
                             width: 100%;
@@ -633,6 +633,10 @@ $focusColor:#3399FF;
                             border: 1px solid $changeColor;
                             padding-left: 20px;
                             box-sizing: border-box;
+                            background:#10122B;
+                            border:1px solid;
+                            border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
+                            opacity:0.62;
                             &:focus {
                                 border: 1px solid $focusColor;
                                 box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
@@ -653,7 +657,8 @@ $focusColor:#3399FF;
                     }
                     .ivu-btn {
                         font-size: 14px;
-                        border-color: #fff;
+                        border:0;
+                        //border-color: #fff;
                         background: transparent;
                         &:hover {
                             color: $main_theme;
@@ -674,12 +679,16 @@ $focusColor:#3399FF;
                 height: 42px;
                 border-radius: 0;
                 border-right: 0;
+                border:1px solid;
+border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
             }
             .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
-                height: 48px;
+                background:#10122B;
+                height: 40px;
                 border-radius: 0;
                 line-height: 42px;
                 border-right: 0;
+                color:#fff;
             }
             .check-agree {
                 .ivu-checkbox-wrapper {

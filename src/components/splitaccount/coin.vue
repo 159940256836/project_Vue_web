@@ -258,5 +258,28 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+    .ivu-table-wrapper {
+        margin-right: -1px;
+        .ivu-table {
+            .ivu-table-stripe {
+                .ivu-table-body {
+                    tr{
+                        &:nth-child(2n) {
+                            td {
+                                background: #10122B;
+                            }
+                        }
+                    }
+                }
+            }
+            .ivu-table-header {
+                th {
+                    background: #111530;
+                    border-bottom: 0;
+                    color: #8090AF;
+                }
+            }
+        }
+    }
 </style>

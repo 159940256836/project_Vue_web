@@ -21,7 +21,6 @@
   }
 </style>
 <style lang="scss">
-
 </style>
 <style lang="scss">
  .mymsg_wrapper  .ivu-table-wrapper tbody.ivu-table-tbody .ivu-table-row td{
