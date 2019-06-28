@@ -35,6 +35,10 @@
   }
 </style>
 <style lang="scss">
+ .mymsg_wrapper  .ivu-table-wrapper tbody.ivu-table-tbody .ivu-table-row td{
+  // //background:transparent !important;
+}
+
   .ivu-date-picker-with-range {
     .ivu-date-picker-with-range {
       background: #10122B;
@@ -52,7 +56,7 @@
   <div class="mymsg_wrapper">
     <div class="wrapper">
       <div class="wrapper-title">
-        {{ $t('financeNav.wdzc') }}
+        {{ $t('new.Mssets') }}
       </div>
       <Tabs
         name="tab1"

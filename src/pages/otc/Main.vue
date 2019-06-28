@@ -25,26 +25,42 @@
       >
         <div class="fiat-login-main">
           <div class="fiat-login-title">
-            <img src="../../assets/images/fait/user.png" alt="">
+            <div class="fiat-coin">
+              <ul>
+                <li
+                  v-for="(item, index) in coinList"
+                  :class = "active == index ? 'addclass' : ''"
+                  @click='dowm(item.unit, index)'
+                >
+                  <span>●</span>
+                  {{ item.unit }}
+                </li>
+              </ul>
+            </div>
+            <!--<img src="../../assets/images/fait/user.png" alt="">-->
           </div>
           <div class="fiat-login-title">
             <p>
-              <span>当前等级认证</span>
-              <span>1</span>
+              <!--当前等级认证-->
+              <span>{{ $t('paper.level_certification') }}</span>
+              <span>{{ currency.memLevel }}</span>
             </p>
             <p>
-              <span>当前资产总估值</span>
-              <span>0.000000</span>
+              <!--当前资产总估值-->
+              <span>{{ $t('paper.total_asset_valuation') }}</span>
+              <span>{{ currencyOtcCoin.balance + currencyOtcCoin.frozenBalance  }}</span>
             </p>
           </div>
           <div class="fiat-login-title">
             <p>
-              <span>可用</span>
-              <span>1</span>
+              <!--可用-->
+              <span>{{ $t('paper.usable') }}</span>
+              <span>{{ currencyOtcCoin.balance }}</span>
             </p>
             <p>
-              <span>冻结</span>
-              <span>0.000000</span>
+              <!--冻结-->
+              <span>{{ $t('paper.freeze') }}</span>
+              <span>{{ currencyOtcCoin.frozenBalance }}</span>
             </p>
           </div>
           <div class="fiat-login-title">
@@ -60,39 +76,44 @@
             <div class="fiat-title">
               <router-link to="/PublishAdver">
                 <button>
-                  {{ $t('otc.myad.post') }}
+                  {{ $t('nav.fabu') }}
                 </button>
               </router-link>
             </div>
             <!--查看订单-->
             <div class="fiat-title-info">
               <router-link to="/order">
+                <!--查看订单-->
                 <button>
-                  查看订单
+                  {{ $t('paper.viewOrder') }}
                 </button>
               </router-link>
             </div>
           </div>
           <div class="fiat-login-title">
             <p>
-              <span>总单数</span>
-              <span>0</span>
+              <!--总单数-->
+              <span>{{ $t('paper.alwaysSingular') }}</span>
+              <span>{{ currency.count }}</span>
             </p>
             <p>
-              <span>完成率</span>
-              <span>0%</span>
+              <!--完成率-->
+              <span>{{ $t('paper.percentage') }}</span>
+              <span>{{ currency.rate }}%</span>
             </p>
           </div>
-          <div class="fiat-login-title">
+          <!--<div class="fiat-login-title">
             <p>
-              <span>单次限额</span>
+              <!-- 单次限额 -->
+              <span>{{ $t("new.Singlelimit") }}</span>
               <span>1</span>
             </p>
             <p>
-              <span>今日交易金额</span>
+              <!-- 今日交易金额 -->
+              <span>{{ $t("new.today") }}</span>
               <span>0</span>
             </p>
-          </div>
+          </div>-->
         </div>
       </div>
       <div class="main-box">
@@ -170,10 +191,59 @@
         height: 180px;
         background: #111530;
         margin: 21px auto 0;
-        padding: 25px;
         display: flex;
         .fiat-login-title {
+          &:first-child {
+            padding: 0;
+          }
+          padding: 25px 0;
           flex: 1;
+          .fiat-coin {
+            width: 170px;
+            height: 180px;
+            overflow-x: hidden;
+            &::-webkit-scrollbar {
+              width: 8px;  /*滚动条宽度*/
+              height: 20px;  /*滚动条高度*/
+            }
+
+            /*定义滚动条轨道 内阴影+圆角*/
+            &::-webkit-scrollbar-track {
+              border-radius: 0;  /*滚动条的背景区域的圆角*/
+              background-color: #131738;/*滚动条的背景颜色*/
+            }
+
+            /*定义滑块 内阴影+圆角*/
+            &::-webkit-scrollbar-thumb {
+              border-radius: 0;  /*滚动条的圆角*/
+              background-color: #21254D;  /*滚动条的背景颜色*/
+            }
+            ul {
+              padding: 25px 0;
+              .addclass {
+                background: #191D3A;
+                color: #8090AF;
+              }
+              li {
+                height: 40px;
+                line-height: 40px;
+                padding: 0 25px;
+                font-weight: 600;
+                cursor: pointer;
+
+                span {
+                  display: inline-block;
+                  width: 40px;
+                  padding-right: 8px;
+                  text-align: right;
+                }
+                &:hover {
+                  background: #191D3A;
+                  color: #8090AF;
+                }
+              }
+            }
+          }
           .login-title {
             color: #8090AF;
             img {
@@ -422,7 +492,14 @@ export default {
   data() {
     return {
       coins: [],
-      activeMenuName: "coin-1"
+      activeMenuName: "coin-1",
+      //币种列表
+      coinList: [],
+      active : 0, // 默认样式
+      coinName: '', // 币种
+      coinName1: '', // 默认币种
+      currency: {}, // 币种详情
+      currencyOtcCoin: {},
     };
   },
   computed: {
@@ -439,6 +516,48 @@ export default {
           this.$nextTick(function() {
             this.$refs.navMenu.updateActiveName();
           });
+        }
+      });
+    },
+    dowm(coin, index) {
+      //将点击的元素的索引赋值给变量
+      this.active = index
+      this.coinName = coin
+      // console.log(coin, index);
+      this.currencyDetails(this.coinName)
+    },
+    // 币种信息
+    findCoin() {
+      // 获取币种
+      this.$http.post(this.host + "/otc/coin/all").then(response => {
+        let resp = response.body;
+        if (resp.code == 0) {
+          this.coinList = resp.data;
+          this.coinName1 = this.coinList[0].unit
+          // console.log(this.coinList, this.coinList[0].unit);
+          this.currencyDetails(this.coinList[0].unit)
+        }
+      })
+    },
+    /*法币币种详情*/
+    currencyDetails (coin, unit) {
+      console.log(coin, unit);
+      if (coin) {
+        this.coinName1 = coin
+      } else {
+        this.coinName1 = unit
+      }
+      this.$http.get(this.host + "otc/coin/index?coin=" + this.coinName1).then(response => {
+        let resp = response.body;
+        if (resp.code == 0) {
+          // console.log(resp);
+          if (resp.data !== null) {
+            this.currency = resp.data
+          }
+          if (this.currency.otcCoin !== null) {
+            this.currencyOtcCoin = this.currency.otcCoin
+          }
+          // console.log(this.currency);
         }
       });
     },
@@ -494,6 +613,8 @@ export default {
   },
   created: function() {
     this.init();
+    this.findCoin()
+    this.currencyDetails()
     // this.activeMenuName = "coin-1";
     // this.$nextTick(function() {
     //   this.$refs.navMenu.updateActiveName();

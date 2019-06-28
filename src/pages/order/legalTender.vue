@@ -4,7 +4,7 @@
       <div class="bill_box_order">
         <div class="order_box">
           <Tabs value="name5" @on-click="showItem" name="tab2-1">
-            <TabPane :label="$t('uc.otcorder.all')" name="name5" tab="tab2-1">
+            <TabPane :label="$t('new.All')" name="name5" tab="tab2-1">
               <div class="order-table">
                 <Table
                       :no-data-text="$t('common.nodata')"
@@ -149,7 +149,7 @@
               </div>
             </TabPane>
             <input class="extra_input" v-model="ordKeyword" slot="extra" :placeholder="$t('uc.otcorder.searchtip')" />
-            <span class="extra_btn" slot="extra" @click="handleSearch">{{ $t('uc.otcorder.search') }}</span>
+            <span class="extra_btn" slot="extra" @click="handleSearch">{{ $t('new.searchfor') }}</span>
           </Tabs>
         </div>
 
@@ -315,16 +315,16 @@ export default {
         align: "center"
       });
       columns.push({
-        title: this.$t("uc.otcorder.class"),
+        title: this.$t("new.Typesof"),
         key: "class",
         // width: 90,
         align: "center",
         render: (h, params) => {
           let text = "";
           if (params.row.type == 0) {
-            text = self.$t("uc.otcorder.class_market_price");
+            text = self.$t("new.markeprice");
           } else {
-            text = self.$t("uc.otcorder.class_market_price");
+            text = self.$t("new.markeprice");
           }
           return h("div", [h("p", text)]);
         }
@@ -384,7 +384,7 @@ export default {
         align: "center"
       });
       columns.push({
-        title: this.$t("uc.otcorder.detail"),
+        title: this.$t("new.Details"),
         // width: 80,
         ellipsis: "true",
         align: "center",
@@ -402,7 +402,7 @@ export default {
                   color: '#3399FF'
                 }
               },
-              self.$t('uc.otcorder.view')
+              self.$t('new.View111')
             )
           ]);
         }
