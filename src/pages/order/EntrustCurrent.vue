@@ -22,11 +22,18 @@
   .small:focus {
     border: none;
   }
-}
+
 
 .page {
   text-align: right;
   margin-top: 20px;
+  margin-bottom:20px;
+  .ivu-page-next a{
+    color:#fff;
+  }
+  .ivu-page-prev a{
+    color:#fff;
+  }
 }
 
  .ivu-table-wrapper {
@@ -52,6 +59,7 @@
 
 .form.ivu-form-inline .ivu-form-item {
   display: inline-block;
+}
 }
 </style>
 <style lang="scss">
@@ -304,15 +312,15 @@
 <template>
   <div class="entrustcurrent">
     <Form class="form" :model="formItem" :label-width="60"  inline>
-      <FormItem :label-width="locale == 'en' ? 95 : 70 " :label="$t('historyAndCu.stEnTime')+':'" style="margin-right:18px;">
+      <!-- <FormItem :label-width="locale == 'en' ? 95 : 70 " :label="$t('historyAndCu.stEnTime')+':'" style="margin-right:18px;">
         <DatePicker class="DatePicker" type="daterange" v-model="formItem.date" style="width:248px;"></DatePicker>
-      </FormItem>
+      </FormItem> -->
       <FormItem :label="$t('historyAndCu.symbol')+':'" style="margin-right:14px;">
         <Select v-model="formItem.symbol" style="width:121px;" :placeholder="$t('header.choose')">
           <Option v-for="(item,index) in symbol " :value="item.symbol " :key="index">{{item.symbol}}</Option>
         </Select>
       </FormItem>
-      <FormItem :label="$t('historyAndCu.type')+':'" style="margin-right:12px;">
+      <!-- <FormItem :label="$t('historyAndCu.type')+':'" style="margin-right:12px;">
         <Select v-model="formItem.type" style="width:95px;" :placeholder="$t('header.choose')" >
           <Option v-for="(item, index) in exchangeType" :value="item[0]" :key="index">{{item[1]}}</Option>
         </Select>
@@ -322,7 +330,7 @@
           <Option value="0">{{$t('historyAndCu.buy')}}</Option>
           <Option value="1">{{$t('historyAndCu.sell')}}</Option>
         </Select>
-      </FormItem>
+      </FormItem> -->
       <div style="margin-bottom: 22px;display:inline-block;">
         <Button
           v-if="orders.length > 2"
@@ -355,219 +363,243 @@
         :loading="loading"
         @on-expand="onExpand"
       ></Table>
-      <div class="page">
+      <!-- <div class="page">
         <Page
           v-show="total > 10"
           :total="total"
           :pageSize="pageSize"
           :current="pageNo"
           @on-change="loadDataPage"
-        ></Page>
+        ></Page> -->
+        <ul class="page" v-show="!pageNo == 0">
+          <ul class="ivu-page"></ul>
+            <li title="上一页" class="ivu-page-prev" @click="previouspage">
+              <a><i class="ivu-icon ivu-icon-ios-arrow-back"></i></a>
+            </li> 
+            <li title="下一页" class="ivu-page-next" @click="nextpage">
+              <a><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></a>
+            </li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 <script>
-var moment = require("moment");
-import expandRow from "@components/exchange/expand.vue";
+var moment = require('moment')
+import expandRow from '@components/exchange/expand.vue'
 // const map = new Map([
 //   ["LIMIT_PRICE", "限价"],
 //   ["MARKET_PRICE", "市价"],
 //   ["CHECK_FULL_STOP", "止盈止损"]
 // ]);
 const map = new Map([
-  ["LIMIT_PRICE", "限价"],
-  ["MARKET_PRICE", "市价"]
-]);
+  ['LIMIT_PRICE', '限价'],
+  ['MARKET_PRICE', '市价']
+])
 // const mapEn = new Map([
 //   ["LIMIT_PRICE", "limited price"],
 //   ["MARKET_PRICE", "market price"],
 //   ["CHECK_FULL_STOP", "top profit and stop loss"]
 // ]);
 const mapEn = new Map([
-  ["LIMIT_PRICE", "limited price"],
-  ["MARKET_PRICE", "market price"]
-]);
+  ['LIMIT_PRICE', 'limited price'],
+  ['MARKET_PRICE', 'market price']
+])
 export default {
   components: { expandRow },
   data() {
-    const self = this;
+    const self = this
     return {
-      locale:'',
+      locale: '',
       loading: false,
       pageSize: 10,
       pageNo: 1,
       total: 10,
       symbol: [],
       formItem: {
-        symbol: "",
-        type: "",
-        direction: "",
-        date: ""
+        symbol: '',
+        type: '',
+        direction: '',
+        date: ''
       },
       orders: [],
       currentTableData: []
-    };
+    }
   },
   watch: {
-    "$i18n.locale": {
+    '$i18n.locale': {
       handler(newVal) {
-        this.locale = newVal;
+        this.locale = newVal
       },
       immediate: true
     }
   },
   created() {
-    this.getCurrentOrder();
-    this.getSymbol();
+    this.getCurrentOrder()
+    this.getSymbol()
   },
   methods: {
+    previouspage() {
+      if (this.pageNo == 1) {
+        this.$Notice.open({
+          title: this.$t('uc.identity.tips'),
+          desc: this.$t('uc.finance.record.nodata')
+        })
+      } else {
+        this.pageNo = this.pageNo - 10
+        this.getCurrentOrder()
+      }
+    },
+    nextpage() {
+      this.pageNo = this.pageNo + 10
+      this.getCurrentOrder()
+    },
     dateFormat: function(tick) {
-      return moment(tick).format("YYYY-MM-DD HH:mm:ss");
+      return moment(tick).format('YYYY-MM-DD HH:mm:ss')
     },
     timeFormat: function(tick) {
-      return moment(tick).format("HH:mm:ss");
+      return moment(tick).format('HH:mm:ss')
     },
     loadDataPage(data) {
-      this.pageNo = data;
-      this.getCurrentOrder();
+      this.pageNo = data
+      this.getCurrentOrder()
     },
     handleSubmit() {
-      this.pageNo = 1;
-      this.getCurrentOrder();
+      this.pageNo = 1
+      this.getCurrentOrder()
     },
     handleClear() {
       this.formItem = {
-        symbol: "",
-        type: "",
-        direction: "",
-        date: ""
-      };
+        symbol: '',
+        type: '',
+        direction: '',
+        date: ''
+      }
     },
     // 币币订单详情
     // 展开原生事件  点击左侧展收起
-    onExpand(row, status){
-      if(status){
+    onExpand(row, status) {
+      if (status) {
         this.orders.splice()
-        this.orders.filter((item, index)=>{
-          if(item.orderId == row.orderId){
-            item._expanded = true;   //展开选中的行
-          }else{
-            item._expanded = false;   //其他行关闭
+        this.orders.filter((item, index) => {
+          if (item.orderId === row.orderId) {
+            item._expanded = true   // 展开选中的行
+          } else {
+            item._expanded = false   // 其他行关闭
           }
-          return item;
-        });
+          return item
+        })
         // this.historyTableData = this.TableData1
       } else {
         this.currentTableData.splice()
-        this.currentTableData.map((item, index)=>{
-          if(item.orderId == row.orderId){
-            item._expanded = false;   //展开选中的行
-          }else{
-            item._expanded = false;   //其他行关闭
+        this.currentTableData.map((item, index) => {
+          if (item.orderId === row.orderId) {
+            item._expanded = false   // 展开选中的行
+          } else {
+            item._expanded = false   // 其他行关闭
           }
-          return item;
-        });
+          return item
+        })
       }
 
       return this.$http.post(this.host + this.api.exchange.orderDetails, {
         orderId: row.orderId
       }).then(res => {
-        const data = res.body;
-        if (data.code == 0) {
+        const data = res.body
+        if (data.code === 0) {
           this.currentTableData = data.data
         }
       })
     },
     getCurrentOrder() {
-      //查询当前委托
-      this.loading = true;
+      // 查询当前委托
+      this.loading = true
       const { symbol, type, direction, date: rangeDate } = this.formItem,
-        startTime = new Date(rangeDate[0]).getTime() || "",
-        endTime = new Date(rangeDate[1]).getTime() || "";
-      let params = {};
-      if (symbol) params.symbol = symbol;
-      if (direction) params.direction = direction;
-      if (type) params.type = type;
-      if (startTime) params.startTime = startTime;
-      if (endTime) params.endTime = endTime;
-      params.pageNo = this.pageNo;
-      params.pageSize = this.pageSize;
-      var that = this;
-      this.orders = [];
+        startTime = new Date(rangeDate[0]).getTime() || '',
+        endTime = new Date(rangeDate[1]).getTime() || ''
+      const params = {}
+      if (symbol) params.symbol = symbol
+      if (direction) params.direction = direction
+      if (type) params.type = type
+      if (startTime) params.startTime = startTime
+      if (endTime) params.endTime = endTime
+      params.pageNo = this.pageNo
+      // params.pageSize = this.pageSize
+      var that = this
+      this.orders = []
       this.$http
-        .post(this.host + "/exchange/order/personal/current", params)
+        .post(this.host + '/exchange/order/personal/newCurrent', params)
         .then(response => {
-          var resp = response.body;
-          let rows = [];
-          if (resp.content.length > 0) {
-            this.total = resp.totalElements;
-            for (var i = 0; i < resp.content.length; i++) {
-              var row = resp.content[i];
+          var resp = response.body
+          const rows = []
+          if (resp.data.length > 0) {
+            this.total = resp.data.length
+            for (var i = 0; i < resp.data.length; i++) {
+              var row = resp.data[i]
               row.price =
-                row.type == "MARKET_PRICE"
-                  ? that.$t("exchange.marketprice")
-                  : row.price;
-              rows.push(row);
+                row.type == 'MARKET_PRICE'
+                  ? that.$t('exchange.marketprice')
+                  : row.price
+              rows.push(row)
             }
-            this.orders = rows;
+            this.orders = rows
           }
-          this.loading = false;
-        });
+          this.loading = false
+        })
     },
     getSymbol() {
       this.$http.post(this.host + this.api.market.thumb, {}).then(response => {
-        var resp = response.body;
+        var resp = response.body
         if (resp.length > 0) {
-          this.symbol = resp;
+          this.symbol = resp
         }
-      });
+      })
     },
     cancel(orderId) {
       // this.$Modal.confirm({
       //   content: this.$t("exchange.undotip"),
       //   onOk: () => {
       this.$http
-        .post(this.host + this.api.exchange.orderCancel + "/" + orderId, {})
+        .post(this.host + this.api.exchange.orderCancel + '/' + orderId, {})
         .then(response => {
-          let resp = response.body;
-          if (resp.code == 0) {
-            this.getCurrentOrder();
+          const resp = response.body
+          if (resp.code === 0) {
+            this.getCurrentOrder()
           } else {
             this.$Notice.error({
-              title: this.$t("exchange.tip"),
+              title: this.$t('exchange.tip'),
               desc: resp.message
-            });
+            })
           }
-        });
+        })
       //   }
       // });
     },
     // 一键撤单
-    repeal () {
+    repeal() {
       this.$Modal.confirm({
-        content: this.$t("exchange.undotip"),
+        content: this.$t('exchange.undotip'),
         onOk: () => {
           this.$http.post(this.host + this.api.exchange.orderCancelAll).then(response => {
-            let resp = response.body;
-            if (resp.code == 0) {
-              this.getCurrentOrder();
+            const resp = response.body
+            if (resp.code === 0) {
+              this.getCurrentOrder()
             } else {
               this.$Notice.error({
-                title: this.$t("exchange.tip"),
+                title: this.$t('exchange.tip'),
                 desc: resp.message
-              });
+              })
             }
-          });
+          })
         }
-      });
+      })
     }
   },
   computed: {
     columns() {
-      const arr = [];
-      const m = this.$store.getters.lang == "English" ? mapEn : map;
-      const m1 = this.$store.getters.lang == "English" ? 180 : 180;
+      const arr = []
+      const m = this.$store.getters.lang === 'English' ? mapEn : map
+      const m1 = this.$store.getters.lang === 'English' ? 180 : 180
       // const m2 = this.$store.getters.lang == "English" ? 98 : 97;
       // const m3 = this.$store.getters.lang == "English" ? 80 : 120;
       // const m4 = this.$store.getters.lang == "English" ? 109 : '';
@@ -591,25 +623,25 @@ export default {
       // });
       arr.push({
         width: m1,
-        title: this.$t("exchange.time"),
-        key: "time",
+        title: this.$t('exchange.time'),
+        key: 'time',
         render: (h, params) => {
-          return h("span", {}, this.dateFormat(params.row.time));
+          return h('span', {}, this.dateFormat(params.row.time))
         }
-      });
+      })
       arr.push({
         // width: m2,
-        title: this.$t("historyAndCu.symbol"),
-        key: "symbol"
-      });
+        title: this.$t('historyAndCu.symbol'),
+        key: 'symbol'
+      })
       arr.push({
-        title: this.$t("historyAndCu.type"),
+        title: this.$t('historyAndCu.type'),
         // width: m3,
         render(h, params) {
-          const type = params.row.type;
-          return h("span", {}, m.get(type));
+          const type = params.row.type
+          return h('span', {}, m.get(type))
         }
-      });
+      })
       // arr.push({
       //   width: m4,
       //   title: this.$t("historyAndCu.triggerPrice"),
@@ -617,14 +649,14 @@ export default {
       // });
       arr.push({
         // width: m5,
-        title: this.$t("exchange.direction"),
-        key: "direction",
+        title: this.$t('exchange.direction'),
+        key: 'direction',
         render: (h, params) => {
-          const row = params.row;
-          const className = row.direction.toLowerCase();
-          if(row.direction == "BUY") {
+          const row = params.row
+          const className = row.direction.toLowerCase()
+          if (row.direction === 'BUY') {
             return h(
-              "span",
+              'span',
               {
                 attrs: {
                   class: className
@@ -633,11 +665,11 @@ export default {
                   color: 'red'
                 }
               },
-              this.$t("exchange.buyin")
-            );
-          }else {
+              this.$t('exchange.buyin')
+            )
+          } else {
             return h(
-              "span",
+              'span',
               {
                 attrs: {
                   class: className
@@ -646,78 +678,77 @@ export default {
                   color: 'red'
                 }
               },
-              this.$t("exchange.sellout")
-            );
+              this.$t('exchange.sellout')
+            )
           }
-          
         }
-      });
+      })
       arr.push({
         // width: m6,
-        title: this.$t("exchange.price"),
-        key: "price",
+        title: this.$t('exchange.price'),
+        key: 'price',
         render: (h, params) => {
           return h(
-            "span",
+            'span',
             {
               attrs: {
                 title: params.row.price
               }
             },
             this.toFloor(params.row.price)
-          );
+          )
         }
-      });
+      })
       arr.push({
         // width: m7,
-        title: this.$t("exchange.num"),
-        key: "amount",
+        title: this.$t('exchange.num'),
+        key: 'amount',
         render: (h, params) => {
           return h(
-            "span",
+            'span',
             {
               attrs: {
                 title: params.row.amount
               }
             },
             this.toFloor(params.row.amount)
-          );
+          )
         }
-      });
+      })
       arr.push({
         // width: m10,
-        title: this.$t("exchange.traded"),
-        key: "tradedAmount",
+        title: this.$t('exchange.traded'),
+        key: 'tradedAmount',
         render: (h, params) => {
           return h(
-            "span",
+            'span',
             {
               attrs: {
                 title: params.row.tradedAmount
               }
             },
             this.toFloor(params.row.tradedAmount)
-          );
+          )
         }
-      });
+      })
       arr.push({
         // width: m8,
-        title: this.$t("historyAndCu.turnoverAmount"),
-        key: "turnover",
+        title: this.$t('historyAndCu.turnoverAmount'),
+        key: 'turnover',
         render: (h, params) => {
           return h(
-            "span",
+            'span',
             {
               attrs: {
                 title: params.row.turnover
               }
             },
             this.toFloor(params.row.turnover)
-          );
+          )
         }
-      });
+      })
       arr.push({
-        type: "expand",
+        type: 'expand',
         width: 60,
         minWidth: 50,
         render: (h, params) => {
@@ -726,43 +757,43 @@ export default {
               skin: params.row.skin,
               rows: this.currentTableData
             }
-          });
+          })
         }
-      });
+      })
       arr.push({
         // width: m9,
-        title: this.$t("exchange.action"),
-        key: "operate",
+        title: this.$t('exchange.action'),
+        key: 'operate',
         render: (h, params) => {
           return h(
-            "Button",
+            'Button',
             {
               props: {
-                size: "small",
+                size: 'small'
               },
               style: {
-                background: "transparent",
-                color: "#3399FF",
-                lineHeight: "15px",
-                border: 'none',
+                background: 'transparent',
+                color: '#3399FF',
+                lineHeight: '15px',
+                border: 'none'
               },
               on: {
                 click: () => {
-                  this.cancel(params.row.orderId);
+                  this.cancel(params.row.orderId)
                 }
               }
             },
-            this.$t("exchange.undo")
-          );
+            this.$t('exchange.undo')
+          )
         }
-      });
-      return arr;
+      })
+      return arr
     },
     exchangeType() {
-      const m = this.$store.getters.lang == "English" ? mapEn : map;
-      return [...m];
+      const m = this.$store.getters.lang === 'English' ? mapEn : map
+      return [...m]
     }
   }
-};
+}
 </script>
 

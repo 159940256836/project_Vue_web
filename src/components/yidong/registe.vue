@@ -207,10 +207,10 @@ export default {
         if (res.code == 0) {
           this.$Message.success(res.message)
           setTimeout(() => {
-            window.location.href = 'https://download.coinmany.com/'
+            window.location.href = 'https://download.bdw.top/'
           }, 2000)
 
-          //  window.location.href="https://download.coinmany.com/"
+          //  window.location.href="https://download.bdw.top/"
         } else {
           this.$Message.error(res.message)
         }
@@ -304,7 +304,7 @@ export default {
         if (res.code == 0) {
           this.$Message.success(res.message)
           setTimeout(() => {
-            window.location.href = 'https://download.coinmany.com/'
+            window.location.href = 'https://download.bdw.top/'
           }, 2000)
         } else {
           this.$Message.error(res.message)

@@ -1571,7 +1571,7 @@ textarea {
 }
 
 .chart-page {
-    background: #f1f3f6
+    background: transparent;
 }
 
 .chart-page .chart-container {
@@ -1647,7 +1647,7 @@ textarea {
     top: 0;
     left: 0;
     z-index: 150;
-    background: #18202A
+    background: rgba(14, 14, 40, .8);
 }
 
 .loading-indicator img {

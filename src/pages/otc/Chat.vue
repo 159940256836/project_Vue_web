@@ -24,9 +24,7 @@
                             <th>{{ $t('otc.chat.transprice') }}(CNY)</th>
                             <th>{{ $t('otc.chat.transnum') }}({{ msg.unit }})</th>
                             <th>{{ $t('otc.chat.orderstatus') }}</th>
-                            <th v-if="reserveTime !== '0'">
-                                {{ $t('otc.chat.timeRemain') }}
-                            </th>
+                            <th>{{ $t('otc.chat.timeRemain') }}</th>
                             <th>{{ $t('exchange.action') }}</th>
                         </tr>
                         <tr>
@@ -44,7 +42,9 @@
                                 <span>{{ statusTextStr }}</span>
                             </th>
                             <th v-if="reserveTime !== '0'">
-                                <span v-show="statusBtn==1">{{ reserveTime }}</span>
+                                <span v-show="statusBtn==1">
+                                    {{ reserveTime }}
+                                </span>
                             </th>
                             <th>
                                 <div v-show="statusBtn==1&&tradeType==0">
@@ -105,7 +105,11 @@
                             <i class="icons bankfor"></i>
                             <span>{{$t('otc.chat.tip1')}}</span>
                         </div>
-                        <div class="account-info" v-if="alipay&&alipay!=null">
+                        <div
+                            class="account-info"
+                            v-if="alipay&&alipay!=null"
+                            style="width: 245px;"
+                        >
                             <i class="icons alipay"></i>
                             <span>{{$t('otc.chat.zfb')}}</span>
                             <span>{{alipay.aliNo}}</span>
@@ -121,7 +125,11 @@
                             <i class="icons alipay"></i>
                             <p>{{$t('otc.chat.tip2')}}</p>
                         </div>
-                        <div class="account-info" v-if="wechatPay&&wechatPay!=null">
+                        <div
+                            class="account-info"
+                            v-if="wechatPay&&wechatPay!=null"
+                            style="width: 245px;"
+                        >
                             <i class="icons wechat"></i>
                             <span>{{$t('otc.chat.wx')}}</span>
                             <span>{{wechatPay.wechat}}</span>

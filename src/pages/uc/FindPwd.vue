@@ -86,7 +86,8 @@
         background: rgba(0,0,0,.3);
     }
     .login_right {
-        background: #fff url("../../assets/images/forget-pass.png") no-repeat center !important;
+        // background: #fff url("../../assets/images/forget-pass.png") no-repeat center !important;
+        background: #10122B !important;
         padding: 20px 40px;
         position: absolute;
         background: #fff;
@@ -102,6 +103,7 @@
         /*border-top: 4px solid #3399ff;*/
         .tel-title {
             font-size: 25px;
+            color:#3399ff
         }
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
@@ -129,8 +131,9 @@
                     }
                     #sendCode {
                         position: absolute;
-                        border: 1px solid #DDDDDD;
-                        background: #fdfaf3;
+                        border:1px solid;
+                        border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
+                        background: #10122B;
                         top: 0px;
                         outline: none;
                         line-height: 40px;
@@ -154,7 +157,8 @@
                 .ivu-checkbox-wrapper.ivu-checkbox-wrapper-checked {
                     .ivu-checkbox.ivu-checkbox-checked {
                         .ivu-checkbox-inner {
-                            border: 1px solid #3399ff;
+                            border:1px solid;
+                            border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
                             background-color: #3399ff;
                         }
                     }
@@ -188,118 +192,118 @@
 </style>
 <script>
 const mobilereg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/,
-    emailReg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-import gtInit from "../../assets/js/gt.js";
-import $ from "jquery";
+  emailReg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+import gtInit from '../../assets/js/gt.js'
+import $ from 'jquery'
 export default {
-    data() {
-        const validateUser = (rule, value, callback) => {
-            if (this.changeActive == 0) {
-                var reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
-                if (value == "") {
-                    callback(new Error(this.$t("uc.regist.teltip")));
-                } else if (!reg.test(this.formInline.user)) {
-                    callback(new Error(this.$t("uc.regist.telerr")));
-                } else {
-                    callback();
-                }
-            } else {
-                var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-                reg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;
-                if (value == "") {
-                    callback(new Error(this.$t("uc.regist.emailtip")));
-                } else if (!reg.test(this.formInline.user)) {
-                    callback(new Error(this.$t("uc.regist.emailerr")));
-                } else {
-                    callback();
-                }
-            }
-        };
-        const validateRepassword = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.forget.pwdvalidate1")));
-            } else if (value !== this.formInline.password) {
-                callback(new Error(this.$t("uc.forget.pwdvalidate2")));
-            } else {
-                callback();
-            }
-        };
-        return {
-            codedisabled: false,
-            sendcodeValue: this.$t("uc.regist.sendcode"),
-            captchaObj: null,
-            modal1: false,
-            _captchaResult: null,
-            buttonLists: [
-                {
-                    text: this.$t("uc.forget.resettelpwd")
-                }
-            ],
-            changeActive: 0,
-            countdown: 60,
-            formInline: {
-                user: "",
-                code: "",
-                password: "",
-                repassword: ""
-            },
-            ruleInline: {
+  data() {
+    const validateUser = (rule, value, callback) => {
+      if (this.changeActive == 0) {
+        var reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
+        if (value == '') {
+          callback(new Error(this.$t('uc.regist.teltip')))
+        } else if (!reg.test(this.formInline.user)) {
+          callback(new Error(this.$t('uc.regist.telerr')))
+        } else {
+          callback()
+        }
+      } else {
+        var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
+        reg = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/
+        if (value == '') {
+          callback(new Error(this.$t('uc.regist.emailtip')))
+        } else if (!reg.test(this.formInline.user)) {
+          callback(new Error(this.$t('uc.regist.emailerr')))
+        } else {
+          callback()
+        }
+      }
+    }
+    const validateRepassword = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.forget.pwdvalidate1')))
+      } else if (value !== this.formInline.password) {
+        callback(new Error(this.$t('uc.forget.pwdvalidate2')))
+      } else {
+        callback()
+      }
+    }
+    return {
+      codedisabled: false,
+      sendcodeValue: this.$t('uc.regist.sendcode'),
+      captchaObj: null,
+      modal1: false,
+      _captchaResult: null,
+      buttonLists: [
+        {
+          text: this.$t('uc.forget.resettelpwd')
+        }
+      ],
+      changeActive: 0,
+      countdown: 60,
+      formInline: {
+        user: '',
+        code: '',
+        password: '',
+        repassword: ''
+      },
+      ruleInline: {
                 // user: [{ validator: validateUser, trigger: "blur" }],
-                code: [{ required: true, message: "请输入验证码", trigger: "blur" }],
-                password: [
-                    {
-                        required: true,
-                        message: this.$t("uc.forget.newpwdtip"),
-                        trigger: "blur"
-                    },
-                    {
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.forget.pwdvalidate3"),
-                        trigger: "blur"
-                    }
-                ],
-                repassword: [
-                    { validator: validateRepassword, trigger: "blur" },
-                    {
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.forget.pwdvalidate3"),
-                        trigger: "blur"
-                    }
-                ]
-            },
-            key: "",
-            code: ""
-        };
-    },
-    watch: {
-        changeActive: function (val) {
-            this.$refs["formInline"].resetFields();
+        code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+        password: [
+          {
+            required: true,
+            message: this.$t('uc.forget.newpwdtip'),
+            trigger: 'blur'
+          },
+          {
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.forget.pwdvalidate3'),
+            trigger: 'blur'
+          }
+        ],
+        repassword: [
+                    { validator: validateRepassword, trigger: 'blur' },
+          {
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.forget.pwdvalidate3'),
+            trigger: 'blur'
+          }
+        ]
+      },
+      key: '',
+      code: ''
+    }
+  },
+  watch: {
+    changeActive: function(val) {
+      this.$refs['formInline'].resetFields()
             // if (val == 0) this.initGtCaptcha();
-        }
-    },
-    created: function () {
-        this.init();
+    }
+  },
+  created: function() {
+    this.init()
         // this.actives(this.changeActive);
+  },
+  mounted: function() {
+    document.getElementById('logo').style.height = document.documentElement.clientHeight + 'px'
+  },
+  computed: {
+    isLogin: function() {
+      return this.$store.getters.isLogin
+    }
+  },
+  methods: {
+    init() {
+      if (this.isLogin) {
+        this.$router.push('/')
+      } else {
+        this.$store.state.HeaderActiveName = '1-4'
+      }
+      this.initGtCaptcha()
     },
-    mounted:function(){
-        document.getElementById("logo").style.height=document.documentElement.clientHeight+"px";
-    },
-    computed: {
-        isLogin: function () {
-            return this.$store.getters.isLogin;
-        }
-    },
-    methods: {
-        init() {
-            if (this.isLogin) {
-                this.$router.push("/");
-            } else {
-                this.$store.state.HeaderActiveName = "1-4";
-            }
-            this.initGtCaptcha();
-        },
         // 切换
         // actives: function(index) {
         //   this.changeActive = index;
@@ -343,164 +347,164 @@ export default {
         //     );
         //   });
         // },
-        initGtCaptcha() {
-            var that = this;
-            this.$http.get(this.host + this.api.uc.captcha).then(function (res) {
-                window.initGeetest(
-                    {
+    initGtCaptcha() {
+      var that = this
+      this.$http.get(this.host + this.api.uc.captcha).then(function(res) {
+        window.initGeetest(
+          {
                         // 以下配置参数来自服务端 SDK
-                        gt: res.body.gt,
-                        challenge: res.body.challenge,
-                        offline: !res.body.success, //表示用户后台检测极验服务器是否宕机
-                        new_captcha: res.body.new_captcha, //用于宕机时表示是新验证码的宕机
-                        product: "bind",
-                        width: "100%"
-                    },
+            gt: res.body.gt,
+            challenge: res.body.challenge,
+            offline: !res.body.success, // 表示用户后台检测极验服务器是否宕机
+            new_captcha: res.body.new_captcha, // 用于宕机时表示是新验证码的宕机
+            product: 'bind',
+            width: '100%'
+          },
                     this.handler
-                );
-            });
-        },
-        handler(captchaObj) {
-            captchaObj.onReady(() => {
-                $("#wait").hide();
-            }).onSuccess(() => {
-                let result = (this._captchaResult = captchaObj.getValidate());
-                if (!result) {
-                    this.$Message.error("请完成验证");
-                } else {
-                    mobilereg.test(this.formInline.user) && this.afterValidate();
-                    emailReg.test(this.formInline.user) && this.emailReset();
-                }
-            });
-            $("#sendCode").click(() => {
-                const tel = this.formInline.user,
-                    flagtel = mobilereg.test(tel) || emailReg.test(tel);
-                flagtel && captchaObj.verify();
-                !flagtel && this.$Message.error("请填写正确的手机号或者邮箱号");
-            });
-        },
-        emailReset() {
-            this.modal1 = false;
-            var params = {};
-            params["account"] = this.formInline.user;
-            params["geetest_challenge"] = this._captchaResult.geetest_challenge; //极验验证二次验证表单数据 chllenge
-            params["geetest_validate"] = this._captchaResult.geetest_validate; //极验验证二次验证表单数据 validate
-            params["geetest_seccode"] = this._captchaResult.geetest_seccode; //极验验证二次验证表单数据 seccode
+                )
+      })
+    },
+    handler(captchaObj) {
+      captchaObj.onReady(() => {
+        $('#wait').hide()
+      }).onSuccess(() => {
+        const result = (this._captchaResult = captchaObj.getValidate())
+        if (!result) {
+          this.$Message.error('请完成验证')
+        } else {
+          mobilereg.test(this.formInline.user) && this.afterValidate()
+          emailReg.test(this.formInline.user) && this.emailReset()
+        }
+      })
+      $('#sendCode').click(() => {
+        const tel = this.formInline.user,
+          flagtel = mobilereg.test(tel) || emailReg.test(tel)
+        flagtel && captchaObj.verify()
+        !flagtel && this.$Message.error('请填写正确的手机号或者邮箱号')
+      })
+    },
+    emailReset() {
+      this.modal1 = false
+      var params = {}
+      params['account'] = this.formInline.user
+      params['geetest_challenge'] = this._captchaResult.geetest_challenge // 极验验证二次验证表单数据 chllenge
+      params['geetest_validate'] = this._captchaResult.geetest_validate // 极验验证二次验证表单数据 validate
+      params['geetest_seccode'] = this._captchaResult.geetest_seccode // 极验验证二次验证表单数据 seccode
 
-            this.$http.post(this.host + "/uc/reset/email/code", params).then(response => {
-                this.countdown = 60;
-                var resp = response.body;
-                if (resp.code == 0) {
-                    this.$Notice.success({
-                        title: this.$t("common.tip"),
-                        desc: resp.message
-                    });
-                } else {
-                    this.$Notice.error({
-                        title: this.$t("common.tip"),
-                        desc: resp.message
-                    });
-                }
-            });
-        },
-        afterValidate() {
-            this.modal1 = false;
-            if (this.changeActive == 1) {
-                //发送邮件
+      this.$http.post(this.host + '/uc/reset/email/code', params).then(response => {
+        this.countdown = 60
+        var resp = response.body
+        if (resp.code == 0) {
+          this.$Notice.success({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
+        } else {
+          this.$Notice.error({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
+        }
+      })
+    },
+    afterValidate() {
+      this.modal1 = false
+      if (this.changeActive == 1) {
+                // 发送邮件
 
-            } else {
-                var params = {};
-                params["account"] = this.formInline.user;
-                params["geetest_challenge"] = this._captchaResult.geetest_challenge; //极验验证二次验证表单数据 chllenge
-                params["geetest_validate"] = this._captchaResult.geetest_validate; //极验验证二次验证表单数据 validate
-                params["geetest_seccode"] = this._captchaResult.geetest_seccode; //极验验证二次验证表单数据 seccode
-                this.$http.post(this.host + "/uc/mobile/reset/code", params).then(response => {
-                    var resp = response.body;
-                    if (resp.code == 0) {
-                        this.settime();
-                        this.$Notice.success({ title: this.$t("common.tip"), desc: resp.message });
-                    } else {
-                        this.$Notice.error({ title: this.$t("common.tip"), desc: resp.message });
-                    }
-                });
-            }
-        },
-        handleSubmit(name) {
+      } else {
+        var params = {}
+        params['account'] = this.formInline.user
+        params['geetest_challenge'] = this._captchaResult.geetest_challenge // 极验验证二次验证表单数据 chllenge
+        params['geetest_validate'] = this._captchaResult.geetest_validate // 极验验证二次验证表单数据 validate
+        params['geetest_seccode'] = this._captchaResult.geetest_seccode // 极验验证二次验证表单数据 seccode
+        this.$http.post(this.host + '/uc/mobile/reset/code', params).then(response => {
+          var resp = response.body
+          if (resp.code == 0) {
+            this.settime()
+            this.$Notice.success({ title: this.$t('common.tip'), desc: resp.message })
+          } else {
+            this.$Notice.error({ title: this.$t('common.tip'), desc: resp.message })
+          }
+        })
+      }
+    },
+    handleSubmit(name) {
             // 新加代码
             // 判断手机号邮箱不能为空
-            if(!this.formInline.user) {
-                this.$Message.error(this.$t("uc.login.loginvalidate"));
-                return false
-            }
-            this.$refs[name].validate(valid => {
-                if (valid) {
-                    if (emailReg.test(this.formInline.user)) {
-                        var params = {};
-                        params["account"] = this.formInline.user;
-                        params["code"] = this.formInline.code;
-                        params["mode"] = 1;
-                        params["password"] = this.formInline.password;
-                        this.$http
-                            .post(this.host + "/uc/reset/login/password", params)
+      if (!this.formInline.user) {
+        this.$Message.error(this.$t('uc.login.loginvalidate'))
+        return false
+      }
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          if (emailReg.test(this.formInline.user)) {
+            var params = {}
+            params['account'] = this.formInline.user
+            params['code'] = this.formInline.code
+            params['mode'] = 1
+            params['password'] = this.formInline.password
+            this.$http
+                            .post(this.host + '/uc/reset/login/password', params)
                             .then(response => {
-                                this.countdown = 60;
-                                var resp = response.body;
-                                if (resp.code == 0) {
-                                    this.$Notice.success({
-                                        title: this.$t("common.tip"),
-                                        desc: resp.message
-                                    });
-                                    this.$router.push("/login");
-                                } else {
-                                    this.$Notice.error({
-                                        title: this.$t("common.tip"),
-                                        desc: resp.message
-                                    });
-                                }
-                            });
-                    } else {
-                        var params = {};
-                        params["account"] = this.formInline.user;
-                        params["code"] = this.formInline.code;
-                        params["mode"] = 0;
-                        params["password"] = this.formInline.password;
-                        this.$http
-                            .post(this.host + "/uc/reset/login/password", params)
+                              this.countdown = 60
+                              var resp = response.body
+                              if (resp.code == 0) {
+                                this.$Notice.success({
+                                  title: this.$t('common.tip'),
+                                  desc: resp.message
+                                })
+                                this.$router.push('/login')
+                              } else {
+                                this.$Notice.error({
+                                  title: this.$t('common.tip'),
+                                  desc: resp.message
+                                })
+                              }
+                            })
+          } else {
+            var params = {}
+            params['account'] = this.formInline.user
+            params['code'] = this.formInline.code
+            params['mode'] = 0
+            params['password'] = this.formInline.password
+            this.$http
+                            .post(this.host + '/uc/reset/login/password', params)
                             .then(response => {
-                                var resp = response.body;
-                                if (resp.code == 0) {
-                                    this.$Notice.success({
-                                        title: this.$t("common.tip"),
-                                        desc: '重置成功'
-                                    });
-                                    this.$router.push("/login");
-                                } else {
-                                    this.$Notice.error({
-                                        title: this.$t("common.tip"),
-                                        desc: resp.message
-                                    });
-                                }
-                            });
-                    }
+                              var resp = response.body
+                              if (resp.code == 0) {
+                                this.$Notice.success({
+                                  title: this.$t('common.tip'),
+                                  desc: '重置成功'
+                                })
+                                this.$router.push('/login')
+                              } else {
+                                this.$Notice.error({
+                                  title: this.$t('common.tip'),
+                                  desc: resp.message
+                                })
+                              }
+                            })
+          }
                     // this.$Message.success(this.$t('uc.forget.resetpwdsuccess'));
-                } else {
-                }
-            });
-        },
-        settime() {
-            this.sendcodeValue = this.countdown;
-            this.codedisabled = true;
-            let timercode = setInterval(() => {
-                this.countdown--;
-                this.sendcodeValue = this.countdown;
-                if (this.countdown <= 0) {
-                    clearInterval(timercode);
-                    this.codedisabled = false;
-                    this.sendcodeValue = this.$t("uc.regist.sendcode");
-                    this.countdown = 60;
-                }
-            }, 1000);
-        },
+        } else {
+        }
+      })
+    },
+    settime() {
+      this.sendcodeValue = this.countdown
+      this.codedisabled = true
+      const timercode = setInterval(() => {
+        this.countdown--
+        this.sendcodeValue = this.countdown
+        if (this.countdown <= 0) {
+          clearInterval(timercode)
+          this.codedisabled = false
+          this.sendcodeValue = this.$t('uc.regist.sendcode')
+          this.countdown = 60
+        }
+      }, 1000)
+    }
         // sendCode() {
         //   this.settime();
         //   var mobilePhone = this.formInline.user;
@@ -523,8 +527,8 @@ export default {
         //   }
         //   this.modal1 = true;
         // }
-    }
-};
+  }
+}
 </script>
 <style lang="scss">
 .login_form {
@@ -535,16 +539,13 @@ export default {
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
                             height: 42px !important;
-                            border: 1px solid #DDDDDD;
+                            border: 1px solid #3399FF;
                             font-size: 14px;
                             border-radius: 0;
+                            background:#10122B;
+                            color:#8090AF;
                             &:focus {
-                                border: 1px solid #DDDDDD;
-                                -moz-box-shadow: 2px 2px 5px #fff,
-                                    -2px -2px 4px #fff;
-                                -webkit-box-shadow: 2px 2px 5px #fff,
-                                    -2px -2px 4px #fff;
-                                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                                border: 1px solid #3399FF;
                             }
                         }
                     }

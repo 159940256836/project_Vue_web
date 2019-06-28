@@ -43,8 +43,8 @@
                         <div class="isLoginWrapper">
                             <div class="login_register isLogin" v-if="isLogin" >
                                 <div class="mymsg">
-                                    <router-link to="/order">{{ $t("new.Myrder")}}</router-link>
-                                    <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
+                                    <router-link to="/order">{{$t("uc.order.myorder")}}</router-link>
+                                    <!-- <router-link to="/uc/safe">{{$t("uc.title")}}</router-link> -->
                                 </div>
                                 <!--@on-click="goBi"-->
                                  <Dropdown @on-click="goBi">
@@ -158,9 +158,12 @@
                 <div class="footer_content">
                     <div class="footer-main">
                         <div class="footer_left">
-                            <img src="./assets/images/logo.png" style="margin:0"></img>
+                            <div class="foot_left_text">
+                                <img src="./assets/images/logo.png"></img>
+                                <span>投资者最信赖的数字资产增值平台</span>
+                            </div>
                             <div class="left-icon">
-                                <a href="http://www.service@coinmany.com">
+                                <a href="http://www.service@bdw.top">
                                     <img src="./assets/images/twitter.png" alt="">
                                 </a>
                                 <div class="qrcode">
@@ -279,7 +282,7 @@
                                 </li>
                                 <li>
                                     <!--服务邮箱-->
-                                    <a href="javascript:;">{{$t('footer.email')}}：service@coinmany.com</a>
+                                    <a href="javascript:;">{{$t('footer.email')}}：service@bdw.top</a>
                                 </li>
                                 <li>
                                     <!--客服QQ-->
@@ -419,7 +422,7 @@ export default {
         case 'nav-exchange':
           break
         default:
-          window.document.title = 'bdw'
+          window.document.title = 'bdw 投资者最信赖的数字资产增值平台'
           break
       }
     },
@@ -440,7 +443,7 @@ export default {
         this.pageView = 'page-view'
                 // this.container_test = "";
       } else {
-        if (to.path.indexOf('exchange') > 0 && this.exchangeSkin == 'night') {
+        if (to.path.indexOf('exchange') > 0 && this.exchangeSkin === 'night') {
           this.pageView = 'page-view'
         } else {
           this.pageView = 'page-view2'
@@ -468,7 +471,7 @@ export default {
     },
     languageValue: function() {
       var curlang = this.$store.getters.lang
-      if (curlang == 'English') this.$i18n.locale = 'en'
+      if (curlang === 'English') this.$i18n.locale = 'en'
       return curlang
     },
     lang() {
@@ -507,49 +510,49 @@ export default {
   },
   methods: {
         // header动画效果
-         reload () {
-            this.isRouterAlive = false
-            this.$nextTick(function () {
-                this.isRouterAlive = true
-            })
-        },
-        goBi(name) {
-          console.log(name);
-          switch (name) {
-            case 'moneyindex':
-              console.log(name);
-              this.$router.push("/personal");
-              break;
-            case 'record':
-              this.$router.push("/personal/record");
-              break;
-            case 'recharge':
-              this.$router.push("/personal/recharge");
-              break;
-            case 'withdraw':
-              this.$router.push("/personal/withdraw");
-              break;
-            case 'withdrawAddr':
-              this.$router.push("/personal/withdrawAddr");
-              break;
-            case 'mebjc':
-              this.$router.push("/personal/bjc");
-              break;
-            case 'giveRecord':
-              this.$router.push("/personal/giveRecord");
-              break;
-          }
-        },
-        handleScroll () {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-            if (scrollTop > 0) {
-                this.styleTop = 0
-                this.topPadding = '0 17%'
-            } else {
-                this.styleTop = 30
-                this.topPadding = '0 5%'
+    reload() {
+      this.isRouterAlive = false
+      this.$nextTick(function() {
+        this.isRouterAlive = true
+      })
+    },
+    goBi(name) {
+      console.log(name)
+      switch (name) {
+        case 'moneyindex':
+          console.log(name)
+          this.$router.push('/personal')
+          break
+        case 'record':
+          this.$router.push('/personal/record')
+          break
+        case 'recharge':
+          this.$router.push('/personal/recharge')
+          break
+        case 'withdraw':
+          this.$router.push('/personal/withdraw')
+          break
+        case 'withdrawAddr':
+          this.$router.push('/personal/withdrawAddr')
+          break
+        case 'mebjc':
+          this.$router.push('/personal/bjc')
+          break
+        case 'giveRecord':
+          this.$router.push('/personal/giveRecord')
+          break
+      }
+    },
+    handleScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      if (scrollTop > 0) {
+        this.styleTop = 0
+        this.topPadding = '0 17%'
+      } else {
+        this.styleTop = 30
+        this.topPadding = '0 5%'
                 // this.topBackgroundColor = 'rgba(0,0,0,.5)'
-        }
+      }
     },
     strpo(str) {
       if (str.length > 4) {
@@ -574,7 +577,7 @@ export default {
                 .post(this.host + '/uc/ancillary/system/advertise', param)
                 .then(response => {
                   var result = response.body
-                  if (result.code == 0 && result.data.length > 0) {
+                  if (result.code === 0 && result.data.length > 0) {
                     this.topInfo = result.data[0]
                   }
                 })
@@ -582,7 +585,7 @@ export default {
     logout() {
       this.$http.post(this.host + '/uc/loginout', {}).then(response => {
         var resp = response.body
-        if (resp.code == 0) {
+        if (resp.code === 0) {
           this.$Message.success(resp.message)
           this.$store.commit('setMember', null)
           setTimeout(() => {
@@ -596,7 +599,7 @@ export default {
     checkLogin() {
       this.$http.post(this.host + '/uc/check/login', {}).then(response => {
         var result = response.body
-        if (result.code == 0 && result.data == false) {
+        if (result.code === 0 && result.data === false) {
           this.$store.commit('setMember', null)
         }
       })
@@ -610,28 +613,23 @@ export default {
         this.$store.commit('setlang', '简体中文')
         this.$i18n.locale = 'zh'
       }
+    },
+    systemservice() {
+      window.addEventListener('scroll', this.handleScroll);
+      (function(a, h, c, b, f, g) { a['UdeskApiObject'] = f; a[f] = a[f] || function() { (a[f].d = a[f].d || []).push(arguments) }; g = h.createElement(c); g.async = 1; g.charset = 'utf-8'; g.src = b; c = h.getElementsByTagName(c)[0]; c.parentNode.insertBefore(g, c) })(window, document, 'script', 'https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js', 'ud')
+      ud({
+        'code': 'a35673e',
+        'link': 'https://1589850.s2.udesk.cn/im_client/?web_plugin_id=9477'
+      })
     }
   },
   mounted() {
-        (function(a,h,c,b,f,g){
-            a["UdeskApiObject"] = f;a[f]=a[f]||function(){
-                (a[f].d=a[f].d||[]).push(arguments)
-            };
-            g=h.createElement(c);
-            g.async=1;
-            g.charset="utf-8";
-            g.src=b;c=h.getElementsByTagName(c)[0];
-            c.parentNode.insertBefore(g,c)
-        })(window,document,"script","https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js","ud");
-        ud({
-            "code": "a35673e",
-            "link": "https://1589850.s2.udesk.cn/im_client/?web_plugin_id=9272"
-        });
-    },
-    beforeDestroy () {
-        window.removeEventListener('scroll', this.handleScroll)
-    }
-};
+    this.systemservice()
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+}
 </script>
 <style lang="scss" scoped>
 %flex {
@@ -858,6 +856,11 @@ ul,li{
 }
 
 .ivu-table-wrapper {
+    margin-right: -1px;
+    .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+    .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+        background: #10122B;
+    }
     .ivu-table {
         &:before {
             background: #fff;
@@ -867,9 +870,14 @@ ul,li{
         }
         .ivu-table-header {
             th {
-                background-color: #fff;
-                border-color: #f5f5f5;
+                background-color: #111530;
+                color: #8090AF;
             }
+        }
+        td {
+            background: #111530;
+            color: #8090AF;
+            border-bottom: 0;
         }
     }
 }
@@ -901,19 +909,18 @@ ul,li{
     .ivu-table-wrapper {
         .ivu-table {
             &:before {
-                background: #fff;
+                background: transparent;
             }
             &:after {
-                background: #fff;
+                background: transparent;
             }
             .ivu-table-header {
                 th {
-                    background-color: #fff;
-                    border-color: #f5f5f5;
+                    background-color: #191D3A;
                 }
             }
             .ivu-table-row td {
-                /*background-color: #fff;*/
+                background-color: #111530;
                 border-color: #f5f5f5;
             }
         }
@@ -1059,7 +1066,7 @@ body {
 // }
 
 .login_title {
-    color: #000;
+    color: #3399FF;
     height: 80px;
     font-size: 25px;
     line-height: 80px;
@@ -1299,8 +1306,17 @@ body {
             .footer_left {
                 float: left;
                 font-size: 14px;
-                img {
-                    margin: 15px 0;
+                .foot_left_text{
+                    display: flex;
+                    align-items: center;
+                    margin-bottom:15px;
+                    img {
+                        margin:0px;
+                    }
+                    span{
+                        margin-left:15px;
+                        color:#8790a1;
+                    }
                 }
                 p {
                     margin: 10px 0;
@@ -1620,8 +1636,31 @@ body {
 }
 /*日期组件样式重置*/
 .ivu-picker-panel-icon-btn {
+    color: #8090AF;
     &:hover {
         color: #3399ff;
+    }
+}
+.ivu-date-picker-with-range {
+    .ivu-picker-panel-body {
+        .ivu-date-picker-header {
+            border-bottom: 1px solid #8090AF;
+            span {
+                color: #8090AF;
+            }
+        }
+        .ivu-date-picker-cells {
+            span {
+                em {
+
+                }
+            }
+        }
+        .ivu-date-picker-cells-header {
+            span {
+                color: #8090AF;
+            }
+        }
     }
 }
 .ivu-date-picker-cells-focused em {
@@ -1643,8 +1682,8 @@ body {
     background: rgba(240, 167, 10, 0.2);
 }
 .ivu-date-picker-cells-cell:hover em {
-    background: #fff;
-    color: #3399ff;
+    background: #8090AF;
+    color: #fff;
 }
 /*按钮样式重置*/
 .ivu-btn-primary:hover {

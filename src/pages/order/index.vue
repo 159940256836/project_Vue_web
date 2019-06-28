@@ -27,20 +27,20 @@ import LegalTender from './legalTender.vue'
 import Coins from './coins.vue'
 
 export default {
-    data() {
-        return {
-            title: this.$t('otc.myorder')
-        }
-    },
-    components: {
-        LegalTender,
-        Coins
-    },
-    methods: {
-        fn() {
-            console.log(1)
-        }
-    },
+  data() {
+    return {
+      title: this.$t('otc.myorder')
+    }
+  },
+  components: {
+    LegalTender,
+    Coins
+  },
+  methods: {
+    fn() {
+      console.log(1)
+    }
+  }
 }
 </script>
 

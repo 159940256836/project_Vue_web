@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-rights">
+    <div class="nav-record">
         <div class="nav-right">
             <div class="bill_flow_box">
                 <div class="rightarea-con">
@@ -385,7 +385,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.nav-rights {
+.nav-record {
     .nav-right {
         height: auto;
         overflow: hidden;
@@ -410,6 +410,7 @@ export default {
 }
 </style>
 <style lang="scss">
+.nav-record {
     .ivu-select-dropdown {
         width: 128px;
     }
@@ -424,7 +425,6 @@ export default {
     .ivu-select .ivu-select-dropdown {
         width: 128px;
     }
-.nav-rights {
     .nav-right {
         .bill_flow_box .rightarea-con {
             .form-group {
@@ -438,6 +438,7 @@ export default {
                     .ivu-date-picker-rel {
                         .ivu-input {
                             width: 260px !important;
+                            height: 30px;
                             background: transparent;
                             color: #fff;
                             border-radius: 0;
