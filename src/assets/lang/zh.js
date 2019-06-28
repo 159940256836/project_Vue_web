@@ -53,7 +53,11 @@ module.exports = {
     All: '全部',
     Mssets: '我的资产',
     nformationto: '请上传资料完成实名认证',
-    Uploartification: '上传认证'
+    Uploartification: '上传认证',
+    BindingGoogle:"绑定谷歌",
+    Retriepassword:"找回密码",
+    ReseGoogle:"重置谷歌",
+    Transactirate:'交易费率',
 
   },
   common: {

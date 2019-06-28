@@ -1,7 +1,8 @@
 <template>
   <div class="transactionCosts new_transactionCosts">
     <div class="top11111">
-      <div class="title_a">交易费率</div>
+      <!-- 交易费率 -->
+      <div class="title_a">{{ $t('new.Transactirate') }}</div>
     </div>
     <div class="content bg">
       <div class="content_top">

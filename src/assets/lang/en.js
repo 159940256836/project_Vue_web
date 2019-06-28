@@ -68,7 +68,12 @@ module.exports = {
     All: 'All',
     Mssets: 'My assets',
     nformationto: 'Please upload the information to complete the real name certification.',
-    Uploartification: 'Upload certification'
+    Uploartification: 'Upload certification',
+    BindingGoogle:'Binding Google',
+    Retriepassword:'Retrieve password',
+    ReseGoogle:'Reset Google',
+    Transactirate:"Transaction rate",
+
 
   },
   foot: {
