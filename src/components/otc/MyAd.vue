@@ -113,7 +113,7 @@ export default {
                       if (params.row.status == 0) {
                         self.$Message.error(self.$t("otc.myad.errmsg"));
                       } else {
-                        self.$router.push("/uc/ad/update?id=" + params.row.id);
+                        self.$router.push("/PublishAdver?id=" + params.row.id);
                       }
                     }
                   }
@@ -365,7 +365,7 @@ export default {
           .ivu-table-tbody .ivu-table-row .ivu-table-cell {
             button.ivu-btn {
               border-radius: 10px;
-              background: #fff;
+              background: transparent;
               &:focus {
                 -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
                 -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;

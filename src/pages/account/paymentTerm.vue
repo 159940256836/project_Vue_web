@@ -59,7 +59,7 @@
         </div>
         <div class="popups-box">
             <Modal
-                :title="$t('uc.safe.bind_bank_account')"
+                :title="$t('new.Bindount')"
                 v-model="modal1"
                 :styles="{top: '100px'}"
                 width="534"
@@ -94,14 +94,14 @@
                         </FormItem>
                         <!-- Button -->
                         <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate1')" style="width:300px;border-radius:0;">{{$t('uc.account.confirm')}}</Button>
+                            <Button type="primary" @click="handleSubmit('formValidate1')" style="width:300px;border-radius:0;">{{$t('new.confirmaaa')}}</Button>
                             <!-- <Button type="ghost" @click="handleReset('formValidate1')" style="margin-left: 8px">Reset</Button> -->
                         </FormItem>
                     </Form>
                 </div>
             </Modal>
             <Modal
-                :title="$t('uc.safe.bind_alipay_account')"
+                :title="$t('new.Binaccount')"
                 v-model="modal2"
                 :styles="{top: '100px'}"
                 width="750"
@@ -112,7 +112,7 @@
                         <Col span="8">
                         <input type="hidden" name="aliPreview" :value="aliPreview" />
                         <img :alt="$t('uc.account.imgtip')" id="aliImg" style="width: 150px;height: 150px;" :src="aliImg">
-                        <p style="text-align:center;"><Icon type="ios-alert" style="color:#3697FE;"/><span style="margin-top:20px;">{{ $t('uc.safe.alipay_tip') }}</span></p>
+                        <p style="text-align:center;"><Icon type="ios-alert" style="color:#3697FE;"/><span style="margin-top:20px;">{{ $t('new.Pleascode') }}</span></p>
                         <div class="acc_sc">
                             <Upload
                             ref="upload1"
@@ -141,7 +141,7 @@
                         </FormItem>
                         <!-- Button -->
                         <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate2')" style="width:300px;border-radius:0;">{{$t('uc.account.confirm')}}</Button>
+                            <Button type="primary" @click="handleSubmit('formValidate2')" style="width:300px;border-radius:0;">{{$t('new.confirmaaa')}}</Button>
                             <!-- <Button type="ghost" @click="handleReset('formValidate2')" style="margin-left: 8px">Reset</Button> -->
                         </FormItem>
                         </Col>
@@ -152,7 +152,7 @@
                 </div>
             </Modal>
             <Modal
-                :title="$t('uc.safe.bind_wechat_account')"
+                :title="$t('new.WeChaccount')"
                 v-model="modal3"
                 :styles="{top: '100px'}"
                 width="750"
@@ -163,7 +163,7 @@
                         <Col span="8">
                             <input type="hidden" name="wePreview" :value="wePreview" />
                             <img :alt="$t('uc.account.imgtip')" id="weImg" style="width: 150px;height: 150px;" :src=weImg>
-                            <p style="text-align:center;"><Icon type="ios-alert" style="color:#3697FE;"/><span style="margin-top:20px;">{{ $t('uc.safe.wechat_tip') }}</span></p>
+                            <p style="text-align:center;"><Icon type="ios-alert" style="color:#3697FE;"/><span style="margin-top:20px;">{{ $t('new.Pleasuplode') }}</span></p>
                             <div class="acc_sc">
                             <Upload
                                 ref="upload2"
@@ -191,7 +191,7 @@
                         </FormItem>
                         <!-- Button -->
                         <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate3')" style="width:300px;border-radius:0;">{{$t('uc.account.confirm')}}</Button>
+                            <Button type="primary" @click="handleSubmit('formValidate3')" style="width:300px;border-radius:0;">{{$t('new.confirmaaa')}}</Button>
                             <!-- <Button type="ghost" @click="handleReset('formValidate3')" style="margin-left: 8px">Reset</Button> -->
                         </FormItem>
                         </Col>

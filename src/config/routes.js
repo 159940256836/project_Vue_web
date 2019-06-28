@@ -126,7 +126,7 @@ export default [
     { path: '/index', component: Index },
     { path: '/login', component: Login },
 
-   
+
     { path: '/mobilereg', component: mobilereg, meta: {
       hide: true
     }},
@@ -194,6 +194,10 @@ export default [
                 path: "giveRecord",
                 name: "giveRecord",
                 component: giveRecord
+            },
+            {
+                path: 'adPublish',
+                component: adPublish
             }
         ]
     },

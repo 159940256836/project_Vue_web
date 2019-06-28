@@ -368,6 +368,7 @@ export default {
             // pageSize: 50,
             // totalNum: 0,
       FAQList: [],
+      indexBtnBC: '',
       favorColumns: [
         {
           title: self.$t('service.favor'),
@@ -442,7 +443,8 @@ export default {
             const nogreen =
                             parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
             return h('div', [
-              h('span', {}, params.row.price + ' /￥' + rmb),
+              // h('span', {}, params.row.price + ' /￥' + rmb),
+              h("span", {}, window.indexBtnBC === 'BC' ? (params.row.price + " /￥" + params.row.price):(params.row.price + " /￥" + rmb)),
               h(
                                 'Icon',
                 {
@@ -740,7 +742,8 @@ export default {
               const nogreen =
                                 parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
               return h('div', [
-                h('span', {}, params.row.price + ' /￥' + rmb),
+                // h('span', {}, params.row.price + ' /￥' + rmb),
+                h("span", {}, window.indexBtnBC === 'BC' ? params.row.price + " /￥" + params.row.price:params.row.price + " /￥" + rmb),
                 h(
                                     'Icon',
                   {
@@ -1316,6 +1319,7 @@ export default {
       )
     },
     addClass(index) {
+      window.indexBtnBC = '';
       this.choseBtn = index
       this.getSymbol()
       if (index == 0) {
@@ -1325,6 +1329,8 @@ export default {
       } else if (index == 2) {
         this.dataIndex = this.coins.ETH
       } else if (index == 3) {
+        this.indexBtnBC = this.indexBtn[3].text;
+        window.indexBtnBC =this.indexBtnBC;
         this.dataIndex = this.coins.BC
       } else if (index == 4) {
         this.dataIndex = this.coins.favor
@@ -1703,7 +1709,7 @@ li {
           .Qrleft{
             .android{
               width: 130px;
-              height: 40px; 
+              height: 40px;
               background:rgba(25,29,58,1);
               border:1px solid rgba(85,99,130,1);
               margin-bottom:12px;

@@ -43,7 +43,7 @@
                         <div class="isLoginWrapper">
                             <div class="login_register isLogin" v-if="isLogin" >
                                 <div class="mymsg">
-                                    <router-link to="/order">{{$t("uc.order.myorder")}}</router-link>
+                                    <router-link to="/order">{{ $t("new.Myrder")}}</router-link>
                                     <router-link to="/uc/safe">{{$t("uc.title")}}</router-link>
                                 </div>
                                 <!--@on-click="goBi"-->

@@ -3,7 +3,7 @@
         <div class="common  commona" style="min-height: 1px; background:#111530FF;">
             <div class="top_box">
                 <div class="ieoLogo">
-                    <img :src="content.picView" alt="">
+                    <!-- <img :src="content.picView" alt=""> -->
                     <span>{{content.saleCoin}}</span>
                 </div>
                 <div>
@@ -82,7 +82,7 @@
                         <Input class="pwda" type="password" v-model="password" :placeholder="$t('Ieo.enter')" />
                     </li>
                     <li>
-                        <div :class="status == '进行中'? 'red1':(status == '已完成' ? 'yellow1' : ( status == '预热中' ? 'pink1' : ''))" class="btn"><span long @click="startSale">{{statusStr}}</span></div>
+                        <div :class="status == '进行中'? 'red1':(status == '已完成' ? 'yellow1' : ( status == '预热中' ? 'pink1' : ''))" class="btn btn_new"><span long @click="startSale">{{statusStr}}</span></div>
                         <p>{{$t('Ieo.agree')}}<a href="">&lt;&lt;{{$t('Ieo.risk')}}&gt;&gt;</a></p>
                     </li>
                 </ul>
@@ -391,7 +391,7 @@ export default {
         padding-left:28px;
 
         div {
-            width: 70px;
+            // width: 70px;
             text-align: center;
         }
         div:nth-child(2){
@@ -594,6 +594,19 @@ $lineColor: rgb(71, 100, 146);
                     flex-wrap: wrap;
                     .btn {
                         width: 100%;
+                        margin-bottom: 15px;
+                        text-align: center;
+                        background: #3399ff;
+                        color: #fff;
+                        line-height: 2.5;
+                        span {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .btn_new{
+                         width: 100%;
                         margin-bottom: 15px;
                         text-align: center;
                         background: #3399ff;

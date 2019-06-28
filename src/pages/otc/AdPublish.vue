@@ -163,7 +163,7 @@
               </FormItem>
               <!-- 1 -->
               <p class="msg">{{$t('otc.publishad.marketprice')}}：
-                <span class="cankao">{{cankao}}</span>
+                <span class="cankao">{{cankao - 0}}</span>
               </p>
               <p class="msg" v-show="!form.fixed">
                 {{$t('otc.publishad.marketpricetip')}}{{wantstyle}}。
@@ -174,7 +174,7 @@
                 </label>
                 <div class="ivu-form-item-content" style="margin-left: 90px;">
                   <div class="ivu-input-wrapper ivu-input-type" id="price">
-                    {{price}}&nbsp;CNY/{{symbol}}
+                    {{price - 0}}&nbsp;CNY/{{symbol}}
                   </div>
                 </div>
               </div>
@@ -1030,6 +1030,11 @@ export default {
       line-height: 40px;
       color: #8090AF;
     }
+  }
+  .ivu-tag {
+    background: #2A3850;
+    border: 0;
+    margin: 8px 4px 3px 0;
   }
   .ivu-select-single {
     .ivu-select-selection {

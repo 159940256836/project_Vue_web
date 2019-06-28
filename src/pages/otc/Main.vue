@@ -104,11 +104,13 @@
           </div>
           <!--<div class="fiat-login-title">
             <p>
-              <span>单次限额</span>
+              单次限额 &ndash;&gt;
+              <span>{{ $t("new.Singlelimit") }}</span>
               <span>1</span>
             </p>
             <p>
-              <span>今日交易金额</span>
+              &lt;!&ndash; 今日交易金额 &ndash;&gt;
+              <span>{{ $t("new.today") }}</span>
               <span>0</span>
             </p>
           </div>-->
