@@ -379,7 +379,7 @@
             </Modal>
             <!-- 资金密码弹窗 -->
             <Modal
-                :title="!fGetBackFundpwd ? $t('new.Modifyassword') : $t('uc.safe.retrieve_fund_password')"
+                :title="!fGetBackFundpwd ? $t('new.Modifyassword') : $t('new.Retriepassword')"
                 v-model="modal5"
                 :styles="{top: '100px'}"
                 width="534"
@@ -481,7 +481,7 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate8')" style="width: 300px;border-radius:0;">
-                                {{$t('uc.safe.confirm')}}
+                                {{$t('new.confirmaaa')}}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate8')" style="margin-left: 8px">
                                 {{$t('uc.safe.reset')}}
@@ -492,7 +492,7 @@
             </Modal>
             <!-- 绑定谷歌验证弹窗 -->
             <Modal
-                :title="$t('uc.safe.binding_google')"
+                :title="$t('new.BindingGoogle')"
                 v-model="modal7"
                 :styles="{top: '100px'}"
                 width="714"
@@ -512,7 +512,7 @@
             </Modal>
             <!-- 重置谷歌验证弹窗 -->
             <Modal
-                :title="$t('uc.safe.binding_google')"
+                :title="$t('new.ReseGoogle')"
                 v-model="modal10"
                 :styles="{top: '100px'}"
                 width="714"
