@@ -47,6 +47,7 @@ module.exports = {
     Gradrate: 'Grade rate',
     Otcurrenrates: 'Otc rates',
     Currencrates: 'Currency rates',
+    // eslint-disable-next-line no-dupe-keys
     Standardates: 'Standard rates',
     Tradingn: 'Trading on',
     Thenamohe: 'The name of the',

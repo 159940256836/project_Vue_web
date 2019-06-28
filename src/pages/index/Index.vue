@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 
 <template>
     <div>
@@ -1296,10 +1297,12 @@ export default {
     },
     mul(a, b) {
       if (b != null) {
+        // eslint-disable-next-line one-var
         var c = 0,
           d = a.toString(),
           e = b.toString()
       } else {
+        // eslint-disable-next-line one-var
         var c = 0,
           d = a,
           e = b
