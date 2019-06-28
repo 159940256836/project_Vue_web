@@ -445,7 +445,7 @@ export default {
                             parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
             return h('div', [
               // h('span', {}, params.row.price + ' /￥' + rmb),
-              h("span", {}, window.indexBtnBC === 'BC' ? (params.row.price + " /￥" + params.row.price):(params.row.price + " /￥" + rmb)),
+              h('span', {}, window.indexBtnBC === 'BC' ? (params.row.price + ' /￥' + params.row.price) : (params.row.price + ' /￥' + rmb)),
               h(
                                 'Icon',
                 {
@@ -744,7 +744,7 @@ export default {
                                 parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
               return h('div', [
                 // h('span', {}, params.row.price + ' /￥' + rmb),
-                h("span", {}, window.indexBtnBC === 'BC' ? params.row.price + " /￥" + params.row.price:params.row.price + " /￥" + rmb),
+                h('span', {}, window.indexBtnBC === 'BC' ? params.row.price + ' /￥' + params.row.price : params.row.price + ' /￥' + rmb),
                 h(
                                     'Icon',
                   {
@@ -1323,7 +1323,7 @@ export default {
       )
     },
     addClass(index) {
-      window.indexBtnBC = '';
+      window.indexBtnBC = ''
       this.choseBtn = index
       this.getSymbol()
       if (index == 0) {
@@ -1333,8 +1333,8 @@ export default {
       } else if (index == 2) {
         this.dataIndex = this.coins.ETH
       } else if (index == 3) {
-        this.indexBtnBC = this.indexBtn[3].text;
-        window.indexBtnBC =this.indexBtnBC;
+        this.indexBtnBC = this.indexBtn[3].text
+        window.indexBtnBC = this.indexBtnBC
         this.dataIndex = this.coins.BC
       } else if (index == 4) {
         this.dataIndex = this.coins.favor
@@ -1743,10 +1743,13 @@ li {
             }
           }
           .Qrright{
-            margin-left:15px;
+                width: 90px;
+                height: 90px;
+                background: #fff;
+                margin-left: 10px;
             img{
-              widows:90px;
-              height:90px;
+                width: 90%;
+                margin: 5% 0 0 5%;
             }
           }
         }

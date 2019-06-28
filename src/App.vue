@@ -649,10 +649,11 @@ export default {
         line-height: 60px;
         position: fixed;
         z-index: 999;
-        background-color: #1c2435;
+        background-color: #11132C;
         transition: all .5s;
         .page-content {
             transition: all .5s;
+            background-color: #11132C !important;
             .time_download {
                 align-items: center;
                 overflow: hidden;
@@ -1346,9 +1347,10 @@ body {
                             left: 0;
                             display: none;
                             z-index: 9;
-                            width: 126px;
+                            width: 120px;
+                            height:120px;
                             text-align: center;
-                            padding: 0 13px;
+                            padding: 10px;
                         }
                     }
                     .qrcode1 {
@@ -1361,9 +1363,10 @@ body {
                             left: 0;
                             display: none;
                             z-index: 9;
-                            width: 126px;
+                            width: 120px;
+                            height: 120px;
                             text-align: center;
-                            padding: 0 13px;
+                            padding: 10px;
                         }
                     }
                     .qrcode2 {
