@@ -1244,6 +1244,7 @@ module.exports = {
           fee: 'Return of mining fees',
           symbol: 'Coin symbol',
           transactionTime: 'Trading time',
+          // eslint-disable-next-line no-dupe-keys
           symbol: 'Transaction pair',
           direction: 'direction',
           price: 'Price',
