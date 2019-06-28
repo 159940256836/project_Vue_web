@@ -974,6 +974,9 @@ p.describe {
 
 <style lang="scss">
 .detail-list {
+    * {
+        box-shadow: none !important; 
+    }
     .ivu-select{
         background: transparent !important;
         .ivu-select-selection {

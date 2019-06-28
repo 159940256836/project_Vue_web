@@ -38,7 +38,6 @@ export default {
     data() {
         return {
             getCodeText: this.$t('openGoolePage._sendCode'),
-            phone: this.$route.params.phone,
             disabled: false,
             openGoogleModal: true,
             formInline: {
@@ -55,14 +54,15 @@ export default {
             }
         }
     },
-    created() {
-        if (this.$route.params.phone) {
-            this.phone = this.$route.params.phone;
-        } else {
-            this.$router.push('/account');
-        }
-        // this.getMember()
-    },
+    props: ['phone'],
+    // created() {
+    //     if (this.$route.params.phone) {
+    //         this.phone = this.$route.params.phone;
+    //     } else {
+    //         this.$router.push('/account');
+    //     }
+    //     // this.getMember()
+    // },
     filters: {
         addStart(str) {
             if (str) {
@@ -148,6 +148,11 @@ export default {
     .openGoogleModal {
         padding: 0 27px;
         overflow: hidden;
+        .ivu-form-item-content {
+            p {
+                padding: 0;
+            }
+        }
     }
     .header-title {
         height: 50px;

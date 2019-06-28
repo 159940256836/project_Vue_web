@@ -1,5 +1,6 @@
 <style lang="scss" scoped>
 .entrusthistory {
+    
     float: left;
     width: 100%;
     .form {
@@ -137,9 +138,41 @@
       padding: 0 26px;
       margin-top: 3px;
     }
+
+    .ivu-select-item:hover {
+        background: #10122b;
+        color: #8090AF;
+    }
+
+    .ivu-select-item-selected,
+    .ivu-select-item-selected:hover {
+        background: #10122b;
+        color: #fff;
+    }
+
+    .ivu-select-dropdown {
+        min-width: 128px;
+        &::-webkit-scrollbar {
+            width: 4px; /*对垂直流动条有效*/
+            height: 10px; /*对水平流动条有效*/
+        }
+
+        /*定义滚动条的轨道颜色、内阴影及圆角*/
+        &::-webkit-scrollbar-track{
+            background-color: #111530;
+            border-radius: 3px;
+        }
+        &::-webkit-scrollbar-thumb{
+            border-radius: 7px;
+            background-color: #8090AF;
+        }
+    }
 }
 
 .entrusthistory {
+    * {
+        box-shadow: none !important; 
+    }
   .ivu-tabs {
         // overflow:initial;
         background: transparent;
@@ -589,17 +622,33 @@ export default {
         render: (h, params) => {
           const row = params.row
           const className = row.direction.toLowerCase()
-          return h(
-                        'span',
-            {
-              attrs: {
-                class: className
-              }
-            },
-                        row.direction == 'BUY'
-                            ? this.$t('exchange.buyin')
-                            : this.$t('exchange.sellout')
-                    )
+          if (row.direction == 'BUY') {
+            return h(
+            'span',
+              {
+                attrs: {
+                  class: className
+                },
+                style: {
+                  color: '#F15057'
+                }
+              },
+            this.$t('exchange.buyin')
+            )
+          } else {
+            return h(
+            'span',
+              {
+                attrs: {
+                  class: className
+                },
+                style: {
+                  color: '#00B275'
+                }
+              },
+            this.$t('exchange.sellout')
+            )
+          }
         }
       })
       arr.push({

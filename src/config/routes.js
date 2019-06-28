@@ -291,8 +291,8 @@ export default [
         component: membercenter,
         children: [
             {
-                path: '',
-                component: safe
+                path: '*',
+                redirect: '/account'
             },
             {
                 path: "ieoadmin",

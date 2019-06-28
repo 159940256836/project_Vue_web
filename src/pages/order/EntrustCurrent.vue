@@ -1,5 +1,8 @@
 <style lang="scss" scoped>
 .entrustcurrent {
+  * {
+        box-shadow: none !important; 
+    }
   float: left;
   width: 100%;
   .form {
@@ -121,6 +124,35 @@
       height: 30px;
       padding: 0 26px;
       margin-top: 3px;
+    }
+
+    .ivu-select-item:hover {
+        background: #10122b;
+        color: #8090AF;
+    }
+
+    .ivu-select-item-selected,
+    .ivu-select-item-selected:hover {
+        background: #10122b;
+        color: #fff;
+    }
+
+    .ivu-select-dropdown {
+        min-width: 128px;
+        &::-webkit-scrollbar {
+            width: 4px; /*对垂直流动条有效*/
+            height: 10px; /*对水平流动条有效*/
+        }
+
+        /*定义滚动条的轨道颜色、内阴影及圆角*/
+        &::-webkit-scrollbar-track{
+            background-color: #111530;
+            border-radius: 3px;
+        }
+        &::-webkit-scrollbar-thumb{
+            border-radius: 7px;
+            background-color: #8090AF;
+        }
     }
 }
 
@@ -630,7 +662,7 @@ export default {
                   class: className
                 },
                 style: {
-                  color: 'red'
+                  color: '#F15057'
                 }
               },
               this.$t('exchange.buyin')
@@ -643,7 +675,7 @@ export default {
                   class: className
                 },
                 style: {
-                  color: 'red'
+                  color: '#00B275'
                 }
               },
               this.$t('exchange.sellout')
