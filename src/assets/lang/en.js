@@ -67,6 +67,8 @@ module.exports = {
         Typesof:'Types of',
         All:'All',
         Mssets:'My assets',
+        nformationto:'Please upload the information to complete the real name certification.',
+        Uploartification:'Upload certification',
 
     },
     foot: {
