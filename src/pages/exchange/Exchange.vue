@@ -728,7 +728,7 @@ $night-color: #fff;
                         width: 100%;
                         height: 100%;
                         display: flex;
-                        background-color: rgba(40, 49, 62, 0.6);
+                        background-color: rgba(14, 14, 40, 0.7);
                         justify-content: center;
                         align-items: center;
                         z-index: 100;
