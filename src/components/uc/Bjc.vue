@@ -182,13 +182,17 @@ export default {
 <style lang="scss">
 .blc-table {
     .ivu-table-wrapper {
+        .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+        .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+            background: #10122B;
+        }
         .ivu-table-header {
             thead th {
-                background: #fff;
+                background: #191D3A;
             }
         }
         tbody.ivu-table-tbody .ivu-table-row td {
-            background: #fff;
+            background: #111530;
         }
     }
 }

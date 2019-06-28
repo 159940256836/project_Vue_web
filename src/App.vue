@@ -858,6 +858,11 @@ ul,li{
 }
 
 .ivu-table-wrapper {
+    margin-right: -1px;
+    .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+    .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+        background: #10122B;
+    }
     .ivu-table {
         &:before {
             background: #fff;
@@ -867,9 +872,14 @@ ul,li{
         }
         .ivu-table-header {
             th {
-                background-color: #fff;
-                border-color: #f5f5f5;
+                background-color: #111530;
+                color: #8090AF;
             }
+        }
+        td {
+            background: #111530;
+            color: #8090AF;
+            border-bottom: 0;
         }
     }
 }
@@ -901,19 +911,18 @@ ul,li{
     .ivu-table-wrapper {
         .ivu-table {
             &:before {
-                background: #fff;
+                background: transparent;
             }
             &:after {
-                background: #fff;
+                background: transparent;
             }
             .ivu-table-header {
                 th {
-                    background-color: #fff;
-                    border-color: #f5f5f5;
+                    background-color: #191D3A;
                 }
             }
             .ivu-table-row td {
-                /*background-color: #fff;*/
+                background-color: #111530;
                 border-color: #f5f5f5;
             }
         }
@@ -1620,8 +1629,31 @@ body {
 }
 /*日期组件样式重置*/
 .ivu-picker-panel-icon-btn {
+    color: #8090AF;
     &:hover {
         color: #3399ff;
+    }
+}
+.ivu-date-picker-with-range {
+    .ivu-picker-panel-body {
+        .ivu-date-picker-header {
+            border-bottom: 1px solid #8090AF;
+            span {
+                color: #8090AF;
+            }
+        }
+        .ivu-date-picker-cells {
+            span {
+                em {
+
+                }
+            }
+        }
+        .ivu-date-picker-cells-header {
+            span {
+                color: #8090AF;
+            }
+        }
     }
 }
 .ivu-date-picker-cells-focused em {
@@ -1643,8 +1675,8 @@ body {
     background: rgba(240, 167, 10, 0.2);
 }
 .ivu-date-picker-cells-cell:hover em {
-    background: #fff;
-    color: #3399ff;
+    background: #8090AF;
+    color: #fff;
 }
 /*按钮样式重置*/
 .ivu-btn-primary:hover {

@@ -17,7 +17,7 @@
           {{$t('otc.publishad.msg3')}}。
         </p>
         <p>{{$t('otc.publishad.msg4')}}
-          <router-link to="/uc/ad">
+          <router-link to="/otc/trade/bc">
             {{$t('otc.publishad.myad')}}
           </router-link>
           。
@@ -928,7 +928,7 @@ export default {
 <style scoped lang="scss">
 .my_ad_container {
   float: left;
-  padding-bottom: 193px;
+  /*padding-bottom: 193px;*/
 }
 .cankao {
   color: #3399ff;

@@ -380,7 +380,7 @@ export default {
     -ms-flex-direction: column;
     flex-direction: column;
     height: 400px;
-    padding-right: 10px;
+    padding: 10px;
     overflow-x: hidden;
     border: 1px solid #2A3850;
     background: #10122B;
@@ -625,6 +625,7 @@ export default {
     border: 1px solid #2A3850;
     border-top: 0;
     background: #111530;
+    color: #8090AF;
     padding: 10px;
     outline: none;
     width: 88%;

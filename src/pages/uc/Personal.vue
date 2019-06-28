@@ -21,7 +21,17 @@
   }
 </style>
 <style lang="scss">
-
+  .ivu-table-wrapper {
+    .ivu-table {
+      .ivu-table-header {
+        th {
+          background: #111530;
+          border-bottom: 0;
+          color: #8090AF;
+        }
+      }
+    }
+  }
   .ivu-tabs-nav-scroll {
     height: 60px;
     background: #111530;
