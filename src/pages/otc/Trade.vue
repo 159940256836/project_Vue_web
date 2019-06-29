@@ -484,7 +484,7 @@
 .merchant-top {
   display: flex;
   align-items: center;
-  background: #fff;
+  /*background: #fff;*/
   padding: 0 15px;
   color: #0d214e;
 }
@@ -496,7 +496,7 @@
 
 .merchant-item {
   padding: 20px 15px 20px 15px;
-  background: #fff;
+  /*background: #fff;*/
   width: 31%;
   float: left;
   margin: 0 1%;
@@ -738,7 +738,7 @@
 }
 
 .user-avatar-public {
-  background: #fff;
+  /*background: #fff;*/
   border-radius: 50%;
   height: 45px;
   width: 30px;

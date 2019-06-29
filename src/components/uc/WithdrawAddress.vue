@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-rights">
+    <div class="nav-rights-address">
         <div class="nav-right">
             <div class="bill_box_address">
                 <section>
@@ -11,7 +11,7 @@
                                 </span>：
                                 <Select
                                     v-model="coinType"
-                                    style="width:128px;"
+                                    style="width:130px;"
                                     size="large"
                                 >
                                     <Option
@@ -29,7 +29,7 @@
                                 <div class="title">
                                     <Input
                                         v-model="withdrawAddr"
-                                        style="width: 200px;"
+                                        style="width: 260px;"
                                         size="large"
                                     />
                                 </div>
@@ -444,7 +444,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.nav-rights {
+.nav-rights-address {
     .ivu-input-large {
         height: 30px;
     }
@@ -551,14 +551,36 @@ span.describe {
         }
     }
 }
-.nav-rights {
+.nav-rights-address {
+    .ivu-select-large.ivu-select-single {
+        .ivu-select-selection {
+            height: 30px;
+            border-radius: 0;
+            border: 1px solid #2A3850;
+            background: #111530;
+        }
+        .ivu-select-selected-value {
+            border-radius: 0;
+            background: #111530;
+        }
+    }
+    .ivu-select-large.ivu-select-single .ivu-select-selection .ivu-select-placeholder,
+    .ivu-select-large.ivu-select-single .ivu-select-selection .ivu-select-selected-value {
+        height: 28px;
+        line-height: 30px;
+        border-radius: 0;
+        background: #111530;
+    }
     .ivu-input-large,
     .ivu-select-placeholder,
     .ivu-select-selection {
-        height: 30px !important;
-        line-height: 30px !important;
+        height: 30px;
+        line-height: 30px;
     }
     .ivu-input {
+        border: 1px solid #2A3850;
+        border-radius: 0;
+        background: #111530;
         color: #8090AF;
     }
     .nav-right {
@@ -590,12 +612,12 @@ span.describe {
 
                         .ivu-select-dropdown {
                             li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-                                background: #fff;
+                                /*background: #fff;*/
                                 color: #3399ff;
                             }
 
                             li.ivu-select-item.ivu-select-item-selected {
-                                background: #fff;
+                                /*background: #fff;*/
                                 color: #495060;
 
                                 &:hover {
@@ -642,6 +664,32 @@ span.describe {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+    .ivu-table {
+        td {
+            &:first-child {
+                text-align: center;
+            }
+            &:last-child {
+                text-align: center;
+            }
+        }
+        .ivu-table-header {
+            th {
+                height: 50px;
+                background: #191D3A;
+                border-bottom: 0 !important;
+                color: #8090AF;
+                &:first-child {
+                    text-align: left;
+                    padding-left: 10px;
+                }
+                &:last-child {
+                    text-align: right;
+                    padding-right: 10px;
                 }
             }
         }

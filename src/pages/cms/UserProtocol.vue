@@ -523,7 +523,7 @@ text-indent:0cm;'><b><span lang=EN-US style=''>十二、</span></b><b><span
 </script>
 <style scoped>
   .agreement {
-    background: #fff;
+    /*background: #fff;*/
     padding-bottom: 20px;
     overflow-x:hidden;
   }

@@ -29,8 +29,8 @@
           <div class="order-table">
             <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
           </div>
-        </div> -->
-        <!-- <Modal v-model="modal" :title="$t('uc.finance.money.match')" @on-ok="matchGCC">
+        </div>
+        <Modal v-model="modal" :title="$t('uc.finance.money.match')" @on-ok="matchGCC">
             <P style="font-weight: bold;padding: 10px 0;">{{$t('uc.finance.money.matchtip1')}}：{{GCCMatchAmount}}</p>
             <p>
                 <span>{{$t('uc.finance.money.matchtip2')}}：</span>
@@ -267,7 +267,7 @@ export default {
                         }
                       },
                       style: {
-                        marginRight: "8px"
+                        marginRight: "30px"
                       }
                     },
                     self.$t("uc.finance.money.charge")
@@ -313,9 +313,6 @@ export default {
                             "/uc/withdraw?name=" + params.row.coin.unit
                         );
                       }
-                    },
-                    style: {
-                      marginRight: "8px"
                     }
                   },
                   self.$t("uc.finance.money.pickup")
@@ -356,44 +353,45 @@ export default {
 }
 </script>
 <style lang="scss">
-  .ivu-btn {
-    border-radius: 0;
-  }
-  .ivu-modal-header-inner {
-    color: #fff;
-  }
-  .ivu-modal-header {
-    border-bottom: 1px solid #2A3850;
-  }
-  .ivu-input,
-  .ivu-input-group-append {
-    border-radius: 0;
-    border-right: 0;
-  }
-  .ivu-input-group-append {
-    padding: 4px 30px;
-    background: transparent;
-    border-left: 0;
-    border: 1px solid #58698A;
-  }
-  .ivu-input[disabled],
-  .ivu-input {
-    background: #111530;
-    height: 40px;
-    &:hover {
-      border-color: #58698A;
-    }
-  }
-
-  .ivu-btn-default {
-    background: transparent;
-    border: 1px solid #8090AF;
-    color: #8090AF;
-    &:hover {
-      background: #111530;
-    }
-  }
+.order-table{
   .nav-right {
+    .ivu-btn {
+      border-radius: 0;
+    }
+    .ivu-modal-header-inner {
+      color: #fff;
+    }
+    .ivu-modal-header {
+      border-bottom: 1px solid #2A3850;
+    }
+    .ivu-input,
+    .ivu-input-group-append {
+      border-radius: 0;
+      border-right: 0;
+    }
+    .ivu-input-group-append {
+      padding: 4px 30px;
+      background: transparent;
+      border-left: 0;
+      border: 1px solid #58698A;
+    }
+    .ivu-input[disabled],
+    .ivu-input {
+      background: #111530;
+      height: 40px;
+      &:hover {
+        border-color: #58698A;
+      }
+    }
+
+    .ivu-btn-default {
+      background: transparent;
+      border: 1px solid #8090AF;
+      color: #8090AF;
+      &:hover {
+        background: #111530;
+      }
+    }
     .ivu-tabs-bar {
       margin-bottom: 0;
     }
@@ -405,7 +403,7 @@ export default {
         td {
           .ivu-table-cell {
             p .ivu-btn {
-              background: #fff;
+              /*background: #fff;*/
               height: 25px;
               padding: 0 10px;
               border:0 !important;
@@ -458,6 +456,28 @@ export default {
       -ms-flex-pack: end;
       justify-content: flex-end;
       right: 35px;
+      span {
+        color: #8090AF;
+        margin-right: 10px;
+      }
+      .ivu-switch {
+        width: 30px;
+        height: 16px;
+        border: 0;
+        &:after {
+          width: 14px;
+          height: 14px;
+          top: 1px;
+        }
+        &:before {
+          background: #8090af;
+        }
+      }
+      .ivu-switch-checked {
+        &:after {
+          left: 15px;
+        }
+      }
     }
   }
 
@@ -472,6 +492,36 @@ export default {
   #lever .ivu-table-row .ivu-table-cell p {
     margin:0;
   }
+  .ivu-table {
+    td {
+      background: #111530;
+      &:first-child {
+        text-align: left;
+        padding-left: 10px;
+      }
+      &:last-child {
+        text-align: right;
+        padding-right: 10px;
+      }
+    }
+    .ivu-table-header {
+      th {
+        height: 50px;
+        background: #191D3A;
+        border-bottom: 0 !important;
+        color: #8090AF;
+        &:first-child {
+          text-align: left;
+          padding-left: 10px;
+        }
+        &:last-child {
+          text-align: right;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}
 
 </style>
 
@@ -480,7 +530,7 @@ export default {
     .nav-right {
       height: auto;
       overflow: hidden;
-      background: #fff;
+      /*background: #fff;*/
       .rightarea.bill_box {
         width: 100%;
         height: auto;

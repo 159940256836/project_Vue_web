@@ -90,7 +90,7 @@
         background: #10122B !important;
         padding: 20px 40px;
         position: absolute;
-        background: #fff;
+        /*background: #fff;*/
         width: 465px;
         height: auto;
         left: 50%;

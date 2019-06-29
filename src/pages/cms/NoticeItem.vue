@@ -102,7 +102,7 @@ export default {
 <style lang="scss" scoped>
 // lhl
 .notice {
-  background: #fff;
+  /*background: #fff;*/
   padding-bottom: 20px;
   overflow-x: hidden;
   min-height: 800px;
@@ -113,7 +113,7 @@ export default {
 .content-wrap {
   width: 1200px;
   margin: 0 auto;
-  background: #fff;
+  /*background: #fff;*/
 }
 .notice_content-wrap{
   margin-top:85px !important;

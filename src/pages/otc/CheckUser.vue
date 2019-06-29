@@ -52,11 +52,11 @@
                               <p>{{$t('otc.checkuser.languagetext')}}</p>
                             </Col>
                             <Col span="6" style="text-align:left">
-                              <p>{{$t('otc.checkuser.registtime')}}</p> 
+                              <p>{{$t('otc.checkuser.registtime')}}</p>
                               <p>{{user.createTime}}</p>
                             </Col>
                             <Col span="6" style="text-align:right">
-                              <p>{{$t('otc.checkuser.exchangetimes')}}</p> 
+                              <p>{{$t('otc.checkuser.exchangetimes')}}</p>
                               <p>{{user.transactions}}</p>
                             </Col>
                         </Row>
@@ -406,7 +406,7 @@ export default {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background: #fff;
+  /*background: #fff;*/
   padding: 0 15px;
   color: #111530;
   margin-left: 20px;
@@ -643,7 +643,7 @@ export default {
 }
 
 .user-avatar-public {
-  background: #fff;
+  /*background: #fff;*/
   height: 65px;
   width: 65px;
   box-shadow: 0 1px 5px 0 rgba(71, 78, 114, 0.24);
@@ -843,7 +843,7 @@ export default {
 
 
     .right-safe .ivu-table-wrapper .ivu-table {
-        color: #fff;       
+        color: #fff;
     }
 
     .right-safe .ivu-table-wrapper  .ivu-table-stripe {
@@ -863,7 +863,7 @@ export default {
         color: #8090AF;
         //表格标题颜色
     }
-    .right-safe .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td, 
+    .right-safe .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
     .right-safe .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
         background: #10122B;
         //表格双数行样式

@@ -86,7 +86,6 @@
                         :width="width"
                         :height="height"
                         :rose="item.chg.toString()"
-                        style="margin-left:15px;"
                     ></SvgLine>
                 </div>
             </section>
@@ -192,21 +191,21 @@
                     <div class="qrcode">
                       <div class="Qrleft" v-show="this.checkoutapp">
                         <div class="android" @click="checkoutfasle">
-                          <Icon type="logo-android" color="white" size="20" style="margin:0 15px"/>
+                          <Icon type="logo-android" color="white" size="20" style="margin:0 12px 0 17px"/>
                           <span>android</span>
                         </div>
                         <div class="ipone click" @click="checkouttrue">
-                          <Icon type="logo-apple" color="white" size="20" style="margin:0 15px"/>
+                          <Icon type="logo-apple" color="white" size="20" style="margin:0 12px 0 17px"/>
                           <span>iphone</span>
                         </div>
                       </div>
                       <div class="Qrleft" v-show="!checkoutapp">
                           <div class="android click" @click="checkoutfasle">
-                            <Icon type="logo-android" color="white" size="20" style="margin:0 15px"/>
+                            <Icon type="logo-android" color="white" size="20" style="margin:0 12px 0 17px"/>
                             <span>android</span>
                           </div>
                           <div class="ipone" @click="checkouttrue">
-                            <Icon type="logo-apple" color="white" size="20" style="margin:0 15px"/>
+                            <Icon type="logo-apple" color="white" size="20" style="margin:0 12px 0 17px"/>
                             <span>iphone</span>
                           </div>
                       </div>
@@ -348,8 +347,8 @@ export default {
   data() {
     const self = this
     return {
-      width: 230,
-      height: 50,
+      width: 274,
+      height: 36,
       loading: false,
       progress: 0,
       already: 0,
@@ -445,7 +444,7 @@ export default {
                             parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
             return h('div', [
               // h('span', {}, params.row.price + ' /￥' + rmb),
-              h("span", {}, window.indexBtnBC === 'BC' ? (params.row.price + " /￥" + params.row.price):(params.row.price + " /￥" + rmb)),
+              h('span', {}, window.indexBtnBC === 'BC' ? (params.row.price + ' /￥' + params.row.price) : (params.row.price + ' /￥' + rmb)),
               h(
                                 'Icon',
                 {
@@ -609,7 +608,6 @@ export default {
         // },
         {
           title: self.$t('service.Exchange'),
-                    // align: "center",
           key: 'buyBtn',
           width: 60,
           render: function(h, params) {
@@ -710,7 +708,7 @@ export default {
                                 ),
                 h('span', {
                   style: {
-                    fontSize: '16px',
+                    fontSize: '7px',
                     fontWeight: 800
                   }
                 }, params.row.coin)
@@ -744,7 +742,7 @@ export default {
                                 parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
               return h('div', [
                 // h('span', {}, params.row.price + ' /￥' + rmb),
-                h("span", {}, window.indexBtnBC === 'BC' ? params.row.price + " /￥" + params.row.price:params.row.price + " /￥" + rmb),
+                h('span', {}, window.indexBtnBC === 'BC' ? params.row.price + ' /￥' + params.row.price : params.row.price + ' /￥' + rmb),
                 h(
                                     'Icon',
                   {
@@ -1323,7 +1321,7 @@ export default {
       )
     },
     addClass(index) {
-      window.indexBtnBC = '';
+      window.indexBtnBC = ''
       this.choseBtn = index
       this.getSymbol()
       if (index == 0) {
@@ -1333,8 +1331,8 @@ export default {
       } else if (index == 2) {
         this.dataIndex = this.coins.ETH
       } else if (index == 3) {
-        this.indexBtnBC = this.indexBtn[3].text;
-        window.indexBtnBC =this.indexBtnBC;
+        this.indexBtnBC = this.indexBtn[3].text
+        window.indexBtnBC = this.indexBtnBC
         this.dataIndex = this.coins.BC
       } else if (index == 4) {
         this.dataIndex = this.coins.favor
@@ -1467,7 +1465,7 @@ li {
     /* // background: url("../../assets/images/bannerBk.jpg") no-repeat center center;
     // background-size: cover; */
     overflow: hidden;
-    height: 400px;
+    height: 510px;
     position: relative;
     .bannerWrapper {
       position: absolute;
@@ -1485,13 +1483,14 @@ li {
     }
 }
 #hot {
-    padding: 23px 0;
-    background-color: #11132C;
+    height:146px;
+    background:rgba(17,19,44,1);
     @extend %flex;
     .section-market {
         // width: 1200px;
         // margin: 0 auto;
         width: 100%;
+        padding:23px;
         display: flex;
         justify-content:center;
         .market-box {
@@ -1575,14 +1574,14 @@ li {
               left: 21%;
                 a {
                     color: #fff;
-                    font-size: 14px;
-                    line-height: 40px;
+                    font-size: 7px;
+                    line-height: 35px;
                     display: inline-block;
                     margin-left: 20px;
                 }
                 .cal_content {
-                    line-height: 40px;
-                    font-size: 14px;
+                    line-height: 35px;
+                    font-size: 7px;
                     display: inline;
                 }
                 .cal_content:nth-child(1) {
@@ -1612,22 +1611,22 @@ li {
     padding: 30px auto;
     margin: 0 auto;
     padding-top: 30px;
+    max-height: 556px;
     .page2nav {
         line-height: 40px;
         font-size: 20px;
         .brclearfix {
             font-weight: 600;
             border: 1px solid #191D3A;
-            border-bottom: 0;
+            border-bottom: 0 !important;
             background: #191D3A;
             li {
                 float: left;
                 cursor: pointer;
-                // color: #333;
                 background: #191D3A;
                 list-style: none;
-                font-size: 16px;
-                padding: 0 30px;
+                font-size: 8px;
+                // padding: 0 30px;
                 color:#FFFFFF;
                 /*box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
                 &:hover {
@@ -1639,6 +1638,11 @@ li {
                 color: #3399ff;
                 border-bottom: 2px solid #191D3A;
                 position: relative;
+                margin-left: 15px;
+                margin-right: 35px; 
+            }
+            .ivu-btn-default{
+              margin-right: 35px; 
             }
         }
     }
@@ -1669,9 +1673,13 @@ li {
                 .ivu-table-row {
                     &:nth-of-type(odd) td{
                         background: rgba(17,22,52,1);
+                        color:#fff;
+                        font-size:7px;
                     }
                     &:nth-of-type(even) td{
                         background: #11132C;
+                        color:#fff;
+                        font-size:7px;
                     }
                 }
             }
@@ -1698,7 +1706,7 @@ li {
         float:left;
         .text{
           font-size:30px;
-          margin-bottom:20px;
+          margin-bottom:15px;
           color:#FFFFFF;
           display: inline-block;
         }
@@ -1743,10 +1751,13 @@ li {
             }
           }
           .Qrright{
-            margin-left:15px;
+                width: 90px;
+                height: 90px;
+                background: #fff;
+                margin-left: 13px;
             img{
-              widows:90px;
-              height:90px;
+                width: 90%;
+                margin: 5% 0 0 5%;
             }
           }
         }
@@ -1774,32 +1785,36 @@ li {
             color:#FFFFFF;
             font-size:9px;
             margin-bottom:9px;
+            margin-top:17px;
         }
         span{
             color :#8090AF;
             text-align: center;
+            font-size: 7px;
         }
     }
 }
 #page1{
-  height:100px;
+  height:150px;
   background:#0E0E28;
   .content{
     width:1200px;
-    height: 100px;
+    height: 150px;
     margin:0 auto;
     display:flex;
     justify-content: space-between;
     .page1left{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       .trading{
         color:#8090AF;
-        font-size:22px;
-        margin-top:15px;
+        font-size:21px;
         margin-bottom:13px;
       }
       .registered{
         color:#8090AF;
-        font-size:12px;
+        font-size:7px;
       }
     }
     .page1right{
@@ -1808,24 +1823,26 @@ li {
       justify-content: center;
       font-size:12px;
       .login{
-        width:100px;
-        height:35px;
-        line-height:35px;
-        text-align:center;
-        background:rgba(27,31,60,1);
-        color:white;
+        width: 84px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        background: #1b1f3c;
+        color: white;
         cursor: pointer;
+        font-size: 8px;
       }
       .registe{
-        width:100px;
-        height:35px;
-        line-height:35px;
+        width: 84px;
+        height: 25px;
+        line-height: 25px;
         text-align:center;
         margin-left:20px;
         background:rgba(94,107,137,1);
         border:1px solid rgba(94,107,137,1);
         color:white;
         cursor: pointer;
+        font-size:8px;
       }
     }
   }
@@ -1906,9 +1923,9 @@ li {
 }
 
 #fullpage {
-    padding-top: 60px;
+    padding-top: 50px;
     min-width: 1260px;
-    background: #fff;
+    /*background: #fff;*/
   .Central{
     background:url("../../assets/images/bg.png");
     height:auto;
@@ -1924,7 +1941,7 @@ li {
 .carousel-item {
     background-repeat: no-repeat;
     background-position: center;
-    height: 400px;
+    height: 510px;
     background-size: cover;
 }
 

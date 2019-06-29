@@ -14,14 +14,14 @@
 </template>
 <style scoped>
   .agreement {
-    background: #fff;
+    /*background: #fff;*/
     padding-bottom: 20px;
     overflow-x: hidden;
   }
   .content-wrap {
     width: 1200px;
     margin: 0 auto;
-    background: #fff;
+    /*background: #fff;*/
   }
   .header {
     text-align: center;

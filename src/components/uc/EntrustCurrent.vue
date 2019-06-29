@@ -14,7 +14,7 @@
 .table .ivu-table-wrapper {
   position: relative;
   /* border: 1px solid #dddee1; */
-  border-bottom: 0;
+  border-bottom: 0 !important;
   border-right: 0;
   box-shadow: 0 0 2px #ccc;
   border-radius: 6px;

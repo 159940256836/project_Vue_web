@@ -1,6 +1,6 @@
 <style scoped>
     .expand-row{
-        margin-bottom: 12px;
+        height: 40px;
     }
     td.ivu-table-expanded-cell{
         padding: 10px 50px;
@@ -15,7 +15,7 @@
     }
 
     .expand  .ivu-row {
-        padding-bottom: 16px;
+        line-height: 40px;
         border-bottom: 1px solid #2A3850;
     }
 
