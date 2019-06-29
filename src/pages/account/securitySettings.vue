@@ -519,7 +519,7 @@
             </Modal>
             <!-- 解除谷歌验证弹窗 -->
             <Modal
-                :title="$t('uc.safe.remove_google')"
+                :title="$t('new.UntieGoogle')"
                 v-model="modal8"
                 :styles="{top: '100px'}"
                 width="534"
