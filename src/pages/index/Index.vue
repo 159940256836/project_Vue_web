@@ -72,7 +72,6 @@
                             </span>
                             <span
                                 class="pairs-pri"
-                                :class="{red: !item.isGreen}"
                                 v-if="!item.isGreen"
                             >
                                 {{item.close}}
@@ -86,6 +85,7 @@
                         :width="width"
                         :height="height"
                         :rose="item.chg.toString()"
+                        style="margin-left: 30px;margin-right: 30px;"
                     ></SvgLine>
                 </div>
             </section>
@@ -135,6 +135,10 @@
                             {{item.text}}
                         </li>
                     </ul>
+                    <div class="search">
+                        <i class="vertical"></i>
+                        <i-input icon="ios-search" placeholder="搜索交易币种" style="width:140px"></i-input>
+                    </div>
                 </div>
                 <div class="ptjy">
                     <Table
@@ -179,7 +183,7 @@
                       <span>{{$t("sectionPage.multilayer")}} <br />{{$t("sectionPage.operation")}}</span>
                   </div>
                     <div class="showsection">
-                      <img src="../../assets/img/03.png" alt="">
+                      <img src="../../assets/img/04.png" alt="">
                       <div>{{$t("sectionPage.Professional")}}</div>
                       <span>{{$t("sectionPage.online")}}<br /> {{$t("sectionPage.Respond")}}</span>
                     </div>
@@ -192,21 +196,21 @@
                       <div class="Qrleft" v-show="this.checkoutapp">
                         <div class="android" @click="checkoutfasle">
                           <Icon type="logo-android" color="white" size="20" style="margin:0 12px 0 17px"/>
-                          <span>android</span>
+                          <span>Android</span>
                         </div>
                         <div class="ipone click" @click="checkouttrue">
                           <Icon type="logo-apple" color="white" size="20" style="margin:0 12px 0 17px"/>
-                          <span>iphone</span>
+                          <span>Iphone</span>
                         </div>
                       </div>
                       <div class="Qrleft" v-show="!checkoutapp">
                           <div class="android click" @click="checkoutfasle">
                             <Icon type="logo-android" color="white" size="20" style="margin:0 12px 0 17px"/>
-                            <span>android</span>
+                            <span>Android</span>
                           </div>
                           <div class="ipone" @click="checkouttrue">
                             <Icon type="logo-apple" color="white" size="20" style="margin:0 12px 0 17px"/>
-                            <span>iphone</span>
+                            <span>Iphone</span>
                           </div>
                       </div>
                       <div class="Qrright">
@@ -347,7 +351,7 @@ export default {
   data() {
     const self = this
     return {
-      width: 274,
+      width: 254,
       height: 36,
       loading: false,
       progress: 0,
@@ -708,7 +712,7 @@ export default {
                                 ),
                 h('span', {
                   style: {
-                    fontSize: '7px',
+                    fontSize: '14px',
                     fontWeight: 800
                   }
                 }, params.row.coin)
@@ -1493,36 +1497,41 @@ li {
         padding:23px;
         display: flex;
         justify-content:center;
+        border-top: 1px solid rgba(42,56,80,1);
         .market-box {
-        width: 270px;
-        height: 120px;
-        /* border-radius: 8px; */
-        /* background: #252b38; */
+        width: 320px;
+        // height: 120px;
         float: left;
-        padding-right: 45px;
-        margin-right: 25px;
-        padding: 13px 0;
+        // padding-right: 45px;
+        // margin-right: 25px;
+        // padding: 13px 0;
         overflow: hidden;
         border-right: 1px solid rgba(42,56,80,1);
+            .vertical{
+              width:1px;
+              height:53px;
+              background:rgba(42,56,80,1);
+            }
             &:last-child {
                 margin-right: 0;
             }
             p {
                 &:first-child {
-                    padding: 0 20px 3px;
+                    padding: 0 30px 3px;
                 }
                 &:nth-child(2) {
-                    padding: 6px 20px 0;
+                    padding: 3px 30px 6px;
                     line-height: 25px;
                 }
                 span {
                     &:last-child {
                         float: right;
+                        font-size: 14px;
                     }
                 }
                 .pairs {
                     color: #8090AF;
-                    font-size: 14px;
+                    font-size: 16px;
                     font-weight: 600;
                 }
                 .sip {
@@ -1533,8 +1542,8 @@ li {
                     color: #03bf7b;
                 }
                 .pairs-pri {
-                    font-size: 18px;
-                    color: #a5a9be;
+                    font-size: 10px;
+                    color: #CDD2E5;
                 }
             }
         }
@@ -1574,14 +1583,14 @@ li {
               left: 21%;
                 a {
                     color: #fff;
-                    font-size: 7px;
+                    font-size: 14px;
                     line-height: 35px;
                     display: inline-block;
                     margin-left: 20px;
                 }
                 .cal_content {
                     line-height: 35px;
-                    font-size: 7px;
+                    font-size: 14px;
                     display: inline;
                 }
                 .cal_content:nth-child(1) {
@@ -1615,17 +1624,20 @@ li {
     .page2nav {
         line-height: 40px;
         font-size: 20px;
+        overflow: hidden;
+        background: #191D3A;
         .brclearfix {
             font-weight: 600;
             border: 1px solid #191D3A;
-            border-bottom: 0 !important;
-            background: #191D3A;
+            border-bottom: 0;
+            padding-left:15px;
+            float:left;
             li {
                 float: left;
                 cursor: pointer;
                 background: #191D3A;
                 list-style: none;
-                font-size: 8px;
+                font-size: 16px;
                 // padding: 0 30px;
                 color:#FFFFFF;
                 /*box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
@@ -1638,12 +1650,30 @@ li {
                 color: #3399ff;
                 border-bottom: 2px solid #191D3A;
                 position: relative;
-                margin-left: 15px;
-                margin-right: 35px; 
+                margin-right: 35px;
             }
             .ivu-btn-default{
-              margin-right: 35px; 
+              border: 0;
+              margin-right: 35px;
             }
+        }
+        .search{
+          float:right;
+          display: flex;
+          align-items: center;
+          height: 42px;
+          .vertical{
+            width:1px;
+            height:18px;
+            background:rgba(128,144,175,1);
+            margin-right:10px;
+          }
+          .ivu-input{
+            background:#191D3A;
+            font-size:7px;
+            border:0;
+            color:#8090AF;
+          }
         }
     }
     .ptjy {
@@ -1674,12 +1704,12 @@ li {
                     &:nth-of-type(odd) td{
                         background: rgba(17,22,52,1);
                         color:#fff;
-                        font-size:7px;
+                        font-size:14px;
                     }
                     &:nth-of-type(even) td{
                         background: #11132C;
                         color:#fff;
-                        font-size:7px;
+                        font-size:14px;
                     }
                 }
             }
@@ -1729,7 +1759,7 @@ li {
               align-items: center;
               cursor: pointer;
               span{
-                font-size:8px;
+                font-size: 16px;
                 color:white;
               }
             }
@@ -1742,7 +1772,7 @@ li {
               align-items: center;
               cursor: pointer;
               span{
-                font-size:8px;
+                font-size: 16px;
                 color:white;
               }
             }
@@ -1783,14 +1813,14 @@ li {
         div{
             font-weight: MicrosoftYaHei;
             color:#FFFFFF;
-            font-size:9px;
+            font-size:18px;
             margin-bottom:9px;
             margin-top:17px;
         }
         span{
             color :#8090AF;
             text-align: center;
-            font-size: 7px;
+            font-size: 14px;
         }
     }
 }
@@ -1814,7 +1844,7 @@ li {
       }
       .registered{
         color:#8090AF;
-        font-size:7px;
+        font-size:14px;
       }
     }
     .page1right{
@@ -1823,26 +1853,26 @@ li {
       justify-content: center;
       font-size:12px;
       .login{
-        width: 84px;
-        height: 25px;
-        line-height: 25px;
+        width: 168px;
+        height: 50px;
+        line-height: 50px;
         text-align: center;
         background: #1b1f3c;
         color: white;
         cursor: pointer;
-        font-size: 8px;
+        font-size: 16px;
       }
       .registe{
-        width: 84px;
-        height: 25px;
-        line-height: 25px;
+        width: 168px;
+        height: 50px;
+        line-height: 50px;
         text-align:center;
         margin-left:20px;
         background:rgba(94,107,137,1);
         border:1px solid rgba(94,107,137,1);
         color:white;
         cursor: pointer;
-        font-size:8px;
+        font-size: 16px;
       }
     }
   }
@@ -1911,7 +1941,7 @@ li {
 }
 
 .red {
-    color: #de211d !important;
+    color: #F15057 !important;
 }
 
 .brclearfix:after {

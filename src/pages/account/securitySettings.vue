@@ -62,7 +62,7 @@
                                         <a  @click="modal6 = true">
                                             {{$t('uc.safe.bind')}}
                                         </a>
-                                    </p>                                  
+                                    </p>
                                 </div>
                             </div>
                             <!-- 2 -->
@@ -84,7 +84,7 @@
                                             {{$t('uc.safe.bind')}}
                                         </a>
                                     </p>
-                                    
+
                                 </div>
                             </div>
                             <!-- 3 -->
@@ -103,7 +103,7 @@
                                         <a  class="btn" @click="modal3 = true">
                                             {{$t('uc.safe.bind')}}
                                         </a>
-                                    </p>                                   
+                                    </p>
                                 </div>
                             </div>
                             <!-- 4 登录密码-->
@@ -123,7 +123,7 @@
                                         <a class="btn"  @click="modal4 = true">
                                             {{$t('uc.safe.edit')}}
                                         </a>
-                                    </p>                                  
+                                    </p>
                                 </div>
                             </div>
                             <!-- 5 资金密码-->
@@ -148,8 +148,8 @@
                                         <a class="btn"  @click="showItemFundpwd()" >
                                             {{$t('uc.safe.edit')}}
                                         </a>
-                                    </p>                            
-                                    
+                                    </p>
+
                                 </div>
                             </div>
                             <!-- 6 谷歌-->
@@ -162,8 +162,8 @@
                                         {{$t('uc.safe.GoogleAuthenticationAbs')}}
                                         <a href="">{{$t('uc.safe.userguide')}}</a>
                                     </p>
-                                    <div class="google-info right-side">
-                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="modal10 = true">{{googleAuthentication}}</span>
+                                    <div class="google-info">
+                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="modal7 = true">{{googleAuthentication}}</span>
                                         <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                                             <span slot="open"></span>
                                             <span slot="close"></span>
@@ -513,29 +513,28 @@
                 v-model="modal7"
                 :styles="{top: '100px'}"
                 width="714"
-                @on-cancel="googleModalCancel"
             >
-                <BindGoogleVali />
+                <ResetGoogleVali />
             </Modal>
             <!-- 解除谷歌验证弹窗 -->
             <Modal
-                :title="$t('uc.safe.remove_google')"
+                :title="$t('new.UntieGoogle')"
                 v-model="modal8"
                 :styles="{top: '100px'}"
                 width="534"
                 @on-cancel="googleModalCancel"
-                >
+            >
                 <CloseGoogleVali :phone="user.mobilePhone" />
             </Modal>
             <!-- 重置谷歌验证弹窗 -->
-            <Modal
+            <!--<Modal
                 :title="$t('new.ReseGoogle')"
                 v-model="modal10"
                 :styles="{top: '100px'}"
                 width="714"
-                >
-                <BindGoogleVali />        
-            </Modal>
+            >
+                <ResetGoogleVali />
+            </Modal>-->
         </div>
 
     </div>

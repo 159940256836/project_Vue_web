@@ -497,11 +497,11 @@ export default {
       background: #111530;
       &:first-child {
         text-align: left;
-        padding-left: 10px;
+        padding-left: 16px;
       }
       &:last-child {
         text-align: right;
-        padding-right: 10px;
+        padding-right: 16px;
       }
     }
     .ivu-table-header {
@@ -512,11 +512,11 @@ export default {
         color: #8090AF;
         &:first-child {
           text-align: left;
-          padding-left: 10px;
+          padding-left: 16px;
         }
         &:last-child {
           text-align: right;
-          padding-right: 10px;
+          padding-right: 16px;
         }
       }
     }

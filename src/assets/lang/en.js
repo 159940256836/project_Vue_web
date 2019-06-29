@@ -73,6 +73,7 @@ module.exports = {
     Retriepassword:'Retrieve password',
     ReseGoogle:'Reset Google',
     Transactirate:"Transaction rate",
+    UntieGoogle:'Untied Google',
 
 
   },

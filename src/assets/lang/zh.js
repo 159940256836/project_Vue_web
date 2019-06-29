@@ -58,6 +58,7 @@ module.exports = {
     Retriepassword:"找回密码",
     ReseGoogle:"重置谷歌",
     Transactirate:'交易费率',
+    UntieGoogle:"解绑谷歌"
 
   },
   common: {

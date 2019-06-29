@@ -153,6 +153,7 @@ export default {
                 background: #111530;
                 padding: 0 28px;
                 span {
+                    color: #8090af;
                     font-size: 14px;
                 }
                 .search_btn {
@@ -196,6 +197,9 @@ export default {
         }
         .blc-table {
             .ivu-table-wrapper {
+                td {
+                    background: #111530;
+                }
                 .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
                 .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
                     background: #10122B;
