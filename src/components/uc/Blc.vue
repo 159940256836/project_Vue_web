@@ -53,7 +53,7 @@ export default {
           align: "center",
           // width: 90,
           render: (h, param) => {
-            return h("div", {}, (param.row.yield * 100).toFixed(2) + "%"); 
+            return h("div", {}, (param.row.yield * 100).toFixed(2) + "%");
           }
         },
         {
@@ -202,24 +202,24 @@ export default {
 }
 </style>
 <style lang="scss">
-.blc-table {
-  .ivu-table-wrapper {
-    .ivu-table-header {
-      thead th {
-        background: #fff;
-      }
-    }
-    tbody.ivu-table-tbody .ivu-table-row td {
-      background: #fff;
-    }
-    .ivu-table-header,
-    .ivu-table-tbody {
-      .ivu-table-cell {
-        padding: 0;
-      }
-    }
-  }
-}
+/*.blc-table {*/
+/*  .ivu-table-wrapper {*/
+/*    .ivu-table-header {*/
+/*      thead th {*/
+/*        background: #fff;*/
+/*      }*/
+/*    }*/
+/*    tbody.ivu-table-tbody .ivu-table-row td {*/
+/*      background: #fff;*/
+/*    }*/
+/*    .ivu-table-header,*/
+/*    .ivu-table-tbody {*/
+/*      .ivu-table-cell {*/
+/*        padding: 0;*/
+/*      }*/
+/*    }*/
+/*  }*/
+/*}*/
 
 
 </style>

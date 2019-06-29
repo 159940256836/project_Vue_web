@@ -95,8 +95,8 @@
                 :label="$t('otc.publishad.currency')"
                 prop="rmb"
               >
-                <Input
-                  style="background: #191D3A;width: 370px;"
+                <input
+                  class="rmb-input"
                   v-model="form.rmb"
                   disabled
                   placeholder=""
@@ -1019,92 +1019,110 @@ export default {
 }
 </style>
 <style lang="scss">
-  .ivu-select-selection {
-    width: 370px;
-    height: 40px;
-    background: transparent;
-    border-radius: 0;
-    border: 1px solid #2A3850;
-    .ivu-select-selected-value {
-      height: 40px;
-      line-height: 40px;
-      color: #8090AF;
-    }
-  }
-  .ivu-tag {
-    background: #2A3850;
-    border: 0;
-    margin: 8px 4px 3px 0;
-  }
-  .ivu-select-single {
+  .my_ad_container {
     .ivu-select-selection {
+      width: 370px;
       height: 40px;
-      line-height: 40px;
+      background: #191d3a;
+      border-radius: 0;
+      border: 1px solid #2A3850;
       .ivu-select-selected-value {
         height: 40px;
         line-height: 40px;
         color: #8090AF;
       }
     }
-  }
-  .ivu-select-multiple {
-    .ivu-select-selection {
-      .ivu-select-placeholder {
+    .ivu-tag {
+      background: #2A3850;
+      border: 0;
+      margin: 8px 4px 3px 0;
+    }
+    .ivu-select-single {
+      .ivu-select-selection {
+        height: 40px !important;
+        line-height: 40px !important;
+        .ivu-select-selected-value {
+          height: 40px !important;
+          line-height: 40px !important;
+          color: #8090AF;
+        }
+      }
+    }
+    .ivu-select-multiple {
+      .ivu-select-selection {
+        .ivu-select-placeholder {
+          height: 40px;
+          line-height: 40px;
+        }
+      }
+    }
+    .ivu-select-dropdown {
+      min-width: 370px !important;
+      background: #191D3A;
+      .ivu-select-item-selected {
+        background: #191D3A;
+      }
+      .ivu-select-item {
+        &:hover {
+          background: #191D3A;
+          color: #8090AF;
+        }
+      }
+      li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+        background: transparent;
+        &:hover {
+          background: transparent;
+          color: #8090AF;
+        }
+      }
+    }
+    .ivu-form .ivu-form-item-label {
+      padding: 13px 12px 10px 0;
+      color: #8090AF;
+    }
+    .ivu-form-item-content {
+      width: 370px;
+      .ivu-input {
+        background: transparent;
+        border-radius: 0;
+        border: 1px solid #2A3850;
         height: 40px;
         line-height: 40px;
-      }
-    }
-  }
-  .ivu-select-dropdown {
-    min-width: 370px !important;
-    background: #191D3A;
-    .ivu-select-item-selected {
-      background: #191D3A;
-    }
-    .ivu-select-item {
-      &:hover {
-        background: #191D3A;
         color: #8090AF;
+        &:hover {
+          border: 1px solid #2A3850;
+        }
       }
-    }
-    li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-      background: transparent;
-      &:hover {
+      .ivu-input-group {
+        .ivu-input {
+          width: 310px;
+        }
+      }
+      .ivu-input-group-append {
+        padding: 4px 17px;
         background: transparent;
-        color: #8090AF;
-      }
-    }
-  }
-  .ivu-form .ivu-form-item-label {
-    padding: 13px 12px 10px 0;
-    color: #8090AF;
-  }
-  .ivu-form-item-content {
-    width: 370px;
-    .ivu-input {
-      background: transparent;
-      border-radius: 0;
-      border: 1px solid #2A3850;
-      height: 40px;
-      line-height: 40px;
-      color: #8090AF;
-      &:hover {
         border: 1px solid #2A3850;
+        border-left: 0;
+        border-radius: 0;
+      }
+      .ivu-switch {
+        background: #3399ff;
+        border: 1px solid #3399ff;
+      }
+      .ivu-radio-inner {
+        background: transparent;
       }
     }
-    .ivu-input-group-append {
-      width: 60px;
-      background: transparent;
-      border: 1px solid #2A3850;
-      border-left: 0;
-      border-radius: 0;
-    }
-    .ivu-switch {
-      background: #3399ff;
-      border: 1px solid #3399ff;
-    }
-    .ivu-radio-inner {
-      background: transparent;
-    }
+  }
+
+</style>
+<style scoped lang="scss">
+  .rmb-input {
+    border: 1px solid #2A3850;
+    background: #191D3A;
+    width: 370px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 15px;
   }
 </style>

@@ -1618,7 +1618,7 @@ li {
         .brclearfix {
             font-weight: 600;
             border: 1px solid #191D3A;
-            border-bottom: 0;
+            border-bottom: 0 !important;
             background: #191D3A;
             li {
                 float: left;
@@ -1908,7 +1908,7 @@ li {
 #fullpage {
     padding-top: 60px;
     min-width: 1260px;
-    background: #fff;
+    /*background: #fff;*/
   .Central{
     background:url("../../assets/images/bg.png");
     height:auto;

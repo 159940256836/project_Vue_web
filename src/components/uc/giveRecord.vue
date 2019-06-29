@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-rights">
+    <div class="nav-rights-give">
         <div class="nav-right">
             <div class="blc_box">
                 <span>{{$t('pointPage.giftTime')}}：</span>
@@ -34,6 +34,7 @@
                         :total="parseInt(totalElement)"
                         :page-size="pageSize"
                         @on-change="changePage"
+                        id="record_pages"
                     ></Page>
                 </div>
             </div>
@@ -138,60 +139,100 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.nav-right {
-    height: auto;
-    overflow: hidden;
-    .nowintegration {
-        font-size: 24px;
-        line-height: 2;
-    }
-    .blc_box {
-        height: 60px;
-        line-height: 60px;
-        background: #111530;
-        padding: 0 28px;
-        span {
-            font-size: 14px;
-        }
-        .search_btn {
-            height: 32px;
-            line-height: 32px;
-            width: 86px;
-            background: #3399ff;
-            color: #fff;
-            font-size: 14px;
-            border: none;
-            outline: none;
-            margin: 14px;
-            float: right;
-            border-radius: 0;
-            cursor: pointer;
-        }
-    }
-    .blc-table {
-        margin-top: 20px;
-        .page-wrap {
-            float: right;
-            margin-top: 20px;
-        }
-    }
-}
-</style>
-<style lang="scss">
-.blc-table {
-    .ivu-table-wrapper {
-        .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
-        .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-            background: #10122B;
-        }
-        .ivu-table-header {
-            thead th {
-                background: #191D3A;
+    .nav-rights-give {
+        .nav-right {
+            height: auto;
+            overflow: hidden;
+            .nowintegration {
+                font-size: 24px;
+                line-height: 2;
+            }
+            .blc_box {
+                height: 60px;
+                line-height: 60px;
+                background: #111530;
+                padding: 0 28px;
+                span {
+                    font-size: 14px;
+                }
+                .search_btn {
+                    height: 32px;
+                    line-height: 32px;
+                    width: 86px;
+                    background: #3399ff;
+                    color: #fff;
+                    font-size: 14px;
+                    border: none;
+                    outline: none;
+                    margin: 14px;
+                    float: right;
+                    border-radius: 0;
+                    cursor: pointer;
+                }
+            }
+            .blc-table {
+                margin-top: 20px;
+                .page-wrap {
+                    float: right;
+                    margin-top: 20px;
+                }
             }
         }
-        tbody.ivu-table-tbody .ivu-table-row td {
+    }
+
+</style>
+<style lang="scss">
+    .nav-rights-give {
+        .ivu-table {
+            &:before {
+                background: transparent;
+            }
+        }
+        .ivu-input-with-suffix {
+            padding-right: 32px;
+            border-radius: 0;
             background: #111530;
+            border: 1px solid #2A3850;
+        }
+        .blc-table {
+            .ivu-table-wrapper {
+                .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+                .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+                    background: #10122B;
+                }
+                .ivu-table-header {
+                    thead th {
+                        background: #191D3A;
+                    }
+                }
+                tbody.ivu-table-tbody .ivu-table-row td {
+                    background: #111530;
+                }
+            }
+        }
+        #record_pages li.ivu-page-item.ivu-page-item-active {
+            background-color: #111530;
+            border-color: #191f44;
+            a {
+                color: #3399ff;
+            }
+        }
+        #record_pages li.ivu-page-item.ivu-page-item-active {
+            &:hover {
+                background-color: #111530;
+                a {
+                    color: #3399ff;
+                }
+            }
+        }
+        .ivu-page-item {
+            background: #111530;
+            color: #8090AF;
+            border: 1px solid #191f44;
+        }
+        .ivu-page-item:hover {
+            color: #3399ff;
         }
     }
-}
+
 </style>

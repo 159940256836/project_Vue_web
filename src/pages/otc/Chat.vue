@@ -759,7 +759,7 @@ export default {
 }
 
 .rightbox {
-  background: #fff;
+  /*background: #fff;*/
   margin-left: 20px;
   padding-bottom: 20px;
   margin-bottom: 40px;
@@ -828,7 +828,7 @@ export default {
 
 .leftmenu {
   margin-bottom: 60px;
-  background: #fff;
+  /*background: #fff;*/
   position: relative;
   min-height: 1px;
   padding: 50px 15px 50px 15px;

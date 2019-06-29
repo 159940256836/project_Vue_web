@@ -508,7 +508,7 @@
                 width="534"
                 @on-cancel="googleModalCancel"
                 >
-                <CloseGoogleVali :phone="user.mobilePhone" />         
+                <CloseGoogleVali :phone="user.mobilePhone" />
             </Modal>
             <!-- 重置谷歌验证弹窗 -->
             <Modal
@@ -615,8 +615,8 @@ export default {
             modal3: false,
             modal4: false,
             modal5: false,
-            modal6: false,   
-            modal7: false,    
+            modal6: false,
+            modal7: false,
             modal8: false,
             modal9: false,
             modal10: false,
@@ -1497,7 +1497,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .rightarea .trade-process .icon {
-    background: #fff;
+    /*background: #fff;*/
     border-radius: 20px;
     height: 20px;
     width: 20px;
@@ -1724,7 +1724,7 @@ button.ivu-btn.ivu-btn-primary {
 
 .user-avatar-public {
     float: left;
-    background: #fff;
+    /*background: #fff;*/
     border-radius: 50%;
     height: 52px;
     width: 52px;
@@ -1765,7 +1765,7 @@ button.ivu-btn.ivu-btn-primary {
 
     .popups-box {
     * {
-        box-shadow: none !important; 
+        box-shadow: none !important;
     }
         .vertical-center-modal{
             display: flex;
@@ -1890,7 +1890,7 @@ button.ivu-btn.ivu-btn-primary {
         }
         .ivu-input {
             border-right: none;
-            
+
         }
         .ivu-input-group-append, .ivu-input-group-prepend {
             border: 1px solid #8090AF;

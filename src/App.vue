@@ -92,11 +92,6 @@
                                         <Icon type="md-arrow-dropdown" size="16" />
                                     </a>
                                     <DropdownMenu slot="list">
-                                        <div @click="logout">
-                                            <DropdownItem>
-                                                <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
-                                            </DropdownItem>
-                                        </div>
                                         <DropdownItem>
                                             <router-link to="/account">
                                                  {{$t("uc.menuTitle.AccountManagement")}}
@@ -112,6 +107,11 @@
                                                  {{$t("apiAdmin.APmanagement")}}
                                             </router-link>
                                         </DropdownItem>
+                                        <div @click="logout">
+                                            <DropdownItem>
+                                                <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
+                                            </DropdownItem>
+                                        </div>
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Dropdown>
@@ -863,10 +863,10 @@ ul,li{
     }
     .ivu-table {
         &:before {
-            background: #fff;
+            /*background: #fff;*/
         }
         &:after {
-            background: #fff;
+            /*background: #fff;*/
         }
         .ivu-table-header {
             th {
@@ -875,9 +875,8 @@ ul,li{
             }
         }
         td {
-            background: #111530;
             color: #8090AF;
-            border-bottom: 0;
+            border-bottom: 0 !important;
         }
     }
 }
@@ -886,9 +885,9 @@ ul,li{
         .ivu-table {
             .ivu-table-row {
                 &:nth-of-type(odd) {
-                    background: #fff;
+                    /*background: #fff;*/
                     td {
-                        background: #fff;
+                        /*background: #fff;*/
                     }
                 }
 
@@ -935,13 +934,13 @@ ul,li{
 .ivu-select-dropdown .ivu-select-item {
     padding: 6px 16px;
     &:hover {
-        background: #fff;
+        /*background: #fff;*/
         color: #3399ff;
     }
 }
 .ivu-select-dropdown
     li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-    background: #fff;
+    /*background: #fff;*/
     color: #3399ff;
 }
 .ivu-select-dropdown {
@@ -1072,7 +1071,7 @@ body {
     line-height: 80px;
 }
 .login_right .ivu-select-dropdown {
-    background: #fff;
+    /*background: #fff;*/
 }
 
 .ivu-form-inline .ivu-form-item {
@@ -1526,11 +1525,11 @@ body {
                                 margin: 0;
                                 .ivu-dropdown-menu {
                                     .ivu-dropdown-item {
-                                        background: #fff;
+                                        /*background: #fff;*/
                                         color: #000;
                                         border-radius: 5px;
                                         &:hover {
-                                            background: #fff;
+                                            /*background: #fff;*/
                                             color: #000;
                                         }
                                     }
@@ -1718,7 +1717,7 @@ body {
 
 /*下拉框*/
 .ivu-select-item-selected {
-    background: #fff;
+    /*background: #fff;*/
     color: #3399ff;
 }
 // primary按钮

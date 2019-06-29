@@ -60,7 +60,7 @@
                 </div>
                 </div>
 
-                
+
                 <!-- //6.26删除 -->
                 <!-- <div class="sharelink">
                     <p class="c1">{{$t('recommendPage._commissionRecommended')}}</p>
@@ -95,7 +95,7 @@
                             </div>
                         </div>
                         <div class="rightwrapper">
-                          
+
                         </div>
                     </div>
                 </div> -->
@@ -248,7 +248,7 @@ export default {
             this.loading = false;
         },
         actives(index) {
-          
+
             this.currentPage = 1;
             this.changeActive = index;
         },
@@ -273,7 +273,7 @@ export default {
                     var resp = response.body;
                     if (resp.code == 0) {
                         this.dataPromoteFriends = resp.data;
-                        
+
                     } else {
                         this.$Message.error(resp.message);
                     }
@@ -364,12 +364,12 @@ export default {
 
 <style scoped lang="scss">
 .code_center{
-   
+
 }
 .newMyExtension{
     background:#0e0e28;
     padding-bottom: 160px;
-   
+
     .nav-rights{
         position:relative;
         top:60px;
@@ -398,7 +398,7 @@ export default {
                     outline: none;
                     color:#fff;
                     line-height:40px;
-                   
+
                 }
                 .span2{
                     display:inline-block;
@@ -432,7 +432,7 @@ export default {
                         font-size:14px;
                     }
 
-                    
+
                 }
                 .invite_right{
                     margin-left:111px;
@@ -445,7 +445,7 @@ export default {
                         color:#fff;
                         font-size:14px;
                     }
-                    
+
                 }
             }
         }
@@ -541,7 +541,7 @@ export default {
     box-shadow:none !important;
 }
 .nav-right .message .ivu-table-wrapper{
-    margin-top:0 !important; 
+    margin-top:0 !important;
 }
 .nav-right .active {
     color: #3399ff !important;
@@ -671,7 +671,7 @@ export default {
     .message {
         .ivu-table-wrapper {
             border-color: #fff;
-           
+
             // -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
             // -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
             // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
@@ -682,7 +682,7 @@ export default {
                     background: none;
                 }
                 .ivu-table-body td {
-                    background: #fff;
+                    /*background: #fff;*/
                 }
             }
         }

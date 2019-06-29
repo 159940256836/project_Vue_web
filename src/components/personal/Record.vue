@@ -500,7 +500,7 @@ export default {
                 }
                 td {
                     background: #111530;
-                    border-bottom: 0;
+                    border-bottom: 0 !important;
                     color: #8090AF;
                 }
 
@@ -511,7 +511,7 @@ export default {
                         color: #8090AF;
                         height: 50px;
                         background: #191D3A;
-                        border-bottom: 0;
+                        border-bottom: 0 !important;
                     }
                 }
             }

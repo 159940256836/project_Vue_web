@@ -316,318 +316,351 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-    .show-qrcode {
-        width: 217px;
-        height: 217px;
-        margin: 0 auto;
-        background: #8090AF;
-        padding: 9px;
-    }
-.table-inner {
-    position: relative;
-    text-align: left;
-    border-radius: 3px;
-    .action-main {
-        background: #111530;
-        height:314px;
-        padding: 25px;
-        .action-inner {
-            width: 100%;
-            display: table;
-            .inner-box.deposit-address {
-                width: 80%;
-                line-height: 50px;
-            }
+    .nav-recharge {
+        .show-qrcode {
+            width: 217px;
+            height: 217px;
+            margin: 0 auto;
+            background: #8090AF;
+            padding: 9px;
         }
+        .table-inner {
+            position: relative;
+            text-align: left;
+            border-radius: 3px;
+            .action-main {
+                background: #111530;
+                height:314px;
+                padding: 25px;
+                .action-inner {
+                    width: 100%;
+                    display: table;
+                    .inner-box.deposit-address {
+                        width: 80%;
+                        line-height: 50px;
+                    }
+                }
 
-        .action-inner {
-            .inner-box {
-                display: table-cell;
-                width: 100%;
-                .title {
-                    position: relative;
-                    .copy {
-                        user-select: text;
-                    }
-                    .copy-add {
-                        width: 90px;
-                        height: 30px;
-                        text-align: center;
-                        position: absolute;
-                        top: 12px;
-                        left: 37%;
-                        line-height: 30px;
-                        display: inline-block;
-                        font-size: 14px;
-                        color: #3399ff;
-                        cursor: pointer;
-                        border-left: 1px solid #58698A;
-                    }
-                    a.link-copy {
-                        font-size: 14px;
-                        margin-left: 20px;
-                        color: #3399ff;
-                    }
+                .action-inner {
+                    .inner-box {
+                        display: table-cell;
+                        width: 100%;
+                        .title {
+                            position: relative;
+                            .copy {
+                                user-select: text;
+                            }
+                            .copy-add {
+                                width: 90px;
+                                height: 30px;
+                                text-align: center;
+                                position: absolute;
+                                top: 12px;
+                                left: 37%;
+                                line-height: 30px;
+                                display: inline-block;
+                                font-size: 14px;
+                                color: #3399ff;
+                                cursor: pointer;
+                                border-left: 1px solid #58698A;
+                            }
+                            a.link-copy {
+                                font-size: 14px;
+                                margin-left: 20px;
+                                color: #3399ff;
+                            }
 
+                        }
+                    }
                 }
             }
         }
+
+        .acb-p1 {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 50px;
+        }
+
+        .acb-p2 {
+            color: #8090AF;
+            font-size: 14px;
+            line-height: 24px;
+        }
+
+        /*.action-box .title .copy {*/
+        /*    user-select: text;*/
+        /*}*/
+
+        /*.action-box .title .copy-add {*/
+        /*    height: 32px;*/
+        /*    text-align: center;*/
+        /*    font-size: 12px;*/
+        /*    background: #3399ff;*/
+        /*    color: #fff;*/
+        /*}*/
+
+        /*.action-box .title a.link-copy {*/
+        /*    font-size: 14px;*/
+        /*    margin-left: 20px;*/
+        /*    color: #3399ff;*/
+        /*}*/
+
+        .hb-night a {
+            text-decoration: none;
+            color: #7a98f7;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .action-box .title a.link-qrcode {
+            margin-left: 20px;
+            font-size: 14px;
+            position: relative;
+            color: #3399ff;
+        }
+
+        .hb-night a {
+            text-decoration: none;
+            color: #7a98f7;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .action-box .subtitle {
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
+        .action-content {
+            width: 100%;
+            margin-top: 30px;
+            /* overflow: hidden; */
+            display: table;
+        }
+
+        .action-box .title {
+            font-size: 20px;
+            width: 91%;
+            float: right;
+        }
+
+        .action-box .title .show-qrcode {
+            position: absolute;
+            top: -100px;
+            left: 40px;
+            padding: 10px;
+        }
+
+        /*.action-inner .inner-box.deposit-address {*/
+        /*    width: 80%;*/
+        /*}*/
+        span.describe {
+            color: #8090AF;
+            font-size: 14px;
+        }
+        .merchant-icon {
+            display: inline-block;
+            margin-left: 4px;
+            background-size: 100% 100%;
+        }
+
+        .merchant-icon.tips {
+            width: 4px;
+            height: 22px;
+            margin-right: 10px;
+            background: #3399ff;
+        }
+
+        .bill_box {
+            width: 100%;
+            height: auto;
+            /* overflow: hidden; */
+        }
+
+        .nav-right {
+            height: auto;
+            overflow: hidden;
+        }
+
+        .order_box {
+            width: 100%;
+            /*background: #fff;*/
+            height: 56px;
+            line-height: 56px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ccf2ff;
+            position: relative;
+            text-align: left;
+        }
+
+        .order_box a {
+            color: #8994a3;
+            font-size: 16px;
+            padding: 0 30px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            line-height: 54px;
+            display: inline-block;
+        }
+
+        .order_box .search {
+            position: absolute;
+            width: 300px;
+            height: 32px;
+            top: 12px;
+            right: 0;
+            display: flex;
+            /* border: #c5cdd7 solid 1px; */
+        }
     }
-}
 
-.acb-p1 {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 50px;
-}
-
-.acb-p2 {
-    color: #8090AF;
-    font-size: 14px;
-    line-height: 24px;
-}
-
-/*.action-box .title .copy {*/
-/*    user-select: text;*/
-/*}*/
-
-/*.action-box .title .copy-add {*/
-/*    height: 32px;*/
-/*    text-align: center;*/
-/*    font-size: 12px;*/
-/*    background: #3399ff;*/
-/*    color: #fff;*/
-/*}*/
-
-/*.action-box .title a.link-copy {*/
-/*    font-size: 14px;*/
-/*    margin-left: 20px;*/
-/*    color: #3399ff;*/
-/*}*/
-
-.hb-night a {
-    text-decoration: none;
-    color: #7a98f7;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-}
-
-.action-box .title a.link-qrcode {
-    margin-left: 20px;
-    font-size: 14px;
-    position: relative;
-    color: #3399ff;
-}
-
-.hb-night a {
-    text-decoration: none;
-    color: #7a98f7;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-}
-
-.action-box .subtitle {
-    font-size: 12px;
-    margin-top: 30px;
-}
-
-.action-content {
-    width: 100%;
-    margin-top: 30px;
-    /* overflow: hidden; */
-    display: table;
-}
-
-.action-box .title {
-    font-size: 20px;
-    width: 91%;
-    float: right;
-}
-
-.action-box .title .show-qrcode {
-    position: absolute;
-    top: -100px;
-    left: 40px;
-    padding: 10px;
-}
-
-/*.action-inner .inner-box.deposit-address {*/
-/*    width: 80%;*/
-/*}*/
-span.describe {
-    color: #8090AF;
-    font-size: 14px;
-}
-.merchant-icon {
-    display: inline-block;
-    margin-left: 4px;
-    background-size: 100% 100%;
-}
-
-.merchant-icon.tips {
-    width: 4px;
-    height: 22px;
-    margin-right: 10px;
-    background: #3399ff;
-}
-
-.bill_box {
-    width: 100%;
-    height: auto;
-    /* overflow: hidden; */
-}
-
-.nav-right {
-    height: auto;
-    overflow: hidden;
-}
-
-.order_box {
-    width: 100%;
-    background: #fff;
-    height: 56px;
-    line-height: 56px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ccf2ff;
-    position: relative;
-    text-align: left;
-}
-
-.order_box a {
-    color: #8994a3;
-    font-size: 16px;
-    padding: 0 30px;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    line-height: 54px;
-    display: inline-block;
-}
-
-.order_box .search {
-    position: absolute;
-    width: 300px;
-    height: 32px;
-    top: 12px;
-    right: 0;
-    display: flex;
-    /* border: #c5cdd7 solid 1px; */
-}
 
 </style>
 <style lang="scss">
-    .ivu-modal-header {
-        background: #111530;
-        p {
-            color: #8090AF;
-        }
-    }
-    .ivu-modal-content {
-        background: #111530;
-    }
-    .ivu-modal-footer {
-        border-top: 0;
-    }
-    .order-table {
-        .ivu-table-wrapper {
-            .ivu-table {
-                .ivu-table-row {
-                    &:hover {
-                        background: #111530;
-                    }
-                    td {
-                        color: #8090AF;
-                        border-bottom: 0;
-                        background: #111530;
-
-                    }
-                }
-
-                .ivu-table-header {
-                    th {
-                        border-bottom: 0;
-                        background: #191D3A;
-                        color: #8090AF;
-                    }
-                }
+    .nav-recharge {
+        .ivu-modal-header {
+            background: #111530;
+            p {
+                color: #8090AF;
             }
         }
-    }
-    .ivu-select-selection {
-        width: 130px;
-        height: 32px;
-        background: transparent;
-        border: 1px solid rgba(88, 105, 138, 1);
-        border-radius: 0;
-    }
-    .ivu-input-wrapper {
-        width: 400px;
-    }
-    .ivu-select-dropdown {
-        .ivu-select-item {
-            &:hover {
-                background: #0e0e28;
-                color: #3399ff;
-            }
-        }
-    }
-    .ivu-table-wrapper {
-        margin-right: -1px;
-        .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
-        .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-            background: #10122B;
-        }
-    }
-    .ivu-select-selected-value {
-        color: #8090AF;
-    }
-    .ivu-select-dropdown {
-        li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-            background: transparent;
-        }
-    }
-    .ivu-table {
-        td {
+        .ivu-modal-content {
             background: #111530;
         }
-        &:before {
-            height: 0;
+        .ivu-modal-footer {
+            border-top: 0;
         }
-        .ivu-table-header {
-            th {
-                color: #8090AF;
-                background: #191D3A;
+        .order-table {
+            .ivu-table-wrapper {
+                .ivu-table {
+                    .ivu-table-row {
+                        &:hover {
+                            background: #111530;
+                        }
+                        td {
+                            color: #8090AF;
+                            border-bottom: 0 !important;
+                            background: #111530;
+
+                        }
+                    }
+
+                    .ivu-table-header {
+                        th {
+                            border-bottom: 0 !important;
+                            background: #191D3A;
+                            color: #8090AF;
+                        }
+                    }
+                }
             }
         }
-    }
-    .ivu-input {
-        height: 32px;
-        border: 1px solid #58698A;
-        background: transparent;
-        border-radius: 0;
-    }
-    #record_pages li.ivu-page-item.ivu-page-item-active {
-        background-color: #111530;
-        border-color: #191f44;
-        a {
-            color: #3399ff;
+        .ivu-select-selection {
+            width: 130px;
+            height: 32px;
+            background: transparent;
+            border: 1px solid rgba(88, 105, 138, 1);
+            border-radius: 0;
         }
-    }
-    #record_pages li.ivu-page-item.ivu-page-item-active {
-        &:hover {
+        .ivu-input-wrapper {
+            width: 400px;
+        }
+        .ivu-select-dropdown {
+            .ivu-select-item {
+                &:hover {
+                    background: #0e0e28;
+                    color: #3399ff;
+                }
+            }
+        }
+        .ivu-table-wrapper {
+            margin-right: -1px;
+            .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+            .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+                background: #10122B;
+            }
+        }
+        .ivu-select-selected-value {
+            color: #8090AF;
+        }
+        .ivu-select-dropdown {
+            li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+                background: transparent;
+            }
+        }
+        /*.ivu-table {*/
+        /*    td {*/
+        /*        background: #111530;*/
+        /*        text-align: center !important;*/
+        /*    }*/
+        /*    &:before {*/
+        /*        height: 0;*/
+        /*    }*/
+        /*    .ivu-table-header {*/
+        /*        th {*/
+        /*            color: #8090AF;*/
+        /*            background: #191D3A;*/
+        /*        }*/
+        /*    }*/
+        /*}*/
+        .ivu-table {
+            td {
+                &:first-child {
+                    text-align: center;
+                }
+                &:last-child {
+                    text-align: center;
+                }
+            }
+            .ivu-table-header {
+                th {
+                    height: 50px;
+                    background: #191D3A;
+                    border-bottom: 0 !important;
+                    color: #8090AF;
+                    &:first-child {
+                        text-align: left;
+                        padding-left: 10px;
+                    }
+                    &:last-child {
+                        text-align: right;
+                        padding-right: 10px;
+                    }
+                }
+            }
+        }
+        .ivu-input {
+            height: 32px;
+            border: 1px solid #58698A;
+            background: transparent;
+            border-radius: 0;
+        }
+        #record_pages li.ivu-page-item.ivu-page-item-active {
             background-color: #111530;
+            border-color: #191f44;
             a {
                 color: #3399ff;
             }
         }
+        #record_pages li.ivu-page-item.ivu-page-item-active {
+            &:hover {
+                background-color: #111530;
+                a {
+                    color: #3399ff;
+                }
+            }
+        }
+        .ivu-page-item {
+            background: #111530;
+            color: #8090AF;
+            border: 1px solid #191f44;
+        }
+        .ivu-page-item:hover {
+            color: #3399ff;
+        }
     }
-    .ivu-page-item {
-        background: #111530;
-        color: #8090AF;
-        border: 1px solid #191f44;
-    }
-    .ivu-page-item:hover {
-        color: #3399ff;
-    }
+
 </style>

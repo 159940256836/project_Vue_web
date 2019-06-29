@@ -323,7 +323,7 @@ export default {
     height: 42px;
     font-size: 1.125em;
     color: #a2a0a1;
-    background: #fff;
+    /*background: #fff;*/
     margin: 20px 0 0;
 }
 .nav-right .active {
@@ -341,7 +341,7 @@ export default {
     border-bottom: 1px dashed #e9e9e9;
 }
 .rightarea {
-    background: #fff;
+    /*background: #fff;*/
 }
 
 .rightarea .rightarea-top {
@@ -401,7 +401,7 @@ export default {
                     background: none;
                 }
                 .ivu-table-body td {
-                    background: #fff;
+                    /*background: #fff;*/
                 }
             }
         }

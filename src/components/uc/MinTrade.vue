@@ -357,7 +357,7 @@ export default {
   text-align: left;
 }
 .rightarea {
-  background: #fff;
+  /*background: #fff;*/
   padding-left: 15px !important;
   padding-right: 15px !important;
   margin-bottom: 60px !important;
@@ -388,7 +388,7 @@ export default {
 }
 
 .rightarea .trade-process .icon {
-  background: #fff;
+  /*background: #fff;*/
   border-radius: 20px;
   height: 20px;
   width: 20px;
@@ -490,7 +490,7 @@ export default {
 
 .order_box {
   width: 100%;
-  background: #fff;
+  /*background: #fff;///*/
   height: 56px;
   line-height: 56px;
   margin-bottom: 20px;

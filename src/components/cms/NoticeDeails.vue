@@ -64,7 +64,7 @@ export default {
     background-color: #f7f7fa;
 }
 .content-wrap{
-  background: #fff;
+  /*background: #fff;*/
 }
 .agreement .agreen-cont{
     padding: 30px 0;

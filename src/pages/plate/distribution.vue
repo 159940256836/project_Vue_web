@@ -35,7 +35,7 @@
   }
   .abstract {
     width: 75%;
-    background: #fff;
+    /*background: #fff;*/
     border-radius: 5px;
     padding: 20px;
     margin: 20px auto;
