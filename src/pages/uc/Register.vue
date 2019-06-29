@@ -159,6 +159,12 @@
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 .ivu-form-item-content {
+                    .ivu-select-item-selected, .ivu-select-item-selected:hover{
+                        background:#191d3a;
+                    }
+                    .ivu-select-item:hover{
+                        background:#191d3a;
+                    }
                     .register_btn.ivu-btn {
                         width: 100%;
                         background-color: #3399ff;
@@ -635,6 +641,7 @@ $focusColor:#3399FF;
                             box-sizing: border-box;
                             background:#10122B;
                             border:1px solid;
+                            color:#FFF;
                             border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
                             opacity:0.62;
                             &:focus {
@@ -660,6 +667,8 @@ $focusColor:#3399FF;
                         border:0;
                         //border-color: #fff;
                         background: transparent;
+                        padding:0;
+                        margin-right:15px;
                         &:hover {
                             color: $main_theme;
                             border-bottom: 2px solid $main_theme;
