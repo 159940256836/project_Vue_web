@@ -161,6 +161,7 @@ export default {
                 padding: 0 28px;
                 background: #111530;
                 span {
+                    color: #8090af;
                     font-size: 14px;
                 }
                 .search_btn {
