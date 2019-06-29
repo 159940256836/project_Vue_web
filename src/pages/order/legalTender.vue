@@ -464,6 +464,10 @@ export default {
   font-size: 12px;
 }
 
+.extra_input::-webkit-input-placeholder{
+  color: #414d64;
+}
+
 .extra_btn {
   font-size: 12px;
   background: #3399FF;

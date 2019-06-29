@@ -41,19 +41,9 @@
 .table .ivu-table-cell-expand {
   color: #3399ff;
 }
-.form .clear_btn {
-  &:hover {
-    color: #3399ff;
-    border-color: #3399ff;
-  }
-  &:focus {
-    background-color: #fff;
-    -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-    -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-    box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-    color: #3399ff;
-    border-color: #3399ff;
-  }
+
+.form .clear_btn:hover {
+    color: #3399FF;
 }
 </style>
 

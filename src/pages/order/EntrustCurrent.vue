@@ -45,7 +45,7 @@
     margin-top: 22px;
     .ivu-table-tip td{
       text-align: center;
-      background: transparent;
+      background: #191D3A !important;
     }
 }
 
@@ -71,6 +71,9 @@
   }
 }
 
+.entrustcurrent .ivu-table .ivu-table-tip td {
+    background: #191D3A !important;
+}
 
 .table .ivu-table-cell-expand {
   color: #3399ff;
@@ -118,6 +121,9 @@
     }
     .ivu-select-selection:focus {
       box-shadow: none;
+    }
+    .ivu-select-placeholder {
+      color: #414d64;
     }
     .ivu-btn {
       border-radius: 0;
@@ -332,7 +338,7 @@
       <!-- <FormItem :label-width="locale == 'en' ? 95 : 70 " :label="$t('historyAndCu.stEnTime')+':'" style="margin-right:18px;">
         <DatePicker class="DatePicker" type="daterange" v-model="formItem.date" style="width:248px;"></DatePicker>
       </FormItem> -->
-      <FormItem :label="$t('historyAndCu.symbol')+':'" style="margin-right:14px;">
+      <FormItem :label="$t('historyAndCu.symbol')+':'">
         <Select v-model="formItem.symbol" style="width:121px;" :placeholder="$t('header.choose')">
           <Option v-for="(item,index) in symbol " :value="item.symbol " :key="index">{{item.symbol}}</Option>
         </Select>
@@ -358,7 +364,7 @@
           {{$t('historyAndCu.repealAll')}}
         </Button>
         <Button
-          style="margin-left: 38px;margin-right:20px; "
+          style="margin-left: 46px;margin-right:45px; "
           @click="handleClear "
           class="clear_btn"
           type="primary"

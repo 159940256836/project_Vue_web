@@ -436,12 +436,6 @@ export default {
                             color: #fff;
                             border-radius: 0;
                             border: 1px solid #58698A;
-                            &:hover {
-                                border-color: #3399ff;
-                            }
-                            &:focus {
-                                border-color: #3399ff;
-                            }
                         }
                     }
                 }
