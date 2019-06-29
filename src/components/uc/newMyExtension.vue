@@ -372,9 +372,10 @@ export default {
 </style>
 
 <style scoped lang="scss">
-.code_center{
-
+.nav-right .btStyle[data-v-be09f418][data-v-be09f418]{
+    color:#8090af !important;
 }
+
 .newMyExtension{
     background:#0e0e28;
     padding-bottom: 160px;
