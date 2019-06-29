@@ -406,6 +406,7 @@
         margin-top: 26px;
         height: 55px;
         background: #191D3A;
+        padding: 0 24px;
       }
       .ivu-menu-light {
         height: 55px;
@@ -416,7 +417,7 @@
         color: #fff;
       }
       .ivu-menu-horizontal .ivu-menu-item {
-        margin: 0 20px;
+        margin: 0 0px 0 22px;
         padding: 0;
       }
       ul.tradelist.ivu-menu.ivu-menu-light.ivu-menu-horizontal {
