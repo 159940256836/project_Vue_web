@@ -41,10 +41,6 @@
 .table .ivu-table-cell-expand {
   color: #3399ff;
 }
-
-.form .clear_btn:hover {
-    color: #3399FF;
-}
 </style>
 
 <template>

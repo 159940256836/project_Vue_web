@@ -355,27 +355,27 @@
         </Select>
       </FormItem> -->
       <div style="margin-bottom: 22px;display:inline-block;">
-        <Button
+        <span
           v-if="orders.length > 2"
-          type="primary"
+          class="my-btn"
           @click="repeal()"
         >
           <!--撤销全部委单-->
           {{$t('historyAndCu.repealAll')}}
-        </Button>
-        <Button
-          style="margin-left: 46px;margin-right:45px; "
+        </span>
+        <span
+          style="margin-left: 46px;margin-right:45px;background:transparent;color:#3399FF;border:1px solid #3399FF;margin-top:3px;"
           @click="handleClear "
-          class="clear_btn"
+          class="my-btn"
           type="primary"
-        >{{$t('historyAndCu.clear')}}</Button>
-        <Button
-          type="primary"
+        >{{$t('historyAndCu.clear')}}</span>
+        <span
           @click="handleSubmit"
-          class="search-btn"
+          class="my-btn"
+          style="margin-top:3px;"
         >
           {{$t('historyAndCu.search')}}
-        </Button>
+        </span>
       </div>
     </Form>
     <div class="entrustcurrent-table">
