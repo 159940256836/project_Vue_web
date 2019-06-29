@@ -10,7 +10,7 @@
                 <DatePicker
                     type="daterange"
                     :placeholder="$t('pointPage.enterTime')"
-                    style="width: 260px"
+                    style="width: 266px"
                     v-model="rangeDate"
                     :editable="false"
                 ></DatePicker>

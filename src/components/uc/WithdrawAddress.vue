@@ -11,7 +11,7 @@
                                 </span>：
                                 <Select
                                     v-model="coinType"
-                                    style="width:128px;"
+                                    style="width:130px;"
                                     size="large"
                                 >
                                     <Option
@@ -29,7 +29,7 @@
                                 <div class="title">
                                     <Input
                                         v-model="withdrawAddr"
-                                        style="width: 200px;"
+                                        style="width: 260px;"
                                         size="large"
                                     />
                                 </div>

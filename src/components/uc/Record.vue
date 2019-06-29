@@ -41,7 +41,7 @@
                         <Select
                             v-model="recordValue"
                             clearable
-                            style="width:128px"
+                            style="width: 200px"
                             :placeholder="$t('header.choose')"
                         >
                             <Option

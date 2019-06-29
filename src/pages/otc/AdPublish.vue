@@ -1119,7 +1119,7 @@ export default {
 <style scoped lang="scss">
   .rmb-input {
     border: 1px solid #2A3850;
-    background: #191D3A;
+    background: #111530;
     width: 370px;
     height: 40px;
     line-height: 40px;

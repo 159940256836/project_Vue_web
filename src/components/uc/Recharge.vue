@@ -15,7 +15,7 @@
                                     <span class="describe">{{$t('uc.finance.recharge.symbol')}}</span>:&nbsp;&nbsp;
                                     <Select
                                         v-model="coinType"
-                                        style="width:128px;"
+                                        style="width:130px;"
                                         @on-change="changeCoin"
                                     >
                                         <Option
@@ -33,7 +33,7 @@
                                         <Input
                                             v-model="qrcode.value"
                                             readonly
-                                            style="width: 400px"
+                                            style="width: 360px"
                                         />
                                         <span
                                             v-if="buttonAdd"
@@ -356,7 +356,7 @@ export default {
                                 text-align: center;
                                 position: absolute;
                                 top: 12px;
-                                left: 37%;
+                                left: 32%;
                                 line-height: 30px;
                                 display: inline-block;
                                 font-size: 14px;

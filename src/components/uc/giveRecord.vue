@@ -6,7 +6,7 @@
                 <DatePicker
                     type="daterange"
                     :placeholder="$t('pointPage.enterTime')"
-                    style="width: 260px"
+                    style="width: 266px"
                     v-model="rangeDate"
                     :editable="false"
                 >
@@ -202,6 +202,7 @@ export default {
                 }
                 .ivu-table-header {
                     thead th {
+                        height: 50px;
                         background: #191D3A;
                     }
                 }
