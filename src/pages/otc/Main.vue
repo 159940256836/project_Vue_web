@@ -423,7 +423,7 @@
             color: #fff;
             &:hover {
               color: #3399ff;
-              border-bottom: 0;
+              border-bottom: 0 !important;
             }
           }
           li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
@@ -449,7 +449,7 @@
       }
       &:nth-of-type(even) {
         .ivu-table td {
-          background: #fff;
+          /*background: #fff;*/
           color: #fff;
         }
       }
@@ -461,10 +461,10 @@
         .ivu-table-wrapper {
           .ivu-table {
             &:before {
-              background: #fff;
+              /*background: #fff;*/
             }
             &:after {
-              background: #fff;
+              /*background: #fff;*/
             }
           }
           .ivu-spin-fix {

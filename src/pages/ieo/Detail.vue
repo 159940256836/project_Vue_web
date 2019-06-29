@@ -316,7 +316,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-    
+
 .ieo_detail_box_ieo_detail_box1{
     background:#0e0e28 !important;
 }
@@ -401,7 +401,7 @@ export default {
 }
 
 .ieo_detail_box[data-v-2300a631] {
-    background: #fff;
+    /*background: #fff;*/
 }
 .red {
     color: #00b274 !important;
@@ -443,7 +443,7 @@ $lineColor: rgb(71, 100, 146);
     .common {
         // mine-height:200px;
         width: 1200px;
-        background: #fff;
+        /*background: #fff;*/
         color: #333333;
         // border: 1px solid rgba(221, 221, 221, 1);
         overflow: hidden;
@@ -646,7 +646,7 @@ $lineColor: rgb(71, 100, 146);
         }
     }
     .ivu-input {
-        background: #fff;
+        /*background: #fff;*/
         color: #8090AF !important;
         outline: none;
         border-radius: 0;

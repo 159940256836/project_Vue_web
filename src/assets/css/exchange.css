@@ -631,13 +631,12 @@ iframe {
 }
 
 .exchange .ivu-table-wrapper {
-    height: 438px;
     box-shadow: none;
     border: 0;
 }
 
 .exchange .order .table .ivu-table-wrapper {
-    height: 255px;
+    min-height: 255px;
     box-shadow: none;
     border: 0;
 }
@@ -705,7 +704,7 @@ iframe {
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td {
-    border-bottom: 1px solid #1B1F3C;
+    border-bottom: 1px solid #1B1F3C !important;
     border-color: #1B1F3C;
 }
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row tr:hover {

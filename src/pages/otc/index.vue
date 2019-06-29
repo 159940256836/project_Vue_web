@@ -251,7 +251,7 @@ export default {
 }
 
 .adv_box .user-avatar-public {
-  background: #fff;
+  /*background: #fff;*/
   border-radius: 50%;
   height: 120px;
   width: 120px;

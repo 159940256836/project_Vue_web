@@ -189,7 +189,7 @@ export default {
                                         }
                                     },
                                     style: {
-                                        marginRight: "8px",
+                                        marginRight: "30px",
                                         color: "#3399ff",
                                         cursor: "pointer"
                                     }
@@ -240,8 +240,7 @@ export default {
                                     }
                                 },
                                 style: {
-                                    marginRight: "8px",
-                                    color: "#f15057",
+                                    color: "#3399ff",
                                     cursor: "pointer"
                                 }
                             },
@@ -268,6 +267,7 @@ export default {
                         &:nth-child(2n) {
                             td {
                                 background: #10122B;
+                                border-bottom: 0 !important;
                             }
                         }
                     }
@@ -276,7 +276,7 @@ export default {
             .ivu-table-header {
                 th {
                     background: #111530;
-                    border-bottom: 0;
+                    border-bottom: 0 !important;
                     color: #8090AF;
                 }
             }

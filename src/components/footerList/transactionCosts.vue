@@ -1,5 +1,5 @@
 <template>
-  <div class="transactionCosts new_transactionCosts">
+  <div class="transactionCosts new_transactionCosts" id="i_bg">
     <div class="top11111">
       <!-- 交易费率 -->
       <div class="title_a">{{ $t('new.Transactirate') }}</div>
@@ -277,8 +277,22 @@ export default {
 .new_transactionCosts .ivu-table td, .ivu-table th{
   border-bottom: none !important;
 }
+.new_transactionCosts .ivu-table td, .ivu-table th{
+  height:50px !important;
+}
+.new_transactionCosts{
+  .ivu-table th{
+    height:50px !important;
+  }
+ 
+}
 .content .content_content .content_tab .content_tab_buy{
   width:1200px !important;
+}
+#i_bg {
+.ivu-table-wrapper .ivu-table td{
+  background: transparent !important;
+}
 }
 .top11111{
   width: 1200px;

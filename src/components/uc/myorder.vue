@@ -418,9 +418,6 @@ export default {
         .ivu-tabs-tabpane {
           .ivu-table-wrapper {
             border: 1px solid #eee;
-            -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-            -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-            box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
             a {
               color: #3399ff;
             }

@@ -684,7 +684,7 @@ export default {
 }
 
 .user-avatar-public {
-  background: #fff;
+  /*background: #fff;*/
   height: 65px;
   width: 65px;
   box-shadow: 0 1px 5px 0 rgba(71, 78, 114, 0.24);

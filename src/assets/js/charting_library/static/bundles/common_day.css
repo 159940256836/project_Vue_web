@@ -15,7 +15,7 @@
   }
 
 .chart-page .tv-side-toolbar .group .button:hover, .chart-page .tv-side-toolbar .group .button.selected, .chart-page .header-chart-panel .group .button:hover, .chart-page .header-chart-panel .group .button.selected {
-    background: #fff;
+    /*background: #fff;*/
     color: #3399ff;
     border: none;
   }
@@ -56,7 +56,7 @@
   right: 0;
   margin: 0 auto;
 }
-/* 
+/*
   .chart-markup-table.pane>div{
     padding-top: 20px;
   } */

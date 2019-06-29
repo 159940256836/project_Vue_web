@@ -41,7 +41,7 @@
                         <Select
                             v-model="recordValue"
                             clearable
-                            style="width:128px"
+                            style="width: 200px"
                             :placeholder="$t('header.choose')"
                         >
                             <Option
@@ -293,6 +293,7 @@ export default {
             });
             columns.push({
                 title: this.$t("uc.finance.record.type"),
+                align: "center",
                 render: function (h, params) {
                     let str = "";
                     let type = params.row.type.toString();
@@ -507,7 +508,7 @@ export default {
                 }
                 td {
                     background: #111530;
-                    border-bottom: 0;
+                    border-bottom: 0 !important;
                     color: #8090AF;
                 }
 
@@ -518,34 +519,35 @@ export default {
                         color: #8090AF;
                         height: 50px;
                         background: #191D3A;
-                        border-bottom: 0;
+                        border-bottom: 0 !important;
                     }
                 }
             }
         }
     }
-}
-#record_pages li.ivu-page-item.ivu-page-item-active {
-    background-color: #111530;
-    border-color: #191f44;
-    a {
-        color: #3399ff;
-    }
-}
-#record_pages li.ivu-page-item.ivu-page-item-active {
-    &:hover {
+    #record_pages li.ivu-page-item.ivu-page-item-active {
         background-color: #111530;
+        border-color: #191f44;
         a {
             color: #3399ff;
         }
     }
+    #record_pages li.ivu-page-item.ivu-page-item-active {
+        &:hover {
+            background-color: #111530;
+            a {
+                color: #3399ff;
+            }
+        }
+    }
+    .ivu-page-item {
+        background: #111530;
+        color: #8090AF;
+        border: 1px solid #191f44;
+    }
+    .ivu-page-item:hover {
+        color: #3399ff;
+    }
 }
-.ivu-page-item {
-    background: #111530;
-    color: #8090AF;
-    border: 1px solid #191f44;
-}
-.ivu-page-item:hover {
-    color: #3399ff;
-}
+
 </style>

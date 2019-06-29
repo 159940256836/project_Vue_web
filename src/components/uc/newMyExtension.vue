@@ -60,7 +60,7 @@
                 </div>
                 </div>
 
-                
+
                 <!-- //6.26删除 -->
                 <!-- <div class="sharelink">
                     <p class="c1">{{$t('recommendPage._commissionRecommended')}}</p>
@@ -95,17 +95,17 @@
                             </div>
                         </div>
                         <div class="rightwrapper">
-                          
+
                         </div>
                     </div>
                 </div> -->
                 <div class="bill_box rightarea padding-right-clear record account-box">
-                    <div style="display:flex; padding-left:35px; line-height:35px; background:rgba(25,29,58,1); margin-top:19px;">
+                    <div style="display:flex; background:rgba(25,29,58,1); margin-top:19px;height:55px;">
                         <div
                             v-for="(list,index) in buttonLists"
                             :key="list.text"
                             class="btStyle"
-                            style="text-align:center"
+                            style="text-align:center;margin-left:35px;"
                             :class="{active:changeActive == index}"
                             @click="actives(index)"
                         >
@@ -248,7 +248,7 @@ export default {
             this.loading = false;
         },
         actives(index) {
-          
+
             this.currentPage = 1;
             this.changeActive = index;
         },
@@ -273,7 +273,7 @@ export default {
                     var resp = response.body;
                     if (resp.code == 0) {
                         this.dataPromoteFriends = resp.data;
-                        
+
                     } else {
                         this.$Message.error(resp.message);
                     }
@@ -347,6 +347,15 @@ export default {
 };
 </script>
 <style>
+.nav-right .btStyle :nth-child(2){
+    margin-left:35px;
+}
+.bill_box .message .ivu-table th{
+    height:55px !important;
+}
+.bill_box .message .ivu-table td, .ivu-table th{
+    height:55px !important;
+}
 .page-wrap {
     text-align: right;
     margin-top: 30px;
@@ -364,12 +373,12 @@ export default {
 
 <style scoped lang="scss">
 .code_center{
-   
+
 }
 .newMyExtension{
     background:#0e0e28;
     padding-bottom: 160px;
-   
+
     .nav-rights{
         position:relative;
         top:60px;
@@ -398,7 +407,7 @@ export default {
                     outline: none;
                     color:#fff;
                     line-height:40px;
-                   
+
                 }
                 .span2{
                     display:inline-block;
@@ -432,7 +441,7 @@ export default {
                         font-size:14px;
                     }
 
-                    
+
                 }
                 .invite_right{
                     margin-left:111px;
@@ -445,7 +454,7 @@ export default {
                         color:#fff;
                         font-size:14px;
                     }
-                    
+
                 }
             }
         }
@@ -461,11 +470,11 @@ export default {
                 color:#fff;
             }
             .rule_content{
-                padding:20px;
                 // line-height:125px;
                 padding-left:35px;
                 font-size:14px;
                 color:#8090AF;
+                margin-top:35px;
             }
         }
         .nav_titlt{
@@ -530,9 +539,9 @@ export default {
 }
 
 .nav-right .btStyle {
-    width: 125px;
-    height: 42px;
-    font-size: 1.125em;
+    // width: 125px;
+    // height: 42px;
+    font-size:18px;
     color: #a2a0a1;
     // background: #fff;
     margin: 20px 0 0;
@@ -541,7 +550,7 @@ export default {
     box-shadow:none !important;
 }
 .nav-right .message .ivu-table-wrapper{
-    margin-top:0 !important; 
+    margin-top:0 !important;
 }
 .nav-right .active {
     color: #3399ff !important;
@@ -566,7 +575,7 @@ export default {
     border:0;
     color:#fff;
     margin-top:19px;
-    height:55px;
+    // height:55px;
 }
 
 .rightarea .rightarea-top {
@@ -671,7 +680,7 @@ export default {
     .message {
         .ivu-table-wrapper {
             border-color: #fff;
-           
+
             // -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
             // -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
             // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
@@ -682,7 +691,7 @@ export default {
                     background: none;
                 }
                 .ivu-table-body td {
-                    background: #fff;
+                    /*background: #fff;*/
                 }
             }
         }

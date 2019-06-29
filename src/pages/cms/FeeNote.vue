@@ -63,7 +63,7 @@
 </template>
 <style scoped>
 .agreement {
-  background: #fff;
+  /*background: #fff;*/
   padding-bottom: 20px;
   overflow-x: hidden;
 }

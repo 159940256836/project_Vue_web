@@ -125,7 +125,7 @@ export default {
 }
 .ieo_common{
     background: #0e0e28;
-    
+
 }
 .ieo_box_banner{
     padding-top:60px;
@@ -143,10 +143,10 @@ export default {
 .common {
     /*padding: 100px 18.75%;*/
     /*min-width: ;*/
-    background: #fff;
+    /*background: #fff;*/
     width: 1200px;
     margin: 0 auto 0;
-    padding-bottom: 100px;
+    // padding-bottom: 100px;
     padding-top: 38px;
     min-height: 700px !important;
     overflow: hidden;
@@ -159,7 +159,7 @@ export default {
         text-align: center;
         width:1200px;
         overflow: hidden;
-        
+
         // border:1px solid rgba(221, 221, 221, 1)
     }
     .ieoWrapper {
@@ -222,7 +222,7 @@ $pageTheme: rgb(13, 70, 125);
     // }
 }
 .father .ivu-tabs-bar{
-    border-bottom: 0;
+    border-bottom: 0 !important;
     background:rgba(25,29,58,1);
 }
 .speicial {
