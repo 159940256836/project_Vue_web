@@ -250,6 +250,8 @@ $color: #2d8cf0;
     }
 }
     .qrflex{
+        top: 10px;
+        position: relative;
         display:flex;
         flex-direction: column;
         justify-content: center;

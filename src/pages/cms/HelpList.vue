@@ -25,11 +25,12 @@
             <div v-show="list.length == 0" style="text-align:center">
                 <img src="../../assets/images/noData.png" alt="" style="width:15%;margin-top: 55px;">
             </div>
-            <div class="page Pagination_page" v-show="showPage">
+            
+        </div>
+        <div class="page Pagination_page" v-show="showPage" style="width:1200px; margin:39px auto;">
                 <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="pageChange" show-elevator></Page>
    
             </div>
-        </div>
         <!-- 6.24修改 -->
        
 
@@ -110,7 +111,7 @@
     }
 }
 .list {
-    font-size: 16px;
+    font-size: 14px;
     margin-top:15px;
     .item {
         color: #8090AFFF;

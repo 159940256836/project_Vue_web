@@ -21,8 +21,13 @@
                                   {{$t('uc.account.backcardtip')}}
                                 </p>
                                 <!-- 银行卡号 -->
-                                <a class="btn" v-if="user.bankVerified==1" @click="modal1 = true">{{$t('uc.account.modify')}}</a>
-                                <a class="btn" v-else @click="modal1 = true">{{$t('uc.account.bind')}}</a>
+                                <p class="right-side" v-if="user.bankVerified==1">
+                                    <a class="btn"  @click="modal1 = true">{{$t('uc.account.modify')}}</a>
+                                </p>
+                                <p class="right-side" v-else>
+                                    <a class="btn"  @click="modal1 = true">{{$t('uc.account.bind')}}</a>
+                                </p>                                
+                                
                             </div>
                         </div>
                         <div class="account-item">
@@ -35,8 +40,12 @@
                                 <p v-else class="bankInfo" style="color: grey;">
                                   {{$t('uc.account.zfbaccounttip')}}
                                 </p>
-                                <a class="btn" v-if="user.aliVerified==1" @click="modal2 = true">{{$t('uc.account.modify')}}</a>
-                                <a class="btn" v-else @click="modal2 = true">{{$t('uc.account.bind')}}</a>
+                                <p class="right-side" v-if="user.aliVerified==1">
+                                    <a class="btn"  @click="modal2 = true">{{$t('uc.account.modify')}}</a>
+                                </p>
+                                <p class="right-side" v-else>
+                                    <a class="btn"  @click="modal2 = true">{{$t('uc.account.bind')}}</a>
+                                </p>                              
                             </div>
                         </div>
                         <div class="account-item">
@@ -49,8 +58,13 @@
                                 <p v-else class="bankInfo" style="color: grey;">
                                   {{$t('uc.account.wxaccounttip')}}
                                 </p>
-                                <a class="btn" v-if="user.wechatVerified==1" @click="modal3 = true">{{$t('uc.account.modify')}}</a>
-                                <a class="btn" v-else @click="modal3 = true">{{$t('uc.account.bind')}}</a>
+                                <p class="right-side" v-if="user.wechatVerified==1">
+                                    <a class="btn"  @click="modal3 = true">{{$t('uc.account.modify')}}</a>
+                                </p>
+                                <p class="right-side" v-else>
+                                    <a class="btn"  @click="modal3 = true">{{$t('uc.account.bind')}}</a>
+                                </p>
+                                                               
                             </div>
                         </div>
                     </div>
@@ -645,10 +659,10 @@ export default {
 }
 
 .account-box .account-in .account-item .account-item-in .card-number {
-    width: 142px;
+    width: 152px;
     height: 40px;
     margin-right: 15px;
-    padding: 0 15px;
+    padding: 0 34px;
     line-height: 40px;
     text-align: left;
     display: inline-block;
@@ -658,6 +672,11 @@ export default {
     width:70%;
     text-align: left;
     color: #8090AF !important;
+}
+
+.account-box .account-in .account-item .account-item-in .right-side {
+    width: 15%;
+    text-align: right;
 }
 
 .account-box .account-in .account-item .account-item-in .btn {
@@ -984,5 +1003,65 @@ p.describe {
             border-radius: 0;
         }
     } 
+    .ivu-select-selection {
+      background: transparent;
+      border-radius: 0;
+      border:1px solid rgba(88,105,138,1);
+      height: 30px;
+      line-height: 22px;
+      outline:none; 
+      box-shadow: none;
+      .ivu-select-selected-value {
+        color: #fff;
+      }
+    }
+
+    .ivu-select-item:hover {
+        background: #10122b;
+        color: #8090AF;
+    }
+
+    .ivu-select-item-selected,
+    .ivu-select-item-selected:hover {
+        background: #10122b;
+        color: #fff;
+    }
+    .ivu-select-selection:focus {
+      box-shadow: none;
+    }
+    .ivu-select-dropdown {
+        min-width: 128px;
+        &::-webkit-scrollbar {
+            width: 4px; /*对垂直流动条有效*/
+            height: 10px; /*对水平流动条有效*/
+        }
+
+        /*定义滚动条的轨道颜色、内阴影及圆角*/
+        &::-webkit-scrollbar-track{
+            background-color: #111530;
+            border-radius: 3px;
+        }
+        &::-webkit-scrollbar-thumb{
+            border-radius: 7px;
+            background-color: #8090AF;
+        }
+    }
+
+    .ivu-date-picker-with-range {
+        .ivu-date-picker-with-range {
+            background: #10122B;
+        }
+        }
+        .ivu-page-total {
+        color: #8090AF;
+        }
+        .ivu-page-next, .ivu-page-prev {
+        background: #111530;
+        border: 1px solid #191f44;
+    }
+
+    .ivu-select-dropdown li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+        background: transparent;
+    }
 }
 </style>

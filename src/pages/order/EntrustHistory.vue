@@ -173,6 +173,10 @@
         background: #10122B;
         }
     }
+
+    .ivu-select-dropdown li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+        background: transparent;
+    }
     .ivu-page-total {
         color: #8090AF;
     }

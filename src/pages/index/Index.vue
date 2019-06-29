@@ -72,7 +72,6 @@
                             </span>
                             <span
                                 class="pairs-pri"
-                                :class="{red: !item.isGreen}"
                                 v-if="!item.isGreen"
                             >
                                 {{item.close}}
@@ -86,6 +85,7 @@
                         :width="width"
                         :height="height"
                         :rose="item.chg.toString()"
+                        style="margin-left: 11px;margin-right: 13px;"
                     ></SvgLine>
                 </div>
             </section>
@@ -135,6 +135,10 @@
                             {{item.text}}
                         </li>
                     </ul>
+                    <div class="search">
+                        <i class="vertical"></i>
+                        <i-input icon="ios-search" placeholder="搜索交易币种" style="width:140px"></i-input>
+                    </div>
                 </div>
                 <div class="ptjy">
                     <Table
@@ -347,7 +351,7 @@ export default {
   data() {
     const self = this
     return {
-      width: 274,
+      width: 296,
       height: 36,
       loading: false,
       progress: 0,
@@ -1493,36 +1497,41 @@ li {
         padding:23px;
         display: flex;
         justify-content:center;
+        border-top: 1px solid rgba(42,56,80,1);
         .market-box {
-        width: 270px;
-        height: 120px;
-        /* border-radius: 8px; */
-        /* background: #252b38; */
+        width: 320px;
+        // height: 120px;
         float: left;
-        padding-right: 45px;
-        margin-right: 25px;
-        padding: 13px 0;
+        // padding-right: 45px;
+        // margin-right: 25px;
+        // padding: 13px 0;
         overflow: hidden;
         border-right: 1px solid rgba(42,56,80,1);
+            .vertical{
+              width:1px;
+              height:53px;
+              background:rgba(42,56,80,1);
+            }
             &:last-child {
                 margin-right: 0;
             }
             p {
                 &:first-child {
-                    padding: 0 20px 3px;
+                    padding: 0 10px 3px;
                 }
                 &:nth-child(2) {
-                    padding: 6px 20px 0;
+                    padding: 3px 10px 6px;
                     line-height: 25px;
                 }
                 span {
                     &:last-child {
                         float: right;
+                        font-size: 7px;
                     }
                 }
                 .pairs {
                     color: #8090AF;
-                    font-size: 14px;
+                    font-size: 8px;
                     font-weight: 600;
                 }
                 .sip {
@@ -1533,8 +1542,8 @@ li {
                     color: #03bf7b;
                 }
                 .pairs-pri {
-                    font-size: 18px;
-                    color: #a5a9be;
+                    font-size: 10px;
+                    color: #CDD2E5;
                 }
             }
         }
@@ -1615,11 +1624,14 @@ li {
     .page2nav {
         line-height: 40px;
         font-size: 20px;
+        overflow: hidden;
+        background: #191D3A;
         .brclearfix {
             font-weight: 600;
             border: 1px solid #191D3A;
-            border-bottom: 0 !important;
-            background: #191D3A;
+            border-bottom: 0;
+            padding-left:15px;
+            float:left;
             li {
                 float: left;
                 cursor: pointer;
@@ -1638,12 +1650,29 @@ li {
                 color: #3399ff;
                 border-bottom: 2px solid #191D3A;
                 position: relative;
-                margin-left: 15px;
                 margin-right: 35px; 
             }
             .ivu-btn-default{
               margin-right: 35px; 
             }
+        }
+        .search{
+          float:right;
+          display: flex;
+          align-items: center;
+          height: 42px;
+          .vertical{
+            width:1px;
+            height:18px;
+            background:rgba(128,144,175,1);
+            margin-right:10px;
+          }
+          .ivu-input{
+            background:#191D3A;
+            font-size:7px;
+            border:0;
+            color:#8090AF;
+          }
         }
     }
     .ptjy {
@@ -1911,7 +1940,7 @@ li {
 }
 
 .red {
-    color: #de211d !important;
+    color: #F15057 !important;
 }
 
 .brclearfix:after {

@@ -14,12 +14,8 @@
                             </div>
                         </div>
                         <Row class="user-right">
-                            <Col span="8">
                             <div>UID:&nbsp;&nbsp;{{uid}}</div>
-                            </Col>
-                            <Col span="8">
                             <div>{{$t("uc.safe.safelevel_low")}}:&nbsp;&nbsp;{{memberlevel}}</div>
-                            </Col>
                         </Row>
                     </div>
                     <section class="accountContent">
@@ -32,7 +28,7 @@
                                     <p class="bankInfo" style="color:grey;">
                                         bearbaby
                                     </p>
-                                    <span style="color:#fff;">{{$t('uc.safe.binded')}}</span>
+                                    <p class="right-side" style="color:#fff;">{{$t('uc.safe.binded')}}</p>
                                 </div>
                             </div>
                             <!-- 6 -->
@@ -43,7 +39,7 @@
                                     <p v-if="user.realVerified==1" class="bankInfo" style="color: grey;">
                                         {{user.realName}}
                                     </p>
-                                    <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo">
+                                    <p  v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo">
                                         <!--审核未通过 ，请重试-->
                                         {{$t('uc.safe.safelevel_medium')}}
                                         <span style="color: #3399ff;">{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}</span>
@@ -51,18 +47,22 @@
                                     <p v-else class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.verifiedtip')}}
                                     </p>
-                                    <span v-if="user.realVerified==1" style="color:#fff">
+                                    <p v-if="user.realVerified==1" style="color:#fff" class="right-side">
                                         {{$t('uc.safe.binded')}}
-                                    </span>
-                                    <span v-else-if="user.realAuditing==1">
+                                    </p>
+                                    <p v-else-if="user.realAuditing==1" class="right-side">
                                         {{$t('uc.safe.binding')}}
-                                    </span>
-                                    <a class="btn" @click="modal6 = true" v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" :title="user.realNameRejectReason">
-                                        {{$t('uc.safe.bindretry')}}
-                                    </a>
-                                    <a v-else class="btn" @click="modal6 = true">
-                                        {{$t('uc.safe.bind')}}
-                                    </a>
+                                    </p>
+                                    <p class="right-side btn" v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null">
+                                        <a @click="modal6 = true"  :title="user.realNameRejectReason">
+                                            {{$t('uc.safe.bindretry')}}
+                                        </a>
+                                    </p>
+                                    <p class="right-side btn"  v-else>
+                                        <a  @click="modal6 = true">
+                                            {{$t('uc.safe.bind')}}
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                             <!-- 2 -->
@@ -76,10 +76,15 @@
                                     <p v-else class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.bindemail')}}
                                     </p>
-                                    <span v-if="user.emailVerified==1" style="color:#fff;">{{$t('uc.safe.binded')}}</span>
-                                    <a v-else class="btn" @click="modal2 = true">
-                                        {{$t('uc.safe.bind')}}
-                                    </a>
+                                    <p class="right-side" v-if="user.emailVerified==1">
+                                        <span  style="color:#fff;">{{$t('uc.safe.binded')}}</span>
+                                    </p>
+                                    <p class="right-side" v-else>
+                                        <a class="btn" @click="modal2 = true">
+                                            {{$t('uc.safe.bind')}}
+                                        </a>
+                                    </p>
+
                                 </div>
                             </div>
                             <!-- 3 -->
@@ -93,10 +98,12 @@
                                     <p v-else class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.bindphone')}}
                                     </p>
-                                    <span v-if="user.phoneVerified==1" style="color:#fff;">{{$t('uc.safe.binded')}}</span>
-                                    <a v-else class="btn" @click="modal3 = true">
-                                        {{$t('uc.safe.bind')}}
-                                    </a>
+                                    <p class="right-side" v-if="user.phoneVerified==1" style="color:#fff;">{{$t('uc.safe.binded')}}</p>
+                                    <p v-else class="right-side">
+                                        <a  class="btn" @click="modal3 = true">
+                                            {{$t('uc.safe.bind')}}
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                             <!-- 4 登录密码-->
@@ -107,13 +114,16 @@
                                     <p class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.logintip')}}
                                     </p>
-
-                                    <a class="btn" v-if="user.phoneVerified==0" @click="noPhone">
-                                        {{$t('uc.safe.edit')}}
-                                    </a>
-                                    <a class="btn" v-else @click="modal4 = true">
-                                        {{$t('uc.safe.edit')}}
-                                    </a>
+                                    <p class="right-side"  v-if="user.phoneVerified==0">
+                                        <a class="btn" @click="noPhone">
+                                            {{$t('uc.safe.edit')}}
+                                        </a>
+                                    </p>
+                                    <p class="right-side" v-else>
+                                        <a class="btn"  @click="modal4 = true">
+                                            {{$t('uc.safe.edit')}}
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                             <!-- 5 资金密码-->
@@ -124,15 +134,22 @@
                                     <p class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.fundtip')}}
                                     </p>
-                                    <a class="btn" v-if="user.phoneVerified==0" @click="noPhone">
-                                        {{$t('uc.safe.set')}}
-                                    </a>
-                                    <a class="btn" v-else-if="user.fundsVerified==0" @click="modal5 = true">
-                                        {{$t('uc.safe.set')}}
-                                    </a>
-                                    <a class="btn" v-else @click="showItemFundpwd()" style="margin-right:26px;margin-bottom:6px;">
-                                        {{$t('uc.safe.edit')}}
-                                    </a>
+                                    <p class="right-side" v-if="user.phoneVerified==0">
+                                        <a class="btn"  @click="noPhone">
+                                            {{$t('uc.safe.set')}}
+                                        </a>
+                                    </p>
+                                    <p class="right-side" v-else-if="user.fundsVerified==0">
+                                        <a class="btn"  @click="modal5 = true">
+                                            {{$t('uc.safe.set')}}
+                                        </a>
+                                    </p>
+                                    <p class="right-side" v-else>
+                                        <a class="btn"  @click="showItemFundpwd()" >
+                                            {{$t('uc.safe.edit')}}
+                                        </a>
+                                    </p>
+
                                 </div>
                             </div>
                             <!-- 6 谷歌-->
@@ -141,7 +158,7 @@
                                     <Icon type="social-googleplus-outline" />
                                     <Icon type="logo-google" size="20" color="#00b5f6" />
                                     <span class="card-number">{{$t("uc.safe.GoogleAuthentication")}}</span>
-                                    <p class="bankInfo" style="color: grey; width: 69%">
+                                    <p class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.GoogleAuthenticationAbs')}}
                                         <a href="">{{$t('uc.safe.userguide')}}</a>
                                     </p>
@@ -496,13 +513,12 @@
                 v-model="modal7"
                 :styles="{top: '100px'}"
                 width="714"
-                @on-cancel="googleModalCancel"
             >
                 <ResetGoogleVali />
             </Modal>
             <!-- 解除谷歌验证弹窗 -->
             <Modal
-                :title="$t('uc.safe.remove_google')"
+                :title="$t('new.UntieGoogle')"
                 v-model="modal8"
                 :styles="{top: '100px'}"
                 width="534"
@@ -525,6 +541,7 @@
 </template>
 <script>
 
+import BindGoogleVali from '@/pages/google/ResetGoogleVali.vue'
 import ResetGoogleVali from '@/pages/google/ResetGoogleVali.vue'
 import CloseGoogleVali from '@/pages/google/CloseGoogleVali.vue'
 
@@ -1306,7 +1323,8 @@ export default {
     },
     components: {
         ResetGoogleVali,
-        CloseGoogleVali
+        CloseGoogleVali,
+        BindGoogleVali
     }
 };
 </script>
@@ -1345,7 +1363,6 @@ button.ivu-btn.ivu-btn-primary {
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        padding: 8px 0;
     }
 }
 .uploadimgtip {
@@ -1418,10 +1435,10 @@ button.ivu-btn.ivu-btn-primary {
         background-image: url(../../assets/img/overicon.png);
     }
     .card-number {
-        width: 142px;
+        width: 152px;
         height: 40px;
         margin-right: 15px;
-        padding: 0 15px;
+        padding: 0 34px;
         line-height: 40px;
         text-align: left;
         display: inline-block;
@@ -1432,7 +1449,7 @@ button.ivu-btn.ivu-btn-primary {
         color: #8090AF !important;
     }
     .btn {
-        padding: 8px 10px;
+        padding: 8px 0;
         cursor: pointer;
     }
     .google-info {
@@ -1440,6 +1457,10 @@ button.ivu-btn.ivu-btn-primary {
         a {
             margin-right: 15px;
         }
+    }
+    .right-side {
+        width: 15%;
+        text-align: right;
     }
 }
 
@@ -1474,6 +1495,11 @@ button.ivu-btn.ivu-btn-primary {
 
 .user-right {
     width: 80%;
+    height: 22px;
+    div {
+        display: inline-block;
+        margin-left: 115px;
+    }
 }
 
 
@@ -1629,8 +1655,6 @@ button.ivu-btn.ivu-btn-primary {
 
 .user-icons {
     /*display: flex;*/
-    align-self: center;
-    width: 200px;
 }
 
 .user-icons .icons-in {
@@ -1664,7 +1688,7 @@ button.ivu-btn.ivu-btn-primary {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 155px;
+    // width: 155px;
     height: 52px;
     overflow: hidden;
     font-size: 14px;
@@ -1724,22 +1748,21 @@ button.ivu-btn.ivu-btn-primary {
 
 .user-avatar-public {
     float: left;
-    /*background: #fff;*/
-    border-radius: 50%;
-    height: 52px;
-    width: 52px;
+    // background: #fff;
+    // border-radius: 50%;
+    height: 54px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 1px 5px 0 rgba(71, 78, 114, 0.24);
+    // box-shadow: 0 1px 5px 0 rgba(71, 78, 114, 0.24);
     position: relative;
 }
 
 .user-avatar-public > .user-avatar-in {
     background: #3399ff;
     border-radius: 50%;
-    height: 42px;
-    width: 42px;
+    height: 37px;
+    width: 37px;
     display: flex;
     justify-content: center;
     align-items: center;

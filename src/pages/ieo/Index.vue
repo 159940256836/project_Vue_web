@@ -146,7 +146,7 @@ export default {
     /*background: #fff;*/
     width: 1200px;
     margin: 0 auto 0;
-    padding-bottom: 100px;
+    // padding-bottom: 100px;
     padding-top: 38px;
     min-height: 700px !important;
     overflow: hidden;

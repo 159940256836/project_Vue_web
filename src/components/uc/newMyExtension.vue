@@ -100,12 +100,12 @@
                     </div>
                 </div> -->
                 <div class="bill_box rightarea padding-right-clear record account-box">
-                    <div style="display:flex; padding-left:35px; line-height:35px; background:rgba(25,29,58,1); margin-top:19px;">
+                    <div style="display:flex; background:rgba(25,29,58,1); margin-top:19px;height:55px;">
                         <div
                             v-for="(list,index) in buttonLists"
                             :key="list.text"
                             class="btStyle"
-                            style="text-align:center"
+                            style="text-align:center;margin-left:35px;"
                             :class="{active:changeActive == index}"
                             @click="actives(index)"
                         >
@@ -347,6 +347,15 @@ export default {
 };
 </script>
 <style>
+.nav-right .btStyle :nth-child(2){
+    margin-left:35px;
+}
+.bill_box .message .ivu-table th{
+    height:55px !important;
+}
+.bill_box .message .ivu-table td, .ivu-table th{
+    height:55px !important;
+}
 .page-wrap {
     text-align: right;
     margin-top: 30px;
@@ -461,11 +470,11 @@ export default {
                 color:#fff;
             }
             .rule_content{
-                padding:20px;
                 // line-height:125px;
                 padding-left:35px;
                 font-size:14px;
                 color:#8090AF;
+                margin-top:35px;
             }
         }
         .nav_titlt{
@@ -530,9 +539,9 @@ export default {
 }
 
 .nav-right .btStyle {
-    width: 125px;
-    height: 42px;
-    font-size: 1.125em;
+    // width: 125px;
+    // height: 42px;
+    font-size:18px;
     color: #a2a0a1;
     // background: #fff;
     margin: 20px 0 0;
@@ -566,7 +575,7 @@ export default {
     border:0;
     color:#fff;
     margin-top:19px;
-    height:55px;
+    // height:55px;
 }
 
 .rightarea .rightarea-top {
