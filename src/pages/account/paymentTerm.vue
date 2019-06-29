@@ -464,6 +464,7 @@ export default {
                 this.$http.post(this.host + '/uc/approve/update/bank', param).then(response => {
                   var resp = response.body;
                   if (resp.code == 0) {
+                    this.modal1 = false
                     this.$Message.success(this.$t('uc.account.save_success'));
                     this.getAccount()
                     this.choseItem = 0
@@ -475,6 +476,7 @@ export default {
                 this.$http.post(this.host + '/uc/approve/bind/bank', param).then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
+                        this.modal1 = false
                         this.$Message.success(this.$t('uc.account.save_success'));
                         this.getAccount()
                         this.choseItem = 0
@@ -496,6 +498,7 @@ export default {
                   this.$http.post(this.host + '/uc/approve/update/ali', param).then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
+                      this.modal2 = false
                       this.$Message.success(this.$t('uc.account.save_success'));
                       this.getAccount()
                       this.choseItem = 0
@@ -507,6 +510,7 @@ export default {
                   this.$http.post(this.host + '/uc/approve/bind/ali', param).then(response => {
                       var resp = response.body;
                       if (resp.code == 0) {
+                          this.modal2 = false
                           this.$Message.success(this.$t('uc.account.save_success'));
                           this.getAccount()
                           this.choseItem = 0
@@ -528,6 +532,7 @@ export default {
                 this.$http.post(this.host + '/uc/approve/update/wechat', param).then(response => {
                   var resp = response.body;
                   if (resp.code == 0) {
+                    this.modal3 = false
                     this.$Message.success(this.$t('uc.account.save_success'));
                     this.getAccount()
                     this.choseItem = 0
@@ -539,6 +544,7 @@ export default {
                 this.$http.post(this.host + '/uc/approve/bind/wechat', param).then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
+                        this.modal3 = false
                         this.$Message.success(this.$t('uc.account.save_success'));
                         this.getAccount()
                         this.choseItem = 0

@@ -474,8 +474,9 @@ export default {
 }
 </style>
 <style lang="scss">
-.ivu-select-single .ivu-select-selection .ivu-select-placeholder,
-.ivu-select-single .ivu-select-selection .ivu-select-selected-value {
+.rejs {
+  .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
+  .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
   height: 0.6rem;
   font-size: 0.28rem;
   line-height: 0.6rem;
@@ -504,6 +505,8 @@ export default {
     }
   }
 }
+}
+
 </style>
 <style>
 .rejs{
