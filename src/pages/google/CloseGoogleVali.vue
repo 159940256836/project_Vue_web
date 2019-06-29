@@ -23,7 +23,7 @@
                     </Input>
                 </FormItem>
             </Form>
-            <div class="btns" style="display:flex;justify-content:space-around;align-items:center;width:300px;margin-right: 14px;float: right;">
+            <div class="btns" style="display:flex;justify-content:space-around;align-items:center;width:300px;margin-right: 59px;float: right;margin-top:10px;">
                 <!-- <Button @click="cancel">{{$t('openGoolePage._cancel')}}</Button> -->
                 <Button type="primary" @click="sureBtn('formInline')" style="width:100%;border-radius:0;">{{$t('openGoolePage._sure')}}</Button>
             </div>
@@ -148,7 +148,6 @@ export default {
         border-color:#3399ff !important;
     }
     .openGoogleModal {
-        padding: 0 27px;
         overflow: hidden;
         .ivu-form-item-content {
             p {
@@ -194,8 +193,10 @@ export default {
     }
     .ivu-form-item-label {
         vertical-align: none;
-        width: 80px;
-        color: #fff;
+        width: 88px;
+        padding-right: 12px;
+        text-align: right;
+        color: #8090AF;
     }
     .ivu-form-item-content {
         display: inline-block;
@@ -204,6 +205,28 @@ export default {
 
     .ivu-form-item-error .ivu-input{
         border: 1px solid #8090AF;
+    }
+
+    .ivu-btn-default {
+        color: #3399FF;
+        background: transparent;
+        border-radius: 0;
+    }
+    .ivu-input-group-append,
+    .ivu-input-group-prepend {
+        background: transparent;
+        color: #3399FF;
+        border: 1px solid #8090AF;
+        border-left: none;
+        border-radius: 0;
+    }
+    .ivu-form-item-error .ivu-input-group-append, 
+    .ivu-form-item-error .ivu-input-group-prepend {
+        background: transparent;
+        color: #3399FF;
+        border: 1px solid #8090AF;
+        border-left: none;
+        border-radius: 0;
     }
     
     .defeat-ivu {
@@ -222,15 +245,16 @@ export default {
         .timebox {
         border-left: 1px solid #8090AF;
         }
-        .ivu-input-group-append, .ivu-input-group-prepend {
-            border: 1px solid #8090AF;
-            border-left: none;
-            border-radius: 0;
-        }
+    }
+
+    .ivu-form-item-error .ivu-input{
+        border: 1px solid #8090AF;
+        border-right: none;
     }
 
 
     .ivu-form-item-content {
+        line-height: 30px;
         .unchangeable {
             padding: 0;
             background: transparent;
@@ -239,6 +263,7 @@ export default {
             border: 1px solid #8090AF;
         }
     }
+
 }
 
 </style>

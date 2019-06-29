@@ -22,7 +22,14 @@
                 <p>{{$t('openGoolePage._googleVerifyabs')}}</p>
                 <p>
                     <span>{{data.secret}}</span>
-                    <span v-clipboard:copy="data.secret" v-clipboard:success="onCopy" v-clipboard:error="onError" class="blue">{{$t('openGoolePage._copy')}}</span>
+                    <span
+                    v-clipboard:copy="data.secret"
+                    v-clipboard:success="onCopy"
+                    v-clipboard:error="onError"
+                    class="blue"
+                    >
+                    {{$t('openGoolePage._copy')}}
+                    </span>
                 </p>
             </div>
             </div>

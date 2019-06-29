@@ -806,31 +806,34 @@ export default {
 }
 </style>
 <style lang="scss">
-    .ivu-input-group-append,
-    .ivu-input-group-prepend {
-        width: 60px;
-        background: transparent;
-        border-radius: 0;
-        border: 1px solid #58698A;
-        border-right: 0;
-        color: #8090AF;
-    }
-    .ivu-input,
-    .ivu-input[disabled] {
-        background: transparent;
-        border-radius: 0;
-        border: 1px solid #58698A;
-    }
-    .ivu-input[disabled] {
-        &:hover {
-            border: 1px solid #58698A;
-        }
-    }
-    .ivu-input-group-large .ivu-input {
-        color: #8090AF;
-    }
-    .ivu-input-group {
-        width: 350px !important;
+    
+    .content-wrap {
+      .ivu-input-group-append,
+      .ivu-input-group-prepend {
+          width: 60px;
+          background: transparent;
+          border-radius: 0;
+          border: 1px solid #58698A;
+          border-right: 0;
+          color: #8090AF;
+      }
+      .ivu-input,
+      .ivu-input[disabled] {
+          background: transparent;
+          border-radius: 0;
+          border: 1px solid #58698A;
+      }
+      .ivu-input[disabled] {
+          &:hover {
+              border: 1px solid #58698A;
+          }
+      }
+      .ivu-input-group-large .ivu-input {
+          color: #8090AF;
+      }
+      .ivu-input-group {
+          width: 350px !important;
+      }
     }
 </style>
 

@@ -514,7 +514,7 @@
                 :styles="{top: '100px'}"
                 width="714"
                 @on-cancel="googleModalCancel"
-                >
+            >
                 <BindGoogleVali />
             </Modal>
             <!-- 解除谷歌验证弹窗 -->
@@ -534,7 +534,7 @@
                 :styles="{top: '100px'}"
                 width="714"
                 >
-                <ResetGoogleVali />
+                <BindGoogleVali />        
             </Modal>
         </div>
 
@@ -1749,14 +1749,14 @@ button.ivu-btn.ivu-btn-primary {
 
 .user-avatar-public {
     float: left;
-    // background: #fff;
-    // border-radius: 50%;
     height: 54px;
+    width: 54px;
     display: flex;
     justify-content: center;
     align-items: center;
     // box-shadow: 0 1px 5px 0 rgba(71, 78, 114, 0.24);
     position: relative;
+    left: -10px;
 }
 
 .user-avatar-public > .user-avatar-in {
@@ -1889,10 +1889,46 @@ button.ivu-btn.ivu-btn-primary {
         }
 
         .ivu-form-item-error .ivu-input{
-        border: 1px solid #8090AF;
-    }
+            border: 1px solid #8090AF;
+        }
+
+        .ivu-input-large {
+            border: 1px solid #8090AF;
+        }
+
+        .ivu-form-item-error .ivu-input-large {
+            border: 1px solid #8090AF;
+        }
+
+        .ivu-btn-default {
+            color: #8090AF;
+            background: transparent;
+            border-radius: 0;
+        }
+        .ivu-input-group-append,
+        .ivu-input-group-prepend {
+            background: transparent;
+            color: #3399FF;
+            border: 1px solid #8090AF;
+            border-left: none;
+            border-radius: 0;
+        }
+
+        .ivu-form-item-error .ivu-input-group-append,
+        .ivu-form-item-error .ivu-input-group-prepend {
+            background: transparent;
+            color: #3399FF;
+            border: 1px solid #8090AF;
+            border-left: none;
+            border-radius: 0;
+        }
 
         .defeat-ivu {
+            .ivu-btn-default {
+                color: #3399FF;
+                background: transparent;
+                border-radius: 0;
+            }
             .ivu-form-item-error .ivu-input{
                 border: 1px solid #8090AF;
                 border-right: none;
@@ -1902,48 +1938,21 @@ button.ivu-btn.ivu-btn-primary {
                 border-right: none;
             }
             .timebox {
-            border-left: 1px solid #8090AF;
-            }
-            .ivu-input-group-append, .ivu-input-group-prepend {
-                border: 1px solid #8090AF;
-                border-left: none;
-                border-radius: 0;
+                border-left: 1px solid #8090AF;
             }
         }
-    }
-    .ivu-btn-default {
-        border: 1px solid #8090AF;
-        color: #8090AF;
-        background: transparent;
-        border-radius: 0;
-    }
-    .ivu-input-group-append {
-        background: transparent;
-        color: #3399FF;
-        // .timebox {
-        //     border-left: 1px solid #8090AF;
-        // }
+
+
     }
 
-    .ivu-form-item-error .ivu-input-group-append, .ivu-form-item-error .ivu-input-group-prepend {
-        background-color: transparent;
-        border: 1px solid #8090AF;
-        border-left: none;
-    }
 
-    .defeat-ivu {
-        .timebox {
-            border-left: 1px solid #8090AF;
-        }
-        .ivu-input {
-            border-right: none;
-
-        }
-        .ivu-input-group-append, .ivu-input-group-prepend {
-            border: 1px solid #8090AF;
-            border-left: none;
-        }
-    }
+    // .ivu-btn-default {
+    //     border: 1px solid #8090AF;
+    //     color: #8090AF;
+    //     background: transparent;
+    //     border-radius: 0;
+    // }
+    
 
 </style>
 
