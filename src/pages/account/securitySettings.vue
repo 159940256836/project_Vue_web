@@ -183,6 +183,7 @@
                 v-model="modal6"
                 :styles="{top: '100px'}"
                 width="875"
+                class="popups-modal"
                 >
                 <div class="detail-list" style="width: 100%;">
                     <!-- 请上传资料完成实名认证 -->
@@ -268,6 +269,7 @@
                 v-model="modal2"
                 :styles="{top: '100px'}"
                 width="534"
+                class="popups-modal"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="110">
@@ -309,6 +311,7 @@
                 v-model="modal3"
                 :styles="{top: '100px'}"
                 width="534"
+                class="popups-modal"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="110">
@@ -352,6 +355,7 @@
                 v-model="modal4"
                 :styles="{top: '100px'}"
                 width="534"
+                class="popups-modal"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate4" :model="formValidate4" :rules="ruleValidate" :label-width="121">
@@ -400,6 +404,7 @@
                 v-model="modal5"
                 :styles="{top: '100px'}"
                 width="534"
+                class="popups-modal"
                 >
                 <!-- 设置资金密码 -->
                 <div class="detail-list" v-show="user.fundsVerified!=1">
@@ -515,6 +520,7 @@
                 :styles="{top: '100px'}"
                 width="714"
                 @on-cancel="googleModalCancel"
+                class="popups-modal"
             >
                 <ResetGoogleVali />
             </Modal>
@@ -525,6 +531,7 @@
                 :styles="{top: '100px'}"
                 width="534"
                 @on-cancel="googleModalCancel"
+                class="popups-modal"
             >
                 <CloseGoogleVali :phone="user.mobilePhone" />
             </Modal>
@@ -1794,31 +1801,34 @@ export default {
 
 
     //弹窗样式
-    .ivu-modal-content {
-        padding: 0 42px;
-        background: #111530;
-        border-radius: 0;
-        .ivu-modal-header {
-            border-bottom: 1px solid #2A3850;
-            height: 54px;
-            padding: 18px 0;
-            .ivu-modal-header-inner {
+    .popups-modal {
+        .ivu-modal-content {
+            padding: 0 42px;
+            background: #111530;
+            border-radius: 0;
+            .ivu-modal-header {
+                border-bottom: 1px solid #2A3850;
+                height: 54px;
+                padding: 18px 0;
+                .ivu-modal-header-inner {
+                    color: #fff;
+                    text-align: left;
+                    font-weight: 400;
+                }
+            }
+            .ivu-modal-footer {
+                display: none;
+            }
+            .ivu-modal-close .ivu-icon-ios-close {
                 color: #fff;
-                text-align: left;
-                font-weight: 400;
+            }
+
+            .ivu-modal-body {
+                padding: 26px 0 20px 0;
             }
         }
-        .ivu-modal-footer {
-            display: none;
-        }
-        .ivu-modal-close .ivu-icon-ios-close {
-            color: #fff;
-        }
-
-        .ivu-modal-body {
-            padding: 26px 0 20px 0;
-        }
     }
+    
 
     .nav-rights {
         .ivu-input {

@@ -70,27 +70,19 @@
     padding-left: 28px;
 }
 
-.clear_btn  {
-    color: #3399FF;
+.form .my-btn {
+  background: #3399FF;
+  color: #fff;
+  display: inline-block;
+  padding:0px 24px;
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  box-sizing: border-box;
+  vertical-align: middle;
+  cursor: pointer;
 }
 
-.form .clear_btn:hover {
-    color: #3399FF;
-}
-// .form .clear_btn {
-//     &:hover {
-//         color: #3399ff;
-//         border-color: #3399ff;
-//     }
-//     &:focus {
-//         background-color: #fff;
-//         -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-//         -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-//         box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-//         color: #3399ff;
-//         border-color: #3399ff;
-//     }
-// }
 .entrusthistory .ivu-table th,
 .entrusthistory .ivu-table td {
   text-align: center;
@@ -398,20 +390,18 @@
                 </Select>
             </FormItem>
             <FormItem>
-                <Button
-                style="margin-left: -10px;margin-right:45px; "
+                <span
+                style="margin-left: -10px;margin-right:45px;margin-left: 8px;background:transparent;border:1px solid #3399FF;color:#3399FF;"
                 @click="handleClear"
-                class="clear_btn"
-                type="primary"
+                class="my-btn"
                 >
                 {{$t('historyAndCu.clear')}}
-                </Button>
-                <Button
-                type="primary"
+                </span>
+                <span
                 @click="handleSubmit"
-                class="search-btn"
+                class="my-btn"
                 >
-                {{$t('historyAndCu.search')}}</Button>
+                {{$t('historyAndCu.search')}}</span>
 
             </FormItem>
         </Form>
