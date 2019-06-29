@@ -1,7 +1,7 @@
 
 <template>
     <main class="box-wrap">
-        <div class="box" id="box">
+        <div class="box new-order-box" id="box">
             <h2 class="title">{{ this.$t('otc.myorder') }}</h2>
             <Tabs name="tab1">
                 <TabPane 
@@ -85,6 +85,19 @@ export default {
 
 .box .ivu-tabs-nav .ivu-tabs-tab-active {
     color: #3399FF;
+}
+
+.new-order-box{
+  .ivu-tabs-ink-bar-animated {
+    display: none;
+  }
+  .ivu-tabs-tab-active,
+  .ivu-tabs-tab-focused {
+    border-bottom: 3px solid #3399FF;
+  }
+  .ivu-tabs-tab {
+    margin-right: 47px !important;
+  }
 }
 
 </style>
