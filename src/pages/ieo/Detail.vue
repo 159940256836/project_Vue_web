@@ -605,7 +605,7 @@ $lineColor: rgb(71, 100, 146);
                             height: 100%;
                         }
                     }
-                    .btn_new{
+                     .btn_new{
                          width: 100%;
                         margin-bottom: 15px;
                         text-align: center;

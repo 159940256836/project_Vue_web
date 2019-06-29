@@ -87,6 +87,32 @@
  }
 
 
+.mymsg_wrapper {
+  .ivu-date-picker-with-range {
+    .ivu-date-picker-with-range {
+      background: #10122B;
+    }
+  }
+  .ivu-page-total {
+    color: #8090AF;
+  }
+  .ivu-page-next, .ivu-page-prev {
+    background: #111530;
+    border: 1px solid #191f44;
+  }
+    .ivu-tabs-nav-scroll {
+    height: 60px;
+    background: #111530;
+    .ivu-tabs-nav .ivu-tabs-tab-active {
+      color: #3399ff !important;
+    }
+    .ivu-tabs-nav .ivu-tabs-tab {
+      padding: 19px 16px;
+      color: #fff;
+    }
+  }
+}
+
 </style>
 <template>
   <div class="mymsg_wrapper">
