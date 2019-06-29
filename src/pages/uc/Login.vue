@@ -44,7 +44,7 @@
                         v-if="openPhoneCode"
                     >
                         <Input
-                            v-model="formInline.phoneCode"
+                            v-model="formInline.checkCode"
                             size="large"
                             :placeholder="$t('uc.login.phone')"
                         >
@@ -186,7 +186,7 @@ $primary-color: #3399ff;
                     width: 270px;
                     text-align: center;
                     .right-img {
-                        /*background: #fff;*/
+                        background: #fff;
                         width: 150px;
                         margin: 0 auto;
                         img {
@@ -261,7 +261,7 @@ export default {
         user: '',
         password: '',
         googleCode: '',
-        phoneCode: '',
+        checkCode: '',
         emailCode: ''
       },
       ruleInline: {
@@ -293,7 +293,7 @@ export default {
     }
   },
   methods: {
-        // /*手机发送验证码*/
+    // /*手机发送验证码*/
     sendPhoneCode(index) {
       console.log(this)
       const me = this
@@ -318,7 +318,7 @@ export default {
           }
         })
       } else {
-                // 获取邮箱code
+        // 获取邮箱code
         this.$http.post(this.host + '/uc/email/login/code', {
           email: this.formInline.user
         }).then(response => {
@@ -418,7 +418,7 @@ export default {
         params.code = formParams.googleCode
       }
       if (this.openPhoneCode) {
-        params.checkCode = this.formInline.phoneCode
+        params.checkCode = this.formInline.checkCode
       }
             // 6.06
       if (this.openEmailCode) {
@@ -445,7 +445,7 @@ export default {
         }
       } else if (this.openPhoneCode) {
                   // // 判断手机验证码不能为空
-        if (!this.formInline.phoneCode) {
+        if (!this.formInline.checkCode) {
           this.$Message.error(this.$t('uc.login.phone'))
           return false
         } else {
@@ -486,6 +486,7 @@ export default {
       params.username = formParams.user
       params.password = formParams.password
       params.code = formParams.googleCode
+      params.checkCode = formParams.checkCode
       this.$http.post(this.host + this.api.uc.login, params).then(response => {
         var resp = response.body
         if (resp.code == 0) {
@@ -541,6 +542,13 @@ $white:#fff;
                 width: 105px;
                 line-height: 26px;
                 border-radius: 0;
+                background:#10122B;
+                color:white;
+                border: 1px solid;
+                -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+                -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+                border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
+                opacity: 0.62;
             }
         }
     }
