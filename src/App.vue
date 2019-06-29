@@ -141,7 +141,7 @@
                         <!-- app二维码 -->
                         <div class="rightwrapper">
                             <poptip placement="bottom"  class="appdownload">
-                                <a href="javascript:;" style="font-size:7px;">{{$t("header.appdownlaod")}}
+                                <a href="javascript:;" style="font-size:14px;">{{$t("header.appdownlaod")}}
                                 </a>
                                 <div class="api" slot="content" style="width:90%;">
                                     <div class="ios">
@@ -654,6 +654,7 @@ export default {
             line-height: 50px;
             transition: all .5s;
             background-color: #11132C !important;
+            opacity: .9;
             .time_download {
                 align-items: center;
                 overflow: hidden;
