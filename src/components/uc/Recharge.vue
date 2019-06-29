@@ -67,7 +67,14 @@
                                                 <p slot="header" style="text-align: center;">
                                                     {{$t('uc.finance.money.qrcode')}}
                                                 </p>
-                                                <div class="show-qrcode" style="text-align: center;">
+                                                <div
+                                                    class="show-qrcode"
+                                                    style="width: 210px;
+                                                    height: 210px;
+                                                    margin: 0 auto;
+                                                    background: #fff;
+                                                    padding: 5px;"
+                                                >
                                                     <!--<qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
                                                     <qriously :value="qrcode.value" :size="qrcode.size" />
                                                 </div>
@@ -318,11 +325,11 @@ export default {
 <style scoped lang="scss">
     .nav-recharge {
         .show-qrcode {
-            width: 217px;
-            height: 217px;
+            width: 210px;
+            height: 210px;
             margin: 0 auto;
-            background: #8090AF;
-            padding: 9px;
+            background: #fff;
+            padding: 5px;
         }
         .table-inner {
             position: relative;
@@ -520,6 +527,18 @@ export default {
 
 </style>
 <style lang="scss">
+    .ivu-modal-content {
+        background: #111530;
+    }
+    .ivu-modal-header {
+        p {
+            color: #8090AF;
+        }
+        border-bottom: 1px solid #2A3850;
+    }
+    .ivu-modal-footer {
+        border-top: 0;
+    }
     .nav-recharge {
         .ivu-modal-header {
             background: #111530;
