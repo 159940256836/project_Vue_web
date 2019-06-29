@@ -188,9 +188,32 @@ export default {
     .ivu-input {
         border-radius: 0;
         background: transparent;
-        color: #fff;
-        
+        color: #fff;      
     }
+
+    .ivu-input-large {
+            border: 1px solid #8090AF;
+        }
+
+    .ivu-input-large:hover,
+    .ivu-input-large:focus,
+    .ivu-input-large:active {
+        border: 1px solid #8090AF;
+    }
+
+    .ivu-form-item-error .ivu-input {
+            border-color: #8090AF;
+    }
+
+    .ivu-form-item-error {
+        .ivu-input-large:hover,
+        .ivu-input-large:focus,
+        .ivu-input-large:active {
+            border: 1px solid #8090AF;
+        }
+    }
+
+
     .ivu-form-item-label {
         vertical-align: none;
         width: 88px;
@@ -203,10 +226,7 @@ export default {
         
     }
 
-    .ivu-form-item-error .ivu-input{
-        border: 1px solid #8090AF;
-    }
-
+    
     .ivu-btn-default {
         color: #3399FF;
         background: transparent;
@@ -234,10 +254,6 @@ export default {
             vertical-align: top;
             margin-top: 10px;
         }
-        .ivu-form-item-error .ivu-input{
-            border: 1px solid #8090AF;
-            border-right: none;
-        }
         .ivu-input{
             border: 1px solid #8090AF;
             border-right: none;
@@ -245,11 +261,6 @@ export default {
         .timebox {
         border-left: 1px solid #8090AF;
         }
-    }
-
-    .ivu-form-item-error .ivu-input{
-        border: 1px solid #8090AF;
-        border-right: none;
     }
 
 

@@ -20,7 +20,7 @@
                         <!--{{$t('uc.finance.record.to')}}-->
                         <!--</span>-->
                         <!--<DatePicker v-model="endDate" type="date"></DatePicker>-->
-                        <span>{{$t('uc.finance.currency')}}：</span>
+                        <span style="margin-left: 30px;">{{$t('uc.finance.currency')}}：</span>
                         <Select
                             v-model="coinType"
                             style="width:128px;margin-right:30px;"
@@ -394,7 +394,6 @@ export default {
             .form-group {
                 height: 60px;
                 line-height: 60px;
-                margin-bottom: 20px;
                 text-align: left;
                 background: #111530;
                 padding-left: 20px;
@@ -407,6 +406,7 @@ export default {
     }
     .order-table {
         margin-right: -1px;
+        margin-bottom: 25px;
     }
 }
 </style>

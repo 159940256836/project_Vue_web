@@ -35,6 +35,7 @@ module.exports = {
     expect: 'Look forward to expectation!',
     delete: 'Are you confirm to delete?',
     nodata: 'No Data',
+    nodataa:'No records, please invite friends',
     set: 'Set',
     update: 'Modify',
     please: 'Please',
@@ -42,6 +43,7 @@ module.exports = {
     confirm: 'confirm'
   },
   new: {
+    Detailss:'Details',
     Currenrtification: 'Current level certification',
     Currentasset: 'Current asset valuation',
     Available: 'Available',

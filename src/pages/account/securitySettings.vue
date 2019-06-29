@@ -401,6 +401,7 @@
                 :styles="{top: '100px'}"
                 width="534"
                 >
+                <!-- 设置资金密码 -->
                 <div class="detail-list" v-show="user.fundsVerified!=1">
                     <Form ref="formValidate7" :model="formValidate7" :rules="ruleValidate" :label-width="120">
                         <!-- newMPw -->
@@ -513,6 +514,7 @@
                 v-model="modal7"
                 :styles="{top: '100px'}"
                 width="714"
+                @on-cancel="googleModalCancel"
             >
                 <ResetGoogleVali />
             </Modal>
@@ -892,17 +894,9 @@ export default {
             })
         },
         changeGoogleSwitch() {//改变google验证状态
-            const params = {
-                phone: this.user.mobilePhone
-            }
-            // !this.googleSwitch && this.$router.push({
-            //     name: "closegoogleVali",
-            //     params
-            // });
             if(this.googleSwitch) {
                 this.modal7 = true
             } else {
-                this.$route.params.phone = this.user.mobilePhone
                 this.modal8 = true
             }
 
@@ -1020,6 +1014,7 @@ export default {
                         if (resp.code == 0) {
                             this.member.realName = this.formValidate6.realName;
                             this.$store.commit("setMember", this.member);
+                            this.modal6 = false;
                             this.$Message.success(this.$t("uc.safe.save_success"));
                             this.getMember();
                             this.choseItem = 0;
@@ -1039,6 +1034,7 @@ export default {
                     .then(response => {
                         var resp = response.body;
                         if (resp.code == 0) {
+                            this.modal2 = false
                             this.$Message.success(this.$t("uc.safe.save_success"));
                             this.getMember();
                             this.choseItem = 0;
@@ -1058,6 +1054,7 @@ export default {
                     .then(response => {
                         var resp = response.body;
                         if (resp.code == 0) {
+                            this.modal3 = false
                             this.$Message.success(this.$t("uc.safe.save_success"));
                             this.getMember();
                             this.choseItem = 0;
@@ -1078,6 +1075,7 @@ export default {
                 this.$http.post(this.host + "/uc/approve/update/password", param).then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
+                        this.modal4 = false
                         this.$Message.success(this.$t("uc.safe.save_success"));
                         this.getMember();
                         this.choseItem = 0;
@@ -1108,6 +1106,7 @@ export default {
                     .then(response => {
                         var resp = response.body;
                         if (resp.code == 0) {
+                            this.modal5 = false
                             this.$Message.success(this.$t("uc.safe.save_success"));
                             this.handleReset("formValidate5");
                             this.getMember();
@@ -1126,6 +1125,7 @@ export default {
                     .then(response => {
                         var resp = response.body;
                         if (resp.code == 0) {
+                            this.modal5 = false
                             this.$Message.success(this.$t("uc.safe.save_success"));
                             this.getMember();
                             this.choseItem = 0;
@@ -1144,6 +1144,7 @@ export default {
                     .then(response => {
                         var resp = response.body;
                         if (resp.code == 0) {
+                            this.modal5 = false
                             this.$Message.success(this.$t("uc.safe.save_success"));
                             this.fGetBackFundpwd = false;
                             this.handleReset("formValidate5");
@@ -1329,23 +1330,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.ivu-btn-warning {
-    background: #3399ff;
-    border-color: #3399ff;
-}
+
 %flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-button.ivu-btn {
-    &:focus {
-        box-shadow: 0 0 0 2px rgba(45, 140, 240, 0);
-    }
-}
-button.ivu-btn.ivu-btn-primary {
-    box-shadow: 0 0 0 2px rgba(45, 140, 240, 0);
-}
+
 .acc_sc {
     margin-top: 29px;
 }
@@ -1890,17 +1881,28 @@ button.ivu-btn.ivu-btn-primary {
             content: ''
         }
 
-        .ivu-form-item-error .ivu-input{
-            border: 1px solid #8090AF;
-        }
-
         .ivu-input-large {
             border: 1px solid #8090AF;
         }
 
-        .ivu-form-item-error .ivu-input-large {
+        .ivu-input-large:hover,
+        .ivu-input-large:focus,
+        .ivu-input-large:active {
             border: 1px solid #8090AF;
         }
+
+        .ivu-form-item-error .ivu-input {
+            border-color: #8090AF;
+        }
+
+        .ivu-form-item-error {
+            .ivu-input-large:hover,
+            .ivu-input-large:focus,
+            .ivu-input-large:active {
+                border: 1px solid #8090AF;
+            }
+        }
+        
 
         .ivu-btn-default {
             color: #8090AF;
@@ -1932,9 +1934,8 @@ button.ivu-btn.ivu-btn-primary {
                 border: none;
                 border-radius: 0;
             }
-            .ivu-form-item-error .ivu-input{
-                border: 1px solid #8090AF;
-                border-right: none;
+            .ivu-btn-default:active {
+                border: none;
             }
             .ivu-input{
                 border: 1px solid #8090AF;

@@ -66,9 +66,9 @@ const en = {
 const zh = {
     last: '最新价',
     up: '24h涨跌',
-    celling: '24h最高价',
-    floor: '24h最低价',
-    turnover: '24h成交量',
+    celling: '最高价',
+    floor: '最低价',
+    turnover: '24h量',
     stop: '止盈止损',
     transfer: '划转',
     option: '自选',

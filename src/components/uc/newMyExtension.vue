@@ -118,7 +118,7 @@
                         v-if="this.changeActive==0"
                     >
                         <Table
-                            :no-data-text="$t('common.nodata')"
+                            :no-data-text="$t('common.nodataa')"
                             stripe
                             :columns="tablePromoteFriends"
                             :data="dataPromoteFriends.content||[]"
@@ -141,7 +141,7 @@
                         v-else-if="this.changeActive==1"
                     >
                         <Table
-                            :no-data-text="$t('common.nodata')"
+                            :no-data-text="$t('common.nodataa')"
                             stripe
                             :columns="tablePromoteMoney"
                             :data="dataPromoteMoney||[]"

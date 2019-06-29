@@ -5,6 +5,7 @@
                 <router-link to="helplist">{{$t("footer.helpCenter")}}</router-link>
                 <span>></span>
                 <router-link :to="{path:'helplist',query:{cate:cate,cateTitle:cateTitle}}">{{cateTitle}}</router-link>
+                <span style="font-size:16px">{{$t("new.Detailss")}}</span>
             </div>
             <div class="main">
                 <!-- <div class="menu">
@@ -201,7 +202,7 @@ export default {
         .content {
             // border-top: 1px solid #f0f0f0;
             padding: 29px 29px 45px 29px;
-            background:#111530FF;
+            // background:#111530FF;
             margin-top:22px;
             // color:#8090AFFF !important;
             color: #8090AF !important;
@@ -216,7 +217,7 @@ export default {
 }
 .route-wrap {
     color: #fff;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     height:56px;
     line-height:56px;
     a {
