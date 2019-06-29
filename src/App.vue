@@ -11,7 +11,7 @@
                 <div class="time_download">
 
                     <div class="netLogo">
-                        <router-link to="/"><img style="width: 80%;" src="./assets/images/logo.png" alt=""></router-link>
+                        <router-link to="/"><img style="width: 100%;" src="./assets/images/logo.png" alt=""></router-link>
                     </div>
                     <div class="nav" :class="locale == 'en' ? 'en' : ''">
                         <!-- <router-link to="/">{{$t("header.index")}}</router-link> -->
@@ -28,7 +28,7 @@
                         <!--中英文切换-->
                         <div class="changelanguage">
                             <Dropdown @on-click="changelanguage">
-                                <a href="javascript:void(0)" style="height: 60px;display: flex;align-items: center;">
+                                <a href="javascript:void(0)" style="height: 50px;display: flex;align-items: center;">
                                     <!-- {{languageValue}} -->
                                     <img src="./assets/img/china.png" v-if="languageValue=='简体中文'" alt="">
                                     <img src="./assets/img/flag.png" v-else alt="">
@@ -57,7 +57,7 @@
                                  <Dropdown @on-click="goBi">
                                     <a href="javascript:void(0)">
                                         <span class="header-img">{{$t("uc.menuTitle.moneyManagement")}}</span>
-                                        <Icon type="md-arrow-dropdown" size="16" />
+                                        <Icon type="ios-arrow-down" size="6" style="margin-left:6px;"/>
                                     </a>
                                     <DropdownMenu slot="list">
                                         <!--个人资产-->
@@ -96,7 +96,7 @@
                                 <Dropdown>
                                     <a href="javascript:void(0)">
                                         <span class="header-img">{{strpo(member.username)}}</span>
-                                        <Icon type="md-arrow-dropdown" size="16" />
+                                        <Icon type="ios-arrow-down" size="6" style="margin-left:6px;"/>
                                     </a>
                                     <DropdownMenu slot="list">
                                         <div @click="logout">
@@ -122,7 +122,7 @@
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Dropdown>
-                                    <a href="javascript:void(0)" style="height: 60px;display: flex;align-items: center;">
+                                    <a href="javascript:void(0)" style="height: 50px;display: flex;align-items: center;">
                                         <img src="./assets/img/notice.png" alt="">
                                     </a>
                                 </Dropdown>
@@ -141,7 +141,7 @@
                         <!-- app二维码 -->
                         <div class="rightwrapper">
                             <poptip placement="bottom"  class="appdownload">
-                                <a href="javascript:;" style="font-size:14px;">{{$t("header.appdownlaod")}}
+                                <a href="javascript:;" style="font-size:7px;">{{$t("header.appdownlaod")}}
                                 </a>
                                 <div class="api" slot="content" style="width:90%;">
                                     <div class="ios">
@@ -645,13 +645,13 @@ export default {
 .page-view {
     header {
         width: 100%;
-        height: 60px;
-        line-height: 60px;
         position: fixed;
         z-index: 999;
         background-color: #11132C;
         transition: all .5s;
         .page-content {
+             height: 50px;
+            line-height: 50px;
             transition: all .5s;
             background-color: #11132C !important;
             .time_download {
@@ -659,7 +659,6 @@ export default {
                 overflow: hidden;
                 min-width: 1100px;
                 .netLogo {
-                    width: 40px;
                     float: left;
                         img {
                             vertical-align: middle;
@@ -671,12 +670,12 @@ export default {
                 }
                 .nav {
                     float: left;
-                    margin-left: 30px;
+                    margin-left: 42px;
                     a {
-                        font-size: 14px;
-                        color: #fff;
+                        font-size: 7px;
+                        color: #8090AF;
                         display: inline-block;
-                        margin-right:40px;
+                        margin-right:45px;
                         text-align: center;
                         // &:nth-child(5) {
                         //     padding-right: 19px;
@@ -692,13 +691,15 @@ export default {
                 }
                 .nav-header {
                     float: right;
+                    height:50px;
                     .isLoginWrapper {
                         float: right;
                         .login_register {
                             display: flex;;
                             a {
-                                color: #fff;
+                                color: #8090AF;
                                 margin: 0 20px 0 10px;
+                                font-size: 7px;
                                 .header-icon {
                                     margin-left: 15px;
                                 }
@@ -715,7 +716,7 @@ export default {
                             padding-right: 30px;
                             .ivu-poptip-rel {
                                 a {
-                                    color: #fff;
+                                    color: #8090AF;
                                 }
                                 i.ivu-icon.ivu-icon-arrow-down-b {
                                     margin-left: 5px;
@@ -747,7 +748,8 @@ export default {
                             float: right;
                         }
                         .ivu-dropdown-rel a {
-                            color: #fff;
+                            color: #8090AF;
+                            font-size:7px;
                         }
                         .ivu-select-dropdown {
                             background: #10122B;
@@ -1318,6 +1320,7 @@ body {
                     display: flex;
                     align-items: center;
                     margin-bottom:15px;
+                    font-size: 8px;
                     img {
                         margin:0px;
                     }
@@ -1412,20 +1415,22 @@ body {
                 }
                 .footer_info {
                     .footer_title {
-                        font-size: 15px;
+                        
                         height: 35px;
                     }
                     li {
                         color: #fff;
+
                         &:first-child {
                             span {
-                                font-size: 16px;
+                                font-size: 8px;
                                 display: block;
                             }
                         }
 
                         a {
                             line-height: 26px;
+                            font-size: 7px;
                             color: #8790a1;
                         }
                     }
@@ -1529,6 +1534,11 @@ body {
                         }
                     }
                     .isLogin {
+                        .mymsg{
+                            a{
+                                font-size:7px;
+                            }
+                        }
                         .ivu-dropdown {
                             display: inline-block;
                             .ivu-select-dropdown {
