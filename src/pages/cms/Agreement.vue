@@ -73,7 +73,7 @@
 .new_agreement{
     background:#0e0e28 !important;
     padding-top:60px;
-    padding-bottom: 50px;
+    padding-bottom: 80px;
     .content-wrap{
         border:0 !important;
     }
@@ -86,7 +86,7 @@
     }
    .content-wrap[data-v-2a3df2d0]{
         border:0 !important;
-        padding-bottom: 120px;
+        // padding-bottom: 120px;
     }
     .container{
         background:rgba(17,21,48,1) !important;
