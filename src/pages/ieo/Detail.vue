@@ -315,6 +315,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.ieo_detail_box .common[data-v-2300a631]{
+    color:#8090af;
+}
+.ieo_detail_box .common .ieoDetail .leftWrapper img[data-v-2300a631]{
+    width:305px !important;
+    height:195px !important;
+}
 
 
 .ieo_detail_box_ieo_detail_box1{
@@ -527,7 +534,7 @@ $lineColor: rgb(71, 100, 146);
                         .span2 {
                             margin-right: 22px;
                             color:#3399FFFF;
-                            font-size:12px;
+                            font-size:14px;
                         }
                         .span1 {
                             margin-left: 14px;
@@ -673,11 +680,11 @@ $lineColor: rgb(71, 100, 146);
 }
 
 .ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631] {
-    background:rgba(42,56,80,1) !important;
+    background:#8090af !important;
     // opacity: 0.5;
 }
 .ieo_detail_box .common .ieoDetail .progress .left_circle[data-v-2300a631]:before{
-    background:#2A3850;
+     background:#8090af !important;
 }
 .ieo_detail_box .common .ieoDetail .progress span[data-v-2300a631]{
     color:#8090AF;

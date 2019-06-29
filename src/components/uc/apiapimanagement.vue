@@ -30,21 +30,7 @@
 
             </Form>
             <div style="margin-left:60px; font-size:12px; color:#8090AF">{{$t('apiAdmin.Thekeybound')}}</div>
-            <Button
-              type="primary"
-              @click="codeVerify"
-              style="
-                width: 85%;
-                display:block;
-                margin-left:64px;
-                margin-top:17px;
-                margin-buttom:115px;
-                border-radius: 0;
-                height: 40px;
-               "
-            >
-              {{$t('apiAdmin.create')}}
-            </Button>
+            <Button type="primary" @click="codeVerify" style="width:85%; border-radius:0 !important;display:block;margin-left:64px; margin-top:17px;margin-buttom:115px;">{{$t('apiAdmin.create')}}</Button>
           </div>
 
       </Card>
@@ -54,7 +40,7 @@
       </Card>
     </div>
     <!--编辑API-->
-    <Modal v-model="editor" :title="$t('apiAdmin.edit')">
+    <Modal class="api_edit" v-model="editor" :title="$t('apiAdmin.edit')">
       <Form :model="editorFormItem" label-position="top">
         <FormItem :label="$t('apiAdmin.mark')">
           <Input v-model="editorFormItem.remark"></Input>
@@ -81,7 +67,8 @@
       </div>
     </Modal>
     <!--删除-->
-    <Modal
+    <!-- <Modal
+      class="edit_let-code"
       v-model="del"
       :title="$t('apiAdmin.delete')"
       @on-ok="onDel(id)"
@@ -90,15 +77,53 @@
       :cancel-text="$t('apiAdmin.cancel')"
     >
       <p>{{$t('apiAdmin.sureDelete')}}</p>
+    </Modal> -->
+
+
+       <!--删除-->
+     <Modal
+      class="edit_let-code edit_let_aa"
+      v-model="del"
+      :title="$t('apiAdmin.delete')"
+     
+    >
+      <p>{{$t('apiAdmin.sureDelete')}}</p>
+       <div slot="footer">
+          <!-- <Button
+            type="text"
+            size="large"
+            @click="verifyEditor=false"
+          >
+            {{ $t('common.cancel') }}
+          </Button> -->
+          <Button class="edit_let_buttom"
+            type="primary"
+            size="large"
+              @click="onDel(id)"
+              @on-cancel="del=false"
+              :ok-text="$t('apiAdmin.okText')"
+              :cancel-text="$t('apiAdmin.cancel')"
+          >
+            <!--确定-->
+            {{ $t('common.confirm') }}
+          </Button>
+        </div>
     </Modal>
+
+
+
+
+
+
+
+
+
     <!--秘钥-->
     <Modal
+      class="edit_let-code edit_let_aa"
       v-model="show"
       :title="$t('apiAdmin.access')"
-      @on-ok="show=false"
       :mask-closable="false"
-      :ok-text="$t('apiAdmin.okText')"
-      :cancel-text="$t('apiAdmin.cancel')"
     >
       <p class="screat">{{$t('apiAdmin.tips')}}</p>
       <p class="screat">
@@ -111,9 +136,55 @@
           class="blue"
         >{{$t('apiAdmin.copy')}}</span>
       </p>
+       <div slot="footer">
+          <Button class="edit_let_buttom"
+            type="primary"
+            size="large"
+              @click="show=false"
+              
+              :ok-text="$t('apiAdmin.okText')"
+              :cancel-text="$t('apiAdmin.cancel')"
+          >
+            <!--确定-->
+            {{ $t('common.confirm') }}
+          </Button>
+        </div>
     </Modal>
+
+
+    <!--秘钥-->
+    <!-- <Modal
+      class="edit_let-code"
+      v-model="show"
+      :title="$t('apiAdmin.access')"
+      @on-ok="show=false"
+      :mask-closable="false"
+      :ok-text="$t('apiAdmin.okText')"
+      :cancel-text="$t('apiAdmin.cancel')"
+    >
+      <p class="screat">{{$t('apiAdmin.tips')}}</p>
+      <p class="screat">
+        <span>{{screat}}</span>
+        <span
+          v-clipboard:copy="screat"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError"
+          class="blue"
+        >{{$t('apiAdmin.copy')}}</span>
+      </p>
+    </Modal> -->
+
+
+
+
+
+
+
+
+
+    
     <!--添加短信校验-->
-    <Modal v-model="verify" :title="$t('apiAdmin.edit')">
+    <Modal class="edit_let-code" v-model="verify" :title="$t('apiAdmin.edit')">
       <Form :model="formItem" label-position="top">
         <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
           <Input v-model="formItem.code" size="large">
@@ -127,15 +198,14 @@
         </FormItem>
       </Form>
       <div slot="footer">
-        <Button
+        <!-- <Button
           type="text"
           size="large"
           @click="verify=false"
         >
-          <!--取消-->
           {{ $t('common.cancel') }}
-        </Button>
-        <Button
+        </Button> -->
+        <Button class="edit_let_buttom"
           type="primary"
           size="large"
           @click="make"
@@ -147,7 +217,7 @@
     </Modal>
     <!--编辑短信校验-->
     <div class="let-code">
-      <Modal v-model="verifyEditor" :title="$t('apiAdmin.edit')">
+      <Modal class="edit_let-code" v-model="verifyEditor" :title="$t('apiAdmin.edit')">
         <Form :model="editorFormItem" label-position="top">
           <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
             <Input v-model="editorFormItem.code" size="large">
@@ -161,15 +231,14 @@
           </FormItem>
         </Form>
         <div slot="footer">
-          <Button
+          <!-- <Button
             type="text"
             size="large"
             @click="verifyEditor=false"
           >
-            <!--取消-->
             {{ $t('common.cancel') }}
-          </Button>
-          <Button
+          </Button> -->
+          <Button class="edit_let_buttom"
             type="primary"
             size="large"
             @click="okUpdate"
@@ -283,8 +352,8 @@ export default {
         // console.log(res);
         this.tableData = res.body.data;
 
-        console.log(this.formatTime(Date.parse(this.tableData[0].expireTime)),this.formatTime(Date.parse(this.tableData[0].createTime)));
-        console.log(Date.parse(this.tableData[0].expireTime)) - Date.parse(this.tableData[0].createTime);
+        // console.log(this.formatTime(Date.parse(this.tableData[0].expireTime)),this.formatTime(Date.parse(this.tableData[0].createTime)));
+        // console.log(Date.parse(this.tableData[0].expireTime)) - Date.parse(this.tableData[0].createTime);
         let time1 = Date.parse(this.tableData[0].expireTime) - Date.parse(this.tableData[0].createTime)
         this.dataTime = time1/24/60/60/1000
         console.log(time1/24/60/60/1000);
@@ -538,6 +607,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.api_edit{
+  background:#0e0e28;
+}
 .apimanagement{
   position:relative;
   background:#0e0e28;
@@ -572,6 +644,9 @@ export default {
 
       .add {
         width: 39%;
+        .ivu-input{
+          border-radius: 0 !important;
+        }
       }
       .prompt {
         margin-left: 25px;
@@ -602,11 +677,154 @@ export default {
 }
 
 }
-
+.apimanagement .main .content .content_header .prompt ul li[data-v-252430f8]{
+  font-size:14px !important;
+  color:#8090AF !important;
+}
 
 
 </style>
 <style lang="scss">
+.bcd .ivu-input{
+  border-radius: 0 !important;
+}
+.edit_let_aa{
+  .ivu-modal-body{
+    margin-left:38px !important;
+  }
+}
+.delete{
+  .ivu-modal-footer button:nth-child(1){
+    display:none;
+  }
+  .ivu-modal-body{
+    margin-left:38px;
+  }
+  .ivu-modal-content {
+        padding: 0 42px;
+        background: #111530;
+        border-radius: 0;
+        .ivu-modal-header {
+            border-bottom: 1px solid #2A3850;
+            height: 54px;
+            padding: 18px 0;
+            .ivu-modal-header-inner {
+                color: #fff;
+                text-align: left;
+                font-weight: 400;
+            }
+        }
+        .ivu-modal-footer {
+            display: none;
+        }
+        .ivu-modal-close .ivu-icon-ios-close {
+            color: #fff;
+        }
+
+        .ivu-modal-body {
+            padding: 26px 0 20px 0;
+        }
+    }
+}
+
+.edit_let-code{
+  .ivu-modal-body{
+    margin-top:30px;
+  }
+  .edit_let_buttom{
+    width:300px;
+    height:40px;
+    margin-left:66px;
+    margin-bottom: 44px;
+    border-radius: 0 !important;
+  }
+  .ivu-input-group-large{
+  border:1px solid rgba(128,144,175,1) !important;
+  border-radius: 0 !important;
+}
+.ivu-btn.disabled, .ivu-btn.disabled.active, .ivu-btn.disabled:active, .ivu-btn.disabled:focus, .ivu-btn.disabled:hover, .ivu-btn[disabled], .ivu-btn[disabled].active, .ivu-btn[disabled]:active, .ivu-btn[disabled]:focus, .ivu-btn[disabled]:hover, fieldset[disabled] .ivu-btn, fieldset[disabled] .ivu-btn.active, fieldset[disabled] .ivu-btn:active, fieldset[disabled] .ivu-btn:focus, fieldset[disabled] .ivu-btn:hover{
+  background-color:transparent;
+  border-color:transparent;
+}
+.ivu-input{
+ border:none !important;
+}
+.ivu-input-group .ivu-input{
+  border-right:1px solid rgba(128,144,175,1) !important;
+}
+.ivu-input-group-append, .ivu-input-group-prepend{
+  border-radius: 0 !important;
+  border:none !important
+}
+.ivu-modal-footer{
+  width:454px;
+  border-top:none !important;
+  margin-left:38px;
+  text-align:center;
+  margin-top:30px;
+}
+.ivu-modal-body{
+  padding:0 !important;
+}
+.ivu-input-group-append, .ivu-input-group-prepend{
+  background:transparent;
+}
+.ivu-input-group-large .ivu-input, .ivu-input-group-large>.ivu-input-group-append, .ivu-input-group-large>.ivu-input-group-prepend{
+  width:200px;
+  height:40px;
+}
+.ivu-form-item{
+  display:flex;
+  height:40px;
+  margin-top:30px;
+  margin-left:43px;
+}
+.ivu-form-label-top .ivu-form-item-label{
+  line-height:40px;
+  font-size:14px;
+  color:#8090AF;
+}
+.ivu-form-item-content{
+  width:300px;
+  margin-left:16px;
+  // border:1px solid rgba(128,144,175,1);
+  // border-radius: 0 !important
+}
+
+.ivu-input{
+  background:transparent !important;
+}
+.ivu-modal-content{
+  width:534px;
+  box-shadow:none !important;
+ background:rgba(17,21,48,1) !important;
+}
+.ivu-modal-header{
+  width:454px;
+  margin-left:38px;
+  padding:14px 0 !important;
+  border-bottom:1px solid rgba(42,56,80,1) !important;
+}
+.ivu-form-label-top .ivu-form-item-label{
+  font-size:14px;
+  margin-left:20px;
+  color:#8090AF;
+}
+.ivu-modal-close{
+  right:34px;
+}
+.ivu-modal-header p, .ivu-modal-header-inner{
+  color:#fff;
+  font-size:18px;
+}
+
+
+
+}
+
+
+
+
 .bcd .card3 .ivu-table-tbody .ivu-table-column-center .ivu-table-cell{
   text-align:right;
 }

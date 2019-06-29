@@ -38,10 +38,13 @@
     border-right: 0;
     overflow: hidden;
     margin-top: 22px;
-    .ivu-table-tip td{
-      text-align: center;
-      background: transparent;
-    }
+    .ivu-table-tip {
+      background: #191D3A !important;
+      td{
+        text-align: center;
+        background: #191D3A !important;
+      }
+    } 
 }
 .form.ivu-form-inline .ivu-form-item {
     display: inline-block;
@@ -58,7 +61,7 @@
 }
 
 .entrusthistory .ivu-table .ivu-table-tip td {
-    background: transparent;
+    background: #191D3A !important;
 }
 .table .ivu-table-cell-expand {
     color: #3399ff;
@@ -68,6 +71,10 @@
 }
 
 .clear_btn  {
+    color: #3399FF;
+}
+
+.form .clear_btn:hover {
     color: #3399FF;
 }
 // .form .clear_btn {
@@ -131,6 +138,9 @@
     }
     .ivu-select-selection:focus {
       box-shadow: none;
+    }
+    .ivu-select-placeholder {
+      color: #414d64;
     }
     .ivu-btn {
       border-radius: 0;
@@ -389,7 +399,7 @@
             </FormItem>
             <FormItem>
                 <Button
-                style="margin-left: 38px;margin-right:20px; "
+                style="margin-left: -10px;margin-right:45px; "
                 @click="handleClear"
                 class="clear_btn"
                 type="primary"

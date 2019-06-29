@@ -1944,6 +1944,10 @@ li {
     color: #F15057 !important;
 }
 
+.gray {
+    color: #2A3850 !important;
+}
+
 .brclearfix:after {
     content: "";
     display: block;

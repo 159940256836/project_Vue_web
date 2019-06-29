@@ -464,6 +464,7 @@ export default {
                 this.$http.post(this.host + '/uc/approve/update/bank', param).then(response => {
                   var resp = response.body;
                   if (resp.code == 0) {
+                    this.modal1 = false
                     this.$Message.success(this.$t('uc.account.save_success'));
                     this.getAccount()
                     this.choseItem = 0
@@ -475,6 +476,7 @@ export default {
                 this.$http.post(this.host + '/uc/approve/bind/bank', param).then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
+                        this.modal1 = false
                         this.$Message.success(this.$t('uc.account.save_success'));
                         this.getAccount()
                         this.choseItem = 0
@@ -496,6 +498,7 @@ export default {
                   this.$http.post(this.host + '/uc/approve/update/ali', param).then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
+                      this.modal2 = false
                       this.$Message.success(this.$t('uc.account.save_success'));
                       this.getAccount()
                       this.choseItem = 0
@@ -507,6 +510,7 @@ export default {
                   this.$http.post(this.host + '/uc/approve/bind/ali', param).then(response => {
                       var resp = response.body;
                       if (resp.code == 0) {
+                          this.modal2 = false
                           this.$Message.success(this.$t('uc.account.save_success'));
                           this.getAccount()
                           this.choseItem = 0
@@ -528,6 +532,7 @@ export default {
                 this.$http.post(this.host + '/uc/approve/update/wechat', param).then(response => {
                   var resp = response.body;
                   if (resp.code == 0) {
+                    this.modal3 = false
                     this.$Message.success(this.$t('uc.account.save_success'));
                     this.getAccount()
                     this.choseItem = 0
@@ -539,6 +544,7 @@ export default {
                 this.$http.post(this.host + '/uc/approve/bind/wechat', param).then(response => {
                     var resp = response.body;
                     if (resp.code == 0) {
+                        this.modal3 = false
                         this.$Message.success(this.$t('uc.account.save_success'));
                         this.getAccount()
                         this.choseItem = 0
@@ -594,26 +600,12 @@ export default {
 }
 </script>
 <style scoped>
-.account-box .account-in .account-item .account-detail {
-    padding: 30px 0;
-    background: white;
-    margin: 6px 0;
-}
-
-.account-box .account-in .account-item .account-detail .detail-list {
-    width: 40%;
-    width: 80%;
-    margin: 0 auto;
-}
-
-.account-box .account-in .account-item .account-detail .detail-list .input-control {
-    margin-bottom: 10px;
-    height: 45px;
-}
 
 .detail-list .input-control .ivu-input-group-prepend {
+    background: transparent;
     width: 63px;
 }
+
 
 .detail-list .input-control .ivu-input {
     height: 45px;
@@ -1061,6 +1053,30 @@ p.describe {
     }
 
     .ivu-select-dropdown li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+        background: transparent;
+    }
+
+    .ivu-btn:before {
+        background: transparent;
+    }
+    .defeat-ivu .ivu-input-group-append, 
+    .defeat-ivu .ivu-input-group-prepend {
+        background: transparent;
+    }
+
+    .ivu-input[disabled], fieldset[disabled] .ivu-input {
+        background: transparent;
+    }
+
+    .ivu-input {
+        background: transparent !important;
+    }
+
+    .ivu-btn-default {
+        border: 1px solid #8090af;
+    }
+
+    .ivu-btn-default:hover {
         background: transparent;
     }
 }

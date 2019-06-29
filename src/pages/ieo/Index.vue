@@ -11,7 +11,8 @@
                 </Tabs>
                 <div class="contentWrapper contentWrapper_content">
                     <template v-if="list.length == 0">
-                        <img src="../../assets/images/noData.png" alt="" style="width:15%;margin-top: 55px;">
+                          <div style="margin-top:150px; margin-bottom: 150px;">{{ $t("common.nodata") }}</div>
+                       
                     </template>
                     <!-- <template v-else>
 
@@ -122,6 +123,7 @@ export default {
 .common_speicial{
     padding-top:0 !important;
     background:#0e0e28 !important;
+   
 }
 .ieo_common{
     background: #0e0e28;

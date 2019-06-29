@@ -27,6 +27,7 @@ module.exports = {
     name: 'bdw--国际数字加密资产交易平台'
   },
   new: {
+    Detailss:'详情',
     Currenrtification: '当前等级认证',
     Currentasset: '当前资产总估值',
     Available: '可用',
@@ -70,6 +71,7 @@ module.exports = {
     expect: '敬请期待!',
     delete: '确定删除吗?',
     nodata: '暂无记录',
+    nodataa:'暂无记录，快去邀请好友',
     set: '设置',
     update: '修改',
     please: '请先',
@@ -1253,6 +1255,7 @@ module.exports = {
       upload_negative: '上传身份证反面照',
       upload_hand: '上传手持身份证照',
       save: '保 存',
+      confirm: '确认',
       reset: '重置',
       email: '邮箱',
       bindemail: '绑定邮箱',

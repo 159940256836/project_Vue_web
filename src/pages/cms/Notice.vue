@@ -44,6 +44,9 @@
 </template>
 <style lang="scss" scoped>
 // lhl
+.notice .main .list .item[data-v-5cc99902]{
+    color:#fff !important;
+}
 .announcement_notice{
      background:#0e0e28;
 }

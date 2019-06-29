@@ -35,6 +35,7 @@ module.exports = {
     expect: 'Look forward to expectation!',
     delete: 'Are you confirm to delete?',
     nodata: 'No Data',
+    nodataa:'No records, please invite friends',
     set: 'Set',
     update: 'Modify',
     please: 'Please',
@@ -42,6 +43,7 @@ module.exports = {
     confirm: 'confirm'
   },
   new: {
+    Detailss:'Details',
     Currenrtification: 'Current level certification',
     Currentasset: 'Current asset valuation',
     Available: 'Available',
@@ -1249,6 +1251,7 @@ module.exports = {
       upload_negative: 'Upload ID card reverse photo',
       upload_hand: 'Upload handheld ID photos',
       save: 'Save',
+      confirm: 'Confirm',
       reset: 'Reset',
       email: 'Email',
       bindemail: 'Bind email',
