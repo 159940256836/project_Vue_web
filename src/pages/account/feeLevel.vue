@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-rights">
+    <div class="nav-rights nav-bottom">
         <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.FeeGrade') }}</h2>
         
         <div class="rightarea">
@@ -32,6 +32,8 @@
             <div class="feelevelTop">
                 <h4>{{$t("leverDescPage._gradDes")}}</h4>
                 <Table :columns="columns" :data="allSelf"></Table>
+                <div class="cover-box-left"></div>
+                <div class="cover-box-right"></div>
             </div>
         </div>
     </div>
@@ -115,14 +117,14 @@ $color: #39f;
 .fee-top {
     ul {
         @extend %flex;
-        padding: 31px 0;
+        padding: 31px 35px;
         .myLevel {
             padding: 20px;
             border-radius: 50%;
             background-color: $color;
             color: #fff;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -139,6 +141,38 @@ $color: #39f;
         height: 18px;
         font-weight:400;
     }
+}
+
+.feelevelTop {
+    position: relative;
+    h4 {
+        padding-left: 35px;
+        font-weight:400;
+        font-size: 18px;
+    }
+    .cover-box-left,
+    .cover-box-right
+    {
+        height: 288px;
+        width: 35px;
+        background: #111530;
+        position: absolute;
+        z-index: 999;
+        bottom: 0;
+    }
+    .cover-box-left {
+        left: 0;       
+    }
+    .cover-box-right {
+        right: 0;
+    }
+}
+
+.nav-bottom {
+    .rightarea {
+        padding: 0 !important;
+    }
+    
 }
 
 </style>
@@ -195,6 +229,31 @@ $color: #39f;
         .ivu-table-header table,
         .ivu-table-body table {
             width: 100%;
+        }
+
+        .ivu-table {
+            .ivu-table-header {
+                tr{
+                    th:first-child {
+                        padding-left: 35px;
+                        .ivu-table-cell{
+                            text-align: left;
+                            padding-left: 0;
+                        }
+                    }
+                }
+            }
+            .ivu-table-tbody {
+                tr{
+                    td:first-child {
+                        padding-left: 35px;
+                        .ivu-table-cell{
+                            text-align: left;
+                            padding-left: 0;
+                        }
+                    }
+                }
+            }
         }
     }
 

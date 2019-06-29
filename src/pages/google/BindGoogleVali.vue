@@ -16,8 +16,8 @@
                 <img src="../../assets/images/goole_IOS.png" alt="">
                 <div>{{$t('openGoolePage._downloadIos')}}</div>
             </div>
-            <div class="qrflex">
-                  <div id="qrcode" style="border:1px solid #fff"></div>
+            <div class="qrflex" style="">
+                  <div id="qrcode2" style="border:1px solid #fff"></div>
             <div class="abstract">
                 <p>{{$t('openGoolePage._googleVerifyabs')}}</p>
                 <p>
@@ -44,7 +44,7 @@
     </div>
 </template>
 <script>
-import QRCode from 'qrcode2';
+import QRCode2 from 'qrcode2';
 // import { minHeightMinx } from "../../minxs/minxs.js"
 export default {
     // mixins: [minHeightMinx],
@@ -74,7 +74,7 @@ export default {
             }
             this.$nextTick(() => {
                 const link = this.data.link;
-                new QRCode(document.getElementById("qrcode"), {
+                new QRCode2(document.getElementById("qrcode2"), {
                     text: link,
                     width: 128,
                     height: 128,
@@ -94,6 +94,7 @@ export default {
             return this.$http.get(this.host + `/uc/google/sendgoogle`).then(res => {
                 const resp = res.body;
                 if (resp.code == 0) {
+                    console.log(resp)
                     return new Promise((resolve, reject) => {
                         resolve(resp.data)
                     })
@@ -207,7 +208,7 @@ $color: #2d8cf0;
             border-radius: 3px;
         }
     }
-    #qrcode {
+    #qrcode2 {
         width: 80px;
         line-height: 2;
     }
@@ -267,6 +268,9 @@ $color: #2d8cf0;
     .ivu-btn {
         border-radius: 0;
         
+    }
+    .ivu-input-group-append {
+        padding: 0;
     }
 }
 
