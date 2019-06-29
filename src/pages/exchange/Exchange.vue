@@ -89,7 +89,16 @@
                         </span>
                     </div>
                     <div class="item">
-                        <span class="text">{{$t('coin.last')}}</span>
+                        <!--<span class="text">{{$t('coin.up')}}</span>-->
+                        <span
+                            class="num"
+                            :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                        >
+                            {{currentCoin.rose?currentCoin.rose:'---'}}
+                        </span>
+                    </div>
+                    <div class="item">
+                        <!--<span class="text">{{$t('coin.last')}}</span>-->
                         <span
                             class="num"
                             :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
@@ -104,40 +113,33 @@
                         >
                             ---
                         </span>
+                        ≈
                         <span class="price-cny">
                             ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
                         </span>
                     </div>
+
                     <div class="item">
-                        <span class="text">{{$t('coin.up')}}</span>
-                        <span
-                            class="num"
-                            :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
-                        >
-                            {{currentCoin.rose?currentCoin.rose:'---'}}
-                        </span>
-                    </div>
-                    <div class="item">
-                        <span class="text">{{$t('coin.celling')}}</span>
-                        <span class="num" v-if="currentCoin.high">
+                        <span class="text" style="color: #8090af;">{{$t('coin.celling')}}</span>
+                        <span class="num" style="color: #8090af;" v-if="currentCoin.high">
                             {{currentCoin.high | toFixed(baseCoinScale)}}
                         </span>
                         <span class="num" v-else>---</span>
                     </div>
                     <div class="item">
-                        <span class="text">{{$t('coin.floor')}}</span>
-                        <span class="num" v-if="currentCoin.low >= 0">
+                        <span class="text" style="color: #8090af;">{{$t('coin.floor')}}</span>
+                        <span class="num" style="color: #8090af;" v-if="currentCoin.low >= 0">
                             {{currentCoin.low | toFixed(baseCoinScale)}}
                         </span>
                         <span class="num" v-else>---</span>
                     </div>
                     <div class="item">
-                        <span class="text">{{$t('coin.turnover')}}</span>
-                        <span class="num">
+                        <span class="text" style="color: #8090af;">{{$t('coin.turnover')}}</span>
+                        <span class="num" style="color: #8090af;">
                             {{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}
                         </span>
                     </div>
-                    <!--<div class="item" @click="changeSkin">
+                    <!--<div class="item" @click="changeSkin" style="float: right">
                         <img :src="skin == 'night' ? night : day" alt="">
                     </div>-->
                 </div>
@@ -591,7 +593,8 @@ $night-color: #fff;
     .main {
         display: flex;
         .left {
-            flex: 0 0 24%;
+            width: 410px;
+            /*flex: 0 0 24%;*/
             background-color: #0E0E28;
             .handlers {
                 text-align: right;
@@ -610,6 +613,7 @@ $night-color: #fff;
                     line-height: 20px;
                     padding: 0 7px;
                     border-radius: 5px;
+                    color: #8090af;
                     &.active {
                         background: #3399ff;
                         color: #fff;
@@ -659,15 +663,16 @@ $night-color: #fff;
                     font-size: 14px;
                     margin-left: 10px;
                     font-weight: 400;
-                    color: #8090AF;
+                    color: #fff;
                 }
             }
         }
         .center {
-            flex: 0 0 50%;
+            width: 1060px;
+            /*flex: 0 0 50%;*/
             margin-right: 10px;
             .imgtable {
-                height: 480px;
+                height: 490px;
                 position: relative;
                 overflow: hidden;
                 margin-bottom: 10px;
@@ -703,9 +708,14 @@ $night-color: #fff;
                         display: flex;
                         li {
                             font-size: 16px;
-                            padding: 0 20px;
+                            min-width: 35px;
                             cursor: pointer;
                             border-bottom: 2px solid transparent;
+                            font-weight: 600;
+                            &:first-child {
+                                margin-left: 40px;
+                            }
+                            margin-right: 50px;
                             &.active {
                                 background-color: #13152F;
                                 border-bottom: 2px solid #3399ff;
@@ -748,7 +758,7 @@ $night-color: #fff;
                 .trade_panel .panel .hd {
                     border-bottom: none;
                     b {
-                        color: #fff;
+                        color: #8090af;
                     }
                     a {
                         color: #3399ff;
@@ -757,12 +767,14 @@ $night-color: #fff;
             }
         }
         .right {
-            flex: 0 0 24%;
+            width: 410px;
+            /*flex: 0 0 24%;*/
             margin-right: 10px;
             .coin-menu {
-                height: 531px;
+                height: 540px;
                 background-color: #0E0E28;
                 margin-bottom: 10px;
+                overflow: hidden;
                 /*border-radius: 6px;*/
             }
         }
@@ -773,16 +785,20 @@ $night-color: #fff;
         padding: 0 20px;
         background: #13152F;
         display: flex;
-        justify-content: space-between;
         /*margin-bottom: 20px;*/
         align-items: center;
         .item {
+            min-width: 30px;
+            margin-left: 15px;
+            &:first-child {
+                margin-left: 0;
+            }
             .price-cny {
                 font-size: 12px;
-                color: #999;
+                color: #fff;
             }
             .coin {
-                font-size: 20px;
+                font-size: 18px;
             }
             .text {
                 width: 100%;
@@ -807,18 +823,18 @@ $night-color: #fff;
         }
     }
     .order {
-        min-height: 227px;
         margin-top: 20px;
         .order-handler {
             font-size: 0;
             > .order-list {
-                padding: 0 20px;
+                min-width: 50px;
                 font-size: 14px;
                 display: inline-block;
                 color: #fff;
                 cursor: pointer;
                 line-height: 40px;
                 background-color: transparent;
+                margin-right: 50px;
                 &.active {
                     color: #3399ff;
                     border-bottom: 2px solid #3399ff;
@@ -826,6 +842,7 @@ $night-color: #fff;
                     border-radius: 0;
                 }
                 &:first-child {
+                    margin-left: 30px;
                     border-top-left-radius: 6px;
                 }
                 &:last-child {
@@ -910,7 +927,8 @@ $night-color: #fff;
             color: #333 !important;
         }
         .right {
-            flex: 0 0 24%;
+            width: 410px;
+            /*flex: 0 0 24%;*/
             .coin-menu {
                 height: 480px;
                 background-color: #fff;
@@ -2169,7 +2187,7 @@ export default {
                     'paneProperties.vertGridProperties.style': 0,
                     "paneProperties.vertGridProperties.color": "rgba(255,255,255,.04)",
                     "paneProperties.horzGridProperties.color": "rgba(255,255,255,.04)",
-                    "scalesProperties.textColor": "#61688A",
+                    "scalesProperties.textColor": "#8090AF", // 开高低收
                     "mainSeriesProperties.candleStyle.upColor": "#00b275",
                     "mainSeriesProperties.candleStyle.downColor": "#f15057",
                     "mainSeriesProperties.candleStyle.drawBorder": false,
@@ -2181,8 +2199,8 @@ export default {
                     "mainSeriesProperties.areaStyle.linecolor": "#9194a4",
                     "scalesProperties.lineColor": "#8090AF", // xy刻度线色值
                     // "paneProperties.crossHairProperties.color": "#00b275", // 十字光标颜色
-          'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
-          'mainSeriesProperties.candleStyle.borderDownColor': '#f15057' // 开高低收卖出标线
+                    'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
+                    'mainSeriesProperties.candleStyle.borderDownColor': '#f15057', // 开高低收卖出标线
         },
                 // 柱状图样式
         studies_overrides: {

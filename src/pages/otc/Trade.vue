@@ -7,8 +7,15 @@
     <!--<a href="/#/identbusiness">{{$t("otc.applymerchant")}}&gt;&gt;</a>-->
     <!-- </section> -->
     <section class="list-content">
-      <Tabs :value="tabPage" v-model="tabPage">
-        <TabPane :label="$t('otc.buyin')" name="buy">
+      <Tabs
+        :value="tabPage"
+        v-model="tabPage"
+        :animated="false"
+      >
+        <TabPane
+          :label="$t('otc.buyin')"
+          name="buy"
+        >
           <div class="table-responsive list-table">
             <Table
               :no-data-text="$t('common.nodata')"
