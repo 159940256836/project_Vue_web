@@ -162,7 +162,7 @@
                                         {{$t('uc.safe.GoogleAuthenticationAbs')}}
                                         <a href="">{{$t('uc.safe.userguide')}}</a>
                                     </p>
-                                    <div class="google-info">
+                                    <div class="google-info right-side">
                                         <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="modal7 = true">{{googleAuthentication}}</span>
                                         <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                                             <span slot="open"></span>
@@ -1801,6 +1801,8 @@ button.ivu-btn.ivu-btn-primary {
         top: 0;
     }
 
+
+    //弹窗样式
     .ivu-modal-content {
         padding: 0 42px;
         background: #111530;
@@ -1826,6 +1828,7 @@ button.ivu-btn.ivu-btn-primary {
             padding: 26px 0 20px 0;
         }
     }
+
     .nav-rights {
         .ivu-input {
             background: transparent;
@@ -1926,6 +1929,7 @@ button.ivu-btn.ivu-btn-primary {
             .ivu-btn-default {
                 color: #3399FF;
                 background: transparent;
+                border: none;
                 border-radius: 0;
             }
             .ivu-form-item-error .ivu-input{
