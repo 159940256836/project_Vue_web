@@ -124,6 +124,7 @@
         name="tab1"
         v-model="activeName"
         @on-click="changeTab"
+        :animated="false"
       >
         <TabPane
           :label="$t('uc.finance.personalassets')"

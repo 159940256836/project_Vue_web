@@ -353,6 +353,47 @@ export default {
 }
 </script>
 <style lang="scss">
+  .ivu-btn-default {
+    background: #111530;
+    color: #8090af;
+    border-radius: 0;
+    &:hover {
+      background: #111530;
+      color: #8090af;
+    }
+  }
+  .ivu-btn-primary {
+    color: #fff;
+    border-radius: 0;
+  }
+  .ivu-input-group-append {
+    background: #111530;
+    border-radius: 0;
+    border: 1px solid #8090AF;
+  }
+  .ivu-modal-content {
+    background: #111530;
+    .ivu-modal-header {
+      border-bottom: 1px solid #8090AF;
+      .ivu-modal-header-inner {
+        color: #8090AF;
+      }
+    }
+    .ivu-input-wrapper {
+      .ivu-input[disabled] {
+        border-radius: 0;
+        background: #111530;
+        border: 1px solid #58698A;
+      }
+    }
+    .ivu-input-group {
+      .ivu-input {
+        background: #111530;
+        border: 1px solid #58698A;
+        border-radius: 0;
+      }
+    }
+  }
 .order-table{
   .nav-right {
     .ivu-btn {
@@ -399,6 +440,9 @@ export default {
       color:#2d8cf0 !important;
     }
     .rightarea.bill_box {
+      .ivu-table {
+        margin-top: 16px;
+      }
       .ivu-table-body {
         td {
           .ivu-table-cell {
@@ -464,6 +508,7 @@ export default {
         width: 30px;
         height: 16px;
         border: 0;
+        margin-top: 3px;
         &:after {
           width: 14px;
           height: 14px;
