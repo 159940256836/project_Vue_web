@@ -193,6 +193,7 @@ export default {
         
     }
     .ivu-form-item-label {
+        vertical-align: none;
         width: 80px;
         color: #fff;
     }
@@ -206,6 +207,10 @@ export default {
     }
     
     .defeat-ivu {
+        .ivu-form-item-label {
+            vertical-align: top;
+            margin-top: 10px;
+        }
         .ivu-form-item-error .ivu-input{
             border: 1px solid #8090AF;
             border-right: none;
