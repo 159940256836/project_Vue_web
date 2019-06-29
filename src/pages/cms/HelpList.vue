@@ -23,7 +23,8 @@
                 <!-- <router-link class="item" v-for="(item,index) in list" :key="index" :to="{path:'helpdetail',query:{id:item.id}}"></router-link> -->
             </div>
             <div v-show="list.length == 0" style="text-align:center">
-                <img src="../../assets/images/noData.png" alt="" style="width:15%;margin-top: 55px;">
+                <div style="margin-top:175px;">{{ $t("common.nodata") }}</div>
+                <!-- <img src="../../assets/images/noData.png" alt="" style="width:15%;margin-top: 55px;"> -->
             </div>
             
         </div>
@@ -37,10 +38,16 @@
     </div>
 </template>
 <style lang="scss" scoped>
+.list .item[data-v-9dbbb4ae]{
+    color:#fff !important;
+}
 // lhl
 .select_list{
     // background:#2d8cf0;
     color:#fff;
+}
+.select_list:hover{
+    color:#57a3f3;
 }
 .select_list.on{
     color: #2d8cf0;
@@ -100,7 +107,8 @@
     height: 100%;
     // margin-top:-210px;
     min-height: 389px;
-    background:rgba(17,21,48,1);
+    // background:rgba(17,21,48,1);
+    background:#0e0e28;
     border:1px solid rgba(17,21,48,1);
     > h1 {
         font-size: 32px;
@@ -112,7 +120,7 @@
 }
 .list {
     font-size: 14px;
-    margin-top:15px;
+    margin-top:22px;
     .item {
         color: #8090AFFF;
         display: block;
