@@ -22,10 +22,10 @@
                                 </p>
                                 <!-- 银行卡号 -->
                                 <p class="right-side" v-if="user.bankVerified==1">
-                                    <a class="btn"  @click="modal1 = true">{{$t('uc.account.modify')}}</a>
+                                    <a class="btn"  @click="openModal(function(){modal1 = true})">{{$t('uc.account.modify')}}</a>
                                 </p>
                                 <p class="right-side" v-else>
-                                    <a class="btn"  @click="modal1 = true">{{$t('uc.account.bind')}}</a>
+                                    <a class="btn"  @click="openModal(function(){modal1 = true})">{{$t('uc.account.bind')}}</a>
                                 </p>                                
                                 
                             </div>
@@ -41,10 +41,10 @@
                                   {{$t('uc.account.zfbaccounttip')}}
                                 </p>
                                 <p class="right-side" v-if="user.aliVerified==1">
-                                    <a class="btn"  @click="modal2 = true">{{$t('uc.account.modify')}}</a>
+                                    <a class="btn"  @click="openModal(function(){modal2 = true})">{{$t('uc.account.modify')}}</a>
                                 </p>
                                 <p class="right-side" v-else>
-                                    <a class="btn"  @click="modal2 = true">{{$t('uc.account.bind')}}</a>
+                                    <a class="btn"  @click="openModal(function(){modal2 = true})">{{$t('uc.account.bind')}}</a>
                                 </p>                              
                             </div>
                         </div>
@@ -59,10 +59,10 @@
                                   {{$t('uc.account.wxaccounttip')}}
                                 </p>
                                 <p class="right-side" v-if="user.wechatVerified==1">
-                                    <a class="btn"  @click="modal3 = true">{{$t('uc.account.modify')}}</a>
+                                    <a class="btn"  @click="openModal(function(){modal3 = true})">{{$t('uc.account.modify')}}</a>
                                 </p>
                                 <p class="right-side" v-else>
-                                    <a class="btn"  @click="modal3 = true">{{$t('uc.account.bind')}}</a>
+                                    <a class="btn"  @click="openModal(function(){modal3 = true})">{{$t('uc.account.bind')}}</a>
                                 </p>
                                                                
                             </div>
@@ -77,6 +77,7 @@
                 v-model="modal1"
                 :styles="{top: '100px'}"
                 width="534"
+                class="popups-modal"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate1" :model="formValidate1" :rules="ruleValidate" :label-width="100">
@@ -119,6 +120,7 @@
                 v-model="modal2"
                 :styles="{top: '100px'}"
                 width="750"
+                class="popups-modal"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="115">
@@ -170,6 +172,7 @@
                 v-model="modal3"
                 :styles="{top: '100px'}"
                 width="750"
+                class="popups-modal"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="115">
@@ -431,6 +434,13 @@ export default {
         }
     },
     methods: {
+        openModal(callback) {
+            console.log(this.user.realName)
+            if(!this.user.realName) {
+                return this.$Message.error(this.$t('otc.validate'))
+            }
+            callback()
+        },     
         aliHandleSuccess (res, file,fileList) {
           this.$refs.upload1.fileList=[fileList[fileList.length-1]];
           this.aliImg=this.aliPreview=res.data;

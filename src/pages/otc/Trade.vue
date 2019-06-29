@@ -10,7 +10,6 @@
       <Tabs
         :value="tabPage"
         v-model="tabPage"
-        :animated="false"
       >
         <TabPane
           :label="$t('otc.buyin')"
@@ -97,9 +96,18 @@
     color: #0d214e;
     .ivu-tabs {
       .ivu-tabs-bar {
+        .ivu-tabs-nav {
+          .ivu-tabs-tab {
+            height: 55px;
+            line-height: 55px;
+            padding: 0;
+          }
+        }
+
         .ivu-tabs-nav-container {
           .ivu-tabs-nav-wrap {
             .ivu-tabs-nav-scroll {
+
               .ivu-tabs-ink-bar.ivu-tabs-ink-bar-animated {
                 background: #3399ff;
               }
