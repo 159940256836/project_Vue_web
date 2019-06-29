@@ -34,7 +34,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="inner-box deposit-address">
+                            <div class="inner-box deposit-address" style="margin-left: 60px;">
                                 <span class="describe">
                                     {{$t('uc.finance.withdraw.remark')}}：
                                 </span>
@@ -129,8 +129,15 @@
                     </FormItem>
                 </Form>
             </div>
-            <div slot="footer" style="width: 50%;margin-left:25%;">
-                <Button type="primary" size="large" long @click="handleSubmit('formValidateAddr')">{{$t('uc.finance.withdraw.save')}}</Button>
+            <div slot="footer" style="width: 68%;margin-left:23%;">
+                <Button
+                    type="primary"
+                    size="large"
+                    long
+                    @click="handleSubmit('formValidateAddr')"
+                >
+                    {{$t('uc.finance.withdraw.save')}}
+                </Button>
             </div>
         </Modal>
     </div>
@@ -524,9 +531,6 @@ span.describe {
 /*  padding: 0 30px;*/
 /*}*/
 /* common */
-.order-table {
-  margin-top: 20px;
-}
 
 .content-wrap {
   background: #f5f5f5;
@@ -540,6 +544,9 @@ span.describe {
 </style>
 <style lang="scss">
 .ivu-modal-content {
+    .ivu-form .ivu-form-item-label {
+        color: #8090AF;
+    }
     background: #111530;
     .ivu-modal-confirm-head {
         text-align: left;
@@ -560,10 +567,36 @@ span.describe {
         }
     }
     .ivu-btn-text {
+        border-radius: 0;
         color: #8090AF;
-        border: 1px solid #8090AF;
+        border: 1px solid #2A3850;
+        padding: 4px 20px;
         &:hover {
             background: transparent;
+        }
+    }
+    .ivu-btn-primary {
+        padding: 4px 20px;
+    }
+
+    .ivu-modal-footer {
+        border-top: 1px solid #2A3850 !important;
+    }
+    .ivu-modal-header {
+        border-bottom: 1px solid #58698A;
+        p {
+            color: #8090af;
+        }
+    }
+    .ivu-form-item-content {
+        .ivu-input-wrapper {
+            .ivu-input-default {
+                height: 40px;
+                border-radius: 0;
+                width: 100%;
+                background: #111530;
+                border: 1px solid #8090AF;
+            }
         }
     }
 }
@@ -686,14 +719,26 @@ span.describe {
         }
     }
     .ivu-table {
-        td {
-            &:first-child {
-                text-align: center;
-            }
-            &:last-child {
-                text-align: center;
+        .ivu-table-row {
+            td {
+                &:first-child {
+                    text-align: left;
+                    padding-left: 10px;
+                }
+                &:last-child {
+                    text-align: right;
+                    padding-right: 10px;
+                }
+                &:nth-child(2) {
+                    text-align: left;
+                    padding-left: 50px;
+                }
+                &:nth-child(3){
+                    text-align: center;
+                }
             }
         }
+
         .ivu-table-header {
             th {
                 height: 50px;
@@ -707,6 +752,13 @@ span.describe {
                 &:last-child {
                     text-align: right;
                     padding-right: 10px;
+                }
+                &:nth-child(2) {
+                    text-align: left;
+                    padding-left: 50px;
+                }
+                &:nth-child(3){
+                    text-align: center;
                 }
             }
         }

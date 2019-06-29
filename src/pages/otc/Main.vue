@@ -122,14 +122,16 @@
             <Menu
               ref="navMenu"
               mode="horizontal"
-              width="auto"
               :active-name="activeMenuName"
               @on-select="menuSelected"
               class='tradelist'
             >
               <MenuGroup>
                 <template v-for="(coin, index) in coins">
-                  <MenuItem :name="'coin-' + index">
+                  <MenuItem
+                    :name="'coin-' + index"
+                    :class = "active1 == index ? 'addclass1' : '' "
+                  >
                     {{ coin.unit }}
                   </MenuItem>
                 </template>
@@ -178,14 +180,18 @@
 
 <style scoped lang="scss">
 .content-wraps {
-  /*background-color: #fff;*/
+  .addclass1 {
+    height: 35px;
+    border-bottom: 2px solid #3399ff !important;
+    color: #3399ff !important;
+  }
   .containers {
     width: 100%;
     padding-top: 39px;
     /*margin: 20px 0;*/
     .fiat-login {
       background: #0e0e28;
-      padding-top: 50px;
+      padding-top: 20px;
       .fiat-login-main {
         width: 1200px;
         height: 180px;
@@ -336,7 +342,7 @@
     .fiat-main {
       width: 1200px;
       margin: 0 auto;
-      padding: 25px 0;
+      padding: 26px 0;
       .content {
         width: 100%;
         /*margin: 20px auto;*/
@@ -397,8 +403,8 @@
         border-bottom: none;
       }
       .ivu-tabs-nav-scroll {
-        margin-top: 20px;
-        height: 50px;
+        margin-top: 26px;
+        height: 55px;
         background: #191D3A;
       }
       .ivu-menu-light {
@@ -406,7 +412,7 @@
         background: #191D3A;
       }
       .ivu-tabs-nav .ivu-tabs-tab {
-        line-height: 34px;
+        line-height: 38px;
         color: #fff;
       }
       .ivu-menu-horizontal .ivu-menu-item {
@@ -423,9 +429,14 @@
             color: #fff;
             &:hover {
               color: #3399ff;
-              border-bottom: 0 !important;
             }
           }
+          /*li.ivu-menu-item {*/
+          /*  &:first-child {*/
+          /*    height: 35px;*/
+          /*    border-bottom: 2px solid #3399ff;*/
+          /*  }*/
+          /*}*/
           li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
             color: #3399ff;
             border-bottom: 2px solid #3399ff;
@@ -492,10 +503,11 @@ export default {
   data() {
     return {
       coins: [],
-      activeMenuName: "coin-1",
+      activeMenuName: "BC",
       //币种列表
       coinList: [],
       active : 0, // 默认样式
+      active1 : 0, // 默认样式
       coinName: '', // 币种
       coinName1: '', // 默认币种
       currency: {}, // 币种详情
@@ -571,7 +583,8 @@ export default {
         this.$Message.warning(this.$t('common.logintip'));
       }
     },
-    menuSelected(menuName) {
+    menuSelected(menuName, index) {
+      this.active1 = index
       if (menuName.startsWith("coin")) {
         var coin = this.coins[menuName.split("-")[1]];
         this.$router.push("/otc/trade/" + coin.unit);

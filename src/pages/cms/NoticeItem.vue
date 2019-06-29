@@ -25,6 +25,12 @@
             </div>
           </div> -->
         <div class="content">
+            <div style="display:flex; font-size:16px; color:#fff;margin-bottom:40px;">
+              <div>公告中心</div>
+              <div style="margin-left:5px"> ></div>
+              <div style="margin-left:5px">详情</div>
+            </div>
+
             <h4 class="title">{{data.title}}</h4>
             <div class="content_box" v-html="data.content"></div>
         </div>
@@ -187,7 +193,7 @@ export default {
     }
     .content {
       .content_box{
-        background:rgba(17,21,48,1) !important;
+        // background:rgba(17,21,48,1) !important;
         margin-top:22px;
         padding:28px 28px 40px 30px;
         color:#8090AF;

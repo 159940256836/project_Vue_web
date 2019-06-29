@@ -194,7 +194,7 @@
                                 </p>
                                 <p class="acb-p2">
                                     • {{$t('uc.finance.withdraw.msg3')}}：{{currentCoin.minAmount}}{{$t('uc.finance.withdraw.msg4')}}。<br>
-                                    • {{$t('uc.finance.withdraw.msg5')}}<br>
+                                    • {{$t('uc.finance.withdraw.msg5')}}。<br>
                                     • {{$t('uc.finance.withdraw.msg6')}}
                                 </p>
                             </div>
@@ -288,14 +288,14 @@
         </Form>
       <div slot="footer">
         <span
-            style="margin-right:50px"
+            class="footer-btn-c"
             @click="cancel"
         >
             <!--取消-->
             {{$t('common.cancel')}}
         </span>
         <span
-            style="background:#3399ff;color:#fff;width:80px;border-radius:30px;display:inline-block;text-align:center;height:30px;line-height: 30px;"
+            class="footer-btn-q"
             @click="ok"
         >
             <!--确定-->
@@ -714,6 +714,12 @@ export default {
                 &:last-child {
                     text-align: center;
                 }
+                &:nth-child(2),
+                &:nth-child(3),
+                &:nth-child(4),
+                &:nth-child(5) {
+                    text-align: center;
+                }
             }
             .ivu-table-header {
                 th {
@@ -729,8 +735,17 @@ export default {
                         text-align: right;
                         padding-right: 10px;
                     }
+                    &:nth-child(2),
+                    &:nth-child(3),
+                    &:nth-child(4),
+                    &:nth-child(5) {
+                        text-align: center;
+                    }
                 }
             }
+        }
+        .ivu-input[disabled]:hover {
+            border-color: #58698A;
         }
         .ivu-input[disabled],
         fieldset[disabled] .ivu-input {
@@ -758,8 +773,46 @@ export default {
 </style>
 
 <style scoped lang="scss">
+    #sendCode {
+        position: absolute;
+        border: none;
+        background: none;
+        top: 10px;
+        outline: none;
+        right: 0;
+        width: 30%;
+        color: #3399ff;
+        cursor: pointer;
+        height: 20px;
+        line-height: 20px;
+        border-left: 1px solid #dddee1;
+    }
+    .footer-btn-c {
+        margin-right:50px;
+        color:#fff;
+        width:80px;
+        border-radius:0;
+        display:inline-block;
+        text-align:center;
+        height:30px;
+        line-height: 30px;
+        cursor: pointer;
+        border: 1px solid #2A3850;
+    }
+    .footer-btn-q {
+        background:#3399ff;
+        color:#fff;
+        width:80px;
+        border-radius:0;
+        display:inline-block;
+        text-align:center;
+        height:30px;
+        line-height: 30px;
+        cursor: pointer;
+    }
     .withdraw {
-    .nav-right {
+
+        .nav-right {
         height: auto;
         overflow: hidden;
         display: block;
@@ -774,6 +827,7 @@ export default {
                 border-bottom: 1px solid #2A3850;
                 margin-bottom: 35px;
                 padding-left: 10px;
+                font-size: 14px;
             }
             .operationform-from {
                 margin: 0 240px 60px;
@@ -803,20 +857,7 @@ export default {
                 }
             }
         }
-        #sendCode {
-            position: absolute;
-            border: none;
-            background: none;
-            top: 10px;
-            outline: none;
-            right: 0;
-            width: 30%;
-            color: #3399ff;
-            cursor: pointer;
-            height: 20px;
-            line-height: 20px;
-            border-left: 1px solid #dddee1;
-        }
+
         a {
           display: inline-block;
           color: #3399ff;
@@ -830,7 +871,7 @@ export default {
           margin-right: 20px;
         }
       }
-      .action-box {
+        .action-box {
         .form-group-container {
           .form-group.form-amount {
             .input-group .ivu-poptip {
@@ -926,7 +967,7 @@ export default {
     }
 
     .acb-p1 {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         line-height: 50px;
         color: #fff;
@@ -1250,7 +1291,7 @@ export default {
         border: 0;
     }
     #pages {
-        margin: 10px;
+        margin: 10px 10px 25px;
         overflow: hidden;
     }
     #pages .ivu-page li.ivu-page-item-active {
@@ -1313,7 +1354,7 @@ export default {
             background: #111530;
             width: 270px;
             line-height: 35px;
-            border: 1px solid #2A3850;
+            border: 1px solid #58698A;
             border-radius: 0;
         }
     }
@@ -1484,13 +1525,13 @@ export default {
         height: 35px;
         line-height: 35px;
         &:hover {
-            border-color: #3399ff;
+            border-color: #58698A;
         }
         .ivu-select-placeholder,
         .ivu-select-selected-value {
             height: 35px;
             line-height: 35px;
-            color: #8090AF;
+            color: #fff;
         }
     }
     .ivu-select-item-selected {
@@ -1503,6 +1544,7 @@ export default {
         border-radius: 0;
         background: transparent;
         border-color: #58698A;
+        color: #fff;
     }
 }
 </style>

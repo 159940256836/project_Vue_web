@@ -5,7 +5,6 @@
                 <span>{{$t('pointPage.giftTime')}}：</span>
                 <DatePicker
                     type="daterange"
-                    :placeholder="$t('pointPage.enterTime')"
                     style="width: 266px"
                     v-model="rangeDate"
                     :editable="false"
@@ -172,7 +171,6 @@ export default {
                 }
             }
             .blc-table {
-                margin-top: 20px;
                 .page-wrap {
                     float: right;
                     margin-top: 20px;
