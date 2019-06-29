@@ -36,7 +36,9 @@
       </Card>
       <Card  :bordered="false" class="content card3">
         <p slot="title">{{$t('apiAdmin.myApiKey')}}</p>
+  
         <Table :columns="myColumns" :data="tableData" :no-data-text="$t('common.nodata')"></Table>
+        
       </Card>
     </div>
     <!--编辑API-->
@@ -564,10 +566,20 @@ export default {
         render: (h, params) => {
           return [
             h(
-              "Button",
+              "span",
               {
                 props: {
                   type: "primary"
+                },
+                 style: {
+                  display:"inline-block",
+                  height:"30px",
+                  // background:"#3399ff",
+                  color:"#fff",
+                  width:'50px',
+                  lineHeight:"30px",
+                  textAlign:"center",
+
                 },
                 on: {
                   click: () => {
@@ -580,13 +592,21 @@ export default {
               this.$t("apiAdmin.edit")
             ),
             h(
-              "Button",
+              "span",
               {
                 props: {
                   type: "error"
                 },
                 style: {
-                  marginLeft: "10px"
+                  marginLeft: "10px",
+                  display:"inline-block",
+                  height:"30px",
+                  // background:"#ed4014",
+                  color:"#fff",
+                  width:'50px',
+                  lineHeight:"30px",
+                  textAlign:"center",
+
                 },
                 on: {
                   click: () => {
@@ -685,6 +705,7 @@ export default {
 
 </style>
 <style lang="scss">
+
 .bcd .ivu-input{
   border-radius: 0 !important;
 }
