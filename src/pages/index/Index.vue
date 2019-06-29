@@ -85,7 +85,7 @@
                         :width="width"
                         :height="height"
                         :rose="item.chg.toString()"
-                        style="margin-left: 11px;margin-right: 13px;"
+                        style="margin-left: 30px;margin-right: 30px;"
                     ></SvgLine>
                 </div>
             </section>
@@ -183,7 +183,7 @@
                       <span>{{$t("sectionPage.multilayer")}} <br />{{$t("sectionPage.operation")}}</span>
                   </div>
                     <div class="showsection">
-                      <img src="../../assets/img/03.png" alt="">
+                      <img src="../../assets/img/04.png" alt="">
                       <div>{{$t("sectionPage.Professional")}}</div>
                       <span>{{$t("sectionPage.online")}}<br /> {{$t("sectionPage.Respond")}}</span>
                     </div>
@@ -196,21 +196,21 @@
                       <div class="Qrleft" v-show="this.checkoutapp">
                         <div class="android" @click="checkoutfasle">
                           <Icon type="logo-android" color="white" size="20" style="margin:0 12px 0 17px"/>
-                          <span>android</span>
+                          <span>Android</span>
                         </div>
                         <div class="ipone click" @click="checkouttrue">
                           <Icon type="logo-apple" color="white" size="20" style="margin:0 12px 0 17px"/>
-                          <span>iphone</span>
+                          <span>Iphone</span>
                         </div>
                       </div>
                       <div class="Qrleft" v-show="!checkoutapp">
                           <div class="android click" @click="checkoutfasle">
                             <Icon type="logo-android" color="white" size="20" style="margin:0 12px 0 17px"/>
-                            <span>android</span>
+                            <span>Android</span>
                           </div>
                           <div class="ipone" @click="checkouttrue">
                             <Icon type="logo-apple" color="white" size="20" style="margin:0 12px 0 17px"/>
-                            <span>iphone</span>
+                            <span>Iphone</span>
                           </div>
                       </div>
                       <div class="Qrright">
@@ -351,7 +351,7 @@ export default {
   data() {
     const self = this
     return {
-      width: 296,
+      width: 254,
       height: 36,
       loading: false,
       progress: 0,
@@ -712,7 +712,7 @@ export default {
                                 ),
                 h('span', {
                   style: {
-                    fontSize: '7px',
+                    fontSize: '14px',
                     fontWeight: 800
                   }
                 }, params.row.coin)
@@ -1517,21 +1517,21 @@ li {
             }
             p {
                 &:first-child {
-                    padding: 0 10px 3px;
+                    padding: 0 30px 3px;
                 }
                 &:nth-child(2) {
-                    padding: 3px 10px 6px;
+                    padding: 3px 30px 6px;
                     line-height: 25px;
                 }
                 span {
                     &:last-child {
                         float: right;
-                        font-size: 7px;
+                        font-size: 14px;
                     }
                 }
                 .pairs {
                     color: #8090AF;
-                    font-size: 8px;
+                    font-size: 16px;
                     font-weight: 600;
                 }
                 .sip {
@@ -1583,14 +1583,14 @@ li {
               left: 21%;
                 a {
                     color: #fff;
-                    font-size: 7px;
+                    font-size: 14px;
                     line-height: 35px;
                     display: inline-block;
                     margin-left: 20px;
                 }
                 .cal_content {
                     line-height: 35px;
-                    font-size: 7px;
+                    font-size: 14px;
                     display: inline;
                 }
                 .cal_content:nth-child(1) {
@@ -1637,7 +1637,7 @@ li {
                 cursor: pointer;
                 background: #191D3A;
                 list-style: none;
-                font-size: 8px;
+                font-size: 16px;
                 // padding: 0 30px;
                 color:#FFFFFF;
                 /*box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;*/
@@ -1703,12 +1703,12 @@ li {
                     &:nth-of-type(odd) td{
                         background: rgba(17,22,52,1);
                         color:#fff;
-                        font-size:7px;
+                        font-size:14px;
                     }
                     &:nth-of-type(even) td{
                         background: #11132C;
                         color:#fff;
-                        font-size:7px;
+                        font-size:14px;
                     }
                 }
             }
@@ -1758,7 +1758,7 @@ li {
               align-items: center;
               cursor: pointer;
               span{
-                font-size:8px;
+                font-size: 16px;
                 color:white;
               }
             }
@@ -1771,7 +1771,7 @@ li {
               align-items: center;
               cursor: pointer;
               span{
-                font-size:8px;
+                font-size: 16px;
                 color:white;
               }
             }
@@ -1812,14 +1812,14 @@ li {
         div{
             font-weight: MicrosoftYaHei;
             color:#FFFFFF;
-            font-size:9px;
+            font-size:18px;
             margin-bottom:9px;
             margin-top:17px;
         }
         span{
             color :#8090AF;
             text-align: center;
-            font-size: 7px;
+            font-size: 14px;
         }
     }
 }
@@ -1843,7 +1843,7 @@ li {
       }
       .registered{
         color:#8090AF;
-        font-size:7px;
+        font-size:14px;
       }
     }
     .page1right{
@@ -1852,26 +1852,26 @@ li {
       justify-content: center;
       font-size:12px;
       .login{
-        width: 84px;
-        height: 25px;
-        line-height: 25px;
+        width: 168px;
+        height: 50px;
+        line-height: 50px;
         text-align: center;
         background: #1b1f3c;
         color: white;
         cursor: pointer;
-        font-size: 8px;
+        font-size: 16px;
       }
       .registe{
-        width: 84px;
-        height: 25px;
-        line-height: 25px;
+        width: 168px;
+        height: 50px;
+        line-height: 50px;
         text-align:center;
         margin-left:20px;
         background:rgba(94,107,137,1);
         border:1px solid rgba(94,107,137,1);
         color:white;
         cursor: pointer;
-        font-size:8px;
+        font-size: 16px;
       }
     }
   }

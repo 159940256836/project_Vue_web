@@ -672,7 +672,7 @@ export default {
                     float: left;
                     margin-left: 42px;
                     a {
-                        font-size: 7px;
+                        font-size: 14px;
                         color: #8090AF;
                         display: inline-block;
                         margin-right:45px;
@@ -699,7 +699,7 @@ export default {
                             a {
                                 color: #8090AF;
                                 margin: 0 20px 0 10px;
-                                font-size: 7px;
+                                font-size: 14px;
                                 .header-icon {
                                     margin-left: 15px;
                                 }
@@ -1319,7 +1319,7 @@ body {
                     display: flex;
                     align-items: center;
                     margin-bottom:15px;
-                    font-size: 8px;
+                    font-size: 16px;
                     img {
                         margin:0px;
                     }
@@ -1422,14 +1422,14 @@ body {
 
                         &:first-child {
                             span {
-                                font-size: 8px;
+                                font-size: 16px;
                                 display: block;
                             }
                         }
 
                         a {
                             line-height: 26px;
-                            font-size: 7px;
+                            font-size: 14px;
                             color: #8790a1;
                         }
                     }
