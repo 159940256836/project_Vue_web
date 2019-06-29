@@ -73,6 +73,10 @@
 .clear_btn  {
     color: #3399FF;
 }
+
+.form .clear_btn:hover {
+    color: #3399FF;
+}
 // .form .clear_btn {
 //     &:hover {
 //         color: #3399ff;
@@ -143,9 +147,6 @@
       height: 30px;
       padding: 0 26px;
       margin-top: 3px;
-    }
-    .ivu-btn:hover {
-      background: transparent;
     }
 
     .ivu-select-item:hover {

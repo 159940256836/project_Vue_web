@@ -132,10 +132,6 @@
       margin-top: 3px;
     }
 
-    .ivu-btn:hover {
-      background: transparent;
-    }
-
     .ivu-select-item:hover {
         background: #10122b;
         color: #8090AF;
