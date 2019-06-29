@@ -1253,6 +1253,7 @@ module.exports = {
       upload_negative: '上传身份证反面照',
       upload_hand: '上传手持身份证照',
       save: '保 存',
+      confirm: '确认',
       reset: '重置',
       email: '邮箱',
       bindemail: '绑定邮箱',

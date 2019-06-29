@@ -27,12 +27,12 @@
               <FormItem :label="$t('apiAdmin.bindAddress')">
                 <Input v-model="formItem.bindIp"></Input>
               </FormItem>
-             
+
             </Form>
             <div style="margin-left:60px; font-size:12px; color:#8090AF">{{$t('apiAdmin.Thekeybound')}}</div>
             <Button type="primary" @click="codeVerify" style="width:85%; border-radius:0 !important;display:block;margin-left:64px; margin-top:17px;margin-buttom:115px;">{{$t('apiAdmin.create')}}</Button>
           </div>
-          
+
       </Card>
       <Card  :bordered="false" class="content card3">
         <p slot="title">{{$t('apiAdmin.myApiKey')}}</p>
@@ -535,9 +535,12 @@ export default {
         //6.28修改
         // width: this.locale == 'en' ? 130 : '',
         render: (h, params) => {
-          let txts = params.row.bindIp.split(",");
-          txts = txts.length > 1 ? txts[0] + "  " + "..." : txts;
-          return h("span", {}, txts);
+          if (params.row.bindIp !== null) {
+            let txts = params.row.bindIp.split(",");
+            txts = txts.length > 1 ? txts[0] + "  " + "..." : txts;
+            return h("span", {}, txts);
+          }
+
         }
       });
       arr.push({
@@ -612,7 +615,7 @@ export default {
   background:#0e0e28;
   padding-top:76px;
   padding-bottom: 100px;
-  
+
   .nav-rights{
     width:1200px;
     margin:0 auto;
@@ -638,7 +641,7 @@ export default {
       padding: 10px;
 
       border-bottom: 1px solid #2A3850FF;
-      
+
       .add {
         width: 39%;
         .ivu-input{
@@ -646,15 +649,14 @@ export default {
         }
       }
       .prompt {
-        width: 49%;
         margin-left: 25px;
         p{
           color: #fff !important;
         }
         ul li {
-          font-size: 10px;
-          color: #515a6e;
-          line-height: 25px;
+          font-size: 14px;
+          color: #8090AF;
+          line-height: 30px;
           list-style: disc;
           span {
             color: #000;
@@ -889,7 +891,7 @@ color: #fff;
 }
 .card3 thead tr .ivu-table-column-center:nth-child(7){
   text-align:right;
-  
+
 }
 .card3.ivu-card .ivu-card-head p{
   color: #fff;
@@ -906,11 +908,15 @@ color: #fff;
 }
 .bcd {
   .ivu-input{
+    color: #8090AF;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 0;
     background: transparent !important;
     border: 1px solid rgba(128,144,175,1);
 
   }
-  
+
   .ivu-table-wrapper .ivu-table:before {
       background: transparent;
     }
@@ -946,7 +952,7 @@ color: #fff;
 }
 
 
- 
+
 </style>
 
 

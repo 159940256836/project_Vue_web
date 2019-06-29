@@ -414,6 +414,12 @@ export default {
 .nav-record {
     .ivu-select-dropdown {
         width: 128px;
+        li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+            background: #10122B;
+        }
+    }
+    .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
+        color: #8090AF;
     }
     .ivu-input-suffix {
         right: 10px;

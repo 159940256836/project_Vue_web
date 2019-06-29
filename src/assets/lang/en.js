@@ -1249,6 +1249,7 @@ module.exports = {
       upload_negative: 'Upload ID card reverse photo',
       upload_hand: 'Upload handheld ID photos',
       save: 'Save',
+      confirm: 'Confirm',
       reset: 'Reset',
       email: 'Email',
       bindemail: 'Bind email',

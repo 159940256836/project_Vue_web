@@ -114,9 +114,9 @@
                                                  {{$t("apiAdmin.APmanagement")}}
                                             </router-link>
                                         </DropdownItem>
-                                        <div @click="logout">
+                                        <div @click="logout" style="text-align: left;padding-left: 10px;">
                                             <DropdownItem>
-                                                <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
+                                                {{$t("common.logout")}}
                                             </DropdownItem>
                                         </div>
                                     </DropdownMenu>
@@ -141,7 +141,7 @@
                         <!-- app二维码 -->
                         <div class="rightwrapper">
                             <poptip placement="bottom"  class="appdownload">
-                                <a href="javascript:;" style="font-size:7px;">{{$t("header.appdownlaod")}}
+                                <a href="javascript:;" style="font-size:14px;">{{$t("header.appdownlaod")}}
                                 </a>
                                 <div class="api" slot="content" style="width:90%;">
                                     <div class="ios">
@@ -654,6 +654,7 @@ export default {
             line-height: 50px;
             transition: all .5s;
             background-color: #11132C !important;
+            opacity: .9;
             .time_download {
                 align-items: center;
                 overflow: hidden;
@@ -672,7 +673,7 @@ export default {
                     float: left;
                     margin-left: 42px;
                     a {
-                        font-size: 7px;
+                        font-size: 14px;
                         color: #8090AF;
                         display: inline-block;
                         margin-right:45px;
@@ -699,7 +700,7 @@ export default {
                             a {
                                 color: #8090AF;
                                 margin: 0 20px 0 10px;
-                                font-size: 7px;
+                                font-size: 14px;
                                 .header-icon {
                                     margin-left: 15px;
                                 }
@@ -1137,7 +1138,7 @@ body {
 }
 
 .ivu-dropdown-menu {
-    width: 100px;
+    min-width: 100px;
 }
 
 .layout-ceiling-main .ivu-select-dropdown {
@@ -1319,7 +1320,7 @@ body {
                     display: flex;
                     align-items: center;
                     margin-bottom:15px;
-                    font-size: 8px;
+                    font-size: 16px;
                     img {
                         margin:0px;
                     }
@@ -1414,7 +1415,7 @@ body {
                 }
                 .footer_info {
                     .footer_title {
-                        
+
                         height: 35px;
                     }
                     li {
@@ -1422,14 +1423,14 @@ body {
 
                         &:first-child {
                             span {
-                                font-size: 8px;
+                                font-size: 16px;
                                 display: block;
                             }
                         }
 
                         a {
                             line-height: 26px;
-                            font-size: 7px;
+                            font-size: 14px;
                             color: #8790a1;
                         }
                     }

@@ -17,14 +17,21 @@
                 <div>{{$t('openGoolePage._downloadIos')}}</div>
             </div>
             <div class="qrflex">
-                  <div id="qrcode" style="border:1px solid #fff"></div>
-            <div class="abstract">
-                <p>{{$t('openGoolePage._googleVerifyabs')}}</p>
-                <p>
-                    <span>{{data.secret}}</span>
-                    <span v-clipboard:copy="data.secret" v-clipboard:success="onCopy" v-clipboard:error="onError" class="blue">{{$t('openGoolePage._copy')}}</span>
-                </p>
-            </div>
+                <div id="qrcodeFrist"></div>
+                <div class="abstract">
+                    <p>{{$t('openGoolePage._googleVerifyabs')}}</p>
+                    <p>
+                        <span>{{dataSecret.secret}}</span>
+                        <span
+                            v-clipboard:copy="dataSecret.secret"
+                            v-clipboard:success="onCopy"
+                            v-clipboard:error="onError"
+                          class="blue"
+                        >
+                            {{$t('openGoolePage._copy')}}
+                        </span>
+                    </p>
+                </div>
             </div>
         </div>
         <ul>
@@ -32,7 +39,13 @@
             <li>{{$t('openGoolePage._abs2')}}</li>
             <li>{{$t('openGoolePage._abs3')}}</li>
         </ul>
-        <Form :model="formCode" label-position="top" :rules="ruleInline" ref="formCode" class="form">
+        <Form
+            :model="formCode"
+            label-position="top"
+            :rules="ruleInline"
+            ref="formCode"
+            class="form"
+        >
             <FormItem :label="$t('openGoolePage._GoogleVerificationCode')">
                 <Input v-model="formCode.code"></Input>
             </FormItem>
@@ -51,10 +64,7 @@ export default {
     name: "resetgooglevali",
     data() {
         return {
-            data: {
-                link: "",
-                secret: ""
-            },
+            dataSecret: {},
             formCode: {
                 code: ""
             },
@@ -63,40 +73,49 @@ export default {
             }
         }
     },
-    created() {
-        this.init().then(res => {
-
-            // const { link, secret } = res;
-            // this.data = { link: "otpauth://totp/6@bitrade.com?secret=SHYT6OFT5C4H24MG", secret: "SHYT6OFT5C4H24MG" };
-            this.data = {
-                link: res.link,
-                secret: res.secret
-            }
-            this.$nextTick(() => {
-                const link = this.data.link;
-                new QRCode(document.getElementById("qrcode"), {
-                    text: link,
-                    width: 128,
-                    height: 128,
-                    colorDark: "#000000",
-                    colorLight: "#ffffff",
-                });
-            })
-
-        })
+    async created() {
+        // await this.init()
+        // console.log(this.dataSecret);
+            //     .then(res => {
+            //
+            // // const { link, secret } = res;
+            // // this.data = { link: "otpauth://totp/6@bitrade.com?secret=SHYT6OFT5C4H24MG", secret: "SHYT6OFT5C4H24MG" };
+            // this.data = {
+            //     link: res.link,
+            //     secret: res.secret
+            // }
+            // this.$nextTick(() => {
+            //     console.log(this.dataSecret);
+            //     const link = this.dataSecret.link;
+            //     new QRCode(document.getElementById("qrcodeFrist"), {
+            //         text: link,
+            //         width: 128,
+            //         height: 128,
+            //         colorDark: "#000000",
+            //         colorLight: "#ffffff",
+            //     });
+            // })
+        // })
     },
     methods: {
         // 点击返回上个页面
         returnSuperior () {
             this.$router.push({path: '/account'})
         },
-        init() {
-            return this.$http.get(this.host + `/uc/google/sendgoogle`).then(res => {
+        async init(){
+            this.$http.get(this.host + `/uc/google/sendgoogle`).then(res => {
                 const resp = res.body;
                 if (resp.code == 0) {
-                    return new Promise((resolve, reject) => {
-                        resolve(resp.data)
-                    })
+                    this.dataSecret = resp.data
+                    /*console.log(this.dataSecret, this.dataSecret.link, this.dataSecret.secret);*/
+
+                    new QRCode(document.getElementById("qrcodeFrist"), {
+                        text: this.dataSecret.link,
+                        width: 75,
+                        height: 75,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff",
+                    });
                 } else {
                     this.$Notice.error(resp.message);
                 }
@@ -119,7 +138,7 @@ export default {
                 if (valid) {
                     const codes = this.formCode.code;
                     //验证用户输入的code码是否正确;
-                    this.reset({ codes, secret: this.data.secret });
+                    this.reset({ codes, secret: this.dataSecret.secret });
                 } else {
                     this.$Notice.erroe({
                         title: this.$t("common.tip"),
@@ -158,7 +177,7 @@ export default {
         }
     },
     mounted() {
-        const link = this.data.link;
+        this.init()
     }
 }
 </script>
@@ -207,9 +226,12 @@ $color: #2d8cf0;
             border-radius: 3px;
         }
     }
-    #qrcode {
-        width: 80px;
+    #qrcodeFrist {
         line-height: 2;
+        width: 80px;
+        height: 80px;
+        padding: 2px;
+        background: #fff;
     }
     .abstract {
         padding-top:8px;
@@ -266,7 +288,7 @@ $color: #2d8cf0;
     }
     .ivu-btn {
         border-radius: 0;
-        
+
     }
 }
 

@@ -62,7 +62,7 @@
                                         <a  @click="modal6 = true">
                                             {{$t('uc.safe.bind')}}
                                         </a>
-                                    </p>                                  
+                                    </p>
                                 </div>
                             </div>
                             <!-- 2 -->
@@ -84,7 +84,7 @@
                                             {{$t('uc.safe.bind')}}
                                         </a>
                                     </p>
-                                    
+
                                 </div>
                             </div>
                             <!-- 3 -->
@@ -103,7 +103,7 @@
                                         <a  class="btn" @click="modal3 = true">
                                             {{$t('uc.safe.bind')}}
                                         </a>
-                                    </p>                                   
+                                    </p>
                                 </div>
                             </div>
                             <!-- 4 登录密码-->
@@ -123,7 +123,7 @@
                                         <a class="btn"  @click="modal4 = true">
                                             {{$t('uc.safe.edit')}}
                                         </a>
-                                    </p>                                  
+                                    </p>
                                 </div>
                             </div>
                             <!-- 5 资金密码-->
@@ -148,8 +148,8 @@
                                         <a class="btn"  @click="showItemFundpwd()" >
                                             {{$t('uc.safe.edit')}}
                                         </a>
-                                    </p>                            
-                                    
+                                    </p>
+
                                 </div>
                             </div>
                             <!-- 6 谷歌-->
@@ -163,7 +163,7 @@
                                         <a href="">{{$t('uc.safe.userguide')}}</a>
                                     </p>
                                     <div class="google-info right-side">
-                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="modal10 = true">{{googleAuthentication}}</span>
+                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="modal7 = true">{{googleAuthentication}}</span>
                                         <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                                             <span slot="open"></span>
                                             <span slot="close"></span>
@@ -513,9 +513,8 @@
                 v-model="modal7"
                 :styles="{top: '100px'}"
                 width="714"
-                @on-cancel="googleModalCancel"
-                >
-                <BindGoogleVali />
+            >
+                <ResetGoogleVali />
             </Modal>
             <!-- 解除谷歌验证弹窗 -->
             <Modal
@@ -524,18 +523,18 @@
                 :styles="{top: '100px'}"
                 width="534"
                 @on-cancel="googleModalCancel"
-                >
+            >
                 <CloseGoogleVali :phone="user.mobilePhone" />
             </Modal>
             <!-- 重置谷歌验证弹窗 -->
-            <Modal
+            <!--<Modal
                 :title="$t('new.ReseGoogle')"
                 v-model="modal10"
                 :styles="{top: '100px'}"
                 width="714"
-                >
+            >
                 <ResetGoogleVali />
-            </Modal>
+            </Modal>-->
         </div>
 
     </div>
@@ -1749,14 +1748,14 @@ button.ivu-btn.ivu-btn-primary {
 
 .user-avatar-public {
     float: left;
-    // background: #fff;
-    // border-radius: 50%;
     height: 54px;
+    width: 54px;
     display: flex;
     justify-content: center;
     align-items: center;
     // box-shadow: 0 1px 5px 0 rgba(71, 78, 114, 0.24);
     position: relative;
+    left: -10px;
 }
 
 .user-avatar-public > .user-avatar-in {
@@ -1802,6 +1801,8 @@ button.ivu-btn.ivu-btn-primary {
         top: 0;
     }
 
+
+    //弹窗样式
     .ivu-modal-content {
         padding: 0 42px;
         background: #111530;
@@ -1827,6 +1828,7 @@ button.ivu-btn.ivu-btn-primary {
             padding: 26px 0 20px 0;
         }
     }
+
     .nav-rights {
         .ivu-input {
             background: transparent;
@@ -1889,10 +1891,47 @@ button.ivu-btn.ivu-btn-primary {
         }
 
         .ivu-form-item-error .ivu-input{
-        border: 1px solid #8090AF;
-    }
+            border: 1px solid #8090AF;
+        }
+
+        .ivu-input-large {
+            border: 1px solid #8090AF;
+        }
+
+        .ivu-form-item-error .ivu-input-large {
+            border: 1px solid #8090AF;
+        }
+
+        .ivu-btn-default {
+            color: #8090AF;
+            background: transparent;
+            border-radius: 0;
+        }
+        .ivu-input-group-append,
+        .ivu-input-group-prepend {
+            background: transparent;
+            color: #3399FF;
+            border: 1px solid #8090AF;
+            border-left: none;
+            border-radius: 0;
+        }
+
+        .ivu-form-item-error .ivu-input-group-append,
+        .ivu-form-item-error .ivu-input-group-prepend {
+            background: transparent;
+            color: #3399FF;
+            border: 1px solid #8090AF;
+            border-left: none;
+            border-radius: 0;
+        }
 
         .defeat-ivu {
+            .ivu-btn-default {
+                color: #3399FF;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+            }
             .ivu-form-item-error .ivu-input{
                 border: 1px solid #8090AF;
                 border-right: none;
@@ -1902,48 +1941,21 @@ button.ivu-btn.ivu-btn-primary {
                 border-right: none;
             }
             .timebox {
-            border-left: 1px solid #8090AF;
-            }
-            .ivu-input-group-append, .ivu-input-group-prepend {
-                border: 1px solid #8090AF;
-                border-left: none;
-                border-radius: 0;
+                border-left: 1px solid #8090AF;
             }
         }
-    }
-    .ivu-btn-default {
-        border: 1px solid #8090AF;
-        color: #8090AF;
-        background: transparent;
-        border-radius: 0;
-    }
-    .ivu-input-group-append {
-        background: transparent;
-        color: #3399FF;
-        // .timebox {
-        //     border-left: 1px solid #8090AF;
-        // }
+
+
     }
 
-    .ivu-form-item-error .ivu-input-group-append, .ivu-form-item-error .ivu-input-group-prepend {
-        background-color: transparent;
-        border: 1px solid #8090AF;
-        border-left: none;
-    }
 
-    .defeat-ivu {
-        .timebox {
-            border-left: 1px solid #8090AF;
-        }
-        .ivu-input {
-            border-right: none;
-
-        }
-        .ivu-input-group-append, .ivu-input-group-prepend {
-            border: 1px solid #8090AF;
-            border-left: none;
-        }
-    }
+    // .ivu-btn-default {
+    //     border: 1px solid #8090AF;
+    //     color: #8090AF;
+    //     background: transparent;
+    //     border-radius: 0;
+    // }
+    
 
 </style>
 
