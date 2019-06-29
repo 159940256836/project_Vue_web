@@ -292,9 +292,9 @@ export default {
       margin-left:30px;
     }
     >div{
-      width:130px;
+      // width:130px;
       text-align:center;
-      margin-right:15px;
+      margin-right:47px;
     }
   }
   .contenta_title{
