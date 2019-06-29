@@ -146,7 +146,7 @@
                                         <a href="">{{$t('uc.safe.userguide')}}</a>
                                     </p>
                                     <div class="google-info">
-                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="modal10 = true">{{googleAuthentication}}</span>
+                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="modal7 = true">{{googleAuthentication}}</span>
                                         <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                                             <span slot="open"></span>
                                             <span slot="close"></span>
@@ -497,7 +497,7 @@
                 :styles="{top: '100px'}"
                 width="714"
                 @on-cancel="googleModalCancel"
-                >
+            >
                 <ResetGoogleVali />
             </Modal>
             <!-- 解除谷歌验证弹窗 -->
@@ -507,18 +507,18 @@
                 :styles="{top: '100px'}"
                 width="534"
                 @on-cancel="googleModalCancel"
-                >
+            >
                 <CloseGoogleVali :phone="user.mobilePhone" />
             </Modal>
             <!-- 重置谷歌验证弹窗 -->
-            <Modal
+            <!--<Modal
                 :title="$t('new.ReseGoogle')"
                 v-model="modal10"
                 :styles="{top: '100px'}"
                 width="714"
-                >
+            >
                 <ResetGoogleVali />
-            </Modal>
+            </Modal>-->
         </div>
 
     </div>
