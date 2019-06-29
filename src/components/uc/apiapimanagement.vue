@@ -36,9 +36,9 @@
       </Card>
       <Card  :bordered="false" class="content card3">
         <p slot="title">{{$t('apiAdmin.myApiKey')}}</p>
-  
+
         <Table :columns="myColumns" :data="tableData" :no-data-text="$t('common.nodata')"></Table>
-        
+
       </Card>
     </div>
     <!--编辑API-->
@@ -87,7 +87,7 @@
       class="edit_let-code edit_let_aa"
       v-model="del"
       :title="$t('apiAdmin.delete')"
-     
+
     >
       <p>{{$t('apiAdmin.sureDelete')}}</p>
        <div slot="footer">
@@ -143,7 +143,7 @@
             type="primary"
             size="large"
               @click="show=false"
-              
+
               :ok-text="$t('apiAdmin.okText')"
               :cancel-text="$t('apiAdmin.cancel')"
           >
@@ -184,7 +184,7 @@
 
 
 
-    
+
     <!--添加短信校验-->
     <Modal class="edit_let-code" v-model="verify" :title="$t('apiAdmin.edit')">
       <Form :model="formItem" label-position="top">
@@ -515,12 +515,10 @@ export default {
       });
       arr.push({
         title: this.$t("apiAdmin.mark"),
-        width: 90,
         key: "remark"
       });
       arr.push({
         title: "API Key",
-        width: 150,
         key: "apiKey"
       });
       arr.push({
@@ -562,7 +560,6 @@ export default {
       arr.push({
         title: this.$t("apiAdmin.operation"),
         align: "center",
-        width: 180,
         render: (h, params) => {
           return [
             h(

@@ -426,6 +426,7 @@
         }
         .ivu-menu-item-group {
           li.ivu-menu-item {
+            height: 35px;
             border: none;
             color: #fff;
             &:hover {
