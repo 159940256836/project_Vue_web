@@ -605,7 +605,7 @@ export default {
                   color:"#fff",
                   width:'50px',
                   lineHeight:"30px",
-                  textAlign:"center",
+                  // textAlign:"center",
 
                 },
                 on: {
