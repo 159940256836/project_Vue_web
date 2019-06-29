@@ -747,7 +747,7 @@ p.describe {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background: #fff;
+    /*background: #fff;*/
     padding: 0 15px;
     color: #0d214e;
 }
@@ -784,7 +784,7 @@ p.describe {
 }
 
 .rightarea {
-    background: #fff;
+    /*background: #fff;*/
     padding-left: 15px !important;
     padding-right: 15px !important;
     margin-bottom: 60px !important;
@@ -815,7 +815,7 @@ p.describe {
 }
 
 .rightarea .trade-process .icon {
-    background: #fff;
+    /*background: #fff;*/
     border-radius: 20px;
     height: 20px;
     width: 20px;
@@ -917,7 +917,7 @@ p.describe {
 
 .order_box {
     width: 100%;
-    background: #fff;
+    /*background: #fff;*/
     height: 56px;
     line-height: 56px;
     margin-bottom: 20px;

@@ -441,7 +441,7 @@ Microsoft YaHei;color:black'>若要申请上述职位，请将您的简历和求
     display: block;
   }
   .container{
-    background: #fff;
+    /*background: #fff;*/
     overflow-x:hidden;
   }
   .content-wrap{
@@ -449,7 +449,7 @@ Microsoft YaHei;color:black'>若要申请上述职位，请将您的简历和求
     position: relative;
     width: 1200px;
     margin: 0 auto;
-    background: #fff;
+    /*background: #fff;*/
   }
   .leftmenu{
     /*position: absolute;*/

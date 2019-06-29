@@ -185,7 +185,7 @@ Microsoft YaHei'>下列情况时本网站无需承担任何责任：</span></p>
 </script>
 <style scoped>
   .agreement {
-    background: #fff;
+    /*background: #fff;*/
     padding-bottom: 20px;
     overflow-x:hidden;
   }

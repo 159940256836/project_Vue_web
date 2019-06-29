@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-rights">
+    <div class="nav-rights-bjc">
         <div class="nav-right">
             <p class="nowintegration">
                 <span>{{ $t('pointPage.currentPoint') }}：</span>
@@ -7,7 +7,13 @@
             </p>
             <div class="blc_box">
                 <span>{{$t('pointPage.time')}}:&nbsp;</span>
-                <DatePicker type="daterange" :placeholder="$t('pointPage.enterTime')" style="width: 200px" v-model="rangeDate" :editable="false"></DatePicker>
+                <DatePicker
+                    type="daterange"
+                    :placeholder="$t('pointPage.enterTime')"
+                    style="width: 266px"
+                    v-model="rangeDate"
+                    :editable="false"
+                ></DatePicker>
                 <button class="search_btn" @click="serar">{{$t('pointPage.search')}}</button>
             </div>
             <div class="blc-table">
@@ -129,71 +135,91 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.nav-right {
-    height: auto;
-    overflow: hidden;
-    .nowintegration {
-        height: 60px;
-        line-height: 60px;
-        font-size: 20px;
-        margin-bottom: 20px;
-        background: #111530;
-        padding: 0 28px;
-        span {
-            &:first-child {
-                color: #fff;
+    .nav-rights-bjc {
+        .nav-right {
+            height: auto;
+            overflow: hidden;
+            .nowintegration {
+                height: 60px;
+                line-height: 60px;
+                font-size: 20px;
+                margin-bottom: 20px;
+                background: #111530;
+                padding: 0 28px;
+                span {
+                    &:first-child {
+                        color: #fff;
+                    }
+                    &:last-child {
+                        color: #3399ff;
+                    }
+                }
             }
-            &:last-child {
-                color: #3399ff;
+            .blc_box {
+                height: 60px;
+                line-height: 60px;
+                padding: 0 28px;
+                background: #111530;
+                span {
+                    font-size: 14px;
+                }
+                .search_btn {
+                    height: 32px;
+                    line-height: 32px;
+                    width: 86px;
+                    background: #3399ff;
+                    color: #fff;
+                    font-size: 14px;
+                    border: none;
+                    outline: none;
+                    float: right;
+                    margin: 14px;
+                    cursor: pointer;
+                }
+            }
+            .blc-table {
+                margin-top: 20px;
+                .page-wrap {
+                    float: right;
+                    margin-top: 20px;
+                }
             }
         }
     }
-    .blc_box {
-        height: 60px;
-        line-height: 60px;
-        padding: 0 28px;
-        background: #111530;
-        span {
-            font-size: 14px;
-        }
-        .search_btn {
-            height: 32px;
-            line-height: 32px;
-            width: 86px;
-            background: #3399ff;
-            color: #fff;
-            font-size: 14px;
-            border: none;
-            outline: none;
-            float: right;
-            margin: 14px;
-            cursor: pointer;
-        }
-    }
-    .blc-table {
-        margin-top: 20px;
-        .page-wrap {
-            float: right;
-            margin-top: 20px;
-        }
-    }
-}
+
 </style>
 <style lang="scss">
-.blc-table {
-    .ivu-table-wrapper {
-        .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
-        .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-            background: #10122B;
+    .nav-rights-bjc {
+        .ivu-input-with-suffix {
+            padding-right: 32px;
+            border-radius: 0;
+            background: #111530;
+            border: 1px solid #2A3850;
         }
-        .ivu-table-header {
-            thead th {
-                background: #191D3A;
+        .ivu-table {
+            &:before {
+                background: transparent;
+            }
+            td {
+                background: #111530;
             }
         }
-        tbody.ivu-table-tbody .ivu-table-row td {
-            background: #111530;
+        .blc-table {
+            .ivu-table-wrapper {
+                .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+                .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+                    background: #10122B;
+                }
+                .ivu-table-header {
+                    thead th {
+                        height: 50px;
+                        background: #191D3A;
+                    }
+                }
+                tbody.ivu-table-tbody .ivu-table-row td {
+                    background: #111530;
+                }
+            }
         }
     }
-}
 </style>

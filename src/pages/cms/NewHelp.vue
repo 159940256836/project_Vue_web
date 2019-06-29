@@ -13,7 +13,7 @@
                         </ul>
                     </div>
                     </Col>
-                    <Col span="18" style="background: #fff; margin-left: 17px;">
+                    <Col span="18" style="margin-left: 17px;">
                     <!-- <keep-alive> -->
                     <router-view></router-view>
                     <!-- </keep-alive> -->
@@ -110,7 +110,7 @@ export default {
 }
 .leftmenu {
   margin-bottom: 60px;
-  background: #fff;
+  /*background: #fff;*/
   position: relative;
   min-height: 1px;
   padding: 20px 0px;
@@ -130,7 +130,7 @@ export default {
 }
 
 .leftmenu .nav-stacked {
-  background: #fff;
+  /*background: #fff;*/
 }
 
 .leftmenu .leftmenu-title {

@@ -6,7 +6,8 @@
             <div class="right">
                 <div class="coin-menu">
                     <div class="bazaar-info">
-                        市场信息
+                        <!--市场信息-->
+                        {{ $t('exchange.marketing') }}
                     </div>
                     <div class="sc_filter">
                         <span @click="changeBaseCion('usdt')" :class="{active:basecion==='usdt'}">USDT</span>
@@ -64,7 +65,8 @@
                 </div>
                 <div class="trade-wrap">
                     <div class="recent-deal">
-                        最近成交
+                        <!--最近成交-->
+                        {{ $t('exchange.recent_deal') }}
                     </div>
                     <Table
                         :no-data-text="$t('common.nodata')"
@@ -415,7 +417,10 @@
             </div>
             <div class="left plate-wrap">
                 <div class="handlers">
-                    <span class="handicap">盘口</span>
+                    <span class="handicap">
+                        <!--盘口-->
+                        {{ $t('exchange.handicap') }}
+                    </span>
                     <!--<span
                         @click="changePlate('all')"
                         class="handler handler-all"
@@ -436,21 +441,24 @@
                         class="handler"
                         :class="{active:selectedPlate=='all'}"
                     >
-                        全部
+                        <!--全部-->
+                        {{ $t('uc.otcorder.all') }}
                     </span>
                     <span
                         @click="changePlate('buy')"
                         class="handler"
                         :class="{active:selectedPlate=='buy'}"
                     >
-                        买单
+                        <!--买单-->
+                        {{ $t('uc.otcorder.type_pay') }}
                     </span>
                     <span
                         @click="changePlate('sell')"
                         class="handler"
                         :class="{active:selectedPlate=='sell'}"
                     >
-                        卖单
+                        <!--卖单-->
+                        {{ $t('uc.otcorder.type_sale') }}
                     </span>
                 </div>
                 <Table
@@ -534,14 +542,14 @@
                     <router-link
                         v-show="selectedOrder==='current'"
                         class="linkmore"
-                        to="/uc/entrust/current"
+                        to="/order"
                     >
                         {{$t('coin.view')}}>>
                     </router-link>
                     <router-link
                         v-show="selectedOrder==='history'"
                         class="linkmore"
-                        to="/uc/entrust/history"
+                        to="/order"
                     >
                         {{$t('coin.view')}}>>
                     </router-link>

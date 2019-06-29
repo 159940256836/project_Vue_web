@@ -88,7 +88,7 @@ export default {
 
 .leftmenu {
     margin-bottom: 60px;
-    background: #fff;
+    /*background: #fff;*/
     position: relative;
     min-height: 1px;
     padding: 20px 15px;
@@ -110,7 +110,7 @@ export default {
 }
 
 .leftmenu .nav-stacked {
-    background: #fff;
+    /*background: #fff;*/
 }
 
 .leftmenu .leftmenu-title {

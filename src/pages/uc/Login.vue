@@ -186,7 +186,7 @@ $primary-color: #3399ff;
                     width: 270px;
                     text-align: center;
                     .right-img {
-                        background: #fff;
+                        /*background: #fff;*/
                         width: 150px;
                         margin: 0 auto;
                         img {

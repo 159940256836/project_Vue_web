@@ -1398,7 +1398,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .rightarea {
-    background: #fff;
+    /*background: #fff;*/
     padding-left: 15px !important;
     padding-right: 15px !important;
     margin-bottom: 60px !important;
@@ -1424,7 +1424,7 @@ button.ivu-btn.ivu-btn-primary {
 }
 
 .rightarea .trade-process .icon {
-    background: #fff;
+    /*background: #fff;*/
     border-radius: 20px;
     height: 20px;
     width: 20px;
@@ -1651,7 +1651,7 @@ button.ivu-btn.ivu-btn-primary {
 
 .user-avatar-public {
     float: left;
-    background: #fff;
+    /*background: #fff;*/
     border-radius: 50%;
     height: 52px;
     width: 52px;
@@ -1701,7 +1701,7 @@ button.ivu-btn.ivu-btn-default {
     &:active {
         color: #3399ff;
         border: 1px solid #3399ff;
-        background: #fff;
+        /*background: #fff;*/
     }
 }
 li.ivu-upload-list-file.ivu-upload-list-file-finish {

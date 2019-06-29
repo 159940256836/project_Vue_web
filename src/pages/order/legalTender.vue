@@ -570,8 +570,12 @@ export default {
                     .ivu-table-cell  {
                       padding: 0;
                       text-align: center;
+                      a {
+                        color: #8090AF;
+                      }
                     }
                     tr td:first-child .ivu-table-cell {
+                      
                         padding-left: 6px;
                     }
                 }

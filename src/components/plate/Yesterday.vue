@@ -94,7 +94,7 @@ export default {
 }
 .moneyAnddetail {
   .money {
-    background: #fff;
+    /*background: #fff;*/
     margin: 20px auto;
     padding: 20px;
     border-radius: 5px;
@@ -134,7 +134,7 @@ export default {
   }
   .detail {
     width: 75%;
-    background: #fff;
+    /*background: #fff;*/
     margin: 20px auto;
     padding-bottom: 40px;
     border-radius: 5px;
@@ -178,7 +178,7 @@ export default {
 @media screen and (min-width: 415px){
     .money {
     width: 75%;
-    background: #fff;
+    /*background: #fff;*/
     margin: 20px auto;
     padding: 20px;
     ul {

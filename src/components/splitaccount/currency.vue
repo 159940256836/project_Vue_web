@@ -149,7 +149,7 @@ export default {
                             }
                         },
                         style: {
-                            marginRight: "8px",
+                            marginRight: "30px",
                             color: "#3399ff",
                             cursor: "pointer"
                         }
@@ -170,7 +170,6 @@ export default {
                             }
                         },
                         style: {
-                            marginRight: "8px",
                             color: "#3399ff",
                             cursor: "pointer"
                         }

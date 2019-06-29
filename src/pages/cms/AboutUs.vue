@@ -130,7 +130,7 @@
 </script>
 <style scoped>
   .container {
-    background: #fff;
+    /*background: #fff;*/
     overflow-x: hidden;
   }
 
@@ -139,7 +139,7 @@
     position: relative;
     width: 1200px;
     margin: 0 auto;
-    background: #fff;
+    /*background: #fff;*/
     min-height: 600px;
   }
 

@@ -58,6 +58,7 @@ module.exports = {
     Retriepassword:"找回密码",
     ReseGoogle:"重置谷歌",
     Transactirate:'交易费率',
+    UntieGoogle:"解绑谷歌"
 
   },
   common: {
@@ -554,6 +555,9 @@ module.exports = {
     market_price: '市价',
     fees_rate: '费率',
     balance: '资产',
+    marketing: '市场信息',
+    recent_deal: '最近成交',
+    handicap: '盘口',
     or: '或',
     starttrade: '开始交易',
     canuse: '可用',
@@ -1337,6 +1341,8 @@ module.exports = {
       type: '方向',
       type_sell: '卖出',
       type_buy: '买入',
+      type_pay: '买单',
+      type_sale: '卖单',
       tradename: '交易对象',
       amount: '数量',
       money: '金额',

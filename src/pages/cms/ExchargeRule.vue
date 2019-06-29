@@ -98,7 +98,7 @@ color:black'>发布广告免费。</span></p>
 
     </div>
     <div v-else class="content">
-        <p><b>Buying Rules of Legal Tender Trading Area 
+        <p><b>Buying Rules of Legal Tender Trading Area
 </b></p>
         <p>1. Real-name certification is required when buying the legal tender trading area.
         </p>
@@ -165,7 +165,7 @@ color:black'>发布广告免费。</span></p>
 
 <style scoped>
 .agreement {
-    background: #fff;
+    /*background: #fff;*/
     padding-bottom: 20px;
     overflow-x: hidden;
 }

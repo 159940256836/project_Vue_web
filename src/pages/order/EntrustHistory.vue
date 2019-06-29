@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 .entrusthistory {
-    
+
     float: left;
     width: 100%;
     .form {
@@ -34,7 +34,7 @@
 .table .ivu-table-wrapper {
     position: relative;
     /* border: 1px solid #dddee1; */
-    border-bottom: 0;
+    border-bottom: 0 !important;
     border-right: 0;
     overflow: hidden;
     margin-top: 22px;
@@ -96,14 +96,14 @@
 .entrusthistory .form {
     padding-top: 16px;
     input {
-      outline:none; 
+      outline:none;
       box-shadow: none;
       color: #fff;
     }
     .ivu-form-item-label {
       color: #8090AF;
     }
-    input:focus{   
+    input:focus{
       box-shadow: none;
     }
     .ivu-input {
@@ -113,7 +113,7 @@
       height: 30px;
       line-height: 24px;
     }
-    .ivu-select-single .ivu-select-selection .ivu-select-placeholder, 
+    .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
     .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
       line-height: 24px;
     }
@@ -123,7 +123,7 @@
       border:1px solid rgba(88,105,138,1);
       height: 30px;
       line-height: 22px;
-      outline:none; 
+      outline:none;
       box-shadow: none;
       .ivu-select-selected-value {
         color: #fff;
@@ -173,6 +173,10 @@
         background: #10122B;
         }
     }
+
+    .ivu-select-dropdown li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+        background: transparent;
+    }
     .ivu-page-total {
         color: #8090AF;
     }
@@ -184,7 +188,7 @@
 
 .entrusthistory {
     * {
-        box-shadow: none !important; 
+        box-shadow: none !important;
     }
   .ivu-tabs {
         // overflow:initial;
@@ -194,7 +198,7 @@
           td {
             background: transparent;
           }
-        }       
+        }
         .ivu-tabs-content.ivu-tabs-content-animated {
             .ivu-tabs-tabpane {
             .ivu-table-wrapper {
@@ -270,7 +274,7 @@
                         padding-left: 28px;
                     }
                 }
-                }            
+                }
             }
             .ivu-table-header th:first-child,
             .ivu-table-body .ivu-table-row td:first-child
@@ -284,12 +288,12 @@
               border: none;
             }
         }
-        
+
       }
   }
   .ivu-table-wrapper .ivu-table {
-      color: #fff;  
-      background: transparent;     
+      color: #fff;
+      background: transparent;
   }
 
   .ivu-table td, .ivu-table th {
@@ -318,7 +322,7 @@
             //表格标题颜色
     }
 
-    .ivu-table-wrapper .ivu-table .ivu-table-tbody tr:nth-child(2n) td, 
+    .ivu-table-wrapper .ivu-table .ivu-table-tbody tr:nth-child(2n) td,
     .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
             background: #10122B;
             //表格双数行样式
@@ -350,8 +354,8 @@
     }
     .ivu-table:before{content:'';width:100%;height:0px;position:absolute;left:0;bottom:0;z-index:1}
     .ivu-table:after{content:'';width:0px;height:100%;position:absolute;top:0;right:0;z-index:3}
-    
-    
+
+
 }
 
 </style>
@@ -384,21 +388,21 @@
                 </Select>
             </FormItem>
             <FormItem>
-                <Button 
+                <Button
                 style="margin-left: 38px;margin-right:20px; "
-                @click="handleClear" 
+                @click="handleClear"
                 class="clear_btn"
                 type="primary"
                 >
                 {{$t('historyAndCu.clear')}}
                 </Button>
-                <Button 
-                type="primary" 
+                <Button
+                type="primary"
                 @click="handleSubmit"
                 class="search-btn"
                 >
                 {{$t('historyAndCu.search')}}</Button>
-                
+
             </FormItem>
         </Form>
         <div class="table">
@@ -422,7 +426,7 @@
           <ul class="ivu-page"></ul>
             <li title="上一页" class="ivu-page-prev" @click="previouspage">
               <a><i class="ivu-icon ivu-icon-ios-arrow-back"></i></a>
-            </li> 
+            </li>
             <li title="下一页" class="ivu-page-next" @click="nextpage">
               <a><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></a>
             </li>

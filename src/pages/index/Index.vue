@@ -1954,7 +1954,7 @@ li {
 #fullpage {
     padding-top: 50px;
     min-width: 1260px;
-    background: #fff;
+    /*background: #fff;*/
   .Central{
     background:url("../../assets/images/bg.png");
     height:auto;
