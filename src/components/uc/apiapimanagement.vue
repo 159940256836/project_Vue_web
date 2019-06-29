@@ -531,7 +531,7 @@ export default {
     width:1200px;
     margin:0 auto;
   }
-  top:60px;
+  top:50px;
   .blue {
   cursor: pointer;
   color: #fff;
