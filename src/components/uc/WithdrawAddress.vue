@@ -448,6 +448,21 @@ export default {
     .ivu-input-large {
         height: 30px;
     }
+    .ivu-select-dropdown {
+        li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+            background: #10122B;
+            color: #3399ff;
+        }
+
+        li.ivu-select-item.ivu-select-item-selected {
+            background: #10122B;
+            color: #495060;
+
+            &:hover {
+                color: #3399ff;
+            }
+        }
+    }
   .nav-right {
     .bill_box_address {
       .table-inner {
@@ -465,6 +480,7 @@ export default {
                   margin-left: 28px;
                 display: table-cell;
                   .describe {
+                      color: #8090af;
                       float: left;
                   }
               }
@@ -570,6 +586,7 @@ span.describe {
         line-height: 30px;
         border-radius: 0;
         background: #111530;
+        color: #8090af;
     }
     .ivu-input-large,
     .ivu-select-placeholder,

@@ -114,9 +114,9 @@
                                                  {{$t("apiAdmin.APmanagement")}}
                                             </router-link>
                                         </DropdownItem>
-                                        <div @click="logout">
+                                        <div @click="logout" style="text-align: left;padding-left: 10px;">
                                             <DropdownItem>
-                                                <img src="./assets/images/logout1.png"> {{$t("common.logout")}}
+                                                {{$t("common.logout")}}
                                             </DropdownItem>
                                         </div>
                                     </DropdownMenu>
@@ -1137,7 +1137,7 @@ body {
 }
 
 .ivu-dropdown-menu {
-    width: 100px;
+    min-width: 100px;
 }
 
 .layout-ceiling-main .ivu-select-dropdown {
@@ -1414,7 +1414,7 @@ body {
                 }
                 .footer_info {
                     .footer_title {
-                        
+
                         height: 35px;
                     }
                     li {

@@ -1284,6 +1284,30 @@ export default {
         border-bottom-color: #10122B;
     }
     .withdraw {
+        .ivu-select-dropdown .ivu-select-item {
+            padding: 6px 16px;
+
+            &:hover {
+                background: #10122B !important;
+                color: #3399ff;
+            }
+        }
+
+        .ivu-select-dropdown {
+            li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+                background: #10122B;
+                color: #3399ff;
+            }
+
+            li.ivu-select-item.ivu-select-item-selected {
+                background: #10122B;
+                color: #495060;
+
+                &:hover {
+                    color: #3399ff;
+                }
+            }
+        }
     .ivu-select-single {
         .ivu-select-selection {
             background: #111530;
@@ -1319,30 +1343,30 @@ export default {
               }
             }
 
-            .ivu-select-dropdown .ivu-select-item {
-              padding: 6px 16px;
+            /*.ivu-select-dropdown .ivu-select-item {*/
+            /*  padding: 6px 16px;*/
 
-              &:hover {
-                /*background: #fff;*/
-                color: #3399ff;
-              }
-            }
+            /*  &:hover {*/
+            /*    background: #10122B !important;*/
+            /*    color: #3399ff;*/
+            /*  }*/
+            /*}*/
 
-            .ivu-select-dropdown {
-              li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-                /*background: #fff;*/
-                color: #3399ff;
-              }
+            /*.ivu-select-dropdown {*/
+            /*  li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {*/
+            /*    background: #10122B;*/
+            /*    color: #3399ff;*/
+            /*  }*/
 
-              li.ivu-select-item.ivu-select-item-selected {
-                /*background: #fff;*/
-                color: #495060;
+            /*  li.ivu-select-item.ivu-select-item-selected {*/
+            /*    background: #10122B;*/
+            /*    color: #495060;*/
 
-                &:hover {
-                  color: #3399ff;
-                }
-              }
-            }
+            /*    &:hover {*/
+            /*      color: #3399ff;*/
+            /*    }*/
+            /*  }*/
+            /*}*/
           }
         }
 

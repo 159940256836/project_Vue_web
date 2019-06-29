@@ -1650,10 +1650,11 @@ li {
                 color: #3399ff;
                 border-bottom: 2px solid #191D3A;
                 position: relative;
-                margin-right: 35px; 
+                margin-right: 35px;
             }
             .ivu-btn-default{
-              margin-right: 35px; 
+              border: 0;
+              margin-right: 35px;
             }
         }
         .search{
