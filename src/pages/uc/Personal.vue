@@ -305,7 +305,7 @@ export default {
     const footerHeight = doc.getElementsByTagName('footer')[0].offsetHeight
     const contentHeight = doc.getElementsByClassName('mymsg_wrapper')[0]
     const bodyHeight = sreenHeight - headerHeight - footerHeight
-    contentHeight.style.minHeight = bodyHeight + 'px'
+    contentHeight.style.minHeight = bodyHeight + 200 + 'px'
   }
 }
 </script>

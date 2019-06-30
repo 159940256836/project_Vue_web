@@ -688,6 +688,7 @@ export default {
                     // 5.15修改
                     a.router-link-active {
                         color: #2d8cf0;
+                        border-bottom: 1px solid #2d8cf0;
                     }
                 }
                 .nav-header {

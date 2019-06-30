@@ -781,7 +781,7 @@ iframe {
 .ivu-table-stripe .ivu-table-body tr.ivu-table-row-highlight:nth-child(2n) td,
 .ivu-table-stripe .ivu-table-fixed-body tr.ivu-table-row-highlight:nth-child(2n) td,
 tr.ivu-table-row-highlight.ivu-table-row-hover td{
-    background-color: transparent;
+    background-color: transparent !important;
 }
 
 .exchange.day .ivu-table-wrapper .ivu-table .ivu-table-row td {
