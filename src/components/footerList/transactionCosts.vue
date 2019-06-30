@@ -455,13 +455,14 @@ export default {
       font-size: 16px;
       align-items: center;
       .active {
-        width: 108px;
+        // width: 108px;
         height: 44px;
         background: #378febff;
         color: #fff;
       }
       div {
-        width: 108px;
+        margin-right:20px;
+        // width: 108px;
         height: 44px;
         text-align: center;
         color: #3399ffff;
