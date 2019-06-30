@@ -160,7 +160,7 @@ export default {
     display: block;
     width: 8px;
     height: 8px;
-    left: 34px;
+    left: 85px;
     top: 50%;
     margin-top: -4px;
     border-radius: 50%;
@@ -179,7 +179,7 @@ export default {
     display: block;
     width: 8px;
     height: 8px;
-    left: 34px;
+    left: 85px;
     top: 50%;
     margin-top: -4px;
     border-radius: 50%;
@@ -194,7 +194,7 @@ export default {
     display: block;
     width: 8px;
     height: 8px;
-    left: 34px;
+    left: 85px;
     top: 50%;
     margin-top: -4px;
     border-radius: 50%;

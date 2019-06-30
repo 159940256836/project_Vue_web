@@ -546,6 +546,9 @@ export default {
     // background: #fff;
     margin: 20px 0 0;
 }
+.nav-right .btStyle[data-v-be09f418][data-v-be09f418]:hover{
+    color:#3399FF;
+}
  .nav-right .message .ivu-table-wrapper, button.btStyle.ivu-btn, button.btStyle.ivu-btn.active:focus{
     box-shadow:none !important;
 }
@@ -621,6 +624,12 @@ export default {
 }
 </style>
 <style lang="scss">
+.nav-right .btStyle[data-v-0fb5a430]{
+    color:#fff !important;
+}
+.nav-right .btStyle :hover{
+    color:#3399FF !important;
+}
 .newMyExtension.nav-right .message .ivu-table-wrapper{
     margin-top:0 !important;
 }

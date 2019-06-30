@@ -41,9 +41,23 @@
 
       </Card>
     </div>
+
+
+
+
     <!--编辑API-->
-    <Modal class="api_edit" v-model="editor" :title="$t('apiAdmin.edit')">
-      <Form :model="editorFormItem" label-position="top">
+    <Modal 
+      class="api_edit edit_let-code" 
+      id="a_new"
+      v-model="editor"
+      class-name="old_deta"
+      :title="$t('apiAdmin.edit')
+      
+     ">
+      <Form 
+      :model="editorFormItem"
+      :label-width='70'
+       label-position="top">
         <FormItem :label="$t('apiAdmin.mark')">
           <Input v-model="editorFormItem.remark"></Input>
         </FormItem>
@@ -52,22 +66,27 @@
         </FormItem>
       </Form>
       <div slot="footer">
-        <Button
+        <!-- <Button
           type="text"
           size="large"
           @click="editor=false"
         >
           {{ $t('common.cancel') }}
-        </Button>
+        </Button> -->
         <Button
+          class="edit_let_buttom edit_let_buttom_new"
           type="primary"
           size="large"
+          id="new_butto"
           @click="update"
         >
           {{ $t('common.confirm') }}
         </Button>
       </div>
     </Modal>
+
+
+    
     <!--删除-->
     <!-- <Modal
       class="edit_let-code"
@@ -84,8 +103,9 @@
 
        <!--删除-->
      <Modal
-      class="edit_let-code edit_let_aa"
+      class="edit_let-code edit_let_aa edit_let_bb "
       v-model="del"
+      class-name="old_deta"
       :title="$t('apiAdmin.delete')"
 
     >
@@ -98,7 +118,7 @@
           >
             {{ $t('common.cancel') }}
           </Button> -->
-          <Button class="edit_let_buttom"
+          <Button class="edit_let_buttom edit_let_buttom_new"
             type="primary"
             size="large"
               @click="onDel(id)"
@@ -124,6 +144,7 @@
     <Modal
       class="edit_let-code edit_let_aa"
       v-model="show"
+      class-name="old_deta"
       :title="$t('apiAdmin.access')"
       :mask-closable="false"
     >
@@ -139,7 +160,7 @@
         >{{$t('apiAdmin.copy')}}</span>
       </p>
        <div slot="footer">
-          <Button class="edit_let_buttom"
+          <Button class="edit_let_buttom edit_let_buttom_new"
             type="primary"
             size="large"
               @click="show=false"
@@ -186,7 +207,12 @@
 
 
     <!--添加短信校验-->
-    <Modal class="edit_let-code" v-model="verify" :title="$t('apiAdmin.edit')">
+    <Modal 
+      class="edit_let-code"
+      v-model="verify" 
+       class-name="old_deta"
+      :title="$t('apiAdmin.edit') "
+     >
       <Form :model="formItem" label-position="top">
         <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
           <Input v-model="formItem.code" size="large">
@@ -219,7 +245,12 @@
     </Modal>
     <!--编辑短信校验-->
     <div class="let-code">
-      <Modal class="edit_let-code" v-model="verifyEditor" :title="$t('apiAdmin.edit')">
+      <Modal 
+      class="edit_let-code"
+       class-name="old_deta"
+       v-model="verifyEditor" 
+       :title="$t('apiAdmin.edit')"
+       >
         <Form :model="editorFormItem" label-position="top">
           <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
             <Input v-model="editorFormItem.code" size="large">
@@ -624,6 +655,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.edit_let_buttom_new{
+  margin-left:0 !important;
+  margin-top:6px;
+}
+.edit_let_bb{
+  .edit_let_butto{
+  display:block;
+  margin: 0 auto;
+  }
+  .ivu-modal-content{
+    border-radius: 0 !important;
+  }
+}
 .api_edit{
   background:#0e0e28;
 }
@@ -702,11 +747,35 @@ export default {
 
 </style>
 <style lang="scss">
+#a_new{
+  #new_butto{
+    margin-left:78px !important;
+  }
+  .ivu-form-item-content{
+    margin-left:20px !important;
+  }
+  .ivu-input{
+   border:1px solid rgba(128,144,175,1) !important;
+   border-radius: 0 !important;
+   height:40px !important;
+  }
+}
+.old_deta{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  .ivu-modal{
+    top:0 !important;
+  }
+}
 
 .bcd .ivu-input{
   border-radius: 0 !important;
 }
 .edit_let_aa{
+  .ivu-modal-footer{
+    margin-top:0 !important;
+  }
   .ivu-modal-body{
     margin-left:38px !important;
   }
@@ -719,6 +788,7 @@ export default {
     margin-left:38px;
   }
   .ivu-modal-content {
+        width:534px;
         padding: 0 42px;
         background: #111530;
         border-radius: 0;
@@ -746,8 +816,10 @@ export default {
 }
 
 .edit_let-code{
-  position:relative;
-  top:100px;
+  .ivu-modal-content{
+    border-radius: 0 !important;
+  }
+
   .ivu-modal-body{
     margin-top:30px;
   }
