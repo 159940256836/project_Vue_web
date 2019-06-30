@@ -36,6 +36,7 @@ const zh = {
     Usegreement:"用户协议",
     Precautions:"注意事项",
     Policnderstanding:"政策了解",
+    platform:"投资者最信赖的数字资产增值平台"
 }
 
 const en = {
@@ -76,6 +77,7 @@ const en = {
     WeChatcustomervi:"WeChat",
     Customvic:' 1',
     Customervic:' 2',
+    platform:"The most trusted digital asset appreciation platform for investors"
 }
 
 exports.zh = zh;
