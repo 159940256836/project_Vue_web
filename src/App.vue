@@ -1769,4 +1769,8 @@ body {
 .ivu-message {
     top:20% !important;
 }
+//修改placeholder字体颜色
+.ivu-input::-webkit-input-placeholder{
+  color: #8090AF;
+}
 </style>

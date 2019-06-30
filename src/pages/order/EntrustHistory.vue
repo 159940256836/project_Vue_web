@@ -480,7 +480,7 @@ export default {
     previouspage() {
       if (this.pageNo == 1) {
         this.$Notice.open({
-          title: this.$t('uc.identity.tips'),
+          title: this.$t('common.tip'),
           desc: this.$t('uc.finance.record.nodata')
         })
       } else {

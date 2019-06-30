@@ -138,134 +138,134 @@ export default {
       data2: [],
       data3: [],
       data4: []
-    };
+    }
   },
   mounted() {
-    this.getDate();
+    this.getDate()
   },
 
   computed: {
     columns1() {
-      let listbb = [];
+      const listbb = []
       listbb.push({
         // 等级名称
-        title: this.$t("foot.Clasame"),
-        key: "gradeName",
-        width:160,
-        align:"center"
-      });
+        title: this.$t('foot.Clasame'),
+        key: 'gradeName',
+        width: 160,
+        align: 'center'
+      })
       listbb.push({
         // 手续费比例
-        title: this.$t("foot.Commissratio"),
-        slot: "exchangeFeeRate",
-        align: "center",
-        width:200,
-      });
+        title: this.$t('foot.Commissratio'),
+        slot: 'exchangeFeeRate',
+        align: 'center',
+        width: 200
+      })
 
       listbb.push({
         // 每日提币数量限制
-        title: this.$t("foot.Dailthdrawamit"),
-        key: "dayWithdrawCount",
-        align: "left",
-      });
-      return listbb;
+        title: this.$t('foot.Dailthdrawamit'),
+        key: 'dayWithdrawCount',
+        align: 'left'
+      })
+      return listbb
     },
     columns2() {
-      let listcc = [];
+      const listcc = []
       listcc.push({
         // 交易对
-        title: this.$t("foot.Tradingn"),
-        key: "symbol",
+        title: this.$t('foot.Tradingn'),
+        key: 'symbol',
         width: 160,
-        align: "center"
+        align: 'center'
 
-      });
+      })
       listcc.push({
         // 结算币种手续费
-        title: this.$t("foot.Setturrencndliarge"),
-        key: "baseFee",
+        title: this.$t('foot.Setturrencndliarge'),
+        key: 'baseFee',
         width: 300,
-        align: "center"
-      });
+        align: 'center'
+      })
       listcc.push({
         // 基币手续费
-        title: this.$t("foot.Baseee"),
-        key: "fee",
-        align: "left"
-      });
-      return listcc;
+        title: this.$t('foot.Baseee'),
+        key: 'fee',
+        align: 'left'
+      })
+      return listcc
     },
 
     columns3() {
-      let listdd = [];
+      const listdd = []
       listdd.push({
         // 币种
-        title: this.$t("foot.currency"),
-        key: "unit",
-        align: "center",
-        width:160,
-      });
+        title: this.$t('foot.currency'),
+        key: 'unit',
+        align: 'center',
+        width: 160
+      })
       listdd.push({
         // 交易手续费率
-        title: this.$t("foot.Transactiate"),
-        key: "jyRate",
-        align: "left",
-       
-      });
-      return listdd;
+        title: this.$t('foot.Transactiate'),
+        key: 'jyRate',
+        align: 'left'
+
+      })
+      return listdd
     },
 
     columns4() {
-      let listaa = [];
+      const listaa = []
       listaa.push({
         //  title: '名称',
-        title: this.$t("foot.Thenamohe"),
-        key: "name",
-        width:160,
-        align:'center',
-      });
+        title: this.$t('foot.Thenamohe'),
+        key: 'name',
+        width: 160,
+        align: 'center'
+      })
       listaa.push({
         //  最小提币手续费
-        title: this.$t("foot.Miniwithdrawfee"),
-        key: "minTxFee",
-        align: "center",
-        width:200,
-      });
+        title: this.$t('foot.Miniwithdrawfee'),
+        key: 'minTxFee',
+        align: 'center',
+        width: 200
+      })
       listaa.push({
         // 最大提币手续费
-        title: this.$t("foot.Maximuthdrawafee"),
-        key: "maxTxFee",
-        align: "center",
-        width:250,
-      });
+        title: this.$t('foot.Maximuthdrawafee'),
+        key: 'maxTxFee',
+        align: 'center',
+        width: 250
+      })
       listaa.push({
         //  矿工费
-        title: this.$t("foot.Mineree"),
-        key: "minerFee",
-        align: "left",
-       
-      });
-      return listaa;
+        title: this.$t('foot.Mineree'),
+        key: 'minerFee',
+        align: 'left'
+
+      })
+      return listaa
     }
   },
   methods: {
     getDate() {
-      this.$http.get(this.host + "/uc/ancillary/more/rate/detail").then(res => {
-        var data = res.body;
+      this.$http.get(this.host + '/uc/ancillary/more/rate/detail').then(res => {
+        var data = res.body
         if (data.code == 0) {
-          this.data1 = data.data.gradeRate;
-          this.data2 = data.data.symbolRate;
-          this.data3 = data.data.otcCoinRade;
-          this.data4 = data.data.coinRade;
+          this.data1 = data.data.gradeRate
+          this.data2 = data.data.symbolRate
+          this.data3 = data.data.otcCoinRade
+          this.data4 = data.data.coinRade
         }
-        console.log(res);
-      });
+        console.log(res)
+      })
     },
     listTab(n) {
-      this.tabid = n;
+      this.tabid = n
     }
   }
-};
+}
 </script>
 <style lang="scss">
 .ivu-table:before{
@@ -274,17 +274,16 @@ export default {
 .ivu-table:after{
   width: 0 !important;
 }
-.new_transactionCosts .ivu-table td, .ivu-table th{
+.new_transactionCosts .ivu-table td{
   border-bottom: none !important;
 }
-.new_transactionCosts .ivu-table td, .ivu-table th{
+.new_transactionCosts .ivu-table td{
   height:50px !important;
 }
 .new_transactionCosts{
   .ivu-table th{
     height:50px !important;
   }
- 
 }
 .content .content_content .content_tab .content_tab_buy{
   width:1200px !important;

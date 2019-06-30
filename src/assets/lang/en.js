@@ -35,7 +35,7 @@ module.exports = {
     expect: 'Look forward to expectation!',
     delete: 'Are you confirm to delete?',
     nodata: 'No Data',
-    nodataa:'No records, please invite friends',
+    nodataa: 'No records, please invite friends',
     set: 'Set',
     update: 'Modify',
     please: 'Please',
@@ -43,7 +43,7 @@ module.exports = {
     confirm: 'confirm'
   },
   new: {
-    Detailss:'Details',
+    Detailss: 'Details',
     Currenrtification: 'Current level certification',
     Currentasset: 'Current asset valuation',
     Available: 'Available',
@@ -71,12 +71,11 @@ module.exports = {
     Mssets: 'My assets',
     nformationto: 'Please upload the information to complete the real name certification.',
     Uploartification: 'Upload certification',
-    BindingGoogle:'Binding Google',
-    Retriepassword:'Retrieve password',
-    ReseGoogle:'Reset Google',
-    Transactirate:"Transaction rate",
-    UntieGoogle:'Untied Google',
-
+    BindingGoogle: 'Binding Google',
+    Retriepassword: 'Retrieve password',
+    ReseGoogle: 'Reset Google',
+    Transactirate: 'Transaction rate',
+    UntieGoogle: 'Untied Google'
 
   },
   foot: {
@@ -1106,7 +1105,8 @@ module.exports = {
         shouldfee: 'Fee payable',
         discountfee: 'Deduction fee',
         realfee: 'Service charge',
-        symbol: 'Coin symbol'
+        symbol: 'Coin symbol',
+        nodata: 'No Data'
       },
       recharge: {
         recharge: 'Recharge',
