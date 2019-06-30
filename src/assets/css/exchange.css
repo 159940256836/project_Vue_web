@@ -419,6 +419,11 @@ p.math_price {
     text-align: right;
     padding-right: 15px;
 }
+/*.exchange .right .ivu-table ivu-table-tip tr td span,*/
+/*.exchange .left .ivu-table .ivu-table-tip td {*/
+/*    text-align: center;*/
+/*}*/
+
 .ivu-modal {
     width: 450px;
 }
@@ -507,7 +512,6 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 .exchange .ivu-table th,
 .exchange .ivu-table td {
     height: 30px;
-    text-align: left;
     padding-left: 28px;
 }
 .exchange .right .ivu-table td {
@@ -677,6 +681,7 @@ iframe {
 }
 
 .exchange .ivu-table-wrapper {
+    width: 100%;
     box-shadow: none;
     border: 0;
 }
@@ -982,3 +987,22 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td{
 .exchange .buy_table .ivu-table-wrapper .ivu-table .ivu-table-row td{
     border-bottom: 1px solid #0E0E28 !important;
 }
+
+/*.feature-no-touch ._tv-dialog .button:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch ._tv-dialog .custom-select .switcher:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch ._tv-dialog .favored-list-container span:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch ._tv-dialog .submenu:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .bottom-widgetbar-content.backtesting .button:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .bottom-widgetbar-content.backtesting .custom-select .switcher:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .bottom-widgetbar-content.backtesting .favored-list-container span:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .bottom-widgetbar-content.backtesting .submenu:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .header-chart-panel .button:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .header-chart-panel .custom-select .switcher:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .header-chart-panel .favored-list-container span:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .header-chart-panel .submenu:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .properties-toolbar .button:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .properties-toolbar .custom-select .switcher:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .properties-toolbar .favored-list-container span:not(.disabled):not(.selected):hover:before,*/
+/*.feature-no-touch .properties-toolbar .submenu:not(.disabled):not(.selected):hover:before {*/
+/*    border: 0;*/
+/*}*/

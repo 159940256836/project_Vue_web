@@ -79,13 +79,23 @@
             <div class="center">
                 <div class="symbol">
                     <div class="item" @click="currentCoinFavorChange">
-                        <Icon v-if="currentCoinIsFavor" type="ios-star" color="#3399ff" size="24" />
-                        <Icon v-else type="ios-star-outline" color="#3399ff" size="24" />
+                        <Icon
+                            v-if="currentCoinIsFavor"
+                            type="ios-star"
+                            color="#3399ff"
+                            size="22"
+                        />
+                        <Icon
+                            v-else
+                            type="ios-star-outline"
+                            color="#3399ff"
+                            size="22"
+                        />
                     </div>
                     <div class="item">
                         <span class="coin">
                             {{currentCoin.coin?currentCoin.coin:'---'}}
-                            <small>/{{currentCoin.base?currentCoin.base:'---'}}</small>
+                            <small style="font-size: 18px">/{{currentCoin.base?currentCoin.base:'---'}}</small>
                         </span>
                     </div>
                     <div class="item">
@@ -790,6 +800,7 @@ $night-color: #fff;
         .item {
             min-width: 30px;
             margin-left: 15px;
+            line-height: 21px;
             &:first-child {
                 margin-left: 0;
             }
@@ -2991,7 +3002,7 @@ export default {
                 })
     },
     cancelCollect(index, row) {
-      if (!this.isLogin) {
+        if (!this.isLogin) {
         this.$Message.info(this.$t('common.logintip'))
         return
       }

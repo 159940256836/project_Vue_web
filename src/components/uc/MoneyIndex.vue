@@ -441,7 +441,7 @@ export default {
     }
     .rightarea.bill_box {
       .ivu-table {
-        margin-top: 16px;
+        margin-top: 22px;
       }
       .ivu-table-body {
         td {
