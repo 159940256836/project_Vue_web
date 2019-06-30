@@ -148,10 +148,10 @@
       :title="$t('apiAdmin.access')"
       :mask-closable="false"
     >
-      <p class="screat">{{$t('apiAdmin.tips')}}</p>
-      <p class="screat">
+      <p class="screat" style="color:#fff">{{$t('apiAdmin.tips')}}</p>
+      <p class="screat" style="color:#3399ff">
         <!--{{screat}}-->
-        <span>{{screat}}</span>
+        <span style="color:#fff">{{screat}}</span>
         <span
           v-clipboard:copy="screat"
           v-clipboard:success="onCopy"
