@@ -677,7 +677,7 @@ export default {
                   this.$Message.success(resp.message);
                   var that = this;
                   setTimeout(() => {
-                    that.$router.push("/uc/ad");
+                    that.$router.push("/otc/trade/bc");
                   }, 3000);
                 } else {
                   this.$Message.error(resp.message);
@@ -695,7 +695,7 @@ export default {
                   this.$Message.success(resp.message);
                   var that = this;
                   setTimeout(() => {
-                    that.$router.push("/uc/ad");
+                    that.$router.push("/otc/trade/bc");
                   }, 3000);
                 } else {
                   this.$Message.error(resp.message);
@@ -1111,6 +1111,13 @@ export default {
       }
       .ivu-radio-inner {
         background: transparent;
+      }
+    }
+    .ivu-btn[disabled] {
+      &:hover {
+        background: #3399ff;
+        color: #fff;
+        border: 0;
       }
     }
   }

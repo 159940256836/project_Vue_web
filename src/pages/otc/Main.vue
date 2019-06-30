@@ -342,9 +342,10 @@
     .fiat-main {
       width: 1200px;
       margin: 0 auto;
-      padding: 26px 0;
+      padding: 20px 0;
       .content {
         width: 100%;
+        position: relative;
         /*margin: 20px auto;*/
       }
       .advantage {
@@ -400,17 +401,19 @@
         height: 20px;
       }
       .ivu-tabs-bar {
-        border-bottom: none;
+        margin-bottom: 75px;
       }
       .ivu-tabs-nav-scroll {
-        margin-top: 26px;
         height: 55px;
         background: #191D3A;
         padding: 0 24px;
       }
       .ivu-menu-light {
+        width: 100%;
         height: 55px;
         background: #191D3A;
+        position: absolute;
+        top: 74px;
       }
       .ivu-tabs-nav .ivu-tabs-tab {
         line-height: 38px;
@@ -452,20 +455,23 @@
       .ivu-table td, .ivu-table th {
         border: 0;
       }
-      /*#list1 li:nth-of-type(odd){ background:#00ccff;*/
+      /*#list1 li:nth-of-type(odd){ background:#00ccff;}*/
       /*#list1 li:nth-of-type(even){ background:#ffcc00;}*/
-      &:nth-of-type(odd) {
-        .ivu-table td {
-          background: #111530;
-          color: #fff;
+      .ivu-table-row {
+        &:nth-of-type(odd) {
+          .ivu-table td {
+            background: #111530;
+            color: #fff;
+          }
+        }
+        &:nth-of-type(even) {
+          .ivu-table td {
+            background: #fff;
+            color: #fff;
+          }
         }
       }
-      &:nth-of-type(even) {
-        .ivu-table td {
-          /*background: #fff;*/
-          color: #fff;
-        }
-      }
+
       /*.ivu-table td {*/
       /*  background: #111530;*/
       /*}*/

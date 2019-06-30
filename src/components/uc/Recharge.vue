@@ -94,7 +94,7 @@
 
                         <div class="action-content">
                             <div class="action-body">
-                                <p class="acb-p1">{{$t('uc.finance.recharge.record')}}</p>
+                                <p class="acb-p1 acb-p">{{$t('uc.finance.recharge.record')}}</p>
                                 <div class="order-table">
                                     <Table
                                         stripe
@@ -337,11 +337,13 @@ export default {
             border-radius: 3px;
             .action-main {
                 background: #111530;
-                height:314px;
-                padding: 25px;
+                height:320px;
+                padding: 0 25px;
                 .action-inner {
                     width: 100%;
                     display: table;
+                    border-bottom: 1px solid #2A3850;
+                    padding: 12px 0;
                     .inner-box.deposit-address {
                         width: 80%;
                         line-height: 50px;
@@ -382,10 +384,12 @@ export default {
                 }
             }
         }
-
+        .acb-p {
+            font-size: 16px !important;
+        }
         .acb-p1 {
             color: #fff;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
             line-height: 50px;
         }
@@ -393,7 +397,7 @@ export default {
         .acb-p2 {
             color: #8090AF;
             font-size: 14px;
-            line-height: 24px;
+            line-height: 30px;
         }
 
         /*.action-box .title .copy {*/

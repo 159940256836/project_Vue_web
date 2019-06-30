@@ -7,7 +7,7 @@
         <div class="help_container">
             <!-- <h1>{{cateTitle}}</h1> -->
             <!-- <h1>{{$t("footer.helpCenter")}}</h1> -->
-            <div style="display:flex; height:50px;line-height:50px; text-align:center; background:#191d3a !important">
+            <div style="display:flex; height:50px;line-height:50px; text-align:center; background:#191d3a !important; cursor: pointer;">
                 <div style="margin-left:10px; width:120px; text-aling:center;" v-for="(item, index) in selectList" :key='index' class="select_list" :class="cate == item.status ? 'on' : ''" @click="changeStatus(item.status)">{{item.klassName}}</div>
             </div>
             <div></div>
@@ -38,6 +38,9 @@
     </div>
 </template>
 <style lang="scss" scoped>
+.select_list[data-v-9dbbb4ae]:hover{
+    color:#fff;
+}
 .list .item[data-v-9dbbb4ae]{
     color:#fff !important;
 }
@@ -51,7 +54,7 @@
     color:#57a3f3;
 }
 .select_list.on{
-    color: #2d8cf0;
+    color: #2d8cf0 !important;
 }
 .helpList_page{
     margin-top:20px;

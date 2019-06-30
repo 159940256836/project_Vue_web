@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-right tradeCenter">
+  <div class="nav-right-trade tradeCenter">
     <!-- <section class="trade-group merchant-top"> -->
     <!-- <i class="merchant-icon tips"></i>
             <span class="tips-word">{{this.coin.toUpperCase()}}</span> -->
@@ -17,6 +17,7 @@
         >
           <div class="table-responsive list-table">
             <Table
+              stripe
               :no-data-text="$t('common.nodata')"
               :border="showBorder"
               :stripe="showStripe"
@@ -44,6 +45,7 @@
         <TabPane :label="$t('otc.sellout')" name="sell">
           <div class="table-responsive list-table">
             <Table
+              stripe
               :no-data-text="$t('common.nodata')"
               :border="showBorder"
               :stripe="showStripe"
@@ -74,7 +76,7 @@
 </template>
 
 <style scoped lang="scss">
-#List .nav-right {
+#List .nav-right-trade {
   color: #26264c;
   padding-right: 0;
   .list-content {
@@ -89,9 +91,14 @@
   .el-table .success-row {
     background: #ebf1fb;
   }
-#List .nav-right {
+#List .nav-right-trade {
   color: #26264c;
   padding-right: 0;
+  .ivu-table-header {
+    th {
+      height: 51px;
+    }
+  }
   .list-content {
     color: #0d214e;
     .ivu-tabs {
@@ -129,7 +136,16 @@
             border: none;
             .ivu-table-body{
               .ivu-table-tbody{
-                .ivu-table-row{
+                .ivu-table-row {
+                  td {
+                    background: #10122B;
+                  }
+                  &:nth-child(2n) {
+                    td {
+                      background: #111530;
+                      border-bottom: 0 !important;
+                    }
+                  }
                   .ivu-table-cell.ivu-table-cell-ellipsis{
                     .user-face.user-avatar-public{
                       img {
@@ -309,13 +325,13 @@
 //   justify-content: center;
 // }
 
-#List .nav-right .list-content .list-table .user-name .user-icon span {
+#List .nav-right-trade.list-content .list-table .user-name .user-icon span {
   font-size: 22px;
   color: white;
   align-self: center;
 }
 
-#List .nav-right .list-content .list-table .user-name .user-info {
+#List .nav-right-trade .list-content .list-table .user-name .user-info {
   margin-left: 5%;
   width: 100px;
   word-wrap: inherit;
@@ -324,7 +340,7 @@
   justify-content: center;
 }
 
-#List .nav-right .list-content .list-table .user-name .user-info p {
+#List .nav-right-trade .list-content .list-table .user-name .user-info p {
   height: 16px;
   margin: 0 0 3px;
 }
@@ -369,16 +385,16 @@
 //   color: #fff;
 // }
 
-#List .nav-right .list-content .pagelist {
+#List .nav-right-trade .list-content .pagelist {
   display: flex;
   justify-content: flex-end;
 }
 
-#List .nav-right .list-content .pagelist ul {
+#List .nav-right-trade .list-content .pagelist ul {
   list-style: none;
 }
 
-#List .nav-right .list-content .pagelist ul li {
+#List .nav-right-trade .list-content .pagelist ul li {
   display: inline-block;
   background-color: #ebeff5;
   height: 32px;
@@ -391,11 +407,11 @@
   margin: 0 2px;
 }
 
-#List .nav-right .list-content .pagelist ul li:hover {
+#List .nav-right-trade .list-content .pagelist ul li:hover {
   background-color: #c5cdd7;
 }
 
-#List .nav-right .list-content .pagelist ul li a {
+#List .nav-right-trade .list-content .pagelist ul li a {
   color: #26264c;
 }
 
@@ -794,7 +810,8 @@
   text-align: center;
   line-height: 42px;
 }
-.ivu-table-wrapper .ivu-table .ivu-table-header th {
+.ivu-table-wrapper .ivu-table .ivu-table-header th,
+.ivu-table-wrapper .ivu-table td {
   color: #8090AF;
   background-color: #111530;
 }
@@ -1056,9 +1073,11 @@ export default {
                   "p",
                   {
                     style: {
+                      fontSize: '12px',
                       color: params.row.advertiseType == 0 ? "rgba(241, 80, 87)" : "rgb(0, 178, 117)",
-                      height: '25px',
-                      lineHeight: '25px',
+                      width: '50px',
+                      height: '24px',
+                      lineHeight: '23px',
                       cursor: 'pointer',
                       border: params.row.advertiseType == 0 ? "1px solid rgba(241, 80, 87)" : "1px solid rgb(0, 178, 117)",
                     },

@@ -105,7 +105,7 @@
                             v-for="(list,index) in buttonLists"
                             :key="list.text"
                             class="btStyle"
-                            style="text-align:center;margin-left:35px;"
+                            style="text-align:center;margin-left:35px;cursor: pointer;"
                             :class="{active:changeActive == index}"
                             @click="actives(index)"
                         >
@@ -344,6 +344,7 @@ export default {
 }
 </script>
 <style>
+
 .nav-right .btStyle :nth-child(2){
     margin-left:35px;
 }
@@ -369,8 +370,9 @@ export default {
 </style>
 
 <style scoped lang="scss">
+
 .nav-right .btStyle[data-v-be09f418][data-v-be09f418]{
-    color:#8090af !important;
+    // color:#8090af !important;
 }
 
 .newMyExtension{
