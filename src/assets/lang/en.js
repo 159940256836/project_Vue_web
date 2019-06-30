@@ -43,6 +43,7 @@ module.exports = {
     confirm: 'confirm'
   },
   new: {
+    Announcemcenter:'Announcement center',
     Detailss: 'Details',
     Currenrtification: 'Current level certification',
     Currentasset: 'Current asset valuation',

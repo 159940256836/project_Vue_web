@@ -603,10 +603,11 @@ export default {
                   display:"inline-block",
                   height:"30px",
                   // background:"#3399ff",
-                  color:"#fff",
+                  color:"#3399ff",
                   width:'50px',
                   lineHeight:"30px",
                   textAlign:"center",
+                  border:'1px solid #3399ff'
 
                 },
                 on: {
@@ -633,7 +634,9 @@ export default {
                   color:"#fff",
                   width:'50px',
                   lineHeight:"30px",
-                  // textAlign:"center",
+                  color:"#ed4014",
+                  border:'1px solid #ed4014 ',
+                  textAlign:"center",
 
                 },
                 on: {
