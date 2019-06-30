@@ -1359,7 +1359,7 @@ module.exports = {
       upload: '上传图片大小不能超过2M',
       placeholder: '请填写取消原因',
       apply: '申请成为商家',
-      become: '成为bdw认证商家， 享更多交易特权',
+      become: '成为币多OTC加V用户，获得广告发布权限，享受更多交易特权',
       zhusnhu: '商家享有专属广告展位，增加交易成功率',
       tijiaoziliao: '提交商家认证资料',
       place: '请您将准备好的商家认证资料上传至平台并提交',

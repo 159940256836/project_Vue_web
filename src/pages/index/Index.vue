@@ -135,10 +135,10 @@
                             {{item.text}}
                         </li>
                     </ul>
-                    <div class="search">
+                    <!-- <div class="search">
                         <i class="vertical"></i>
                         <i-input icon="ios-search" placeholder="搜索交易币种" style="width:140px"></i-input>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="ptjy">
                     <Table
@@ -195,21 +195,21 @@
                     <div class="qrcode">
                       <div class="Qrleft" v-show="this.checkoutapp">
                         <div class="android" @click="checkoutfasle">
-                          <Icon type="logo-android" color="white" size="20" style="margin:0 12px 0 17px"/>
+                            <img src="../../assets/img/ad.png" style="margin:0 24px 0 34px" alt="">
                           <span>Android</span>
                         </div>
                         <div class="ipone click" @click="checkouttrue">
-                          <Icon type="logo-apple" color="white" size="20" style="margin:0 12px 0 17px"/>
+                            <img src="../../assets/img/ios.png" style="margin:0 24px 0 34px" alt="">
                           <span>Iphone</span>
                         </div>
                       </div>
                       <div class="Qrleft" v-show="!checkoutapp">
                           <div class="android click" @click="checkoutfasle">
-                            <Icon type="logo-android" color="white" size="20" style="margin:0 12px 0 17px"/>
+                            <img src="../../assets/img/ad.png" style="margin:0 24px 0 34px" alt="">
                             <span>Android</span>
                           </div>
                           <div class="ipone" @click="checkouttrue">
-                            <Icon type="logo-apple" color="white" size="20" style="margin:0 12px 0 17px"/>
+                            <img src="../../assets/img/ios.png" style="margin:0 24px 0 34px" alt="">
                             <span>Iphone</span>
                           </div>
                       </div>
@@ -1701,15 +1701,18 @@ li {
         .ivu-table-wrapper {
             .ivu-table {
                 .ivu-table-row {
+                  background:transparent !important;
                     &:nth-of-type(odd) td{
                         background: rgba(17,22,52,1);
                         color:#fff;
                         font-size:14px;
+                        height:40px;
                     }
                     &:nth-of-type(even) td{
-                        background: #11132C;
+                        background:transparent !important;
                         color:#fff;
                         font-size:14px;
+                        height:40px;
                     }
                 }
             }
@@ -1728,6 +1731,7 @@ li {
     height: auto;
     width: 1200px;
     margin: 50px auto;
+    margin-bottom: 150px;
     min-height: 350px;
     display: flex;
     justify-content: space-between;
@@ -1735,23 +1739,23 @@ li {
     .left{
         float:left;
         .text{
-          font-size:30px;
+          font-size:42px;
           margin-bottom:15px;
           color:#FFFFFF;
           display: inline-block;
         }
         p{
-          font-size:14px;
+          font-size:20px;
           color:#FFFFFF;
           margin-bottom:28px;
         }
         .qrcode{
           display: flex;
-          width:300px;
+          width:320px;
           .Qrleft{
             .android{
-              width: 130px;
-              height: 40px;
+              width: 180px;
+              height: 48px;
               background:rgba(25,29,58,1);
               border:1px solid rgba(85,99,130,1);
               margin-bottom:12px;
@@ -1764,8 +1768,8 @@ li {
               }
             }
             .ipone{
-              width: 130px;
-              height: 40px;
+              width: 180px;
+              height: 48px;
               background:rgba(25,29,58,1);
               border:1px solid rgba(85,99,130,1);
               display: flex;
@@ -1781,10 +1785,10 @@ li {
             }
           }
           .Qrright{
-                width: 90px;
-                height: 90px;
+                width: 108px;
+                height: 108px;
                 background: #fff;
-                margin-left: 13px;
+                margin-left: 26px;
             img{
                 width: 90%;
                 margin: 5% 0 0 5%;
@@ -1884,6 +1888,7 @@ li {
     .tables {
         .ivu-table {
               background-color:transparent;
+              font-size:14px;
             .ivu-table-header {
                 th {
                     color: #8090AF;

@@ -539,11 +539,14 @@ export default {
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
                             height: 42px !important;
-                            border: 1px solid #3399FF;
+                            border:1px solid;
+                            color:#FFF;
+                            border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
+                            opacity:0.62;
                             font-size: 14px;
                             border-radius: 0;
                             background:#10122B;
-                            color:#8090AF;
+                            color:#fff;
                             &:focus {
                                 border: 1px solid #3399FF;
                             }

@@ -180,7 +180,7 @@ $primary-color: #3399ff;
             margin-top: 109px;
             .right-border {
                 height: 230px;
-                border-left: 1px solid rgba(221,221,221,1);
+                border-left: 1px solid rgba(51,153,255,1);
                 .right-main {
                     float: right;
                     width: 270px;
@@ -195,7 +195,7 @@ $primary-color: #3399ff;
                         }
                     }
                     p {
-                        color: #fff;
+                        color: #8090AF;
                         font-size: 14px;
                     }
                 }
@@ -226,9 +226,10 @@ $primary-color: #3399ff;
         height: 20px;
         line-height: 25px;
         overflow: hidden;
-        font-size: 12px;
         span {
             float: left;
+            color: #8090AF;
+             font-size: 12px;
         }
         a {
             float: left;
@@ -486,7 +487,15 @@ export default {
       params.username = formParams.user
       params.password = formParams.password
       params.code = formParams.googleCode
-      params.checkCode = formParams.checkCode
+      if (this.openGoogleCode) {
+        params.code = formParams.googleCode
+      }
+      if (this.openPhoneCode) {
+        params.checkCode = this.formInline.checkCode
+      }
+      if (this.openEmailCode) {
+        params.checkCode = this.formInline.emailCode
+      }
       this.$http.post(this.host + this.api.uc.login, params).then(response => {
         var resp = response.body
         if (resp.code == 0) {
@@ -529,7 +538,7 @@ $white:#fff;
                             border:1px solid;
                             border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
                             opacity:0.62;
-                            color:#8090AF;
+                            color:#fff;
                             &:focus {
                                 border: 1px solid $focusColor;
                                 box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
