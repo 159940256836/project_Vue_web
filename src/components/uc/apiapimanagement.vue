@@ -746,6 +746,8 @@ export default {
 }
 
 .edit_let-code{
+  position:relative;
+  top:100px;
   .ivu-modal-body{
     margin-top:30px;
   }
