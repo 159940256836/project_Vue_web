@@ -953,10 +953,10 @@ export default {
 }
 .bun {
   height: 40px;
-  background:#3399ff;
-  color:#fff;
-  border:1px solid #3399ff;
-  border-radius: 0;
+  background:#3399ff !important;
+  color:#fff !important;
+  border:1px solid #3399ff !important;
+  border-radius: 0 !important;
 }
 .formbox {
   float: left;
