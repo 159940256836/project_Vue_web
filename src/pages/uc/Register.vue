@@ -1,5 +1,5 @@
 <template>
-    <div class="login_form" id="logo">
+    <div class="login_form" id="button">
         <div class="wrap-mask"></div>
         <div class="login_right">
             <Form
@@ -137,9 +137,10 @@
 <style scoped lang="scss">
 #button{
   .ivu-btn{
-      padding: 5px 15px 6px;
+      padding: 5px 0px 6px;
       font-size:14px;
       height:48px;
+      box-shadow:0 
   }
   .ivu-btn:hover{
     border:0;
@@ -184,10 +185,12 @@
                         border-radius: 0;
                         font-size: 18px;
                         margin-top: 20px;
-                        // &:focus {
-                        //     box-shadow: 2px 2px 5px transparent,
-                        //         -2px -2px 4px transparent;
-                        // }
+
+                        &:focus {
+                            // box-shadow: 2px 2px 5px transparent,
+                            //     -2px -2px 4px transparent;
+                                outline: none;
+                        }
                     }
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
