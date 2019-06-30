@@ -144,6 +144,9 @@
   .ivu-btn:hover{
     border:0;
   }
+  .ivu-btn:focus{
+    box-shadow:0;
+  }
 }
 .login_form {
     background: #f9f9f9 url('../../assets/images/brnner.png') no-repeat center
@@ -184,10 +187,10 @@
                         border-radius: 0;
                         font-size: 18px;
                         margin-top: 20px;
-                        // &:focus {
-                        //     box-shadow: 2px 2px 5px transparent,
-                        //         -2px -2px 4px transparent;
-                        // }
+                        &:focus {
+                            box-shadow: 2px 2px 5px transparent,
+                                -2px -2px 4px transparent;
+                        }
                     }
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
