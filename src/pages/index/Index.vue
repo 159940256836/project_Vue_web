@@ -65,7 +65,7 @@
                         <p class="flex">
                             <span
                                 class="pairs-sip sip"
-                                :class="{green: item.isGreen}"
+  
                                 v-if="item.isGreen"
                             >
                                 {{item.close}}
@@ -1535,14 +1535,15 @@ li {
                     font-weight: 600;
                 }
                 .sip {
-                    font-size: 18px;
+                    font-size: 14px;
                     font-weight: bold;
+                     color: #CDD2E5;
                 }
                 .pairs-sip {
-                    color: #03bf7b;
+                    color: #CDD2E5;
                 }
                 .pairs-pri {
-                    font-size: 10px;
+                    font-size: 14px;
                     color: #CDD2E5;
                 }
             }

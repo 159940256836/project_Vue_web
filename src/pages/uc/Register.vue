@@ -1,7 +1,7 @@
 <template>
-    <div class="login_form" id="button">
+    <div class="login_form" id="logo">
         <div class="wrap-mask"></div>
-        <div class="login_right">
+        <div class="login_right" id="button">
             <Form
                 v-if="allowRegister"
                 ref="formInline"
@@ -135,17 +135,6 @@
     </div>
 </template>
 <style scoped lang="scss">
-#button{
-  .ivu-btn{
-      padding: 5px 0px 6px;
-      font-size:14px;
-      height:48px;
-      box-shadow:0 
-  }
-  .ivu-btn:hover{
-    border:0;
-  }
-}
 .login_form {
     background: #f9f9f9 url('../../assets/images/brnner.png') no-repeat center
         center;
@@ -685,10 +674,10 @@ $focusColor:#3399FF;
                             color: $main_theme;
                             border-bottom: 2px solid $main_theme;
                         }
-                        // &:focus {
-                        //     box-shadow: 2px 2px 5px transparent,
-                        //         -2px -2px 4px transparent;
-                        // }
+                        &:focus {
+                            box-shadow: 2px 2px 5px transparent,
+                                -2px -2px 4px transparent;
+                        }
                     }
                 }
             }
@@ -734,5 +723,20 @@ border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 
             }
         }
     }
+}
+#button{
+  .ivu-btn{
+      padding: 5px 0px 6px;
+      font-size:14px;
+      height:48px;
+      border-bottom: 2px solid transparent;
+      box-shadow:0;
+  }
+  .ivu-btn:hover{
+    // border:0;
+  }
+  .ivu-btn:focus{
+    box-shadow: 0 !important;
+  }
 }
 </style>
