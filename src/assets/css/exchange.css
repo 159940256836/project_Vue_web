@@ -466,7 +466,7 @@ p.math_price {
 .ivu-table-stripe .ivu-table-body tr.ivu-table-row-highlight:nth-child(2n) td,
 .ivu-table-stripe .ivu-table-fixed-body tr.ivu-table-row-highlight:nth-child(2n) td,
 tr.ivu-table-row-highlight.ivu-table-row-hover td {
-    background: #262A42;
+    background: transparent !important;
 }
 .exchange .ivu-table-overflowY::-webkit-scrollbar {
     width: 5px; /*对垂直流动条有效*/
@@ -953,7 +953,9 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td{
     display: none;
     font-size: 0;
 }
-
+.exchange .ivu-table-wrapper .ivu-table td {
+    background: transparent !important;
+}
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd .ivu-table-cell {
     position: absolute;
     width: 100%;

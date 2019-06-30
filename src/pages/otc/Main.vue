@@ -450,6 +450,7 @@
         }
       }
       .ivu-table-large td {
+        background: #10122B;
         height: 50px;
       }
       .ivu-table td, .ivu-table th {
@@ -479,6 +480,9 @@
         background: #0e0e28;
         .ivu-table-wrapper {
           .ivu-table {
+            td {
+              background: #10122B;
+            }
             &:before {
               /*background: #fff;*/
             }

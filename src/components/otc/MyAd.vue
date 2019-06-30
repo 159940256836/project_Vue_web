@@ -52,13 +52,11 @@ export default {
         {
           title: self.$t("otc.myad.no"),
           key: "id",
-          width: 55,
           align: "center"
         },
         {
           title: self.$t("otc.myad.type"),
           key: "advertiseType",
-          width: 90,
           align: "center",
           render: (h, params) => {
             let text = "";
@@ -73,7 +71,6 @@ export default {
         {
           title: self.$t("otc.myad.limit"),
           key: "limit",
-          width: 100,
           align: "center",
           render: (h, params) => {
             return h("div", [
@@ -84,25 +81,21 @@ export default {
         {
           title: self.$t("otc.myad.remain"),
           key: "remainAmount",
-          width: 90,
           align: "center"
         },
         {
           title: self.$t("otc.myad.coin"),
           key: "coinUnit",
-          width: 100,
           align: "center"
         },
         {
           title: self.$t("otc.myad.created"),
           key: "createTime",
-          width: 160,
           align: "center"
         },
         {
           title: self.$t("otc.myad.operate"),
           key: "buyBtn",
-          width: 180,
           align: "center",
           render: function(h, params) {
             return h("p", [
@@ -376,18 +369,25 @@ export default {
             }
             .ivu-table {
                 td {
+                    text-align: left;
                     background-color: #111530;
                     color: #8090AF;
                     .ivu-table-cell {
                         padding-right: 0;
                     }
+                    &:first-child {
+                        text-align: left;
+                        padding-left: 18px;
+                    }
                 }
                 .ivu-table-header {
                     th {
+                        text-align: left;
                         padding: 15px 0;
                         background: #191D3A;
                         border-color: transparent;
                         &:first-child {
+                            text-align: left;
                             padding-left: 18px;
                         }
                         &:last-child {

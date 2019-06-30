@@ -27,6 +27,7 @@ module.exports = {
     name: 'bdw--国际数字加密资产交易平台'
   },
   new: {
+    Announcemcenter:"公告中心",
     Detailss: '详情',
     Currenrtification: '当前等级认证',
     Currentasset: '当前资产总估值',
