@@ -318,9 +318,9 @@ $pageTheme: rgb(13, 70, 125);
 .father .ivu-tabs-nav .ivu-tabs-tab-active{
     color:#3399FF !important;
 }
-// .father .ivu-tabs-nav .ivu-tabs-tab:hover{
-//     color:#fff;
-// }
+.father .ivu-tabs-nav .ivu-tabs-tab:hover{
+    color:#fff;
+}
 </style>
 
 
