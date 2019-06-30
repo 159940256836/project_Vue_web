@@ -142,7 +142,7 @@ export default {
                 height: 60px;
                 line-height: 60px;
                 font-size: 20px;
-                margin-bottom: 16px;
+                margin-bottom: 22px;
                 background: #111530;
                 padding: 0 28px;
                 span {
@@ -159,6 +159,7 @@ export default {
                 line-height: 60px;
                 padding: 0 28px;
                 background: #111530;
+                margin-bottom: 22px;
                 span {
                     color: #8090af;
                     font-size: 14px;

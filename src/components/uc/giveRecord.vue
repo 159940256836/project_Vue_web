@@ -151,6 +151,7 @@ export default {
                 line-height: 60px;
                 background: #111530;
                 padding: 0 28px;
+                margin-bottom: 22px;
                 span {
                     color: #8090af;
                     font-size: 14px;

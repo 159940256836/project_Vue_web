@@ -8210,7 +8210,6 @@ div.symbol-edit-popup .exchange-filter .sbToggle {
 .hotlist-controls .button.active,
 .save-load-buttons .active,
 .symbol-edit-widget .button.active {
-    background: #f2f5f8!important;
     color: #333
 }
 
@@ -8262,7 +8261,6 @@ div.symbol-edit-popup .exchange-filter .sbToggle {
 .favored-list-container span.selected,
 .feature-no-touch .favored-list-container span:active,
 .feature-touch .favored-list-container span:active {
-    background: #f2f5f8!important;
     color: #58c3e5
 }
 

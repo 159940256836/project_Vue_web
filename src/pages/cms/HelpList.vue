@@ -48,6 +48,7 @@
 .select_list{
     // background:#2d8cf0;
     color:#fff;
+    cursor: pointer;
 }
 .select_list:hover{
     color:#57a3f3;
@@ -189,92 +190,91 @@
 </style>
 <script>
 export default {
-    data() {
-        return {
-            cate: 0,
-            pageNo: 1,
-            pageSize: 10,
-            total: 0,
-            list: [],
-            cate:0,
-            showPage: false
-        };
-    },
-    created() {
+  data() {
+    return {
+      cate: 0,
+      pageNo: 1,
+      pageSize: 10,
+      total: 0,
+      list: [],
+      cate: 0,
+      showPage: false
+    }
+  },
+  created() {
         // this.$store.commit("navigate", "nav-uc");
         // const { cate, cateTitle } = this.$route.query;
         // this.cate = cate;
         // this.cateTitle = cateTitle;
-        this.getData();
-        this.settiele();
+    this.getData()
+    this.settiele()
+  },
+  computed: {
+    selectList() {
+      var list = []
+      list.push({ status: 0, klassName: this.$t('footer.RecommendedCommission') })
+      list.push({ status: 1, klassName: this.$t('footer.question') })
+      list.push({ status: 2, klassName: this.$t('footer.Recharguide') })
+      list.push({ status: 3, klassName: this.$t('footer.Tradiguide') })
+      return list
+    }
+  },
+  watch: {
+    $route(to, from) {
+            // this.getAllData();
+    }
+  },
+  methods: {
+    pageChange(data) {
+      this.pageNo = data
+      this.getData()
     },
-    computed: {
-        selectList() {
-            var list = [];
-            list.push({ status: 0, klassName: this.$t("footer.RecommendedCommission")});
-            list.push({ status: 1, klassName: this.$t("footer.question") });
-            list.push({ status: 2, klassName: this.$t("footer.Recharguide") });
-            list.push({ status: 3, klassName: this.$t("footer.Tradiguide") });
-            return list
-        }
+    changeStatus(n) {
+      this.pageNo = 1
+      this.cate = n
+      this.getData()
     },
-    watch: {
-        $route(to, from) {
-            //this.getAllData();
-        }
-    },
-    methods: {
-        pageChange(data) {
-            this.pageNo = data;
-            this.getData();
-        },
-        changeStatus(n) {
-            this.pageNo = 1;
-            this.cate = n;
-            this.getData();
-        },
-        getAllData(){//查询所有帮助
-            let params = {
-                pageNo: this.pageNo,
-                pageSize: this.pageSize,
-                cate: this.cate
-            };
-            this.$http
+    getAllData() { // 查询所有帮助
+      const params = {
+        pageNo: this.pageNo,
+        pageSize: this.pageSize,
+        cate: this.cate
+      }
+      this.$http
                 // .post(this.host + "/uc/ancillary/system/help", params)
-                .post(this.host + "/uc/ancillary/more/help/page", params)
+                .post(this.host + '/uc/ancillary/more/help/page', params)
                 .then(res => {
-                    if (res.status == 200 && res.body.code == 0) {
-                        this.list = res.body.data.content;
-                    } else {
-                        this.$Message.error(res.body.message);
-                    }
-                });
-        },
-        getData() {//查询指定类型的帮助;
-            let params = {
-                pageNo: this.pageNo,
-                pageSize: this.pageSize,
-                cate: this.cate
-            };
-            this.$http
-                .post(this.host + "/uc/ancillary/more/help/page", params)
-                .then(res => {
-                    if (res.status == 200 && res.body.code == 0) {
-                        if (res.body.data.totalElements > 10) {
-                            this.showPage = true;
-                        } else {
-                            this.showPage = false;
-                        }
-                        this.list = res.body.data.content;
-                        this.total = res.body.data.totalElements;
-                    } else {
-                        this.$Message.error(res.body.message);
-                    }
-                });
-                
-        }
+                  if (res.status == 200 && res.body.code == 0) {
+                    this.list = res.body.data.content
+                  } else {
+                    this.$Message.error(res.body.message)
+                  }
+                })
     },
-    mounted() {
+    getData() { // 查询指定类型的帮助;
+      const params = {
+        pageNo: this.pageNo,
+        pageSize: this.pageSize,
+        cate: this.cate
+      }
+      this.$http
+                .post(this.host + '/uc/ancillary/more/help/page', params)
+                .then(res => {
+                  if (res.status == 200 && res.body.code == 0) {
+                    if (res.body.data.totalElements > 10) {
+                      this.showPage = true
+                    } else {
+                      this.showPage = false
+                    }
+                    this.list = res.body.data.content
+                    this.total = res.body.data.totalElements
+                  } else {
+                    this.$Message.error(res.body.message)
+                  }
+                })
+    }
+  },
+  mounted() {
         // const doc = document.body
         // const sreenHeight = doc.offsetHeight;
         // const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
@@ -282,8 +282,8 @@ export default {
         // const contentHeight = doc.getElementsByClassName("helplist")[0];
         // const bodyHeight = sreenHeight - headerHeight - footerHeight;
         // contentHeight.style.minHeight = bodyHeight + "px";
-    }
-};
+  }
+}
 </script>
 
 

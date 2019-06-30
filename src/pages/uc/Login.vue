@@ -211,11 +211,17 @@ $primary-color: #3399ff;
                         outline: none;
                         border-color: $primary-color;
                         color: #fff;
-                        font-size: 18px;
+                        font-size: 14px;
                         border-radius: 0;
                         margin-top: 15px;
                         &:focus {
-                            box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
+                            // box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
+                        }
+                        span{
+                          font-size:14px;
+                        }
+                        .ivu-btn:hover{
+                          border:0;
                         }
                     }
                 }
@@ -234,6 +240,7 @@ $primary-color: #3399ff;
         a {
             float: left;
             color: $primary-color;
+             font-size: 12px;
         }
     }
 }
@@ -529,7 +536,7 @@ $white:#fff;
                         .ivu-input {
                             background:#10122B;
                             width: 100%;
-                            height: 48px;
+                            height: 42px;
                             font-size: 14px;
                             border-radius: 0;
                             // border: 1px solid $changeColor;
@@ -537,11 +544,10 @@ $white:#fff;
                             box-sizing: border-box;
                             border:1px solid;
                             border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
-                            opacity:0.62;
-                            color:#fff;
+                            color:white;
                             &:focus {
                                 border: 1px solid $focusColor;
-                                box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
+                                // box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
                             }
                         }
                     }

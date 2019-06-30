@@ -135,6 +135,7 @@
                     size="large"
                     long
                     @click="handleSubmit('formValidateAddr')"
+                    style="color: #fff;height: 35px;"
                 >
                     {{$t('uc.finance.withdraw.save')}}
                 </Button>
@@ -479,6 +480,7 @@ export default {
             height: 60px;
             line-height: 60px;
             width: 100%;
+            margin-bottom: 22px;
             .inner-left {
                 width: 20%;
             }
@@ -544,6 +546,18 @@ span.describe {
 </style>
 <style lang="scss">
 .ivu-modal-content {
+    .ivu-btn {
+        color: #fff;
+        border: 0;
+    }
+    .ivu-input-group-large>.ivu-input-group-append {
+        min-width: 20px;
+    }
+    .ivu-btn[disabled] {
+        &:hover {
+            background: #111530;
+        }
+    }
     .ivu-form .ivu-form-item-label {
         color: #8090AF;
     }
@@ -581,6 +595,9 @@ span.describe {
 
     .ivu-modal-footer {
         border-top: 1px solid #2A3850 !important;
+        .ivu-btn-primary {
+            color: #8090af;
+        }
     }
     .ivu-modal-header {
         border-bottom: 1px solid #58698A;

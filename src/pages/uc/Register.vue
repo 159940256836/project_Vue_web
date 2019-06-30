@@ -122,7 +122,7 @@
                     </router-link>
                     <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
                 </div>
-                <FormItem>
+                <FormItem id="button">
                     <Button
                         class="register_btn"
                         @click="handleSubmit('formInline')"
@@ -135,6 +135,16 @@
     </div>
 </template>
 <style scoped lang="scss">
+#button{
+  .ivu-btn{
+      padding: 5px 15px 6px;
+      font-size:14px;
+      height:48px;
+  }
+  .ivu-btn:hover{
+    border:0;
+  }
+}
 .login_form {
     background: #f9f9f9 url('../../assets/images/brnner.png') no-repeat center
         center;
@@ -174,10 +184,10 @@
                         border-radius: 0;
                         font-size: 18px;
                         margin-top: 20px;
-                        &:focus {
-                            box-shadow: 2px 2px 5px transparent,
-                                -2px -2px 4px transparent;
-                        }
+                        // &:focus {
+                        //     box-shadow: 2px 2px 5px transparent,
+                        //         -2px -2px 4px transparent;
+                        // }
                     }
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
@@ -641,9 +651,8 @@ $focusColor:#3399FF;
                             box-sizing: border-box;
                             background:#10122B;
                             border:1px solid;
-                            color:#FFF;
+                            color:white;
                             border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
-                            opacity:0.62;
                             &:focus {
                                 border: 1px solid $focusColor;
                                 box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
@@ -673,10 +682,10 @@ $focusColor:#3399FF;
                             color: $main_theme;
                             border-bottom: 2px solid $main_theme;
                         }
-                        &:focus {
-                            box-shadow: 2px 2px 5px transparent,
-                                -2px -2px 4px transparent;
-                        }
+                        // &:focus {
+                        //     box-shadow: 2px 2px 5px transparent,
+                        //         -2px -2px 4px transparent;
+                        // }
                     }
                 }
             }
@@ -698,6 +707,7 @@ border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 
                 line-height: 42px;
                 border-right: 0;
                 color:#fff;
+                text-align: center;
             }
             .check-agree {
                 .ivu-checkbox-wrapper {

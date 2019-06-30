@@ -65,10 +65,13 @@
         color: #fff;
       }
     }
+    .ivu-tabs-bar {
+      margin-bottom: 22px;
+    }
   }
   #personal{
     .wrapper{
-      padding-bottom:72px;
+      padding-bottom: 65px;
     }
       .ivu-tabs-ink-bar{
       display:none !important;
@@ -198,41 +201,6 @@
           <GiveRecord v-if="activeName === 'giveRecord'"/>
         </TabPane>
       </Tabs>
-      <!--<Menu
-        :active-name="activename"
-        :open-names="opennames"
-        @on-open-change="sss"
-        ref="test"
-        :accordion="true"
-      >
-        <div class="title">{{$t("uc.title")}}</div>
-
-        <Submenu name="1">
-          <template slot="title">
-            <span class="isclick"></span>
-            <span class="content">{{$t("uc.menuTitle.moneyManagement")}}</span>
-          </template>
-          <Menu-item name="1-1">
-            <router-link to="/uc/money">{{$t('uc.finance.personalassets')}}</router-link>
-          </Menu-item>
-          <Menu-item name="1-2">
-            <router-link to="/uc/record">{{$t('uc.finance.billdetail')}}</router-link>
-          </Menu-item>
-          <Menu-item name="1-3">
-            <router-link to="/uc/recharge">{{$t('uc.finance.charge')}}</router-link>
-          </Menu-item>
-          <Menu-item name="1-4">
-            <router-link to="/uc/withdraw">{{$t('uc.finance.pickup')}}</router-link>
-          </Menu-item>
-          <Menu-item name="1-5">
-            <router-link to="/uc/bjc">{{$t('uc.finance.pointManagement')}}</router-link>
-          </Menu-item>
-          <Menu-item name="1-6">
-            <router-link to="/uc/giveRecord">{{$t('uc.finance.CandyGivingRecords')}}</router-link>
-          </Menu-item>
-        </Submenu>
-      </Menu>-->
-<!--      <router-view></router-view>-->
     </div>
   </div>
 
@@ -247,27 +215,15 @@ import Bjc from '../../components/uc/Bjc'
 import GiveRecord from '../../components/uc/giveRecord'
 export default {
   components: { Money, Record, Recharge, Withdraw, WithdrawAddress, Bjc, GiveRecord },
-  // mixins: [minHeightMinx],
   data() {
     return {
       activeName: 'money'
-      // activename: "1-1",
-      // opennames: ["1"],
-      // routeArr: {
-      //   "/uc/money": "1-1",
-      //   "/uc/record": "1-2",
-      //   "/uc/recharge": "1-3",
-      //   "/uc/withdraw": "1-4",
-      //   "/uc/bjc": "1-5",
-      //   "/uc/giveRecord": "1-6"
-      // }
     }
   },
   created: function() {
     this.changeTab()
     console.log(this.$route.path)
     const name = this.$route.path
-    // console.log(name.replace("/personal",""));
     switch (name) {
       case '/personal' || 'moneyindex':
         this.activeName = 'money'
@@ -294,78 +250,17 @@ export default {
         this.activeName = 'money'
         break
     }
-    // this.init();
-    // const path = this.$route.path;
-    // this.heightLightMenu(path);
-    // this.settiele();
   },
   methods: {
     changeTab(name) {
       console.log(name)
     },
     init() {
-      // this.$store.commit("navigate", "nav-uc");
-      // this.$store.state.HeaderActiveName = "1-6";
       if (!localStorage.TOKEN || !localStorage.MEMBER) {
         this.$Message.success(this.$t('common.logintip'))
         this.$router.push('/login')
       }
     }
-    // sss(name) {
-    //   console.log(name);
-    //   let index = 1;
-    //   if (name.length >= 1) {
-    //     index = name[name.length - 1];
-    //     this.opennames = [index];
-    //     this.activename = index + "-1";
-    //     this.link(this.activename);
-    //   } else {
-    //     return;
-    //   }
-    // },
-    // link(code) {
-    //   switch (code) {
-    //     case "1-1":
-    //       this.$router.push("/uc/safe");
-    //       break;
-    //     // case "2-1":
-    //     //   this.$router.push("/uc/money");
-    //     //   break;
-    //     // case "3-1":
-    //     //   this.$router.push("/uc/entrust/current");
-    //     //   break;
-    //     // case "4-1":
-    //     //   this.$router.push("/uc/ad");
-    //     //   break;
-    //     // case "5-1":
-    //     //   this.$router.push("/uc/ieoadmin");
-    //     //   break;
-    //     // case "6-1":
-    //     //   this.$router.push("/uc/apiManage");
-    //     //   break;
-    //     //   // case "7-1":
-    //     //   //     this.$router.push("/uc/level/current");
-    //     //   //     break;
-    //     //   // case "7-2":
-    //     //   //     this.$router.push("/uc/level/history");
-    //     //   //     break;
-    //     // default:
-    //     //   this.$router.push("/uc/safe");
-    //     //   break;
-    //   }
-    // },
-    // heightLightMenu(path) {
-    //   console.log(path);
-    //   let acName = this.routeArr[path] || "1-1",
-    //       opName = acName.split("-")[0];
-    //   this.opennames = [opName];
-    //   this.activename = acName;
-    //   console.log(this.opennames, this.activename);
-    //   this.$nextTick(function () {
-    //     this.$refs.test.updateOpened();
-    //     this.$refs.test.updateActiveName();
-    //   });
-    // }
   },
   watch: {
     $route(to, form) {

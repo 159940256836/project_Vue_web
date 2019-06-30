@@ -405,15 +405,13 @@ export default {
         }
     }
     .order-table {
-        margin-right: -1px;
-        margin-bottom: 25px;
+        margin: 22px 0 -1px;
     }
 }
 </style>
 <style lang="scss">
 .nav-record {
     .ivu-select-dropdown {
-        width: 128px;
         li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
             background: #10122B;
         }
