@@ -473,15 +473,13 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 }
 /*定义滚动条的轨道颜色、内阴影及圆角*/
 .exchange .ivu-table-overflowY::-webkit-scrollbar-track{
-    -webkit-box-shadow: inset 0 0 6px #27313e;
-    background-color: #13152F;
-    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 6px #131738;
+    background-color: #131738;
 }
 /*定义滑块颜色、内阴影及圆角*/
 .exchange .ivu-table-overflowY::-webkit-scrollbar-thumb{
-    border-radius: 7px;
-    -webkit-box-shadow: inset 0 0 6px #0E0E28;
-    background-color: #191d3a;
+    -webkit-box-shadow: inset 0 0 6px #21254D;
+    background-color: #21254D;
 }
 
 .exchange.day .ivu-table-overflowY::-webkit-scrollbar {
@@ -495,7 +493,6 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 }
 /*定义滑块颜色、内阴影及圆角*/
 .exchange.day .ivu-table-overflowY::-webkit-scrollbar-thumb{
-    border-radius: 7px;
     -webkit-box-shadow: inset 0 0 6px rgba(238, 238, 238, .9);
     background-color: rgba(238, 238, 238, .9);
 }
@@ -819,7 +816,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td{
 .exchange .ivu-slider-wrap {
     height: 6px;
     margin: 0;
-    background-color: rgb(32, 39, 64);
+    background-color: rgb(32, 39, 64) !important;
 }
 
 .exchange .slider-wrap {

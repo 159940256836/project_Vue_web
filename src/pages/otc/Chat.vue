@@ -353,17 +353,32 @@
                 </Col>-->
             </Row>
         </div>
-        <Modal v-model="modal1" :title="$t('otc.chat.tip')" @on-ok="ok1">
+        <Modal
+            v-model="modal1"
+            :title="$t('otc.chat.tip')"
+            @on-ok="ok1"
+        >
             <p style="color:red;font-weight: bold;">{{$t('otc.chat.msg1')}}</p>
         </Modal>
         <!-- <Modal v-model="modal2" :title="$t('otc.chat.tip')" @on-ok="ok2" :loading="isloading">
             <p style="color:red;font-weight: bold;">{{$t('otc.chat.msg2')}}</p>
         </Modal> -->
-        <Modal v-model="modal3" :title="$t('otc.chat.tip')" @on-ok="ok3">
+        <Modal
+            v-model="modal3"
+            :title="$t('otc.chat.tip')"
+            @on-ok="ok3"
+        >
             <p style="color:red;font-weight: bold;">{{$t('otc.chat.msg3')}}</p>
         </Modal>
-        <Modal v-model="modal4" :title="$t('otc.chat.tip')" @on-ok="ok4">
-            <Form :model="formItem" :label-width="80">
+        <Modal
+            v-model="modal4"
+            :title="$t('otc.chat.tip')"
+            @on-ok="ok4"
+        >
+            <Form
+                :model="formItem"
+                :label-width="80"
+            >
                 <FormItem :label="$t('otc.chat.comptype')">
                     <Select v-model="formItem.select">
                         <Option value="1">{{$t('otc.chat.msg4')}}</Option>
@@ -371,14 +386,28 @@
                     </Select>
                 </FormItem>
                 <FormItem :label="$t('otc.chat.compremark')">
-                    <Input v-model="formItem.remark" type="textarea" :autosize="{minRows: 2,maxRows: 5}" :placeholder="$t('otc.chat.willcomp')"></Input>
+                    <Input
+                        v-model="formItem.remark"
+                        type="textarea"
+                        :autosize="{minRows: 2,maxRows: 5}"
+                        :placeholder="$t('otc.chat.willcomp')"
+                    />
                 </FormItem>
             </Form>
         </Modal>
-        <Modal v-model="modal5" :title="$t('otc.chat.tip')" @on-ok="ok5">
+        <Modal
+            v-model="modal5"
+            :title="$t('otc.chat.tip')"
+            @on-ok="ok5"
+        >
             <P style="color:red;font-weight: bold;">
-              {{$t('otc.chat.msg6')}}<br/>
-              <Input type="password" v-model="fundpwd" :placeholder="$t('otc.chat.msg7')" style="margin-top: 10px;"></Input>
+                {{$t('otc.chat.msg6')}}<br/>
+                <Input
+                    type="password"
+                    v-model="fundpwd"
+                    :placeholder="$t('otc.chat.msg7')"
+                    style="margin-top: 10px;"
+                />
             </p>
 
         </Modal>
@@ -956,4 +985,26 @@ export default {
         }
     }
 </style>
-<style lang="scss"></style>
+<style lang="scss">
+    .ivu-modal-header {
+        border-bottom: 1px solid #2A3850;
+    }
+    .ivu-modal-footer {
+        border-top: 1px solid #2A3850;
+    }
+    .ivu-modal-header-inner {
+        color: #8090af;
+    }
+    .ivu-btn-text {
+        color: #8090af;
+        padding: 4px 13px;
+        border-radius: 0;
+        &:hover {
+            background: #191D3A;
+        }
+    }
+    .ivu-btn-primary {
+        padding: 2px 13px;
+        border-radius: 0;
+    }
+</style>
