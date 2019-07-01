@@ -352,53 +352,9 @@ export default {
 }
 </script>
 <style lang="scss">
-  /*.ivu-btn-default {*/
-  /*  background: #111530 !important;*/
-  /*  color: #8090af !important;*/
-  /*  border-radius: 0 !important;*/
-  /*  &:hover {*/
-  /*    background: #111530 !important;*/
-  /*    color: #8090af !important;*/
-  /*  }*/
-  /*}*/
-  /*.ivu-btn-primary {*/
-  /*  color: #fff;*/
-  /*  border-radius: 0 !important;*/
-  /*}*/
-  /*.ivu-input-group-append {*/
-  /*  background: #111530;*/
-  /*  border-radius: 0 !important;*/
-  /*  border: 1px solid #8090af;*/
-  /*}*/
-  /*.ivu-input-group-append,*/
-  /*.ivu-input-group-prepend {*/
-  /*  background: #111530 !important;*/
-  /*  padding: 4px 25px !important;*/
-  /*}*/
-  /*.ivu-modal-content {*/
-  /*  background: #111530;*/
-  /*  .ivu-modal-header {*/
-  /*    border-bottom: 1px solid #8090AF;*/
-  /*    .ivu-modal-header-inner {*/
-  /*      color: #8090AF;*/
-  /*    }*/
-  /*  }*/
-  /*  .ivu-input-wrapper {*/
-  /*    .ivu-input[disabled] {*/
-  /*      border-radius: 0;*/
-  /*      background: #111530;*/
-  /*      border: 1px solid #58698A;*/
-  /*    }*/
-  /*  }*/
-  /*  .ivu-input-group {*/
-  /*    .ivu-input {*/
-  /*      background: #111530;*/
-  /*      border: 1px solid #58698A;*/
-  /*      border-radius: 0;*/
-  /*    }*/
-  /*  }*/
-  /*}*/
-.order-table-index{
+  
+
+.order-table{
   .nav-right {
     .ivu-btn {
       border-radius: 0;
@@ -567,6 +523,48 @@ export default {
           // text-align: right;
           padding-right: 16px;
         }
+      }
+    }
+  }
+
+  .ivu-btn-default {
+    background: #111530;
+    color: #8090af;
+    border-radius: 0;
+    &:hover {
+      background: #111530;
+      color: #8090af;
+    }
+  }
+  .ivu-btn-primary {
+    color: #fff;
+    border-radius: 0;
+  }
+  .ivu-input-group-append {
+    background: #111530;
+    border-radius: 0;
+    border: 1px solid #8090AF;
+  }
+  .ivu-modal-content {
+    background: #111530;
+    .ivu-modal-header {
+      border-bottom: 1px solid #8090AF;
+      .ivu-modal-header-inner {
+        color: #8090AF;
+      }
+    }
+    .ivu-input-wrapper {
+      .ivu-input[disabled] {
+        border-radius: 0;
+        background: #111530;
+        border: 1px solid #58698A;
+      }
+    }
+    .ivu-input-group {
+      .ivu-input {
+        background: #111530;
+        border: 1px solid #58698A;
+        border-radius: 0;
       }
     }
   }
