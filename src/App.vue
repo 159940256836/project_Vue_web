@@ -392,6 +392,7 @@
 import QRCode from 'qrcode2'
 import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
+import { Transform } from 'stream'
 export default {
   name: 'App',
   provide() {
@@ -415,7 +416,8 @@ export default {
       },
       styleTop: 30,
       topPadding: '0 5%',
-      topBackgroundColor: 'rgba(28, 36, 53)',
+      topBackgroundColor: 'transparent',
+      $mainNightBgColor: '#11132c',
       pathName: '',
       pathNameState: true,
       weChat1: false, // 微信客服1
@@ -647,13 +649,12 @@ export default {
         width: 100%;
         position: fixed;
         z-index: 999;
-        background-color: #11132C;
+        // background-color: rgba(16,18,43,.3);
         transition: all .5s;
         .page-content {
              height: 50px;
             line-height: 50px;
             transition: all .5s;
-            background-color: #11132C !important;
             opacity: .9;
             .time_download {
                 align-items: center;
