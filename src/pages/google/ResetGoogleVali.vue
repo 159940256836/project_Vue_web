@@ -12,7 +12,7 @@
                 <img src="../../assets/images/goole_Android.png" alt="">
                 <div>{{$t('openGoolePage._downloadAndroid')}}</div>
             </div>
-            <div class="qrclass">
+            <div class="qrclass" style="border-right:1px dashed #8090AF;margin-right:30px;padding-right:30px;">
                 <img src="../../assets/images/goole_IOS.png" alt="">
                 <div>{{$t('openGoolePage._downloadIos')}}</div>
             </div>
@@ -28,7 +28,7 @@
                             v-clipboard:error="onError"
                           class="blue"
                         >
-                            {{$t('openGoolePage._copy')}}
+                            <img src="@/assets/images/copy_icon.png" alt="加载失败">
                         </span>
                     </p>
                 </div>
@@ -50,7 +50,7 @@
                 <Input v-model="formCode.code"></Input>
             </FormItem>
             <FormItem>
-                <Button type="primary" style="width:100%;" @click="sure('formCode')">{{$t('openGoolePage._sure')}}</Button>
+                <Button type="primary" style="width:100%;border-radius:0;height:40px;font-size:14px;" @click="sure('formCode')">{{$t('openGoolePage._sure')}}</Button>
             </FormItem>
         </Form>
 
@@ -219,11 +219,10 @@ $color: #2d8cf0;
         .blue {
             cursor: pointer;
             color: #fff;
-            background: #3399ff;
             display: inline-block;
-            padding: 4px 12px;
+            margin-left: 5px;
             font-size: 12px;
-            border-radius: 3px;
+            vertical-align: top;
         }
     }
     #qrcodeFrist {
@@ -276,11 +275,17 @@ $color: #2d8cf0;
 }
 
 .specail {
+    .ivu-form-item {
+        margin-bottom: 30px;
+    }
+
     .ivu-form-item-label {
         color: #8090AF;
         font-size: 14px;
     }
+    
     .ivu-input {
+        height: 40px;
         margin-top: 10px;
         background-color: transparent;
         border: 1px solid #8090AF;
