@@ -585,6 +585,10 @@ export default {
                 }
                 }            
             }
+            .ivu-table-tip td{
+              text-align: center !important;
+              background: #191D3A !important;
+            }
             .ivu-table-header th:first-child,
             .ivu-table-body .ivu-table-row td:first-child
             {
@@ -599,36 +603,34 @@ export default {
         }
         
       }
+      .ivu-table th,
+      .ivu-table td {
+        background: #2A3850;
+      }
+      .ivu-table-wrapper {
+          .ivu-table {
+              color: #fff; 
+              .ivu-table-header th {
+                  background: #191D3A;
+                  color: #8090AF;
+                  //表格标题颜色
+              }    
+              .ivu-table-row td {
+                  background: #090e2e;
+                  //表格单数行样式
+              }  
+          }
+          .ivu-table-stripe {
+              background: transparent;
+              .ivu-table-body tr:nth-child(2n) td, 
+              .ivu-table-fixed-body tr:nth-child(2n) td {
+                  background: #10122B;
+                  //表格双数行样式
+              }
+          }
+      }
     }
 
-    .order_box .ivu-table th,
-    .order_box .ivu-table td {
-      background: #2A3850;
-    }
-
-
-    .order-table .ivu-table-wrapper .ivu-table {
-        color: #fff;       
-    }
-
-    .order-table .ivu-table-wrapper  .ivu-table-stripe {
-        background: transparent;
-    }
-
-    .order-table .ivu-table-wrapper .ivu-table .ivu-table-header th {
-        background: #191D3A;
-        color: #8090AF;
-        //表格标题颜色
-    }
-    .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td, 
-    .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-        background: #10122B;
-        //表格双数行样式
-    }
-    .ivu-table-wrapper .ivu-table .ivu-table-row td {
-        background: #090e2e;
-        //表格单数行样式
-    }
 
     //去Table边框
     .ivu-table-wrapper .ivu-table:before {

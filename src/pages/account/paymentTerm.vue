@@ -1089,5 +1089,19 @@ p.describe {
     .ivu-btn-default:hover {
         background: transparent;
     }
+
+    .ivu-btn.disabled, .ivu-btn.disabled.active, 
+    .ivu-btn.disabled:active, .ivu-btn.disabled:focus, 
+    .ivu-btn.disabled:hover, 
+    .ivu-btn[disabled], .ivu-btn[disabled].active, 
+    .ivu-btn[disabled]:active, .ivu-btn[disabled]:focus, 
+    .ivu-btn[disabled]:hover, 
+    fieldset[disabled] .ivu-btn, fieldset[disabled] .ivu-btn.active, 
+    fieldset[disabled] .ivu-btn:active, 
+    fieldset[disabled] .ivu-btn:focus, 
+    fieldset[disabled] .ivu-btn:hover {
+        background: transparent;
+        color: #3399FF;
+    }
 }
 </style>

@@ -1,7 +1,15 @@
 <template>
 <div class="content-wrap" id="List">
     <div class="container">
-        <h2 class="title">{{ this.$t('otc.myorder')+' > ' + '订单详情' }}</h2>
+        <p style="padding: 10px 0 10px 20px;font-size: 18px;">
+          <router-link
+              to="/order"
+              style="color:#3399ff;"
+          >
+              {{$t('otc.myorder')}}
+          </router-link> >
+          <span style="font-size:16px;color: #8090AF;">{{$t('otc.chat.orderDetails')}}</span>
+        </p>
         <div class="right-safe">
             <div class="leftmenu left-box">
                 <div class="user-info">
