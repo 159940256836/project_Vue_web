@@ -96,6 +96,7 @@ export default {
         {
           title: self.$t("otc.myad.operate"),
           key: "buyBtn",
+          width: "180px",
           align: "center",
           render: function(h, params) {
             return h("p", [

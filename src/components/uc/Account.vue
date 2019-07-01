@@ -622,7 +622,7 @@ export default {
 }
 
 .account-box .account-in .account-item .account-item-in .card-number {
-    width: 142px;
+    width: 204px;
     height: 40px;
     margin-right: 15px;
     border-right: 1px dashed #d0d5de;

@@ -1323,9 +1323,10 @@ body {
                     margin-bottom:15px;
                     font-size: 16px;
                     img {
-                        margin:0px;
+                        margin: 0;
                     }
                     span{
+                        width: 320px;
                         margin-left:15px;
                         color:#8790a1;
                     }

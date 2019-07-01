@@ -11,7 +11,7 @@
                         <!-- <i class="angle" style="right: 71px;"></i> -->
                         <div class="action-main">
                             <div class="action-inner">
-                                <div class="inner-left">
+                                <div class="inner-left" style="float: left;margin: 10px 25px 0 0;">
                                     <span class="describe">{{$t('uc.finance.recharge.symbol')}}</span>:&nbsp;&nbsp;
                                     <Select
                                         v-model="coinType"
@@ -27,9 +27,9 @@
                                         </Option>
                                     </Select>
                                 </div>
-                                <div class="inner-box deposit-address">
-                                    <span class="describe">{{$t('uc.finance.recharge.address')}}</span>:
-                                    <div class="title">
+                                <div class="inner-box deposit-address" style="float: left;margin-right: 15px;">
+                                    <span class="describe" style="float: left;">{{$t('uc.finance.recharge.address')}}:&nbsp;&nbsp;</span>
+                                    <div class="title" style="float: left">
                                         <Input
                                             v-model="qrcode.value"
                                             readonly
@@ -345,7 +345,7 @@ export default {
                     border-bottom: 1px solid #2A3850;
                     padding: 12px 0;
                     .inner-box.deposit-address {
-                        width: 80%;
+                        /*width: 80%;*/
                         line-height: 50px;
                     }
                 }
@@ -353,19 +353,19 @@ export default {
                 .action-inner {
                     .inner-box {
                         display: table-cell;
-                        width: 100%;
+                        /*width: 100%;*/
                         .title {
                             position: relative;
                             .copy {
                                 user-select: text;
                             }
                             .copy-add {
-                                width: 90px;
+                                width: 95px;
                                 height: 30px;
                                 text-align: center;
-                                position: absolute;
-                                top: 12px;
-                                left: 32%;
+                                position: relative;
+                                top: 0;
+                                right: 101px;
                                 line-height: 30px;
                                 display: inline-block;
                                 font-size: 14px;
@@ -453,8 +453,6 @@ export default {
 
         .action-box .title {
             font-size: 20px;
-            width: 91%;
-            float: right;
         }
 
         .action-box .title .show-qrcode {
@@ -632,10 +630,12 @@ export default {
         .ivu-table {
             td {
                 &:first-child {
-                    text-align: center;
+                    text-align: left;
+                    padding-left: 12px;
                 }
                 &:last-child {
-                    text-align: center;
+                    text-align: right;
+                    padding-right: 12px;
                 }
             }
             .ivu-table-header {

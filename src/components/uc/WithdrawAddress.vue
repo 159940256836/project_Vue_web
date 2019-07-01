@@ -736,6 +736,11 @@ span.describe {
         }
     }
     .ivu-table {
+        .ivu-table-tip {
+            td {
+                background: #111530;
+            }
+        }
         .ivu-table-row {
             td {
                 &:first-child {

@@ -295,6 +295,9 @@ export default {
                   click: function() {
                     self.$router.push("/chat?tradeId=" + params.row.orderSn);
                   }
+                },
+                style: {
+                  color: '#3399FF'
                 }
               },
               params.row.orderSn
@@ -343,7 +346,7 @@ export default {
             text = self.$t("uc.otcorder.type_sell");
             return h("div", [h("p", {style:{color: '#00B275'}},text)]);
           }
-          
+
         }
       });
       columns.push({
@@ -392,7 +395,7 @@ export default {
           return h("p", [
             h(
               "a",
-              { 
+              {
                 on: {
                   click: function() {
                       self.$router.push("/chat?tradeId=" + params.row.orderSn);
@@ -485,7 +488,7 @@ export default {
 <style lang="scss">
 .bill_box_order {
     * {
-      box-shadow: none !important; 
+      box-shadow: none !important;
     }
     .order_box {
       .ivu-tabs {
@@ -493,9 +496,9 @@ export default {
         tr {
           background: transparent;
           td {
-            background: transparent;
+            background: #111530;
           }
-        }       
+        }
         .ivu-tabs-content.ivu-tabs-content-animated {
             .ivu-tabs-tabpane {
             .ivu-table-wrapper {
@@ -579,11 +582,11 @@ export default {
                       }
                     }
                     tr td:first-child .ivu-table-cell {
-                      
+
                         padding-left: 6px;
                     }
                 }
-                }            
+                }
             }
             .ivu-table-header th:first-child,
             .ivu-table-body .ivu-table-row td:first-child
@@ -597,7 +600,7 @@ export default {
               border: none;
             }
         }
-        
+
       }
     }
 
@@ -608,7 +611,12 @@ export default {
 
 
     .order-table .ivu-table-wrapper .ivu-table {
-        color: #fff;       
+       color: #fff;
+       .ivu-table {
+         .ivu-table-tip {
+           background: #111530;
+         }
+       }
     }
 
     .order-table .ivu-table-wrapper  .ivu-table-stripe {
@@ -620,7 +628,7 @@ export default {
         color: #8090AF;
         //表格标题颜色
     }
-    .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td, 
+    .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
     .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
         background: #10122B;
         //表格双数行样式

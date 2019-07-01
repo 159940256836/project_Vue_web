@@ -497,7 +497,7 @@ export default {
     position: relative;
     .hidden-assets{
       position: absolute;
-      width: 300px;
+      min-width: 300px;
       top: -40px;
       display: -webkit-box;
       display: -ms-flexbox;
