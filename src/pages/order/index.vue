@@ -3,16 +3,18 @@
     <main class="box-wrap">
         <div class="box new-order-box" id="box">
             <h2 class="title">{{ this.$t('otc.myorder') }}</h2>
-            <Tabs name="tab1">
+            <Tabs name="tab1" :value="myOrderTabName" @on-click="tabCut">
                 <TabPane 
                 :label="this.$t('uc.menuTitle.bibiManagement')" 
                 tab="tab1" 
+                name="name1"               
                 >              
                     <Coins />
                 </TabPane>
                 <TabPane 
                 :label="this.$t('uc.menuTitle.otcManagement')" 
                 tab="tab1"
+                name="name2"
                 >            
                     <LegalTender />  
                 </TabPane>
@@ -32,13 +34,22 @@ export default {
       title: this.$t('otc.myorder')
     }
   },
+  computed: {
+    myOrderTabName() {
+      if (localStorage.myOrderTabName) {
+        return localStorage.myOrderTabName
+      } else {
+        return 'name1'
+      }
+    }
+  },
   components: {
     LegalTender,
     Coins
   },
   methods: {
-    fn() {
-      console.log(1)
+    tabCut(name) {
+      localStorage.myOrderTabName = name
     }
   }
 }
@@ -70,22 +81,25 @@ export default {
 
 <style lang="scss">
 
-.box .ivu-tabs-bar {
-    border-color: transparent;
-    background: #111530;
-    margin-bottom: 22px;
-    padding-left: 28px;
-}
-
-.box .ivu-tabs-nav .ivu-tabs-tab {
+.box {
+  .ivu-tabs-bar {
+      border-color: transparent;
+      background: #111530;
+      margin-bottom: 22px;
+      padding-left: 28px;
+  }
+  .ivu-tabs-nav .ivu-tabs-tab {
     color: #fff;
     height: 65px;
     line-height: 65px;
     padding: 0;
-}
-
-.box .ivu-tabs-nav .ivu-tabs-tab-active {
+  }
+  .ivu-tabs-nav .ivu-tabs-tab:hover {
     color: #3399FF;
+  }
+  .ivu-tabs-nav .ivu-tabs-tab-active {
+    color: #3399FF;
+  }
 }
 
 .new-order-box{

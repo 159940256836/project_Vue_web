@@ -856,25 +856,49 @@ export default {
   color:#8090AF;
 }
 </style>
-<style>
-.ivu-form-item {
-  margin-bottom: 24px;
+<style lang="scss">
+.merchant {
+  .ivu-form-item {
+    margin-bottom: 24px;
+  }
+  .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner {
+    background-color: #313654;
+    border-color: #313654;
+  }
+  .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner > .ivu-steps-icon,
+  .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner span {
+    color: #fff !important;
+  }
+  .ivu-steps-item.ivu-steps-status-process .ivu-steps-head-inner {
+    border-color: #313654;
+    background-color: #313654;
+  }
+  .ivu-steps-item.ivu-steps-status-finish .ivu-steps-tail > i:after {
+    background: #313654;
+  }
+
+  .ivu-steps .ivu-steps-head {
+    background: transparent;
+  }
+  .ivu-steps .ivu-steps-title {
+    background: #0e0e28;
+    padding-top: 4px;
+  }
+  .ivu-btn-primary {
+    background: #3399ff;
+    border: 1px solid #3399ff;
+    &:hover {
+      background: #3399ff;
+      border: 1px solid #3399ff;
+    }
+  }
+  .ivu-btn-text {
+    &:hover {
+      color: #3399ff;
+    }
+  }
 }
-.ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner {
-  background-color: #313654;
-  border-color: #313654;
-}
-.ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner > .ivu-steps-icon,
-.ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner span {
-  color: #fff !important;
-}
-.ivu-steps-item.ivu-steps-status-process .ivu-steps-head-inner {
-  border-color: #313654;
-  background-color: #313654;
-}
-.ivu-steps-item.ivu-steps-status-finish .ivu-steps-tail > i:after {
-  background: #313654;
-}
+
 </style>
 <style lang="scss">
     .ivu-checkbox-inner {
@@ -1041,11 +1065,6 @@ export default {
       &:hover {
         background: #3399ff;
         border: 1px solid #3399ff;
-      }
-    }
-    .ivu-btn-text {
-      &:hover {
-        color: #3399ff;
       }
     }
     .ivu-checkbox-checked .ivu-checkbox-inner {
