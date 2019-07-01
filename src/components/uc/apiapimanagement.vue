@@ -190,13 +190,14 @@
       <Form :model="formItem" label-position="top">
         <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
           <Input v-model="formItem.code" size="large">
-            <div class="timebox" slot="append">
+            <div class="timebox" slot="append" style="position:relative;height:20px;line-height:20px">
+              <div style="height:17px;width:2px;background:#8090AFFF;position:absolute;top:3px"></div>
               <Button  v-if="sendMsgDisabled" :disabled="sendMsgDisabled">
-                <span >{{time+$t('uc.safe.second')}}</span>
+                <span style="color:#3399FFFF">{{time+$t('uc.safe.second')}}</span>
                
               </Button>
               <div v-if="!sendMsgDisabled" @click="sendCode(1)" style="cursor:pointer">
-                 <span >{{$t('uc.safe.clickget')}}</span>
+                 <span style="color:#3399FFFF">{{$t('uc.safe.clickget')}}</span>
               </div>
             </div>
           </Input>
@@ -231,13 +232,14 @@
         <Form :model="editorFormItem" label-position="top">
           <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
             <Input v-model="editorFormItem.code" size="large">
-              <div class="timebox" slot="append">
+              <div class="timebox" slot="append" style="position:relative;height:20px;line-height:20px">
+                <div style="height:17px;width:2px;background:#8090af;position:absolute;top:3px"></div>
                 <div style="cursor:pointer" @click="sendCode(2)" v-if="!sendMsgDisabled1">
                   
-                  <span >{{$t('uc.safe.clickget')}}</span>
+                  <span style="color:#3399FFFF">{{$t('uc.safe.clickget')}}</span>
                 </div>
                 <Button v-if="sendMsgDisabled1" :disabled="sendMsgDisabled1">
-                    <span >{{time1+$t('uc.safe.second')}}</span>
+                    <span style="color:#3399FFFF" >{{time1+$t('uc.safe.second')}}</span>
                 </Button>
               </div>
             </Input>
@@ -840,7 +842,7 @@ export default {
  border:none !important;
 }
 .ivu-input-group .ivu-input{
-  border-right:1px solid rgba(128,144,175,1) !important;
+  // border-right:1px solid rgba(128,144,175,1) !important;
 }
 .ivu-input-group-append, .ivu-input-group-prepend{
   border-radius: 0 !important;
