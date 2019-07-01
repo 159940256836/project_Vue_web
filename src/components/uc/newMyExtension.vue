@@ -1,5 +1,5 @@
 <template>
-    <div class="newMyExtension">
+    <div class="newMyExtension" id="newMy">
         <div class="new_title">
             <img src="../../assets/img/center.png">
         </div>
@@ -350,8 +350,20 @@ export default {
   }
 }
 </script>
-<style>
+<style lang='scss'>
+#newMy{
+    .ivu-table-wrapper .ivu-table .ivu-table-header th{
+        border-bottom:1px solid #2a3850 !important;
+        font-size:14px !important;
+    }
+    .ivu-table-wrapper .ivu-table td{
+        font-size:14px !important;
+    }
+    .nav-rights .rule .rule_title[data-v-be09f418]{
+        font-size:18px !important;
+    }
 
+}
 .nav-right .btStyle :nth-child(2){
     margin-left:35px;
 }
@@ -377,6 +389,9 @@ export default {
 </style>
 
 <style scoped lang="scss">
+.rule_title{
+    color:#8090af !important;
+}
 
 .nav-right .btStyle[data-v-be09f418][data-v-be09f418]{
     // color:#8090af !important;
@@ -476,7 +491,7 @@ export default {
                 line-height:55px;
                 padding-left:34px;
                 color:#fff;
-                font-size: 16px;
+                font-size: 16px !important;
             }
             .rule_content{
                 // line-height:125px;
@@ -588,7 +603,7 @@ export default {
 .nav-right .btStyle[data-v-be09f418]{
     background:transparent;
     border:0;
-    color:#fff;
+    // color:#fff;
     margin-top:19px;
     // height:55px;
 }
