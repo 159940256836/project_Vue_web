@@ -611,7 +611,7 @@ span.describe {
                 height: 40px;
                 border-radius: 0;
                 width: 100%;
-                background: #111530;
+                // background: #111530;
                 border: 1px solid #8090AF;
             }
         }

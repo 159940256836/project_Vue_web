@@ -10,7 +10,7 @@
         <div class="contenta_cont_title new_title">{{$t("foot.Legatices")}}</div>
         <div class="contenta_cont_content">
           <!-- 第一条 -->
-          <p class="contenta_aa">{{$t("foot.First")}}</p>
+          <p class="contenta_aa" style="color:#fff">{{$t("foot.First")}}</p>
           <p class="contenta_cc">{{$t("foot.illegtrading")}}</p>
           <!-- 第二条 -->
           <p class="contenta_bb">{{$t("foot.Second")}}</p>
@@ -98,6 +98,7 @@ export default {
       font-size: 14px;
       // color: #333;
       font-weight: bold;
+      color:#fff !important;
     }
     .contenta_cc {
       font-size: 14px;

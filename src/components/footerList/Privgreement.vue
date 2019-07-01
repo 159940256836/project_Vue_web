@@ -9,7 +9,7 @@
         <!-- 隐私条款 -->
         <div class="contenta_cont_title">{{$t("foot.PrivacPolicy")}}</div>
         <div class="contenta_cont_content">
-          <p class="contenta_aa">{{$t("foot.Firstothdes")}}</p>
+          <p class="contenta_aa" style="color:#fff">{{$t("foot.Firstothdes")}}</p>
           <p class="contenta_cc">1.1{{$t("foot.websitedicated")}}</p>
           <p class="contenta_cc">1.2{{$t("foot.Asthenatural")}}</p>
           <p class="contenta_cc">1.3{{$t("foot.referredto")}}</p>
@@ -129,6 +129,7 @@ export default {
       font-size: 14px;
       // color: #333;
       font-weight: bold;
+      color:#fff;
     }
     .contenta_cc {
       text-indent: 14px;

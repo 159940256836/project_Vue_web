@@ -181,7 +181,7 @@
             <Modal
                 :title="$t('uc.safe.safelevel_high')"
                 v-model="modal6"
-                :styles="{top: '100px'}"
+                className="vertical-center-modal"
                 width="875"
                 class="popups-modal"
                 >
@@ -267,7 +267,7 @@
             <Modal
                 :title="$t('uc.safe.bindemail')"
                 v-model="modal2"
-                :styles="{top: '100px'}"
+                className="vertical-center-modal"
                 width="534"
                 class="popups-modal"
                 >
@@ -309,7 +309,7 @@
             <Modal
                 :title="$t('uc.safe.bindphone')"
                 v-model="modal3"
-                :styles="{top: '100px'}"
+                className="vertical-center-modal"
                 width="534"
                 class="popups-modal"
                 >
@@ -353,12 +353,12 @@
             <Modal
                 :title="$t('new.Modifpassword')"
                 v-model="modal4"
-                :styles="{top: '100px'}"
                 width="534"
                 class="popups-modal"
+                className="vertical-center-modal"
                 >
                 <div class="detail-list">
-                    <Form ref="formValidate4" :model="formValidate4" :rules="ruleValidate" :label-width="121">
+                    <Form ref="formValidate4" :model="formValidate4" :rules="ruleValidate" :label-width="101">
                         <!-- oldPw -->
                         <FormItem :label="$t('uc.safe.oldpwd')" prop="oldPw">
                             <Input v-model="formValidate4.oldPw" size="large" type="password" style="width:300px;"></Input>
@@ -402,7 +402,7 @@
             <Modal
                 :title="!fGetBackFundpwd ? $t('new.Modifyassword') : $t('new.Retriepassword')"
                 v-model="modal5"
-                :styles="{top: '100px'}"
+                className="vertical-center-modal"
                 width="534"
                 class="popups-modal"
                 >
@@ -422,7 +422,7 @@
                         </FormItem>-->
                         <!-- Button -->
                         <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate7')" style="width: 300px;border-radius:0;">
+                            <Button type="primary" @click="handleSubmit('formValidate7')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
                                 {{$t('uc.safe.confirm')}}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate7')" style="margin-left: 8px">
@@ -433,7 +433,7 @@
                 </div>
                 <!-- 修改资金密码 -->
                 <div class="detail-list" v-show="user.fundsVerified==1  && !fGetBackFundpwd">
-                    <Form ref="formValidate5" :model="formValidate5" :rules="ruleValidate" :label-width="121">
+                    <Form ref="formValidate5" :model="formValidate5" :rules="ruleValidate" :label-width="101">
                         <!-- oldPw -->
                         <FormItem :label="$t('uc.safe.oldfundpwd')" prop="oldPw">
                             <Input v-model="formValidate5.oldPw" size="large" type="password" style="width: 300px;"></Input>
@@ -460,14 +460,14 @@
                             <Input v-model="formValidate5.googleCode" size="large" type="text" style="width: 300px;"></Input>
                         </FormItem>
                         <p style="text-align:right;">
-                            <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#3399ff;margin-right:24px;margin-bottom:10px;">
+                            <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#3399ff;margin-right:50px;margin-bottom:10px;">
                                 <!--忘记密码?-->
                                 {{$t('uc.login.forget')}}
                             </a>
                         </p>
                         <!-- Button -->
                         <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate5')" style="width: 300px;border-radius:0;">
+                            <Button type="primary"  @click="handleSubmit('formValidate5')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
                                 {{ $t('new.confirmaaa') }}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate5')" style="margin-left: 8px">
@@ -478,7 +478,7 @@
                 </div>
                 <!-- 找回 -->
                 <div class="detail-list" v-show="user.fundsVerified==1 && fGetBackFundpwd">
-                    <Form ref="formValidate8" :model="formValidate8" :rules="ruleValidate" :label-width="121">
+                    <Form ref="formValidate8" :model="formValidate8" :rules="ruleValidate" :label-width="101">
                         <!-- newMPw -->
                         <FormItem :label="$t('uc.safe.newfundpwd')" prop="newMPw8">
                             <Input v-model="formValidate8.newMPw8" size="large" type="password" style="width: 300px;"></Input>
@@ -503,7 +503,7 @@
                         </FormItem>
                         <!-- Button -->
                         <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate8')" style="width: 300px;border-radius:0;">
+                            <Button type="primary" @click="handleSubmit('formValidate8')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
                                 {{$t('new.confirmaaa')}}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate8')" style="margin-left: 8px">
@@ -517,7 +517,7 @@
             <Modal
                 :title="$t('new.BindingGoogle')"
                 v-model="modal7"
-                :styles="{top: '100px'}"
+                className="vertical-center-modal"
                 width="714"
                 @on-cancel="googleModalCancel"
                 class="popups-modal"
@@ -528,7 +528,7 @@
             <Modal
                 :title="$t('new.UntieGoogle')"
                 v-model="modal8"
-                :styles="{top: '100px'}"
+                className="vertical-center-modal"
                 width="534"
                 @on-cancel="googleModalCancel"
                 class="popups-modal"
@@ -1785,14 +1785,15 @@ export default {
 <style lang="scss">
 
     .popups-box {
-    * {
-        box-shadow: none !important;
-    }
-        .vertical-center-modal{
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        * {
+            box-shadow: none !important;
         }
+    }
+
+    .vertical-center-modal{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .ivu-modal{
@@ -1821,10 +1822,16 @@ export default {
             }
             .ivu-modal-close .ivu-icon-ios-close {
                 color: #fff;
+                font-size: 24px;
+            }
+
+            .ivu-modal-close {
+                right: 34px;
+                top: 12px;
             }
 
             .ivu-modal-body {
-                padding: 26px 0 20px 0;
+                padding: 26px 0 1px 0;
             }
         }
     }
@@ -1835,6 +1842,9 @@ export default {
             background: transparent;
             border: 1px solid #8090AF;
             border-radius: 0;
+        }
+        .ivu-form-item  {
+            margin-bottom: 30px !important;
         }
         .ivu-form-item-label {
             color: #8090AF !important;
@@ -1847,9 +1857,6 @@ export default {
         }
         .ivu-form-item-required .ivu-form-item-label:before {
             content: ''
-        }
-        .ivu-input:hover {
-            border-color: #3399ff;
         }
     }
     .validate {
@@ -1878,6 +1885,13 @@ export default {
         }
     }
     .detail-list {
+        .ivu-form-item {
+            margin-bottom: 30px;
+        }
+        .ivu-select-selection {
+            height: 40px !important;
+        }
+
         .ivu-input {
             background: transparent;
             border: 1px solid #8090AF;
@@ -1893,12 +1907,13 @@ export default {
 
         .ivu-input-large {
             border: 1px solid #8090AF;
+            height: 40px;
         }
 
         .ivu-input-large:hover,
         .ivu-input-large:focus,
         .ivu-input-large:active {
-            border: 1px solid #8090AF;
+            border-color:#8090AF;
         }
 
         .ivu-form-item-error .ivu-input {
@@ -1909,7 +1924,7 @@ export default {
             .ivu-input-large:hover,
             .ivu-input-large:focus,
             .ivu-input-large:active {
-                border: 1px solid #8090AF;
+                border-color: #8090AF;
             }
         }
         
@@ -1950,6 +1965,7 @@ export default {
             .ivu-input{
                 border: 1px solid #8090AF;
                 border-right: none;
+                height: 40px;
             }
             .timebox {
                 border-left: 1px solid #8090AF;
@@ -1959,13 +1975,6 @@ export default {
 
     }
 
-
-    // .ivu-btn-default {
-    //     border: 1px solid #8090AF;
-    //     color: #8090AF;
-    //     background: transparent;
-    //     border-radius: 0;
-    // }
     
 
 </style>

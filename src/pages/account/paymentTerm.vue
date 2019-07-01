@@ -109,7 +109,7 @@
                         </FormItem>
                         <!-- Button -->
                         <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate1')" style="width:300px;border-radius:0;">{{$t('new.confirmaaa')}}</Button>
+                            <Button type="primary" @click="handleSubmit('formValidate1')" style="width:300px;border-radius:0;height:40px;font-size:14px;">{{$t('new.confirmaaa')}}</Button>
                             <!-- <Button type="ghost" @click="handleReset('formValidate1')" style="margin-left: 8px">Reset</Button> -->
                         </FormItem>
                     </Form>
@@ -157,7 +157,7 @@
                         </FormItem>
                         <!-- Button -->
                         <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate2')" style="width:300px;border-radius:0;">{{$t('new.confirmaaa')}}</Button>
+                            <Button type="primary" @click="handleSubmit('formValidate2')" style="width:300px;border-radius:0;height:40px;font-size:14px;">{{$t('new.confirmaaa')}}</Button>
                             <!-- <Button type="ghost" @click="handleReset('formValidate2')" style="margin-left: 8px">Reset</Button> -->
                         </FormItem>
                         </Col>
@@ -180,8 +180,8 @@
                         <Col span="8">
                             <input type="hidden" name="wePreview" :value="wePreview" />
                             <img :alt="$t('uc.account.imgtip')" id="weImg" style="width: 150px;height: 150px;" :src=weImg>
-                            <p style="text-align:center;"><Icon type="ios-alert" style="color:#3697FE;"/><span style="margin-top:20px;">{{ $t('new.Pleasuplode') }}</span></p>
-                            <div class="acc_sc">
+                            <p style="text-align:center;margin-top:10px;"><Icon type="ios-alert" style="color:#3697FE;"/><span style="margin-top:20px;">{{ $t('new.Pleasuplode') }}</span></p>
+                            <div class="acc_sc" style="margin-top:20px;">
                             <Upload
                                 ref="upload2"
                                 :on-success="weHandleSuccess"
@@ -208,7 +208,7 @@
                         </FormItem>
                         <!-- Button -->
                         <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate3')" style="width:300px;border-radius:0;">{{$t('new.confirmaaa')}}</Button>
+                            <Button type="primary" @click="handleSubmit('formValidate3')" style="width:300px;border-radius:0;height:40px;font-size:14px;">{{$t('new.confirmaaa')}}</Button>
                             <!-- <Button type="ghost" @click="handleReset('formValidate3')" style="margin-left: 8px">Reset</Button> -->
                         </FormItem>
                         </Col>
@@ -1088,6 +1088,20 @@ p.describe {
 
     .ivu-btn-default:hover {
         background: transparent;
+    }
+
+    .ivu-btn.disabled, .ivu-btn.disabled.active, 
+    .ivu-btn.disabled:active, .ivu-btn.disabled:focus, 
+    .ivu-btn.disabled:hover, 
+    .ivu-btn[disabled], .ivu-btn[disabled].active, 
+    .ivu-btn[disabled]:active, .ivu-btn[disabled]:focus, 
+    .ivu-btn[disabled]:hover, 
+    fieldset[disabled] .ivu-btn, fieldset[disabled] .ivu-btn.active, 
+    fieldset[disabled] .ivu-btn:active, 
+    fieldset[disabled] .ivu-btn:focus, 
+    fieldset[disabled] .ivu-btn:hover {
+        background: transparent;
+        color: #3399FF;
     }
 }
 </style>

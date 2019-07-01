@@ -197,7 +197,7 @@
                                 </li>
                                 <li>
                                     <!-- <router-link to="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</router-link> -->
-                                      <a href="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</a>
+                                      <a href="https://bdwtop.github.io/">{{$t("footer.apiDoc")}}</a>
 
                                 </li>
                                  <!-- <li>
@@ -769,6 +769,7 @@ export default {
                         /*width: 7%;*/
                         justify-content: flex-end;
                         #change_language_theme .ivu-dropdown-item{
+                            font-size: 14px !important;
                             color: #8090AF;
                         }
                     }
@@ -959,6 +960,7 @@ ul,li{
     background: #10122B;
     .ivu-dropdown-item {
         color: #8090AF;
+        font-size: 14px !important;
         &:hover {
             background: transparent;
             color: #3399ff;

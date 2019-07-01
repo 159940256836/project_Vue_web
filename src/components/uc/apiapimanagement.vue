@@ -41,10 +41,6 @@
 
       </Card>
     </div>
-
-
-
-
     <!--编辑API-->
     <Modal 
       class="api_edit edit_let-code" 
@@ -84,9 +80,6 @@
         </Button>
       </div>
     </Modal>
-
-
-    
     <!--删除-->
     <!-- <Modal
       class="edit_let-code"
@@ -99,8 +92,6 @@
     >
       <p>{{$t('apiAdmin.sureDelete')}}</p>
     </Modal> -->
-
-
        <!--删除-->
      <Modal
       class="edit_let-code edit_let_aa edit_let_bb "
@@ -132,14 +123,6 @@
         </div>
     </Modal>
 
-
-
-
-
-
-
-
-
     <!--秘钥-->
     <Modal
       class="edit_let-code edit_let_aa"
@@ -149,7 +132,7 @@
       :mask-closable="false"
     >
       <p class="screat" style="color:#fff">{{$t('apiAdmin.tips')}}</p>
-      <p class="screat" style="color:#3399ff">
+      <p class="screat" style="color:#3399ff;cursor:pointer;">
         <!--{{screat}}-->
         <span style="color:#fff">{{screat}}</span>
         <span
@@ -197,15 +180,6 @@
       </p>
     </Modal> -->
 
-
-
-
-
-
-
-
-
-
     <!--添加短信校验-->
     <Modal 
       class="edit_let-code"
@@ -216,11 +190,15 @@
       <Form :model="formItem" label-position="top">
         <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
           <Input v-model="formItem.code" size="large">
-            <div class="timebox" slot="append">
-              <Button @click="sendCode(1)" :disabled="sendMsgDisabled">
-                <span v-if="sendMsgDisabled">{{time+$t('uc.safe.second')}}</span>
-                <span v-if="!sendMsgDisabled">{{$t('uc.safe.clickget')}}</span>
+            <div class="timebox" slot="append" style="position:relative;height:20px;line-height:20px">
+              <div style="height:17px;width:2px;background:#8090AFFF;position:absolute;top:3px"></div>
+              <Button  v-if="sendMsgDisabled" :disabled="sendMsgDisabled">
+                <span style="color:#3399FFFF">{{time+$t('uc.safe.second')}}</span>
+               
               </Button>
+              <div v-if="!sendMsgDisabled" @click="sendCode(1)" style="cursor:pointer">
+                 <span style="color:#3399FFFF">{{$t('uc.safe.clickget')}}</span>
+              </div>
             </div>
           </Input>
         </FormItem>
@@ -254,10 +232,14 @@
         <Form :model="editorFormItem" label-position="top">
           <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
             <Input v-model="editorFormItem.code" size="large">
-              <div class="timebox" slot="append">
-                <Button @click="sendCode(2)" :disabled="sendMsgDisabled1">
-                  <span v-if="sendMsgDisabled1">{{time1+$t('uc.safe.second')}}</span>
-                  <span v-if="!sendMsgDisabled1">{{$t('uc.safe.clickget')}}</span>
+              <div class="timebox" slot="append" style="position:relative;height:20px;line-height:20px">
+                <div style="height:17px;width:2px;background:#8090af;position:absolute;top:3px"></div>
+                <div style="cursor:pointer" @click="sendCode(2)" v-if="!sendMsgDisabled1">
+                  
+                  <span style="color:#3399FFFF">{{$t('uc.safe.clickget')}}</span>
+                </div>
+                <Button v-if="sendMsgDisabled1" :disabled="sendMsgDisabled1">
+                    <span style="color:#3399FFFF" >{{time1+$t('uc.safe.second')}}</span>
                 </Button>
               </div>
             </Input>
@@ -607,7 +589,9 @@ export default {
                   width:'50px',
                   lineHeight:"30px",
                   textAlign:"center",
-                  border:'1px solid #3399ff'
+                  border:'1px solid #3399ff',
+                  cursor: 'pointer',
+                  
 
                 },
                 on: {
@@ -637,6 +621,8 @@ export default {
                   color:"#ed4014",
                   border:'1px solid #ed4014 ',
                   textAlign:"center",
+                  cursor: 'pointer',
+                  
 
                 },
                 on: {
@@ -662,6 +648,7 @@ export default {
 .edit_let_buttom_new{
   margin-left:0 !important;
   margin-top:6px;
+  
 }
 .edit_let_bb{
   .edit_let_butto{
@@ -750,6 +737,13 @@ export default {
 
 </style>
 <style lang="scss">
+.old_deta .timebox button{
+  outline: none;
+}
+.old_deta .timebox .ivu-btn{
+  border:none !important;
+  outline: none;
+}
 #a_new{
   #new_butto{
     margin-left:78px !important;
@@ -769,6 +763,9 @@ export default {
   align-items: center;
   .ivu-modal{
     top:0 !important;
+  }
+  .ivu-modal-header .ivu-modal-header-inner{
+    text-align: left !important;
   }
 }
 
@@ -801,7 +798,7 @@ export default {
             padding: 18px 0;
             .ivu-modal-header-inner {
                 color: #fff;
-                text-align: left;
+                text-align: left !important;
                 font-weight: 400;
             }
         }
@@ -845,7 +842,7 @@ export default {
  border:none !important;
 }
 .ivu-input-group .ivu-input{
-  border-right:1px solid rgba(128,144,175,1) !important;
+  // border-right:1px solid rgba(128,144,175,1) !important;
 }
 .ivu-input-group-append, .ivu-input-group-prepend{
   border-radius: 0 !important;
