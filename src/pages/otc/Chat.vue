@@ -9,7 +9,7 @@
                   {{$t('otc.myorder')}}
               </router-link> >
                 <span style="font-size:16px;color: #8090AF;">{{$t('otc.chat.orderDetails')}}</span>
-              </p>
+            </p>
 
             <Row class="chat-in">
                 <div class="trading">
@@ -24,8 +24,8 @@
                             <th>{{ $t('otc.chat.transprice') }}(CNY)</th>
                             <th>{{ $t('otc.chat.transnum') }}({{ msg.unit }})</th>
                             <th>{{ $t('otc.chat.orderstatus') }}</th>
-                            <th>{{ $t('otc.chat.timeRemain') }}</th>
-                            <th>{{ $t('exchange.action') }}</th>
+                            <th v-if="statusBtn==1">{{ $t('otc.chat.timeRemain') }}</th>
+                            <th v-if="statusBtn==1&&tradeType==0">{{ $t('exchange.action') }}</th>
                         </tr>
                         <tr>
                             <th>
@@ -41,7 +41,7 @@
                             <th>
                                 <span>{{ statusTextStr }}</span>
                             </th>
-                            <th v-if="reserveTime !== '0'">
+                            <th v-if="statusBtn==1">
                                 <span v-show="statusBtn==1">
                                     {{ reserveTime }}
                                 </span>
@@ -69,16 +69,16 @@
                                         {{$t('otc.chat.orderstatus_2')}}
                                     </Button>
                                     <Button
-                                            @click="modal3 = true"
-                                            type="error"
+                                        @click="modal3 = true"
+                                        type="error"
                                     >
                                         {{$t('otc.chat.orderstatus_4')}}
                                     </Button>
                                 </div>
                                 <div v-show="statusBtn==2&&tradeType==1">
                                     <Button
-                                            type="warning"
-                                            @click="modal5 = true"
+                                        type="warning"
+                                        @click="modal5 = true"
                                     >
                                         {{$t('otc.chat.orderstatus_3')}}
                                     </Button>
@@ -466,6 +466,9 @@ export default {
     this.initScok();
   },
   computed: {
+      lang: function() {
+          return this.$store.state.lang;
+      },
       statusTextStr(){
           if (this.statusText == 1) {
               return this.$t("otc.chat.result_1");
@@ -938,6 +941,23 @@ export default {
                         color: #8090AF;
                         span {
                             color: #8090AF;
+                        }
+                        .ivu-btn-warning,
+                        .ivu-btn-error {
+                            border-radius: 0;
+                        }
+                        .ivu-btn-warning {
+                            background: #191D3A;
+                            border: 1px solid #3399ff;
+                            color: #3399ff;
+                        }
+                        .ivu-btn-error {
+                            background: #191D3A;
+                            border: 1px solid #f15057;
+                            color: #f15057;
+                        }
+                        .ivu-btn {
+                            padding: 2px 7px;
                         }
                     }
                 }
