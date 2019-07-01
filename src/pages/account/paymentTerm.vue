@@ -26,8 +26,8 @@
                                 </p>
                                 <p class="right-side" v-else>
                                     <a class="btn"  @click="openModal(function(){modal1 = true})">{{$t('uc.account.bind')}}</a>
-                                </p>                                
-                                
+                                </p>
+
                             </div>
                         </div>
                         <div class="account-item">
@@ -45,7 +45,7 @@
                                 </p>
                                 <p class="right-side" v-else>
                                     <a class="btn"  @click="openModal(function(){modal2 = true})">{{$t('uc.account.bind')}}</a>
-                                </p>                              
+                                </p>
                             </div>
                         </div>
                         <div class="account-item">
@@ -64,7 +64,7 @@
                                 <p class="right-side" v-else>
                                     <a class="btn"  @click="openModal(function(){modal3 = true})">{{$t('uc.account.bind')}}</a>
                                 </p>
-                                                               
+
                             </div>
                         </div>
                     </div>
@@ -440,7 +440,7 @@ export default {
                 return this.$Message.error(this.$t('otc.validate'))
             }
             callback()
-        },     
+        },
         aliHandleSuccess (res, file,fileList) {
           this.$refs.upload1.fileList=[fileList[fileList.length-1]];
           this.aliImg=this.aliPreview=res.data;
@@ -661,7 +661,7 @@ export default {
 }
 
 .account-box .account-in .account-item .account-item-in .card-number {
-    width: 152px;
+    width: 204px;
     height: 40px;
     margin-right: 15px;
     padding: 0 34px;
@@ -996,7 +996,7 @@ p.describe {
 <style lang="scss">
 .detail-list {
     * {
-        box-shadow: none !important; 
+        box-shadow: none !important;
     }
     .ivu-select{
         background: transparent !important;
@@ -1004,14 +1004,14 @@ p.describe {
             background: transparent !important;
             border-radius: 0;
         }
-    } 
+    }
     .ivu-select-selection {
       background: transparent;
       border-radius: 0;
       border:1px solid rgba(88,105,138,1);
       height: 30px;
       line-height: 22px;
-      outline:none; 
+      outline:none;
       box-shadow: none;
       .ivu-select-selected-value {
         color: #fff;
@@ -1069,7 +1069,7 @@ p.describe {
     .ivu-btn:before {
         background: transparent;
     }
-    .defeat-ivu .ivu-input-group-append, 
+    .defeat-ivu .ivu-input-group-append,
     .defeat-ivu .ivu-input-group-prepend {
         background: transparent;
     }

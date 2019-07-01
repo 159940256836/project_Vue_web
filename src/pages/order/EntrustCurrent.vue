@@ -45,7 +45,7 @@
     margin-top: 22px;
     .ivu-table-tip td{
       text-align: center;
-      background: #191D3A !important;
+      background: #111530 !important;
     }
 }
 
@@ -72,7 +72,7 @@
 }
 
 .entrustcurrent .ivu-table .ivu-table-tip td {
-    background: #191D3A !important;
+    background: #111530 !important;
 }
 
 .table .ivu-table-cell-expand {
@@ -334,7 +334,7 @@
 
 <template>
   <div class="entrustcurrent">
-    <Form class="form" :model="formItem" :label-width="60"  inline>
+    <Form class="form" :model="formItem" :label-width="70"  inline>
       <!-- <FormItem :label-width="locale == 'en' ? 95 : 70 " :label="$t('historyAndCu.stEnTime')+':'" style="margin-right:18px;">
         <DatePicker class="DatePicker" type="daterange" v-model="formItem.date" style="width:248px;"></DatePicker>
       </FormItem> -->
@@ -629,7 +629,7 @@ export default {
       // const m5 = this.$store.getters.lang == "English" ? 88 : 60;
       // const m6 = this.$store.getters.lang == "English" ? 70 : '';
       // const m7 = this.$store.getters.lang == "English" ? 85 : '';
-      // const m8 = this.$store.getters.lang == "English" ? 135 : 100;
+      const m8 = this.$store.getters.lang == "English" ? 143 : 100;
       // const m9 = this.$store.getters.lang == "English" ? 80 : 110;
       // const m10 = this.$store.getters.lang == "English" ? 70 : '';
       // arr.push({
@@ -755,7 +755,7 @@ export default {
         }
       })
       arr.push({
-        // width: m8,
+        width: m8,
         title: this.$t('historyAndCu.turnoverAmount'),
         key: 'turnover',
         render: (h, params) => {

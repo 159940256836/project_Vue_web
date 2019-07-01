@@ -709,10 +709,12 @@ export default {
         .ivu-table {
             td {
                 &:first-child {
-                    text-align: center;
+                    text-align: left;
+                    padding-left: 12px;
                 }
                 &:last-child {
-                    text-align: center;
+                    text-align: right;
+                    padding-right: 12px;
                 }
                 &:nth-child(2),
                 &:nth-child(3),
