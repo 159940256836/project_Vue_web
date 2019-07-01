@@ -480,6 +480,7 @@ export default {
     },
     languageValue: function() {
       var curlang = this.$store.getters.lang
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       if (curlang === 'English') this.$i18n.locale = 'en'
       return curlang
     },
@@ -557,10 +558,11 @@ export default {
       if (scrollTop > 0) {
         this.styleTop = 0
         this.topPadding = '0 17%'
+        this.topBackgroundColor = '#11132c'
       } else {
         this.styleTop = 30
         this.topPadding = '0 5%'
-                // this.topBackgroundColor = 'rgba(0,0,0,.5)'
+        this.topBackgroundColor = 'transparent'
       }
     },
     strpo(str) {
@@ -655,7 +657,6 @@ export default {
              height: 50px;
             line-height: 50px;
             transition: all .5s;
-            opacity: .9;
             .time_download {
                 align-items: center;
                 overflow: hidden;

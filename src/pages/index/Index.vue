@@ -1115,9 +1115,6 @@ export default {
         // openActivity(url) {
         // },
     init() {
-            // console.log(this.coins.columns[7],this.favorColumns);
-            // this.$store.commit("navigate", "nav-index");
-            // this.$store.state.HeaderActiveName = "1-1";
       this.loadPicData()// 获取轮播图
       this.addClass(0)
             // this.getmoneyData();
