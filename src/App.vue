@@ -389,6 +389,7 @@
     </div>
 </template>
 <script>
+var $ = require('jquery')
 import QRCode from 'qrcode2'
 import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
@@ -439,7 +440,6 @@ export default {
       this.locale = newVal
     },
     $route(to, from) {
-      console.log(to)
       this.pathName = to.path
       if (this.pathName === '/login' || this.pathName === '/register') {
         this.pathNameState = false
@@ -447,11 +447,11 @@ export default {
         this.pathNameState = true
       }
 
-      console.log(this.pathName)
       if (to.path === '/') {
         this.pageView = 'page-view'
                 // this.container_test = "";
       } else {
+        $('.page-content').css({ 'background': '#11132c' })
         if (to.path.indexOf('exchange') > 0 && this.exchangeSkin === 'night') {
           this.pageView = 'page-view'
         } else {
@@ -527,10 +527,8 @@ export default {
       })
     },
     goBi(name) {
-      console.log(name)
       switch (name) {
         case 'moneyindex':
-          console.log(name)
           this.$router.push('/personal')
           break
         case 'record':
@@ -817,7 +815,6 @@ ul,li{
     margin-bottom: 15px;
 }
 .ivu-modal-body {
-    // border-top: 4px solid #3399ff;
     line-height: 25px;
     border-radius: 5px;
     .ivu-modal-confirm {
