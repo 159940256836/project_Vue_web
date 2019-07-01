@@ -368,6 +368,13 @@ export default {
                 }
             }
             .ivu-table {
+                .ivu-table-tip {
+                    tr {
+                        td {
+                            text-align: center;
+                        }
+                    }
+                }
                 td {
                     text-align: left;
                     background-color: #111530;

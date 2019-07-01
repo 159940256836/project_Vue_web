@@ -2139,7 +2139,7 @@ export default {
     },
     getCNYRate() {
       this.$http
-                .post(this.host + '/market/exchange-rate/usd-cny')
+        .post(this.host + '/market/exchange-rate/usd-cny')
                 .then(response => {
                     let resp = response.body;
                     this.CNYRate = resp.data;
@@ -2180,7 +2180,9 @@ export default {
                     "header_saveload",
                     "use_localstorage_for_settings",
                     "left_toolbar",
-                    "volume_force_overlay"
+                    "volume_force_overlay",
+                    'header_settings',
+                    'main_meries_seale_menu' // 隐藏右上角设置
                 ],
                 enabled_features: [
                     "hide_last_na_study_output",
