@@ -42,12 +42,22 @@ const zh = {
     ruleofactivity:"活动规则",
     APmanagement:"API管理",
     Mypromotion:"我的推广",
-    RegisteringDW:"注册BDW交易所即赠送100个糖果价值约1000人民币，邀请一级赠送20枚糖果价值约200人民币，2级送10枚糖果价值约100人民币，8月份糖果即可在交易所交易变现"
+    RegisteringDW0:"2019年7月1号起注册实名验证赠送糖果50个，一级邀请10个，二级邀请5个，活动到7月10号截止！",
+    RegisteringDW1:"注册赠送的BDW糖果作用：",
+    RegisteringDW2:"兑换平台币，8月份即可兑换联系变现",
+    RegisteringDW3:"获得IEO抢购资格",
+    RegisteringDW4:"IEO活动时可将糖果按照比例兑换成相应的平台币",
+    RegisteringDW5:"可获得平台分红资格"
 };
 const en = {
     Mypromotion:"My promotion",
     APmanagement:'API management',
-    RegisteringDW :'Registering BDW Exchange will give 100 candy worth about 1000 RMB, invite 20 gifts for the first grade to be worth about 200 RMB, and 2 for 10 candy worth about 100 RMB. In August, the candy can be traded on the exchange.',
+    RegisteringDW0:"Since July 1, 2019, 50 candies have been registered, 10 candies have been invited at the first level and 5 candies have been invited at the second level.",
+    RegisteringDW1:"The Role of Registered Gift of BDW Candy：",
+    RegisteringDW2:"Converting platform currencies can be realized in August.",
+    RegisteringDW3:"Get IEO Buy Qualification",
+    RegisteringDW4:"Candy can be converted into platform currency in proportion to IEO activities.",
+    RegisteringDW5:"Platform dividend eligibility",
     ruleofactivity:'rule of activity',
     Currentoints:"Current points",
     Myscores:'My scores',
