@@ -91,8 +91,8 @@
         <div class="table1">
             <!-- 5.14修改 -->
             <div class="tabida">
-                <div @click="changeTab(1)" :class="tabid==1?'activee':''">{{$t('Ieo.selling')}}</div>
-                <div @click="changeTab(2)" :class="tabid==2?'activee':''">{{$t('Ieo.project')}}</div>
+                <div style=" cursor: pointer;" @click="changeTab(1)" :class="tabid==1?'activee':''">{{$t('Ieo.selling')}}</div>
+                <div style=" cursor: pointer;" @click="changeTab(2)" :class="tabid==2?'activee':''">{{$t('Ieo.project')}}</div>
             </div>
             <div class="tabida1" v-show="tabid==1">
                 <div>{{content.sellMode}}</div>
