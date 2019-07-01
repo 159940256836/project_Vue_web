@@ -229,7 +229,8 @@ $pageTheme: rgb(13, 70, 125);
 }
 .speicial {
       .ivu-tabs-tab {
-        width:102px;
+          margin-left:26px;
+        // width:102px;
         height:46px;
         font-size:16px;
         // color:#fff;

@@ -26,9 +26,10 @@
           </div> -->
         <div class="content">
             <div style="display:flex; font-size:16px; color:#fff;margin-bottom:40px;">
-              <div>公告中心</div>
+              <!-- 公告中心 -->
+              <div>{{ $t("new.Announcemcenter") }}</div>
               <div style="margin-left:5px"> ></div>
-              <div style="margin-left:5px">详情</div>
+              <div style="margin-left:5px">{{ $t("new.Detailss") }}</div>
             </div>
 
             <h4 class="title">{{data.title}}</h4>

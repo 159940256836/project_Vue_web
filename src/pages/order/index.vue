@@ -66,6 +66,7 @@ export default {
     color: #fff;
     width: 1200px;
     margin: auto;
+    padding-bottom: 55px;
 }
 
 .title {

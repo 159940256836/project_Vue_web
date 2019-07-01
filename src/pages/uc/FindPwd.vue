@@ -116,13 +116,7 @@
                         color: #fff;
                         font-size: 18px;
                         border-radius: 0;
-                        &:focus {
-                            -moz-box-shadow: 2px 2px 5px #fff,
-                                -2px -2px 4px #fff;
-                            -webkit-box-shadow: 2px 2px 5px #fff,
-                                -2px -2px 4px #fff;
-                            box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                        }
+                        border:0;
                     }
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
@@ -487,7 +481,6 @@ export default {
                             })
           }
                     // this.$Message.success(this.$t('uc.forget.resetpwdsuccess'));
-        } else {
         }
       })
     },
@@ -531,7 +524,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.login_form {
+#logo {
     .login_right {
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
@@ -539,17 +532,26 @@ export default {
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
                             height: 42px !important;
-                            border: 1px solid #3399FF;
+                            border:1px solid;
+                            border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
                             font-size: 14px;
                             border-radius: 0;
                             background:#10122B;
-                            color:#8090AF;
+                            color:white;
                             &:focus {
                                 border: 1px solid #3399FF;
                             }
                         }
                     }
                 }
+                  .ivu-btn{
+                      padding: 5px 15px 6px;
+                      font-size:14px;
+                      height:48px;
+                  }
+                  .ivu-btn:hover{
+                    border:0;
+                  }
             }
         }
     }

@@ -1,7 +1,128 @@
+<style lang="scss">
+$changeColor:#DDDDDD;
+$focusColor:#3399FF;
+.login_form {
+    $main_theme: #3399ff;
+    .login_right {
+        form.ivu-form.ivu-form-label-right.ivu-form-inline {
+            .ivu-form-item {
+                border:0 !important;
+                .ivu-form-item-content {
+                    border:0;
+                    .ivu-input-wrapper.ivu-input-type {
+                        .ivu-input {
+                            width: 100%;
+                            height: 42px;
+                            font-size: 14px;
+                            border-radius: 0;
+                            border: 1px solid $changeColor;
+                            padding-left: 20px;
+                            box-sizing: border-box;
+                            background:#10122B;
+                            border:1px solid;
+                            color:white;
+                            border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
+                            &:focus {
+                                border: 1px solid $focusColor;
+                                box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
+                            }
+                        }
+                    }
+                    .ivu-btn.active {
+                        font-size: 14px;
+                        font-weight: 500;
+                        border-radius: 0;
+                        border-color: #fff;
+                        border-bottom: 2px solid $main_theme !important;
+                    }
+                    .ivu-btn:active {
+                        font-size: 14px;
+                        color: $main_theme;
+                        border-bottom: 2px solid $main_theme;
+                    }
+                    .ivu-btn {
+                        font-size: 14px;
+                        border:0;
+                        //border-color: #fff;
+                        background: transparent;
+                        padding:0;
+                        margin-right:15px;
+                        &:hover {
+                            color: $main_theme;
+                            border-bottom: 2px solid $main_theme;
+                        }
+                        &:focus {
+                            box-shadow: 2px 2px 5px transparent,
+                                -2px -2px 4px transparent;
+                        }
+                    }
+                }
+            }
+            .ivu-select {
+                height: 42px;
+                border-radius: 0;
+            }
+            .ivu-select-single .ivu-select-selection {
+                height: 42px;
+                border-radius: 0;
+                border-right: 0;
+                border:1px solid;
+                border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
+                background-color:transparent;
+                text-align: center;
+            }
+            .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
+                background:#10122B;
+                height: 40px;
+                border-radius: 0;
+                line-height: 42px;
+                border-right: 0;
+                color:#fff;
+                text-align: center;
+            }
+            .check-agree {
+                .ivu-checkbox-wrapper {
+                    .ivu-checkbox-input {
+                        &:focus {
+                            border: none;
+                            outline: none;
+                            box-shadow: 2px 2px 5px transparent,
+                                -2px -2px 4px transparent;
+                        }
+                    }
+                }
+                .ivu-checkbox-wrapper.ivu-checkbox-wrapper-checked {
+                    .ivu-checkbox.ivu-checkbox-checked {
+                        .ivu-checkbox-inner {
+                            border: 1px solid $main_theme;
+                            background-color: $main_theme;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#button{
+  .ivu-btn{
+      padding: 5px 0px 6px;
+      font-size:14px;
+      height:48px;
+      border-bottom: 2px solid transparent;
+      box-shadow:0;
+  }
+  .ivu-btn:hover{
+    // border:0;
+  }
+  .ivu-btn:focus{
+    box-shadow: 0 !important;
+  }
+}
+</style>
 <template>
     <div class="login_form" id="logo">
         <div class="wrap-mask"></div>
-        <div class="login_right">
+        <div class="login_right" id="button">
             <Form
                 v-if="allowRegister"
                 ref="formInline"
@@ -122,7 +243,7 @@
                     </router-link>
                     <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
                 </div>
-                <FormItem>
+                <FormItem id="button">
                     <Button
                         class="register_btn"
                         @click="handleSubmit('formInline')"
@@ -159,6 +280,12 @@
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 .ivu-form-item-content {
+                    .ivu-select-item-selected, .ivu-select-item-selected:hover{
+                        background:#191d3a;
+                    }
+                    .ivu-select-item:hover{
+                        background:#191d3a;
+                    }
                     .register_btn.ivu-btn {
                         width: 100%;
                         background-color: #3399ff;
@@ -168,9 +295,11 @@
                         border-radius: 0;
                         font-size: 18px;
                         margin-top: 20px;
+
                         &:focus {
-                            box-shadow: 2px 2px 5px transparent,
-                                -2px -2px 4px transparent;
+                            // box-shadow: 2px 2px 5px transparent,
+                            //     -2px -2px 4px transparent;
+                                outline: none;
                         }
                     }
                     .ivu-input-wrapper.ivu-input-type {
@@ -613,104 +742,4 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-$changeColor:#DDDDDD;
-$focusColor:#3399FF;
-.login_form {
-    $main_theme: #3399ff;
-    .login_right {
-        form.ivu-form.ivu-form-label-right.ivu-form-inline {
-            .ivu-form-item {
-                border:0 !important;
-                .ivu-form-item-content {
-                    border:0;
-                    .ivu-input-wrapper.ivu-input-type {
-                        .ivu-input {
-                            width: 100%;
-                            height: 42px;
-                            font-size: 14px;
-                            border-radius: 0;
-                            border: 1px solid $changeColor;
-                            padding-left: 20px;
-                            box-sizing: border-box;
-                            background:#10122B;
-                            border:1px solid;
-                            border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
-                            opacity:0.62;
-                            &:focus {
-                                border: 1px solid $focusColor;
-                                box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
-                            }
-                        }
-                    }
-                    .ivu-btn.active {
-                        font-size: 14px;
-                        font-weight: 500;
-                        border-radius: 0;
-                        border-color: #fff;
-                        border-bottom: 2px solid $main_theme !important;
-                    }
-                    .ivu-btn:active {
-                        font-size: 14px;
-                        color: $main_theme;
-                        border-bottom: 2px solid $main_theme;
-                    }
-                    .ivu-btn {
-                        font-size: 14px;
-                        border:0;
-                        //border-color: #fff;
-                        background: transparent;
-                        &:hover {
-                            color: $main_theme;
-                            border-bottom: 2px solid $main_theme;
-                        }
-                        &:focus {
-                            box-shadow: 2px 2px 5px transparent,
-                                -2px -2px 4px transparent;
-                        }
-                    }
-                }
-            }
-            .ivu-select {
-                height: 42px;
-                border-radius: 0;
-            }
-            .ivu-select-single .ivu-select-selection {
-                height: 42px;
-                border-radius: 0;
-                border-right: 0;
-                border:1px solid;
-border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
-            }
-            .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
-                background:#10122B;
-                height: 40px;
-                border-radius: 0;
-                line-height: 42px;
-                border-right: 0;
-                color:#fff;
-            }
-            .check-agree {
-                .ivu-checkbox-wrapper {
-                    .ivu-checkbox-input {
-                        &:focus {
-                            border: none;
-                            outline: none;
-                            box-shadow: 2px 2px 5px transparent,
-                                -2px -2px 4px transparent;
-                        }
-                    }
-                }
-                .ivu-checkbox-wrapper.ivu-checkbox-wrapper-checked {
-                    .ivu-checkbox.ivu-checkbox-checked {
-                        .ivu-checkbox-inner {
-                            border: 1px solid $main_theme;
-                            background-color: $main_theme;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-</style>
+

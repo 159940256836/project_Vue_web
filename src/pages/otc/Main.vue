@@ -342,9 +342,10 @@
     .fiat-main {
       width: 1200px;
       margin: 0 auto;
-      padding: 26px 0;
+      padding: 20px 0;
       .content {
         width: 100%;
+        position: relative;
         /*margin: 20px auto;*/
       }
       .advantage {
@@ -400,23 +401,26 @@
         height: 20px;
       }
       .ivu-tabs-bar {
-        border-bottom: none;
+        margin-bottom: 75px;
       }
       .ivu-tabs-nav-scroll {
-        margin-top: 26px;
         height: 55px;
         background: #191D3A;
+        padding: 0 24px;
       }
       .ivu-menu-light {
+        width: 100%;
         height: 55px;
         background: #191D3A;
+        position: absolute;
+        top: 74px;
       }
       .ivu-tabs-nav .ivu-tabs-tab {
         line-height: 38px;
         color: #fff;
       }
       .ivu-menu-horizontal .ivu-menu-item {
-        margin: 0 20px;
+        margin: 0 0px 0 22px;
         padding: 0;
       }
       ul.tradelist.ivu-menu.ivu-menu-light.ivu-menu-horizontal {
@@ -425,6 +429,7 @@
         }
         .ivu-menu-item-group {
           li.ivu-menu-item {
+            height: 35px;
             border: none;
             color: #fff;
             &:hover {
@@ -445,25 +450,29 @@
         }
       }
       .ivu-table-large td {
+        background: #10122B;
         height: 50px;
       }
       .ivu-table td, .ivu-table th {
         border: 0;
       }
-      /*#list1 li:nth-of-type(odd){ background:#00ccff;*/
+      /*#list1 li:nth-of-type(odd){ background:#00ccff;}*/
       /*#list1 li:nth-of-type(even){ background:#ffcc00;}*/
-      &:nth-of-type(odd) {
-        .ivu-table td {
-          background: #111530;
-          color: #fff;
+      .ivu-table-row {
+        &:nth-of-type(odd) {
+          .ivu-table td {
+            background: #111530;
+            color: #fff;
+          }
+        }
+        &:nth-of-type(even) {
+          .ivu-table td {
+            background: #fff;
+            color: #fff;
+          }
         }
       }
-      &:nth-of-type(even) {
-        .ivu-table td {
-          /*background: #fff;*/
-          color: #fff;
-        }
-      }
+
       /*.ivu-table td {*/
       /*  background: #111530;*/
       /*}*/
@@ -471,6 +480,9 @@
         background: #0e0e28;
         .ivu-table-wrapper {
           .ivu-table {
+            td {
+              background: #10122B;
+            }
             &:before {
               /*background: #fff;*/
             }
@@ -497,42 +509,42 @@
 }
 </style>
 <script>
-import myAdvertising from "../../components/otc/MyAd";
+import myAdvertising from '../../components/otc/MyAd'
 export default {
   components: { myAdvertising },
   data() {
     return {
       coins: [],
-      activeMenuName: "BC",
-      //币种列表
+      activeMenuName: 'BC',
+      // 币种列表
       coinList: [],
-      active : 0, // 默认样式
-      active1 : 0, // 默认样式
+      active: 0, // 默认样式
+      active1: 0, // 默认样式
       coinName: '', // 币种
       coinName1: '', // 默认币种
       currency: {}, // 币种详情
-      currencyOtcCoin: {},
-    };
+      currencyOtcCoin: {}
+    }
   },
   computed: {
     isLogin: function() {
-      return this.$store.getters.isLogin;
+      return this.$store.getters.isLogin
     }
   },
   methods: {
     init() {
-      this.$store.commit("navigate", "nav-otc");
+      this.$store.commit('navigate', 'nav-otc')
       this.$http.post(this.host + this.api.otc.coin).then(response => {
         if (response.body.code == 0) {
-          this.coins = response.body.data;
+          this.coins = response.body.data
           this.$nextTick(function() {
-            this.$refs.navMenu.updateActiveName();
-          });
+            this.$refs.navMenu.updateActiveName()
+          })
         }
-      });
+      })
     },
     dowm(coin, index) {
-      //将点击的元素的索引赋值给变量
+      // 将点击的元素的索引赋值给变量
       this.active = index
       this.coinName = coin
       // console.log(coin, index);
@@ -541,26 +553,26 @@ export default {
     // 币种信息
     findCoin() {
       // 获取币种
-      this.$http.post(this.host + "/otc/coin/all").then(response => {
-        let resp = response.body;
+      this.$http.post(this.host + '/otc/coin/all').then(response => {
+        const resp = response.body
         if (resp.code == 0) {
-          this.coinList = resp.data;
+          this.coinList = resp.data
           this.coinName1 = this.coinList[0].unit
           // console.log(this.coinList, this.coinList[0].unit);
           this.currencyDetails(this.coinList[0].unit)
         }
       })
     },
-    /*法币币种详情*/
-    currencyDetails (coin, unit) {
-      console.log(coin, unit);
+    /* 法币币种详情*/
+    currencyDetails(coin, unit) {
+      console.log(coin, unit)
       if (coin) {
         this.coinName1 = coin
       } else {
         this.coinName1 = unit
       }
-      this.$http.get(this.host + "otc/coin/index?coin=" + this.coinName1).then(response => {
-        let resp = response.body;
+      this.$http.get(this.host + '/otc/coin/index?coin=' + this.coinName1).then(response => {
+        const resp = response.body
         if (resp.code == 0) {
           // console.log(resp);
           if (resp.data !== null) {
@@ -571,68 +583,68 @@ export default {
           }
           // console.log(this.currency);
         }
-      });
+      })
     },
     goBusiness() {
       if (this.isLogin) {
         this.$router.push({
-          path: "/identbusiness"
-        });
+          path: '/identbusiness'
+        })
       } else {
-        /*请先登录*/
-        this.$Message.warning(this.$t('common.logintip'));
+        /* 请先登录*/
+        this.$Message.warning(this.$t('common.logintip'))
       }
     },
     menuSelected(menuName, index) {
       this.active1 = index
-      if (menuName.startsWith("coin")) {
-        var coin = this.coins[menuName.split("-")[1]];
-        this.$router.push("/otc/trade/" + coin.unit);
+      if (menuName.startsWith('coin')) {
+        var coin = this.coins[menuName.split('-')[1]]
+        this.$router.push('/otc/trade/' + coin.unit)
       } else {
-        this.$router.push("/otc/" + menuName);
+        this.$router.push('/otc/' + menuName)
       }
     },
     activeMenu() {
-      console.log(this.$route.params);
-      let coin = this.$route.params[0] || "BC";
-      coin = coin.toUpperCase();
-      console.log(coin);
+      console.log(this.$route.params)
+      let coin = this.$route.params[0] || 'BC'
+      coin = coin.toUpperCase()
+      console.log(coin)
       switch (coin) {
-        case "BTC":
+        case 'BTC':
          // this.activeMenuName = "coin-0";
-         this.activeMenuName = "BTC";
-          break;
-        case "USDT":
+          this.activeMenuName = 'BTC'
+          break
+        case 'USDT':
          // this.activeMenuName = "coin-1";
-          this.activeMenuName = "USDT";
-          break;
-        case "ETH":
+          this.activeMenuName = 'USDT'
+          break
+        case 'ETH':
         //  this.activeMenuName = "coin-2";
-         this.activeMenuName = "ETH";
-          break;
-        case "BC":
+          this.activeMenuName = 'ETH'
+          break
+        case 'BC':
           //  this.activeMenuName = "coin-2";
-          this.activeMenuName = "BC";
-          break;
+          this.activeMenuName = 'BC'
+          break
         default:
         //  this.activeMenuName = "coin-1";
-         this.activeMenuName = "USDT";
-          break;
+          this.activeMenuName = 'USDT'
+          break
       }
       this.$nextTick(function() {
-        this.$refs.navMenu.updateActiveName();
-      });
+        this.$refs.navMenu.updateActiveName()
+      })
     }
   },
   created: function() {
-    this.init();
+    this.init()
     this.findCoin()
     this.currencyDetails()
     // this.activeMenuName = "coin-1";
     // this.$nextTick(function() {
     //   this.$refs.navMenu.updateActiveName();
     // });
-    this.activeMenu();
+    this.activeMenu()
   }
-};
+}
 </script>

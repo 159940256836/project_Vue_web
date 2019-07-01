@@ -7,8 +7,8 @@
         <div class="help_container">
             <!-- <h1>{{cateTitle}}</h1> -->
             <!-- <h1>{{$t("footer.helpCenter")}}</h1> -->
-            <div style="display:flex; height:50px;line-height:50px; text-align:center; background:#191d3a !important">
-                <div style="margin-left:10px; width:120px; text-aling:center;" v-for="(item, index) in selectList" :key='index' class="select_list" :class="cate == item.status ? 'on' : ''" @click="changeStatus(item.status)">{{item.klassName}}</div>
+            <div style="display:flex; height:50px;line-height:50px; text-align:center; background:#191d3a !important; cursor: pointer;">
+                <div style="margin-left:10px;margin-left:30px; text-aling:center;" v-for="(item, index) in selectList" :key='index' class="select_list" :class="cate == item.status ? 'on' : ''" @click="changeStatus(item.status)">{{item.klassName}}</div>
             </div>
             <div></div>
             <div class="list">
@@ -38,6 +38,9 @@
     </div>
 </template>
 <style lang="scss" scoped>
+.select_list[data-v-9dbbb4ae]:hover{
+    color:#3399ff;
+}
 .list .item[data-v-9dbbb4ae]{
     color:#fff !important;
 }
@@ -45,12 +48,14 @@
 .select_list{
     // background:#2d8cf0;
     color:#fff;
+    cursor: pointer;
 }
 .select_list:hover{
     color:#57a3f3;
 }
 .select_list.on{
-    color: #2d8cf0;
+    color: #2d8cf0 !important;
+    border-bottom: 1px solid #2d8cf0;
 }
 .helpList_page{
     margin-top:20px;
@@ -185,92 +190,91 @@
 </style>
 <script>
 export default {
-    data() {
-        return {
-            cate: 0,
-            pageNo: 1,
-            pageSize: 10,
-            total: 0,
-            list: [],
-            cate:0,
-            showPage: false
-        };
-    },
-    created() {
+  data() {
+    return {
+      cate: 0,
+      pageNo: 1,
+      pageSize: 10,
+      total: 0,
+      list: [],
+      cate: 0,
+      showPage: false
+    }
+  },
+  created() {
         // this.$store.commit("navigate", "nav-uc");
         // const { cate, cateTitle } = this.$route.query;
         // this.cate = cate;
         // this.cateTitle = cateTitle;
-        this.getData();
-        this.settiele();
+    this.getData()
+    this.settiele()
+  },
+  computed: {
+    selectList() {
+      var list = []
+      list.push({ status: 0, klassName: this.$t('footer.RecommendedCommission') })
+      list.push({ status: 1, klassName: this.$t('footer.question') })
+      list.push({ status: 2, klassName: this.$t('footer.Recharguide') })
+      list.push({ status: 3, klassName: this.$t('footer.Tradiguide') })
+      return list
+    }
+  },
+  watch: {
+    $route(to, from) {
+            // this.getAllData();
+    }
+  },
+  methods: {
+    pageChange(data) {
+      this.pageNo = data
+      this.getData()
     },
-    computed: {
-        selectList() {
-            var list = [];
-            list.push({ status: 0, klassName: this.$t("footer.RecommendedCommission")});
-            list.push({ status: 1, klassName: this.$t("footer.question") });
-            list.push({ status: 2, klassName: this.$t("footer.Recharguide") });
-            list.push({ status: 3, klassName: this.$t("footer.Tradiguide") });
-            return list
-        }
+    changeStatus(n) {
+      this.pageNo = 1
+      this.cate = n
+      this.getData()
     },
-    watch: {
-        $route(to, from) {
-            //this.getAllData();
-        }
-    },
-    methods: {
-        pageChange(data) {
-            this.pageNo = data;
-            this.getData();
-        },
-        changeStatus(n) {
-            this.pageNo = 1;
-            this.cate = n;
-            this.getData();
-        },
-        getAllData(){//查询所有帮助
-            let params = {
-                pageNo: this.pageNo,
-                pageSize: this.pageSize,
-                cate: this.cate
-            };
-            this.$http
+    getAllData() { // 查询所有帮助
+      const params = {
+        pageNo: this.pageNo,
+        pageSize: this.pageSize,
+        cate: this.cate
+      }
+      this.$http
                 // .post(this.host + "/uc/ancillary/system/help", params)
-                .post(this.host + "/uc/ancillary/more/help/page", params)
+                .post(this.host + '/uc/ancillary/more/help/page', params)
                 .then(res => {
-                    if (res.status == 200 && res.body.code == 0) {
-                        this.list = res.body.data.content;
-                    } else {
-                        this.$Message.error(res.body.message);
-                    }
-                });
-        },
-        getData() {//查询指定类型的帮助;
-            let params = {
-                pageNo: this.pageNo,
-                pageSize: this.pageSize,
-                cate: this.cate
-            };
-            this.$http
-                .post(this.host + "/uc/ancillary/more/help/page", params)
-                .then(res => {
-                    if (res.status == 200 && res.body.code == 0) {
-                        if (res.body.data.totalElements > 10) {
-                            this.showPage = true;
-                        } else {
-                            this.showPage = false;
-                        }
-                        this.list = res.body.data.content;
-                        this.total = res.body.data.totalElements;
-                    } else {
-                        this.$Message.error(res.body.message);
-                    }
-                });
-                
-        }
+                  if (res.status == 200 && res.body.code == 0) {
+                    this.list = res.body.data.content
+                  } else {
+                    this.$Message.error(res.body.message)
+                  }
+                })
     },
-    mounted() {
+    getData() { // 查询指定类型的帮助;
+      const params = {
+        pageNo: this.pageNo,
+        pageSize: this.pageSize,
+        cate: this.cate
+      }
+      this.$http
+                .post(this.host + '/uc/ancillary/more/help/page', params)
+                .then(res => {
+                  if (res.status == 200 && res.body.code == 0) {
+                    if (res.body.data.totalElements > 10) {
+                      this.showPage = true
+                    } else {
+                      this.showPage = false
+                    }
+                    this.list = res.body.data.content
+                    this.total = res.body.data.totalElements
+                  } else {
+                    this.$Message.error(res.body.message)
+                  }
+                })
+    }
+  },
+  mounted() {
         // const doc = document.body
         // const sreenHeight = doc.offsetHeight;
         // const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
@@ -278,8 +282,8 @@ export default {
         // const contentHeight = doc.getElementsByClassName("helplist")[0];
         // const bodyHeight = sreenHeight - headerHeight - footerHeight;
         // contentHeight.style.minHeight = bodyHeight + "px";
-    }
-};
+  }
+}
 </script>
 
 

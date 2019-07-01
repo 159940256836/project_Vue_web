@@ -677,7 +677,7 @@ export default {
                   this.$Message.success(resp.message);
                   var that = this;
                   setTimeout(() => {
-                    that.$router.push("/uc/ad");
+                    that.$router.push("/otc/trade/bc");
                   }, 3000);
                 } else {
                   this.$Message.error(resp.message);
@@ -695,7 +695,7 @@ export default {
                   this.$Message.success(resp.message);
                   var that = this;
                   setTimeout(() => {
-                    that.$router.push("/uc/ad");
+                    that.$router.push("/otc/trade/bc");
                   }, 3000);
                 } else {
                   this.$Message.error(resp.message);
@@ -953,10 +953,10 @@ export default {
 }
 .bun {
   height: 40px;
-  background:#3399ff;
-  color:#fff;
-  border:1px solid #3399ff;
-  border-radius: 0;
+  background:#3399ff !important;
+  color:#fff !important;
+  border:1px solid #3399ff !important;
+  border-radius: 0 !important;
 }
 .formbox {
   float: left;
@@ -1111,6 +1111,13 @@ export default {
       }
       .ivu-radio-inner {
         background: transparent;
+      }
+    }
+    .ivu-btn[disabled] {
+      &:hover {
+        background: #3399ff;
+        color: #fff;
+        border: 0;
       }
     }
   }

@@ -167,7 +167,7 @@
                         <div class="footer_left">
                             <div class="foot_left_text">
                                 <img src="./assets/images/logo.png"></img>
-                                <span>投资者最信赖的数字资产增值平台</span>
+                                <span>{{ $t('footer.platform') }}</span>
                             </div>
                             <div class="left-icon">
                                 <a href="http://www.service@bdw.top">
@@ -197,7 +197,7 @@
                                 </li>
                                 <li>
                                     <!-- <router-link to="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</router-link> -->
-                                      <a href="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</a>
+                                      <a href="https://bdwtop.github.io/">{{$t("footer.apiDoc")}}</a>
 
                                 </li>
                                  <!-- <li>
@@ -688,6 +688,7 @@ export default {
                     // 5.15修改
                     a.router-link-active {
                         color: #2d8cf0;
+                        border-bottom: 1px solid #2d8cf0;
                     }
                 }
                 .nav-header {
@@ -1768,5 +1769,9 @@ body {
 .ivu-notice,
 .ivu-message {
     top:20% !important;
+}
+//修改placeholder字体颜色
+.ivu-input::-webkit-input-placeholder{
+  color: #8090AF;
 }
 </style>

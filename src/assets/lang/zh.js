@@ -27,7 +27,8 @@ module.exports = {
     name: 'bdw--国际数字加密资产交易平台'
   },
   new: {
-    Detailss:'详情',
+    Announcemcenter:"公告中心",
+    Detailss: '详情',
     Currenrtification: '当前等级认证',
     Currentasset: '当前资产总估值',
     Available: '可用',
@@ -55,11 +56,11 @@ module.exports = {
     Mssets: '我的资产',
     nformationto: '请上传资料完成实名认证',
     Uploartification: '上传认证',
-    BindingGoogle:"绑定谷歌",
-    Retriepassword:"找回密码",
-    ReseGoogle:"重置谷歌",
-    Transactirate:'交易费率',
-    UntieGoogle:"解绑谷歌"
+    BindingGoogle: '绑定谷歌',
+    Retriepassword: '找回密码',
+    ReseGoogle: '重置谷歌',
+    Transactirate: '交易费率',
+    UntieGoogle: '解绑谷歌'
 
   },
   common: {
@@ -71,7 +72,7 @@ module.exports = {
     expect: '敬请期待!',
     delete: '确定删除吗?',
     nodata: '暂无记录',
-    nodataa:'暂无记录，快去邀请好友',
+    nodataa: '暂无记录，快去邀请好友',
     set: '设置',
     update: '修改',
     please: '请先',
@@ -1009,7 +1010,8 @@ module.exports = {
         symbol: '币种',
         num: '数量',
         status: '状态',
-        finish: '已完成'
+        finish: '已完成',
+        nodata: '没有数据'
       },
       paydividende: {
         money_holding: '持币分红已返还累计(ETH) : ',
@@ -1359,7 +1361,7 @@ module.exports = {
       upload: '上传图片大小不能超过2M',
       placeholder: '请填写取消原因',
       apply: '申请成为商家',
-      become: '成为bdw认证商家， 享更多交易特权',
+      become: '成为币多OTC加V用户，获得广告发布权限，享受更多交易特权',
       zhusnhu: '商家享有专属广告展位，增加交易成功率',
       tijiaoziliao: '提交商家认证资料',
       place: '请您将准备好的商家认证资料上传至平台并提交',

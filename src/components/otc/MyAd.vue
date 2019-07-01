@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-rights">
+    <div class="nav-rights-my">
         <div class="my_ad_box">
             <!--<div class="add_ad">
                 <Button
@@ -14,6 +14,7 @@
             </Alert>-->
             <div class="order-table">
                 <Table
+                    stripe
                     :columns="tableColumnsAdv"
                     :data="tableAdv"
                     :no-data-text="$t('common.nodata')"
@@ -51,13 +52,11 @@ export default {
         {
           title: self.$t("otc.myad.no"),
           key: "id",
-          width: 55,
           align: "center"
         },
         {
           title: self.$t("otc.myad.type"),
           key: "advertiseType",
-          width: 90,
           align: "center",
           render: (h, params) => {
             let text = "";
@@ -72,7 +71,6 @@ export default {
         {
           title: self.$t("otc.myad.limit"),
           key: "limit",
-          width: 100,
           align: "center",
           render: (h, params) => {
             return h("div", [
@@ -83,25 +81,21 @@ export default {
         {
           title: self.$t("otc.myad.remain"),
           key: "remainAmount",
-          width: 90,
           align: "center"
         },
         {
           title: self.$t("otc.myad.coin"),
           key: "coinUnit",
-          width: 100,
           align: "center"
         },
         {
           title: self.$t("otc.myad.created"),
           key: "createTime",
-          width: 160,
           align: "center"
         },
         {
           title: self.$t("otc.myad.operate"),
           key: "buyBtn",
-          width: 180,
           align: "center",
           render: function(h, params) {
             return h("p", [
@@ -298,14 +292,14 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.nav-rights .my_ad_box .ivu-alert.ivu-alert-info[data-v-50c44f70].en{
+.nav-rights-my .my_ad_box .ivu-alert.ivu-alert-info[data-v-50c44f70].en{
   text-align:left;
 }
 .ivu-alert.en{
   padding:8px 0 8px 0
 }
 
-.nav-rights {
+.nav-rights-my {
   .my_ad_box {
     .add_ad {
       margin-bottom: 20px;
@@ -314,11 +308,6 @@ export default {
         color: #fff;
         &:hover {
           border-color: #3399ff;
-        }
-        &:focus {
-          -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-          -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-          box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
         }
       }
     }
@@ -331,21 +320,94 @@ export default {
 }
 </style>
 <style lang="scss">
-.nav-rights {
+    .ivu-modal-content {
+        background: #191D3A;
+        .ivu-modal-confirm-head {
+            text-align: left;
+            .ivu-modal-confirm-head-icon {
+                display: none;
+            }
+            .ivu-modal-confirm-head-title {
+                color: #8090af;
+            }
+        }
+        .ivu-modal-confirm-body {
+            padding-left: 13px;
+            color: #8090af;
+        }
+        .ivu-modal-confirm-footer {
+            .ivu-btn-primary,
+            .ivu-btn-text {
+                border-radius: 0;
+                padding: 4px 25px;
+            }
+            .ivu-btn-text {
+                color: #8090af;
+                border: 1px solid #8090af;
+                &:hover {
+                    background: #191D3A;
+                }
+            }
+        }
+    }
+.nav-rights-my {
+
   .my_ad_box {
     .order-table {
         .ivu-table-wrapper {
+            .ivu-table-stripe {
+                .ivu-table-body {
+                    tr{
+                        &:nth-child(2n) {
+                            td {
+                                background: #10122B;
+                                border-bottom: 0 !important;
+                            }
+                        }
+                    }
+                }
+            }
             .ivu-table {
+                .ivu-table-tip {
+                    tr {
+                        td {
+                            text-align: center;
+                        }
+                    }
+                }
                 td {
+                    text-align: left;
                     background-color: #111530;
                     color: #8090AF;
+                    .ivu-table-cell {
+                        padding-right: 0;
+                    }
+                    &:first-child {
+                        text-align: left;
+                        padding-left: 18px;
+                    }
                 }
                 .ivu-table-header {
                     th {
+                        text-align: left;
                         padding: 15px 0;
                         background: #191D3A;
                         border-color: transparent;
+                        &:first-child {
+                            text-align: left;
+                            padding-left: 18px;
+                        }
+                        &:last-child {
+                            padding-right: 35px;
+                            text-align: right;
+                        }
                     }
+                }
+            }
+            .ivu-table-column-center {
+                &:last-child {
+                    text-align: right;
+                    padding-right: 35px
                 }
             }
         }
@@ -361,16 +423,19 @@ export default {
             }
           }
         }
+        .ivu-table-column-center {
+            .ivu-table-cell {
+                &:last-child {
+                    /*padding-left: 18px;*/
+                    /*padding-right: 18px;*/
+                }
+            }
+        }
         .ivu-table-body {
           .ivu-table-tbody .ivu-table-row .ivu-table-cell {
             button.ivu-btn {
-              border-radius: 10px;
+              border-radius: 0;
               background: transparent;
-              &:focus {
-                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-              }
             }
             button.ivu-btn.ivu-btn-default {
               border-color: #00b275;

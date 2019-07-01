@@ -105,7 +105,7 @@
                             v-for="(list,index) in buttonLists"
                             :key="list.text"
                             class="btStyle"
-                            style="text-align:center;margin-left:35px;"
+                            style="text-align:center;margin-left:35px;cursor: pointer;"
                             :class="{active:changeActive == index}"
                             @click="actives(index)"
                         >
@@ -168,192 +168,190 @@
     </div>
 </template>
 <script>
-const getParamFun = (obj) => (pageNum) => Object.assign(obj, pageNum);
-const getParams = getParamFun({ pageSize: 10, type: "", createStartTime: "", createEndTime: '' });
+const getParamFun = (obj) => (pageNum) => Object.assign(obj, pageNum)
+const getParams = getParamFun({ pageSize: 10, type: '', createStartTime: '', createEndTime: '' })
 // 积分类型 PROMOTION_GIVING  LEGAL_RECHARGE_GIVING  COIN_RECHARGE_GIVING("")
-const map = new Map([[0,'推广'],[1,'法币充值赠送'],[2,'币币充值赠送']]);
-const mapEn = new Map([[0,'recommend'],[1,'Presentation of French Currency'],[2,'Currency recharge gift']]);
+const map = new Map([[0, '推广'], [1, '法币充值赠送'], [2, '币币充值赠送']])
+const mapEn = new Map([[0, 'recommend'], [1, 'Presentation of French Currency'], [2, 'Currency recharge gift']])
 export default {
-    components: {},
-    data() {
-        const m = this.$store.getters.lang == 'English' ?mapEn:map;
-        return {
-            number: 0,
-            buttonLists: [
-                {
-                    text: this.$t("uc.extension.title2")
-                },
-                {
-                    text: this.$t("uc.extension.title3")
-                }
-            ],
-            currentCommission: "0.00",
-            commissionPaying: "6%",
-            changeActive: 0,
-            qrcode: {
-                value: "",
-                size: 200,
-                code: ""
+  components: {},
+  data() {
+    const m = this.$store.getters.lang == 'English' ? mapEn : map
+    return {
+          number: 0,
+          buttonLists: [
+            {
+              text: this.$t('uc.extension.title2')
             },
-            loading: true,
-            tablePromoteFriends: [
-                {
-                    title: this.$t("uc.extension.username"),
-                    key: "username",
-                    align: "center"
-                },
-                {
-                    title: this.$t("uc.extension.createdtime"),
-                    key: "createTime",
-                    align: "center"
-                },
-                {
-                    title: this.$t("uc.extension.userlevel"),
-                    key: "level",
-                    align: "center",
-                    render: function (h, params) {
-                        return h("span", "V" + (parseInt(params.row.level) + 1))
-                    }
+            {
+              text: this.$t('uc.extension.title3')
+            }
+          ],
+          currentCommission: '0.00',
+          commissionPaying: '6%',
+          changeActive: 0,
+          qrcode: {
+            value: '',
+            size: 200,
+            code: ''
+          },
+          loading: true,
+          tablePromoteFriends: [
+            {
+              title: this.$t('uc.extension.username'),
+              key: 'username',
+              align: 'center'
+            },
+            {
+              title: this.$t('uc.extension.createdtime'),
+              key: 'createTime',
+              align: 'center'
+            },
+            {
+              title: this.$t('uc.extension.userlevel'),
+              key: 'level',
+              align: 'center',
+              render: function(h, params) {
+                  return h('span', 'V' + (parseInt(params.row.level) + 1))
                 }
-            ],
-            dataPromoteFriends: {},
-            tablePromoteMoney: [
-                {
-                    title: this.$t("uc.extension.type"),
-                    render:(h,params)=>{
-
-                        return h("div",{},m.get(params.row.type))
-                    }
-                },
-                {
-                    title: this.$t("uc.extension.amount"),
-                    key: "amount",
-                    align: "center"
-                },
-                {
-                    title: this.$t("uc.extension.amounttime"),
-                    key: "createTime",
-                    align: "center"
+            }
+          ],
+          dataPromoteFriends: {},
+          tablePromoteMoney: [
+            {
+              title: this.$t('uc.extension.type'),
+              render: (h, params) => {
+                  return h('div', {}, m.get(params.row.type))
                 }
-            ],
-            dataPromoteMoney: {},
-            pageSize: 10,
-            currentPage: 1
-        };
-    },
-    methods: {
-        share() {
-        },
-        getList() {
-            this.loading = false;
-        },
-        actives(index) {
-
-            this.currentPage = 1;
-            this.changeActive = index;
-        },
-        qrcodeM() {
-            console.log(this.user);
-            let promotionCode = this.user.promotionCode;
-            this.qrcode.value = this.url + "/#/register?agent=" + promotionCode + '&mobile=' + this.user.mobile;
-            this.qrcode.code = promotionCode;
-        },
-        onCopy(e) {
-            this.$Message.success(this.$t("uc.extension.copy_msg1") + e.text);
-        },
-        onError(e) {
-            this.$Message.error(this.$t("uc.extension.copy_msg2"));
-        },
-        getPromotionList(pageNo = 1, pageSize = 10) {
-            this.$http
-                .post(this.host + "/uc/promotion/record", { pageNo, pageSize })
+            },
+            {
+              title: this.$t('uc.extension.amount'),
+              key: 'amount',
+              align: 'center'
+            },
+            {
+              title: this.$t('uc.extension.amounttime'),
+              key: 'createTime',
+              align: 'center'
+            }
+          ],
+          dataPromoteMoney: {},
+          pageSize: 10,
+          currentPage: 1
+        }
+  },
+  methods: {
+    share() {
+      },
+    getList() {
+        this.loading = false
+      },
+    actives(index) {
+        this.currentPage = 1
+        this.changeActive = index
+      },
+    qrcodeM() {
+        console.log(this.user)
+        const promotionCode = this.user.promotionCode
+        this.qrcode.value = this.url + '/#/register?agent=' + promotionCode + '&mobile=' + this.user.mobile
+        this.qrcode.code = promotionCode
+      },
+    onCopy(e) {
+        this.$Message.success(this.$t('uc.extension.copy_msg1') + e.text)
+      },
+    onError(e) {
+        this.$Message.error(this.$t('uc.extension.copy_msg2'))
+      },
+    getPromotionList(pageNo = 1, pageSize = 10) {
+        this.$http
+                .post(this.host + '/uc/promotion/record', { pageNo, pageSize })
                 .then(response => {
-                    var num = 0;
-                    console.log(response)
-                    var resp = response.body;
-                    if (resp.code == 0) {
-                        this.dataPromoteFriends = resp.data;
-
+                  var num = 0
+                  console.log(response)
+                  var resp = response.body
+                  if (resp.code == 0) {
+                      this.dataPromoteFriends = resp.data
                     } else {
-                        this.$Message.error(resp.message);
+                      this.$Message.error(resp.message)
                     }
-                });
-        },
-        promoteFriendsPageChange(data) {
-            this.currentPage = data;
-            this.getPromotionList(data, this.pageSize);
-        },
-        promoteMoneyPageChange(data) {
-            this.currentPage = data;
-            this.getPromotionMoney(data, this.pageSize);
-        },
-        getPromotionMoney(pageNum = 1) {
-            const params = getParams({pageNum});
-            var number = 0;
-            //注册链接接口
-            this.$http.post(this.host + "/uc/integration/record/page_query",params)
+                })
+      },
+    promoteFriendsPageChange(data) {
+        this.currentPage = data
+        this.getPromotionList(data, this.pageSize)
+      },
+    promoteMoneyPageChange(data) {
+        this.currentPage = data
+        this.getPromotionMoney(data, this.pageSize)
+      },
+    getPromotionMoney(pageNum = 1) {
+        const params = getParams({ pageNum })
+        var number = 0
+            // 注册链接接口
+        this.$http.post(this.host + '/uc/integration/record/page_query', params)
                 .then(response => {
-                    console.log(response)
-                    var resp = response.body;
-                    if (resp.code == 0) {
-                        this.dataPromoteMoney = resp.data;
-                        resp.data.map((item) => {
-                            number += item.amount;
+                  console.log(response)
+                  var resp = response.body
+                  if (resp.code == 0) {
+                      this.dataPromoteMoney = resp.data
+                      resp.data.map((item) => {
+                          number += item.amount
                         })
-                        this.number = number;
+                      this.number = number
                     } else {
                         // this.$Message.error(resp.message);
                     }
-                });
-        },
-        updateLangData() {
-            this.buttonLists = [
-                {
-                    text: this.$t("uc.extension.title2")
-                },
-                {
-                    text: this.$t("uc.extension.title3")
-                }
-            ];
-            this.tablePromoteFriends[0].title = this.$t("uc.extension.username");
-            this.tablePromoteFriends[1].title = this.$t("uc.extension.createdtime");
-            this.tablePromoteFriends[2].title = this.$t("uc.extension.userlevel");
-            this.tablePromoteMoney[0].title = this.$t("uc.extension.symbol");
-            this.tablePromoteMoney[1].title = this.$t("uc.extension.amount");
-            this.tablePromoteMoney[2].title = this.$t("uc.extension.amounttime");
-            this.tablePromoteMoney[3].title = this.$t("uc.extension.remark");
-        }
-    },
-    created() {
-        this.actives(this.changeActive);
-        this.qrcodeM();
-        this.getList();
-        this.getPromotionList();
-        this.getPromotionMoney();
-    },
-    computed: {
-        user: function () {
-            return JSON.parse(localStorage.getItem("MEMBER"));
-        },
-        lang: function () {
-            return this.$store.state.lang;
-        }
-    },
-    watch: {
-        lang: function () {
-            this.updateLangData();
-        }
-    }
-};
+                })
+      },
+    updateLangData() {
+        this.buttonLists = [
+            {
+              text: this.$t('uc.extension.title2')
+            },
+            {
+              text: this.$t('uc.extension.title3')
+            }
+          ]
+        this.tablePromoteFriends[0].title = this.$t('uc.extension.username')
+        this.tablePromoteFriends[1].title = this.$t('uc.extension.createdtime')
+        this.tablePromoteFriends[2].title = this.$t('uc.extension.userlevel')
+        this.tablePromoteMoney[0].title = this.$t('uc.extension.symbol')
+        this.tablePromoteMoney[1].title = this.$t('uc.extension.amount')
+        this.tablePromoteMoney[2].title = this.$t('uc.extension.amounttime')
+        this.tablePromoteMoney[3].title = this.$t('uc.extension.remark')
+      }
+  },
+  created() {
+    this.actives(this.changeActive)
+    this.qrcodeM()
+    this.getList()
+    this.getPromotionList()
+    this.getPromotionMoney()
+  },
+  computed: {
+    user: function() {
+        return JSON.parse(localStorage.getItem('MEMBER'))
+      },
+    lang: function() {
+        return this.$store.state.lang
+      }
+  },
+  watch: {
+    lang: function() {
+        this.updateLangData()
+      }
+  }
+}
 </script>
 <style>
+
 .nav-right .btStyle :nth-child(2){
     margin-left:35px;
 }
 .bill_box .message .ivu-table th{
     height:55px !important;
 }
-.bill_box .message .ivu-table td, .ivu-table th{
+.bill_box .message .ivu-table td,.bill_box .message .ivu-table th{
     height:55px !important;
 }
 .page-wrap {
@@ -372,8 +370,9 @@ export default {
 </style>
 
 <style scoped lang="scss">
+
 .nav-right .btStyle[data-v-be09f418][data-v-be09f418]{
-    color:#8090af !important;
+    // color:#8090af !important;
 }
 
 .newMyExtension{
@@ -547,6 +546,9 @@ export default {
     // background: #fff;
     margin: 20px 0 0;
 }
+.nav-right .btStyle[data-v-be09f418][data-v-be09f418]:hover{
+    color:#3399FF;
+}
  .nav-right .message .ivu-table-wrapper, button.btStyle.ivu-btn, button.btStyle.ivu-btn.active:focus{
     box-shadow:none !important;
 }
@@ -622,6 +624,12 @@ export default {
 }
 </style>
 <style lang="scss">
+.nav-right .btStyle[data-v-0fb5a430]{
+    color:#fff !important;
+}
+.nav-right .btStyle :hover{
+    color:#3399FF !important;
+}
 .newMyExtension.nav-right .message .ivu-table-wrapper{
     margin-top:0 !important;
 }

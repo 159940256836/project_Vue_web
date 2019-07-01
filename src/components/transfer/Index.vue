@@ -60,16 +60,20 @@
                 <span style="width:50px;display: inline-block;line-height: 40px;text-align:right; color: #8090AF;">
                     {{$t('coin.quantity')}}:
                 </span>
-                <Input v-model="num" :placeholder="$t('coin.quantityTransferred')" style="width: 85%; float: right;">
-                <span slot="append" v-if="!currencyData.modal">
+                <Input
+                    v-model="num"
+                    :placeholder="$t('coin.quantityTransferred')"
+                    style="width: 85%; float: right;"
+                />
+            </div>
+            <div style="position: relative">
+                <span v-if="!currencyData.modal">
                     <span class="all" @click="turnAll">{{$t('coin.all')}}</span>
                 </span>
-                <span slot="append" v-else>
+                <span v-else>
                     <span class="all" @click="All">{{$t('coin.all')}}</span>
                 </span>
-                </Input>
             </div>
-
             <div style="margin-top:5px;padding-left:75px; color: #8090AF;" v-if="currencyData.modal">
                 {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{canUseNum}}
             </div>
@@ -77,8 +81,8 @@
                 {{$t('coin.available')}}:&nbsp;&nbsp;&nbsp;{{this.currencyData.balance}}
             </div>
             <div class="button">
-                <Button @click="cancel" type="default">{{$t('coin.cancel')}}</Button>
-                <Button @click="sure" type="primary">{{$t('coin.save')}}</Button>
+                <button @click="cancel">{{$t('coin.cancel')}}</button>
+                <button @click="sure">{{$t('coin.save')}}</button>
             </div>
         </Modal>
     </div>
@@ -437,9 +441,71 @@ export default {
 }
 </script>
 <style lang="scss">
+        .ivu-btn-default {
+            background: #111530;
+            color: #8090af;
+            border-radius: 0;
+            &:hover {
+                background: #111530;
+                color: #8090af;
+            }
+        }
+        .ivu-btn-primary {
+            color: #fff;
+            border-radius: 0 !important;
+        }
+        .ivu-input-group-append {
+            background: #111530;
+            border-radius: 0;
+            border: 1px solid #8090af;
+        }
+        .ivu-input-group-append,
+        .ivu-input-group-prepend {
+            background: #111530;
+            padding: 4px 25px;
+            border: 1px solid #2A3850;
+        }
+        .ivu-modal-content {
+            background: #111530;
+            .ivu-modal-header {
+                border-bottom: 1px solid #8090AF;
+                .ivu-modal-header-inner {
+                    color: #8090AF;
+                }
+            }
+            .ivu-input-wrapper {
+                .ivu-input[disabled] {
+                    border-radius: 0;
+                    background: #111530;
+                    border: 1px solid #2A3850;
+                }
+            }
+            .ivu-input-group {
+                .ivu-input {
+                    background: #111530;
+                    border: 1px solid #2A3850;
+                    border-radius: 0;
+                }
+            }
+            .ivu-input {
+                border-radius: 0;
+                background: #111530;
+                border: 1px solid #2A3850;
+                color: #8090af;
+            }
+        }
 .all {
+    display: inline-block;
     cursor: pointer;
     color: #2d8cf0;
+    text-align: center;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    border-left: 1px solid #2A3850;
+    position: absolute;
+    top: -39px;
+    right: 55px;
 }
 .button {
     display:flex;
@@ -447,6 +513,17 @@ export default {
     margin-top:20px;
     button{
         width:100px;
+        cursor: pointer;
+        &:first-child {
+            background: #191D3A;
+            border: 1px solid #2A3850;
+            color: #fff;
+        }
+        &:last-child {
+            background: #3399ff;
+            border: 1px solid #3399ff;
+            color: #fff;
+        }
     }
 }
 #select{
