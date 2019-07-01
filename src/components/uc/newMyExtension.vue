@@ -387,7 +387,7 @@ export default {
 }
 
 .nav-right .btStyle[data-v-be09f418][data-v-be09f418]{
-    color:#8090af !important;
+    // color:#8090af !important;
 }
 
 .newMyExtension{
@@ -592,7 +592,7 @@ export default {
 .nav-right .btStyle[data-v-be09f418]{
     background:transparent;
     border:0;
-    color:#fff;
+    // color:#fff;
     margin-top:19px;
     // height:55px;
 }
