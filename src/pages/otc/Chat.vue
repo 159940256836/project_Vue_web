@@ -108,13 +108,14 @@
                         <div
                             class="account-info"
                             v-if="alipay&&alipay!=null"
-                            style="width: 245px;"
+                            style="width: 245px;position: relative;"
                         >
                             <i class="icons alipay"></i>
                             <span>{{$t('otc.chat.zfb')}}</span>
                             <span>{{alipay.aliNo}}</span>
                             <span
                                 v-if="alipay&&alipay!=null&&alipay.qrCodeUrl!=null&&alipay.qrCodeUrl!=''"
+                                style="position: absolute;top: 20px;left: 21px;"
                             >
                                 <a @click="showQRCode(1)">
                                     {{$t('otc.chat.qrcode')}}
@@ -128,13 +129,14 @@
                         <div
                             class="account-info"
                             v-if="wechatPay&&wechatPay!=null"
-                            style="width: 245px;"
+                            style="width: 245px;position: relative;"
                         >
                             <i class="icons wechat"></i>
                             <span>{{$t('otc.chat.wx')}}</span>
                             <span>{{wechatPay.wechat}}</span>
                             <p
                                 v-if="wechatPay&&wechatPay!=null&&wechatPay.qrWeCodeUrl!=null&&wechatPay.qrWeCodeUrl!=''"
+                                style="position: absolute;top: 20px;left: 21px;"
                             >
                                 <a @click="showQRCode(2)">
                                     {{$t('otc.chat.qrcode')}}
@@ -986,6 +988,9 @@ export default {
     }
 </style>
 <style lang="scss">
+    .ivu-modal-content {
+        background: #191D3A;
+    }
     .ivu-modal-header {
         border-bottom: 1px solid #2A3850;
     }
