@@ -86,9 +86,6 @@
         border-bottom:2px solid #3399ff;
         padding:17px 0;
       }
-      // .mymsg_wrapper .ivu-tabs-nav-scroll .ivu-tabs-nav .ivu-tabs-tab{
-
-      // }
     }
   }
 </style>
@@ -137,7 +134,9 @@
     }
   }
 }
-
+.ivu-table td:last-child{
+  text-align: center;
+}
 </style>
 <template>
   <div class="mymsg_wrapper" id="personal">
@@ -305,7 +304,7 @@ export default {
     const footerHeight = doc.getElementsByTagName('footer')[0].offsetHeight
     const contentHeight = doc.getElementsByClassName('mymsg_wrapper')[0]
     const bodyHeight = sreenHeight - headerHeight - footerHeight
-    contentHeight.style.minHeight = bodyHeight + 'px'
+    contentHeight.style.minHeight = bodyHeight + 200 + 'px'
   }
 }
 </script>

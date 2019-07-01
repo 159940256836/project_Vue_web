@@ -466,22 +466,20 @@ p.math_price {
 .ivu-table-stripe .ivu-table-body tr.ivu-table-row-highlight:nth-child(2n) td,
 .ivu-table-stripe .ivu-table-fixed-body tr.ivu-table-row-highlight:nth-child(2n) td,
 tr.ivu-table-row-highlight.ivu-table-row-hover td {
-    background: #262A42;
+    background: transparent !important;
 }
 .exchange .ivu-table-overflowY::-webkit-scrollbar {
     width: 5px; /*对垂直流动条有效*/
 }
 /*定义滚动条的轨道颜色、内阴影及圆角*/
 .exchange .ivu-table-overflowY::-webkit-scrollbar-track{
-    -webkit-box-shadow: inset 0 0 6px #27313e;
-    background-color: #13152F;
-    border-radius: 3px;
+    -webkit-box-shadow: inset 0 0 6px #131738;
+    background-color: #131738;
 }
 /*定义滑块颜色、内阴影及圆角*/
 .exchange .ivu-table-overflowY::-webkit-scrollbar-thumb{
-    border-radius: 7px;
-    -webkit-box-shadow: inset 0 0 6px #0E0E28;
-    background-color: #191d3a;
+    -webkit-box-shadow: inset 0 0 6px #21254D;
+    background-color: #21254D;
 }
 
 .exchange.day .ivu-table-overflowY::-webkit-scrollbar {
@@ -495,7 +493,6 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 }
 /*定义滑块颜色、内阴影及圆角*/
 .exchange.day .ivu-table-overflowY::-webkit-scrollbar-thumb{
-    border-radius: 7px;
     -webkit-box-shadow: inset 0 0 6px rgba(238, 238, 238, .9);
     background-color: rgba(238, 238, 238, .9);
 }
@@ -781,7 +778,7 @@ iframe {
 .ivu-table-stripe .ivu-table-body tr.ivu-table-row-highlight:nth-child(2n) td,
 .ivu-table-stripe .ivu-table-fixed-body tr.ivu-table-row-highlight:nth-child(2n) td,
 tr.ivu-table-row-highlight.ivu-table-row-hover td{
-    background-color: transparent;
+    background-color: transparent !important;
 }
 
 .exchange.day .ivu-table-wrapper .ivu-table .ivu-table-row td {
@@ -819,7 +816,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td{
 .exchange .ivu-slider-wrap {
     height: 6px;
     margin: 0;
-    background-color: rgb(32, 39, 64);
+    background-color: rgb(32, 39, 64) !important;
 }
 
 .exchange .slider-wrap {
@@ -953,7 +950,9 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td{
     display: none;
     font-size: 0;
 }
-
+.exchange .ivu-table-wrapper .ivu-table td {
+    background: transparent !important;
+}
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd .ivu-table-cell {
     position: absolute;
     width: 100%;

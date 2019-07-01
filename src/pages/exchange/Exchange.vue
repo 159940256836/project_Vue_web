@@ -195,8 +195,8 @@
                             </ul>
                             <!-- <span @click="limited_price" :class="{active:!showMarket}">{{$t("exchange.limited_price")}}</span>
                             <span @click="market_price" :class="{active:showMarket}">{{$t("exchange.market_price")}}</span>
-                            <span @click="stopLossFun" :class="{active:stopLoss}">止盈止损</span> -->
-                            <!-- <div class="fee-wrap">
+                            <span @click="stopLossFun" :class="{active:stopLoss}">止盈止损</span>
+                            <div class="fee-wrap">
                                 <Checkbox v-model="isUseBHB" @on-change="changeUseBHB">使用BHB抵扣手续费</Checkbox>
                                 <span>Taker{{$t("exchange.fees_rate")}}：{{symbolFee|toPercent}}</span>
                                 <span>Maker{{$t("exchange.fees_rate")}}：{{symbolFee|toPercent}}</span>
@@ -288,11 +288,11 @@
                                 <div class="bd bd_market" v-show="btnList[1].check==true">
                                     <Form ref="formValidate">
                                         <FormItem>
-                                            <Input disabled :placeholder="$t('exchange.buytip')"></Input>
+                                            <Input disabled :placeholder="$t('exchange.buytip')"/>
                                             <label>{{currentCoin.base}}</label>
                                         </FormItem>
                                         <FormItem>
-                                            <Input @on-keyup="keyEvent" v-model="form.buy.marketAmount" :placeholder="$t('exchange.amount')"></Input>
+                                            <Input @on-keyup="keyEvent" v-model="form.buy.marketAmount" :placeholder="$t('exchange.amount')"/>
                                             <label>{{currentCoin.base}}</label>
                                         </FormItem>
                                         <div class="slider-wrap">
@@ -1700,11 +1700,11 @@ export default {
   },
   computed: {
     rechargeUSDTUrl: function() {
-      return '/uc/recharge'
+      return '/personal/recharge'
             // return "#/finance/recharge?name=" + this.currentCoin.base;
     },
     rechargeCoinUrl: function() {
-      return '/uc/recharge'
+      return '/personal/recharge'
             // return "#/finance/recharge?name=" + this.currentCoin.coin;
     },
     isLogin: function() {
@@ -2139,7 +2139,7 @@ export default {
     },
     getCNYRate() {
       this.$http
-                .post(this.host + '/market/exchange-rate/usd-cny')
+        .post(this.host + '/market/exchange-rate/usd-cny')
                 .then(response => {
                     let resp = response.body;
                     this.CNYRate = resp.data;
@@ -2180,7 +2180,9 @@ export default {
                     "header_saveload",
                     "use_localstorage_for_settings",
                     "left_toolbar",
-                    "volume_force_overlay"
+                    "volume_force_overlay",
+                    'header_settings',
+                    'main_meries_seale_menu' // 隐藏右上角设置
                 ],
                 enabled_features: [
                     "hide_last_na_study_output",
