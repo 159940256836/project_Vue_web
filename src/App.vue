@@ -770,6 +770,7 @@ export default {
                         /*width: 7%;*/
                         justify-content: flex-end;
                         #change_language_theme .ivu-dropdown-item{
+                            font-size: 14px !important;
                             color: #8090AF;
                         }
                     }
@@ -960,6 +961,7 @@ ul,li{
     background: #10122B;
     .ivu-dropdown-item {
         color: #8090AF;
+        font-size: 14px !important;
         &:hover {
             background: transparent;
             color: #3399ff;
@@ -1324,9 +1326,10 @@ body {
                     margin-bottom:15px;
                     font-size: 16px;
                     img {
-                        margin:0px;
+                        margin: 0;
                     }
                     span{
+                        width: 320px;
                         margin-left:15px;
                         color:#8790a1;
                     }

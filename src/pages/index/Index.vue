@@ -613,7 +613,7 @@ export default {
         {
           title: self.$t('service.Exchange'),
           key: 'buyBtn',
-          width: 60,
+          width: 70,
           render: function(h, params) {
             return h('div', [
               h('img', {
@@ -914,7 +914,7 @@ export default {
             title: self.$t('service.Exchange'),
             align: 'center',
             key: 'buyBtn',
-            width: 60,
+            width: 70,
                         // minWidth: 60,
             render: function(h, params) {
               return h('div', [
@@ -1689,6 +1689,11 @@ li {
             }
             .ivu-table {
               .ivu-table-header {
+                th {
+                  &:last-child {
+                    background: none;
+                  }
+                }
                 .ivu-table-column-center {
                     border: 0;
                     background: none;

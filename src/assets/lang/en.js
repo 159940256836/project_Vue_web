@@ -968,7 +968,7 @@ module.exports = {
         charge: 'Charge',
         pickup: 'Pick up',
         assets: 'assets',
-        getaddress: 'Get Address',
+        getaddress: 'Address',
         qrcode: 'Qr code for charging currency address',
         resetsuccess: 'Reset Success',
         match: 'Match',
