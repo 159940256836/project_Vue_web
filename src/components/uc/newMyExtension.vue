@@ -349,6 +349,12 @@ export default {
         border-bottom:1px solid #2a3850 !important;
         font-size:14px !important;
     }
+    .ivu-table-wrapper .ivu-table td{
+        font-size:14px !important;
+    }
+    .nav-rights .rule .rule_title[data-v-be09f418]{
+        font-size:18px !important;
+    }
    
 }
 .nav-right .btStyle :nth-child(2){
@@ -477,6 +483,7 @@ export default {
                 line-height:55px;
                 padding-left:34px;
                 color:#fff;
+                font-size:18px !important;
             }
             .rule_content{
                 // line-height:125px;
