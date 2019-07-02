@@ -497,6 +497,9 @@ export default {
   font-size: 0.2rem;
 }
 .rejs {
+  .ivu-select-dropdown {
+    background: #fff;
+  }
   .ivu-select-item-selected,
   .ivu-select-item-selected:hover {
     background: #fff;
