@@ -31,76 +31,75 @@
 </template>
 <script>
 export default {
-    components: {
-    },
-    data() {
-        let self = this;
-        return {
-            choseBtn: 0,
-            sasa: false,
-            tableData1: [],
-            tableColumnsAdv: [
-                {
-                    title: ' ',
-                    key: 'name',
-                    render: function(h, params) {
-                        return h('p', [
-                            h('a', {
-                                on: {
-                                    click: function() {
-                                        self.$router.push('/noticeDetail?id=123');
-                                    }
-                                }
-                            }, params.row.name)
-                        ]);
-                    }
-                },
-                {
-                    title: ' ',
-                    align: 'right',
-                    key: 'payNums',
-                },
-
-            ],
-        }
-    },
-    methods: {
-        mockTableData1(index) {
-            let data = [];
-            let page = 1 || index
-            this.$http.post(this.host + '/otc/advertise/page', { 'pageNo': index }).then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                    for (let i = 0; i < 10; i++) {
-                        data.push({
-                            name: resp.data.content[i].id,
-                            payNums: '2018-01-11 15:36:07',
-
-                        })
-                    }
-                } else if (resp.code == 4000) {
-                    this.$Message.success('请先登录');
-                    this.$router.push('/login');
-                } else {
-                    this.$Message.error(resp.message);
+  components: {
+  },
+  data() {
+    const self = this
+    return {
+      choseBtn: 0,
+      sasa: false,
+      tableData1: [],
+      tableColumnsAdv: [
+        {
+          title: ' ',
+          key: 'name',
+          render: function(h, params) {
+            return h('p', [
+              h('a', {
+                on: {
+                  click: function() {
+                    self.$router.push('/noticeDetail?id=123')
+                  }
                 }
-            })
-
-            return data;
+              }, params.row.name)
+            ])
+          }
         },
-        changePage(index) {
-            // The simulated data is changed directly here, and the actual usage scenario should fetch the data from the server
-            this.tableData1 = this.mockTableData1(index);
+        {
+          title: ' ',
+          align: 'right',
+          key: 'payNums'
         }
 
-
-    },
-    computed: {
-
-    },
-    created() {
-        this.mockTableData1();
+      ]
     }
+  },
+  methods: {
+    mockTableData1(index) {
+      const data = []
+      const page = 1 || index
+      this.$http.post(this.host + '/otc/advertise/page', { 'pageNo': index }).then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
+          for (let i = 0; i < 10; i++) {
+            data.push({
+              name: resp.data.content[i].id,
+              payNums: '2018-01-11 15:36:07'
+
+            })
+          }
+        } else if (resp.code == 4000) {
+          this.$Message.success('请先登录')
+          this.$router.push('/login')
+        } else {
+          this.$Message.error(resp.message)
+        }
+      })
+
+      return data
+    },
+    changePage(index) {
+            // The simulated data is changed directly here, and the actual usage scenario should fetch the data from the server
+      this.tableData1 = this.mockTableData1(index)
+    }
+
+  },
+  computed: {
+
+  },
+  created() {
+    this.mockTableData1()
+  }
 }
 </script>
 <style>

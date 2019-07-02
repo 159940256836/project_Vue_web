@@ -26,7 +26,6 @@
         </div>
         <!-- <div class="help_container">
           <div style="line-height: 40px;font-size:16px;"><router-link to="/help" style="color:#3399ff;">{{$t('cms.servicecenter')}}</router-link>->{{$t('cms.notice')}}</div>
-
             <Col span="24" style="padding:0 2%;color:#000;font-size:18px;background:#fff">
                 <div class="faqlist">
                     <div v-for="item,index in FAQList" class="faqitem" @click="noticedeail(item.id)" v-if="titleLang(item.title)===lang">{{item.title}}
@@ -34,7 +33,6 @@
                     </div>
                 </div>
             </Col>
-
         </div>
         <Col span="24" style="padding:100px 0;">
 
@@ -121,73 +119,72 @@
 }
 </style>
 <script>
-import { minHeightMinx } from "../../minxs/minxs"
+import { minHeightMinx } from '../../minxs/minxs'
 export default {
     // mixins: [minHeightMinx],
-    data() {
-        return {
-            pageNo: 1,
-            pageSize: 10,
-            totalNum: 0,
-            FAQList: [],
-            showPage: false
+  data() {
+    return {
+        pageNo: 1,
+        pageSize: 10,
+        totalNum: 0,
+        FAQList: [],
+        showPage: false
 
-        };
-    },
-    created: function () {
-        this.init();
-    },
-    computed: {
-        lang() {
-            return this.$store.state.lang;
-        }
-    },
-    methods: {
-        init() {
-            this.$store.state.HeaderActiveName = "1-7";
-            this.$store.commit("navigate", "nav-service");
-            this.loadDataPage(this.pageNo);
-        },
-        loadDataPage(pageIndex) {
-            var param = {};
-            (param["pageNo"] = pageIndex),
-                (param["pageSize"] = this.pageSize),
+      }
+  },
+  created: function() {
+    this.init()
+  },
+  computed: {
+    lang() {
+        return this.$store.state.lang
+      }
+  },
+  methods: {
+    init() {
+        this.$store.state.HeaderActiveName = '1-7'
+          this.$store.commit('navigate', 'nav-service')
+        this.loadDataPage(this.pageNo)
+      },
+    loadDataPage(pageIndex) {
+        var param = {};
+        (param['pageNo'] = pageIndex),
+                (param['pageSize'] = this.pageSize),
                 this.$http
                     .post(this.host + this.api.uc.announcement, param)
                     .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-
-                            if (resp.data.content.length == 0) return;
-                            if (resp.data.totalElements <= 10) {
-                                this.showPage = false;
+                      var resp = response.body
+                      if (resp.code == 0) {
+                          if (resp.data.content.length == 0) return
+                          if (resp.data.totalElements <= 10) {
+                              this.showPage = false
                             } else {
-                                this.showPage = true;
+                              this.showPage = true
                             }
-                            this.FAQList = resp.data.content;
-                            this.totalNum = resp.data.totalElements;
+                          this.FAQList = resp.data.content
+                          this.totalNum = resp.data.totalElements
                         } else {
-                            this.$Notice.error({
-                                title: this.$t("common.tip"),
-                                desc: resp.message
-                            });
+                          this.$Notice.error({
+                            title: this.$t('common.tip'),
+                            desc: resp.message
+                          })
                         }
-                    });
-        },
-        noticedeail(id) {
-            var path = { path: "/notice/index", query: { id: id } };
-            this.$router.push(path);
-        },
-        titleLang(str) {
-            const reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
-            if (reg.test(str)) {
-                return "简体中文";
+                    })
+      },
+    noticedeail(id) {
+        var path = { path: '/notice/index', query: { id: id }}
+        this.$router.push(path)
+      },
+    titleLang(str) {
+        const reg = new RegExp('[\\u4E00-\\u9FFF]+', 'g')
+        if (reg.test(str)) {
+              return '简体中文'
             } else {
-                return "English";
+              return 'English'
             }
-        }
-    }
-};
+      }
+  }
+}
 </script>
 <style lang="scss">
 .ivu-page .ivu-page-item.ivu-page-item-active:hover {

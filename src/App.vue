@@ -10,8 +10,9 @@
             >
                 <div class="time_download">
 
-                    <div class="netLogo">
-                        <router-link to="/"><img style="width: 100%;" src="./assets/images/logo.png" alt=""></router-link>
+                    <div class="netLogo" @mouseover="this.show=true">
+                        <router-link to="/" v-if="show"><img style="width: 100%;" src="./assets/images/logo.png" alt=""></router-link>
+                        <router-link to="/" v-else><img style="width: 100%;" src="./assets/images/logo2.png" alt=""></router-link>
                     </div>
                     <div class="nav" :class="locale == 'en' ? 'en' : ''">
                         <!-- <router-link to="/">{{$t("header.index")}}</router-link> -->
@@ -22,7 +23,6 @@
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">{{$t('header.help')}}</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
-
                     </div>
                     <div class="nav-header">
                         <!--中英文切换-->
@@ -405,7 +405,7 @@ export default {
     return {
       locale: '',
       isRouterAlive: true,
-            // container_test:"container_test",
+      show: 'false',
       pageView: 'page-view',
       utc: null,
       time: null,
