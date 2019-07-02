@@ -661,7 +661,7 @@ export default {
 }
 
 .account-box .account-in .account-item .account-item-in .card-number {
-    width: 204px;
+    width: 152px;
     height: 40px;
     margin-right: 15px;
     padding: 0 34px;

@@ -1676,8 +1676,6 @@ export default {
 }
 
 .user-icons .user-name {
-
-    margin-left: 10px;
     display: flex;
     justify-content: flex-start;
     /* align-items: center; */
@@ -1685,7 +1683,6 @@ export default {
 }
 
 .user-icons .user-name span {
-    padding-left: 15px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
