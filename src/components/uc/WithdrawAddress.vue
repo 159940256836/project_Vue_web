@@ -545,78 +545,7 @@ span.describe {
 }
 </style>
 <style lang="scss">
-.ivu-modal-content {
-    .ivu-btn {
-        color: #fff;
-        border: 0;
-    }
-    .ivu-input-group-large>.ivu-input-group-append {
-        min-width: 20px;
-    }
-    .ivu-btn[disabled] {
-        &:hover {
-            background: #111530;
-        }
-    }
-    .ivu-form .ivu-form-item-label {
-        color: #8090AF;
-    }
-    background: #111530;
-    .ivu-modal-confirm-head {
-        text-align: left;
-        height: 35px;
-        border-bottom: 1px solid #2A3850;
-        .ivu-modal-confirm-head-title {
-            color: #fff;
-            margin-left: 0;
-        }
-    }
-    .ivu-modal-confirm-body {
-        padding-left: 20px;
-    }
 
-    .ivu-modal-confirm-head-icon-confirm {
-        display: none;
-        .ivu-modal-confirm-body {
-        }
-    }
-    .ivu-btn-text {
-        border-radius: 0;
-        color: #8090AF;
-        border: 1px solid #2A3850;
-        padding: 4px 20px;
-        &:hover {
-            background: transparent;
-        }
-    }
-    .ivu-btn-primary {
-        padding: 4px 20px;
-    }
-
-    .ivu-modal-footer {
-        border-top: 1px solid #2A3850 !important;
-        .ivu-btn-primary {
-            color: #8090af;
-        }
-    }
-    .ivu-modal-header {
-        border-bottom: 1px solid #58698A;
-        p {
-            color: #8090af;
-        }
-    }
-    .ivu-form-item-content {
-        .ivu-input-wrapper {
-            .ivu-input-default {
-                height: 40px;
-                border-radius: 0;
-                width: 100%;
-                // background: #111530;
-                border: 1px solid #8090AF;
-            }
-        }
-    }
-}
 .nav-rights-address {
     .ivu-select-large.ivu-select-single {
         .ivu-select-selection {
