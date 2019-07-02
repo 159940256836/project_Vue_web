@@ -256,7 +256,16 @@ export default {
     }
 }
 </script>
-
+<style lang="scss" scoped>
+    .shaow {
+        position: relative;
+        .hidden-assets {
+            position: absolute;
+            top: -63px;
+            right: 34px;
+        }
+    }
+</style>
 <style lang="scss">
     .ivu-table-wrapper {
         margin-right: -1px;

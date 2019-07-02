@@ -187,16 +187,16 @@
   }
   .containers {
     width: 100%;
-    padding-top: 39px;
+
     /*margin: 20px 0;*/
     .fiat-login {
       background: #0e0e28;
-      padding-top: 20px;
+      padding-top: 70px;
       .fiat-login-main {
         width: 1200px;
         height: 180px;
         background: #111530;
-        margin: 21px auto 0;
+        margin: 0 auto;
         display: flex;
         .fiat-login-title {
           &:first-child {

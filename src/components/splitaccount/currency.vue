@@ -185,6 +185,15 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+.shaow {
+    .order-table {
+        position: relative;
+        .hidden-assets {
+            position: absolute;
+            top: -63px;
+            right: 34px;
+        }
+    }
+}
 </style>
