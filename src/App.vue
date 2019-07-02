@@ -9,17 +9,16 @@
                 }"
             >
                 <div class="time_download">
-
-                    <div class="netLogo" @mouseover="this.show=true">
-                        <router-link to="/" v-if="show"><img style="width: 100%;" src="./assets/images/logo.png" alt=""></router-link>
-                        <router-link to="/" v-else><img style="width: 100%;" src="./assets/images/logo2.png" alt=""></router-link>
+                    <div class="netLogo">
+                        <router-link to="/" ><div class="logo"></div></router-link>
+                        <!-- <router-link to="/" ><img style="width: 100%;" src="./assets/images/logo2.png" alt=""></router-link> -->
                     </div>
                     <div class="nav" :class="locale == 'en' ? 'en' : ''">
                         <!-- <router-link to="/">{{$t("header.index")}}</router-link> -->
                         <router-link to="/exchange">{{$t("header.exchange")}}</router-link>
                         <router-link to="/otc/trade/bc">{{$t("header.otc")}}</router-link>
                          <!--<router-link to="/leverindex">{{$t("header.lever")}}</router-link>-->
-                          <router-link to="/Ieo">{{$t('header.asset')}}</router-link>
+                        <router-link to="/Ieo">{{$t('header.asset')}}</router-link>
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">{{$t('header.help')}}</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
@@ -62,12 +61,12 @@
                                     <DropdownMenu slot="list">
                                         <!--个人资产-->
                                         <DropdownItem name="moneyindex">
-<!--                                            <router-link to="/personal/money">{{ $t('uc.finance.personalassets') }}</router-link>-->
+<!--<router-link to="/personal/money">{{ $t('uc.finance.personalassets') }}</router-link>-->
                                             <span>{{$t("uc.finance.personalassets")}}</span>
                                         </DropdownItem>
                                         <!--资产流水-->
                                         <DropdownItem name="record">
-<!--                                          <router-link to="/personal/record">{{ $t('uc.finance.billdetail') }}</router-link>-->
+<!--<router-link to="/personal/record">{{ $t('uc.finance.billdetail') }}</router-link>-->
                                             <span>{{ $t("uc.finance.billdetail") }}</span>
                                         </DropdownItem>
                                         <!--充币-->
@@ -405,7 +404,6 @@ export default {
     return {
       locale: '',
       isRouterAlive: true,
-      show: 'false',
       pageView: 'page-view',
       utc: null,
       time: null,
@@ -427,7 +425,6 @@ export default {
   },
   watch: {
     activeNav: function(newVal) {
-      console.log(newVal)
       switch (this.activeNav) {
         case 'nav-exchange':
           break
@@ -660,9 +657,22 @@ export default {
                 overflow: hidden;
                 min-width: 1100px;
                 .netLogo {
+                    width:50px;
+                    height:50px;
                     float: left;
-                        img {
-                            vertical-align: middle;
+                        .logo {
+                            background:url("../src/assets/images/logo.png") no-repeat;
+                            width:80%;
+                            height:80%;
+                            margin-left: 30px;
+                            margin-top: 10px;
+                        }
+                        .logo:hover {
+                            background:url("../src/assets/images/logo2.png") no-repeat;
+                            width:80%;
+                            height:80%;
+                            margin-left: 30px;
+                            margin-top: 10px;
                         }
                     }
                 }
@@ -681,6 +691,10 @@ export default {
                         // &:nth-child(5) {
                         //     padding-right: 19px;
                         // }
+                    }
+                    a:hover{
+                        color:#2d8cf0;
+                        border-bottom: 1px solid #2d8cf0;
                     }
                     // a.router-link-exact-active.router-link-active {
                     //     color: #2d8cf0;
