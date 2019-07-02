@@ -682,7 +682,7 @@ export default {
 }
 
 .account-box .account-in .account-item .account-item-in .btn {
-    padding: 8px 10px;
+    padding: 8px 0;
     cursor: pointer;
     color: #3399ff;
 }
