@@ -1796,13 +1796,12 @@ export default {
         justify-content: center;
     }
 
-    .ivu-modal{
-        top: 0;
-    }
-
 
     //弹窗样式
     .popups-modal {
+        .ivu-modal{
+            top: 0;
+        }
         .ivu-modal-content {
             padding: 0 42px;
             background: #111530;
