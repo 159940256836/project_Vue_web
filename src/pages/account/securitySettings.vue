@@ -163,7 +163,7 @@
                                         <a href="">{{$t('uc.safe.userguide')}}</a>
                                     </p>
                                     <div class="google-info right-side">
-                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="modal7 = true">{{googleAuthentication}}</span>
+                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="resetGoogle">{{googleAuthentication}}</span>
                                         <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                                             <span slot="open"></span>
                                             <span slot="close"></span>
@@ -900,13 +900,16 @@ export default {
                 }
             })
         },
+        resetGoogle() {
+            this.modal7 = true
+            this.googleSwitch = !this.googleSwitch
+        },
         changeGoogleSwitch() {//改变google验证状态
             if(this.googleSwitch) {
                 this.modal7 = true
             } else {
                 this.modal8 = true
             }
-
         },
         googleModalCancel() {
             this.googleSwitch = !this.googleSwitch

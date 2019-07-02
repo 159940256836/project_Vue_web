@@ -46,7 +46,7 @@
             ref="formCode"
             class="form"
         >
-            <FormItem :label="$t('openGoolePage._GoogleVerificationCode')">
+            <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="code">
                 <Input v-model="formCode.code"></Input>
             </FormItem>
             <FormItem>
@@ -135,17 +135,28 @@ export default {
         },
         sure(name) {
             this.$refs[name].validate(valid => {
+                console.log(valid)
                 if (valid) {
                     const codes = this.formCode.code;
                     //验证用户输入的code码是否正确;
                     this.reset({ codes, secret: this.dataSecret.secret });
                 } else {
-                    this.$Notice.erroe({
+                    this.$Notice.error({
                         title: this.$t("common.tip"),
                         desc: this.$t("openGoolePage._googleCodeRequire"),
                     })
                 }
             })
+            // if (this.formCode.code) {
+            //     const codes = this.formCode.code;
+            //     //验证用户输入的code码是否正确;
+            //     this.reset({ codes, secret: this.dataSecret.secret });
+            // } else {
+            //     this.$Notice.error({
+            //         title: this.$t("common.tip"),
+            //         desc: this.$t("openGoolePage._googleCodeRequire"),
+            //     })
+            // }
         },
         // validCode(params) {//验证用户输入的code码是否正确;
         //     this.$http.post(this.host + "/uc/google/yzgoogle", params).then(res => {
@@ -165,7 +176,7 @@ export default {
                         desc: resp.message
                     });
                     setTimeout(() => {
-                        this.$router.push('/account')
+                        this.$router.go(0)
                     })
                 }else{
                     this.$Notice.error({
@@ -268,7 +279,7 @@ $color: #2d8cf0;
 .common.specail .ivu-input {
     background-color: transparent;
     border: 1px solid #8090AF;
-    color: #000;
+    
     // &:hover {
     //     border-color: #3399ff;
     // }
@@ -290,10 +301,14 @@ $color: #2d8cf0;
         background-color: transparent;
         border: 1px solid #8090AF;
         border-radius: 0;
+        color: #fff;
     }
     .ivu-btn {
         border-radius: 0;
 
+    }
+    .ivu-form-item-required .ivu-form-item-label:before {
+        content: ''
     }
 }
 
