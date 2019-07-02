@@ -1115,9 +1115,6 @@ export default {
         // openActivity(url) {
         // },
     init() {
-            // console.log(this.coins.columns[7],this.favorColumns);
-            // this.$store.commit("navigate", "nav-index");
-            // this.$store.state.HeaderActiveName = "1-1";
       this.loadPicData()// 获取轮播图
       this.addClass(0)
             // this.getmoneyData();
@@ -1968,9 +1965,8 @@ li {
 }
 
 #fullpage {
-    padding-top: 50px;
+    // padding-top: 50px;
     min-width: 1260px;
-    /*background: #fff;*/
   .Central{
     background:url("../../assets/images/bg.png");
     height:auto;

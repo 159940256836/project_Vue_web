@@ -162,7 +162,14 @@
             </div>
             <div class="rule">
                 <div class="rule_title">{{$t('apiAdmin.ruleofactivity')}}</div>
-                <div class="rule_content">{{$t('apiAdmin.RegisteringDW')}}</div>
+                <div class="rule_content">
+                    <p>{{$t('apiAdmin.RegisteringDW0')}}</p>
+                    <p>{{$t('apiAdmin.RegisteringDW1')}}</p>
+                    <p>1.{{$t('apiAdmin.RegisteringDW2')}}</p>
+                    <p>2.{{$t('apiAdmin.RegisteringDW3')}}</p>
+                    <p>3.{{$t('apiAdmin.RegisteringDW4')}}</p>
+                    <p>4.{{$t('apiAdmin.RegisteringDW5')}}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -355,7 +362,7 @@ export default {
     .nav-rights .rule .rule_title[data-v-be09f418]{
         font-size:18px !important;
     }
-   
+
 }
 .nav-right .btStyle :nth-child(2){
     margin-left:35px;
@@ -473,16 +480,17 @@ export default {
             }
         }
         .rule{
-            height:180px;
+            min-height:180px;
             background:rgba(17,21,48,1);
             margin-top:20px;
+            padding-bottom: 35px;
             .rule_title{
                 height:55px;
                 background:rgba(25,29,58,1);
                 line-height:55px;
                 padding-left:34px;
                 color:#fff;
-                font-size:18px !important;
+                font-size: 16px !important;
             }
             .rule_content{
                 // line-height:125px;
@@ -490,6 +498,9 @@ export default {
                 font-size:14px;
                 color:#8090AF;
                 margin-top:35px;
+                p {
+                    line-height: 30px;
+                }
             }
         }
         .nav_titlt{

@@ -543,16 +543,12 @@ export default {
                 background-color: #3399ff;
                 }
                 .ivu-tabs-tab.ivu-tabs-tab-active.ivu-tabs-tab-focused {
-                color: #3399ff;
-                &:hover {
-                    color: #3399ff;
-                }
+                  color: #3399ff;
+                  &:hover {
+                      color: #3399ff;
+                  }
                 }
                 .ivu-tabs-tab {
-                // margin-right: 31px;
-                .ivu-tabs-ink-bar {
-                  // transform: translate(31px)
-                }
                 &:hover {
                     color: #3399ff;
                 }
