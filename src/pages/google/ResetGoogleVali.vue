@@ -291,7 +291,7 @@ $color: #2d8cf0;
     }
 
     .ivu-form-item-label {
-        color: #8090AF;
+        color: #8090AF !important;
         font-size: 14px;
     }
     

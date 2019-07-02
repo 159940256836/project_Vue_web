@@ -1,5 +1,5 @@
 <template>
-    <div class="openGoogle common">
+    <div class="openGoogle common" id="openGoogle">
         <div class="openGoogleModal">
             <!-- <Modal v-model="openGoogleModal" :title="title" :footer-hide="true"> -->
             <Form ref="formInline" :model="formInline" :rules="ruleInline" label-position="top">
@@ -141,12 +141,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.openGoogle {
+#openGoogle {
     margin: 0 auto;
-    .openGoogleModal .ivu-btn-warning{
-        background:#3399ff !important;
-        border-color:#3399ff !important;
-    }
     .openGoogleModal {        
         overflow: hidden;
         .ivu-form-item-content {
@@ -180,7 +176,7 @@ export default {
 </style>
 
 <style lang="scss">
-.openGoogle {
+#openGoogle{
     color: red;
     .ivu-form-item-required .ivu-form-item-label:before {
         content: ''
@@ -189,6 +185,7 @@ export default {
         height: 40px;
         border-radius: 0;
         background: transparent;
+        border: 1px solid #8090AF;
         color: #fff;      
     }
     .ivu-form-item {
