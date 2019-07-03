@@ -97,8 +97,16 @@
                         <div class="account-info" v-if="bankInfo&&bankInfo!=null">
                             <i class="icons bankfor"></i>
                             <span>{{ payInfo != null ? payInfo.realName : "" }} </span>
-                            <span>{{ bankInfo.branch }}</span>
-                            <span style="position: absolute;top: 20px;left: 21px;">{{ bankInfo.cardNo }}</span>
+                            <Poptip word-wrap trigger="hover" :content="bankInfo.branch">
+                                <span>{{ bankInfo.branch }}</span>
+                            </Poptip>
+                            <span style="position: absolute;
+                                        top: 35px;
+                                        left: 21px;
+                                        height: 20px;
+                                        line-height: 20px;
+                                        cursor: pointer;"
+                            >{{ bankInfo.cardNo }}</span>
                         </div>
                         <div class="account-info" v-else>
                             <i class="icons bankfor"></i>
@@ -921,6 +929,9 @@ export default {
 </style>
 <style lang="scss" scoped>
     .chat-in {
+        .ivu-poptip-title {
+            display: none;
+        }
         .trading,
         .account-main,
         .online-chat {

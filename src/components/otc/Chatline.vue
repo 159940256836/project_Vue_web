@@ -338,9 +338,11 @@ export default {
   /*}*/
   .msg-notice,
   .spe_show {
+      font-size: 14px;
       height: 50px;
       line-height: 50px;
       padding: 0 30px;
+      color: #8090AF;
   }
   /*.msg-notice>label{*/
   /*  margin-top: 8px;*/
