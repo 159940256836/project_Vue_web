@@ -114,6 +114,7 @@ import apiapimanagement from "../components/uc/apiapimanagement"
 import newMyExtension from "../components/uc/newMyExtension"
 import mobilereg from "../components/yidong/registers";
 import registe from "../components/yidong/registe";
+import Mobile from "../components/mobile/index.vue";
 export default [
     { path: '/newMyExtension', component: newMyExtension },
     { path: '/apiapimanagement', component: apiapimanagement },
@@ -125,8 +126,7 @@ export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
     { path: '/login', component: Login },
-
-
+    { path: '/mobile', component: Mobile, meta: {hide: true}},
     { path: '/mobilereg', component: mobilereg, meta: {
       hide: true
     }},
