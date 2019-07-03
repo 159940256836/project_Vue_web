@@ -136,8 +136,12 @@
   </div>
 </template>
 <script>
+import $ from '@js/jquery.min.js'
 import { setTimeout } from 'timers'
+  console.log(1);
+
 export default {
+
   data() {
     return {
       tabId: 1,
@@ -408,8 +412,20 @@ export default {
   mounted() {
     this.agentcode = this.$route.query.agent ? this.$route.query.agent : ''
   },
-  component() {},
-  created() {}
+  component() {
+
+    // metaInfo: {
+    //   console.log(1);
+    //   meta: [
+    //     { charset: 'utf-8' },
+    //     { name: 'viewport', content: 'width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1' }
+    //   ]
+    // }
+  },
+  created() {
+    $("meta[name='viewport']").attr('content', "***");
+    $("head").append('<meta http-equiv="refresh" content="width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1">');
+  }
 }
 </script>
 
