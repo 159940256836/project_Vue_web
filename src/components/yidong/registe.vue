@@ -411,7 +411,7 @@ export default {
     }
   },
   mounted() {
-    this.agentcode = this.$route.query.agent ? this.$route.query.agent : ''
+    this.agentcode = (this.$route.query.agent && this.$route.query.agent != 'undefined') ? this.$route.query.agent : ''
   },
   component() {
 
@@ -486,8 +486,9 @@ export default {
 }
 .tob_b {
   display: flex;
-  margin-top: 0.5rem;
-  padding-left: 1.42rem;
+  width: 60%;
+  margin: 0.5rem auto 0;
+  justify-content: space-around;
   .actives {
     color: #3399ff;
     border-bottom: 1px solid #3399ff;
@@ -498,7 +499,7 @@ export default {
     line-height: 0.43em;
     font-size: 0.32rem;
     color: #666666ff;
-    margin-left: 0.69rem;
+
     text-align: center;
   }
 }

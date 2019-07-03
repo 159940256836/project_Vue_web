@@ -260,7 +260,7 @@ export default {
     qrcodeM() {
         console.log(this.user)
         const promotionCode = this.user.promotionCode
-        this.qrcode.value = this.url + '/#/register?agent=' + promotionCode + '&mobile=' + this.user.mobile
+        this.qrcode.value = this.url + '/#/mobilereg?agent=' + promotionCode + '&mobile=' + this.user.mobile
         this.qrcode.code = promotionCode
       },
     onCopy(e) {
