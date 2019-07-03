@@ -11,7 +11,7 @@
                     <div style="display:flex; padding-left:35px; padding-top:40px;">
                         <div>
                             <div style="font-size:14px; color:#8090AF; margin-bottom:23px;">{{$t('apiAdmin.Exclusivinvita')}}</div>
-                            <div class="copy copy_left">
+                            <div class="copy copy_left"style="display:flex; align-items: center">
                                 <span class="code">{{qrcode.code}}</span>
                                 <span>|</span>
                                 <span class="span2">
