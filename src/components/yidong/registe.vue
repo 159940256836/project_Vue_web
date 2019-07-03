@@ -61,7 +61,7 @@
         </label>
         <router-link
           to="/Usereement"
-          style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem"
+          style="color:#CCCCCCFF; font-size:0.2rem; position:relative; left:-0.2rem"
         >《用户名协议》</router-link>
         <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
       </div>
@@ -123,8 +123,9 @@
           <Checkbox v-model="agreee">我已阅读并同意</Checkbox>
         </label>
         <router-link
+          class="ft-2"
           to="/Usereement"
-          style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem;font-size: 0.2rem;"
+          style="color:#CCCCCCFF;  position:relative; left:-0.2rem;font-size: 0.2rem;"
         >《用户名协议》</router-link>
         <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
       </div>
@@ -431,8 +432,12 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/index.css";
+
 .rejs{
   background:#fff;
+  .ft-2{
+    font-size: 0.2rem !important;
+  }
 }
 .btn {
   margin-top: 0.82rem;
@@ -499,7 +504,21 @@ export default {
 }
 </style>
 <style lang="scss">
+ .rejs .ivu-select-single .ivu-select-selection{
+   height: 80px;
+   padding-left: 10px;
+
+ }
 .rejs {
+  .ivu-checkbox-inner{
+    height: 24px;
+    width: 24px;
+  }
+  .ivu-checkbox-checked .ivu-checkbox-inner:after{
+    width: 8px;
+    height: 16px;
+    left: 8px;
+  }
   .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
   .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
     height: 0.6rem;
