@@ -400,7 +400,6 @@ export default {
 .newMyExtension{
     background:#0e0e28;
     padding-bottom: 160px;
-
     .nav-rights{
         position:relative;
         top:60px;
