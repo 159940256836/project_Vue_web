@@ -44,37 +44,37 @@
 export default {
   data() {
     return {
-      data: { info: {} },
-      queryId: "",
-      title: "",
-      time: "",
-      content: "",
+      data: { info: {}},
+      queryId: '',
+      title: '',
+      time: '',
+      content: '',
       initLang: this.$store.state.lang
-    };
+    }
   },
   created: function() {
-    this.initialize();
-    var self = this;
-    self.fetchData();
-     this.$store.commit("navigate", "nav-service");
+    this.initialize()
+    var self = this
+    self.fetchData()
+    this.$store.commit('navigate', 'nav-service')
   },
   computed: {
     lang() {
       if (this.$store.state.lang != this.initLang) {
-        this.$router.back();
+        this.$router.back()
       }
-      return this.$store.state.lang;
+      return this.$store.state.lang
     }
   },
   methods: {
     initialize() {
-      this.loadNoticeInfo();
+      this.loadNoticeInfo()
     },
     loadNoticeInfo() {
-      let id = this.$route.query.id;
-      if (id == null || id == "") {
-        this.$router.push("/notice");
-        return;
+      const id = this.$route.query.id
+      if (id == null || id == '') {
+        this.$router.push('/notice')
+        return
       }
       // this.$http.get(this.host + "/uc/announcement/" + id).then(response => {
       //   var result = response.body;
@@ -85,25 +85,25 @@ export default {
       //   }
       // });
       this.$http.get(this.host + `/uc/announcement/${id}`).then(response => {
-          var result = response.body;
-          if (result.code == 0) {
-            const data = result.data;
-            this.data = data;
+        var result = response.body
+        if (result.code == 0) {
+          const data = result.data
+          this.data = data
             // this.title = result.data.title;
             // this.time = result.data.createTime;
             // this.content = result.data.content;
-          }
-        });
+        }
+      })
     },
     fetchData() {
-      let id = this.$route.query.id;
-      this.loadNoticeInfo();
+      const id = this.$route.query.id
+      this.loadNoticeInfo()
     }
   },
   watch: {
-    $route: "fetchData"
+    $route: 'fetchData'
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -198,6 +198,7 @@ export default {
         margin-top:22px;
         padding:28px 28px 40px 30px;
         color:#8090AF;
+        border: 1px solid rgba(42,56,80,1);
       }
       span {
         .MsoNormal {
@@ -230,7 +231,7 @@ export default {
       }
       .image-desc {
         .uploaded-img {
-          width: 100%;
+          width: 50%;
         }
         .image-caption {
           display: none !important;

@@ -7,7 +7,7 @@
      </div>
       <div class="agent">
           <span>你的好友</span>
-          <span>{{mobile}}</span>
+          <span>{{mobile || ''}}</span>
       </div>
       <div @click="bdmMax" class="zhuceId">邀请您注册BDW</div>
       <div class="btn">
@@ -46,6 +46,10 @@ export default {
   },
   created(){
 
+      if (!(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))) {
+      var par = '?' + location.href.split('?')[1]
+      this.$router.replace('/Register' + par)
+    }
   },
 }
 </script>

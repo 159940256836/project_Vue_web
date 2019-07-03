@@ -43,12 +43,12 @@
             <p>
               <!--当前等级认证-->
               <span>{{ $t('paper.level_certification') }}</span>
-              <span>{{ currency.memLevel }}</span>
+              <span>{{ currency.memLevel ? currency.memLevel : '---' }}</span>
             </p>
             <p>
               <!--当前资产总估值-->
               <span>{{ $t('paper.total_asset_valuation') }}</span>
-              <span>{{ currencyOtcCoin.balance + currencyOtcCoin.frozenBalance  }}</span>
+              <span>{{ currencyOtcCoin.balance }} USDT ≈ {{ (currencyOtcCoin.balance + currencyOtcCoin.frozenBalance)*CNYRate | toFixed(2) }} CNY</span>
             </p>
           </div>
           <div class="fiat-login-title">
@@ -64,13 +64,12 @@
             </p>
           </div>
           <div class="fiat-login-title">
-            <div class="login-title">
-              <img
-                src="../../assets/images/fait/tip.png"
-                alt=""
-              >
-              <!--新手指南-->
-              {{$t("footer.RecommendedCommission")}}
+            <div class="fiat-title">
+              <router-link to="/identbusiness">
+                <button>
+                  {{certStatus == 2 ? $t('uc.identity.shenqingtuibao') : $t('paper.become') }}
+                </button>
+              </router-link>
             </div>
             <!--发布广告-->
             <div class="fiat-title">
@@ -523,7 +522,9 @@ export default {
       coinName: '', // 币种
       coinName1: '', // 默认币种
       currency: {}, // 币种详情
-      currencyOtcCoin: {}
+      currencyOtcCoin: {},
+      certStatus: '', // 商家状态
+      CNYRate: '' // 汇率
     }
   },
   computed: {
@@ -540,6 +541,25 @@ export default {
           this.$nextTick(function() {
             this.$refs.navMenu.updateActiveName()
           })
+        }
+      })
+    },
+    getCNYRate() {
+      this.$http.post(this.host + '/market/exchange-rate/usd-cny').then(res => {
+        console.log(res.body);
+        if (res.body.code == 0) {
+          let resp = res.body;
+          this.CNYRate = resp.data;
+          console.log(this.CNYRate);
+        }
+      });
+    },
+    getSetting() {
+      this.$http.get(this.host + this.api.uc.identification).then(res => {
+        if (res.body.code == 0) {
+          console.log(res);
+          this.certStatus = res.body.data.certifiedBusinessStatus;
+          console.log(this.certStatus);
         }
       })
     },
@@ -639,6 +659,8 @@ export default {
   created: function() {
     this.init()
     this.findCoin()
+    this.getSetting()
+    this.getCNYRate()
     this.currencyDetails()
     // this.activeMenuName = "coin-1";
     // this.$nextTick(function() {

@@ -61,7 +61,7 @@
         </label>
         <router-link
           to="/Usereement"
-          style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem"
+          style="color:#CCCCCCFF; font-size:0.2rem; position:relative; left:-0.2rem"
         >《用户名协议》</router-link>
         <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
       </div>
@@ -123,8 +123,9 @@
           <Checkbox v-model="agreee">我已阅读并同意</Checkbox>
         </label>
         <router-link
+          class="ft-2"
           to="/Usereement"
-          style="color:#CCCCCCFF; font-size:0.24rem; position:relative; left:-0.2rem;font-size: 0.2rem;"
+          style="color:#CCCCCCFF;  position:relative; left:-0.2rem;font-size: 0.2rem;"
         >《用户名协议》</router-link>
         <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
       </div>
@@ -136,8 +137,12 @@
   </div>
 </template>
 <script>
+import $ from '@js/jquery.min.js'
 import { setTimeout } from 'timers'
+  console.log(1);
+
 export default {
+
   data() {
     return {
       tabId: 1,
@@ -406,17 +411,33 @@ export default {
     }
   },
   mounted() {
-    this.agentcode = this.$route.query.agent ? this.$route.query.agent : ''
+    this.agentcode = (this.$route.query.agent && this.$route.query.agent != 'undefined') ? this.$route.query.agent : ''
   },
-  component() {},
-  created() {}
+  component() {
+
+    // metaInfo: {
+    //   console.log(1);
+    //   meta: [
+    //     { charset: 'utf-8' },
+    //     { name: 'viewport', content: 'width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1' }
+    //   ]
+    // }
+  },
+  created() {
+    $("meta[name='viewport']").attr('content', "***");
+    $("head").append('<meta http-equiv="refresh" content="width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1">');
+  }
 }
 </script>
 
 <style scoped lang="scss">
 @import "../../styles/index.css";
+
 .rejs{
   background:#fff;
+  .ft-2{
+    font-size: 0.2rem !important;
+  }
 }
 .btn {
   margin-top: 0.82rem;
@@ -465,8 +486,9 @@ export default {
 }
 .tob_b {
   display: flex;
-  margin-top: 0.5rem;
-  padding-left: 1.42rem;
+  width: 60%;
+  margin: 0.5rem auto 0;
+  justify-content: space-around;
   .actives {
     color: #3399ff;
     border-bottom: 1px solid #3399ff;
@@ -477,26 +499,52 @@ export default {
     line-height: 0.43em;
     font-size: 0.32rem;
     color: #666666ff;
-    margin-left: 0.69rem;
+
     text-align: center;
   }
 }
 </style>
 <style lang="scss">
+.rejs .ivu-select-item-selected, .ivu-select-item-selected:hover{
+  background:#fff !important;
+}
+ .rejs .ivu-select-dropdown{
+   background:#fff !important;
+ }
+.rejs .ivu-select-item:hover{
+background:#fff !important;
+}
+ .rejs .ivu-select-single .ivu-select-selection{
+   height: 100px;
+   padding-left: 10px;
+
+ }
 .rejs {
+  .ivu-checkbox-inner{
+    height: 24px;
+    width: 24px;
+  }
+  .ivu-checkbox-checked .ivu-checkbox-inner:after{
+    width: 8px;
+    height: 16px;
+    left: 8px;
+  }
   .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
   .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
-    height: 0.6rem;
+    height: 0.8rem;
     font-size: 0.28rem;
-    line-height: 0.6rem;
+    line-height: 0.7rem;
   }
 .ivu-select-dropdown .ivu-select-item {
-  font-size: 0.13rem !important;
+  font-size: 0.24rem !important;
 }
 .ivu-checkbox-wrapper {
   font-size: 0.2rem;
 }
 .rejs {
+  .ivu-select-dropdown {
+    background: #fff;
+  }
   .ivu-select-item-selected,
   .ivu-select-item-selected:hover {
     background: #fff;

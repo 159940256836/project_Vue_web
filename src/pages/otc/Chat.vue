@@ -10,7 +10,6 @@
               </router-link> >
                 <span style="font-size:16px;color: #8090AF;">{{$t('otc.chat.orderDetails')}}</span>
             </p>
-
             <Row class="chat-in">
                 <div class="trading">
                     <table class="gridtable">
@@ -98,8 +97,16 @@
                         <div class="account-info" v-if="bankInfo&&bankInfo!=null">
                             <i class="icons bankfor"></i>
                             <span>{{ payInfo != null ? payInfo.realName : "" }} </span>
-                            <span>{{ bankInfo.branch }}</span>
-                            <span>{{ bankInfo.cardNo }}</span>
+                            <Poptip word-wrap trigger="hover" :content="bankInfo.branch">
+                                <span>{{ bankInfo.branch }}</span>
+                            </Poptip>
+                            <span style="position: absolute;
+                                        top: 35px;
+                                        left: 21px;
+                                        height: 20px;
+                                        line-height: 20px;
+                                        cursor: pointer;"
+                            >{{ bankInfo.cardNo }}</span>
                         </div>
                         <div class="account-info" v-else>
                             <i class="icons bankfor"></i>
@@ -136,7 +143,7 @@
                             <span>{{wechatPay.wechat}}</span>
                             <p
                                 v-if="wechatPay&&wechatPay!=null&&wechatPay.qrWeCodeUrl!=null&&wechatPay.qrWeCodeUrl!=''"
-                                style="position: absolute;top: 20px;left: 21px;"
+                                style="position: absolute;top: 20px;left: 29px;"
                             >
                                 <a @click="showQRCode(2)">
                                     {{$t('otc.chat.qrcode')}}
@@ -922,6 +929,9 @@ export default {
 </style>
 <style lang="scss" scoped>
     .chat-in {
+        .ivu-poptip-title {
+            display: none;
+        }
         .trading,
         .account-main,
         .online-chat {
@@ -973,6 +983,7 @@ export default {
                 .account-info {
                     height: 50px;
                     line-height: 50px;
+                    position: relative;
                     span {
                         margin-left: 8px;
                         color: #8090AF;

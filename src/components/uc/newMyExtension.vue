@@ -11,7 +11,7 @@
                     <div style="display:flex; padding-left:35px; padding-top:40px;">
                         <div>
                             <div style="font-size:14px; color:#8090AF; margin-bottom:23px;">{{$t('apiAdmin.Exclusivinvita')}}</div>
-                            <div class="copy copy_left">
+                            <div class="copy copy_left"style="display:flex; align-items: center">
                                 <span class="code">{{qrcode.code}}</span>
                                 <span>|</span>
                                 <span class="span2">
@@ -260,7 +260,7 @@ export default {
     qrcodeM() {
         console.log(this.user)
         const promotionCode = this.user.promotionCode
-        this.qrcode.value = this.url + '/#/register?agent=' + promotionCode + '&mobile=' + this.user.mobile
+        this.qrcode.value = this.url + '/#/mobilereg?agent=' + promotionCode + '&mobile=' + this.user.mobile
         this.qrcode.code = promotionCode
       },
     onCopy(e) {
@@ -400,7 +400,6 @@ export default {
 .newMyExtension{
     background:#0e0e28;
     padding-bottom: 160px;
-
     .nav-rights{
         position:relative;
         top:60px;
