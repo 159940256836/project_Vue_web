@@ -505,8 +505,17 @@ export default {
 }
 </style>
 <style lang="scss">
+.rejs .ivu-select-item-selected, .ivu-select-item-selected:hover{
+  background:#fff !important;
+}
+ .rejs .ivu-select-dropdown{
+   background:#fff !important;
+ }
+.rejs .ivu-select-item:hover{
+background:#fff !important;
+}
  .rejs .ivu-select-single .ivu-select-selection{
-   height: 80px;
+   height: 100px;
    padding-left: 10px;
 
  }
@@ -522,12 +531,12 @@ export default {
   }
   .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
   .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
-    height: 0.6rem;
+    height: 0.8rem;
     font-size: 0.28rem;
-    line-height: 0.6rem;
+    line-height: 0.7rem;
   }
 .ivu-select-dropdown .ivu-select-item {
-  font-size: 0.13rem !important;
+  font-size: 0.24rem !important;
 }
 .ivu-checkbox-wrapper {
   font-size: 0.2rem;
