@@ -1,5 +1,5 @@
 <template>
-    <div class="notice common announcement_notice" style="min-height:800px; height:calc(100vh - 402px)">
+    <div class="notice common announcement_notice" style="min-height:800px;">
         <div class="banner notice_banner ">
             <span>{{$t('footer.bulletinboard')}}</span>
         </div>
