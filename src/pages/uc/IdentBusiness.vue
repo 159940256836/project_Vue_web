@@ -19,10 +19,12 @@
       <!--</div>-->
       <!--</div>-->
       <div style="width: 80%; margin: 0 auto;">
+        <!--0 未认证 1 审核中 2 已认证 3 未通过 5 申请退保中-->
         <div
-            class="ident-title ident-info"
-            v-if="certStatus === 0"
+          class="ident-title ident-info"
+          v-if="certStatus === 0"
         >
+          <!--未认证-->
           <!-- 申请认证商家 -->
           <span>{{$t('uc.identity.apply')}}</span>
           <p style="font-size: 14px;margin-top: 10px">
@@ -31,40 +33,46 @@
           </p>
         </div>
         <div
-                class="ident-title ident-info"
-                v-else-if="certStatus == 1"
+          class="ident-title ident-info"
+          v-else-if="certStatus == 1"
         >
-          <h3>{{$t('uc.identity.tijiao')}}</h3>
+          <!--审核中 您的商家认证审核已提交-->
+          <span>{{$t('uc.identity.tijiao')}}</span>
         </div>
         <div
-                class="ident-title ident-info"
-                v-else-if="certStatus == 2"
+          class="ident-title ident-info"
+          v-else-if="certStatus == 2"
         >
-          <h3>{{$t('uc.identity.tijiaosuc')}}</h3>
+          <!--恭喜！您的商家认证审核已通过-->
+          <span>{{$t('uc.identity.tijiaosuc')}}</span>
         </div>
         <div
-                class="ident-title ident-info"
-                v-else-if="certStatus == 3"
+          class="ident-title ident-info"
+          v-else-if="certStatus == 3"
         >
-          <h3>{{$t("uc.identity.tijiaofail")}}</h3>
+          <!--抱歉！您的商家认证审核未通过-->
+          <span>{{$t("uc.identity.tijiaofail")}}</span>
         </div>
         <div
-                class="ident-title ident-info"
-                v-else-if="certStatus == 5"
+          class="ident-title ident-info"
+          v-else-if="certStatus == 5"
         >
-          <h3>{{$t("uc.identity.zhuxiaotijiao")}}</h3>
+          <!--您的商家注销申请已提交-->
+          <span>{{$t("uc.identity.zhuxiaotijiao")}}</span>
         </div>
         <div
-                class="ident-title ident-info"
-                v-else-if="certStatus == 6"
+          class="ident-title ident-info"
+          v-else-if="certStatus == 6"
         >
-          <h3>{{$t("uc.identity.shenhefail")}}</h3>
+          <!--未通过 您的商家注销申请审核未通过-->
+          <span>{{$t("uc.identity.shenhefail")}}</span>
         </div>
         <div
-                class="ident-title ident-info"
-                v-else-if="certStatus == 7"
+          class="ident-title ident-info"
+          v-else-if="certStatus == 7"
         >
-          <h3>{{$t("uc.identity.shenhesuc")}}</h3>
+          <!--已认证 您的商家注销申请审核已通过-->
+          <span>{{$t("uc.identity.shenhesuc")}}</span>
         </div>
         <!-- prepare:准备资料； review：提交审核； result:审核结果；certified：已认证 ; shenheshibai：审核失败-->
         <Steps class="apply-step" :current="certStatus == 2 ? 3 : certStatus == 3 ? 2 : certStatus" :status="certStatus == 3 ? 'error' :'finish'" v-if="certStatus != 0 && certStatus != 5 && certStatus != 6 && certStatus != 7">
@@ -79,68 +87,68 @@
           <Step :title="certStatus == 5 ? result : certStatus == 6 ? shenheshibai : passed"></Step>
         </Steps>
 
-        <div v-if="certStatus == 6" style="width: 500px;margin: 0 auto;text-align: center;">
-          <Button
-            type="warning"
-            style="width: 120px;background:#3399ff;border-color:#3399ff"
+        <div v-if="certStatus == 6" class="business">
+          <button
+            type="button"
             @click="modal_return=true"
             long
             size="large"
+            class="ok-business"
           >
             {{$t("uc.identity.shenagain")}}
-          </Button>
+          </button>
           <div class="fail-reason" style="margin-top: 50px;font-size: 16px;">
             <Icon type="md-alert" color="red" size="16" />
             <span style="margin-left: 10px;">{{$t('uc.identity.yuanyin')}}：{{refuseReason}}</span>
           </div>
         </div>
 
-        <div v-if="certStatus == 7" style="width: 500px;margin: 0 auto;text-align: center;">
-          <Button
-            type="warning"
-            style="width: 120px;background:#3399ff;border-color:#3399ff"
+        <div v-if="certStatus == 7" class="business">
+          <button
+            type="button"
             @click="modal_read=true"
             long
             size="large"
+            class="ok-business"
           >
             {{$t("uc.identity.sheqinggain")}}
-          </Button>
+          </button>
         </div>
 
-        <div v-if="certStatus == 3" style="width: 500px;margin: 0 auto;text-align: center;">
-          <Button
-            type="warning"
-            style="width: 120px;background:#3399ff;border-color:#3399ff"
+        <div v-if="certStatus == 3" class="business">
+          <button
+            type="button"
             @click="modal_read=true"
             long
             size="large"
+            class="ok-business"
           >
             {{$t("uc.identity.shenagain")}}
-          </Button>
+          </button>
           <div class="fail-reason" style="margin-top: 50px;font-size: 16px;">
             <Icon type="md-alert" color="red" size="16" />
             <span style="margin-left: 10px;">{{$t("uc.identity.reason")}}：{{certReason}}</span>
           </div>
         </div>
 
-        <div v-else-if="certStatus == 2" style="width: 500px;margin: 0 auto;text-align: center;">
-          <Button
-            type="warning"
-            style="width: 120px;background:#3399ff;border-color:#3399ff"
+        <div v-else-if="certStatus == 2" class="business">
+          <button
+            type="button"
             @click="publishAd"
             long
             size="large"
+            class="ok-business"
           >
             {{$t('nav.fabu')}}
-          </Button>
+          </button>
           <div style="margin-top: 30px;font-size: 16px;text-align: center;">
-            <a @click="returnAdit" style="color: #aaa;">{{$t("uc.identity.shenqingtuibao")}}</a>
+            <a @click="returnAdit" style="color: #8090af;">{{$t("uc.identity.shenqingtuibao")}}</a>
           </div>
         </div>
       </div>
       <!-- 认证商家第一步 -->
       <div class="ipshang" :class="certStatus != 0 ? 'applying' : '' ">
-        <div class="ident-title" v-if="certStatus == 3">
+        <!--<div class="ident-title" v-if="certStatus == 3">
           <h3 style="font-size: 20px">{{$t('uc.identity.apply')}}</h3>
           <p style="font-size: 14px;margin-top: 10px"> {{$t('uc.identity.become')}}</p>
         </div>
@@ -150,7 +158,7 @@
         >
           <p>{{$t("uc.identity.getquan1")}}</p>
           <p>成为币多OTC加V用户，获得广告发布权限，享受更多交易特权</p>
-        </div>
+        </div>-->
         <!-- 第一步 -->
         <Row style="margin-top:40px;">
           <Col span="8">
@@ -413,7 +421,7 @@ export default {
       }, 10000);
     },
     publishAd() {
-      this.$router.push("/uc/ad/create");
+      this.$router.push("/PublishAdver");
     },
     returnAdit() {
       this.modal_return = true;
@@ -457,6 +465,7 @@ export default {
           let certifiedBusinessStatus = res.body.data.certifiedBusinessStatus;
           this.activeStepIndex = certifiedBusinessStatus;
           this.certStatus = certifiedBusinessStatus;
+          console.log(this.certStatus);
           this.certReason = res.body.data.detail;
           this.refuseReason = res.body.data.reason;
         })
@@ -650,6 +659,21 @@ export default {
   text-align: left;
   padding-left: 139px;
 }
+.business {
+  width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ok-business {
+  width: 120px;
+  height: 40px;
+  font-size: 16px;
+  color: #fff;
+  background: #191D3A;
+  border: 1px solid #556382;
+  border-radius: 0;
+  cursor: pointer;
+}
 .ipshang {
   overflow: hidden;
 }
@@ -804,7 +828,6 @@ export default {
 .ident-title {
   text-align: center;
   font-size: 20px;
-  height: 100px;
 }
 .ident-info {
   color: #8090AF;
@@ -826,7 +849,7 @@ export default {
 }
 .apply-step {
   padding: 50px 0;
-  margin-left: 150px;
+  margin-left: 115px;
 }
 .apply-step .ivu-steps-title {
   display: block;
