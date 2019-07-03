@@ -603,7 +603,8 @@ $night-color: #fff;
     .main {
         display: flex;
         .left {
-            width: 410px;
+            /*width: 410px;*/
+            min-width: 21.7%;
             /*flex: 0 0 24%;*/
             background-color: #0E0E28;
             .handlers {
@@ -678,7 +679,8 @@ $night-color: #fff;
             }
         }
         .center {
-            width: 1060px;
+            /*width: 1060px;*/
+            min-width: 56.1%;
             /*flex: 0 0 50%;*/
             margin-right: 10px;
             .imgtable {
@@ -777,7 +779,8 @@ $night-color: #fff;
             }
         }
         .right {
-            width: 410px;
+            /*width: 410px;*/
+            min-width: 21.7%;
             /*flex: 0 0 24%;*/
             margin-right: 10px;
             .coin-menu {
