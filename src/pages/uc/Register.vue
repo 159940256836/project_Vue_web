@@ -540,10 +540,7 @@ export default {
     }
   },
   created: function() {
-    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-      var par = '?' + location.href.split('?')[1]
-      this.$router.replace('/mobilereg' + par)
-    }
+    
     window.scrollTo(0, 0)
     this.init()
     this.actives(this.changeActive)
