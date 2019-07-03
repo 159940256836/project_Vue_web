@@ -32,95 +32,95 @@
 </template>
 <script>
 export default {
-    data() {
-        return {
-            topList: [], //置顶文章列表
-            article: {} //文章详情
-        };
+  data() {
+    return {
+      topList: [], // 置顶文章列表
+      article: {} // 文章详情
+    }
+  },
+  created() {
+    const { cate, id, cateTitle } = this.$route.query
+    this.cate = cate
+    this.id = id
+    this.cateTitle = cateTitle
+    this.init()
+    this.$store.commit('navigate', 'nav-uc')
+  },
+  methods: {
+    clickTitle(id) {
+      this.getData(id)
     },
-    created() {
-        const { cate, id, cateTitle } = this.$route.query;
-        this.cate = cate;
-        this.id = id;
-        this.cateTitle = cateTitle;
-        this.init();
-        this.$store.commit("navigate", "nav-uc");
+    getTop() {
+      return this.$http.post(this.host + '/uc/ancillary/more/help/page/top', {
+        cate: this.cate
+      })
     },
-    methods: {
-        clickTitle(id) {
-            this.getData(id);
-        },
-        getTop() {
-            return this.$http.post(this.host + "/uc/ancillary/more/help/page/top", {
-                cate: this.cate
-            });
-        },
-        getArticle() {
-            return this.$http.post(this.host + "/uc/ancillary/more/help/detail", {
-                id: this.id
-            });
-        },
-        init() {
-            Promise.all([this.getTop(), this.getArticle()]).then(arr => {
-                if (
+    getArticle() {
+      return this.$http.post(this.host + '/uc/ancillary/more/help/detail', {
+        id: this.id
+      })
+    },
+    init() {
+      Promise.all([this.getTop(), this.getArticle()]).then(arr => {
+        if (
                     arr[0].status == 200 &&
                     arr[0].body.code == 0 &&
                     arr[1].status == 200 &&
                     arr[1].body.code == 0
                 ) {
-                    let returnTop = arr[0].body.data,
-                        returnArticle = arr[1].body.data,
-                        hsaInTop = false;
-                    returnTop.forEach(v => {
-                        if (v.id == returnArticle.id) {
-                            hsaInTop = true;
-                        }
-                    });
-                    hsaInTop ? "" : returnTop.unshift(returnArticle);
-                    this.topList = returnTop;
-                    this.article = returnArticle;
-                } else {
-                    this.$message.error("网络错误");
-                }
-            });
-        },
-        getTopList() {
-            this.$http
-                .post(this.host + "/uc/ancillary/more/help/page/top", {
-                    cate: this.cate
-                })
-                .then(res => {
-                    if (res.status == 200 && res.body.code == 0) {
-                        this.topList = res.body.data;
-                    } else {
-                        this.$Message.error(res.body.message);
-                    }
-                });
-        },
-        getData(id) {
-            this.$http
-                .post(this.host + "/uc/ancillary/more/help/detail", {
-                    id
-                })
-                .then(res => {
-                    if (res.status == 200 && res.body.code == 0) {
-                        this.article = res.body.data;
-                    } else {
-                        this.$Message.error(res.body.message);
-                    }
-                });
-        }
+            let returnTop = arr[0].body.data,
+                returnArticle = arr[1].body.data,
+                hsaInTop = false
+            returnTop.forEach(v => {
+                if (v.id == returnArticle.id) {
+                    hsaInTop = true
+                  }
+              })
+            hsaInTop ? '' : returnTop.unshift(returnArticle)
+            this.topList = returnTop
+            this.article = returnArticle
+          } else {
+            this.$message.error('网络错误')
+          }
+      })
     },
-    mounted(){
-         const doc = document.body
-         const sreenHeight = doc.offsetHeight;
-         const headerHeight = doc.getElementsByTagName("header")[0].offsetHeight;
-         const footerHeight = doc.getElementsByTagName("footer")[0].offsetHeight;
-         const contentHeight = doc.getElementsByClassName("helpdetail")[0];
-         const bodyHeight = sreenHeight - headerHeight - footerHeight;
-         contentHeight.style.minHeight = bodyHeight + "px";
+    getTopList() {
+      this.$http
+                .post(this.host + '/uc/ancillary/more/help/page/top', {
+                  cate: this.cate
+                })
+                .then(res => {
+                  if (res.status == 200 && res.body.code == 0) {
+                    this.topList = res.body.data
+                  } else {
+                    this.$Message.error(res.body.message)
+                  }
+                })
+    },
+    getData(id) {
+      this.$http
+                .post(this.host + '/uc/ancillary/more/help/detail', {
+                  id
+                })
+                .then(res => {
+                  if (res.status == 200 && res.body.code == 0) {
+                    this.article = res.body.data
+                  } else {
+                    this.$Message.error(res.body.message)
+                  }
+                })
     }
-};
+  },
+  mounted() {
+    const doc = document.body
+    const sreenHeight = doc.offsetHeight
+    const headerHeight = doc.getElementsByTagName('header')[0].offsetHeight
+    const footerHeight = doc.getElementsByTagName('footer')[0].offsetHeight
+    const contentHeight = doc.getElementsByClassName('helpdetail')[0]
+    const bodyHeight = sreenHeight - headerHeight - footerHeight
+    contentHeight.style.minHeight = bodyHeight + 'px'
+  }
+}
 </script>
 <style lang="scss" scoped>
 // lhl
@@ -207,7 +207,7 @@ export default {
             // color:#8090AFFF !important;
             color: #8090AF !important;
             font-size:14px;
-
+            border: 1px solid rgba(42,56,80,1);
         }
     }
 }
@@ -229,7 +229,7 @@ export default {
 <style lang="scss">
 .main .content-wrap .content {
     .uploaded-img {
-        width: 100% !important;
+        width: 50% !important;
     }
 }
 .main .content-wrap .title,.main .content-wrap .time{

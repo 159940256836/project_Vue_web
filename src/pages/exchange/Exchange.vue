@@ -836,6 +836,9 @@ $night-color: #fff;
     .order {
         margin-top: 20px;
         .order-handler {
+            background: #13152F;
+            height: 50px;
+            line-height: 50px;
             font-size: 0;
             > .order-list {
                 min-width: 50px;
@@ -843,7 +846,7 @@ $night-color: #fff;
                 display: inline-block;
                 color: #fff;
                 cursor: pointer;
-                line-height: 40px;
+                line-height: 48px;
                 background-color: transparent;
                 margin-right: 50px;
                 &.active {

@@ -1,10 +1,10 @@
 <template>
-    <div class="openGoogle common">
+    <div class="openGoogle common" id="openGoogle">
         <div class="openGoogleModal">
             <!-- <Modal v-model="openGoogleModal" :title="title" :footer-hide="true"> -->
             <Form ref="formInline" :model="formInline" :rules="ruleInline" label-position="top">
                 <FormItem :label="$t('openGoolePage._phone')">
-                    <p class="unchangeable">
+                    <p class="unchangeable" style="height:40px;line-height:40px;">
                         {{phone|addStart}}
                         <!--{{ phone.substring(0,2)}}
                         ****
@@ -12,20 +12,20 @@
                     </p>
                 </FormItem>
                 <FormItem :label="$t('openGoolePage._phoneCode')" prop="code" class="defeat-ivu">
-                    <Input type="text" v-model="formInline.code" :placeholder="$t('openGoolePage._phoneCode')" style="width:300px;border-right: none;">s                     
+                    <Input type="text" v-model="formInline.code" :placeholder="$t('openGoolePage._phoneCode')" style="width:300px;border-right: none;">                   
                         <div class="timebox" slot="append">
                             <Button @click="getCode" :disabled="disabled">{{getCodeText}}</Button>
                         </div>
                     </Input>
                 </FormItem>
                 <FormItem :label="$t('openGoolePage._GoogleVerificationCode')" prop="googleCode">
-                    <Input  type="text" v-model="formInline.googleCode" :placeholder="$t('openGoolePage._GoogleVerificationCode')" style="width:300px;">
+                    <Input  type="text" v-model="formInline.googleCode" :placeholder="$t('openGoolePage._GoogleVerificationCode')" style="width:300px;height:40px;">
                     </Input>
                 </FormItem>
             </Form>
             <div class="btns" style="display:flex;justify-content:space-around;align-items:center;width:300px;margin-right: 59px;float: right;margin-top:10px;">
                 <!-- <Button @click="cancel">{{$t('openGoolePage._cancel')}}</Button> -->
-                <Button type="primary" @click="sureBtn('formInline')" style="width:100%;border-radius:0;">{{$t('openGoolePage._sure')}}</Button>
+                <Button type="primary" @click="sureBtn('formInline')" style="width:100%;border-radius:0;margin-bottom:30px;height:40px;">{{$t('openGoolePage._sure')}}</Button>
             </div>
             <!-- </Modal> -->
         </div>
@@ -86,7 +86,7 @@ export default {
                         desc: resp.message
                     });
                     setTimeout(()=>{
-                        this.$router.go(-1);
+                        this.$router.go(0);
                     },1000)
                 }else{
                     this.$Notice.error({
@@ -141,13 +141,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.openGoogle {
+#openGoogle {
     margin: 0 auto;
-    .openGoogleModal .ivu-btn-warning{
-        background:#3399ff !important;
-        border-color:#3399ff !important;
-    }
-    .openGoogleModal {
+    .openGoogleModal {        
         overflow: hidden;
         .ivu-form-item-content {
             p {
@@ -180,17 +176,21 @@ export default {
 </style>
 
 <style lang="scss">
-.openGoogle {
+#openGoogle{
     color: red;
     .ivu-form-item-required .ivu-form-item-label:before {
         content: ''
     }
     .ivu-input {
+        height: 40px;
         border-radius: 0;
         background: transparent;
+        border: 1px solid #8090AF;
         color: #fff;      
     }
-
+    .ivu-form-item {
+        margin-bottom: 30px;
+    }
     .ivu-input-large {
             border: 1px solid #8090AF;
         }
@@ -198,18 +198,19 @@ export default {
     .ivu-input-large:hover,
     .ivu-input-large:focus,
     .ivu-input-large:active {
-        border: 1px solid #8090AF;
+        border:#8090AF;
     }
 
     .ivu-form-item-error .ivu-input {
             border-color: #8090AF;
     }
 
+
     .ivu-form-item-error {
         .ivu-input-large:hover,
         .ivu-input-large:focus,
         .ivu-input-large:active {
-            border: 1px solid #8090AF;
+            border-color: #8090AF;
         }
     }
 
@@ -250,6 +251,12 @@ export default {
     }
     
     .defeat-ivu {
+        .ivu-btn-default {
+            color: #3399FF;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+        }
         .ivu-form-item-label {
             vertical-align: top;
             margin-top: 10px;
@@ -260,6 +267,10 @@ export default {
         }
         .timebox {
         border-left: 1px solid #8090AF;
+        }
+        .ivu-btn:focus {
+            -webkit-box-shadow: none;
+            box-shadow: none;
         }
     }
 

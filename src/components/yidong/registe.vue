@@ -5,7 +5,11 @@
       <div @click="regMax(1)" :class="tabId==1? 'actives':''">手机注册</div>
       <div @click="regMax(2)" :class="tabId==2? 'actives':''" class="right">邮箱注册</div>
     </div>
-    <div class="content" v-show="tabId==1">
+    <div
+      class="content"
+      v-show="tabId==1"
+      style="padding: 0.2rem 0.8rem;"
+    >
       <i-select :model.sync="model9" style="width:5.74rem" v-model="country">
         <i-option value="中国" label="中国">
           <span>中国</span>
@@ -64,9 +68,13 @@
       <div class="btn">
         <button @click="handleSubmita">注册</button>
       </div>
-    </div>
-
-    <div class="content" v-show="tabId==2">
+    </div
+    >
+    <div
+      class="content"
+      v-show="tabId==2"
+      style="padding: 0.2rem 0.8rem;"
+    >
       <i-select :model.sync="model9" style="width:5.74rem" v-model="country1">
         <i-option value="中国" label="中国">
           <span>中国</span>
@@ -123,7 +131,8 @@
       <div class="btn">
         <button @click="initGtCaptcha2">注册</button>
       </div>
-    </div>
+    </div
+    >
   </div>
 </template>
 <script>
@@ -477,10 +486,10 @@ export default {
 .rejs {
   .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
   .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
-  height: 0.6rem;
-  font-size: 0.28rem;
-  line-height: 0.6rem;
-}
+    height: 0.6rem;
+    font-size: 0.28rem;
+    line-height: 0.6rem;
+  }
 .ivu-select-dropdown .ivu-select-item {
   font-size: 0.13rem !important;
 }
@@ -488,10 +497,20 @@ export default {
   font-size: 0.2rem;
 }
 .rejs {
+  .ivu-select-dropdown {
+    background: #fff;
+  }
+  .ivu-select-item-selected,
+  .ivu-select-item-selected:hover {
+    background: #fff;
+  }
+  .ivu-select-item-selected {
+    background: #fff;
+    color: #3399ff;
+  }
   .content {
-    padding-left: 0.94rem;
+    padding: 0.2rem 0.8rem;
     width: 5.74rem;
-    padding-bottom: 2.17rem;
     .ivu-select-single .ivu-select-selection {
       height: 0.6rem;
       padding-left: 0.1rem;
