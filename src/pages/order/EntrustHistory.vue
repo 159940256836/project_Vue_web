@@ -466,7 +466,6 @@ export default {
   },
   created() {
     this.getHistoryOrder()
-    this.getSymbol()
   },
   watch: {
     '$i18n.locale': {
@@ -527,7 +526,8 @@ export default {
     //   params.pageSize = this.pageSize
       params.status = this.formItem.status
       var that = this
-      this.orders = []
+        console.log(params);
+        this.orders = []
       this.$http
                 .post(this.host + '/exchange/order/personal/newHistory', params)
                 .then(response => {
@@ -544,6 +544,7 @@ export default {
                       rows.push(row)
                     }
                     this.orders = rows
+                      this.getSymbol()
                   }
                   this.loading = false
                 })

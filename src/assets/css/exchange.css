@@ -64,10 +64,9 @@
 }
 .handicap {
     font-weight: 600;
-    width: 60%;
     display: inline-block;
-    text-align: left;
     padding-left: 23px;
+    float: left;
 }
 /*6.20杨孝喜 结束*/
 .sc_filter span {
@@ -385,6 +384,9 @@ p.math_price {
 .exchange .right .ivu-table .ivu-table-header tr th:nth-child(2) {
     text-align: center;
 }
+.exchange .right .ivu-table .ivu-table-row td:nth-child(1) {
+    padding-left: 28px;
+}
 .exchange .right .ivu-table .ivu-table-row td:nth-child(2) {
     text-align: center;
 }
@@ -405,7 +407,9 @@ p.math_price {
 .exchange .left .sell_table .ivu-table-header tr th:nth-child(2) {
     text-align: center;
 }
-
+.exchange .left .ivu-table-wrapper .ivu-table .ivu-table-row td:nth-child(1) {
+    padding-left: 28px;
+}
 .exchange .left .ivu-table-wrapper .ivu-table .ivu-table-row td:nth-child(2) {
     text-align: center;
 }
@@ -509,7 +513,6 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 .exchange .ivu-table th,
 .exchange .ivu-table td {
     height: 30px;
-    padding-left: 28px;
 }
 .exchange .right .ivu-table td {
     height: 38px;
