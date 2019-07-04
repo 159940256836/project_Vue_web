@@ -22,7 +22,7 @@
                     <span class="login btn" @click="goLogin">登录</span>
                 </p>            
                 <img src="./img/module.png" alt="加载失败" class="module">
-                <p class="text">移动交易, 随时随地</p>
+                <p class="text">移动交易，随时随地</p>
                 <div class="terminal">
                     <div class="pc btn2" @click="goPc">
                         <span>电脑版</span>
@@ -64,7 +64,7 @@ export default {
             this.$router.push('/login')
         },
         goRegister() {
-            this.$router.push('/register')
+            this.$router.push('mobilereg')
         }
     },
     beforeRouteEnter (to, from, next) {
@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './reset.css';
+@import './reset.scss';
 #mobile_home {
     height: 100%;
     font-size: 16px;
@@ -146,7 +146,7 @@ export default {
                 cursor: pointer;
                 border: .01rem solid #3399FF; 
                 color: #3399FF;
-                text-indent: 1.02rem;
+                text-indent: .52rem;
                 font-size: .28rem;
             }
             .pc {
