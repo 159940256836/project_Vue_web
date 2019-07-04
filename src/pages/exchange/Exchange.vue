@@ -2002,14 +2002,14 @@ export default {
       this.getSymbolScale()
       this.getSymbol() // 包含 K线图、getFavor、startWebsock等
       this.getPlate() // 买卖盘
-            // this.getPlateFull(); //深度图
+            // this.getPlateFull(); // 深度图
       this.getTrade()
       if (this.isLogin && this.member.realName) {
-                // this.getMember(); //获取是否实名认证
-                // this.getMemberRate(); //获取会员等级用与是否抵扣BHB资格
+                // this.getMember(); // 获取是否实名认证
+                // this.getMemberRate(); // 获取会员等级用与是否抵扣BHB资格
         this.getWallet() // 账户资产信息
         this.getCurrentOrder() // 当前委托
-        this.getHistoryOrder() // 历史委托
+      // this.getHistoryOrder()
       }
       this.sliderBuyLimitPercent = 0
       this.sliderSellLimitPercent = 0
@@ -2069,21 +2069,21 @@ export default {
         //         });
         //     }
         // },
-    changeSkin() {
-      const currentSkin = this.skin
-      if (currentSkin === 'day') {
-        this.skin = 'night'
-      } else {
-        this.skin = 'day'
-      }
-      this.$store.commit('setSkin', this.skin)
-      this.getKline()
-            // this.getPlateFull();
-      if (this.isLogin) {
-        this.getCurrentOrder()
-        this.getHistoryOrder()
-      }
-    },
+    // changeSkin() {
+    //   const currentSkin = this.skin
+    //   if (currentSkin === 'day') {
+    //     this.skin = 'night'
+    //   } else {
+    //     this.skin = 'day'
+    //   }
+    //   this.$store.commit('setSkin', this.skin)
+    //   this.getKline()
+    //         // this.getPlateFull();
+    //   if (this.isLogin) {
+    //     this.getCurrentOrder()
+    //     this.getHistoryOrder()
+    //   }
+    // },
     changePlate(str) {
       if (str != 'all') {
         this.plate.maxPostion = 24
@@ -2097,7 +2097,14 @@ export default {
       this.currentImgTable = str
     },
     changeOrder(str) {
-      this.selectedOrder = str
+        // console.log(str);
+        if (str == 'current') {
+            this.getCurrentOrder()
+        }
+        if (str == 'history') {
+            this.getHistoryOrder()
+        }
+        this.selectedOrder = str
     },
     setback() {
       const obk = document.getElementsByClassName('container')[0]
@@ -3473,8 +3480,8 @@ export default {
             }
             this.historyOrder.rows = rows
           }
-          this.historyLoading = false
         }
+        this.historyLoading = false
       })
     },
         // 撤单
@@ -3533,6 +3540,7 @@ export default {
           })
                     // this.historyTableData = this.TableData1
         } else {
+
           this.currentTableData.splice()
           this.currentTableData.map((item, index) => {
             if (item.orderId == row.orderId) {
