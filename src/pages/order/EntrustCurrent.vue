@@ -24,17 +24,7 @@
   }
 
 
-.page {
-  text-align: right;
-  margin-top: 20px;
-  margin-bottom:20px;
-  .ivu-page-next a{
-    color:#fff;
-  }
-  .ivu-page-prev a{
-    color:#fff;
-  }
-}
+
 
  .ivu-table-wrapper {
     position: relative;
@@ -84,6 +74,18 @@
 }
 
 .entrustcurrent .form {
+    .my-btn {
+      background: #3399FF;
+      color: #fff;
+      display: inline-block;
+      padding:0px 24px;
+      font-size: 14px;
+      height: 30px;
+      line-height: 30px;
+      box-sizing: border-box;
+      vertical-align: middle;
+      cursor: pointer;
+    }
     padding-top: 16px;
     input {
       outline:none;
@@ -198,33 +200,7 @@
                 }
             }
             }
-            .page {
-            .ivu-icon.ivu-icon-ios-arrow-left,
-            .ivu-icon.ivu-icon-ios-arrow-right {
-                color: #666;
-            }
-            li.ivu-page-item.ivu-page-item-active {
-                a {
-                color: #fff;
-                }
-                &:hover {
-                a {
-                    color: #fff;
-                }
-                }
-            }
-            li.ivu-page-item {
-                a {
-                color: #666;
-                }
-                &:hover {
-                border: 1px solid #3399ff;
-                a {
-                    color: #3399ff;
-                }
-                }
-            }
-            }
+            
         }
         .ivu-tabs-bar {
             .ivu-tabs-nav-container {
@@ -280,6 +256,43 @@
         }
 
       }
+  }
+
+  .page {
+    text-align: right;
+    margin-top: 20px;
+    margin-bottom:20px;
+    .ivu-page-next a{
+      color:#fff;
+    }
+    .ivu-page-prev a{
+      color:#fff;
+    }
+
+    .ivu-page-total {
+      color: #8090AF;
+    }
+    .ivu-page-next, .ivu-page-prev {
+      background: #111530;
+      border: 1px solid #191f44;
+    }
+    
+    .ivu-icon.ivu-icon-ios-arrow-left,
+    .ivu-icon.ivu-icon-ios-arrow-right {
+        color: #8090AF;
+    }
+    li.ivu-page-item.ivu-page-item-active {
+        background: #111530;
+        border: 1px solid #191f44;
+        a {
+        color: #8090AF;
+        }
+        &:hover {
+        a {
+            color: #8090AF;
+        }
+        }
+    }
   }
   .ivu-table-wrapper .ivu-table {
       color: #fff;
