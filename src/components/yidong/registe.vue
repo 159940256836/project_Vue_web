@@ -411,7 +411,7 @@ export default {
     }
   },
   mounted() {
-    this.agentcode = this.$route.query.agent ? this.$route.query.agent : ''
+    this.agentcode = (this.$route.query.agent && this.$route.query.agent != 'undefined') ? this.$route.query.agent : ''
   },
   component() {
 
@@ -486,8 +486,9 @@ export default {
 }
 .tob_b {
   display: flex;
-  margin-top: 0.5rem;
-  padding-left: 1.42rem;
+  width: 60%;
+  margin: 0.5rem auto 0;
+  justify-content: space-around;
   .actives {
     color: #3399ff;
     border-bottom: 1px solid #3399ff;
@@ -498,14 +499,23 @@ export default {
     line-height: 0.43em;
     font-size: 0.32rem;
     color: #666666ff;
-    margin-left: 0.69rem;
+
     text-align: center;
   }
 }
 </style>
 <style lang="scss">
+.rejs .ivu-select-item-selected, .ivu-select-item-selected:hover{
+  background:#fff !important;
+}
+ .rejs .ivu-select-dropdown{
+   background:#fff !important;
+ }
+.rejs .ivu-select-item:hover{
+background:#fff !important;
+}
  .rejs .ivu-select-single .ivu-select-selection{
-   height: 80px;
+   height: 100px;
    padding-left: 10px;
 
  }
@@ -521,12 +531,12 @@ export default {
   }
   .ivu-select-single .ivu-select-selection .ivu-select-placeholder,
   .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
-    height: 0.6rem;
+    height: 0.8rem;
     font-size: 0.28rem;
-    line-height: 0.6rem;
+    line-height: 0.7rem;
   }
 .ivu-select-dropdown .ivu-select-item {
-  font-size: 0.13rem !important;
+  font-size: 0.24rem !important;
 }
 .ivu-checkbox-wrapper {
   font-size: 0.2rem;

@@ -182,12 +182,12 @@
                 :title="$t('uc.safe.safelevel_high')"
                 v-model="modal6"
                 className="vertical-center-modal"
-                width="875"
+                width="534"
                 class="popups-modal"
                 >
                 <div class="detail-list" style="width: 100%;">
                     <!-- 请上传资料完成实名认证 -->
-                    <h3 style="color:#3697FE;font-weight:400;">{{ $t("new.nformationto") }}</h3>
+                    <!-- <h3 style="color:#3697FE;font-weight:400;">{{ $t("new.nformationto") }}</h3> -->
                     <Form ref="formValidate6" :model="formValidate6" :rules="ruleValidate" :label-width="85" style="text-align:center;">
                         <div class="validate" style="text-align:center;color:#8090AF;">
                             <FormItem :label="$t('uc.safe.realname')" prop="realName" >
@@ -200,64 +200,64 @@
                         </div>
                         <!-- 真实姓名 -->
 
-                        <div style="height:300px;">
+                        <!-- <div style="height:300px;">
                             <Col span="8">
-                            <input type="hidden" name="imgPreview" :value="imgPreview" />
-                            <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_positive')}}</div>
-                            <img id="frontCardImg" style="width: 230px;height: 140px;" :src="frontCardImg">
-                            <div class="acc_sc">
-                                <Upload
-                                    ref="upload1"
-                                    :before-upload="beforeUpload"
-                                    :on-success="frontHandleSuccess"
-                                    :headers="uploadHeaders"
-                                    :action="uploadUrl"
-                                    accept=".jpg,.jpeg,.png,.gif"
-                                >
-                                    <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
-                                </Upload>
-                            </div>
+                                <input type="hidden" name="imgPreview" :value="imgPreview" />
+                                <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_positive')}}</div>
+                                <img id="frontCardImg" style="width: 230px;height: 140px;" :src="frontCardImg">
+                                <div class="acc_sc">
+                                    <Upload
+                                        ref="upload1"
+                                        :before-upload="beforeUpload"
+                                        :on-success="frontHandleSuccess"
+                                        :headers="uploadHeaders"
+                                        :action="uploadUrl"
+                                        accept=".jpg,.jpeg,.png,.gif"
+                                    >
+                                        <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
+                                    </Upload>
+                                </div>
                             </Col>
                             <Col span="8">
-                            <input type="hidden" name="imgNext" :value="imgNext" />
-                            <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_negative')}}</div>
-                            <img id="backCardImg" style="width: 230px;height: 140px;" :src="backCardImg">
-                            <div class="acc_sc">
-                                <Upload
-                                    ref="upload2"
-                                    :before-upload="beforeUpload"
-                                    :on-success="backHandleSuccess"
-                                    :headers="uploadHeaders"
-                                    :action="uploadUrl"
-                                    accept=".jpg,.jpeg,.png,.gif"
-                                >
-                                    <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
-                                </Upload>
-                            </div>
+                                <input type="hidden" name="imgNext" :value="imgNext" />
+                                <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_negative')}}</div>
+                                <img id="backCardImg" style="width: 230px;height: 140px;" :src="backCardImg">
+                                <div class="acc_sc">
+                                    <Upload
+                                        ref="upload2"
+                                        :before-upload="beforeUpload"
+                                        :on-success="backHandleSuccess"
+                                        :headers="uploadHeaders"
+                                        :action="uploadUrl"
+                                        accept=".jpg,.jpeg,.png,.gif"
+                                    >
+                                        <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
+                                    </Upload>
+                                </div>
                             </Col>
                             <Col span="8">
-                            <input type="hidden" name="imgLast" :value="imgLast" />
-                            <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_hand')}}</div>
-                            <img id="handCardImg" style="width: 230px;height: 140px;" :src="handCardImg">
-                            <div class="acc_sc">
-                                <Upload
-                                    ref="upload3"
-                                    :before-upload="beforeUpload"
-                                    :on-success="handHandleSuccess"
-                                    :headers="uploadHeaders"
-                                    :action="uploadUrl"
-                                    accept=".jpg,.jpeg,.png,.gif"
-                                >
-                                    <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
-                                </Upload>
-                            </div>
+                                <input type="hidden" name="imgLast" :value="imgLast" />
+                                <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_hand')}}</div>
+                                <img id="handCardImg" style="width: 230px;height: 140px;" :src="handCardImg">
+                                <div class="acc_sc">
+                                    <Upload
+                                        ref="upload3"
+                                        :before-upload="beforeUpload"
+                                        :on-success="handHandleSuccess"
+                                        :headers="uploadHeaders"
+                                        :action="uploadUrl"
+                                        accept=".jpg,.jpeg,.png,.gif"
+                                    >
+                                        <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
+                                    </Upload>
+                                </div>
                             </Col>
-                        </div>
-                        <span v-if="lang==='简体中文'" class="uploadimgtip">提示：上传图片仅支持.jpg、.gif、.png、.jpeg格式，且推荐大小为100kb-1024kb，否则有可能上传失败。</span>
-                        <span v-else class="uploadimgtip">Tip: uploaded pictures only support.Jpg,.Gif,.Png,.Jpeg format, and recommended size is 100kb-1024kb, otherwise it may fail to upload.</span>
+                        </div> -->
+                        <!-- <span v-if="lang==='简体中文'" class="uploadimgtip">提示：上传图片仅支持.jpg、.gif、.png、.jpeg格式，且推荐大小为100kb-1024kb，否则有可能上传失败。</span>
+                        <span v-else class="uploadimgtip">Tip: uploaded pictures only support.Jpg,.Gif,.Png,.Jpeg format, and recommended size is 100kb-1024kb, otherwise it may fail to upload.</span> -->
                         <!-- Button -->
                         <FormItem style="text-align:center;">
-                            <Button type="primary" @click="handleSubmit('formValidate6')" style="margin-left: -85px;width:400px;border-radius:0;height:40px;font-size:19px;">{{$t('new.Uploartification')}}</Button>
+                            <Button type="primary" @click="handleSubmit('formValidate6')" style="margin-left: -65px;width:300px;border-radius:0;height:40px;font-size:14px;">{{$t('new.Uploartification')}}</Button>
                             <!-- <Button @click="handleReset('formValidate6')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button> -->
                         </FormItem>
                     </Form>
@@ -999,26 +999,25 @@ export default {
                     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
                     return false;
                 }
-                if (this.imgPreview == "") {
-                    this.$Message.error(this.$t("uc.safe.upload_positivetip"));
-                    return false;
-                }
-                if (this.imgNext == "") {
-                    this.$Message.error(this.$t("uc.safe.upload_negativetip"));
-                    return false;
-                }
-                if (this.imgLast == "") {
-                    this.$Message.error(this.$t("uc.safe.upload_handtip"));
-                    return false;
-                }
+                // if (this.imgPreview == "") {
+                //     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
+                //     return false;
+                // }
+                // if (this.imgNext == "") {
+                //     this.$Message.error(this.$t("uc.safe.upload_negativetip"));
+                //     return false;
+                // }
+                // if (this.imgLast == "") {
+                //     this.$Message.error(this.$t("uc.safe.upload_handtip"));
+                //     return false;
+                // }
                 let param = {};
                 param["realName"] = this.formValidate6.realName;
                 param["idCard"] = this.formValidate6.idCard;
-                param["idCardFront"] = this.imgPreview;
-                param["idCardBack"] = this.imgNext;
-                param["handHeldIdCard"] = this.imgLast;
-                this.$http
-                    .post(this.host + "/uc/approve/real/name", param)
+                // param["idCardFront"] = this.imgPreview;
+                // param["idCardBack"] = this.imgNext;
+                // param["handHeldIdCard"] = this.imgLast;
+                this.$http.post("http://192.168.124.188:6001/uc/approve/real/name", param)
                     .then(response => {
                         var resp = response.body;
                         if (resp.code == 0) {
@@ -1353,7 +1352,7 @@ export default {
 .validate {
     width: 100%;
     height: 60px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     .ivu-form-item-required {
         float: left;
     }
@@ -1849,10 +1848,10 @@ export default {
             color: #8090AF !important;
         }
         .ivu-form-item-required {
-            margin-left: 210px !important;
+            // margin-left: 210px !important;
         }
         .ivu-form-item-required:last-child {
-            margin-left: 210px !important;
+            // margin-left: 210px !important;
         }
         .ivu-form-item-required .ivu-form-item-label:before {
             content: ''
@@ -1871,10 +1870,10 @@ export default {
             color: #8090AF !important;
         }
         .ivu-form-item-required {
-            margin-left: 210px !important;
+            // margin-left: 210px !important;
         }
         .ivu-form-item-required:last-child {
-            margin-left: 210px !important;
+            // margin-left: 210px !important;
         }
         .ivu-form-item-required .ivu-form-item-label:before {
             content: ''

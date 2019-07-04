@@ -1049,7 +1049,6 @@ export default {
       })
     },
     rowClassName(row, index) {
-      console.log(row, index)
       if (index % 2 === 1) {
         return 'demo-table-info-row'
       } else if (index % 2 !== 1) {
