@@ -1416,10 +1416,10 @@ export default {
                 return h('span', {}, '--')
               } else {
                 return h(
-                                    'span',
-                                    {},
-                                    params.row.totalAmount.toFixed(this.coinScale)
-                                )
+                    'span',
+                    {},
+                    params.row.totalAmount.toFixed(this.coinScale)
+                )
               }
             },
             renderHeader: (h, params) => {
@@ -1959,7 +1959,6 @@ export default {
         this.$router.push('/exchange/' + this.defaultPath)
         params = this.defaultPath
       } else {
-        console.log(this.currentTradingPrice);
         const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
         this.settiele(title)
       }
@@ -2609,14 +2608,12 @@ export default {
                                 ask.position = i;
                                 this.plate.askRows.push(ask);
                             }
-
                             const rows = this.plate.askRows
                             const len = rows.length
                             const totle =
-                                    rows[this.plate.maxPostion - resp.ask.items.length]-1
-                                            .totalAmount
-                            this.plate.askTotle = totle
-
+                                    rows[this.plate.maxPostion - resp.ask.items.length]
+                                        .totalAmount
+                                this.plate.askTotle = totle
                     }
                   }
                   if (resp.bid && resp.bid.items) {
@@ -2645,14 +2642,10 @@ export default {
                         bid.totalAmount = 0
                         this.plate.bidRows.push(bid)
                       }
-                      const rows = this.plate.bidRows,
-                        len = rows.length,
-                        totle = rows[resp.bid.items.length - 1].totalAmount
-                            // if(rows[resp.bid.items.length - 1]!=undefined){
-                            //     const totle = rows[resp.bid.items.length - 1].totalAmount;
-                            // }else{
-                            //     let totle;
-                            // }
+                        const rows = this.plate.bidRows
+                        const len = rows.length
+                        const totle = rows[resp.bid.items.length - 1].totalAmount
+                        console.log(rows[resp.bid.items.length - 1]);
                       this.plate.bidTotle = totle
                     } else {
                       const rows = this.plate.bidRows,
