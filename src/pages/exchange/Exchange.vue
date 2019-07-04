@@ -1418,10 +1418,10 @@ export default {
                 return h('span', {}, '--')
               } else {
                 return h(
-                                    'span',
-                                    {},
-                                    params.row.totalAmount.toFixed(this.coinScale)
-                                )
+                    'span',
+                    {},
+                    params.row.totalAmount.toFixed(this.coinScale)
+                )
               }
             },
             renderHeader: (h, params) => {
@@ -1961,7 +1961,6 @@ export default {
         this.$router.push('/exchange/' + this.defaultPath)
         params = this.defaultPath
       } else {
-        console.log(this.currentTradingPrice)
         const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
         this.settiele(title)
       }
@@ -2577,46 +2576,46 @@ export default {
                   this.plate.askRows = []
                   this.plate.bidRows = []
                   const resp = response.body
-                  if (resp.ask && resp.ask.items) {
-                    for (let i = 0; i < resp.ask.items.length; i++) {
-                      if (i == 0) {
-                        resp.ask.items[i].totalAmount = resp.ask.items[i].amount
-                      } else {
-                        resp.ask.items[i].totalAmount =
-                                    resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount
-                      }
-                    }
-                    if (resp.ask.items.length >= this.plate.maxPostion) {
-                      for (let i = this.plate.maxPostion; i > 0; i--) {
-                        const ask = resp.ask.items[i - 1]
-                        ask.direction = 'SELL'
-                        ask.position = i
-                        this.plate.askRows.push(ask)
-                      }
-                      const rows = this.plate.askRows,
-                        len = rows.length,
-                        totle = rows[0].totalAmount
-                      this.plate.askTotle = totle
-                    } else {
-                      for (let i = 12; i > resp.ask.items.length; i--) {
-                        const ask = { price: 0, amount: 0 }
-                        ask.direction = 'SELL'
-                        ask.position = i
-                        ask.totalAmount = ask.amount
-                        this.plate.askRows.push(ask)
-                      }
-                      for (let i = resp.ask.items.length; i > 0; i--) {
-                        const ask = resp.ask.items[i - 1]
-                        ask.direction = 'SELL'
-                        ask.position = i
-                        this.plate.askRows.push(ask)
-                      }
-                      const rows = this.plate.askRows,
-                        len = rows.length
-                      totle =
+                    if (resp.ask && resp.ask.items) {
+                        for (let i = 0; i < resp.ask.items.length; i++) {
+                            if (i == 0) {
+                                resp.ask.items[i].totalAmount = resp.ask.items[i].amount;
+                            } else {
+                                resp.ask.items[i].totalAmount =
+                                    resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount;
+                            }
+                        }
+                        if (resp.ask.items.length >= this.plate.maxPostion) {
+                            for (let i = this.plate.maxPostion; i > 0; i--) {
+                                let ask = resp.ask.items[i - 1];
+                                ask.direction = "SELL";
+                                ask.position = i;
+                                this.plate.askRows.push(ask);
+                            }
+                            const rows = this.plate.askRows,
+                                len = rows.length,
+                                totle = rows[0].totalAmount;
+                            this.plate.askTotle = totle;
+                        } else {
+                            for (let i = 12; i > resp.ask.items.length; i--) {
+                                let ask = { price: 0, amount: 0 };
+                                ask.direction = "SELL";
+                                ask.position = i;
+                                ask.totalAmount = ask.amount;
+                                this.plate.askRows.push(ask);
+                            }
+                            for (let i = resp.ask.items.length; i > 0; i--) {
+                                let ask = resp.ask.items[i - 1];
+                                ask.direction = "SELL";
+                                ask.position = i;
+                                this.plate.askRows.push(ask);
+                            }
+                            const rows = this.plate.askRows
+                            const len = rows.length
+                            const totle =
                                     rows[this.plate.maxPostion - resp.ask.items.length]
                                         .totalAmount
-                      this.plate.askTotle = totle
+                                this.plate.askTotle = totle
                     }
                   }
                   if (resp.bid && resp.bid.items) {
@@ -2645,14 +2644,10 @@ export default {
                         bid.totalAmount = 0
                         this.plate.bidRows.push(bid)
                       }
-                      const rows = this.plate.bidRows,
-                        len = rows.length,
-                        totle = rows[resp.bid.items.length - 1].totalAmount
-                            // if(rows[resp.bid.items.length - 1]!=undefined){
-                            //     const totle = rows[resp.bid.items.length - 1].totalAmount;
-                            // }else{
-                            //     let totle;
-                            // }
+                        const rows = this.plate.bidRows
+                        const len = rows.length
+                        const totle = rows[resp.bid.items.length - 1].totalAmount
+                        console.log(rows[resp.bid.items.length - 1]);
                       this.plate.bidTotle = totle
                     } else {
                       const rows = this.plate.bidRows,
