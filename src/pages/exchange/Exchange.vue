@@ -1887,7 +1887,7 @@ export default {
     this.getdefaultSymbol().then(res => {
       this.defaultPath = res
       this.init()
-      this.statusCurreny()
+      // this.statusCurreny()
     })
   },
   mounted: function() {
@@ -1955,16 +1955,16 @@ export default {
     silderGo(silder, val) {
       this[silder] = val
     },
-    statusCurreny() {
-      let params = this.$route.params.pathMatch
-      if (params == undefined) {
-        this.$router.push('/exchange/' + this.defaultPath)
-        params = this.defaultPath
-      } else {
-        const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
-        this.settiele(title)
-      }
-    },
+    // statusCurreny() {
+    //   let params = this.$route.params.pathMatch
+    //   if (params == undefined) {
+    //     this.$router.push('/exchange/' + this.defaultPath)
+    //     params = this.defaultPath
+    //   } else {
+    //     const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
+    //     this.settiele(title)
+    //   }
+    // },
     init() {
       let params = this.$route.params.pathMatch
       if (params == undefined) {
@@ -2644,10 +2644,9 @@ export default {
                         bid.totalAmount = 0
                         this.plate.bidRows.push(bid)
                       }
-                        const rows = this.plate.bidRows
-                        const len = rows.length
-                        const totle = rows[resp.bid.items.length - 1].totalAmount
-                        console.log(rows[resp.bid.items.length - 1]);
+                        const rows = this.plate.bidRows,
+                         len = rows.length,
+                             totle = rows[resp.bid.items.length - 1].totalAmount
                       this.plate.bidTotle = totle
                     } else {
                       const rows = this.plate.bidRows,
@@ -2740,7 +2739,7 @@ export default {
         that.getKline()
                 // 订阅价格变化消息
         stompClient.subscribe('/topic/market/thumb', function(msg) {
-          that.statusCurreny()
+          // that.statusCurreny()
           const resp = JSON.parse(msg.body)
           const coin = that.getCoin(resp.symbol)
           if (coin != null) {
