@@ -154,7 +154,7 @@ const threeComma = (num) => {
 Vue.filter('threeComma', threeComma)
 
 Vue.prototype.toFloor = toFloor
-Vue.prototype.settiele = (name) => {
+Vue.prototype.settiele = (name, num) => {
   if (name !== undefined) {
     window.document.title = name
   } else {

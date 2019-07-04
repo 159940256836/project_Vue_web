@@ -1,17 +1,23 @@
 <template>
     <div>
-        <Tabs name="tab1-1">
-            <TabPane 
-            :label="this.$t('exchange.curdelegation')" 
+        <Tabs
+            name="tab1-1"
+            v-model="activeName"
+            @on-click="changeTab"
+        >
+            <TabPane
+            :label="this.$t('exchange.curdelegation')"
+            name="EntrustCurrent"
             tab="tab1-1"
-            >             
-                <EntrustCurrent /> 
+            >
+                <EntrustCurrent v-if="activeName === 'EntrustCurrent'" />
             </TabPane>
-            <TabPane 
-            :label="this.$t('exchange.hisdelegation')" 
+            <TabPane
+            :label="this.$t('exchange.hisdelegation')"
+            name="EntrustHistory"
             tab="tab1-1"
-            >            
-                <EntrustHistory />
+            >
+                <EntrustHistory v-if="activeName === 'EntrustHistory'" />
             </TabPane>
         </Tabs>
     </div>
@@ -22,9 +28,19 @@ import EntrustCurrent from './EntrustCurrent.vue'
 import EntrustHistory from './EntrustHistory.vue'
 
 export default {
+    data() {
+        return {
+            activeName: 'EntrustCurrent'
+        }
+    },
   components: {
     EntrustCurrent,
     EntrustHistory
-  }
+  },
+  methods: {
+      changeTab(name) {
+          console.log(name)
+      }
+  },
 }
 </script>

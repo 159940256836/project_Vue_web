@@ -1039,6 +1039,7 @@ export default {
       loadingButton6: false, // 接口请求loading
       loadingButton7: false, // 接口请求loading
       modal: false,
+      currentTradingPrice: '', // title默认当前交易价
       btnList: [
         {
           text: self.$t('exchange.limited_price'),
@@ -1742,12 +1743,12 @@ export default {
         amount = 0
       if (val > 0) {
         amount = this.toFloor(
-                    account
-                        .div(price)
-                        .mul(this.sliderBuyLimitPercent)
-                        .mul(0.01),
-                    this.coinScale
-                )
+            account
+                .div(price)
+                .mul(this.sliderBuyLimitPercent)
+                .mul(0.01),
+            this.coinScale
+        )
       }
       this.form.buy.limitAmount = amount
       this.form.buy.limitTurnover = this.toFloor(
@@ -1813,16 +1814,16 @@ export default {
     lang: function() {
       this.updateLangData()
     },
-        // currentCoin: function () {
+    // currentCoin: function () {
         //     this.updateTitle();
         // },
-        // "currentCoin.price": function () {
-        //     this.updateTitle();
-        // },
+    'currentCoin.price': function() {
+      this.currentTradingPrice = this.currentCoin.price
+      console.log(this.currentTradingPrice)
+    },
     $route(to, from) {
       this.init()
     },
-
     sliderBuyLimitPercent() {
       let price = this.form.buy.limitPrice,
         account = this.wallet.base,
@@ -1886,6 +1887,7 @@ export default {
     this.getdefaultSymbol().then(res => {
       this.defaultPath = res
       this.init()
+      this.statusCurreny()
     })
   },
   mounted: function() {
@@ -1909,7 +1911,7 @@ export default {
     }
   },
   methods: {
-        // 默认交易对
+    // 默认交易对
     getdefaultSymbol() {
       return this.$http.get(this.host + '/market/default/symbol').then(res => {
         const data = res.body
@@ -1920,8 +1922,7 @@ export default {
         }
       })
     },
-
-        // //金额只能为正整数
+    // //金额只能为正整数
         // checkNum(element) {
         //     let val = element.value;
         //     //匹配非数字
@@ -1954,17 +1955,31 @@ export default {
     silderGo(silder, val) {
       this[silder] = val
     },
-    init() {
+    statusCurreny() {
       let params = this.$route.params.pathMatch
       if (params == undefined) {
         this.$router.push('/exchange/' + this.defaultPath)
         params = this.defaultPath
       } else {
-        const title = params.replace('_', '/').toUpperCase() + ' bdw'
+        console.log(this.currentTradingPrice)
+        const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
         this.settiele(title)
       }
+    },
+    init() {
+      let params = this.$route.params.pathMatch
+      if (params == undefined) {
+        this.$router.push('/exchange/' + this.defaultPath)
+        params = this.defaultPath
+      }
+        // else {
+      //   console.log(this.currentTradingPrice);
+      //   const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
+      //   this.settiele(title)
+      // }
       const basecion = params.split('_')[1]
       if (basecion) {
+        console.log(basecion)
         this.basecion = basecion.toLowerCase()
       }
       const coin = params.toUpperCase().split('_')[0]
@@ -2223,7 +2238,7 @@ export default {
           'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
           'mainSeriesProperties.candleStyle.borderDownColor': '#f15057' // 开高低收卖出标线
         },
-                // 柱状图样式
+        // 柱状图样式
         studies_overrides: {
           'volume.volume.color.0': 'rgba(241, 80, 87, .3)',  // 第一根的颜色
           'volume.volume.color.1': 'rgba(0, 178, 117, .3)'  // 第二根的颜色
@@ -2233,7 +2248,7 @@ export default {
             text: '1min',
             resolution: '1',
             description: 'realtime',
-            title: that.$t('exchange.realtime')
+            title: this.$t('exchange.realtime')
           },
           {
             text: '1min',
@@ -2730,18 +2745,17 @@ export default {
         that.getKline()
                 // 订阅价格变化消息
         stompClient.subscribe('/topic/market/thumb', function(msg) {
+          that.statusCurreny()
           const resp = JSON.parse(msg.body)
           const coin = that.getCoin(resp.symbol)
           if (coin != null) {
-                        // coin.price = resp.close.toFixed(2);
             coin.price = resp.close
-            coin.rose =
-                            resp.chg > 0
+            coin.rose = resp.chg > 0
                                 ? '+' + (resp.chg * 100).toFixed(2) + '%'
                                 : (resp.chg * 100).toFixed(2) + '%'
-                        // coin.close = resp.close.toFixed(2);
-                        // coin.high = resp.high.toFixed(2);
-                        // coin.low = resp.low.toFixed(2);
+            // coin.close = resp.close.toFixed(2);
+            // coin.high = resp.high.toFixed(2);
+            // coin.low = resp.low.toFixed(2);
             coin.close = resp.close
             coin.high = resp.high
             coin.low = resp.low
@@ -3039,7 +3053,9 @@ export default {
                 })
     },
     gohref(currentRow, oldCurrentRow) {
-            // location.href = "/#exchange/" + currentRow.href;
+      console.log(currentRow)
+      this.startWebsock()
+        // location.href = "/#exchange/" + currentRow.href;
             // location.reload();
       const path = '/exchange/' + currentRow.href
       this.$router.push({

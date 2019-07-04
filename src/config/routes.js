@@ -126,7 +126,7 @@ export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
     { path: '/login', component: Login },
-    { path: '/mobile', component: Mobile, meta: {hide: true}},
+    { path: '/mobile', component: Mobile, name: 'mobile',meta: {hide: true}},
     { path: '/mobilereg', component: mobilereg, meta: {
       hide: true
     }},
