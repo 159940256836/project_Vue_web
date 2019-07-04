@@ -121,6 +121,16 @@
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Dropdown>
+                                    <DropdownMenu slot="list">
+                                        <ul class="ul-notice" v-for="(item, index) in FAQList">
+                                            <router-link
+                                                :to="{path: '/notice/index', query: { 'id': item.id }}"
+                                            >
+                                                {{ item.title }}
+                                            </router-link>
+                                        </ul>
+                                        <router-link class="list-info" to="/notice">{{$t("otc.index.viewmore")}}</router-link>
+                                    </DropdownMenu>
                                     <a href="javascript:void(0)" style="height: 50px;display: flex;align-items: center;">
                                         <img src="./assets/img/notice.png" alt="">
                                     </a>
@@ -420,7 +430,8 @@ export default {
       pathName: '',
       pathNameState: true,
       weChat1: false, // 微信客服1
-      weChat2: false // 微信客服2
+      weChat2: false, // 微信客服2
+      FAQList: [] // 公告
     }
   },
   watch: {
@@ -492,6 +503,7 @@ export default {
     }
   },
   created: function() {
+      this.loadDataPage()
     this.initialize()
     if (this.$route.path === '/') {
       this.pageView = 'page-view'
@@ -519,6 +531,23 @@ export default {
     })
   },
   methods: {
+  /** *
+   * 获取公告
+   */
+  loadDataPage() {
+      var param = {}
+      param['pageNo'] = 1
+      param['pageSize'] = 50
+      this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
+          var resp = response.body
+          if (resp.code === 0) {
+              this.FAQList = (resp.data.content).slice(0, 5)
+              console.log(this.FAQList.slice(0, 5));
+          } else {
+              this.$Message.error(console.log('1'))
+          }
+      })
+  },
         // header动画效果
     reload() {
       this.isRouterAlive = false
@@ -725,6 +754,29 @@ export default {
                                 .header-img {
                                     margin-left: 10px;
                                 }
+                            }
+                            .ul-notice {
+                                height: 30px;
+                                line-height: 30px;
+                                cursor: pointer;
+                                a {
+                                    min-width: 100px;
+                                    background: #10122B;
+                                    padding: 0 15px;
+                                    color: #8090af;
+                                    font-size: 14px;
+                                }
+                                &:hover a {
+                                    color: #3399ff;
+                                }
+                            }
+                            .list-info {
+                                display: inline-block;
+                                margin: 0;
+                                padding: 0 0 0 25px;
+                                color: #3399ff;
+                                -webkit-box-sizing: border-box;
+                                box-sizing: border-box;
                             }
                         }
                     }

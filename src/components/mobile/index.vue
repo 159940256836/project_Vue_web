@@ -12,7 +12,7 @@
                 </p>
                 <p>
                     <img src="./img/banner_text2.png" alt="加载失败" style="margin-top:.28rem;height:.21rem;width:4.18rem;">
-                </p>               
+                </p>
             </div>
             <div class="content">
                 <p style="text-align:center">
@@ -20,7 +20,7 @@
                 </p>
                 <p style="text-align:center">
                     <span class="login btn" @click="goLogin">登录</span>
-                </p>            
+                </p>
                 <img src="./img/module.png" alt="加载失败" class="module">
                 <p class="text">移动交易，随时随地</p>
                 <div class="terminal">
@@ -57,27 +57,11 @@ export default {
     goPc() {
       this.$router.push('/')
     },
-<<<<<<< HEAD
     goMobile() {
       window.location.href = 'https://download.bdw.top'
     },
     goLogin() {
       this.$router.push('/login')
-=======
-    methods: {
-        goPc() {
-            this.$router.push('/')
-        },
-        goMobile() {
-            window.location.href = 'https://download.dbw.top'
-        },
-        goLogin() {
-            this.$router.push('/login')
-        },
-        goRegister() {
-            this.$router.push('mobilereg')
-        }
->>>>>>> cf68f93508a111f5966b2589ebb92dbb42cb5dca
     },
     goRegister() {
       this.$router.push('/register')
@@ -159,19 +143,19 @@ export default {
                 width: 2.36rem;
                 border-radius: .05rem;
                 cursor: pointer;
-                border: .01rem solid #3399FF; 
+                border: .01rem solid #3399FF;
                 color: #3399FF;
                 text-indent: .52rem;
                 font-size: .28rem;
             }
             .pc {
                 background: url('./img/pc_icon.png') no-repeat .46rem .22rem;
-                background-size: .3rem .27rem; 
+                background-size: .3rem .27rem;
             }
             .mobile {
                 margin-left: .46rem;
                 background: url('./img/mobile_icon.png') no-repeat .52rem .21rem;
-                background-size: .2rem .28rem; 
+                background-size: .2rem .28rem;
             }
             .botton-logo {
                 margin-top: .82rem;
