@@ -598,8 +598,10 @@ $night-headerbg: #27313e;
 $night-contentbg: #192330;
 $night-color: #fff;
 .exchange {
+    width:100%;
     color: #fff;
     background-color: #191d3a;
+    // height: calc(100vh - 402px);
     .main {
         display: flex;
         .left {
@@ -1815,9 +1817,9 @@ export default {
     // currentCoin: function () {
         //     this.updateTitle();
         // },
-    "currentCoin.price": function () {
-        this.currentTradingPrice = this.currentCoin.price
-        console.log(this.currentTradingPrice);
+    'currentCoin.price': function() {
+      this.currentTradingPrice = this.currentCoin.price
+      console.log(this.currentTradingPrice)
     },
     $route(to, from) {
       this.init()
@@ -1882,11 +1884,11 @@ export default {
     }
   },
   created: function() {
-      this.getdefaultSymbol().then(res => {
-          this.defaultPath = res
-          this.init()
-          this.statusCurreny()
-      })
+    this.getdefaultSymbol().then(res => {
+      this.defaultPath = res
+      this.init()
+      this.statusCurreny()
+    })
   },
   mounted: function() {
         // console.log(this.tableData);
@@ -1965,10 +1967,10 @@ export default {
     },
     init() {
       let params = this.$route.params.pathMatch
-        if (params == undefined) {
-            this.$router.push('/exchange/' + this.defaultPath)
-            params = this.defaultPath
-          }
+      if (params == undefined) {
+        this.$router.push('/exchange/' + this.defaultPath)
+        params = this.defaultPath
+      }
         // else {
       //   console.log(this.currentTradingPrice);
       //   const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
@@ -1976,8 +1978,8 @@ export default {
       // }
       const basecion = params.split('_')[1]
       if (basecion) {
-          console.log(basecion);
-          this.basecion = basecion.toLowerCase()
+        console.log(basecion)
+        this.basecion = basecion.toLowerCase()
       }
       const coin = params.toUpperCase().split('_')[0]
       const base = params.toUpperCase().split('_')[1]
@@ -2161,79 +2163,79 @@ export default {
       this.$http
         .post(this.host + '/market/exchange-rate/usd-cny')
                 .then(response => {
-                    let resp = response.body;
-                    this.CNYRate = resp.data;
-                });
-        },
+                  const resp = response.body
+                  this.CNYRate = resp.data
+                })
+    },
     getCoin(symbol) {
-        return this.coins._map[symbol];
+      return this.coins._map[symbol]
     },
     getKline() {
-      let that = this;
-      let config = {
+      const that = this
+      const config = {
         autosize: true,
         fullscreen: true,
         symbol: that.symbol,
-        interval: "5", // K线默认时间传值
-        timezone: "Asia/Shanghai",
-        toolbar_bg: "#0E0E28",
-        container_id: "kline_container",
+        interval: '5', // K线默认时间传值
+        timezone: 'Asia/Shanghai',
+        toolbar_bg: '#0E0E28',
+        container_id: 'kline_container',
         datafeed: that.datafeed,
         library_path:
-            process.env.NODE_ENV === "production"
-                ? "/assets/charting_library/"
-                : "src/assets/js/charting_library/",
-        locale: "zh",
+                    process.env.NODE_ENV === 'production'
+                        ? '/assets/charting_library/'
+                        : 'src/assets/js/charting_library/',
+        locale: 'zh',
         debug: false,
         drawings_access: {
-            type: "black",
-            tools: [{ name: "Regression Trend" }]
+          type: 'black',
+          tools: [{ name: 'Regression Trend' }]
         },
         disabled_features: [
-            "header_resolutions",
-            "timeframes_toolbar",
-            "header_symbol_search",
-            "header_chart_type",
-            "header_compare",
-            "header_undo_redo",
-            "header_screenshot",
-            "header_saveload",
-            "use_localstorage_for_settings",
-            "left_toolbar",
-            "volume_force_overlay",
-            'header_settings',
-            'main_meries_seale_menu' // 隐藏右上角设置
+          'header_resolutions',
+          'timeframes_toolbar',
+          'header_symbol_search',
+          'header_chart_type',
+          'header_compare',
+          'header_undo_redo',
+          'header_screenshot',
+          'header_saveload',
+          'use_localstorage_for_settings',
+          'left_toolbar',
+          'volume_force_overlay',
+          'header_settings',
+          'main_meries_seale_menu' // 隐藏右上角设置
         ],
         enabled_features: [
-            "hide_last_na_study_output",
-            "move_logo_to_main_pane"
+          'hide_last_na_study_output',
+          'move_logo_to_main_pane'
         ],
-        custom_css_url: "bundles/common.css",
-        supported_resolutions: ["1", "5", "15", "30", "60", "240", "1D", "1W", "1M"],
-        charts_storage_url: "http://saveload.tradingview.com",
-        charts_storage_api_version: "1.1",
-        client_id: "tradingview.com",
-        user_id: "public_user_id",
+        custom_css_url: 'bundles/common.css',
+        supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M'],
+        charts_storage_url: 'http://saveload.tradingview.com',
+        charts_storage_api_version: '1.1',
+        client_id: 'tradingview.com',
+        user_id: 'public_user_id',
         overrides: {
                     // 背景色网格颜色
-                    "paneProperties.background": "#131630",
-                    'paneProperties.vertGridProperties.style': 0,
-                    "paneProperties.vertGridProperties.color": "rgba(255,255,255,.04)",
-                    "paneProperties.horzGridProperties.color": "rgba(255,255,255,.04)",
-                    "scalesProperties.textColor": "#8090AF", // 开高低收
-                    "mainSeriesProperties.candleStyle.upColor": "#00b275",
-                    "mainSeriesProperties.candleStyle.downColor": "#f15057",
-                    "mainSeriesProperties.candleStyle.drawBorder": false,
-                    "mainSeriesProperties.candleStyle.wickUpColor": "#00b275",
-                    "mainSeriesProperties.candleStyle.wickDownColor": "#f15057",
-                    "paneProperties.legendProperties.showLegend": false,
-                    "mainSeriesProperties.areaStyle.color1": "rgba(71, 78, 112, 0.5)",
-                    "mainSeriesProperties.areaStyle.color2": "rgba(71, 78, 112, 0.5)",
-                    "mainSeriesProperties.areaStyle.linecolor": "#9194a4",
-                    "scalesProperties.lineColor": "#8090AF", // xy刻度线色值
+          'paneProperties.background': '#131630',
+          'paneProperties.vertGridProperties.style': 0,
+          'paneProperties.vertGridProperties.color': 'rgba(255,255,255,.04)',
+          'paneProperties.horzGridProperties.color': 'rgba(255,255,255,.04)',
+          'scalesProperties.textColor': '#8090AF', // 开高低收
+          'mainSeriesProperties.candleStyle.upColor': '#00b275',
+          'mainSeriesProperties.candleStyle.downColor': '#f15057',
+          'mainSeriesProperties.candleStyle.drawBorder': false,
+          'mainSeriesProperties.candleStyle.wickUpColor': '#00b275',
+          'mainSeriesProperties.candleStyle.wickDownColor': '#f15057',
+          'paneProperties.legendProperties.showLegend': false,
+          'mainSeriesProperties.areaStyle.color1': 'rgba(71, 78, 112, 0.5)',
+          'mainSeriesProperties.areaStyle.color2': 'rgba(71, 78, 112, 0.5)',
+          'mainSeriesProperties.areaStyle.linecolor': '#9194a4',
+          'scalesProperties.lineColor': '#8090AF', // xy刻度线色值
                     // "paneProperties.crossHairProperties.color": "#00b275", // 十字光标颜色
-                    'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
-                    'mainSeriesProperties.candleStyle.borderDownColor': '#f15057', // 开高低收卖出标线
+          'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
+          'mainSeriesProperties.candleStyle.borderDownColor': '#f15057' // 开高低收卖出标线
         },
         // 柱状图样式
         studies_overrides: {
@@ -2738,9 +2740,9 @@ export default {
         that.getKline()
                 // 订阅价格变化消息
         stompClient.subscribe('/topic/market/thumb', function(msg) {
-            that.statusCurreny()
-            const resp = JSON.parse(msg.body)
-            const coin = that.getCoin(resp.symbol)
+          that.statusCurreny()
+          const resp = JSON.parse(msg.body)
+          const coin = that.getCoin(resp.symbol)
           if (coin != null) {
             coin.price = resp.close
             coin.rose = resp.chg > 0
@@ -2812,7 +2814,7 @@ export default {
         stompClient.subscribe(
                     '/topic/market/trade-plate/' + that.currentCoin.symbol,
                     function(msg) {
-                        const resp = JSON.parse(msg.body)
+                      const resp = JSON.parse(msg.body)
                       if (resp.direction == 'SELL') {
                         const asks = resp.items
                         that.plate.askRows = []
@@ -3019,7 +3021,7 @@ export default {
                 })
     },
     cancelCollect(index, row) {
-        if (!this.isLogin) {
+      if (!this.isLogin) {
         this.$Message.info(this.$t('common.logintip'))
         return
       }
@@ -3046,8 +3048,8 @@ export default {
                 })
     },
     gohref(currentRow, oldCurrentRow) {
-        console.log(currentRow);
-        this.startWebsock()
+      console.log(currentRow)
+      this.startWebsock()
         // location.href = "/#exchange/" + currentRow.href;
             // location.reload();
       const path = '/exchange/' + currentRow.href

@@ -7,12 +7,20 @@
         </header>
         <main>
             <div class="banner">
-                <img src="./img/banner_text1.png" alt="加载失败" style="margin-top:1.63rem;height:.34rem;width:5.72rem;">
-                 <img src="./img/banner_text2.png" alt="加载失败" style="margin-top:.28rem;height:.21rem;width:4.18rem;">
+                <p>
+                    <img src="./img/banner_text1.png" alt="加载失败" style="margin-top:1.63rem;height:.34rem;width:5.72rem;">
+                </p>
+                <p>
+                    <img src="./img/banner_text2.png" alt="加载失败" style="margin-top:.28rem;height:.21rem;width:4.18rem;">
+                </p>               
             </div>
             <div class="content">
-                <span class="register btn" @click="goRegister">立即注册</span>
-                <span class="login btn" @click="goLogin">登录</span>
+                <p style="text-align:center">
+                    <span class="register btn" @click="goRegister">立即注册</span>
+                </p>
+                <p style="text-align:center">
+                    <span class="login btn" @click="goLogin">登录</span>
+                </p>            
                 <img src="./img/module.png" alt="加载失败" class="module">
                 <p class="text">移动交易, 随时随地</p>
                 <div class="terminal">
@@ -60,6 +68,7 @@ export default {
         }
     },
     beforeRouteEnter (to, from, next) {
+        
         document.documentElement.style.fontSize = document.documentElement.clientWidth/7.5 + 'px';
         next()
     }
@@ -102,7 +111,6 @@ export default {
                 width: 6.7rem;
                 text-align: center;
                 border-radius:.05rem;
-                margin-left: .4rem;
                 cursor: pointer;
                 font-size: .32rem;
             }
@@ -126,6 +134,9 @@ export default {
                 margin-top: .82rem;
                 margin-bottom: .67rem;
             }
+            .terminal {
+                text-align: center;
+            }
             .btn2 {
                 display: inline-block;
                 height: .7rem;
@@ -139,7 +150,6 @@ export default {
                 font-size: .28rem;
             }
             .pc {
-                margin-left: 1.17rem;
                 background: url('./img/pc_icon.png') no-repeat .46rem .22rem;
                 background-size: .3rem .27rem; 
             }

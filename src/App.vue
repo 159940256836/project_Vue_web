@@ -438,6 +438,9 @@ export default {
     },
     $route(to, from) {
       this.pathName = to.path
+      if (this.pathName == '/mobile') {
+           this.$router.push('/')
+      }
       if (this.pathName === '/login' || this.pathName === '/register') {
         this.pathNameState = false
       } else {
@@ -634,7 +637,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
-  }
+  },
 }
 </script>
 <style lang="scss" scoped>
@@ -1049,7 +1052,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 14px;
-    background: transparent !important;
+    background: #0e0e28 !important;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
         "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
