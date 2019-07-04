@@ -3,20 +3,25 @@
     <main class="box-wrap">
         <div class="box new-order-box" id="box">
             <h2 class="title">{{ this.$t('otc.myorder') }}</h2>
-            <Tabs name="tab1" :value="myOrderTabName" @on-click="tabCut">
-                <TabPane 
-                :label="this.$t('uc.menuTitle.bibiManagement')" 
-                tab="tab1" 
-                name="name1"               
-                >              
-                    <Coins />
+            <Tabs
+                    v-model="activeName"
+                name="tab1"
+                :value="myOrderTabName"
+                @on-click="tabCut"
+            >
+                <TabPane
+                :label="this.$t('uc.menuTitle.bibiManagement')"
+                tab="tab1"
+                name="name1"
+                >
+                    <Coins v-if="activeName === 'name1'"/>
                 </TabPane>
-                <TabPane 
-                :label="this.$t('uc.menuTitle.otcManagement')" 
+                <TabPane
+                :label="this.$t('uc.menuTitle.otcManagement')"
                 tab="tab1"
                 name="name2"
-                >            
-                    <LegalTender />  
+                >
+                    <LegalTender v-if="activeName === 'name2'"/>
                 </TabPane>
             </Tabs>
         </div>
@@ -31,7 +36,8 @@ import Coins from './coins.vue'
 export default {
   data() {
     return {
-      title: this.$t('otc.myorder')
+      title: this.$t('otc.myorder'),
+        activeName: 'name1'
     }
   },
   computed: {

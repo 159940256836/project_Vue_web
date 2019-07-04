@@ -337,8 +337,8 @@ export default {
             border-radius: 3px;
             .action-main {
                 background: #111530;
-                height:320px;
-                padding: 0 25px;
+                min-height:320px;
+                padding: 0 25px 25px;
                 .action-inner {
                     width: 100%;
                     display: table;

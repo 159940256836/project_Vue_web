@@ -459,7 +459,6 @@ export default {
   },
   created() {
     this.getCurrentOrder()
-    this.getSymbol()
   },
   methods: {
     previouspage() {
@@ -566,6 +565,7 @@ export default {
               rows.push(row)
             }
             this.orders = rows
+            this.getSymbol()
           }
           this.loading = false
         })

@@ -1037,6 +1037,7 @@ export default {
       loadingButton6: false, // 接口请求loading
       loadingButton7: false, // 接口请求loading
       modal: false,
+      currentTradingPrice: '', // title默认当前交易价
       btnList: [
         {
           text: self.$t('exchange.limited_price'),
@@ -1740,12 +1741,12 @@ export default {
         amount = 0
       if (val > 0) {
         amount = this.toFloor(
-                    account
-                        .div(price)
-                        .mul(this.sliderBuyLimitPercent)
-                        .mul(0.01),
-                    this.coinScale
-                )
+            account
+                .div(price)
+                .mul(this.sliderBuyLimitPercent)
+                .mul(0.01),
+            this.coinScale
+        )
       }
       this.form.buy.limitAmount = amount
       this.form.buy.limitTurnover = this.toFloor(
@@ -1811,16 +1812,16 @@ export default {
     lang: function() {
       this.updateLangData()
     },
-        // currentCoin: function () {
+    // currentCoin: function () {
         //     this.updateTitle();
         // },
-        // "currentCoin.price": function () {
-        //     this.updateTitle();
-        // },
+    "currentCoin.price": function () {
+        this.currentTradingPrice = this.currentCoin.price
+        console.log(this.currentTradingPrice);
+    },
     $route(to, from) {
       this.init()
     },
-
     sliderBuyLimitPercent() {
       let price = this.form.buy.limitPrice,
         account = this.wallet.base,
@@ -1881,10 +1882,11 @@ export default {
     }
   },
   created: function() {
-    this.getdefaultSymbol().then(res => {
-      this.defaultPath = res
-      this.init()
-    })
+      this.getdefaultSymbol().then(res => {
+          this.defaultPath = res
+          this.init()
+          this.statusCurreny()
+      })
   },
   mounted: function() {
         // console.log(this.tableData);
@@ -1907,7 +1909,7 @@ export default {
     }
   },
   methods: {
-        // 默认交易对
+    // 默认交易对
     getdefaultSymbol() {
       return this.$http.get(this.host + '/market/default/symbol').then(res => {
         const data = res.body
@@ -1918,8 +1920,7 @@ export default {
         }
       })
     },
-
-        // //金额只能为正整数
+    // //金额只能为正整数
         // checkNum(element) {
         //     let val = element.value;
         //     //匹配非数字
@@ -1952,18 +1953,32 @@ export default {
     silderGo(silder, val) {
       this[silder] = val
     },
-    init() {
+    statusCurreny() {
       let params = this.$route.params.pathMatch
       if (params == undefined) {
         this.$router.push('/exchange/' + this.defaultPath)
         params = this.defaultPath
       } else {
-        const title = params.replace('_', '/').toUpperCase() + ' bdw'
+        console.log(this.currentTradingPrice);
+        const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
         this.settiele(title)
       }
+    },
+    init() {
+      let params = this.$route.params.pathMatch
+        if (params == undefined) {
+            this.$router.push('/exchange/' + this.defaultPath)
+            params = this.defaultPath
+          }
+        // else {
+      //   console.log(this.currentTradingPrice);
+      //   const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
+      //   this.settiele(title)
+      // }
       const basecion = params.split('_')[1]
       if (basecion) {
-        this.basecion = basecion.toLowerCase()
+          console.log(basecion);
+          this.basecion = basecion.toLowerCase()
       }
       const coin = params.toUpperCase().split('_')[0]
       const base = params.toUpperCase().split('_')[1]
@@ -2151,56 +2166,56 @@ export default {
                     this.CNYRate = resp.data;
                 });
         },
-        getCoin(symbol) {
-            return this.coins._map[symbol];
+    getCoin(symbol) {
+        return this.coins._map[symbol];
+    },
+    getKline() {
+      let that = this;
+      let config = {
+        autosize: true,
+        fullscreen: true,
+        symbol: that.symbol,
+        interval: "5", // K线默认时间传值
+        timezone: "Asia/Shanghai",
+        toolbar_bg: "#0E0E28",
+        container_id: "kline_container",
+        datafeed: that.datafeed,
+        library_path:
+            process.env.NODE_ENV === "production"
+                ? "/assets/charting_library/"
+                : "src/assets/js/charting_library/",
+        locale: "zh",
+        debug: false,
+        drawings_access: {
+            type: "black",
+            tools: [{ name: "Regression Trend" }]
         },
-        getKline() {
-            let that = this;
-            let config = {
-                autosize: true,
-                fullscreen: true,
-                symbol: that.symbol,
-                interval: "5", // K线默认时间传值
-                timezone: "Asia/Shanghai",
-                toolbar_bg: "#0E0E28",
-                container_id: "kline_container",
-                datafeed: that.datafeed,
-                library_path:
-                    process.env.NODE_ENV === "production"
-                        ? "/assets/charting_library/"
-                        : "src/assets/js/charting_library/",
-                locale: "zh",
-                debug: false,
-                drawings_access: {
-                    type: "black",
-                    tools: [{ name: "Regression Trend" }]
-                },
-                disabled_features: [
-                    "header_resolutions",
-                    "timeframes_toolbar",
-                    "header_symbol_search",
-                    "header_chart_type",
-                    "header_compare",
-                    "header_undo_redo",
-                    "header_screenshot",
-                    "header_saveload",
-                    "use_localstorage_for_settings",
-                    "left_toolbar",
-                    "volume_force_overlay",
-                    'header_settings',
-                    'main_meries_seale_menu' // 隐藏右上角设置
-                ],
-                enabled_features: [
-                    "hide_last_na_study_output",
-                    "move_logo_to_main_pane"
-                ],
-                custom_css_url: "bundles/common.css",
-                supported_resolutions: ["1", "5", "15", "30", "60", "240", "1D", "1W", "1M"],
-                charts_storage_url: "http://saveload.tradingview.com",
-                charts_storage_api_version: "1.1",
-                client_id: "tradingview.com",
-                user_id: "public_user_id",
-                overrides: {
+        disabled_features: [
+            "header_resolutions",
+            "timeframes_toolbar",
+            "header_symbol_search",
+            "header_chart_type",
+            "header_compare",
+            "header_undo_redo",
+            "header_screenshot",
+            "header_saveload",
+            "use_localstorage_for_settings",
+            "left_toolbar",
+            "volume_force_overlay",
+            'header_settings',
+            'main_meries_seale_menu' // 隐藏右上角设置
+        ],
+        enabled_features: [
+            "hide_last_na_study_output",
+            "move_logo_to_main_pane"
+        ],
+        custom_css_url: "bundles/common.css",
+        supported_resolutions: ["1", "5", "15", "30", "60", "240", "1D", "1W", "1M"],
+        charts_storage_url: "http://saveload.tradingview.com",
+        charts_storage_api_version: "1.1",
+        client_id: "tradingview.com",
+        user_id: "public_user_id",
+        overrides: {
                     // 背景色网格颜色
                     "paneProperties.background": "#131630",
                     'paneProperties.vertGridProperties.style': 0,
@@ -2221,7 +2236,7 @@ export default {
                     'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
                     'mainSeriesProperties.candleStyle.borderDownColor': '#f15057', // 开高低收卖出标线
         },
-                // 柱状图样式
+        // 柱状图样式
         studies_overrides: {
           'volume.volume.color.0': 'rgba(241, 80, 87, .3)',  // 第一根的颜色
           'volume.volume.color.1': 'rgba(0, 178, 117, .3)'  // 第二根的颜色
@@ -2231,7 +2246,7 @@ export default {
             text: '1min',
             resolution: '1',
             description: 'realtime',
-            title: that.$t('exchange.realtime')
+            title: this.$t('exchange.realtime')
           },
           {
             text: '1min',
@@ -2594,12 +2609,14 @@ export default {
                                 ask.position = i;
                                 this.plate.askRows.push(ask);
                             }
-                            const rows = this.plate.askRows,
-                                len = rows.length
-                                totle =
-                                    rows[this.plate.maxPostion - resp.ask.items.length]
-                                        .totalAmount
-                      this.plate.askTotle = totle
+
+                            const rows = this.plate.askRows
+                            const len = rows.length
+                            const totle =
+                                    rows[this.plate.maxPostion - resp.ask.items.length]-1
+                                            .totalAmount
+                            this.plate.askTotle = totle
+
                     }
                   }
                   if (resp.bid && resp.bid.items) {
@@ -2728,18 +2745,17 @@ export default {
         that.getKline()
                 // 订阅价格变化消息
         stompClient.subscribe('/topic/market/thumb', function(msg) {
-          const resp = JSON.parse(msg.body)
-          const coin = that.getCoin(resp.symbol)
+            that.statusCurreny()
+            const resp = JSON.parse(msg.body)
+            const coin = that.getCoin(resp.symbol)
           if (coin != null) {
-                        // coin.price = resp.close.toFixed(2);
             coin.price = resp.close
-            coin.rose =
-                            resp.chg > 0
+            coin.rose = resp.chg > 0
                                 ? '+' + (resp.chg * 100).toFixed(2) + '%'
                                 : (resp.chg * 100).toFixed(2) + '%'
-                        // coin.close = resp.close.toFixed(2);
-                        // coin.high = resp.high.toFixed(2);
-                        // coin.low = resp.low.toFixed(2);
+            // coin.close = resp.close.toFixed(2);
+            // coin.high = resp.high.toFixed(2);
+            // coin.low = resp.low.toFixed(2);
             coin.close = resp.close
             coin.high = resp.high
             coin.low = resp.low
@@ -2803,7 +2819,7 @@ export default {
         stompClient.subscribe(
                     '/topic/market/trade-plate/' + that.currentCoin.symbol,
                     function(msg) {
-                      const resp = JSON.parse(msg.body)
+                        const resp = JSON.parse(msg.body)
                       if (resp.direction == 'SELL') {
                         const asks = resp.items
                         that.plate.askRows = []
@@ -3037,7 +3053,9 @@ export default {
                 })
     },
     gohref(currentRow, oldCurrentRow) {
-            // location.href = "/#exchange/" + currentRow.href;
+        console.log(currentRow);
+        this.startWebsock()
+        // location.href = "/#exchange/" + currentRow.href;
             // location.reload();
       const path = '/exchange/' + currentRow.href
       this.$router.push({
