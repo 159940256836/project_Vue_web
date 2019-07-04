@@ -48,30 +48,29 @@
 
 <script>
 export default {
-    data() {
-        return {
-            footerIsShow: true
-        }
-    },
-    methods: {
-        goPc() {
-            this.$router.push('/')
-        },
-        goMobile() {
-            window.location.href = 'https://download.dbw.top'
-        },
-        goLogin() {
-            this.$router.push('/login')
-        },
-        goRegister() {
-            this.$router.push('/register')
-        }
-    },
-    beforeRouteEnter (to, from, next) {
-        
-        document.documentElement.style.fontSize = document.documentElement.clientWidth/7.5 + 'px';
-        next()
+  data() {
+    return {
+      footerIsShow: true
     }
+  },
+  methods: {
+    goPc() {
+      this.$router.push('/')
+    },
+    goMobile() {
+      window.location.href = 'https://download.bdw.top'
+    },
+    goLogin() {
+      this.$router.push('/login')
+    },
+    goRegister() {
+      this.$router.push('/register')
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px'
+    next()
+  }
 }
 </script>
 
