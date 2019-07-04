@@ -18,17 +18,6 @@
         background:rgba(51,153,255,1);
         border:1px solid rgba(51,153,255,1);
     }
-    .page {
-        text-align: right;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        .ivu-page-next a{
-            color:#fff;
-        }
-        .ivu-page-prev a{
-            color:#fff;
-        }
-    }
 }
 
 .table .ivu-table-wrapper {
@@ -192,6 +181,41 @@
     * {
         box-shadow: none !important;
     }
+
+  .page {
+    text-align: right;
+    margin-top: 20px;
+    margin-bottom:20px;
+    .ivu-page-next a{
+      color:#fff;
+    }
+    .ivu-page-prev a{
+      color:#fff;
+    }
+    .ivu-page-total {
+      color: #8090AF;
+    }
+    .ivu-page-next, .ivu-page-prev {
+      background: #111530;
+      border: 1px solid #191f44;
+    }
+    .ivu-icon.ivu-icon-ios-arrow-left,
+    .ivu-icon.ivu-icon-ios-arrow-right {
+        color: #8090AF;
+    }
+    li.ivu-page-item.ivu-page-item-active {
+        background: #111530;
+        border: 1px solid #191f44;
+        a {
+        color: #8090AF;
+        }
+        &:hover {
+        a {
+            color: #8090AF;
+        }
+        }
+    }
+  }
   .ivu-tabs {
         // overflow:initial;
         background: transparent;
@@ -207,33 +231,6 @@
                 border: none;
                 a {
                 color: #fff;
-                }
-            }
-            }
-            .page {
-            .ivu-icon.ivu-icon-ios-arrow-left,
-            .ivu-icon.ivu-icon-ios-arrow-right {
-                color: #666;
-            }
-            li.ivu-page-item.ivu-page-item-active {
-                a {
-                color: #fff;
-                }
-                &:hover {
-                a {
-                    color: #fff;
-                }
-                }
-            }
-            li.ivu-page-item {
-                a {
-                color: #666;
-                }
-                &:hover {
-                border: 1px solid #3399ff;
-                a {
-                    color: #3399ff;
-                }
                 }
             }
             }
@@ -391,7 +388,7 @@
             </FormItem>
             <FormItem>
                 <span
-                style="margin-left: -10px;margin-right:45px;margin-left: 8px;background:transparent;border:1px solid #3399FF;color:#3399FF;"
+                style="margin-left: -10px;margin-right:45px;margin-left: -16px;background:transparent;border:1px solid #3399FF;color:#3399FF;"
                 @click="handleClear"
                 class="my-btn"
                 >

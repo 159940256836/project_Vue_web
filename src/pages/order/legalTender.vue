@@ -17,7 +17,6 @@
                 <div style="margin: 10px;overflow: hidden" class="page">
                   <div style="float: right;">
                     <Page
-                          v-if="totalPage > 10"
                           :total="totalNum"
                           :current="currentPage"
                           show-total
@@ -508,33 +507,6 @@ export default {
                 }
             }
             }
-            .page {
-            .ivu-icon.ivu-icon-ios-arrow-left,
-            .ivu-icon.ivu-icon-ios-arrow-right {
-                color: #666;
-            }
-            li.ivu-page-item.ivu-page-item-active {
-                a {
-                color: #fff;
-                }
-                &:hover {
-                a {
-                    color: #fff;
-                }
-                }
-            }
-            li.ivu-page-item {
-                a {
-                color: #666;
-                }
-                &:hover {
-                border: 1px solid #3399ff;
-                a {
-                    color: #3399ff;
-                }
-                }
-            }
-            }
         }
         .ivu-tabs-bar {
             .ivu-tabs-nav-container {
@@ -677,5 +649,44 @@ export default {
     .ivu-table:before{content:'';width:100%;height:0px;position:absolute;left:0;bottom:0;z-index:1}
     .ivu-table:after{content:'';width:0px;height:100%;position:absolute;top:0;right:0;z-index:3}
     }
+
+
+    .page {
+
+      text-align: right;
+      margin-top: 20px;
+      margin-bottom:20px;
+      .ivu-page-next a{
+        color:#fff;
+      }
+      .ivu-page-prev a{
+        color:#fff;
+      }
+      .ivu-page-total {
+        color: #8090AF;
+      }
+      .ivu-page-next, .ivu-page-prev {
+        background: #111530;
+        border: 1px solid #191f44;
+      }
+
+      .ivu-icon.ivu-icon-ios-arrow-left,
+      .ivu-icon.ivu-icon-ios-arrow-right {
+          color: #8090AF;
+      }
+      li.ivu-page-item.ivu-page-item-active {
+          background: #111530;
+          border: 1px solid #191f44;
+          a {
+          color: #8090AF;
+          }
+          &:hover {
+          a {
+              color: #8090AF;
+          }
+          }
+      }
+    }
+    
 }
 </style>
