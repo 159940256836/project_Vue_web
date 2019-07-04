@@ -1961,12 +1961,21 @@ export default {
     //     this.$router.push('/exchange/' + this.defaultPath)
     //     params = this.defaultPath
     //   } else {
-    //     const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
+    //       /*this.currentTradingPrice + ' ' +*/
+    //       const title = params.replace('_', '/').toUpperCase() + ' bdw'
     //     this.settiele(title)
     //   }
     // },
     init() {
       let params = this.$route.params.pathMatch
+        if (params == undefined) {
+            this.$router.push('/exchange/' + this.defaultPath)
+            params = this.defaultPath
+        } else {
+            /*this.currentTradingPrice + ' ' +*/
+            const title = params.replace('_', '/').toUpperCase() + ' bdw'
+            this.settiele(title)
+        }
       if (params == undefined) {
         this.$router.push('/exchange/' + this.defaultPath)
         params = this.defaultPath
@@ -3047,8 +3056,6 @@ export default {
                 })
     },
     gohref(currentRow, oldCurrentRow) {
-      console.log(currentRow)
-      this.startWebsock()
         // location.href = "/#exchange/" + currentRow.href;
             // location.reload();
       const path = '/exchange/' + currentRow.href
