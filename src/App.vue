@@ -439,7 +439,7 @@ export default {
     $route(to, from) {
       this.pathName = to.path
       if (this.pathName == '/mobile') {
-           this.$router.push('/')
+        this.$router.push('/')
       }
       if (this.pathName === '/login' || this.pathName === '/register') {
         this.pathNameState = false
@@ -637,7 +637,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -1058,7 +1058,6 @@ body {
 }
 
 /*自定义滚动条样式*/
-
 ::-webkit-scrollbar {
     width: 10px;
     background: #f5f5f5;

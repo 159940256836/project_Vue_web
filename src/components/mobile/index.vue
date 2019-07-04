@@ -48,11 +48,22 @@
 
 <script>
 export default {
-    data() {
-        return {
-            footerIsShow: true
-        }
+  data() {
+    return {
+      footerIsShow: true
+    }
+  },
+  methods: {
+    goPc() {
+      this.$router.push('/')
     },
+<<<<<<< HEAD
+    goMobile() {
+      window.location.href = 'https://download.bdw.top'
+    },
+    goLogin() {
+      this.$router.push('/login')
+=======
     methods: {
         goPc() {
             this.$router.push('/')
@@ -66,12 +77,16 @@ export default {
         goRegister() {
             this.$router.push('mobilereg')
         }
+>>>>>>> cf68f93508a111f5966b2589ebb92dbb42cb5dca
     },
-    beforeRouteEnter (to, from, next) {
-        
-        document.documentElement.style.fontSize = document.documentElement.clientWidth/7.5 + 'px';
-        next()
+    goRegister() {
+      this.$router.push('/register')
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px'
+    next()
+  }
 }
 </script>
 
