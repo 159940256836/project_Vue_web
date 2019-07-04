@@ -1447,6 +1447,16 @@ export default {
         //         }
         //     });
         // }
+  },
+  beforeRouteEnter (to, from, next) {
+    if(from.name == 'mobile') {
+      next()
+    }else {
+      if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        next({name:'mobile'})
+      }
+      next()
+    }
   }
 }
 </script>
