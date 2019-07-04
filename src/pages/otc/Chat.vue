@@ -97,8 +97,22 @@
                         <div class="account-info" v-if="bankInfo&&bankInfo!=null">
                             <i class="icons bankfor"></i>
                             <span>{{ payInfo != null ? payInfo.realName : "" }} </span>
-                            <Poptip word-wrap trigger="hover" :content="bankInfo.branch">
-                                <span>{{ bankInfo.branch }}</span>
+                            <Poptip
+                                word-wrap
+                                trigger="hover"
+                                :content="bankInfo.branch"
+                                style="height: 20px;
+                                line-height: 20px;
+                                position: absolute;
+                                top: 16px;"
+                            >
+                                <span style="width: 145px;
+                                    display: inline-block;
+                                    cursor: pointer;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                    text-overflow: ellipsis;"
+                                >{{ bankInfo.branch }}</span>
                             </Poptip>
                             <span style="position: absolute;
                                         top: 35px;
@@ -131,7 +145,7 @@
                         </div>
                         <div class="account-info" v-else>
                             <i class="icons alipay"></i>
-                            <p>{{$t('otc.chat.tip2')}}</p>
+                            <span>{{$t('otc.chat.tip2')}}</span>
                         </div>
                         <div
                             class="account-info"
@@ -141,14 +155,14 @@
                             <i class="icons wechat"></i>
                             <span>{{$t('otc.chat.wx')}}</span>
                             <span>{{wechatPay.wechat}}</span>
-                            <p
+                            <span
                                 v-if="wechatPay&&wechatPay!=null&&wechatPay.qrWeCodeUrl!=null&&wechatPay.qrWeCodeUrl!=''"
-                                style="position: absolute;top: 20px;left: 29px;"
+                                style="position: absolute;top: 20px;left: 22px;"
                             >
                                 <a @click="showQRCode(2)">
                                     {{$t('otc.chat.qrcode')}}
                                 </a>
-                            </p>
+                            </span>
                         </div>
                         <div class="account-info" v-else>
                             <i class="icons wechat"></i>

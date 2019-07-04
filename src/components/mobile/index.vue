@@ -7,8 +7,12 @@
         </header>
         <main>
             <div class="banner">
-                <img src="./img/banner_text1.png" alt="加载失败" style="margin-top:1.63rem;height:.34rem;width:5.72rem;">
-                 <img src="./img/banner_text2.png" alt="加载失败" style="margin-top:.28rem;height:.21rem;width:4.18rem;">
+                <p>
+                    <img src="./img/banner_text1.png" alt="加载失败" style="margin-top:1.63rem;height:.34rem;width:5.72rem;">
+                </p>
+                <p>
+                    <img src="./img/banner_text2.png" alt="加载失败" style="margin-top:.28rem;height:.21rem;width:4.18rem;">
+                </p>               
             </div>
             <div class="content">
                 <p style="text-align:center">
