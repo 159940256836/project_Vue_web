@@ -1,5 +1,5 @@
 <template>
-    <div class="notice common announcement_notice" style="min-height:800px; height:calc(100vh - 402px)">
+    <div class="notice common announcement_notice" style="min-height:800px;">
         <div class="banner notice_banner ">
             <span>{{$t('footer.bulletinboard')}}</span>
         </div>
@@ -22,7 +22,6 @@
                 </template>
                 <!-- <Page v-show="showPage" :total="totalNum" :pageSize="pageSize" :current="pageNo" @on-change="loadDataPage"></Page> -->
             </div>
-           
         </div>
         <!-- <div class="help_container">
           <div style="line-height: 40px;font-size:16px;"><router-link to="/help" style="color:#3399ff;">{{$t('cms.servicecenter')}}</router-link>->{{$t('cms.notice')}}</div>
@@ -35,7 +34,6 @@
             </Col>
         </div>
         <Col span="24" style="padding:100px 0;">
-
 
          </Col> -->
     </div>
@@ -124,65 +122,65 @@ export default {
     // mixins: [minHeightMinx],
   data() {
     return {
-        pageNo: 1,
-        pageSize: 10,
-        totalNum: 0,
-        FAQList: [],
-        showPage: false
+      pageNo: 1,
+      pageSize: 10,
+      totalNum: 0,
+      FAQList: [],
+      showPage: false
 
-      }
+    }
   },
   created: function() {
     this.init()
   },
   computed: {
     lang() {
-        return this.$store.state.lang
-      }
+      return this.$store.state.lang
+    }
   },
   methods: {
     init() {
-        this.$store.state.HeaderActiveName = '1-7'
-          this.$store.commit('navigate', 'nav-service')
-        this.loadDataPage(this.pageNo)
-      },
+      this.$store.state.HeaderActiveName = '1-7'
+      this.$store.commit('navigate', 'nav-service')
+      this.loadDataPage(this.pageNo)
+    },
     loadDataPage(pageIndex) {
-        var param = {};
-        (param['pageNo'] = pageIndex),
+      var param = {};
+      (param['pageNo'] = pageIndex),
                 (param['pageSize'] = this.pageSize),
                 this.$http
                     .post(this.host + this.api.uc.announcement, param)
                     .then(response => {
                       var resp = response.body
                       if (resp.code == 0) {
-                          if (resp.data.content.length == 0) return
-                          if (resp.data.totalElements <= 10) {
-                              this.showPage = false
-                            } else {
-                              this.showPage = true
-                            }
-                          this.FAQList = resp.data.content
-                          this.totalNum = resp.data.totalElements
+                        if (resp.data.content.length == 0) return
+                        if (resp.data.totalElements <= 10) {
+                          this.showPage = false
                         } else {
-                          this.$Notice.error({
-                            title: this.$t('common.tip'),
-                            desc: resp.message
-                          })
+                          this.showPage = true
                         }
+                        this.FAQList = resp.data.content
+                        this.totalNum = resp.data.totalElements
+                      } else {
+                        this.$Notice.error({
+                          title: this.$t('common.tip'),
+                          desc: resp.message
+                        })
+                      }
                     })
-      },
+    },
     noticedeail(id) {
-        var path = { path: '/notice/index', query: { id: id }}
-        this.$router.push(path)
-      },
+      var path = { path: '/notice/index', query: { id: id }}
+      this.$router.push(path)
+    },
     titleLang(str) {
-        const reg = new RegExp('[\\u4E00-\\u9FFF]+', 'g')
-        if (reg.test(str)) {
-              return '简体中文'
-            } else {
-              return 'English'
-            }
+      const reg = new RegExp('[\\u4E00-\\u9FFF]+', 'g')
+      if (reg.test(str)) {
+        return '简体中文'
+      } else {
+        return 'English'
       }
+    }
   }
 }
 </script>

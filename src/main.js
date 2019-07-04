@@ -8,7 +8,6 @@ import VueI18n from 'vue-i18n'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import util from './assets/js/util.js' // 乘除方法，js的算数运算真是SB
-
 import App from './App.vue'
 import Api from './config/api'
 import $ from '@js/jquery.min.js'
@@ -19,11 +18,9 @@ Vue.use(VueClipboard)
 Vue.use(VueRouter)
 Vue.use(vueResource)
 Vue.use(VueI18n)
-Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
+// Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
 // Vue.prototype.host = 'http://192.168.124.14/' // 陈然
-// Vue.prototype.host = 'http://47.244.100.113' // 第一套
-// Vue.prototype.host = 'https://api.nr3d.cn' // 正式
-// Vue.prototype.host = 'http://47.103.47.131/'// 正式
+Vue.prototype.host = 'https://api.nr3d.cn' // 正式
 Vue.prototype.url = 'https://www.bdw.top' // 链接地址
 // Vue.prototype.url = 'http://192.168.124.45' // 链接地址
 Vue.prototype.api = Api
@@ -44,6 +41,7 @@ const i18n = new VueI18n({
     'en': require('./assets/lang/en.js')
   }
 })
+
 Vue.http.interceptors.push((request, next) => {
     // 登录成功后将后台返回的TOKEN在本地存下来,每次请求从sessionStorage中拿到存储的TOKEN值
   request.headers.set('x-auth-token', localStorage.getItem('TOKEN'))
