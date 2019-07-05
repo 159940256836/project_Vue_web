@@ -59,7 +59,7 @@ export default {
         sessionStorage.switchToPc = true
     },
     goMobile() {
-        window.location.href = 'https://download.dbw.top'
+        window.location.href = 'https://download.bdw.top'
     },
     goLogin() {
         this.$router.push({name:'mobileLogin'})
