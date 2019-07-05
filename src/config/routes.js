@@ -114,7 +114,13 @@ import apiapimanagement from "../components/uc/apiapimanagement"
 import newMyExtension from "../components/uc/newMyExtension"
 import mobilereg from "../components/yidong/registers";
 import registe from "../components/yidong/registe";
-import Mobile from "../components/mobile/index.vue";
+
+//移动端页面
+import Mobile from "../components/mobile/mobile.vue";
+import MobileHome from "../components/mobile/home.vue";
+import MobileRegister from "../components/mobile/register.vue";
+import MobileLogin from "../components/mobile/login.vue";
+
 export default [
     { path: '/newMyExtension', component: newMyExtension },
     { path: '/apiapimanagement', component: apiapimanagement },
@@ -126,7 +132,39 @@ export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
     { path: '/login', component: Login },
-    { path: '/mobile', component: Mobile, name: 'mobile',meta: {hide: true}},
+    { path: '/mobile',
+        component: Mobile,
+        name: 'mobile',
+        meta: {
+            hide: true
+        }, 
+        children: [
+            {
+                path: 'home',
+                name: 'mobileHome',
+                component: MobileHome,
+                meta: {
+                    hide: true
+                }, 
+            },
+            {
+                path: 'login',
+                name: 'mobileLogin',
+                component: MobileLogin,
+                meta: {
+                    hide: true
+                }, 
+            },
+            {
+                path: 'register',
+                name: 'mobileRegister',
+                component: MobileRegister,
+                meta: {
+                    hide: true
+                },
+            }
+        ]
+    },
     { path: '/mobilereg', component: mobilereg, name:'mobilereg',meta: {
       hide: true
     }},

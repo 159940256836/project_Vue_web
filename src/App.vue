@@ -448,9 +448,10 @@ export default {
       this.locale = newVal
     },
     $route(to, from) {
-      this.pathName = to.path
-      if (this.pathName == '/mobile') {
-        this.$router.push('/')
+    //     console.log(to)
+    //   this.pathName = to.path
+      if (this.pathName == '/mobile/home') {
+           this.$router.push('/')
       }
       if (this.pathName === '/login' || this.pathName === '/register') {
         this.pathNameState = false
