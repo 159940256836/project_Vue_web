@@ -131,7 +131,7 @@
                         </Checkbox>
                     </label>
                     <!-- 用户协议 -->
-                    <router-link to="/Usereement">
+                    <router-link to="/Usereement" style="font-size:.3rem;">
                         《{{$t('uc.regist.userprotocol')}}》
                     </router-link>
                     <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
@@ -544,9 +544,9 @@ export default {
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       border: .01rem solid;
-      -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 20 20;
-      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 20 20;
-      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 20 20;
+      -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
       color: white;
     }
     /deep/ .ivu-form-item-error-tip {
@@ -585,7 +585,7 @@ export default {
     // height: 1rem;
     margin-bottom: .49rem;
     font-size: .3rem;
-    border: 1px solid;
+    border-color: 1px solid #2988e8;
     // border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 20 20;
     -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
       -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
@@ -593,6 +593,7 @@ export default {
     .ivu-select-selection {
       background: transparent;
       color: #fff;
+      border-color: 1px solid #2988e8;
       -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
       -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
       border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
