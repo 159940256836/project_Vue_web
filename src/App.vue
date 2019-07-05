@@ -450,9 +450,9 @@ export default {
     $route(to, from) {
     //     console.log(to)
     //   this.pathName = to.path
-      if (this.pathName == '/mobile/home') {
-           this.$router.push('/')
-      }
+    //   if (this.pathName == '/mobile/home') {
+    //        this.$router.push('/')
+    //   }
       if (this.pathName === '/login' || this.pathName === '/register') {
         this.pathNameState = false
       } else {
@@ -542,11 +542,11 @@ export default {
       this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
         var resp = response.body
         if (resp.code === 0) {
-        this.FAQList = (resp.data.content).slice(0, 5)
-        console.log(this.FAQList.slice(0, 5))
-      } else {
-        this.$Message.error(console.log('1'))
-      }
+          this.FAQList = (resp.data.content).slice(0, 5)
+          console.log(this.FAQList.slice(0, 5))
+        } else {
+          this.$Message.error(console.log('1'))
+        }
       })
     },
         // header动画效果

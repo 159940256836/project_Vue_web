@@ -56,25 +56,16 @@ export default {
   methods: {
     goPc() {
       this.$router.push('/')
+      sessionStorage.switchToPc = true
     },
-    methods: {
-        goPc() {
-            this.$router.push('/')
-            sessionStorage.switchToPc = true
-        },
-        goMobile() {
-            window.location.href = 'https://download.dbw.top'
-        },
-        goLogin() {
-            this.$router.push({name:'mobileLogin'})
-        },
-        goRegister() {
-            this.$router.push({name:'mobileRegister'})
-        }
+    goMobile() {
+      window.location.href = 'https://download.bdw.top'
     },
-    beforeRouteLeave (to, from, next) {
-        console.log(to)
-        next()
+    goLogin() {
+      this.$router.push({ name: 'mobileLogin' })
+    },
+    goRegister() {
+      this.$router.push({ name: 'mobileRegister' })
     }
   },
   beforeRouteEnter(to, from, next) {
