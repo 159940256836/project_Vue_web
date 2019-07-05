@@ -995,24 +995,24 @@ export default {
                 },
                 nativeOn: {
                   click: () => {
-                        event.stopPropagation() // 阻止事件冒泡
-                        if (this.isLogin) {
+                    event.stopPropagation() // 阻止事件冒泡
+                    if (this.isLogin) {
                           if (
                                                 event.currentTarget.className ==
                                                 'ivu-icon ivu-icon-android-star'
                                             ) {
-                              this.cancelCollect(params.index, params.row)
-                              event.currentTarget.className ==
+                            this.cancelCollect(params.index, params.row)
+                            event.currentTarget.className ==
                                                     'ivu-icon ivu-icon-android-star-outline'
-                            } else {
-                              this.collect(params.index, params.row)
-                              event.currentTarget.className =
+                          } else {
+                            this.collect(params.index, params.row)
+                            event.currentTarget.className =
                                                     'ivu-icon ivu-icon-android-star'
-                            }
+                          }
                         } else {
                           this.$Message.warning(this.$t('common.logintip'))
                         }
-                      }
+                  }
                 }
               }),
               h('span', params.row.symbol)
@@ -1079,31 +1079,31 @@ export default {
                 h('Icon', {
                   props: {
                                         // color:"red",
-                        type: params.row.isFavor
+                    type: params.row.isFavor
                                             ? 'android-star'
                                             : 'android-star-outline'
-                      },
+                  },
                   nativeOn: {
-                        click: () => {
+                    click: () => {
                           event.stopPropagation() // 阻止事件冒泡
                           if (this.isLogin) {
-                              if (
+                            if (
                                                     event.currentTarget.className ==
                                                     'ivu-icon ivu-icon-android-star'
                                                 ) {
-                                  this.cancelCollect(params.index, params.row)
-                                  event.currentTarget.className ==
+                                this.cancelCollect(params.index, params.row)
+                                event.currentTarget.className ==
                                                         'ivu-icon ivu-icon-android-star-outline'
-                                } else {
-                                  this.collect(params.index, params.row)
-                                  event.currentTarget.className =
+                              } else {
+                                this.collect(params.index, params.row)
+                                event.currentTarget.className =
                                                         'ivu-icon ivu-icon-android-star'
-                                }
-                            } else {
-                              this.$Message.warning(this.$t('common.logintip'))
-                            }
+                              }
+                          } else {
+                            this.$Message.warning(this.$t('common.logintip'))
+                          }
                         }
-                      }
+                  }
                 }),
                 h('span', params.row.coin)
               ])
@@ -1468,8 +1468,8 @@ export default {
                   style: {},
                   on: {
                     click: () => {
-                          this.cancel(params.index)
-                        }
+                      this.cancel(params.index)
+                    }
                   }
                 },
                                 self.$t('exchange.undo')
@@ -1574,19 +1574,19 @@ export default {
                                     'span',
                   {
                     style: {
-                          color: '#3399ff'
-                        }
+                      color: '#3399ff'
+                    }
                   },
                                     self.$t('exchange.finished')
                                 )
               } else if (status == 'CANCELED') {
                 return h(
                                     'span',
-                      {
-                        style: {
+                  {
+                    style: {
                           color: '#3399ff'
                         }
-                      },
+                  },
                                     self.$t('exchange.canceled')
                                 )
               } else {

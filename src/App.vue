@@ -504,7 +504,7 @@ export default {
     }
   },
   created: function() {
-      this.loadDataPage()
+    this.loadDataPage()
     this.initialize()
     if (this.$route.path === '/') {
       this.pageView = 'page-view'
@@ -535,20 +535,20 @@ export default {
   /** *
    * 获取公告
    */
-  loadDataPage() {
+    loadDataPage() {
       var param = {}
       param['pageNo'] = 1
       param['pageSize'] = 50
       this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
-          var resp = response.body
-          if (resp.code === 0) {
-              this.FAQList = (resp.data.content).slice(0, 5)
-              console.log(this.FAQList.slice(0, 5));
-          } else {
-              this.$Message.error(console.log('1'))
-          }
+        var resp = response.body
+        if (resp.code === 0) {
+        this.FAQList = (resp.data.content).slice(0, 5)
+        console.log(this.FAQList.slice(0, 5))
+      } else {
+        this.$Message.error(console.log('1'))
+      }
       })
-  },
+    },
         // header动画效果
     reload() {
       this.isRouterAlive = false
@@ -761,7 +761,7 @@ export default {
                                 line-height: 30px;
                                 cursor: pointer;
                                 a {
-                                    min-width: 100px;
+                                    min-width: 150px;
                                     background: #10122B;
                                     padding: 0 15px;
                                     color: #8090af;

@@ -495,6 +495,7 @@ export default {
           minWidth: 70,
           sortable: true,
           sortMethod: function(a, b, type) {
+            console.log(a, b)
             const a1 = a.replace(/[^\d|.|-]/g, '') - 0
             const b1 = b.replace(/[^\d|.|-]/g, '') - 0
             if (type == 'asc') {
@@ -507,14 +508,14 @@ export default {
             const row = params.row
             const className = parseFloat(row.rose) < 0 ? 'red' : 'green'
             return h(
-                            'span',
+                'span',
               {
                 attrs: {
                   class: className
                 }
               },
-                            row.rose
-                        )
+                row.rose
+            )
           }
         },
         {
@@ -805,14 +806,14 @@ export default {
               const row = params.row
               const className = parseFloat(row.rose) < 0 ? 'red' : 'green'
               return h(
-                                'span',
+                  'span',
                 {
                   attrs: {
                     class: className
                   }
                 },
-                                row.rose
-                            )
+                  row.rose
+                )
             }
           },
           {
@@ -1448,16 +1449,16 @@ export default {
         //     });
         // }
   },
-  beforeRouteEnter (to, from, next) {
-    if(from.name == 'mobileHome') {
+  beforeRouteEnter(to, from, next) {
+    if (from.name == 'mobileHome') {
       next()
-    }else {
-      if(sessionStorage.switchToPc) {
+    } else {
+      if (sessionStorage.switchToPc) {
         next()
-      }else {
-        if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-          next({name:'mobileHome'})
-        }else {
+      } else {
+        if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+          next({ name: 'mobileHome' })
+        } else {
           next()
         }
       }
@@ -1629,10 +1630,9 @@ li {
     width: 1200px;
     height: auto;
     min-height: 320px;
-    padding: 30px auto;
     margin: 0 auto;
-    padding-top: 30px;
     max-height: 556px;
+    padding-top:56px;
     .page2nav {
         line-height: 40px;
         font-size: 20px;
@@ -1982,7 +1982,7 @@ li {
     // padding-top: 50px;
     min-width: 1260px;
   .Central{
-    background:url("../../assets/images/bg.png");
+    background:url("https://coinmany2.oss-cn-shanghai.aliyuncs.com/bg.png");
     height:auto;
   }
 }

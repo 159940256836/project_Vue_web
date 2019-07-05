@@ -58,10 +58,14 @@ export default {
   },
   computed: {
     polylinePoints: function() {
+      console.log(this.coords)
       return this.coords.slice(2, this.coords.length - 2).join(' ')
     },
     polygonPoints: function() {
-      return this.coords.join()
+      // console.log(this.coords)
+      if (this.coords[0] != undefined) {
+        return this.coords.join()
+      }
     }
   },
   methods: {
