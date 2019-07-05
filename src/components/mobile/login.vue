@@ -59,7 +59,7 @@
 
           <div class="go-register-tip">
             <span>{{$t("uc.login.noaccount")}}</span>
-            <router-link :to="{name:'mobileRegister'}">{{$t("uc.login.registerLog")}}</router-link>
+            <router-link style="font-size:.3rem;" :to="{name:'mobileRegister'}">{{$t("uc.login.registerLog")}}</router-link>
             <!-- <router-link to="/findPwd">{{$t('uc.login.forget')}}</router-link> -->
           </div>
           <FormItem style="margin-bottom:10px;">
