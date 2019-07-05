@@ -12,13 +12,13 @@ import noticeitem from '../pages/cms/NoticeItem'
 import newhelp from '../pages/cms/NewHelp'
 import question from '../pages/cms/Question'
 import agreement from '../pages/cms/Agreement'
-import exchargerule from '../pages/cms/ExchargeRule' /*交易规则*/
-import userprotocol from '../pages/cms/UserProtocol' /*使用协议*/
-import feenote from '../pages/cms/FeeNote' /*资费说明*/
+import exchargerule from '../pages/cms/ExchargeRule' /* 交易规则*/
+import userprotocol from '../pages/cms/UserProtocol' /* 使用协议*/
+import feenote from '../pages/cms/FeeNote' /* 资费说明*/
 import merchantprotocol from '../pages/cms/MerchantProtocol'
-import homenotice from '../pages/cms/HomeNotice' /*首页公告*/
-import aboutus from '../pages/cms/AboutUs' /*关于我们*/
-import joinus from '../pages/cms/JoinUs' /*加入我们*/
+import homenotice from '../pages/cms/HomeNotice' /* 首页公告*/
+import aboutus from '../pages/cms/AboutUs' /* 关于我们*/
+import joinus from '../pages/cms/JoinUs' /* 加入我们*/
 import rate from '../pages/cms/Rate'
 import moneyindex from '../components/uc/MoneyIndex'
 import record from '../components/uc/Record'
@@ -39,14 +39,14 @@ import Register from '../pages/uc/register'
 import FindPwd from '../pages/uc/findpwd'
 import Exchange from '../pages/exchange/exchange'
 // import Help from '../pages/cms/help'
-import HelpList from '../pages/cms/HelpList' //帮助分类列表
-import HelpDetail from '../pages/cms/HelpDetail' //帮助详情
+import HelpList from '../pages/cms/HelpList' // 帮助分类列表
+import HelpDetail from '../pages/cms/HelpDetail' // 帮助详情
 // import Message from '../pages/cms/message'
 import OTCMain from '../pages/otc/Main'
 import OtcTrade from '../pages/otc/Trade'
 import OtcOrder from '../components/uc/myorder'
-import EntrustCurrent from '../components/uc/EntrustCurrent' //当前委托记录
-import EntrustHistory from '../components/uc/EntrustHistory' //历史委托记录
+import EntrustCurrent from '../components/uc/EntrustCurrent' // 当前委托记录
+import EntrustHistory from '../components/uc/EntrustHistory' // 历史委托记录
 import OtcAd from '../components/otc/MyAd'
 import adPublish from '../pages/otc/AdPublish'
 import PublishAdver from '../pages/otc/PublishAdver'
@@ -55,8 +55,8 @@ import personal from '../pages/uc/Personal'
 import identbusiness from '../pages/uc/IdentBusiness'
 // 币理财
 import Blc from '../pages/blc/Bilicai'
-import meblc from "../components/uc/Blc"
-import mebjc from "../components/uc/Bjc"
+import meblc from '../components/uc/Blc'
+import mebjc from '../components/uc/Bjc'
 // 费率  transactionCosts
 import transactionCosts from '../components/footerList/transactionCosts'
 // 法律声明
@@ -77,20 +77,20 @@ import Bjc from '../pages/bjc/Bijingcai'
 import feereturn from '../pages/feereturn/Feereturn'
 
 // ieo
-import Ieo from "../pages/ieo/Index.vue"
-import IeoDetail from "../pages/ieo/Detail.vue"
+import Ieo from '../pages/ieo/Index.vue'
+import IeoDetail from '../pages/ieo/Detail.vue'
 
-//开启或者关闭google验证
-import ClosegoogleVali from "../pages/google/CloseGoogleVali.vue";
-import OpenGoogleVali from "../pages/google/ResetGoogleVali.vue"
+// 开启或者关闭google验证
+import ClosegoogleVali from '../pages/google/CloseGoogleVali.vue'
+import OpenGoogleVali from '../pages/google/ResetGoogleVali.vue'
 
-//uc模块
-import feeLevel from "../components/uc/FeeLevel.vue"
+// uc模块
+import feeLevel from '../components/uc/FeeLevel.vue'
 
-//IEo管理
+// IEo管理
 import Ieoadmin from '../components/uc/IeoAdmin.vue'
 
-//api管理
+// api管理
 import apiManage from '../components/uc/apiManage.vue'
 
 // 杠杆账户管理 => 当前委托
@@ -103,23 +103,23 @@ import levelHistory from '../components/uc/levelHistory.vue'
 import giveRecord from '../components/uc/giveRecord.vue'
 
 // 归还赠送记录
-import LeverIndex from "../pages/lever/Index.vue"
+import LeverIndex from '../pages/lever/Index.vue'
 
-//杠杆交易
-import Lever from "../pages/exchange/lever.vue"
-//移动端注册  registe
-//新api管理  apiapi
-import apiapimanagement from "../components/uc/apiapimanagement"
-//newMyExtension新推广
-import newMyExtension from "../components/uc/newMyExtension"
-import mobilereg from "../components/yidong/registers";
-import registe from "../components/yidong/registe";
+// 杠杆交易
+import Lever from '../pages/exchange/lever.vue'
+// 移动端注册  registe
+// 新api管理  apiapi
+import apiapimanagement from '../components/uc/apiapimanagement'
+// newMyExtension新推广
+import newMyExtension from '../components/uc/newMyExtension'
+import mobilereg from '../components/yidong/registers'
+import registe from '../components/yidong/registe'
 
-//移动端页面
-import Mobile from "../components/mobile/mobile.vue";
-import MobileHome from "../components/mobile/home.vue";
-import MobileRegister from "../components/mobile/register.vue";
-import MobileLogin from "../components/mobile/login.vue";
+// 移动端页面
+import Mobile from '../components/mobile/mobile.vue'
+import MobileHome from '../components/mobile/home.vue'
+import MobileRegister from '../components/mobile/register.vue'
+import MobileLogin from '../components/mobile/login.vue'
 
 export default [
     { path: '/newMyExtension', component: newMyExtension },
@@ -132,52 +132,52 @@ export default [
     { path: '/', component: Index },
     { path: '/index', component: Index },
     { path: '/login', component: Login },
-    { path: '/mobile',
-        component: Mobile,
-        name: 'mobile',
-        meta: {
-            hide: true
-        }, 
-        children: [
-            {
-                path: 'home',
-                name: 'mobileHome',
-                component: MobileHome,
-                meta: {
-                    hide: true
-                }, 
-            },
-            {
-                path: 'login',
-                name: 'mobileLogin',
-                component: MobileLogin,
-                meta: {
-                    hide: true
-                }, 
-            },
-            {
-                path: 'register',
-                name: 'mobileRegister',
-                component: MobileRegister,
-                meta: {
-                    hide: true
-                },
-            }
-        ]
-    },
-    { path: '/mobilereg', component: mobilereg, name:'mobilereg',meta: {
+  { path: '/mobile',
+    component: Mobile,
+    name: 'mobile',
+    meta: {
       hide: true
-    }},
-    { path: '/registe', component: registe, meta: {
-        hide: true
-    }},
-    { path: "/Ieo", name: "ieo", component: Ieo },
-    { path: "/Ieo/IeoDetail", name: "IeoDetail", component: IeoDetail },
+    },
+    children: [
+      {
+        path: 'home',
+        name: 'mobileHome',
+        component: MobileHome,
+        meta: {
+          hide: true
+        }
+      },
+      {
+        path: 'login',
+        name: 'mobileLogin',
+        component: MobileLogin,
+        meta: {
+          hide: true
+        }
+      },
+      {
+        path: 'register',
+        name: 'mobileRegister',
+        component: MobileRegister,
+        meta: {
+          hide: true
+        }
+      }
+    ]
+  },
+  { path: '/mobilereg', component: mobilereg, name: 'mobilereg', meta: {
+    hide: true
+  }},
+  { path: '/registe', component: registe, meta: {
+    hide: true
+  }},
+    { path: '/Ieo', name: 'ieo', component: Ieo },
+    { path: '/Ieo/IeoDetail', name: 'IeoDetail', component: IeoDetail },
     { path: '/login/returnUrl/:returnUrl', component: Login },
     { path: '/register', component: Register },
-    { path: "/closeGoogleval", name: "closegoogleVali", component: ClosegoogleVali },
-    { path: "/openGoogleVali", name: "resetgooglevali", component: OpenGoogleVali },
-    { path: "/lever/:coin", name: "lever", component: LeverIndex },
+    { path: '/closeGoogleval', name: 'closegoogleVali', component: ClosegoogleVali },
+    { path: '/openGoogleVali', name: 'resetgooglevali', component: OpenGoogleVali },
+    { path: '/lever/:coin', name: 'lever', component: LeverIndex },
     { path: '/findPwd', component: FindPwd },
     { path: '/exchange', component: Exchange },
     { path: '/exchange/*', component: Exchange },
@@ -194,61 +194,61 @@ export default [
     { path: '/bjc', component: Bjc },
     // 发布广告
     { path: '/PublishAdver', component: PublishAdver },
-    {
-        path: '/personal',
-        component: personal,
-        children: [
-            {
-                path: '',
-                name: "moneyindex",
-                component: moneyindex
-            },
-            {
-                path: 'record',
-                name: "record",
-                component: record
-            },
-            {
-                path: 'recharge',
-                name: "recharge",
-                component: recharge
-            },
-            {
-                path: 'withdraw',
-                name: "withdraw",
-                component: withdraw
-            },
-            {
-                path: 'withdrawAddr',
-                name: "withdrawAddr",
-                component: withdrawAddr
-            },
-            {
-                path: 'bjc',
-                name: "mebjc",
-                component: mebjc
-            },
-            {
-                path: "giveRecord",
-                name: "giveRecord",
-                component: giveRecord
-            },
-            {
-                path: 'adPublish',
-                component: adPublish
-            }
-        ]
-    },
+  {
+    path: '/personal',
+    component: personal,
+    children: [
+      {
+        path: '',
+        name: 'moneyindex',
+        component: moneyindex
+      },
+      {
+        path: 'record',
+        name: 'record',
+        component: record
+      },
+      {
+        path: 'recharge',
+        name: 'recharge',
+        component: recharge
+      },
+      {
+        path: 'withdraw',
+        name: 'withdraw',
+        component: withdraw
+      },
+      {
+        path: 'withdrawAddr',
+        name: 'withdrawAddr',
+        component: withdrawAddr
+      },
+      {
+        path: 'bjc',
+        name: 'mebjc',
+        component: mebjc
+      },
+      {
+        path: 'giveRecord',
+        name: 'giveRecord',
+        component: giveRecord
+      },
+      {
+        path: 'adPublish',
+        component: adPublish
+      }
+    ]
+  },
     // 平台手续费返还
-    { path: "/feereturn", component: feereturn },
-    {
-        //我的订单页
-        path: '/order', component: resolve => require(['@/pages/order/index.vue'], resolve)
-    },
-    {
-        //我的账号管理页
-        path: '/account', name: 'account',component: resolve => require(['@/pages/account/index.vue'], resolve)
-    },
+    { path: '/feereturn', component: feereturn },
+  {
+        // 我的订单页
+    path: '/order', component: resolve => require(['@/pages/order/index.vue'], resolve)
+  },
+  {
+        // 我的账号管理页
+    path: '/account', name: 'account', component: resolve => require(['@/pages/account/index.vue'], resolve)
+  },
     // {
     //     path: "/distribute",
     //     component: platedistribute,
@@ -262,13 +262,13 @@ export default [
     //         },
     //     ]
     // },
-    {
-        path: '/otc',
-        component: OTCMain,
-        children: [{
-                path: 'trade/*',
-                component: OtcTrade
-            },
+  {
+    path: '/otc',
+    component: OTCMain,
+    children: [{
+      path: 'trade/*',
+      component: OtcTrade
+    }
             //     {
             //         path: 'ad',
             //         component: OtcAd
@@ -285,8 +285,8 @@ export default [
             //         path: 'order',
             //         component: OtcOrder
             //     }
-        ]
-    },
+    ]
+  },
     // {
     //     path: '/finance',
     //     component: finance,
@@ -328,55 +328,55 @@ export default [
     //         }
     //     ]
     // },
-    {
-        path: '/uc',
-        component: membercenter,
-        children: [
-            {
-                path: '*',
-                redirect: '/account'
-            },
-            {
-                path: "ieoadmin",
-                name: "ieoadmin",
-                component: Ieoadmin
-            },
-            {
-                path: "apiManage",
-                name: "apiManage",
-                component: apiManage
-            },
-            {
-                path: "level/current",
-                name: "levelCurrent",
-                component: levelCurrent
-            },
-            {
-                path: "level/history",
-                name: "levelHistory",
-                component: levelHistory
-            },
+  {
+    path: '/uc',
+    component: membercenter,
+    children: [
+      {
+        path: '*',
+        redirect: '/account'
+      },
+      {
+        path: 'ieoadmin',
+        name: 'ieoadmin',
+        component: Ieoadmin
+      },
+      {
+        path: 'apiManage',
+        name: 'apiManage',
+        component: apiManage
+      },
+      {
+        path: 'level/current',
+        name: 'levelCurrent',
+        component: levelCurrent
+      },
+      {
+        path: 'level/history',
+        name: 'levelHistory',
+        component: levelHistory
+      },
             // {
             //     path: "giveRecord",
             //     name: "giveRecord",
             //     component: GiveRecord
             // },
-            {
-                path: 'safe',
-                component: safe
-            },
-            {
-                path: 'feeLevel',
-                component: feeLevel
-            },
-            {
-                path: 'account',
-                component: account
-            },
-            {
-                path: 'myextension',
-                component: myextension
-            },
+      {
+        path: 'safe',
+        component: safe
+      },
+      {
+        path: 'feeLevel',
+        component: feeLevel
+      },
+      {
+        path: 'account',
+        component: account
+      },
+      {
+        path: 'myextension',
+        component: myextension
+      },
             // {
             //     path: 'money',
             //     component: moneyindex
@@ -397,123 +397,123 @@ export default [
             //     path: 'withdraw/address',
             //     component: withdrawAddr
             // },
-            {
-                path: 'ad',
-                component: OtcAd
-            },
-            {
-                path: 'ad/create',
-                component: adPublish
-            },
-            {
-                path: 'ad/update',
-                component: adPublish
-            },
-            {
-                path: 'order',
-                component: OtcOrder
-            },
-            {
-                path: 'entrust/current',
-                component: EntrustCurrent
-            },
-            {
-                path: 'entrust/history',
-                component: EntrustHistory
-            }, {
-                path: 'trade',
-                component: trade
-            },
-            {
-                path: 'invitingmining',
-                component: invitingmining
-            },
-            {
-                path: 'paydividends',
-                component: paydividends
-            },
-            {
-                path: 'blc',
-                component: meblc
-            },
+      {
+        path: 'ad',
+        component: OtcAd
+      },
+      {
+        path: 'ad/create',
+        component: adPublish
+      },
+      {
+        path: 'ad/update',
+        component: adPublish
+      },
+      {
+        path: 'order',
+        component: OtcOrder
+      },
+      {
+        path: 'entrust/current',
+        component: EntrustCurrent
+      },
+      {
+        path: 'entrust/history',
+        component: EntrustHistory
+      }, {
+        path: 'trade',
+        component: trade
+      },
+      {
+        path: 'invitingmining',
+        component: invitingmining
+      },
+      {
+        path: 'paydividends',
+        component: paydividends
+      },
+      {
+        path: 'blc',
+        component: meblc
+      }
             // {
             //     path: 'bjc',
             //     component: mebjc
             // }
-        ]
+    ]
+  },
+  {
+    name: 'tradeInfo',
+    path: '/otc/tradeInfo',
+    component: tradeInfo
+  },
+  {
+    path: '/checkuser',
+    component: checkuser
+  },
+  {
+    path: '/chat',
+    component: chat
+  },
+  {
+    path: '/identbusiness',
+    component: identbusiness
+  },
+  {
+    path: '/newhelp',
+    component: newhelp,
+    children: [{
+      path: '',
+      component: noticeindex
     },
     {
-        name: 'tradeInfo',
-        path: '/otc/tradeInfo',
-        component: tradeInfo
+      path: 'index',
+      component: noticeindex
     },
     {
-        path: '/checkuser',
-        component: checkuser
-    },
-    {
-        path: '/chat',
-        component: chat
-    },
-    {
-        path: '/identbusiness',
-        component: identbusiness
-    },
-    {
-        path: '/newhelp',
-        component: newhelp,
-        children: [{
-                path: '',
-                component: noticeindex
-            },
-            {
-                path: 'index',
-                component: noticeindex
-            },
-            {
-                path: 'account',
-                component: account
-            },
-        ]
-    },
-    {
-        path: '/question',
-        component: question
-    },
-    {
-        path: '/agreement',
-        component: agreement
-    },
-    {
-        path: '/rate',
-        component: rate
-    },
-    {
-        path: '/about-rule',
-        component: exchargerule
-    },
-    {
-        path: '/about-protocol',
-        component: userprotocol
-    },
-    {
-        path: '/about-fee',
-        component: feenote
-    },
-    {
-        path: '/about-notice',
-        component: homenotice
-    },
-    {
-        path: '/about-us',
-        component: aboutus
-    },
-    {
-        path: '/join-us',
-        component: joinus
-    },
-    {
-        path: '/about-merchant',
-        component: merchantprotocol
+      path: 'account',
+      component: account
     }
-];
+    ]
+  },
+  {
+    path: '/question',
+    component: question
+  },
+  {
+    path: '/agreement',
+    component: agreement
+  },
+  {
+    path: '/rate',
+    component: rate
+  },
+  {
+    path: '/about-rule',
+    component: exchargerule
+  },
+  {
+    path: '/about-protocol',
+    component: userprotocol
+  },
+  {
+    path: '/about-fee',
+    component: feenote
+  },
+  {
+    path: '/about-notice',
+    component: homenotice
+  },
+  {
+    path: '/about-us',
+    component: aboutus
+  },
+  {
+    path: '/join-us',
+    component: joinus
+  },
+  {
+    path: '/about-merchant',
+    component: merchantprotocol
+  }
+]

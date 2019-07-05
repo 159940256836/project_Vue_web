@@ -4,7 +4,7 @@
             <div
                 class="page-content"
                 :style = "{
-                  padding: $route.path==='/'? topPadding : '0 5%',
+                  padding: $route.path==='/'? topPadding : '0 7.5%',
                   backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
                 }"
             >
@@ -424,7 +424,7 @@ export default {
         createTime: '2018-01-10 11:37:27'
       },
       styleTop: 30,
-      topPadding: '0 5%',
+      topPadding: '0 7.5%',
       topBackgroundColor: 'transparent',
       $mainNightBgColor: '#11132c',
       pathName: '',
@@ -589,7 +589,7 @@ export default {
         this.topBackgroundColor = '#11132c'
       } else {
         this.styleTop = 30
-        this.topPadding = '0 5%'
+        this.topPadding = '0 7.5%'
         this.topBackgroundColor = 'transparent'
       }
     },
