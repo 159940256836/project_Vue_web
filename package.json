@@ -1,8 +1,8 @@
 {
-  "name": "bitrade",
+  "name": "bdw",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "bear <220806216@qq.com>",
+  "description": "bdw",
+  "author": "lz <176498798@qq.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

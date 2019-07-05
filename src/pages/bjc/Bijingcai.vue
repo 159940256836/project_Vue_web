@@ -189,17 +189,17 @@
 </style>
 
 <script>
-import child from "./bijingcaiChild";
+import child from './bijingcaiChild'
 export default {
   data() {
     return {
-      disabledarr:[],
+      disabledarr: [],
       obj: {
-        h: "00",
-        m: "00",
-        s: "00"
+        h: '00',
+        m: '00',
+        s: '00'
       },
-      str: "",
+      str: '',
       disabled: false,
       src: null,
       modal1: false,
@@ -210,229 +210,229 @@ export default {
       lotteryNo: 0,
       columns1: [
         {
-          title: "类型",
-          align: "center",
-          key: "quizType",
-          width:160
+          title: '类型',
+          align: 'center',
+          key: 'quizType',
+          width: 160
         },
         {
-          title: "期次",
-          align: "center",
-          key: "periodNo"
+          title: '期次',
+          align: 'center',
+          key: 'periodNo'
         },
         {
-          title: "每注个数",
-          key: "betAmount",
-          align: "center",
+          title: '每注个数',
+          key: 'betAmount',
+          align: 'center'
         },
         {
-          title: "开始时间",
-          align: "center",
+          title: '开始时间',
+          align: 'center',
           width: 180,
-          key: "createTime"
+          key: 'createTime'
         },
         {
-          title: "已投注总数",
-          align: "center",
-          key: "betSum"
+          title: '已投注总数',
+          align: 'center',
+          key: 'betSum'
         },
         {
-          title: "开奖时间",
-          align: "center",
+          title: '开奖时间',
+          align: 'center',
           width: 180,
-          key: "lotteryTime"
+          key: 'lotteryTime'
         },
         {
-          title: "开奖详情",
-          align: "center",
+          title: '开奖详情',
+          align: 'center',
           render: (h, param) => {
-            let params = {
-              periodNo:param.row.periodNo,
-              quizTypeId:param.row.quizTypeId
-            };
+            const params = {
+              periodNo: param.row.periodNo,
+              quizTypeId: param.row.quizTypeId
+            }
             return h(
-              "span",
+              'span',
               {
                 on: {
                   click: () => {
-                    this.check(params);
+                    this.check(params)
                   }
                 },
                 style: {
-                  color: "#3399ff",
-                  cursor:"pointer"
-                },
+                  color: '#3399ff',
+                  cursor: 'pointer'
+                }
               },
-              "查看"
-            );
+              '查看'
+            )
           }
         }
       ],
       data1: [],
       columns2: [
         {
-          title: "排行",
-          key: "winningLevel",
-          align: "center"
+          title: '排行',
+          key: 'winningLevel',
+          align: 'center'
         },
         {
-          title: "会员姓名",
-          key: "memberName",
-          align: "center"
+          title: '会员姓名',
+          key: 'memberName',
+          align: 'center'
         },
         {
-          title: "福彩排列5",
-          align: "center",
+          title: '福彩排列5',
+          align: 'center',
           render: (h, param) => {
-            return h("span", {}, this.lotteryNo);
+            return h('span', {}, this.lotteryNo)
           }
         },
         {
-          title: "下注时间",
-          key: "betTime",
+          title: '下注时间',
+          key: 'betTime',
           width: 200,
-          align: "center"
+          align: 'center'
         },
         {
-          title: "奖项",
-          align: "center",
+          title: '奖项',
+          align: 'center',
           render: (h, param) => {
-            let str = "";
+            let str = ''
             if (param.row.winningLevel == 1) {
-              str = "一等奖";
+              str = '一等奖'
             } else if (param.row.winningLevel == 2) {
-              str = "二等奖";
+              str = '二等奖'
             } else if (param.row.winningLevel == 3) {
-              str = "三等奖";
+              str = '三等奖'
             } else {
-              str = "错误";
+              str = '错误'
             }
-            return h("span", {}, str);
+            return h('span', {}, str)
           }
         },
         {
-          title: "中奖金额",
-          align: "center",
+          title: '中奖金额',
+          align: 'center',
           render: (h, param) => {
-            let str1 = param.row.winningNum + param.row.winningCoin;
-            return h("span", {}, str1);
+            const str1 = param.row.winningNum + param.row.winningCoin
+            return h('span', {}, str1)
           }
         }
       ],
       data2: [],
       bjclist: []
-    };
+    }
   },
   components: {
     child
   },
   created() {
-    this.$store.commit("navigate", "nav-bjc");
-    this.init();
-    this.getList();
+    this.$store.commit('navigate', 'nav-bjc')
+    this.init()
+    this.getList()
   },
   methods: {
-    toZero(index){
-      let temArr=this.bjclist[index];
-      temArr.disabled = true;
-      this.$set(this.bjclist,index,temArr);
+    toZero(index) {
+      const temArr = this.bjclist[index]
+      temArr.disabled = true
+      this.$set(this.bjclist, index, temArr)
     },
     changepage(index) {
-      this.pageNo = index;
-      this.getList();
+      this.pageNo = index
+      this.getList()
     },
     ruleshow(str) {
-      this.src = str;
-      this.modal1 = true;
+      this.src = str
+      this.modal1 = true
     },
     check(params) {
-      this.$http.post(this.host + "/uc/coin/guess/detail", params).then(res => {
-        let resp = res.body;
+      this.$http.post(this.host + '/uc/coin/guess/detail', params).then(res => {
+        const resp = res.body
         if (resp.code == 0) {
-          this.modal2 = true;
-          this.data2 = resp.data.quizOrders;
-          this.lotteryNo = resp.data.lotteryNo;
+          this.modal2 = true
+          this.data2 = resp.data.quizOrders
+          this.lotteryNo = resp.data.lotteryNo
         } else {
-          this.$Message.error(resp.message);
+          this.$Message.error(resp.message)
         }
-      });
+      })
     },
     getList() {
-      let param = {
+      const param = {
         pageNo: this.pageNo,
         pageSize: this.pageSize
-      };
-      this.$http.post(this.host + "/uc/coin/guess/record", param).then(res => {
-        let resp = res.body;
+      }
+      this.$http.post(this.host + '/uc/coin/guess/record', param).then(res => {
+        const resp = res.body
         if (resp.code == 0) {
-          this.total = resp.data.totalElements;
-          this.data1 = resp.data.content;
+          this.total = resp.data.totalElements
+          this.data1 = resp.data.content
         } else {
-          this.$Message.error(resp.message);
+          this.$Message.error(resp.message)
         }
-      });
+      })
     },
     add(str) {
-      return str < 10 ? "0" + str : str + "";
+      return str < 10 ? '0' + str : str + ''
     },
-    formattime(hms){
-      let date = new Date();
-      let year = date.getFullYear() + "";
-      let month = this.add(date.getMonth() + 1);
-      let day = this.add(date.getDate());
-      let str = `${year}-${month}-${day} ${hms}`;
-      str = new Date(str).getTime();
-      return str;
+    formattime(hms) {
+      const date = new Date()
+      const year = date.getFullYear() + ''
+      const month = this.add(date.getMonth() + 1)
+      const day = this.add(date.getDate())
+      let str = `${year}-${month}-${day} ${hms}`
+      str = new Date(str).getTime()
+      return str
     },
     init() {
-      this.$http.post(this.host + "/uc/coin/guess/index", {}).then(res => {
-        let resp = res.body;
+      this.$http.post(this.host + '/uc/coin/guess/index', {}).then(res => {
+        const resp = res.body
         if (resp.code == 0) {
-          this.bjclist = resp.data;
-          let now = new Date().getTime();
-          this.bjclist.forEach((v,i)=>{
-              if(this.formattime(v.quizType.deadline) <=now){
-                 v.disabled=true;
-              }else{
-                 v.disabled=false;
-              }
+          this.bjclist = resp.data
+          const now = new Date().getTime()
+          this.bjclist.forEach((v, i) => {
+            if (this.formattime(v.quizType.deadline) <= now) {
+              v.disabled = true
+            } else {
+              v.disabled = false
+            }
           })
         } else {
-          this.disabled = true;
-          this.$Message.error(resp.message);
+          this.disabled = true
+          this.$Message.error(resp.message)
         }
-      });
+      })
     },
     order(periodNo, quizTypeId) {
-      let login = this.$store.getters.isLogin;
-      let membername = this.$store.getters.member;
-       !login && this.$router.push("/login");
-       if(login){
-         if(membername && membername.realName){
-           let body = {
-             periodNo:periodNo,
-             quizTypeId:quizTypeId
+      const login = this.$store.getters.isLogin
+      const membername = this.$store.getters.member
+      !login && this.$router.push('/login')
+      if (login) {
+        if (membername && membername.realName) {
+          const body = {
+             periodNo: periodNo,
+             quizTypeId: quizTypeId
            }
-           this.$http.post(this.host + "/uc/coin/guess/order",body).then(res=>{
-             let resp = res.body;
-             if(resp.code == 0){
-               this.$Message.success("下注成功");
-               this.init();
-               this.getList();
-             }else{
+          this.$http.post(this.host + '/uc/coin/guess/order', body).then(res => {
+             const resp = res.body
+             if (resp.code == 0) {
+               this.$Message.success('下注成功')
+               this.init()
+               this.getList()
+             } else {
                this.$Message.error(resp.message)
              }
            })
-         }else{
-           this.$Message.error(this.$t("otc.validate"));
-            setTimeout(() => {
-              this.$router.push("/uc/safe");
-            }, 2000);
-         }
-       }
+        } else {
+          this.$Message.error(this.$t('otc.validate'))
+          setTimeout(() => {
+             this.$router.push('/uc/safe')
+           }, 2000)
+        }
+      }
     }
   }
-};
+}
 </script>
 <style lang="scss">
 .bic_wrapper {

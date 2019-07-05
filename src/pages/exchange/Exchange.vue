@@ -1595,7 +1595,6 @@ export default {
             type: 'expand',
             width: 40,
             render: (h, params) => {
-                            // console.log(params);
               return h(expandRow, {
                 props: {
                   skin: params.row.skin,
@@ -1819,7 +1818,6 @@ export default {
         // },
     'currentCoin.price': function() {
       this.currentTradingPrice = this.currentCoin.price
-      console.log(this.currentTradingPrice)
     },
     $route(to, from) {
       this.init()
@@ -1968,14 +1966,14 @@ export default {
     // },
     init() {
       let params = this.$route.params.pathMatch
-        if (params == undefined) {
-            this.$router.push('/exchange/' + this.defaultPath)
-            params = this.defaultPath
-        } else {
-            /*this.currentTradingPrice + ' ' +*/
-            const title = params.replace('_', '/').toUpperCase() + ' bdw'
-            this.settiele(title)
-        }
+      if (params == undefined) {
+        this.$router.push('/exchange/' + this.defaultPath)
+        params = this.defaultPath
+      } else {
+            /* this.currentTradingPrice + ' ' +*/
+        const title = params.replace('_', '/').toUpperCase() + ' bdw'
+        this.settiele(title)
+      }
       if (params == undefined) {
         this.$router.push('/exchange/' + this.defaultPath)
         params = this.defaultPath
@@ -1987,7 +1985,6 @@ export default {
       // }
       const basecion = params.split('_')[1]
       if (basecion) {
-        console.log(basecion)
         this.basecion = basecion.toLowerCase()
       }
       const coin = params.toUpperCase().split('_')[0]
@@ -2097,14 +2094,13 @@ export default {
       this.currentImgTable = str
     },
     changeOrder(str) {
-        // console.log(str);
-        if (str == 'current') {
-            this.getCurrentOrder()
-        }
-        if (str == 'history') {
-            this.getHistoryOrder()
-        }
-        this.selectedOrder = str
+      if (str == 'current') {
+        this.getCurrentOrder()
+      }
+      if (str == 'history') {
+        this.getHistoryOrder()
+      }
+      this.selectedOrder = str
     },
     setback() {
       const obk = document.getElementsByClassName('container')[0]
@@ -2330,7 +2326,6 @@ export default {
       }
       require(['@js/charting_library/charting_library.min.js'], function(tv) {
         const widget = (window.tvWidget = new TradingView.widget(config))
-                // console.log(widget);
                 /* onChartReady 自定义初始化指标线（平均移动线等），设置颜色*/
         widget.onChartReady(function() {
           widget.chart().executeActionById('drawingToolbarAction')
@@ -2552,7 +2547,6 @@ export default {
           this.coins[coin.base].push(coin)
           if (coin.symbol == this.currentCoin.symbol) {
             this.currentCoin = coin
-                        // console.log(this.currentCoin)
             this.form.buy.limitPrice = this.form.sell.limitPrice = coin.price
           }
         }
@@ -2592,46 +2586,46 @@ export default {
                   this.plate.askRows = []
                   this.plate.bidRows = []
                   const resp = response.body
-                    if (resp.ask && resp.ask.items) {
-                        for (let i = 0; i < resp.ask.items.length; i++) {
-                            if (i == 0) {
-                                resp.ask.items[i].totalAmount = resp.ask.items[i].amount;
-                            } else {
-                                resp.ask.items[i].totalAmount =
-                                    resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount;
-                            }
-                        }
-                        if (resp.ask.items.length >= this.plate.maxPostion) {
-                            for (let i = this.plate.maxPostion; i > 0; i--) {
-                                let ask = resp.ask.items[i - 1];
-                                ask.direction = "SELL";
-                                ask.position = i;
-                                this.plate.askRows.push(ask);
-                            }
-                            const rows = this.plate.askRows,
-                                len = rows.length,
-                                totle = rows[0].totalAmount;
-                            this.plate.askTotle = totle;
-                        } else {
-                            for (let i = 12; i > resp.ask.items.length; i--) {
-                                let ask = { price: 0, amount: 0 };
-                                ask.direction = "SELL";
-                                ask.position = i;
-                                ask.totalAmount = ask.amount;
-                                this.plate.askRows.push(ask);
-                            }
-                            for (let i = resp.ask.items.length; i > 0; i--) {
-                                let ask = resp.ask.items[i - 1];
-                                ask.direction = "SELL";
-                                ask.position = i;
-                                this.plate.askRows.push(ask);
-                            }
-                            const rows = this.plate.askRows
-                            const len = rows.length
-                            const totle =
+                  if (resp.ask && resp.ask.items) {
+                    for (let i = 0; i < resp.ask.items.length; i++) {
+                      if (i == 0) {
+                        resp.ask.items[i].totalAmount = resp.ask.items[i].amount
+                      } else {
+                        resp.ask.items[i].totalAmount =
+                                    resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount
+                      }
+                    }
+                    if (resp.ask.items.length >= this.plate.maxPostion) {
+                      for (let i = this.plate.maxPostion; i > 0; i--) {
+                        const ask = resp.ask.items[i - 1]
+                        ask.direction = 'SELL'
+                        ask.position = i
+                        this.plate.askRows.push(ask)
+                      }
+                      const rows = this.plate.askRows,
+                        len = rows.length,
+                        totle = rows[0].totalAmount
+                      this.plate.askTotle = totle
+                    } else {
+                      for (let i = 12; i > resp.ask.items.length; i--) {
+                        const ask = { price: 0, amount: 0 }
+                        ask.direction = 'SELL'
+                        ask.position = i
+                        ask.totalAmount = ask.amount
+                        this.plate.askRows.push(ask)
+                      }
+                      for (let i = resp.ask.items.length; i > 0; i--) {
+                        const ask = resp.ask.items[i - 1]
+                        ask.direction = 'SELL'
+                        ask.position = i
+                        this.plate.askRows.push(ask)
+                      }
+                      const rows = this.plate.askRows
+                      const len = rows.length
+                      const totle =
                                     rows[this.plate.maxPostion - resp.ask.items.length]
                                         .totalAmount
-                                this.plate.askTotle = totle
+                      this.plate.askTotle = totle
                     }
                   }
                   if (resp.bid && resp.bid.items) {
@@ -2660,9 +2654,9 @@ export default {
                         bid.totalAmount = 0
                         this.plate.bidRows.push(bid)
                       }
-                        const rows = this.plate.bidRows,
-                         len = rows.length,
-                             totle = rows[resp.bid.items.length - 1].totalAmount
+                      const rows = this.plate.bidRows,
+                        len = rows.length,
+                        totle = rows[resp.bid.items.length - 1].totalAmount
                       this.plate.bidTotle = totle
                     } else {
                       const rows = this.plate.bidRows,
@@ -2824,10 +2818,45 @@ export default {
                         }
                     )
         }
-
+          // 订阅盘口消息
+        stompClient.subscribe(
+                        '/topic/market/trade-plate/buy/' +
+                        that.currentCoin.symbol,
+                        function(msg) {
+                          const resp = JSON.parse(msg.body)
+                          const bids = resp.items
+                          that.plate.bidRows = []
+                          let totle = 0
+                          for (let i = 0; i < that.plate.maxPostion; i++) {
+                            let bid = {}
+                            if (i < bids.length) {
+                              bid = bids[i]
+                            } else {
+                              bid['price'] = 0
+                              bid['amount'] = 0
+                            }
+                            bid.direction = 'BUY'
+                            bid.position = i + 1
+                            that.plate.bidRows.push(bid)
+                          }
+                          for (let i = 0; i < that.plate.bidRows.length; i++) {
+                          // eslint-disable-next-line eqeqeq
+                            if (i == 0 || that.plate.bidRows[i].amount == 0) {
+                              that.plate.bidRows[i].totalAmount =
+                                        that.plate.bidRows[i].amount
+                            } else {
+                              that.plate.bidRows[i].totalAmount =
+                                        that.plate.bidRows[i - 1].totalAmount +
+                                        that.plate.bidRows[i].amount
+                            }
+                            totle += that.plate.bidRows[i].amount
+                          }
+                          that.plate.bidTotle = totle
+                        }
+                    )
                 // 订阅盘口消息
         stompClient.subscribe(
-                    '/topic/market/trade-plate/' + that.currentCoin.symbol,
+                    '/topic/market/trade-plate/sell/' + that.currentCoin.symbol,
                     function(msg) {
                       const resp = JSON.parse(msg.body)
                       if (resp.direction == 'SELL') {
@@ -2887,35 +2916,8 @@ export default {
                             //     else that.plate.askRows[i].totalAmount = that.plate.askRows[i+1].totalAmount + that.plate.askRows[i].amount;
                             //   }
                             // }
-                      } else {
-                        const bids = resp.items
-                        that.plate.bidRows = []
-                        let totle = 0
-                        for (let i = 0; i < that.plate.maxPostion; i++) {
-                          let bid = {}
-                          if (i < bids.length) {
-                            bid = bids[i]
-                          } else {
-                            bid['price'] = 0
-                            bid['amount'] = 0
-                          }
-                          bid.direction = 'BUY'
-                          bid.position = i + 1
-                          that.plate.bidRows.push(bid)
-                        }
-                        for (let i = 0; i < that.plate.bidRows.length; i++) {
-                          // eslint-disable-next-line eqeqeq
-                          if (i == 0 || that.plate.bidRows[i].amount == 0) {
-                            that.plate.bidRows[i].totalAmount =
-                                        that.plate.bidRows[i].amount
-                          } else {
-                            that.plate.bidRows[i].totalAmount =
-                                        that.plate.bidRows[i - 1].totalAmount +
-                                        that.plate.bidRows[i].amount
-                          }
-                          totle += that.plate.bidRows[i].amount
-                        }
-                        that.plate.bidTotle = totle
+                      }
+
                             // if (bids.length >= that.plate.maxPostion){
                             //     that.plate.bidRows = [];
                             //
@@ -2941,7 +2943,6 @@ export default {
                             //       else that.plate.bidRows[i].totalAmount = that.plate.bidRows[i-1].totalAmount + that.plate.bidRows[i].amount;
                             //     }
                             // }
-                      }
                     }
                 )
       })
@@ -3143,7 +3144,6 @@ export default {
       params['amount'] = this.form.buy.marketAmount
       params['direction'] = 'BUY'
       params['type'] = 'MARKET_PRICE'
-            // console.log(this.form.buy.marketAmount)
             // params["useDiscount"] = this.isUseBHB ? "1" : "0"; //是否试用手续费抵扣,0 不使用 1使用
       const that = this
       this.loadingButton2 = true
@@ -3526,7 +3526,6 @@ export default {
         // 币币订单详情
         // 展开原生事件  点击左侧展收起
     onExpand(row, status) {
-      console.log(row, status)
       if (this.selectedOrder === 'current') {
         if (status) {
           this.currentOrder.rows.splice()
@@ -3540,7 +3539,6 @@ export default {
           })
                     // this.historyTableData = this.TableData1
         } else {
-
           this.currentTableData.splice()
           this.currentTableData.map((item, index) => {
             if (item.orderId == row.orderId) {
@@ -3581,7 +3579,6 @@ export default {
       }).then(res => {
         const data = res.body
         if (data.code == 0) {
-          console.log(data.data)
           if (this.selectedOrder === 'current') {
             this.currentTableData = data.data
           } else {
