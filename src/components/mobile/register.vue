@@ -605,6 +605,15 @@ export default {
         line-height: .8rem;
         color: #fff;
       }
+      .ivu-select-arrow {
+        font-size: .3rem;
+      }
+    }
+    .ivu-select-item-selected:hover, 
+    .rejs .ivu-select-dropdown,
+    .rejs .ivu-select-item-selected, 
+    .rejs .ivu-select-item:hover {
+      background: transparent !important;
     }
     .ivu-select-item {
       padding-left: .1rem;
