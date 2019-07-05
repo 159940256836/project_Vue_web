@@ -397,7 +397,11 @@ export default {
             // this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
         const resp = response.body
         if (resp.code == 0) {
-          this.$Notice.success({
+          // this.$Notice.success({
+          //   title: this.$t('common.tip'),
+          //   desc: resp.message
+          // })
+          this.$refs.myModal.open({
             title: this.$t('common.tip'),
             desc: resp.message
           })
@@ -405,7 +409,7 @@ export default {
             this.$router.push('login')
           }, 3000)
         } else {
-          this.$Notice.error({
+          this.$refs.myModal.open({
             title: this.$t('common.tip'),
             desc: resp.message
           })
