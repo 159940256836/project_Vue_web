@@ -1449,13 +1449,18 @@ export default {
         // }
   },
   beforeRouteEnter (to, from, next) {
-    if(from.name == 'mobile') {
+    if(from.name == 'mobileHome') {
       next()
     }else {
-      if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
-        next({name:'mobile'})
+      if(sessionStorage.switchToPc) {
+        next()
+      }else {
+        if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+          next({name:'mobileHome'})
+        }else {
+          next()
+        }
       }
-      next()
     }
   }
 }
