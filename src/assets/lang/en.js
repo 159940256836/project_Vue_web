@@ -40,7 +40,9 @@ module.exports = {
     update: 'Modify',
     please: 'Please',
     cancel: 'cancel',
-    confirm: 'confirm'
+    confirm: 'confirm',
+    copySuccess: 'copy success',
+    copyFail: 'copy fail'
   },
   new: {
     Announcemcenter:'Announcement center',

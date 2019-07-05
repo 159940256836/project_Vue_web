@@ -9,8 +9,8 @@
                 :rules="ruleInline"
                 inline
             >
-                <p class="title">{{$t('uc.login.registered')}}</p>
-                <FormItem style="width: 100%;border-bottom: 1px solid #2988e8;">
+                <p class="title" style="margin-bottom: .39rem;font-size: .4rem;">{{$t('uc.login.registered')}}</p>
+                <FormItem style="width: 100%;">
                     <ButtonGroup>
                         <Button
                             v-for="(list,index) in buttonLists"
@@ -124,7 +124,7 @@
                     </Input>
                 </FormItem>
 
-                <div>
+                <div style="margin-bottom: .39rem;">
                     <label>
                         <Checkbox v-model="agree" size="large">
                             {{$t('uc.regist.agreement')}}
@@ -380,6 +380,7 @@ export default {
         this.key = this.$t('uc.regist.email')
         this.ruleInline.code = []
       }
+      this.formInline.user = null
     },
     emailSuccess() { // 邮箱注册腾讯防水验证成功
       const forminline = this.formInline
@@ -527,19 +528,19 @@ export default {
 <style lang="scss" scoped>
 #mobile_register {
   font-size: .3rem;
-  padding: .5rem .4rem;
+  padding: .5rem .3rem;
   .title {
     color: #2988e8;
   }
   /deep/ .ivu-form-item {
-      margin-bottom: .59rem;
+      margin-bottom: .49rem;
     /deep/ .ivu-input {
       background: #10122B;
       width: 100%;
-      height: 1rem;
+      height: .8rem;
       padding: .2rem;
       border-radius: .05rem;
-      font-size: .4rem;
+      font-size: .3rem;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       border: .01rem solid;
@@ -549,13 +550,13 @@ export default {
       color: white;
     }
     /deep/ .ivu-form-item-error-tip {
-      font-size: .35rem;
+      font-size: .3rem;
     }
   }
   /deep/ .time-input {
     .ivu-input-group-append {
-      padding: 0 .4rem;
-      font-size: .35rem;
+      padding: 0 .3rem;
+      font-size: .3rem;
       background: transparent;
       color: #2988e8;
       border: 1px solid #2988e8;
@@ -563,35 +564,51 @@ export default {
   }
   /deep/ .ivu-btn-group{
     .ivu-btn {
-      height: .6rem;
-      font-size: .2rem;
+      height: .8rem;
+      // line-height: .8rem;
+      font-size: .3rem;
       background: transparent;
-      border: 1px solid #2988e8;
+      // border: 1px solid #2988e8;
       margin-right: .1rem;
+      border:1px solid #2988e8;
+      border-radius: .05rem;
+      padding-left: .2rem;
+      padding-right: .2rem;
+
+    }
+    .active {
+      background: #3399FF;
+      color: #fff;
     }
   }
   /deep/ .ivu-select {
     // height: 1rem;
-    margin-bottom: .59rem;
-    font-size: .4rem;
+    margin-bottom: .49rem;
+    font-size: .3rem;
     border: 1px solid;
-    border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 20 20;
+    // border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 20 20;
+    -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
     .ivu-select-selection {
       background: transparent;
       color: #fff;
+      -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
       padding-left: .1rem;
-      height: 1rem;
+      height: .8rem;
       .ivu-select-selected-value {
-        font-size: .4rem !important;
-        height: 1rem;
-        line-height: 1rem;
+        font-size: .3rem !important;
+        height: .8rem;
+        line-height: .8rem;
         color: #fff;
       }
     }
     .ivu-select-item {
       padding-left: .1rem;
-      height: 1rem;
-      font-size: .4rem !important;
+      height: .8rem;
+      font-size: .3rem !important;
       color: #8090af;
       background: transparent;
     }
@@ -600,7 +617,7 @@ export default {
     }
   }
   /deep/ .ivu-checkbox-wrapper {
-    font-size: .35rem;
+    font-size: .3rem;
     .ivu-checkbox-inner {
       height: .3rem;
       width: .3rem;
@@ -615,19 +632,19 @@ export default {
     margin-bottom: .29rem;
   }
   .login-btn {
-      background: #10122B;
+      background: #3399FF;
       width: 100%;
-      height: 1rem;
-      padding: .2rem;
+      height: .8rem;
       border-radius: .05rem;
-      font-size: .4rem;
+      font-size: .3rem;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
-      border: .01rem solid;
-      -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
-      color: #2988e8;
+      // border: .01rem solid;
+      // -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      // -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      // border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
+      color: #fff;
+      border-color: #3399FF;
   }
 }
 
@@ -641,7 +658,7 @@ export default {
 //       margin-right: .32rem;
 //     }
 //     .ivu-message-notice-content {
-//       font-size: .4rem;
+//       font-size: .3rem;
 //       padding: .2rem .3rem;
 //     }
 //     .ivu-message-notice-close i.ivu-icon {

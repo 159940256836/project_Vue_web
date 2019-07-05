@@ -81,7 +81,9 @@ module.exports = {
     pleaseChoose: '请选择搜索日期范围',
     logIn: '去登录',
     hint: '温馨提示',
-    hint1: '暂无该产品'
+    hint1: '暂无该产品',
+    copySuccess: '复制成功',
+    copyFail: '复制失败'
   },
   foot: {
     Standardates: '费率标准',

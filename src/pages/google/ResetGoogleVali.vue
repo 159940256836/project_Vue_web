@@ -124,13 +124,13 @@ export default {
         onCopy(e) {
             this.$Notice.success({
                 title: this.$t("common.tip"),
-                desc: "copy success"
+                desc: this.$t("common.copySuccess")
             })
         },
         onError() {
             this.$Notice.error({
                 title: this.$t("common.tip"),
-                desc: "copy fail"
+                desc: this.$t("common.copyFail")
             })
         },
         sure(name) {

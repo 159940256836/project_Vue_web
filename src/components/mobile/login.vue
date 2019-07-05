@@ -3,7 +3,7 @@
     <div>
       <div>
         <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-          <div class="title">{{$t('uc.login.login')}}</div>
+          <div class="title" style="margin-bottom: .39rem;font-size: .4rem;">{{$t('uc.login.login')}}</div>
           <FormItem prop="user">
             <Input
               @on-enter="handleSubmit('formInline')"
@@ -71,10 +71,13 @@
         </Form>
       </div>
     </div>
+    <MyModal ref="myModal"/>
   </div>
 </template>
 
 <script>
+import MyModal from './myModal.vue'
+
 export default {
   data() {
     const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
@@ -149,7 +152,7 @@ export default {
                 }
               }, 1000);
             } else {
-              this.$Message.error(resp.message);
+              this.$refs.myModal.open(resp.message);
             }
           });
       } else {
@@ -171,7 +174,7 @@ export default {
                 }
               }, 1000);
             } else {
-              this.$Message.error(resp.message);
+              this.$refs.myModal.open(resp.message);
             }
           });
       }
@@ -272,7 +275,7 @@ export default {
       // 新加代码
       // 判断手机号邮箱不能为空
       if (!this.formInline.user) {
-        this.$Message.error(this.$t("uc.login.loginvalidate"));
+        this.$refs.myModal.open(this.$t("uc.login.loginvalidate"));
         return false;
       }
       // 判断是否绑定谷歌
@@ -280,7 +283,7 @@ export default {
         // this.openPhoneCode = false;
         // 判断谷歌验证码不能为空
         if (!this.formInline.googleCode) {
-          this.$Message.error(this.$t("uc.login.google"));
+          this.$refs.myModal.open(this.$t("uc.login.google"));
           return false;
         } else {
           this.initGtCaptcha();
@@ -288,7 +291,7 @@ export default {
       } else if (this.openPhoneCode) {
         // // 判断手机验证码不能为空
         if (!this.formInline.checkCode) {
-          this.$Message.error(this.$t("uc.login.phone"));
+          this.$refs.myModal.open(this.$t("uc.login.phone"));
           return false;
         } else {
           this.initGtCaptcha();
@@ -297,7 +300,7 @@ export default {
         // 6.06
         // // 判断邮箱验证码不能为空
         if (!this.formInline.emailCode) {
-          this.$Message.error(this.$t("uc.login.email"));
+          this.$refs.myModal.open(this.$t("uc.login.email"));
           return false;
         } else {
           this.initGtCaptcha();
@@ -340,17 +343,21 @@ export default {
       this.$http.post(this.host + this.api.uc.login, params).then(response => {
         var resp = response.body;
         if (resp.code == 0) {
-          this.$Message.success(this.$t("uc.login.success"));
+          this.$refs.myModal.open(this.$t("uc.login.success"));
           this.$store.commit("setMember", response.body.data);
           if (this.$route.query.key != null && this.$route.query.key != "") {
             localStorage.setItem("USERKEY", this.$route.query.key);
           }
+          sessionStorage.switchToPc = true
           this.$router.push("/");
         } else {
-          this.$Message.error(resp.message);
+          this.$refs.myModal.open(resp.message);
         }
       });
     }
+  },
+  components: {
+    MyModal
   }
 };
 </script>
@@ -358,19 +365,19 @@ export default {
 <style lang="scss" scoped>
 #mobile_login {
   font-size: .3rem;
-  padding: .5rem .4rem;
+  padding: .5rem .3rem;
   .title {
     color: #2988e8;
   }
   /deep/ .ivu-form-item {
-      margin-bottom: .59rem;
+      margin-bottom: .49rem;
     /deep/ .ivu-input {
       background: #10122B;
       width: 100%;
-      height: 1rem;
-      padding: .2rem;
+      height: .8rem;
+      padding: .2rem;      
       border-radius: .05rem;
-      font-size: .4rem;
+      font-size: .3rem;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       border: .01rem solid;
@@ -380,13 +387,13 @@ export default {
       color: white;
     }
     /deep/ .ivu-form-item-error-tip {
-      font-size: .35rem;
+      font-size: .3rem;
     }
   }
   /deep/ .time-input {
     .ivu-input-group-append {
-      padding: 0 .4rem;
-      font-size: .35rem;
+      padding: 0 .3rem;
+      font-size: .3rem;
       background: transparent;
       color: #2988e8;
       border: 1px solid #2988e8;
@@ -396,19 +403,15 @@ export default {
     margin-bottom: .29rem;
   }
   .login-btn {
-      background: #10122B;
+      background: #3399FF;
       width: 100%;
-      height: 1rem;
-      padding: .2rem;
+      height: .8rem;
       border-radius: .05rem;
-      font-size: .4rem;
+      font-size: .3rem;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
-      border: .01rem solid;
-      -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
-      color: #2988e8;
+      color: #fff;
+      border-color: #3399FF;
   }
 }
 </style>
