@@ -45,7 +45,7 @@ module.exports = {
     copyFail: 'copy fail'
   },
   new: {
-    Announcemcenter:'Announcement center',
+    Announcemcenter: 'Announcement center',
     Detailss: 'Details',
     Currenrtification: 'Current level certification',
     Currentasset: 'Current asset valuation',
@@ -540,7 +540,7 @@ module.exports = {
     OpenPrice: 'Open Price',
     PriceTrend: 'Price Trend',
     Operate: 'Operate',
-    Exchange: 'Exchange',
+    exchange: 'Exchange',
     hight: 'higher',
     low: 'lower'
   },

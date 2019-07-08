@@ -612,7 +612,7 @@ export default {
         //   }
         // },
         {
-          title: self.$t('service.Exchange'),
+          title: self.$t('service.exchange'),
           key: 'buyBtn',
           width: 70,
           render: function(h, params) {
@@ -912,7 +912,7 @@ export default {
         //     }
         //   },
           {
-            title: self.$t('service.Exchange'),
+            title: self.$t('service.exchange'),
             align: 'center',
             key: 'buyBtn',
             width: 70,
@@ -1099,7 +1099,7 @@ export default {
       this.coins.columns[5].title = this.$t('service.low')
       this.coins.columns[6].title = this.$t('service.ExchangeNum')
     //   this.coins.columns[7].title = this.$t('service.PriceTrend')
-      this.coins.columns[8].title = this.$t('service.Exchange')
+      this.coins.columns[7].title = this.$t('service.exchange')
 
       this.favorColumns[0].title = this.$t('service.favor')
       this.favorColumns[1].title = this.$t('service.symbol')
@@ -1109,7 +1109,7 @@ export default {
       this.favorColumns[5].title = this.$t('service.low')
       this.favorColumns[6].title = this.$t('service.ExchangeNum')
     //   this.favorColumns[7].title = this.$t('service.PriceTrend')
-      this.favorColumns[8].title = this.$t('service.Exchange')
+      this.favorColumns[7].title = this.$t('service.exchange')
             // this.coins.columns[4].title = this.$t("service.OpenPrice");
     },
         // openActivity(url) {

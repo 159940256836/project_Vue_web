@@ -2,16 +2,16 @@
     <div id="mobile_home">
         <header>
             <div class="header-logo">
-                <img src="./img/top_logo.png" alt="加载失败">
+                <img src="./img/top_logo.png" alt="">
             </div>
         </header>
         <main>
             <div class="banner">
                 <p>
-                    <img src="./img/banner_text1.png" alt="加载失败" style="margin-top:1.63rem;height:.34rem;width:5.72rem;">
+                    <img src="./img/banner_text1.png" alt="" style="margin-top:1.63rem;height:.34rem;width:5.72rem;">
                 </p>
                 <p>
-                    <img src="./img/banner_text2.png" alt="加载失败" style="margin-top:.28rem;height:.21rem;width:4.18rem;">
+                    <img src="./img/banner_text2.png" alt="" style="margin-top:.28rem;height:.21rem;width:4.18rem;">
                 </p>
             </div>
             <div class="content">
@@ -21,7 +21,7 @@
                 <p style="text-align:center">
                     <span class="login btn" @click="goLogin">登录</span>
                 </p>
-                <img src="./img/module.png" alt="加载失败" class="module">
+                <img src="./img/module.png" alt="" class="module">
                 <p class="text">移动交易，随时随地</p>
                 <div class="terminal">
                     <div class="pc btn2" @click="goPc">
@@ -31,11 +31,11 @@
                         <span>移动版</span>
                     </div>
                 </div>
-                <img src="./img/bottom_logo.png" alt="加载失败"  class="botton-logo">
+                <img src="./img/bottom_logo.png" alt=""  class="botton-logo">
             </div>
         </main>
         <footer v-if="footerIsShow">
-            <img src="./img/logo.png" alt="加载事变" class="logo">
+            <img src="./img/logo.png" alt="" class="logo">
             <div class="logo-text">
                 <p>BDW</p>
                 <p>随时对地, 放心交易</p>
