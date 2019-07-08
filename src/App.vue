@@ -760,6 +760,7 @@ export default {
                                 height: 30px;
                                 line-height: 30px;
                                 cursor: pointer;
+                                /*overflow: hidden;*/
                                 a {
                                     min-width: 150px;
                                     background: #10122B;
@@ -1210,6 +1211,9 @@ body {
 
 .ivu-dropdown-menu {
     min-width: 100px;
+    /*max-width: 200px;*/
+    /*padding-right: 20px;*/
+    white-space: nowrap;
 }
 
 .layout-ceiling-main .ivu-select-dropdown {

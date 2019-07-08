@@ -144,7 +144,9 @@
           >
             <ul>
               <li>
-                <div class="image"><img src="../../assets/images/fait/price.png" alt=""></div>
+                <div class="image" style="height: 102px;">
+                  <img style="margin-top: 16px" src="../../assets/images/fait/price.png" alt="">
+                </div>
                 <div class="title">{{$t('paper.market')}}</div>
                 <div class="content1">{{$t('paper.price')}}</div>
               </li>

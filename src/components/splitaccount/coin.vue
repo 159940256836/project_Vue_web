@@ -1,29 +1,31 @@
 <template>
     <div class="shaow">
-        <div class="hidden-assets">
-            <!--隐藏资产为0的币种-->
-            <span>{{$t('uc.finance.money.hiddenAssets')}}</span>
-            <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-                <span slot="open"></span>
-                <span slot="close"></span>
-            </i-switch>
-        </div>
         <div class="order-table">
-            <Table
-                stripe
-                :columns="tableColumnsMoney"
-                :data="tableMoney"
-                :loading="loading"
-                :disabled-hover="true"
-                :no-data-text="$t('common.nodata')"
-            ></Table>
-        </div>
-        <transfermodal
+            <div class="hidden-assets">
+                <!--隐藏资产为0的币种-->
+                <span class="title-header">{{$t('uc.finance.money.hiddenAssets')}}</span>
+                <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
+                    <span slot="open"></span>
+                    <span slot="close"></span>
+                </i-switch>
+            </div>
+            <div class="order-table">
+                <Table
+                    stripe
+                    :columns="tableColumnsMoney"
+                    :data="tableMoney"
+                    :loading="loading"
+                    :disabled-hover="true"
+                    :no-data-text="$t('common.nodata')"
+                ></Table>
+            </div>
+            <transfermodal
             @closetransferModal="closeModal"
             :getmoney="getMoney"
             :currencyData="currencyData"
         >
         </transfermodal>
+        </div>
     </div>
 </template>
 <script>
@@ -263,6 +265,9 @@ export default {
             position: absolute;
             top: -63px;
             right: 34px;
+        }
+        .title-header {
+            color: #8090af;
         }
     }
 </style>
