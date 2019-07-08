@@ -352,8 +352,6 @@ export default {
 }
 </script>
 <style lang="scss">
-  
-
 .order-table{
   .nav-right {
     .ivu-btn {
@@ -448,9 +446,7 @@ export default {
       }
     }
   }
-  .shaow {
-    position: relative;
-    .hidden-assets{
+  .hidden-assets{
       position: absolute;
       min-width: 300px;
       top: -40px;
@@ -484,7 +480,6 @@ export default {
         }
       }
     }
-  }
 
   #moneyindex .ivu-table-row .ivu-table-cell{
     display: flex;

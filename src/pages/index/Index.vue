@@ -65,7 +65,7 @@
                         <p class="flex">
                             <span
                                 class="pairs-sip sip"
-  
+
                                 v-if="item.isGreen"
                             >
                                 {{item.close}}
@@ -124,6 +124,17 @@
             <div class="Central">
               <div class="section" id="page2">
                 <div class="page2nav">
+                  <!--前端静态搜索 7.08-->
+                  <div class="title-info">
+                    <img src="../../assets/images/search.png" alt="">
+                    <input
+                      type="text"
+                      class="text-input"
+                      v-model="searchKeyWord"
+                      @keyup="statusKey"
+                    >
+                  </div>
+
                     <ul class="brclearfix">
                         <li
                             v-show="!(index==4&&!isLogin)"
@@ -144,7 +155,7 @@
                     <Table
                         v-if="choseBtn==4"
                         :columns="favorColumns"
-                        :data="dataIndex"
+                        :data="filteredData"
                         class="tables"
                         :disabled-hover="true"
                         :loading="loading"
@@ -154,7 +165,7 @@
                     <Table
                         v-else
                         :columns="coins.columns"
-                        :data="dataIndex"
+                        :data="filteredData"
                         class="tables"
                         :disabled-hover="true"
                         :loading="loading"
@@ -366,11 +377,12 @@ export default {
       yesDayCashDividensBonusETH: 0,
       yesDayMineAmountBHB: 0,
       CNYRate: null,
-      dataIndex: [],
+      dataIndex: [], // 原始币种列表数据
+      searchKeyWord: '', // 搜索框内容
       checkoutapp: 'true',
-            // pageNo: 1,
-            // pageSize: 50,
-            // totalNum: 0,
+      // pageNo: 1,
+      // pageSize: 50,
+      // totalNum: 0,
       FAQList: [],
       indexBtnBC: '',
       favorColumns: [
@@ -985,6 +997,12 @@ export default {
     },
     lang: function() {
       return this.$store.state.lang
+    },
+    filteredData: function () {
+      return this.dataIndex.filter((item) => {
+        return item['symbol'].split('/')[0].toLowerCase().indexOf(this.searchKeyWord.toLowerCase()) !== -1
+
+      })
     }
   },
   watch: {
@@ -1014,6 +1032,10 @@ export default {
     })
   },
   methods: {
+    statusKey () {
+      console.log(this.searchKeyWord);
+      console.log(1);
+    },
     checkouttrue() {
       this.checkoutapp = true
     },
@@ -1354,6 +1376,7 @@ export default {
           coin.isFavor = false
           this.coins._map[coin.symbol] = coin
           this.coins[coin.base].push(coin)
+          console.log(coin.coin);
         }
         if (this.isLogin) {
           this.getFavor()
@@ -1638,6 +1661,27 @@ li {
         font-size: 20px;
         overflow: hidden;
         background: #191D3A;
+      .title-info {
+        position: relative;
+        .text-input {
+          height: 30px;
+          width: 150px;
+          border: 1px solid #8090af;
+          border-radius: 0;
+          background-color: #191D3A;
+          float: right;
+          margin: 8px 25px 0;
+          padding: 3px 0 3px 40px;
+          font-size: 14px;
+          color: #fff;
+        }
+        img {
+          position: absolute;
+          top: 14px;
+          right: 145px;
+        }
+      }
+
         .brclearfix {
             font-weight: 600;
             border: 1px solid #191D3A;

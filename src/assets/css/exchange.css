@@ -691,6 +691,12 @@ iframe {
     border: 0;
 }
 
+.exchange .order .table .ivu-table-wrapper .ivu-table .ivu-table-row td:first-child,
+.order .ivu-table-wrapper .ivu-table .ivu-table-header th:first-child{
+    text-align: left;
+    padding-left: 30px;
+}
+
 .exchange .order .table .ivu-table-wrapper .ivu-table .ivu-table-row td {
     background-color: #13152F;
     padding-left: 0;
@@ -954,7 +960,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td{
     font-size: 0;
 }
 .exchange .ivu-table-wrapper .ivu-table td {
-    background: transparent !important;
+    background: transparent;
 }
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd .ivu-table-cell {
     position: absolute;

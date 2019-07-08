@@ -349,7 +349,7 @@ export default {
     getAdv() {
       //获取个人账户信息
       this.$http
-        .post(this.host + "otc/advertise/returnMember", {
+        .post(this.host + "/otc/advertise/returnMember", {
           id: this.$route.query.id
         })
         .then(response => {

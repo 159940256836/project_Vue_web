@@ -2,7 +2,7 @@
     <div class="shaow">
         <div class="order-table">
             <div class="hidden-assets">
-            <span>{{$t('myAccount._display')}}:</span>
+            <span class="title-header">{{$t('myAccount._display')}}</span>
             <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
                 <span slot="open"></span>
                 <span slot="close"></span>
@@ -193,6 +193,9 @@ export default {
             position: absolute;
             top: -63px;
             right: 34px;
+        }
+        .title-header {
+            color: #8090af;
         }
     }
 }

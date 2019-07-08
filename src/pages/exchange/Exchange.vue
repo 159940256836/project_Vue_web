@@ -875,7 +875,7 @@ $night-color: #fff;
                 .repeal {
                     position: absolute;
                     right: 115px;
-                    top: 8px;
+                    top: -6px;
                     border: 0;
                     color: #3399FF;
                     font-size: 14px;
@@ -1469,26 +1469,14 @@ export default {
       currentOrder: {
         columns: [
           {
-            type: 'expand',
-            width: 40,
-            render: (h, params) => {
-              return h(expandRow, {
-                props: {
-                  skin: params.row.skin,
-                  rows: this.currentTableData
-                }
-              })
-            }
-          },
-          {
-                        /* 时间*/
+        /* 时间*/
             title: self.$t('exchange.time'),
             key: 'time',
             render: (h, params) => {
               return h('span', {}, this.dateFormat(params.row.time))
             }
           },
-                        /* 交易对*/
+        /* 交易对*/
           {
             title: self.$t('coin.deal'),
             key: 'symbol'
@@ -1498,16 +1486,16 @@ export default {
                     //     title: self.$t("coin.trigger"),
                     //     key: "triggerPrice"
                     // },
-                        /* 类型*/
+        /* 类型*/
           {
             title: self.$t('coin.type'),
             render(h, params) {
               return h(
-                                'span', {}, map.get(params.row.type)
-                            )
+                    'span', {}, map.get(params.row.type)
+                )
             }
           },
-                        /* 方向*/
+        /* 方向*/
           {
             title: self.$t('exchange.direction'),
             key: 'direction',
@@ -1521,13 +1509,13 @@ export default {
                     class: className
                   }
                 },
-                                row.direction == 'BUY'
-                                    ? self.$t('exchange.buyin')
-                                    : self.$t('exchange.sellout')
-                            )
+                    row.direction == 'BUY'
+                        ? self.$t('exchange.buyin')
+                        : self.$t('exchange.sellout')
+                )
             }
           },
-                        /* 价格*/
+        /* 价格*/
           {
             title: self.$t('exchange.price'),
             key: 'price',
@@ -1535,7 +1523,7 @@ export default {
               return h('span', self.toFloor(params.row.price))
             }
           },
-                        /* 数量*/
+        /* 数量*/
           {
             title: self.$t('exchange.num'),
             key: 'amount',
@@ -1543,7 +1531,7 @@ export default {
               return h('span', self.toFloor(params.row.amount))
             }
           },
-                        /* 已成交*/
+        /* 已成交*/
           {
             title: self.$t('exchange.traded'),
             key: 'tradedAmount',
@@ -1551,7 +1539,7 @@ export default {
               return h('span', self.toFloor(params.row.tradedAmount))
             }
           },
-                        /* 成交金额*/
+        /* 成交金额*/
           {
             title: self.$t('coin.amount'),
             key: 'turnover',
@@ -1559,30 +1547,43 @@ export default {
               return h('span', self.toFloor(params.row.turnover))
             }
           },
-                        /* 操作*/
-          {
-            title: self.$t('exchange.action'),
-            key: 'operate',
-            width: 110,
-            render: (h, params) => {
-              return h(
-                                'Button',
-                {
-                  props: {
-                    size: 'small',
-                    type: 'warning'
-                  },
-                  style: {},
-                  on: {
-                    click: () => {
-                      this.cancel(params.index)
-                    }
-                  }
-                },
-                                self.$t('exchange.undo')
-                            )
-            }
-          }
+            /* 操作*/
+              {
+                title: self.$t('exchange.action'),
+                key: 'operate',
+                width: 110,
+                render: (h, params) => {
+                  return h(
+                    'Button',
+                    {
+                      props: {
+                        size: 'small',
+                        type: 'warning'
+                      },
+                      style: {},
+                      on: {
+                        click: () => {
+                          this.cancel(params.index)
+                        }
+                      }
+                    },
+                        self.$t('exchange.undo')
+                    )
+                }
+              },
+            {
+                title: self.$t('new.Detailss'),
+                type: 'expand',
+                width: 80,
+                render: (h, params) => {
+                    return h(expandRow, {
+                        props: {
+                            skin: params.row.skin,
+                            rows: this.currentTableData
+                        }
+                    })
+                }
+            },
         ],
         rows: []
       },
@@ -1591,19 +1592,6 @@ export default {
         total: 3,
         page: 1,
         columns: [
-          {
-            type: 'expand',
-            width: 40,
-            render: (h, params) => {
-              return h(expandRow, {
-                props: {
-                  skin: params.row.skin,
-                  rows: this.historyTableData
-                }
-              })
-            }
-          },
-
           {
             title: self.$t('exchange.time'),
             key: 'time',
@@ -1619,8 +1607,8 @@ export default {
             title: self.$t('coin.type'),
             render(h, params) {
               return h(
-                                'span', {}, map.get(params.row.type)
-                            )
+                    'span', {}, map.get(params.row.type)
+                )
             }
           },
           {
@@ -1636,10 +1624,10 @@ export default {
                     class: className
                   }
                 },
-                                row.direction == 'BUY'
-                                    ? self.$t('exchange.buyin')
-                                    : self.$t('exchange.sellout')
-                            )
+                    row.direction == 'BUY'
+                        ? self.$t('exchange.buyin')
+                        : self.$t('exchange.sellout')
+                )
             }
           },
           {
@@ -1699,7 +1687,20 @@ export default {
                 return h('span', {}, '--')
               }
             }
-          }
+          },
+            {
+                title: self.$t('new.Detailss'),
+                type: 'expand',
+                width: 80,
+                render: (h, params) => {
+                    return h(expandRow, {
+                        props: {
+                            skin: params.row.skin,
+                            rows: this.historyTableData
+                        }
+                    })
+                }
+            }
         ],
         rows: []
       },
@@ -2006,7 +2007,7 @@ export default {
                 // this.getMemberRate(); // 获取会员等级用与是否抵扣BHB资格
         this.getWallet() // 账户资产信息
         this.getCurrentOrder() // 当前委托
-      // this.getHistoryOrder()
+        this.getHistoryOrder()
       }
       this.sliderBuyLimitPercent = 0
       this.sliderSellLimitPercent = 0
@@ -2094,12 +2095,12 @@ export default {
       this.currentImgTable = str
     },
     changeOrder(str) {
-      if (str == 'current') {
-        this.getCurrentOrder()
-      }
-      if (str == 'history') {
-        this.getHistoryOrder()
-      }
+      // if (str == 'current') {
+      //   this.getCurrentOrder()
+      // }
+      // if (str == 'history') {
+      //   this.getHistoryOrder()
+      // }
       this.selectedOrder = str
     },
     setback() {
@@ -2144,26 +2145,28 @@ export default {
       this.plate.columns[2].title = this.$t('exchange.num')
             // this.plate.columns[3].title = this.$t("exchange.total");
 
-      this.currentOrder.columns[1].title = this.$t('exchange.time')
-      this.currentOrder.columns[2].title = this.$t('coin.deal')
+      this.currentOrder.columns[0].title = this.$t('exchange.time')
+      this.currentOrder.columns[1].title = this.$t('coin.deal')
             // this.currentOrder.columns[3].title = this.$t("coin.trigger");
-      this.currentOrder.columns[4].title = this.$t('coin.type')
-      this.currentOrder.columns[5].title = this.$t('exchange.direction')
-      this.currentOrder.columns[6].title = this.$t('exchange.price')
-      this.currentOrder.columns[7].title = this.$t('exchange.num')
-      this.currentOrder.columns[8].title = this.$t('exchange.traded')
-      this.currentOrder.columns[9].title = this.$t('coin.amount')
-      this.currentOrder.columns[10].title = this.$t('exchange.action')
+      this.currentOrder.columns[2].title = this.$t('coin.type')
+      this.currentOrder.columns[3].title = this.$t('exchange.direction')
+      this.currentOrder.columns[4].title = this.$t('exchange.price')
+      this.currentOrder.columns[5].title = this.$t('exchange.num')
+      this.currentOrder.columns[6].title = this.$t('exchange.traded')
+      this.currentOrder.columns[7].title = this.$t('coin.amount')
+      this.currentOrder.columns[8].title = this.$t('exchange.action')
+      this.currentOrder.columns[9].title = this.$t('new.Detailss')
 
-      this.historyOrder.columns[1].title = this.$t('exchange.time')
-      this.historyOrder.columns[2].title = this.$t('coin.deal')
-      this.historyOrder.columns[3].title = this.$t('coin.type')
-      this.historyOrder.columns[4].title = this.$t('exchange.direction')
-      this.historyOrder.columns[5].title = this.$t('exchange.price')
-      this.historyOrder.columns[6].title = this.$t('exchange.num')
-      this.historyOrder.columns[7].title = this.$t('exchange.done')
-      this.historyOrder.columns[8].title = this.$t('coin.amount')
-      this.historyOrder.columns[9].title = this.$t('exchange.status')
+      this.historyOrder.columns[0].title = this.$t('exchange.time')
+      this.historyOrder.columns[1].title = this.$t('coin.deal')
+      this.historyOrder.columns[2].title = this.$t('coin.type')
+      this.historyOrder.columns[3].title = this.$t('exchange.direction')
+      this.historyOrder.columns[4].title = this.$t('exchange.price')
+      this.historyOrder.columns[5].title = this.$t('exchange.num')
+      this.historyOrder.columns[6].title = this.$t('exchange.done')
+      this.historyOrder.columns[7].title = this.$t('coin.amount')
+      this.historyOrder.columns[8].title = this.$t('exchange.status')
+      this.historyOrder.columns[9].title = this.$t('new.Detailss')
 
       this.btnList[0].text = this.$t('exchange.limited_price')
       this.btnList[1].text = this.$t('exchange.market_price')
@@ -3432,8 +3435,8 @@ export default {
                 .post(this.host + this.api.exchange.current, params)
                 .then(response => {
                   const resp = response.body
-                  if (resp.content && resp.content.length > 0) {
-                    this.currentOrder.rows = resp.content.slice(0, 3)
+                    if (resp.data && resp.data.length > 0) {
+                    this.currentOrder.rows = resp.data.slice(0, 3)
                     this.currentOrder.rows.forEach((row, index) => {
                       row.skin = that.skin
                       row.price =
@@ -3462,12 +3465,12 @@ export default {
       this.$http.post(this.host + this.api.exchange.history, params).then(response => {
         const resp = response.body
         const rows = []
-        if (resp.content != undefined) {
-          if (resp.content.length > 0) {
+        if (resp.data != undefined) {
+          if (resp.data.length > 0) {
             this.historyOrder.total = resp.totalElements
             this.historyOrder.page = resp.number
             for (let i = 0; i < 3; i++) {
-              const row = resp.content[i]
+              const row = resp.data[i]
               if (row) {
                 row.skin = that.skin
                 row.price =

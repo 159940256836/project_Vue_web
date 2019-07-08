@@ -806,7 +806,7 @@ export default {
 }
 </style>
 <style lang="scss">
-    
+
     .content-wrap {
       .ivu-input-group-append,
       .ivu-input-group-prepend {
@@ -834,6 +834,21 @@ export default {
       .ivu-input-group {
           width: 350px !important;
       }
+        input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+            color: #8090af;
+        }
+
+        input:-moz-placeholder, textarea:-moz-placeholder {
+            color: #8090af;
+        }
+
+        input::-moz-placeholder, textarea::-moz-placeholder {
+            color: #8090af;
+        }
+
+        input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+            color: #8090af;
+        }
     }
 </style>
 
