@@ -2625,10 +2625,10 @@ export default {
                       }
                       const rows = this.plate.askRows
                       const len = rows.length
-                      const totle =
-                                    rows[this.plate.maxPostion - resp.ask.items.length]
-                                        .totalAmount
-                      this.plate.askTotle = totle
+                      // console.log(rows[this.plate.maxPostion - resp.ask.items.length])
+                      if(rows[this.plate.maxPostion - resp.ask.items.length]) {
+                        this.plate.askTotle = rows[this.plate.maxPostion - resp.ask.items.length].totalAmount
+                      }
                     }
                   }
                   if (resp.bid && resp.bid.items) {
