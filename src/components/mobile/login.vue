@@ -371,7 +371,7 @@ export default {
   }
   /deep/ .ivu-form-item {
       margin-bottom: .49rem;
-    /deep/ .ivu-input {
+    .ivu-input {
       background: #10122B;
       width: 100%;
       height: .8rem;
@@ -386,7 +386,7 @@ export default {
       border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 20 20;
       color: white;
     }
-    /deep/ .ivu-form-item-error-tip {
+    .ivu-form-item-error-tip {
       font-size: .3rem;
     }
   }

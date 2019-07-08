@@ -354,6 +354,7 @@ export default {
       // })
     },
     mul(a, b) {
+      console.log(a)
       var c = 0,
         d = a.toString(),
         e = b.toString();
@@ -363,9 +364,11 @@ export default {
       try {
         c += e.split(".")[1].length;
       } catch (f) {}
+      d == null ? d = 0 : (typeof d == 'string' ? d = d.replace('.','') : '')
+      e == null ? e = 0 : (typeof e == 'string' ? e = e.replace('.','') : '')
       return (
-        Number(d.replace(".", "")) *
-        Number(e.replace(".", "")) /
+        Number(d) *
+        Number(e) /
         Math.pow(10, c)
       );
     },

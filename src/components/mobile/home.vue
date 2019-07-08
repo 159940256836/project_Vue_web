@@ -7,11 +7,12 @@
         </header>
         <main>
             <div class="banner">
+                <!--margin-top:1.63rem;height:.34rem;width:5.72rem;-->
                 <p>
-                    <img src="./img/banner_text1.png" alt="加载失败" style="margin-top:1.63rem;height:.34rem;width:5.72rem;">
+                    您好，创造者，欢迎来到BDW的世界
                 </p>
                 <p>
-                    <img src="./img/banner_text2.png" alt="加载失败" style="margin-top:.28rem;height:.21rem;width:4.18rem;">
+                    我们，将给您带来一场不一样的资产之旅
                 </p>
             </div>
             <div class="content">
@@ -62,10 +63,23 @@ export default {
         window.location.href = 'https://download.bdw.top'
     },
     goLogin() {
+        if(this.isLogin) {
+            sessionStorage.switchToPc = true
+            this.$router.push('/')
+        }
         this.$router.push({name:'mobileLogin'})
     },
     goRegister() {
+        if(this.isLogin) {
+            sessionStorage.switchToPc = true
+            this.$router.push('/')
+        }
         this.$router.push({name:'mobileRegister'})
+    }
+  },
+  computed: {
+    isLogin: function() {
+      return this.$store.getters.isLogin;
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -100,6 +114,17 @@ export default {
             height: 4.29rem;
             background: url('./img/banner_bg.png') no-repeat center center;
             background-size: cover;
+            p {
+                color: #3399ff;
+            }
+            p:nth-child(1) {
+                font-size: .34rem;
+                padding-top:1.59rem;
+            }
+            p:nth-child(2) {
+                font-size: .22rem;
+                margin-top: .18rem;
+            }
         }
         .content {
             background: #191D3A;
