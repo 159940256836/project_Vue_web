@@ -129,9 +129,10 @@
                     <img src="../../assets/images/search.png" alt="">
                     <input
                       type="text"
+                      :placeholder="$t('new.searchCurrency')"
                       class="text-input"
                       v-model="searchKeyWord"
-                      @keyup="statusKey"
+                      maxlength="10"
                     >
                   </div>
 
@@ -1008,7 +1009,10 @@ export default {
   watch: {
     lang: function() {
       this.updateLangData()
-    }
+    },
+    searchKeyWord:function(){
+      this.searchKeyWord=this.searchKeyWord.replace(/[^\w\.\/]/ig,'');
+    },
   },
   mounted: function() {
     this.getCNYRate()
@@ -1032,10 +1036,6 @@ export default {
     })
   },
   methods: {
-    statusKey () {
-      console.log(this.searchKeyWord);
-      console.log(1);
-    },
     checkouttrue() {
       this.checkoutapp = true
     },
@@ -1344,7 +1344,7 @@ export default {
         Number(e) /
         Math.pow(10, c)
       )
-      
+
     },
     addClass(index) {
       window.indexBtnBC = ''
@@ -1667,21 +1667,22 @@ li {
       .title-info {
         position: relative;
         .text-input {
-          height: 30px;
-          width: 150px;
-          border: 1px solid #8090af;
-          border-radius: 0;
-          background-color: #191D3A;
+          height: 15px;
+          width: 180px;
+          border: none;
+          background-color: transparent;
           float: right;
-          margin: 8px 25px 0;
-          padding: 3px 0 3px 40px;
+          margin: 14px 25px 0;
+          padding: 0 0 0 35px;
           font-size: 14px;
           color: #fff;
+          border-left: 2px solid #8090af;
+          outline: none;
         }
         img {
           position: absolute;
           top: 14px;
-          right: 145px;
+          right: 19px;
         }
       }
 
@@ -1984,6 +1985,21 @@ li {
 }
 </style>
 <style lang="scss">
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #8090af;
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #8090af;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #8090af;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #8090af;
+}
 .ivu-table-wrapper > .ivu-spin-fix{
     background: rgba(17,22,52,1)
 }
