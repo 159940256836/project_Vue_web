@@ -39,6 +39,7 @@ module.exports = {
     Singlelimit: '单次限额',
     today: '今日交易金额',
     Myrder: '我的订单',
+    searchCurrency: '搜索交易币种',
     Modifpassword: '修改登录密码',
     confirmaaa: '确认',
     Modifyassword: '修改资金密码',

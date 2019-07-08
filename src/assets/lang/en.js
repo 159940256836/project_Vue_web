@@ -57,6 +57,7 @@ module.exports = {
     Singlelimit: 'Single limit',
     today: "Today's transaction amount",
     Myrder: 'My Order',
+    searchCurrency: 'Search currencies',
     Modifpassword: 'Modify the login password',
     confirmaaa: 'confirm',
     Modifyassword: 'Modify the fund password',
