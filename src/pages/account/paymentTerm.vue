@@ -78,6 +78,7 @@
                 :styles="{top: '100px'}"
                 width="534"
                 class="popups-modal"
+                :mask-closable="false"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate1" :model="formValidate1" :rules="ruleValidate" :label-width="100">
@@ -121,6 +122,7 @@
                 :styles="{top: '100px'}"
                 width="750"
                 class="popups-modal"
+                :mask-closable="false"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="115">
@@ -173,6 +175,7 @@
                 :styles="{top: '100px'}"
                 width="750"
                 class="popups-modal"
+                :mask-closable="false"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="115">

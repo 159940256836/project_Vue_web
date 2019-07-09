@@ -184,6 +184,7 @@
                 className="vertical-center-modal"
                 width="534"
                 class="popups-modal"
+                :mask-closable="false"
                 >
                 <div class="detail-list" style="width: 100%;">
                     <!-- 请上传资料完成实名认证 -->
@@ -270,6 +271,7 @@
                 className="vertical-center-modal"
                 width="534"
                 class="popups-modal"
+                :mask-closable="false"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="110">
@@ -312,6 +314,7 @@
                 className="vertical-center-modal"
                 width="534"
                 class="popups-modal"
+                :mask-closable="false"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="110">
@@ -356,6 +359,7 @@
                 width="534"
                 class="popups-modal"
                 className="vertical-center-modal"
+                :mask-closable="false"
                 >
                 <div class="detail-list">
                     <Form ref="formValidate4" :model="formValidate4" :rules="ruleValidate" :label-width="101">
@@ -405,6 +409,7 @@
                 className="vertical-center-modal"
                 width="534"
                 class="popups-modal"
+                :mask-closable="false"
                 >
                 <!-- 设置资金密码 -->
                 <div class="detail-list" v-show="user.fundsVerified!=1">
@@ -521,6 +526,7 @@
                 width="714"
                 @on-cancel="googleModalCancel"
                 class="popups-modal"
+                :mask-closable="false"
             >
                 <ResetGoogleVali />
             </Modal>
@@ -532,6 +538,7 @@
                 width="534"
                 @on-cancel="googleModalCancel"
                 class="popups-modal"
+                :mask-closable="false"
             >
                 <CloseGoogleVali :phone="user.mobilePhone" />
             </Modal>
