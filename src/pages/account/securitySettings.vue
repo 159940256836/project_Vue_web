@@ -326,7 +326,7 @@
                             </Input>
                         </FormItem>
                         <!-- 手机验证码 -->
-                        <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode2">
+                        <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode2" class="defeat-ivu">
                             <Input v-model="formValidate3.vailCode2" size="large" style="width:300px;">
                             <!-- <Button slot="append">点击获取</Button> -->
                             <div class="timebox" slot="append">
