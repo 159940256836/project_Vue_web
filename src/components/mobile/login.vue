@@ -380,10 +380,10 @@ export default {
       font-size: .3rem;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
-      border: .01rem solid;
-      -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 20 20;
-      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 20 20;
-      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 20 20;
+      border: .01rem solid #2988e8;
+      // -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 20 20;
+      // -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 20 20;
+      // border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 20 20;
       color: white;
     }
     .ivu-form-item-error-tip {
@@ -396,7 +396,7 @@ export default {
       font-size: .3rem;
       background: transparent;
       color: #2988e8;
-      border: 1px solid #2988e8;
+      border: .01rem solid #2988e8;
     }
   }
   .go-register-tip {

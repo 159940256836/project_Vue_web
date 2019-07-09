@@ -51,19 +51,23 @@
                             {{area.zhName}}
                         </Option>
                     </Select>
+                    
+                </FormItem>
+
+                <FormItem>
                     <Input
-                        prop="user"
-                        v-if="changeActive == 0"
-                        type="text" v-model="formInline.user"
-                        :placeholder="key"
-                    >
-                    </Input>
-                    <Input
-                        v-else
-                        type="text"
-                        v-model="formInline.user"
-                        :placeholder="key"
-                    >
+                          prop="user"
+                          v-if="changeActive == 0"
+                          type="text" v-model="formInline.user"
+                          :placeholder="key"
+                      >
+                      </Input>
+                      <Input
+                          v-else
+                          type="text"
+                          v-model="formInline.user"
+                          :placeholder="key"
+                      >
                     </Input>
                 </FormItem>
 
@@ -543,10 +547,11 @@ export default {
       font-size: .3rem;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
-      border: .01rem solid;
-      -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
+      // border: .01rem solid;
+      border: .01rem solid #2988e8;
+      // -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      // -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      // border-image: linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
       color: white;
     }
     .ivu-form-item-error-tip {
@@ -559,7 +564,7 @@ export default {
       font-size: .3rem;
       background: transparent;
       color: #2988e8;
-      border: 1px solid #2988e8;
+      border: .01rem solid #2988e8;
     }
   }
   /deep/ .ivu-btn-group{
@@ -582,21 +587,24 @@ export default {
     }
   }
   /deep/ .ivu-select {
+        background: #10122B;
     // height: 1rem;
-    margin-bottom: .49rem;
     font-size: .3rem;
-    border-color: 1px solid #2988e8;
-    // border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 20 20;
-    -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
+    border: .01rem solid #2988e8;
+    -webkit-box-sizing: border-box;
+    border-radius: .05rem;
+    // -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+    //   -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+    //   border-image: linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
     .ivu-select-selection {
+      border: none;
       background: transparent;
       color: #fff;
-      border-color: 1px solid #2988e8;
-      -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
-      border-image: linear-gradient(-83deg, #2988e8, #51e8ff) 10 10;
+      // border-color: 1px solid #2988e8;
+      // border: .01rem solid #2988e8;
+      // -webkit-border-image: -webkit-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      // -o-border-image: -o-linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
+      // border-image: linear-gradient(173deg, #2988e8, #51e8ff) 10 10;
       padding-left: .1rem;
       height: .8rem;
       .ivu-select-selected-value {
