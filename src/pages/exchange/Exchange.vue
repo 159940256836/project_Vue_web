@@ -59,7 +59,8 @@
                         highlight-row
                         v-show="basecion==='favor'"
                         :no-data-text="$t('common.nodata')"
-                        id="collect" :columns="favorColumns"
+                        id="collect"
+                        :columns="favorColumns"
                         :data="coins.favor"
                     ></Table>
                 </div>
@@ -78,20 +79,20 @@
             </div>
             <div class="center">
                 <div class="symbol">
-                    <div class="item" @click="currentCoinFavorChange">
-                        <Icon
-                            v-if="currentCoinIsFavor"
-                            type="ios-star"
-                            color="#3399ff"
-                            size="22"
-                        />
-                        <Icon
-                            v-else
-                            type="ios-star-outline"
-                            color="#3399ff"
-                            size="22"
-                        />
-                    </div>
+<!--                    <div class="item" @click="currentCoinFavorChange">-->
+<!--                        <Icon-->
+<!--                            v-if="currentCoinIsFavor"-->
+<!--                            type="ios-star"-->
+<!--                            color="#3399ff"-->
+<!--                            size="22"-->
+<!--                        />-->
+<!--                        <Icon-->
+<!--                            v-else-->
+<!--                            type="ios-star-outline"-->
+<!--                            color="#3399ff"-->
+<!--                            size="22"-->
+<!--                        />-->
+<!--                    </div>-->
                     <div class="item">
                         <span class="coin">
                             {{currentCoin.coin?currentCoin.coin:'---'}}
@@ -130,21 +131,41 @@
                     </div>
 
                     <div class="item">
-                        <span class="text" style="color: #8090af;">{{$t('coin.celling')}}</span>
-                        <span class="num" style="color: #8090af;" v-if="currentCoin.high">
+                        <span
+                            class="text item-media"
+                            style="color: #8090af;"
+                        >
+                            {{$t('coin.celling')}}
+                        </span>
+                        <span
+                            class="num item-media-red"
+                            v-if="currentCoin.high"
+                        >
                             {{currentCoin.high | toFixed(baseCoinScale)}}
                         </span>
-                        <span class="num" v-else>---</span>
+                        <span class="num item-media-red" v-else>---</span>
                     </div>
                     <div class="item">
-                        <span class="text" style="color: #8090af;">{{$t('coin.floor')}}</span>
-                        <span class="num" style="color: #8090af;" v-if="currentCoin.low >= 0">
+                        <span
+                            class="text item-media"
+                        >
+                            {{$t('coin.floor')}}
+                        </span>
+                        <span
+                            class="num item-media-bule"
+                            v-if="currentCoin.low >= 0"
+                        >
                             {{currentCoin.low | toFixed(baseCoinScale)}}
                         </span>
-                        <span class="num" v-else>---</span>
+                        <span class="num item-media-bule" v-else>---</span>
                     </div>
                     <div class="item">
-                        <span class="text" style="color: #8090af;">{{$t('coin.turnover')}}</span>
+                        <span
+                            class="text item-media"
+                            style="color: #8090af;"
+                        >
+                            {{$t('coin.turnover')}}
+                        </span>
                         <span class="num" style="color: #8090af;">
                             {{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}
                         </span>
@@ -814,13 +835,13 @@ $night-color: #fff;
                 color: #fff;
             }
             .coin {
-                font-size: 18px;
+                font-size: 16px;
             }
             .text {
                 width: 100%;
                 /*display: block;*/
                 font-size: 12px;
-                color: #F0F0F0;
+                color: #8090af;
                 margin-bottom: 5px;
             }
             .text1 {
@@ -828,7 +849,7 @@ $night-color: #fff;
             }
             .num {
                 font-size: 14px;
-                color: #fff;
+                color: #8090af;
             }
             > img {
                 display: block;
@@ -836,7 +857,22 @@ $night-color: #fff;
                 height: 18px;
                 cursor: pointer;
             }
+            @media screen and (max-width: 1380px) {
+                .item-media {
+                    display: none;
+                }
+                .item-media-red {
+                    color: #00b275;
+                }
+                .item-media-bule {
+                    color: #f15057;
+                }
+            }
         }
+        /*.item-media {*/
+        /*    */
+        /*}*/
+
     }
     .order {
         margin-top: 20px;
@@ -1084,6 +1120,8 @@ export default {
         coin: '',
         symbol: ''
       },
+        // selected: require('../../assets/images/selected.png'), // 已选
+        // choose: require('../../assets/images/choose.png'), // 未选
       favorColumns: [
         {
           title: this.$t('exchange.symbol'),
@@ -1094,30 +1132,47 @@ export default {
             return h('div', [
               h('Icon', {
                 props: {
-                                    // color:"red",
-                  type: params.row.isFavor
-                                        ? 'android-star'
-                                        : 'android-star-outline'
+                    color:"#3399ff",
+                    size:"18",
+                    type: params.row.isFavor
+                            ? 'ios-star'
+                            : 'ios-star-outline'
+                  // type: params.row.isFavor
+                  //                       ? 'android-star'
+                  //                       : 'android-star-outline'
                 },
                 nativeOn: {
                   click: () => {
                     event.stopPropagation() // 阻止事件冒泡
-                    if (this.isLogin) {
-                      if (
-                                                event.currentTarget.className ==
-                                                'ivu-icon ivu-icon-android-star'
-                                            ) {
-                        this.cancelCollect(params.index, params.row)
-                        event.currentTarget.className ==
-                                                    'ivu-icon ivu-icon-android-star-outline'
-                      } else {
-                        this.collect(params.index, params.row)
-                        event.currentTarget.className =
-                                                    'ivu-icon ivu-icon-android-star'
+                    // if (this.isLogin) {
+                    //   if (
+                    //                             event.currentTarget.className ==
+                    //                             'ivu-icon ivu-icon-android-star'
+                    //                         ) {
+                    //     this.cancelCollect(params.index, params.row)
+                    //     event.currentTarget.className ==
+                    //                                 'ivu-icon ivu-icon-android-star-outline'
+                    //   } else {
+                    //     this.collect(params.index, params.row)
+                    //     event.currentTarget.className =
+                    //                                 'ivu-icon ivu-icon-android-star'
+                    //   }
+                    // } else {
+                    //   this.$Message.warning(this.$t('common.logintip'))
+                    // }
+                      if (this.isLogin) {
+                          if (params.row.isFavor) {
+                              this.cancelCollect(params.index, params.row)
+                              // event.currentTarget.className ==
+                              //                               'ivu-icon ivu-icon-android-star-outline'
+                          } else {
+                              this.collect(params.index, params.row)
+                              // event.currentTarget.className =
+                              //                               'ivu-icon ivu-icon-android-star'
+                          }
+                      }else {
+                        this.$Message.warning(this.$t('common.logintip'))
                       }
-                    } else {
-                      this.$Message.warning(this.$t('common.logintip'))
-                    }
                   }
                 }
               }),
@@ -1173,6 +1228,7 @@ export default {
         USDT: [],
         BTC: [],
         ETH: [],
+        BC: [],
         favor: [],
         columns: [
           {
@@ -1181,29 +1237,23 @@ export default {
             sortable: false,
             className: 'coin-menu-symbol',
             render: (h, params) => {
-              return h('div', [
+                return h('div', [
                 h('Icon', {
                   props: {
-                                        // color:"red",
+                    color:"#3399ff",
+                    size:"18",
                     type: params.row.isFavor
-                                            ? 'android-star'
-                                            : 'android-star-outline'
+                                          ? 'ios-star'
+                                          : 'ios-star-outline'
                   },
                   nativeOn: {
                     click: () => {
                       event.stopPropagation() // 阻止事件冒泡
                       if (this.isLogin) {
-                        if (
-                                                    event.currentTarget.className ==
-                                                    'ivu-icon ivu-icon-android-star'
-                                                ) {
+                        if (params.row.isFavor) {
                           this.cancelCollect(params.index, params.row)
-                          event.currentTarget.className ==
-                                                        'ivu-icon ivu-icon-android-star-outline'
                         } else {
                           this.collect(params.index, params.row)
-                          event.currentTarget.className =
-                                                        'ivu-icon ivu-icon-android-star'
                         }
                       } else {
                         this.$Message.warning(this.$t('common.logintip'))
@@ -2962,7 +3012,8 @@ export default {
         //     this.stopLoss = true;
         //     this.showMarket = false;
         // },
-    currentCoinFavorChange() {
+    currentCoinFavorChange(index, row) {
+        console.log(index, row, this.currentCoin.symbol, this.currentCoinIsFavor);
       if (!this.isLogin) {
         this.$Message.warning(this.$t('common.logintip'))
         return
@@ -3018,7 +3069,8 @@ export default {
       }
     },
     collect(index, row) {
-      if (!this.isLogin) {
+        console.log(index, row);
+        if (!this.isLogin) {
         this.$Message.info(this.$t('common.logintip'))
         return
       }
@@ -3040,7 +3092,8 @@ export default {
                 })
     },
     cancelCollect(index, row) {
-      if (!this.isLogin) {
+        console.log(index, row);
+        if (!this.isLogin) {
         this.$Message.info(this.$t('common.logintip'))
         return
       }

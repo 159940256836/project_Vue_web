@@ -657,6 +657,7 @@ export default {
             .ivu-table-tip {
                 td {
                     text-align: center;
+                    background: #111530;
                 }
             }
         }

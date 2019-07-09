@@ -58,7 +58,7 @@
 .recent-deal {
     height: 50px;
     line-height: 50px;
-    padding-left: 28px;
+    padding-left: 22px;
     background: #13152F;
     font-weight: 600;
 }
@@ -79,7 +79,7 @@
     background-color: #0E0E28;
 }
 .sc_filter span:first-child {
-    margin-left: 28px;
+    margin-left: 22px;
 }
 .day .sc_filter span {
     color: #333;
@@ -120,6 +120,8 @@
 .coin-menu .coin-menu-symbol .ivu-icon {
     color: #3399ff;
     margin-right: 5px;
+    position: relative;
+    top: -2px;
 }
 
 .ivu-icon {
@@ -385,7 +387,7 @@ p.math_price {
     text-align: center;
 }
 .exchange .right .ivu-table .ivu-table-row td:nth-child(1) {
-    padding-left: 28px;
+    padding-left: 20px;
 }
 .exchange .right .ivu-table .ivu-table-row td:nth-child(2) {
     text-align: center;
@@ -749,7 +751,7 @@ iframe {
 }
 .exchange .main .ivu-table .ivu-table-header th:first-child {
     text-align: left;
-    padding-left: 30px;
+    padding-left: 22px;
 }
 .exchange .main .ivu-table .ivu-table-header th {
     line-height: 40px;

@@ -93,7 +93,12 @@
                 <span>{{$t('uc.finance.withdraw.safevalidate')}}</span>
             </p>
             <div style="text-align:center">
-                <Form ref="formValidateAddr" :model="formValidateAddr" :rules="ruleValidate" :label-width="85">
+                <Form
+                    ref="formValidateAddr"
+                    :model="formValidateAddr"
+                    :rules="ruleValidate"
+                    :label-width="85"
+                >
                     <!-- 手机号 -->
                     <FormItem :label="$t('uc.finance.withdraw.telno')" prop="mobileNo" v-show="validPhone" style="width:90%">
                         <Input disabled size="large" v-model="formValidateAddr.mobileNo"></Input>
@@ -545,7 +550,23 @@ span.describe {
 }
 </style>
 <style lang="scss">
-
+    .ivu-modal-confirm-head-icon-confirm {
+        display: none;
+    }
+    .ivu-modal-confirm-head {
+        .ivu-modal-confirm-head-title {
+            color: #8090af;
+        }
+        text-align: left;
+    }
+    .ivu-modal-confirm-body {
+        padding-left: 14px;
+    }
+    .ivu-btn-text {
+        &:hover {
+            background: transparent;
+        }
+    }
 .nav-rights-address {
     .ivu-select-large.ivu-select-single {
         .ivu-select-selection {

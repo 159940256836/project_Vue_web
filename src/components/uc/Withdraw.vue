@@ -706,6 +706,21 @@ export default {
 </script>
 <style lang="scss">
     .withdraw {
+        input::-webkit-input-placeholder {
+            color: #8090af;
+        }
+
+        input:-moz-placeholder {
+            color: #8090af;
+        }
+
+        input::-moz-placeholder {
+            color: #8090af;
+        }
+
+        input:-ms-input-placeholder {
+            color: #8090af;
+        }
         .ivu-table {
             td {
                 &:first-child {
@@ -748,6 +763,7 @@ export default {
             .ivu-table-tip {
                 td {
                     text-align: center;
+                    background: #111530;
                 }
             }
         }
@@ -855,6 +871,7 @@ export default {
                 span{
                     display: inline-block;
                     font-size:14px;
+                    color: #8090af;
                 }
                 .input-group{
                     display: inline-block;
@@ -1087,11 +1104,12 @@ export default {
 
     .label-amount .label-fr {
         float: right;
-        color: #aaa;
+        color: #8090af;
         font-size: 14px;
     }
 
     .label-amount .label-fr span {
+        color: #8090af;
         margin-left: 2px;
     }
 
@@ -1534,7 +1552,9 @@ export default {
         &:hover {
             border-color: #58698A;
         }
-        .ivu-select-placeholder,
+        .ivu-select-placeholder {
+            color: #8090af;
+        }
         .ivu-select-selected-value {
             height: 35px;
             line-height: 35px;

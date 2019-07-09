@@ -263,7 +263,6 @@ export default {
         position: relative;
         .hidden-assets {
             position: absolute;
-            top: -63px;
             right: 34px;
         }
         .title-header {
