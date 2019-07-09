@@ -4,7 +4,7 @@
     float: left;
     width: 100%;
     .form {
-        padding-left: 28px;
+        padding-left: 12px;
         background: #111530;
         color: #8090AF;
         font-family: MicrosoftYaHei;
@@ -121,7 +121,7 @@
       box-shadow: none;
     }
     .ivu-select-placeholder {
-      color: #414d64;
+      color: #8090af;
     }
     .ivu-btn {
       border-radius: 0;
@@ -381,25 +381,26 @@
                 </Select>
             </FormItem> -->
             <FormItem :label="$t('exchange.status')">
-                <Select v-model="formItem.status" style="width:70px;" :placeholder="$t('header.choose')">
+                <Select v-model="formItem.status" style="width:94px;" :placeholder="$t('header.choose')">
                     <Option value="COMPLETED">{{$t('exchange.finished')}}</Option>
                     <Option value="CANCELED">{{$t('exchange.canceled')}}</Option>
                 </Select>
             </FormItem>
             <FormItem>
+
                 <span
-                style="margin-left: -10px;margin-right:45px;margin-left: -16px;background:transparent;border:1px solid #3399FF;color:#3399FF;"
-                @click="handleClear"
-                class="my-btn"
+                    @click="handleSubmit"
+                    class="my-btn"
                 >
-                {{$t('historyAndCu.clear')}}
+                    {{$t('historyAndCu.search')}}
                 </span>
                 <span
-                @click="handleSubmit"
-                class="my-btn"
+                    style="margin-left: 20px;background:transparent;border:1px solid #3399FF;color:#3399FF;"
+                    @click="handleClear"
+                    class="my-btn"
                 >
-                {{$t('historyAndCu.search')}}</span>
-
+                    {{$t('historyAndCu.clear')}}
+                </span>
             </FormItem>
         </Form>
         <div class="table">

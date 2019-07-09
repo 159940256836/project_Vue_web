@@ -6,7 +6,7 @@
   float: left;
   width: 100%;
   .form {
-    padding-left: 28px;
+    padding-left: 12px;
     background: #111530;
     color: #8090AF;
     font-family: MicrosoftYaHei;
@@ -125,7 +125,7 @@
       box-shadow: none;
     }
     .ivu-select-placeholder {
-      color: #414d64;
+      color: #8090af;
     }
     .ivu-btn {
       border-radius: 0;
@@ -200,7 +200,7 @@
                 }
             }
             }
-            
+
         }
         .ivu-tabs-bar {
             .ivu-tabs-nav-container {
@@ -276,7 +276,7 @@
       background: #111530;
       border: 1px solid #191f44;
     }
-    
+
     .ivu-icon.ivu-icon-ios-arrow-left,
     .ivu-icon.ivu-icon-ios-arrow-right {
         color: #8090AF;
@@ -367,7 +367,7 @@
           <Option value="1">{{$t('historyAndCu.sell')}}</Option>
         </Select>
       </FormItem> -->
-      <div style="margin-bottom: 22px;display:inline-block;">
+      <div style="margin-bottom: 22px;display:inline-block;margin-left: 50px;">
         <span
           v-if="orders.length > 2"
           class="my-btn"
@@ -376,12 +376,7 @@
           <!--撤销全部委单-->
           {{$t('historyAndCu.repealAll')}}
         </span>
-        <span
-          style="margin-left: 46px;margin-right:45px;background:transparent;color:#3399FF;border:1px solid #3399FF;margin-top:3px;"
-          @click="handleClear "
-          class="my-btn"
-          type="primary"
-        >{{$t('historyAndCu.clear')}}</span>
+
         <span
           @click="handleSubmit"
           class="my-btn"
@@ -389,6 +384,12 @@
         >
           {{$t('historyAndCu.search')}}
         </span>
+        <span
+          style="margin-left: 20px;margin-right:45px;background:transparent;color:#3399FF;border:1px solid #3399FF;margin-top:3px;"
+          @click="handleClear "
+          class="my-btn"
+          type="primary"
+        >{{$t('historyAndCu.clear')}}</span>
       </div>
     </Form>
     <div class="entrustcurrent-table">

@@ -4,7 +4,7 @@
         <div class="box new-order-box" id="box">
             <h2 class="title">{{ this.$t('otc.myorder') }}</h2>
             <Tabs
-                    v-model="activeName"
+                v-model="activeName"
                 name="tab1"
                 :value="myOrderTabName"
                 @on-click="tabCut"

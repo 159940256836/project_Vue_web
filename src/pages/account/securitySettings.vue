@@ -1840,7 +1840,7 @@ export default {
             }
         }
     }
-    
+
 
     .nav-rights {
         .ivu-input {
@@ -1904,6 +1904,7 @@ export default {
             color: #fff;
         }
         .ivu-form-item-label {
+            padding: 14px 12px 14px 0;
             color: #8090AF !important;
         }
         .ivu-form-item-required .ivu-form-item-label:before {
@@ -1932,7 +1933,7 @@ export default {
                 border-color: #8090AF;
             }
         }
-        
+
 
         .ivu-btn-default {
             color: #8090AF;
@@ -1980,7 +1981,7 @@ export default {
 
     }
 
-    
+
 
 </style>
 

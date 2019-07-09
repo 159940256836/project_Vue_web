@@ -156,7 +156,7 @@
                                     <div class="ios">
                                         <img src="../src/assets/images/qrcode.png" alt="">
                                         <div class="tips">
-                                            <span>app下载</span>
+                                            <span>{{ $t('header.appdownlaod') }}</span>
                                         </div>
                                     </div>
                                 </div>

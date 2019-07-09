@@ -26,14 +26,14 @@
                 <div style="margin-top:175px;">{{ $t("common.nodata") }}</div>
                 <!-- <img src="../../assets/images/noData.png" alt="" style="width:15%;margin-top: 55px;"> -->
             </div>
-            
+
         </div>
         <div class="page Pagination_page" v-show="showPage" style="width:1200px; margin:39px auto;">
                 <Page :total="total" :pageSize="pageSize" :current="pageNo" @on-change="pageChange" show-elevator></Page>
-   
+
             </div>
         <!-- 6.24修改 -->
-       
+
 
     </div>
 </template>
@@ -103,18 +103,15 @@
     span{
         margin-left:31px;
     }
-    
-   
+
+
 }
 .help_container {
    width:1200px;
    margin:0 auto;
     height: 100%;
-    // margin-top:-210px;
     min-height: 389px;
-    // background:rgba(17,21,48,1);
     background:#0e0e28;
-    border:1px solid rgba(17,21,48,1);
     > h1 {
         font-size: 32px;
         line-height: 1;
@@ -185,7 +182,7 @@
         width:38px;
         height:20px;
     }
-    
+
 }
 </style>
 <script>
