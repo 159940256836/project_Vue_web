@@ -1382,6 +1382,10 @@ export default {
     },
     getSymbol() {
       this.loading = true
+      // for (const i in this.coins) {
+      //   this.coins[i] = []
+      //   console.log(this.coins)
+      // }
       this.coins.USDT = []; this.coins.BTC = []; this.coins.ETH = []; this.coins.BC = []
       this.$http.post(this.host + this.api.market.thumbTrend, {}).then(response => {
         var resp = response.body
@@ -1395,7 +1399,6 @@ export default {
           coin.isFavor = false
           this.coins._map[coin.symbol] = coin
           this.coins[coin.base].push(coin)
-          console.log(coin.coin)
         }
         if (this.isLogin) {
           this.getFavor()
