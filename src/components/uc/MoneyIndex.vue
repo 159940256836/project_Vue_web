@@ -352,7 +352,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.order-table{
+.order-table-index{
   .nav-right {
     .ivu-btn {
       border-radius: 0;
@@ -496,11 +496,11 @@ export default {
     td {
       background: #111530;
       &:first-child {
-        // text-align: left;
+        text-align: left;
         padding-left: 16px;
       }
       &:last-child {
-        // text-align: right;
+       text-align: right;
         padding-right: 16px;
       }
     }
@@ -511,11 +511,11 @@ export default {
         border-bottom: 0 !important;
         color: #8090AF;
         &:first-child {
-          // text-align: left;
+          text-align: left;
           padding-left: 16px;
         }
         &:last-child {
-          // text-align: right;
+          text-align: right;
           padding-right: 16px;
         }
       }

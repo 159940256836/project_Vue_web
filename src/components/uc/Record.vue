@@ -524,6 +524,10 @@ export default {
                         height: 50px;
                         background: #191D3A;
                         border-bottom: 0 !important;
+                        &:first-child {
+                            text-align: left;
+                            padding-left: 13px;
+                        }
                     }
                 }
             }

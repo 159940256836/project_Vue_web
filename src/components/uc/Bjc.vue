@@ -218,6 +218,9 @@ export default {
                 }
                 tbody.ivu-table-tbody .ivu-table-row td {
                     background: #111530;
+                    &:last-child {
+                        text-align: left;
+                    }
                 }
             }
         }
