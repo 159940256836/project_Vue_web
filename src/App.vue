@@ -4,7 +4,7 @@
             <div
                 class="page-content"
                 :style = "{
-                  padding: $route.path==='/'? topPadding : '0 5%',
+                  padding: $route.path==='/'? topPadding : '0 7.5%',
                   backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
                 }"
             >
@@ -424,7 +424,7 @@ export default {
         createTime: '2018-01-10 11:37:27'
       },
       styleTop: 30,
-      topPadding: '0 5%',
+      topPadding: '0 7.5%',
       topBackgroundColor: 'transparent',
       $mainNightBgColor: '#11132c',
       pathName: '',
@@ -542,11 +542,11 @@ export default {
       this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
         var resp = response.body
         if (resp.code === 0) {
-        this.FAQList = (resp.data.content).slice(0, 5)
-        console.log(this.FAQList.slice(0, 5))
-      } else {
-        this.$Message.error(console.log('1'))
-      }
+          this.FAQList = (resp.data.content).slice(0, 5)
+          console.log(this.FAQList.slice(0, 5))
+        } else {
+          this.$Message.error(console.log('1'))
+        }
       })
     },
         // header动画效果
@@ -589,7 +589,7 @@ export default {
         this.topBackgroundColor = '#11132c'
       } else {
         this.styleTop = 30
-        this.topPadding = '0 5%'
+        this.topPadding = '0 7.5%'
         this.topBackgroundColor = 'transparent'
       }
     },
@@ -760,6 +760,7 @@ export default {
                                 height: 30px;
                                 line-height: 30px;
                                 cursor: pointer;
+                                /*overflow: hidden;*/
                                 a {
                                     min-width: 150px;
                                     background: #10122B;
@@ -1210,6 +1211,9 @@ body {
 
 .ivu-dropdown-menu {
     min-width: 100px;
+    /*max-width: 200px;*/
+    /*padding-right: 20px;*/
+    white-space: nowrap;
 }
 
 .layout-ceiling-main .ivu-select-dropdown {

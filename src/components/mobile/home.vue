@@ -2,7 +2,7 @@
     <div id="mobile_home">
         <header>
             <div class="header-logo">
-                <img src="./img/top_logo.png" alt="加载失败">
+                <img src="./img/top_logo.png" alt="">
             </div>
         </header>
         <main>
@@ -22,7 +22,7 @@
                 <p style="text-align:center">
                     <span class="login btn" @click="goLogin">登录</span>
                 </p>
-                <img src="./img/module.png" alt="加载失败" class="module">
+                <img src="./img/module.png" alt="" class="module">
                 <p class="text">移动交易，随时随地</p>
                 <div class="terminal">
                     <div class="pc btn2" @click="goPc">
@@ -32,11 +32,11 @@
                         <span>移动版</span>
                     </div>
                 </div>
-                <img src="./img/bottom_logo.png" alt="加载失败"  class="botton-logo">
+                <img src="./img/bottom_logo.png" alt=""  class="botton-logo">
             </div>
         </main>
         <footer v-if="footerIsShow">
-            <img src="./img/logo.png" alt="加载事变" class="logo">
+            <img src="./img/logo.png" alt="" class="logo">
             <div class="logo-text">
                 <p>BDW</p>
                 <p>随时对地, 放心交易</p>
@@ -56,30 +56,30 @@ export default {
   },
   methods: {
     goPc() {
-        this.$router.push('/')
-        sessionStorage.switchToPc = true
+      this.$router.push('/')
+      sessionStorage.switchToPc = true
     },
     goMobile() {
-        window.location.href = 'https://download.bdw.top'
+      window.location.href = 'https://download.bdw.top'
     },
     goLogin() {
-        if(this.isLogin) {
-            sessionStorage.switchToPc = true
-            this.$router.push('/')
-        }
-        this.$router.push({name:'mobileLogin'})
+      if (this.isLogin) {
+        sessionStorage.switchToPc = true
+        this.$router.push('/')
+      }
+      this.$router.push({ name: 'mobileLogin' })
     },
     goRegister() {
-        if(this.isLogin) {
-            sessionStorage.switchToPc = true
-            this.$router.push('/')
-        }
-        this.$router.push({name:'mobileRegister'})
+      if (this.isLogin) {
+        sessionStorage.switchToPc = true
+        this.$router.push('/')
+      }
+      this.$router.push({ name: 'mobileRegister' })
     }
   },
   computed: {
     isLogin: function() {
-      return this.$store.getters.isLogin;
+      return this.$store.getters.isLogin
     }
   },
   beforeRouteEnter(to, from, next) {

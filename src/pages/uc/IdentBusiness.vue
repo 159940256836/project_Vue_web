@@ -284,7 +284,7 @@
               <span style="line-height: 100px;font-size: 50px">+</span>
               <img v-show="assetImg" class="previewImg" :src="assetImg">
             </Upload>
-            <span>{{$t("uc.identity.gerenzichan")}}</span>
+            <span class="user-text">{{$t("uc.identity.gerenzichan")}}</span>
             </Col>
             <Col span="8">
             <span>&nbsp;</span>
@@ -295,7 +295,7 @@
               <img v-show="tradeImg" class="previewImg" :src="tradeImg">
 
             </Upload>
-            <span>{{$t("uc.identity.shuzizichan")}}</span>
+            <span class="user-text">{{$t("uc.identity.shuzizichan")}}</span>
             </Col>
           </Row>
           <FormItem style="margin-top: 20px;">
@@ -970,14 +970,22 @@ export default {
           .apply-content {
 
             form.apply-form.ivu-form.ivu-form-label-top {
+              .ivu-select-item-focus {
+                background: transparent;
+              }
+              .user-text {
+                color: #8090af;
+              }
               .ivu-form-item-label {
                 color: #8090AF;
               }
               .ivu-form-item-content {
+                color: #8090AF;
                 .ivu-input {
-                  border: 1px solid;
+                  border: 1px solid #8090AF;
                   background: transparent;
                   color: #8090AF;
+                  border-radius: 0;
                   &:hover {
                     border-color: #3399ff;
                   }
@@ -999,11 +1007,11 @@ export default {
                         color: #3399ff;
                       }
                     }
-
                   }
                   .ivu-select-selection {
                     background: transparent;
-                    border: 1px solid;
+                    border: 1px solid #8090af;
+                    border-radius: 0;
                     .ivu-select-selected-value {
                       color: #8090AF;
                     }
@@ -1021,6 +1029,7 @@ export default {
               }
               .ivu-row {
                 .ivu-upload.ivu-upload-drag {
+                  border-radius: 0;
                   background: transparent;
                   &:hover {
                     border-color: #3399ff;

@@ -27,7 +27,7 @@ module.exports = {
     name: 'bdw--国际数字加密资产交易平台'
   },
   new: {
-    Announcemcenter:"公告中心",
+    Announcemcenter: '公告中心',
     Detailss: '详情',
     Currenrtification: '当前等级认证',
     Currentasset: '当前资产总估值',
@@ -39,6 +39,7 @@ module.exports = {
     Singlelimit: '单次限额',
     today: '今日交易金额',
     Myrder: '我的订单',
+    searchCurrency: '搜索交易币种',
     Modifpassword: '修改登录密码',
     confirmaaa: '确认',
     Modifyassword: '修改资金密码',
@@ -537,7 +538,7 @@ module.exports = {
     OpenPrice: '开盘价',
     PriceTrend: '价格趋势',
     Operate: '操作',
-    Exchange: '去交易',
+    exchange: '去交易',
     high: '24h最高价',
     low: '24h最低价'
   },

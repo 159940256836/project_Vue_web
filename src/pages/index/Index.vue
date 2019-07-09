@@ -65,7 +65,7 @@
                         <p class="flex">
                             <span
                                 class="pairs-sip sip"
-  
+
                                 v-if="item.isGreen"
                             >
                                 {{item.close}}
@@ -124,6 +124,18 @@
             <div class="Central">
               <div class="section" id="page2">
                 <div class="page2nav">
+                  <!--前端静态搜索 7.08-->
+                  <div class="title-info">
+                    <img src="../../assets/images/search.png" alt="">
+                    <input
+                      type="text"
+                      :placeholder="$t('new.searchCurrency')"
+                      class="text-input"
+                      v-model="searchKeyWord"
+                      maxlength="10"
+                    >
+                  </div>
+
                     <ul class="brclearfix">
                         <li
                             v-show="!(index==4&&!isLogin)"
@@ -144,7 +156,7 @@
                     <Table
                         v-if="choseBtn==4"
                         :columns="favorColumns"
-                        :data="dataIndex"
+                        :data="filteredData"
                         class="tables"
                         :disabled-hover="true"
                         :loading="loading"
@@ -154,7 +166,7 @@
                     <Table
                         v-else
                         :columns="coins.columns"
-                        :data="dataIndex"
+                        :data="filteredData"
                         class="tables"
                         :disabled-hover="true"
                         :loading="loading"
@@ -366,11 +378,12 @@ export default {
       yesDayCashDividensBonusETH: 0,
       yesDayMineAmountBHB: 0,
       CNYRate: null,
-      dataIndex: [],
+      dataIndex: [], // 原始币种列表数据
+      searchKeyWord: '', // 搜索框内容
       checkoutapp: 'true',
-            // pageNo: 1,
-            // pageSize: 50,
-            // totalNum: 0,
+      // pageNo: 1,
+      // pageSize: 50,
+      // totalNum: 0,
       FAQList: [],
       indexBtnBC: '',
       favorColumns: [
@@ -612,7 +625,7 @@ export default {
         //   }
         // },
         {
-          title: self.$t('service.Exchange'),
+          title: self.$t('service.exchange'),
           key: 'buyBtn',
           width: 70,
           render: function(h, params) {
@@ -912,7 +925,7 @@ export default {
         //     }
         //   },
           {
-            title: self.$t('service.Exchange'),
+            title: self.$t('service.exchange'),
             align: 'center',
             key: 'buyBtn',
             width: 70,
@@ -985,12 +998,21 @@ export default {
     },
     lang: function() {
       return this.$store.state.lang
+    },
+    filteredData: function () {
+      return this.dataIndex.filter((item) => {
+        return item['symbol'].split('/')[0].toLowerCase().indexOf(this.searchKeyWord.toLowerCase()) !== -1
+
+      })
     }
   },
   watch: {
     lang: function() {
       this.updateLangData()
-    }
+    },
+    searchKeyWord:function(){
+      this.searchKeyWord=this.searchKeyWord.replace(/[^\w\.\/]/ig,'');
+    },
   },
   mounted: function() {
     this.getCNYRate()
@@ -1099,7 +1121,7 @@ export default {
       this.coins.columns[5].title = this.$t('service.low')
       this.coins.columns[6].title = this.$t('service.ExchangeNum')
     //   this.coins.columns[7].title = this.$t('service.PriceTrend')
-      this.coins.columns[8].title = this.$t('service.Exchange')
+      this.coins.columns[7].title = this.$t('service.exchange')
 
       this.favorColumns[0].title = this.$t('service.favor')
       this.favorColumns[1].title = this.$t('service.symbol')
@@ -1109,7 +1131,7 @@ export default {
       this.favorColumns[5].title = this.$t('service.low')
       this.favorColumns[6].title = this.$t('service.ExchangeNum')
     //   this.favorColumns[7].title = this.$t('service.PriceTrend')
-      this.favorColumns[8].title = this.$t('service.Exchange')
+      this.favorColumns[7].title = this.$t('service.exchange')
             // this.coins.columns[4].title = this.$t("service.OpenPrice");
     },
         // openActivity(url) {
@@ -1322,7 +1344,7 @@ export default {
         Number(e) /
         Math.pow(10, c)
       )
-      
+
     },
     addClass(index) {
       window.indexBtnBC = ''
@@ -1357,6 +1379,7 @@ export default {
           coin.isFavor = false
           this.coins._map[coin.symbol] = coin
           this.coins[coin.base].push(coin)
+          console.log(coin.coin);
         }
         if (this.isLogin) {
           this.getFavor()
@@ -1641,6 +1664,28 @@ li {
         font-size: 20px;
         overflow: hidden;
         background: #191D3A;
+      .title-info {
+        position: relative;
+        .text-input {
+          height: 15px;
+          width: 180px;
+          border: none;
+          background-color: transparent;
+          float: right;
+          margin: 14px 25px 0;
+          padding: 0 0 0 35px;
+          font-size: 14px;
+          color: #fff;
+          border-left: 2px solid #8090af;
+          outline: none;
+        }
+        img {
+          position: absolute;
+          top: 14px;
+          right: 19px;
+        }
+      }
+
         .brclearfix {
             font-weight: 600;
             border: 1px solid #191D3A;
@@ -1940,6 +1985,21 @@ li {
 }
 </style>
 <style lang="scss">
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #8090af;
+}
+
+input:-moz-placeholder, textarea:-moz-placeholder {
+  color: #8090af;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #8090af;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #8090af;
+}
 .ivu-table-wrapper > .ivu-spin-fix{
     background: rgba(17,22,52,1)
 }

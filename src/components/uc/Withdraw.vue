@@ -745,6 +745,11 @@ export default {
                     }
                 }
             }
+            .ivu-table-tip {
+                td {
+                    text-align: center;
+                }
+            }
         }
         .ivu-input[disabled]:hover {
             border-color: #58698A;

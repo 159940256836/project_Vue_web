@@ -45,7 +45,7 @@ module.exports = {
     copyFail: 'copy fail'
   },
   new: {
-    Announcemcenter:'Announcement center',
+    Announcemcenter: 'Announcement center',
     Detailss: 'Details',
     Currenrtification: 'Current level certification',
     Currentasset: 'Current asset valuation',
@@ -57,6 +57,7 @@ module.exports = {
     Singlelimit: 'Single limit',
     today: "Today's transaction amount",
     Myrder: 'My Order',
+    searchCurrency: 'Search currencies',
     Modifpassword: 'Modify the login password',
     confirmaaa: 'confirm',
     Modifyassword: 'Modify the fund password',
@@ -540,7 +541,7 @@ module.exports = {
     OpenPrice: 'Open Price',
     PriceTrend: 'Price Trend',
     Operate: 'Operate',
-    Exchange: 'Exchange',
+    exchange: 'Exchange',
     hight: 'higher',
     low: 'lower'
   },

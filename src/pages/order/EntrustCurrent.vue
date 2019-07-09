@@ -565,22 +565,24 @@ export default {
       this.$http
         .post(this.host + '/exchange/order/personal/newCurrent', params)
         .then(response => {
-          var resp = response.body
-          const rows = []
-          if (resp.data.length > 0) {
-            this.total = resp.data.length
-            for (var i = 0; i < resp.data.length; i++) {
-              var row = resp.data[i]
-              row.price =
+          if (response.body.code != 500) {
+            var resp = response.body
+            const rows = []
+            if (resp.data.length > 0) {
+              this.total = resp.data.length
+              for (var i = 0; i < resp.data.length; i++) {
+                var row = resp.data[i]
+                row.price =
                 row.type == 'MARKET_PRICE'
                   ? that.$t('exchange.marketprice')
                   : row.price
-              rows.push(row)
+                rows.push(row)
+              }
+              this.orders = rows
+              this.getSymbol()
             }
-            this.orders = rows
-            this.getSymbol()
+            this.loading = false
           }
-          this.loading = false
         })
     },
     getSymbol() {
@@ -642,7 +644,7 @@ export default {
       // const m5 = this.$store.getters.lang == "English" ? 88 : 60;
       // const m6 = this.$store.getters.lang == "English" ? 70 : '';
       // const m7 = this.$store.getters.lang == "English" ? 85 : '';
-      const m8 = this.$store.getters.lang == "English" ? 143 : 100;
+      const m8 = this.$store.getters.lang == 'English' ? 143 : 100
       // const m9 = this.$store.getters.lang == "English" ? 80 : 110;
       // const m10 = this.$store.getters.lang == "English" ? 70 : '';
       // arr.push({
