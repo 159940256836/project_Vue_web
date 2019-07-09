@@ -240,10 +240,28 @@
                       <div class="trading">{{$t("sectionPage.soontrading")}}</div>
                       <div class="registered">{{$t("sectionPage.Registeraccount")}}</div>
                     </div>
-                    <div class="page1right">
-                      <router-link class="login"  to="/login">{{$t("common.login")}}</router-link>
-                      <router-link class="registe" to="/register">{{$t("common.register")}}</router-link>
+                    <div class="page1right" v-if="!isLogin">
+                      <router-link
+                          class="login"
+                          to="/login"
+                      >
+                        {{$t("common.login")}}
+                      </router-link>
+                      <router-link
+                          class="registe"
+                          to="/register"
+                      >
+                        {{$t("common.register")}}
+                      </router-link>
                     </div>
+                  <div class="page1right" v-else>
+                    <router-link
+                        class="registe"
+                        to="/exchange"
+                    >
+                      {{$t("service.exchange")}}
+                    </router-link>
+                  </div>
                 </div>
               </div>
             </div>
