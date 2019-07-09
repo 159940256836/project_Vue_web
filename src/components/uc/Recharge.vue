@@ -17,6 +17,7 @@
                                         v-model="coinType"
                                         style="width:130px;"
                                         @on-change="changeCoin"
+                                        :placeholder="$t('header.choose')"
                                     >
                                         <Option
                                             v-for="item in coinList"

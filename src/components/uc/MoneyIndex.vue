@@ -190,7 +190,6 @@ export default {
       columns.push({
         title: this.$t('uc.finance.money.cointype'),
         key: 'coinType',
-        width: 100,
         align: 'center'
       })
       columns.push({
@@ -493,11 +492,16 @@ export default {
     margin:0;
   }
   .ivu-table {
+    .ivu-table-tip {
+      td {
+        text-align: center !important;
+      }
+    }
     td {
       background: #111530;
       &:first-child {
         text-align: left;
-        padding-left: 16px;
+        padding-left: 32px;
       }
       &:last-child {
        text-align: right;
@@ -512,7 +516,7 @@ export default {
         color: #8090AF;
         &:first-child {
           text-align: left;
-          padding-left: 16px;
+          padding-left: 32px;
         }
         &:last-child {
           text-align: right;
