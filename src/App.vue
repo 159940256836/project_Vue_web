@@ -356,7 +356,7 @@
                             <a href="http://www.iterduo.com">
                                 <img src="./assets/images/footer/5.png" alt="">
                             </a>
-                            <a href="http://www.feixiaohao.com">
+                            <a href="https://www.feixiaohao.com/exchange/bdw/">
                                 <img src="./assets/images/footer/6.png" alt="">
                             </a>
                             <a href="http://www.btc123.com">

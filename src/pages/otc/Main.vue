@@ -307,7 +307,7 @@
     border-radius: 5px;
     height: 510px;
     /*background: url("../../assets/images/fiat_banner.jpg") no-repeat center center;*/
-    background: url("../../assets/images/fait/fait-banner.png") no-repeat center center;
+    background: url("https://coinmany2.oss-cn-shanghai.aliyuncs.com/fait-banner.png") no-repeat center center;
     /*background-size: 100%;*/
     display: flex; //flex布局
     justify-content: center; //使子项目水平居中
@@ -548,20 +548,20 @@ export default {
     },
     getCNYRate() {
       this.$http.post(this.host + '/market/exchange-rate/usd-cny').then(res => {
-        console.log(res.body);
+        console.log(res.body)
         if (res.body.code == 0) {
-          let resp = res.body;
-          this.CNYRate = resp.data;
-          console.log(this.CNYRate);
+          const resp = res.body
+          this.CNYRate = resp.data
+          console.log(this.CNYRate)
         }
-      });
+      })
     },
     getSetting() {
       this.$http.get(this.host + this.api.uc.identification).then(res => {
         if (res.body.code == 0) {
-          console.log(res);
-          this.certStatus = res.body.data.certifiedBusinessStatus;
-          console.log(this.certStatus);
+          console.log(res)
+          this.certStatus = res.body.data.certifiedBusinessStatus
+          console.log(this.certStatus)
         }
       })
     },

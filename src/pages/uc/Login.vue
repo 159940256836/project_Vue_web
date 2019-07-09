@@ -136,7 +136,7 @@
 /* 验证码 */
 $primary-color: #3399ff;
 .login_form {
-    background: #fff url('../../assets/images/brnner.png') no-repeat center;
+    background: #fff url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/brnner.png') no-repeat center;
     height: 760px;
     position: relative;
     overflow: hidden;

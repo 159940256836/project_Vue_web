@@ -212,7 +212,7 @@
                         </div>
                         <div class="ipone click" @click="checkouttrue">
                             <img src="../../assets/img/ios.png" style="margin:0 24px 0 34px" alt="">
-                          <span>Iphone</span>
+                          <span>iphone</span>
                         </div>
                       </div>
                       <div class="Qrleft" v-show="!checkoutapp">
@@ -222,7 +222,7 @@
                           </div>
                           <div class="ipone" @click="checkouttrue">
                             <img src="../../assets/img/ios.png" style="margin:0 24px 0 34px" alt="">
-                            <span>Iphone</span>
+                            <span>iphone</span>
                           </div>
                       </div>
                       <div class="Qrright">
@@ -999,10 +999,9 @@ export default {
     lang: function() {
       return this.$store.state.lang
     },
-    filteredData: function () {
+    filteredData: function() {
       return this.dataIndex.filter((item) => {
         return item['symbol'].split('/')[0].toLowerCase().indexOf(this.searchKeyWord.toLowerCase()) !== -1
-
       })
     }
   },
@@ -1010,9 +1009,9 @@ export default {
     lang: function() {
       this.updateLangData()
     },
-    searchKeyWord:function(){
-      this.searchKeyWord=this.searchKeyWord.replace(/[^\w\.\/]/ig,'');
-    },
+    searchKeyWord: function() {
+      this.searchKeyWord = this.searchKeyWord.replace(/[^\w\.\/]/ig, '')
+    }
   },
   mounted: function() {
     this.getCNYRate()
@@ -1337,14 +1336,13 @@ export default {
       try {
         c += e.split('.')[1].length
       } catch (f) { }
-      d == null ? d = 0 : (typeof d == 'string' ? d = d.replace('.','') : '')
-      e == null ? e = 0 : (typeof e == 'string' ? e = e.replace('.','') : '')
+      d == null ? d = 0 : (typeof d === 'string' ? d = d.replace('.', '') : '')
+      e == null ? e = 0 : (typeof e === 'string' ? e = e.replace('.', '') : '')
       return (
         Number(d) *
         Number(e) /
         Math.pow(10, c)
       )
-
     },
     addClass(index) {
       window.indexBtnBC = ''
@@ -1379,7 +1377,7 @@ export default {
           coin.isFavor = false
           this.coins._map[coin.symbol] = coin
           this.coins[coin.base].push(coin)
-          console.log(coin.coin);
+          console.log(coin.coin)
         }
         if (this.isLogin) {
           this.getFavor()

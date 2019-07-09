@@ -555,366 +555,366 @@ import ResetGoogleVali from '@/pages/google/ResetGoogleVali.vue'
 import CloseGoogleVali from '@/pages/google/CloseGoogleVali.vue'
 
 export default {
-    data() {
-        const validatePass = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.safe.newpwdmsg1")));
-            } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-                callback(new Error(this.$t("uc.safe.newpwdmsg1")));
-            } else {
-                callback();
-            }
-        };
-        const validatePassCheck = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.safe.newpwdmsg2")));
-            } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-                callback(new Error(this.$t("uc.safe.newpwdmsg2")));
-            } else if (value !== this.formValidate4.newPw) {
-                callback(new Error(this.$t("uc.safe.newpwdmsg2")));
-            } else {
-                callback();
-            }
-        };
-        const validateMPass = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.safe.pwdmsg1")));
-            } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-                callback(new Error(this.$t("uc.safe.pwdmsg1")));
-            } else {
-                callback();
-            }
-        };
-        const validateMPassCheck = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.safe.pwdmsg2")));
-            } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-                callback(new Error(this.$t("uc.safe.pwdmsg2")));
-            } else if (value !== this.formValidate5.newMPw) {
-                callback(new Error(this.$t("uc.safe.pwdmsg2")));
-            } else {
-                callback();
-            }
-        };
-        const validatepw7 = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.safe.pwdmsg1")));
-            } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-                callback(new Error(this.$t("uc.safe.pwdmsg1")));
-            } else {
-                callback();
-            }
-        };
-        const validatepw7check = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.safe.pwdmsg1")));
-            } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-                callback(new Error(this.$t("uc.safe.pwdmsg2")));
-            } else if (value !== this.formValidate7.pw7) {
-                callback(new Error(this.$t("uc.safe.pwdmsg2")));
-            } else {
-                callback();
-            }
-        };
-        const validateMPass8 = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.safe.pwdmsg1")));
-            } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-                callback(new Error(this.$t("uc.safe.pwdmsg1")));
-            } else {
-                callback();
-            }
-        };
-        const validateMPassCheck8 = (rule, value, callback) => {
-            if (value === "") {
-                callback(new Error(this.$t("uc.safe.pwdmsg2")));
-            } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-                callback(new Error(this.$t("uc.safe.pwdmsg2")));
-            } else if (value !== this.formValidate8.newMPw8) {
-                callback(new Error(this.$t("uc.safe.pwdmsg2")));
-            } else {
-                callback();
-            }
-        };
-        return {
-            modal2: false,
-            modal3: false,
-            modal4: false,
-            modal5: false,
-            modal6: false,
-            modal7: false,
-            modal8: false,
-            modal9: false,
-            modal10: false,
-            uid: '',
-            googleSwitch: false,
-            fGetBackFundpwd: false,
-            imgPreview: "",
-            imgNext: "",
-            imgLast: "",
-            loginmsg: this.$t("common.logintip"),
-            memberlevel: "",
-            frontCardImg: require("../../assets/images/frontCardImg1.jpg"),
-            backCardImg: require("../../assets/images/backCardImg1.jpg"),
-            handCardImg: require("../../assets/images/HandCardImg1.jpg"),
+  data() {
+    const validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.safe.newpwdmsg1')))
+      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.safe.newpwdmsg1')))
+      } else {
+        callback()
+      }
+    }
+    const validatePassCheck = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.safe.newpwdmsg2')))
+      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.safe.newpwdmsg2')))
+      } else if (value !== this.formValidate4.newPw) {
+        callback(new Error(this.$t('uc.safe.newpwdmsg2')))
+      } else {
+        callback()
+      }
+    }
+    const validateMPass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.safe.pwdmsg1')))
+      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.safe.pwdmsg1')))
+      } else {
+        callback()
+      }
+    }
+    const validateMPassCheck = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.safe.pwdmsg2')))
+      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.safe.pwdmsg2')))
+      } else if (value !== this.formValidate5.newMPw) {
+        callback(new Error(this.$t('uc.safe.pwdmsg2')))
+      } else {
+        callback()
+      }
+    }
+    const validatepw7 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.safe.pwdmsg1')))
+      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.safe.pwdmsg1')))
+      } else {
+        callback()
+      }
+    }
+    const validatepw7check = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.safe.pwdmsg1')))
+      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.safe.pwdmsg2')))
+      } else if (value !== this.formValidate7.pw7) {
+        callback(new Error(this.$t('uc.safe.pwdmsg2')))
+      } else {
+        callback()
+      }
+    }
+    const validateMPass8 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.safe.pwdmsg1')))
+      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.safe.pwdmsg1')))
+      } else {
+        callback()
+      }
+    }
+    const validateMPassCheck8 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.safe.pwdmsg2')))
+      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.safe.pwdmsg2')))
+      } else if (value !== this.formValidate8.newMPw8) {
+        callback(new Error(this.$t('uc.safe.pwdmsg2')))
+      } else {
+        callback()
+      }
+    }
+    return {
+      modal2: false,
+      modal3: false,
+      modal4: false,
+      modal5: false,
+      modal6: false,
+      modal7: false,
+      modal8: false,
+      modal9: false,
+      modal10: false,
+      uid: '',
+      googleSwitch: false,
+      fGetBackFundpwd: false,
+      imgPreview: '',
+      imgNext: '',
+      imgLast: '',
+      loginmsg: this.$t('common.logintip'),
+      memberlevel: '',
+      frontCardImg: require('../../assets/images/frontCardImg1.jpg'),
+      backCardImg: require('../../assets/images/backCardImg1.jpg'),
+      handCardImg: require('../../assets/images/HandCardImg1.jpg'),
 
-            uploadHeaders: { "x-auth-token": localStorage.getItem("TOKEN") },
-            uploadUrl: this.host + "/uc/upload/oss/image",
+      uploadHeaders: { 'x-auth-token': localStorage.getItem('TOKEN') },
+      uploadUrl: this.host + '/uc/upload/oss/image',
 
-            usernameS: "",
-            user: {},
-            googleAuthentication: "",
-            choseItem: 0,
-            accountValue: "1",
-            formValidate2: {
-                mail: "",
-                vailCode1: "",
-                password: ""
-            },
-            formValidate3: {
-                mobile: "",
-                vailCode2: "",
-                password: ""
-            },
-            formValidate4: {
-                googleCode: "",
-                oldPw: "",
-                newPw: "",
-                newPwConfirm: "",
-                vailCode3: ""
-            },
-            formValidate5: {
-                oldPw: "",
-                newMPw: "",
-                newMPwConfirm: "",
-                vailCode5: '',
-                googleCode: "",
-            },
-            formValidate6: {
-                realName: "",
-                idCard: ""
-            },
-            formValidate7: {
-                pw7: "",
-                pw7Confirm: ""
-            },
-            formValidate8: {
-                newMPw8: "",
-                newMPwConfirm8: "",
-                vailCode5: ""
-            },
-            ruleValidate: {
-                googleCode5: [{
-                    required: true,
-                    message: this.$t('openGoolePage._GoogleVerificationCode'),
-                    trigger: "blur"
-                }],
-                googleCode: [
-                    {
-                        required: true,
-                        message: this.$t('openGoolePage._GoogleVerificationCode'),
-                        trigger: "blur"
-                    }
-                ],
-                mail: [
-                    {
-                        required: true,
-                        type: "email",
-                        message: this.$t("uc.safe.emailtip"),
-                        trigger: "blur"
-                    }
-                ],
-                vailCode1: [
-                    {
-                        required: true,
-                        message: this.$t("uc.safe.codetip"),
-                        trigger: "blur"
-                    }
-                ],
-                mobile: [
-                    {
-                        required: true,
-                        message: this.$t("uc.safe.telnotip"),
-                        trigger: "blur"
-                    }
-                ],
-                vailCode2: [
-                    {
-                        required: true,
-                        message: this.$t("uc.safe.codetip"),
-                        trigger: "blur"
-                    }
-                ],
-                vailCode3: [
-                    {
-                        required: true,
-                        message: this.$t("uc.safe.codetip"),
-                        trigger: "blur"
-                    }
-                ],
-                password: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.pwdmsg1"),
-                        trigger: "blur"
-                    }
-                ],
-                oldPw: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.oldpwdtip"),
-                        trigger: "blur"
-                    }
-                ],
-                newPw: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.newpwdmsg1"),
-                        trigger: "blur"
-                    },
-                    { validator: validatePass, trigger: "blur" }
-                ],
-                newPwConfirm: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.confirmpwd"),
-                        trigger: "blur"
-                    },
-                    { validator: validatePassCheck, trigger: "blur" }
-                ],
-                newMPw: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.pwdmsg1"),
-                        trigger: "blur"
-                    },
-                    { validator: validateMPass, trigger: "blur" }
-                ],
-                newMPwConfirm: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.pwdmsg2"),
-                        trigger: "blur"
-                    },
-                    { validator: validateMPassCheck, trigger: "blur" }
-                ],
-                pw7: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.pwdmsg1"),
-                        trigger: "blur"
-                    },
-                    { validator: validatepw7, trigger: "blur" }
-                ],
-                pw7Confirm: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.pwdmsg2"),
-                        trigger: "blur"
-                    },
-                    { validator: validatepw7check, trigger: "blur" }
-                ],
-                vailCode5: [
-                    {
-                        required: true,
-                        message: this.$t("uc.safe.codetip"),
-                        trigger: "blur"
-                    }
-                ],
-                realName: [
-                    {
-                        required: true,
-                        message: this.$t("uc.safe.realnametip"),
-                        trigger: "blur"
-                    }
-                ],
-                idCard: [
-                    {
-                        required: true,
-                        message: this.$t("uc.safe.idcardtip"),
-                        trigger: "blur"
-                    }
-                ],
-                newMPw8: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.pwdmsg1"),
-                        trigger: "blur"
-                    },
-                    { validator: validateMPass8, trigger: "blur" }
-                ],
-                newMPwConfirm8: [
-                    {
-                        required: true,
-                        type: "string",
-                        min: 6,
-                        message: this.$t("uc.safe.pwdmsg2"),
-                        trigger: "blur"
-                    },
-                    { validator: validateMPassCheck8, trigger: "blur" }
-                ]
-            },
-            time1: 60, // 发送验证码倒计时
-            time2: 60, // 发送验证码倒计时
-            time3: 60, // 发送验证码倒计时
-            time5: 60, // 发送验证码倒计时
-            time8: 60,
-            sendMsgDisabled1: false,
-            sendMsgDisabled2: false,
-            sendMsgDisabled3: false,
-            sendMsgDisabled5: false,
-            sendMsgDisabled8: false,
-            googleAuthentication: ""
-        };
+      usernameS: '',
+      user: {},
+      googleAuthentication: '',
+      choseItem: 0,
+      accountValue: '1',
+      formValidate2: {
+        mail: '',
+        vailCode1: '',
+        password: ''
+      },
+      formValidate3: {
+        mobile: '',
+        vailCode2: '',
+        password: ''
+      },
+      formValidate4: {
+        googleCode: '',
+        oldPw: '',
+        newPw: '',
+        newPwConfirm: '',
+        vailCode3: ''
+      },
+      formValidate5: {
+        oldPw: '',
+        newMPw: '',
+        newMPwConfirm: '',
+        vailCode5: '',
+        googleCode: ''
+      },
+      formValidate6: {
+        realName: '',
+        idCard: ''
+      },
+      formValidate7: {
+        pw7: '',
+        pw7Confirm: ''
+      },
+      formValidate8: {
+        newMPw8: '',
+        newMPwConfirm8: '',
+        vailCode5: ''
+      },
+      ruleValidate: {
+        googleCode5: [{
+          required: true,
+          message: this.$t('openGoolePage._GoogleVerificationCode'),
+          trigger: 'blur'
+        }],
+        googleCode: [
+          {
+            required: true,
+            message: this.$t('openGoolePage._GoogleVerificationCode'),
+            trigger: 'blur'
+          }
+        ],
+        mail: [
+          {
+            required: true,
+            type: 'email',
+            message: this.$t('uc.safe.emailtip'),
+            trigger: 'blur'
+          }
+        ],
+        vailCode1: [
+          {
+            required: true,
+            message: this.$t('uc.safe.codetip'),
+            trigger: 'blur'
+          }
+        ],
+        mobile: [
+          {
+            required: true,
+            message: this.$t('uc.safe.telnotip'),
+            trigger: 'blur'
+          }
+        ],
+        vailCode2: [
+          {
+            required: true,
+            message: this.$t('uc.safe.codetip'),
+            trigger: 'blur'
+          }
+        ],
+        vailCode3: [
+          {
+            required: true,
+            message: this.$t('uc.safe.codetip'),
+            trigger: 'blur'
+          }
+        ],
+        password: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.pwdmsg1'),
+            trigger: 'blur'
+          }
+        ],
+        oldPw: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.oldpwdtip'),
+            trigger: 'blur'
+          }
+        ],
+        newPw: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.newpwdmsg1'),
+            trigger: 'blur'
+          },
+                    { validator: validatePass, trigger: 'blur' }
+        ],
+        newPwConfirm: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.confirmpwd'),
+            trigger: 'blur'
+          },
+                    { validator: validatePassCheck, trigger: 'blur' }
+        ],
+        newMPw: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.pwdmsg1'),
+            trigger: 'blur'
+          },
+                    { validator: validateMPass, trigger: 'blur' }
+        ],
+        newMPwConfirm: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.pwdmsg2'),
+            trigger: 'blur'
+          },
+                    { validator: validateMPassCheck, trigger: 'blur' }
+        ],
+        pw7: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.pwdmsg1'),
+            trigger: 'blur'
+          },
+                    { validator: validatepw7, trigger: 'blur' }
+        ],
+        pw7Confirm: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.pwdmsg2'),
+            trigger: 'blur'
+          },
+                    { validator: validatepw7check, trigger: 'blur' }
+        ],
+        vailCode5: [
+          {
+            required: true,
+            message: this.$t('uc.safe.codetip'),
+            trigger: 'blur'
+          }
+        ],
+        realName: [
+          {
+            required: true,
+            message: this.$t('uc.safe.realnametip'),
+            trigger: 'blur'
+          }
+        ],
+        idCard: [
+          {
+            required: true,
+            message: this.$t('uc.safe.idcardtip'),
+            trigger: 'blur'
+          }
+        ],
+        newMPw8: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.pwdmsg1'),
+            trigger: 'blur'
+          },
+                    { validator: validateMPass8, trigger: 'blur' }
+        ],
+        newMPwConfirm8: [
+          {
+            required: true,
+            type: 'string',
+            min: 6,
+            message: this.$t('uc.safe.pwdmsg2'),
+            trigger: 'blur'
+          },
+                    { validator: validateMPassCheck8, trigger: 'blur' }
+        ]
+      },
+      time1: 60, // 发送验证码倒计时
+      time2: 60, // 发送验证码倒计时
+      time3: 60, // 发送验证码倒计时
+      time5: 60, // 发送验证码倒计时
+      time8: 60,
+      sendMsgDisabled1: false,
+      sendMsgDisabled2: false,
+      sendMsgDisabled3: false,
+      sendMsgDisabled5: false,
+      sendMsgDisabled8: false,
+      googleAuthentication: ''
+    }
+  },
+  methods: {
+    userUid() {
+      this.uid = this.userId.id
     },
-    methods: {
-        userUid() {
-            this.uid = this.userId.id;
-        },
-        checkGoogleValidtor(data) {//验证用户是否开启google验证
-            this.$http.post(this.host + '/uc/get/user', data).then(res => {
-                const data = res.body;
-                if (data.code == 0) {
-                    this.googleSwitch = !!data.data;
-                }
-                if (data.data == 1) {
-                    this.googleAuthentication = this.$t('openGoolePage._reset')
-                }
-            })
-        },
-        resetGoogle() {
-            this.modal7 = true
-            this.googleSwitch = !this.googleSwitch
-        },
-        changeGoogleSwitch() {//改变google验证状态
-            if(this.googleSwitch) {
-                this.modal7 = true
-            } else {
-                this.modal8 = true
-            }
-        },
-        googleModalCancel() {
-            this.googleSwitch = !this.googleSwitch
-        },
-        beforeUpload(data) {
+    checkGoogleValidtor(data) { // 验证用户是否开启google验证
+      this.$http.post(this.host + '/uc/get/user', data).then(res => {
+        const data = res.body
+        if (data.code == 0) {
+          this.googleSwitch = !!data.data
+        }
+        if (data.data == 1) {
+          this.googleAuthentication = this.$t('openGoolePage._reset')
+        }
+      })
+    },
+    resetGoogle() {
+      this.modal7 = true
+      this.googleSwitch = !this.googleSwitch
+    },
+    changeGoogleSwitch() { // 改变google验证状态
+      if (this.googleSwitch) {
+        this.modal7 = true
+      } else {
+        this.modal8 = true
+      }
+    },
+    googleModalCancel() {
+      this.googleSwitch = !this.googleSwitch
+    },
+    beforeUpload(data) {
             // console.log(data)
             // let name = data.name;//截取后4位
             // name.substring(name.length-3);
@@ -927,78 +927,78 @@ export default {
             //     this.$Message.error('文件格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。');
             //     return false;
             // }
-            if (data && data.size >= 1024000 * 2) {
-                /*上传图片大小不能超过2M*/
-                this.$Message.error(this.$t('uc.identity.upload'));
-                return false;
-            }
-        },
-        frontHandleSuccess(res, file, fileList) {
-            this.$refs.upload1.fileList = [fileList[fileList.length - 1]];
-            if (res.code == 0) {
-                this.frontCardImg = this.imgPreview = res.data;
-            } else {
-                this.$Message.error(res.message);
-            }
-        },
-        backHandleSuccess(res, file, fileList) {
-            this.$refs.upload2.fileList = [fileList[fileList.length - 1]];
-            if (res.code == 0) {
-                this.backCardImg = this.imgNext = res.data;
-            } else {
-                this.$Message.error(res.message);
-            }
-        },
-        handHandleSuccess(res, file, fileList) {
-            this.$refs.upload3.fileList = [fileList[fileList.length - 1]];
-            if (res.code == 0) {
-                this.handCardImg = this.imgLast = res.data;
-            } else {
-                this.$Message.error(res.message);
-            }
-        },
-        noPhone() {
-            this.$Message.info(this.$t("uc.safe.bindphonetip"));
+      if (data && data.size >= 1024000 * 2) {
+                /* 上传图片大小不能超过2M*/
+        this.$Message.error(this.$t('uc.identity.upload'))
+        return false
+      }
+    },
+    frontHandleSuccess(res, file, fileList) {
+      this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
+      if (res.code == 0) {
+        this.frontCardImg = this.imgPreview = res.data
+      } else {
+        this.$Message.error(res.message)
+      }
+    },
+    backHandleSuccess(res, file, fileList) {
+      this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
+      if (res.code == 0) {
+        this.backCardImg = this.imgNext = res.data
+      } else {
+        this.$Message.error(res.message)
+      }
+    },
+    handHandleSuccess(res, file, fileList) {
+      this.$refs.upload3.fileList = [fileList[fileList.length - 1]]
+      if (res.code == 0) {
+        this.handCardImg = this.imgLast = res.data
+      } else {
+        this.$Message.error(res.message)
+      }
+    },
+    noPhone() {
+      this.$Message.info(this.$t('uc.safe.bindphonetip'))
             // this.showItem(3);
-            this.modal3 = true
+      this.modal3 = true
+    },
+    showItemFundpwd() {
+      this.fGetBackFundpwd = false
+      this.handleReset('formValidate5')
+      this.modal5 = true
+    },
+    renderPw() {
+      this.$Modal.confirm({
+        title: this.$t('uc.safe.resetfundpwd'),
+        onOk: () => {
+          this.$Message.info('Clicked ok')
         },
-        showItemFundpwd() {
-            this.fGetBackFundpwd = false;
-            this.handleReset("formValidate5");
-            this.modal5 = true;
-        },
-        renderPw() {
-            this.$Modal.confirm({
-                title: this.$t("uc.safe.resetfundpwd"),
-                onOk: () => {
-                    this.$Message.info("Clicked ok");
-                },
-                render: h => {
-                    return h("Input", {
-                        props: {
-                            value: this.value,
-                            autofocus: true
-                        },
-                        on: {
-                            input: val => {
-                                this.value = val;
-                            }
-                        }
-                    });
+        render: h => {
+          return h('Input', {
+            props: {
+              value: this.value,
+              autofocus: true
+            },
+            on: {
+              input: val => {
+                  this.value = val
                 }
-            });
-        },
-        submit(name) {
-            //实名认证
-            if (name == "formValidate6") {
-                if (!this.formValidate6.realName) {
-                    this.$Message.error(this.$t("uc.safe.upload_positivetip"));
-                    return false;
-                }
-                if (!this.formValidate6.idCard) {
-                    this.$Message.error(this.$t("uc.safe.upload_positivetip"));
-                    return false;
-                }
+            }
+          })
+        }
+      })
+    },
+    submit(name) {
+            // 实名认证
+      if (name == 'formValidate6') {
+        if (!this.formValidate6.realName) {
+          this.$Message.error(this.$t('uc.safe.upload_positivetip'))
+          return false
+        }
+        if (!this.formValidate6.idCard) {
+          this.$Message.error(this.$t('uc.safe.upload_positivetip'))
+          return false
+        }
                 // if (this.imgPreview == "") {
                 //     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
                 //     return false;
@@ -1011,332 +1011,332 @@ export default {
                 //     this.$Message.error(this.$t("uc.safe.upload_handtip"));
                 //     return false;
                 // }
-                let param = {};
-                param["realName"] = this.formValidate6.realName;
-                param["idCard"] = this.formValidate6.idCard;
+        const param = {}
+        param['realName'] = this.formValidate6.realName
+        param['idCard'] = this.formValidate6.idCard
                 // param["idCardFront"] = this.imgPreview;
                 // param["idCardBack"] = this.imgNext;
                 // param["handHeldIdCard"] = this.imgLast;
-                this.$http.post("http://192.168.124.188:6001/uc/approve/real/name", param)
+        this.$http.post(this.host + '/uc/approve/real/name', param)
                     .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            this.member.realName = this.formValidate6.realName;
-                            this.$store.commit("setMember", this.member);
-                            this.modal6 = false;
-                            this.$Message.success(this.$t("uc.safe.save_success"));
-                            this.getMember();
-                            this.choseItem = 0;
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            }
-            //邮箱认证
-            if (name == "formValidate2") {
-                let param = {};
-                param["email"] = this.formValidate2.mail;
-                param["code"] = this.formValidate2.vailCode1;
-                param["password"] = this.formValidate2.password;
-                this.$http
-                    .post(this.host + "/uc/approve/bind/email", param)
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            this.modal2 = false
-                            this.$Message.success(this.$t("uc.safe.save_success"));
-                            this.getMember();
-                            this.choseItem = 0;
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            }
-            //手机认证
-            if (name == "formValidate3") {
-                let param = {};
-                param["phone"] = this.formValidate3.mobile;
-                param["code"] = this.formValidate3.vailCode2;
-                param["password"] = this.formValidate3.password;
-                this.$http
-                    .post(this.host + "/uc/approve/bind/phone", param)
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            this.modal3 = false
-                            this.$Message.success(this.$t("uc.safe.save_success"));
-                            this.getMember();
-                            this.choseItem = 0;
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            }
-            //登录密码
-            if (name == "formValidate4") {
-                let param = {};
-                param["oldPassword"] = this.formValidate4.oldPw;
-                param["newPassword"] = this.formValidate4.newPw;
-                param["code"] = this.formValidate4.vailCode3;
-                if (this.googleSwitch) {
-                    param.googleCode = this.formValidate4.googleCode;
-                }
-                this.$http.post(this.host + "/uc/approve/update/password", param).then(response => {
-                    var resp = response.body;
-                    if (resp.code == 0) {
-                        this.modal4 = false
-                        this.$Message.success(this.$t("uc.safe.save_success"));
-                        this.getMember();
-                        this.choseItem = 0;
-                        localStorage.removeItem("MEMBER");
-                        localStorage.removeItem("TOKEN");
-                        this.$store.state.showLogout = true;
-                        this.$store.state.showLogin = false;
-                        let self = this;
-                        setTimeout(() => {
-                            self.$router.push("/login");
-                        }, 2000);
-                    } else {
-                        this.$Message.error(resp.message);
-                    }
-                });
-            }
-            //修改资金密码
-            if (name == "formValidate5") {
-                let param = {};
-                param["oldPassword"] = this.formValidate5.oldPw;
-                param["newPassword"] = this.formValidate5.newMPw;
-                param['msgCode'] = this.formValidate5.vailCode5;
-                if (this.googleSwitch) {
-                    param.googleCode = this.formValidate5.googleCode;
-                }
-                this.$http
-                    .post(this.host + "/uc/approve/update/transaction/password", param)
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            this.modal5 = false
-                            this.$Message.success(this.$t("uc.safe.save_success"));
-                            this.handleReset("formValidate5");
-                            this.getMember();
-                            this.choseItem = 0;
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            }
-            //设置资金密码
-            if (name == "formValidate7") {
-                let param = {};
-                param["jyPassword"] = this.formValidate7.pw7;
-                this.$http
-                    .post(this.host + "/uc/approve/transaction/password", param)
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            this.modal5 = false
-                            this.$Message.success(this.$t("uc.safe.save_success"));
-                            this.getMember();
-                            this.choseItem = 0;
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            }
-            //找回资金密码
-            if (name == "formValidate8") {
-                let param = {};
-                param["newPassword"] = this.formValidate8.newMPw8;
-                param["code"] = this.formValidate8.vailCode5;
-                this.$http
-                    .post(this.host + "/uc/approve/reset/transaction/password", param)
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            this.modal5 = false
-                            this.$Message.success(this.$t("uc.safe.save_success"));
-                            this.fGetBackFundpwd = false;
-                            this.handleReset("formValidate5");
-                            this.getMember();
-                            this.choseItem = 0;
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            }
-        },
-        handleSubmit(name) {
-            this.$refs[name].validate(valid => {
-                if (valid) {
-                    this.submit(name);
-                } else {
-                    // this.$Message.error(this.$t("uc.safe.save_failure"));
-                }
-            });
-        },
-        handleReset(name) {
-            this.$refs[name].resetFields();
-        },
-        showItem(index) {
-            this.choseItem = index;
-        },
-        send(index) {
-            let me = this;
-            if (index == 1) {
-                if (this.formValidate2.mail) {
-                    //获取邮箱code
-                    this.$http
-                        .post(this.host + "/uc/bind/email/code", {
-                            email: this.formValidate2.mail
-                        })
-                        .then(response => {
-                            var resp = response.body;
-                            if (resp.code == 0) {
-                                me.sendMsgDisabled1 = true;
-                                let interval = window.setInterval(function () {
-                                    if (me.time1-- <= 0) {
-                                        me.time1 = 60;
-                                        me.sendMsgDisabled1 = false;
-                                        window.clearInterval(interval);
-                                    }
-                                }, 1000);
-                            } else {
-                                this.$Message.error(resp.message);
-                            }
-                        });
-                } else {
-                    this.$refs.formValidate2.validateField("mail");
-                }
-            } else if (index == 2) {
-                if (this.formValidate3.mobile) {
-                    //获取手机code
-                    this.$http
-                        .post(this.host + "/uc/mobile/bind/code", {
-                            phone: this.formValidate3.mobile
-                        })
-                        .then(response => {
-                            var resp = response.body;
-                            if (resp.code == 0) {
-                                me.sendMsgDisabled2 = true;
-                                let interval = window.setInterval(function () {
-                                    if (me.time2-- <= 0) {
-                                        me.time2 = 60;
-                                        me.sendMsgDisabled2 = false;
-                                        window.clearInterval(interval);
-                                    }
-                                }, 1000);
-                            } else {
-                                this.$Message.error(resp.message);
-                            }
-                        });
-                } else {
-                    this.$refs.formValidate3.validateField("mobile");
-                }
-            } else if (index == 3) {
-                //登录密码获取手机code
-                this.$http
-                    .post(this.host + "/uc/mobile/update/password/code")
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            me.sendMsgDisabled3 = true;
-                            let interval = window.setInterval(function () {
-                                if (me.time3-- <= 0) {
-                                    me.time3 = 60;
-                                    me.sendMsgDisabled3 = false;
-                                    window.clearInterval(interval);
-                                }
-                            }, 1000);
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            } else if (index == 5) {
-                //资金密码获取手机code
-                this.$http
-                    .post(this.host + "/uc/mobile/trade/code")
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            me.sendMsgDisabled5 = true;
-                            let interval = window.setInterval(function () {
-                                if (me.time5-- <= 0) {
-                                    me.time5 = 60;
-                                    me.sendMsgDisabled5 = false;
-                                    window.clearInterval(interval);
-                                }
-                            }, 1000);
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            } else if (index == 8) {
-                this.$http.post(this.host + "/uc/mobile/transaction/code")
-                    .then(response => {
-                        var resp = response.body;
-                        if (resp.code == 0) {
-                            me.sendMsgDisabled8 = true;
-                            let interval = window.setInterval(function () {
-                                if (me.time8-- <= 0) {
-                                    me.time8 = 60;
-                                    me.sendMsgDisabled8 = false;
-                                    window.clearInterval(interval);
-                                }
-                            }, 1000);
-                        } else {
-                            this.$Message.error(resp.message);
-                        }
-                    });
-            }
-        },
-        getMember() {
-            //获取个人安全信息
-            return this.$http.post(this.host + "/uc/approve/security/setting").then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                    return new Promise((resolve, reject) => {
-                        this.user = resp.data;
-                        this.usernameS = this.user.username.slice(0, 1);
-                        resolve(resp.data);
+                      var resp = response.body
+                      if (resp.code == 0) {
+                        this.member.realName = this.formValidate6.realName
+                        this.$store.commit('setMember', this.member)
+                        this.modal6 = false
+                        this.$Message.success(this.$t('uc.safe.save_success'))
+                        this.getMember()
+                        this.choseItem = 0
+                      } else {
+                        this.$Message.error(resp.message)
+                      }
                     })
-                } else {
-                    this.$Message.error(this.loginmsg);
-                }
-            });
+      }
+            // 邮箱认证
+      if (name == 'formValidate2') {
+        const param = {}
+        param['email'] = this.formValidate2.mail
+        param['code'] = this.formValidate2.vailCode1
+        param['password'] = this.formValidate2.password
+        this.$http
+                    .post(this.host + '/uc/approve/bind/email', param)
+                    .then(response => {
+                      var resp = response.body
+                      if (resp.code == 0) {
+                        this.modal2 = false
+                        this.$Message.success(this.$t('uc.safe.save_success'))
+                        this.getMember()
+                        this.choseItem = 0
+                      } else {
+                        this.$Message.error(resp.message)
+                      }
+                    })
+      }
+            // 手机认证
+      if (name == 'formValidate3') {
+        const param = {}
+        param['phone'] = this.formValidate3.mobile
+        param['code'] = this.formValidate3.vailCode2
+        param['password'] = this.formValidate3.password
+        this.$http
+                    .post(this.host + '/uc/approve/bind/phone', param)
+                    .then(response => {
+                      var resp = response.body
+                      if (resp.code == 0) {
+                        this.modal3 = false
+                        this.$Message.success(this.$t('uc.safe.save_success'))
+                        this.getMember()
+                        this.choseItem = 0
+                      } else {
+                        this.$Message.error(resp.message)
+                      }
+                    })
+      }
+            // 登录密码
+      if (name == 'formValidate4') {
+        const param = {}
+        param['oldPassword'] = this.formValidate4.oldPw
+        param['newPassword'] = this.formValidate4.newPw
+        param['code'] = this.formValidate4.vailCode3
+        if (this.googleSwitch) {
+          param.googleCode = this.formValidate4.googleCode
+        }
+        this.$http.post(this.host + '/uc/approve/update/password', param).then(response => {
+          var resp = response.body
+          if (resp.code == 0) {
+            this.modal4 = false
+            this.$Message.success(this.$t('uc.safe.save_success'))
+            this.getMember()
+            this.choseItem = 0
+            localStorage.removeItem('MEMBER')
+            localStorage.removeItem('TOKEN')
+            this.$store.state.showLogout = true
+            this.$store.state.showLogin = false
+            const self = this
+            setTimeout(() => {
+              self.$router.push('/login')
+            }, 2000)
+          } else {
+            this.$Message.error(resp.message)
+          }
+        })
+      }
+            // 修改资金密码
+      if (name == 'formValidate5') {
+        const param = {}
+        param['oldPassword'] = this.formValidate5.oldPw
+        param['newPassword'] = this.formValidate5.newMPw
+        param['msgCode'] = this.formValidate5.vailCode5
+        if (this.googleSwitch) {
+          param.googleCode = this.formValidate5.googleCode
+        }
+        this.$http
+                    .post(this.host + '/uc/approve/update/transaction/password', param)
+                    .then(response => {
+                      var resp = response.body
+                      if (resp.code == 0) {
+                        this.modal5 = false
+                        this.$Message.success(this.$t('uc.safe.save_success'))
+                        this.handleReset('formValidate5')
+                        this.getMember()
+                        this.choseItem = 0
+                      } else {
+                        this.$Message.error(resp.message)
+                      }
+                    })
+      }
+            // 设置资金密码
+      if (name == 'formValidate7') {
+        const param = {}
+        param['jyPassword'] = this.formValidate7.pw7
+        this.$http
+                    .post(this.host + '/uc/approve/transaction/password', param)
+                    .then(response => {
+                      var resp = response.body
+                      if (resp.code == 0) {
+                        this.modal5 = false
+                        this.$Message.success(this.$t('uc.safe.save_success'))
+                        this.getMember()
+                        this.choseItem = 0
+                      } else {
+                        this.$Message.error(resp.message)
+                      }
+                    })
+      }
+            // 找回资金密码
+      if (name == 'formValidate8') {
+        const param = {}
+        param['newPassword'] = this.formValidate8.newMPw8
+        param['code'] = this.formValidate8.vailCode5
+        this.$http
+                    .post(this.host + '/uc/approve/reset/transaction/password', param)
+                    .then(response => {
+                      var resp = response.body
+                      if (resp.code == 0) {
+                        this.modal5 = false
+                        this.$Message.success(this.$t('uc.safe.save_success'))
+                        this.fGetBackFundpwd = false
+                        this.handleReset('formValidate5')
+                        this.getMember()
+                        this.choseItem = 0
+                      } else {
+                        this.$Message.error(resp.message)
+                      }
+                    })
+      }
+    },
+    handleSubmit(name) {
+      this.$refs[name].validate(valid => {
+        if (valid) {
+          this.submit(name)
+        } else {
+                    // this.$Message.error(this.$t("uc.safe.save_failure"));
+        }
+      })
+    },
+    handleReset(name) {
+      this.$refs[name].resetFields()
+    },
+    showItem(index) {
+      this.choseItem = index
+    },
+    send(index) {
+      const me = this
+      if (index == 1) {
+        if (this.formValidate2.mail) {
+                    // 获取邮箱code
+          this.$http
+                        .post(this.host + '/uc/bind/email/code', {
+                          email: this.formValidate2.mail
+                        })
+                        .then(response => {
+                          var resp = response.body
+                          if (resp.code == 0) {
+                            me.sendMsgDisabled1 = true
+                            const interval = window.setInterval(function() {
+                              if (me.time1-- <= 0) {
+                                me.time1 = 60
+                                me.sendMsgDisabled1 = false
+                                window.clearInterval(interval)
+                              }
+                            }, 1000)
+                          } else {
+                            this.$Message.error(resp.message)
+                          }
+                        })
+        } else {
+          this.$refs.formValidate2.validateField('mail')
+        }
+      } else if (index == 2) {
+        if (this.formValidate3.mobile) {
+                    // 获取手机code
+          this.$http
+                        .post(this.host + '/uc/mobile/bind/code', {
+                          phone: this.formValidate3.mobile
+                        })
+                        .then(response => {
+                          var resp = response.body
+                          if (resp.code == 0) {
+                            me.sendMsgDisabled2 = true
+                            const interval = window.setInterval(function() {
+                              if (me.time2-- <= 0) {
+                                me.time2 = 60
+                                me.sendMsgDisabled2 = false
+                                window.clearInterval(interval)
+                              }
+                            }, 1000)
+                          } else {
+                            this.$Message.error(resp.message)
+                          }
+                        })
+        } else {
+          this.$refs.formValidate3.validateField('mobile')
+        }
+      } else if (index == 3) {
+                // 登录密码获取手机code
+        this.$http
+                    .post(this.host + '/uc/mobile/update/password/code')
+                    .then(response => {
+                      var resp = response.body
+                      if (resp.code == 0) {
+                        me.sendMsgDisabled3 = true
+                        const interval = window.setInterval(function() {
+                          if (me.time3-- <= 0) {
+                            me.time3 = 60
+                            me.sendMsgDisabled3 = false
+                            window.clearInterval(interval)
+                          }
+                        }, 1000)
+                      } else {
+                        this.$Message.error(resp.message)
+                      }
+                    })
+      } else if (index == 5) {
+                // 资金密码获取手机code
+        this.$http
+                    .post(this.host + '/uc/mobile/trade/code')
+                    .then(response => {
+                      var resp = response.body
+                      if (resp.code == 0) {
+                        me.sendMsgDisabled5 = true
+                        const interval = window.setInterval(function() {
+                          if (me.time5-- <= 0) {
+                            me.time5 = 60
+                            me.sendMsgDisabled5 = false
+                            window.clearInterval(interval)
+                          }
+                        }, 1000)
+                      } else {
+                        this.$Message.error(resp.message)
+                      }
+                    })
+      } else if (index == 8) {
+          this.$http.post(this.host + '/uc/mobile/transaction/code')
+                    .then(response => {
+                      var resp = response.body
+                      if (resp.code == 0) {
+                        me.sendMsgDisabled8 = true
+                        const interval = window.setInterval(function() {
+                          if (me.time8-- <= 0) {
+                            me.time8 = 60
+                            me.sendMsgDisabled8 = false
+                            window.clearInterval(interval)
+                          }
+                        }, 1000)
+                      } else {
+                        this.$Message.error(resp.message)
+                      }
+                    })
         }
     },
-    computed: {
-        userId: function () {
-            return JSON.parse(localStorage.getItem("MEMBER"));
-        },
-        member: function () {
-            return this.$store.getters.member;
-        },
-        lang() {
-            return this.$store.state.lang;
-        },
-
-    },
-    created() {
-        this.settiele();
-        this.userUid()
-        this.getMember().then(res => {
-            this.checkGoogleValidtor({ mobile: res.mobilePhone });
-        });
-        const level = (memberGradeId) => {
-            return `V${memberGradeId}`
+    getMember() {
+            // 获取个人安全信息
+      return this.$http.post(this.host + '/uc/approve/security/setting').then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
+          return new Promise((resolve, reject) => {
+            this.user = resp.data
+            this.usernameS = this.user.username.slice(0, 1)
+            resolve(resp.data)
+          })
+        } else {
+          this.$Message.error(this.loginmsg)
         }
-        let memberGradeId = this.$store.getters.member.memberGradeId;
-        this.memberlevel = level(memberGradeId);
-        //验证用户是否开启google验证
-        // this.checkGoogleValidtor();
-    },
-    components: {
-        ResetGoogleVali,
-        CloseGoogleVali,
-        BindGoogleVali
+      })
     }
-};
+  },
+  computed: {
+    userId: function() {
+      return JSON.parse(localStorage.getItem('MEMBER'))
+    },
+    member: function() {
+      return this.$store.getters.member
+    },
+    lang() {
+      return this.$store.state.lang
+    }
+
+  },
+  created() {
+    this.settiele()
+    this.userUid()
+    this.getMember().then(res => {
+      this.checkGoogleValidtor({ mobile: res.mobilePhone })
+    })
+    const level = (memberGradeId) => {
+      return `V${memberGradeId}`
+    }
+    const memberGradeId = this.$store.getters.member.memberGradeId
+    this.memberlevel = level(memberGradeId)
+        // 验证用户是否开启google验证
+        // this.checkGoogleValidtor();
+  },
+  components: {
+    ResetGoogleVali,
+    CloseGoogleVali,
+    BindGoogleVali
+  }
+}
 </script>
 <style scoped lang="scss">
 
