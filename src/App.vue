@@ -305,7 +305,7 @@
                                     <p class="facebook4">
                                         {{$t('footer.customerservice2')}}：3039059895
                                         <span id="facebook4">
-                                            <img src="./assets/images/qqkefu.jpg" alt="">
+                                            <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/qq.jpg" alt="">
                                         </span>
                                     </p>
                                 </li>
@@ -314,7 +314,7 @@
                                     <p class="facebook5">
                                         {{$t('footer.customerservice1')}}：729045745
                                         <span id="facebook5">
-                                            <img src="./assets/images/qqqun.jpg" alt="">
+                                            <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/qqgroup.png" alt="">
                                         </span>
                                     </p>
                                 </li>
@@ -1541,6 +1541,7 @@ body {
                         display: block;
                     }
                     .facebook5:hover #facebook5 {
+                         top: -135px;
                         display: block;
                     }
                 }

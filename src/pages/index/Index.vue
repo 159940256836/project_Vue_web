@@ -231,7 +231,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <img src="../../assets/img/shouye.png" alt="" />
+                    <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/shouye.png" alt="" />
                 </div>
               </div>
               <div class="section" id="page1">
@@ -1155,8 +1155,9 @@ export default {
         // },
     init() {
       this.loadPicData()// 获取轮播图
+
+      this.getSymbol()
       this.addClass(0)
-            // this.getmoneyData();
       this.loadDataPage(this.pageNo)// 获取公告
     },
     stop: function() {
@@ -1365,7 +1366,7 @@ export default {
     addClass(index) {
       window.indexBtnBC = ''
       this.choseBtn = index
-      this.getSymbol()
+      // this.getSymbol()
       if (index == 0) {
         this.dataIndex = this.coins.USDT
       } else if (index == 1) {
@@ -1382,10 +1383,6 @@ export default {
     },
     getSymbol() {
       this.loading = true
-      // for (const i in this.coins) {
-      //   this.coins[i] = []
-      //   console.log(this.coins)
-      // }
       this.coins.USDT = []; this.coins.BTC = []; this.coins.ETH = []; this.coins.BC = []
       this.$http.post(this.host + this.api.market.thumbTrend, {}).then(response => {
         var resp = response.body

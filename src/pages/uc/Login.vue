@@ -109,9 +109,9 @@
                     <FormItem style="margin-bottom:10px;">
                         <Button
                             class="login_btn"
-                            @click="login"
+                            @click="handleSubmit('formInline')"
                         >
-                            <!--@click="handleSubmit('formInline')"-->
+                            <!-- @click="handleSubmit('formInline')" -->
                             {{$t('uc.forget.login')}}
                         </Button>
                     </FormItem>
