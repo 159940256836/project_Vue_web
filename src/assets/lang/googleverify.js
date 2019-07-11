@@ -22,7 +22,7 @@ const openGoogleMapEn = {
 const openGoogleMapZh = {
     _downloadAndroid: "android谷歌验证器下载",
     _downloadIos: "ios谷歌验证器下载",
-    _googleVerifyabs: "秘钥用于找回谷歌验证，器请妥善保存",
+    _googleVerifyabs: "秘钥用于找回谷歌验证器，请妥善保存",
     _copy: "复制",
     _abs1: "· 在手机谷歌验证器APP右上角点击加号，扫描网页上的二维码或输入网页提供的密钥",
     _abs2: '· 在谷歌验证器上绑定新的谷歌密钥，在网页输入新的谷歌验证码',

@@ -566,7 +566,7 @@ export default {
       this.$http
         .post(this.host + '/exchange/order/personal/newCurrent', params)
         .then(response => {
-          if (response.body.code != 500) {
+          if (response.body.code == 0) {
             var resp = response.body
             const rows = []
             if (resp.data.length > 0) {
@@ -639,15 +639,7 @@ export default {
       const arr = []
       const m = this.$store.getters.lang === 'English' ? mapEn : map
       const m1 = this.$store.getters.lang === 'English' ? 180 : 180
-      // const m2 = this.$store.getters.lang == "English" ? 98 : 97;
-      // const m3 = this.$store.getters.lang == "English" ? 80 : 120;
-      // const m4 = this.$store.getters.lang == "English" ? 109 : '';
-      // const m5 = this.$store.getters.lang == "English" ? 88 : 60;
-      // const m6 = this.$store.getters.lang == "English" ? 70 : '';
-      // const m7 = this.$store.getters.lang == "English" ? 85 : '';
       const m8 = this.$store.getters.lang == 'English' ? 143 : 100
-      // const m9 = this.$store.getters.lang == "English" ? 80 : 110;
-      // const m10 = this.$store.getters.lang == "English" ? 70 : '';
       // arr.push({
       //   type: "expand",
       //   width: 30,

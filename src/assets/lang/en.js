@@ -42,7 +42,9 @@ module.exports = {
     cancel: 'cancel',
     confirm: 'confirm',
     copySuccess: 'copy success',
-    copyFail: 'copy fail'
+    copyFail: 'copy fail',
+    down: 'Download BDW App anytime, anywhere, convenient transaction',
+    scan: 'Scan the qr code to download the BDW App'
   },
   new: {
     Announcemcenter: 'Announcement center',
@@ -906,10 +908,11 @@ module.exports = {
       leverManagement: 'leveraged'
     },
     login: {
-      noaccount: 'No Account？To Regist',
+      noaccount: 'No account?',
       google: 'google Code',
       phone: 'phone Code',
       email: 'email Code',
+      registerLog: 'Register Now',
       register: 'Sign Up',
       login: 'Log In',
       registered: 'Welcome Register',

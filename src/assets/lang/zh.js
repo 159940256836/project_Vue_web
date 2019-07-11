@@ -84,7 +84,9 @@ module.exports = {
     hint: '温馨提示',
     hint1: '暂无该产品',
     copySuccess: '复制成功',
-    copyFail: '复制失败'
+    copyFail: '复制失败',
+    down: '下载BDW App 随时随地，便捷交易',
+    scan: '扫描二维码即可下载BDW App'
   },
   foot: {
     Standardates: '费率标准',
@@ -906,11 +908,11 @@ module.exports = {
       leverManagement: '杠杆交易管理'
     },
     login: {
-      noaccount: '没有账号？',
+      noaccount: '暂无账号？',
       google: '请输入谷歌验证码',
       phone: '请输入手机验证码',
       email: '请输入邮箱验证码',
-      registerLog: '马上注册',
+      registerLog: '立即注册',
       register: '注册',
       login: '欢迎登陆BDW',
       registered: '欢迎注册BDW',

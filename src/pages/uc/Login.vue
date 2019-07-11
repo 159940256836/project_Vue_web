@@ -7,7 +7,6 @@
                     <div class="login_title">{{$t('uc.login.login')}}</div>
                     <FormItem prop="user">
                         <Input
-                            @on-enter="handleSubmit('formInline')"
                             name="user"
                             type="text"
                             v-model="formInline.user"
@@ -47,6 +46,7 @@
                             v-model="formInline.checkCode"
                             size="large"
                             :placeholder="$t('uc.login.phone')"
+                            @on-enter="handleSubmit('formInline')"
                         >
                             <div
                                 class="timebox"
@@ -77,6 +77,7 @@
                             v-model="formInline.emailCode"
                             size="large"
                             :placeholder="$t('uc.login.email')"
+                            @on-enter="handleSubmit('formInline')"
                         >
                             <div
                                 class="timebox"
@@ -98,7 +99,7 @@
                         </Input>
                     </FormItem>
                     <div class='to_register'>
-                        <span>{{$t("uc.login.noaccount")}}</span>
+                        <span style="margin-right: 5px">{{$t("uc.login.noaccount")}}</span>
                         <router-link to="/register">
                             {{$t("uc.login.registerLog")}}
                         </router-link>
@@ -109,7 +110,7 @@
                     <FormItem style="margin-bottom:10px;">
                         <Button
                             class="login_btn"
-                            @click="login"
+                            @click="handleSubmit('formInline')"
                         >
                             <!--@click="handleSubmit('formInline')"-->
                             {{$t('uc.forget.login')}}
@@ -124,8 +125,9 @@
                         <div class="right-img">
                             <img src="../../assets/images/qrcode.png" alt="">
                         </div>
-                        <p style="margin-top: 15px;">下载BDW App 随时随地，便捷交易</p>
-                        <p>扫描二维码即可下载BDW App</p>
+                        <!--下载BDW App 随时随地，便捷交易 扫描二维码即可下载BDW App-->
+                        <p style="margin-top: 15px;">{{ $t('common.down') }}</p>
+                        <p>{{ $t('common.scan') }}</p>
                     </div>
                 </div>
             </div>
@@ -459,7 +461,7 @@ export default {
         } else {
           this.initGtCaptcha()
         }
-      } else if (this.openPhoneCode) {
+      } else if (this.openEmailCode) {
                 // 6.06
                 // // 判断邮箱验证码不能为空
         if (!this.formInline.emailCode) {
@@ -479,11 +481,6 @@ export default {
         console.log(valid)
         if (valid) {
           this.loginCheck()
-          const params = {}
-          const formParams = this.formInline
-          params.username = formParams.user
-          params.password = formParams.password
-          params.code = formParams.googleCode
         }
       })
     },

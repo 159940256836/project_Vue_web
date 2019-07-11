@@ -375,7 +375,7 @@ export default {
       background: #10122B;
       width: 100%;
       height: .8rem;
-      padding: .2rem;      
+      padding: .2rem;
       border-radius: .05rem;
       font-size: .3rem;
       -webkit-box-sizing: border-box;

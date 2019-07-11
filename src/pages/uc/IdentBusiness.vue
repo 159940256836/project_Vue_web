@@ -700,7 +700,7 @@ export default {
   outline:none;
   height: 50px;
   font-size: 18px;
-  width: 165px;
+  min-width: 165px;
 }
 .tit {
   font-size: 16px;
