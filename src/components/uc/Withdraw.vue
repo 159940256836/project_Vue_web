@@ -45,6 +45,7 @@
                                                 style="width:270px;margin-left:10px;"
                                                 clearable
                                                 @on-query-change="onAddressChange"
+                                                :placeholder="$t('header.choose')"
                                             >
                                                 <Option
                                                     v-for="item in currentCoin.addresses"

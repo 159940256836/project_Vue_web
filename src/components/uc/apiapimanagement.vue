@@ -8,7 +8,7 @@
         <div class="content_header">
           <div class="prompt">
             <p style="color:#515a6e; font-weight: 600;">{{$t('apiAdmin.hint')}}</p>
-            <ul>
+            <ul style="margin: 0 15px;">
               <li>
                 {{$t('apiAdmin.part1')}}
                 <a href="https://bdwtop.github.io/" target="_blank">{{$t('apiAdmin.apiDoc')}}</a>
@@ -30,7 +30,20 @@
 
             </Form>
             <div style="margin-left:60px; font-size:12px; color:#8090AF">{{$t('apiAdmin.Thekeybound')}}</div>
-            <Button type="primary" @click="codeVerify" style="width:85%; border-radius:0 !important;display:block;margin-left:64px; margin-top:17px;margin-buttom:115px;">{{$t('apiAdmin.create')}}</Button>
+            <Button
+              type="primary"
+              @click="codeVerify"
+              style="
+                width:85%;
+                height: 37px;
+                font-size: 14px;
+                border-radius:0 !important;
+                display:block;
+                margin: 17px 0 115px 64px;
+              "
+            >
+              {{$t('apiAdmin.create')}}
+            </Button>
           </div>
 
       </Card>
@@ -42,15 +55,15 @@
       </Card>
     </div>
     <!--编辑API-->
-    <Modal 
-      class="api_edit edit_let-code" 
+    <Modal
+      class="api_edit edit_let-code"
       id="a_new"
       v-model="editor"
       class-name="old_deta"
       :title="$t('apiAdmin.edit')
-      
+
      ">
-      <Form 
+      <Form
       :model="editorFormItem"
       :label-width='70'
        label-position="top">
@@ -181,9 +194,9 @@
     </Modal> -->
 
     <!--添加短信校验-->
-    <Modal 
+    <Modal
       class="edit_let-code"
-      v-model="verify" 
+      v-model="verify"
        class-name="old_deta"
       :title="$t('apiAdmin.edit') "
      >
@@ -194,7 +207,7 @@
               <div style="height:17px;width:2px;background:#8090AFFF;position:absolute;top:3px"></div>
               <Button  v-if="sendMsgDisabled" :disabled="sendMsgDisabled">
                 <span style="color:#3399FFFF">{{time+$t('uc.safe.second')}}</span>
-               
+
               </Button>
               <div v-if="!sendMsgDisabled" @click="sendCode(1)" style="cursor:pointer">
                  <span style="color:#3399FFFF">{{$t('uc.safe.clickget')}}</span>
@@ -223,10 +236,10 @@
     </Modal>
     <!--编辑短信校验-->
     <div class="let-code">
-      <Modal 
+      <Modal
       class="edit_let-code"
        class-name="old_deta"
-       v-model="verifyEditor" 
+       v-model="verifyEditor"
        :title="$t('apiAdmin.edit')"
        >
         <Form :model="editorFormItem" label-position="top">
@@ -235,7 +248,7 @@
               <div class="timebox" slot="append" style="position:relative;height:20px;line-height:20px">
                 <div style="height:17px;width:2px;background:#8090af;position:absolute;top:3px"></div>
                 <div style="cursor:pointer" @click="sendCode(2)" v-if="!sendMsgDisabled1">
-                  
+
                   <span style="color:#3399FFFF">{{$t('uc.safe.clickget')}}</span>
                 </div>
                 <Button v-if="sendMsgDisabled1" :disabled="sendMsgDisabled1">
@@ -370,6 +383,7 @@ export default {
         // console.log(this.formatTime(Date.parse(this.tableData[0].expireTime)),this.formatTime(Date.parse(this.tableData[0].createTime)));
         // console.log(Date.parse(this.tableData[0].expireTime)) - Date.parse(this.tableData[0].createTime);
         let time1 = Date.parse(this.tableData[0].expireTime) - Date.parse(this.tableData[0].createTime)
+        console.log(this.tableData[0]);
         this.dataTime = time1/24/60/60/1000
         console.log(time1/24/60/60/1000);
       });
@@ -591,7 +605,7 @@ export default {
                   textAlign:"center",
                   border:'1px solid #3399ff',
                   cursor: 'pointer',
-                  
+
 
                 },
                 on: {
@@ -622,7 +636,7 @@ export default {
                   border:'1px solid #ed4014 ',
                   textAlign:"center",
                   cursor: 'pointer',
-                  
+
 
                 },
                 on: {
@@ -648,7 +662,7 @@ export default {
 .edit_let_buttom_new{
   margin-left:0 !important;
   margin-top:6px;
-  
+
 }
 .edit_let_bb{
   .edit_let_butto{
@@ -688,7 +702,7 @@ export default {
   .content {
     margin: 10px 0;
     margin-top:30px;
-    padding-bottom:115px;
+    padding-bottom: 1px;
     .content_header {
       padding: 10px;
 
@@ -826,8 +840,7 @@ export default {
   .edit_let_buttom{
     width:300px;
     height:40px;
-    margin-left:66px;
-    margin-bottom: 44px;
+    margin: 0 0 44px 93px;
     border-radius: 0 !important;
   }
   .ivu-input-group-large{
@@ -839,6 +852,7 @@ export default {
   border-color:transparent;
 }
 .ivu-input{
+  color: #8090af;
  border:none !important;
 }
 .ivu-input-group .ivu-input{
@@ -872,9 +886,10 @@ export default {
   margin-left:43px;
 }
 .ivu-form-label-top .ivu-form-item-label{
-  line-height:40px;
-  font-size:14px;
-  color:#8090AF;
+  /*line-height:40px;*/
+  font-size: 14px;
+  color: #8090AF;
+  padding: 13px 12px 13px 0;
 }
 .ivu-form-item-content{
   width:300px;

@@ -13,6 +13,7 @@
                                     v-model="coinType"
                                     style="width:130px;"
                                     size="large"
+                                    :placeholder="$t('header.choose')"
                                 >
                                     <Option
                                         v-for="item in coinList"

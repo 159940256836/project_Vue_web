@@ -2057,7 +2057,7 @@ export default {
                 // this.getMemberRate(); // 获取会员等级用与是否抵扣BHB资格
         this.getWallet() // 账户资产信息
         this.getCurrentOrder() // 当前委托
-        this.getHistoryOrder()
+        // this.getHistoryOrder()
       }
       this.sliderBuyLimitPercent = 0
       this.sliderSellLimitPercent = 0
@@ -2145,12 +2145,12 @@ export default {
       this.currentImgTable = str
     },
     changeOrder(str) {
-      // if (str == 'current') {
-      //   this.getCurrentOrder()
-      // }
-      // if (str == 'history') {
-      //   this.getHistoryOrder()
-      // }
+      if (str == 'current') {
+        this.getCurrentOrder()
+      }
+      if (str == 'history') {
+        this.getHistoryOrder()
+      }
       this.selectedOrder = str
     },
     setback() {

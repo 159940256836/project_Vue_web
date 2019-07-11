@@ -78,7 +78,6 @@ export default {
             columns.push({
                 title: this.$t("uc.finance.money.cointype"),
                 key: "coinType",
-                width: 100,
                 align: "center"
             });
             columns.push({
