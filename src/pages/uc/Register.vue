@@ -257,7 +257,7 @@ $focusColor:#3399FF;
 </template>
 <style scoped lang="scss">
 .login_form {
-    background: #f9f9f9 url('../../assets/images/brnner.png') no-repeat center
+    background: #f9f9f9 url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/brnner.png') no-repeat center
         center;
     height: 760px;
     position: relative;
@@ -540,7 +540,6 @@ export default {
     }
   },
   created: function() {
-    
     window.scrollTo(0, 0)
     this.init()
     this.actives(this.changeActive)

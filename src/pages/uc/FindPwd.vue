@@ -76,7 +76,7 @@
 .login_form {
     // background: #f9f9f9 url(../../assets/images/login_bg.jpg) no-repeat center
     //     center;
-    background: #f9f9f9 url('../../assets/images/brnner.png') no-repeat center !important;
+    background: #f9f9f9 url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/brnner.png') no-repeat center !important;
     height: 760px;
     position: relative;
     overflow: hidden;
