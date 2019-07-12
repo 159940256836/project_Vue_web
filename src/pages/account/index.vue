@@ -17,17 +17,17 @@ import PaymentTerm from './paymentTerm.vue'
 import FeeLevel from './feeLevel.vue'
 
 export default {
-    data() {
-        return {
-        }
-    },
-    components: {
-        SecuritySettings,
-        PaymentTerm,
-        FeeLevel
-    },
-    methods: {
-    },
+  data() {
+    return {
+    }
+  },
+  components: {
+    SecuritySettings,
+    PaymentTerm,
+    FeeLevel
+  },
+  methods: {
+  }
 }
 </script>
 
@@ -43,11 +43,9 @@ export default {
     margin: auto;
     padding-bottom: 86px;
 }
-
 </style>
 
 <style lang="scss">
-
 .account-box {
     .title {
         font-weight: normal;
@@ -82,6 +80,4 @@ export default {
         }
     }
 }
-
-
 </style>

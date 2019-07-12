@@ -134,12 +134,12 @@
                                     <p class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.fundtip')}}
                                     </p>
-                                    <p class="right-side" v-if="user.phoneVerified==0">
+                                    <!-- <p class="right-side" v-if="user.phoneVerified==0">
                                         <a class="btn"  @click="noPhone">
                                             {{$t('uc.safe.set')}}
                                         </a>
-                                    </p>
-                                    <p class="right-side" v-else-if="user.fundsVerified==0">
+                                    </p> -->
+                                    <p class="right-side" v-if="user.fundsVerified==0">
                                         <a class="btn"  @click="modal5 = true">
                                             {{$t('uc.safe.set')}}
                                         </a>
@@ -160,7 +160,7 @@
                                     <span class="card-number">{{$t("uc.safe.GoogleAuthentication")}}</span>
                                     <p class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.GoogleAuthenticationAbs')}}
-                                        <a href="">{{$t('uc.safe.userguide')}}</a>
+                                        <router-link to="/helpList"><a href="javascript:void(0)">{{$t('uc.safe.userguide')}}</a></router-link>
                                     </p>
                                     <div class="google-info right-side">
                                         <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="resetGoogle">{{googleAuthentication}}</span>
@@ -988,8 +988,8 @@ export default {
             },
             on: {
               input: val => {
-                  this.value = val
-                }
+                this.value = val
+              }
             }
           })
         }
@@ -1177,7 +1177,7 @@ export default {
         if (valid) {
           this.submit(name)
         } else {
-                    // this.$Message.error(this.$t("uc.safe.save_failure"));
+          // this.$Message.error(this.$t("uc.safe.save_failure"));
         }
       })
     },
@@ -1278,7 +1278,7 @@ export default {
                       }
                     })
       } else if (index == 8) {
-          this.$http.post(this.host + '/uc/mobile/transaction/code')
+        this.$http.post(this.host + '/uc/mobile/transaction/code')
                     .then(response => {
                       var resp = response.body
                       if (resp.code == 0) {
@@ -1294,7 +1294,7 @@ export default {
                         this.$Message.error(resp.message)
                       }
                     })
-        }
+      }
     },
     getMember() {
             // 获取个人安全信息

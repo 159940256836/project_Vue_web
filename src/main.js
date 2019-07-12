@@ -18,10 +18,10 @@ Vue.use(VueClipboard)
 Vue.use(VueRouter)
 Vue.use(vueResource)
 Vue.use(VueI18n)
-Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
+// Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
 // Vue.prototype.host = 'http://192.168.124.14/' // 陈然
 // Vue.prototype.host = 'http://47.244.100.113/' // 正式环境
-// Vue.prototype.host = 'https://api.nr3d.cn' // 正式
+Vue.prototype.host = 'https://api.nr3d.cn' // 正式
 Vue.prototype.url = 'https://www.bdw.top' // 链接地址
 // Vue.prototype.url = 'http://192.168.124.45' // 链接地址
 Vue.prototype.api = Api
@@ -29,7 +29,6 @@ Vue.http.options.credentials = true
 Vue.http.options.emulateJSON = true
 Vue.http.options.headers = {
   'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    // 'Content-Type': 'application/json;charset=utf-8'
 }
 const router = new VueRouter({
   mode: 'hash',
@@ -55,7 +54,6 @@ Vue.http.interceptors.push((request, next) => {
         //
     if (response.body.code === '4000' || response.body.code === '3000') {
       store.commit('setMember', null)
-            // router.push('/login');
       return false
     }
     return response

@@ -685,6 +685,7 @@ export default {
              height: 50px;
             line-height: 50px;
             transition: all .5s;
+            background-color: #11132c;
             .time_download {
                 align-items: center;
                 overflow: hidden;

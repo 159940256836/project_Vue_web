@@ -142,7 +142,7 @@ $primary-color: #3399ff;
     height: 760px;
     position: relative;
     overflow: hidden;
-    padding-top: 60px;
+    padding-top: 50px;
     .wrap-mask {
         height:100%;
         width:100%;
