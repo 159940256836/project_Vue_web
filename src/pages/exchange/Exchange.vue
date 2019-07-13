@@ -2245,7 +2245,9 @@ export default {
         timezone: 'Asia/Shanghai',
         toolbar_bg: '#0E0E28',
         container_id: 'kline_container',
-        datafeed: that.datafeed,
+        symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
+
+          datafeed: that.datafeed,
         library_path:
                     process.env.NODE_ENV === 'production'
                         ? '/assets/charting_library/'
@@ -2256,7 +2258,7 @@ export default {
           type: 'black',
           tools: [{ name: 'Regression Trend' }]
         },
-        disabled_features: [
+          disabled_features: [
           'header_resolutions',
           'timeframes_toolbar',
           'header_symbol_search',
@@ -2272,8 +2274,8 @@ export default {
           'main_meries_seale_menu' // 隐藏右上角设置
         ],
         enabled_features: [
-          'hide_last_na_study_output',
-          'move_logo_to_main_pane'
+          'hide_last_na_study_output'
+          // 'move_logo_to_main_pane' // TradingView login 开启显示在网格上 隐藏显示在网格下
         ],
         custom_css_url: 'bundles/common.css',
         supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M'],
@@ -2282,11 +2284,11 @@ export default {
         client_id: 'tradingview.com',
         user_id: 'public_user_id',
         overrides: {
-                    // 背景色网格颜色
-          'paneProperties.background': '#131630',
+          // 'symbolWatermarkProperties.color': 'rgba(255, 255, 255, .1)', // 水印透明度
+          'paneProperties.background': '#131630', // 背景色网格颜色
           'paneProperties.vertGridProperties.style': 0,
-          'paneProperties.vertGridProperties.color': 'rgba(255,255,255,.04)',
-          'paneProperties.horzGridProperties.color': 'rgba(255,255,255,.04)',
+          'paneProperties.vertGridProperties.color': 'rgba(255,255,255,.04)', // 列分割线
+          'paneProperties.horzGridProperties.color': 'rgba(255,255,255,.04)', // 行分割线
           'scalesProperties.textColor': '#8090AF', // 开高低收
           'mainSeriesProperties.candleStyle.upColor': '#00b275',
           'mainSeriesProperties.candleStyle.downColor': '#f15057',
@@ -2382,6 +2384,7 @@ export default {
                 /* onChartReady 自定义初始化指标线（平均移动线等），设置颜色*/
         widget.onChartReady(function() {
           widget.chart().executeActionById('drawingToolbarAction')
+            // 创建最新价水平线
           widget
             .chart()
             .createStudy('Moving Average', false, false, [5], null, {
@@ -2441,19 +2444,19 @@ export default {
             .addClass('selected') // 静态默认分时
 
           widget
-        .createButton()
-        .attr('title', 'M15')
-        .on('click', function() {
-          if ($(this).hasClass('selected')) return
-          $(this)
-                .addClass('selected')
-                .parent('.group')
-                .siblings('.group')
-                .find('.button.selected')
-                .removeClass('selected')
-          widget.chart().setChartType(1)
-          widget.setSymbol('', '15')
-        })
+            .createButton()
+            .attr('title', 'M15')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '15')
+            })
         .append('<span>M15</span>')
 
           widget

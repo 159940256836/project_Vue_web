@@ -95,7 +95,7 @@
             size="large"
             class="ok-business"
           >
-            {{$t("uc.identity.shenagain")}}
+            {{$t("uc.identity.sheqinggain")}}
           </button>
           <div class="fail-reason" style="margin-top: 50px;font-size: 16px;">
             <Icon type="md-alert" color="red" size="16" />
@@ -123,7 +123,7 @@
             size="large"
             class="ok-business"
           >
-            {{$t("uc.identity.shenagain")}}
+            {{$t("uc.identity.sheqinggain")}}
           </button>
           <div class="fail-reason" style="margin-top: 50px;font-size: 16px;">
             <Icon type="md-alert" color="red" size="16" />
@@ -187,7 +187,13 @@
         <div v-show="certStatus === 0" style="text-align: center;font-size: 16px;margin-top:50px">
           <Checkbox v-model="single"></Checkbox>
           <span>{{$t("uc.identity.read")}}</span>
-          <router-link target="_blank" to="/helpdetail?cate=1&id=6&cateTitle=常见问题" class="cur" style="color:#3399ff">{{$t('uc.identity.agreement')}}</router-link>
+          <router-link
+            to="/merchantsDeal"
+            class="cur"
+            style="color:#3399ff"
+          >
+            {{$t('uc.identity.agreement')}}
+          </router-link>
         </div>
         <!-- 同意第一步的按钮 -->
         <div v-show="certStatus === 0" class="sq">
