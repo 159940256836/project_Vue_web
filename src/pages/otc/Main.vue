@@ -266,7 +266,7 @@
               cursor: pointer;
               color: #fff;
               width: 100px;
-              height: 32px;
+              min-height: 32px;
               background: transparent;
               border: 1px solid #282F4C;
             }

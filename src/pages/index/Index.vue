@@ -1139,7 +1139,6 @@ export default {
       this.coins.columns[6].title = this.$t('service.ExchangeNum')
     //   this.coins.columns[7].title = this.$t('service.PriceTrend')
       this.coins.columns[7].title = this.$t('service.exchange')
-
       this.favorColumns[0].title = this.$t('service.favor')
       this.favorColumns[1].title = this.$t('service.symbol')
       this.favorColumns[2].title = this.$t('service.NewPrice')
@@ -1155,7 +1154,6 @@ export default {
         // },
     init() {
       this.loadPicData()// 获取轮播图
-
       this.getSymbol()
       this.addClass(0)
       this.loadDataPage(this.pageNo)// 获取公告
@@ -1204,6 +1202,8 @@ export default {
       param['pageSize'] = this.pageSize
       this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
         var resp = response.body
+        var str = JSON.stringify(resp.data)
+        localStorage.setItem('result', str)
         if (resp.code === 0) {
           if (resp.data.content.length === 0) return
           const FAQList = resp.data.content
@@ -1250,16 +1250,14 @@ export default {
       const param = {}
       param['sysAdvertiseLocation'] = 1
       this.$http.post(this.host + '/uc/ancillary/system/advertise', param)
-                .then(response => {
-                  var result = response.body
-                  if (result.code == 0 && result.data.length > 0) {
-                    console.log(result.data)
-                    const picList = result.data
-                    // this.picList = this.splitArray(picList);
-                    this.picList = picList
-                    console.log(this.picList)
-                  }
-                })
+      .then(response => {
+        var result = response.body
+        if (result.code == 0 && result.data.length > 0) {
+          const picList = result.data
+          // this.picList = this.splitArray(picList);
+          this.picList = picList
+        }
+      })
     },
     getCoin(symbol) {
       return this.coins._map[symbol]

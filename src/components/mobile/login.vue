@@ -80,10 +80,10 @@ import MyModal from './myModal.vue'
 
 export default {
   data() {
-    const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
+    const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
     return {
       openGoogleCode: false, // 是否开启google验证状态;
-      openGoogle: "", //  获取谷歌验证
+      openGoogle: '', //  获取谷歌验证
       /* 添加短信验证 yangxiaoxi 5.29*/
       openPhoneCode: false, // 是否开启Phone验证;
       // 6.06
@@ -97,269 +97,269 @@ export default {
       captchaObj: null,
       _captchaResult: null,
       formInline: {
-        user: "",
-        password: "",
-        googleCode: "",
-        checkCode: "",
-        emailCode: ""
+        user: '',
+        password: '',
+        googleCode: '',
+        checkCode: '',
+        emailCode: ''
       },
       ruleInline: {
         password: [
           {
             required: true,
-            message: this.$t("uc.login.pwdvalidate1"),
-            trigger: "blur"
+            message: this.$t('uc.login.pwdvalidate1'),
+            trigger: 'blur'
           },
           {
-            type: "string",
+            type: 'string',
             min: 6,
-            message: this.$t("uc.login.pwdvalidate2"),
-            trigger: "blur"
+            message: this.$t('uc.login.pwdvalidate2'),
+            trigger: 'blur'
           }
         ]
       }
-    };
+    }
   },
   created: function() {
-    this.init();
+    this.init()
   },
   computed: {
     isLogin: function() {
-      return this.$store.getters.isLogin;
+      return this.$store.getters.isLogin
     }
   },
   methods: {
     // /*手机发送验证码*/
     sendPhoneCode(index) {
-      console.log(this);
-      const me = this;
+      console.log(this)
+      const me = this
       if (index == 1) {
         // 获取手机code
         this.$http
-          .post(this.host + "/uc/mobile/login/code", {
+          .post(this.host + '/uc/mobile/login/code', {
             phone: this.formInline.user
           })
           .then(response => {
-            console.log(response);
-            const resp = response.body;
+            console.log(response)
+            const resp = response.body
             if (resp.code == 0) {
-              this.sendMsgDisabled = true;
+              this.sendMsgDisabled = true
               const interval = window.setInterval(function() {
                 if (me.codeTime-- <= 0) {
-                  me.codeTime = 60;
-                  me.sendMsgDisabled = false;
-                  window.clearInterval(interval);
+                  me.codeTime = 60
+                  me.sendMsgDisabled = false
+                  window.clearInterval(interval)
                 }
-              }, 1000);
+              }, 1000)
             } else {
-              this.$refs.myModal.open(resp.message);
+              this.$refs.myModal.open(resp.message)
             }
-          });
+          })
       } else {
         // 获取邮箱code
         this.$http
-          .post(this.host + "/uc/email/login/code", {
+          .post(this.host + '/uc/email/login/code', {
             email: this.formInline.user
           })
           .then(response => {
-            console.log(response);
-            const resp = response.body;
+            console.log(response)
+            const resp = response.body
             if (resp.code == 0) {
-              this.sendMsgDisabled1 = true;
+              this.sendMsgDisabled1 = true
               const interval = window.setInterval(function() {
                 if (me.codeTime1-- <= 0) {
-                  me.codeTime1 = 60;
-                  me.sendMsgDisabled1 = false;
-                  window.clearInterval(interval);
+                  me.codeTime1 = 60
+                  me.sendMsgDisabled1 = false
+                  window.clearInterval(interval)
                 }
-              }, 1000);
+              }, 1000)
             } else {
-              this.$refs.myModal.open(resp.message);
+              this.$refs.myModal.open(resp.message)
             }
-          });
+          })
       }
     },
     // 用户名输入以后判断用户是否开启谷歌验证
     userBlur() {
-      const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
-      var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-      const tel = this.formInline.user;
+      const pattern = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
+      var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
+      const tel = this.formInline.user
       if (pattern.test(tel) || reg.test(tel)) {
         this.isNeedGoogle(tel).then(res => {
-          console.log(res);
+          console.log(res)
           // 6.06改写
           switch (res) {
             case 0:
               // 0为无需输入任何验证
-              this.openGoogleCode = false;
-              this.openPhoneCode = false;
-              this.openEmailCode = false;
-              break;
+              this.openGoogleCode = false
+              this.openPhoneCode = false
+              this.openEmailCode = false
+              break
             case 1:
               // 1为开启谷歌验证
-              this.openGoogleCode = true;
-              this.openPhoneCode = false;
-              this.openEmailCode = false;
-              break;
+              this.openGoogleCode = true
+              this.openPhoneCode = false
+              this.openEmailCode = false
+              break
             case 2:
               // 2为开启手机验证
-              this.openGoogleCode = false;
-              this.openPhoneCode = true;
-              this.openEmailCode = false;
-              break;
+              this.openGoogleCode = false
+              this.openPhoneCode = true
+              this.openEmailCode = false
+              break
             case 3:
               // 3为开启邮箱验证
-              this.openGoogleCode = false;
-              this.openPhoneCode = false;
-              this.openEmailCode = true;
+              this.openGoogleCode = false
+              this.openPhoneCode = false
+              this.openEmailCode = true
           }
-          console.log(res);
-        });
+          console.log(res)
+        })
       }
     },
     init() {
       if (this.isLogin) {
-        this.$router.push("/");
+        this.$router.push('/')
       }
     },
     onKeyup(ev) {
       if (ev.keyCode == 13) {
-        $(".login_btn").click();
+        $('.login_btn').click()
       }
     },
     initGtCaptcha() {
-      var self = this;
-      var captcha1 = new TencentCaptcha("2038419167", res => {
+      var self = this
+      var captcha1 = new TencentCaptcha('2038419167', res => {
         res.ret == 0 &&
           (self.ticket = res.ticket) &&
           (self.randStr = res.randstr) &&
-          self.success(res.ticket, res.randstr); // 腾讯防水验证成功的回调
-      });
-      captcha1.show(); // 显示验证码
+          self.success(res.ticket, res.randstr) // 腾讯防水验证成功的回调
+      })
+      captcha1.show() // 显示验证码
     },
     /** 验证用户是否开启了谷歌验证  返回值1为开启*/
     isNeedGoogle(tel) {
       return this.$http
-        .post(this.host + "/uc/v2/get/user", { username: tel })
+        .post(this.host + '/uc/v2/get/user', { username: tel })
         .then(res => {
-          const resp = res.body;
-          this.openGoole = res.body.data;
+          const resp = res.body
+          this.openGoole = res.body.data
           if (resp.code == 0) {
             return new Promise((resolve, reject) => {
-              resolve(resp.data);
-            });
+              resolve(resp.data)
+            })
           }
-        });
+        })
     },
     success(ticket, randstr) {
       const params = {
         ticket,
         randStr: randstr
-      };
-      const formParams = this.formInline;
-      params.username = formParams.user;
-      params.password = formParams.password;
+      }
+      const formParams = this.formInline
+      params.username = formParams.user
+      params.password = formParams.password
       if (this.openGoogleCode) {
-        params.code = formParams.googleCode;
+        params.code = formParams.googleCode
       }
       if (this.openPhoneCode) {
-        params.checkCode = this.formInline.checkCode;
+        params.checkCode = this.formInline.checkCode
       }
       // 6.06
       if (this.openEmailCode) {
-        params.checkCode = this.formInline.emailCode;
+        params.checkCode = this.formInline.emailCode
       }
-      return this.login(params);
+      return this.login(params)
     },
     loginCheck() {
       // 新加代码
       // 判断手机号邮箱不能为空
       if (!this.formInline.user) {
-        this.$refs.myModal.open(this.$t("uc.login.loginvalidate"));
-        return false;
+        this.$refs.myModal.open(this.$t('uc.login.loginvalidate'))
+        return false
       }
       // 判断是否绑定谷歌
       if (this.openGoogleCode) {
         // this.openPhoneCode = false;
         // 判断谷歌验证码不能为空
         if (!this.formInline.googleCode) {
-          this.$refs.myModal.open(this.$t("uc.login.google"));
-          return false;
+          this.$refs.myModal.open(this.$t('uc.login.google'))
+          return false
         } else {
-          this.initGtCaptcha();
+          this.initGtCaptcha()
         }
       } else if (this.openPhoneCode) {
         // // 判断手机验证码不能为空
         if (!this.formInline.checkCode) {
-          this.$refs.myModal.open(this.$t("uc.login.phone"));
-          return false;
+          this.$refs.myModal.open(this.$t('uc.login.phone'))
+          return false
         } else {
-          this.initGtCaptcha();
+          this.initGtCaptcha()
         }
       } else if (this.openPhoneCode) {
         // 6.06
         // // 判断邮箱验证码不能为空
         if (!this.formInline.emailCode) {
-          this.$refs.myModal.open(this.$t("uc.login.email"));
-          return false;
+          this.$refs.myModal.open(this.$t('uc.login.email'))
+          return false
         } else {
-          this.initGtCaptcha();
+          this.initGtCaptcha()
         }
       }
-      this.initGtCaptcha();
+      this.initGtCaptcha()
     },
     handleSubmit(name) {
       // 5.20修改
-      console.log(name);
+      console.log(name)
       this.$refs[name].validate(valid => {
         // 首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
-        console.log(valid);
+        console.log(valid)
         if (valid) {
-          this.loginCheck();
-          const params = {};
-          const formParams = this.formInline;
-          params.username = formParams.user;
-          params.password = formParams.password;
-          params.code = formParams.googleCode;
+          this.loginCheck()
+          const params = {}
+          const formParams = this.formInline
+          params.username = formParams.user
+          params.password = formParams.password
+          params.code = formParams.googleCode
         }
-      });
+      })
     },
     // login(params) {
     login() {
-      const params = {};
-      const formParams = this.formInline;
-      params.username = formParams.user;
-      params.password = formParams.password;
-      params.code = formParams.googleCode;
+      const params = {}
+      const formParams = this.formInline
+      params.username = formParams.user
+      params.password = formParams.password
+      params.code = formParams.googleCode
       if (this.openGoogleCode) {
-        params.code = formParams.googleCode;
+        params.code = formParams.googleCode
       }
       if (this.openPhoneCode) {
-        params.checkCode = this.formInline.checkCode;
+        params.checkCode = this.formInline.checkCode
       }
       if (this.openEmailCode) {
-        params.checkCode = this.formInline.emailCode;
+        params.checkCode = this.formInline.emailCode
       }
       this.$http.post(this.host + this.api.uc.login, params).then(response => {
-        var resp = response.body;
+        var resp = response.body
         if (resp.code == 0) {
-          this.$refs.myModal.open(this.$t("uc.login.success"));
-          this.$store.commit("setMember", response.body.data);
-          if (this.$route.query.key != null && this.$route.query.key != "") {
-            localStorage.setItem("USERKEY", this.$route.query.key);
+          this.$refs.myModal.open(this.$t('uc.login.success'))
+          this.$store.commit('setMember', response.body.data)
+          if (this.$route.query.key != null && this.$route.query.key != '') {
+            localStorage.setItem('USERKEY', this.$route.query.key)
           }
           sessionStorage.switchToPc = true
-          this.$router.push("/");
+          this.$router.push('/')
         } else {
-          this.$refs.myModal.open(resp.message);
+          this.$refs.myModal.open(resp.message)
         }
-      });
+      })
     }
   },
   components: {
     MyModal
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

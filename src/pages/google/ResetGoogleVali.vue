@@ -57,23 +57,23 @@
     </div>
 </template>
 <script>
-import QRCode from 'qrcode2';
+import QRCode from 'qrcode2'
 // import { minHeightMinx } from "../../minxs/minxs.js"
 export default {
     // mixins: [minHeightMinx],
-    name: "resetgooglevali",
-    data() {
-        return {
-            dataSecret: {},
-            formCode: {
-                code: ""
-            },
-            ruleInline: {
-                code: [{ required: true, message: this.$t('openGoolePage._mustFill'), trigger: 'blur' }]
-            }
-        }
-    },
-    async created() {
+  name: 'Resetgooglevali',
+  data() {
+    return {
+      dataSecret: {},
+      formCode: {
+        code: ''
+      },
+      ruleInline: {
+        code: [{ required: true, message: this.$t('openGoolePage._mustFill'), trigger: 'blur' }]
+      }
+    }
+  },
+  async created() {
         // await this.init()
         // console.log(this.dataSecret);
             //     .then(res => {
@@ -96,57 +96,57 @@ export default {
             //     });
             // })
         // })
-    },
-    methods: {
+  },
+  methods: {
         // 点击返回上个页面
-        returnSuperior () {
-            this.$router.push({path: '/account'})
-        },
-        async init(){
-            this.$http.get(this.host + `/uc/google/sendgoogle`).then(res => {
-                const resp = res.body;
-                if (resp.code == 0) {
-                    this.dataSecret = resp.data
-                    /*console.log(this.dataSecret, this.dataSecret.link, this.dataSecret.secret);*/
+    returnSuperior() {
+      this.$router.push({ path: '/account' })
+    },
+    async init() {
+      this.$http.get(this.host + `/uc/google/sendgoogle`).then(res => {
+        const resp = res.body
+        if (resp.code == 0) {
+          this.dataSecret = resp.data
+                    /* console.log(this.dataSecret, this.dataSecret.link, this.dataSecret.secret);*/
 
-                    new QRCode(document.getElementById("qrcodeFrist"), {
-                        text: this.dataSecret.link,
-                        width: 75,
-                        height: 75,
-                        colorDark: "#000000",
-                        colorLight: "#ffffff",
-                    });
-                } else {
-                    this.$Notice.error(resp.message);
-                }
-            })
-        },
-        onCopy(e) {
-            this.$Notice.success({
-                title: this.$t("common.tip"),
-                desc: this.$t("common.copySuccess")
-            })
-        },
-        onError() {
-            this.$Notice.error({
-                title: this.$t("common.tip"),
-                desc: this.$t("common.copyFail")
-            })
-        },
-        sure(name) {
-            this.$refs[name].validate(valid => {
-                console.log(valid)
-                if (valid) {
-                    const codes = this.formCode.code;
-                    //验证用户输入的code码是否正确;
-                    this.reset({ codes, secret: this.dataSecret.secret });
-                } else {
-                    this.$Notice.error({
-                        title: this.$t("common.tip"),
-                        desc: this.$t("openGoolePage._googleCodeRequire"),
-                    })
-                }
-            })
+          new QRCode(document.getElementById('qrcodeFrist'), {
+            text: this.dataSecret.link,
+            width: 75,
+            height: 75,
+            colorDark: '#000000',
+            colorLight: '#ffffff'
+          })
+        } else {
+          this.$Notice.error(resp.message)
+        }
+      })
+    },
+    onCopy(e) {
+      this.$Notice.success({
+        title: this.$t('common.tip'),
+        desc: this.$t('common.copySuccess')
+      })
+    },
+    onError() {
+      this.$Notice.error({
+        title: this.$t('common.tip'),
+        desc: this.$t('common.copyFail')
+      })
+    },
+    sure(name) {
+      this.$refs[name].validate(valid => {
+        console.log(valid)
+        if (valid) {
+          const codes = this.formCode.code
+                    // 验证用户输入的code码是否正确;
+          this.reset({ codes, secret: this.dataSecret.secret })
+        } else {
+          this.$Notice.error({
+            title: this.$t('common.tip'),
+            desc: this.$t('openGoolePage._googleCodeRequire')
+          })
+        }
+      })
             // if (this.formCode.code) {
             //     const codes = this.formCode.code;
             //     //验证用户输入的code码是否正确;
@@ -157,7 +157,7 @@ export default {
             //         desc: this.$t("openGoolePage._googleCodeRequire"),
             //     })
             // }
-        },
+    },
         // validCode(params) {//验证用户输入的code码是否正确;
         //     this.$http.post(this.host + "/uc/google/yzgoogle", params).then(res => {
         //         const resp = res.body;
@@ -167,29 +167,29 @@ export default {
         //         }
         //     })
         // },
-        reset(params) {//验证用户是否可以绑定或者修改成功;
-            this.$http.post(this.host + "/uc/google/googleAuth", params).then(res => {
-                const resp = res.body;
-                if (resp.code == 0) {
-                    this.$Notice.success({
-                        title: this.$t("common.tip"),
-                        desc: resp.message
-                    });
-                    setTimeout(() => {
-                        this.$router.go(0)
-                    })
-                }else{
-                    this.$Notice.error({
-                        title: this.$t("common.tip"),
-                        desc:resp.message
-                    });
-                }
-            })
+    reset(params) { // 验证用户是否可以绑定或者修改成功;
+      this.$http.post(this.host + '/uc/google/googleAuth', params).then(res => {
+        const resp = res.body
+        if (resp.code == 0) {
+          this.$Notice.success({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
+          setTimeout(() => {
+            this.$router.go(0)
+          })
+        } else {
+          this.$Notice.error({
+            title: this.$t('common.tip'),
+            desc: resp.message
+          })
         }
-    },
-    mounted() {
-        this.init()
+      })
     }
+  },
+  mounted() {
+    this.init()
+  }
 }
 </script>
 <style lang="scss" scoped>

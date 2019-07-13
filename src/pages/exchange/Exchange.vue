@@ -1132,9 +1132,9 @@ export default {
             return h('div', [
               h('Icon', {
                 props: {
-                    color:"#3399ff",
-                    size:"18",
-                    type: params.row.isFavor
+                  color: '#3399ff',
+                  size: '18',
+                  type: params.row.isFavor
                             ? 'ios-star'
                             : 'ios-star-outline'
                   // type: params.row.isFavor
@@ -1160,19 +1160,19 @@ export default {
                     // } else {
                     //   this.$Message.warning(this.$t('common.logintip'))
                     // }
-                      if (this.isLogin) {
-                          if (params.row.isFavor) {
-                              this.cancelCollect(params.index, params.row)
+                    if (this.isLogin) {
+                      if (params.row.isFavor) {
+                        this.cancelCollect(params.index, params.row)
                               // event.currentTarget.className ==
                               //                               'ivu-icon ivu-icon-android-star-outline'
-                          } else {
-                              this.collect(params.index, params.row)
+                      } else {
+                        this.collect(params.index, params.row)
                               // event.currentTarget.className =
                               //                               'ivu-icon ivu-icon-android-star'
-                          }
-                      }else {
-                        this.$Message.warning(this.$t('common.logintip'))
                       }
+                    } else {
+                      this.$Message.warning(this.$t('common.logintip'))
+                    }
                   }
                 }
               }),
@@ -1237,11 +1237,11 @@ export default {
             sortable: false,
             className: 'coin-menu-symbol',
             render: (h, params) => {
-                return h('div', [
+              return h('div', [
                 h('Icon', {
                   props: {
-                    color:"#3399ff",
-                    size:"18",
+                    color: '#3399ff',
+                    size: '18',
                     type: params.row.isFavor
                                           ? 'ios-star'
                                           : 'ios-star-outline'
@@ -1598,42 +1598,42 @@ export default {
             }
           },
             /* 操作*/
-              {
-                title: self.$t('exchange.action'),
-                key: 'operate',
-                width: 110,
-                render: (h, params) => {
-                  return h(
+          {
+            title: self.$t('exchange.action'),
+            key: 'operate',
+            width: 110,
+            render: (h, params) => {
+              return h(
                     'Button',
-                    {
-                      props: {
-                        size: 'small',
-                        type: 'warning'
-                      },
-                      style: {},
-                      on: {
-                        click: () => {
-                          this.cancel(params.index)
-                        }
-                      }
-                    },
+                {
+                  props: {
+                    size: 'small',
+                    type: 'warning'
+                  },
+                  style: {},
+                  on: {
+                    click: () => {
+                      this.cancel(params.index)
+                    }
+                  }
+                },
                         self.$t('exchange.undo')
                     )
+            }
+          },
+          {
+            title: self.$t('new.Detailss'),
+            type: 'expand',
+            width: 80,
+            render: (h, params) => {
+              return h(expandRow, {
+                props: {
+                  skin: params.row.skin,
+                  rows: this.currentTableData
                 }
-              },
-            {
-                title: self.$t('new.Detailss'),
-                type: 'expand',
-                width: 80,
-                render: (h, params) => {
-                    return h(expandRow, {
-                        props: {
-                            skin: params.row.skin,
-                            rows: this.currentTableData
-                        }
-                    })
-                }
-            },
+              })
+            }
+          }
         ],
         rows: []
       },
@@ -1738,19 +1738,19 @@ export default {
               }
             }
           },
-            {
-                title: self.$t('new.Detailss'),
-                type: 'expand',
-                width: 80,
-                render: (h, params) => {
-                    return h(expandRow, {
-                        props: {
-                            skin: params.row.skin,
-                            rows: this.historyTableData
-                        }
-                    })
+          {
+            title: self.$t('new.Detailss'),
+            type: 'expand',
+            width: 80,
+            render: (h, params) => {
+              return h(expandRow, {
+                props: {
+                  skin: params.row.skin,
+                  rows: this.historyTableData
                 }
+              })
             }
+          }
         ],
         rows: []
       },
@@ -2227,10 +2227,10 @@ export default {
     getCNYRate() {
       this.$http
         .post(this.host + '/market/exchange-rate/usd-cny')
-                .then(response => {
-                  const resp = response.body
-                  this.CNYRate = resp.data
-                })
+            .then(response => {
+              const resp = response.body
+              this.CNYRate = resp.data
+            })
     },
     getCoin(symbol) {
       return this.coins._map[symbol]
@@ -2676,7 +2676,7 @@ export default {
                       const rows = this.plate.askRows
                       const len = rows.length
                       // console.log(rows[this.plate.maxPostion - resp.ask.items.length])
-                      if(rows[this.plate.maxPostion - resp.ask.items.length]) {
+                      if (rows[this.plate.maxPostion - resp.ask.items.length]) {
                         this.plate.askTotle = rows[this.plate.maxPostion - resp.ask.items.length].totalAmount
                       }
                     }
@@ -3013,7 +3013,7 @@ export default {
         //     this.showMarket = false;
         // },
     currentCoinFavorChange(index, row) {
-        console.log(index, row, this.currentCoin.symbol, this.currentCoinIsFavor);
+      console.log(index, row, this.currentCoin.symbol, this.currentCoinIsFavor)
       if (!this.isLogin) {
         this.$Message.warning(this.$t('common.logintip'))
         return
@@ -3069,8 +3069,8 @@ export default {
       }
     },
     collect(index, row) {
-        console.log(index, row);
-        if (!this.isLogin) {
+      console.log(index, row)
+      if (!this.isLogin) {
         this.$Message.info(this.$t('common.logintip'))
         return
       }
@@ -3092,8 +3092,8 @@ export default {
                 })
     },
     cancelCollect(index, row) {
-        console.log(index, row);
-        if (!this.isLogin) {
+      console.log(index, row)
+      if (!this.isLogin) {
         this.$Message.info(this.$t('common.logintip'))
         return
       }
@@ -3488,7 +3488,7 @@ export default {
                 .post(this.host + this.api.exchange.current, params)
                 .then(response => {
                   const resp = response.body
-                    if (resp.data && resp.data.length > 0) {
+                  if (resp.data && resp.data.length > 0) {
                     this.currentOrder.rows = resp.data.slice(0, 3)
                     this.currentOrder.rows.forEach((row, index) => {
                       row.skin = that.skin
@@ -3510,7 +3510,7 @@ export default {
             // }
       this.historyOrder.rows = [] // 清空数据
       const params = {}
-      params['pageNo'] = 1
+      // params['pageNo'] = 1
       params['pageSize'] = this.historyOrder.pageSize
       params['symbol'] = this.currentCoin.symbol
       const that = this
@@ -3605,11 +3605,23 @@ export default {
             return item
           })
         }
+        this.$http.post(this.host + this.api.exchange.orderDetails, {
+          orderId: row.orderId
+        }).then(res => {
+          const data = res.body
+          if (data.code == 0) {
+            if (this.selectedOrder === 'current') {
+              this.currentTableData = data.data
+            } else {
+              this.historyTableData = data.data
+            }
+          }
+        })
       } else {
         if (status) {
           this.historyOrder.rows.splice()
           this.historyOrder.rows.filter((item, index) => {
-            if (item.orderId === row.orderId) {
+            if (item.id === row.id) {
               item._expanded = true   // 展开选中的行
             } else {
               item._expanded = false   // 其他行关闭
@@ -3620,7 +3632,7 @@ export default {
         } else {
           this.historyTableData.splice()
           this.historyTableData.map((item, index) => {
-            if (item.orderId === row.orderId) {
+            if (item.id === row.id) {
               item._expanded = false   // 展开选中的行
             } else {
               item._expanded = false   // 其他行关闭
@@ -3628,20 +3640,19 @@ export default {
             return item
           })
         }
-      }
-
-      return this.$http.post(this.host + this.api.exchange.orderDetails, {
-        orderId: row.orderId
-      }).then(res => {
-        const data = res.body
-        if (data.code == 0) {
-          if (this.selectedOrder === 'current') {
-            this.currentTableData = data.data
-          } else {
-            this.historyTableData = data.data
+        this.$http.post(this.host + this.api.exchange.orderDetails, {
+          orderId: row.id
+        }).then(res => {
+          const data = res.body
+          if (data.code == 0) {
+            if (this.selectedOrder === 'current') {
+              this.currentTableData = data.data
+            } else {
+              this.historyTableData = data.data
+            }
           }
-        }
-      })
+        })
+      }
     },
     refreshAccount: function() {
       this.getCurrentOrder()

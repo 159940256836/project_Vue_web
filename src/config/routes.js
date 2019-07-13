@@ -45,8 +45,6 @@ import HelpDetail from '../pages/cms/HelpDetail' // 帮助详情
 import OTCMain from '../pages/otc/Main'
 import OtcTrade from '../pages/otc/Trade'
 import OtcOrder from '../components/uc/myorder'
-import EntrustCurrent from '../components/uc/EntrustCurrent' // 当前委托记录
-import EntrustHistory from '../components/uc/EntrustHistory' // 历史委托记录
 import OtcAd from '../components/otc/MyAd'
 import adPublish from '../pages/otc/AdPublish'
 import PublishAdver from '../pages/otc/PublishAdver'
@@ -414,13 +412,6 @@ export default [
         component: OtcOrder
       },
       {
-        path: 'entrust/current',
-        component: EntrustCurrent
-      },
-      {
-        path: 'entrust/history',
-        component: EntrustHistory
-      }, {
         path: 'trade',
         component: trade
       },

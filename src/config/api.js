@@ -29,7 +29,7 @@ export default {
   exchange: { // 币币交易委托提交与查询接口
     orderAdd: '/exchange/order/add', // 提交订单接口
     current: '/exchange/order/personal/newCurrent', // 当前委托接口
-    history: '/exchange/order/personal/newHistory', // 历史委托接口
+    history: '/order/exchange-order/exchange/history', // 历史委托接口
     detail: '/exchange/order/detail/', // 详细订单接口
     favorFind: '/exchange/favor/find', // 查询自选
     favorAdd: '/exchange/favor/add', // 添加自选

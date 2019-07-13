@@ -33,11 +33,11 @@
                                     <img src="./assets/img/flag.png" v-else alt="">
                                 </a>
                                 <DropdownMenu slot="list" id="change_language_theme">
-                                    <DropdownItem v-if="languageValue=='简体中文'" name="en">
+                                    <DropdownItem v-if="languageValue=='简体中文'" name="en" @click.native="lnswitch('cn')">
                                         <img src="./assets/img/flag.png" alt="">
                                         English
                                     </DropdownItem>
-                                    <DropdownItem v-else name="cn">
+                                    <DropdownItem v-else name="cn" @click.native="lnswitch('en')">
                                         <img src="./assets/img/china.png" alt="">
                                         简体中文
                                     </DropdownItem>
@@ -532,22 +532,31 @@ export default {
     })
   },
   methods: {
+    lnswitch: function(language) {
+      this.$http.get(this.host + '/uc/lang/change/' + language).then(res => {
+        console.log(res)
+      })
+    },
   /** *
    * 获取公告
    */
     loadDataPage() {
-      var param = {}
-      param['pageNo'] = 1
-      param['pageSize'] = 50
-      this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
-        var resp = response.body
-        if (resp.code === 0) {
-          this.FAQList = (resp.data.content).slice(0, 5)
-          console.log(this.FAQList.slice(0, 5))
-        } else {
-          this.$Message.error(console.log('1'))
-        }
-      })
+      var result = localStorage.getItem('result')
+      result = JSON.parse(result)
+      if (result.content.length > 0) {
+        this.FAQList = result.content
+      } else {
+        this.$Message.error('没有发布公告')
+      }
+
+    //   this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
+    //     var resp = response.body
+    //     if (resp.code === 0) {
+    //       this.FAQList = (resp.data.content).slice(0, 5)
+    //     } else {
+    //       this.$Message.error(console.log('1'))
+    //     }
+    //   })
     },
         // header动画效果
     reload() {
@@ -605,11 +614,10 @@ export default {
       this.$store.commit('navigate', 'nav-index')
       this.$store.commit('recoveryMember')
       this.$store.commit('initLang')
-            // this.loadTopInfo();
+      this.loadTopInfo()
       this.checkLogin()
     },
     loadTopInfo() {
-            /* 获取首页顶部公告*/
       const param = {}
       param['sysAdvertiseLocation'] = 2
       this.$http
@@ -1401,7 +1409,7 @@ body {
                         margin: 0;
                     }
                     span{
-                        width: 320px;
+                        width: 280px;
                         margin-left:15px;
                         color:#8790a1;
                     }

@@ -13,40 +13,39 @@
 
 <script>
 export default {
-    props:{
-        openCallBack: {
-            type: Function,
-            default: null
+  props: {
+    openCallBack: {
+      type: Function,
+      default: null
+    }
+  },
+  data() {
+    return {
+      isShow: false,
+      title: '消息',
+      content: null,
+      okText: '好的'
+    }
+  },
+  methods: {
+    open(config) {
+      this.isShow = true
+      if (typeof config === 'string') {
+        this.content = config
+      } else if (typeof config === 'object') {
+        if (config instanceof Array) {
+          return false
         }
+        config.title ? this.title = config.title : null
+        config.desc ? this.content = config.desc : null
+        config.okText ? this.okText = config.okText : null
+        this.isShow = true
+      }
     },
-    data() {
-        return {
-            isShow: false,
-            title: '消息',
-            content: null,
-            okText: '好的'
-        }
-    },
-    methods: {
-        open(config) {
-            this.isShow = true
-            if(typeof config == 'string') {
-                this.content = config
-            }
-            else if(typeof config == 'object') {
-                if(config instanceof Array) {
-                    return false
-                }
-                config.title ? this.title = config.title : null
-                config.desc ? this.content = config.desc : null
-                config.okText ? this.okText = config.okText : null
-                this.isShow = true
-            }
-        },
-        closeEvent() {
-            this.isShow = false
-        }
-    },
+    closeEvent() {
+      this.isShow = false
+    }
+  }
 }
 </script>
 

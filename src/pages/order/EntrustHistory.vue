@@ -365,7 +365,7 @@
                 <DatePicker class="DatePicker" type="daterange" v-model="formItem.date" style="width:248px;"></DatePicker>
             </FormItem> -->
             <FormItem :label="$t('historyAndCu.symbol')+':'" style="margin-right:14px;">
-                <Select v-model="formItem.symbol" style="width:121px;" :placeholder="$t('header.choose')">
+                <Select v-model="formItem.symbol"  :placeholder="$t('header.choose')">
                 <Option v-for="(item,index) in symbol " :value="item.symbol " :key="index">{{item.symbol}}</Option>
                 </Select>
             </FormItem>
@@ -374,12 +374,19 @@
                 <Option v-for="(item, index) in exchangeType" :value="item[0]" :key="index">{{item[1]}}</Option>
                 </Select>
             </FormItem> -->
-            <!-- <FormItem :label="$t('historyAndCu.type')+':'" style="margin-right:12px;">
+            <FormItem :label="$t('historyAndCu.type')+':'" style="margin-right:12px;">
                 <Select v-model="formItem.direction" style="width:95px;" :placeholder="$t('header.choose')">
                 <Option value="0">{{$t('historyAndCu.buy')}}</Option>
                 <Option value="1">{{$t('historyAndCu.sell')}}</Option>
                 </Select>
-            </FormItem> -->
+            </FormItem>
+            <FormItem :label="'时间'" style="margin-right:12px;">
+                <Select v-model="formItem.period" style="width:95px;" :placeholder="$t('header.choose')">
+                <Option value="0">一周内</Option>
+                <Option value="1">一月内</Option>
+                <Option value="2">二月内</Option>
+                </Select>
+            </FormItem>
             <FormItem :label="$t('exchange.status')">
                 <Select v-model="formItem.status" style="width:94px;" :placeholder="$t('header.choose')">
                     <Option value="COMPLETED">{{$t('exchange.finished')}}</Option>
@@ -387,7 +394,6 @@
                 </Select>
             </FormItem>
             <FormItem>
-
                 <span
                     @click="handleSubmit"
                     class="my-btn"
@@ -450,12 +456,19 @@ export default {
       pageNo: 1,
       total: 10,
       symbol: [],
+      lastid: '',
+      firstid: '',
+      lasttime: '',
+      firsttime: '',
       formItem: {
-        symbol: '',
+        symbol: ['BTC/BC'],
         type: '',
         direction: '',
-        date: '',
-        status: 'COMPLETED'
+        status: 'COMPLETED',
+        period: 0,
+        select: '',
+        lastId: '',
+        lastTime: ''
       },
 
       orders: [],
@@ -464,6 +477,7 @@ export default {
   },
   created() {
     this.getHistoryOrder()
+    this.getSymbol()
   },
   watch: {
     '$i18n.locale': {
@@ -474,6 +488,9 @@ export default {
     }
   },
   methods: {
+    maxTagPlaceholder(num) {
+      return 'more ' + num
+    },
     previouspage() {
       if (this.pageNo == 1) {
         this.$Notice.open({
@@ -482,11 +499,17 @@ export default {
         })
       } else {
         this.pageNo = this.pageNo - 10
+        this.formItem.select = 'prev'
+        this.formItem.lastId = this.firstid
+        this.formItem.lastTime = this.firsttime
         this.getHistoryOrder()
       }
     },
     nextpage() {
       this.pageNo = this.pageNo + 10
+      this.formItem.select = 'next'
+      this.formItem.lastId = this.lastid
+      this.formItem.lastTime = this.lasttime
       this.getHistoryOrder()
     },
     dateFormat: function(tick) {
@@ -511,41 +534,50 @@ export default {
     getHistoryOrder() {
             // 查询历史委托
       this.loading = true
-      const { symbol, type, direction, date: rangeDate } = this.formItem,
-        startTime = new Date(rangeDate[0]).getTime() || '',
-        endTime = new Date(rangeDate[1]).getTime() || ''
+      // const { symbol, type, direction, date: rangeDate, period } = this.formItem
+        // startTime = new Date(rangeDate[0]).getTime() || '',
+        // endTime = new Date(rangeDate[1]).getTime() || ''
+      const { type, direction, period, lastId, select, lastTime, symbol } = this.formItem
       const params = {}
-      if (symbol) params.symbol = symbol
+      // const symbol = this.formItem.symbol.join(',')
+      if (symbol) params.symbols = symbol
+      if (period) params.period = period
       if (direction) params.direction = direction
       if (type) params.type = type
-      if (startTime) params.startTime = startTime
-      if (endTime) params.endTime = endTime
+      if (lastId) params.lastId = lastId
+      if (select) params.select = select
+      if (lastTime) params.lastTime = lastTime
+      params.period = 0
       params.pageNo = this.pageNo
-    //   params.pageSize = this.pageSize
       params.status = this.formItem.status
       var that = this
-        console.log(params);
-        this.orders = []
       this.$http
-                .post(this.host + '/exchange/order/personal/newHistory', params)
-                .then(response => {
-                  var resp = response.body
-                  const rows = []
-                  if (resp.data.length > 0) {
-                    this.total = resp.totalElements
-                    for (var i = 0; i < resp.data.length; i++) {
-                      var row = resp.data[i]
-                      row.price =
-                                row.type == 'MARKET_PRICE'
-                                    ? that.$t('exchange.marketprice')
-                                    : row.price
-                      rows.push(row)
-                    }
-                    this.orders = rows
-                      this.getSymbol()
-                  }
-                  this.loading = false
-                })
+      .post(this.host + '/order/exchange-order/exchange/personal/history', params)
+      .then(response => {
+        var resp = response.body
+        const rows = []
+        if (resp.data.length > 0) {
+          this.orders = []
+          this.firstid = response.body.data[0].id
+          const num = resp.data.length - 1
+          this.lastid = response.body.data[num].id
+          this.firsttime = response.body.data[0].createTime
+          this.lasttime = response.body.data[num].createTime
+          this.total = resp.totalElements
+          for (var i = 0; i < resp.data.length; i++) {
+            var row = resp.data[i]
+            row.price =
+                      row.type == 'MARKET_PRICE'
+                          ? that.$t('exchange.marketprice')
+                          : row.price
+            rows.push(row)
+          }
+          this.orders = rows
+        } else {
+          this.pageNo = this.pageNo - 10
+        }
+        this.loading = false
+      })
     },
         // 币币订单详情
         // 展开原生事件  点击左侧展收起
@@ -553,7 +585,8 @@ export default {
       if (status) {
         this.orders.splice()
         this.orders.filter((item, index) => {
-          if (item.orderId == row.orderId) {
+          console.log(item, row)
+          if (item.id == row.id) {
             item._expanded = true   // 展开选中的行
           } else {
             item._expanded = false   // 其他行关闭
@@ -563,7 +596,7 @@ export default {
       } else {
         this.historyTableData.splice()
         this.historyTableData.map((item, index) => {
-          if (item.orderId == row.orderId) {
+          if (item.id == row.id) {
             item._expanded = false   // 展开选中的行
           } else {
             item._expanded = false   // 其他行关闭
@@ -573,7 +606,7 @@ export default {
       }
 
       return this.$http.post(this.host + this.api.exchange.orderDetails, {
-        orderId: row.orderId
+        orderId: row.id
       }).then(res => {
         const data = res.body
         if (data.code == 0) {

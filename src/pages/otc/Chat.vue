@@ -94,33 +94,73 @@
                 </div>
                 <div class="account-main">
                     <div class="account-left">
-                        <div class="account-info" v-if="bankInfo&&bankInfo!=null">
+                        <div class="account-info" v-if="bankInfo&&bankInfo!=null" style="height:70px;">
                             <i class="icons bankfor"></i>
                             <span>{{ payInfo != null ? payInfo.realName : "" }} </span>
+                          <span
+                            v-clipboard:copy="payInfo.realName"
+                            v-clipboard:success="onCopy"
+                            v-clipboard:error="onError"
+                          class="blue"
+                        >
+                            <img src="@/assets/images/copy_icon.png" alt="加载失败" width="12px">
+                        </span>
                             <Poptip
                                 word-wrap
                                 trigger="hover"
-                                :content="bankInfo.branch"
-                                style="height: 20px;
+                                :content="bankInfo.bank+'-'+bankInfo.branch"
+                                style="
+                                width:200px;
+                                height: 20px;
                                 line-height: 20px;
+                                left:20px;
                                 position: absolute;
-                                top: 16px;"
+                                top: 20px;"
                             >
-                                <span style="width: 145px;
+                                <span style="
+                                    width:165px;
                                     display: inline-block;
                                     cursor: pointer;
                                     overflow: hidden;
                                     white-space: nowrap;
                                     text-overflow: ellipsis;"
-                                >{{ bankInfo.branch }}</span>
+                                >{{bankInfo.bank}}-{{ bankInfo.branch }}
+                                 <span
+                                    v-clipboard:copy="bankInfo.bank+'-'+bankInfo.branch"
+                                    v-clipboard:success="onCopy"
+                                    v-clipboard:error="onError"
+                                      class="blue"
+                                    >
+                                    <img src="@/assets/images/copy_icon.png" alt="加载失败" width="12px">
+                                </span>
+                                </span>
+                                <span
+                                    v-clipboard:copy="bankInfo.bank+'-'+bankInfo.branch"
+                                    v-clipboard:success="onCopy"
+                                    v-clipboard:error="onError"
+                                    v-if="bankInfo.bank.length+bankInfo.branch.length>15"
+                                      class="blue"
+                                      style="vertical-align: super;"
+                                    >
+                                    <img src="@/assets/images/copy_icon.png" alt="加载失败" width="12px">
+                                </span>
                             </Poptip>
                             <span style="position: absolute;
-                                        top: 35px;
-                                        left: 21px;
+                                        top: 40px;
+                                        left: 20px;
                                         height: 20px;
                                         line-height: 20px;
                                         cursor: pointer;"
-                            >{{ bankInfo.cardNo }}</span>
+                            >{{ bankInfo.cardNo }}
+                            <span
+                                v-clipboard:copy="bankInfo.cardNo"
+                                v-clipboard:success="onCopy"
+                                v-clipboard:error="onError"
+                              class="blue"
+                            >
+                            <img src="@/assets/images/copy_icon.png" alt="加载失败" width="12px">
+                        </span>
+                            </span>
                         </div>
                         <div class="account-info" v-else>
                             <i class="icons bankfor"></i>
@@ -445,9 +485,9 @@
     </div>
 </template>
 <script>
-var Stomp = require("stompjs");
-var SockJS = require("sockjs-client");
-import chatline from "../../components/otc/Chatline";
+var Stomp = require('stompjs')
+var SockJS = require('sockjs-client')
+import chatline from '../../components/otc/Chatline'
 export default {
   components: {
     chatline
@@ -456,14 +496,14 @@ export default {
     return {
       watching: false,
       stompClient: null,
-      reserveTime: "60",
+      reserveTime: '60',
       reserveInteval: null,
-      fundpwd: "",
+      fundpwd: '',
       statusBtn: 0,
       tradeType: 0,
       isloading: true,
-      payTime: "",
-      statusText: "",
+      payTime: '',
+      statusText: '',
       modal1: false,
       modal2: false,
       modal3: false,
@@ -471,297 +511,309 @@ export default {
       modal5: false,
       modal6: false,
       formItem: {
-        select: "",
-        remark: ""
+        select: '',
+        remark: ''
       },
       msg: {},
       payInfo: {},
       bankInfo: {},
       alipay: {},
       wechatPay: {},
-      payCodeUrl: ""
-    };
+      payCodeUrl: ''
+    }
   },
   created() {
-    this.getDetail();
-    this.initScok();
+    this.getDetail()
+    this.initScok()
   },
   computed: {
-      lang: function() {
-          return this.$store.state.lang;
-      },
-      statusTextStr(){
-          if (this.statusText == 1) {
-              return this.$t("otc.chat.result_1");
-            } else if (this.statusText == 2) {
-              return this.$t("otc.chat.result_2");
-            } else if (this.statusText == 3) {
-              return this.$t("otc.chat.result_3");
-            } else if (this.statusText == 4) {
-              return this.$t("otc.chat.result_4");
-            } else if (this.statusText == 0) {
-              return this.$t("otc.chat.result_5");
-            }
+    lang: function() {
+      return this.$store.state.lang
+    },
+    statusTextStr() {
+      if (this.statusText == 1) {
+        return this.$t('otc.chat.result_1')
+      } else if (this.statusText == 2) {
+        return this.$t('otc.chat.result_2')
+      } else if (this.statusText == 3) {
+        return this.$t('otc.chat.result_3')
+      } else if (this.statusText == 4) {
+        return this.$t('otc.chat.result_4')
+      } else if (this.statusText == 0) {
+        return this.$t('otc.chat.result_5')
       }
+    }
   },
   methods: {
-    //让浏览器滚动条保持在最低部
+    onCopy(e) {
+      this.$Notice.success({
+        title: this.$t('common.tip'),
+        desc: this.$t('common.copySuccess')
+      })
+    },
+    onError() {
+      this.$Notice.error({
+        title: this.$t('common.tip'),
+        desc: this.$t('common.copyFail')
+      })
+    },
+    // 让浏览器滚动条保持在最低部
     scrollToBottom: function() {
       // window.scrollTo(0, 900000);
     },
     initScok: function() {
-      var socket = new SockJS(this.host + "/chat/chat-webSocket");
-      this.stompClient = Stomp.over(socket);
-      this.stompClient.debug = false;
+      var socket = new SockJS(this.host + '/chat/chat-webSocket')
+      this.stompClient = Stomp.over(socket)
+      this.stompClient.debug = false
     },
     watchOrderStutusNotice: function() {
-      var self = this;
+      var self = this
       this.stompClient.connect({}, function(frame) {
         self.stompClient.subscribe(
-          "/user/" +
+          '/user/' +
             self.msg.myId +
-            "/order-notice/" +
+            '/order-notice/' +
             self.$route.query.tradeId,
           function(response) {
-            if (self.reserveInteval != null) clearInterval(self.reserveInteval);
-            var confirmPayMsg = JSON.parse(response.body);
-            self.$Message.success(confirmPayMsg.content);
-            self.statusBtn = confirmPayMsg.status;
+            if (self.reserveInteval != null) clearInterval(self.reserveInteval)
+            var confirmPayMsg = JSON.parse(response.body)
+            self.$Message.success(confirmPayMsg.content)
+            self.statusBtn = confirmPayMsg.status
             if (confirmPayMsg.status == 1) {
-              self.statusText = 1;
-              self.setReserveTime();
+              self.statusText = 1
+              self.setReserveTime()
             } else if (confirmPayMsg.status == 2) {
-              self.statusText = 2;
+              self.statusText = 2
             } else if (confirmPayMsg.status == 3) {
-              self.statusText = 3;
+              self.statusText = 3
             } else if (confirmPayMsg.status == 4) {
-              self.statusText = 4;
+              self.statusText = 4
             } else if (confirmPayMsg.status == 0) {
-              self.statusText = 0;
+              self.statusText = 0
             }
           }
-        );
-      });
+        )
+      })
     },
     sendOrderStatusNotice: function(type) {
-      if (this.reserveInteval != null) clearInterval(this.reserveInteval);
-      var content = "";
-        /*对方已付款，请查收并确认放行!*/
-      if (type == 1) content = this.$t("otc.chat.msg10tip");
-        /*对方已取消订单!*/
-      else if (type == 3) content = this.$t("otc.chat.msg11tip");
-        /*对方已申诉!*/
-      else if (type == 4) content = this.$t("otc.chat.msg12tip");
-        /*对方已放行,请查收!*/
-      else if (type == 5) content = this.$t("otc.chat.msg13tip");
+      if (this.reserveInteval != null) clearInterval(this.reserveInteval)
+      var content = ''
+        /* 对方已付款，请查收并确认放行!*/
+      if (type == 1) content = this.$t('otc.chat.msg10tip')
+        /* 对方已取消订单!*/
+      else if (type == 3) content = this.$t('otc.chat.msg11tip')
+        /* 对方已申诉!*/
+      else if (type == 4) content = this.$t('otc.chat.msg12tip')
+        /* 对方已放行,请查收!*/
+      else if (type == 5) content = this.$t('otc.chat.msg13tip')
       var jsonParam = {
         uidTo: this.msg.hisId,
         uidFrom: this.msg.myId,
         orderId: this.$route.query.tradeId,
         content: content,
         messageType: 0
-      };
-      this.stompClient.send("/app/message/chat", {}, JSON.stringify(jsonParam));
+      }
+      this.stompClient.send('/app/message/chat', {}, JSON.stringify(jsonParam))
     },
     showQRCode: function(type) {
       if (type == 1) {
-          this.payCodeUrl = this.alipay.qrCodeUrl;
-          if (this.alipay.qrCodeUrl == "") {
-            this.$Message.error(this.$t("otc.chat.qcode"));
-            this.modal6 = false;
-          }
-        } else {
-          this.payCodeUrl = this.wechatPay.qrWeCodeUrl;
-          if (this.wechatPay.qrWeCodeUrl == "") {
-            this.$Message.error(this.$t("otc.chat.qcode"));
-            this.modal6 = false;
-          }
+        this.payCodeUrl = this.alipay.qrCodeUrl
+        if (this.alipay.qrCodeUrl == '') {
+          this.$Message.error(this.$t('otc.chat.qcode'))
+          this.modal6 = false
         }
-        this.modal6 = true;
+      } else {
+        this.payCodeUrl = this.wechatPay.qrWeCodeUrl
+        if (this.wechatPay.qrWeCodeUrl == '') {
+          this.$Message.error(this.$t('otc.chat.qcode'))
+          this.modal6 = false
+        }
+      }
+      this.modal6 = true
     },
     setReserveTime: function() {
-      this.getReserveTime();
+      this.getReserveTime()
       this.reserveInteval = setInterval(() => {
-        this.getReserveTime();
-      }, 1000);
+        this.getReserveTime()
+      }, 1000)
     },
     getReserveTime: function() {
-      var d1 = new Date().getTime();
-      var d2 = new Date(this.msg.createTime.replace(/-/g,"/")).getTime();
-      var throughSeconds = parseInt(parseInt(d1 - d2) / 1000);
-      var reserveSeconds = parseInt(this.msg.timeLimit) * 60 - throughSeconds;
+      var d1 = new Date().getTime()
+      var d2 = new Date(this.msg.createTime.replace(/-/g, '/')).getTime()
+      var throughSeconds = parseInt(parseInt(d1 - d2) / 1000)
+      var reserveSeconds = parseInt(this.msg.timeLimit) * 60 - throughSeconds
       this.reserveTime =
         parseInt(reserveSeconds / 60) +
-        ":" +
+        ':' +
         (parseInt(reserveSeconds % 60) >= 10
           ? parseInt(reserveSeconds % 60)
-          : "0" + parseInt(reserveSeconds % 60));
+          : '0' + parseInt(reserveSeconds % 60))
       if (reserveSeconds <= 0) {
-        this.resetStatus();
+        this.resetStatus()
       }
     },
     resetStatus: function() {
-      //计时时间已到，重置状态
-      clearInterval(this.reserveInteval);
-      this.statusBtn = 5;
-      this.ok3();
+      // 计时时间已到，重置状态
+      clearInterval(this.reserveInteval)
+      this.statusBtn = 5
+      this.ok3()
     },
     appearOrder: function() {
-      var nowTime = new Date().getTime();
-      var payTime = new Date(this.msg.payTime).getTime();
+      var nowTime = new Date().getTime()
+      var payTime = new Date(this.msg.payTime).getTime()
       if (parseInt((nowTime - payTime) / 1000) < 1800) {
-        //付款时间小于30分钟不允许申诉
-        this.$Message.info(this.$t('otc.chat.appeal'));
-        return;
+        // 付款时间小于30分钟不允许申诉
+        this.$Message.info(this.$t('otc.chat.appeal'))
+        return
       } else {
-        this.modal4 = true;
+        this.modal4 = true
       }
     },
     ok1() {
       this.$http
-        .post(this.host + "/otc/order/pay", {
+        .post(this.host + '/otc/order/pay', {
           orderSn: this.$route.query.tradeId
         })
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
-            this.$Message.success(resp.message);
-            this.sendOrderStatusNotice(1);
-            this.getDetail();
+            this.$Message.success(resp.message)
+            this.sendOrderStatusNotice(1)
+            this.getDetail()
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+        })
     },
     ok2() {
-      this.modal2 = false;
-        this.modal3 = true;
-        return;
+      this.modal2 = false
+      this.modal3 = true
+      return
       setTimeout(() => {
-        this.isloading = false;
-        this.modal2 = false;
-        this.modal3 = true;
-      }, 10000);
+        this.isloading = false
+        this.modal2 = false
+        this.modal3 = true
+      }, 10000)
     },
     ok3() {
       this.$http
-        .post(this.host + "/otc/order/cancel", {
+        .post(this.host + '/otc/order/cancel', {
           orderSn: this.$route.query.tradeId
         })
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
-            this.$Message.success(resp.message);
-            this.sendOrderStatusNotice(3);
-            this.getDetail();
+            this.$Message.success(resp.message)
+            this.sendOrderStatusNotice(3)
+            this.getDetail()
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+        })
     },
     ok4() {
-      //订单申诉
-      //时间
-      if (1 == 1) {
-        var params = {};
-        params["orderSn"] = this.$route.query.tradeId;
-        params["remark"] = this.formItem.remark;
+      // 订单申诉
+      // 时间
+      if (1 === 1) {
+        var params = {}
+        params['orderSn'] = this.$route.query.tradeId
+        params['remark'] = this.formItem.remark
 
         this.$http
-          .post(this.host + "/otc/order/appeal", params)
+          .post(this.host + '/otc/order/appeal', params)
           .then(response => {
-            var resp = response.body;
+            var resp = response.body
             if (resp.code == 0) {
-              this.$Message.success(resp.message);
-              this.sendOrderStatusNotice(4);
-              this.getDetail();
+              this.$Message.success(resp.message)
+              this.sendOrderStatusNotice(4)
+              this.getDetail()
             } else {
-              this.$Message.error(resp.message);
+              this.$Message.error(resp.message)
             }
-          });
+          })
       }
     },
     ok5() {
-      var params = {};
-      params["orderSn"] = this.$route.query.tradeId;
-      params["jyPassword"] = this.fundpwd;
-      if (this.fundpwd == "") {
-        this.$Message.error(this.$t("otc.chat.msg7tip"));
-        return;
+      var params = {}
+      params['orderSn'] = this.$route.query.tradeId
+      params['jyPassword'] = this.fundpwd
+      if (this.fundpwd == '') {
+        this.$Message.error(this.$t('otc.chat.msg7tip'))
+        return
       }
       this.$http
-        .post(this.host + "/otc/order/release", params)
+        .post(this.host + '/otc/order/release', params)
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
-            this.$Message.success(resp.message);
-            this.sendOrderStatusNotice(5);
-            this.getDetail();
+            this.$Message.success(resp.message)
+            this.sendOrderStatusNotice(5)
+            this.getDetail()
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+        })
     },
     getDetail() {
-      //获取个人广告
+      // 获取个人广告
       this.$http
-        .post(this.host + "/otc/order/detail", {
+        .post(this.host + '/otc/order/detail', {
           orderSn: this.$route.query.tradeId
         })
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
-              console.log(resp, this.msg);
-              this.msg = resp.data;
-              this.detailRecords = this.msg
-            this.payInfo = this.msg.payInfo;
+            console.log(resp, this.msg)
+            this.msg = resp.data
+            this.detailRecords = this.msg
+            this.payInfo = this.msg.payInfo
             if (this.payInfo == null) {
-              this.bankInfo = this.alipay = this.wechatPay == null;
+              this.bankInfo = this.alipay = this.wechatPay == null
             } else {
-              this.bankInfo = this.msg.payInfo.bankInfo;
-              this.alipay = this.msg.payInfo.alipay;
-              this.wechatPay = this.msg.payInfo.wechatPay;
+              this.bankInfo = this.msg.payInfo.bankInfo
+              this.alipay = this.msg.payInfo.alipay
+              this.wechatPay = this.msg.payInfo.wechatPay
             }
 
             if (!this.watching) {
-              this.watchOrderStutusNotice();
-              this.watching = true;
+              this.watchOrderStutusNotice()
+              this.watching = true
             }
 
-            this.statusBtn = resp.data.status;
-            this.tradeType = resp.data.type;
+            this.statusBtn = resp.data.status
+            this.tradeType = resp.data.type
             if (resp.data.status == 1) {
-              this.statusText = 1;
-              this.setReserveTime();
+              this.statusText = 1
+              this.setReserveTime()
             } else if (resp.data.status == 2) {
-              this.statusText = 2;
+              this.statusText = 2
             } else if (resp.data.status == 3) {
-              this.statusText = 3;
+              this.statusText = 3
             } else if (resp.data.status == 4) {
-              this.statusText = 4;
+              this.statusText = 4
             } else if (resp.data.status == 0) {
-              this.statusText = 0;
+              this.statusText = 0
             }
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+        })
     },
-    strpro(str){
-      let newStr = str;
-      str = str.slice(1);
-      var re = /[\D\d]*/g;
-      var str2 = str.replace(re,function(str){
-            var result = '';
-            for(var i=0;i<str.length;i++){
-                result += '*';
-            }
-            return result;
-        });
-      return newStr.slice(0,1)+str2;
+    strpro(str) {
+      const newStr = str
+      str = str.slice(1)
+      var re = /[\D\d]*/g
+      var str2 = str.replace(re, function(str) {
+        var result = ''
+        for (var i = 0; i < str.length; i++) {
+          result += '*'
+        }
+        return result
+      })
+      return newStr.slice(0, 1) + str2
     }
   }
-};
+}
 </script>
 
 <style>
@@ -995,12 +1047,19 @@ export default {
             .account-left {
                 flex: 1;
                 .account-info {
-                    height: 50px;
-                    line-height: 50px;
+                    height: 60px;
                     position: relative;
                     span {
                         margin-left: 8px;
                         color: #8090AF;
+                    }
+                    .blue {
+                        cursor: pointer;
+                        color: #fff;
+                        display: inline-block;
+                        margin-left: 5px;
+                        font-size: 12px;
+                        vertical-align: middle;
                     }
                 }
             }
