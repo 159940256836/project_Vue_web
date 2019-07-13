@@ -769,7 +769,10 @@ export default {
                                 height: 30px;
                                 line-height: 30px;
                                 cursor: pointer;
-                                /*overflow: hidden;*/
+                                max-width: 150px;
+                                overflow: hidden;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
                                 a {
                                     min-width: 150px;
                                     background: #10122B;

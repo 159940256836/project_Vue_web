@@ -7,9 +7,28 @@
     <div class="contenta">
       <div class="contenta_title">{{ $t("footer.Usegreement") }}</div>
       <div class="contenta_list">
-        <div style="cursor: pointer" @click="contentaTab(1)" :class="tabid==1?'activeaa':''" class="list1">{{ $t("footer.Precautions") }}</div>
-        <div style="cursor: pointer" @click="contentaTab(2)" :class="tabid==2?'activeaa':''">{{ $t("footer.Usegreement") }}</div>
-        <div style="cursor: pointer" @click="contentaTab(3)" :class="tabid==3?'activeaa':''">{{ $t("footer.Policnderstanding") }}</div>
+        <div
+          style="cursor: pointer"
+          @click="contentaTab(1)"
+          :class="tabid==1?'activeaa':''"
+          class="list1"
+        >
+          {{ $t("footer.Precautions") }}
+        </div>
+        <div
+          style="cursor: pointer"
+          @click="contentaTab(2)"
+          :class="tabid==2?'activeaa':''"
+        >
+          {{ $t("footer.Usegreement") }}
+        </div>
+        <div
+          style="cursor: pointer"
+          @click="contentaTab(3)"
+          :class="tabid==3?'activeaa':''"
+        >
+          {{ $t("footer.Policnderstanding") }}
+        </div>
       </div>
       <div class="contenta_cont contenta_contone" v-show="tabid==1">
         <!-- <div class="contenta_cont_title">用户协议</div> -->

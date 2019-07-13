@@ -41,6 +41,7 @@ import Exchange from '../pages/exchange/exchange'
 // import Help from '../pages/cms/help'
 import HelpList from '../pages/cms/HelpList' // 帮助分类列表
 import HelpDetail from '../pages/cms/HelpDetail' // 帮助详情
+import merchantsDeal from '../pages/cms/merchantsDeal'
 // import Message from '../pages/cms/message'
 import OTCMain from '../pages/otc/Main'
 import OtcTrade from '../pages/otc/Trade'
@@ -170,6 +171,7 @@ export default [
     hide: true
   }},
     { path: '/Ieo', name: 'ieo', component: Ieo },
+
     { path: '/Ieo/IeoDetail', name: 'IeoDetail', component: IeoDetail },
     { path: '/login/returnUrl/:returnUrl', component: Login },
     { path: '/register', component: Register },
@@ -474,6 +476,10 @@ export default [
   {
     path: '/agreement',
     component: agreement
+  },
+  {
+    path: '/merchantsDeal',
+    component: merchantsDeal
   },
   {
     path: '/rate',
