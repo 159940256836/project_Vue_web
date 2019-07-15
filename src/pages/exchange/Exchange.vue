@@ -124,9 +124,15 @@
                         >
                             ---
                         </span>
-                        ≈
-                        <span class="price-cny">
-                            ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
+                      <span
+                        v-if="currentCoinBC == 'BC'"
+                         class="price-cny"
+                      >
+                       ≈ {{currentCoin.price * 1 | toFixed(2)}} CNY
+                    </span>
+                     
+                        <span class="price-cny" v-else>
+                          ≈  ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
                         </span>
                     </div>
 
@@ -2247,7 +2253,7 @@ export default {
         container_id: 'kline_container',
         symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
 
-          datafeed: that.datafeed,
+        datafeed: that.datafeed,
         library_path:
                     process.env.NODE_ENV === 'production'
                         ? '/assets/charting_library/'
@@ -2258,7 +2264,7 @@ export default {
           type: 'black',
           tools: [{ name: 'Regression Trend' }]
         },
-          disabled_features: [
+        disabled_features: [
           'header_resolutions',
           'timeframes_toolbar',
           'header_symbol_search',
@@ -2710,6 +2716,7 @@ export default {
                         bid.totalAmount = 0
                         this.plate.bidRows.push(bid)
                       }
+                      console.log(this.plate.bidRows[resp.bid.items.length - 1])
                       const rows = this.plate.bidRows,
                         len = rows.length,
                         totle = rows[resp.bid.items.length - 1].totalAmount

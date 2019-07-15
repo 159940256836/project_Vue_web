@@ -376,19 +376,20 @@
             </FormItem> -->
             <FormItem :label="$t('historyAndCu.direction')+':'" style="margin-right:12px;">
                 <Select v-model="formItem.direction" style="width:95px;" :placeholder="$t('header.choose')">
-                <Option value="0">{{$t('historyAndCu.buy')}}</Option>
-                <Option value="1">{{$t('historyAndCu.sell')}}</Option>
+                <Option value="BUY">{{$t('historyAndCu.buy')}}</Option>
+                <Option value="SELL">{{$t('historyAndCu.sell')}}</Option>
                 </Select>
             </FormItem>
-            <FormItem :label="'时间'" style="margin-right:12px;">
+            <FormItem :label="$t('historyAndCu.time')+':'" style="margin-right:12px;">
                 <Select v-model="formItem.period" style="width:95px;" :placeholder="$t('header.choose')">
-                <Option value="0">一周内</Option>
-                <Option value="1">一月内</Option>
-                <Option value="2">二月内</Option>
+                <Option value="0">{{$t('historyAndCu.week')}}</Option>
+                <Option value="1">{{$t('historyAndCu.month')}}</Option>
+                <Option value="2">{{$t('historyAndCu.year')}}</Option>
                 </Select>
             </FormItem>
             <FormItem :label="$t('exchange.status')">
                 <Select v-model="formItem.status" style="width:94px;" :placeholder="$t('header.choose')">
+                  <Option value="">{{$t('exchange.all')}}</Option>
                     <Option value="COMPLETED">{{$t('exchange.finished')}}</Option>
                     <Option value="CANCELED">{{$t('exchange.canceled')}}</Option>
                 </Select>
@@ -464,7 +465,7 @@ export default {
         symbol: 'BTC/BC',
         type: '',
         direction: '',
-        status: 'COMPLETED',
+        status: '',
         period: 0,
         select: '',
         lastId: '',
@@ -521,14 +522,21 @@ export default {
     },
     handleSubmit() {
       this.pageNo = 1
+      this.formItem.lastId = ''
+      this.formItem.lastTime = ''
+      this.formItem.select = ''
       this.getHistoryOrder()
     },
     handleClear() {
       this.formItem = {
-        symbol: '',
+        symbol: 'BTC/BC',
         type: '',
         direction: '',
-        date: ''
+        status: '',
+        period: 0,
+        select: '',
+        lastId: '',
+        lastTime: ''
       }
     },
     getHistoryOrder() {
@@ -556,11 +564,12 @@ export default {
       .then(response => {
         var resp = response.body
         const rows = []
-        if (resp.data.length > 0) {
+        if (resp.data[0] != undefined) {
           this.orders = []
           this.firstid = response.body.data[0].id
           const num = resp.data.length - 1
           this.lastid = response.body.data[num].id
+          console.log(this.firstid, this.lastid, this.firstid.toString(), this.lastid.toString())
           this.firsttime = response.body.data[0].createTime
           this.lasttime = response.body.data[num].createTime
           this.total = resp.totalElements

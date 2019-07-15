@@ -677,7 +677,8 @@ module.exports = {
     },
     realtime: 'realtime',
     operateSuccessfully: 'operate successfully',
-    view: 'view'
+    view: 'view',
+    all: 'All'
   },
   otc: {
     ad: 'Advertising',
@@ -1171,6 +1172,7 @@ module.exports = {
         realfee: 'Service charge',
         symbol: 'Coin symbol',
         nodata: 'No Data'
+
       },
       recharge: {
         recharge: 'Recharge',

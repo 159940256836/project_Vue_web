@@ -675,7 +675,8 @@ module.exports = {
     },
     realtime: '分时',
     operateSuccessfully: '操作成功',
-    view: '查看'
+    view: '查看',
+    all: '全部'
   },
   otc: {
     ad: '广告中心',
