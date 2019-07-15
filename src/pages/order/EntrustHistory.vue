@@ -374,7 +374,7 @@
                 <Option v-for="(item, index) in exchangeType" :value="item[0]" :key="index">{{item[1]}}</Option>
                 </Select>
             </FormItem> -->
-            <FormItem :label="$t('historyAndCu.type')+':'" style="margin-right:12px;">
+            <FormItem :label="$t('historyAndCu.direction')+':'" style="margin-right:12px;">
                 <Select v-model="formItem.direction" style="width:95px;" :placeholder="$t('header.choose')">
                 <Option value="0">{{$t('historyAndCu.buy')}}</Option>
                 <Option value="1">{{$t('historyAndCu.sell')}}</Option>
@@ -461,7 +461,7 @@ export default {
       lasttime: '',
       firsttime: '',
       formItem: {
-        symbol: ['BTC/BC'],
+        symbol: 'BTC/BC',
         type: '',
         direction: '',
         status: 'COMPLETED',
@@ -548,7 +548,7 @@ export default {
       if (select) params.select = select
       if (lastTime) params.lastTime = lastTime
       params.period = 0
-      params.pageNo = this.pageNo
+      // params.pageSize = this.pageNo
       params.status = this.formItem.status
       var that = this
       this.$http

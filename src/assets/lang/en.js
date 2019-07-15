@@ -533,7 +533,7 @@ module.exports = {
     merchant_info50: 'Any failure to pass the authentication or suffer any other loss caused by users providing incorrect, incomplete or untrue information to the website shall have nothing to do with the website;',
     merchant_info51: 'Your assets are defrauded by others for reasons other than the platform.',
     merchant_info52: 'special announcement',
-    merchant_info53: 'The basic information review and margin requirements conducted by the website to the advertising party do not mean that the advertising party is 100% trustworthy, nor does it mean that there is any warranty relationship between the website and the advertising party.Please strictly follow the procedures of the website users to do a good job in the transaction of the information review, detailed communication, to ensure the safety of their own transactions and assets!At the same time, based on the particularity of digital asset transaction, you need to pay special attention to the risk of anti-money laundering, and review the identity of the counterparty of your transaction according to the requirements of KYC and anti-money laundering, otherwise you may face the risk of asset freezing due to the suspected crime of the counterparty of your transaction.',
+    merchant_info53: 'The basic information review and margin requirements conducted by the website to the advertising party do not mean that the advertising party is 100% trustworthy, nor does it mean that there is any warranty relationship between the website and the advertising party.Please strictly follow the procedures of the website users to do a good job in the transaction of the information review, detailed communication, to ensure the safety of their own transactions and assets!At the same time, based on the particularity of digital asset transaction, you need to pay special attention to the risk of anti-money laundering, and review the identity of the counterparty of your transaction according to the requirements of KYC and anti-money laundering, otherwise you may face the risk of asset freezing due to the suspected crime of the counterparty of your transaction.'
   },
   downLoadAbs: {
     big: 'whenever and wherever possible Multi-platform terminal transactions ',
@@ -1157,6 +1157,7 @@ module.exports = {
         promotionaward: 'Promotion Award',
         dividend: 'Dividend',
         vote: 'Vote',
+        direction: 'direction',
         handrecharge: 'Artificial recharge',
         match: 'Match',
         chargetime: 'Charge Time',

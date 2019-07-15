@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       title: this.$t('otc.myorder'),
-        activeName: 'name1'
+      activeName: 'name1'
     }
   },
   computed: {
