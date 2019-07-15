@@ -460,6 +460,7 @@ export default {
       }
 
       if (to.path === '/') {
+          this.loadDataPage()
         this.pageView = 'page-view'
                 // this.container_test = "";
       } else {
@@ -504,7 +505,6 @@ export default {
     }
   },
   created: function() {
-    this.loadDataPage()
     this.initialize()
     if (this.$route.path === '/') {
       this.pageView = 'page-view'
@@ -541,22 +541,18 @@ export default {
    * 获取公告
    */
     loadDataPage() {
-      var result = localStorage.getItem('result')
-      result = JSON.parse(result)
-      if (result.content.length > 0) {
-        this.FAQList = result.content
-      } else {
-        this.$Message.error('没有发布公告')
-      }
-
-    //   this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
-    //     var resp = response.body
-    //     if (resp.code === 0) {
-    //       this.FAQList = (resp.data.content).slice(0, 5)
-    //     } else {
-    //       this.$Message.error(console.log('1'))
-    //     }
-    //   })
+      var param = {}
+      this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
+        var resp = response.body
+          var str = JSON.stringify(resp.data.content)
+          if (resp.code === 0) {
+            localStorage.setItem('result', str)
+            var result = JSON.parse(localStorage.getItem('result'))
+            this.FAQList = result.slice(0, 5)
+          } else {
+            this.$Message.error(console.log('1'))
+          }
+      })
     },
         // header动画效果
     reload() {
@@ -671,7 +667,7 @@ export default {
     }
   },
   mounted() {
-    this.systemservice()
+      this.systemservice()
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
