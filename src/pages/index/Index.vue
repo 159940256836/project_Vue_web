@@ -1032,6 +1032,7 @@ export default {
     }
   },
   mounted: function() {
+    this.loadDataPage(this.pageNo)// 获取公告
     this.getCNYRate()
         //  this.getSymbol();
     this.getHotSymbol();
@@ -1156,7 +1157,6 @@ export default {
       this.loadPicData()// 获取轮播图
       this.getSymbol()
       this.addClass(0)
-      this.loadDataPage(this.pageNo)// 获取公告
     },
     stop: function() {
       clearInterval(this.timer3)
@@ -1202,9 +1202,10 @@ export default {
       param['pageSize'] = this.pageSize
       this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
         var resp = response.body
-        var str = JSON.stringify(resp.data)
-        localStorage.setItem('result', str)
+        // var str = JSON.stringify(resp.data)
         if (resp.code === 0) {
+          // localStorage.setItem('result', str)
+          // console.log(localStorage.getItem('result'));
           if (resp.data.content.length === 0) return
           const FAQList = resp.data.content
           const len = FAQList.length
