@@ -162,7 +162,7 @@
           name="record"
           tab="tab1"
         >
-          <Record/>
+          <Record  v-if="activeName === 'record'"/>
         </TabPane>
         <Tab-pane
           :label="$t('uc.finance.charge')"

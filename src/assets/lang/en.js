@@ -1176,6 +1176,7 @@ module.exports = {
         recharge: 'Recharge',
         symbol: 'Coin',
         address: 'Recharge Address',
+        hash: 'Hash',
         copy: 'Copy',
         qrcode: 'QRCode',
         msg1: 'Do not recharge any non-currency assets to the above address, otherwise the assets will not be recovered.',
