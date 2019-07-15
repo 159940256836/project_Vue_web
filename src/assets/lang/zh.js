@@ -1182,6 +1182,7 @@ module.exports = {
         recharge: '充币',
         symbol: '币种',
         address: '充币地址',
+        hash: '哈希',
         copy: '复制',
         qrcode: '二维码',
         msg1: '请勿向上述地址充值任何非币种资产，否则资产将不可找回。',

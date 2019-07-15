@@ -302,6 +302,23 @@ export default {
                     return h("div", {}, str);
                 }
             });
+
+            columns.push({
+                title: this.$t("uc.finance.recharge.hash"),
+                width: 150,
+                align: "center",
+                render: (h, param) => {
+                    let str = param.row.txid;
+                    return h("div", {
+                        style: {
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                            textOverflow: 'ellipsis',
+                        },
+                    }, str);
+                }
+            });
+
             columns.push({
                 title: this.$t("uc.finance.recharge.address"),
                 align: "center",
@@ -543,6 +560,15 @@ export default {
         border-top: 0;
     }
     .nav-recharge {
+        /*.ivu-table-column-center:nth-child(3) {*/
+        /*    .ivu-table-cell {*/
+        /*        div {*/
+        /*            width: 204px;*/
+        /*            overflow:hidden;*/
+        /*            text-overflow:ellipsis;*/
+        /*        }*/
+        /*    }*/
+        /*}*/
         .ivu-modal-header {
             background: #111530;
             p {
