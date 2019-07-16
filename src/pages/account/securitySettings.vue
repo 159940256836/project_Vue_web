@@ -1020,7 +1020,7 @@ export default {
                 // }
         const param = {}
         param['realName'] = this.formValidate6.realName
-        param['idCard'] = this.formValidate6.idCard
+        param['idCard'] = this.formValidate6.idCard.toUpperCase()
                 // param["idCardFront"] = this.imgPreview;
                 // param["idCardBack"] = this.imgNext;
                 // param["handHeldIdCard"] = this.imgLast;

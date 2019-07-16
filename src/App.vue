@@ -206,8 +206,8 @@
                                 </li>
                                 <li>
                                     <!-- <router-link to="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</router-link> -->
-                                      <a href="https://bdwtop.github.io/">{{$t("footer.apiDoc")}}</a>
-
+                                      <!-- <a href="https://bdwtop.github.io/">{{$t("footer.apiDoc")}}</a> -->
+                                      <a href="#">{{$t("footer.apiDoc")}}</a>
                                 </li>
                                  <!-- <li>
                                     <router-link to="/">{{$t("footer.appDownload")}}</router-link>
@@ -460,7 +460,7 @@ export default {
       }
 
       if (to.path === '/') {
-          this.loadDataPage()
+        this.loadDataPage()
         this.pageView = 'page-view'
                 // this.container_test = "";
       } else {
@@ -534,7 +534,6 @@ export default {
   methods: {
     lnswitch: function(language) {
       this.$http.get(this.host + '/uc/lang/change/' + language).then(res => {
-        console.log(res)
       })
     },
   /** *
@@ -544,14 +543,14 @@ export default {
       var param = {}
       this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
         var resp = response.body
-          var str = JSON.stringify(resp.data.content)
-          if (resp.code === 0) {
-            localStorage.setItem('result', str)
-            var result = JSON.parse(localStorage.getItem('result'))
-            this.FAQList = result.slice(0, 5)
-          } else {
-            this.$Message.error(console.log('1'))
-          }
+        var str = JSON.stringify(resp.data.content)
+        if (resp.code === 0) {
+          localStorage.setItem('result', str)
+          var result = JSON.parse(localStorage.getItem('result'))
+          this.FAQList = result.slice(0, 5)
+        } else {
+          this.$Message.error(console.log('1'))
+        }
       })
     },
         // header动画效果
@@ -667,7 +666,7 @@ export default {
     }
   },
   mounted() {
-      this.systemservice()
+    this.systemservice()
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.handleScroll)
