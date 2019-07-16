@@ -324,43 +324,42 @@ export default {
                 render: (h, param) => {
                     let str = param.row.txid;
                     let tokenLenth = param.row.txid.length
-                    console.log(tokenLenth);
                     // 显示前五位 后五位
                     let tokenCont = param.row.txid.substring(0, 5)
                             +
                             '...'
                             + param.row.txid.substring(tokenLenth - 5, tokenLenth)
-                    console.log(tokenCont);
-                    return h("div", [
-                        h('Button', {
-                            props: {
-                                type: 'success',
-                            },
-                            style: {
-                                width: '35px',
-                                height: '20px',
-                                fontSize: '12px',
-                                marginRight: '4px',
-                                float: 'left',
-                                background: '#3399ff',
-                                color: '#fff',
-                                border: 0,
-                                lineHeight: '0',
-                            },
-                            on: {
-                                click: () => {
-                                    this.copyToken(str)
+                    if (str) {
+                        return h("div", [
+                            h('Button', {
+                                props: {
+                                    type: 'success',
+                                },
+                                style: {
+                                    width: '35px',
+                                    height: '20px',
+                                    fontSize: '12px',
+                                    marginRight: '4px',
+                                    float: 'left',
+                                    background: '#3399ff',
+                                    color: '#fff',
+                                    border: 0,
+                                    lineHeight: '0',
+                                },
+                                on: {
+                                    click: () => {
+                                        this.copyToken(str)
+                                    }
                                 }
-                            }
-                        }, this.$t('uc.finance.recharge.copy')),
-                        h("div", {
-                            style: {
-                                fontSize: '1%',
-                                float: 'left'
-                            },
-                        }, tokenCont)
-                    ])
-
+                            }, this.$t('uc.finance.recharge.copy')),
+                            h("div", {
+                                style: {
+                                    fontSize: '1%',
+                                    float: 'left'
+                                },
+                            }, tokenCont)
+                        ])
+                    }
                 }
             });
 

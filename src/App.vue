@@ -121,7 +121,7 @@
                                     </DropdownMenu>
                                 </Dropdown>
                                 <Dropdown>
-                                    <DropdownMenu slot="list">
+                                    <DropdownMenu slot="list" style="right: 80px">
                                         <ul class="ul-notice" v-for="(item, index) in FAQList">
                                             <router-link
                                                 :to="{path: '/notice/index', query: { 'id': item.id }}"
@@ -507,9 +507,10 @@ export default {
   created: function() {
     this.initialize()
     if (this.$route.path === '/') {
-      this.pageView = 'page-view'
+        this.loadDataPage()
+        this.pageView = 'page-view'
     } else {
-      this.pageView = 'page-view2'
+        this.pageView = 'page-view2'
     }
     this.$nextTick(() => {
       const link = 16604775806
@@ -549,6 +550,7 @@ export default {
             localStorage.setItem('result', str)
             var result = JSON.parse(localStorage.getItem('result'))
             this.FAQList = result.slice(0, 5)
+              console.log(this.FAQList);
           } else {
             this.$Message.error(console.log('1'))
           }
@@ -765,7 +767,7 @@ export default {
                                 height: 30px;
                                 line-height: 30px;
                                 cursor: pointer;
-                                max-width: 150px;
+                                max-width: 260px;
                                 overflow: hidden;
                                 white-space: nowrap;
                                 text-overflow: ellipsis;
@@ -781,6 +783,7 @@ export default {
                                 }
                             }
                             .list-info {
+                                text-align: center;
                                 display: inline-block;
                                 margin: 0;
                                 padding: 0 0 0 25px;

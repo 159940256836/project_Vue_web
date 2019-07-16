@@ -292,6 +292,8 @@ export default {
     }
   },
   created: function() {
+      this.formInline.user = ''
+      this.formInline.password = ''
     this.init()
   },
   mounted: function() {
