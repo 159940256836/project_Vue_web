@@ -152,6 +152,20 @@ export default {
         };
     },
     methods: {
+        // 复制功能
+        copyToken (data) {
+            let url = data
+            let oInput = document.createElement('input')
+            oInput.value = url
+            document.body.appendChild(oInput)
+            oInput.select() // 选择对象
+            console.log(oInput.value)
+            document.execCommand('Copy') // 执行浏览器复制命令
+            this.$Message.success(
+                this.$t("uc.finance.recharge.copysuccess")
+            )
+            oInput.remove()
+        },
         changePage(index) {
             this.getList(index);
         },
@@ -305,17 +319,47 @@ export default {
 
             columns.push({
                 title: this.$t("uc.finance.recharge.hash"),
-                width: 150,
+                width: 160,
                 align: "center",
                 render: (h, param) => {
                     let str = param.row.txid;
-                    return h("div", {
-                        style: {
-                            overflow: 'hidden',
-                            whiteSpace: 'nowrap',
-                            textOverflow: 'ellipsis',
-                        },
-                    }, str);
+                    let tokenLenth = param.row.txid.length
+                    // 显示前五位 后五位
+                    let tokenCont = param.row.txid.substring(0, 5)
+                            +
+                            '...'
+                            + param.row.txid.substring(tokenLenth - 5, tokenLenth)
+                    if (str) {
+                        return h("div", [
+                            h('Button', {
+                                props: {
+                                    type: 'success',
+                                },
+                                style: {
+                                    width: '35px',
+                                    height: '20px',
+                                    fontSize: '12px',
+                                    marginRight: '4px',
+                                    float: 'left',
+                                    background: '#3399ff',
+                                    color: '#fff',
+                                    border: 0,
+                                    lineHeight: '0',
+                                },
+                                on: {
+                                    click: () => {
+                                        this.copyToken(str)
+                                    }
+                                }
+                            }, this.$t('uc.finance.recharge.copy')),
+                            h("div", {
+                                style: {
+                                    fontSize: '1%',
+                                    float: 'left'
+                                },
+                            }, tokenCont)
+                        ])
+                    }
                 }
             });
 
@@ -560,6 +604,9 @@ export default {
         border-top: 0;
     }
     .nav-recharge {
+        .ivu-btn-success {
+            padding: 0;
+        }
         /*.ivu-table-column-center:nth-child(3) {*/
         /*    .ivu-table-cell {*/
         /*        div {*/
