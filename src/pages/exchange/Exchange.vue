@@ -71,7 +71,7 @@
                     </div>
                     <Table
                         :no-data-text="$t('common.nodata')"
-                        height="400"
+                        height="443"
                         :columns="trade.columns"
                         :data="trade.rows"
                     ></Table>
@@ -130,7 +130,7 @@
                       >
                        ≈ {{currentCoin.price * 1 | toFixed(2)}} CNY
                     </span>
-                     
+
                         <span class="price-cny" v-else>
                           ≈  ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
                         </span>
@@ -709,7 +709,7 @@ $night-color: #fff;
         }
         .center {
             /*width: 1060px;*/
-            min-width: 56.1%;
+            min-width: 55.5%;
             /*flex: 0 0 50%;*/
             margin-right: 10px;
             .imgtable {
@@ -1391,9 +1391,9 @@ export default {
           }
         ]
       },
-            //   最新价的 table 数据;
+      // 最新价的 table 数据;
       plate: {
-        maxPostion: 12,
+        maxPostion: 15, // 买卖盘口数据条数最大限制
         columns: [
                     // {
                     //   title: self.$t("exchange.stall"),
@@ -2142,7 +2142,7 @@ export default {
       if (str != 'all') {
         this.plate.maxPostion = 24
       } else {
-        this.plate.maxPostion = 13
+        this.plate.maxPostion = 15
       }
       this.selectedPlate = str
       this.getPlate()
