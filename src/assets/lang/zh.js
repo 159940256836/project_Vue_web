@@ -1043,6 +1043,7 @@ module.exports = {
         matcherr2: '超出最大配对数量!',
         matchsuccess: '配对成功!',
         needreleased: '待释放资产',
+        assetValuation: '资产估值',
         hiddenAssets: '隐藏资产为0的币种'
       },
       record: {

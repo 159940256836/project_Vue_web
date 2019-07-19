@@ -44,6 +44,7 @@
                     v-for="(item,index) in hostSymbolList"
                     :key="index"
                     style="float: left;"
+                    @click="optionjump(item.symbol)"
                 >
                     <div>
                         <p class="flex">
@@ -1082,12 +1083,18 @@ export default {
           chg: ele.chg,
           isGreen: ele.chg > 0,
           close: ele.close,
-          cny: this.round(this.mul(ele.baseUsdRate, this.CNYRate), 2),
+          // cny: this.round(this.mul(ele.baseUsdRate, this.CNYRate), 2),
+          cny: ele.volume,
           trend: ele.trend
         }))
         this.hostSymbolList = list
+        console.log(this.hostSymbolList)
         this.startWebsockHotlist()
       })
+    },
+    optionjump(href) {
+      href = href.replace('/', '_')
+      this.$router.push('/exchange/' + href)
     },
     rowClassName(row, index) {
       if (index % 2 === 1) {
@@ -1283,7 +1290,8 @@ export default {
                 chg: resp.chg,
                 isGreen: resp.chg > 0,
                 close: resp.close,
-                cny: this.round(this.mul(resp.baseUsdRate, this.CNYRate), 2),
+                // cny: this.round(this.mul(resp.baseUsdRate, this.CNYRate), 2),
+                cny: resp.volume,
                 trend: resp.trend
               })
             }
@@ -1325,6 +1333,7 @@ export default {
             coin.close = resp.close
             coin.high = resp.high
             coin.low = resp.low
+            coin.volume = resp.volume
             coin.turnover = parseInt(resp.volume)
           }
         })
@@ -1560,6 +1569,7 @@ li {
         // padding: 13px 0;
         overflow: hidden;
         border-right: 1px solid rgba(42,56,80,1);
+        cursor: pointer;
             .vertical{
               width:1px;
               height:53px;

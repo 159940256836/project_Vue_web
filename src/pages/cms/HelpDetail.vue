@@ -68,20 +68,20 @@ export default {
                     arr[1].status == 200 &&
                     arr[1].body.code == 0
                 ) {
-            let returnTop = arr[0].body.data,
-                returnArticle = arr[1].body.data,
-                hsaInTop = false
-            returnTop.forEach(v => {
-                if (v.id == returnArticle.id) {
-                    hsaInTop = true
-                  }
-              })
-            hsaInTop ? '' : returnTop.unshift(returnArticle)
-            this.topList = returnTop
-            this.article = returnArticle
-          } else {
-            this.$message.error('网络错误')
-          }
+          let returnTop = arr[0].body.data,
+            returnArticle = arr[1].body.data,
+            hsaInTop = false
+          returnTop.forEach(v => {
+            if (v.id == returnArticle.id) {
+              hsaInTop = true
+            }
+          })
+          hsaInTop ? '' : returnTop.unshift(returnArticle)
+          this.topList = returnTop
+          this.article = returnArticle
+        } else {
+          this.$message.error('网络错误')
+        }
       })
     },
     getTopList() {
@@ -229,7 +229,7 @@ export default {
 <style lang="scss">
 .main .content-wrap .content {
     .uploaded-img {
-        width: 50% !important;
+        width: 25% !important;
     }
 }
 .main .content-wrap .title,.main .content-wrap .time{

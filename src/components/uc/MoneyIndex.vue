@@ -18,29 +18,9 @@
               tab="tab1-1"
               name="CURRENCY"
             ></TabPane>
-            <!-- <TabPane :label="$t('myAccount._LeveragedAccounts')" name="LEVER"></TabPane> -->
           </Tabs>
-          <!-- <keep-alive> -->
           <component :is="splitcomponent"></component>
-          <!-- </keep-alive> -->
-
         </div>
-        <!-- <div class="shaow">
-          <div class="order-table">
-            <Table stripe :columns="tableColumnsMoney" :data="tableMoney" :loading="loading" :disabled-hover="true"></Table>
-          </div>
-        </div>
-        <Modal v-model="modal" :title="$t('uc.finance.money.match')" @on-ok="matchGCC">
-            <P style="font-weight: bold;padding: 10px 0;">{{$t('uc.finance.money.matchtip1')}}：{{GCCMatchAmount}}</p>
-            <p>
-                <span>{{$t('uc.finance.money.matchtip2')}}：</span>
-                <InputNumber style="width: 150px;" type="text" v-model="matchAmount" :placeholder="$t('uc.finance.money.matchtip2')"></InputNumber>
-            </p>
-        </Modal>
-        <Modal v-model="modal_msg" :title="$t('uc.finance.money.match')">
-            <p>{{match_msg}}</p>
-        </Modal> -->
-        <!-- <transfermodal :modal="modal" @closetransferModal="closeModal"></transfermodal> -->
     </div>
     </div>
   </div>
@@ -116,7 +96,6 @@ export default {
     //     });
     //   }
     //   //获取
-
     // },
     getGCCMatchAmount() {
       // 获取

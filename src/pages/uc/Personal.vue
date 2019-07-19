@@ -22,38 +22,6 @@
 </style>
 <style lang="scss">
   .mymsg_wrapper {
-    /*.ivu-table-wrapper {*/
-    /*  .ivu-table {*/
-    /*    td {*/
-    /*      background: #111530;*/
-    /*      &:first-child {*/
-    /*        text-align: left;*/
-    /*        padding-left: 10px;*/
-    /*      }*/
-    /*      &:last-child {*/
-    /*        text-align: right;*/
-    /*        padding-right: 10px;*/
-    /*      }*/
-    /*    }*/
-    /*    .ivu-table-header {*/
-    /*      th {*/
-    /*        height: 50px;*/
-    /*        background: #191D3A;*/
-    /*        border-bottom: 0 !important;*/
-    /*        color: #8090AF;*/
-    /*        &:first-child {*/
-    /*          text-align: left;*/
-    /*          padding-left: 10px;*/
-    /*        }*/
-    /*        &:last-child {*/
-    /*          text-align: right;*/
-    /*          padding-right: 10px;*/
-    /*        }*/
-    /*      }*/
-    /*    }*/
-    /*  }*/
-    /*}*/
-
     .ivu-tabs-nav-scroll {
       height: 60px;
       background: #111530;
@@ -202,7 +170,6 @@
       </Tabs>
     </div>
   </div>
-
 </template>
 <script>
 import Money from '../../components/uc/MoneyIndex'
