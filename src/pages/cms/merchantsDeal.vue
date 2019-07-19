@@ -71,15 +71,11 @@
 <script>
   export default {
     data() {
-      return {};
-    },
-    mounted() {
-      this.getDate();
-    },
-
+      return {}
+  },
     computed: {},
     methods: {}
-  };
+  }
 </script>
 <style lang="scss">
   .Privgreement_new{

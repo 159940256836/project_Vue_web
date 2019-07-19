@@ -140,10 +140,6 @@ export default {
       data4: []
     }
   },
-  mounted() {
-    this.getDate()
-  },
-
   computed: {
     columns1() {
       const listbb = []

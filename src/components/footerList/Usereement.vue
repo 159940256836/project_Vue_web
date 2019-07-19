@@ -269,21 +269,17 @@
 export default {
   data() {
     return {
-      tabid:1,
-    };
+      tabid: 1
+    }
   },
-  mounted() {
-    this.getDate();
-  },
-
   computed: {},
   methods: {
-    contentaTab(n){
-      this.tabid=n;
+    contentaTab(n) {
+      this.tabid = n
       console.log(2)
     }
   }
-};
+}
 </script>
 <style lang="scss">
 .new_Usereement .contenta .contenta_list > div:hover{

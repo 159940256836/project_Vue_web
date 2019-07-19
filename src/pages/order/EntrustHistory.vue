@@ -357,6 +357,18 @@
 
 }
 
+.special{
+  .ivu-form-item-content{
+    margin-left:0px !important;
+  }
+  .ivu-input{
+    width:80px;
+  }
+}
+.slash{
+    height: 66px;
+    line-height: 36px;
+}
 </style>
 <template>
     <div class="entrusthistory">
@@ -364,9 +376,18 @@
             <!-- <FormItem :label-width="locale == 'en' ? 95 : 70 " :label="$t('historyAndCu.stEnTime')+':'" style="margin-right:18px;">
                 <DatePicker class="DatePicker" type="daterange" v-model="formItem.date" style="width:248px;"></DatePicker>
             </FormItem> -->
-            <FormItem :label="$t('historyAndCu.symbol')+':'" style="margin-right:14px;">
+            <FormItem prop="user" class="special">
+            <Input
+              name="user"
+              type="text"
+              v-model="symbolInput"
+              :placeholder="$t('service.COIN')"
+            />
+          </FormItem>
+            <span class="slash">/</span>
+            <FormItem  style="margin-right:14px;" class="special">
                 <Select v-model="formItem.symbol"  :placeholder="$t('header.choose')">
-                <Option v-for="(item,index) in symbol " :value="item.symbol " :key="index">{{item.symbol}}</Option>
+                <Option v-for="(item,index) in symbol " :value="item " :key="index">{{item}}</Option>
                 </Select>
             </FormItem>
             <!-- <FormItem :label="$t('historyAndCu.type')+':'" style="margin-right:12px;">
@@ -461,8 +482,9 @@ export default {
       firstid: '',
       lasttime: '',
       firsttime: '',
+      symbolInput: 'BTC',
       formItem: {
-        symbol: 'BTC/BC',
+        symbol: 'USDT',
         type: '',
         direction: '',
         status: '',
@@ -525,11 +547,12 @@ export default {
       this.formItem.lastId = ''
       this.formItem.lastTime = ''
       this.formItem.select = ''
+      this.orders = []
       this.getHistoryOrder()
     },
     handleClear() {
       this.formItem = {
-        symbol: 'BTC/BC',
+        symbol: 'USDT',
         type: '',
         direction: '',
         status: '',
@@ -540,51 +563,57 @@ export default {
       }
     },
     getHistoryOrder() {
-            // 查询历史委托
+      // 查询历史委托
       this.loading = true
       // const { symbol, type, direction, date: rangeDate, period } = this.formItem
         // startTime = new Date(rangeDate[0]).getTime() || '',
         // endTime = new Date(rangeDate[1]).getTime() || ''
-      const { type, direction, period, lastId, select, lastTime, symbol } = this.formItem
+      const { type, direction, period, lastId, select, lastTime, symbol, status } = this.formItem
       const params = {}
       // const symbol = this.formItem.symbol.join(',')
-      if (symbol) params.symbols = symbol
+      if (symbol) params.symbols = this.symbolInput.toUpperCase() + '/' + symbol
       if (period) params.period = period
       if (direction) params.direction = direction
       if (type) params.type = type
       if (lastId) params.lastId = lastId
       if (select) params.select = select
       if (lastTime) params.lastTime = lastTime
+      if (status) params.status = status
+      else params.status = ''
       params.period = 0
       // params.pageSize = this.pageNo
-      params.status = this.formItem.status
       var that = this
       this.$http
       .post(this.host + '/order/exchange-order/exchange/personal/history', params)
       .then(response => {
         var resp = response.body
         const rows = []
-        if (resp.data[0] != undefined) {
-          this.orders = []
-          this.firstid = response.body.data[0].id
-          const num = resp.data.length - 1
-          this.lastid = response.body.data[num].id
-          console.log(this.firstid, this.lastid, this.firstid.toString(), this.lastid.toString())
-          this.firsttime = response.body.data[0].createTime
-          this.lasttime = response.body.data[num].createTime
-          this.total = resp.totalElements
-          for (var i = 0; i < resp.data.length; i++) {
-            var row = resp.data[i]
-            row.price =
-                      row.type == 'MARKET_PRICE'
-                          ? that.$t('exchange.marketprice')
-                          : row.price
-            rows.push(row)
+        if (resp.code == 0) {
+          if (resp.data[0] != undefined) {
+            this.orders = []
+            this.firstid = response.body.data[0].id
+            const num = resp.data.length - 1
+            this.lastid = response.body.data[num].id
+            console.log(this.firstid, this.lastid, this.firstid.toString(), this.lastid.toString())
+            this.firsttime = response.body.data[0].createTime
+            this.lasttime = response.body.data[num].createTime
+            this.total = resp.totalElements
+            for (var i = 0; i < resp.data.length; i++) {
+              var row = resp.data[i]
+              row.price =
+                        row.type == 'MARKET_PRICE'
+                            ? that.$t('exchange.marketprice')
+                            : row.price
+              rows.push(row)
+            }
+            this.orders = rows
+          } else {
+            this.pageNo = this.pageNo - 10
           }
-          this.orders = rows
         } else {
-          this.pageNo = this.pageNo - 10
+          this.$Message.warning(resp.message)
         }
+
         this.loading = false
       })
     },
@@ -626,10 +655,25 @@ export default {
     getSymbol() {
       this.$http.post(this.host + this.api.market.thumb, {}).then(response => {
         var resp = response.body
-        if (resp.length > 0) {
-          this.symbol = resp
-        }
+        console.log(resp)
+        resp.forEach((e, i) => {
+          console.log(e, i)
+          const num = this.getCaption(e.symbol)
+          console.log(num)
+          if (this.symbol.indexOf(num) == -1) {
+            this.symbol.push(num)
+          }
+        })
+        console.log(this.symbol)
+        // if (resp.length > 0) {
+        //   this.symbol = resp
+        // }
       })
+    },
+    getCaption(obj) {
+      const index = obj.lastIndexOf('/')
+      obj = obj.substring(index + 1, obj.length)
+      return obj
     }
   },
   computed: {

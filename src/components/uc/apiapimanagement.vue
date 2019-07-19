@@ -11,7 +11,8 @@
             <ul style="margin: 0 15px;">
               <li>
                 {{$t('apiAdmin.part1')}}
-                <a href="https://bdwtop.github.io/" target="_blank">{{$t('apiAdmin.apiDoc')}}</a>
+                <!-- <a href="https://bdwtop.github.io/" target="_blank">{{$t('apiAdmin.apiDoc')}}</a> -->
+                <a href="#" target="_blank">{{$t('apiAdmin.apiDoc')}}</a>
                 {{$t('apiAdmin.howUse')}}
               </li>
               <li>{{$t('apiAdmin.part2')}}</li>
@@ -287,98 +288,112 @@
 </template>
 
 <script>
-import moment from "moment";
+import moment from 'moment'
 export default {
   data() {
     return {
-      locale:'',
+      locale: '',
       del: false,
       editor: false,
       verify: false,
       loading: false,
       verifyEditor: false,
       show: false,
-      screat: "",
+      screat: '',
       time: 60, // 发送验证码倒计时
       time1: 60, // 发送验证码倒计时
       sendMsgDisabled: false,
       sendMsgDisabled1: false,
-      codeEditorFormItem: "",
+      codeEditorFormItem: '',
       editorFormItem: {
-        remark: "",
-        bindIp: "",
-        code: ""
+        remark: '',
+        bindIp: '',
+        code: ''
       },
       formItem: {
-        remark: "",
-        bindIp: "",
-        code: ""
+        remark: '',
+        bindIp: '',
+        code: ''
       },
       tableData: [],
-      id: "",
+      id: '',
       phoneStatus: '',
       dataTime: ''
-    };
+    }
   },
-  //5.25加
+  // 5.25加
   watch: {
-        '$i18n.locale': {
-            handler(newVal) {
-                this.locale = newVal;
-            },
-            immediate: true,
-        }
+    '$i18n.locale': {
+      handler(newVal) {
+        this.locale = newVal
+      },
+      immediate: true
+    }
   },
   created() {
-    this.getAllAPI();
+    this.getAllAPI()
     this.getMember()
   },
   methods: {
+    // 复制功能
+    copyToken (data) {
+      let url = data
+      let oInput = document.createElement('input')
+      oInput.value = url
+      document.body.appendChild(oInput)
+      oInput.select() // 选择对象
+      console.log(oInput.value)
+      document.execCommand('Copy') // 执行浏览器复制命令
+      this.$Message.success(
+          this.$t("uc.finance.recharge.copysuccess")
+      )
+      oInput.remove()
+    },
     sendCode(index) {
-      let me = this;
-      //获取手机code
-      this.$http.post(this.host + "/uc/mobile/api/code").then(response => {
-        let resp = response.body;
+      const me = this
+      // 获取手机code
+      this.$http.post(this.host + '/uc/mobile/api/code').then(response => {
+        const resp = response.body
         if (resp.code == 0) {
           if (index == 1) {
-            this.sendMsgDisabled = true;
-            let interval = window.setInterval(function() {
+            this.sendMsgDisabled = true
+            const interval = window.setInterval(function() {
               if (me.time-- <= 0) {
-                me.time = 60;
-                me.sendMsgDisabled = false;
-                window.clearInterval(interval);
+                me.time = 60
+                me.sendMsgDisabled = false
+                window.clearInterval(interval)
               }
-            }, 1000);
+            }, 1000)
           } else {
-            this.sendMsgDisabled1 = true;
-            let interval = window.setInterval(function() {
+            this.sendMsgDisabled1 = true
+            const interval = window.setInterval(function() {
               if (me.time1-- <= 0) {
-                me.time1 = 60;
-                me.sendMsgDisabled1 = false;
-                window.clearInterval(interval);
+                me.time1 = 60
+                me.sendMsgDisabled1 = false
+                window.clearInterval(interval)
               }
-            }, 1000);
+            }, 1000)
           }
         } else {
-          this.$Message.error(resp.message);
+          this.$Message.error(resp.message)
         }
-      });
+      })
     },
     onCopy(e) {
       this.$Notice.success({
-        title: this.$t("common.tip"),
-        desc: "success"
-      });
+        title: this.$t('common.tip'),
+        desc: 'success'
+      })
     },
     onError() {
       this.$Notice.error({
-        title: this.$t("common.tip"),
-        desc: "fail"
-      });
+        title: this.$t('common.tip'),
+        desc: 'fail'
+      })
     },
     // 时间格式转换
     formatTime(date) {
-      return moment(date).format("YYYY-MM-DD")
+      return moment(date).format('YYYY-MM-DD')
     },
     getAllAPI() {
       return this.$http.get(this.host + `/uc/open/get_key`).then(res => {
@@ -400,26 +415,26 @@ export default {
     },
     // 添加api校验
     codeVerify() {
-      let that = this
+      const that = this
       if (this.phoneStatus.phoneVerified == 0) {
         const lang =
-            this.$store.getters.lang == "English"
-                ? "Please bind the mobile phone first"
-                : "请先绑定手机";
-        this.$Message.error(lang);
-        setTimeout(function () {
-          that.$router.push("/uc/Safe");
-        }, 1000);
-        return false;
+            this.$store.getters.lang == 'English'
+                ? 'Please bind the mobile phone first'
+                : '请先绑定手机'
+        this.$Message.error(lang)
+        setTimeout(function() {
+          that.$router.push('/uc/Safe')
+        }, 1000)
+        return false
       }
-      const IP_REG = /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/;
-      if (this.formItem.remark == "") {
+      const IP_REG = /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/
+      if (this.formItem.remark == '') {
         const lang =
-          this.$store.getters.lang == "English"
-            ? "please scanner remark"
-            : "请输入备注信息";
-        this.$Message.error(lang);
-        return;
+          this.$store.getters.lang == 'English'
+            ? 'please scanner remark'
+            : '请输入备注信息'
+        this.$Message.error(lang)
+        return
       }
       // else if (this.formItem.bindIp == "") {
       //   const lang =
@@ -438,52 +453,52 @@ export default {
       //   return;
       // }
       else {
-        this.verify = true;
+        this.verify = true
       }
     },
     // 确认添加api
     make() {
       this.$http
-        .post(this.host + "/uc/open/api/save", this.formItem)
+        .post(this.host + '/uc/open/api/save', this.formItem)
         .then(res => {
           if (!res.body.code) {
-            this.$Message.success(res.body.message);
-            this.formItem.remark = "";
-            this.formItem.bindIp = "";
-            this.formItem.code = "";
-            this.getAllAPI();
-            this.verify = false;
-            this.screat = res.body.data;
-            this.show = true;
+            this.$Message.success(res.body.message)
+            this.formItem.remark = ''
+            this.formItem.bindIp = ''
+            this.formItem.code = ''
+            this.getAllAPI()
+            this.verify = false
+            this.screat = res.body.data
+            this.show = true
           } else {
-            this.$Message.error(res.body.message);
+            this.$Message.error(res.body.message)
           }
-        });
+        })
     },
     // 编辑验证
     okUpdate() {
       if (this.editorFormItem.code == undefined) {
         const lang =
-          this.$store.getters.lang == "English"
-            ? "please scanner Correct IP Address"
-            : "请输入验证码";
-        this.$Message.error(lang);
-        return;
+          this.$store.getters.lang == 'English'
+            ? 'please scanner Correct IP Address'
+            : '请输入验证码'
+        this.$Message.error(lang)
+        return
       } else {
-        this.verifyEditor = false;
-        this.editor = true;
+        this.verifyEditor = false
+        this.editor = true
       }
     },
     // 编辑api
     update() {
-      const IP_REG = /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/;
+      const IP_REG = /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/
       if (!this.editorFormItem.remark) {
         const lang =
-          this.$store.getters.lang == "English"
-            ? "please scanner remark"
-            : "请输入备注信息";
-        this.$Message.error(lang);
-        return;
+          this.$store.getters.lang == 'English'
+            ? 'please scanner remark'
+            : '请输入备注信息'
+        this.$Message.error(lang)
+        return
       }
       // if (!this.editorFormItem.bindIp) {
       //   const lang =
@@ -502,112 +517,148 @@ export default {
       //   return;
       // }
       this.$http
-        .post(this.host + "/uc/open/api/update", this.editorFormItem)
+        .post(this.host + '/uc/open/api/update', this.editorFormItem)
         .then(res => {
           if (!res.body.code) {
-            this.getAllAPI();
-            this.editor = false;
-            this.$Message.success(res.body.message);
+            this.getAllAPI()
+            this.editor = false
+            this.$Message.success(res.body.message)
           } else {
-            this.$Message.error(res.body.message);
+            this.$Message.error(res.body.message)
           }
-        });
+        })
     },
     // 删除api
     onDel(id) {
       this.$http.get(this.host + `/uc/open/api/del/${id}`).then(res => {
         if (!res.body.code) {
-          this.$Message.success(res.body.message);
-          this.del = false;
-          this.getAllAPI();
+          this.$Message.success(res.body.message)
+          this.del = false
+          this.getAllAPI()
         } else {
-          this.$Message.error(res.body.message);
+          this.$Message.error(res.body.message)
         }
-      });
+      })
     },
     getMember() {
-      //获取个人安全信息
-      return this.$http.post(this.host + "/uc/approve/security/setting").then(response => {
-        let resp = response.body;
+      // 获取个人安全信息
+      return this.$http.post(this.host + '/uc/approve/security/setting').then(response => {
+        const resp = response.body
         if (resp.code == 0) {
           return new Promise((resolve, reject) => {
-            this.phoneStatus = resp.data;
+            this.phoneStatus = resp.data
             // console.log(resp.data)
-            resolve(resp.data);
+            resolve(resp.data)
           })
         } else {
-          this.$Message.error(this.loginmsg);
+          this.$Message.error(this.loginmsg)
         }
-      });
+      })
     }
   },
   computed: {
     myColumns() {
-      const arr = [];
+      const arr = []
       arr.push({
-        title: this.$t("apiAdmin.createTime"),
+        title: this.$t('apiAdmin.createTime'),
         // width: 100,
         // width: this.locale == 'en' ? 110 : 100,
-        key: "createTime"
-      });
+        key: 'createTime'
+      })
       arr.push({
-        title: this.$t("apiAdmin.mark"),
-        key: "remark"
-      });
+        title: this.$t('apiAdmin.mark'),
+        key: 'remark'
+      })
       arr.push({
-        title: "API Key",
-        key: "apiKey"
-      });
+        title: 'API Key',
+        key: 'apiKey',
+        render: (h, params) => {
+          let str = params.row.apiKey;
+          let tokenLenth = params.row.apiKey.length
+          // 显示前五位 后五位
+          let tokenCont = params.row.apiKey.substring(0, 5)
+              +
+              '...'
+              + params.row.apiKey.substring(tokenLenth - 5, tokenLenth)
+          if (str) {
+            return h("div", [
+              h('Icon', {
+                props: {
+                  type: 'ios-paper-outline'
+                },
+                style: {
+                  height: '20px',
+                  fontSize: '16px',
+                  color: '#fff',
+                  border: 0,
+                  lineHeight: '20px',
+                  marginLeft: '5px'
+                },
+                on: {
+                  click: () => {
+                    this.copyToken(str)
+                  }
+                }
+              }, this.$t('uc.finance.recharge.copy')),
+              h("div", {
+                style: {
+                  fontSize: '1%',
+                  float: 'left'
+                },
+              }, tokenCont)
+            ])
+          }
+        }
+      })
       arr.push({
-        title: this.$t("apiAdmin.accessKey"),
-        //6.28修改
+        title: this.$t('apiAdmin.accessKey'),
+        // 6.28修改
         // width: this.locale == 'en' ? 130 : 100,
         render: (h, params) => {
-          const text = "******";
-          return h("span", {}, text);
+          const text = '******'
+          return h('span', {}, text)
         }
-      });
+      })
       arr.push({
-        title: this.$t("apiAdmin.bindIpAddress"),
-        //6.28修改
+        title: this.$t('apiAdmin.bindIpAddress'),
+        // 6.28修改
         // width: this.locale == 'en' ? 130 : '',
         render: (h, params) => {
           if (params.row.bindIp !== null) {
-            let txts = params.row.bindIp.split(",");
-            txts = txts.length > 1 ? txts[0] + "  " + "..." : txts;
-            return h("span", {}, txts);
+            let txts = params.row.bindIp.split(',')
+            txts = txts.length > 1 ? txts[0] + '  ' + '...' : txts
+            return h('span', {}, txts)
           }
-
         }
-      });
+      })
       arr.push({
-        title: this.$t("apiAdmin.ioDays"),
-        //6.28修改
+        title: this.$t('apiAdmin.ioDays'),
+        // 6.28修改
         // width: this.locale == 'en' ? 150 : '',
         render: (h, params) => {
           if (params.row.bindIp) {
-            let residue = Date.parse(params.row.expireTime) - Date.parse(new Date());
-            let lastTime = residue / 1000 / 60 / 60 / 24;
-            lastTime = lastTime <= 0 ? 0 : lastTime;
-            const timeDay = h("span", {}, Math.round(lastTime));
-            return [timeDay];
+            const residue = Date.parse(params.row.expireTime) - Date.parse(new Date())
+            let lastTime = residue / 1000 / 60 / 60 / 24
+            lastTime = lastTime <= 0 ? 0 : lastTime
+            const timeDay = h('span', {}, Math.round(lastTime))
+            return [timeDay]
           }
         }
-      });
+      })
       arr.push({
-        title: this.$t("apiAdmin.operation"),
-        align: "center",
+        title: this.$t('apiAdmin.operation'),
+        align: 'center',
         render: (h, params) => {
           return [
             h(
-              "span",
+              'span',
               {
                 props: {
-                  type: "primary"
+                  type: 'primary'
                 },
-                 style: {
-                  display:"inline-block",
-                  height:"30px",
+                style: {
+                  display: 'inline-block',
+                  height: '30px',
                   // background:"#3399ff",
                   color:"#3399ff",
                   width:'50px',
@@ -618,51 +669,50 @@ export default {
                 },
                 on: {
                   click: () => {
-                    const { remark, bindIp, id, code } = params.row;
-                    this.editorFormItem = { remark, bindIp, id, code };
-                    this.verifyEditor = true;
+                    const { remark, bindIp, id, code } = params.row
+                    this.editorFormItem = { remark, bindIp, id, code }
+                    this.verifyEditor = true
                   }
                 }
               },
-              this.$t("apiAdmin.edit")
+              this.$t('apiAdmin.edit')
             ),
             h(
-              "span",
+              'span',
               {
                 props: {
-                  type: "error"
+                  type: 'error'
                 },
                 style: {
-                  marginLeft: "10px",
-                  display:"inline-block",
-                  height:"30px",
+                  marginLeft: '10px',
+                  display: 'inline-block',
+                  height: '30px',
                   // background:"#ed4014",
-                  color:"#fff",
-                  width:'50px',
-                  lineHeight:"30px",
-                  color:"#ed4014",
-                  border:'1px solid #ed4014 ',
-                  textAlign:"center",
-                  cursor: 'pointer',
-
+                  color: '#fff',
+                  width: '50px',
+                  lineHeight: '30px',
+                  color: '#ed4014',
+                  border: '1px solid #ed4014 ',
+                  textAlign: 'center',
+                  cursor: 'pointer'
 
                 },
                 on: {
                   click: () => {
-                    this.del = true;
-                    this.id = params.row.id;
+                    this.del = true
+                    this.id = params.row.id
                   }
                 }
               },
-              this.$t("apiAdmin.delete")
+              this.$t('apiAdmin.delete')
             )
-          ];
+          ]
         }
-      });
-      return arr;
+      })
+      return arr
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -338,27 +338,26 @@ export default {
                             + param.row.txid.substring(tokenLenth - 5, tokenLenth)
                     if (str) {
                         return h("div", [
-                            h('Button', {
+                            h('Icon', {
                                 props: {
-                                    type: 'success',
+                                    type: 'ios-paper-outline',
                                 },
                                 style: {
-                                    width: '35px',
                                     height: '20px',
-                                    fontSize: '12px',
+                                    fontSize: '16px',
                                     marginRight: '4px',
                                     float: 'left',
-                                    background: '#3399ff',
                                     color: '#fff',
                                     border: 0,
-                                    lineHeight: '0',
+                                    lineHeight: '20px',
+                                    marginLeft: '10px'
                                 },
                                 on: {
                                     click: () => {
                                         this.copyToken(str)
                                     }
                                 }
-                            }, this.$t('uc.finance.recharge.copy')),
+                            }),
                             h("div", {
                                 style: {
                                     fontSize: '1%',
@@ -383,28 +382,26 @@ export default {
                             + param.row.address.substring(tokenLenth - 5, tokenLenth)
                     if (str) {
                         return h("div", [
-                            h('Button', {
+                            h('Icon', {
                                 props: {
-                                    type: 'success',
+                                    type: 'ios-paper-outline',
                                 },
                                 style: {
-                                    width: '35px',
                                     height: '20px',
-                                    fontSize: '12px',
+                                    fontSize: '16px',
                                     marginRight: '4px',
                                     float: 'left',
-                                    background: '#3399ff',
                                     color: '#fff',
                                     border: 0,
-                                    lineHeight: '0',
-                                    marginLeft: '40px'
+                                    lineHeight: '20px',
+                                    marginLeft: '60px'
                                 },
                                 on: {
                                     click: () => {
                                         this.copyToken(str)
                                     }
                                 }
-                            }, this.$t('uc.finance.recharge.copy')),
+                            }),
                             h("div", {
                                 style: {
                                     textAlign: 'center',

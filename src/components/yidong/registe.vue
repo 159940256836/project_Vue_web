@@ -139,7 +139,7 @@
 <script>
 import $ from '@js/jquery.min.js'
 import { setTimeout } from 'timers'
-  console.log(1);
+console.log(1)
 
 export default {
 
@@ -372,8 +372,8 @@ export default {
         return false
       }
       // 直接生成一个验证码对象
-      let captcha1 = new TencentCaptcha("2087858432", res => {
-        console.log(res);
+      const captcha1 = new TencentCaptcha('2087858432', res => {
+        console.log(res)
         if (res.ret == 0) {
           this.ticket1 = res.ticket
           this.randStr1 = res.randstr
@@ -424,8 +424,8 @@ export default {
     // }
   },
   created() {
-    $("meta[name='viewport']").attr('content', "***");
-    $("head").append('<meta http-equiv="refresh" content="width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1">');
+    $("meta[name='viewport']").attr('content', '***')
+    $('head').append('<meta http-equiv="refresh" content="width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1">')
   }
 }
 </script>
@@ -505,7 +505,7 @@ export default {
 }
 </style>
 <style lang="scss">
-.rejs .ivu-select-item-selected, .ivu-select-item-selected:hover{
+.rejs .ivu-select-item-selected,.rejs .ivu-select-item-selected:hover{
   background:#fff !important;
 }
  .rejs .ivu-select-dropdown{

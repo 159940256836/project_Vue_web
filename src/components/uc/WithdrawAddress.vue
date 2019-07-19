@@ -192,26 +192,25 @@ export default {
                         + param.row.address.substring(tokenLenth - 5, tokenLenth)
                 if (str) {
                     return h("div", [
-                        h('Button', {
+                        h('Icon', {
                             props: {
-                                type: 'success',
+                                type: 'ios-paper-outline',
                             },
                             style: {
                                 height: '20px',
-                                fontSize: '12px',
-                                marginRight: '4px',
-                                background: '#3399ff',
+                                fontSize: '16px',
+                                float: 'left',
                                 color: '#fff',
                                 border: 0,
-                                lineHeight: '0',
-                                marginLeft: '5px'
+                                lineHeight: '20px',
+                                marginRight: '5px'
                             },
                             on: {
                                 click: () => {
                                     this.copyToken(str)
                                 }
                             }
-                        }, this.$t('uc.finance.recharge.copy')),
+                        }),
                         h("div", {
                             style: {
                                 textAlign: 'center',
