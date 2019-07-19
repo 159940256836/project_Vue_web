@@ -82,7 +82,7 @@
             </div>
             <div class="button">
                 <button @click="cancel">{{$t('coin.cancel')}}</button>
-                <button @click="sure">{{$t('coin.save')}}</button>
+                <button @click="sure">{{$t('coin.rollOut')}}</button>
             </div>
         </Modal>
     </div>

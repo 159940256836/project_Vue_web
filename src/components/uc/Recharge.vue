@@ -88,7 +88,14 @@
                             <div class="action-content">
                                 <div class="action-body">
                                     <p class="acb-p1">{{$t('common.tip')}}</p>
-                                    <p class="acb-p2">• {{$t('uc.finance.recharge.msg1')}}<br>• {{$t('uc.finance.recharge.msg2')}}<br>• {{$t('uc.finance.recharge.msg3')}}<br>• {{$t('uc.finance.recharge.msg4')}}<br>• {{$t('uc.finance.recharge.msg5')}}</p>
+                                    <p class="acb-p2">
+                                        <!--禁止充值除LCT之外的其他资产，任何非LCT资产充值将不可找回。-->
+                                        • {{$t('uc.finance.recharge.msg1')}} {{ coinType }} {{$t('uc.finance.recharge.msg11')}} {{ coinType }} {{$t('uc.finance.recharge.msg12')}}<br>
+                                        • {{$t('uc.finance.recharge.msg2')}}<br>
+                                        • {{$t('uc.finance.recharge.msg3')}}<br>
+                                        • {{$t('uc.finance.recharge.msg4')}}<br>
+                                        • {{$t('uc.finance.recharge.msg5')}}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -331,27 +338,26 @@ export default {
                             + param.row.txid.substring(tokenLenth - 5, tokenLenth)
                     if (str) {
                         return h("div", [
-                            h('Button', {
+                            h('Icon', {
                                 props: {
-                                    type: 'success',
+                                    type: 'ios-paper-outline',
                                 },
                                 style: {
-                                    width: '35px',
                                     height: '20px',
-                                    fontSize: '12px',
+                                    fontSize: '16px',
                                     marginRight: '4px',
                                     float: 'left',
-                                    background: '#3399ff',
                                     color: '#fff',
                                     border: 0,
-                                    lineHeight: '0',
+                                    lineHeight: '20px',
+                                    marginLeft: '10px'
                                 },
                                 on: {
                                     click: () => {
                                         this.copyToken(str)
                                     }
                                 }
-                            }, this.$t('uc.finance.recharge.copy')),
+                            }),
                             h("div", {
                                 style: {
                                     fontSize: '1%',
@@ -368,7 +374,43 @@ export default {
                 align: "center",
                 render: (h, param) => {
                     let str = param.row.address;
-                    return h("div", {}, str);
+                    let tokenLenth = param.row.address.length
+                    // 显示前五位 后五位
+                    let tokenCont = param.row.address.substring(0, 5)
+                            +
+                            '...'
+                            + param.row.address.substring(tokenLenth - 5, tokenLenth)
+                    if (str) {
+                        return h("div", [
+                            h('Icon', {
+                                props: {
+                                    type: 'ios-paper-outline',
+                                },
+                                style: {
+                                    height: '20px',
+                                    fontSize: '16px',
+                                    marginRight: '4px',
+                                    float: 'left',
+                                    color: '#fff',
+                                    border: 0,
+                                    lineHeight: '20px',
+                                    marginLeft: '60px'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.copyToken(str)
+                                    }
+                                }
+                            }),
+                            h("div", {
+                                style: {
+                                    textAlign: 'center',
+                                    fontSize: '1%',
+                                    float: 'left'
+                                },
+                            }, tokenCont)
+                        ])
+                    }
                 }
             });
             columns.push({

@@ -1368,14 +1368,14 @@ body {
     width: 100%;
 }
 
-.ivu-select-item:hover {
-    background: #aaa;
-}
+/*.ivu-select-item:hover {*/
+/*    background: #aaa;*/
+/*}*/
 
-.ivu-select-item-selected,
-.ivu-select-item-selected:hover {
-    background: #aaa;
-}
+/*.ivu-select-item-selected,*/
+/*.ivu-select-item-selected:hover {*/
+/*    background: #aaa;*/
+/*}*/
 
 .chart_container #chart_updated_time {
     float: left;

@@ -51,7 +51,12 @@
       <Card  :bordered="false" class="content card3">
         <p slot="title">{{$t('apiAdmin.myApiKey')}}</p>
 
-        <Table :columns="myColumns" :data="tableData" :no-data-text="$t('common.nodata')"></Table>
+        <Table
+          :columns="myColumns"
+          :data="tableData"
+          :no-data-text="$t('common.nodata')"
+        >
+        </Table>
 
       </Card>
     </div>
@@ -330,6 +335,20 @@ export default {
     this.getMember()
   },
   methods: {
+    // 复制功能
+    copyToken (data) {
+      let url = data
+      let oInput = document.createElement('input')
+      oInput.value = url
+      document.body.appendChild(oInput)
+      oInput.select() // 选择对象
+      console.log(oInput.value)
+      document.execCommand('Copy') // 执行浏览器复制命令
+      this.$Message.success(
+          this.$t("uc.finance.recharge.copysuccess")
+      )
+      oInput.remove()
+    },
     sendCode(index) {
       const me = this
       // 获取手机code
@@ -378,16 +397,21 @@ export default {
     },
     getAllAPI() {
       return this.$http.get(this.host + `/uc/open/get_key`).then(res => {
-        // console.log(res);
-        this.tableData = res.body.data
-
+        this.tableData = res.body.data;
+        // this.tableData = []
+        // let me = this;
+        // res.body.data.forEach(function (c, index) {
+        //   if (c.apistatus !== 1) {
+        //     me.tableData.push(c)
+        //   }
+        // })
         // console.log(this.formatTime(Date.parse(this.tableData[0].expireTime)),this.formatTime(Date.parse(this.tableData[0].createTime)));
         // console.log(Date.parse(this.tableData[0].expireTime)) - Date.parse(this.tableData[0].createTime);
-        const time1 = Date.parse(this.tableData[0].expireTime) - Date.parse(this.tableData[0].createTime)
-        console.log(this.tableData[0])
-        this.dataTime = time1 / 24 / 60 / 60 / 1000
-        console.log(time1 / 24 / 60 / 60 / 1000)
-      })
+        // let time1 = Date.parse(this.tableData[0].expireTime) - Date.parse(this.tableData[0].createTime)
+        // console.log(this.tableData[0]);
+        // this.dataTime = time1/24/60/60/1000
+        // console.log(time1/24/60/60/1000);
+      });
     },
     // 添加api校验
     codeVerify() {
@@ -547,7 +571,44 @@ export default {
       })
       arr.push({
         title: 'API Key',
-        key: 'apiKey'
+        key: 'apiKey',
+        render: (h, params) => {
+          let str = params.row.apiKey;
+          let tokenLenth = params.row.apiKey.length
+          // 显示前五位 后五位
+          let tokenCont = params.row.apiKey.substring(0, 5)
+              +
+              '...'
+              + params.row.apiKey.substring(tokenLenth - 5, tokenLenth)
+          if (str) {
+            return h("div", [
+              h('Icon', {
+                props: {
+                  type: 'ios-paper-outline'
+                },
+                style: {
+                  height: '20px',
+                  fontSize: '16px',
+                  color: '#fff',
+                  border: 0,
+                  lineHeight: '20px',
+                  marginLeft: '5px'
+                },
+                on: {
+                  click: () => {
+                    this.copyToken(str)
+                  }
+                }
+              }, this.$t('uc.finance.recharge.copy')),
+              h("div", {
+                style: {
+                  fontSize: '1%',
+                  float: 'left'
+                },
+              }, tokenCont)
+            ])
+          }
+        }
       })
       arr.push({
         title: this.$t('apiAdmin.accessKey'),
@@ -599,13 +660,12 @@ export default {
                   display: 'inline-block',
                   height: '30px',
                   // background:"#3399ff",
-                  color: '#3399ff',
-                  width: '50px',
-                  lineHeight: '30px',
-                  textAlign: 'center',
-                  border: '1px solid #3399ff',
+                  color:"#3399ff",
+                  width:'50px',
+                  lineHeight:"30px",
+                  textAlign:"center",
+                  border:'1px solid #3399ff',
                   cursor: 'pointer'
-
                 },
                 on: {
                   click: () => {

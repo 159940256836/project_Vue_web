@@ -180,7 +180,47 @@ export default {
         },
         {
           title: this.$t("uc.finance.withdraw.address"),
-          key: "address"
+          key: "address",
+            align: "center",
+            render: (h, param) => {
+                let str = param.row.address;
+                let tokenLenth = param.row.address.length
+                // 显示前五位 后五位
+                let tokenCont = param.row.address.substring(0, 5)
+                        +
+                        '...'
+                        + param.row.address.substring(tokenLenth - 5, tokenLenth)
+                if (str) {
+                    return h("div", [
+                        h('Icon', {
+                            props: {
+                                type: 'ios-paper-outline',
+                            },
+                            style: {
+                                height: '20px',
+                                fontSize: '16px',
+                                float: 'left',
+                                color: '#fff',
+                                border: 0,
+                                lineHeight: '20px',
+                                marginRight: '5px'
+                            },
+                            on: {
+                                click: () => {
+                                    this.copyToken(str)
+                                }
+                            }
+                        }),
+                        h("div", {
+                            style: {
+                                textAlign: 'center',
+                                fontSize: '1%',
+                                float: 'left'
+                            },
+                        }, tokenCont)
+                    ])
+                }
+            }
         },
         {
           title: this.$t("uc.finance.withdraw.remark"),
@@ -260,6 +300,20 @@ export default {
     this.getCoin();
   },
   methods: {
+      // 复制功能
+      copyToken (data) {
+          let url = data
+          let oInput = document.createElement('input')
+          oInput.value = url
+          document.body.appendChild(oInput)
+          oInput.select() // 选择对象
+          console.log(oInput.value)
+          document.execCommand('Copy') // 执行浏览器复制命令
+          this.$Message.success(
+                  this.$t("uc.finance.recharge.copysuccess")
+          )
+          oInput.remove()
+      },
     refresh(){
       this.coinType = null,
       this.withdrawAddr = null,
@@ -478,6 +532,7 @@ export default {
         }
     }
   .nav-right {
+
     .bill_box_address {
       .table-inner {
         .action-inner {
@@ -568,7 +623,16 @@ span.describe {
             background: transparent;
         }
     }
+    .ivu-btn[disabled]:hover{
+        /*background-color: transparent;*/
+        border-color: transparent;
+    }
+    .ivu-modal-confirm-footer .ivu-btn-primary,
+    .ivu-modal-confirm-footer .ivu-btn-text {
+        padding: 3px 15px;
+    }
 .nav-rights-address {
+
     .ivu-select-large.ivu-select-single {
         .ivu-select-selection {
             height: 30px;

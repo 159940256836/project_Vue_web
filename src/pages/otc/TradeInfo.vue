@@ -111,9 +111,10 @@
                             ></textarea>
                         </div>
                         <div class="trade-price-box">
-                            <p class="show-price">
-                                <span>{{type}}:</span>
-                                <span>&nbsp;&nbsp;{{buyPrice}} CNY / {{nuyNum}} {{user.unit}}</span>
+                            <p class="show-price" v-if="type == '卖出'">
+                                <span>{{$t('otc.tradeinfo.currentbalance')}}:</span>
+                                <span>{{ user.otcBalance }} {{ user.unit }}</span>
+                                <!--<span>&nbsp;&nbsp;{{buyPrice}} CNY / {{nuyNum}} {{user.unit}}</span>-->
                             </p>
                             <button
                                 class="btn-trade-in"
@@ -253,7 +254,8 @@ export default {
     getIdAdv() {
       //获取id广告信息
       this.$http
-        .post(this.host + "/otc/order/pre", { id: this.$route.query.tradeId })
+        .post(this.host + "/otc/order/pre", { id: this.$route.query.tradeId, memberId: this.$store.getters.member.id })
+        // .post('http://192.168.124.188:6006' + "/otc/order/pre", { id: this.$route.query.tradeId })
         .then(response => {
           var resp = response.body;
           if (resp.code == 0) {
@@ -524,10 +526,11 @@ export default {
 }
 
 .trade-right-box .trade-operation .trade-price-box .show-price {
-    width: 70%;
-    height: 35px;
+    width: 100%;
+    /*height: 30px;*/
     float: left;
-    line-height: 35px;
+    /*line-height: 30px;*/
+    margin-bottom: 15px;
 }
 
 .trade-right-box .trade-operation .price-box .show-price em {
@@ -537,12 +540,12 @@ export default {
 }
 
 .trade-right-box .trade-operation .trade-price-box .show-price span {
-  font-size: 18px;
+  font-size: 14px;
   color: #8090AF;
 }
 
 .trade-right-box .trade-operation .trade-price-box .btn-trade-in {
-    width: 90px;
+    width: 100%;
     height: 35px;
     outline: medium;
     border: 0;
@@ -578,6 +581,7 @@ export default {
 }
 
 .trade-right-box .trade-remark-box .content {
+    color: #8090af;
     padding: 0 25px 20px;
 }
 .trade-right-box .trade-remark .titles {
