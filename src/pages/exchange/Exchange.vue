@@ -1066,6 +1066,12 @@ import DepthGraph from '@components/exchange/DepthGraph.vue'
 import $ from '@js/jquery.min.js'
 export default {
   components: { expandRow, DepthGraph, transfermodal },
+  beforeRouteLeave(to, from, next) {
+    if (this.stompClient) {
+      this.stompClient.disconnect()
+    }
+    next()
+  },
   data() {
     const self = this
     return {
@@ -1942,7 +1948,7 @@ export default {
     this.getdefaultSymbol().then(res => {
       this.defaultPath = res
       this.init()
-      // this.statusCurreny()
+      this.statusCurreny()
     })
   },
   mounted: function() {
@@ -1977,27 +1983,6 @@ export default {
         }
       })
     },
-    // //金额只能为正整数
-        // checkNum(element) {
-        //     let val = element.value;
-        //     //匹配非数字
-        //     let reg = new RegExp("([^0-9]*)", "g");
-        //     let ma = val.match(reg);
-        //     //如果有非数字，替换成""
-        //     if (ma.length > 0) {
-        //         for (let k in ma) {
-        //             if (ma[k] != "") {
-        //                 val = val.replace(ma[k], "");
-        //             }
-        //         }
-        //     }
-        //     //可以为0，但不能以0开头
-        //     if (val.startsWith("0") && val.length > 1) {
-        //         val = val.substring(1, val.length);
-        //     }
-        //     //赋值，这样实现的效果就是用户按下非数字不会有任何反应
-        //     element.value = val;
-        // },
     tab(index) {
       this.btnList.map((ele, i) => {
         if (i == index) {
@@ -2010,36 +1995,26 @@ export default {
     silderGo(silder, val) {
       this[silder] = val
     },
-    // statusCurreny() {
-    //   let params = this.$route.params.pathMatch
-    //   if (params == undefined) {
-    //     this.$router.push('/exchange/' + this.defaultPath)
-    //     params = this.defaultPath
-    //   } else {
-    //       /*this.currentTradingPrice + ' ' +*/
-    //       const title = params.replace('_', '/').toUpperCase() + ' bdw'
-    //     this.settiele(title)
-    //   }
-    // },
+    statusCurreny() {
+      let params = this.$route.params.pathMatch
+      if (params == undefined) {
+        // this.$router.push('/exchange/' + this.defaultPath)
+        params = this.defaultPath
+        const title = this.currentTradingPrice + ' ' + 'BTC/USDT' + ' bdw'
+        this.settiele(title)
+      } else {
+          /* this.currentTradingPrice + ' ' +*/
+        // if(){}
+        const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
+        this.settiele(title)
+      }
+    },
     init() {
       let params = this.$route.params.pathMatch
       if (params == undefined) {
-        this.$router.push('/exchange/' + this.defaultPath)
-        params = this.defaultPath
-      } else {
-            /* this.currentTradingPrice + ' ' +*/
-        const title = params.replace('_', '/').toUpperCase() + ' bdw'
-        this.settiele(title)
-      }
-      if (params == undefined) {
-        this.$router.push('/exchange/' + this.defaultPath)
+        // this.$router.push('/exchange/' + this.defaultPath)
         params = this.defaultPath
       }
-        // else {
-      //   console.log(this.currentTradingPrice);
-      //   const title = this.currentTradingPrice + ' ' + params.replace('_', '/').toUpperCase() + ' bdw'
-      //   this.settiele(title)
-      // }
       const basecion = params.split('_')[1]
       if (basecion) {
         this.basecion = basecion.toLowerCase()
@@ -2684,7 +2659,6 @@ export default {
                       }
                       const rows = this.plate.askRows
                       const len = rows.length
-                      // console.log(rows[this.plate.maxPostion - resp.ask.items.length])
                       if (rows[this.plate.maxPostion - resp.ask.items.length]) {
                         this.plate.askTotle = rows[this.plate.maxPostion - resp.ask.items.length].totalAmount
                       }
@@ -2716,7 +2690,6 @@ export default {
                         bid.totalAmount = 0
                         this.plate.bidRows.push(bid)
                       }
-                      console.log(this.plate.bidRows[resp.bid.items.length - 1])
                       const rows = this.plate.bidRows,
                         len = rows.length,
                         totle = rows[resp.bid.items.length - 1].totalAmount
@@ -2812,7 +2785,7 @@ export default {
         that.getKline()
                 // 订阅价格变化消息
         stompClient.subscribe('/topic/market/thumb', function(msg) {
-          // that.statusCurreny()
+          that.statusCurreny()
           const resp = JSON.parse(msg.body)
           const coin = that.getCoin(resp.symbol)
           if (coin != null) {
@@ -3023,7 +2996,6 @@ export default {
         //     this.showMarket = false;
         // },
     currentCoinFavorChange(index, row) {
-      console.log(index, row, this.currentCoin.symbol, this.currentCoinIsFavor)
       if (!this.isLogin) {
         this.$Message.warning(this.$t('common.logintip'))
         return
@@ -3079,7 +3051,6 @@ export default {
       }
     },
     collect(index, row) {
-      console.log(index, row)
       if (!this.isLogin) {
         this.$Message.info(this.$t('common.logintip'))
         return
@@ -3102,7 +3073,6 @@ export default {
                 })
     },
     cancelCollect(index, row) {
-      console.log(index, row)
       if (!this.isLogin) {
         this.$Message.info(this.$t('common.logintip'))
         return

@@ -12,7 +12,7 @@
               <li>
                 {{$t('apiAdmin.part1')}}
                 <!-- <a href="https://bdwtop.github.io/" target="_blank">{{$t('apiAdmin.apiDoc')}}</a> -->
-                <a href="#" target="_blank">{{$t('apiAdmin.apiDoc')}}</a>
+                <a href="https://bdwexchange.github.io/" target="_blank">{{$t('apiAdmin.apiDoc')}}</a>
                 {{$t('apiAdmin.howUse')}}
               </li>
               <li>{{$t('apiAdmin.part2')}}</li>

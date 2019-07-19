@@ -207,7 +207,7 @@
                                 <li>
                                     <!-- <router-link to="https://coinmany.github.io/">{{$t("footer.apiDoc")}}</router-link> -->
                                       <!-- <a href="https://bdwtop.github.io/">{{$t("footer.apiDoc")}}</a> -->
-                                      <a href="#">{{$t("footer.apiDoc")}}</a>
+                                      <a href="https://bdwexchange.github.io/">{{$t("footer.apiDoc")}}</a>
                                 </li>
                                  <!-- <li>
                                     <router-link to="/">{{$t("footer.appDownload")}}</router-link>
@@ -341,10 +341,10 @@
                     <div class="footer-info">
                         <div class="info-title">{{$t('footer.friendLinks')}}:</div>
                         <div class="info-img">
-                            <a href="javascript:;">
+                            <a href="https://rxcj.top/">
                                 <img src="./assets/images/footer/1.png" alt="">
                             </a>
-                            <a href="javascript:;">
+                            <a href="https://hxcj123.com/">
                                 <img src="./assets/images/footer/2.png" alt="">
                             </a>
                             <a href="http://www.jinse.com">

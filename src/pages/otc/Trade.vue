@@ -856,7 +856,7 @@
 export default {
   components: {},
   data() {
-    var self = this;
+    var self = this
     return {
       showBorder: false,
       showStripe: false,
@@ -866,10 +866,10 @@ export default {
       fixedHeader: false,
       loading: true,
       dataCount: 10,
-      tableSize: "large",
-      tabPage: "buy",
+      tableSize: 'large',
+      tabPage: 'buy',
       advertiment: {
-        //卖出的广告数据
+        // 卖出的广告数据
         ask: {
           rows: [],
           currentPage: 1,
@@ -877,7 +877,7 @@ export default {
           pageNumber: 10,
           totalElement: 0
         },
-        //买入的广告数据
+        // 买入的广告数据
         bid: {
           rows: [],
           currentPage: 1,
@@ -887,66 +887,66 @@ export default {
         },
         columns: [
           {
-            title: self.$t("otc.merchant"),
-            key: "memberName",
+            title: self.$t('otc.merchant'),
+            key: 'memberName',
             // width: 160,
             ellipsis: true,
             render: function(h, params) {
               var avatar = params.row.avatar,
-                haveAvatar = false;
-              var innerCNT = [];
-              if (avatar != null && avatar != "") {
+                haveAvatar = false
+              var innerCNT = []
+              if (avatar != null && avatar != '') {
                 innerCNT[0] = h(
-                  "div",
+                  'div',
                   {
                     attrs: {
-                      class: "user-face user-avatar-public"
+                      class: 'user-face user-avatar-public'
                     }
                   },
                   [
-                    h("img", {
+                    h('img', {
                       attrs: {
                         src: avatar,
-                        width: "45px",
-                        height: "45px"
+                        width: '45px',
+                        height: '45px'
                       },
                       style: {
-                        "border-radius": "50%"
+                        'border-radius': '50%'
                       }
                     })
                   ]
-                );
+                )
               } else {
                 innerCNT[0] = h(
-                  "div",
+                  'div',
                   {
                     attrs: {
-                      class: "user-face user-avatar-public"
+                      class: 'user-face user-avatar-public'
                     }
                   },
                   [
                     h(
-                      "span",
+                      'span',
                       {
                         attrs: {
-                          class: "user-avatar-in"
+                          class: 'user-avatar-in'
                         }
                       },
                       params.row.memberName
-                        .replace(/^\s+|\s+$/g, "")
+                        .replace(/^\s+|\s+$/g, '')
                         .slice(0, 1)
                     )
                   ]
-                );
+                )
               }
-              innerCNT[1] = h("p", [
+              innerCNT[1] = h('p', [
                 h(
-                  "a",
+                  'a',
                   {
                     style: {
-                      marginRight: "8px",
-                      cursor: "pointer",
-                      paddingTop: "5px"
+                      marginRight: '8px',
+                      cursor: 'pointer',
+                      paddingTop: '5px'
                     },
                     class: {
                       // renzhengA: params.row.renzheng
@@ -955,10 +955,10 @@ export default {
                       click: function() {
                         if (self.isLogin) {
                           self.$router.push(
-                            "/checkuser?id=" + params.row.memberName
-                          );
+                            '/checkuser?id=' + params.row.memberName
+                          )
                         } else {
-                          self.$router.push("/login");
+                          self.$router.push('/login')
                         }
                       }
                     }
@@ -967,72 +967,73 @@ export default {
                   // self.strpro(params.row.memberName)
                 ),
                 h(
-                  "div",
+                  'div',
                   {
                     class: {
                       // renzheng: params.row.renzheng
                     }
                   },
-                  ""
+                  ''
                 )
-              ]);
-              if (params.row.level == 2)
+              ])
+              if (params.row.level == 2) {
                 innerCNT[2] = h(
-                  "div",
+                  'div',
                   {
                     attrs: {
-                      class: "user-business-v"
+                      class: 'user-business-v'
                     },
                     style: {
-                      display: "inline-block",
-                      "vertical-align": "text-top"
+                      display: 'inline-block',
+                      'vertical-align': 'text-top'
                     }
                   },
                   [
-                    h("img", {
+                    h('img', {
                       attrs: {
-                        src: require("../../assets/images/business_v.png")
+                        src: require('../../assets/images/business_v.png')
                       }
                     })
                   ]
-                );
-              return h("div", innerCNT);
+                )
+              }
+              return h('div', innerCNT)
             }
           },
           {
-            title: self.$t("otc.volume"),
-            key: "transactions",
-            width:100,
-            align:"center"
+            title: self.$t('otc.volume'),
+            key: 'transactions',
+            width: 100,
+            align: 'center'
           },
           {
-            title: self.$t("otc.paymethod"),
-            key: "payMode",
-            align:"center"
+            title: self.$t('otc.paymethod'),
+            key: 'payMode',
+            align: 'center'
           },
           {
-            align:"center",
-            title: self.$t("otc.amount"),
-            key: "remainAmount"
+            align: 'center',
+            title: self.$t('otc.amount'),
+            key: 'remainAmount'
           },
           {
-            title: self.$t("paper.quota"),
-            align:'center',
-            render:(h, params)=>{
-              return h('div',{},params.row.minLimit + "-" + params.row.maxLimit + "CNY")
+            title: self.$t('paper.quota'),
+            align: 'center',
+            render: (h, params) => {
+              return h('div', {}, params.row.minLimit + '-' + params.row.maxLimit + 'CNY')
             }
           },
           {
-            title:self.$t("paper.unit"),
-            align:'center',
-            render:(h, params)=>{
+            title: self.$t('paper.unit'),
+            align: 'center',
+            render: (h, params) => {
               return h('div',
                 {
                   style: {
-                    color: "#3399ff"
+                    color: '#3399ff'
                   }
                 },
-                params.row.price + "CNY")
+                params.row.price + 'CNY')
             }
           },
           // {
@@ -1063,42 +1064,42 @@ export default {
           //   }
           // },
           {
-            title: self.$t("otc.operate"),
-            key: "buyBtn",
+            title: self.$t('otc.operate'),
+            key: 'buyBtn',
             width: 80,
-            align: "center",
+            align: 'center',
             paddingLeft: '0',
             render: function(h, params) {
               return h(
-                  "p",
-                  {
-                    style: {
-                      fontSize: '12px',
-                      color: params.row.advertiseType == 0 ? "rgba(241, 80, 87)" : "rgb(0, 178, 117)",
-                      width: '50px',
-                      height: '24px',
-                      lineHeight: '23px',
-                      cursor: 'pointer',
-                      border: params.row.advertiseType == 0 ? "1px solid rgba(241, 80, 87)" : "1px solid rgb(0, 178, 117)",
-                    },
-                    on: {
-                      click: () => {
-                        if (!self.isLogin) {
-                          self.$router.push("/login");
-                        } else if (!self.member.realName) {
+                  'p',
+                {
+                  style: {
+                    fontSize: '12px',
+                    color: params.row.advertiseType == 0 ? 'rgba(241, 80, 87)' : 'rgb(0, 178, 117)',
+                    width: '50px',
+                    height: '24px',
+                    lineHeight: '23px',
+                    cursor: 'pointer',
+                    border: params.row.advertiseType == 0 ? '1px solid rgba(241, 80, 87)' : '1px solid rgb(0, 178, 117)'
+                  },
+                  on: {
+                    click: () => {
+                      if (!self.isLogin) {
+                        self.$router.push('/login')
+                      } else if (!self.member.realName) {
                           //                                            } else if (!self.member.memberLevel) {
-                          self.$Message.error(self.$t("otc.validate"));
-                          setTimeout(() => {
-                            self.$router.push("/uc/safe");
-                          }, 2000);
-                        } else {
-                          self.$router.push(
-                              "/otc/tradeInfo?tradeId=" + params.row.advertiseId
-                          );
-                        }
+                        self.$Message.error(self.$t('otc.validate'))
+                        setTimeout(() => {
+                          self.$router.push('/uc/safe')
+                        }, 2000)
+                      } else {
+                        self.$router.push(
+                              '/otc/tradeInfo?tradeId=' + params.row.advertiseId
+                          )
                       }
                     }
-                  },
+                  }
+                },
                   // [
                   //   h(
                   //     "div",
@@ -1114,8 +1115,8 @@ export default {
                   //       }
                   //     },
                   params.row.advertiseType == 0
-                      ? self.$t("otc.sell")
-                      : self.$t("otc.buy")
+                      ? self.$t('otc.sell')
+                      : self.$t('otc.buy')
                   // )
                   // ]
               )
@@ -1134,115 +1135,115 @@ export default {
           }
         ]
       },
-      coinData: ""
-    };
+      coinData: ''
+    }
   },
   computed: {
     isLogin: function() {
-      return this.$store.getters.isLogin;
+      return this.$store.getters.isLogin
     },
     member: function() {
-      return this.$store.getters.member;
+      return this.$store.getters.member
     },
     coin: function() {
       return this.$route.params.pathMatch
       // return this.$route.params[0];
     },
     lang: function() {
-      return this.$store.state.lang;
+      return this.$store.state.lang
     }
   },
   watch: {
     coin: function() {
-      this.reloadAd();
+      this.reloadAd()
     },
     lang: function() {
-      this.updateLangData();
+      this.updateLangData()
     }
   },
   methods: {
     updateLangData() {
-      this.advertiment.columns[0].title = this.$t("otc.merchant");
-      this.advertiment.columns[1].title = this.$t("otc.volume");
-      this.advertiment.columns[2].title = this.$t("otc.paymethod");
-      this.advertiment.columns[3].title = this.$t("otc.amount");
-      this.advertiment.columns[4].title = this.$t("paper.quota");
-      this.advertiment.columns[5].title = this.$t("paper.unit");
+      this.advertiment.columns[0].title = this.$t('otc.merchant')
+      this.advertiment.columns[1].title = this.$t('otc.volume')
+      this.advertiment.columns[2].title = this.$t('otc.paymethod')
+      this.advertiment.columns[3].title = this.$t('otc.amount')
+      this.advertiment.columns[4].title = this.$t('paper.quota')
+      this.advertiment.columns[5].title = this.$t('paper.unit')
       // this.advertiment.columns[2].title = this.$t("otc.price_coin");
-      this.advertiment.columns[6].title = this.$t("otc.operate");
+      this.advertiment.columns[6].title = this.$t('otc.operate')
     },
-    getMethodCurrency () {
-       return this.$http.post(this.host + this.api.otc.coin).then(response => {
+    getMethodCurrency() {
+      return this.$http.post(this.host + this.api.otc.coin).then(response => {
         if (response.body.code == 0) {
-          this.coinData = response.body.data[0].unit;
+          this.coinData = response.body.data[0].unit
           // console.log(this.coinData, response.body.data[0].unit);
         }
-      });
+      })
     },
     loadAd(pageNo, advertiseType, table) {
-      console.log(this.coin);
-      //获取广告
-      let params = {};
-      table.rows = [];
-      table.totalElement = 0;
-      table.currentPage = pageNo;
-      params["pageNo"] = pageNo;
-      params["pageSize"] = table.pageNumber;
-      params["advertiseType"] = advertiseType;
-      params["unit"] = this.coin
+      console.log(this.coin)
+      // 获取广告
+      const params = {}
+      table.rows = []
+      table.totalElement = 0
+      table.currentPage = pageNo
+      params['pageNo'] = pageNo
+      params['pageSize'] = table.pageNumber
+      params['advertiseType'] = advertiseType
+      params['unit'] = this.coin
       if (params.unit == undefined) {
-        params["unit"] = this.coinData;
+        params['unit'] = this.coinData
       }
       this.$http
         .post(this.host + this.api.otc.advertise, params)
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
             if (resp.data.context) {
-              table.rows = resp.data.context;
-              table.totalElement = resp.data.totalElement;
+              table.rows = resp.data.context
+              table.totalElement = resp.data.totalElement
             }
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-          this.loading = false;
-        });
+          this.loading = false
+        })
     },
     changePage(page) {
-      if (this.tabPage == "sell") {
-        this.loadAd(page, 0, this.advertiment.bid);
+      if (this.tabPage == 'sell') {
+        this.loadAd(page, 0, this.advertiment.bid)
       } else {
-        this.loadAd(page, 1, this.advertiment.ask);
+        this.loadAd(page, 1, this.advertiment.ask)
       }
     },
     reloadAd() {
       // this.tabPage = "buy";
-      this.getMethodCurrency().then(()=>{
+      this.getMethodCurrency().then(() => {
         this.loadAd(1, 0, this.advertiment.bid)
-        this.loadAd(1, 1, this.advertiment.ask);
+        this.loadAd(1, 1, this.advertiment.ask)
       })
     },
     strpro(str) {
-      let newStr = str;
-      str = str.slice(1);
-      var re = /[\D\d]*/g;
+      const newStr = str
+      str = str.slice(1)
+      var re = /[\D\d]*/g
       var str2 = str.replace(re, function(str) {
-        var result = "";
+        var result = ''
         for (var i = 0; i < str.length; i++) {
-          result += "*";
+          result += '*'
         }
-        return result;
-      });
-      return newStr.slice(0, 1) + str2;
+        return result
+      })
+      return newStr.slice(0, 1) + str2
     }
   },
   created() {
-    this.getMethodCurrency();
-    this.reloadAd();
+    this.getMethodCurrency()
+    this.reloadAd()
   },
-  mounted(){
-    this.getMethodCurrency();
-    console.log(this.coinsData);
+  mounted() {
+    this.getMethodCurrency()
+    console.log(this.coinsData)
   }
-};
+}
 </script>

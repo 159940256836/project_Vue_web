@@ -952,34 +952,34 @@ export default {
           render: (h, params) => {
             return h('div', [
               h('Icon', {
-                    props: {
+                props: {
                                     // color:"red",
-                      type: params.row.isFavor
+                  type: params.row.isFavor
                                         ? 'android-star'
                                         : 'android-star-outline'
-                    },
-                    nativeOn: {
-                      click: () => {
-                          event.stopPropagation() // 阻止事件冒泡
-                          if (this.isLogin) {
-                                if (
+                },
+                nativeOn: {
+                  click: () => {
+                    event.stopPropagation() // 阻止事件冒泡
+                    if (this.isLogin) {
+                      if (
                                                 event.currentTarget.className ==
                                                 'ivu-icon ivu-icon-android-star'
                                             ) {
-                                    this.cancelCollect(params.index, params.row)
-                                    event.currentTarget.className ==
+                        this.cancelCollect(params.index, params.row)
+                        event.currentTarget.className ==
                                                     'ivu-icon ivu-icon-android-star-outline'
-                                  } else {
-                                    this.collect(params.index, params.row)
-                                    event.currentTarget.className =
+                      } else {
+                        this.collect(params.index, params.row)
+                        event.currentTarget.className =
                                                     'ivu-icon ivu-icon-android-star'
-                                  }
-                              } else {
-                                this.$Message.warning(this.$t('common.logintip'))
-                              }
-                        }
+                      }
+                    } else {
+                      this.$Message.warning(this.$t('common.logintip'))
                     }
-                  }),
+                  }
+                }
+              }),
               h('span', params.row.symbol)
             ])
           }
@@ -1018,8 +1018,8 @@ export default {
                             'span',
               {
                 attrs: {
-                      class: className
-                    }
+                  class: className
+                }
               },
                             row.rose
                         )
@@ -1041,60 +1041,60 @@ export default {
             className: 'coin-menu-symbol',
             render: (h, params) => {
               return h('div', [
-                    h('Icon', {
-                      props: {
+                h('Icon', {
+                  props: {
                                         // color:"red",
-                          type: params.row.isFavor
+                    type: params.row.isFavor
                                             ? 'android-star'
                                             : 'android-star-outline'
-                        },
-                      nativeOn: {
-                          click: () => {
-                              event.stopPropagation() // 阻止事件冒泡
-                              if (this.isLogin) {
-                                    if (
+                  },
+                  nativeOn: {
+                    click: () => {
+                      event.stopPropagation() // 阻止事件冒泡
+                      if (this.isLogin) {
+                        if (
                                                     event.currentTarget.className ==
                                                     'ivu-icon ivu-icon-android-star'
                                                 ) {
-                                        this.cancelCollect(params.index, params.row)
-                                        event.currentTarget.className ==
+                              this.cancelCollect(params.index, params.row)
+                              event.currentTarget.className ==
                                                         'ivu-icon ivu-icon-android-star-outline'
-                                      } else {
-                                        this.collect(params.index, params.row)
-                                        event.currentTarget.className =
+                            } else {
+                              this.collect(params.index, params.row)
+                              event.currentTarget.className =
                                                         'ivu-icon ivu-icon-android-star'
-                                      }
-                                  } else {
-                                    this.$Message.warning(this.$t('common.logintip'))
-                                  }
                             }
-                        }
-                    }),
-                    h('div', [
-                      h('span', {
-                          style: {
-                              position: 'relative',
-                              top: '-8px'
-                            }
-                        },
+                      } else {
+                        this.$Message.warning(this.$t('common.logintip'))
+                      }
+                    }
+                  }
+                }),
+                h('div', [
+                  h('span', {
+                    style: {
+                      position: 'relative',
+                      top: '-8px'
+                    }
+                  },
                                         params.row.coin),
-                      h('span', {
-                          style: {
-                              display: 'inline-block',
-                              height: '18px',
-                              marginLeft: '10px',
-                              border: '1px solid rgba(53,124,225,.4)',
-                              borderColor: 'rgba(53,124,225,.4)',
-                              color: '#357ce1',
-                              textAlign: 'center',
-                              padding: '0 5px',
-                              position: 'relative',
-                              top: '-8px'
-                            }
-                        }, params.row.proportion)
-                    ])
+                  h('span', {
+                    style: {
+                      display: 'inline-block',
+                      height: '18px',
+                      marginLeft: '10px',
+                      border: '1px solid rgba(53,124,225,.4)',
+                      borderColor: 'rgba(53,124,225,.4)',
+                      color: '#357ce1',
+                      textAlign: 'center',
+                      padding: '0 5px',
+                      position: 'relative',
+                      top: '-8px'
+                    }
+                  }, params.row.proportion)
+                ])
                                 // h("span", params.row.coin + " " + params.row.proportion)
-                  ])
+              ])
             }
           },
           {
@@ -1105,10 +1105,10 @@ export default {
               const a1 = parseFloat(a)
               const b1 = parseFloat(b)
               if (type == 'asc') {
-                    return a1 - b1
-                  } else {
-                    return b1 - a1
-                  }
+                return a1 - b1
+              } else {
+                return b1 - a1
+              }
             }
           },
           {
@@ -1119,21 +1119,21 @@ export default {
               const a1 = a.replace(/[^\d|.|-]/g, '') - 0
               const b1 = b.replace(/[^\d|.|-]/g, '') - 0
               if (type == 'asc') {
-                    return a1 - b1
-                  } else {
-                    return b1 - a1
-                  }
+                return a1 - b1
+              } else {
+                return b1 - a1
+              }
             },
             render: (h, params) => {
               const row = params.row
               const className = parseFloat(row.rose) < 0 ? 'sell' : 'buy'
               return h(
                                 'span',
-                    {
-                      attrs: {
-                        class: className
-                      }
-                    },
+                {
+                  attrs: {
+                    class: className
+                  }
+                },
                                 row.rose
                             )
             }
@@ -1182,11 +1182,11 @@ export default {
 
               return h(
                                 'span',
-                    {
-                      attrs: {
-                        class: className
-                      }
-                    },
+                {
+                  attrs: {
+                    class: className
+                  }
+                },
                                 params.row.price.toFixed(this.baseCoinScale)
                             )
             },
@@ -1297,14 +1297,14 @@ export default {
             key: 'totalAmount',
             render: (h, params) => {
               if (params.row.price == 0 || params.row.totalAmount == 0) {
-                    return h('span', {}, '--')
-                  } else {
-                    return h(
+                return h('span', {}, '--')
+              } else {
+                return h(
                                     'span',
                                     {},
                                     params.row.totalAmount.toFixed(this.coinScale)
                                 )
-                  }
+              }
             },
             renderHeader: (h, params) => {
               const title =
@@ -1317,26 +1317,26 @@ export default {
             width: 1,
             render: (h, params) => {
               let width = '0',
-                    backgroundColor =
+                backgroundColor =
                                     params.row.direction === 'BUY' ? '#00b275' : '#f15057',
-                    totle =
+                totle =
                                     params.row.direction === 'BUY'
                                         ? this.plate.bidTotle
                                         : this.plate.askTotle
               if (params.row.totalAmount) {
-                    width = (params.row.totalAmount / totle).toFixed(4) * 100 + '%'
-                  }
+                width = (params.row.totalAmount / totle).toFixed(4) * 100 + '%'
+              }
               return h(
                                 'div',
-                    {
-                      style: {
-                        width,
-                        backgroundColor
-                      },
-                      attrs: {
-                        class: 'percentdiv'
-                      }
-                    },
+                {
+                  style: {
+                    width,
+                    backgroundColor
+                  },
+                  attrs: {
+                    class: 'percentdiv'
+                  }
+                },
                                 ' '
                             )
             }
@@ -1354,11 +1354,11 @@ export default {
             width: 40,
             render: (h, params) => {
               return h(expandRow, {
-                    props: {
-                      skin: params.row.skin,
-                      rows: this.currentTableData
-                    }
-                  })
+                props: {
+                  skin: params.row.skin,
+                  rows: this.currentTableData
+                }
+              })
             }
           },
           {
@@ -1392,11 +1392,11 @@ export default {
               const className = row.direction.toLowerCase()
               return h(
                                 'span',
-                    {
-                      attrs: {
-                        class: className
-                      }
-                    },
+                {
+                  attrs: {
+                    class: className
+                  }
+                },
                                 row.direction == 'BUY'
                                     ? self.$t('exchange.buyin')
                                     : self.$t('exchange.sellout')
@@ -1438,19 +1438,19 @@ export default {
             render: (h, params) => {
               return h(
                                 'Button',
-                    {
-                      props: {
-                        size: 'small',
-                        type: 'warning'
-                      },
-                      style: {},
-                      on: {
-                        click: () => {
+                {
+                  props: {
+                    size: 'small',
+                    type: 'warning'
+                  },
+                  style: {},
+                  on: {
+                    click: () => {
                                             // console.log("======开始撤单")
-                            this.cancel(params.index)
-                          }
-                      }
-                    },
+                      this.cancel(params.index)
+                    }
+                  }
+                },
                                 self.$t('exchange.undo')
                             )
             }
@@ -1468,11 +1468,11 @@ export default {
             width: 40,
             render: (h, params) => {
               return h(expandRow, {
-                    props: {
-                      skin: params.row.skin,
-                      rows: this.historyTableData
-                    }
-                  })
+                props: {
+                  skin: params.row.skin,
+                  rows: this.historyTableData
+                }
+              })
             }
           },
           {
@@ -1502,11 +1502,11 @@ export default {
               const className = row.direction.toLowerCase()
               return h(
                                 'span',
-                    {
-                      attrs: {
-                        class: className
-                      }
-                    },
+                {
+                  attrs: {
+                    class: className
+                  }
+                },
                                 row.direction == 'BUY'
                                     ? self.$t('exchange.buyin')
                                     : self.$t('exchange.sellout')
@@ -1547,28 +1547,28 @@ export default {
             render: (h, params) => {
               const status = params.row.status
               if (status == 'COMPLETED') {
-                    return h(
+                return h(
                                     'span',
-                      {
-                        style: {
-                            color: '#3399ff'
-                          }
-                      },
+                  {
+                    style: {
+                      color: '#3399ff'
+                    }
+                  },
                                     self.$t('exchange.finished')
                                 )
-                  } else if (status == 'CANCELED') {
-                    return h(
+              } else if (status == 'CANCELED') {
+                return h(
                                     'span',
-                        {
-                          style: {
-                              color: '#3399ff'
-                            }
-                        },
+                  {
+                    style: {
+                      color: '#3399ff'
+                    }
+                  },
                                     self.$t('exchange.canceled')
                                 )
-                  } else {
-                    return h('span', {}, '--')
-                  }
+              } else {
+                return h('span', {}, '--')
+              }
             }
           }
         ],
@@ -1826,10 +1826,10 @@ export default {
       this[silder] = val
     },
     init() {
-      let params = this.$route.params.pathMatch
+      const params = this.$route.params.pathMatch
+      console.log(params)
       if (params == undefined) {
         this.$router.push('/leverindex/' + this.defaultPath)
-        params = this.defaultPath
       } else {
         const title = params.replace('_', '/').toUpperCase() + ' bdw 投资者最信赖的数字资产增值平台'
         this.settiele(title)
@@ -3265,12 +3265,12 @@ export default {
           if (resp.content.length > 0) {
             this.currentOrder.rows = resp.content.slice(0, 3)
             this.currentOrder.rows.forEach((row, index) => {
-                row.skin = that.skin
-                row.price =
+              row.skin = that.skin
+              row.price =
                                 row.type == 'MARKET_PRICE'
                                     ? that.$t('exchange.marketprice')
                                     : row.price
-              })
+            })
           }
         }
         this.currentLoading = false
@@ -3345,13 +3345,13 @@ export default {
           this.$http.post(this.host + this.api.exchange.orderCancelAll).then(response => {
             const resp = response.body
             if (resp.code == 0) {
-                this.refreshAccount()
-              } else {
-                this.$Notice.error({
-                    title: this.$t('exchange.tip'),
-                    desc: resp.message
-                  })
-              }
+              this.refreshAccount()
+            } else {
+              this.$Notice.error({
+                title: this.$t('exchange.tip'),
+                desc: resp.message
+              })
+            }
           })
         }
       })
@@ -3364,20 +3364,20 @@ export default {
           this.currentOrder.rows.splice()
           this.currentOrder.rows.filter((item, index) => {
             if (item.orderId == row.orderId) {
-                item._expanded = true   // 展开选中的行
-              } else {
-                item._expanded = false   // 其他行关闭
-              }
+              item._expanded = true   // 展开选中的行
+            } else {
+              item._expanded = false   // 其他行关闭
+            }
             return item
           })
         } else {
           this.currentTableData.splice()
           this.currentTableData.map((item, index) => {
             if (item.orderId == row.orderId) {
-                item._expanded = false   // 展开选中的行
-              } else {
-                item._expanded = false   // 其他行关闭
-              }
+              item._expanded = false   // 展开选中的行
+            } else {
+              item._expanded = false   // 其他行关闭
+            }
             return item
           })
         }
@@ -3386,10 +3386,10 @@ export default {
           this.historyOrder.rows.splice()
           this.historyOrder.rows.filter((item, index) => {
             if (item.orderId == row.orderId) {
-                item._expanded = true   // 展开选中的行
-              } else {
-                item._expanded = false   // 其他行关闭
-              }
+              item._expanded = true   // 展开选中的行
+            } else {
+              item._expanded = false   // 其他行关闭
+            }
             return item
           })
                     // this.historyTableData = this.TableData1
@@ -3397,10 +3397,10 @@ export default {
           this.historyTableData.splice()
           this.historyTableData.map((item, index) => {
             if (item.orderId == row.orderId) {
-                item._expanded = false   // 展开选中的行
-              } else {
-                item._expanded = false   // 其他行关闭
-              }
+              item._expanded = false   // 展开选中的行
+            } else {
+              item._expanded = false   // 其他行关闭
+            }
             return item
           })
         }
@@ -3413,10 +3413,10 @@ export default {
         if (data.code == 0) {
           console.log(data.data)
           if (this.selectedOrder === 'current') {
-              this.currentTableData = data.data
-            } else {
-              this.historyTableData = data.data
-            }
+            this.currentTableData = data.data
+          } else {
+            this.historyTableData = data.data
+          }
         }
       })
     },
