@@ -50,7 +50,12 @@
       <Card  :bordered="false" class="content card3">
         <p slot="title">{{$t('apiAdmin.myApiKey')}}</p>
 
-        <Table :columns="myColumns" :data="tableData" :no-data-text="$t('common.nodata')"></Table>
+        <Table
+          :columns="myColumns"
+          :data="tableData"
+          :no-data-text="$t('common.nodata')"
+        >
+        </Table>
 
       </Card>
     </div>
@@ -377,15 +382,20 @@ export default {
     },
     getAllAPI() {
       return this.$http.get(this.host + `/uc/open/get_key`).then(res => {
-        // console.log(res);
         this.tableData = res.body.data;
-
+        // this.tableData = []
+        // let me = this;
+        // res.body.data.forEach(function (c, index) {
+        //   if (c.apistatus !== 1) {
+        //     me.tableData.push(c)
+        //   }
+        // })
         // console.log(this.formatTime(Date.parse(this.tableData[0].expireTime)),this.formatTime(Date.parse(this.tableData[0].createTime)));
         // console.log(Date.parse(this.tableData[0].expireTime)) - Date.parse(this.tableData[0].createTime);
-        let time1 = Date.parse(this.tableData[0].expireTime) - Date.parse(this.tableData[0].createTime)
-        console.log(this.tableData[0]);
-        this.dataTime = time1/24/60/60/1000
-        console.log(time1/24/60/60/1000);
+        // let time1 = Date.parse(this.tableData[0].expireTime) - Date.parse(this.tableData[0].createTime)
+        // console.log(this.tableData[0]);
+        // this.dataTime = time1/24/60/60/1000
+        // console.log(time1/24/60/60/1000);
       });
     },
     // 添加api校验
@@ -604,9 +614,7 @@ export default {
                   lineHeight:"30px",
                   textAlign:"center",
                   border:'1px solid #3399ff',
-                  cursor: 'pointer',
-
-
+                  cursor: 'pointer'
                 },
                 on: {
                   click: () => {
