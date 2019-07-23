@@ -17,7 +17,7 @@ const zh = {
     ipAddress: "ip地址",
     createTime: "创建时间",
     accessKey: "访问密钥",
-    bindIpAddress: "绑定IP地址",
+    bindIpAddress: "IP地址",
     ioDays: "剩余有效期/天",
     operation: "操作",
     create: "创建",

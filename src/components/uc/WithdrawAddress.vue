@@ -49,9 +49,8 @@
                             </div>
                             <Button
                                 id="addrSubmit"
-                                @click='addAddr'
+                                @click='addAddr(1)'
                                 size="large"
-                                style=""
                             >
                                 {{$t('uc.finance.withdraw.add')}}
                             </Button>
@@ -91,7 +90,7 @@
         <!-- model -->
         <Modal v-model="modal2" width="400">
             <p slot="header" style="color:#39f;text-align:center">
-                <span>{{$t('uc.finance.withdraw.safevalidate')}}</span>
+                <span>{{ id == undefined?$t('uc.finance.withdraw.safevalidate'):$t('otc.myad.delete')}}</span>
             </p>
             <div style="text-align:center">
                 <Form
@@ -101,11 +100,21 @@
                     :label-width="85"
                 >
                     <!-- 手机号 -->
-                    <FormItem :label="$t('uc.finance.withdraw.telno')" prop="mobileNo" v-show="validPhone" style="width:90%">
-                        <Input disabled size="large" v-model="formValidateAddr.mobileNo"></Input>
+                    <FormItem
+                        :label="$t('uc.finance.withdraw.telno')"
+                        prop="mobileNo"
+                        v-if="isPhoneCode"
+                        style="width:90%"
+                    >
+                        <Input disabled size="large" v-model="formValidateAddr.mobileNo"/>
                     </FormItem>
                     <!-- 手机验证码 -->
-                    <FormItem :label="$t('uc.finance.withdraw.smscode')" prop="vailCode2" v-show="validPhone" style="width:90%">
+                    <FormItem
+                        :label="$t('uc.safe.phonecode')"
+                        prop="vailCode2"
+                        v-if="isPhoneCode"
+                        style="width:90%"
+                    >
                         <Input v-model="formValidateAddr.vailCode2" size="large">
                         <!-- <Button slot="append">点击获取</Button> -->
                         <div class="timebox" slot="append">
@@ -118,20 +127,50 @@
                         </Input>
                     </FormItem>
                     <!-- 邮箱 -->
-                    <FormItem :label="$t('uc.finance.withdraw.email')" prop="email" v-show="validEmail" style="width:90%">
-                        <Input disabled v-model="formValidateAddr.email" size="large"></Input>
+                    <FormItem
+                        :label="$t('uc.finance.withdraw.email')"
+                        prop="email"
+                        v-if="isEmailCode"
+                        style="width:90%"
+                    >
+                        <Input
+                            disabled
+                            v-model="formValidateAddr.email"
+                            size="large"
+                        />
                     </FormItem>
                     <!-- 邮箱验证码 -->
-                    <FormItem :label="$t('uc.finance.withdraw.emailcode')" prop="vailCode1" v-show="validEmail" style="width:90%">
+                    <FormItem
+                        :label="$t('uc.forget.emailcode')"
+                        prop="vailCode1"
+                        v-if="isEmailCode"
+                        style="width:90%"
+                    >
                         <Input v-model="formValidateAddr.vailCode1" size="large">
                         <!-- <Button slot="append">点击获取</Button> -->
                         <div class="timebox" slot="append">
-                            <Button @click="send(1)" :disabled="disbtn">
-                                <span v-if="sendMsgDisabled1">{{time1+$t('uc.finance.withdraw.second')}}</span>
-                                <span v-if="!sendMsgDisabled1">{{$t('uc.finance.withdraw.clickget')}}</span>
-                            </Button>
+                            <p @click="send(1)" :disabled="sendMsgDisabled1">
+                                <span v-if="sendMsgDisabled1">
+                                    {{time1+$t('uc.finance.withdraw.second')}}
+                                </span>
+                                <span v-if="!sendMsgDisabled1">
+                                    {{$t('uc.finance.withdraw.clickget')}}
+                                </span>
+                            </p>
                         </div>
                         </Input>
+                    </FormItem>
+                    <FormItem
+                        :label="$t('openGoolePage._GoogleVerificationCode')"
+                        v-if="isGoogleCode"
+                        style="text-align: left"
+                    >
+                        <Input
+                            v-model="formValidateAddr.googleCode"
+                            size="large"
+                            type="text"
+                            style="width:88%"
+                        />
                     </FormItem>
                 </Form>
             </div>
@@ -160,6 +199,7 @@ export default {
       disbtn: false,
       dataCount: 10,
       loading: true,
+        id: '',
       //else
       sendMsgDisabled1: false,
       sendMsgDisabled2: false,
@@ -170,8 +210,6 @@ export default {
       withdrawAddr: "",
       remark: "",
       coinType: "",
-      validEmail: false,
-      validPhone: false,
       coinList: [],
       tableColumnsRecharge: [
         {
@@ -242,7 +280,7 @@ export default {
                   },
                   on: {
                     click: () => {
-                      this.del(params.row.id);
+                      this.addAddr(2, params.row.id);
                       // this.getList(0, 10);
                     }
                   }
@@ -258,26 +296,27 @@ export default {
         mobileNo: "",
         vailCode2: "",
         email: "",
-        vailCode1: ""
+        vailCode1: "",
+          googleCode: ""
       },
       ruleValidate: {
         mobileNo: [
           {
-            required: this.validPhone,
+            required: this.isPhoneCode,
             message: this.$t("uc.finance.withdraw.telerr"),
             trigger: "blur"
           }
         ],
         vailCode2: [
           {
-            required: this.validPhone,
+            required: this.isPhoneCode,
             message: this.$t("uc.finance.withdraw.codeerr"),
             trigger: "change"
           }
         ],
         email: [
           {
-            required: this.validEmail,
+            required: this.isEmailCode,
             type: "email",
             message: this.$t("uc.finance.withdraw.emailerr"),
             trigger: "blur"
@@ -285,12 +324,23 @@ export default {
         ],
         vailCode1: [
           {
-            required: this.validEmail,
+            required: this.isEmailCode,
             message: this.$t("uc.finance.withdraw.codeerr"),
             trigger: "change"
           }
-        ]
-      }
+        ],
+          googleCode: [
+              {
+                  required: this.isGoogleCode,
+                  message: this.$t("uc.finance.withdraw.codeerr"),
+                  trigger: "change"
+              }
+          ]
+      },
+        isCode: '',
+        isPhoneCode: false, // 是否绑定手机验证状态
+        isEmailCode: false, // 是否绑定手机验证状态
+        isGoogleCode: false, // 是否绑定谷歌验证状态
     };
   },
   created() {
@@ -300,6 +350,39 @@ export default {
     this.getCoin();
   },
   methods: {
+      // 安全验证接口
+      afetyVerification () {
+          // 1.输入谷歌验证码
+          // 2.输入手机验证码
+          // 3.输入邮箱验证码
+          this.$http.post(this.host + '/uc/getGoogleState',{ mobile: this.$store.getters.member.mobile }).then(res => {
+              const data = res.body
+              this.isCode = data.data
+              console.log(this.isCode);
+              if (data.code == 0) {
+                  console.log(data);
+                  switch (data.data) {
+                      case 1:
+                          // 1为开启谷歌验证
+                          this.isGoogleCode = true
+                          this.isPhoneCode = false
+                          this.isEmailCode = false
+                          break
+                      case 2:
+                          // 2为开启手机验证
+                          this.isGoogleCode = false
+                          this.isPhoneCode = true
+                          this.isEmailCode = false
+                          break
+                      case 3:
+                          // 3为开启邮箱验证
+                          this.isGoogleCode = false
+                          this.isPhoneCode = false
+                          this.isEmailCode = true
+                  }
+              }
+          })
+      },
       // 复制功能
       copyToken (data) {
           let url = data
@@ -329,12 +412,12 @@ export default {
           if (resp.code == 0) {
             if (resp.data.mobilePhone) {
               this.formValidateAddr.mobileNo = resp.data.mobilePhone;
-              this.validPhone = true;
-              this.validEmail = false;
+              // this.validPhone = true;
+              // this.validEmail = false;
             } else {
               this.formValidateAddr.email = resp.data.email;
-              this.validPhone = false;
-              this.validEmail = true;
+              // this.validPhone = false;
+              // this.validEmail = true;
             }
           } else {
             this.$Message.error(resp.message);
@@ -376,75 +459,140 @@ export default {
     send(index) {
       let me = this;
       this.disbtn = true;
-      if (index == 1) {
-        if (this.formValidateAddr.email) {
-          //获取邮箱code
-          this.$http.post(this.host + "/uc/add/address/code").then(response => {
-            var resp = response.body;
-            if (resp.code == 0) {
-              this.$Message.success(resp.message);
-              me.sendMsgDisabled1 = true;
-              let interval = window.setInterval(function() {
-                if (me.time1-- <= 0) {
-                  me.time1 = 60;
-                  me.sendMsgDisabled1 = false;
-                  window.clearInterval(interval);
-                  this.disbtn = false;
-                }
-              }, 1000);
-            } else {
-              this.$Message.error(resp.message);
-              this.disbtn = false;
-            }
-          });
-        } else {
-          this.$refs.formValidateAddr.validateField("email");
-          this.disbtn = false;
-        }
-      } else if (index == 2) {
-        if (this.formValidateAddr.mobileNo) {
-          //获取手机code
-          this.$http.post(this.host + "/uc/mobile/add/address/code").then(response => {
-              var resp = response.body;
-              if (resp.code == 0) {
-                this.$Message.success(resp.message);
-                me.sendMsgDisabled2 = true;
-                this.interval = window.setInterval(()=> {
-                  if (me.time2-- <= 0) {
-                    me.time2 = 60;
-                    me.sendMsgDisabled2 = false;
-                    window.clearInterval(this.interval);
-                    this.disbtn = false;
-                  }
-                }, 1000);
+      if (this.id) {
+          if (index == 1) {
+              if (this.formValidateAddr.email) {
+                  //获取邮箱code
+                  this.$http.post(this.host + "/uc/delete/address/email/code").then(response => {
+                      var resp = response.body;
+                      if (resp.code == 0) {
+                          this.$Message.success(resp.message);
+                          me.sendMsgDisabled1 = true;
+                          let interval = window.setInterval(function() {
+                              if (me.time1-- <= 0) {
+                                  me.time1 = 60;
+                                  me.sendMsgDisabled1 = false;
+                                  window.clearInterval(interval);
+                                  this.disbtn = false;
+                              }
+                          }, 1000);
+                      } else {
+                          this.$Message.error(resp.message);
+                          this.disbtn = false;
+                      }
+                  });
               } else {
-                this.$Message.error(resp.message);
-                this.disbtn = false;
+                  this.$refs.formValidateAddr.validateField("email");
+                  this.disbtn = false;
               }
-            });
-        } else {
-          this.$refs.formValidateAddr.validateField("mobileNo");
-          this.disbtn = false;
-        }
+          } else if (index == 2) {
+              if (this.formValidateAddr.mobileNo) {
+                  //获取手机code
+                  this.$http.post(this.host + "/uc/mobile/delete/address/code").then(response => {
+                      var resp = response.body;
+                      if (resp.code == 0) {
+                          this.$Message.success(resp.message);
+                          me.sendMsgDisabled2 = true;
+                          this.interval = window.setInterval(()=> {
+                              if (me.time2-- <= 0) {
+                                  me.time2 = 60;
+                                  me.sendMsgDisabled2 = false;
+                                  window.clearInterval(this.interval);
+                                  this.disbtn = false;
+                              }
+                          }, 1000);
+                      } else {
+                          this.$Message.error(resp.message);
+                          this.disbtn = false;
+                      }
+                  });
+              } else {
+                  this.$refs.formValidateAddr.validateField("mobileNo");
+                  this.disbtn = false;
+              }
+          }
+      } else {
+          if (index == 1) {
+              if (this.formValidateAddr.email) {
+                  //获取邮箱code
+                  this.$http.post(this.host + "/uc/add/address/code").then(response => {
+                      var resp = response.body;
+                      if (resp.code == 0) {
+                          this.$Message.success(resp.message);
+                          me.sendMsgDisabled1 = true;
+                          let interval = window.setInterval(function() {
+                              if (me.time1-- <= 0) {
+                                  me.time1 = 60;
+                                  me.sendMsgDisabled1 = false;
+                                  window.clearInterval(interval);
+                                  this.disbtn = false;
+                              }
+                          }, 1000);
+                      } else {
+                          this.$Message.error(resp.message);
+                          this.disbtn = false;
+                      }
+                  });
+              } else {
+                  this.$refs.formValidateAddr.validateField("email");
+                  this.disbtn = false;
+              }
+          } else if (index == 2) {
+              if (this.formValidateAddr.mobileNo) {
+                  //获取手机code
+                  this.$http.post(this.host + "/uc/mobile/add/address/code").then(response => {
+                      var resp = response.body;
+                      if (resp.code == 0) {
+                          this.$Message.success(resp.message);
+                          me.sendMsgDisabled2 = true;
+                          this.interval = window.setInterval(()=> {
+                              if (me.time2-- <= 0) {
+                                  me.time2 = 60;
+                                  me.sendMsgDisabled2 = false;
+                                  window.clearInterval(this.interval);
+                                  this.disbtn = false;
+                              }
+                          }, 1000);
+                      } else {
+                          this.$Message.error(resp.message);
+                          this.disbtn = false;
+                      }
+                  });
+              } else {
+                  this.$refs.formValidateAddr.validateField("mobileNo");
+                  this.disbtn = false;
+              }
+          }
       }
+
     },
-    addAddr() {
-      let interval = setInterval(()=>{
-        if(this.time2 <= 0){
-          this.sendMsgDisabled2 = false;
-          window.clearInterval(interval);
-          this.disbtn = false;
+    addAddr(index, id) {
+        this.formValidateAddr.vailCode2 = ''
+        this.formValidateAddr.vailCode1 = ''
+        this.formValidateAddr.googleCode = ''
+        this.afetyVerification()
+        this.id = id
+        if (id) {
+            this.modal2 = true;
+        } else {
+            let interval = setInterval(()=>{
+                if(this.time2 <= 0){
+                    this.sendMsgDisabled2 = false;
+                    window.clearInterval(interval);
+                    this.disbtn = false;
+                }
+            },1000);
+            if (!this.coinType) {
+                this.$Message.warning(this.$t("uc.finance.withdraw.symboltip"));
+            } else if (!this.withdrawAddr) {
+                this.$Message.warning(this.$t("uc.finance.withdraw.addresstip"));
+            } else if (!this.remark) {
+                this.$Message.warning(this.$t("uc.finance.withdraw.remarktip"));
+            } else if (this.coinType && this.remark && this.withdrawAddr) {
+                this.modal2 = true;
+            }
         }
-      },1000);
-      if (!this.coinType) {
-        this.$Message.warning(this.$t("uc.finance.withdraw.symboltip"));
-      } else if (!this.withdrawAddr) {
-        this.$Message.warning(this.$t("uc.finance.withdraw.addresstip"));
-      } else if (!this.remark) {
-        this.$Message.warning(this.$t("uc.finance.withdraw.remarktip"));
-      } else if (this.coinType && this.remark && this.withdrawAddr) {
-        this.modal2 = true;
-      }
+
     },
     changePage(index) {
       this.getList(index, 10, this.coinType);
@@ -473,26 +621,54 @@ export default {
       });
     },
     handleSubmit(name) {
-      this.$refs[name].validate(valid => {
-        if (valid) {
-          this.submit(name);
+        // console.log(name);
+        // this.$refs[name].validate(valid => {
+        //   console.log(valid);
+        //   if (valid) {
+        //       this.submit(name);
+          // } else {
+          //     this.$Message.error(this.$t("uc.finance.withdraw.savemsg1"));
+          // }
+      // });
+        if (this.id) {
+            let params = {};
+            params["id"] = this.id;
+            if (this.isCode == 2) {
+                params["code"] = this.formValidateAddr.vailCode2;
+            } else {
+                params["code"] = this.formValidateAddr.vailCode1;
+            }
+            params["googleCode"] = this.formValidateAddr.googleCode;
+            this.$http.post(this.host + "/uc/withdraw/address/delete", params).then(response => {
+                var resp = response.body;
+                if (resp.code == 0) {
+                    this.$Message.success(resp.message);
+                    this.modal2 = false;
+                    this.refresh();
+                } else {
+                    this.$Message.error(resp.message);
+                }
+                this.loading = false;
+            });
         } else {
-          this.$Message.error(this.$t("uc.finance.withdraw.savemsg1"));
+            this.submit(name);
         }
-      });
     },
     submit(name) {
       let param = {};
       param["address"] = this.withdrawAddr;
       param["unit"] = this.coinType;
-      if (this.validPhone) {
-        param["aims"] = this.formValidateAddr.mobileNo;
-        param["code"] = this.formValidateAddr.vailCode2;
-      } else {
-        param["aims"] = this.formValidateAddr.email;
-        param["code"] = this.formValidateAddr.vailCode1;
-      }
-      param["remark"] = this.remark;
+        console.log(this.isPhoneCode);
+        if (this.isCode == 2) {
+            param["aims"] = this.formValidateAddr.mobileNo;
+            param["code"] = this.formValidateAddr.vailCode2;
+        } else if (this.isCode == 3) {
+            param["aims"] = this.formValidateAddr.email;
+            param["code"] = this.formValidateAddr.vailCode1;
+        } else {
+            param["googleCode"] = this.formValidateAddr.googleCode;
+        }
+        param["remark"] = this.remark;
 
       this.$http.post(this.host + "/uc/withdraw/address/add", param).then(response => {
           var resp = response.body;
@@ -512,6 +688,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+    .timebox {
+        color: #3399ff;
+        min-width: 50px;
+        cursor: pointer;
+    }
 .nav-rights-address {
     .ivu-input-large {
         height: 30px;
@@ -606,6 +787,12 @@ span.describe {
 }
 </style>
 <style lang="scss">
+    .ivu-form .ivu-form-item-label {
+        color: #8090af;
+    }
+    .ivu-modal-footer {
+        border-top: 1px solid #8090AF;
+    }
     .ivu-modal-confirm-head-icon-confirm {
         display: none;
     }
@@ -632,7 +819,9 @@ span.describe {
         padding: 3px 15px;
     }
 .nav-rights-address {
-
+    .ivu-form .ivu-form-item-label {
+        padding: 14px 12px 10px 0;
+    }
     .ivu-select-large.ivu-select-single {
         .ivu-select-selection {
             height: 30px;
@@ -704,6 +893,26 @@ span.describe {
 
                                 &:hover {
                                     color: #3399ff;
+                                }
+                            }
+                            &::-webkit-scrollbar {
+                                width: 4px; /*对垂直流动条有效*/
+                                height: 10px; /*对水平流动条有效*/
+                            }
+
+                            /*定义滚动条的轨道颜色、内阴影及圆角*/
+                            &::-webkit-scrollbar-track{
+                                background-color: #111530;
+                                border-radius: 3px;
+                            }
+                            &::-webkit-scrollbar-thumb{
+                                border-radius: 7px;
+                                background-color: #8090AF;
+                            }
+                            .ivu-select-item {
+                                &:hover {
+                                    background: transparent;
+                                    color: #8090AF;
                                 }
                             }
                         }

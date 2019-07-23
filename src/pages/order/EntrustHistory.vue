@@ -680,15 +680,7 @@ export default {
     columns() {
       const m = this.$store.getters.lang == 'English' ? mapEn : map
       const m1 = this.$store.getters.lang == 'English' ? 180 : 180
-      const m2 = this.$store.getters.lang == 'English' ? 97 : 95
-      const m3 = this.$store.getters.lang == 'English' ? 80 : 120
-      const m4 = this.$store.getters.lang == 'English' ? 110 : ''
-      const m5 = this.$store.getters.lang == 'English' ? 88 : 60
-      const m6 = this.$store.getters.lang == 'English' ? 70 : ''
-      const m7 = this.$store.getters.lang == 'English' ? 85 : ''
       const m8 = this.$store.getters.lang == 'English' ? 143 : 100
-      const m9 = this.$store.getters.lang == 'English' ? 75 : 110
-      const m10 = this.$store.getters.lang == 'English' ? 87 : 110
       const arr = []
       arr.push({
         width: m1,
@@ -696,7 +688,7 @@ export default {
         key: 'time',
         minWidth: 55,
         render: (h, params) => {
-          return h('span', {}, this.dateFormat(params.row.time))
+          return h('span', {}, this.dateFormat(params.row.createTime))
         }
       })
       arr.push({
