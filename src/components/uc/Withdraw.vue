@@ -260,40 +260,79 @@
             <!-- <FormItem>
               <Input type="text" v-model="user.mobilePhone" disabled></Input>
             </FormItem> -->
-            <FormItem prop="code" :label="$t('uc.regist.smscode')">
+                <!--手机验证-->
+            <FormItem
+                prop="code"
+                :label="$t('uc.regist.smscode')"
+                v-if="isPhoneCode"
+            >
               <Input
                   class="input-text"
                   type="text"
                   v-model="formInline.code"
                   :placeholder="$t('uc.regist.smscode')"
-              >
-              </Input>
+              />
               <input
                   class="input-text"
                   id="sendCode"
-                  @click="sendCode();"
+                  @click="sendCode(1)"
                   type="Button"
                   :value="sendcodeValue"
                   :disabled="codeIsSending"
-              >
-              </input>
+              />
             </FormItem>
-            <FormItem v-if="googleSwitch" :label="$t('uc.safe.GoogleAuthentication')">
+                <!--谷歌验证-->
+            <FormItem
+                :label="$t('uc.safe.GoogleAuthentication')"
+                v-if="isGoogleCode"
+            >
                 <!--请输入谷歌验证码-->
                 <Input
                     class="input-text"
                     type="text"
                     v-model="formInline.googleCode"
                     :placeholder="$t('uc.login.google')"
-                ></Input>
+                />
             </FormItem>
+                <!--邮箱验证码 6.06-->
+                <FormItem
+                    class="code-title"
+                    prop="vailCode4"
+                    v-if="isEmailCode"
+                    :label="$t('uc.forget.emailcode')"
+                >
+                    <Input
+                        style="width: 315px;"
+                        v-model="formInline.emailCode"
+                        size="large"
+                        :placeholder="$t('uc.login.email')"
+                    >
+                        <div
+                            class="timebox"
+                            slot="append"
+                        >
+                            <div
+                                class="button-code"
+                                @click="sendCode(2)"
+                                :disabled="sendMsgDisabled1"
+                            >
+                                <span v-if="sendMsgDisabled1">
+                                    {{codeTime1+$t('uc.safe.second')}}
+                                </span>
+                                <span v-if="!sendMsgDisabled1">
+                                    {{$t('uc.safe.clickget')}}
+                                </span>
+                            </div>
+                        </div>
+                    </Input>
+                </FormItem>
             <FormItem :label="$t('otc.chat.msg7')">
                 <Input
                     class="input-text"
                     type="password"
                     v-model="formInline.fundpwd"
                     :placeholder="$t('otc.chat.msg7')"
-                ></Input>
+                />
             </FormItem>
 
         </Form>
@@ -320,15 +359,21 @@
 export default {
   data() {
     return {
-      googleSwitch: false,
+        isGoogleCode: false, // 是否开启google验证状态;
+        isPhoneCode: false, // 是否开启Phone验证状态;
+        codeIsSending: false, // 手机验证
+        countdown: 60, // 手机短信倒计时
+        isEmailCode: false, // 是否开启Email验证状态;
+        sendMsgDisabled1: false, // 邮箱短信验证
+        codeTime1: 60, // 邮箱短信验证倒计时
       user: {},
-      codeIsSending: false,
       sendcodeValue: this.$t('uc.regist.sendcode'),
-      countdown: 60,
+        isCode: '',
       formInline: {
         code: '',
-        fundpwd: '',
-        googleCode: ''
+        googleCode: '',
+        emailCode: '',
+        fundpwd: ''
       },
       modal: false,
       fundpwd: '',
@@ -376,24 +421,42 @@ export default {
       this.modal = false
       this.formInline.code = ''
       this.formInline.fundpwd = ''
+      this.formInline.emailCode = ''
       this.formInline.googleCode = ''
     },
-    sendCode() {
-      this.$http.post(this.host + '/uc/mobile/withdraw/code').then(response => {
-        var resp = response.body
-        if (resp.code == 0) {
-          this.settime()
-          this.$Notice.success({
-            title: this.$t('common.tip'),
-            desc: resp.message
+    sendCode(index) {
+        const me = this
+      if (index == 1) {
+          // 获取手机验证码
+          this.$http.post(this.host + '/uc/mobile/withdraw/code').then(response => {
+              const resp = response.body
+              if (resp.code == 0) {
+                  me.settime()
+                  me.$Message.success(resp.message)
+              } else {
+                  me.$Message.error(resp.message)
+              }
           })
-        } else {
-          this.$Notice.error({
-            title: this.$t('common.tip'),
-            desc: resp.message
+      } else {
+          // 获取邮箱code
+          this.$http.post(this.host + '/uc/withdraw/email/code').then(response => {
+              console.log(response)
+              const resp = response.body
+              if (resp.code == 0) {
+                  me.sendMsgDisabled1 = true
+                  const interval = window.setInterval(function() {
+                      if (me.codeTime1-- <= 0) {
+                          me.codeTime1 = 60
+                          me.sendMsgDisabled1 = false
+                          window.clearInterval(interval)
+                      }
+                  }, 1000)
+              } else {
+                  me.$Message.error(resp.message)
+              }
           })
-        }
-      })
+      }
+
     },
     settime() {
       this.sendcodeValue = this.countdown
@@ -441,35 +504,47 @@ export default {
       }
     },
     ok() {
-      if (this.formInline.code == '') {
-        this.modal = true
-                /* 请填写短信验证码*/
-        this.$Message.error(this.$t('otc.chat.msg8tip'))
-        return
-      }
-      if (this.formInline.fundpwd == '') {
-        this.modal = true
-        this.$Message.error(this.$t('otc.chat.msg7tip'))
-        return
-      }
-      const params = {}
+        const params = {}
+        // 短信验证码不能为空
+        if (this.isPhoneCode) {
+            if (this.formInline.code == '') {
+                this.modal = true
+                this.$Message.error(this.$t('otc.chat.msg8tip'))
+                return false
+            }
+        }
+
+        // 邮箱验证码不能为空
+        if (this.isEmailCode) {
+            if (this.formInline.emailCode == '') {
+                this.modal = true
+                this.$Message.error(this.$t('otc.chat.msg81tip'))
+                return false
+            }
+        }
+
+        // 谷歌验证码不能为空
       if (this.googleSwitch) {
         if (this.formInline.googleCode == '') {
           this.modal = true
-                    /* "请填写谷歌验证码"*/
           this.$Message.error(this.$t('otc.chat.msg9tip'))
-          return
+            return false
         } else {
           params.googleCode = this.formInline.googleCode
         }
       }
-
+        // 资金密码不能为空
+        if (this.formInline.fundpwd == '') {
+            this.modal = true
+            this.$Message.error(this.$t('otc.chat.msg7tip'))
+            return false
+        }
       params['unit'] = this.currentCoin.unit
       params['address'] = this.withdrawAdress
       params['amount'] = this.withdrawAmount
       params['fee'] = this.withdrawFee
       params['jyPassword'] = this.formInline.fundpwd
-      params['code'] = this.formInline.code
+      params['code'] = this.isCode == 2 ? this.formInline.code : this.formInline.emailCode
       params['googleCode'] = this.formInline.googleCode
       this.$http.post(this.host + '/uc/withdraw/apply', params).then(response => {
         this.fundpwd = ''
@@ -485,6 +560,7 @@ export default {
         } else {
           this.$Message.error(resp.message)
         }
+
       })
     },
     getAddrList() {
@@ -615,27 +691,32 @@ export default {
                 this.withdrawFee - 0 < this.currentCoin.minTxFee
             ) {
         this.$Message.error(
-                    this.$t('uc.finance.withdraw.feetip1') + this.currentCoin.minTxFee + ' , ' + this.$t('uc.finance.withdraw.feetip2') + this.currentCoin.maxTxFee
-                )
+            this.$t('uc.finance.withdraw.feetip1') + this.currentCoin.minTxFee + ' , ' + this.$t('uc.finance.withdraw.feetip2') + this.currentCoin.maxTxFee
+        )
         return false
       } else {
         return true
       }
     },
+    empty() {
+          this.formInline.code = ''
+          this.formInline.fundpwd = ''
+          this.formInline.googleCode = ''
+          this.formInline.emailCode = ''
+      },
     apply() {
-      this.formInline.code = ''
-      this.formInline.fundpwd = ''
-      this.formInline.googleCode = ''
-      if (this.valid()) {
-        this.modal = true
-        const timercode = setInterval(() => {
-          if (this.countdown <= 0) {
-            clearInterval(timercode)
-            this.sendcodeValue = this.$t('uc.regist.sendcode')
-            this.codeIsSending = false
-          }
-        }, 1000)
-      }
+        this.afetyVerification()
+        this.empty()
+        if (this.valid()) {
+          this.modal = true
+          const timercode = setInterval(() => {
+            if (this.countdown <= 0) {
+              clearInterval(timercode)
+              this.sendcodeValue = this.$t('uc.regist.sendcode')
+              this.codeIsSending = false
+            }
+          }, 1000)
+        }
     },
     getMember() {
             // 获取个人安全信息
@@ -647,7 +728,38 @@ export default {
           this.$Message.error(this.loginmsg)
         }
       })
-    }
+    },
+    // 安全验证接口
+    afetyVerification () {
+          // 1.输入谷歌验证码
+          // 2.输入手机验证码
+          // 3.输入邮箱验证码
+          this.$http.post(this.host + '/uc/getGoogleState',{ mobile: this.$store.getters.member.mobile }).then(res => {
+              const data = res.body
+              this.isCode = data.data
+              if (data.code == 0) {
+                  switch (data.data) {
+                      case 1:
+                          // 1为开启谷歌验证
+                          this.isGoogleCode = true
+                          this.isPhoneCode = false
+                          this.isEmailCode = false
+                          break
+                      case 2:
+                          // 2为开启手机验证
+                          this.isGoogleCode = false
+                          this.isPhoneCode = true
+                          this.isEmailCode = false
+                          break
+                      case 3:
+                          // 3为开启邮箱验证
+                          this.isGoogleCode = false
+                          this.isPhoneCode = false
+                          this.isEmailCode = true
+                  }
+              }
+          })
+      }
   },
   created() {
         // this.getMember();
@@ -655,15 +767,9 @@ export default {
     this.coinType = this.$route.query.name || ''
     this.getAddrList()
     this.getList(0, 10, 1)
-
-    this.$http.post(this.host + '/uc/get/user', { mobile: this.$store.getters.member.mobile }).then(res => {
-      const data = res.body
-      if (data.code == 0) {
-        this.googleSwitch = !!data.data
-      }
-    })
   },
   computed: {
+
     member: function() {
       return this.$store.getters.member
     },
@@ -750,13 +856,17 @@ export default {
         render: (h, params) => {
           let text = ''
           if (params.row.status == 0) {
-            text = this.$t('uc.finance.withdraw.status_1')
+            text = this.$t('uc.finance.withdraw.status_0')
           } else if (params.row.status == 1) {
-            text = this.$t('uc.finance.withdraw.status_2')
+            text = this.$t('uc.finance.withdraw.status_1')
           } else if (params.row.status == 2) {
-            text = this.$t('uc.finance.withdraw.status_3')
+            text = this.$t('uc.finance.withdraw.status_2')
           } else if (params.row.status == 3) {
-            text = this.$t('uc.finance.withdraw.status_4')
+            text = this.$t('uc.finance.withdraw.status_3')
+          } else if (params.row.status == 4) {
+              text = this.$t('uc.finance.withdraw.status_4')
+          } else if (params.row.status == 5) {
+              text = this.$t('uc.finance.withdraw.status_5')
           }
           return h('div', [h('p', text)])
         }
@@ -1108,6 +1218,9 @@ export default {
 <style scoped lang="scss">
     .input-text{
         width: 95%;
+    }
+    .timebox {
+        cursor: pointer;
     }
   #sendCode {
       position: absolute;

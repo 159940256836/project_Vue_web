@@ -6,9 +6,10 @@ const openGoogleMapEn = {
     _abs1: "· Click the plus sign in the upper right corner of the mobile Google verifier APP to scan the qr code on the webpage or enter the key provided by the webpage",
     _abs2: '· Bind the new Google key on the Google validator and enter the new Google verification code on the web page',
     _abs3: "· Then verify the SMS verification code, email verification code, and the original Google verification code bound by multiple accounts in bitcoin, and complete the replacement of Google verification code",
-    _GoogleVerificationCode: "Google verification code",
-    _phoneCode: "SMS verification code",
+    _GoogleVerificationCode: "Google code",
+    _phoneCode: "SMS code",
     _openGoogle: "Bind Google",
+    _emailCode: "Email Code",
     _closeGoogle: "Close Google",
     _phone: "phone",
     _sendCode: "send",
@@ -17,7 +18,7 @@ const openGoogleMapEn = {
     _cancel: "cancel",
     _mustFill: "Required",
     _reset: "reset",
-    _googleCodeRequire: "Google verification code Required"
+    _googleCodeRequire: "Google code Required"
 }
 const openGoogleMapZh = {
     _downloadAndroid: "android谷歌验证器下载",
@@ -29,6 +30,7 @@ const openGoogleMapZh = {
     _abs3: "· 然后依次验证币多账号绑定的手机短信验证码、邮箱验证码、原有谷歌验证码，完成谷歌验证码更换",
     _GoogleVerificationCode: "谷歌验证码",
     _phoneCode: "短信验证码",
+    _emailCode: "邮箱验证码",
     _phone: "手机号",
     _sendCode: "发送验证码",
     _openGoogle: "绑定谷歌",

@@ -176,7 +176,7 @@ export default {
         title: this.$t('uc.finance.money.assetValuation'),
         align: 'center',
         render(h, params) {
-          console.log(params.row, (params.row.releaseBalance + params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate)
+/*          console.log(params.row, (params.row.releaseBalance + params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate)*/
           return h(
                         'span',
             {
@@ -305,7 +305,7 @@ export default {
             .title-info {
                     position: absolute;
                     top: -9px;
-                    color: white;   
+                    color: white;
                     .text-input {
                     height: 15px;
                     width: 180px;

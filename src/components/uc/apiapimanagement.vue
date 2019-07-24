@@ -119,7 +119,7 @@
       :title="$t('apiAdmin.delete')"
 
     >
-      <p>{{$t('apiAdmin.sureDelete')}}</p>
+      <p style="color: #8090af;">{{$t('apiAdmin.sureDelete')}}</p>
        <div slot="footer">
           <!-- <Button
             type="text"
@@ -145,7 +145,7 @@
     <!--秘钥-->
     <Modal
       class="edit_let-code edit_let_aa"
-      v-model="show"
+      v-model="showData"
       class-name="old_deta"
       :title="$t('apiAdmin.access')"
       :mask-closable="false"
@@ -165,8 +165,7 @@
           <Button class="edit_let_buttom edit_let_buttom_new"
             type="primary"
             size="large"
-              @click="show=false"
-
+              @click="showData = false"
               :ok-text="$t('apiAdmin.okText')"
               :cancel-text="$t('apiAdmin.cancel')"
           >
@@ -204,22 +203,76 @@
       class="edit_let-code"
       v-model="verify"
        class-name="old_deta"
-      :title="$t('apiAdmin.edit') "
+      :title="$t('uc.finance.withdraw.add') "
      >
       <Form :model="formItem" label-position="top">
-        <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
+        <FormItem
+          :label="$t('uc.safe.phonecode')"
+          v-if="isPhoneCode"
+        >
           <Input v-model="formItem.code" size="large">
-            <div class="timebox" slot="append" style="position:relative;height:20px;line-height:20px">
+            <div
+              class="timebox"
+              slot="append"
+              style="position:relative;height:20px;line-height:20px"
+            >
               <div style="height:17px;width:2px;background:#8090AFFF;position:absolute;top:3px"></div>
-              <Button  v-if="sendMsgDisabled" :disabled="sendMsgDisabled">
-                <span style="color:#3399FFFF">{{time+$t('uc.safe.second')}}</span>
-
+              <Button  v-if="addPhoneDisabled" :disabled="addPhoneDisabled">
+                <span style="color:#3399FFFF">{{phoneTime+$t('uc.safe.second')}}</span>
               </Button>
-              <div v-if="!sendMsgDisabled" @click="sendCode(1)" style="cursor:pointer">
+              <div
+                v-if="!addPhoneDisabled"
+                @click="sendCode('old', 1)"
+                style="cursor:pointer"
+              >
                  <span style="color:#3399FFFF">{{$t('uc.safe.clickget')}}</span>
               </div>
             </div>
           </Input>
+        </FormItem>
+        <!--邮箱验证码 6.06-->
+        <FormItem
+          class="code-title"
+          v-if="isEmailCode"
+          :label="$t('uc.forget.emailcode')"
+        >
+          <Input
+            style="width: 300px;"
+            v-model="formItem.emailCode"
+            size="large"
+            :placeholder="$t('uc.login.email')"
+          >
+            <div
+              class="timebox"
+              slot="append"
+            >
+              <div
+                class="button-code"
+                @click="sendCode('new', 2)"
+                :disabled="addEmailDisabled"
+              >
+                <Button v-if="addEmailDisabled">
+                  {{addEmailTime+$t('uc.safe.second')}}
+                </Button>
+                <span v-if="!addEmailDisabled">
+                  {{$t('uc.safe.clickget')}}
+                </span>
+              </div>
+            </div>
+          </Input>
+        </FormItem>
+        <!--谷歌验证-->
+        <FormItem
+          :label="$t('openGoolePage._GoogleVerificationCode')"
+          prop="googleCode"
+          v-if="isGoogleCode"
+        >
+          <Input
+            v-model="formItem.googleCode"
+            size="large"
+            type="text"
+            style="width:300px;"
+          />
         </FormItem>
       </Form>
       <div slot="footer">
@@ -243,25 +296,79 @@
     <!--编辑短信校验-->
     <div class="let-code">
       <Modal
-      class="edit_let-code"
-       class-name="old_deta"
-       v-model="verifyEditor"
-       :title="$t('apiAdmin.edit')"
+        class="edit_let-code"
+         class-name="old_deta"
+         v-model="verifyEditor"
+         :title="$t('apiAdmin.edit')"
        >
         <Form :model="editorFormItem" label-position="top">
-          <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode3">
+          <FormItem
+            :label="$t('uc.safe.phonecode')"
+            v-if="isPhoneCode"
+          >
             <Input v-model="editorFormItem.code" size="large">
               <div class="timebox" slot="append" style="position:relative;height:20px;line-height:20px">
                 <div style="height:17px;width:2px;background:#8090af;position:absolute;top:3px"></div>
-                <div style="cursor:pointer" @click="sendCode(2)" v-if="!sendMsgDisabled1">
+                <div
+                  style="cursor:pointer"
+                  @click="sendCode('old', 3)"
+                  v-if="!updatePhoneDisabled"
+                >
 
                   <span style="color:#3399FFFF">{{$t('uc.safe.clickget')}}</span>
                 </div>
-                <Button v-if="sendMsgDisabled1" :disabled="sendMsgDisabled1">
-                    <span style="color:#3399FFFF" >{{time1+$t('uc.safe.second')}}</span>
+                <Button
+                  v-if="updatePhoneDisabled"
+                  :disabled="updatePhoneDisabled"
+                >
+                    <span style="color:#3399FFFF" >{{updateTime+$t('uc.safe.second')}}</span>
                 </Button>
               </div>
             </Input>
+          </FormItem>
+          <!--邮箱验证码 6.06-->
+          <FormItem
+            class="code-title"
+            v-if="isEmailCode"
+            :label="$t('uc.forget.emailcode')"
+          >
+            <Input
+              style="width: 300px;"
+              v-model="editorFormItem.emailCode"
+              size="large"
+              :placeholder="$t('uc.login.email')"
+            >
+              <div
+                class="timebox"
+                slot="append"
+              >
+                <div
+                  class="button-code"
+                  @click="sendCode('new', 4)"
+                  :disabled="updateEmailDisabled"
+                >
+                <Button v-if="updateEmailDisabled">
+                  {{updateEmailTime+$t('uc.safe.second')}}
+                </Button>
+                  <span v-if="!updateEmailDisabled">
+                  {{$t('uc.safe.clickget')}}
+                </span>
+                </div>
+              </div>
+            </Input>
+          </FormItem>
+          <!--谷歌验证-->
+          <FormItem
+            :label="$t('openGoolePage._GoogleVerificationCode')"
+            prop="googleCode"
+            v-if="isGoogleCode"
+          >
+            <Input
+              v-model="editorFormItem.googleCode"
+              size="large"
+              type="text"
+              style="width:300px;"
+            />
           </FormItem>
         </Form>
         <div slot="footer">
@@ -298,23 +405,36 @@ export default {
       verify: false,
       loading: false,
       verifyEditor: false,
-      show: false,
+      showData: false,
       screat: '',
-      time: 60, // 发送验证码倒计时
-      time1: 60, // 发送验证码倒计时
-      sendMsgDisabled: false,
-      sendMsgDisabled1: false,
+      isCode: '',
+      isPhoneCode: false, // 是否绑定手机验证状态
+      isEmailCode: false, // 是否绑定手机验证状态
+      isGoogleCode: false, // 是否绑定谷歌验证状态
+      phoneTime: 60, // 添加发送手机验证码倒计时
+      updateTime: 60, // 编辑发送手机倒计时
+      addPhoneDisabled: false, // 添加发送手机验证码
+      updatePhoneDisabled: false, // 编辑发送手机验证码
+      addEmailDisabled: false, // 添加发送邮箱验证码
+      updateEmailDisabled: false, // 编辑发送邮箱验证码
+      addEmailTime: 60, // 添加发送邮箱验证码倒计时
+      updateEmailTime: 60, // 编辑发送邮验证码箱倒计时
       codeEditorFormItem: '',
       editorFormItem: {
         remark: '',
         bindIp: '',
-        code: ''
+        code: '',
+        emailCode: '',
+        googleCode: '',
       },
       formItem: {
         remark: '',
         bindIp: '',
-        code: ''
+        code: '',
+        emailCode: '',
+        googleCode: '',
       },
+      formItemData: {},
       tableData: [],
       id: '',
       phoneStatus: '',
@@ -335,6 +455,38 @@ export default {
     this.getMember()
   },
   methods: {
+    // 安全验证接口
+    afetyVerification () {
+      // 1.输入谷歌验证码
+      // 2.输入手机验证码
+      // 3.输入邮箱验证码
+      this.$http.post(this.host + '/uc/getGoogleState',{ mobile: this.$store.getters.member.mobile }).then(res => {
+        const data = res.body
+        this.isCode = data.data
+        console.log(this.isCode, data.data);
+        if (data.code == 0) {
+          switch (data.data) {
+            case 1:
+              // 1为开启谷歌验证
+              this.isGoogleCode = true
+              this.isPhoneCode = false
+              this.isEmailCode = false
+              break
+            case 2:
+              // 2为开启手机验证
+              this.isGoogleCode = false
+              this.isPhoneCode = true
+              this.isEmailCode = false
+              break
+            case 3:
+              // 3为开启邮箱验证
+              this.isGoogleCode = false
+              this.isPhoneCode = false
+              this.isEmailCode = true
+          }
+        }
+      })
+    },
     // 复制功能
     copyToken (data) {
       let url = data
@@ -349,35 +501,71 @@ export default {
       )
       oInput.remove()
     },
-    sendCode(index) {
+    sendCode(type, index) {
       const me = this
       // 获取手机code
-      this.$http.post(this.host + '/uc/mobile/api/code').then(response => {
-        const resp = response.body
-        if (resp.code == 0) {
-          if (index == 1) {
-            this.sendMsgDisabled = true
-            const interval = window.setInterval(function() {
-              if (me.time-- <= 0) {
-                me.time = 60
-                me.sendMsgDisabled = false
-                window.clearInterval(interval)
-              }
-            }, 1000)
+      if (type == 'old') {
+        this.$http.post(this.host + '/uc/mobile/api/code').then(response => {
+          const resp = response.body
+          if (resp.code == 0) {
+            if (index == 1) {
+              this.addPhoneDisabled = true
+              const interval = window.setInterval(function() {
+                if (me.phoneTime-- <= 0) {
+                  me.phoneTime = 60
+                  me.addPhoneDisabled = false
+                  window.clearInterval(interval)
+                }
+              }, 1000)
+            } else if (index == 3) {
+              this.updatePhoneDisabled = true
+              const interval = window.setInterval(function() {
+                if (me.updateTime-- <= 0) {
+                  me.updateTime = 60
+                  me.updatePhoneDisabled = false
+                  window.clearInterval(interval)
+                }
+              }, 1000)
+            }
           } else {
-            this.sendMsgDisabled1 = true
-            const interval = window.setInterval(function() {
-              if (me.time1-- <= 0) {
-                me.time1 = 60
-                me.sendMsgDisabled1 = false
-                window.clearInterval(interval)
-              }
-            }, 1000)
+            this.$Message.error(resp.message)
           }
-        } else {
-          this.$Message.error(resp.message)
+        })
+      } else if (type == 'new') {
+        if (index == 2) {
+          this.$http.post(this.host + '/uc/open/api/email/code').then(response => {
+            const resp = response.body
+            if (resp.code == 0) {
+              this.addEmailDisabled = true
+              const interval = window.setInterval(function() {
+                if (me.addEmailTime-- <= 0) {
+                  me.addEmailTime = 60
+                  me.addEmailDisabled = false
+                  window.clearInterval(interval)
+                }
+              }, 1000)
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        } else if (index == 4) {
+          this.$http.post(this.host + '/uc/update/api/email/code').then(response => {
+            const resp = response.body
+            if (resp.code == 0) {
+              this.updateEmailDisabled = true
+              const interval = window.setInterval(function() {
+                if (me.updateEmailTime-- <= 0) {
+                  me.updateEmailTime = 60
+                  me.updateEmailDisabled = false
+                  window.clearInterval(interval)
+                }
+              }, 1000)
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
         }
-      })
+      }
     },
     onCopy(e) {
       this.$Notice.success({
@@ -415,18 +603,19 @@ export default {
     },
     // 添加api校验
     codeVerify() {
-      const that = this
-      if (this.phoneStatus.phoneVerified == 0) {
-        const lang =
-            this.$store.getters.lang == 'English'
-                ? 'Please bind the mobile phone first'
-                : '请先绑定手机'
-        this.$Message.error(lang)
-        setTimeout(function() {
-          that.$router.push('/uc/Safe')
-        }, 1000)
-        return false
-      }
+      // const that = this
+      // if (this.phoneStatus.phoneVerified == 0) {
+      //   const lang =
+      //       this.$store.getters.lang == 'English'
+      //           ? 'Please bind the mobile phone first'
+      //           : '请先绑定手机'
+      //   this.$Message.error(lang)
+      //   setTimeout(function() {
+      //     that.$router.push('/uc/Safe')
+      //   }, 1000)
+      //   return false
+      // }
+      this.afetyVerification()
       const IP_REG = /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/
       if (this.formItem.remark == '') {
         const lang =
@@ -458,18 +647,37 @@ export default {
     },
     // 确认添加api
     make() {
-      this.$http
-        .post(this.host + '/uc/open/api/save', this.formItem)
-        .then(res => {
-          if (!res.body.code) {
+      if (this.isPhoneCode) {
+        if (!this.formItem.code) {
+          this.$Message.error(this.$t('uc.login.phone'))
+          return false
+        }
+      } else if (this.isEmailCode) {
+        if (!this.formItem.emailCode) {
+          this.$Message.error(this.$t('uc.login.email'))
+          return false
+        }
+      } else if (this.isGoogleCode) {
+        if (!this.formItem.googleCode) {
+          this.$Message.error(this.$t('uc.login.google'))
+          return false
+        }
+      }
+      const param = {}
+      param['remark'] = this.formItem.remark
+      param['bindIp'] = this.formItem.bindIp
+      param['code'] = this.isCode == 2?this.formItem.code:this.formItem.emailCode
+      param['googleCode'] = this.formItem.googleCode
+      // this.host
+      this.$http.post(this.host + '/uc/open/api/save', param).then(res => {
+        console.log(res.body.code);
+        if (res.body.code == 0) {
             this.$Message.success(res.body.message)
-            this.formItem.remark = ''
-            this.formItem.bindIp = ''
-            this.formItem.code = ''
             this.getAllAPI()
-            this.verify = false
             this.screat = res.body.data
-            this.show = true
+            this.verify = false
+            this.showData = true
+            this.formItem = {}
           } else {
             this.$Message.error(res.body.message)
           }
@@ -477,20 +685,52 @@ export default {
     },
     // 编辑验证
     okUpdate() {
-      if (this.editorFormItem.code == undefined) {
-        const lang =
-          this.$store.getters.lang == 'English'
-            ? 'please scanner Correct IP Address'
-            : '请输入验证码'
-        this.$Message.error(lang)
-        return
-      } else {
-        this.verifyEditor = false
-        this.editor = true
+      if (this.isPhoneCode) {
+        if (!this.editorFormItem.code) {
+          this.$Message.error(this.$t('uc.login.phone'))
+          return false
+        } else {
+          this.verifyEditor = false
+          this.editor = true
+        }
+      } else if (this.isEmailCode) {
+        if (!this.editorFormItem.emailCode) {
+          this.$Message.error(this.$t('uc.login.email'))
+          return false
+        } else {
+          this.verifyEditor = false
+          this.editor = true
+        }
+      } else if (this.isGoogleCode) {
+        if (!this.editorFormItem.googleCode) {
+          this.$Message.error(this.$t('uc.login.google'))
+          return false
+        } else {
+          this.verifyEditor = false
+          this.editor = true
+        }
       }
+      this.editorFormItem.remark = this.formItemData.remark,
+      this.editorFormItem.bindIp = this.formItemData.bindIp,
+      this.editorFormItem.code = this.isCode == 2? this.editorFormItem.code:this.editorFormItem.emailCode
+      // if (!this.editorFormItem.code) {
+      //   this.$Message.error(this.$t('uc.login.phone'))
+      //   return false
+      // } else if (!this.editorFormItem.emailCode) {
+      //   this.$Message.error(this.$t('uc.login.email'))
+      //   return false
+      // } else if (!this.editorFormItem.emailCode) {
+      //   this.$Message.error(this.$t('uc.login.google'))
+      //   return false
+      // } else {
+      //   this.verifyEditor = false
+      //   this.editor = true
+      // }
     },
     // 编辑api
-    update() {
+    update(row) {
+      console.log(row);
+      console.log(this.editorFormItem);
       const IP_REG = /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/
       if (!this.editorFormItem.remark) {
         const lang =
@@ -500,6 +740,7 @@ export default {
         this.$Message.error(lang)
         return
       }
+
       // if (!this.editorFormItem.bindIp) {
       //   const lang =
       //     this.$store.getters.lang == "English"
@@ -516,8 +757,14 @@ export default {
       //   this.$Message.error(lang);
       //   return;
       // }
+      const param = {}
+      param['id'] = this.formItemData.id
+      param['remark'] = this.editorFormItem.remark
+      param['bindIp'] = this.editorFormItem.bindIp
+      param['code'] = this.editorFormItem.code
+      param['googleCode'] = this.editorFormItem.googleCode
       this.$http
-        .post(this.host + '/uc/open/api/update', this.editorFormItem)
+        .post(this.host + '/uc/open/api/update', param)
         .then(res => {
           if (!res.body.code) {
             this.getAllAPI()
@@ -669,9 +916,13 @@ export default {
                 },
                 on: {
                   click: () => {
-                    const { remark, bindIp, id, code } = params.row
-                    this.editorFormItem = { remark, bindIp, id, code }
+                    this.afetyVerification()
                     this.verifyEditor = true
+                    this.formItemData = params.row
+                    // this.showData(params.row)
+                    // const { remark, bindIp, id, code } = params.row
+                    // this.editorFormItem = { remark, bindIp, id, code }
+                    // this.verifyEditor = true
                   }
                 }
               },
@@ -716,7 +967,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.timebox {
+  color: #8090af;
+  cursor: pointer;
+  .button-code {
+    color: #3399ff;
+    font-size: 12px;
+  }
+}
 .edit_let_buttom_new{
   margin-left:0 !important;
   margin-top:6px;
@@ -902,17 +1160,21 @@ export default {
     border-radius: 0 !important;
   }
   .ivu-input-group-large{
-  border:1px solid rgba(128,144,175,1) !important;
-  border-radius: 0 !important;
-}
+    border:1px solid rgba(128,144,175,1) !important;
+    border-radius: 0 !important;
+    .ivu-input{
+      color: #8090af;
+      border-right: 1px solid #8090af;
+      border-top: 0;
+      border-bottom: 0;
+      border-left: 0;
+    }
+  }
 .ivu-btn.disabled, .ivu-btn.disabled.active, .ivu-btn.disabled:active, .ivu-btn.disabled:focus, .ivu-btn.disabled:hover, .ivu-btn[disabled], .ivu-btn[disabled].active, .ivu-btn[disabled]:active, .ivu-btn[disabled]:focus, .ivu-btn[disabled]:hover, fieldset[disabled] .ivu-btn, fieldset[disabled] .ivu-btn.active, fieldset[disabled] .ivu-btn:active, fieldset[disabled] .ivu-btn:focus, fieldset[disabled] .ivu-btn:hover{
   background-color:transparent;
   border-color:transparent;
 }
-.ivu-input{
-  color: #8090af;
- border:none !important;
-}
+
 .ivu-input-group .ivu-input{
   // border-right:1px solid rgba(128,144,175,1) !important;
 }
@@ -957,6 +1219,9 @@ export default {
 }
 
 .ivu-input{
+  border-radius: 0;
+  border-color: #8090af;
+  color: #fff;
   background:transparent !important;
 }
 .ivu-modal-content{

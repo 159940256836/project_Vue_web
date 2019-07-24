@@ -96,7 +96,7 @@
                     <div class="item">
                         <span class="coin">
                             {{currentCoin.coin?currentCoin.coin:'---'}}
-                            <small style="font-size: 18px">/{{currentCoin.base?currentCoin.base:'---'}}</small>
+                            <small style="font-size: 16px">/{{currentCoin.base?currentCoin.base:'---'}}</small>
                         </span>
                     </div>
                     <div class="item">

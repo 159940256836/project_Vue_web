@@ -183,11 +183,14 @@ export default {
   components: { Money, Record, Recharge, Withdraw, WithdrawAddress, Bjc, GiveRecord },
   data() {
     return {
-      activeName: 'money'
+      activeName: 'money',
+      user: {}
     }
   },
   created: function() {
+    this.getMember()
     this.changeTab()
+    let self = this
     console.log(this.$route.path)
     const name = this.$route.path
     switch (name) {
@@ -201,6 +204,13 @@ export default {
         this.activeName = 'recharge'
         break
       case '/personal/withdraw':
+        if (self.user != 4) {
+          this.$Message.error(this.$t('otc.validate'))
+          setTimeout(function(){
+            self.$router.push('/account')
+          },2000)
+          return false
+        }
         this.activeName = 'withdraw'
         break
       case '/personal/withdrawAddr':
@@ -218,7 +228,35 @@ export default {
     }
   },
   methods: {
+    getMember() {
+      // 获取个人安全信息
+      return this.$http.post(this.host + '/uc/approve/security/setting').then(response => {
+        const resp = response.body
+        if (resp.code == 0) {
+          return new Promise((resolve, reject) => {
+            // 0-未实名、1-视频审核,2-实名审核失败、3-视频审核失败,4-实名成功,5-待实名审核 ,6-待视频审核
+            this.user = resp.data.kycStatus
+            console.log(this.user);
+            resolve(resp.data)
+          })
+        } else {
+          this.$Message.error(this.loginmsg)
+        }
+      })
+    },
     changeTab(name) {
+      let self = this
+      console.log(name);
+      if (name == 'withdraw' || name == '/personal/withdraw') {
+        console.log(this.user, name);
+        if (this.user != 4) {
+          this.$Message.error(this.$t('otc.validate'))
+          setTimeout(function(){
+            self.$router.push('/account')
+          },2000)
+          return false
+        }
+      }
       console.log(name)
     },
     init() {
@@ -230,6 +268,7 @@ export default {
   },
   watch: {
     $route(to, form) {
+      let self = this
       console.log(to, form, to.path)
       switch (to.path) {
         case '/personal':
@@ -242,6 +281,13 @@ export default {
           this.activeName = 'recharge'
           break
         case '/personal/withdraw':
+          if (this.user != 4) {
+            this.$Message.error(this.$t('otc.validate'))
+            setTimeout(function(){
+              self.$router.push('/account')
+            },2000)
+            return false
+          }
           this.activeName = 'withdraw'
           break
         case '/personal/withdrawAddr':
