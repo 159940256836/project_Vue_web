@@ -580,7 +580,7 @@ export default {
       if (lastTime) params.lastTime = lastTime
       if (status) params.status = status
       else params.status = ''
-      params.period = 0
+      // params.period = 0
       // params.pageSize = this.pageNo
       var that = this
       this.$http
