@@ -1151,7 +1151,8 @@ export default {
       this.uid = this.userId.id
     },
     checkGoogleValidtor(data) {
-      // 验证用户是否开启google验证
+        console.log(data);
+        // 验证用户是否开启google验证
       this.$http.post(this.host + '/uc/get/user', data).then(res => {
         const data = res.body
         if (data.code == 0) {
@@ -1357,7 +1358,7 @@ export default {
           if (this.googleSwitch) {
           param.googleCode = this.formValidate4.googleCode
         }
-        this.$http.post('http://192.168.124.15:6001' + '/uc/approve/update/password', param).then(response => {
+        this.$http.post(this.host + '/uc/approve/update/password', param).then(response => {
           var resp = response.body
           if (resp.code == 0) {
             this.modal4 = false
@@ -1628,7 +1629,9 @@ export default {
     this.userUid()
     this.getMember().then(res => {
         console.log(res);
-        this.checkGoogleValidtor({ mobile: this.isCode == 2 ? res.mobilePhone : res.email})
+        console.log(res.mobilePhone);
+        console.log(res.email);
+        this.checkGoogleValidtor({ mobile: res.mobilePhone ? res.mobilePhone : res.email})
     })
     const level = (memberGradeId) => {
       return `V${memberGradeId}`
