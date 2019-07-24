@@ -2045,7 +2045,6 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .section .ivu-carousel-dots-inside {
     bottom: 30px;
 }
-
 .green {
     color: #03bf7b !important;
 }
