@@ -627,14 +627,20 @@ export default {
                 })
     },
     logout() {
+        this.$store.commit('setMember', null)
+        localStorage.removeItem("TOKEN");
+        setTimeout(() => {
+            location.href = '/'
+        }, 500)
       this.$http.post(this.host + '/uc/loginout', {}).then(response => {
         var resp = response.body
         if (resp.code === 0) {
           this.$Message.success(resp.message)
-          this.$store.commit('setMember', null)
-          setTimeout(() => {
-            location.href = '/'
-          }, 1500)
+            this.$store.commit('setMember', null)
+            localStorage.removeItem("TOKEN");
+            setTimeout(() => {
+                location.href = '/'
+            }, 500)
         } else {
           this.$Message.error(resp.message)
         }
@@ -645,6 +651,7 @@ export default {
         var result = response.body
         if (result.code === 0 && result.data === false) {
           this.$store.commit('setMember', null)
+            localStorage.removeItem("TOKEN");
         }
       })
     },
