@@ -586,13 +586,13 @@ export default {
     getAllAPI() {
       return this.$http.get(this.host + `/uc/open/get_key`).then(res => {
         this.tableData = res.body.data;
-        // this.tableData = []
-        // let me = this;
-        // res.body.data.forEach(function (c, index) {
-        //   if (c.apistatus !== 1) {
-        //     me.tableData.push(c)
-        //   }
-        // })
+        this.tableData = []
+        let me = this;
+        res.body.data.forEach(function (c, index) {
+          if (c.apistatus !== 1) {
+            me.tableData.push(c)
+          }
+        })
         // console.log(this.formatTime(Date.parse(this.tableData[0].expireTime)),this.formatTime(Date.parse(this.tableData[0].createTime)));
         // console.log(Date.parse(this.tableData[0].expireTime)) - Date.parse(this.tableData[0].createTime);
         // let time1 = Date.parse(this.tableData[0].expireTime) - Date.parse(this.tableData[0].createTime)

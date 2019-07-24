@@ -4,7 +4,7 @@
             <!-- <Modal v-model="openGoogleModal" :title="title" :footer-hide="true"> -->
             <Form ref="formInline" :model="formInline" :rules="ruleInline" label-position="top">
                 <FormItem
-                    :label="isCode == 2?$t('openGoolePage._phone'):$t('uc.forget.email')"
+                    :label="user.mobilePhone?$t('openGoolePage._phone'):$t('uc.forget.email')"
                 >
                     <p class="unchangeable" style="height:40px;line-height:40px;">
                         {{phone|addStart}}
@@ -18,7 +18,7 @@
                     :label="$t('openGoolePage._phoneCode')"
                     prop="code"
                     class="defeat-ivu"
-                    v-if="isCode == 2"
+                    v-if="user.mobilePhone"
                 >
                     <Input
                         type="text"
@@ -40,6 +40,7 @@
                 <FormItem
                     class="code-title"
                     :label="$t('uc.forget.emailcode')"
+                    v-if="user.mobilePhone === '' || user.mobilePhone === null"
                 >
                     <Input
                         style="width: 300px;"
@@ -104,6 +105,7 @@ export default {
       getCodeText: this.$t('openGoolePage._sendCode'),
       disabled: false,
       openGoogleModal: true,
+        user: {},
       formInline: {
         code: '',
         emailCode: '',
@@ -111,16 +113,16 @@ export default {
       },
       ruleInline: {
         code: [
-                    { message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' },
-                    { type: 'string', min: 6, message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' }
+            { message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' },
+            { type: 'string', min: 6, message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' }
           ],
         emailCode: [
-                    { message: this.$t('openGoolePage._emailCode'), trigger: 'blur' },
-                    { type: 'string', min: 6, message: this.$t('openGoolePage._emailCode'), trigger: 'blur' }
+            { message: this.$t('openGoolePage._emailCode'), trigger: 'blur' },
+            { type: 'string', min: 6, message: this.$t('openGoolePage._emailCode'), trigger: 'blur' }
           ],
         googleCode: [
-                    { message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' },
-                    { type: 'string', min: 6, message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' }
+            { message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' },
+            { type: 'string', min: 6, message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' }
           ]
       },
       sendEmailDisabled: false, // 邮箱短信验证
@@ -133,9 +135,8 @@ export default {
   },
   props: ['phone'],
   created() {
-    this.afetyVerification()
-    console.log(this.status)
-    console.log(this.props)
+      this.getMember()
+      this.afetyVerification()
         // if (this.$route.params.phone) {
         //     this.phone = this.$route.params.phone;
         // } else {
@@ -209,7 +210,7 @@ export default {
             //     if (valid) {
       const formInline = this.formInline
       const params = {
-        smsCode: this.isCode == 2 ? formInline.code : formInline.emailCode,
+        smsCode: this.user.mobilePhone ? formInline.code : formInline.emailCode,
         codes: formInline.googleCode
       }
       this.jcgoogle(params)
@@ -265,11 +266,28 @@ export default {
             this.$Notice.error({ title: this.$t('common.tip'), desc: res.body.message })
           }
       })
-    }
+    },
+      getMember() {
+          // 获取个人安全信息
+          return this.$http.post(this.host + '/uc/approve/security/setting').then(response => {
+              var resp = response.body
+              if (resp.code == 0) {
+                  return new Promise((resolve, reject) => {
+                      this.user = resp.data
+                      console.log(this.user);
+                      resolve(resp.data)
+                  })
+              } else {
+                  this.$Message.error(this.loginmsg)
+              }
+          })
+      }
   },
-  watch: {
-
-  }
+    computed: {
+        member: function() {
+            return this.$store.getters.member
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -351,13 +369,13 @@ export default {
     }
 
 
-    .ivu-form-item {
+/*    .ivu-form-item {
         &:nth-child(2) {
             .ivu-form-item-label {
                 margin-top: -30px;
             }
         }
-    }
+    }*/
     .ivu-form-item-label {
         vertical-align: none;
         width: 88px;

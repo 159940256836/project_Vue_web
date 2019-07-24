@@ -754,7 +754,7 @@
                 class="popups-modal"
                 :mask-closable="false"
             >
-                <CloseGoogleVali :phone="isCode == 2 ? user.mobilePhone:user.email" />
+                <CloseGoogleVali :phone="user.mobilePhone ? user.mobilePhone:user.email" />
             </Modal>
             <!-- 重置谷歌验证弹窗 -->
             <!--<Modal
@@ -1151,13 +1151,8 @@ export default {
       this.uid = this.userId.id
     },
     checkGoogleValidtor(data) {
-<<<<<<< HEAD
-      console.log(data)
-      // 验证用户是否开启google验证
-=======
         console.log(data);
         // 验证用户是否开启google验证
->>>>>>> 5b9fb294022cb39966c52c8e5a9dc046bb32f803
       this.$http.post(this.host + '/uc/get/user', data).then(res => {
         const data = res.body
         if (data.code == 0) {
@@ -1632,9 +1627,9 @@ export default {
     this.settiele()
     this.userUid()
     this.getMember().then(res => {
-        console.log(res);
-        console.log(res.mobilePhone);
-        console.log(res.email);
+        // console.log(res);
+        // console.log(res.mobilePhone);
+        // console.log(res.email);
         this.checkGoogleValidtor({ mobile: res.mobilePhone ? res.mobilePhone : res.email})
     })
     const level = (memberGradeId) => {
