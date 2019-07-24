@@ -152,7 +152,7 @@ export default {
       newpwd: '',
       pwdagain: '',
       agentcode: '',
-      country: '',
+      country: '中国',
       setnum1: '获取验证码',
       username: '',
       agreee: true,
@@ -160,7 +160,7 @@ export default {
       username1: '',
       newpwd1: '',
       pwdagain1: '',
-      country1: ''
+      country1: '中国'
     }
   },
   methods: {
@@ -441,14 +441,14 @@ export default {
 }
 .btn {
   margin-top: 0.82rem;
-  width: 5.07rem;
+  width: 6.07rem;
   height: 0.8rem;
   line-height: 0.8rem;
   background: #3399ff;
   border-radius: 0.4rem;
   text-align: center;
   color: #fff;
-  margin-left: 0.4rem;
+  margin-left: -0.2rem;
   button {
     width: 5.07rem;
     height: 0.8rem;

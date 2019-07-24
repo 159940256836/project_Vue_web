@@ -20,37 +20,36 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-       value: [20, 50],
-       agent: '',
-       mobile: ''
+      value: [20, 50],
+      agent: '',
+      mobile: ''
     }
   },
   methods: {
-      bdmMax(){
-          this.$router.push('/bdm')
-      },
-      reg() {
-          var par = '?agent=' + this.agent;
-          this.$router.push('/registe' + par);
-      }
+    bdmMax() {
+      this.$router.push('/bdm')
+    },
+    reg() {
+      var par = '?agent=' + this.agent
+      this.$router.push('/registe' + par)
+    }
   },
-  mounted(){
-      this.agent = this.$route.query.agent;
-      this.mobile = this.$route.query.mobile ? this.$route.query.mobile.substr(0,3) + '****' + this.$route.query.mobile.substr(7,4): '';
-      document.getElementById('reg').style.height = document.documentElement.clientHeight + 'px';
+  mounted() {
+    this.agent = this.$route.query.agent
+    this.mobile = this.$route.query.mobile ? this.$route.query.mobile.substr(0, 3) + '****' + this.$route.query.mobile.substr(7, 4) : ''
+    document.getElementById('reg').style.height = document.documentElement.clientHeight + 'px'
   },
-  component(){
+  component() {
 
   },
-  created(){
-
-      if (!(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))) {
+  created() {
+    if (!(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent))) {
       var par = '?' + location.href.split('?')[1]
       this.$router.replace('/Register' + par)
     }
-  },
+  }
 }
 </script>
 

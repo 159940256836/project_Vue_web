@@ -867,10 +867,10 @@ export default {
       modal9: false,
       modal10: false,
       uid: '',
-        googleSwitch: false,
-        isPhoneCode: false, // 是否绑定手机验证状态
-        isEmailCode: false, // 是否绑定手机验证状态
-        isGoogleCode: false, // 是否绑定谷歌验证状态
+      googleSwitch: false,
+      isPhoneCode: false, // 是否绑定手机验证状态
+      isEmailCode: false, // 是否绑定手机验证状态
+      isGoogleCode: false, // 是否绑定谷歌验证状态
       fGetBackFundpwd: false,
       imgPreview: '',
       imgNext: '',
@@ -925,7 +925,7 @@ export default {
       formValidate8: {
         newMPw8: '',
         newMPwConfirm8: '',
-          phoneCode: ''
+        phoneCode: ''
       },
       ruleValidate: {
         googleCode5: [{
@@ -969,7 +969,7 @@ export default {
             trigger: 'blur'
           }
         ],
-          phoneCode: [
+        phoneCode: [
           {
             required: true,
             message: this.$t('uc.safe.codetip'),
@@ -1054,7 +1054,7 @@ export default {
           },
                     { validator: validatepw7check, trigger: 'blur' }
         ],
-          phoneCode: [
+        phoneCode: [
           {
             required: true,
             message: this.$t('uc.safe.codetip'),
@@ -1101,11 +1101,11 @@ export default {
       time3: 60, // 发送验证码倒计时
       time5: 60, // 发送验证码倒计时
       time8: 60, // 发送验证码倒计时
-        sendEmailDisabled: false, // 邮箱短信验证
-        codeTime1: 60, // 邮箱短信验证倒计时
-        sendEmailDisabled1: false, // 修改资金密码邮箱短信验证
-        codeTime2: 60, // 修改资金密码邮箱短信验证倒计时
-        isCode: '',
+      sendEmailDisabled: false, // 邮箱短信验证
+      codeTime1: 60, // 邮箱短信验证倒计时
+      sendEmailDisabled1: false, // 修改资金密码邮箱短信验证
+      codeTime2: 60, // 修改资金密码邮箱短信验证倒计时
+      isCode: '',
       sendMsgDisabled1: false,
       sendMsgDisabled2: false,
       sendMsgDisabled3: false,
@@ -1116,41 +1116,42 @@ export default {
   },
   methods: {
       // 安全验证接口
-      afetyVerification () {
+    afetyVerification() {
           // 1.输入谷歌验证码
           // 2.输入手机验证码
           // 3.输入邮箱验证码
-          this.$http.post(this.host + '/uc/getGoogleState',{ mobile: this.$store.getters.member.mobile }).then(res => {
-              const data = res.body
-              this.isCode = data.data
-              console.log(this.isCode);
-              if (data.code == 0) {
-                  switch (data.data) {
-                      case 1:
+      this.$http.post(this.host + '/uc/getGoogleState', { mobile: this.$store.getters.member.mobile }).then(res => {
+        const data = res.body
+        this.isCode = data.data
+        console.log(this.isCode)
+        if (data.code == 0) {
+          switch (data.data) {
+            case 1:
                           // 1为开启谷歌验证
-                          this.isGoogleCode = true
-                          this.isPhoneCode = false
-                          this.isEmailCode = false
-                          break
-                      case 2:
+              this.isGoogleCode = true
+              this.isPhoneCode = false
+              this.isEmailCode = false
+              break
+            case 2:
                           // 2为开启手机验证
-                          this.isGoogleCode = false
-                          this.isPhoneCode = true
-                          this.isEmailCode = false
-                          break
-                      case 3:
+              this.isGoogleCode = false
+              this.isPhoneCode = true
+              this.isEmailCode = false
+              break
+            case 3:
                           // 3为开启邮箱验证
-                          this.isGoogleCode = false
-                          this.isPhoneCode = false
-                          this.isEmailCode = true
-                  }
-              }
-          })
-      },
+              this.isGoogleCode = false
+              this.isPhoneCode = false
+              this.isEmailCode = true
+          }
+        }
+      })
+    },
     userUid() {
       this.uid = this.userId.id
     },
     checkGoogleValidtor(data) {
+      console.log(data)
       // 验证用户是否开启google验证
       this.$http.post(this.host + '/uc/get/user', data).then(res => {
         const data = res.body
@@ -1225,10 +1226,9 @@ export default {
       //     // this.showItem(3);
       //     this.modal3 = true
       // } else {
-          this.afetyVerification()
-          this.modal4 = true
+      this.afetyVerification()
+      this.modal4 = true
       // }
-
     },
     showItemFundpwd() {
       this.afetyVerification()
@@ -1347,17 +1347,17 @@ export default {
         param['oldPassword'] = this.formValidate4.oldPw
         param['newPassword'] = this.formValidate4.newPw
         param['code'] = this.isCode == 2 ? this.formValidate4.phoneCode : this.formValidate4.emailCode
-          if (this.isCode == 3) {
-              param['codeMold'] = 1
-          } else if (this.isCode == 2) {
-              param['codeMold'] = 0
-          } else  {
-              param['codeMold'] = ''
-          }
-          if (this.googleSwitch) {
+        if (this.isCode == 3) {
+          param['codeMold'] = 1
+        } else if (this.isCode == 2) {
+          param['codeMold'] = 0
+        } else {
+          param['codeMold'] = ''
+        }
+        if (this.googleSwitch) {
           param.googleCode = this.formValidate4.googleCode
         }
-        this.$http.post('http://192.168.124.15:6001' + '/uc/approve/update/password', param).then(response => {
+        this.$http.post(this.host + '/uc/approve/update/password', param).then(response => {
           var resp = response.body
           if (resp.code == 0) {
             this.modal4 = false
@@ -1461,8 +1461,8 @@ export default {
         if (this.formValidate2.mail) {
                     // 获取邮箱code
           this.$http.post(this.host + '/uc/bind/email/code', {
-              email: this.formValidate2.mail
-            })
+            email: this.formValidate2.mail
+          })
             .then(response => {
               var resp = response.body
               if (resp.code == 0) {
@@ -1485,8 +1485,8 @@ export default {
         if (this.formValidate3.mobile) {
                     // 获取手机code
           this.$http.post(this.host + '/uc/mobile/bind/code', {
-                          phone: this.formValidate3.mobile
-                        })
+            phone: this.formValidate3.mobile
+          })
                         .then(response => {
                           var resp = response.body
                           if (resp.code == 0) {
@@ -1525,21 +1525,21 @@ export default {
                     })
       } else if (index == 4) {
           // 获取邮箱code
-          this.$http.post(this.host + '/uc/update/email/code').then(response => {
-              const resp = response.body
-              if (resp.code == 0) {
-                  me.sendEmailDisabled = true
-                  const interval = window.setInterval(function() {
-                      if (me.codeTime1-- <= 0) {
-                          me.codeTime1 = 60
-                          me.sendEmailDisabled = false
-                          window.clearInterval(interval)
-                      }
-                  }, 1000)
-              } else {
-                  me.$Message.error(resp.message)
+        this.$http.post(this.host + '/uc/update/email/code').then(response => {
+          const resp = response.body
+          if (resp.code == 0) {
+            me.sendEmailDisabled = true
+            const interval = window.setInterval(function() {
+              if (me.codeTime1-- <= 0) {
+                me.codeTime1 = 60
+                me.sendEmailDisabled = false
+                window.clearInterval(interval)
               }
-          })
+            }, 1000)
+          } else {
+            me.$Message.error(resp.message)
+          }
+        })
       } else if (index == 5) {
                 // 资金密码获取手机code
         this.$http.post(this.host + '/uc/mobile/trade/code')
@@ -1558,25 +1558,25 @@ export default {
                         this.$Message.error(resp.message)
                       }
                     })
-      }  else if (index == 6) {
+      } else if (index == 6) {
           // 获取邮箱code
-          this.$http.post(this.host + '/uc/transaction/email/code').then(response => {
-              console.log(response)
-              const resp = response.body
-              if (resp.code == 0) {
-                  me.sendEmailDisabled1 = true
-                  const interval = window.setInterval(function() {
-                      if (me.codeTime2-- <= 0) {
-                          me.codeTime2 = 60
-                          me.sendEmailDisabled1 = false
-                          window.clearInterval(interval)
-                      }
-                  }, 1000)
-              } else {
-                  me.$Message.error(resp.message)
+        this.$http.post(this.host + '/uc/transaction/email/code').then(response => {
+          console.log(response)
+          const resp = response.body
+          if (resp.code == 0) {
+            me.sendEmailDisabled1 = true
+            const interval = window.setInterval(function() {
+              if (me.codeTime2-- <= 0) {
+                me.codeTime2 = 60
+                me.sendEmailDisabled1 = false
+                window.clearInterval(interval)
               }
-          })
-      }else if (index == 8) {
+            }, 1000)
+          } else {
+            me.$Message.error(resp.message)
+          }
+        })
+      } else if (index == 8) {
         this.$http.post(this.host + '/uc/mobile/transaction/code')
                     .then(response => {
                       var resp = response.body
@@ -1602,7 +1602,7 @@ export default {
         if (resp.code == 0) {
           return new Promise((resolve, reject) => {
             this.user = resp.data
-              this.usernameS = this.user.username.slice(0, 1)
+            this.usernameS = this.user.username.slice(0, 1)
             resolve(resp.data)
           })
         } else {
@@ -1627,8 +1627,10 @@ export default {
     this.settiele()
     this.userUid()
     this.getMember().then(res => {
-        console.log(res);
-        this.checkGoogleValidtor({ mobile: this.isCode == 2 ? res.mobilePhone : res.email})
+      console.log(res)
+      console.log(res.email)
+      console.log(res.mobilePhone)
+      this.checkGoogleValidtor({ mobile: res.mobilePhone ? res.mobilePhone : res.email })
     })
     const level = (memberGradeId) => {
       return `V${memberGradeId}`

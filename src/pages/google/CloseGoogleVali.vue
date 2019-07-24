@@ -98,179 +98,178 @@
 // import { minHeightMinx } from "../../minxs/minxs"
 export default {
     // mixins: [minHeightMinx],
-    name: "closegoogleVali",
-    data() {
-        return {
-            getCodeText: this.$t('openGoolePage._sendCode'),
-            disabled: false,
-            openGoogleModal: true,
-            formInline: {
-                code: '',
-                emailCode: '',
-                googleCode: ''
-            },
-            ruleInline: {
-                code: [
+  name: 'ClosegoogleVali',
+  data() {
+    return {
+      getCodeText: this.$t('openGoolePage._sendCode'),
+      disabled: false,
+      openGoogleModal: true,
+      formInline: {
+        code: '',
+        emailCode: '',
+        googleCode: ''
+      },
+      ruleInline: {
+        code: [
                     { message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' },
                     { type: 'string', min: 6, message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' }
-                ],
-                emailCode: [
+          ],
+        emailCode: [
                     { message: this.$t('openGoolePage._emailCode'), trigger: 'blur' },
                     { type: 'string', min: 6, message: this.$t('openGoolePage._emailCode'), trigger: 'blur' }
-                ],
-                googleCode: [
+          ],
+        googleCode: [
                     { message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' },
                     { type: 'string', min: 6, message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' }
-                ]
-            },
-            sendEmailDisabled: false, // 邮箱短信验证
-            codeTime1: 60, // 邮箱短信验证倒计时
-            isCode: '',
-            isPhoneCode: false, // 是否绑定手机验证状态
-            isEmailCode: false, // 是否绑定手机验证状态
-            isGoogleCode: false, // 是否绑定谷歌验证状态
-        }
-    },
-    props: ['phone'],
-    created() {
-        this.afetyVerification()
-        console.log(this.status);
-        console.log(this.props);
+          ]
+      },
+      sendEmailDisabled: false, // 邮箱短信验证
+      codeTime1: 60, // 邮箱短信验证倒计时
+      isCode: '',
+      isPhoneCode: false, // 是否绑定手机验证状态
+      isEmailCode: false, // 是否绑定手机验证状态
+      isGoogleCode: false // 是否绑定谷歌验证状态
+    }
+  },
+  props: ['phone'],
+  created() {
+    this.afetyVerification()
+    console.log(this.status)
+    console.log(this.props)
         // if (this.$route.params.phone) {
         //     this.phone = this.$route.params.phone;
         // } else {
         //     this.$router.push('/account');
         // }
         // this.getMember()
-    },
-    filters: {
-        addStart(str) {
-            console.log(str);
-            if (str) {
-                return str.slice(0, 3) + "****" + str.slice(8, 19)
-            }
-        }
-    },
-    methods: {
+  },
+  filters: {
+    addStart(str) {
+      console.log(str)
+      if (str) {
+        return str.slice(0, 3) + '****' + str.slice(8, 19)
+      }
+    }
+  },
+  methods: {
         // 安全验证接口
-        afetyVerification () {
+    afetyVerification() {
             // 1.输入谷歌验证码
             // 2.输入手机验证码
             // 3.输入邮箱验证码
-            this.$http.post(this.host + '/uc/getGoogleState',{ mobile: this.$store.getters.member.mobile }).then(res => {
-                const data = res.body
-                this.isCode = data.data
-                console.log(this.isCode);
-                if (data.code == 0) {
-                    switch (data.data) {
-                        case 1:
+      this.$http.post(this.host + '/uc/getGoogleState', { mobile: this.$store.getters.member.mobile }).then(res => {
+        const data = res.body
+        this.isCode = data.data
+        console.log(this.isCode)
+        if (data.code == 0) {
+            switch (data.data) {
+                case 1:
                             // 1为开启谷歌验证
-                            this.isGoogleCode = true
-                            this.isPhoneCode = false
-                            this.isEmailCode = false
-                            break
-                        case 2:
+                  this.isGoogleCode = true
+                  this.isPhoneCode = false
+                  this.isEmailCode = false
+                  break
+                case 2:
                             // 2为开启手机验证
-                            this.isGoogleCode = false
-                            this.isPhoneCode = true
-                            this.isEmailCode = false
-                            break
-                        case 3:
+                  this.isGoogleCode = false
+                  this.isPhoneCode = true
+                  this.isEmailCode = false
+                  break
+                case 3:
                             // 3为开启邮箱验证
-                            this.isGoogleCode = false
-                            this.isPhoneCode = false
-                            this.isEmailCode = true
-                    }
-                }
-            })
-        },
+                  this.isGoogleCode = false
+                  this.isPhoneCode = false
+                  this.isEmailCode = true
+              }
+          }
+      })
+    },
         // 点击返回上个页面
-        returnSuperior () {
-            this.$router.push({path: '/account'})
-        },
-        jcgoogle(params) {
-            console.log(params);
-            this.$http.post(this.host+"/uc/google/jcgoogle",params).then(res=>{
-                const resp = res.body;
-                if(resp.code == 0){
-                    this.$Message.success(resp.message)
-                    setTimeout(()=>{
-                        this.$router.go(0);
-                    },1000)
-                }else{
-                    this.$Message.error(resp.message)
-                }
-            })
-        },
-        sureBtn(name) {
-            console.log(name);
+    returnSuperior() {
+      this.$router.push({ path: '/account' })
+    },
+    jcgoogle(params) {
+      console.log(params)
+      this.$http.post(this.host + '/uc/google/jcgoogle', params).then(res => {
+        const resp = res.body
+        if (resp.code == 0) {
+            this.$Message.success(resp.message)
+            setTimeout(() => {
+                  this.$router.go(0)
+                }, 1000)
+          } else {
+            this.$Message.error(resp.message)
+          }
+      })
+    },
+    sureBtn(name) {
+      console.log(name)
             // this.$refs[name].validate((valid) => {
             //     console.log(valid);
             //     if (valid) {
-                    const formInline = this.formInline;
-                    const params = {
-                        smsCode:this.isCode == 2?formInline.code:formInline.emailCode,
-                        codes:formInline.googleCode
-                    }
-                    this.jcgoogle(params);
+      const formInline = this.formInline
+      const params = {
+        smsCode: this.isCode == 2 ? formInline.code : formInline.emailCode,
+        codes: formInline.googleCode
+      }
+      this.jcgoogle(params)
             //     }
             // })
-        },
-        cancel() {
-            this.$router.go(-1);
-        },
-        getCode(index) {
-            let me = this
-            if (index == 1) {
-                this.getPhoneCode().then(res => {
-                    let count = 60;
-                    this.disabled = true;
-                    const timer = setInterval(() => {
-                        this.getCodeText = --count;
-                        if (count <= 0) {
-                            clearInterval(timer);
-                            this.getCodeText =  this.$t('openGoolePage._sendCode');
-                            this.disabled = false;
-                        }
-                    }, 1000);
-                })
-            } else if (index == 2) {
+    },
+    cancel() {
+      this.$router.go(-1)
+    },
+    getCode(index) {
+      const me = this
+      if (index == 1) {
+        this.getPhoneCode().then(res => {
+            let count = 60
+            this.disabled = true
+            const timer = setInterval(() => {
+                this.getCodeText = --count
+                if (count <= 0) {
+                    clearInterval(timer)
+                    this.getCodeText = this.$t('openGoolePage._sendCode')
+                    this.disabled = false
+                  }
+              }, 1000)
+          })
+      } else if (index == 2) {
                 // 获取邮箱code
-                this.$http.post('http://192.168.124.15:6001' + '/uc/unbind/google/email/code').then(response => {
-                    const resp = response.body
-                    if (resp.code == 0) {
-                        me.sendEmailDisabled = true
-                        const interval = window.setInterval(function() {
-                            if (me.codeTime1-- <= 0) {
-                                me.codeTime1 = 60
-                                me.sendEmailDisabled = false
-                                window.clearInterval(interval)
-                            }
-                        }, 1000)
-                    } else {
-                        me.$Message.error(resp.message)
-                    }
-                })
-            }
-
-        },
-        getPhoneCode() {
-            return this.$http.post(this.host + "/uc/mobile/google/code", {}).then(res => {
-                const resp = res.body;
-                console.log(resp);
-                if (resp.code == 0) {
-                    return new Promise((resolve, reject) => {
-                        resolve();
-                    })
+          this.$http.post(this.host + '/uc/unbind/google/email/code').then(response => {
+              const resp = response.body
+              if (resp.code == 0) {
+                  me.sendEmailDisabled = true
+                  const interval = window.setInterval(function() {
+                    if (me.codeTime1-- <= 0) {
+                        me.codeTime1 = 60
+                        me.sendEmailDisabled = false
+                        window.clearInterval(interval)
+                      }
+                  }, 1000)
                 } else {
-                    this.$Notice.error({ title: this.$t("common.tip"), desc: res.body.message });
+                  me.$Message.error(resp.message)
                 }
             })
         }
     },
-    watch: {
-
+    getPhoneCode() {
+      return this.$http.post(this.host + '/uc/mobile/google/code', {}).then(res => {
+        const resp = res.body
+        console.log(resp)
+        if (resp.code == 0) {
+            return new Promise((resolve, reject) => {
+                resolve()
+              })
+          } else {
+            this.$Notice.error({ title: this.$t('common.tip'), desc: res.body.message })
+          }
+      })
     }
+  },
+  watch: {
+
+  }
 }
 </script>
 <style lang="scss" scoped>

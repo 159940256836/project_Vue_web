@@ -17,7 +17,7 @@
                     </FormItem>
                     <FormItem prop="password">
                         <Input
-                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('formInline'):login()"
+                            @on-enter="login()"
                             type="password"
                             v-model="formInline.password"
                             :placeholder="$t('uc.login.pwdtip')"
@@ -30,7 +30,7 @@
                     >
                         <Input
                             type="text"
-                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('formInline'):login()"
+                            @on-enter="login()"
                             v-model="formInline.googleCode"
                             :placeholder="$t('uc.login.google')"
                         >
@@ -46,7 +46,7 @@
                             v-model="formInline.checkCode"
                             size="large"
                             :placeholder="$t('uc.login.phone')"
-                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('formInline'):login()"
+                            @on-enter="login()"
                         >
                             <div
                                 class="timebox"
@@ -110,7 +110,7 @@
                     <FormItem style="margin-bottom:10px;">
                         <Button
                             class="login_btn"
-                            @click="host == 'https://api.nr3d.cn'?handleSubmit('formInline'):login()"
+                            @click="login()"
                         >
                             {{$t('uc.forget.login')}}
                         </Button>
@@ -291,8 +291,8 @@ export default {
     }
   },
   created: function() {
-      this.formInline.user = ''
-      this.formInline.password = ''
+    this.formInline.user = ''
+    this.formInline.password = ''
     this.init()
   },
   mounted: function() {

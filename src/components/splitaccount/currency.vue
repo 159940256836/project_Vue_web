@@ -139,10 +139,10 @@ export default {
                         'span',
             {
               attrs: {
-                title: params.row.releaseBalance
+                title: params.row.frozenBalance + params.row.balance
               }
             },
-                        self.toFloor(params.row.releaseBalance || '0')
+                        self.toFloor(params.row.frozenBalance + params.row.balance || '0')
                     )
         }
       })
@@ -154,10 +154,10 @@ export default {
                         'span',
             {
               attrs: {
-                title: (params.row.releaseBalance + params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate + ' CNY'
+                title: (params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate + ' CNY'
               }
             },
-                self.toFloor((params.row.releaseBalance + params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate + ' CNY' || '0')
+                self.toFloor((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate + ' CNY' || '0')
             )
         }
       })
