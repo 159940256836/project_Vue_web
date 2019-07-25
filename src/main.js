@@ -13,7 +13,9 @@ import Api from './config/api'
 import $ from '@js/jquery.min.js'
 var moment = require('moment')
 
-Vue.use(iView)
+Vue.use(iView, {
+  i18n: (key, value) => i18n.t(key, value)
+})
 Vue.use(VueClipboard)
 Vue.use(VueRouter)
 Vue.use(vueResource)
