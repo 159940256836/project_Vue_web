@@ -190,42 +190,6 @@ export default {
   created: function() {
     this.getMember()
     this.changeTab()
-    let self = this
-    console.log(this.$route.path)
-    const name = this.$route.path
-    switch (name) {
-      case '/personal' || 'moneyindex':
-        this.activeName = 'money'
-        break
-      case '/personal/record':
-        this.activeName = 'record'
-        break
-      case '/personal/recharge':
-        this.activeName = 'recharge'
-        break
-      case '/personal/withdraw':
-        if (self.user != 4) {
-          this.$Message.error(this.$t('otc.validate'))
-          setTimeout(function(){
-            self.$router.push('/account')
-          },2000)
-          return false
-        }
-        this.activeName = 'withdraw'
-        break
-      case '/personal/withdrawAddr':
-        this.activeName = 'withdrawAddress'
-        break
-      case '/personal/bjc':
-        this.activeName = 'bjc'
-        break
-      case '/personal/giveRecord':
-        this.activeName = 'giveRecord'
-        break
-      default:
-        this.activeName = 'money'
-        break
-    }
   },
   methods: {
     getMember() {
@@ -236,6 +200,41 @@ export default {
           return new Promise((resolve, reject) => {
             // 0-未实名、1-视频审核,2-实名审核失败、3-视频审核失败,4-实名成功,5-待实名审核 ,6-待视频审核
             this.user = resp.data.kycStatus
+            const name = this.$route.path
+            let self = this
+            switch (name) {
+              case '/personal' || 'moneyindex':
+                this.activeName = 'money'
+                break
+              case '/personal/record':
+                this.activeName = 'record'
+                break
+              case '/personal/recharge':
+                this.activeName = 'recharge'
+                break
+              case '/personal/withdraw':
+                if (self.user != 4) {
+                  this.$Message.error(this.$t('otc.validate'))
+                  setTimeout(function(){
+                    self.$router.push('/account')
+                  },2000)
+                  return false
+                }
+                this.activeName = 'withdraw'
+                break
+              case '/personal/withdrawAddr':
+                this.activeName = 'withdrawAddress'
+                break
+              case '/personal/bjc':
+                this.activeName = 'bjc'
+                break
+              case '/personal/giveRecord':
+                this.activeName = 'giveRecord'
+                break
+              default:
+                this.activeName = 'money'
+                break
+            }
             console.log(this.user);
             resolve(resp.data)
           })

@@ -172,14 +172,14 @@
             <div class="business-function">
               <img alt="" src="../../assets/images/fait/business_service.png">
               <p class="business-info">{{$t('uc.identity.service')}}</p>
-              <span class="business-span">{{$t("uc.identity.service")}}</span>
+              <span class="business-span">{{$t("uc.identity.zhusnhu1")}}</span>
             </div>
           </Col>
           <Col span="8">
             <div class="business-function">
               <img alt="" src="../../assets/images/fait/business_fee.png">
               <p class="business-info">{{$t('uc.identity.lowfee')}}</p>
-              <span class="business-span">{{$t("uc.identity.lowfee")}}</span>
+              <span class="business-span">{{$t("uc.identity.zhusnhu2")}}</span>
             </div>
           </Col>
         </Row>
@@ -877,12 +877,11 @@ export default {
 }
 .business-function .business-span {
   font-size: 14px;
-  margin: 10px 0;
+  margin: 10px auto;
   overflow: hidden;
-  text-overflow:ellipsis;
   display: block;
-  white-space:nowrap;
-  color:#8090AF;
+  width: 67%;
+  color: #8090AF;
 }
 </style>
 <style lang="scss">

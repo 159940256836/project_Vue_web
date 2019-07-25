@@ -754,7 +754,7 @@
                 class="popups-modal"
                 :mask-closable="false"
             >
-                <CloseGoogleVali :phone="isCode == 2 ? user.mobilePhone:user.email" />
+                <CloseGoogleVali :phone="user.mobilePhone ? user.mobilePhone:user.email" />
             </Modal>
             <!-- 重置谷歌验证弹窗 -->
             <!--<Modal
@@ -1626,9 +1626,9 @@ export default {
     this.settiele()
     this.userUid()
     this.getMember().then(res => {
-      console.log(res)
-      console.log(res.mobilePhone)
-      console.log(res.email)
+        // console.log(res);
+        // console.log(res.mobilePhone);
+        // console.log(res.email);
       this.checkGoogleValidtor({ mobile: res.mobilePhone ? res.mobilePhone : res.email })
     })
     const level = (memberGradeId) => {
