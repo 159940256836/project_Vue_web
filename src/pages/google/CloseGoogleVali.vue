@@ -330,6 +330,11 @@ export default {
 
 <style lang="scss">
 #openGoogle{
+    .code-title {
+        .ivu-form-item-label {
+            margin-top: -31px;
+        }
+    }
     color: red;
     .ivu-form-item-required .ivu-form-item-label:before {
         content: ''
