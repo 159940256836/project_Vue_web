@@ -171,18 +171,10 @@ export default {
       this.$http.post(this.host + '/uc/google/googleAuth', params).then(res => {
         const resp = res.body
         if (resp.code == 0) {
-          this.$Notice.success({
-            title: this.$t('common.tip'),
-            desc: resp.message
-          })
-          setTimeout(() => {
-            this.$router.go(0)
-          })
+            this.$emit('closeGoogle')
+            this.$Message.success(resp.message)
         } else {
-          this.$Notice.error({
-            title: this.$t('common.tip'),
-            desc: resp.message
-          })
+            this.$Message.error(resp.message)
         }
       })
     }
@@ -279,7 +271,7 @@ $color: #2d8cf0;
 .common.specail .ivu-input {
     background-color: transparent;
     border: 1px solid #8090AF;
-    
+
     // &:hover {
     //     border-color: #3399ff;
     // }
@@ -294,7 +286,7 @@ $color: #2d8cf0;
         color: #8090AF !important;
         font-size: 14px;
     }
-    
+
     .ivu-input {
         height: 40px;
         margin-top: 10px;

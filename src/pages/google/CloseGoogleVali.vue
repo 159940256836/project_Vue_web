@@ -194,28 +194,37 @@ export default {
       this.$http.post(this.host + '/uc/google/jcgoogle', params).then(res => {
         const resp = res.body
         if (resp.code == 0) {
+            this.$emit('closeGoogle')
             this.$Message.success(resp.message)
-            setTimeout(() => {
-                  this.$router.go(0)
-                }, 1000)
           } else {
             this.$Message.error(resp.message)
           }
       })
     },
     sureBtn(name) {
+        if(this.user.mobilePhone){
+            if (!this.formInline.code) {
+                this.$Message.error(this.$t('uc.login.phone'))
+                return false
+            }
+        } else {
+            if (!this.formInline.emailCode) {
+                this.$Message.error(this.$t('uc.login.email'))
+                return false
+            }
+        }
+        if(!this.formInline.googleCode) {
+            this.$Message.error(this.$t('uc.login.google'))
+            return false
+        }
+
       console.log(name)
-            // this.$refs[name].validate((valid) => {
-            //     console.log(valid);
-            //     if (valid) {
       const formInline = this.formInline
       const params = {
         smsCode: this.user.mobilePhone ? formInline.code : formInline.emailCode,
         codes: formInline.googleCode
       }
       this.jcgoogle(params)
-            //     }
-            // })
     },
     cancel() {
       this.$router.go(-1)
@@ -435,6 +444,7 @@ export default {
             border-right: none;
         }
         .timebox {
+            width: 88px;
             cursor: pointer;
             border-left: 1px solid #8090AF;
         }
