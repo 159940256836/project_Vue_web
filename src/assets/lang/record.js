@@ -13,7 +13,7 @@ const zh = {
   time: '时间',
   week: '一周内',
   month: '一月内',
-  year: '一年内'
+  year: '两个月内'
 }
 
 const en = {
@@ -31,7 +31,7 @@ const en = {
   time: 'Time',
   week: 'Within a week',
   month: 'Within a month',
-  year: 'One year'
+  year: 'Two months'
 }
 
 exports.zh = zh

@@ -1,7 +1,7 @@
 <template>
     <div class="nav-rights nav-bottom">
         <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.FeeGrade') }}</h2>
-        
+
         <div class="rightarea">
             <div class="fee-top">
                 <ul>
@@ -52,10 +52,14 @@ export default {
             return `V${memberGradeId}`
         }
         const memberGradeId = level(this.$store.getters.member.memberGradeId);
+        console.log(memberGradeId);
         this.init().then(data => {
             const mySelf = data.filter(ele => ele.gradeCode == memberGradeId);
+            console.log(mySelf);
             this.mySelf = mySelf[0];
+            console.log(this.mySelf);
             this.allSelf = data;
+            console.log(this.allSelf);
         })
     },
     methods: {
@@ -64,6 +68,7 @@ export default {
                 const resp = res.body;
                 if (resp.code == 0) {
                     return new Promise((resolve, reject) => {
+                        console.log(resp.data);
                         resolve(resp.data);
                     })
                 }
@@ -77,7 +82,7 @@ export default {
             const L = this.$store.getters.lang == "English" ? 200 : '';
             arr.push({
                 title: this.$t('leverDescPage._grade'),
-                key: "gradeCode"
+                key: "gradeName"
             });
             arr.push({
                 title: this.$t('leverDescPage._BitcoinServiceCharge'),
@@ -85,21 +90,21 @@ export default {
             });
             arr.push({
                 title: this.$t('leverDescPage._legalServiceCharge'),
-                key: "gradeCode"
+                key: "exchangeFeeRate"
             });
             arr.push({
                 title: this.$t('leverDescPage._leverServiveCharge'),
-                key: "gradeCode"
+                key: "exchangeFeeRate"
             });
             arr.push({
                 title: this.$t('leverDescPage._dayLimit')+"（USDT）",
                 width: E,
-                key: "gradeCode"
+                key: "withdrawCoinAmoun"
             });
             arr.push({
                 title: this.$t('leverDescPage._daynumLimit'),
                 width: L,
-                key: "gradeCode"
+                key: "dayWithdrawCount"
             });
             return arr;
         }
@@ -161,7 +166,7 @@ $color: #39f;
         bottom: 0;
     }
     .cover-box-left {
-        left: 0;       
+        left: 0;
     }
     .cover-box-right {
         right: 0;
@@ -172,7 +177,7 @@ $color: #39f;
     .rightarea {
         padding: 0 !important;
     }
-    
+
 }
 
 </style>
@@ -193,7 +198,7 @@ $color: #39f;
             th {
                 border-bottom: none;
                 color: #8090AF;
-            }   
+            }
 
             .ivu-table-tbody tr:last-child td {
                 border: none;
@@ -225,7 +230,7 @@ $color: #39f;
         .ivu-table:before{content:'';width:100%;height:0px;position:absolute;left:0;bottom:0;z-index:1}
         .ivu-table:after{content:'';width:0px;height:100%;position:absolute;top:0;right:0;z-index:3}
 
-        
+
         .ivu-table-header table,
         .ivu-table-body table {
             width: 100%;
@@ -257,6 +262,6 @@ $color: #39f;
         }
     }
 
-    
+
 </style>
 

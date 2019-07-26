@@ -742,7 +742,7 @@
                 class="popups-modal"
                 :mask-closable="false"
             >
-                <ResetGoogleVali />
+                <ResetGoogleVali @closeGoogle="closeGoogle"/>
             </Modal>
             <!-- 解除谷歌验证弹窗 -->
             <Modal
@@ -754,7 +754,7 @@
                 class="popups-modal"
                 :mask-closable="false"
             >
-                <CloseGoogleVali :phone="user.mobilePhone ? user.mobilePhone:user.email" />
+                <CloseGoogleVali :phone="user.mobilePhone ? user.mobilePhone:user.email" @closeGoogle="closeGoogle"/>
             </Modal>
             <!-- 重置谷歌验证弹窗 -->
             <!--<Modal
@@ -1151,7 +1151,6 @@ export default {
       this.uid = this.userId.id
     },
     checkGoogleValidtor(data) {
-        console.log(data);
         // 验证用户是否开启google验证
       this.$http.post(this.host + '/uc/get/user', data).then(res => {
         const data = res.body
@@ -1167,6 +1166,15 @@ export default {
       this.modal7 = true
       this.googleSwitch = !this.googleSwitch
     },
+      closeGoogle() { // 改变google验证状态
+          if (this.googleSwitch) {
+              this.modal7 = false
+              this.googleAuthentication = this.$t('openGoolePage._reset')
+          } else {
+              this.modal8 = false
+              this.googleAuthentication = ''
+          }
+      },
     changeGoogleSwitch() { // 改变google验证状态
       if (this.googleSwitch) {
         this.modal7 = true
