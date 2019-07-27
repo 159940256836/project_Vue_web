@@ -429,14 +429,20 @@ p.math_price {
 /*.exchange .left .ivu-table .ivu-table-tip td {*/
 /*    text-align: center;*/
 /*}*/
-
-.ivu-modal {
-    width: 450px;
+.ivu-modal-content {
+    background: #191D3A;
 }
-
 .ivu-modal-header .ivu-modal-header-inner {
     color: #3399ff;
     text-align: center;
+}
+
+.ivu-modal-header {
+    border-bottom: 1px solid #191D3A;
+}
+
+.ivu-modal-footer {
+    display: none;
 }
 
 /* .ivu-modal .ivu-modal-body .ivu-btn {

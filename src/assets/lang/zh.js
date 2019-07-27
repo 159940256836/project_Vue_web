@@ -677,7 +677,18 @@ module.exports = {
     realtime: '分时',
     operateSuccessfully: '操作成功',
     view: '查看',
-    all: '全部'
+    all: '全部',
+    coinDetails: {
+      coinDetail: '币种详情',
+      coinName: '币种名称',
+      publishTime: '发行时间',
+      officialWebsite: '相关连接',
+      officialWebsite1: '官网',
+      whitePaper: '白皮书',
+      circulateVolume: '发行价格',
+      publishVolume: '发行总量',
+      summary: '币种介绍',
+    }
   },
   otc: {
     ad: '广告中心',
@@ -729,7 +740,7 @@ module.exports = {
       contentmsg: '消息不能为空'
     },
     chat: {
-      seller: '卖家',
+      seller: '卖家真实姓名',
       orderDetails: '订单详情',
       buyer: '买家',
       openDesktopAlerts: '开启桌面消息提醒',

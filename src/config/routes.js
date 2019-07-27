@@ -114,6 +114,9 @@ import newMyExtension from '../components/uc/newMyExtension'
 import mobilereg from '../components/yidong/registers'
 import registe from '../components/yidong/registe'
 
+// 币币币种详情
+import coinDetails from '../components/exchange/coinDetails.vue'
+
 // 移动端页面
 import Mobile from '../components/mobile/mobile.vue'
 import MobileHome from '../components/mobile/home.vue'
@@ -194,6 +197,8 @@ export default [
     { path: '/bjc', component: Bjc },
     // 发布广告
     { path: '/PublishAdver', component: PublishAdver },
+    // 币种详情
+    { path: '/coinDetails', component: coinDetails },
   {
     path: '/personal',
     component: personal,

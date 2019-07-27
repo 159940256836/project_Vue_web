@@ -15,7 +15,7 @@
                     <table class="gridtable">
                         <tr>
                             <th>
-                                <span v-if="tradeType==0">{{$t('otc.chat.seller')}}:</span>
+                                <span v-if="tradeType==0">{{$t('otc.chat.seller')}}</span>
                                 <span v-else>{{$t('otc.chat.buyer')}}:</span>
                             </th>
                             <th>{{ $t('otc.chat.order') }}</th>
@@ -30,7 +30,7 @@
                             <th>
                                 <router-link :to="{ path: '/checkuser', query: { 'id': msg.hisId }}">
                                 <!-- {{msg.otherSide && msg.otherSide.length>2 && strpro(msg.otherSide)}} -->
-                                    {{msg.otherSide}}
+                                    {{ payInfo.realName }}
                                 </router-link>
                             </th>
                             <th>{{ msg.orderSn }}</th>
@@ -767,7 +767,8 @@ export default {
             this.msg = resp.data
             this.detailRecords = this.msg
             this.payInfo = this.msg.payInfo
-            if (this.payInfo == null) {
+              console.log(this.payInfo);
+              if (this.payInfo == null) {
               this.bankInfo = this.alipay = this.wechatPay == null
             } else {
               this.bankInfo = this.msg.payInfo.bankInfo
