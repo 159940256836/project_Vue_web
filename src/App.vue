@@ -4,7 +4,7 @@
             <div
                 class="page-content"
                 :style = "{
-                  padding: $route.path==='/'? topPadding : '0 7.5%',
+                  padding: $route.path==='/'? topPadding : '0 1.5%',
                   backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
                 }"
             >
@@ -424,7 +424,7 @@ export default {
         createTime: '2018-01-10 11:37:27'
       },
       styleTop: 30,
-      topPadding: '0 7.5%',
+      topPadding: '0 1.5%',
       topBackgroundColor: 'transparent',
       $mainNightBgColor: '#11132c',
       pathName: '',
@@ -460,7 +460,6 @@ export default {
       }
 
       if (to.path === '/') {
-        this.loadDataPage()
         this.pageView = 'page-view'
                 // this.container_test = "";
       } else {
@@ -505,9 +504,14 @@ export default {
     }
   },
   created: function() {
-    this.initialize()
+      /** *
+       * 获取公告
+       */
+      var result = JSON.parse(localStorage.getItem('result'))
+      this.FAQList = result.content.slice(0, 5)
+      // console.log(result, result.content, this.FAQList);
+      this.initialize()
     if (this.$route.path === '/') {
-      this.loadDataPage()
       this.pageView = 'page-view'
     } else {
       this.pageView = 'page-view2'
@@ -535,24 +539,6 @@ export default {
   methods: {
     lnswitch: function(language) {
       this.$http.get(this.host + '/uc/lang/change/' + language).then(res => {
-      })
-    },
-  /** *
-   * 获取公告
-   */
-    loadDataPage() {
-      var param = {}
-      this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
-        var resp = response.body
-        var str = JSON.stringify(resp.data.content)
-        if (resp.code === 0) {
-          localStorage.setItem('result', str)
-          var result = JSON.parse(localStorage.getItem('result'))
-          this.FAQList = result.slice(0, 5)
-          console.log(this.FAQList)
-        } else {
-          this.$Message.error(console.log('1'))
-        }
       })
     },
         // header动画效果
@@ -595,7 +581,7 @@ export default {
         this.topBackgroundColor = '#11132c'
       } else {
         this.styleTop = 30
-        this.topPadding = '0 7.5%'
+        this.topPadding = '0 1.5%'
         this.topBackgroundColor = 'transparent'
       }
     },
