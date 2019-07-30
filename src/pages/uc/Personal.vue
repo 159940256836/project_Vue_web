@@ -201,7 +201,7 @@ export default {
             // 0-未实名、1-视频审核,2-实名审核失败、3-视频审核失败,4-实名成功,5-待实名审核 ,6-待视频审核
             this.user = resp.data.kycStatus
             const name = this.$route.path
-            let self = this
+            const self = this
             switch (name) {
               case '/personal' || 'moneyindex':
                 this.activeName = 'money'
@@ -215,9 +215,9 @@ export default {
               case '/personal/withdraw':
                 if (self.user != 4) {
                   this.$Message.error(this.$t('otc.validate'))
-                  setTimeout(function(){
+                  setTimeout(function() {
                     self.$router.push('/account')
-                  },2000)
+                  }, 2000)
                   return false
                 }
                 this.activeName = 'withdraw'
@@ -235,7 +235,7 @@ export default {
                 this.activeName = 'money'
                 break
             }
-            console.log(this.user);
+            console.log(this.user)
             resolve(resp.data)
           })
         } else {
@@ -244,15 +244,15 @@ export default {
       })
     },
     changeTab(name) {
-      let self = this
-      console.log(name);
+      const self = this
+      console.log(name)
       if (name == 'withdraw' || name == '/personal/withdraw') {
-        console.log(this.user, name);
+        console.log(this.user, name)
         if (this.user != 4) {
           this.$Message.error(this.$t('otc.validate'))
-          setTimeout(function(){
+          setTimeout(function() {
             self.$router.push('/account')
-          },2000)
+          }, 2000)
           return false
         }
       }
@@ -267,7 +267,7 @@ export default {
   },
   watch: {
     $route(to, form) {
-      let self = this
+      const self = this
       console.log(to, form, to.path)
       switch (to.path) {
         case '/personal':
@@ -282,9 +282,9 @@ export default {
         case '/personal/withdraw':
           if (this.user != 4) {
             this.$Message.error(this.$t('otc.validate'))
-            setTimeout(function(){
+            setTimeout(function() {
               self.$router.push('/account')
-            },2000)
+            }, 2000)
             return false
           }
           this.activeName = 'withdraw'
@@ -306,10 +306,6 @@ export default {
     }
   },
   mounted: function() {
-    // this.$nextTick(function () {
-    //   this.$refs.test.updateOpened();
-    //   this.$refs.test.updateActiveName();
-    // });
     const doc = document.body
     const sreenHeight = doc.offsetHeight
     const headerHeight = doc.getElementsByTagName('header')[0].offsetHeight

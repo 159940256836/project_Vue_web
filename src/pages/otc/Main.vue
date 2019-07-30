@@ -541,7 +541,7 @@ export default {
         if (response.body.code == 0) {
           this.coins = response.body.data
           this.$nextTick(function() {
-            this.$refs.navMenu.updateActiveName()
+            // this.$refs.navMenu.updateActiveName()
           })
         }
       })
@@ -654,7 +654,7 @@ export default {
           break
       }
       this.$nextTick(function() {
-        this.$refs.navMenu.updateActiveName()
+        // this.$refs.navMenu.updateActiveName()
       })
     }
   },

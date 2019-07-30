@@ -112,7 +112,7 @@ export default {
         .banner {
             text-align: center;
             height: 4.29rem;
-            background: url('./img/banner_bg.png') no-repeat center center;
+            background: url('./img/banner_bg.jpg') no-repeat center center;
             background-size: cover;
             p {
                 color: #3399ff;
