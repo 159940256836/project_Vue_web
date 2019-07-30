@@ -505,15 +505,15 @@ export default {
     }
   }
 
-  .ivu-btn-default {
-    background: #111530;
-    color: #8090af;
-    border-radius: 0;
-    &:hover {
-      background: #111530;
-      color: #8090af;
-    }
-  }
+  /*.ivu-btn-default {*/
+  /*  background: #111530;*/
+  /*  color: #8090af;*/
+  /*  border-radius: 0;*/
+  /*  &:hover {*/
+  /*    background: #111530;*/
+  /*    color: #8090af;*/
+  /*  }*/
+  /*}*/
   .ivu-btn-primary {
     color: #fff;
     border-radius: 0;

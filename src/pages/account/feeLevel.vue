@@ -10,14 +10,14 @@
                         <p>{{$t("leverDescPage._feeGread")}}</p>
                         <p>{{mySelf.exchangeFeeRate}}</p>
                     </li>
-                    <li>
+                   <!-- <li>
                         <p>{{$t("leverDescPage._legalServiceCharge")}}</p>
                         <p>{{mySelf.exchangeFeeRate}}</p>
                     </li>
                     <li>
                         <p>{{$t("leverDescPage._leverServiveCharge")}}</p>
                         <p>{{mySelf.exchangeFeeRate}}</p>
-                    </li>
+                    </li>-->
                     <li>
                         <p>{{$t("leverDescPage._dayLimit")}}(USDT)</p>
                         <p>{{mySelf.withdrawCoinAmount}}</p>
@@ -86,20 +86,20 @@ export default {
             });
             arr.push({
                 title: this.$t('leverDescPage._BitcoinServiceCharge'),
-                key: "gradeCode"
-            });
-            arr.push({
-                title: this.$t('leverDescPage._legalServiceCharge'),
                 key: "exchangeFeeRate"
             });
-            arr.push({
-                title: this.$t('leverDescPage._leverServiveCharge'),
-                key: "exchangeFeeRate"
-            });
+            // arr.push({
+            //     title: this.$t('leverDescPage._legalServiceCharge'),
+            //     key: "exchangeFeeRate"
+            // });
+            // arr.push({
+            //     title: this.$t('leverDescPage._leverServiveCharge'),
+            //     key: "exchangeFeeRate"
+            // });
             arr.push({
                 title: this.$t('leverDescPage._dayLimit')+"（USDT）",
                 width: E,
-                key: "withdrawCoinAmoun"
+                key: "withdrawCoinAmount"
             });
             arr.push({
                 title: this.$t('leverDescPage._daynumLimit'),

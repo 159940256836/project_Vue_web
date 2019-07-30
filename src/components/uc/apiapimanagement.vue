@@ -216,7 +216,7 @@
               slot="append"
               style="position:relative;height:20px;line-height:20px"
             >
-              <div style="height:17px;width:2px;background:#8090AFFF;position:absolute;top:3px"></div>
+              <!--<div style="height:17px;width:2px;background:#8090AFFF;position:absolute;top:3px"></div>-->
               <Button  v-if="addPhoneDisabled" :disabled="addPhoneDisabled">
                 <span style="color:#3399FFFF">{{phoneTime+$t('uc.safe.second')}}</span>
               </Button>
@@ -1111,9 +1111,9 @@ export default {
   }
 }
 .delete{
-  .ivu-modal-footer button:nth-child(1){
-    display:none;
-  }
+  /*.ivu-modal-footer button:nth-child(1){*/
+  /*  display:none;*/
+  /*}*/
   .ivu-modal-body{
     margin-left:38px;
   }
@@ -1132,9 +1132,9 @@ export default {
                 font-weight: 400;
             }
         }
-        .ivu-modal-footer {
-            display: none;
-        }
+        /*.ivu-modal-footer {*/
+        /*    display: none;*/
+        /*}*/
         .ivu-modal-close .ivu-icon-ios-close {
             color: #fff;
         }

@@ -15,7 +15,7 @@
                     <table class="gridtable">
                         <tr>
                             <th>
-                                <span v-if="tradeType==0">{{$t('otc.chat.seller')}}:</span>
+                                <span v-if="tradeType==0">{{$t('otc.chat.seller')}}</span>
                                 <span v-else>{{$t('otc.chat.buyer')}}:</span>
                             </th>
                             <th>{{ $t('otc.chat.order') }}</th>
@@ -30,7 +30,7 @@
                             <th>
                                 <router-link :to="{ path: '/checkuser', query: { 'id': msg.hisId }}">
                                 <!-- {{msg.otherSide && msg.otherSide.length>2 && strpro(msg.otherSide)}} -->
-                                    {{msg.otherSide}}
+                                    {{ payInfo.realName }}
                                 </router-link>
                             </th>
                             <th>{{ msg.orderSn }}</th>
@@ -169,7 +169,7 @@
                         <div
                             class="account-info"
                             v-if="alipay&&alipay!=null"
-                            style="width: 245px;position: relative;"
+                            style="width: 245px;position: relative;height: 45px;"
                         >
                             <i class="icons alipay"></i>
                             <span>{{$t('otc.chat.zfb')}}</span>
@@ -183,14 +183,14 @@
                                 </a>
                             </span>
                         </div>
-                        <div class="account-info" v-else>
+                        <div class="account-info" v-else style="height: 45px;">
                             <i class="icons alipay"></i>
                             <span>{{$t('otc.chat.tip2')}}</span>
                         </div>
                         <div
                             class="account-info"
                             v-if="wechatPay&&wechatPay!=null"
-                            style="width: 245px;position: relative;"
+                            style="width: 245px;position: relative;height: 45px;"
                         >
                             <i class="icons wechat"></i>
                             <span>{{$t('otc.chat.wx')}}</span>
@@ -204,9 +204,17 @@
                                 </a>
                             </span>
                         </div>
-                        <div class="account-info" v-else>
+                        <div class="account-info" v-else style="height: 45px;">
                             <i class="icons wechat"></i>
                             <span>{{$t('otc.chat.tip3')}}</span>
+                        </div>
+                        <div style="color: #8090af;" v-if="detailRecords.phone">
+                            <i class="icons phone"></i>
+                            <span>{{detailRecords.phone}}</span>
+                        </div>
+                        <div style="color: #8090af;" v-if="detailRecords.email&&detailRecords.phone == null">
+                            <i class="icons email"></i>
+                            <span>{{ detailRecords.email }}</span>
                         </div>
                     </div>
                     <div class="account-border"></div>
@@ -468,7 +476,7 @@
                 <Input
                     type="password"
                     v-model="fundpwd"
-                    :placeholder="$t('otc.chat.msg7')"
+                    :placeholder="$t('otc.publishad.inputtip8')"
                     style="margin-top: 10px;"
                 />
             </p>
@@ -767,7 +775,7 @@ export default {
             this.msg = resp.data
             this.detailRecords = this.msg
             this.payInfo = this.msg.payInfo
-            if (this.payInfo == null) {
+              if (this.payInfo == null) {
               this.bankInfo = this.alipay = this.wechatPay == null
             } else {
               this.bankInfo = this.msg.payInfo.bankInfo
@@ -899,6 +907,16 @@ export default {
 
 .icons.qrcode {
   background-image: url(../../assets/images/wechats.png);
+}
+
+.icons.phone {
+    width: 22px;
+    height: 20px;
+    background-image: url(../../assets/images/fait/phone.png);
+}
+
+.icons.email {
+    background-image: url(../../assets/images/fait/email.png);
 }
 
 .icons {
@@ -1047,7 +1065,6 @@ export default {
             .account-left {
                 flex: 1;
                 .account-info {
-                    height: 60px;
                     position: relative;
                     span {
                         margin-left: 8px;
@@ -1099,6 +1116,7 @@ export default {
         border-bottom: 1px solid #2A3850;
     }
     .ivu-modal-footer {
+        display: block;
         border-top: 1px solid #2A3850;
     }
     .ivu-modal-header-inner {

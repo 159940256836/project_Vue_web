@@ -787,6 +787,13 @@ span.describe {
 }
 </style>
 <style lang="scss">
+    .ivu-input-group-append,
+    .ivu-input-group-prepend {
+        background: #111530 !important;
+        border: 1px solid #2a3850 !important;
+        border-left: none !important;
+        border-radius: 0 !important;
+    }
     .ivu-form .ivu-form-item-label {
         color: #8090af;
     }

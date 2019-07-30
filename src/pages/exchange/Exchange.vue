@@ -79,25 +79,33 @@
             </div>
             <div class="center">
                 <div class="symbol">
-<!--                    <div class="item" @click="currentCoinFavorChange">-->
-<!--                        <Icon-->
-<!--                            v-if="currentCoinIsFavor"-->
-<!--                            type="ios-star"-->
-<!--                            color="#3399ff"-->
-<!--                            size="22"-->
-<!--                        />-->
-<!--                        <Icon-->
-<!--                            v-else-->
-<!--                            type="ios-star-outline"-->
-<!--                            color="#3399ff"-->
-<!--                            size="22"-->
-<!--                        />-->
-<!--                    </div>-->
+                    <!--    <div class="item" @click="currentCoinFavorChange">
+                        <Icon
+                            v-if="currentCoinIsFavor"
+                            type="ios-star"
+                            color="#3399ff"
+                            size="22"
+                        />
+                        <Icon
+                            v-else
+                            type="ios-star-outline"
+                            color="#3399ff"
+                            size="22"
+                        />
+                    </div>-->
                     <div class="item">
                         <span class="coin">
                             {{currentCoin.coin?currentCoin.coin:'---'}}
                             <small style="font-size: 16px">/{{currentCoin.base?currentCoin.base:'---'}}</small>
                         </span>
+                    </div>
+                    <!--币币交易币种详情-->
+                    <div
+                        class="item"
+                        style="cursor: pointer"
+                        @click="getCoinDetails"
+                    >
+                        <span>{{ $t('exchange.coinDetails.coinDetail') }}</span>
                     </div>
                     <div class="item">
                         <!--<span class="text">{{$t('coin.up')}}</span>-->
@@ -135,7 +143,6 @@
                           ≈  ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
                         </span>
                     </div>
-
                     <div class="item">
                         <span
                             class="text item-media"
@@ -593,7 +600,6 @@
                         {{$t('coin.view')}}>>
                     </router-link>
                 </div>
-
             </div>
             <div class="table">
                 <Table
@@ -616,6 +622,16 @@
                 ></Table>
             </div>
         </div>
+        <Modal
+            v-model="detailsModal"
+            class-name="vertical"
+            width="760"
+            footer-hide
+        >
+            <div class="details">
+                <coinDetails :coinInfo="coinInfo"></coinDetails>
+            </div>
+        </Modal>
     </div>
 </template>
 <style scoped lang="scss">
@@ -930,6 +946,10 @@ $night-color: #fff;
         }
     }
 }
+.details {
+    padding: 50px 20px;
+    color: #fff;
+}
 .exchange.day {
     color: #333;
     background-color: #fff;
@@ -1052,20 +1072,33 @@ $night-color: #fff;
     }
 }
 </style>
+<style lang="scss">
+    .vertical {
+        .ivu-modal{
+            top: 20%;
+        }
+    }
+
+</style>
 <script>
 import expandRow from '@components/exchange/expand.vue'
 import Datafeeds from '@js/charting_library/datafeed/bitrade.js'
 import transfermodal from '../../components/transfer/Index'
+import coinDetails from '../../components/exchange/coinDetails'
 const Stomp = require('stompjs')
 const SockJS = require('sockjs-client')
 const moment = require('moment')
 // const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价'], ['CHECK_FULL_STOP', '止盈止损']]);
 const map = new Map([['LIMIT_PRICE', '限价'], ['MARKET_PRICE', '市价']])
-
 import DepthGraph from '@components/exchange/DepthGraph.vue'
 import $ from '@js/jquery.min.js'
 export default {
-  components: { expandRow, DepthGraph, transfermodal },
+  components: {
+      expandRow,
+      DepthGraph,
+      transfermodal,
+      coinDetails
+  },
   beforeRouteLeave(to, from, next) {
     if (this.stompClient) {
       this.stompClient.disconnect()
@@ -1075,6 +1108,9 @@ export default {
   data() {
     const self = this
     return {
+        coinInfo: {}, // 币种详情
+        detail: '',
+        detailCoin: '',
       currentLoading: true, // 当前委单默认loading
       historyLoading: true, // 历史委单默认loading
       day: require('../../assets/images/exchange/night.png'), // 黑色版本
@@ -1766,7 +1802,8 @@ export default {
         ],
         rows: []
       },
-      fullTrade: {}
+      fullTrade: {},
+        detailsModal: false // 币币交易详情模态框默认
     }
   },
   computed: {
@@ -1972,13 +2009,32 @@ export default {
     }
   },
   methods: {
+      // 币币交易币种详情信息
+      getCoinDetails() {
+          // 判断当前是否存在默认交易对
+          // 存在把当前交易币种截取之后传到后台
+          // 不存在获取对默认交易对并进行截取传参
+          if (this.$route.params.pathMatch) {
+              this.detail = this.$route.params.pathMatch.match(/(\S*)_/)[1].toUpperCase(); // 截取字符串特定符号前的全部字符
+          } else {
+              this.detail = this.detailCoin.match(/(\S*)_/)[1]
+          }
+          this.detailsModal = true
+          this.$http.get(this.host + `/uc/coinDescription/detail?coinName=${this.detail}` ).then(res => {
+            const data = res.body
+            if (data.code == 0) {
+                this.coinInfo = data.data
+            }
+          })
+      },
     // 默认交易对
     getdefaultSymbol() {
       return this.$http.get(this.host + '/market/default/symbol').then(res => {
         const data = res.body
         if (data.code == 0) {
           return new Promise((resolve, reject) => {
-            resolve(data.data.web)
+              this.detailCoin = data.data.web
+              resolve(data.data.web)
           }).catch(reject => reject('BTC_USDT'))
         }
       })

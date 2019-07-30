@@ -445,6 +445,7 @@ export default {
             background: #111530;
             color: #8090af;
             border-radius: 0;
+            border: 1px solid #2A3850;
             &:hover {
                 background: #111530;
                 color: #8090af;

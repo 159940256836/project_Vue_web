@@ -1209,9 +1209,9 @@ export default {
       param['pageSize'] = this.pageSize
       this.$http.post(this.host + this.api.uc.announcement, param).then(response => {
         var resp = response.body
-        // var str = JSON.stringify(resp.data)
+        var str = JSON.stringify(resp.data)
         if (resp.code === 0) {
-          // localStorage.setItem('result', str)
+          localStorage.setItem('result', str)
           // console.log(localStorage.getItem('result'));
           if (resp.data.content.length === 0) return
           const FAQList = resp.data.content

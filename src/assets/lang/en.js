@@ -679,7 +679,18 @@ module.exports = {
     realtime: 'realtime',
     operateSuccessfully: 'operate successfully',
     view: 'view',
-    all: 'All'
+    all: 'All',
+    coinDetails: {
+      coinDetail: 'Coin detail',
+      coinName: 'Coin name',
+      publishTime: 'Issue date',
+      officialWebsite: 'Related links',
+      officialWebsite1: 'official website',
+      whitePaper: 'white paper',
+      circulateVolume: 'Issue price',
+      publishVolume: 'Total circulation',
+      summary: 'Coin introduced',
+    }
   },
   otc: {
     ad: 'Advertising',
@@ -731,7 +742,7 @@ module.exports = {
       contentmsg: 'Message cannot be empty'
     },
     chat: {
-      seller: 'Seller',
+      seller: 'name seller',
       buyer: 'Buyer',
       orderDetails: 'The order details',
       exchangeamount: 'Exchange amount',
@@ -1265,7 +1276,8 @@ module.exports = {
       securitysetting: 'Security setting',
       accountsetting: 'Account setting',
       FeeGrade: 'Fee grade',
-      myextension: 'My extension'
+      myextension: 'My extension',
+      safetyrecords: 'Safety records'
     },
     order: {
       ordercenter: 'Order center',

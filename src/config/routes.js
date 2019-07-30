@@ -113,6 +113,9 @@ import apiapimanagement from '../components/uc/apiapimanagement'
 import newMyExtension from '../components/uc/newMyExtension'
 import mobilereg from '../components/yidong/registers'
 import registe from '../components/yidong/registe'
+import safetyRecords from '../components/uc/safetyRecords'
+// 币币币种详情
+import coinDetails from '../components/exchange/coinDetails.vue'
 
 // 移动端页面
 import Mobile from '../components/mobile/mobile.vue'
@@ -122,6 +125,7 @@ import MobileLogin from '../components/mobile/login.vue'
 
 export default [
     { path: '/newMyExtension', component: newMyExtension },
+    { path: '/safetyRecords', component: safetyRecords },
     { path: '/apiapimanagement', component: apiapimanagement },
     { path: '/bdm', component: bdm },
     { path: '/Usereement', component: Usereement },
@@ -194,6 +198,8 @@ export default [
     { path: '/bjc', component: Bjc },
     // 发布广告
     { path: '/PublishAdver', component: PublishAdver },
+    // 币种详情
+    { path: '/coinDetails', component: coinDetails },
   {
     path: '/personal',
     component: personal,

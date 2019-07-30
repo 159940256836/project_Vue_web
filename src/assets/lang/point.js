@@ -8,7 +8,14 @@ const zh = {
     num: "数量",
     giftTime: "赠送时间",
     activity: "活动名称",
-    QuantityGiven: "赠送数量"
+    QuantityGiven: "赠送数量",
+    userId: "用户ID",
+    user: "用户名",
+    ipbelongs: "ip归属地",
+    ipaddress: "ip地址",
+    operationtime: "操作时间",
+    operation: "操作"
+
 };
 
 const en = {
@@ -21,7 +28,13 @@ const en = {
     num: "quantity",
     giftTime: "Giving time",
     activity: "Name of activity",
-    QuantityGiven: "Quantity given"
+    QuantityGiven: "Quantity given",
+    userId: "user ID",
+    user: "user",
+    ipbelongs: "IP belongs to",
+    ipaddress: "IP address",
+    operationtime: "operation time",
+    operation: "operation"
 }
 
 exports.zh = zh;
