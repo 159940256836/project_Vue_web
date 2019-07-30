@@ -627,6 +627,7 @@
             class-name="vertical-center-modal"
             width="760"
             top="0"
+            footer-hide
         >
             <div class="details">
                 <coinDetails :coinInfo="coinInfo"></coinDetails>

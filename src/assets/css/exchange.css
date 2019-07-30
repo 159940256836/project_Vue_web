@@ -441,9 +441,9 @@ p.math_price {
     border-bottom: 1px solid #191D3A;
 }
 
-.ivu-modal-footer {
-    display: none;
-}
+/*.ivu-modal-footer {*/
+/*    display: none;*/
+/*}*/
 
 /* .ivu-modal .ivu-modal-body .ivu-btn {
     padding: 5px 35px;

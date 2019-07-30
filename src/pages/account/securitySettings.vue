@@ -180,6 +180,7 @@
                 width="534"
                 class="popups-modal"
                 :mask-closable="false"
+                footer-hide
                 >
                 <div class="detail-list" style="width: 100%;">
                     <!-- 请上传资料完成实名认证 -->
@@ -267,6 +268,7 @@
                 width="534"
                 class="popups-modal"
                 :mask-closable="false"
+                footer-hide
                 >
                 <div class="detail-list">
                     <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="110">
@@ -310,6 +312,7 @@
                 width="534"
                 class="popups-modal"
                 :mask-closable="false"
+                footer-hide
                 >
                 <div class="detail-list">
                     <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="110">
@@ -355,7 +358,8 @@
                 class="popups-modal"
                 className="vertical-center-modal"
                 :mask-closable="false"
-                >
+                footer-hide
+            >
                 <div class="detail-list">
                     <Form
                         ref="formValidate4"
@@ -482,6 +486,7 @@
                 width="534"
                 class="popups-modal"
                 :mask-closable="false"
+                footer-hide
                 >
                 <!-- 设置资金密码 -->
                 <div class="detail-list" v-show="user.fundsVerified!=1">
@@ -2131,9 +2136,6 @@ export default {
                     font-weight: 400;
                 }
             }
-            .ivu-modal-footer {
-                display: none;
-            }
             .ivu-modal-close .ivu-icon-ios-close {
                 color: #fff;
                 font-size: 24px;
@@ -2265,11 +2267,11 @@ export default {
         }
         .ivu-input-group-append,
         .ivu-input-group-prepend {
-            background: transparent;
-            color: #3399FF;
-            border: 1px solid #8090AF;
-            border-left: none;
-            border-radius: 0;
+            background: transparent !important;
+            color: #3399FF !important;
+            border: 1px solid #8090AF !important;
+            border-left: none !important;
+            border-radius: 0 !important;
         }
 
         .ivu-form-item-error .ivu-input-group-append,
