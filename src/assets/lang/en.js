@@ -1276,7 +1276,8 @@ module.exports = {
       securitysetting: 'Security setting',
       accountsetting: 'Account setting',
       FeeGrade: 'Fee grade',
-      myextension: 'My extension'
+      myextension: 'My extension',
+      safetyrecords: 'Safety records'
     },
     order: {
       ordercenter: 'Order center',

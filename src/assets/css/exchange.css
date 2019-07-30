@@ -985,7 +985,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td{
     right: 0;
     height: 100%;
     opacity: .2;
-    transition: all 1.5s;
+    transition: all 1s;
 }
 
 .exchange.day .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd .percentdiv {

@@ -1282,7 +1282,8 @@ module.exports = {
       securitysetting: '安全设置',
       accountsetting: '收款方式',
       FeeGrade: '手续费等级',
-      myextension: '我的推广'
+      myextension: '我的推广',
+      safetyrecords: '账户安全记录'
     },
     order: {
       ordercenter: '订单中心',
