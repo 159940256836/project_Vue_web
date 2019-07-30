@@ -624,9 +624,8 @@
         </div>
         <Modal
             v-model="detailsModal"
-            class-name="vertical-center-modal"
+            class-name="vertical"
             width="760"
-            top="0"
             footer-hide
         >
             <div class="details">
@@ -1072,6 +1071,14 @@ $night-color: #fff;
         }
     }
 }
+</style>
+<style lang="scss">
+    .vertical {
+        .ivu-modal{
+            top: 20%;
+        }
+    }
+
 </style>
 <script>
 import expandRow from '@components/exchange/expand.vue'
