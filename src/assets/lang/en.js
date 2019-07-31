@@ -687,6 +687,7 @@ module.exports = {
       officialWebsite: 'Related links',
       officialWebsite1: 'official website',
       whitePaper: 'white paper',
+      blockLinks: 'block links',
       circulateVolume: 'Issue price',
       publishVolume: 'Total circulation',
       summary: 'Coin introduced',

@@ -11,7 +11,7 @@
           <span>{{ $t('exchange.coinDetails.coinName') }}</span>
           <span>{{coinInfo.coinFullName}}</span>
         </p>
-        <p>
+        <p v-if="coinInfo.publishTime">
           <!--发行时间-->
           <span>{{ $t('exchange.coinDetails.publishTime') }}</span>
           <span>{{coinInfo.publishTime}}</span>
@@ -20,7 +20,10 @@
           <!--相关连接-->
           <span>{{ $t('exchange.coinDetails.officialWebsite') }}</span>
           <!--官网-->
+        </p>
+        <p>
           <a
+            v-if="coinInfo.officialWebsite"
             target="_blank"
             :href="coinInfo.officialWebsite"
             class="padding"
@@ -29,28 +32,38 @@
           </a>
           <!--白皮书-->
           <a
+            v-if="coinInfo.whitePaper"
             target="_blank"
             :href="coinInfo.whitePaper"
             class="padding"
           >
             {{ $t('exchange.coinDetails.whitePaper') }}
           </a>
+          <!--区块链接-->
+          <a
+            v-if="coinInfo.blockQuery"
+            target="_blank"
+            :href="coinInfo.blockQuery"
+            class="padding"
+          >
+            {{ $t('exchange.coinDetails.blockLinks') }}
+          </a>
         </p>
       </div>
       <div class="flex">
-        <p>
-          <!--发行价格-->
-          <span>{{ $t('exchange.coinDetails.circulateVolume') }}</span>
-          <span>{{coinInfo.publishPrice}}</span>
-        </p>
-        <p>
+        <p v-if="coinInfo.publishVolume">
           <!--发行总量-->
           <span>{{ $t('exchange.coinDetails.publishVolume') }}</span>
           <span>{{coinInfo.publishVolume}}</span>
         </p>
+        <p v-if="coinInfo.publishPrice">
+          <!--发行价格-->
+          <span>{{ $t('exchange.coinDetails.circulateVolume') }}</span>
+          <span>{{coinInfo.publishPrice}}</span>
+        </p>
       </div>
     </div>
-    <div class="main-bottom">
+    <div class="main-bottom" v-if="coinInfo.summary">
       <!--币种介绍-->
       <p>{{ $t('exchange.coinDetails.summary') }}</p>
       <p>
