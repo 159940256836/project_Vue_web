@@ -2024,6 +2024,8 @@ export default {
             const data = res.body
             if (data.code == 0) {
                 this.coinInfo = data.data
+            } else {
+                this.coinInfo = []
             }
           })
       },

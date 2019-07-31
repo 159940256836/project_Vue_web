@@ -42,7 +42,7 @@
       };
     },
     created: function () {
-      this.getList(this.pageNo);
+      // this.getList(this.pageNo);
     },
     methods: {
       getList(obj) {

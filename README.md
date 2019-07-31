@@ -54,7 +54,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 5、法币交易我的订单增加联系电话；  
 
 2018.7.17   
-1、修复提币页面提现记录分页BUG并优化筛选功能； 
+1、修复提币页面提现记录分页BUG并优化筛选功能；
 2、首页特点内容优化；  
 
 2018.7.16   

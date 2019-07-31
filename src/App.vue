@@ -108,11 +108,11 @@
                                                  {{$t("apiAdmin.Mypromotion")}}
                                             </router-link>
                                         </DropdownItem>
-                                        <DropdownItem>
+                                        <!--<DropdownItem>
                                             <router-link to="/safetyRecords">
                                                 {{$t("uc.member.safetyrecords")}}
                                             </router-link>
-                                        </DropdownItem>
+                                        </DropdownItem>-->
                                          <DropdownItem>
                                             <router-link to="/apiapimanagement">
                                                  {{$t("apiAdmin.APmanagement")}}
@@ -1025,7 +1025,7 @@ ul,li{
 .ivu-select-dropdown .ivu-select-item {
     padding: 6px 16px;
     &:hover {
-        /*background: #fff;*/
+        background: #191d3a;
         color: #3399ff;
     }
 }
