@@ -18,6 +18,7 @@
                                         style="width:130px;"
                                         @on-change="changeCoin"
                                         :placeholder="$t('header.choose')"
+                                        clearable
                                     >
                                         <Option
                                             v-for="item in coinList"
@@ -116,7 +117,7 @@
                                             <Page
                                                 v-show="dataCount > 10"
                                                 :total="dataCount"
-                                                :current="1"
+                                                :current="transaction.page"
                                                 @on-change="changePage"
                                                 id="record_pages"
                                             ></Page>
@@ -147,6 +148,11 @@ export default {
             isShowEwm: false,
             dataCount: 0,
             loading: true,
+            transaction: {
+                page: 1,
+                pageSize: 10,
+                symbol: ''
+            },
             qrcode: {
                 value: "",
                 size: 200,
@@ -174,16 +180,9 @@ export default {
             oInput.remove()
         },
         changePage(index) {
-            this.getList(index);
-        },
-        getCurrentCoinRecharge() {
-            if (this.coinType != "") {
-                var temp = [];
-                this.tableRecharge = this.allTableRecharge.filter(ele=>ele.symbol == this.coinType);
-                console.log(this.tableRecharge);
-            } else {
-                this.tableRecharge = this.allTableRecharge;
-            }
+            console.log(index);
+            this.transaction.page = index
+            this.getList();
         },
         showEwm() {
             this.isShowEwm = !this.isShowEwm;
@@ -197,24 +196,19 @@ export default {
             this.$Message.error(this.$t("uc.finance.recharge.copysuccess"));
         },
         changeCoin(value) {
-            const list = (this.coinList.length>0 && this.coinList.filter(ele=>ele.coin.unit == value)) || [];
-            // this.resetAddress();
-            // this.getMoney();
-            if(list.length>0) {
-                this.qrcode.value = list[0].address || '';
-                this.qrcode.coinName = list[0].coin.name.toLowerCase();
+            this.coinList.forEach((item)=>{//model就是上面的数据源
+                console.log(item);
+                // return item.id === id;//筛选出匹配数据
+            });
+            // vm.modelName=obj.model;
+            // console.log("modelName"+vm.modelName)
+            console.log(value);
+            if (value) {
+                this.transaction.symbol = value
+            } else if (value == undefined) {
+                this.transaction.symbol = ''
             }
-            if (!this.qrcode.value) {
-                this.buttonAdd = true;
-            } else {
-                this.buttonAdd = false;
-            }
-            // for (var i = 0; i < this.coinList.length; i++) {
-            //     if (this.coinList[i].coin.unit == value) {
-
-            //     }
-            // }
-            this.getCurrentCoinRecharge();
+            this.getList();
         },
         // 获取充币地址
         resetAddress() {
@@ -254,19 +248,23 @@ export default {
                 }
             });
         },
-        getList(pageNo) {
+        getList() {
             //获取tableRecharge
             // let memberId = 0;
             !this.$store.getters.isLogin && this.$router.push("/login");
             // this.$store.getters.isLogin && (memberId = this.$store.getters.member.id);
-            const params = { unit: "", pageNo, pageSize:10, type:"0" };
+
+            const params = {}
+            params['pageNo'] = this.transaction.page
+            params['type'] = '0'
+            params['pageSize'] = this.transaction.pageSize
+            params['symbol'] = this.transaction.symbol
             this.$http.post(this.host + "/uc/asset/transaction", params).then(response => {
                 let resp = response.body;
                 if (resp.code == 0) {
                     if (resp.data) {
-                        this.allTableRecharge = resp.data.content || [];
+                        this.tableRecharge = resp.data.content || [];
                         this.dataCount = resp.data.totalElements || 0;
-                        this.getCurrentCoinRecharge();
                     }
                     this.loading = false;
                 } else {
@@ -302,7 +300,7 @@ export default {
         this.coinType = this.$route.query.name || "";
         // this.getMember();
         this.getMoney();
-        this.getList(1);
+        this.getList();
     },
     computed: {
         tableColumnsRecharge() {
@@ -329,43 +327,46 @@ export default {
                 width: 160,
                 align: "center",
                 render: (h, param) => {
-                    let str = param.row.txid;
-                    let tokenLenth = param.row.txid.length
-                    // 显示前五位 后五位
-                    let tokenCont = param.row.txid.substring(0, 5)
-                            +
-                            '...'
-                            + param.row.txid.substring(tokenLenth - 5, tokenLenth)
-                    if (str) {
-                        return h("div", [
-                            h('Icon', {
-                                props: {
-                                    type: 'ios-paper-outline',
-                                },
-                                style: {
-                                    height: '20px',
-                                    fontSize: '16px',
-                                    marginRight: '4px',
-                                    float: 'left',
-                                    color: '#fff',
-                                    border: 0,
-                                    lineHeight: '20px',
-                                    marginLeft: '10px'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.copyToken(str)
+                    if (param.row.txid) {
+                        let str = param.row.txid;
+                        let tokenLenth = param.row.txid.length
+                        // 显示前五位 后五位
+                        let tokenCont = param.row.txid.substring(0, 5)
+                                +
+                                '...'
+                                + param.row.txid.substring(tokenLenth - 5, tokenLenth)
+                        if (str) {
+                            return h("div", [
+                                h('Icon', {
+                                    props: {
+                                        type: 'ios-paper-outline',
+                                    },
+                                    style: {
+                                        height: '20px',
+                                        fontSize: '16px',
+                                        marginRight: '4px',
+                                        float: 'left',
+                                        color: '#fff',
+                                        border: 0,
+                                        lineHeight: '20px',
+                                        marginLeft: '10px'
+                                    },
+                                    on: {
+                                        click: () => {
+                                            this.copyToken(str)
+                                        }
                                     }
-                                }
-                            }),
-                            h("div", {
-                                style: {
-                                    fontSize: '1%',
-                                    float: 'left'
-                                },
-                            }, tokenCont)
-                        ])
+                                }),
+                                h("div", {
+                                    style: {
+                                        fontSize: '1%',
+                                        float: 'left'
+                                    },
+                                }, tokenCont)
+                            ])
+                        }
                     }
+
                 }
             });
 

@@ -108,11 +108,11 @@
                                                  {{$t("apiAdmin.Mypromotion")}}
                                             </router-link>
                                         </DropdownItem>
-                                        <!--<DropdownItem>
+                                        <DropdownItem>
                                             <router-link to="/safetyRecords">
                                                 {{$t("uc.member.safetyrecords")}}
                                             </router-link>
-                                        </DropdownItem>-->
+                                        </DropdownItem>
                                          <DropdownItem>
                                             <router-link to="/apiapimanagement">
                                                  {{$t("apiAdmin.APmanagement")}}

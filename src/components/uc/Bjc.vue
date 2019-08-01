@@ -28,9 +28,10 @@
                     <Page
                         v-show="totalElement > 10"
                         :current="pageNo"
-                        :total="parseInt(totalElement)"
+                        :total="totalElement"
                         :page-size="pageSize"
                         @on-change="changePage"
+                        id="record_pages"
                     ></Page>
                 </div>
             </div>
@@ -74,12 +75,13 @@ export default {
             this.integration = this.$store.getters.member.integration;
             const params = getParams(this.pageNum)(this.createStartTime)(this.createEndTime);
             this.getList(params).then(res => {
-                this.tableMoney = res.map(ele => ({
+                this.tableMoney = res.data.map(ele => ({
                     type: ele.type,
                     amount: "+" + ele.amount,
                     createTime: ele.createTime
                 }));
-                this.totalElement = res.length;
+                this.totalElement = res.total;
+                console.log(this.totalElement, params);
             });
         },
         getList(params) {
@@ -88,7 +90,7 @@ export default {
                 if (resp.code == 0) {
                     this.loading = false;
                     return new Promise((resolve, reject) => {
-                        resolve(resp.data)
+                        resolve(resp)
                     })
                 }
             });
@@ -223,6 +225,29 @@ export default {
                     }
                 }
             }
+        }
+        #record_pages li.ivu-page-item.ivu-page-item-active {
+            background-color: #111530;
+            border-color: #191f44;
+            a {
+                color: #3399ff;
+            }
+        }
+        #record_pages li.ivu-page-item.ivu-page-item-active {
+            &:hover {
+                background-color: #111530;
+                a {
+                    color: #3399ff;
+                }
+            }
+        }
+        .ivu-page-item {
+            background: #111530;
+            color: #8090AF;
+            border: 1px solid #191f44;
+        }
+        .ivu-page-item:hover {
+            color: #3399ff;
         }
     }
 </style>
