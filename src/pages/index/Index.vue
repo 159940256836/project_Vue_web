@@ -96,7 +96,7 @@
                 <div class="topnav">
                     <div class="carl">
                         <!-- <div class="laba"> -->
-                        <img style="margin: 13px;margin-left:-60%;" src="../../assets/images/laba_pri.png" alt="">
+                        <img style="position: absolute;left: 0;top: 12px;" src="../../assets/images/laba_pri.png" alt="">
                         <!--<Icon type="ios-volume-up" color="#fff" style="height:14px;margin-right:4px;" size="35" />-->
                         <!-- </div> -->
                         <div class="carsoul">
@@ -1057,8 +1057,8 @@ export default {
     })
   },
   methods: {
-    rowClick(data,index){
-      console.log(data, index, data.href);
+    rowClick(data, index) {
+      console.log(data, index, data.href)
       this.$router.push('/exchange/' + data.href)
     },
     checkouttrue() {
@@ -1635,7 +1635,8 @@ li {
         height: 40px;
         margin: 0 auto;
         .carl {
-            width: 100%;
+            width: 1200px;
+              margin: 0 auto;
             height: 40px;
             position: relative;
             @extend %flex;
@@ -1650,7 +1651,7 @@ li {
             }
             .carsoul {
               position:absolute;
-              left: 21%;
+              left: 3%;
                 a {
                     color: #fff;
                     font-size: 14px;
