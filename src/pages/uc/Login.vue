@@ -17,7 +17,7 @@
                     </FormItem>
                     <FormItem prop="password">
                         <Input
-                            @on-enter="login()"
+                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('password'):login()"
                             type="password"
                             v-model="formInline.password"
                             :placeholder="$t('uc.login.pwdtip')"
@@ -30,7 +30,7 @@
                     >
                         <Input
                             type="text"
-                            @on-enter="login()"
+                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('googleCode'):login()"
                             v-model="formInline.googleCode"
                             :placeholder="$t('uc.login.google')"
                         >
@@ -46,7 +46,7 @@
                             v-model="formInline.checkCode"
                             size="large"
                             :placeholder="$t('uc.login.phone')"
-                            @on-enter="login()"
+                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('checkCode'):login()"
                         >
                             <div
                                 class="timebox"
@@ -77,7 +77,7 @@
                             v-model="formInline.emailCode"
                             size="large"
                             :placeholder="$t('uc.login.email')"
-                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('formInline'):login()"
+                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('emailCode'):login()"
                         >
                             <div
                                 class="timebox"
@@ -110,7 +110,7 @@
                     <FormItem style="margin-bottom:10px;">
                         <Button
                             class="login_btn"
-                            @click="login()"
+                            @click="host == 'https://api.nr3d.cn'?handleSubmit('formInline'):login()"
                         >
                             {{$t('uc.forget.login')}}
                         </Button>
@@ -361,25 +361,25 @@ export default {
                     // 6.06改写
           switch (res) {
             case 0:
-                            // 0为无需输入任何验证
+            // 0为无需输入任何验证
               this.openGoogleCode = false
               this.openPhoneCode = false
               this.openEmailCode = false
               break
             case 1:
-                            // 1为开启谷歌验证
+            // 1为开启谷歌验证
               this.openGoogleCode = true
               this.openPhoneCode = false
               this.openEmailCode = false
               break
             case 2:
-                            // 2为开启手机验证
+            // 2为开启手机验证
               this.openGoogleCode = false
               this.openPhoneCode = true
               this.openEmailCode = false
               break
             case 3:
-                            // 3为开启邮箱验证
+            // 3为开启邮箱验证
               this.openGoogleCode = false
               this.openPhoneCode = false
               this.openEmailCode = true
@@ -438,24 +438,24 @@ export default {
       return this.login(params)
     },
     loginCheck() {
-            // 新加代码
-            // 判断手机号邮箱不能为空
+    // 新加代码
+    // 判断手机号邮箱不能为空
       if (!this.formInline.user) {
         this.$Message.error(this.$t('uc.login.loginvalidate'))
         return false
       }
-            // 判断是否绑定谷歌
+        // 判断是否绑定谷歌
       if (this.openGoogleCode) {
-                // this.openPhoneCode = false;
-                // 判断谷歌验证码不能为空
+        // this.openPhoneCode = false;
+        // 判断谷歌验证码不能为空
         if (!this.formInline.googleCode) {
           this.$Message.error(this.$t('uc.login.google'))
           return false
         } else {
-          this.initGtCaptcha()
+            this.login()
         }
       } else if (this.openPhoneCode) {
-                  // // 判断手机验证码不能为空
+        // 判断手机验证码不能为空
         if (!this.formInline.checkCode) {
           this.$Message.error(this.$t('uc.login.phone'))
           return false
@@ -463,22 +463,24 @@ export default {
           this.initGtCaptcha()
         }
       } else if (this.openEmailCode) {
-                // 6.06
-                // // 判断邮箱验证码不能为空
+        // 6.06
+        // 判断邮箱验证码不能为空
         if (!this.formInline.emailCode) {
           this.$Message.error(this.$t('uc.login.email'))
           return false
         } else {
           this.initGtCaptcha()
         }
+      } else {
+          this.initGtCaptcha()
       }
-      this.initGtCaptcha()
+      // this.initGtCaptcha()
     },
     handleSubmit(name) {
             // 5.20修改
       console.log(name)
       this.$refs[name].validate(valid => {
-                 // 首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
+                  // 首先验证输入的内容是否通过验证;通过验证的话调取腾讯防水
         console.log(valid)
         if (valid) {
           this.loginCheck()

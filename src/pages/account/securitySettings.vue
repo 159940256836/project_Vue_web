@@ -746,6 +746,7 @@
                 @on-cancel="googleModalCancel"
                 class="popups-modal"
                 :mask-closable="false"
+                footer-hide
             >
                 <ResetGoogleVali @closeGoogle="closeGoogle"/>
             </Modal>
@@ -758,6 +759,7 @@
                 @on-cancel="googleModalCancel"
                 class="popups-modal"
                 :mask-closable="false"
+                footer-hide
             >
                 <CloseGoogleVali :phone="user.mobilePhone ? user.mobilePhone:user.email" @closeGoogle="closeGoogle"/>
             </Modal>

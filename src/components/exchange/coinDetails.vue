@@ -67,7 +67,7 @@
       <!--币种介绍-->
       <p>{{ $t('exchange.coinDetails.summary') }}</p>
       <p>
-        {{coinInfo.summary}}
+        {{this.$store.getters.lang == 'English'?coinInfo.summaryEnglish:coinInfo.summary}}
       </p>
     </div>
   </div>
@@ -81,7 +81,9 @@
     },
     props: ['coinInfo'],
     methods: {},
-    created() {},
+    created() {
+      console.log(this.$store.getters.lang)
+    },
     computed: {},
     watch:{}
   }
