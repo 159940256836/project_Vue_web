@@ -412,7 +412,7 @@ export default {
   name: 'App',
   provide() {
     return {
-      // reload: this.reload
+      reload: this.reload
     }
   },
   data() {
@@ -547,12 +547,12 @@ export default {
       })
     },
         // header动画效果
-    // reload() {
-    //   this.isRouterAlive = false
-    //   this.$nextTick(function() {
-    //     this.isRouterAlive = true
-    //   })
-    // },
+    reload() {
+      this.isRouterAlive = false
+      this.$nextTick(function() {
+        this.isRouterAlive = true
+      })
+    },
     goBi(name) {
       switch (name) {
         case 'moneyindex':
