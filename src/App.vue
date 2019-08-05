@@ -1,12 +1,12 @@
 <template>
     <div class="page-view">
         <header v-show="!$route.meta.hide">
+            <!--:style = "{
+            padding: $route.path==='/'? topPadding : '0 1.5%',
+            backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
+            }"-->
             <div
                 class="page-content"
-                :style = "{
-                  padding: $route.path==='/'? topPadding : '0 1.5%',
-                  backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
-                }"
             >
                 <div class="time_download">
                     <div class="netLogo">
@@ -412,7 +412,7 @@ export default {
   name: 'App',
   provide() {
     return {
-      reload: this.reload
+      // reload: this.reload
     }
   },
   data() {
@@ -547,12 +547,12 @@ export default {
       })
     },
         // header动画效果
-    reload() {
-      this.isRouterAlive = false
-      this.$nextTick(function() {
-        this.isRouterAlive = true
-      })
-    },
+    // reload() {
+    //   this.isRouterAlive = false
+    //   this.$nextTick(function() {
+    //     this.isRouterAlive = true
+    //   })
+    // },
     goBi(name) {
       switch (name) {
         case 'moneyindex':
@@ -578,18 +578,18 @@ export default {
           break
       }
     },
-    handleScroll() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      if (scrollTop > 0) {
-        this.styleTop = 0
-        this.topPadding = '0 17%'
-        this.topBackgroundColor = '#11132c'
-      } else {
-        this.styleTop = 30
-        this.topPadding = '0 1.5%'
-        this.topBackgroundColor = 'transparent'
-      }
-    },
+    // handleScroll() {
+    //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+    //   if (scrollTop > 0) {
+    //     this.styleTop = 0
+    //     this.topPadding = '0 17%'
+    //     this.topBackgroundColor = '#11132c'
+    //   } else {
+    //     this.styleTop = 30
+    //     this.topPadding = '0 1.5%'
+    //     this.topBackgroundColor = 'transparent'
+    //   }
+    // },
     strpo(str) {
       if (str.length > 4) {
         str = str.slice(0, 4) + '···'
@@ -689,6 +689,7 @@ export default {
             line-height: 50px;
             transition: all .5s;
             background-color: #11132c;
+            padding-right: 30px;
             .time_download {
                 align-items: center;
                 overflow: hidden;
