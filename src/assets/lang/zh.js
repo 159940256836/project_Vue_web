@@ -685,6 +685,7 @@ module.exports = {
       officialWebsite: '相关连接',
       officialWebsite1: '官网',
       whitePaper: '白皮书',
+      blockLinks: '区块链接',
       circulateVolume: '发行价格',
       publishVolume: '发行总量',
       summary: '币种介绍',

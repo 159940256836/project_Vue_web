@@ -108,11 +108,11 @@
                                                  {{$t("apiAdmin.Mypromotion")}}
                                             </router-link>
                                         </DropdownItem>
-                                        <!--<DropdownItem>
+                                        <DropdownItem>
                                             <router-link to="/safetyRecords">
                                                 {{$t("uc.member.safetyrecords")}}
                                             </router-link>
-                                        </DropdownItem>-->
+                                        </DropdownItem>
                                          <DropdownItem>
                                             <router-link to="/apiapimanagement">
                                                  {{$t("apiAdmin.APmanagement")}}
@@ -214,12 +214,12 @@
                                       <!-- <a href="https://bdwtop.github.io/">{{$t("footer.apiDoc")}}</a> -->
                                       <a href="https://bdwexchange.github.io/">{{$t("footer.apiDoc")}}</a>
                                 </li>
-                                 <!-- <li>
+                                  <li>
                                     <router-link to="/">{{$t("footer.appDownload")}}</router-link>
                                 </li>
-                                 <li>
+                                 <!--<li>
                                     <router-link to="/">{{$t("footer.otherDownload")}}</router-link>
-                                </li> -->
+                                </li>-->
 
                             </ul>
                             <!--客户服务-->

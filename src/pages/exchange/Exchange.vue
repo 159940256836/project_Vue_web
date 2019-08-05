@@ -1803,7 +1803,8 @@ export default {
         rows: []
       },
       fullTrade: {},
-      detailsModal: false // 币币交易详情模态框默认
+      detailsModal: false, // 币币交易详情模态框默认
+      isChinese: null
     }
   },
   computed: {
@@ -2016,17 +2017,19 @@ export default {
           // 不存在获取对默认交易对并进行截取传参
       if (this.$route.params.pathMatch) {
         this.detail = this.$route.params.pathMatch.match(/(\S*)_/)[1].toUpperCase() // 截取字符串特定符号前的全部字符
+        this.isChinese = this.$store.getters.lang === 'English' ? 0 : 1
       } else {
         this.detail = this.detailCoin.match(/(\S*)_/)[1]
+        this.isChinese = this.$store.getters.lang === 'English' ? 0 : 1
       }
       this.detailsModal = true
-      this.$http.get(this.host + `/uc/coinDescription/detail?coinName=${this.detail}`).then(res => {
+      this.$http.get(this.host + `/uc/coinDescription/detail?coinName=${this.detail}&isChinese=${this.isChinese}`).then(res => {
         const data = res.body
         if (data.code == 0) {
-            this.coinInfo = data.data
-          } else {
-            this.coinInfo = []
-          }
+          this.coinInfo = data.data
+        } else {
+          this.coinInfo = []
+        }
       })
     },
     // 默认交易对

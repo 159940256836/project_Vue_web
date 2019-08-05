@@ -42,8 +42,9 @@
       };
     },
     created: function () {
-      // this.getList(this.pageNo);
+      this.getList(this.pageNo);
     },
+    watch: {},
     methods: {
       getList(obj) {
         this.$http.get(this.host + `/uc/user/log/page-query?pageNo=${obj}`).then(res => {
@@ -52,6 +53,9 @@
             this.loading = false;
             this.tableMoney = resp.data.content;
             this.totalElement = resp.data.totalElements;
+          } else {
+            this.$Message.error(resp.message)
+            this.loading = false;
           }
         });
       },
@@ -63,7 +67,11 @@
       }
     },
     computed: {
+      lang: function() {
+        return this.$store.state.lang
+      },
       tableColumnsBlc() {
+        let self = this
         const arr = [];
         arr.push({
           title: this.$t('pointPage.userId'),
@@ -75,20 +83,24 @@
         });
 
         arr.push({
-          title: this.$t('pointPage.ipbelongs'),
+          title: this.$t('pointPage.ipaddress'),
           key: "ip",
+        })
+        arr.push({
+          title: this.$t('pointPage.ipbelongs'),
+          key: "ipAddress",
         });
+
         arr.push({
           title: this.$t('pointPage.operationtime'),
           key: "createTime",
         });
         arr.push({
-          title: this.$t('pointPage.ipaddress'),
-          key: "ipAddress",
-        })
-        arr.push({
           title: this.$t('pointPage.operation'),
           key: "operation",
+          render(h, params){
+            return h("span", {}, self.$store.state.lang == 'English'?params.row.operationEnglish:params.row.operation);
+          }
         });
         return arr;
       }

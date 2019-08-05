@@ -156,6 +156,7 @@
                 <div class="ptjy">
                     <Table
                         v-if="choseBtn==4"
+                        @on-row-click="rowClick"
                         :columns="favorColumns"
                         :data="filteredData"
                         class="tables"
@@ -167,6 +168,7 @@
                     <Table
                         v-else
                         :columns="coins.columns"
+                        @on-row-click="rowClick"
                         :data="filteredData"
                         class="tables"
                         :disabled-hover="true"
@@ -582,7 +584,7 @@ export default {
             }
           }
         },
-                // {
+          // {
                 //   title: self.$t("service.OpenPrice"),
                 //   align: "center",
                 //   key: "open",
@@ -668,7 +670,7 @@ export default {
           }
         }
       ],
-            // 当前市场上的交易币种，按交易对分
+      // 当前市场上的交易币种，按交易对分
       coins: {
         _map: [],
         USDT: [],
@@ -880,7 +882,7 @@ export default {
               }
             }
           },
-                    // {
+            // {
                     //   title: self.$t("service.OpenPrice"),
                     //   align: "center",
                     //   key: "open",
@@ -1033,7 +1035,7 @@ export default {
     }
   },
   mounted: function() {
-    this.loadDataPage(this.pageNo)// 获取公告
+    this.loadDataPage(this.pageNo) // 获取公告
     this.getCNYRate()
         //  this.getSymbol();
     this.getHotSymbol();
@@ -1055,6 +1057,10 @@ export default {
     })
   },
   methods: {
+    rowClick(data,index){
+      console.log(data, index, data.href);
+      this.$router.push('/exchange/' + data.href)
+    },
     checkouttrue() {
       this.checkoutapp = true
     },
@@ -1412,7 +1418,7 @@ export default {
         this.loading = false
       })
     },
-        // getFavor() {
+    // getFavor() {
         //   //查询自选
         //   this.$http
         //     .post(this.host + this.api.exchange.favorFind, {})
@@ -1425,7 +1431,7 @@ export default {
         //     });
         // },
     getFavor() {
-            // 查询自选(收藏)
+      // 查询自选(收藏)
       this.$http.post(this.host + this.api.exchange.favorFind, {}).then(response => {
         var resp = response.body
         this.coins.favor = []
@@ -1481,7 +1487,7 @@ export default {
                   }
                 })
     }
-        // getmoneyData() {
+    // getmoneyData() {
         //     this.$http.get(this.host + this.api.market.indexData).then(res => {
         //         if (res.body.code == 0) {
         //             let data = res.body.data;
@@ -1766,6 +1772,7 @@ li {
         height: 100%;
         .tables {
             border: none;
+          cursor: pointer;
             /*<!--box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;-->*/
             /*border-top: 2px solid #39f;*/
             .ivu-table:before {
@@ -1976,6 +1983,7 @@ li {
 #page2 {
   .ptjy {
     .tables {
+      cursor: pointer;
         .ivu-table {
               background-color:transparent;
               font-size:14px;
