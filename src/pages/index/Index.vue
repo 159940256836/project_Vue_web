@@ -1709,6 +1709,7 @@ li {
           color: #fff;
           border-left: 2px solid #8090af;
           outline: none;
+          line-height: 16px;
         }
         img {
           position: absolute;
