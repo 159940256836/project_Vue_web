@@ -108,210 +108,210 @@
     </div>
 </template>
 <script>
-import { minHeightMinx } from "../../minxs/minxs.js";
-import { fail } from 'assert';
+import { minHeightMinx } from '../../minxs/minxs.js'
+import { fail } from 'assert'
 
 export default {
-    name: "IeoDetail",
-    data() {
-        return {
-            text: "",
-            raiseCoinNum: "",
-            number: true,
-            base: "",
-            exchange: "",
-            password: "",
-            content: {},
-            status,
-            tabid: 1,
-        }
+  name: 'IeoDetail',
+  data() {
+    return {
+      text: '',
+      raiseCoinNum: '',
+      number: true,
+      base: '',
+      exchange: '',
+      password: '',
+      content: {},
+      status,
+      tabid: 1
+    }
+  },
+  computed: {
+    isLogin: function() {
+      return this.$store.getters.isLogin
     },
-    computed: {
-        isLogin: function () {
-            return this.$store.getters.isLogin;
-        },
-        statusStr() {
-            if (this.status == '预热中') {
-                return this.$t('Ieo.preheating')
-            } else if (this.status == "进行中") {
-                return this.$t('Ieo.underway')
-            } else if (this.status == "已完成") {
-                return this.$t('Ieo.finished')
-            } else if (this.status == "去登录") {
-                return this.$t('uc.login.login')
+    statusStr() {
+      if (this.status == '预热中') {
+          return this.$t('Ieo.preheating')
+        } else if (this.status == '进行中') {
+            return this.$t('Ieo.underway')
+          } else if (this.status == '已完成') {
+              return this.$t('Ieo.finished')
+            } else if (this.status == '去登录') {
+              return this.$t('uc.login.login')
             }
-        },
-        statusClass() {
-            if (this.status == '预热中') {
-                return "pink"
-            } else if (this.status == "进行中") {
-                return "red"
-            } else if (this.status == "已完成") {
-                return "yellow"
+    },
+    statusClass() {
+      if (this.status == '预热中') {
+          return 'pink'
+        } else if (this.status == '进行中') {
+            return 'red'
+          } else if (this.status == '已完成') {
+              return 'yellow'
             }
+    }
+  },
+  created() {
+    if (this.$route.params.id) {
+      const params = {
+          pageSize: 1,
+          pageNum: 1,
+          status: '',
+          id: this.$route.params.id
         }
+      this.init(params)
+    } else {
+      this.$router.back(-1)
+    }
+  },
+  methods: {
+    changeTab(n) {
+      this.tabid = n
     },
-    created() {
-        if (this.$route.params.id) {
-            const params = {
-                pageSize: 1,
-                pageNum: 1,
-                status: '',
-                id: this.$route.params.id
-            };
-            this.init(params);
-        } else {
-            this.$router.back(-1);
-        }
-    },
-    methods: {
-        changeTab(n) {
-            this.tabid = n;
-        },
-        init(params) {
-            this.getMsg(params)
+    init(params) {
+      this.getMsg(params)
                 .then(res => {
-                    return res;
+                  return res
                 }).then(res => {
-                    return this.getMyRaiseCoin(res);
+                  return this.getMyRaiseCoin(res)
                 }).then(res => {
-                    this.raiseCoinNum = res;
+                  this.raiseCoinNum = res
                 })
-        },
-        getMsg(params) {
-            return this.$http.post(this.host + "/uc/ieo/all", params).then(res => {
-                const resp = res.body;
-                if (resp.code == 0) {
-                    return new Promise((resolve, reject) => {
-                        this.content = resp.data[0] || {};
-                        this.base = 1;
-                        this.exchange = this.multity(1, this.content.ratio);
-                        if (!this.isLogin) {
-                            this.raiseCoinNum = "--";
-                            /*去登录*/
-                            this.status = this.$t('common.logIn');
-                            this.getStatus(this.content);
-                            return;
-                        } else {
-                            this.getStatus(this.content);
-                            resolve(this.content.raiseCoin);
-                        }
-                    });
-                } else {
-                    this.$Notice.error({
-                        /*温馨提示*/
-                        title: this.$t('common.hint'),
-                        /*暂无该产品*/
-                        desc: this.$t('common.hint1')
-                    });
-                }
-            })
-        },
-        multity(x, y) {
-            return String((x * y).toFixed(3));
-        },
-        changeNum() {
-            if (this.isNaNFun(this.base)) {
-                this.exchange = 0;
+    },
+    getMsg(params) {
+      return this.$http.post(this.host + '/uc/ieo/all', params).then(res => {
+          const resp = res.body
+          if (resp.code == 0) {
+              return new Promise((resolve, reject) => {
+                    this.content = resp.data[0] || {}
+                    this.base = 1
+                    this.exchange = this.multity(1, this.content.ratio)
+                    if (!this.isLogin) {
+                      this.raiseCoinNum = '--'
+                            /* 去登录*/
+                      this.status = this.$t('common.logIn')
+                      this.getStatus(this.content)
+                      return
+                    } else {
+                      this.getStatus(this.content)
+                      resolve(this.content.raiseCoin)
+                    }
+                  })
             } else {
-                this.exchange = this.multity(Number(this.base), this.content.ratio);
+              this.$Notice.error({
+                        /* 温馨提示*/
+                    title: this.$t('common.hint'),
+                        /* 暂无该产品*/
+                    desc: this.$t('common.hint1')
+                  })
             }
-        },
-        getMyRaiseCoin(coin) {
-            return this.$http.get(this.host + `/uc/asset/wallet/${coin}`).then(res => {
-                const resp = res.body;
-                if (resp.code == 0) {
-                    return new Promise((resolve, reject) => {
-                        !resp.data && (this.raiseCoinNum = 0);
-                        resp.data && resolve(resp.data.balance);
-                    })
-                }
-            })
-        },
-        startSale() {//发起募集
+        })
+    },
+    multity(x, y) {
+      return String((x * y).toFixed(3))
+    },
+    changeNum() {
+      if (this.isNaNFun(this.base)) {
+          this.exchange = 0
+        } else {
+          this.exchange = this.multity(Number(this.base), this.content.ratio)
+        }
+    },
+    getMyRaiseCoin(coin) {
+      return this.$http.get(this.host + `/uc/asset/wallet/${coin}`).then(res => {
+          const resp = res.body
+          if (resp.code == 0) {
+              return new Promise((resolve, reject) => {
+                    !resp.data && (this.raiseCoinNum = 0)
+                    resp.data && resolve(resp.data.balance)
+                  })
+            }
+        })
+    },
+    startSale() { // 发起募集
             // 5.14修改
-            if (!this.isLogin) {
-                this.$router.push("/login");
-                return;
-            }
-            if (this.status != '进行中') {
-                return false
-            }
+      if (!this.isLogin) {
+          this.$router.push('/login')
+          return
+        }
+      if (this.status != '进行中') {
+          return false
+        }
 
-            if (this.isNaNFun(this.base)) {
-                this.$Message.error("请输入符合规格的持有币种");
-                return;
-            }
-            if (this.password.length == 0) {
-                /*请输入交易密码*/
-                this.$Message.error(this.$t('Ieo.enter'));
-                return;
-            }
-            const params = {
-                id: this.$route.params.id,
-                amount: this.base,
-                jyPassword: this.password
-            };
-            this.$http.post(this.host + "/uc/ieo/order", params).then(res => {
-                const resp = res.body;
-                /*温馨提示*/
-                if (resp.code == 0) {
-                    this.$Notice.success({
-                        title: this.$t('common.hint'),
-                        desc: resp.message
-                    })
-                } else {
-                    this.$Notice.error({
-                        title: this.$t('common.hint'),
-                        desc: resp.message
-                    })
+      if (this.isNaNFun(this.base)) {
+          this.$Message.error('请输入符合规格的持有币种')
+          return
+        }
+      if (this.password.length == 0) {
+                /* 请输入交易密码*/
+          this.$Message.error(this.$t('Ieo.enter'))
+          return
+        }
+      const params = {
+          id: this.$route.params.id,
+          amount: this.base,
+          jyPassword: this.password
+        }
+      this.$http.post(this.host + '/uc/ieo/order', params).then(res => {
+          const resp = res.body
+                /* 温馨提示*/
+          if (resp.code == 0) {
+                this.$Notice.success({
+                    title: this.$t('common.hint'),
+                    desc: resp.message
+                  })
+              } else {
+                this.$Notice.error({
+                    title: this.$t('common.hint'),
+                    desc: resp.message
+                  })
+              }
+        })
+      this.password = ''
+    },
+    isNaNFun(num) {
+      return isNaN(Number(num))
+    },
+    isEmpty(num) {
+      return num !== null && num !== undefined
+    },
+    getStatus(content) {
+      const startTime = this.formatTime(content.startTime),
+          nowTime = new Date().getTime(),
+          endTime = this.formatTime(content.endTime),
+          surplusAmount = content.surplusAmount > 0,
+          resultFun = (time1, time2) => time1 - time2 > 0,
+          compareStAndNow = resultFun(nowTime, startTime) > 0, // 查看当前时间是否在开始时间之后;
+          compareNowAndEnd = resultFun(endTime, nowTime) > 0// 查看当前时间是否在结束时间之前;
+      let str = ''
+            /* 去登录*/
+      if (!this.isLogin) {
+            str = this.$t('common.logIn')
+          } else {
+            if (!compareStAndNow) {
+                    /* 预热中*/
+              this.status = '预热中'
+              str = this.$t('Ieo.preheating')
+            } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
+                    /* 进行中*/
+                this.status = '进行中'
+                str = this.$t('Ieo.underway')
+              } else if (!compareNowAndEnd || !surplusAmount) {
+                    /* 已完成*/
+                  this.status = '已完成'
+                  str = this.$t('Ieo.finished')
                 }
-            })
-            this.password = "";
-        },
-        isNaNFun(num) {
-            return isNaN(Number(num));
-        },
-        isEmpty(num) {
-            return num !== null && num !== undefined;
-        },
-        getStatus(content) {
-            const startTime = this.formatTime(content.startTime),
-                nowTime = new Date().getTime(),
-                endTime = this.formatTime(content.endTime),
-                surplusAmount = content.surplusAmount > 0,
-                resultFun = (time1, time2) => time1 - time2 > 0,
-                compareStAndNow = resultFun(nowTime, startTime) > 0,//查看当前时间是否在开始时间之后;
-                compareNowAndEnd = resultFun(endTime, nowTime) > 0;//查看当前时间是否在结束时间之前;
-            let str = "";
-            /*去登录*/
-            if (!this.isLogin) {
-                str = this.$t('common.logIn')
-            } else {
-                if (!compareStAndNow) {
-                    /*预热中*/
-                    this.status = '预热中';
-                    str = this.$t('Ieo.preheating')
-                } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
-                    /*进行中*/
-                    this.status = '进行中';
-                    str = this.$t('Ieo.underway')
-                } else if (!compareNowAndEnd || !surplusAmount) {
-                    /*已完成*/
-                    this.status = '已完成';
-                    str = this.$t('Ieo.finished')
-                }
-            }
+          }
 
-            this.str = str;
+      this.str = str
             // if(this.status=="进行中"){
             //     this.status="确定"
             // }
-        },
-        formatTime(date) {
-            return new Date(date).getTime();
-        },
+    },
+    formatTime(date) {
+      return new Date(date).getTime()
     }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -619,6 +619,7 @@ $lineColor: rgb(71, 100, 146);
                         background: #3399ff;
                         color: #fff;
                         line-height: 2.5;
+                        cursor: pointer;
                         span {
                             display: block;
                             width: 100%;

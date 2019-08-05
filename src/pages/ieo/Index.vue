@@ -172,7 +172,7 @@ export default {
         color:#333333;
         margin-top:42px;
         margin-bottom: 40px !important;
-
+        cursor: pointer;
     }
     .ieoWrapper:nth-child(3) {
         margin-right: 0%;

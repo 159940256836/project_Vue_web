@@ -51,70 +51,70 @@
 </template>
 <script>
 export default {
-    name: "ieoAbstract",
-    data() {
-        return {
-            status: ""
+  name: 'ieoAbstract',
+  data() {
+      return {
+          status: ''
         }
     },
-    props: {
-        content: Object
+  props: {
+      content: Object
     },
-    created() {
-        const content = this.content,
-            startTime = this.formatTime(content.startTime),
-            nowTime = new Date().getTime(),
-            endTime = this.formatTime(content.endTime),
-            surplusAmount = content.surplusAmount > 0,
-            resultFun = (time1, time2) => time1 - time2 > 0,
-            compareStAndNow = resultFun(nowTime, startTime),//查看当前时间是否在开始时间之后;
-            compareNowAndEnd = resultFun(endTime, nowTime);//查看当前时间是否在结束时间之前;
-        let str = "";
-        if (!compareStAndNow) {
-            /*预热中*/
-            this.status = '预热中';
+  created() {
+      const content = this.content,
+          startTime = this.formatTime(content.startTime),
+          nowTime = new Date().getTime(),
+          endTime = this.formatTime(content.endTime),
+          surplusAmount = content.surplusAmount > 0,
+          resultFun = (time1, time2) => time1 - time2 > 0,
+          compareStAndNow = resultFun(nowTime, startTime), // 查看当前时间是否在开始时间之后;
+          compareNowAndEnd = resultFun(endTime, nowTime)//查看当前时间是否在结束时间之前;
+        let str = '';
+      if (!compareStAndNow) {
+            /* 预热中*/
+          this.status = '预热中'
             str = this.$t('Ieo.preheating')
         } else if (compareStAndNow && compareNowAndEnd && surplusAmount) {
-            /*进行中*/
-            this.status = '进行中';
+            /* 进行中*/
+          this.status = '进行中'
             str = this.$t('Ieo.underway')
         } else if (!compareNowAndEnd || !surplusAmount) {
-            /*已完成*/
-            this.status = '已完成';
+            /* 已完成*/
+          this.status = '已完成'
             str = this.$t('Ieo.finished')
         }
-        this.str = str;
+      this.str = str
     },
-    methods: {
-        formatTime(date) {
-            return new Date(date).getTime();
+  methods: {
+      formatTime(date) {
+          return new Date(date).getTime()
         },
-        getDetail() {
-            this.$router.push({
-                name: "IeoDetail",
-                params: {
-                    id: this.content.id
+      getDetail() {
+          this.$router.push({
+              name: 'IeoDetail',
+              params: {
+                  id: this.content.id
                 }
             })
         }
     },
-    computed:{
-        statusStr(){
-            if(this.status == '预热中'){
-                return this.$t('Ieo.preheating')
-            }else if(this.status == "进行中"){
-                return this.$t('Ieo.underway')
-            }else if(this.status == "已完成"){
-                return this.$t('Ieo.finished')
+  computed: {
+      statusStr() {
+          if (this.status == '预热中') {
+              return this.$t('Ieo.preheating')
+            } else if (this.status == '进行中') {
+              return this.$t('Ieo.underway')
+            } else if (this.status == '已完成') {
+              return this.$t('Ieo.finished')
             }
         },
-        statusClass(){
-            if(this.status == '预热中'){
-                return "pink"
-            }else if(this.status == "进行中"){
-                return "red"
-            }else if(this.status == "已完成"){
-                return "yellow"
+      statusClass() {
+          if (this.status == '预热中') {
+              return 'pink'
+            } else if (this.status == '进行中') {
+              return 'red'
+            } else if (this.status == '已完成') {
+              return 'yellow'
             }
         }
     }

@@ -512,10 +512,10 @@ export default {
       /** *
        * 获取公告
        */
-      var result = JSON.parse(localStorage.getItem('result'))
-      this.FAQList = result.content.slice(0, 5)
+    var result = JSON.parse(localStorage.getItem('result'))
+    this.FAQList = result.content.slice(0, 5)
       // console.log(result, result.content, this.FAQList);
-      this.initialize()
+    this.initialize()
     if (this.$route.path === '/') {
       this.pageView = 'page-view'
     } else {
@@ -618,20 +618,20 @@ export default {
                 })
     },
     logout() {
-        this.$store.commit('setMember', null)
-        localStorage.removeItem("TOKEN");
-        setTimeout(() => {
-            location.href = '/'
-        }, 500)
+      this.$store.commit('setMember', null)
+      localStorage.removeItem('TOKEN')
+      setTimeout(() => {
+        location.href = '/'
+      }, 500)
       this.$http.post(this.host + '/uc/loginout', {}).then(response => {
         var resp = response.body
         if (resp.code === 0) {
           this.$Message.success(resp.message)
-            this.$store.commit('setMember', null)
-            localStorage.removeItem("TOKEN");
-            setTimeout(() => {
-                location.href = '/'
-            }, 500)
+          this.$store.commit('setMember', null)
+          localStorage.removeItem('TOKEN')
+          setTimeout(() => {
+            location.href = '/'
+          }, 500)
         } else {
           this.$Message.error(resp.message)
         }
@@ -642,7 +642,7 @@ export default {
         var result = response.body
         if (result.code === 0 && result.data === false) {
           this.$store.commit('setMember', null)
-            localStorage.removeItem("TOKEN");
+          localStorage.removeItem('TOKEN')
         }
       })
     },

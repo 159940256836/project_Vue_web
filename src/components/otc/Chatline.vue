@@ -127,209 +127,205 @@
     </div>
 </template>
 <script>
-var Stomp = require('stompjs');
-var SockJS = require('sockjs-client');
-var stompClient = null;
+var Stomp = require('stompjs')
+var SockJS = require('sockjs-client')
+var stompClient = null
 export default {
-    props: ['msg'],
-    data() {
-        return {
+  props: ['msg'],
+  data() {
+    return {
             // audioSrc:'/assets/audio/notice.wav',
-            audioSrc:'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/notice.wav',
-            fOpenAudio:true,
-            fOpenNotice:false,
-            currentPage: 1,
-            totalPage: 1,
-            showMore: true,
-            mytext: '',
-            othermsg: '11',
-            mymsg: '22',
-            msgLists: [],
-            otherList: [],
-            myList: [],
-            myitem: {},
-            otheritem: {},
-            timeNow: '',
-            systext: '',
-        }
-    },
-    computed: {
-        msgnameS: function() {
-            return (this.msg.otherSide + '').slice(0, 1)
-        },
-        user: function() {
-            return JSON.parse(localStorage.getItem("MEMBER"))
-        },
-        usernameS: function() {
-            return (this.user.username + '').slice(0, 1)
-        },
-        orderId: function() {
-            return this.$route.query.tradeId
-        },
-
-    },
-    watch: {
-        'processData': 'scrollToBottom',
-    },
-    methods: {
-        //让浏览器滚动条保持在最低部
-        scrollToBottom: function() {
-            this.$nextTick(() => {
-                var div = document.getElementById('scrollChat')
-                div.scrollTop = div.scrollHeight
-            })
-        },
-        playAudio:function () {
-            var audio = document.getElementById('noticeMusic');
-            if(audio!==null) audio.play();
-        },
-        handleNoticeClick:function () {
-            if (this.fOpenNotice) {
-              if (window.Notification) {
-                if (Notification.permission == "default") {
-                    /*请点击允许进行开启*/
-                  this.$Message.info(this.$t('description.browser1'));
-                  Notification.requestPermission().then(function(result) {
-                    // result可能是是granted, denied, 或default.
-                      /*'您已屏蔽消息提醒，如需开通，请查看帮助!'*/
-                    if(result == "denied") this.$Message.info(this.$t('description.browser2'));
-                  });
-                }else if(Notification.permission == "denied") {
-                  this.$Message.info(this.$t('description.browser2'));
-                }else {
-                  this.$Message.info();
-                }
-              } else {
-                  /*'您的浏览器不支持该功能'*/
-                this.$Message.info(this.$t('description.browser3'));
-              }
-            }else {
-                /*"您已关闭桌面消息提醒!"*/
-              this.$Message.info(this.$t('description.browser4'));
-            }
-        },
-        handleAudioClick:function () {
-          if (this.fOpenAudio) {
-              /*您已开启声音消息提醒*/
-            this.$Message.info(this.$t('description.browser5'));
-          }else {
-              /*您已关闭声音消息提醒*/
-            this.$Message.info(this.$t('description.browser6'));
-          }
-        },
-        connect: function() {
-            let self = this
-            var socket = new SockJS(this.host+'/chat/chat-webSocket');
-            stompClient = Stomp.over(socket);
-            stompClient.debug = false;
-            stompClient.connect({}, function(frame) {
-                stompClient.subscribe('/user/' + self.msg.myId + '/' + self.orderId, function(response) {
-                  self.otheritem = JSON.parse(response.body)
-                    self.msgLists.push(self.otheritem)
-                    if(self.fOpenNotice && window.Notification && Notification.permission == "granted") {
-                        var notification = new Notification(self.msg.otherSide+"：", {
-                            body: self.otheritem.content,
-                            icon: 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/20190509154221.png'
-                        });
-
-                        notification.onclick = function() {
-                            notification.close();
-                        };
-                    }
-                    if(self.fOpenAudio) {
-                        self.playAudio();
-                    }
-                });
-            });
-        },
-        sendName: function() {
-            if (this.mytext) {
-                let self = this
-                var content = this.mytext
-                var jsonParam = {
-                    'uidTo': this.msg.hisId,
-                    'uidFrom': this.msg.myId,
-                    'orderId': this.orderId,
-                    'nameFrom': this.user.username,
-                    'nameTo': this.msg.otherSide,
-                    'content': content,
-                };
-
-                stompClient.send("/app/message/chat", {}, JSON.stringify(jsonParam));
-                self.myitem = jsonParam
-                self.myitem['timeNow'] = self.CurentTime()
-                self.msgLists.push(self.myitem)
-                this.scrollToBottom()
-                self.mytext = ''
-            } else {
-                this.$Message.info(this.$t('otc.chatline.contentmsg'));
-            }
-        },
-        CurentTime: function() {
-            var now = new Date();
-
-            var year = now.getFullYear();       //年
-            var month = now.getMonth() + 1;     //月
-            var day = now.getDate();            //日
-
-            var hh = now.getHours();            //时
-            var mm = now.getMinutes();          //分
-
-            var clock = year + "-";
-
-            if (month < 10)
-                clock += "0";
-
-            clock += month + "-";
-
-            if (day < 10)
-                clock += "0";
-
-            clock += day + " ";
-
-            if (hh < 10)
-                clock += "0";
-
-            clock += hh + ":";
-            if (mm < 10) clock += '0';
-            clock += mm;
-            return clock;
-        },
-        getBefore: function(page) {
-            let self = this
-            let params = {}
-            let selfarr = []
-            let myarr = []
-            params['orderId'] = this.orderId
-            params['Page'] = this.currentPage
-            this.$http.post(this.host+'/chat/getHistoryMessage', params).then(response => {
-                var resp = response.body;
-                this.totalPage = resp.totalPage
-                if (resp.data) {
-                    if (this.currentPage < resp.totalPage || this.currentPage == resp.totalPage) {
-                        this.showMore = true
-                        for (let i = 0; i < resp.data.length; i++) {
-                            let objitem = {}
-                            objitem = resp.data[i]
-                            self.msgLists.unshift(objitem)
-                        }
-                        this.currentPage = this.currentPage - 0 + 1
-                    } else {
-                        this.showMore = false
-                    }
-
-                } else {
-                    this.showMore = false
-                }
-            })
-        },
-
-    },
-    created() {
-        this.getBefore()
-        this.scrollToBottom()
-        this.connect()
+      audioSrc: 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/notice.wav',
+      fOpenAudio: true,
+      fOpenNotice: false,
+      currentPage: 1,
+      totalPage: 1,
+      showMore: true,
+      mytext: '',
+      othermsg: '11',
+      mymsg: '22',
+      msgLists: [],
+      otherList: [],
+      myList: [],
+      myitem: {},
+      otheritem: {},
+      timeNow: '',
+      systext: ''
     }
+  },
+  computed: {
+    msgnameS: function() {
+      return (this.msg.otherSide + '').slice(0, 1)
+    },
+    user: function() {
+      return JSON.parse(localStorage.getItem('MEMBER'))
+    },
+    usernameS: function() {
+      return (this.user.username + '').slice(0, 1)
+    },
+    orderId: function() {
+      return this.$route.query.tradeId
+    }
+
+  },
+  watch: {
+    'processData': 'scrollToBottom'
+  },
+  methods: {
+        // 让浏览器滚动条保持在最低部
+    scrollToBottom: function() {
+      this.$nextTick(() => {
+        var div = document.getElementById('scrollChat')
+        div.scrollTop = div.scrollHeight
+      })
+    },
+    playAudio: function() {
+      var audio = document.getElementById('noticeMusic')
+      if (audio !== null) audio.play()
+    },
+    handleNoticeClick: function() {
+      if (this.fOpenNotice) {
+        if (window.Notification) {
+          if (Notification.permission == 'default') {
+                    /* 请点击允许进行开启*/
+            this.$Message.info(this.$t('description.browser1'))
+            Notification.requestPermission().then(function(result) {
+                    // result可能是是granted, denied, 或default.
+                      /* '您已屏蔽消息提醒，如需开通，请查看帮助!'*/
+              if (result == 'denied') this.$Message.info(this.$t('description.browser2'))
+            })
+          } else if (Notification.permission == 'denied') {
+            this.$Message.info(this.$t('description.browser2'))
+          } else {
+            this.$Message.info()
+          }
+        } else {
+                  /* '您的浏览器不支持该功能'*/
+          this.$Message.info(this.$t('description.browser3'))
+        }
+      } else {
+                /* "您已关闭桌面消息提醒!"*/
+        this.$Message.info(this.$t('description.browser4'))
+      }
+    },
+    handleAudioClick: function() {
+      if (this.fOpenAudio) {
+              /* 您已开启声音消息提醒*/
+        this.$Message.info(this.$t('description.browser5'))
+      } else {
+              /* 您已关闭声音消息提醒*/
+        this.$Message.info(this.$t('description.browser6'))
+      }
+    },
+    connect: function() {
+      const self = this
+      var socket = new SockJS(this.host + '/chat/chat-webSocket')
+      stompClient = Stomp.over(socket)
+      stompClient.debug = false
+      stompClient.connect({}, function(frame) {
+        stompClient.subscribe('/user/' + self.msg.myId + '/' + self.orderId, function(response) {
+          self.otheritem = JSON.parse(response.body)
+          self.msgLists.push(self.otheritem)
+          if (self.fOpenNotice && window.Notification && Notification.permission == 'granted') {
+            var notification = new Notification(self.msg.otherSide + '：', {
+              body: self.otheritem.content,
+              icon: 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/20190509154221.png'
+            })
+
+            notification.onclick = function() {
+              notification.close()
+            }
+          }
+          if (self.fOpenAudio) {
+            self.playAudio()
+          }
+        })
+      })
+    },
+    sendName: function() {
+      if (this.mytext) {
+        const self = this
+        var content = this.mytext
+        var jsonParam = {
+          'uidTo': this.msg.hisId,
+          'uidFrom': this.msg.myId,
+          'orderId': this.orderId,
+          'nameFrom': this.user.username,
+          'nameTo': this.msg.otherSide,
+          'content': content
+        }
+
+        stompClient.send('/app/message/chat', {}, JSON.stringify(jsonParam))
+        self.myitem = jsonParam
+        self.myitem['timeNow'] = self.CurentTime()
+        self.msgLists.push(self.myitem)
+        this.scrollToBottom()
+        self.mytext = ''
+      } else {
+        this.$Message.info(this.$t('otc.chatline.contentmsg'))
+      }
+    },
+    CurentTime: function() {
+      var now = new Date()
+
+      var year = now.getFullYear()       // 年
+      var month = now.getMonth() + 1     // 月
+      var day = now.getDate()            // 日
+
+      var hh = now.getHours()            // 时
+      var mm = now.getMinutes()          // 分
+
+      var clock = year + '-'
+
+      if (month < 10) { clock += '0' }
+
+      clock += month + '-'
+
+      if (day < 10) { clock += '0' }
+
+      clock += day + ' '
+
+      if (hh < 10) { clock += '0' }
+
+      clock += hh + ':'
+      if (mm < 10) clock += '0'
+      clock += mm
+      return clock
+    },
+    getBefore: function(page) {
+      const self = this
+      const params = {}
+      const selfarr = []
+      const myarr = []
+      params['orderId'] = this.orderId
+      params['Page'] = this.currentPage
+      this.$http.post(this.host + '/chat/getHistoryMessage', params).then(response => {
+        var resp = response.body
+        this.totalPage = resp.totalPage
+        if (resp.data) {
+          if (this.currentPage < resp.totalPage || this.currentPage == resp.totalPage) {
+            this.showMore = true
+            for (let i = 0; i < resp.data.length; i++) {
+              let objitem = {}
+              objitem = resp.data[i]
+              self.msgLists.unshift(objitem)
+            }
+            this.currentPage = this.currentPage - 0 + 1
+          } else {
+            this.showMore = false
+          }
+        } else {
+          this.showMore = false
+        }
+      })
+    }
+
+  },
+  created() {
+    this.getBefore()
+    this.scrollToBottom()
+    this.connect()
+  }
 }
 </script>
 <style scoped lang="scss">

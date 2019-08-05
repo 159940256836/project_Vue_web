@@ -1094,10 +1094,10 @@ import DepthGraph from '@components/exchange/DepthGraph.vue'
 import $ from '@js/jquery.min.js'
 export default {
   components: {
-      expandRow,
-      DepthGraph,
-      transfermodal,
-      coinDetails
+    expandRow,
+    DepthGraph,
+    transfermodal,
+    coinDetails
   },
   beforeRouteLeave(to, from, next) {
     if (this.stompClient) {
@@ -1108,9 +1108,9 @@ export default {
   data() {
     const self = this
     return {
-        coinInfo: {}, // 币种详情
-        detail: '',
-        detailCoin: '',
+      coinInfo: {}, // 币种详情
+      detail: '',
+      detailCoin: '',
       currentLoading: true, // 当前委单默认loading
       historyLoading: true, // 历史委单默认loading
       day: require('../../assets/images/exchange/night.png'), // 黑色版本
@@ -1803,7 +1803,7 @@ export default {
         rows: []
       },
       fullTrade: {},
-        detailsModal: false // 币币交易详情模态框默认
+      detailsModal: false // 币币交易详情模态框默认
     }
   },
   computed: {
@@ -2010,33 +2010,33 @@ export default {
   },
   methods: {
       // 币币交易币种详情信息
-      getCoinDetails() {
+    getCoinDetails() {
           // 判断当前是否存在默认交易对
           // 存在把当前交易币种截取之后传到后台
           // 不存在获取对默认交易对并进行截取传参
-          if (this.$route.params.pathMatch) {
-              this.detail = this.$route.params.pathMatch.match(/(\S*)_/)[1].toUpperCase(); // 截取字符串特定符号前的全部字符
+      if (this.$route.params.pathMatch) {
+        this.detail = this.$route.params.pathMatch.match(/(\S*)_/)[1].toUpperCase() // 截取字符串特定符号前的全部字符
+      } else {
+        this.detail = this.detailCoin.match(/(\S*)_/)[1]
+      }
+      this.detailsModal = true
+      this.$http.get(this.host + `/uc/coinDescription/detail?coinName=${this.detail}`).then(res => {
+        const data = res.body
+        if (data.code == 0) {
+            this.coinInfo = data.data
           } else {
-              this.detail = this.detailCoin.match(/(\S*)_/)[1]
+            this.coinInfo = []
           }
-          this.detailsModal = true
-          this.$http.get(this.host + `/uc/coinDescription/detail?coinName=${this.detail}` ).then(res => {
-            const data = res.body
-            if (data.code == 0) {
-                this.coinInfo = data.data
-            } else {
-                this.coinInfo = []
-            }
-          })
-      },
+      })
+    },
     // 默认交易对
     getdefaultSymbol() {
       return this.$http.get(this.host + '/market/default/symbol').then(res => {
         const data = res.body
         if (data.code == 0) {
           return new Promise((resolve, reject) => {
-              this.detailCoin = data.data.web
-              resolve(data.data.web)
+            this.detailCoin = data.data.web
+            resolve(data.data.web)
           }).catch(reject => reject('BTC_USDT'))
         }
       })
