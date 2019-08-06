@@ -29,13 +29,13 @@
                                         </Option>
                                     </Select>
                                 </div>
-                                <div class="inner-box deposit-address" style="float: left;margin-right: 15px;">
+                                <div class="inner-box deposit-address" style="margin-right: 15px;">
                                     <span class="describe" style="float: left;">{{$t('uc.finance.recharge.address')}}:&nbsp;&nbsp;</span>
                                     <div class="title" style="float: left">
                                         <Input
                                             v-model="qrcode.value"
                                             readonly
-                                            style="width: 360px"
+                                            style="width: 280px"
                                         />
                                         <span
                                             v-if="buttonAdd"
@@ -91,9 +91,9 @@
                                     <p class="acb-p1">{{$t('common.tip')}}</p>
                                     <p class="acb-p2">
                                         <!--禁止充值除LCT之外的其他资产，任何非LCT资产充值将不可找回。-->
-                                        • {{$t('uc.finance.recharge.msg1')}} {{ coinType }} {{$t('uc.finance.recharge.msg11')}} {{ coinType }} {{$t('uc.finance.recharge.msg12')}}<br>
+                                        • {{$t('uc.finance.recharge.msg1')}} {{ coinType? coinType: '当前' }} {{$t('uc.finance.recharge.msg11')}} {{ coinType }} {{$t('uc.finance.recharge.msg12')}}<br>
                                         • {{$t('uc.finance.recharge.msg2')}}<br>
-                                        • {{$t('uc.finance.recharge.msg3')}}<br>
+                                        • {{$t('uc.finance.recharge.msg3')}}{{ coinTypeFee?coinTypeFee:'0' }}，{{$t('uc.finance.recharge.msg31')}}<br>
                                         • {{$t('uc.finance.recharge.msg4')}}<br>
                                         • {{$t('uc.finance.recharge.msg5')}}
                                     </p>
@@ -159,6 +159,8 @@ export default {
                 coinName: ""
             },
             coinType: "",
+            coinAddress: "",
+            coinTypeFee: "",
             coinList: [],
             tableRecharge: [],
             allTableRecharge: []
@@ -196,13 +198,21 @@ export default {
             this.$Message.error(this.$t("uc.finance.recharge.copysuccess"));
         },
         changeCoin(value) {
-            this.coinList.forEach((item)=>{//model就是上面的数据源
-                console.log(item);
-                // return item.id === id;//筛选出匹配数据
+            console.log(value)
+            this.coinList.forEach((item)=>{
+                //model就是上面的数据源
+                // console.log(item, item.coin.unit, value);
+                if (item.coin.unit == value) {
+                    this.coinTypeFee = item.coin.minTxFee
+                    this.qrcode.value = item.address
+                }
+                // console.log(this.coinTypeFee)
             });
-            // vm.modelName=obj.model;
-            // console.log("modelName"+vm.modelName)
-            console.log(value);
+            if (!this.qrcode.value) {
+                this.buttonAdd = true
+            } else {
+                this.buttonAdd = false
+            }
             if (value) {
                 this.transaction.symbol = value
             } else if (value == undefined) {
@@ -297,7 +307,9 @@ export default {
         }
     },
     created() {
+        console.log(this.$route.query, this.coinType)
         this.coinType = this.$route.query.name || "";
+        console.log(this.coinType)
         // this.getMember();
         this.getMoney();
         this.getList();
@@ -446,7 +458,8 @@ export default {
                 padding: 0 25px 25px;
                 .action-inner {
                     width: 100%;
-                    display: table;
+                    height: 80px;
+                    /*display: table;*/
                     border-bottom: 1px solid #2A3850;
                     padding: 12px 0;
                     .inner-box.deposit-address {
@@ -457,7 +470,7 @@ export default {
 
                 .action-inner {
                     .inner-box {
-                        display: table-cell;
+                        /*display: table-cell;*/
                         /*width: 100%;*/
                         .title {
                             position: relative;
@@ -466,17 +479,16 @@ export default {
                             }
                             .copy-add {
                                 width: 95px;
-                                height: 30px;
+                                border: 1px solid #58698A;
+                                border-left: 0;
                                 text-align: center;
                                 position: relative;
-                                top: 0;
-                                right: 101px;
+                                right: 7px;
                                 line-height: 30px;
                                 display: inline-block;
                                 font-size: 14px;
                                 color: #3399ff;
                                 cursor: pointer;
-                                border-left: 1px solid #58698A;
                             }
                             a.link-copy {
                                 font-size: 14px;
@@ -783,6 +795,7 @@ export default {
             border: 1px solid #58698A;
             background: transparent;
             border-radius: 0;
+            color: #8090af;
         }
         #record_pages li.ivu-page-item.ivu-page-item-active {
             background-color: #111530;
