@@ -79,6 +79,7 @@
                 width="534"
                 class="popups-modal"
                 :mask-closable="false"
+                footer-hide
                 >
                 <div class="detail-list">
                     <Form ref="formValidate1" :model="formValidate1" :rules="ruleValidate" :label-width="100">
@@ -123,6 +124,7 @@
                 width="750"
                 class="popups-modal"
                 :mask-closable="false"
+                footer-hide
                 >
                 <div class="detail-list">
                     <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="115">
@@ -176,6 +178,7 @@
                 width="750"
                 class="popups-modal"
                 :mask-closable="false"
+                footer-hide
                 >
                 <div class="detail-list">
                     <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="115">
@@ -1093,15 +1096,15 @@ p.describe {
         background: transparent;
     }
 
-    .ivu-btn.disabled, .ivu-btn.disabled.active, 
-    .ivu-btn.disabled:active, .ivu-btn.disabled:focus, 
-    .ivu-btn.disabled:hover, 
-    .ivu-btn[disabled], .ivu-btn[disabled].active, 
-    .ivu-btn[disabled]:active, .ivu-btn[disabled]:focus, 
-    .ivu-btn[disabled]:hover, 
-    fieldset[disabled] .ivu-btn, fieldset[disabled] .ivu-btn.active, 
-    fieldset[disabled] .ivu-btn:active, 
-    fieldset[disabled] .ivu-btn:focus, 
+    .ivu-btn.disabled, .ivu-btn.disabled.active,
+    .ivu-btn.disabled:active, .ivu-btn.disabled:focus,
+    .ivu-btn.disabled:hover,
+    .ivu-btn[disabled], .ivu-btn[disabled].active,
+    .ivu-btn[disabled]:active, .ivu-btn[disabled]:focus,
+    .ivu-btn[disabled]:hover,
+    fieldset[disabled] .ivu-btn, fieldset[disabled] .ivu-btn.active,
+    fieldset[disabled] .ivu-btn:active,
+    fieldset[disabled] .ivu-btn:focus,
     fieldset[disabled] .ivu-btn:hover {
         background: transparent;
         color: #3399FF;
