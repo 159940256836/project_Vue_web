@@ -1008,6 +1008,7 @@ module.exports = {
       newpwd: 'Enter new password',
       confirmpwd: 'Enter new password again',
       save: 'Save',
+      present: 'current',
       pwdvalidate1: 'Enter confirm password',
       pwdvalidate2: 'Password not same!',
       resettelpwd: 'Reset tel password',

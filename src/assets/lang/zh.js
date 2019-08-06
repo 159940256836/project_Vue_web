@@ -1009,6 +1009,7 @@ module.exports = {
       newpwd: '请输入字母加数字新密码',
       confirmpwd: '请再次确认密码',
       save: '保存',
+      present: '当前',
       pwdvalidate1: '请输入确认密码',
       pwdvalidate2: '两次密码输入不一致!',
       resettelpwd: '重置手机密码',

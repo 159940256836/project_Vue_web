@@ -91,9 +91,9 @@
                                     <p class="acb-p1">{{$t('common.tip')}}</p>
                                     <p class="acb-p2">
                                         <!--禁止充值除LCT之外的其他资产，任何非LCT资产充值将不可找回。-->
-                                        • {{$t('uc.finance.recharge.msg1')}} {{ coinType }} {{$t('uc.finance.recharge.msg11')}} {{ coinType }} {{$t('uc.finance.recharge.msg12')}}<br>
+                                        • {{$t('uc.finance.recharge.msg1')}} {{ coinType? coinType: '当前' }} {{$t('uc.finance.recharge.msg11')}} {{ coinType }} {{$t('uc.finance.recharge.msg12')}}<br>
                                         • {{$t('uc.finance.recharge.msg2')}}<br>
-                                        • {{$t('uc.finance.recharge.msg3')}}{{ coinTypeFee }}，{{$t('uc.finance.recharge.msg31')}}<br>
+                                        • {{$t('uc.finance.recharge.msg3')}}{{ coinTypeFee?coinTypeFee:'0' }}，{{$t('uc.finance.recharge.msg31')}}<br>
                                         • {{$t('uc.finance.recharge.msg4')}}<br>
                                         • {{$t('uc.finance.recharge.msg5')}}
                                     </p>
@@ -483,7 +483,7 @@ export default {
                                 border-left: 0;
                                 text-align: center;
                                 position: relative;
-                                right: 5px;
+                                right: 7px;
                                 line-height: 30px;
                                 display: inline-block;
                                 font-size: 14px;
