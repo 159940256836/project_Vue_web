@@ -55,163 +55,162 @@
     </div>
 </template>
 <script>
-import moment from "moment";
+import moment from 'moment'
 export default {
-    name: "ieoadmin",
-    data() {
-
-        return {
-            select:"select",
-            total: 0,
-            formItem: {
-                date: "",
-            },
-            pageNo: 1,
-            data: [],
-            paramsFun: function () { },
-            params: {
-                pageNum: 1,
-                ieoName: "",
-                status: "",//状态 (0-失败，1-成功)
-                startTime: "",//开始时间
-                endTime: "",//结束时间
-            }
+  name: 'Ieoadmin',
+  data() {
+    return {
+      select: 'select',
+      total: 0,
+      formItem: {
+        date: ''
+      },
+      pageNo: 1,
+      data: [],
+      paramsFun: function() { },
+      params: {
+        pageNum: 1,
+        ieoName: '',
+        status: '', // 状态 (0-失败，1-成功)
+        startTime: '', // 开始时间
+        endTime: '' // 结束时间
+      }
+    }
+  },
+  created() {
+    const mobile = this.$store.getters.member.mobile
+    const userName = this.$store.getters.member.username
+    const getParams = (mobile, userName, pageSize) => (pageNum) => (ieoName) => (status) => (startTime) => (endTime) => ({
+      mobile,
+      userName,
+      pageSize,
+      pageNum,
+      ieoName,
+      status,
+      startTime,
+      endTime
+    })
+    this.paramsFun = getParams(mobile, userName, 10)
+    this.init()
+  },
+  methods: {
+    init() {
+      this.getList(this.paramsFun).then(res => {
+        const data = res.data
+        this.data = data
+        this.total = res.total
+      })
+    },
+    getList(paramsFun) {
+      const temp = this.params
+      const params = paramsFun(temp.pageNum)(temp.ieoName)(temp.status)(temp.startTime)(temp.endTime)
+      return this.$http.post(this.host + '/uc/ieo/record', params).then(res => {
+        const resp = res.body
+        if (resp.code == 0) {
+          return new Promise((resolve, reject) => {
+            resolve(resp)
+          })
         }
+      })
     },
-    created() {
-        const mobile = this.$store.getters.member.mobile;
-        const userName = this.$store.getters.member.username;
-        const getParams = (mobile, userName, pageSize) => (pageNum) => (ieoName) => (status) => (startTime) => (endTime) => ({
-            mobile,
-            userName,
-            pageSize,
-            pageNum,
-            ieoName,
-            status,
-            startTime,
-            endTime
-        });
-        this.paramsFun = getParams(mobile, userName, 10);
-        this.init();
+    search() {
+      this.pageNo = 1
+      const params = this.params
+      const formItem = this.formItem
+      const rangeDate = formItem.date
+      if (rangeDate && rangeDate[0]) {
+        const startTime = new Date(rangeDate[0])
+        const endTime = new Date(rangeDate[1])
+        params.startTime = this.formatTime(startTime)
+        params.endTime = this.formatTime(endTime)
+      } else {
+        params.startTime = ''
+        params.endTime = ''
+      }
+      params.ieoName = formItem.ieoName || ''
+      params.status = formItem.status || ''
+      this.init()
     },
-    methods: {
-        init() {
-            this.getList(this.paramsFun).then(res => {
-                const data = res.data;
-                this.data = data;
-                this.total = res.total;
-            })
-        },
-        getList(paramsFun) {
-            const temp = this.params;
-            const params = paramsFun(temp.pageNum)(temp.ieoName)(temp.status)(temp.startTime)(temp.endTime);
-            return this.$http.post(this.host + "/uc/ieo/record", params).then(res => {
-                const resp = res.body;
-                if (resp.code == 0) {
-                    return new Promise((resolve, reject) => {
-                        resolve(resp);
-                    })
-                }
-            })
-        },
-        search() {
-            this.pageNo = 1;
-            const params = this.params;
-            const formItem = this.formItem;
-            let rangeDate = formItem.date;
-            if (rangeDate && rangeDate[0]) {
-                let startTime = new Date(rangeDate[0]);
-                let endTime = new Date(rangeDate[1]);
-                params.startTime = this.formatTime(startTime);
-                params.endTime = this.formatTime(endTime);
-            } else {
-                params.startTime = "";
-                params.endTime = "";
-            }
-            params.ieoName = formItem.ieoName || "";
-            params.status = formItem.status || "";
-            this.init();
-        },
         // handleClear() {
         // },
-        changePage(index) {
-            this.pageNo = index;
-            this.params.pageNum = index;
-            this.init();
-        },
-        formatTime(str) {
-            return moment(str).format("YYYY-MM-DD HH:mm:ss");
-        }
+    changePage(index) {
+      this.pageNo = index
+      this.params.pageNum = index
+      this.init()
     },
-    computed:{
-        columns(){
-            const arr = [];
-            const L = this.$store.getters.lang == "English" ? 115 : '';
-            const L0 = this.$store.getters.lang == "English" ? 'left' : '';
-            const L1 = this.$store.getters.lang == "English" ? 111 : '';
-            const L2 = this.$store.getters.lang == "English" ? 98 : '';
-            const L3 = this.$store.getters.lang == "English" ? 123 : '';
-            const L4 = this.$store.getters.lang == "English" ? 187 : 138;
-            const L5 = this.$store.getters.lang == "English" ? 82 : '';
-            const L6 = this.$store.getters.lang == "English" ? 140 : '';
-            const L7 = this.$store.getters.lang == "English" ? 105 : '';
-            const L9 = this.$store.getters.lang == "English" ? 80 : '';
-            const L90 = this.$store.getters.lang == "English" ? 'right' : '';
-            arr.push({
-                title: this.$t('ieoAdmin.currencySale'),
-                fixed: L0,
-                width: L,
-                key: "saleCoin"
-            });
-            arr.push({
-                title: this.$t('ieoAdmin.projectName'),
-                width: L1,
-                key: "ieoName"
-            });
-            arr.push({
-               title: this.$t('ieoAdmin.totalSale'),
-                width: L2,
-                key: "saleAmount"
-            });
-            arr.push({
-                title: this.$t('ieoAdmin.currenCollected'),
-                width: L3,
-                key: "raiseCoin"
-            });
-            arr.push({
-                title: this.$t('ieoAdmin.FundraisingCycle'),
-                width: L4,
-                render: (h, params) => {
-                    return h("span", {}, params.row.startTime + params.row.endTime)
-                }
-            });
-            arr.push({
-                title: this.$t('ieoAdmin.SubscriptionAmount'),
-                width: L6,
-                key: "receiveAmount"
-            });
-            arr.push({
-                title: this.$t('ieoAdmin.useAmount'),
-                width: L7,
-                key: "payAmount"
-            });
-            arr.push({
-                title: this.$t('ieoAdmin.SubscriptionTime'),
-                width: L5,
-                key: "createTime"
-            });
-            arr.push({
-                title: this.$t('ieoAdmin.SubscriptionStatus'),
-                fixed: L90,
-                width: L9,
-                render: (h, params) => {
-                    const str = params.row.status == 0 ? this.$t('ieoAdmin.failure') : this.$t('ieoAdmin.success');
-                    return h("span", {}, str);
-                }
-            });
-            return arr;
-        }
+    formatTime(str) {
+      return moment(str).format('YYYY-MM-DD HH:mm:ss')
     }
+  },
+  computed: {
+    columns() {
+      const arr = []
+      const L = this.$store.getters.lang == 'English' ? 115 : ''
+      const L0 = this.$store.getters.lang == 'English' ? 'left' : ''
+      const L1 = this.$store.getters.lang == 'English' ? 111 : ''
+      const L2 = this.$store.getters.lang == 'English' ? 98 : ''
+      const L3 = this.$store.getters.lang == 'English' ? 123 : ''
+      const L4 = this.$store.getters.lang == 'English' ? 187 : 138
+      const L5 = this.$store.getters.lang == 'English' ? 82 : ''
+      const L6 = this.$store.getters.lang == 'English' ? 140 : ''
+      const L7 = this.$store.getters.lang == 'English' ? 105 : ''
+      const L9 = this.$store.getters.lang == 'English' ? 80 : ''
+      const L90 = this.$store.getters.lang == 'English' ? 'right' : ''
+      arr.push({
+        title: this.$t('ieoAdmin.currencySale'),
+        fixed: L0,
+        width: L,
+        key: 'saleCoin'
+      })
+      arr.push({
+        title: this.$t('ieoAdmin.projectName'),
+        width: L1,
+        key: 'ieoName'
+      })
+      arr.push({
+        title: this.$t('ieoAdmin.totalSale'),
+        width: L2,
+        key: 'saleAmount'
+      })
+      arr.push({
+        title: this.$t('ieoAdmin.currenCollected'),
+        width: L3,
+        key: 'raiseCoin'
+      })
+      arr.push({
+        title: this.$t('ieoAdmin.FundraisingCycle'),
+        width: L4,
+        render: (h, params) => {
+          return h('span', {}, params.row.startTime + params.row.endTime)
+        }
+      })
+      arr.push({
+        title: this.$t('ieoAdmin.SubscriptionAmount'),
+        width: L6,
+        key: 'receiveAmount'
+      })
+      arr.push({
+        title: this.$t('ieoAdmin.useAmount'),
+        width: L7,
+        key: 'payAmount'
+      })
+      arr.push({
+        title: this.$t('ieoAdmin.SubscriptionTime'),
+        width: L5,
+        key: 'createTime'
+      })
+      arr.push({
+        title: this.$t('ieoAdmin.SubscriptionStatus'),
+        fixed: L90,
+        width: L9,
+        render: (h, params) => {
+          const str = params.row.status == 0 ? this.$t('ieoAdmin.failure') : this.$t('ieoAdmin.success')
+          return h('span', {}, str)
+        }
+      })
+      return arr
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
