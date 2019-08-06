@@ -137,6 +137,7 @@ export default {
 .ieo_box_banner_top{
     // background:url(../../assets/img/IEObanner.png) 0 0 no-repeat;
     background:url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/IEObanner.png') 0 0 no-repeat;
+    background-position: center;
 }
 
 .ivu-tabs{

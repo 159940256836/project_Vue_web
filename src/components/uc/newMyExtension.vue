@@ -1,7 +1,6 @@
 <template>
     <div class="newMyExtension" id="newMy">
         <div class="new_title">
-            <img src="../../assets/img/center.png">
         </div>
         <div class="nav-rights">
             <div class="nav_titlt">{{$t('apiAdmin.Mywasharing')}}</div>
@@ -185,148 +184,148 @@ export default {
   data() {
     const m = this.$store.getters.lang == 'English' ? mapEn : map
     return {
-          number: 0,
-          buttonLists: [
-            {
-              text: this.$t('uc.extension.title2')
-            },
-            {
-              text: this.$t('uc.extension.title3')
-            }
-          ],
-          currentCommission: '0.00',
-          commissionPaying: '6%',
-          changeActive: 0,
-          qrcode: {
-            value: '',
-            size: 200,
-            code: ''
-          },
-          loading: true,
-          tablePromoteFriends: [
-            {
-              title: this.$t('uc.extension.username'),
-              key: 'username',
-              align: 'center'
-            },
-            {
-              title: this.$t('uc.extension.createdtime'),
-              key: 'createTime',
-              align: 'center'
-            },
-            {
-              title: this.$t('uc.extension.userlevel'),
-              key: 'level',
-              align: 'center',
-              render: function(h, params) {
-                  return h('span', 'V' + (parseInt(params.row.level) + 1))
-                }
-            }
-          ],
-          dataPromoteFriends: {},
-          tablePromoteMoney: [
-            {
-              title: this.$t('uc.extension.type'),
-              render: (h, params) => {
-                  return h('div', {}, m.get(params.row.type))
-                }
-            },
-            {
-              title: this.$t('uc.extension.amount'),
-              key: 'amount',
-              align: 'center'
-            },
-            {
-              title: this.$t('uc.extension.amounttime'),
-              key: 'createTime',
-              align: 'center'
-            }
-          ],
-          dataPromoteMoney: {},
-          pageSize: 10,
-          currentPage: 1
+      number: 0,
+      buttonLists: [
+        {
+          text: this.$t('uc.extension.title2')
+        },
+        {
+          text: this.$t('uc.extension.title3')
         }
+      ],
+      currentCommission: '0.00',
+      commissionPaying: '6%',
+      changeActive: 0,
+      qrcode: {
+        value: '',
+        size: 200,
+        code: ''
+      },
+      loading: true,
+      tablePromoteFriends: [
+        {
+          title: this.$t('uc.extension.username'),
+          key: 'username',
+          align: 'center'
+        },
+        {
+          title: this.$t('uc.extension.createdtime'),
+          key: 'createTime',
+          align: 'center'
+        },
+        {
+          title: this.$t('uc.extension.userlevel'),
+          key: 'level',
+          align: 'center',
+          render: function(h, params) {
+            return h('span', 'V' + (parseInt(params.row.level) + 1))
+          }
+        }
+      ],
+      dataPromoteFriends: {},
+      tablePromoteMoney: [
+        {
+          title: this.$t('uc.extension.type'),
+          render: (h, params) => {
+            return h('div', {}, m.get(params.row.type))
+          }
+        },
+        {
+          title: this.$t('uc.extension.amount'),
+          key: 'amount',
+          align: 'center'
+        },
+        {
+          title: this.$t('uc.extension.amounttime'),
+          key: 'createTime',
+          align: 'center'
+        }
+      ],
+      dataPromoteMoney: {},
+      pageSize: 10,
+      currentPage: 1
+    }
   },
   methods: {
     share() {
-      },
+    },
     getList() {
-        this.loading = false
-      },
+      this.loading = false
+    },
     actives(index) {
-        this.currentPage = 1
-        this.changeActive = index
-      },
+      this.currentPage = 1
+      this.changeActive = index
+    },
     qrcodeM() {
-        console.log(this.user)
-        const promotionCode = this.user.promotionCode
-        this.qrcode.value = this.url + '/#/mobilereg?agent=' + promotionCode + '&mobile=' + this.user.mobile
-        this.qrcode.code = promotionCode
-      },
+      console.log(this.user)
+      const promotionCode = this.user.promotionCode
+      this.qrcode.value = this.url + '/#/mobilereg?agent=' + promotionCode + '&mobile=' + this.user.mobile
+      this.qrcode.code = promotionCode
+    },
     onCopy(e) {
-        this.$Message.success(this.$t('uc.extension.copy_msg1') + e.text)
-      },
+      this.$Message.success(this.$t('uc.extension.copy_msg1') + e.text)
+    },
     onError(e) {
-        this.$Message.error(this.$t('uc.extension.copy_msg2'))
-      },
+      this.$Message.error(this.$t('uc.extension.copy_msg2'))
+    },
     getPromotionList(pageNo = 1, pageSize = 10) {
-        this.$http
+      this.$http
                 .post(this.host + '/uc/promotion/record', { pageNo, pageSize })
                 .then(response => {
                   var num = 0
                   console.log(response)
                   var resp = response.body
                   if (resp.code == 0) {
-                      this.dataPromoteFriends = resp.data
-                    } else {
-                      this.$Message.error(resp.message)
-                    }
+                    this.dataPromoteFriends = resp.data
+                  } else {
+                    this.$Message.error(resp.message)
+                  }
                 })
-      },
+    },
     promoteFriendsPageChange(data) {
-        this.currentPage = data
-        this.getPromotionList(data, this.pageSize)
-      },
+      this.currentPage = data
+      this.getPromotionList(data, this.pageSize)
+    },
     promoteMoneyPageChange(data) {
-        this.currentPage = data
-        this.getPromotionMoney(data, this.pageSize)
-      },
+      this.currentPage = data
+      this.getPromotionMoney(data, this.pageSize)
+    },
     getPromotionMoney(pageNum = 1) {
-        const params = getParams({ pageNum })
-        var number = 0
+      const params = getParams({ pageNum })
+      var number = 0
             // 注册链接接口
-        this.$http.post(this.host + '/uc/integration/record/page_query', params)
+      this.$http.post(this.host + '/uc/integration/record/page_query', params)
                 .then(response => {
                   console.log(response)
                   var resp = response.body
                   if (resp.code == 0) {
-                      this.dataPromoteMoney = resp.data
-                      resp.data.map((item) => {
-                          number += item.amount
-                        })
-                      this.number = number
-                    } else {
+                    this.dataPromoteMoney = resp.data
+                    resp.data.map((item) => {
+                      number += item.amount
+                    })
+                    this.number = number
+                  } else {
                         // this.$Message.error(resp.message);
-                    }
+                  }
                 })
-      },
+    },
     updateLangData() {
-        this.buttonLists = [
-            {
-              text: this.$t('uc.extension.title2')
-            },
-            {
-              text: this.$t('uc.extension.title3')
-            }
-          ]
-        this.tablePromoteFriends[0].title = this.$t('uc.extension.username')
-        this.tablePromoteFriends[1].title = this.$t('uc.extension.createdtime')
-        this.tablePromoteFriends[2].title = this.$t('uc.extension.userlevel')
-        this.tablePromoteMoney[0].title = this.$t('uc.extension.symbol')
-        this.tablePromoteMoney[1].title = this.$t('uc.extension.amount')
-        this.tablePromoteMoney[2].title = this.$t('uc.extension.amounttime')
-        this.tablePromoteMoney[3].title = this.$t('uc.extension.remark')
-      }
+      this.buttonLists = [
+        {
+          text: this.$t('uc.extension.title2')
+        },
+        {
+          text: this.$t('uc.extension.title3')
+        }
+      ]
+      this.tablePromoteFriends[0].title = this.$t('uc.extension.username')
+      this.tablePromoteFriends[1].title = this.$t('uc.extension.createdtime')
+      this.tablePromoteFriends[2].title = this.$t('uc.extension.userlevel')
+      this.tablePromoteMoney[0].title = this.$t('uc.extension.symbol')
+      this.tablePromoteMoney[1].title = this.$t('uc.extension.amount')
+      this.tablePromoteMoney[2].title = this.$t('uc.extension.amounttime')
+      this.tablePromoteMoney[3].title = this.$t('uc.extension.remark')
+    }
   },
   created() {
     this.actives(this.changeActive)
@@ -337,16 +336,16 @@ export default {
   },
   computed: {
     user: function() {
-        return JSON.parse(localStorage.getItem('MEMBER'))
-      },
+      return JSON.parse(localStorage.getItem('MEMBER'))
+    },
     lang: function() {
-        return this.$store.state.lang
-      }
+      return this.$store.state.lang
+    }
   },
   watch: {
     lang: function() {
-        this.updateLangData()
-      }
+      this.updateLangData()
+    }
   }
 }
 </script>
@@ -517,10 +516,8 @@ export default {
         height:510px;
         position:relative;
         top:60px;
-        img{
-            width:100%;
-            height:510px;
-        }
+        background-image: url('../../assets/img/center.png');
+        background-position-x: center;
     }
     .nav-rights{
         width:1200px;

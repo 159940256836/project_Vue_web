@@ -384,7 +384,7 @@ export default {
   data() {
     const self = this
     return {
-      width: 254,
+      width: 256,
       height: 36,
       loading: false,
       progress: 0,
@@ -1004,6 +1004,7 @@ export default {
     }
   },
   created: function() {
+    this.width = document.body.clientWidth / 6 - 64
     this.stop()
     this.init()
     this.settiele()

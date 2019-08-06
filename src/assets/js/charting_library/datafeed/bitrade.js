@@ -58,6 +58,7 @@ WebsockFeed.prototype.subscribeBars = function(symbolInfo, resolution, onRealtim
     var resp = JSON.parse(msg.body)
     that.lastBar = { time: resp.time, open: resp.openPrice, high: resp.highestPrice, low: resp.lowestPrice, close: resp.closePrice, volume: resp.volume }
     that.currentBar = that.lastBar
+    console.log(that.lastBar)
     onRealtimeCallback(that.lastBar)
   })
 }
@@ -92,6 +93,16 @@ WebsockFeed.prototype._send = function(url, params) {
   })
 }
 
+function Processdata(event) {
+  for (let i = 0; i < event.length; i++) {
+    if (i != event.length - 1) {
+      event[i].close = event[i + 1].open
+      event[i].high = event[i + 1].open
+    }
+  }
+  return event
+}
+
 WebsockFeed.prototype.getBars = function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
   var bars = []
   var that = this
@@ -109,6 +120,7 @@ WebsockFeed.prototype.getBars = function(symbolInfo, resolution, from, to, onHis
         bars.push({ time: item[0], open: item[1], high: item[2], low: item[3], close: item[4], volume: item[5] })
       }
       that.lastBar = bars.length > 0 ? bars[bars.length - 1] : null
+      Processdata(bars)
       that.currentBar = that.lastBar
       var noData = bars.length == 0
       var retBars = onHistoryCallback(bars, { noData: noData })
