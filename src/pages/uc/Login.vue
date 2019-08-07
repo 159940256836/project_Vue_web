@@ -122,7 +122,7 @@
                 <div class="right-border">
                     <div class="right-main">
                         <div class="right-img">
-                            <img src="../../assets/images/qrcode.png" alt="">
+                            <img src="../../assets/images/app_qrcode.png" alt="">
                         </div>
                         <!--下载BDW App 随时随地，便捷交易 扫描二维码即可下载BDW App-->
                         <p style="margin-top: 15px;">{{ $t('common.down') }}</p>
@@ -452,7 +452,7 @@ export default {
           this.$Message.error(this.$t('uc.login.google'))
           return false
         } else {
-            this.login()
+          this.login()
         }
       } else if (this.openPhoneCode) {
         // 判断手机验证码不能为空
@@ -472,7 +472,7 @@ export default {
           this.initGtCaptcha()
         }
       } else {
-          this.initGtCaptcha()
+        this.initGtCaptcha()
       }
       // this.initGtCaptcha()
     },

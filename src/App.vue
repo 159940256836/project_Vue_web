@@ -159,7 +159,7 @@
                                 </a>
                                 <div class="api" slot="content" style="width:90%;">
                                     <div class="ios">
-                                        <img src="../src/assets/images/qrcode.png" alt="">
+                                        <img src="../src/assets/images/app_qrcode.png" alt="">
                                         <div class="tips">
                                             <span>{{ $t('header.appdownlaod') }}</span>
                                         </div>

@@ -229,7 +229,7 @@
                           </div>
                       </div>
                       <div class="Qrright">
-                          <img src='../../assets/images/qrcode.png' alt="" />
+                          <img src='../../assets/images/app_qrcode.png' alt="" />
                       </div>
                     </div>
                 </div>
