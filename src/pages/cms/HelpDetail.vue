@@ -126,7 +126,7 @@ export default {
 // lhl
 .helplist_helpdetail{
     background:#0e0e28;
-    
+
 }
 .helpdetail {
     // width: 70%;
@@ -185,14 +185,14 @@ export default {
             // color:#fff;
             padding-top:25px;
         }
-      
+
         .title {
             line-height: 1;
             margin-bottom: 20px;
             font-size:16px;
             color:#8090AF;
             margin-left:30px;
-            
+
         }
         .time {
             color: #fff;
@@ -229,7 +229,7 @@ export default {
 <style lang="scss">
 .main .content-wrap .content {
     .uploaded-img {
-        width: 25% !important;
+        width: 50% !important;
     }
 }
 .main .content-wrap .title,.main .content-wrap .time{

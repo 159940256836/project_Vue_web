@@ -8,6 +8,7 @@ import tradeInfo from '../pages/otc/TradeInfo'
 import checkuser from '../pages/otc/CheckUser'
 import chat from '../pages/otc/Chat'
 import notice from '../pages/cms/Notice'
+import fund from '../pages/fund/fund'
 import noticeitem from '../pages/cms/NoticeItem'
 import newhelp from '../pages/cms/NewHelp'
 import question from '../pages/cms/Question'
@@ -193,6 +194,7 @@ export default [
     { path: '/helpdetail', component: HelpDetail },
     // { path: '/message', component: Message },
     { path: '/notice', component: notice },
+    { path: '/fund', component: fund }, // BD基金
     { path: '/notice/index', component: noticeitem },
     { path: '*', component: Index },
     { path: '/blc', component: Blc },

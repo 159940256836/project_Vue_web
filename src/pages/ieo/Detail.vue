@@ -12,7 +12,7 @@
                 <div>
                     <!-- <span class="type">{{status}}</span> -->
                     <!-- 5.13修改 -->
-                    <div class="type" :class="statusClass">{{str}}</div>
+                    <div class="type" :class="statusClass">{{ strData }}</div>
                 </div>
             </div>
             <div class="ieoDetail">
@@ -22,28 +22,36 @@
                 <div class="detail">
                     <ul>
                         <li>
-                            <span class="span1">{{$t('Ieo.totalSales')}}</span>
-                            <span class="span2">{{content.saleAmount|threeComma}}&nbsp;&nbsp;{{content.saleCoin}}</span>
+                            <span class="span1">{{ $t('Ieo.totalSales') }}</span>
+                            <span class="span2">{{ content.saleAmount|threeComma }}&nbsp;&nbsp;{{ content.saleCoin }}</span>
                         </li>
                         <li>
-                            <span class="span1">{{$t('Ieo.onlineTime')}}</span>
-                            <span class="span2">{{content.expectTime}}</span>
+                            <span class="span1">{{ $t('Ieo.onlineTime') }}</span>
+                            <span class="span2">{{ content.expectTime }}</span>
                         </li>
                         <li>
-                            <span class="span1">{{$t('Ieo.currency')}}</span>
-                            <span class="specialColor span2">{{content.raiseCoin}}</span>
+                            <span class="span1">{{ $t('Ieo.currency') }}</span>
+                            <span class="specialColor span2">{{content.raiseCoin }}</span>
                         </li>
                         <li>
-                            <span class="span1">{{$t('Ieo.ratio')}}</span>
-                            <span class="span2">1{{content.raiseCoin}}={{content.ratio}}{{content.saleCoin}}</span>
+                            <span class="span1">{{ $t('Ieo.ratio') }}</span>
+                            <span class="span2">1{{ content.raiseCoin }}={{ content.ratio }}{{ content.saleCoin}}</span>
                         </li>
                         <li>
-                            <span class="span1">{{$t('Ieo.charge')}}</span>
-                            <span class="specialColor span2">{{$t('Ieo.fee')}}</span>
+                            <span class="span1">{{ $t('Ieo.quota') }}</span>
+                            <span class="span2">{{ content.limitAmount }} {{ content.saleCoin }}</span>
                         </li>
                         <li>
-                            <span class="span1">{{$t('Ieo.cycle')}}(UTC+8)</span>
-                            <span class="span2">{{content.startTime}}-{{content.endTime}}</span>
+                            <span class="span1">{{ $t('Ieo.agree2') }}</span>
+                            <span class="span2">{{ content.haveAmount }} {{ content.raiseCoin }}</span>
+                        </li>
+                        <li>
+                            <span class="span1">{{ $t('Ieo.charge') }}</span>
+                            <span class="specialColor span2">{{ $t('Ieo.fee') }}</span>
+                        </li>
+                        <li>
+                            <span class="span1">{{ $t('Ieo.cycle') }}(UTC+8)</span>
+                            <span class="span2">{{ content.startTime }}-{{ content.endTime }}</span>
                         </li>
                     </ul>
                 </div>
@@ -61,20 +69,32 @@
                 <ul>
                     <li>
                         <div style="color:#8090AF">
-                            <span class="img_box"><img src="../../assets/img/biaoqing.png" /></span>{{this.raiseCoinNum}}<span>{{content.raiseCoin}}</span>
+                            <span class="img_box">
+                                <img src="../../assets/img/biaoqing.png" />
+                                </span>{{this.raiseCoinNum}}<span>
+                                {{content.raiseCoin}}
+                            </span>
                         </div>
                         <div>
-                            <span class="img_box"><img style="color:rgb(19,133,211)" src="../../assets/img/biaoqing.png" /></span>
+                            <span class="img_box">
+                                <img style="color:rgb(19,133,211)" src="../../assets/img/biaoqing.png" />
+                            </span>
                             <!-- <Icon type="ios-card" color="rgb(19,133,211)" size="25" /> -->
                         </div>
                     </li>
                     <li class="li1 li10">
-                        <Input v-model="base" @on-change="changeNum">
+                        <Input
+                            v-model="base"
+                            @keyup.native="changeNum"
+                        >
                         <span slot="append">{{content.raiseCoin}}</span>
                         </Input>
                     </li>
                     <li class="li10">
-                        <Input v-model="exchange" disabled>
+                        <Input
+                            v-model="exchange"
+                            disabled
+                        >
                         <span slot="append">{{content.saleCoin}}</span>
                         </Input>
                     </li>
@@ -123,7 +143,8 @@ export default {
       password: '',
       content: {},
       status,
-      tabid: 1
+      tabid: 1,
+    strData: ''
     }
   },
   computed: {
@@ -211,11 +232,17 @@ export default {
       return String((x * y).toFixed(3))
     },
     changeNum() {
+        let baseDate = this.base * this.content.ratio
+        if (baseDate > this.content.limitAmount) {
+            this.$Message.error(this.$t('Ieo.agree1'))
+            return false
+        }
       if (this.isNaNFun(this.base)) {
           this.exchange = 0
         } else {
           this.exchange = this.multity(Number(this.base), this.content.ratio)
         }
+
     },
     getMyRaiseCoin(coin) {
       return this.$http.get(this.host + `/uc/asset/wallet/${coin}`).then(res => {
@@ -303,7 +330,7 @@ export default {
                 }
           }
 
-      this.str = str
+      this.strData = str
             // if(this.status=="进行中"){
             //     this.status="确定"
             // }
@@ -675,7 +702,7 @@ $lineColor: rgb(71, 100, 146);
         // border-left: 1px solid #3399ff;
         border-radius: 0;
         span {
-            font-size: 18px;
+            font-size: 14px;
         }
     }
 }

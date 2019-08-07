@@ -476,6 +476,7 @@ module.exports = {
     otcOrder: 'ORDER',
     ucenter: 'ACCOUNT',
     service: 'Announcement',
+    fund: 'BD Fund',
     downloadapp: 'Scan the code for download and installation',
     appdownlaod: 'Download APP',
     choose: 'Please select'
