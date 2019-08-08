@@ -86,7 +86,6 @@ module.exports = {
 
   },
   foot: {
-    Standardates: 'Standard rates',
     Tradrate: 'Trade rate',
     Gradrate: 'Grade rate',
     Otcurrenrates: 'Otc rates',
@@ -103,6 +102,13 @@ module.exports = {
     Setturrencndliarge: 'Settlement currency handling charge',
     Baseee: 'Base fee',
     currency: 'currency',
+    // 锁仓记录
+    amount: 'amount',
+    lockTime: 'lock Time',
+    unlockTime: 'unlock Time',
+    lockType: 'type',
+    lockStatus: 'status',
+    reason: 'reason',
     Transactiate: 'Transaction rate',
     Privaeement: 'Privacy agreement',
     Usment: 'User agreement',

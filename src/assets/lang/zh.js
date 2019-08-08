@@ -106,6 +106,13 @@ module.exports = {
     Setturrencndliarge: '结算币种手续费',
     Baseee: '基币手续费',
     currency: '币种',
+    // 锁仓记录
+    amount: '锁仓金额',
+    lockTime: '锁仓时间',
+    unlockTime: '解锁时间',
+    lockType: '锁仓类型',
+    lockStatus: '锁仓状态',
+    reason: '锁仓原因',
     Transactiate: '交易手续费率',
     Privaeement: '隐私协议',
     Usment: '用户协议',

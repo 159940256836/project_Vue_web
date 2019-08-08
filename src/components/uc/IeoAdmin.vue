@@ -236,7 +236,36 @@ export default {
     .nav-rights .ivu-table-cell {
         padding: 0 10px;
     }
-    #leoadmin{
+    #leoadmin {
+        .ivu-table {
+            td {
+                background: #111530;
+            }
+        }
+        .ivu-select-dropdown li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+            background: #191d3a;
+        }
+        .ivu-table {
+            tr {
+                &:nth-child(2n) {
+                    td {
+                        background: #10122B;
+                        border-bottom: 0 !important;
+                    }
+                }
+            }
+
+            .ivu-table-header {
+                th {
+                    background: #191D3A;
+                    border-bottom: 0 !important;
+                    color: #8090AF;
+                    &:last-child {
+                        text-align: center;
+                    }
+                }
+            }
+        }
       .ivu-form-item-label{
         color:#8090af;
         font-size:14px;
@@ -248,6 +277,7 @@ export default {
         margin:0;
       }
       .ivu-select-selection{
+          border-radius: 0;
         background: transparent;
         border-color: #58698A;
         color:#fff;
