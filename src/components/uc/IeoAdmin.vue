@@ -271,6 +271,7 @@ export default {
         margin:0;
       }
       .ivu-select-selection{
+          border-radius: 0;
         background: transparent;
         border-color: #58698A;
         color:#fff;
