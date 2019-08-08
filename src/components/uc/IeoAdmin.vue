@@ -1,6 +1,6 @@
 
 <template>
-    <div class="nav-rights">
+    <div class="nav-rights" id="leoadmin">
         <Form
             class="form"
             :model="formItem"
@@ -236,18 +236,45 @@ export default {
     .nav-rights .ivu-table-cell {
         padding: 0 10px;
     }
-    /*.ivu-table-overflowY::-webkit-scrollbar {!*滚动条整体样式*!*/
-    /*    width: 3px;     !*高宽分别对应横竖滚动条的尺寸*!*/
-    /*    height: 1px;*/
-    /*}*/
-    /*.ivu-table-overflowY::-webkit-scrollbar-thumb {!*滚动条里面小方块*!*/
-    /*    border-radius: 10px;*/
-    /*    background-color: rgba(255, 255, 255, .6);*/
-    /*    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);*/
-    /*}*/
-    /*.ivu-table-overflowY::-webkit-scrollbar-track {!*滚动条里面轨道*!*/
-    /*    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);*/
-    /*    !*border-radius: 10px;*!*/
-    /*    background: rgba(255, 255, 255, .1);*/
-    /*}*/
+    #leoadmin{
+      .ivu-form-item-label{
+        color:#8090af;
+        font-size:14px;
+      }
+      .ivu-select-selected-value{
+        color:#fff;
+      }
+      .ivu-form-item{
+        margin:0;
+      }
+      .ivu-select-selection{
+        background: transparent;
+        border-color: #58698A;
+        color:#fff;
+      }
+      .ivu-input{
+          height: 35px;
+          line-height: 35px;
+          border-radius: 0;
+          background: transparent;
+          border-color: #58698A;
+          color: #fff;
+      }
+      .ivu-input[disabled]:hover {
+            border-color: #58698A;
+        }
+        .ivu-input[disabled],
+        fieldset[disabled] .ivu-input {
+            background-color: #111530;
+        }
+      .ivu-table:before{
+          background-color:#111530;
+        }
+      .ivu-table-tip {
+          td {
+              text-align: center;
+              background: #111530;
+          }
+        }
+    }
 </style>

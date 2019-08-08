@@ -167,6 +167,13 @@
         >
           <GiveRecord v-if="activeName === 'giveRecord'"/>
         </TabPane>
+        <TabPane
+          :label="$t('uc.finance.ieo')"
+          name="Ieoadmin"
+          tab="tab1"
+        >
+          <Ieoadmin v-if="activeName === 'Ieoadmin'"/>
+        </TabPane>
       </Tabs>
     </div>
   </div>
@@ -179,8 +186,9 @@ import Withdraw from '../../components/uc/Withdraw'
 import WithdrawAddress from '../../components/uc/WithdrawAddress'
 import Bjc from '../../components/uc/Bjc'
 import GiveRecord from '../../components/uc/giveRecord'
+import Ieoadmin from '../../components/uc/Ieoadmin'
 export default {
-  components: { Money, Record, Recharge, Withdraw, WithdrawAddress, Bjc, GiveRecord },
+  components: { Money, Record, Recharge, Withdraw, WithdrawAddress, Bjc, GiveRecord, Ieoadmin },
   data() {
     return {
       activeName: 'money',
@@ -297,6 +305,9 @@ export default {
           break
         case '/personal/giveRecord':
           this.activeName = 'giveRecord'
+          break
+        case '/Ieoadmin':
+          this.activeName = 'Ieoadmin'
           break
         default:
           this.activeName = 'money'

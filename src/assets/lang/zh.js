@@ -689,7 +689,7 @@ module.exports = {
       blockLinks: '区块链接',
       circulateVolume: '发行价格',
       publishVolume: '发行总量',
-      summary: '币种介绍',
+      summary: '币种介绍'
     }
   },
   otc: {
@@ -1031,6 +1031,7 @@ module.exports = {
     finance: {
       pointManagement: '积分管理',
       CandyGivingRecords: '糖果赠送记录',
+      ieo: 'ieo认购记录',
       center: '财务中心',
       Quantityofarrival: '到账数量',
       currency: '币种',

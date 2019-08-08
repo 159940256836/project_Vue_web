@@ -691,7 +691,7 @@ module.exports = {
       blockLinks: 'block links',
       circulateVolume: 'Issue price',
       publishVolume: 'Total circulation',
-      summary: 'Coin introduced',
+      summary: 'Coin introduced'
     }
   },
   otc: {
@@ -1032,6 +1032,7 @@ module.exports = {
       center: 'Finance center',
       currency: 'currency',
       CandyGivingRecords: 'Candy giving records',
+      ieo: 'Ieo subscription record',
       pointManagement: 'point management',
       Quantityofarrival: 'Account number',
       personalassets: 'Personal assets',
