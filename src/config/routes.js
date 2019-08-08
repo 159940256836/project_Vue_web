@@ -81,6 +81,7 @@ import Ieo from '../pages/ieo/Index.vue'
 import IeoDetail from '../pages/ieo/Detail.vue'
 // 半价优选
 import priceIeo from '../pages/ieo/priceIeo.vue'
+import priceIeoDetail from '../pages/ieo/Detail.vue'
 // 开启或者关闭google验证
 import ClosegoogleVali from '../pages/google/CloseGoogleVali.vue'
 import OpenGoogleVali from '../pages/google/ResetGoogleVali.vue'
@@ -184,6 +185,7 @@ export default [
   }},
     { path: '/Ieo', name: 'ieo', component: Ieo },
     { path: '/priceIeo', name: 'priceIeo', component: priceIeo },
+    { path: '/priceIeo/priceIeoDetail', name: 'priceIeoDetail', component: priceIeoDetail },
     { path: '/Ieo/IeoDetail', name: 'IeoDetail', component: IeoDetail },
     { path: '/login/returnUrl/:returnUrl', component: Login },
     { path: '/register', component: Register },
@@ -247,6 +249,11 @@ export default [
         path: 'giveRecord',
         name: 'giveRecord',
         component: giveRecord
+      },
+      {
+        path: 'ieoadmin',
+        name: 'ieoadmin',
+        component: Ieoadmin
       },
       {
         path: 'adPublish',
@@ -350,11 +357,6 @@ export default [
       {
         path: '*',
         redirect: '/account'
-      },
-      {
-        path: 'ieoadmin',
-        name: 'ieoadmin',
-        component: Ieoadmin
       },
       {
         path: 'apiManage',

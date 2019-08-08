@@ -95,8 +95,8 @@
                     </div>-->
                     <div class="item">
                         <span class="coin">
-                            {{currentCoin.coin?currentCoin.coin:'---'}}
-                            <small style="font-size: 16px">/{{currentCoin.base?currentCoin.base:'---'}}</small>
+                          {{currentCoin.base?currentCoin.base:'---'}}
+                            <small style="font-size: 16px">/ {{currentCoin.coin?currentCoin.coin:'---'}}</small>
                         </span>
                     </div>
                     <!--币币交易币种详情-->

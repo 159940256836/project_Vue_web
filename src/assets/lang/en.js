@@ -480,7 +480,7 @@ module.exports = {
     downloadapp: 'Scan the code for download and installation',
     appdownlaod: 'Download APP',
     choose: 'Please select',
-    priceIeo: 'Half price optimization'
+    priceIeo: 'Half price zone'
   },
   merchant: {
     merchant_title: 'French currency merchant service agreement',
@@ -1033,7 +1033,7 @@ module.exports = {
       center: 'Finance center',
       currency: 'currency',
       CandyGivingRecords: 'Candy giving records',
-      ieo: 'Ieo subscription record',
+      ieo: 'subscription record',
       pointManagement: 'point management',
       Quantityofarrival: 'Account number',
       personalassets: 'Personal assets',
@@ -1043,6 +1043,7 @@ module.exports = {
       tradetail: 'Trade Mining',
       paydividends: 'Pay dividends',
       invitingmining: 'Inviting mining Awards',
+      record: 'Subscribe record',
       money: {
         cointype: 'Coin',
         balance: 'Available',

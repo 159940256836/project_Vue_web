@@ -36,7 +36,7 @@
     </div>
 </template>
 <script>
-import ieoAbstract from '../../components/ieo/index'
+import ieoAbstract from '../../components/ieo/priceIeo'
 import { minHeightMinx } from '../../minxs/minxs.js'
 const FixAraible = (pageSize) => (pageNum) => (status) => ({
   pageSize: pageSize,

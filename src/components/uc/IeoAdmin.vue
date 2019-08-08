@@ -236,7 +236,30 @@ export default {
     .nav-rights .ivu-table-cell {
         padding: 0 10px;
     }
+
     #leoadmin{
+      .ivu-select-item-focus{
+        background:#111530;
+      }
+      .ivu-page-item{
+         background: #111530;
+         border: 1px solid #191f44;
+      }
+      .ivu-page-item-active{
+        background: #191D3A;
+        border: 1px solid #191f44;
+      }
+      .ivu-table-wrapper .ivu-table .ivu-table-header th{
+         background-color: #191D3A;
+         text-align: center;
+      }
+      .ivu-table td{
+        background-color: #111530;
+        text-align: center;
+      }
+      .ivu-table-row:nth-child(2n) td{
+        background-color: #10122B;
+      }
       .ivu-form-item-label{
         color:#8090af;
         font-size:14px;

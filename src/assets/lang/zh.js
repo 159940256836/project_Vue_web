@@ -475,7 +475,7 @@ module.exports = {
     downloadapp: '扫码进行下载安装',
     appdownlaod: 'APP下载',
     choose: '请选择',
-    priceIeo: '半价优选'
+    priceIeo: '半价专区'
   },
 
   merchant: {
@@ -1032,7 +1032,7 @@ module.exports = {
     finance: {
       pointManagement: '积分管理',
       CandyGivingRecords: '糖果赠送记录',
-      ieo: 'ieo认购记录',
+      ieo: '认购记录',
       center: '财务中心',
       Quantityofarrival: '到账数量',
       currency: '币种',
@@ -1043,7 +1043,7 @@ module.exports = {
       invitingmining: '邀请挖矿奖励',
       charge: '充币',
       pickup: '提币',
-
+      record: '认购记录',
       money: {
         cointype: '币种名称',
         balance: '可用资产',

@@ -239,6 +239,9 @@ export default {
               case '/personal/giveRecord':
                 this.activeName = 'giveRecord'
                 break
+              case '/personal/Ieoadmin':
+                this.activeName = 'Ieoadmin'
+                break
               default:
                 this.activeName = 'money'
                 break
@@ -306,7 +309,7 @@ export default {
         case '/personal/giveRecord':
           this.activeName = 'giveRecord'
           break
-        case '/Ieoadmin':
+        case '/personal/Ieoadmin':
           this.activeName = 'Ieoadmin'
           break
         default:
