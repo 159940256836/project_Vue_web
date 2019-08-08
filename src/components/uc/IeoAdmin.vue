@@ -7,7 +7,7 @@
             :label-width="95"
             inline
         >
-            <FormItem :label="$t('ieoAdmin.projectName')">
+            <!-- <FormItem :label="$t('ieoAdmin.projectName')">
                 <Input
                     v-model="formItem.ieoName"
                     type="text"
@@ -19,7 +19,7 @@
                     v-model="formItem.date"
                     style="width:180px;"
                 ></DatePicker>
-            </FormItem>
+            </FormItem> -->
             <FormItem :label="$t('ieoAdmin.SubscriptionStatus')">
                 <Select
                     v-model="formItem.status"
@@ -145,36 +145,36 @@ export default {
   computed: {
     columns() {
       const arr = []
-      const L = this.$store.getters.lang == 'English' ? 115 : ''
-      const L0 = this.$store.getters.lang == 'English' ? 'left' : ''
-      const L1 = this.$store.getters.lang == 'English' ? 111 : ''
-      const L2 = this.$store.getters.lang == 'English' ? 98 : ''
-      const L3 = this.$store.getters.lang == 'English' ? 123 : ''
+      // const L = this.$store.getters.lang == 'English' ? 115 : ''
+      // const L0 = this.$store.getters.lang == 'English' ? 'left' : ''
+      // const L1 = this.$store.getters.lang == 'English' ? 111 : ''
+      // const L2 = this.$store.getters.lang == 'English' ? 98 : ''
+      // const L3 = this.$store.getters.lang == 'English' ? 123 : ''
       const L4 = this.$store.getters.lang == 'English' ? 187 : 138
-      const L5 = this.$store.getters.lang == 'English' ? 82 : ''
+      // const L5 = this.$store.getters.lang == 'English' ? 82 : ''
       const L6 = this.$store.getters.lang == 'English' ? 140 : ''
-      const L7 = this.$store.getters.lang == 'English' ? 105 : ''
-      const L9 = this.$store.getters.lang == 'English' ? 80 : ''
-      const L90 = this.$store.getters.lang == 'English' ? 'right' : ''
+      // const L7 = this.$store.getters.lang == 'English' ? 105 : ''
+      // const L9 = this.$store.getters.lang == 'English' ? 80 : ''
+      // const L90 = this.$store.getters.lang == 'English' ? 'right' : ''
       arr.push({
         title: this.$t('ieoAdmin.currencySale'),
-        fixed: L0,
-        width: L,
+        // fixed: L0,
+        // width: L,
         key: 'saleCoin'
       })
       arr.push({
         title: this.$t('ieoAdmin.projectName'),
-        width: L1,
+        // width: L1,
         key: 'ieoName'
       })
       arr.push({
         title: this.$t('ieoAdmin.totalSale'),
-        width: L2,
+        // width: L2,
         key: 'saleAmount'
       })
       arr.push({
         title: this.$t('ieoAdmin.currenCollected'),
-        width: L3,
+        // width: L3,
         key: 'raiseCoin'
       })
       arr.push({
@@ -191,18 +191,18 @@ export default {
       })
       arr.push({
         title: this.$t('ieoAdmin.useAmount'),
-        width: L7,
+        // width: L7,
         key: 'payAmount'
       })
       arr.push({
         title: this.$t('ieoAdmin.SubscriptionTime'),
-        width: L5,
+        // width: L5,
         key: 'createTime'
       })
       arr.push({
         title: this.$t('ieoAdmin.SubscriptionStatus'),
-        fixed: L90,
-        width: L9,
+        // fixed: L90,
+        // width: L9,
         render: (h, params) => {
           const str = params.row.status == 0 ? this.$t('ieoAdmin.failure') : this.$t('ieoAdmin.success')
           return h('span', {}, str)
