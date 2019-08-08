@@ -479,7 +479,8 @@ module.exports = {
     fund: 'BD Fund',
     downloadapp: 'Scan the code for download and installation',
     appdownlaod: 'Download APP',
-    choose: 'Please select'
+    choose: 'Please select',
+    priceIeo: 'Half price optimization'
   },
   merchant: {
     merchant_title: 'French currency merchant service agreement',

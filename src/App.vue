@@ -19,6 +19,7 @@
                         <router-link to="/otc/trade/bc">{{$t("header.otc")}}</router-link>
                          <!--<router-link to="/leverindex">{{$t("header.lever")}}</router-link>-->
                         <router-link to="/Ieo">{{$t('header.asset')}}</router-link>
+                         <router-link to="/priceIeo">{{$t("header.priceIeo")}}</router-link>
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">{{$t('header.help')}}</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>

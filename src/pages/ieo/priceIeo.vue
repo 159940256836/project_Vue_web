@@ -42,8 +42,8 @@ const FixAraible = (pageSize) => (pageNum) => (status) => ({
   pageSize: pageSize,
   pageNum: pageNum,
   status: status,
-  id: '',
-  ieoType: 0
+  ieoType: 1,
+  id: ''
 })
 const getParams = FixAraible(3)
 export default {
@@ -136,8 +136,8 @@ export default {
     height:510px;
 }
 .ieo_box_banner_top{
-    // background:url(../../assets/img/IEObanner.png) 0 0 no-repeat;
-    background:url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/IEObanner.png') 0 0 no-repeat;
+    background:url(../../assets/img/ieobanner.jpg) 0 0 no-repeat;
+    // background:url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/IEObanner.png') 0 0 no-repeat;
     background-position: center;
 }
 
@@ -288,11 +288,7 @@ $pageTheme: rgb(13, 70, 125);
 .father .ivu-page-item-active{
     background:#145b89
 }
-// .father .ivu-tabs-nav:hover{
-//     color:#fff;
-//     width:102px;
-//     height:46px;
-// }
+
 //5.13修改
 .father .ivu-tabs-tab-active{
     // background:#3399FF;

@@ -474,7 +474,8 @@ module.exports = {
     fund: 'BD基金',
     downloadapp: '扫码进行下载安装',
     appdownlaod: 'APP下载',
-    choose: '请选择'
+    choose: '请选择',
+    priceIeo: '半价优选'
   },
 
   merchant: {
@@ -1289,7 +1290,7 @@ module.exports = {
       FeeGrade: '手续费等级',
       myextension: '我的推广',
       safetyrecords: '账户安全记录',
-      lockRecord: '锁仓记录',
+      lockRecord: '锁仓记录'
     },
     order: {
       ordercenter: '订单中心',

@@ -79,7 +79,8 @@ import feereturn from '../pages/feereturn/Feereturn'
 // ieo
 import Ieo from '../pages/ieo/Index.vue'
 import IeoDetail from '../pages/ieo/Detail.vue'
-
+// 半价优选
+import priceIeo from '../pages/ieo/priceIeo.vue'
 // 开启或者关闭google验证
 import ClosegoogleVali from '../pages/google/CloseGoogleVali.vue'
 import OpenGoogleVali from '../pages/google/ResetGoogleVali.vue'
@@ -182,7 +183,7 @@ export default [
     hide: true
   }},
     { path: '/Ieo', name: 'ieo', component: Ieo },
-
+    { path: '/priceIeo', name: 'priceIeo', component: priceIeo },
     { path: '/Ieo/IeoDetail', name: 'IeoDetail', component: IeoDetail },
     { path: '/login/returnUrl/:returnUrl', component: Login },
     { path: '/register', component: Register },
