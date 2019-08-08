@@ -116,6 +116,10 @@ import mobilereg from '../components/yidong/registers'
 import registe from '../components/yidong/registe'
 // 用户安全记录
 import safetyRecords from '../components/uc/safetyRecords'
+
+// 锁仓记录
+import LockRecord from '../components/uc/lockRecord'
+
 // 币币币种详情
 import coinDetails from '../components/exchange/coinDetails.vue'
 
@@ -128,6 +132,7 @@ import MobileLogin from '../components/mobile/login.vue'
 export default [
     { path: '/newMyExtension', component: newMyExtension },
     { path: '/safetyRecords', component: safetyRecords },
+    { path: '/LockRecord', component: LockRecord },
     { path: '/apiapimanagement', component: apiapimanagement },
     { path: '/bdm', component: bdm },
     { path: '/Usereement', component: Usereement },

@@ -62,12 +62,10 @@
                                     <DropdownMenu slot="list">
                                         <!--个人资产-->
                                         <DropdownItem name="moneyindex">
-<!--<router-link to="/personal/money">{{ $t('uc.finance.personalassets') }}</router-link>-->
                                             <span>{{$t("uc.finance.personalassets")}}</span>
                                         </DropdownItem>
                                         <!--资产流水-->
                                         <DropdownItem name="record">
-<!--<router-link to="/personal/record">{{ $t('uc.finance.billdetail') }}</router-link>-->
                                             <span>{{ $t("uc.finance.billdetail") }}</span>
                                         </DropdownItem>
                                         <!--充币-->
@@ -99,24 +97,34 @@
                                         <Icon type="ios-arrow-down" size="6" style="margin-left:6px;"/>
                                     </a>
                                     <DropdownMenu slot="list">
+                                        <!--账户管理-->
                                         <DropdownItem>
                                             <router-link to="/account">
                                                  {{$t("uc.menuTitle.AccountManagement")}}
                                             </router-link>
                                         </DropdownItem>
+                                        <!--我的推广-->
                                          <DropdownItem>
                                             <router-link to="/newMyExtension">
                                                  {{$t("apiAdmin.Mypromotion")}}
                                             </router-link>
                                         </DropdownItem>
-                                        <DropdownItem>
-                                            <router-link to="/safetyRecords">
-                                                {{$t("uc.member.safetyrecords")}}
-                                            </router-link>
-                                        </DropdownItem>
+                                        <!--API管理-->
                                          <DropdownItem>
                                             <router-link to="/apiapimanagement">
                                                  {{$t("apiAdmin.APmanagement")}}
+                                            </router-link>
+                                        </DropdownItem>
+                                        <!--锁仓记录-->
+                                        <DropdownItem>
+                                            <router-link to="/LockRecord">
+                                                {{$t("uc.member.lockRecord")}}
+                                            </router-link>
+                                        </DropdownItem>
+                                        <!--账户安全管理记录-->
+                                        <DropdownItem>
+                                            <router-link to="/safetyRecords">
+                                                {{$t("uc.member.safetyrecords")}}
                                             </router-link>
                                         </DropdownItem>
                                         <div @click="logout" style="text-align: left;padding-left: 10px;">
