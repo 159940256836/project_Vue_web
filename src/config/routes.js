@@ -90,7 +90,7 @@ import OpenGoogleVali from '../pages/google/ResetGoogleVali.vue'
 import feeLevel from '../components/uc/FeeLevel.vue'
 
 // IEo管理
-import Ieoadmin from '../components/uc/IeoAdmin.vue'
+import Ieoadmin from '../components/uc/Ieoadminpage.vue'
 
 // api管理
 import apiManage from '../components/uc/apiManage.vue'

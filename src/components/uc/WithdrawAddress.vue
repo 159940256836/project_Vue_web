@@ -193,432 +193,429 @@ export default {
   components: {},
 
   data() {
-    var that = this;
+    var that = this
     return {
-      interval:function(){},
+      interval: function() {},
       disbtn: false,
       dataCount: 10,
       loading: true,
-        id: '',
-      //else
+      id: '',
+      // else
       sendMsgDisabled1: false,
       sendMsgDisabled2: false,
       time1: 60, // 发送验证码倒计时
       time2: 60, // 发送验证码倒计时
       modal2: false,
       modal_loading: false,
-      withdrawAddr: "",
-      remark: "",
-      coinType: "",
+      withdrawAddr: '',
+      remark: '',
+      coinType: '',
       coinList: [],
       tableColumnsRecharge: [
         {
-          title: this.$t("uc.finance.withdraw.symbol"),
-          key: "unit"
+          title: this.$t('uc.finance.withdraw.symbol'),
+          key: 'unit'
         },
         {
-          title: this.$t("uc.finance.withdraw.address"),
-          key: "address",
-            align: "center",
-            render: (h, param) => {
-                let str = param.row.address;
-                let tokenLenth = param.row.address.length
+          title: this.$t('uc.finance.withdraw.address'),
+          key: 'address',
+          align: 'center',
+          render: (h, param) => {
+            const str = param.row.address
+            const tokenLenth = param.row.address.length
                 // 显示前五位 后五位
-                let tokenCont = param.row.address.substring(0, 5)
-                        +
-                        '...'
-                        + param.row.address.substring(tokenLenth - 5, tokenLenth)
-                if (str) {
-                    return h("div", [
-                        h('Icon', {
-                            props: {
-                                type: 'ios-paper-outline',
-                            },
-                            style: {
-                                height: '20px',
-                                fontSize: '16px',
-                                float: 'left',
-                                color: '#fff',
-                                border: 0,
-                                lineHeight: '20px',
-                                marginRight: '5px'
-                            },
-                            on: {
-                                click: () => {
-                                    this.copyToken(str)
-                                }
-                            }
-                        }),
-                        h("div", {
-                            style: {
-                                textAlign: 'center',
-                                fontSize: '1%',
-                                float: 'left'
-                            },
-                        }, tokenCont)
-                    ])
-                }
-            }
+            const tokenCont = param.row.address.substring(0, 5) +
+                        '...' +
+                        param.row.address.substring(tokenLenth - 5, tokenLenth)
+            if (str) {
+                return h('div', [
+                    h('Icon', {
+                        props: {
+                            type: 'ios-paper-outline'
+                          },
+                        style: {
+                            height: '20px',
+                            fontSize: '16px',
+                            float: 'left',
+                            color: '#fff',
+                            border: 0,
+                            lineHeight: '20px',
+                            marginRight: '5px'
+                          },
+                        on: {
+                            click: () => {
+                                this.copyToken(str)
+                              }
+                          }
+                      }),
+                    h('div', {
+                        style: {
+                            textAlign: 'center',
+                            fontSize: '1%',
+                            float: 'left'
+                          }
+                      }, tokenCont)
+                  ])
+              }
+          }
         },
         {
-          title: this.$t("uc.finance.withdraw.remark"),
-          key: "remark"
+          title: this.$t('uc.finance.withdraw.remark'),
+          key: 'remark'
         },
         {
-          title: this.$t("uc.finance.withdraw.operate"),
-          key: "action",
+          title: this.$t('uc.finance.withdraw.operate'),
+          key: 'action',
           width: 150,
-          align: "center",
+          align: 'center',
           render: (h, params) => {
-            return h("div", [
+            return h('div', [
               h(
-                "span",
+                'span',
                 {
-                  style:{
-                      color: '#3399ff',
-                      cursor: 'pointer'
+                  style: {
+                    color: '#3399ff',
+                    cursor: 'pointer'
                   },
                   on: {
                     click: () => {
-                      this.addAddr(2, params.row.id);
+                      this.addAddr(2, params.row.id)
                       // this.getList(0, 10);
                     }
                   }
                 },
-                that.$t("uc.finance.withdraw.delete")
+                that.$t('uc.finance.withdraw.delete')
               )
-            ]);
+            ])
           }
         }
       ],
       dataRecharge: [],
       formValidateAddr: {
-        mobileNo: "",
-        vailCode2: "",
-        email: "",
-        vailCode1: "",
-          googleCode: ""
+        mobileNo: '',
+        vailCode2: '',
+        email: '',
+        vailCode1: '',
+        googleCode: ''
       },
       ruleValidate: {
         mobileNo: [
           {
             required: this.isPhoneCode,
-            message: this.$t("uc.finance.withdraw.telerr"),
-            trigger: "blur"
+            message: this.$t('uc.finance.withdraw.telerr'),
+            trigger: 'blur'
           }
         ],
         vailCode2: [
           {
             required: this.isPhoneCode,
-            message: this.$t("uc.finance.withdraw.codeerr"),
-            trigger: "change"
+            message: this.$t('uc.finance.withdraw.codeerr'),
+            trigger: 'change'
           }
         ],
         email: [
           {
             required: this.isEmailCode,
-            type: "email",
-            message: this.$t("uc.finance.withdraw.emailerr"),
-            trigger: "blur"
+            type: 'email',
+            message: this.$t('uc.finance.withdraw.emailerr'),
+            trigger: 'blur'
           }
         ],
         vailCode1: [
           {
             required: this.isEmailCode,
-            message: this.$t("uc.finance.withdraw.codeerr"),
-            trigger: "change"
+            message: this.$t('uc.finance.withdraw.codeerr'),
+            trigger: 'change'
           }
         ],
-          googleCode: [
-              {
-                  required: this.isGoogleCode,
-                  message: this.$t("uc.finance.withdraw.codeerr"),
-                  trigger: "change"
-              }
-          ]
+        googleCode: [
+          {
+            required: this.isGoogleCode,
+            message: this.$t('uc.finance.withdraw.codeerr'),
+            trigger: 'change'
+          }
+        ]
       },
-        isCode: '',
-        isPhoneCode: false, // 是否绑定手机验证状态
-        isEmailCode: false, // 是否绑定手机验证状态
-        isGoogleCode: false, // 是否绑定谷歌验证状态
-    };
+      isCode: '',
+      isPhoneCode: false, // 是否绑定手机验证状态
+      isEmailCode: false, // 是否绑定手机验证状态
+      isGoogleCode: false // 是否绑定谷歌验证状态
+    }
   },
   created() {
-    this.getMember();
-    this.getList(0, 10);
-    this.coinType = this.$route.query.name;
-    this.getCoin();
+    this.getMember()
+    this.getList(0, 10)
+    this.coinType = this.$route.query.name
+    this.getCoin()
   },
   methods: {
       // 安全验证接口
-      afetyVerification () {
+    afetyVerification() {
           // 1.输入谷歌验证码
           // 2.输入手机验证码
           // 3.输入邮箱验证码
-          this.$http.post(this.host + '/uc/getGoogleState',{ mobile: this.$store.getters.member.mobile }).then(res => {
-              const data = res.body
-              this.isCode = data.data
-              console.log(this.isCode);
-              if (data.code == 0) {
-                  console.log(data);
-                  switch (data.data) {
-                      case 1:
+      this.$http.post(this.host + '/uc/getGoogleState', { mobile: this.$store.getters.member.mobile }).then(res => {
+          const data = res.body
+          this.isCode = data.data
+          console.log(this.isCode)
+          if (data.code == 0) {
+                console.log(data)
+                switch (data.data) {
+                    case 1:
                           // 1为开启谷歌验证
-                          this.isGoogleCode = true
-                          this.isPhoneCode = false
-                          this.isEmailCode = false
-                          break
-                      case 2:
+                      this.isGoogleCode = true
+                      this.isPhoneCode = false
+                      this.isEmailCode = false
+                      break
+                    case 2:
                           // 2为开启手机验证
-                          this.isGoogleCode = false
-                          this.isPhoneCode = true
-                          this.isEmailCode = false
-                          break
-                      case 3:
+                      this.isGoogleCode = false
+                      this.isPhoneCode = true
+                      this.isEmailCode = false
+                      break
+                    case 3:
                           // 3为开启邮箱验证
-                          this.isGoogleCode = false
-                          this.isPhoneCode = false
-                          this.isEmailCode = true
+                      this.isGoogleCode = false
+                      this.isPhoneCode = false
+                      this.isEmailCode = true
                   }
               }
-          })
-      },
+        })
+    },
       // 复制功能
-      copyToken (data) {
-          let url = data
-          let oInput = document.createElement('input')
-          oInput.value = url
-          document.body.appendChild(oInput)
-          oInput.select() // 选择对象
-          console.log(oInput.value)
-          document.execCommand('Copy') // 执行浏览器复制命令
-          this.$Message.success(
-                  this.$t("uc.finance.recharge.copysuccess")
+    copyToken(data) {
+      const url = data
+      const oInput = document.createElement('input')
+      oInput.value = url
+      document.body.appendChild(oInput)
+      oInput.select() // 选择对象
+      console.log(oInput.value)
+      document.execCommand('Copy') // 执行浏览器复制命令
+      this.$Message.success(
+                  this.$t('uc.finance.recharge.copysuccess')
           )
-          oInput.remove()
-      },
-    refresh(){
+      oInput.remove()
+    },
+    refresh() {
       this.coinType = null,
       this.withdrawAddr = null,
-      this.remark = null;
+      this.remark = null
       this.getList(0, 10)
     },
     getMember() {
-      //获取个人安全信息
+      // 获取个人安全信息
       this.$http
-        .post(this.host + "/uc/approve/security/setting")
+        .post(this.host + '/uc/approve/security/setting')
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
             if (resp.data.mobilePhone) {
-              this.formValidateAddr.mobileNo = resp.data.mobilePhone;
+              this.formValidateAddr.mobileNo = resp.data.mobilePhone
               // this.validPhone = true;
               // this.validEmail = false;
             } else {
-              this.formValidateAddr.email = resp.data.email;
+              this.formValidateAddr.email = resp.data.email
               // this.validPhone = false;
               // this.validEmail = true;
             }
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+        })
     },
     getCoin() {
-      //币种
-      this.$http.post(this.host + "/uc/withdraw/support/coin").then(response => {
-          var resp = response.body;
-          if (resp.code == 0) {
+      // 币种
+      this.$http.post(this.host + '/uc/withdraw/support/coin').then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
             for (let i = 0; i < resp.data.length; i++) {
-              this.coinList.push(resp.data[i]);
+              this.coinList.push(resp.data[i])
             }
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+      })
     },
     getList(pageNo, pageSize) {
-      //获取地址
-      let params = {};
-      params["pageNo"] = pageNo;
-      params["pageSize"] = pageSize;
-      this.$http.post(this.host + "/uc/withdraw/address/page", params).then(response => {
-          var resp = response.body;
-          if (resp.code == 0 && resp.data.content) {
-            this.dataRecharge = resp.data.content;
-            this.dataCount = resp.data.totalElement;
+      // 获取地址
+      const params = {}
+      params['pageNo'] = pageNo
+      params['pageSize'] = pageSize
+      this.$http.post(this.host + '/uc/withdraw/address/page', params).then(response => {
+        var resp = response.body
+        if (resp.code == 0 && resp.data.content) {
+            this.dataRecharge = resp.data.content
+            this.dataCount = resp.data.totalElement
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-          this.loading = false;
-        });
+        this.loading = false
+      })
     },
     remove(index) {
-      this.dataRecharge.splice(index, 1);
+      this.dataRecharge.splice(index, 1)
     },
     send(index) {
-      let me = this;
-      this.disbtn = true;
+      const me = this
+      this.disbtn = true
       if (this.id) {
-          if (index == 1) {
-              if (this.formValidateAddr.email) {
-                  //获取邮箱code
-                  this.$http.post(this.host + "/uc/delete/address/email/code").then(response => {
-                      var resp = response.body;
-                      if (resp.code == 0) {
-                          this.$Message.success(resp.message);
-                          me.sendMsgDisabled1 = true;
-                          let interval = window.setInterval(function() {
-                              if (me.time1-- <= 0) {
-                                  me.time1 = 60;
-                                  me.sendMsgDisabled1 = false;
-                                  window.clearInterval(interval);
-                                  this.disbtn = false;
-                              }
-                          }, 1000);
+        if (index == 1) {
+          if (this.formValidateAddr.email) {
+                  // 获取邮箱code
+              this.$http.post(this.host + '/uc/delete/address/email/code').then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                        this.$Message.success(resp.message)
+                        me.sendMsgDisabled1 = true
+                        const interval = window.setInterval(function() {
+                            if (me.time1-- <= 0) {
+                              me.time1 = 60
+                              me.sendMsgDisabled1 = false
+                              window.clearInterval(interval)
+                              this.disbtn = false
+                            }
+                          }, 1000)
                       } else {
-                          this.$Message.error(resp.message);
-                          this.disbtn = false;
+                        this.$Message.error(resp.message)
+                        this.disbtn = false
                       }
-                  });
-              } else {
-                  this.$refs.formValidateAddr.validateField("email");
-                  this.disbtn = false;
-              }
-          } else if (index == 2) {
-              if (this.formValidateAddr.mobileNo) {
-                  //获取手机code
-                  this.$http.post(this.host + "/uc/mobile/delete/address/code").then(response => {
-                      var resp = response.body;
-                      if (resp.code == 0) {
-                          this.$Message.success(resp.message);
-                          me.sendMsgDisabled2 = true;
-                          this.interval = window.setInterval(()=> {
-                              if (me.time2-- <= 0) {
-                                  me.time2 = 60;
-                                  me.sendMsgDisabled2 = false;
-                                  window.clearInterval(this.interval);
-                                  this.disbtn = false;
-                              }
-                          }, 1000);
+                })
+            } else {
+              this.$refs.formValidateAddr.validateField('email')
+              this.disbtn = false
+            }
+        } else if (index == 2) {
+            if (this.formValidateAddr.mobileNo) {
+                  // 获取手机code
+              this.$http.post(this.host + '/uc/mobile/delete/address/code').then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                        this.$Message.success(resp.message)
+                        me.sendMsgDisabled2 = true
+                        this.interval = window.setInterval(() => {
+                            if (me.time2-- <= 0) {
+                              me.time2 = 60
+                              me.sendMsgDisabled2 = false
+                              window.clearInterval(this.interval)
+                              this.disbtn = false
+                            }
+                          }, 1000)
                       } else {
-                          this.$Message.error(resp.message);
-                          this.disbtn = false;
+                        this.$Message.error(resp.message)
+                        this.disbtn = false
                       }
-                  });
-              } else {
-                  this.$refs.formValidateAddr.validateField("mobileNo");
-                  this.disbtn = false;
-              }
+                })
+            } else {
+              this.$refs.formValidateAddr.validateField('mobileNo')
+              this.disbtn = false
+            }
           }
       } else {
-          if (index == 1) {
-              if (this.formValidateAddr.email) {
-                  //获取邮箱code
-                  this.$http.post(this.host + "/uc/add/address/code").then(response => {
-                      var resp = response.body;
-                      if (resp.code == 0) {
-                          this.$Message.success(resp.message);
-                          me.sendMsgDisabled1 = true;
-                          let interval = window.setInterval(function() {
-                              if (me.time1-- <= 0) {
-                                  me.time1 = 60;
-                                  me.sendMsgDisabled1 = false;
-                                  window.clearInterval(interval);
-                                  this.disbtn = false;
-                              }
-                          }, 1000);
+        if (index == 1) {
+          if (this.formValidateAddr.email) {
+                  // 获取邮箱code
+              this.$http.post(this.host + '/uc/add/address/code').then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                        this.$Message.success(resp.message)
+                        me.sendMsgDisabled1 = true
+                        const interval = window.setInterval(function() {
+                            if (me.time1-- <= 0) {
+                              me.time1 = 60
+                              me.sendMsgDisabled1 = false
+                              window.clearInterval(interval)
+                              this.disbtn = false
+                            }
+                          }, 1000)
                       } else {
-                          this.$Message.error(resp.message);
-                          this.disbtn = false;
+                        this.$Message.error(resp.message)
+                        this.disbtn = false
                       }
-                  });
-              } else {
-                  this.$refs.formValidateAddr.validateField("email");
-                  this.disbtn = false;
-              }
-          } else if (index == 2) {
-              if (this.formValidateAddr.mobileNo) {
-                  //获取手机code
-                  this.$http.post(this.host + "/uc/mobile/add/address/code").then(response => {
-                      var resp = response.body;
-                      if (resp.code == 0) {
-                          this.$Message.success(resp.message);
-                          me.sendMsgDisabled2 = true;
-                          this.interval = window.setInterval(()=> {
-                              if (me.time2-- <= 0) {
-                                  me.time2 = 60;
-                                  me.sendMsgDisabled2 = false;
-                                  window.clearInterval(this.interval);
-                                  this.disbtn = false;
-                              }
-                          }, 1000);
+                })
+            } else {
+              this.$refs.formValidateAddr.validateField('email')
+              this.disbtn = false
+            }
+        } else if (index == 2) {
+            if (this.formValidateAddr.mobileNo) {
+                  // 获取手机code
+              this.$http.post(this.host + '/uc/mobile/add/address/code').then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                        this.$Message.success(resp.message)
+                        me.sendMsgDisabled2 = true
+                        this.interval = window.setInterval(() => {
+                            if (me.time2-- <= 0) {
+                              me.time2 = 60
+                              me.sendMsgDisabled2 = false
+                              window.clearInterval(this.interval)
+                              this.disbtn = false
+                            }
+                          }, 1000)
                       } else {
-                          this.$Message.error(resp.message);
-                          this.disbtn = false;
+                        this.$Message.error(resp.message)
+                        this.disbtn = false
                       }
-                  });
-              } else {
-                  this.$refs.formValidateAddr.validateField("mobileNo");
-                  this.disbtn = false;
-              }
+                })
+            } else {
+              this.$refs.formValidateAddr.validateField('mobileNo')
+              this.disbtn = false
+            }
           }
       }
-
     },
     addAddr(index, id) {
-        this.formValidateAddr.vailCode2 = ''
-        this.formValidateAddr.vailCode1 = ''
-        this.formValidateAddr.googleCode = ''
-        this.afetyVerification()
-        this.id = id
-        if (id) {
-            this.modal2 = true;
-        } else {
-            let interval = setInterval(()=>{
-                if(this.time2 <= 0){
-                    this.sendMsgDisabled2 = false;
-                    window.clearInterval(interval);
-                    this.disbtn = false;
-                }
-            },1000);
-            if (!this.coinType) {
-                this.$Message.warning(this.$t("uc.finance.withdraw.symboltip"));
+      this.formValidateAddr.vailCode2 = ''
+      this.formValidateAddr.vailCode1 = ''
+      this.formValidateAddr.googleCode = ''
+      this.afetyVerification()
+      this.id = id
+      if (id) {
+        this.modal2 = true
+      } else {
+        const interval = setInterval(() => {
+            if (this.time2 <= 0) {
+                this.sendMsgDisabled2 = false
+                window.clearInterval(interval)
+                this.disbtn = false
+              }
+          }, 1000)
+        if (!this.coinType) {
+              this.$Message.warning(this.$t('uc.finance.withdraw.symboltip'))
             } else if (!this.withdrawAddr) {
-                this.$Message.warning(this.$t("uc.finance.withdraw.addresstip"));
+              this.$Message.warning(this.$t('uc.finance.withdraw.addresstip'))
             } else if (!this.remark) {
-                this.$Message.warning(this.$t("uc.finance.withdraw.remarktip"));
+              this.$Message.warning(this.$t('uc.finance.withdraw.remarktip'))
             } else if (this.coinType && this.remark && this.withdrawAddr) {
-                this.modal2 = true;
+              this.modal2 = true
             }
-        }
-
+      }
     },
     changePage(index) {
-      this.getList(index, 10, this.coinType);
+      this.getList(index, 10, this.coinType)
     },
     del(id) {
-      const title = this.$t("common.tip");
-      const content = "<p>" + this.$t("common.delete") + "</p>";
+      const title = this.$t('common.tip')
+      const content = '<p>' + this.$t('common.delete') + '</p>'
       this.$Modal.confirm({
         title: title,
         content: content,
         onOk: () => {
-          let params = {};
-          params["id"] = id;
-          this.$http.post(this.host + "/uc/withdraw/address/delete", params).then(response => {
-              var resp = response.body;
-              if (resp.code == 0) {
-                this.$Message.success(resp.message);
-                this.refresh();
+          const params = {}
+          params['id'] = id
+          this.$http.post(this.host + '/uc/withdraw/address/delete', params).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+                this.$Message.success(resp.message)
+                this.refresh()
               } else {
-                this.$Message.error(resp.message);
+                this.$Message.error(resp.message)
               }
-              this.loading = false;
-            });
+            this.loading = false
+          })
         },
         onCancel: () => {}
-      });
+      })
     },
     handleSubmit(name) {
         // console.log(name);
@@ -630,61 +627,61 @@ export default {
           //     this.$Message.error(this.$t("uc.finance.withdraw.savemsg1"));
           // }
       // });
-        if (this.id) {
-            let params = {};
-            params["id"] = this.id;
-            if (this.isCode == 2) {
-                params["code"] = this.formValidateAddr.vailCode2;
+      if (this.id) {
+        const params = {}
+        params['id'] = this.id
+        if (this.isCode == 2) {
+              params['code'] = this.formValidateAddr.vailCode2
             } else {
-                params["code"] = this.formValidateAddr.vailCode1;
+              params['code'] = this.formValidateAddr.vailCode1
             }
-            params["googleCode"] = this.formValidateAddr.googleCode;
-            this.$http.post(this.host + "/uc/withdraw/address/delete", params).then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                    this.$Message.success(resp.message);
-                    this.modal2 = false;
-                    this.refresh();
+        params['googleCode'] = this.formValidateAddr.googleCode
+        this.$http.post(this.host + '/uc/withdraw/address/delete', params).then(response => {
+              var resp = response.body
+              if (resp.code == 0) {
+                  this.$Message.success(resp.message)
+                  this.modal2 = false
+                  this.refresh()
                 } else {
-                    this.$Message.error(resp.message);
+                  this.$Message.error(resp.message)
                 }
-                this.loading = false;
-            });
-        } else {
-            this.submit(name);
-        }
+              this.loading = false
+            })
+      } else {
+        this.submit(name)
+      }
     },
     submit(name) {
-      let param = {};
-      param["address"] = this.withdrawAddr;
-      param["unit"] = this.coinType;
-        console.log(this.isPhoneCode);
-        if (this.isCode == 2) {
-            param["aims"] = this.formValidateAddr.mobileNo;
-            param["code"] = this.formValidateAddr.vailCode2;
+      const param = {}
+      param['address'] = this.withdrawAddr
+      param['unit'] = this.coinType
+      console.log(this.isPhoneCode)
+      if (this.isCode == 2) {
+          param['aims'] = this.formValidateAddr.mobileNo
+          param['code'] = this.formValidateAddr.vailCode2
         } else if (this.isCode == 3) {
-            param["aims"] = this.formValidateAddr.email;
-            param["code"] = this.formValidateAddr.vailCode1;
+          param['aims'] = this.formValidateAddr.email
+          param['code'] = this.formValidateAddr.vailCode1
         } else {
-            param["googleCode"] = this.formValidateAddr.googleCode;
+          param['googleCode'] = this.formValidateAddr.googleCode
         }
-        param["remark"] = this.remark;
+      param['remark'] = this.remark
 
-      this.$http.post(this.host + "/uc/withdraw/address/add", param).then(response => {
-          var resp = response.body;
-          if (resp.code == 0) {
-            this.$Message.success(this.$t("uc.finance.withdraw.savemsg2"));
-            this.formValidateAddr.vailCode2 = "";
-            this.refresh();
-            this.modal2 = false;
+      this.$http.post(this.host + '/uc/withdraw/address/add', param).then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
+            this.$Message.success(this.$t('uc.finance.withdraw.savemsg2'))
+            this.formValidateAddr.vailCode2 = ''
+            this.refresh()
+            this.modal2 = false
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+      })
     }
   },
   computed: {}
-};
+}
 </script>
 
 <style scoped lang="scss">
