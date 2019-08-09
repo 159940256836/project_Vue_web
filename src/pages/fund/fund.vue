@@ -15,9 +15,9 @@
           <div class="info">
             <span>存币数量：</span>
             <Input
-              type="text"
-              placeholder="请输入数量"
-              style="width: 555px;"
+                    type="text"
+                    placeholder="请输入数量"
+                    style="width: 555px;"
             />
           </div>
           <div class="info-text">
@@ -36,17 +36,17 @@
               <i class="ivu-icon ivu-icon-md-arrow-dropdown icon"></i>
             </p>
             <p class="count-time">
-              <span class="time">10</span>
+              <span class="time">{{ day }}</span>
               <span class="day margin">天</span>&nbsp;
-              <span class="time margin1">6</span>
+              <span class="time margin1">{{ hr }}</span>
               <span class="day margin">小时</span>&nbsp;
-              <span class="time margin1">56</span>
+              <span class="time margin1">{{ min }}</span>
               <span class="day margin">分钟</span>&nbsp;
-              <span class="time margin1">57</span>
+              <span class="time margin1">{{ sec }}</span>
               <span class="day margin">秒</span>&nbsp;
             </p>
             <p class="count-progress">
-              <Progress :percent="80" />
+              <Progress :percent="progressBar" />
             </p>
           </div>
           <div class="purchase">
@@ -81,40 +81,102 @@
   </div>
 </template>
 <script>
-export default {
-  components: {},
-  data() {
-    return {
-      loading: false,
-      pageNo: 1,
-      pageSize: 10,
-      pageNum: 1,
-      ieoDataList: []
-    }
-  },
-  created () {
-    this.getDataList()
-  },
-  methods: {
-    getDataList(pageNo, pageSize) {
-      let params = {};
-      params["pageNo"] = pageNo;
-      params["pageSize"] = pageSize;
-      this.$http.post(this.host + "/uc/gift/record", params).then(res => {
-        const resp = res.body;
-        if (resp.code == 0) {
-          this.loading = false;
-          this.getList(params).then(res => {
-            this.ieoDataList = res.data;
-            this.totalElement = res.total;
-          });
+  export default {
+    components: {},
+    data() {
+      return {
+        loading: false,
+        pageNo: 1,
+        pageSize: 10,
+        pageNum: 1,
+        ieoDataList: [],
+        reserveTime: '60',
+        reserveInteval: null,
+        msg: {
+          createTime: '2019-08-08 19:18:08',
+          timeLimit: 10
+        },
+        day: 0,
+        hr: 0,
+        min: 0,
+        sec: 0,
+        totalTime: '',
+        progressBar: ''
+      }
+    },
+    created () {
+      this.getDataList()
+      this.countdown()
+    },
+    mounted: function () {
+      this.countdown()
+    },
+    methods: {
+      // 倒计时
+      countdown () {
+        var iTime
+        const end = Date.parse(new Date('2019-08-09 16:55:00'))
+        const now = Date.parse(new Date())
+        const msec = end - now
+        const that = this
+        let day = parseInt(msec / 1000 / 60 / 60 / 24)
+        let hr = parseInt(msec / 1000 / 60 / 60 % 24)
+        let min = parseInt(msec / 1000 / 60 % 60)
+        let sec = parseInt(msec / 1000 % 60)
+        // console.log(day, hr, min, sec)
+        let day1 = parseInt(day * 60 * 60 * 24)
+        let hr1 = parseInt(hr  * 60 * 60)
+        let min1 = parseInt(min  * 60)
+        let sec1 = parseInt(sec)
+        this.totalTime = (day1 + hr1 + min1 + sec1)
+        console.log(this.totalTime)
+        if (this.totalTime > 0) {
+          this.day = day
+          this.hr = hr > 9 ? hr : '0' + hr
+          this.min = min > 9 ? min : '0' + min
+          this.sec = sec > 9 ? sec : '0' + sec
+          console.log(this.day, this.hr, this.min, this.sec)
+          iTime = setTimeout(function () {
+            that.countdown()
+          }, 1000)
         }
-      });
-    }
-  },
-  watch: {},
-  mounted () {}
-}
+        this.progressBar = this.totalTime * 875 * 0.01
+        if (this.progressBar == 0) {
+          clearTimeout(iTime)
+          this.sec = '00'
+        }
+      },
+
+      // 数据列表
+      getDataList(pageNo, pageSize) {
+        let params = {};
+        params["pageNo"] = pageNo;
+        params["pageSize"] = pageSize;
+        this.$http.post(this.host + "/uc/gift/record", params).then(res => {
+          const resp = res.body;
+          if (resp.code == 0) {
+            this.loading = false;
+            this.getList(params).then(res => {
+              this.ieoDataList = res.data;
+              this.totalElement = res.total;
+            });
+          }
+        });
+      }
+    },
+    watch: {
+      countdown () {
+        // console.log(this.totalTime)
+        if (this.progressBar == 0) {
+          var iTime
+          iTime = setTimeout(function () {
+            this.countdown()
+          }, 1000)
+        }
+      }
+    },
+    mounted () {}
+  }
 </script>
 <style scoped lang="scss">
   #fund-box {
@@ -225,6 +287,7 @@ export default {
             }
             .count-progress {
               margin-top: 75px;
+              text-align: center;
             }
           }
           .purchase {
@@ -258,14 +321,18 @@ export default {
     background: #101646;
     border: 1px solid rgba(63,125,168,1);
   }
+  .ivu-progress-show-info .ivu-progress-outer {
+    /* padding-right: 55px; */
+    margin-right: -55px;
+  }
   .ivu-progress-inner {
     height: 38px;
     background: #272D61;
+    overflow: hidden;
     .ivu-progress-bg {
       height: 38px !important;
       /*background: linear-gradient(0deg, #fff 0%,#000 100%);*/
-        background:linear-gradient(45deg, rgba(49,107,239,.3), rgba(20,56,240,.3));
-      /*box-shadow:0px 2px 2px 0px rgba(153, 153, 153, 0.35);*/
+      background:linear-gradient(45deg, rgba(49, 107, 239, .6), rgba(20, 56, 240, .7));
     }
   }
   .ivu-progress-text {
