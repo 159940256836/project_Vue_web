@@ -229,7 +229,7 @@ export default {
 <style lang="scss">
 .main .content-wrap .content {
     .uploaded-img {
-        width: 50% !important;
+        width: 25% !important;
     }
 }
 .main .content-wrap .title,.main .content-wrap .time{

@@ -17,7 +17,7 @@
                     </FormItem>
                     <FormItem prop="password">
                         <Input
-                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('password'):login()"
+                            @on-enter="login()"
                             type="password"
                             v-model="formInline.password"
                             :placeholder="$t('uc.login.pwdtip')"
@@ -30,7 +30,7 @@
                     >
                         <Input
                             type="text"
-                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('googleCode'):login()"
+                            @on-enter="login()"
                             v-model="formInline.googleCode"
                             :placeholder="$t('uc.login.google')"
                         >
@@ -46,7 +46,7 @@
                             v-model="formInline.checkCode"
                             size="large"
                             :placeholder="$t('uc.login.phone')"
-                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('checkCode'):login()"
+                            @on-enter="login()"
                         >
                             <div
                                 class="timebox"
@@ -77,7 +77,7 @@
                             v-model="formInline.emailCode"
                             size="large"
                             :placeholder="$t('uc.login.email')"
-                            @on-enter="host == 'https://api.nr3d.cn'?handleSubmit('emailCode'):login()"
+                            @on-enter="login()"
                         >
                             <div
                                 class="timebox"
@@ -108,14 +108,17 @@
                         </router-link>
                     </div>
                     <FormItem style="margin-bottom:10px;">
-                        <Button
+                        <!-- <Button
                             class="login_btn"
                             @click="host == 'https://api.nr3d.cn'?handleSubmit('formInline'):login()"
+                        > -->
+                        <Button
+                            class="login_btn"
+                            @click="login()"
                         >
                             {{$t('uc.forget.login')}}
                         </Button>
                     </FormItem>
-
                 </Form>
             </div>
             <div class="right-login">

@@ -117,8 +117,8 @@ const map = new Map([
     ['24', '币币转入法币'],
     ['25', '法币转入币币'],
     ['26', '借贷流水'],
-    ['27', '还款流水'],
-]);
+    ['27', '还款流水']
+])
 const mapEn = new Map([
     ['0', 'recharge'],
     ['1', 'withdraw deposit'],
@@ -147,196 +147,196 @@ const mapEn = new Map([
     ['24', 'The bitcoins are transferred into legal tender'],
     ['25', 'Legal tender is transferred into bitcoin'],
     ['26', 'loan flow'],
-    ['27', 'repayment flow'],
-]);
+    ['27', 'repayment flow']
+])
 
 export default {
-    components: {},
-    data() {
-        return {
-            loading: false,
-            ordKeyword: "",
-            rangeDate: "",
-            startDate: "",
-            endDate: "",
-            select:'select',
-            recordValue: "",
+  components: {},
+  data() {
+    return {
+      loading: false,
+      ordKeyword: '',
+      rangeDate: '',
+      startDate: '',
+      endDate: '',
+      select: 'select',
+      recordValue: '',
             // recordType: [...map.values()],
-            coinList: [],
-            coinType: "",
-            pageSize: 10,
-            page: 1,
-            total: 0,
-            tableRecord: []
-        };
-    },
-    created: function () {
-        this.getList(this.page);
-        this.getAddrList();
+      coinList: [],
+      coinType: '',
+      pageSize: 10,
+      page: 1,
+      total: 0,
+      tableRecord: []
+    }
+  },
+  created: function() {
+    this.getList(this.page)
+    this.getAddrList()
         // const name = this.$route.path
         // console.log(name, this.$route.path);
         // if (name === '/personal/record') {
         //     this.getList(this.page);
         //     this.getAddrList();
         // }
+  },
+  methods: {
+    changedate() {
+      if (this.rangeDate[0]) {
+        this.startDate = this.dateform(this.rangeDate[0])
+        this.endDate = this.dateform(this.rangeDate[1])
+      }
     },
-    methods: {
-        changedate() {
-            if (this.rangeDate[0]) {
-                this.startDate = this.dateform(this.rangeDate[0]);
-                this.endDate = this.dateform(this.rangeDate[1]);
-            }
-        },
-        changePage(pageindex) {
-            this.page = pageindex;
-            this.getList(this.page);
-        },
-        queryOrder() {
-            if (this.rangeDate.length == 0) {
-                this.$Message.error(this.$t('uc.finance.record.searchPla'));
-                return;
-            } else {
-                try {
-                    this.page = 1;
-                    this.getList(this.page);
-                } catch (ex) {
-                    this.$Message.error(this.$t('uc.finance.record.searchPla'));
-                    return;
-                }
-            }
-        },
-        getAddrList() {
-            //获取个人资产币种
-            this.$http
-                .post(this.host + "/uc/asset/wallet/")
-                .then(response => {
-                    var resp = response.body;
-                    if (resp.code == 0) {
-                        this.coinList = resp.data;
-                    } else {
-                        this.$Message.error(resp.message);
-                    }
-                });
-        },
-        dateform(time) {
-            var date = new Date(time);
-            var y = date.getFullYear();
-            var m = date.getMonth() + 1;
-            m = m < 10 ? "0" + m : m;
-            var d = date.getDate();
-            d = d < 10 ? "0" + d : d;
-            var h = date.getHours();
-            h = h < 10 ? "0" + h : h;
-            var minute = date.getMinutes();
-            var second = date.getSeconds();
-            minute = minute < 10 ? "0" + minute : minute;
-            second = second < 10 ? "0" + second : second;
-            return y + "-" + m + "-" + d + " " + h + ":" + minute + ":" + second;
-        },
-        getList(pageNo) {
-            //获取tableWithdraw
-            let memberId = 0;
-            !this.$store.getters.isLogin && this.$router.push("/login");
-            this.$store.getters.isLogin && (memberId = this.$store.getters.member.id);
-            let startDate = "";
-            let endDate = "";
-            let symbol = "";
-            let type = "";
-            this.startDate && (startDate = this.startDate);
-            this.endDate && (endDate = this.endDate);
-            this.coinType && (symbol = this.coinType);
-            if (this.recordValue == 0 || this.recordValue) {
-                type = this.recordValue;
-            }
-            // this.recordValue!="" || this.recordValue!=undefined && (type = this.recordValue);
-            this.loading = true;
-            let params = {
-                pageNo,
-                pageSize: this.pageSize,
-                startDate,
-                endDate,
-                memberId,
-                symbol,
-                type
-            };
-            this.$http.post(this.host + "/uc/asset/transaction", params).then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                    this.loading = false;
-                    if (resp.data) {
-                        let trueData = resp.data;
-                        this.total = trueData.totalElements;
-                        this.tableRecord = trueData.content;
-                    }
-                } else {
-                    this.$Message.error(resp.message);
-                }
-                this.loading = false;
-            });
-        },
-        clear() {
-            this.startDate = "";
-            this.endDate = "";
+    changePage(pageindex) {
+      this.page = pageindex
+      this.getList(this.page)
+    },
+    queryOrder() {
+      if (this.rangeDate.length == 0) {
+        this.$Message.error(this.$t('uc.finance.record.searchPla'))
+        return
+      } else {
+        try {
+          this.page = 1
+          this.getList(this.page)
+        } catch (ex) {
+          this.$Message.error(this.$t('uc.finance.record.searchPla'))
+          return
         }
+      }
     },
-    computed: {
-        tableColumnsRecord() {
-            let columns = [];
-            var that = this;
-            const m = this.$store.getters.lang == "English" ? mapEn : map;
-            columns.push({
-                title: this.$t("uc.finance.record.chargetime"),
-                align: "center",
-                render: (h, params) => {
-                    return h("div", {}, params.row.createTime);
-                }
-            });
-            columns.push({
-                title: this.$t("uc.finance.record.type"),
-                align: "center",
-                render: function (h, params) {
-                    let str = "";
-                    let type = params.row.type.toString();
-                    return h("div", {}, m.get(type));
-                }
-            });
-            columns.push({
-                title: this.$t("uc.finance.record.symbol"),
-                align: "center",
-                render: (h, param) => {
-                    return h("div", {}, param.row.symbol);
-                }
-            });
-            columns.push({
-                title: this.$t("uc.finance.Quantityofarrival"),
-                align: "center",
-                render(h, params) {
-                    return h(
-                        "span",
-                        {
-                            attrs: {
-                                title: params.row.amount
-                            }
-                        },
+    getAddrList() {
+            // 获取个人资产币种
+      this.$http
+                .post(this.host + '/uc/asset/wallet/')
+                .then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                    this.coinList = resp.data
+                  } else {
+                    this.$Message.error(resp.message)
+                  }
+                })
+    },
+    dateform(time) {
+      var date = new Date(time)
+      var y = date.getFullYear()
+      var m = date.getMonth() + 1
+      m = m < 10 ? '0' + m : m
+      var d = date.getDate()
+      d = d < 10 ? '0' + d : d
+      var h = date.getHours()
+      h = h < 10 ? '0' + h : h
+      var minute = date.getMinutes()
+      var second = date.getSeconds()
+      minute = minute < 10 ? '0' + minute : minute
+      second = second < 10 ? '0' + second : second
+      return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second
+    },
+    getList(pageNo) {
+            // 获取tableWithdraw
+      let memberId = 0
+      !this.$store.getters.isLogin && this.$router.push('/login')
+      this.$store.getters.isLogin && (memberId = this.$store.getters.member.id)
+      let startDate = ''
+      let endDate = ''
+      let symbol = ''
+      let type = ''
+      this.startDate && (startDate = this.startDate)
+      this.endDate && (endDate = this.endDate)
+      this.coinType && (symbol = this.coinType)
+      if (this.recordValue == 0 || this.recordValue) {
+        type = this.recordValue
+      }
+            // this.recordValue!="" || this.recordValue!=undefined && (type = this.recordValue);
+      this.loading = true
+      const params = {
+        pageNo,
+        pageSize: this.pageSize,
+        startDate,
+        endDate,
+        memberId,
+        symbol,
+        type
+      }
+      this.$http.post(this.host + '/uc/asset/transaction', params).then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
+          this.loading = false
+          if (resp.data) {
+            const trueData = resp.data
+            this.total = trueData.totalElements
+            this.tableRecord = trueData.content
+          }
+        } else {
+          this.$Message.error(resp.message)
+        }
+        this.loading = false
+      })
+    },
+    clear() {
+      this.startDate = ''
+      this.endDate = ''
+    }
+  },
+  computed: {
+    tableColumnsRecord() {
+      const columns = []
+      var that = this
+      const m = this.$store.getters.lang == 'English' ? mapEn : map
+      columns.push({
+        title: this.$t('uc.finance.record.chargetime'),
+        align: 'center',
+        render: (h, params) => {
+          return h('div', {}, params.row.createTime)
+        }
+      })
+      columns.push({
+        title: this.$t('uc.finance.record.type'),
+        align: 'center',
+        render: function(h, params) {
+          const str = ''
+          const type = params.row.type.toString()
+          return h('div', {}, m.get(type))
+        }
+      })
+      columns.push({
+        title: this.$t('uc.finance.record.symbol'),
+        align: 'center',
+        render: (h, param) => {
+          return h('div', {}, param.row.symbol)
+        }
+      })
+      columns.push({
+        title: this.$t('uc.finance.Quantityofarrival'),
+        align: 'center',
+        render(h, params) {
+          return h(
+                        'span',
+            {
+              attrs: {
+                title: params.row.amount
+              }
+            },
                         that.toFloor(params.row.amount) || 0
-                    );
-                }
-            });
-            columns.push({
-                title: this.$t("uc.finance.record.shouldfee"), //"应付手续费"
-                align: "center",
-                render(h, params) {
-                    return h(
-                        "span",
-                        {
-                            attrs: {
-                                title: params.row.fee
-                            }
-                        },
+                    )
+        }
+      })
+      columns.push({
+        title: this.$t('uc.finance.record.shouldfee'), // "应付手续费"
+        align: 'center',
+        render(h, params) {
+          return h(
+                        'span',
+            {
+              attrs: {
+                title: params.row.fee
+              }
+            },
                         that.toFloor(params.row.fee) || 0
-                    );
-                }
-            });
+                    )
+        }
+      })
             // columns.push({
             //     title: this.$t("uc.finance.record.discountfee"), //"抵扣手续费"
             //     width: F,
@@ -353,37 +353,37 @@ export default {
             //         );
             //     }
             // });
-            columns.push({
-                    title: this.$t("uc.finance.record.realfee"), //"实际手续费"
-                    align: "center",
-                    render(h, params) {
-                        return h(
-                            "span",
-                            {
-                                attrs: {
-                                    title: params.row.fee
-                                }
-                            },
+      columns.push({
+        title: this.$t('uc.finance.record.realfee'), // "实际手续费"
+        align: 'center',
+        render(h, params) {
+          return h(
+                            'span',
+            {
+              attrs: {
+                title: params.row.fee
+              }
+            },
                             that.toFloor(params.row.fee) || 0
-                        );
-                    }
-                });
-            columns.push({
-                title: this.$t("uc.finance.record.status"),
-                // key: "status",
-                align: "center",
-                render: (h, params) => {
-                    return h("div", that.$t("uc.finance.record.finish"), "");
-                }
-            });
-            return columns;
-        },
-        recordType() {
-            const m = this.$store.getters.lang == "English" ? mapEn : map;
-            return [...m.values()];
+                        )
         }
+      })
+      columns.push({
+        title: this.$t('uc.finance.record.status'),
+                // key: "status",
+        align: 'center',
+        render: (h, params) => {
+          return h('div', that.$t('uc.finance.record.finish'), '')
+        }
+      })
+      return columns
+    },
+    recordType() {
+      const m = this.$store.getters.lang == 'English' ? mapEn : map
+      return [...m.values()]
     }
-};
+  }
+}
 </script>
 <style scoped lang="scss">
 .nav-record {

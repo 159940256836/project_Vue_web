@@ -186,7 +186,7 @@ import Withdraw from '../../components/uc/Withdraw'
 import WithdrawAddress from '../../components/uc/WithdrawAddress'
 import Bjc from '../../components/uc/Bjc'
 import GiveRecord from '../../components/uc/giveRecord'
-import Ieoadmin from '../../components/uc/Ieoadmin'
+import Ieoadmin from '../../components/uc/Ieoadminpage'
 export default {
   components: { Money, Record, Recharge, Withdraw, WithdrawAddress, Bjc, GiveRecord, Ieoadmin },
   data() {
@@ -238,6 +238,9 @@ export default {
                 break
               case '/personal/giveRecord':
                 this.activeName = 'giveRecord'
+                break
+              case '/personal/Ieoadmin':
+                this.activeName = 'Ieoadmin'
                 break
               default:
                 this.activeName = 'money'
@@ -306,7 +309,7 @@ export default {
         case '/personal/giveRecord':
           this.activeName = 'giveRecord'
           break
-        case '/Ieoadmin':
+        case '/personal/Ieoadmin':
           this.activeName = 'Ieoadmin'
           break
         default:

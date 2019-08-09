@@ -91,7 +91,7 @@ export default {
     },
     getDetail() {
       this.$router.push({
-        name: 'IeoDetail',
+        name: 'priceIeoDetail',
         params: {
           id: this.content.id
         }
