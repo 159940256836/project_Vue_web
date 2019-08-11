@@ -44,7 +44,18 @@ module.exports = {
     copySuccess: 'copy success',
     copyFail: 'copy fail',
     down: 'Download BDW App anytime, anywhere, convenient transaction',
-    scan: 'Scan the qr code to download the BDW App'
+    scan: 'Scan the qr code to download the BDW App',
+    loginInfo: 'Please enter the deposit amount',
+    fund: {
+      MemberId: 'userID',
+      lockCoinName: 'name',
+      lockCoinUnit: 'coin',
+      lockAmount: 'sum',
+      lockCoinDay: 'nunDay',
+      interests: 'interests',
+      lockTime: 'lock Time',
+      unlockTime: 'unlock Time',
+    }
   },
   new: {
     Announcemcenter: 'Announcement center',

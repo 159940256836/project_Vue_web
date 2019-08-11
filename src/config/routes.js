@@ -8,7 +8,7 @@ import tradeInfo from '../pages/otc/TradeInfo'
 import checkuser from '../pages/otc/CheckUser'
 import chat from '../pages/otc/Chat'
 import notice from '../pages/cms/Notice'
-import fund from '../pages/fund/fund'
+import fund from '../pages/fund/fund' // BD基金
 import noticeitem from '../pages/cms/NoticeItem'
 import newhelp from '../pages/cms/NewHelp'
 import question from '../pages/cms/Question'
@@ -131,6 +131,8 @@ import MobileHome from '../components/mobile/home.vue'
 import MobileRegister from '../components/mobile/register.vue'
 import MobileLogin from '../components/mobile/login.vue'
 
+import mobileTerminalFund from '../components/fund/mobileTerminalFund' // 移动BD基金
+
 export default [
     { path: '/newMyExtension', component: newMyExtension },
     { path: '/safetyRecords', component: safetyRecords },
@@ -203,6 +205,14 @@ export default [
     // { path: '/message', component: Message },
     { path: '/notice', component: notice },
     { path: '/fund', component: fund }, // BD基金
+    {
+      path: '/mobileTerminalFund',
+      name: 'mobileTerminalFund',
+      component: mobileTerminalFund,
+      meta: {
+        hide: true
+      }
+    }, // 移动BD基金
     { path: '/notice/index', component: noticeitem },
     { path: '*', component: Index },
     { path: '/blc', component: Blc },

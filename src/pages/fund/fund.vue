@@ -9,71 +9,243 @@
         <div class="header-content">
           <div class="header-title">
             <img src="../../assets/img/line-two.png" alt="">
-            <span class="title">存币</span>
+            <span class="title" @click="goRegister">存币</span>
             <img src="../../assets/img/line-one.png" alt="">
           </div>
           <div class="info">
             <span>存币数量：</span>
             <Input
-                    type="text"
-                    placeholder="请输入数量"
-                    style="width: 555px;"
+              type="text"
+              v-model="lockAmount"
+              placeholder="请输入数量"
+              style="width: 555px;"
+              :min="coinInfo.lockMinimum"
+              :max="coinInfo.lockHighest"
+              :placeholder="coinInfo !== ''? '0':Number(coinInfo.lockMinimum) + '～' + coinInfo !== ''?'0':Number(coinInfo.lockHighest)"
             />
+            <span class="coinName">{{ coinInfo.lockCoinUnit }}</span>
           </div>
           <div class="info-text">
-            <span>可用余额</span>：<span>10000BC</span>
+            <span>可用余额</span>：<span>{{ userWallet.balance? userWallet.balance: '--' }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
           </div>
           <div class="footer-info">
-            <button>立即存币</button>
+            <Button @click="buyLockCoin" :disabled="!isLogin">立即存币</Button>
           </div>
         </div>
         <section>
-          <div class="count-down">
-            <p class="count-title">
-              倒计时
-            </p>
-            <p class="count-icon">
-              <i class="ivu-icon ivu-icon-md-arrow-dropdown icon"></i>
-            </p>
-            <p class="count-time">
-              <span class="time">{{ day }}</span>
-              <span class="day margin">天</span>&nbsp;
-              <span class="time margin1">{{ hr }}</span>
-              <span class="day margin">小时</span>&nbsp;
-              <span class="time margin1">{{ min }}</span>
-              <span class="day margin">分钟</span>&nbsp;
-              <span class="time margin1">{{ sec }}</span>
-              <span class="day margin">秒</span>&nbsp;
-            </p>
-            <p class="count-progress">
-              <Progress :percent="progressBar" />
-            </p>
+          <!--图片-->
+          <p class="circle1"></p>
+          <p class="circle2"></p>
+          <p class="circle3"></p>
+          <p class="circle4"></p>
+          <!--抢购-->
+          <div class="section-main" v-show="snapStatus">
+            <div class="count-down">
+              <p class="count-title">
+                倒计时
+              </p>
+              <p class="count-icon">
+                <i class="ivu-icon ivu-icon-md-arrow-dropdown icon"></i>
+              </p>
+              <p class="count-time">
+                <span class="time">{{ day }}</span>
+                <span class="day margin">天</span>&nbsp;
+                <span class="time margin1">{{ hr }}</span>
+                <span class="day margin">小时</span>&nbsp;
+                <span class="time margin1">{{ min }}</span>
+                <span class="day margin">分钟</span>&nbsp;
+                <span class="time margin1">{{ sec }}</span>
+                <span class="day margin">秒</span>&nbsp;
+              </p>
+              <p class="count-progress">
+                <Progress :percent="progressBar" />
+              </p>
+            </div>
+            <div class="purchase">
+              <div class="info" style="padding: 0 80px 0 10px;">
+                <span>预购数量：</span>
+                <Input
+                  type="text"
+                  v-model="lockAdvance"
+                  placeholder="请输入预购btc数量"
+                  style="width: 555px;"
+                  :min="coinInfo.lockMinimum"
+                  :max="coinInfo.lockHighest"
+                  :placeholder="userWallet !== ''?'0':Number(coinInfo.lockMinimum) + '～' + userWallet !== ''?'0':Number(coinInfo.lockHighest)"
+                />
+                <span class="coinName" style="right: 65px;">
+                {{ coinInfo.lockCoinUnit }}
+              </span>
+              </div>
+              <div class="info-text">
+                <span>可用余额</span>：<span>{{ userWallet.balance? userWallet.balance: '--' }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
+                <span style="margin-left: 15px;">可抢购数量</span>：<span>{{ userWallet.balance? userWallet.balance: '--' }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
+              </div>
+              <div class="footer-info">
+                <Button
+                  @click="buyLockCoin"
+                  :disabled="!isLogin"
+                >
+                  立即抢购
+                </Button>
+              </div>
+            </div>
           </div>
-          <div class="purchase">
-            2
+          <p class="circle5"></p>
+          <p class="circle6"></p>
+          <!--活动规则-->
+          <div class="activity-rules">
+            <div class="activity-top">
+              <div class="top-title">
+                <img src="../../assets/img/line-two.png" alt="">
+                <span class="title">活动内容</span>
+                <img src="../../assets/img/line-one.png" alt="">
+              </div>
+              <div class="top-content">
+                <div class="top-left">
+                  <p>共500枚BTC <i class="text1">两折</i> 抢购</p>
+                  <p>1.存TD ≧
+                    <span class="text2">500</span>
+                    枚，享
+                    <span class="text2">1</span>
+                    个BTC抢购资格；
+                  </p>
+                  <p>2.存TD ≧
+                    <span class="text2">1000</span>
+                    枚，享
+                    <span class="text2">3</span>
+                    个BTC抢购资格；
+                  </p>
+                  <p>3.存TD ≧
+                    <span class="text2">5000</span>
+                    枚，享
+                    <span class="text2">5</span>
+                    个BTC抢购资格；
+                  </p>
+                </div>
+                <span class="top-border"></span>
+                <div class="top-right">
+                  <p>凡没有抢到BTC的用户根据用户存TD数量
+                    <span class="text1">空投BC</span>
+                  </p>
+                  <p>1.存TD ≧
+                    <span class="text2">500</span>
+                    枚，空投
+                    <span class="text2">88BC</span>；
+                  </p>
+                  <p>2.存TD ≧
+                    <span class="text2">1000</span>
+                    枚，空投
+                    <span class="text2">188BC</span>；
+                  </p>
+                  <p>3.存TD ≧
+                    <span class="text2">5000</span>
+                    枚，空投
+                    <span class="text2">588BC</span>；
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="activity-bottom">
+              <div class="top-title">
+                <img src="../../assets/img/line-two.png" alt="">
+                <span class="title">活动细则</span>
+                <img src="../../assets/img/line-one.png" alt="">
+              </div>
+              <div class="top-content">
+                <div class="bottom-left">
+                  <p>1.参与本次活动，必须在规定时间内存
+                    <span class="text3">相应数量的TD,</span>
+                    才能
+                  </p>
+                  <p>拥有在规定时间内打折抢购
+                    <span class="text3">BTC</span>
+                    的资格;
+                  </p>
+                  <p>2.每人只能参与
+                    <span class="text3">一次抢购</span>;
+                  </p>
+                  <p>3.参与本次存TD活动的最小数量为
+                    <span class="text3">1TD</span>;
+                  </p>
+                  <p>4.本次活动最终解释权归BDW所有。</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
-        <footer>
-          <!--<div class="fund-table">
-            <Table
-                    :no-data-text="$t('common.nodata')"
-                    stripe
-                    :columns="tableColumnsBlc"
-                    :data="tableMoney"
-                    :loading="loading"
-                    :disabled-hover="true"
-            ></Table>
-            <div class="page-wrap">
-              <Page
-                      v-show="totalElement > 10"
-                      :current="pageNo"
-                      :total="parseInt(totalElement)"
-                      :page-size="pageSize"
-                      @on-change="changePage"
-                      id="record_pages"
-              ></Page>
+        <!--记录-->
+        <footer v-if="isLogin">
+          <div class="record-list">
+            <div class="save-money">
+              <div class="save-title">
+                <img src="../../assets/img/line-two.png" alt="">
+                <span class="title">存币记录</span>
+                <img src="../../assets/img/line-one.png" alt="">
+              </div>
+              <div class="fund-table">
+                <Table
+                  :no-data-text="$t('common.nodata')"
+                  stripe
+                  :columns="tableColumnsSave"
+                  :data="saveMoneyList"
+                  :loading="loading"
+                  :disabled-hover="true"
+                ></Table>
+                <ul class="page" v-show="!savePageNo == 0">
+                  <ul class="ivu-page"></ul>
+                  <li
+                    title="上一页"
+                    class="ivu-page-prev"
+                    @click="previouspage('save')"
+                  >
+                    <a><i class="ivu-icon ivu-icon-ios-arrow-back"></i></a>
+                  </li>
+                  <li
+                    title="下一页"
+                    class="ivu-page-next"
+                    @click="nextpage('save')"
+                  >
+                    <a><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>-->
+            <div class="save-purchase" v-if="snapStatus">
+              <div class="save-title">
+                <img src="../../assets/img/line-two.png" alt="">
+                <span class="title">抢币记录</span>
+                <img src="../../assets/img/line-one.png" alt="">
+              </div>
+              <div class="fund-table">
+                <Table
+                  :no-data-text="$t('common.nodata')"
+                  stripe
+                  :columns="tableColumnsRob"
+                  :data="robMoneyList"
+                  :loading="loading"
+                  :disabled-hover="true"
+                ></Table>
+                <ul class="page" v-show="!robPageNo == 0">
+                  <ul class="ivu-page"></ul>
+                  <li
+                    title="上一页"
+                    class="ivu-page-prev"
+                    @click="previouspage('rob')"
+                  >
+                    <a><i class="ivu-icon ivu-icon-ios-arrow-back"></i></a>
+                  </li>
+                  <li
+                    title="下一页"
+                    class="ivu-page-next"
+                    @click="nextpage('rob')"
+                  >
+                    <a><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </footer>
       </div>
 
@@ -81,55 +253,89 @@
   </div>
 </template>
 <script>
+  // 存币记录
+  const FixAraibleSave = (pageSize) => (pageNo) => ({
+    pageSize,
+    pageNo
+  });
+  const getParamsSave = FixAraibleSave(10, '');
+  // 抢币记录
+  // const FixAraibleRob = (robPageSize ) => (robPageNo) => ({
+  //   robPageSize,
+  //   robPageNo
+  // });
+  // const getParamsRob = FixAraibleRob(10, '');
   export default {
-    components: {},
     data() {
       return {
         loading: false,
-        pageNo: 1,
-        pageSize: 10,
-        pageNum: 1,
-        ieoDataList: [],
+        /*存币分页*/
+        savePageNo: 1,
+        savePageSize: 10,
+        saveTotalElement: 0,
+        // 抢币分页
+        robPageNo: 1,
+        robPageSize: 10,
+        robTotalElement: 0,
+        lockAmount: '', // 存币数量
+        lockAdvance: '', // 预购数量
+        saveMoneyList: [],
+        robMoneyList: [],
         reserveTime: '60',
         reserveInteval: null,
-        msg: {
-          createTime: '2019-08-08 19:18:08',
-          timeLimit: 10
-        },
         day: 0,
         hr: 0,
         min: 0,
         sec: 0,
         totalTime: '',
-        progressBar: ''
+        progressBar: '',
+        coinInfo: {},
+        userWallet: {},
+        snapStatus: true // 抢购状态
       }
     },
     created () {
-      this.getDataList()
-      this.countdown()
+      const name = this.$route.path
+      if (name == '/fund') {
+        if(this.isLogin) {
+          this.countdown()
+          this.getSaveDataList()
+        }
+        this.getCoin()
+      }
     },
-    mounted: function () {
-      this.countdown()
-    },
+    mounted: function () {},
     methods: {
+      goRegister() {
+        this.$router.push({ name: 'mobileTerminalFund' })
+      },
       // 倒计时
       countdown () {
         var iTime
-        const end = Date.parse(new Date('2019-08-09 16:55:00'))
+        // 到期时间
+        const end = Date.parse(new Date('2019-09-09 10:25:00'))
+        // 当前时间
         const now = Date.parse(new Date())
+        // 开始时间
+        const start = Date.parse(new Date('2019-08-09 10:25:00'))
+        /*剩余时间 = 到期时间 - 当前时间*/
         const msec = end - now
+        /*当前秒数 = (到期时间 - 开始时间)*0.001*/
+        const num = (end-start)*0.001
         const that = this
+        /*年月日时分秒*/
         let day = parseInt(msec / 1000 / 60 / 60 / 24)
         let hr = parseInt(msec / 1000 / 60 / 60 % 24)
         let min = parseInt(msec / 1000 / 60 % 60)
         let sec = parseInt(msec / 1000 % 60)
-        // console.log(day, hr, min, sec)
+        console.log(day, hr, min, sec)
+
         let day1 = parseInt(day * 60 * 60 * 24)
         let hr1 = parseInt(hr  * 60 * 60)
         let min1 = parseInt(min  * 60)
         let sec1 = parseInt(sec)
+        /*总秒数*/
         this.totalTime = (day1 + hr1 + min1 + sec1)
-        console.log(this.totalTime)
         if (this.totalTime > 0) {
           this.day = day
           this.hr = hr > 9 ? hr : '0' + hr
@@ -140,42 +346,204 @@
             that.countdown()
           }, 1000)
         }
-        this.progressBar = this.totalTime * 875 * 0.01
+        /*进度条比例 = 总秒数/当前秒数 *100*/
+        this.progressBar = this.totalTime/num * 100
         if (this.progressBar == 0) {
           clearTimeout(iTime)
           this.sec = '00'
         }
       },
-
-      // 数据列表
-      getDataList(pageNo, pageSize) {
-        let params = {};
-        params["pageNo"] = pageNo;
-        params["pageSize"] = pageSize;
-        this.$http.post(this.host + "/uc/gift/record", params).then(res => {
+      // 币种详细信息
+      getCoin() {
+        let userId = this.isLogin?this.$store.getters.member.id:''
+        this.$http.get(this.host + `/wallet/lockCoinWallet/getList?userId=${userId?userId:''}`).then(res => {
           const resp = res.body;
           if (resp.code == 0) {
             this.loading = false;
-            this.getList(params).then(res => {
-              this.ieoDataList = res.data;
-              this.totalElement = res.total;
-            });
+              this.coinInfo = resp.data.list[0];
+            console.log(this.coinInfo, '123456')
+            if (this.userWallet) {
+              this.userWallet = resp.data.memberWallet;
+            }
+          } else {
+            this.$Message.error(resp.message)
+            return false
           }
         });
-      }
+      },
+      // 存币接口数据
+      buyLockCoin () {
+        // 判断是否登录
+        if(this.isLogin) {
+          if (!this.lockAmount) {
+            this.$Message.error(this.$t('common.loginInfo'))
+            return false
+          }
+          const params = {}
+          params['id'] = this.coinInfo.id
+          params['amount'] = this.lockAmount
+          this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
+            const resp = res.body;
+            if (resp.code == 0) {
+              this.$Message.success(resp.message)
+              this.lockAmount = ''
+              this.snapStatus = true // 抢购状态
+              this.getCoin()
+            } else {
+              this.$Message.err(resp.message)
+            }
+          });
+        } else {
+          this.$Message.error(this.$t('common.logintip'))
+        }
+
+      },
+      // 数据列表存币
+      getSaveDataList() {
+        const params = getParamsSave(this.savePageNo);
+        this.$http.post(this.host + "/wallet/lockCoinWallet/record", params).then(res => {
+          const resp = res.body;
+          if (resp.code == 0) {
+            this.loading = false;
+            this.saveMoneyList = resp.data;
+            this.totalElement = res.total;
+            console.log(this.saveMoneyList)
+          }
+        });
+      },
+      // 数据列表抢币
+      // getRobDataList() {
+      //   const params = getParamsRob(this.savePageNo);
+      //   this.$http.post(this.host + "/lockCoinWallet/record", params).then(res => {
+      //     const resp = res.body;
+      //     if (resp.code == 0) {
+      //       this.loading = false;
+      //       this.saveMoneyList = resp.data;
+      //       this.totalElement = res.total;
+      //       console.log(this.saveMoneyList)
+      //     }
+      //   });
+      // },
+      /*分页*/
+      previouspage(type) {
+        if (type == 'save') {
+          if (this.savePageNo == 1) {
+            this.$Message.error(this.$t('uc.finance.record.nodata'))
+          } else {
+            this.savePageNo = this.savePageNo - 10
+            this.getSaveDataList()
+          }
+        }
+        // else if (type == 'rob') {
+        //   if (this.robPageNo == 1) {
+        //     this.$Message.error(this.$t('uc.finance.record.nodata'))
+        //   } else {
+        //     this.robPageNo = this.savePageNo - 10
+        //     // this.getRobDataList()
+        //   }
+        // }
+      },
+      nextpage(type) {
+        if (type == 'save') {
+          this.savePageNo = this.savePageNo + 10
+          this.getSaveDataList()
+        }
+        // else if (type == 'rob') {
+        //   this.robPageNo = this.robPageNo + 10
+        //   this.getRobDataList()
+        // }
+      },
     },
     watch: {
       countdown () {
-        // console.log(this.totalTime)
-        if (this.progressBar == 0) {
-          var iTime
-          iTime = setTimeout(function () {
-            this.countdown()
-          }, 1000)
+        if (this.isLogin) {
+          // console.log(this.totalTime)
+          if (this.progressBar == 0) {
+            var iTime
+            iTime = setTimeout(function () {
+              this.countdown()
+            }, 1000)
+          }
         }
       }
     },
-    mounted () {}
+    mounted () {},
+    computed: {
+      isLogin: function() {
+        return this.$store.getters.isLogin
+      },
+      member: function() {
+        return this.$store.getters.member},
+      lang: function() {
+        return this.$store.state.lang
+      },
+      // 存币记录
+      tableColumnsSave() {
+        let self = this
+        const arr = [];
+        arr.push({
+          title: this.$t('common.fund.MemberId'),
+          key: "memberId",
+        });
+        arr.push({
+          title: this.$t('common.fund.lockCoinUnit'),
+          key: "lockCoinUnit",
+        });
+
+        arr.push({
+          title: this.$t('common.fund.lockAmount'),
+          key: "lockAmount",
+        })
+        arr.push({
+          title: this.$t('common.fund.lockTime'),
+          key: "lockTime",
+        });
+        arr.push({
+          title: this.$t('common.fund.unlockTime'),
+          key: "unlockTime",
+        });
+        arr.push({
+          title: this.$t('common.fund.lockCoinDay'),
+          key: "lockCoinDay",
+        });
+        arr.push({
+          title: this.$t('common.fund.interests'),
+          key: "interests",
+        });
+        // arr.push({
+        //   title: this.$t('pointPage.operation'),
+        //   key: "operation",
+        //   render(h, params){
+        //     return h("span", {}, self.$store.state.lang == 'English'?params.row.operationEnglish:params.row.operation);
+        //   }
+        // });
+        return arr;
+      },
+      // 抢币记录
+      tableColumnsRob() {
+        const arr = [];
+        arr.push({
+          title: this.$t('common.fund.moneyDeposited'),
+          key: "memberId",
+        });
+        arr.push({
+          title: this.$t('common.fund.successful'),
+          key: "lockCoinUnit",
+        });
+        arr.push({
+          title: this.$t('common.fund.rewardDrop'),
+          key: "lockAmount",
+        })
+        // arr.push({
+        //   title: this.$t('pointPage.operation'),
+        //   key: "operation",
+        //   render(h, params){
+        //     return h("span", {}, self.$store.state.lang == 'English'?params.row.operationEnglish:params.row.operation);
+        //   }
+        // });
+        return arr;
+      }
+    }
   }
 </script>
 <style scoped lang="scss">
@@ -187,117 +555,302 @@
         background: url("../../assets/img/banner2.png") 0 0 no-repeat;
         background-position: center;
       }
-
       .main {
         background: #101646;
+        padding-bottom: 100px;
         .header-content {
           width: 800px;
           margin: 0 auto;
           position: relative;
           top: -140px;
-          .header-title {
-            margin-bottom: 80px;
-            span {
-              display: inline-block;
-              width: 140px;
-              height: 20px;
-              font-size: 18px;
-              color: #45AAFF;
-              line-height: 20px;
-              text-align: center;
-            }
-            img {
-              vertical-align: middle;
-            }
+        }
+        .header-title {
+          margin-bottom: 80px;
+          span {
+            display: inline-block;
+            width: 140px;
+            height: 20px;
+            font-size: 18px;
+            color: #45AAFF;
+            line-height: 20px;
+            text-align: center;
           }
-          .info {
-            padding: 0 80px;
-            span {
-              color: #FEFFFF;
-              font-size: 16px;
-              display: inline-block;
-              min-width: 75px;
-              height: 45px;
-              line-height: 45px;
-            }
+          img {
+            vertical-align: middle;
           }
-          .info-text {
+        }
+        .info {
+          padding: 0 80px 0 45px;
+          position: relative;
+          span {
+            color: #FEFFFF;
+            font-size: 16px;
+            display: inline-block;
+            min-width: 75px;
+            height: 45px;
+            line-height: 45px;
+          }
+          .coinName {
+            display: inline-block;
+            line-height: 64px;
+            position: absolute;
+            right: 45px;
+            top: 0;
+          }
+        }
+        .info-text {
+          height: 64px;
+          color: #fff;
+          line-height: 64px;
+          text-align: right;
+          padding-right: 115px;
+        }
+        .footer-info {
+          text-align: right;
+          padding-right: 115px;
+          button {
+            width: 555px;
             height: 64px;
             color: #fff;
-            line-height: 64px;
-            text-align: right;
-            padding-right: 80px;
-          }
-          .footer-info {
-            text-align: right;
-            padding-right: 80px;
-            button {
-              width: 555px;
-              height: 64px;
-              color: #fff;
-              border: 0;
-              outline:none;
-              cursor: pointer;
-              font-size: 16px;
-              text-align: center;
-              line-height: 64px;
-              background: #293872;
-            }
+            border: 0;
+            border-radius: 0;
+            font-size: 16px;
+            text-align: center;
+            background: #293872;
           }
         }
         section {
-          width: 875px;
-          margin: 0 auto 210px;
+          margin: 0 auto;
           min-height: 400px;
-          .count-down {
-            margin-bottom: 173px;
-            .count-title {
-              text-align: center;
-              font-size:48px;
-              font-family:PingFangSC-Regular;
-              font-weight:bold;
-              color:rgba(69,170,255,1);
-            }
-            .count-icon {
-              text-align: center;
-              .icon {
-                color: #3F7DA8;
-                font-size: 35px;
-              }
-            }
-            .count-time {
-              text-align: center;
-              margin-top: 20px;
-              .time {
-                font-size:54px;
+          position: relative;
+          .circle1 {
+            width: 100px;
+            height: 205px;
+            border-radius: 0 205px 205px 0;
+            background: radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+            position: absolute;
+            top: -6%;
+            left: -10px;
+            opacity: 0.06;
+          }
+          .circle2 {
+            width:100px;
+            height:100px;
+            background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+            opacity:0.06;
+            border-radius:50%;
+            position: absolute;
+            top: -7%;
+            right: 10%;
+          }
+          .circle3 {
+            width:75px;
+            height:75px;
+            background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+            opacity:0.06;
+            border-radius:50%;
+            position: absolute;
+            top: 33%;
+            left: 17%;
+          }
+          .circle4 {
+            width:110px;
+            height:110px;
+            background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+            opacity:0.06;
+            border-radius:50%;
+            position: absolute;
+            top: 35%;
+            right: 12%;
+          }
+          .circle5 {
+             width:95px;
+             height:95px;
+             background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+             opacity:0.06;
+             border-radius:50%;
+             position: absolute;
+             bottom: -8%;
+             left: 8%;
+           }
+          .circle6 {
+            width: 65px;
+            height: 130px;
+            border-radius: 130px 0 0 130px;
+            background: radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+            position: absolute;
+            bottom: -6%;
+            right: -6px;
+            opacity: 0.06;
+          }
+          .section-main {
+            margin-bottom: 75px;
+            .count-down {
+              width: 875px;
+              margin: 0 auto 130px;
+              .count-title {
+                text-align: center;
+                font-size:48px;
+                font-family:PingFangSC-Regular;
                 font-weight:bold;
-                font-style:italic;
                 color:rgba(69,170,255,1);
               }
-              .margin {
-                margin-left: 10px;
+              .count-icon {
+                text-align: center;
+                .icon {
+                  color: #3F7DA8;
+                  font-size: 35px;
+                }
               }
-              .margin1 {
-                margin-left: 15px;
+              .count-time {
+                text-align: center;
+                margin-top: 20px;
+                .time {
+                  font-size:54px;
+                  font-weight:bold;
+                  font-style:italic;
+                  color:rgba(69,170,255,1);
+                }
+                .margin {
+                  margin-left: 10px;
+                }
+                .margin1 {
+                  margin-left: 15px;
+                }
+                .day {
+                  font-size: 45px;
+                  color: #fff;
+                }
               }
-              .day {
-                font-size: 45px;
-                color: #fff;
+              .count-progress {
+                text-align: center;
+                margin: 75px auto 0;
+                width: 875px;
               }
             }
-            .count-progress {
-              margin-top: 75px;
+            .purchase {
               text-align: center;
+              width: 800px;
+              margin: 0 auto;
             }
           }
-          .purchase {
-            background: rosybrown;
+
+          .activity-rules {
+            width: 1200px;
+            margin: 0 auto 75px;
+            padding: 40px;
+            .activity-top,
+            .activity-bottom {
+              .top-title {
+                width: 875px;
+                margin: 0 auto 74px;
+                text-align: center;
+                img {
+                  vertical-align: middle;
+                }
+                .title {
+                  font-size: 18px;
+                  color: #45AAFF;
+                  display: inline-block;
+                  text-align: center;
+                  width: 150px;
+                  line-height: 64px;
+                }
+              }
+              .top-content {
+                min-height: 357px;
+                background: url("../../assets/img/border.png") 0 0 no-repeat;
+                background-position: center;
+                background-size: 100% 100%;
+                padding: 54px 40px;
+                display: flex;
+                .top-left {
+                  flex: 6;
+                  margin-left: 80px;
+                  p {
+                    font-size: 16px;
+                    font-weight:400;
+                    color:rgba(235,235,235,1);
+                    line-height:48px;
+                    .text1 {
+                      color: #45AAFF;
+                      font-size: 20px;
+                    }
+                    .text2 {
+                      color: #45AAFF;
+                      font-size: 18px;
+                    }
+                  }
+                }
+                .top-border {
+                  display: inline-block;
+                  border: 1px dashed #3F7DA8;
+                  height: 195px;
+                }
+                .top-right {
+                  flex: 7;
+                  margin-left: 80px;
+                  p {
+                    font-size: 16px;
+                    font-weight:400;
+                    color:rgba(235,235,235,1);
+                    line-height:48px;
+                    .text1 {
+                      color: #45AAFF;
+                      font-size: 20px;
+                    }
+                    .text2 {
+                      color: #45AAFF;
+                      font-size: 18px;
+                    }
+                  }
+                }
+                .bottom-left {
+                  margin: 0 auto;
+                  p {
+                    font-size:16px;
+                    font-weight:400;
+                    color:rgba(235,235,235,1);
+                    line-height:48px;
+                    .text3 {
+                      color: #45AAFF;
+                      font-size: 20px;
+                    }
+                  }
+                }
+              }
+            }
+            .activity-bottom {
+              margin-top: 150px;
+            }
           }
         }
         footer {
           width: 1200px;
           min-height: 150px;
-          margin: 20px auto 50px;
+          margin: 100px auto 0;
+          .record-list {
+            .save-money,
+            .save-purchase {
+              text-align: center;
+              margin-bottom: 100px;
+              .save-title {
+                color: #8090af;
+                margin-bottom: 30px;
+                .title {
+                  font-size: 18px;
+                  color: #45AAFF;
+                  display: inline-block;
+                  text-align: center;
+                  width: 150px;
+                  line-height: 64px;
+                }
+                img {
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
         }
       }
 
@@ -305,11 +858,6 @@
   }
 </style>
 <style lang="scss">
-  .ivu-table {
-    &:before {
-      background: transparent;
-    }
-  }
   .ivu-input {
     width: 555px;
     height: 64px;
@@ -322,7 +870,6 @@
     border: 1px solid rgba(63,125,168,1);
   }
   .ivu-progress-show-info .ivu-progress-outer {
-    /* padding-right: 55px; */
     margin-right: -55px;
   }
   .ivu-progress-inner {
@@ -331,58 +878,140 @@
     overflow: hidden;
     .ivu-progress-bg {
       height: 38px !important;
-      /*background: linear-gradient(0deg, #fff 0%,#000 100%);*/
       background:linear-gradient(45deg, rgba(49, 107, 239, .6), rgba(20, 56, 240, .7));
     }
   }
   .ivu-progress-text {
     display: none;
   }
-  #fund-table {
-
+  #fund-box {
     .ivu-table-wrapper {
-      td {
-        background: #111530;
-      }
-      .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
-      .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-        background: #10122B;
-      }
-      .ivu-table-header {
-        thead th {
-          height: 50px;
-          background: #191D3A;
+      position: initial !important;
+    }
+    .ivu-table {
+      tr {
+        &:last-child {
+          td {
+            border-bottom: 0;
+          }
         }
       }
-      tbody.ivu-table-tbody .ivu-table-row td {
-        background: #111530;
+      td {
+        background: #101646;
+        border-bottom: 1px solid rgba(41,74,97,1) !important;
         &:last-child {
-          text-align: left;
+          border-right: 1px solid rgba(41,74,97,1);
+        }
+      }
+      &:before {
+        background: transparent;
+      }
+      .ivu-table-tip {
+        border: 1px solid rgba(41,74,97,1);
+        border-top: 0;
+        td {
+          background: #101646;
+        }
+      }
+      th {
+        border-bottom: 0;
+      }
+      table {
+        table-layout: auto;
+      }
+      .ivu-table-header {
+        height: 48px;
+        line-height: 48px;
+        border: 1px solid #294a61;
+        th {
+          background: #101646;
+        }
+      }
+      .ivu-table-body {
+        border: 1px solid #294A61;
+        border-top: 0;
+        border-bottom: 0;
+      }
+      .ivu-table-tip {
+        tr {
+          &:last-child {
+            td {
+              border-right: 0;
+            }
+          }
         }
       }
     }
-  }
-  #record_pages li.ivu-page-item.ivu-page-item-active {
-    background-color: #111530;
-    border-color: #191f44;
-    a {
+    .page {
+      text-align: right;
+      margin-top: 20px;
+      margin-bottom:20px;
+      .ivu-page-next a{
+        color:#fff;
+      }
+      .ivu-page-prev a{
+        color:#fff;
+      }
+
+      .ivu-page-total {
+        color: #8090AF;
+      }
+      .ivu-page-next, .ivu-page-prev {
+        background: #111530;
+        border: 1px solid #191f44;
+        line-height: 25px;
+      }
+
+      .ivu-icon.ivu-icon-ios-arrow-left,
+      .ivu-icon.ivu-icon-ios-arrow-right {
+        color: #8090AF;
+      }
+      li.ivu-page-item.ivu-page-item-active {
+        background: #111530;
+        border: 1px solid #191f44;
+        a {
+          color: #8090AF;
+        }
+        &:hover {
+          a {
+            color: #8090AF;
+          }
+        }
+      }
+    }
+    #fund-table {
+
+      .ivu-table-wrapper {
+        margin-right: 0;
+        td {
+          background: #111530;
+        }
+        .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+        .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+          background: #10122B;
+        }
+        .ivu-table-header {
+          thead th {
+            height: 50px;
+            background: #191D3A;
+          }
+        }
+        tbody.ivu-table-tbody .ivu-table-row td {
+          background: #111530;
+          &:last-child {
+            text-align: left;
+          }
+        }
+      }
+    }
+    .ivu-page-item {
+      background: #111530;
+      color: #8090AF;
+      border: 1px solid #191f44;
+    }
+    .ivu-page-item:hover {
       color: #3399ff;
     }
   }
-  #record_pages li.ivu-page-item.ivu-page-item-active {
-    &:hover {
-      background-color: #111530;
-      a {
-        color: #3399ff;
-      }
-    }
-  }
-  .ivu-page-item {
-    background: #111530;
-    color: #8090AF;
-    border: 1px solid #191f44;
-  }
-  .ivu-page-item:hover {
-    color: #3399ff;
-  }
+
 </style>

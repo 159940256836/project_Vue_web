@@ -23,7 +23,8 @@
                         <!-- <router-link to="/help">帮助</router-link> -->
                         <router-link to="/helpList">{{$t('header.help')}}</router-link>
                         <router-link to="/notice">{{$t("header.service")}}</router-link>
-                        <!-- <router-link to="/fund">{{$t("header.fund")}}</router-link> -->
+                         <router-link to="/fund">{{$t("header.fund")}}</router-link>
+                         <!--<router-link to="/mobileTerminalFund">移动{{$t("header.fund")}}</router-link>-->
                     </div>
                     <div class="nav-header">
                         <!--中英文切换-->
