@@ -271,19 +271,19 @@
   const FixAraibleSave = (pageSize) => (pageNo) => ({
     pageSize,
     pageNo
-  });
-  const getParamsSave = FixAraibleSave(10, '');
-  // 抢币记录
-  const FixAraibleRob = (pageSize) => (pageNo) => ({
+  })
+const getParamsSave = FixAraibleSave(10, '')
+// 抢币记录
+const FixAraibleRob = (pageSize) => (pageNo) => ({
     pageSize,
     pageNo
-  });
-  const getParamsRob = FixAraibleRob(10, '');
-  export default {
+  })
+const getParamsRob = FixAraibleRob(10, '')
+export default {
     data() {
       return {
         loading: false,
-        /*存币分页*/
+        /* 存币分页*/
         savePageNo: 1,
         savePageSize: 10,
         saveTotalElement: 0,
@@ -311,18 +311,18 @@
         balanceData: {
           balance: '--',
           maxSaleAmount: '--',
-          raiseCoin: "BC",
-          saleCoin: "BTC"
-        }, // 可抢币余额
+          raiseCoin: 'BC',
+          saleCoin: 'BTC'
+        } // 可抢币余额
       }
     },
-    created () {
+    created() {
       const name = this.$route.path
       console.log(name)
       this.countdown()
       if (name == '/fund') {
         console.log(1)
-        if(this.isLogin) {
+        if (this.isLogin) {
           console.log(2)
           console.log(name, this.isLogin)
           this.getSaveDataList() // 数据列表存币
@@ -334,46 +334,46 @@
         this.getCoinRob() // 币种详细信息 抢币
       }
     },
-    mounted () {},
+    mounted() {},
     methods: {
       // 正则校验只能输入数字和小数点
-      text () {
-        this.lockAmount = this.lockAmount.replace(/[^\d.]/g,"")
-        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g,"")
+      text() {
+        this.lockAmount = this.lockAmount.replace(/[^\d.]/g, '')
+        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, '')
       },
       // 时间格式转换
       formatTime(date) {
-        return moment(date).format("YYYY-MM-DD")
+        return moment(date).format('YYYY/MM/DD')
       },
       goRegister() {
         this.$router.push({ name: 'mobileTerminalFund' })
       },
       // 倒计时
-      countdown () {
-        var iTime
+      countdown() {
+        let iTime
         // 到期时间
-        const end = Date.parse(new Date('2019-09-12 11:40:00'))
+        const end = Date.parse(new Date('2019/09/12 11:40:00'))
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
-        const start = Date.parse(new Date('2019-08-09 10:25:00'))
-        /*剩余时间 = 到期时间 - 当前时间*/
+        const start = Date.parse(new Date('2019/08/09 10:25:00'))
+        /* 剩余时间 = 到期时间 - 当前时间*/
         const msec = end - now
-        /*当前秒数 = (到期时间 - 开始时间)*0.001*/
-        const num = (end-start)*0.001
-        const that = this
-        /*年月日时分秒*/
-        let day = parseInt(msec / 1000 / 60 / 60 / 24)
-        let hr = parseInt(msec / 1000 / 60 / 60 % 24)
-        let min = parseInt(msec / 1000 / 60 % 60)
-        let sec = parseInt(msec / 1000 % 60)
+        /* 当前秒数 = (到期时间 - 开始时间)*0.001*/
+        const num = (end - start) * 0.001
+        // const that = this
+        /* 年月日时分秒*/
+        const day = parseInt(msec / 1000 / 60 / 60 / 24)
+        const hr = parseInt(msec / 1000 / 60 / 60 % 24)
+        const min = parseInt(msec / 1000 / 60 % 60)
+        const sec = parseInt(msec / 1000 % 60)
         // console.log(day, hr, min, sec)
 
-        let day1 = parseInt(day * 60 * 60 * 24)
-        let hr1 = parseInt(hr  * 60 * 60)
-        let min1 = parseInt(min  * 60)
-        let sec1 = parseInt(sec)
-        /*总秒数*/
+        const day1 = parseInt(day * 60 * 60 * 24)
+        const hr1 = parseInt(hr * 60 * 60)
+        const min1 = parseInt(min * 60)
+        const sec1 = parseInt(sec)
+        /* 总秒数*/
         this.totalTime = (day1 + hr1 + min1 + sec1)
         if (this.totalTime > 0) {
           this.day = day
@@ -381,55 +381,53 @@
           this.min = min > 9 ? min : '0' + min
           this.sec = sec > 9 ? sec : '0' + sec
           // console.log(this.day, this.hr, this.min, this.sec)
-          iTime = setTimeout(function () {
-            that.countdown()
+          iTime = setTimeout(() => {
+            this.countdown()
           }, 1000)
         }
-        /*进度条比例 = 总秒数/当前秒数 *100*/
-        this.progressBar = this.totalTime/num * 100
+        /* 进度条比例 = 总秒数/当前秒数 *100*/
+        this.progressBar = this.totalTime / num * 100
         if (this.progressBar == 0) {
           clearTimeout(iTime)
         }
       },
-      /*********存币***********/
-
+      /** *******存币***********/
       // 币种详细信息 存币
       getCoin() {
         this.$http.get(this.host + `/wallet/lockCoinWallet/getList`).then(res => {
-          const resp = res.body;
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.coinInfo = resp.data[0];
+            this.loading = false
+            this.coinInfo = resp.data[0]
             if (this.isLogin) {
               this.lockCoinUnit = resp.data[0].lockCoinUnit
               this.getCoinBalance()
             }
             console.log(this.coinInfo, this.lockCoinUnit)
-
           } else {
             this.$Message.error(resp.message)
             return false
           }
-        });
+        })
       },
       // 币种余额 存币
       getCoinBalance() {
         console.log(this.lockCoinUnit)
-        let unit = !this.lockCoinUnit? 'TDE':this.lockCoinUnit
+        const unit = !this.lockCoinUnit ? 'TDE' : this.lockCoinUnit
         this.$http.get(this.host + `/wallet/lockCoinWallet/userWallet?unit=${unit}`).then(res => {
-          const resp = res.body;
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.userWalletBalance = resp.data.balance;
+            this.loading = false
+            this.userWalletBalance = resp.data.balance
           } else {
             console.log(resp.message)
           }
-        });
+        })
       },
       // 接口数据 存币 抢币
-      buyLockCoin (state) {
+      buyLockCoin(state) {
         // 判断是否登录
-        if(this.isLogin) {
+        if (this.isLogin) {
           if (state == 'buy') {
             if (!this.lockAmount) {
               this.$Message.error(this.$t('common.loginInfo'))
@@ -439,7 +437,7 @@
             params['id'] = this.coinInfo.id
             params['amount'] = this.lockAmount
             this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
-              const resp = res.body;
+              const resp = res.body
               if (resp.code == 0) {
                 this.$Message.success(resp.message)
                 this.lockAmount = ''
@@ -449,7 +447,7 @@
               } else {
                 this.$Message.error(resp.message)
               }
-            });
+            })
           } else if (state == 'rush') {
             if (!this.lockAdvance) {
               this.$Message.error(this.$t('common.loginInfo1'))
@@ -459,7 +457,7 @@
             params['id'] = 1
             params['amount'] = this.lockAdvance
             this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
-              const resp = res.body;
+              const resp = res.body
               if (resp.code == 0) {
                 this.$Message.success(resp.message)
                 this.lockAdvance = ''
@@ -469,7 +467,7 @@
               } else {
                 this.$Message.error(resp.message)
               }
-            });
+            })
           }
         } else {
           this.$Message.error(this.$t('common.logintip'))
@@ -477,18 +475,18 @@
       },
       // 数据列表 存币
       async getSaveDataList() {
-        const params = getParamsSave(this.savePageNo);
-        this.$http.post(this.host + "/wallet/lockCoinWallet/record", params).then(res => {
-          const resp = res.body;
+        const params = getParamsSave(this.savePageNo)
+        this.$http.post(this.host + '/wallet/lockCoinWallet/record', params).then(res => {
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.saveMoneyList = resp.data;
-            this.totalElement = resp.total;
+            this.loading = false
+            this.saveMoneyList = resp.data
+            this.totalElement = resp.total
             console.log(this.saveMoneyList)
           }
-        });
+        })
       },
-      /*分页 存币*/
+      /* 分页 存币*/
       previouspage(type) {
         console.log(this.savePageNo)
         if (type == 'save') {
@@ -519,134 +517,134 @@
         //   this.getRobDataList()
         // }
       },
-      /*********抢币***********/
+      /** *******抢币***********/
       // 币种详细信息 可抢币
-      getCoinRob () {
-        let id = 1
-        this.$http.get(this.host + `/wallet/activity/lower-price/remain/${id?1:''}`).then(res => {
-          const resp = res.body;
+      getCoinRob() {
+        const id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/remain/${id ? 1 : ''}`).then(res => {
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            // setTimeout(function () {
-            //   this.getCoinRob()
-            // }, 1000)
-            this.coinBalance = resp.data;
+            this.loading = false
+          // setTimeout(function () {
+          //   this.getCoinRob()
+          // }, 1000)
+            this.coinBalance = resp.data
           } else {
             this.$Message.error(resp.message)
             return false
           }
-        });
+        })
       },
       // 钱包余额和最多抢购额度 抢币
-      snapLines () {
-        let id = 1
-        this.$http.get(this.host + `/wallet/activity/lower-price/wallet/result/${id?1:''}`).then(res => {
-          const resp = res.body;
+      snapLines() {
+        const id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/wallet/result/${id ? 1 : ''}`).then(res => {
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.balanceData = resp.data;
+            this.loading = false
+            this.balanceData = resp.data
             console.log(this.balanceData)
           } else {
             this.$Message.error(resp.message)
             return false
           }
-        });
+        })
       },
       // 数据列表 抢币
       getRobDataList() {
         // const params = getParamsRob(this.savePageNo);
-        let id = 1
+        const id = 1
         this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
-          const resp = res.body;
-          /*if (resp.code == 0) {
-            this.loading = false;
-            this.saveMoneyList = resp.data;
-            // this.totalElement = res.total;
-            console.log(this.saveMoneyList)
-          }*/
-        });
+          const resp = res.body
+        /* if (resp.code == 0) {
+          this.loading = false;
+          this.saveMoneyList = resp.data;
+          // this.totalElement = res.total;
+          console.log(this.saveMoneyList)
+        }*/
+        })
       }
     },
     watch: {
-      countdown () {
+      countdown() {
         if (this.isLogin) {
           // console.log(this.totalTime)
           if (this.progressBar == 0) {
             var iTime
-            iTime = setTimeout(function () {
+            iTime = setTimeout(function() {
               this.countdown()
             }, 1000)
           }
         }
       }
     },
-    mounted () {},
+    mounted() {},
     computed: {
       isLogin: function() {
         return this.$store.getters.isLogin
       },
       member: function() {
-        return this.$store.getters.member},
+        return this.$store.getters.member
+      },
       lang: function() {
         return this.$store.state.lang
       },
       // 存币记录
       tableColumnsSave() {
-        let self = this
-        const arr = [];
+        const self = this
+        const arr = []
         arr.push({
           title: this.$t('common.fund.lockCoinUnit'),
-          key: "lockCoinUnit",
-        });
+          key: 'lockCoinUnit'
+        })
         arr.push({
           title: this.$t('common.fund.lockCoinName'),
-          key: "lockCoinName",
-        });
+          key: 'lockCoinName'
+        })
         arr.push({
           title: this.$t('common.fund.lockAmount'),
-          key: "lockAmount",
+          key: 'lockAmount'
         })
         arr.push({
           title: this.$t('common.fund.lockCoinDay'),
-          key: "lockCoinDay",
-        });
+          key: 'lockCoinDay'
+        })
         arr.push({
           title: this.$t('common.fund.lockTime'),
-          key: "lockTime",
-          render(h, params){
-            return h("span", {}, self.formatTime(params.row.lockTime));
+          key: 'lockTime',
+          render(h, params) {
+            return h('span', {}, self.formatTime(params.row.lockTime))
           }
-        });
+        })
         arr.push({
           title: this.$t('common.fund.unlockTime'),
-          key: "unlockTime",
-          render(h, params){
-            return h("span", {}, self.formatTime(params.row.unlockTime));
+          key: 'unlockTime',
+          render(h, params) {
+            return h('span', {}, self.formatTime(params.row.unlockTime))
           }
-        });
+        })
         arr.push({
           title: this.$t('common.fund.interests'),
-          key: "interests",
-        });
-        return arr;
-        console.log(arr)
+          key: 'interests'
+        })
+        return arr
       },
       // 抢币记录
       tableColumnsRob() {
-        const arr = [];
+        const arr = []
         arr.push({
           title: this.$t('common.fund.moneyDeposited'),
-          key: "memberId",
-        });
+          key: 'memberId'
+        })
         arr.push({
           title: this.$t('common.fund.successful'),
-          key: "lockCoinUnit",
-        });
+          key: 'lockCoinUnit'
+        })
         arr.push({
           title: this.$t('common.fund.rewardDrop'),
-          key: "lockAmount",
+          key: 'lockAmount'
         })
-        return arr;
+        return arr
       }
     }
   }
