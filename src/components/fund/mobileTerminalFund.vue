@@ -1,5 +1,5 @@
 <template>
-  <div id="fund-box">
+  <div id="fund-box-yi">
     <div class="fund-main">
       <header></header>
       <div class="main">
@@ -20,20 +20,26 @@
                   <span>存币数量</span>
                   <p class="lock-sum">
                     <span>可用余额</span>:
-                    <span>{{ userWallet.balance? userWallet.balance: '--' }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
+                    <span>{{ userWalletBalance }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
                   </p>
                 </div>
                 <Input
                   type="text"
                   v-model="lockAmount"
                   placeholder="请输入数量"
+                  @keyup.native="text"
                   :min="coinInfo.lockMinimum"
                   :max="coinInfo.lockHighest"
-                  :placeholder="'请输入存币数量' + Number(coinInfo.lockMinimum) + '～' + Number(coinInfo.lockHighest)"
+                  :placeholder="'请输入存币数量' + (!coinInfo? '0':Number(coinInfo.lockMinimum)) + '～' + (!coinInfo?'0':Number(coinInfo.lockHighest))"
                 />
+                <p class="info-text-tip">{{ skylightText }}</p>
               </div>
-              <div class="footer-info">
-                <Button @click="buyLockCoin" :disabled="!isLogin">立即存币</Button>
+              <div class="footer-info1" :class="skylightText == ''?'footer-info':'footer-info1'">
+                <Button
+                    @click.native="buyLockCoin('buy')"
+                >
+                  立即存币
+                </Button>
               </div>
             </div>
           </div>
@@ -56,12 +62,10 @@
             </p>
           </div>
         </div>
-
-
         <section>
           &lt;!&ndash;抢购&ndash;&gt;
          <!--v-show="snapStatus"-->
-         <div class="section-main" v-show="snapStatus">
+         <div class="section-main">
             <div class="purchase">
               <div class="info">
                 <p>预购数量</p>
@@ -71,24 +75,23 @@
                 <Input
                   type="text"
                   v-model="lockAdvance"
-                  :min="coinInfo.lockMinimum"
-                  :max="coinInfo.lockHighest"
+                  @keyup.native="text()"
                   placeholder="请输入预购BTC数量"
                 />
               </div>
               <div class="info-text">
-                <span>可用余额</span>：<span>{{ userWallet.balance? userWallet.balance: '&#45;&#45;' }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
+                <span>可用余额</span>：<span>{{ balanceData? balanceData.balance: '0' }}&nbsp;{{ balanceData.raiseCoin }}</span>
                 <p class="amount-text">
                   <span>可抢购数量</span>：
                   <span>
-                    {{ userWallet.balance? userWallet.balance: '&#45;&#45;' }}&nbsp;{{ coinInfo.lockCoinUnit }}
+                    {{ balanceData? balanceData.maxSaleAmount: '0' }}&nbsp;{{ balanceData.saleCoin }}
                   </span>
                 </p>
               </div>
-              <div class="footer-info">
+              <p class="info-text-tip">{{ skylightText1 }}</p>
+              <div class="footer-info1" :class="skylightText1 == ''?'footer-info':'footer-info1'">
                 <Button
-                  @click="buyLockCoin"
-                  :disabled="!isLogin"
+                  @click.native="buyLockCoin('rush')"
                 >
                   立即抢购
                 </Button>
@@ -128,7 +131,8 @@
            </div>
          </div>
         </section>
-        <footer v-if="isLogin">
+        <!--需要判断用户是否登录-->
+        <footer>
           <div :class="snapStatus == false? 'record-list-1':'record-list'">
             <!--存币记录-->
             <div class="save-money">
@@ -140,12 +144,12 @@
                   <tr>
                     <td>时间</td>
                     <td>存币方案</td>
-                    <td>释放</td>
+                    <td>天数</td>
                   </tr>
                   <tr>
-                    <td>{{ item.lockTime }}</td>
-                    <td>{{ item.interests }}</td>
-                    <td>{{ item.release }}</td>
+                    <td>{{ formatTime(item.lockTime) }}</td>
+                    <td>{{ item.lockCoinName }}</td>
+                    <td>{{ item.lockCoinDay }}</td>
                   </tr>
                 </table>
                 <table
@@ -154,36 +158,40 @@
                 >
                   <tr>
                     <td>币种</td>
-                    <td>存币方案</td>
+                    <td>数量</td>
                     <td>状态</td>
                   </tr>
                   <tr>
                     <td>{{ item.lockCoinUnit }}</td>
                     <td>{{ item.lockAmount }}</td>
-                    <td>{{ item.lockStatus }}</td>
+                    <td>{{ item.lockStatus == 0? '锁仓中':'已释放' }}</td>
                   </tr>
                 </table>
               </div>
             </div>
             <!--抢购记录-->
             <!--v-show="snapStatus"-->
-            <div class="rush-purchase" v-if="snapStatus">
+            <div class="rush-purchase">
               <div class="title-img">
                 <p>抢购记录</p>
               </div>
               <div
                 class="record-main"
-                v-for="item in rushList"
+                v-for="item in robMoneyList"
                 style="padding: 0.25rem 8% 0;"
               >
-                <table cellspacing="0"cellpadding="0" id="rush-style">
+                <table
+                  cellspacing="0"
+                  cellpadding="0"
+                  id="rush-style"
+                >
                   <tr>
                     <td>预存币</td>
                     <td>抢购成功</td>
                     <td>空投奖励</td>
                   </tr>
                   <tr>
-                    <td>{{ item.lockTime }}</td>
+                    <td>{{ formatTime(item.lockTime) }}</td>
                     <td>{{ item.interests }}</td>
                     <td>{{ item.release }}</td>
                   </tr>
@@ -198,7 +206,6 @@
               </p>
               <p class="box-info">详情请咨询BDW客服</p>
             </div>
-
           </div>
         </footer>
         <!--记录-->
@@ -261,6 +268,8 @@
   </div>
 </template>
 <script>
+  import $ from '@js/jquery.min.js'
+  import moment from 'moment'
   const FixAraible = (pageSize) => (pageNo) => ({
     pageSize,
     pageNo
@@ -276,26 +285,9 @@
         lockAmount: '', // 存币数量
         lockAdvance: '', // 预购数量
         // 存币记录
-        saveMoneyList: [
-          {
-            lockTime: '2019-08-10 12:00:00',
-            interests: '锁仓',
-            release: '释放',
-            lockCoinUnit: 'TD',
-            lockAmount: '500',
-            lockStatus: '待抢购'
-          },
-          {
-            lockTime: '2019-08-10 12:00:00',
-            interests: '锁仓',
-            release: '释放',
-            lockCoinUnit: 'TD',
-            lockAmount: '500',
-            lockStatus: '待抢购',
-          }
-        ],
+        saveMoneyList: [],
         // 抢购记录
-        rushList: [
+        robMoneyList: [
           {
             lockTime: '500 TD',
             interests: '0 BTC',
@@ -310,20 +302,55 @@
         sec: 0,
         totalTime: '',
         progressBar: '',
-        coinInfo: {},
-        userWallet: {},
+        coinInfo: {}, // 币种详细信息
+        lockCoinUnit: '', // 币种
+        userWalletBalance: '--', // 币种余额
         snapStatus: false, // 抢购状态
+        skylight: true,
+        skylightText: '',
+        skylightText1: '',
+        coinBalance: {}, // 可抢币余额
+        balanceData: {
+          balance: '--',
+          maxSaleAmount: '--',
+          raiseCoin: "BC",
+          saleCoin: "BTC"
+        }, // 币种信息
       }
     },
-    created () {
-      if(this.isLogin) {
-        this.countdown()
-        this.getDataList()
-      }
-      this.getCoin()
+    created: function () {
+
+      const name = this.$route.path
+      console.log(name)
+      this.countdown()
+      console.log(1)
+      /*需判断用户是否登录*/
+      // if(this.isLogin) {
+        console.log(2)
+        console.log(name, this.isLogin)
+        this.getSaveDataList() // 数据列表存币
+        this.getCoinBalance() // 币种余额 存币
+        this.getRobDataList() // 数据列表 抢币
+        this.snapLines() // 钱包余额和最多抢购额度 抢币
+      // }
+      this.getCoin() // 币种详细信息 存币
+      this.getCoinRob() // 币种详细信息 抢币
+      // $("meta[name='viewport']").attr('content', '***')
+      // $('head').append('<meta http-equiv="refresh" content="width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1">')
     },
     mounted: function () {},
     methods: {
+      // 正则校验只能输入数字和小数点
+      text () {
+        this.skylightText1 = ''
+        this.skylightText = ''
+        this.lockAmount = this.lockAmount.replace(/[^\d.]/g,"")
+        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g,"")
+      },
+      // 时间格式转换
+      formatTime(date) {
+        return moment(date).format("YYYY-MM-DD")
+      },
       // 倒计时
       countdown () {
         var iTime
@@ -343,7 +370,7 @@
         let hr = parseInt(msec / 1000 / 60 / 60 % 24)
         let min = parseInt(msec / 1000 / 60 % 60)
         let sec = parseInt(msec / 1000 % 60)
-        console.log(day, hr, min, sec)
+        // console.log(day, hr, min, sec)
 
         let day1 = parseInt(day * 60 * 60 * 24)
         let hr1 = parseInt(hr  * 60 * 60)
@@ -356,7 +383,7 @@
           this.hr = hr > 9 ? hr : '0' + hr
           this.min = min > 9 ? min : '0' + min
           this.sec = sec > 9 ? sec : '0' + sec
-          console.log(this.day, this.hr, this.min, this.sec)
+          // console.log(this.day, this.hr, this.min, this.sec)
           iTime = setTimeout(function () {
             that.countdown()
           }, 1000)
@@ -368,51 +395,96 @@
           this.sec = '00'
         }
       },
-      // 币种详细信息
+      // 币种详细信息 存币
       getCoin() {
-        let userId = this.isLogin?this.$store.getters.member.id:''
-        this.$http.get(this.host + `/lockCoinWallet/getList?userId=${userId?userId:''}`).then(res => {
+        this.$http.get(this.host + `/wallet/lockCoinWallet/getList`).then(res => {
           const resp = res.body;
           if (resp.code == 0) {
             this.loading = false;
-            this.coinInfo = resp.data.list[0];
-            if (this.userWallet) {
-              this.userWallet = resp.data.memberWallet;
-            }
+            this.coinInfo = resp.data[0];
+            /*需判断用户是否登录*/
+            // if(this.isLogin) {
+              this.lockCoinUnit = resp.data[0].lockCoinUnit
+              this.getCoinBalance()
+              console.log(this.coinInfo, this.lockCoinUnit)
+            // }
+
+          } else {
+            this.$Message.error(resp.message)
+            return false
           }
         });
       },
-      // 存币接口数据
-      buyLockCoin () {
-        // 判断是否登录
-        if(this.isLogin) {
-          if (!this.lockAmount) {
-            this.$Message.error(this.$t('common.loginInfo'))
-            return false
+      // 币种余额 存币
+      getCoinBalance() {
+        console.log(this.lockCoinUnit)
+        let unit = !this.lockCoinUnit? 'TDE':this.lockCoinUnit
+        this.$http.get(this.host + `/wallet/lockCoinWallet/userWallet?unit=${unit}`).then(res => {
+          const resp = res.body;
+          if (resp.code == 0) {
+            this.loading = false;
+            this.userWalletBalance = resp.data.balance;
+          } else {
+            console.log(resp.message)
           }
-          const params = {}
-          params['id'] = this.coinInfo.id
-          params['amount'] = this.lockAmount
-          this.$http.post(this.host + '/lockCoinWallet/buyLockCoin', params).then(res => {
-            const resp = res.body;
-            if (resp.code == 0) {
-              this.$Message.success(resp.message)
-              this.lockAmount = ''
-              this.snapStatus = true // 抢购状态
-              this.getCoin()
-            } else {
-              this.$Message.err(resp.message)
+        });
+      },
+      // 接口数据 存币 抢币
+      buyLockCoin (state) {
+        alert(state)
+        // 判断是否登录
+        // console.log(state == 'buy',this.$store.getters.member.id)
+        // if(this.$store.getters.member.id) {
+          if (state == 'buy') {
+            if (!this.lockAmount) {
+              this.skylightText = this.$t('common.loginInfo')
+              return false
             }
-          });
-        } else {
-          this.$Message.error(this.$t('common.logintip'))
-        }
+            const params = {}
+            params['id'] = this.coinInfo.id
+            params['amount'] = this.lockAmount
+            this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
+              const resp = res.body;
+              if (resp.code == 0) {
+                this.$Message.success(resp.message)
+                this.lockAmount = ''
+                // this.snapStatus = true // 抢购状态
+                this.getCoinBalance()
+                this.getSaveDataList()
+              } else {
+                this.skylightText = resp.message
+              }
+            });
+          } else if (state == 'rush') {
+            if (!this.lockAdvance) {
+              this.skylightText1 = this.$t('common.loginInfo1')
+              return false
+            }
+            const params = {}
+            params['id'] = 1
+            params['amount'] = this.lockAdvance
+            this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
+              const resp = res.body;
+              if (resp.code == 0) {
+                this.$Message.success(resp.message)
+                this.lockAmount = ''
+                // this.snapStatus = true // 抢购状态
+                this.snapLines()
+                this.getRobDataList()
+              } else {
+                this.skylightText1 = resp.message
+              }
+            });
+          }
+        // } else {
+        //   this.$Message.error(this.$t('common.logintip'))
+        // }
 
       },
-      // 数据列表
-      getDataList() {
+      // 数据列表 存币
+      getSaveDataList() {
         const params = getParams(this.pageNo);
-        this.$http.post(this.host + "/lockCoinWallet/record", params).then(res => {
+        this.$http.post(this.host + "/wallet/lockCoinWallet/record", params).then(res => {
           const resp = res.body;
           if (resp.code == 0) {
             this.loading = false;
@@ -422,14 +494,58 @@
           }
         });
       },
-      changePage(page) {
-        this.pageNo = this.pageNo = page;
-        this.getList();
+      // 币种详细信息 抢币
+      getCoinRob () {
+        let id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/remain/${id?1:''}`).then(res => {
+          const resp = res.body;
+          if (resp.code == 0) {
+            this.loading = false;
+            this.coinBalance = resp.data;
+          } else {
+            this.$Message.error(resp.message)
+            return false
+          }
+        });
       },
+      // 钱包余额和最多抢购额度 抢币
+      snapLines () {
+        let id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/wallet/result/${id?1:''}`).then(res => {
+          const resp = res.body;
+          if (resp.code == 0) {
+            this.loading = false;
+            this.balanceData = resp.data;
+            console.log(this.balanceData)
+          } else {
+            this.$Message.error(resp.message)
+            return false
+          }
+        });
+      },
+
+      // 数据列表 抢币
+      getRobDataList() {
+        // const params = getParamsRob(this.savePageNo);
+        let id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
+          const resp = res.body;
+          // if (resp.code == 0) {
+          //   this.loading = false;
+          //   this.saveMoneyList = resp.data;
+          //   this.totalElement = res.total;
+          //   console.log(this.saveMoneyList)
+          // }
+        });
+      }
+      // changePage(page) {
+      //   this.pageNo = this.pageNo = page;
+      //   this.getList();
+      // },
     },
     watch: {
       countdown () {
-        if (this.isLogin) {
+        if (this.$store.getters.member.id) {
           // console.log(this.totalTime)
           if (this.progressBar == 0) {
             var iTime
@@ -500,9 +616,37 @@
   }
 </script>
 <style scoped lang="scss">
-  #fund-box {
+  #fund-box-yi {
     height: 100%;
     .fund-main {
+      .info-text-tip {
+        height: 0.5rem;
+        line-height: 0.5rem;
+        color: #f15057;
+        font-size: 0.25rem;
+      }
+      .footer-info {
+        margin-top: 0.3rem;
+      }
+      .footer-info1 {
+        margin-top: 0;
+      }
+      .footer-info,
+      .footer-info1 {
+        text-align: center;
+
+        button {
+          width: 100%;
+          height: 0.8rem;
+          color: #fff;
+          border: 0;
+          border-radius: 0;
+          font-size: 0.25rem;
+          text-align: center;
+          background: #5C52EB;
+          cursor: pointer;
+        }
+      }
       header {
         height: 13.5rem;
         background: #4C38D8 url(../../assets/images/yidong/yidongbanner.png) 100% 100% no-repeat;
@@ -518,7 +662,8 @@
         .header-info {
           .header-banner {
             color: #fff;
-            margin: 0 6% 0;
+            padding: 0 10% 0;
+            min-width: 7rem;
             font-size: .25rem;
             .border-banner {
               display: inline-block;
@@ -546,7 +691,7 @@
             margin-bottom: 1rem;
             .header-content {
               width: 90%;
-              height: 4.3rem;
+              height: 4.45rem;
               background: url("../../assets/images/yidong/yidong1.png") 0 0 no-repeat;
               background-position: initial;
               background-size: 100% 100%;
@@ -567,22 +712,6 @@
                   .lock-sum {
                     float: right;
                   }
-                }
-              }
-              .footer-info {
-                text-align: center;
-                margin-top: 0.3rem;
-
-                button {
-                  width: 100%;
-                  height: 0.8rem;
-                  color: #fff;
-                  border: 0;
-                  border-radius: 0;
-                  font-size: 0.25rem;
-                  text-align: center;
-                  background: #5C52EB;
-                  cursor: pointer;
                 }
               }
             }
@@ -660,24 +789,22 @@
                   float: right;
                 }
               }
-              .footer-info {
-                text-align: center;
-                margin-top: 0.3rem;
-
-                button {
-                  width: 100%;
-                  height: 0.8rem;
-                  color: #fff;
-                  border: 0;
-                  border-radius: 0;
-                  font-size: 0.25rem;
-                  text-align: center;
-                  background: #5C52EB;
-                  cursor: pointer;
-                }
-              }
+              /*.footer-info {*/
+              /*  text-align: center;*/
+              /*  margin-top: 0.3rem;*/
+              /*  button {*/
+              /*    width: 100%;*/
+              /*    height: 0.8rem;*/
+              /*    color: #fff;*/
+              /*    border: 0;*/
+              /*    border-radius: 0;*/
+              /*    font-size: 0.25rem;*/
+              /*    text-align: center;*/
+              /*    background: #5C52EB;*/
+              /*    cursor: pointer;*/
+              /*  }*/
+              /*}*/
             }
-
           }
           .activity-rules {
             padding: 0 5% 15%;
@@ -835,7 +962,7 @@
                       td {
                         color: #B2A6DC;
                         &:nth-child(2) {
-                          text-align: center;
+                          padding-left: 0.5rem;
                         }
                         &:last-child {
                           text-align: right;
@@ -912,39 +1039,44 @@
   }
 </style>
 <style lang="scss">
-  .ivu-input {
-    width: 100%;
-    height: 0.8rem;
-    color: #fff;
-    font-size: 0.3rem;
-    border-radius: 0;
-    padding-left: 0.1rem;
-    background: transparent;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 0.01rem solid #A497FF;
-    &:focus {
+  #fund-box-yi {
+    .ivu-input {
+      width: 100%;
+      height: 0.8rem;
+      color: #fff;
+      font-size: 0.3rem;
+      border-radius: 0;
+      padding-left: 0.1rem;
+      background: transparent;
+      box-sizing: border-box;
       border: 0.01rem solid #A497FF;
+      &:focus {
+        border: 0.01rem solid #A497FF;
+      }
     }
-  }
-  .ivu-progress-show-info .ivu-progress-outer {
-    /* padding-right: 55px; */
-    margin-right: -55px;
-  }
-  .ivu-progress-inner {
-    height: 38px;
-    background: #272D61;
-    overflow: hidden;
-    .ivu-progress-bg {
-      height: 38px !important;
-      /*background: linear-gradient(0deg, #fff 0%,#000 100%);*/
-      background:linear-gradient(45deg, rgba(49, 107, 239, .6), rgba(20, 56, 240, .7));
+    .ivu-message-notice {
+      height: 1rem;
+      font-size: 0.3rem;
     }
-  }
-  .ivu-progress-text {
-    display: none;
-  }
-  #fund-box {
+
+    .ivu-progress-show-info .ivu-progress-outer {
+      /* padding-right: 55px; */
+      margin-right: -55px;
+    }
+    .ivu-progress-inner {
+      height: 38px;
+      background: #272D61;
+      overflow: hidden;
+      .ivu-progress-bg {
+        height: 38px !important;
+        /*background: linear-gradient(0deg, #fff 0%,#000 100%);*/
+        background:linear-gradient(45deg, rgba(49, 107, 239, .6), rgba(20, 56, 240, .7));
+      }
+    }
+    .ivu-progress-text {
+      display: none;
+    }
+
     .ivu-table-wrapper {
       position: initial !important;
     }
@@ -993,53 +1125,54 @@
         border-bottom: 0;
       }
     }
-  }
-  #fund-table {
+    #fund-table {
 
-    .ivu-table-wrapper {
-      margin-right: 0;
-      td {
-        background: #111530;
-      }
-      .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
-      .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-        background: #10122B;
-      }
-      .ivu-table-header {
-        thead th {
-          height: 50px;
-          background: #191D3A;
+      .ivu-table-wrapper {
+        margin-right: 0;
+        td {
+          background: #111530;
         }
-      }
-      tbody.ivu-table-tbody .ivu-table-row td {
-        background: #111530;
-        &:last-child {
-          text-align: left;
+        .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+        .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+          background: #10122B;
+        }
+        .ivu-table-header {
+          thead th {
+            height: 50px;
+            background: #191D3A;
+          }
+        }
+        tbody.ivu-table-tbody .ivu-table-row td {
+          background: #111530;
+          &:last-child {
+            text-align: left;
+          }
         }
       }
     }
-  }
-  #record_pages li.ivu-page-item.ivu-page-item-active {
-    background-color: #111530;
-    border-color: #191f44;
-    a {
-      color: #3399ff;
-    }
-  }
-  #record_pages li.ivu-page-item.ivu-page-item-active {
-    &:hover {
+    #record_pages li.ivu-page-item.ivu-page-item-active {
       background-color: #111530;
+      border-color: #191f44;
       a {
         color: #3399ff;
       }
     }
+    #record_pages li.ivu-page-item.ivu-page-item-active {
+      &:hover {
+        background-color: #111530;
+        a {
+          color: #3399ff;
+        }
+      }
+    }
+    .ivu-page-item {
+      background: #111530;
+      color: #8090AF;
+      border: 1px solid #191f44;
+    }
+    .ivu-page-item:hover {
+      color: #3399ff;
+    }
   }
-  .ivu-page-item {
-    background: #111530;
-    color: #8090AF;
-    border: 1px solid #191f44;
-  }
-  .ivu-page-item:hover {
-    color: #3399ff;
-  }
+
 </style>

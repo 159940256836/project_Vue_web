@@ -2,9 +2,15 @@
   <div id="fund-box">
     <div class="fund-main">
       <header>
-
+        <div class="header-notice">
+          <span class="header-title-text">活动时间</span>
+          <span class="header-title-border"></span>
+          <div class="notice-text">
+            <p>存TD — 8月15日 10:00 至 8月20日 20:00</p>
+            <p>抢购BTC — 8月20日 21:00</p>
+          </div>
+        </div>
       </header>
-
       <div class="main">
         <div class="header-content">
           <div class="header-title">
@@ -19,17 +25,23 @@
               v-model="lockAmount"
               placeholder="请输入数量"
               style="width: 555px;"
+              @keyup.native="text()"
               :min="coinInfo.lockMinimum"
               :max="coinInfo.lockHighest"
-              :placeholder="coinInfo !== ''? '0':Number(coinInfo.lockMinimum) + '～' + coinInfo !== ''?'0':Number(coinInfo.lockHighest)"
+              :placeholder="(!coinInfo? '0':Number(coinInfo.lockMinimum)) + '～' + (!coinInfo?'0':Number(coinInfo.lockHighest))"
             />
             <span class="coinName">{{ coinInfo.lockCoinUnit }}</span>
           </div>
           <div class="info-text">
-            <span>可用余额</span>：<span>{{ userWallet.balance? userWallet.balance: '--' }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
+            <span>可用余额</span>：<span>{{ userWalletBalance }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
           </div>
           <div class="footer-info">
-            <Button @click="buyLockCoin" :disabled="!isLogin">立即存币</Button>
+            <Button
+              @click="buyLockCoin('buy')"
+              :disabled="!isLogin"
+            >
+              立即存币
+            </Button>
           </div>
         </div>
         <section>
@@ -39,7 +51,7 @@
           <p class="circle3"></p>
           <p class="circle4"></p>
           <!--抢购-->
-          <div class="section-main" v-show="snapStatus">
+          <div class="section-main">
             <div class="count-down">
               <p class="count-title">
                 倒计时
@@ -61,30 +73,31 @@
                 <Progress :percent="progressBar" />
               </p>
             </div>
+            <!--v-if="progressBar == 0"-->
             <div class="purchase">
               <div class="info" style="padding: 0 80px 0 10px;">
                 <span>预购数量：</span>
                 <Input
                   type="text"
                   v-model="lockAdvance"
-                  placeholder="请输入预购btc数量"
+                  placeholder="请输入预购BTC数量"
                   style="width: 555px;"
-                  :min="coinInfo.lockMinimum"
-                  :max="coinInfo.lockHighest"
-                  :placeholder="userWallet !== ''?'0':Number(coinInfo.lockMinimum) + '～' + userWallet !== ''?'0':Number(coinInfo.lockHighest)"
+                  @keyup.native="text()"
                 />
-                <span class="coinName" style="right: 65px;">
-                {{ coinInfo.lockCoinUnit }}
-              </span>
+                <span class="coinName" style="right: 105px;">
+                  {{ balanceData.saleCoin }}
+                </span>
               </div>
               <div class="info-text">
-                <span>可用余额</span>：<span>{{ userWallet.balance? userWallet.balance: '--' }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
-                <span style="margin-left: 15px;">可抢购数量</span>：<span>{{ userWallet.balance? userWallet.balance: '--' }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
+                <span>可用余额</span>：
+                <span>{{ balanceData? balanceData.balance: '0' }}&nbsp;{{ balanceData.raiseCoin }}</span>
+                <span style="margin-left: 15px;">可抢购数量</span>：
+                <span>{{ balanceData? balanceData.maxSaleAmount: '0' }}&nbsp;{{ balanceData.saleCoin }}</span>
               </div>
               <div class="footer-info">
                 <Button
-                  @click="buyLockCoin"
-                  :disabled="!isLogin"
+                  @click="buyLockCoin('rush')"
+                  :disabled="coinBalance==0||!isLogin"
                 >
                   立即抢购
                 </Button>
@@ -192,7 +205,7 @@
                   :loading="loading"
                   :disabled-hover="true"
                 ></Table>
-                <ul class="page" v-show="!savePageNo == 0">
+                <ul class="page" v-show="saveMoneyList.length > 9">
                   <ul class="ivu-page"></ul>
                   <li
                     title="上一页"
@@ -211,7 +224,8 @@
                 </ul>
               </div>
             </div>
-            <div class="save-purchase" v-if="snapStatus">
+            <!--v-if="snapStatus"-->
+            <div class="save-purchase">
               <div class="save-title">
                 <img src="../../assets/img/line-two.png" alt="">
                 <span class="title">抢币记录</span>
@@ -226,7 +240,7 @@
                   :loading="loading"
                   :disabled-hover="true"
                 ></Table>
-                <ul class="page" v-show="!robPageNo == 0">
+                <!--<ul class="page" v-show="!robPageNo == 0">
                   <ul class="ivu-page"></ul>
                   <li
                     title="上一页"
@@ -242,17 +256,17 @@
                   >
                     <a><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></a>
                   </li>
-                </ul>
+                </ul>-->
               </div>
             </div>
           </div>
         </footer>
       </div>
-
     </div>
   </div>
 </template>
 <script>
+  import moment from 'moment'
   // 存币记录
   const FixAraibleSave = (pageSize) => (pageNo) => ({
     pageSize,
@@ -260,11 +274,11 @@
   });
   const getParamsSave = FixAraibleSave(10, '');
   // 抢币记录
-  // const FixAraibleRob = (robPageSize ) => (robPageNo) => ({
-  //   robPageSize,
-  //   robPageNo
-  // });
-  // const getParamsRob = FixAraibleRob(10, '');
+  const FixAraibleRob = (pageSize) => (pageNo) => ({
+    pageSize,
+    pageNo
+  });
+  const getParamsRob = FixAraibleRob(10, '');
   export default {
     data() {
       return {
@@ -289,23 +303,48 @@
         sec: 0,
         totalTime: '',
         progressBar: '',
-        coinInfo: {},
-        userWallet: {},
-        snapStatus: true // 抢购状态
+        coinInfo: {}, // 币种详细信息
+        lockCoinUnit: '', // 币种
+        userWalletBalance: '--', // 币种余额
+        snapStatus: false, // 抢购状态
+        coinBalance: {}, // 可抢币余额
+        balanceData: {
+          balance: '--',
+          maxSaleAmount: '--',
+          raiseCoin: "BC",
+          saleCoin: "BTC"
+        }, // 可抢币余额
       }
     },
     created () {
       const name = this.$route.path
+      console.log(name)
+      this.countdown()
       if (name == '/fund') {
+        console.log(1)
         if(this.isLogin) {
-          this.countdown()
-          this.getSaveDataList()
+          console.log(2)
+          console.log(name, this.isLogin)
+          this.getSaveDataList() // 数据列表存币
+          this.getCoinBalance() // 币种余额 存币
+          this.getRobDataList() // 数据列表 抢币
+          this.snapLines() // 钱包余额和最多抢购额度 抢币
         }
-        this.getCoin()
+        this.getCoin() // 币种详细信息 存币
+        this.getCoinRob() // 币种详细信息 抢币
       }
     },
-    mounted: function () {},
+    mounted () {},
     methods: {
+      // 正则校验只能输入数字和小数点
+      text () {
+        this.lockAmount = this.lockAmount.replace(/[^\d.]/g,"")
+        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g,"")
+      },
+      // 时间格式转换
+      formatTime(date) {
+        return moment(date).format("YYYY-MM-DD")
+      },
       goRegister() {
         this.$router.push({ name: 'mobileTerminalFund' })
       },
@@ -313,7 +352,7 @@
       countdown () {
         var iTime
         // 到期时间
-        const end = Date.parse(new Date('2019-09-09 10:25:00'))
+        const end = Date.parse(new Date('2019-09-12 11:40:00'))
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
@@ -328,7 +367,7 @@
         let hr = parseInt(msec / 1000 / 60 / 60 % 24)
         let min = parseInt(msec / 1000 / 60 % 60)
         let sec = parseInt(msec / 1000 % 60)
-        console.log(day, hr, min, sec)
+        // console.log(day, hr, min, sec)
 
         let day1 = parseInt(day * 60 * 60 * 24)
         let hr1 = parseInt(hr  * 60 * 60)
@@ -341,7 +380,7 @@
           this.hr = hr > 9 ? hr : '0' + hr
           this.min = min > 9 ? min : '0' + min
           this.sec = sec > 9 ? sec : '0' + sec
-          console.log(this.day, this.hr, this.min, this.sec)
+          // console.log(this.day, this.hr, this.min, this.sec)
           iTime = setTimeout(function () {
             that.countdown()
           }, 1000)
@@ -350,109 +389,183 @@
         this.progressBar = this.totalTime/num * 100
         if (this.progressBar == 0) {
           clearTimeout(iTime)
-          this.sec = '00'
         }
       },
-      // 币种详细信息
+      /*********存币***********/
+
+      // 币种详细信息 存币
       getCoin() {
-        let userId = this.isLogin?this.$store.getters.member.id:''
-        this.$http.get(this.host + `/wallet/lockCoinWallet/getList?userId=${userId?userId:''}`).then(res => {
+        this.$http.get(this.host + `/wallet/lockCoinWallet/getList`).then(res => {
           const resp = res.body;
           if (resp.code == 0) {
             this.loading = false;
-              this.coinInfo = resp.data.list[0];
-            console.log(this.coinInfo, '123456')
-            if (this.userWallet) {
-              this.userWallet = resp.data.memberWallet;
+            this.coinInfo = resp.data[0];
+            if (this.isLogin) {
+              this.lockCoinUnit = resp.data[0].lockCoinUnit
+              this.getCoinBalance()
             }
+            console.log(this.coinInfo, this.lockCoinUnit)
+
           } else {
             this.$Message.error(resp.message)
             return false
           }
         });
       },
-      // 存币接口数据
-      buyLockCoin () {
+      // 币种余额 存币
+      getCoinBalance() {
+        console.log(this.lockCoinUnit)
+        let unit = !this.lockCoinUnit? 'TDE':this.lockCoinUnit
+        this.$http.get(this.host + `/wallet/lockCoinWallet/userWallet?unit=${unit}`).then(res => {
+          const resp = res.body;
+          if (resp.code == 0) {
+            this.loading = false;
+            this.userWalletBalance = resp.data.balance;
+          } else {
+            console.log(resp.message)
+          }
+        });
+      },
+      // 接口数据 存币 抢币
+      buyLockCoin (state) {
         // 判断是否登录
         if(this.isLogin) {
-          if (!this.lockAmount) {
-            this.$Message.error(this.$t('common.loginInfo'))
-            return false
-          }
-          const params = {}
-          params['id'] = this.coinInfo.id
-          params['amount'] = this.lockAmount
-          this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
-            const resp = res.body;
-            if (resp.code == 0) {
-              this.$Message.success(resp.message)
-              this.lockAmount = ''
-              this.snapStatus = true // 抢购状态
-              this.getCoin()
-            } else {
-              this.$Message.err(resp.message)
+          if (state == 'buy') {
+            if (!this.lockAmount) {
+              this.$Message.error(this.$t('common.loginInfo'))
+              return false
             }
-          });
+            const params = {}
+            params['id'] = this.coinInfo.id
+            params['amount'] = this.lockAmount
+            this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
+              const resp = res.body;
+              if (resp.code == 0) {
+                this.$Message.success(resp.message)
+                this.lockAmount = ''
+                // this.snapStatus = true // 抢购状态
+                this.getCoinBalance()
+                this.getSaveDataList()
+              } else {
+                this.$Message.error(resp.message)
+              }
+            });
+          } else if (state == 'rush') {
+            if (!this.lockAdvance) {
+              this.$Message.error(this.$t('common.loginInfo1'))
+              return false
+            }
+            const params = {}
+            params['id'] = 1
+            params['amount'] = this.lockAdvance
+            this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
+              const resp = res.body;
+              if (resp.code == 0) {
+                this.$Message.success(resp.message)
+                this.lockAdvance = ''
+                // this.snapStatus = true // 抢购状态
+                this.snapLines()
+                this.getRobDataList()
+              } else {
+                this.$Message.error(resp.message)
+              }
+            });
+          }
         } else {
           this.$Message.error(this.$t('common.logintip'))
         }
-
       },
-      // 数据列表存币
-      getSaveDataList() {
+      // 数据列表 存币
+      async getSaveDataList() {
         const params = getParamsSave(this.savePageNo);
         this.$http.post(this.host + "/wallet/lockCoinWallet/record", params).then(res => {
           const resp = res.body;
           if (resp.code == 0) {
             this.loading = false;
             this.saveMoneyList = resp.data;
-            this.totalElement = res.total;
+            this.totalElement = resp.total;
             console.log(this.saveMoneyList)
           }
         });
       },
-      // 数据列表抢币
-      // getRobDataList() {
-      //   const params = getParamsRob(this.savePageNo);
-      //   this.$http.post(this.host + "/lockCoinWallet/record", params).then(res => {
-      //     const resp = res.body;
-      //     if (resp.code == 0) {
-      //       this.loading = false;
-      //       this.saveMoneyList = resp.data;
-      //       this.totalElement = res.total;
-      //       console.log(this.saveMoneyList)
-      //     }
-      //   });
-      // },
-      /*分页*/
+      /*分页 存币*/
       previouspage(type) {
+        console.log(this.savePageNo)
         if (type == 'save') {
           if (this.savePageNo == 1) {
             this.$Message.error(this.$t('uc.finance.record.nodata'))
           } else {
-            this.savePageNo = this.savePageNo - 10
+            this.savePageNo = this.savePageNo - 1
             this.getSaveDataList()
+            console.log(this.savePageNo)
           }
         }
         // else if (type == 'rob') {
         //   if (this.robPageNo == 1) {
         //     this.$Message.error(this.$t('uc.finance.record.nodata'))
         //   } else {
-        //     this.robPageNo = this.savePageNo - 10
+        //     this.robPageNo = this.savePageNo - 1
         //     // this.getRobDataList()
         //   }
         // }
       },
       nextpage(type) {
         if (type == 'save') {
-          this.savePageNo = this.savePageNo + 10
+          this.savePageNo = this.savePageNo + 1
           this.getSaveDataList()
         }
         // else if (type == 'rob') {
-        //   this.robPageNo = this.robPageNo + 10
+        //   this.robPageNo = this.robPageNo + 1
         //   this.getRobDataList()
         // }
       },
+      /*********抢币***********/
+      // 币种详细信息 可抢币
+      getCoinRob () {
+        let id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/remain/${id?1:''}`).then(res => {
+          const resp = res.body;
+          if (resp.code == 0) {
+            this.loading = false;
+            // setTimeout(function () {
+            //   this.getCoinRob()
+            // }, 1000)
+            this.coinBalance = resp.data;
+          } else {
+            this.$Message.error(resp.message)
+            return false
+          }
+        });
+      },
+      // 钱包余额和最多抢购额度 抢币
+      snapLines () {
+        let id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/wallet/result/${id?1:''}`).then(res => {
+          const resp = res.body;
+          if (resp.code == 0) {
+            this.loading = false;
+            this.balanceData = resp.data;
+            console.log(this.balanceData)
+          } else {
+            this.$Message.error(resp.message)
+            return false
+          }
+        });
+      },
+      // 数据列表 抢币
+      getRobDataList() {
+        // const params = getParamsRob(this.savePageNo);
+        let id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
+          const resp = res.body;
+          /*if (resp.code == 0) {
+            this.loading = false;
+            this.saveMoneyList = resp.data;
+            // this.totalElement = res.total;
+            console.log(this.saveMoneyList)
+          }*/
+        });
+      }
     },
     watch: {
       countdown () {
@@ -482,42 +595,41 @@
         let self = this
         const arr = [];
         arr.push({
-          title: this.$t('common.fund.MemberId'),
-          key: "memberId",
-        });
-        arr.push({
           title: this.$t('common.fund.lockCoinUnit'),
           key: "lockCoinUnit",
         });
-
+        arr.push({
+          title: this.$t('common.fund.lockCoinName'),
+          key: "lockCoinName",
+        });
         arr.push({
           title: this.$t('common.fund.lockAmount'),
           key: "lockAmount",
         })
         arr.push({
+          title: this.$t('common.fund.lockCoinDay'),
+          key: "lockCoinDay",
+        });
+        arr.push({
           title: this.$t('common.fund.lockTime'),
           key: "lockTime",
+          render(h, params){
+            return h("span", {}, self.formatTime(params.row.lockTime));
+          }
         });
         arr.push({
           title: this.$t('common.fund.unlockTime'),
           key: "unlockTime",
-        });
-        arr.push({
-          title: this.$t('common.fund.lockCoinDay'),
-          key: "lockCoinDay",
+          render(h, params){
+            return h("span", {}, self.formatTime(params.row.unlockTime));
+          }
         });
         arr.push({
           title: this.$t('common.fund.interests'),
           key: "interests",
         });
-        // arr.push({
-        //   title: this.$t('pointPage.operation'),
-        //   key: "operation",
-        //   render(h, params){
-        //     return h("span", {}, self.$store.state.lang == 'English'?params.row.operationEnglish:params.row.operation);
-        //   }
-        // });
         return arr;
+        console.log(arr)
       },
       // 抢币记录
       tableColumnsRob() {
@@ -534,13 +646,6 @@
           title: this.$t('common.fund.rewardDrop'),
           key: "lockAmount",
         })
-        // arr.push({
-        //   title: this.$t('pointPage.operation'),
-        //   key: "operation",
-        //   render(h, params){
-        //     return h("span", {}, self.$store.state.lang == 'English'?params.row.operationEnglish:params.row.operation);
-        //   }
-        // });
         return arr;
       }
     }
@@ -554,6 +659,34 @@
         height: 955px;
         background: url("../../assets/img/banner2.png") 0 0 no-repeat;
         background-position: center;
+
+        .header-notice {
+          width: 420px;
+          margin: 0 auto;
+          padding-top: 500px;
+          color: #EBEBEB;
+          font-size: 16px;
+
+          .header-title-text {
+            float: left;
+            display: inline-block;
+            height: 55px;
+            line-height: 55px;
+          }
+
+          .header-title-border {
+            display: inline-block;
+            width: 1px;
+            height: 30px;
+            background: #EBEBEB;
+            margin: 13px 25px;
+          }
+
+          .notice-text {
+            float: right;
+            line-height: 28px;
+          }
+        }
       }
       .main {
         background: #101646;
@@ -594,7 +727,7 @@
             display: inline-block;
             line-height: 64px;
             position: absolute;
-            right: 45px;
+            right: 90px;
             top: 0;
           }
         }
@@ -858,33 +991,35 @@
   }
 </style>
 <style lang="scss">
-  .ivu-input {
-    width: 555px;
-    height: 64px;
-    color: #fff;
-    font-size: 16px;
-    border-radius: 0;
-    padding-left: 15px;
-    box-sizing: border-box;
-    background: #101646;
-    border: 1px solid rgba(63,125,168,1);
-  }
-  .ivu-progress-show-info .ivu-progress-outer {
-    margin-right: -55px;
-  }
-  .ivu-progress-inner {
-    height: 38px;
-    background: #272D61;
-    overflow: hidden;
-    .ivu-progress-bg {
-      height: 38px !important;
-      background:linear-gradient(45deg, rgba(49, 107, 239, .6), rgba(20, 56, 240, .7));
-    }
-  }
-  .ivu-progress-text {
-    display: none;
-  }
+
   #fund-box {
+    .ivu-input {
+      width: 555px;
+      height: 64px;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 0;
+      padding-left: 15px;
+      box-sizing: border-box;
+      background: #101646;
+      border: 1px solid rgba(63,125,168,1);
+    }
+
+    .ivu-progress-show-info .ivu-progress-outer {
+      margin-right: -55px;
+    }
+    .ivu-progress-inner {
+      height: 38px;
+      background: #272D61;
+      overflow: hidden;
+      .ivu-progress-bg {
+        height: 38px !important;
+        background:linear-gradient(45deg, rgba(49, 107, 239, .6), rgba(20, 56, 240, .7));
+      }
+    }
+    .ivu-progress-text {
+      display: none;
+    }
     .ivu-table-wrapper {
       position: initial !important;
     }
@@ -939,6 +1074,36 @@
               border-right: 0;
             }
           }
+        }
+      }
+    }
+    .save-money {
+      .ivu-table {
+        .ivu-table-header {
+          th {
+            &:first-child,
+            &:last-child {
+              text-align: center;
+            }
+          }
+        }
+        td {
+          &:first-child,
+          &:last-child {
+            text-align: center;
+          }
+        }
+      }
+    }
+    .save-purchase {
+      .ivu-table {
+        .ivu-table-header {
+          th {
+              text-align: center;
+          }
+        }
+        td {
+            text-align: center;
         }
       }
     }

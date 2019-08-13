@@ -46,6 +46,7 @@ module.exports = {
     down: 'Download BDW App anytime, anywhere, convenient transaction',
     scan: 'Scan the qr code to download the BDW App',
     loginInfo: 'Please enter the deposit amount',
+    loginInfo1: 'Please enter the number of COINS',
     fund: {
       MemberId: 'userID',
       lockCoinName: 'name',
