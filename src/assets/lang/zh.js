@@ -104,6 +104,13 @@ module.exports = {
       moneyDeposited: '预存币',
       successful: '抢购成功',
       rewardDrop: '空投奖励',
+      transactionPrice: '价格',
+      saleAmount: '预购额',
+      actualSaleAmount: '实购额',
+      airDropCoin: '空投币种',
+      airDropAmount: '空投额度',
+      createTime: '抢购时间',
+      actStatus: '状态',
     }
   },
   foot: {

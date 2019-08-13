@@ -51,7 +51,7 @@
           <p class="circle3"></p>
           <p class="circle4"></p>
           <!--抢购-->
-          <div class="section-main">
+          <div class="section-main" v-if="isLogin">
             <div class="count-down">
               <p class="count-title">
                 倒计时
@@ -97,7 +97,7 @@
               <div class="footer-info">
                 <Button
                   @click="buyLockCoin('rush')"
-                  :disabled="coinBalance==0||!isLogin"
+                  :disabled="progressBar!==0"
                 >
                   立即抢购
                 </Button>
@@ -352,7 +352,7 @@
       countdown () {
         var iTime
         // 到期时间
-        const end = Date.parse(new Date('2019-09-12 11:40:00'))
+        const end = Date.parse(new Date('2019-08-13 17:59:00'))
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
@@ -387,7 +387,9 @@
         }
         /*进度条比例 = 总秒数/当前秒数 *100*/
         this.progressBar = this.totalTime/num * 100
+        console.log(this.progressBar)
         if (this.progressBar == 0) {
+          this.sec = '00'
           clearTimeout(iTime)
         }
       },
@@ -558,12 +560,12 @@
         let id = 1
         this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
           const resp = res.body;
-          /*if (resp.code == 0) {
+          if (resp.code == 0) {
             this.loading = false;
-            this.saveMoneyList = resp.data;
+            this.robMoneyList = resp.data;
             // this.totalElement = res.total;
-            console.log(this.saveMoneyList)
-          }*/
+            // console.log(this.saveMoneyList)
+          }
         });
       }
     },
@@ -635,17 +637,43 @@
       tableColumnsRob() {
         const arr = [];
         arr.push({
-          title: this.$t('common.fund.moneyDeposited'),
-          key: "memberId",
+          title: this.$t('common.fund.lockCoinUnit'),
+          key: "saleCoin",
         });
         arr.push({
-          title: this.$t('common.fund.successful'),
-          key: "lockCoinUnit",
+          title: this.$t('common.fund.transactionPrice'),
+          key: "transactionPrice",
         });
         arr.push({
-          title: this.$t('common.fund.rewardDrop'),
-          key: "lockAmount",
+          title: this.$t('common.fund.saleAmount'),
+          key: "saleAmount",
+        });
+        arr.push({
+          title: this.$t('common.fund.actualSaleAmount'),
+          key: "actualSaleAmount",
+        });
+        arr.push({
+          title: this.$t('common.fund.airDropCoin'),
+          key: "airDropCoin",
         })
+        ;arr.push({
+          title: this.$t('common.fund.airDropAmount'),
+          key: "airDropAmount",
+        });
+        ;arr.push({
+          title: this.$t('common.fund.createTime'),
+          key: "createTime",
+          render(h, params){
+            return h("span", {}, self.formatTime(params.row.createTime));
+          }
+        });
+        arr.push({
+          title: this.$t('common.fund.actStatus'),
+          key: "actStatus",
+          render(h, params){
+            return h("span", {}, params.row.actStatus == 'I'?'待开奖':params.row.actStatus=='S'?'成功':'失败');
+          }
+        });
         return arr;
       }
     }

@@ -36,7 +36,7 @@
               </div>
               <div class="footer-info1" :class="skylightText == ''?'footer-info':'footer-info1'">
                 <Button
-                    @click.native="buyLockCoin('buy')"
+                  @click.native="buyLockCoin('buy')"
                 >
                   立即存币
                 </Button>
@@ -92,8 +92,9 @@
               <div class="footer-info1" :class="skylightText1 == ''?'footer-info':'footer-info1'">
                 <Button
                   @click.native="buyLockCoin('rush')"
+                  :disabled="progressBar!==0"
                 >
-                  立即抢购
+                  {{ progressBar==0?'活动结束':'立即抢购' }}
                 </Button>
               </div>
             </div>
@@ -191,9 +192,25 @@
                     <td>空投奖励</td>
                   </tr>
                   <tr>
+                    <td>{{ item.saleCoin }}</td>
+                    <td>{{ item.transactionPrice }}</td>
+                    <td>{{ item.saleAmount }}</td>
+                  </tr>
+                </table>
+                <table
+                  cellspacing="0"
+                  cellpadding="0"
+                  id="rush-style1"
+                >
+                  <tr>
+                    <td>预存币</td>
+                    <td>抢购成功</td>
+                    <td>空投奖励</td>
+                  </tr>
+                  <tr>
                     <td>{{ formatTime(item.lockTime) }}</td>
-                    <td>{{ item.interests }}</td>
-                    <td>{{ item.release }}</td>
+                    <td>{{ item.actualSaleAmount }}</td>
+                    <td>{{ item.actStatus == 'I'?'待开奖':item.actStatus=='S'?'成功':'失败' }}</td>
                   </tr>
                 </table>
               </div>
@@ -287,13 +304,7 @@
         // 存币记录
         saveMoneyList: [],
         // 抢购记录
-        robMoneyList: [
-          {
-            lockTime: '500 TD',
-            interests: '0 BTC',
-            release: '88 BC'
-          }
-        ],
+        robMoneyList: [],
         reserveTime: '60',
         reserveInteval: null,
         day: 0,
@@ -316,23 +327,24 @@
           raiseCoin: "BC",
           saleCoin: "BTC"
         }, // 币种信息
+        token: ''
       }
     },
     created: function () {
-
+      this.getUrlParam()
       const name = this.$route.path
-      console.log(name)
+      // console.log(name)
       this.countdown()
-      console.log(1)
+      // console.log(1)
       /*需判断用户是否登录*/
-      // if(this.isLogin) {
-        console.log(2)
-        console.log(name, this.isLogin)
+      if(this.token) {
+        // console.log(2)
+        // console.log(name, this.isLogin)
         this.getSaveDataList() // 数据列表存币
         this.getCoinBalance() // 币种余额 存币
         this.getRobDataList() // 数据列表 抢币
         this.snapLines() // 钱包余额和最多抢购额度 抢币
-      // }
+      }
       this.getCoin() // 币种详细信息 存币
       this.getCoinRob() // 币种详细信息 抢币
       // $("meta[name='viewport']").attr('content', '***')
@@ -340,6 +352,20 @@
     },
     mounted: function () {},
     methods: {
+      // urltoken
+      getUrlParam() {
+        var url1 = window.location.href;
+        let theRequest = new Object();
+        if (url1.indexOf("?") != -1) {
+          let str = url1.substr(1);
+          let strs = str.split("&");
+          console.log(str.length)
+          for(let i = 0; i < strs.length; i ++) {
+            theRequest[0]=unescape(strs[i].split("=")[1]);
+          }
+        }
+        this.token = theRequest
+      },
       // 正则校验只能输入数字和小数点
       text () {
         this.skylightText1 = ''
@@ -355,7 +381,7 @@
       countdown () {
         var iTime
         // 到期时间
-        const end = Date.parse(new Date('2019-09-11 10:25:00'))
+        const end = Date.parse(new Date('2019-08-09 17:45:00'))
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
@@ -431,10 +457,8 @@
       },
       // 接口数据 存币 抢币
       buyLockCoin (state) {
-        alert(state)
         // 判断是否登录
-        // console.log(state == 'buy',this.$store.getters.member.id)
-        // if(this.$store.getters.member.id) {
+        if(this.token) {
           if (state == 'buy') {
             if (!this.lockAmount) {
               this.skylightText = this.$t('common.loginInfo')
@@ -476,10 +500,9 @@
               }
             });
           }
-        // } else {
-        //   this.$Message.error(this.$t('common.logintip'))
-        // }
-
+        } else {
+          alert(this.$t('common.logintip'))
+        }
       },
       // 数据列表 存币
       getSaveDataList() {
@@ -530,12 +553,10 @@
         let id = 1
         this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
           const resp = res.body;
-          // if (resp.code == 0) {
-          //   this.loading = false;
-          //   this.saveMoneyList = resp.data;
-          //   this.totalElement = res.total;
-          //   console.log(this.saveMoneyList)
-          // }
+          if (resp.code == 0) {
+            this.loading = false;
+            this.robMoneyList = resp.data;
+          }
         });
       }
       // changePage(page) {
@@ -896,12 +917,13 @@
             /*抢购记录*/
             .rush-purchase {
               margin-top: 0.7rem;
-              height: 2.95rem;
+              min-height: 2.95rem;
               background: #4C38D8 url(../../assets/images/yidong/yidong3.png) 100% 100% no-repeat;
               background-position: initial;
               background-size: 100% 100%;
               .record-main {
-                #rush-style {
+                #rush-style,
+                #rush-style1 {
                   tr {
                     display: flex;
                     &:first-child {
@@ -914,7 +936,7 @@
                     &:last-child {
                       td {
                         &:nth-child(2) {
-                          padding-left: 9%;
+                          padding-left: 0.9rem;
                         }
                       }
                     }
