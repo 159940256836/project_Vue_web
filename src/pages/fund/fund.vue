@@ -99,7 +99,7 @@
                   @click="buyLockCoin('rush')"
                   :disabled="progressBar!==0"
                 >
-                  立即抢购
+                  {{ coinBalance==0?'活动结束':'立即抢购' }}
                 </Button>
               </div>
             </div>
@@ -350,12 +350,11 @@ export default {
       countdown() {
         let iTime
         // 到期时间
-        // const end = this.endtime
-        const end = Date.parse(new Date('2019/08/13 18:17:00'))
+        const end = Date.parse(new Date('2019/08/20 21:00:00'))
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
-        const start = Date.parse(new Date('2019/08/09 10:25:00'))
+        const start = Date.parse(new Date('2019/08/13 10:25:00'))
         /* 剩余时间 = 到期时间 - 当前时间*/
         const msec = end - now
         /* 当前秒数 = (到期时间 - 开始时间)*0.001*/
@@ -386,10 +385,7 @@ export default {
         }
         /* 进度条比例 = 总秒数/当前秒数 *100*/
         this.progressBar = this.totalTime / num * 100
-        if (this.progressBar < 0) {
-          this.progressBar = 0
-        }
-        console.log(this.progressBar)
+        // console.log(this.progressBar)
         if (this.progressBar == 0) {
           this.sec = '00'
           clearTimeout(iTime)

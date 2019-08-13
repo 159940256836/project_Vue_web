@@ -92,9 +92,9 @@
               <div class="footer-info1" :class="skylightText1 == ''?'footer-info':'footer-info1'">
                 <Button
                   @click.native="buyLockCoin('rush')"
-                  :disabled="progressBar!==0"
+                  :disabled="progressBar!==0&&!token"
                 >
-                  {{ progressBar==0?'活动结束':'立即抢购' }}
+                  {{ coinBalance==0?'活动结束':'立即抢购' }}
                 </Button>
               </div>
             </div>
@@ -133,42 +133,45 @@
          </div>
         </section>
         <!--需要判断用户是否登录-->
-        <footer>
+        <footer v-if="token">
           <div :class="snapStatus == false? 'record-list-1':'record-list'">
             <!--存币记录-->
             <div class="save-money">
               <div class="title-img">
                 <p>存币记录</p>
               </div>
-              <div class="record-main" v-for="item in saveMoneyList">
-                <table cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td>时间</td>
-                    <td>存币方案</td>
-                    <td>天数</td>
-                  </tr>
-                  <tr>
-                    <td>{{ formatTime(item.lockTime) }}</td>
-                    <td>{{ item.lockCoinName }}</td>
-                    <td>{{ item.lockCoinDay }}</td>
-                  </tr>
-                </table>
-                <table
-                  cellspacing="0"
-                  cellpadding="0"
-                >
-                  <tr>
-                    <td>币种</td>
-                    <td>数量</td>
-                    <td>状态</td>
-                  </tr>
-                  <tr>
-                    <td>{{ item.lockCoinUnit }}</td>
-                    <td>{{ item.lockAmount }}</td>
-                    <td>{{ item.lockStatus == 0? '锁仓中':'已释放' }}</td>
-                  </tr>
-                </table>
+              <div v-if="saveMoneyList.length">
+                <div class="record-main" v-for="item in saveMoneyList">
+                  <table cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td>时间</td>
+                      <td>存币方案</td>
+                      <td>天数</td>
+                    </tr>
+                    <tr>
+                      <td>{{ formatTime(item.lockTime) }}</td>
+                      <td>{{ item.lockCoinName }}</td>
+                      <td>{{ item.lockCoinDay }}</td>
+                    </tr>
+                  </table>
+                  <table
+                          cellspacing="0"
+                          cellpadding="0"
+                  >
+                    <tr>
+                      <td>币种</td>
+                      <td>数量</td>
+                      <td>状态</td>
+                    </tr>
+                    <tr>
+                      <td>{{ item.lockCoinUnit }}</td>
+                      <td>{{ item.lockAmount }}</td>
+                      <td>{{ item.lockStatus == 0? '锁仓中':'已释放' }}</td>
+                    </tr>
+                  </table>
+                </div>
               </div>
+              <p class="kong" v-else>暂无数据</p>
             </div>
             <!--抢购记录-->
             <!--v-show="snapStatus"-->
@@ -176,44 +179,47 @@
               <div class="title-img">
                 <p>抢购记录</p>
               </div>
-              <div
-                class="record-main"
-                v-for="item in robMoneyList"
-                style="padding: 0.25rem 8% 0;"
-              >
-                <table
-                  cellspacing="0"
-                  cellpadding="0"
-                  id="rush-style"
+              <div v-if="robMoneyList.length">
+                <div
+                        class="record-main"
+                        v-for="item in robMoneyList"
+                        style="padding: 0.25rem 8% 0;"
                 >
-                  <tr>
-                    <td>预存币</td>
-                    <td>抢购成功</td>
-                    <td>空投奖励</td>
-                  </tr>
-                  <tr>
-                    <td>{{ item.saleCoin }}</td>
-                    <td>{{ item.transactionPrice }}</td>
-                    <td>{{ item.saleAmount }}</td>
-                  </tr>
-                </table>
-                <table
-                  cellspacing="0"
-                  cellpadding="0"
-                  id="rush-style1"
-                >
-                  <tr>
-                    <td>预存币</td>
-                    <td>抢购成功</td>
-                    <td>空投奖励</td>
-                  </tr>
-                  <tr>
-                    <td>{{ formatTime(item.lockTime) }}</td>
-                    <td>{{ item.actualSaleAmount }}</td>
-                    <td>{{ item.actStatus == 'I'?'待开奖':item.actStatus=='S'?'成功':'失败' }}</td>
-                  </tr>
-                </table>
+                  <table
+                          cellspacing="0"
+                          cellpadding="0"
+                          id="rush-style"
+                  >
+                    <tr>
+                      <td>预存币</td>
+                      <td>抢购成功</td>
+                      <td>空投奖励</td>
+                    </tr>
+                    <tr>
+                      <td>{{ item.saleCoin }}</td>
+                      <td>{{ item.transactionPrice }}</td>
+                      <td>{{ item.saleAmount }}</td>
+                    </tr>
+                  </table>
+                  <table
+                          cellspacing="0"
+                          cellpadding="0"
+                          id="rush-style1"
+                  >
+                    <tr>
+                      <td>预存币</td>
+                      <td>抢购成功</td>
+                      <td>空投奖励</td>
+                    </tr>
+                    <tr>
+                      <td>{{ formatTime(item.lockTime) }}</td>
+                      <td>{{ item.actualSaleAmount }}</td>
+                      <td>{{ item.actStatus == 'I'?'待开奖':item.actStatus=='S'?'成功':'失败' }}</td>
+                    </tr>
+                  </table>
+                </div>
               </div>
+              <p class="kong1" v-else>暂无数据</p>
             </div>
           </div>
           <div class="service">
@@ -225,61 +231,6 @@
             </div>
           </div>
         </footer>
-        <!--记录-->
-        <!--<footer v-if="isLogin">
-          <div class="record-list">
-            <div class="save-money">
-              <div class="save-title"></div>
-              &lt;!&ndash;<div class="fund-table">
-                <Table
-                  :no-data-text="$t('common.nodata')"
-                  stripe
-                  :columns="tableColumnsBlc"
-                  :data="saveMoneyList"
-                  :loading="loading"
-                  :disabled-hover="true"
-                ></Table>
-                <div class="page-wrap">
-                  <Page
-                    v-show="totalElement > 10"
-                    :current="pageNo"
-                    :total="parseInt(totalElement)"
-                    :page-size="pageSize"
-                    @on-change="changePage"
-                    id="record_pages"
-                  ></Page>
-                </div>
-              </div>&ndash;&gt;
-            </div>
-            &lt;!&ndash;<div class="save-purchase" v-show="snapStatus">
-              <div class="save-title">
-                <img src="../../assets/img/line-two.png" alt="">
-                <span class="title">抢币记录</span>
-                <img src="../../assets/img/line-one.png" alt="">
-              </div>
-              <div class="fund-table">
-                <Table
-                  :no-data-text="$t('common.nodata')"
-                  stripe
-                  :columns="tableColumnsBlc"
-                  :data="saveMoneyList"
-                  :loading="loading"
-                  :disabled-hover="true"
-                ></Table>
-                <div class="page-wrap">
-                  <Page
-                    v-show="totalElement > 10"
-                    :current="pageNo"
-                    :total="parseInt(totalElement)"
-                    :page-size="pageSize"
-                    @on-change="changePage"
-                    id="record_pages"
-                  ></Page>
-                </div>
-              </div>
-            </div>&ndash;&gt;
-          </div>
-        </footer>-->
       </div>
     </div>
   </div>
@@ -332,14 +283,9 @@
     },
     created: function () {
       this.getUrlParam()
-      const name = this.$route.path
-      // console.log(name)
       this.countdown()
-      // console.log(1)
       /*需判断用户是否登录*/
       if(this.token) {
-        // console.log(2)
-        // console.log(name, this.isLogin)
         this.getSaveDataList() // 数据列表存币
         this.getCoinBalance() // 币种余额 存币
         this.getRobDataList() // 数据列表 抢币
@@ -347,8 +293,6 @@
       }
       this.getCoin() // 币种详细信息 存币
       this.getCoinRob() // 币种详细信息 抢币
-      // $("meta[name='viewport']").attr('content', '***')
-      // $('head').append('<meta http-equiv="refresh" content="width = device-width, initial-scale = 1, minimum-scale = 1, maximum-scale = 1">')
     },
     mounted: function () {},
     methods: {
@@ -375,17 +319,17 @@
       },
       // 时间格式转换
       formatTime(date) {
-        return moment(date).format("YYYY-MM-DD")
+        return moment(date).format("YYYY/MM/DD")
       },
       // 倒计时
       countdown () {
         var iTime
         // 到期时间
-        const end = Date.parse(new Date('2019-08-09 17:45:00'))
+        const end = Date.parse(new Date('2019/08/20 21:00:00'))
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
-        const start = Date.parse(new Date('2019-08-09 15:03:00'))
+        const start = Date.parse(new Date('2019/08/13 15:03:00'))
         /*剩余时间 = 到期时间 - 当前时间*/
         const msec = end - now
         /*当前秒数 = (到期时间 - 开始时间)*0.001*/
@@ -409,7 +353,7 @@
           this.hr = hr > 9 ? hr : '0' + hr
           this.min = min > 9 ? min : '0' + min
           this.sec = sec > 9 ? sec : '0' + sec
-          // console.log(this.day, this.hr, this.min, this.sec)
+          console.log(this.day, this.hr, this.min, this.sec)
           iTime = setTimeout(function () {
             that.countdown()
           }, 1000)
@@ -429,11 +373,11 @@
             this.loading = false;
             this.coinInfo = resp.data[0];
             /*需判断用户是否登录*/
-            // if(this.isLogin) {
+            if(this.token) {
               this.lockCoinUnit = resp.data[0].lockCoinUnit
               this.getCoinBalance()
               console.log(this.coinInfo, this.lockCoinUnit)
-            // }
+            }
 
           } else {
             this.$Message.error(resp.message)
@@ -461,7 +405,8 @@
         if(this.token) {
           if (state == 'buy') {
             if (!this.lockAmount) {
-              this.skylightText = this.$t('common.loginInfo')
+              alert(this.$t('common.loginInfo'))
+              // this.skylightText = this.$t('common.loginInfo')
               return false
             }
             const params = {}
@@ -481,7 +426,8 @@
             });
           } else if (state == 'rush') {
             if (!this.lockAdvance) {
-              this.skylightText1 = this.$t('common.loginInfo1')
+              alert(this.$t('common.loginInfo1'))
+              // this.skylightText1 = this.$t('common.loginInfo1')
               return false
             }
             const params = {}
@@ -836,7 +782,7 @@
                 padding: 0 18%;
                 color: #fff;
                 font-size: 0.4rem;
-                line-height: 0.7rem;
+                line-height: 0.6rem;
                 position: relative;
                 .info-title {
                   height: 1rem;
@@ -902,6 +848,18 @@
           /*.record-list-1 {*/
           /*  height: 7.1rem;*/
           /*}*/
+          .kong {
+            font-size: 0.3rem;
+            text-align: center;
+            line-height: 6rem;
+            color: #fff;
+          }
+          .kong1 {
+            font-size: 0.3rem;
+            text-align: center;
+            line-height: 1.5rem;
+            color: #fff;
+          }
           .record-list,
           .record-list-1 {
             padding: 0 5%;
@@ -953,7 +911,7 @@
                 text-align: center;
                 color: #fff;
                 font-size: 0.3rem;
-                line-height: 0.7rem;
+                line-height: 0.6rem;
               }
               .record-main {
                 padding: 0.5rem 8% 0;
