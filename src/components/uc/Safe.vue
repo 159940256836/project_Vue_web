@@ -1181,7 +1181,7 @@ export default {
         },
         getMember() {
             //获取个人安全信息
-            return this.$http.post(this.host + "/uc/approve/security/setting").then(response => {
+            return this.$http.post(this.host + "/uc/approve/security/newSetting").then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
                     return new Promise((resolve, reject) => {

@@ -310,235 +310,235 @@
 export default {
   data() {
     const numberCheck = (rule, value, callback) => {
-      if (value === "" || value == 0) {
-        callback(new Error(this.$t("otc.publishad.warning1")));
+      if (value === '' || value == 0) {
+        callback(new Error(this.$t('otc.publishad.warning1')))
       } else if (Number.isNaN(Number(value))) {
-        callback(new Error(this.$t("otc.publishad.warning1")));
+        callback(new Error(this.$t('otc.publishad.warning1')))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const premisePriceCheck = (rule, value, callback) => {
       if (this.form.fixed == false) {
         if (!value || value == 0) {
-          return callback(new Error(this.$t("otc.publishad.warning2")));
+          return callback(new Error(this.$t('otc.publishad.warning2')))
         } else if (Number.isNaN(Number(value))) {
-          callback(new Error(""));
+          callback(new Error(''))
         } else if (value < 0 || value > 20) {
-          callback(new Error(this.$t("otc.publishad.warning1")));
+          callback(new Error(this.$t('otc.publishad.warning1')))
         } else {
-          callback();
+          callback()
         }
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const fixedPCheck = (rule, value, callback) => {
       if (this.form.fixed == true) {
-        if (value === "") {
-          callback(new Error(this.$t("otc.publishad.warning1")));
+        if (value === '') {
+          callback(new Error(this.$t('otc.publishad.warning1')))
         } else if (!/^[0-9]+(.[0-9]{2})?/.test(value)) {
-          callback(new Error(this.$t("otc.publishad.warning1")));
+          callback(new Error(this.$t('otc.publishad.warning1')))
         } else {
-          callback();
+          callback()
         }
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const maxCheck = (rule, value, callback) => {
       let priceNow =
-        (this.price + "").replace(/,/g, "").replace(/[^\d|.]/g, "") - 0;
-      priceNow = this.round(this.mul(priceNow, this.form.number), 8);
+        (this.price + '').replace(/,/g, '').replace(/[^\d|.]/g, '') - 0
+      priceNow = this.round(this.mul(priceNow, this.form.number), 8)
 
       if (!value || value == 0) {
-        return callback(new Error(this.$t("otc.publishad.warning3")));
+        return callback(new Error(this.$t('otc.publishad.warning3')))
       } else if (!/^[0-9]+(.[0-9]{2})?$/.test(value)) {
-        callback(new Error(this.$t("otc.publishad.warning4")));
+        callback(new Error(this.$t('otc.publishad.warning4')))
       } else if (parseFloat(value) < parseFloat(this.form.minLimit)) {
-        callback(new Error(this.$t("otc.publishad.warning5")));
+        callback(new Error(this.$t('otc.publishad.warning5')))
       } else if (parseFloat(value) > parseFloat(priceNow)) {
         callback(
-          new Error(this.$t("otc.publishad.warning6") + priceNow + "CNY！")
-        );
+          new Error(this.$t('otc.publishad.warning6') + priceNow + 'CNY！')
+        )
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     const minCheck = (rule, value, callback) => {
       if (!value || value == 0) {
-        return callback(new Error(this.$t("otc.publishad.warning7")));
+        return callback(new Error(this.$t('otc.publishad.warning7')))
       } else if (!/^\d+$/.test(value)) {
-        callback(new Error(this.$t("otc.publishad.warning4")));
+        callback(new Error(this.$t('otc.publishad.warning4')))
       } else if (parseFloat(value) < 100) {
-        callback(new Error(this.$t("otc.publishad.warning8")));
+        callback(new Error(this.$t('otc.publishad.warning8')))
       }
       if (
         this.form.maxLimit &&
         this.form.maxLimit != 0 &&
         parseFloat(value) > this.form.maxLimit - 0
       ) {
-        callback(new Error(this.$t("otc.publishad.warning9")));
+        callback(new Error(this.$t('otc.publishad.warning9')))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     //    期限
     const timeLimitCheck = (rule, value, callback) => {
-      //数字
-      if (value === "" || !/^\d+$/.test(value)) {
-        callback(new Error(this.$t("otc.publishad.warning1")));
+      // 数字
+      if (value === '' || !/^\d+$/.test(value)) {
+        callback(new Error(this.$t('otc.publishad.warning1')))
       }
-      //出售
+      // 出售
       if (this.form.advertiseType == 1) {
         if (value < 15 || value > 120) {
-          callback(new Error(this.$t("otc.publishad.warning1")));
+          callback(new Error(this.$t('otc.publishad.warning1')))
         } else {
-          callback();
+          callback()
         }
       }
-      //买入
+      // 买入
       if (this.form.advertiseType == 0) {
         if (value < 10 || value > 30) {
-          callback(new Error(this.$t("otc.publishad.warning1")));
+          callback(new Error(this.$t('otc.publishad.warning1')))
         } else {
-          callback();
+          callback()
         }
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       isSpinShow: true,
       isId: false,
       disAllowBtn: false,
-      //币种列表
+      // 币种列表
       coinList: [],
-      //账户余额
+      // 账户余额
       balance: 100,
-      //参考价
-      cankao: "",
-      price: "",
-      symbol: "",
+      // 参考价
+      cankao: '',
+      price: '',
+      symbol: '',
       gongshi: 1,
-      wantstyle: this.$t("otc.publishad.sellout"),
-      wantTime: "15-120",
+      wantstyle: this.$t('otc.publishad.sellout'),
+      wantTime: '15-120',
       areas: [],
       form: {
-        advertiseType: "1",
-        coin: "1",
-        country: "china",
-        rmb: "",
+        advertiseType: '1',
+        coin: '1',
+        country: 'china',
+        rmb: '',
         fixed: false,
-        premisePrice: "",
-        regularPrice: "",
-        fixedPrice: "",
-        number: "",
-        timeLimit: "",
+        premisePrice: '',
+        regularPrice: '',
+        fixedPrice: '',
+        number: '',
+        timeLimit: '',
         payMode: [],
-        minLimit: "",
-        maxLimit: "",
+        minLimit: '',
+        maxLimit: '',
         autoReply: false,
-        remark: "",
-        priceW: "",
-        autoword: ""
+        remark: '',
+        priceW: '',
+        autoword: ''
       },
       ruleValidate: {
-        advertiseType: [{ required: true, trigger: "change" }],
+        advertiseType: [{ required: true, trigger: 'change' }],
         coin: [
           {
             required: true,
-            message: this.$t("otc.publishad.inputtip1"),
-            trigger: "change"
+            message: this.$t('otc.publishad.inputtip1'),
+            trigger: 'change'
           }
         ],
         country: [
           {
             required: true,
-            message: this.$t("otc.publishad.inputtip2"),
-            trigger: "change"
+            message: this.$t('otc.publishad.inputtip2'),
+            trigger: 'change'
           }
         ],
         rmb: [
           {
             required: true,
-            message: this.$t("otc.publishad.inputtip2"),
-            trigger: "change"
+            message: this.$t('otc.publishad.inputtip2'),
+            trigger: 'change'
           }
         ],
         premisePrice: [
           {
             validator: premisePriceCheck,
-            message: this.$t("otc.publishad.inputtip3"),
-            trigger: "blur"
+            message: this.$t('otc.publishad.inputtip3'),
+            trigger: 'blur'
           }
         ],
         fixedPrice: [
           {
             validator: fixedPCheck,
-            message: this.$t("otc.publishad.inputtip4"),
-            trigger: "blur"
+            message: this.$t('otc.publishad.inputtip4'),
+            trigger: 'blur'
           }
         ],
         number: [
           {
             required: true,
             validator: numberCheck,
-            message: this.$t("otc.publishad.inputtip5"),
-            trigger: "blur"
+            message: this.$t('otc.publishad.inputtip5'),
+            trigger: 'blur'
           }
         ],
         timeLimit: [
           {
             required: true,
             validator: timeLimitCheck,
-            message: this.$t("otc.publishad.inputtip6"),
-            trigger: "blur"
+            message: this.$t('otc.publishad.inputtip6'),
+            trigger: 'blur'
           }
         ],
         payMode: [
           {
             required: true,
-            type: "array",
+            type: 'array',
             min: 1,
-            message: this.$t("otc.publishad.inputtip7"),
-            trigger: "change"
+            message: this.$t('otc.publishad.inputtip7'),
+            trigger: 'change'
           }
         ],
-        minLimit: [{ required: true, validator: minCheck, trigger: "blur" }],
-        maxLimit: [{ required: true, validator: maxCheck, trigger: "blur" }],
+        minLimit: [{ required: true, validator: minCheck, trigger: 'blur' }],
+        maxLimit: [{ required: true, validator: maxCheck, trigger: 'blur' }],
         priceW: [
           {
             required: true,
-            message: this.$t("otc.publishad.inputtip8"),
-            trigger: "blur"
+            message: this.$t('otc.publishad.inputtip8'),
+            trigger: 'blur'
           }
         ]
       },
       payModeList: [
         {
-          value: this.$t("otc.publishad.zfb"),
-          label: this.$t("otc.publishad.zfb"),
+          value: this.$t('otc.publishad.zfb'),
+          label: this.$t('otc.publishad.zfb'),
           isOpen: true
         },
         {
-          value: this.$t("otc.publishad.wx"),
-          label: this.$t("otc.publishad.wx"),
+          value: this.$t('otc.publishad.wx'),
+          label: this.$t('otc.publishad.wx'),
           isOpen: true
         },
         {
-          value: this.$t("otc.publishad.unionpay"),
-          label: this.$t("otc.publishad.unionpay"),
+          value: this.$t('otc.publishad.unionpay'),
+          label: this.$t('otc.publishad.unionpay'),
           isOpen: true
         }
       ]
-    };
+    }
   },
   methods: {
     // 特殊字符限制
-    handleInput (reg1) {
-      var reg = new RegExp(/[\-\_\,\!\|\~\`\(\)\#\@\%\-\+\=\/\'\￥\。\ \…\$\（\）\(\)\[\]\【\】\^\&\*\{\}\:\;\"\L\<\>\?\\]/g, '');
-      if(reg.test(reg1)) {
+    handleInput(reg1) {
+      var reg = new RegExp(/[\-\_\,\!\|\~\`\(\)\#\@\%\-\+\=\/\'\￥\。\ \…\$\（\）\(\)\[\]\【\】\^\&\*\{\}\:\;\"\L\<\>\?\\]/g, '')
+      if (reg.test(reg1)) {
         this.form.premisePrice = ''
         this.form.fixedPrice = ''
         this.form.minLimit = ''
@@ -547,219 +547,219 @@ export default {
       }
     },
     changeCoin() {
-      console.log(this.symbol);
-      let coinItem = this.getCoin(this.form.coin);
-      console.log(coinItem, this.form.coin);
+      console.log(this.symbol)
+      const coinItem = this.getCoin(this.form.coin)
+      console.log(coinItem, this.form.coin)
       if (coinItem != null) {
-        this.cankao = coinItem.marketPrice + "";
-        let lv = (1 + this.form.premisePrice / 100).toFixed(4);
-        let cankoNew =
-          this.cankao.replace(/,/g, "").replace(/[^\d|.]/g, "") - 0;
-        this.price = (cankoNew * lv).toLocaleString(); // + ' CNY/' + coinItem.unit;
-        this.symbol = coinItem.unit;
-        console.log(this.symbol);
+        this.cankao = coinItem.marketPrice + ''
+        const lv = (1 + this.form.premisePrice / 100).toFixed(4)
+        const cankoNew =
+          this.cankao.replace(/,/g, '').replace(/[^\d|.]/g, '') - 0
+        this.price = (cankoNew * lv).toLocaleString() // + ' CNY/' + coinItem.unit;
+        this.symbol = coinItem.unit
+        console.log(this.symbol)
       }
-      /*当购买类型为 卖出 1 时 并且 当前交易币种为BC时 默认显示固定价格 并且固定价格为1
+      /* 当购买类型为 卖出 1 时 并且 当前交易币种为BC时 默认显示固定价格 并且固定价格为1
       否则购买类型为 买入0 时 并且当前交易对币种为BC时 默认显示固定价格 并且固定价格为 0.99
       当购买或者出售时必中不是 BC 那么默认显示 溢出价 价格自定义*/
       if (this.form.advertiseType == '1' && this.symbol == 'BC') {
-        this.form.fixed = true;
+        this.form.fixed = true
         this.form.fixedPrice = '1'
       } else if (this.form.advertiseType == '0' && this.symbol == 'BC') {
-        this.form.fixed = true;
+        this.form.fixed = true
         this.form.fixedPrice = '0.99'
       } else {
-        this.form.fixed = false;
+        this.form.fixed = false
         this.form.fixedPrice = ''
       }
     },
     mul(a, b) {
       var c = 0,
         d = a.toString(),
-        e = b.toString();
+        e = b.toString()
       try {
-        c += d.split(".")[1].length;
+        c += d.split('.')[1].length
       } catch (f) {}
       try {
-        c += e.split(".")[1].length;
+        c += e.split('.')[1].length
       } catch (f) {}
-      d == null ? d = 0 : (typeof d == 'string' ? d = d.replace('.','') : '')
-      e == null ? e = 0 : (typeof e == 'string' ? e = e.replace('.','') : '')
+      d == null ? d = 0 : (typeof d === 'string' ? d = d.replace('.', '') : '')
+      e == null ? e = 0 : (typeof e === 'string' ? e = e.replace('.', '') : '')
       return (
         Number(d) *
         Number(e) /
         Math.pow(10, c)
-      );
+      )
     },
     div(a, b) {
       var c,
         d,
         e = 0,
-        f = 0;
+        f = 0
       try {
-        e = a.toString().split(".")[1].length;
+        e = a.toString().split('.')[1].length
       } catch (g) {}
       try {
-        f = b.toString().split(".")[1].length;
+        f = b.toString().split('.')[1].length
       } catch (g) {}
       return (
-        (c = Number(a.toString().replace(".", ""))),
-        (d = Number(b.toString().replace(".", ""))),
+        (c = Number(a.toString().replace('.', ''))),
+        (d = Number(b.toString().replace('.', ''))),
         this.mul(c / d, Math.pow(10, f - e))
-      );
+      )
     },
     round(v, e) {
-      var t = 1;
+      var t = 1
       for (; e > 0; t *= 10, e--);
       for (; e < 0; t /= 10, e++);
-      return Math.round(v * t) / t;
+      return Math.round(v * t) / t
     },
     handleSubmit(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.disAllowBtn = true;
-          //创建
-          var params = {};
-          params["price"] = (this.price + "").replace(/[^\d|.]/g, "") - 0;
-          params["advertiseType"] = this.form.advertiseType;
-          params["coin.id"] = this.form.coin;
-          params["minLimit"] = this.form.minLimit;
-          params["maxLimit"] = this.form.maxLimit;
-          params["timeLimit"] = this.form.timeLimit;
-          params["country"] = this.form.country;
+          this.disAllowBtn = true
+          // 创建
+          var params = {}
+          params['price'] = (this.price + '').replace(/[^\d|.]/g, '') - 0
+          params['advertiseType'] = this.form.advertiseType
+          params['coin.id'] = this.form.coin
+          params['minLimit'] = this.form.minLimit
+          params['maxLimit'] = this.form.maxLimit
+          params['timeLimit'] = this.form.timeLimit
+          params['country'] = this.form.country
           if (this.form.fixed == true) {
-            params["priceType"] = 0;
+            params['priceType'] = 0
           } else if (this.form.fixed == false) {
-            params["priceType"] = 1;
+            params['priceType'] = 1
           }
-          params["premiseRate"] = this.form.premisePrice;
-          params["remark"] = this.form.remark;
-          params["number"] = this.form.number;
-          params["pay"] = this.form.payMode;
-          params["jyPassword"] = this.form.priceW;
+          params['premiseRate'] = this.form.premisePrice
+          params['remark'] = this.form.remark
+          params['number'] = this.form.number
+          params['pay'] = this.form.payMode
+          params['jyPassword'] = this.form.priceW
           if (this.form.autoReply == true) {
-            params["auto"] = 1;
+            params['auto'] = 1
           } else if (this.form.autoReply == false) {
-            params["auto"] = 0;
+            params['auto'] = 0
           }
-          params["autoword"] = this.form.autoword;
+          params['autoword'] = this.form.autoword
 
-          //修改
-          var isIdparams = {};
-          isIdparams["id"] = this.$route.query.id;
-          isIdparams["advertiseType"] = this.form.advertiseType;
-          isIdparams["price"] = (this.price + "").replace(/[^\d|.]/g, "") - 0;
-          isIdparams["coin.id"] = this.form.coin;
-          isIdparams["minLimit"] = this.form.minLimit;
-          isIdparams["maxLimit"] = this.form.maxLimit;
-          isIdparams["timeLimit"] = this.form.timeLimit;
-          isIdparams["country"] = this.form.country;
+          // 修改
+          var isIdparams = {}
+          isIdparams['id'] = this.$route.query.id
+          isIdparams['advertiseType'] = this.form.advertiseType
+          isIdparams['price'] = (this.price + '').replace(/[^\d|.]/g, '') - 0
+          isIdparams['coin.id'] = this.form.coin
+          isIdparams['minLimit'] = this.form.minLimit
+          isIdparams['maxLimit'] = this.form.maxLimit
+          isIdparams['timeLimit'] = this.form.timeLimit
+          isIdparams['country'] = this.form.country
           if (this.form.fixed == true) {
-            isIdparams["priceType"] = 0;
+            isIdparams['priceType'] = 0
           } else if (this.form.fixed == false) {
-            isIdparams["priceType"] = 1;
+            isIdparams['priceType'] = 1
           }
-          isIdparams["premiseRate"] = this.form.premisePrice;
-          isIdparams["remark"] = this.form.remark;
-          isIdparams["number"] = this.form.number;
-          isIdparams["pay"] = this.form.payMode;
-          isIdparams["jyPassword"] = this.form.priceW;
+          isIdparams['premiseRate'] = this.form.premisePrice
+          isIdparams['remark'] = this.form.remark
+          isIdparams['number'] = this.form.number
+          isIdparams['pay'] = this.form.payMode
+          isIdparams['jyPassword'] = this.form.priceW
           if (this.form.autoReply == true) {
-            isIdparams["auto"] = 1;
+            isIdparams['auto'] = 1
           } else if (this.form.autoReply == false) {
-            isIdparams["auto"] = 0;
+            isIdparams['auto'] = 0
           }
-          isIdparams["autoword"] = this.form.autoword;
+          isIdparams['autoword'] = this.form.autoword
           if (this.isId) {
             this.$http
-              .post(this.host + "/otc/advertise/update", isIdparams)
+              .post(this.host + '/otc/advertise/update', isIdparams)
               .then(response => {
-                var resp = response.body;
+                var resp = response.body
                 if (resp.code == 0) {
-                  this.$Message.success(resp.message);
-                  var that = this;
+                  this.$Message.success(resp.message)
+                  var that = this
                   setTimeout(() => {
-                    that.$router.push("/otc/trade/bc");
-                  }, 3000);
+                    that.$router.push('/otc/trade/bc')
+                  }, 3000)
                 } else {
-                  this.$Message.error(resp.message);
-                  this.disAllowBtn = false;
+                  this.$Message.error(resp.message)
+                  this.disAllowBtn = false
                 }
                 //  this.disAllowBtn=false
-              });
+              })
           } else {
-            //创建
+            // 创建
             this.$http
-              .post(this.host + "/otc/advertise/create", params)
+              .post(this.host + '/otc/advertise/create', params)
               .then(response => {
-                var resp = response.body;
+                var resp = response.body
                 if (resp.code == 0) {
-                  this.$Message.success(resp.message);
-                  var that = this;
+                  this.$Message.success(resp.message)
+                  var that = this
                   setTimeout(() => {
-                    that.$router.push("/otc/trade/bc");
-                  }, 3000);
+                    that.$router.push('/otc/trade/bc')
+                  }, 3000)
                 } else {
-                  this.$Message.error(resp.message);
-                  this.disAllowBtn = false;
+                  this.$Message.error(resp.message)
+                  this.disAllowBtn = false
                 }
                 // this.disAllowBtn=false
-              });
+              })
           }
         } else {
-          this.disAllowBtn = false;
-          this.$Message.error(this.$t("otc.publishad.submit_failure"));
+          this.disAllowBtn = false
+          this.$Message.error(this.$t('otc.publishad.submit_failure'))
         }
-      });
+      })
     },
     handleReset(name) {
-      this.$refs[name].resetFields();
+      this.$refs[name].resetFields()
     },
     onAreaChange(value) {
       for (var i = 0; i < this.areas.length; i++) {
         if (this.areas[i].zhName == value) {
-          this.form.rmb = this.areas[i].localCurrency;
+          this.form.rmb = this.areas[i].localCurrency
         }
       }
     },
     findCoin(coinId) {
       for (let i = 0; i < this.coinList.length; i++) {
         if (this.coinList[i].id == coinId) {
-          return this.coinList[i].unit;
+          return this.coinList[i].unit
         }
       }
     },
     getCoin(coinId) {
       for (let i = 0; i < this.coinList.length; i++) {
         if (this.coinList[i].id == coinId) {
-          return this.coinList[i];
+          return this.coinList[i]
         }
       }
     },
     getAreas() {
-      this.$http.post(this.host + "/uc/support/country").then(response => {
-        var resp = response.body;
-        this.areas = resp.data;
-        this.form.country = this.areas[0].zhName;
-        this.form.rmb = this.areas[0].localCurrency;
-      });
+      this.$http.post(this.host + '/uc/support/country').then(response => {
+        var resp = response.body
+        this.areas = resp.data
+        this.form.country = this.areas[0].zhName
+        this.form.rmb = this.areas[0].localCurrency
+      })
     },
     getMember() {
-      //获取个人安全信息
-      let self = this;
+      // 获取个人安全信息
+      const self = this
       this.$http.get(this.host + this.api.uc.identification).then(res => {
-        let certifiedBusinessStatus = res.body.data.certifiedBusinessStatus;
+        const certifiedBusinessStatus = res.body.data.certifiedBusinessStatus
         if (certifiedBusinessStatus == 2) {
-          this.getAccount();
+          this.getAccount()
         } else {
-          /*请先申请商家认证?*/
-          this.$Message.warning(this.$t('otc.publishad.certification'));
-          this.$router.push("/identbusiness");
+          /* 请先申请商家认证?*/
+          this.$Message.warning(this.$t('otc.publishad.certification'))
+          this.$router.push('/identbusiness')
         }
-      });
+      })
       //
       //
-      // this.$http.post(this.host + '/uc/approve/security/setting').then(response => {
+      // this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
       //     var resp = response.body;
       //     if (resp.code == 0) {
       //         if (resp.data.realName == null || resp.data.realName == "") {
@@ -780,74 +780,74 @@ export default {
       // })
     },
     getAccount() {
-      //获取个人账户信息
-      let self = this;
+      // 获取个人账户信息
+      const self = this
       this.$http
-        .post(this.host + "/uc/approve/account/setting")
+        .post(this.host + '/uc/approve/account/newSetting')
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
             if (
               resp.data.bankVerified == 0 &&
               resp.data.aliVerified == 0 &&
               resp.data.wechatVerified == 0
             ) {
-              this.$Message.success(this.$t("otc.publishad.submittip4"));
-              self.$router.push("/uc/account");
+              this.$Message.success(this.$t('otc.publishad.submittip4'))
+              self.$router.push('/uc/account')
             }
             if (resp.data.aliVerified == 1) {
-              this.payModeList[0].isOpen = false;
+              this.payModeList[0].isOpen = false
             }
             if (resp.data.wechatVerified == 1) {
-              this.payModeList[1].isOpen = false;
+              this.payModeList[1].isOpen = false
             }
             if (resp.data.bankVerified == 1) {
-              this.payModeList[2].isOpen = false;
+              this.payModeList[2].isOpen = false
             }
           } else {
-            this.msg = resp.message;
-            this.$Message.error(resp.message);
+            this.msg = resp.message
+            this.$Message.error(resp.message)
           }
-        });
+        })
     },
     getDetailAd() {
-      this.isId = true;
+      this.isId = true
       this.$http
-        .post(this.host + "/otc/advertise/detail", { id: this.$route.query.id })
+        .post(this.host + '/otc/advertise/detail', { id: this.$route.query.id })
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
-            this.form.coin = resp.data.coinId + "";
-            this.form.country = resp.data.country.zhName;
-            this.cankao = resp.data.marketPrice + "";
+            this.form.coin = resp.data.coinId + ''
+            this.form.country = resp.data.country.zhName
+            this.cankao = resp.data.marketPrice + ''
             if (resp.data.priceType == 0) {
-              this.form.fixed = true;
-              this.form.fixedPrice = resp.data.price;
+              this.form.fixed = true
+              this.form.fixedPrice = resp.data.price
             } else if (resp.data.priceType == 1) {
-              this.form.fixed = false;
+              this.form.fixed = false
             }
-            this.price = resp.data.price;
-            this.symbol = resp.data.coinUnit;
+            this.price = resp.data.price
+            this.symbol = resp.data.coinUnit
             // this.price = resp.data.price + ' CNY/' + resp.data.coinUnit;
-            this.form.advertiseType = resp.data.advertiseType + "";
-            this.form.minLimit = resp.data.minLimit;
-            this.form.maxLimit = resp.data.maxLimit;
-            this.form.remark = resp.data.remark;
-            this.form.timeLimit = resp.data.timeLimit;
-            this.form.premisePrice = resp.data.premiseRate;
-            this.form.payMode = (resp.data.payMode + "").split(",");
-            this.form.number = resp.data.number;
+            this.form.advertiseType = resp.data.advertiseType + ''
+            this.form.minLimit = resp.data.minLimit
+            this.form.maxLimit = resp.data.maxLimit
+            this.form.remark = resp.data.remark
+            this.form.timeLimit = resp.data.timeLimit
+            this.form.premisePrice = resp.data.premiseRate
+            this.form.payMode = (resp.data.payMode + '').split(',')
+            this.form.number = resp.data.number
             if (resp.data.auto == 1) {
-              this.form.autoReply = true;
+              this.form.autoReply = true
             } else if (resp.data.auto == 0) {
-              this.form.autoReply = false;
+              this.form.autoReply = false
             }
-            this.form.autoword = resp.data.autoword;
+            this.form.autoword = resp.data.autoword
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-          this.isSpinShow = false;
-        });
+          this.isSpinShow = false
+        })
     }
   },
   mounted() {
@@ -855,67 +855,67 @@ export default {
   },
   computed: {
     wantHistory() {
-      return this.form.advertiseType;
+      return this.form.advertiseType
     },
     premisePriceHistory() {
-      return this.form.premisePrice;
+      return this.form.premisePrice
     },
     fixedPriceHistory() {
-      return this.form.fixedPrice;
+      return this.form.fixedPrice
     }
   },
   watch: {
     wantHistory(newValue, oldValue) {
-      if (newValue == "1") {
-        this.wantstyle = this.$t("otc.publishad.sellout");
-        this.wantTime = "15-120";
+      if (newValue == '1') {
+        this.wantstyle = this.$t('otc.publishad.sellout')
+        this.wantTime = '15-120'
       } else {
-        this.wantstyle = this.$t("otc.publishad.buyin");
-        this.wantTime = "10-30";
+        this.wantstyle = this.$t('otc.publishad.buyin')
+        this.wantTime = '10-30'
       }
     },
     premisePriceHistory(newValue, oldValue) {
-      let lv = (1 + newValue / 100).toFixed(4);
-      let cankoNew = this.cankao.replace(/,/g, "").replace(/[^\d|.]/g, "") - 0;
+      const lv = (1 + newValue / 100).toFixed(4)
+      const cankoNew = this.cankao.replace(/,/g, '').replace(/[^\d|.]/g, '') - 0
 
       // this.price = (cankoNew * lv).toLocaleString() + ' CNY/' + this.findCoin(this.form.coin);
       // this.price = this.round(this.mul(cankoNew, lv), 2).toLocaleString() + ' CNY/' + this.findCoin(this.form.coin);
-      this.price = this.round(this.mul(cankoNew, lv), 2).toLocaleString();
-      this.gongshi = 1 + newValue / 100;
+      this.price = this.round(this.mul(cankoNew, lv), 2).toLocaleString()
+      this.gongshi = 1 + newValue / 100
     },
     fixedPriceHistory(newValue, oldValue) {
-      this.price = (newValue - 0).toLocaleString();
+      this.price = (newValue - 0).toLocaleString()
     }
   },
   created() {
     this.changeCoin()
-    this.getMember();
-    this.getAreas();
-    let lv = (1 + this.form.premisePrice / 100).toFixed(4);
-    //获取币种
-    this.$http.post(this.host + "/otc/coin/all").then(response => {
-      var resp = response.body;
+    this.getMember()
+    this.getAreas()
+    const lv = (1 + this.form.premisePrice / 100).toFixed(4)
+    // 获取币种
+    this.$http.post(this.host + '/otc/coin/all').then(response => {
+      var resp = response.body
       if (resp.code == 0) {
-        this.coinList = resp.data;
-        this.form.coin = resp.data[0].id;
-        this.cankao = resp.data[0].marketPrice + "";
-        let cankoNew =
-          this.cankao.replace(/,/g, "").replace(/[^\d|.]/g, "") - 0;
+        this.coinList = resp.data
+        this.form.coin = resp.data[0].id
+        this.cankao = resp.data[0].marketPrice + ''
+        const cankoNew =
+          this.cankao.replace(/,/g, '').replace(/[^\d|.]/g, '') - 0
         // this.price = (cankoNew * lv).toLocaleString() + ' CNY/' + this.findCoin(this.form.coin);
-        this.price = (cankoNew * lv).toLocaleString();
-        this.symbol = resp.data[0].unit;
+        this.price = (cankoNew * lv).toLocaleString()
+        this.symbol = resp.data[0].unit
       } else {
-        this.$Message.error(resp.message);
+        this.$Message.error(resp.message)
       }
-      //修改
+      // 修改
       if (this.$route.query.id) {
-        this.getDetailAd();
+        this.getDetailAd()
       } else {
-        this.isSpinShow = false;
+        this.isSpinShow = false
       }
-    });
+    })
   }
-};
+}
 </script>
 <style>
 .my_ad_container .my_ad_container_spin.ivu-spin-fix .ivu-spin-main {

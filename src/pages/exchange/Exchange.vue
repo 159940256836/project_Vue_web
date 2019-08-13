@@ -1163,6 +1163,8 @@ export default {
       coinScale: 4,
       baseCoinScale: 2,
       symbolFee: 0.001,
+      buyone: '',
+      sellone: '',
       currentCoin: {
         base: '',
         coin: '',
@@ -2128,7 +2130,7 @@ export default {
     getMember() {
           // 获取个人安全信息
       this.$http
-            .post(this.host + '/uc/approve/security/setting')
+            .post(this.host + '/uc/approve/security/newSetting')
             .then(response => {
               const resp = response.body
               this.member.realName = resp.data.realName
@@ -2645,7 +2647,7 @@ export default {
           this.coins[coin.base].push(coin)
           if (coin.symbol == this.currentCoin.symbol) {
             this.currentCoin = coin
-            this.form.buy.limitPrice = this.form.sell.limitPrice = coin.price
+            // this.form.buy.limitPrice = this.form.sell.limitPrice = coin.price
           }
         }
         if (this.isLogin) {
@@ -2681,6 +2683,9 @@ export default {
       this.$http
                 .post(this.host + this.api.market.platemini, params)
                 .then(response => {
+                  this.form.sell.limitPrice = response.data.bid.items[0].price
+                  this.form.buy.limitPrice = response.data.ask.items[0].price
+                  console.log(response.data.bid.items[0].price, response.data.ask.items[0].price)
                   this.plate.askRows = []
                   this.plate.bidRows = []
                   const resp = response.body

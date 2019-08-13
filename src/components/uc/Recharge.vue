@@ -284,7 +284,7 @@ export default {
         },
         getMember() {
             let self = this;
-            this.$http.post(this.host + "/uc/approve/security/setting").then(response => {
+            this.$http.post(this.host + "/uc/approve/security/newSetting").then(response => {
                 var resp = response.body;
                 if (resp.code == 0) {
                     if (resp.data.realName == null || resp.data.realName == "") {

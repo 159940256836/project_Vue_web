@@ -175,7 +175,7 @@
                                     <div class="ios">
                                         <img src="../src/assets/images/app_qrcode.png" alt="">
                                         <div class="tips">
-                                            <span>{{ $t('header.appdownlaod') }}</span>
+                                            <span>{{ $t('header.Scandownload') }}</span>
                                         </div>
                                     </div>
                                 </div>

@@ -485,6 +485,7 @@ module.exports = {
     fund: 'BD Fund',
     downloadapp: 'Scan the code for download and installation',
     appdownlaod: 'Download APP',
+    Scandownload: 'Scan qr download',
     choose: 'Please select',
     priceIeo: 'Half price zone'
   },

@@ -1,6 +1,6 @@
 <template>
     <div class="nav-rights">
-        <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.securitysetting') }}</h2>
+        <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.securitynewSetting') }}</h2>
         <div class="nav-right padding-right-clear">
             <div class="padding-right-clear padding-left-clear rightarea user account-box">
                 <div class="rightarea-con">
@@ -1612,7 +1612,7 @@ export default {
     },
     getMember() {
             // 获取个人安全信息
-      return this.$http.post(this.host + '/uc/approve/security/setting').then(response => {
+      return this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
         var resp = response.body
         if (resp.code == 0) {
           return new Promise((resolve, reject) => {

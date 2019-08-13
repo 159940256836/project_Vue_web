@@ -405,7 +405,7 @@ export default {
     getMember() {
       // 获取个人安全信息
       this.$http
-        .post(this.host + '/uc/approve/security/setting')
+        .post(this.host + '/uc/approve/security/newSetting')
         .then(response => {
           var resp = response.body
           if (resp.code == 0) {
