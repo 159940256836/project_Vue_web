@@ -51,7 +51,7 @@
           <p class="circle3"></p>
           <p class="circle4"></p>
           <!--抢购-->
-          <div class="section-main" v-if="isLogin">
+          <div class="section-main">
             <div class="count-down">
               <p class="count-title">
                 倒计时
@@ -99,7 +99,7 @@
                   @click="buyLockCoin('rush')"
                   :disabled="progressBar!==0"
                 >
-                  立即抢购
+                  {{ coinBalance==0?'活动结束':'立即抢购' }}
                 </Button>
               </div>
             </div>
@@ -343,7 +343,7 @@ export default {
       },
       // 时间格式转换
       formatTime(date) {
-        return moment(date).format('YYYY/MM/DD')
+        return moment(date).format('YYYY/MM/DD HH:mm:ss')
       },
       goRegister() {
         this.$router.push({ name: 'mobileTerminalFund' })
@@ -352,11 +352,11 @@ export default {
       countdown() {
         let iTime
         // 到期时间
-        const end = Date.parse(new Date('2019/08/13 17:59:00'))
+        const end = Date.parse(new Date('2019/08/20 21:00:00'))
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
-        const start = Date.parse(new Date('2019/08/09 10:25:00'))
+        const start = Date.parse(new Date('2019/08/13 10:25:00'))
         /* 剩余时间 = 到期时间 - 当前时间*/
         const msec = end - now
         /* 当前秒数 = (到期时间 - 开始时间)*0.001*/
@@ -387,7 +387,7 @@ export default {
         }
         /*进度条比例 = 总秒数/当前秒数 *100*/
         this.progressBar = this.totalTime/num * 100
-        console.log(this.progressBar)
+        // console.log(this.progressBar)
         if (this.progressBar == 0) {
           this.sec = '00'
           clearTimeout(iTime)
