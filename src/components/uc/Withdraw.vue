@@ -180,13 +180,13 @@
                             <div class="action-foot">
                                 <!--提币数量等于零 或者 小于最小提币数量 该按钮禁用-->
                                 <Button
-                                        id="withdrawSubmit"
-                                        long
-                                        size="large"
-                                        type="primary"
-                                        style="height:40px;"
-                                        @click="apply"
-                                        :disabled="withdrawAmount == 0 || withdrawAmount < currentCoin.minAmount"
+                                    id="withdrawSubmit"
+                                    long
+                                    size="large"
+                                    type="primary"
+                                    style="height:40px;"
+                                    @click="apply"
+                                    :disabled="withdrawAmount == 0 || withdrawAmount < currentCoin.minAmount"
                                 >
                                     {{$t('uc.finance.withdraw.pickup')}}
                                 </Button>

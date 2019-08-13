@@ -87,7 +87,24 @@ module.exports = {
     copySuccess: '复制成功',
     copyFail: '复制失败',
     down: '下载BDW App 随时随地，便捷交易',
-    scan: '扫描二维码即可下载BDW App'
+    scan: '扫描二维码即可下载BDW App',
+    loginInfo: '请输入存币数量',
+    loginInfo1: '请输入抢币数量',
+    fund: {
+      // 存币记录
+      MemberId: '用户ID',
+      lockCoinName: '名称',
+      lockCoinUnit: '币种',
+      lockAmount: '数量',
+      lockCoinDay: '天数',
+      interests: '利率',
+      lockTime: '锁仓时间',
+      unlockTime: '解锁时间',
+      // 抢币记录
+      moneyDeposited: '预存币',
+      successful: '抢购成功',
+      rewardDrop: '空投奖励',
+    }
   },
   foot: {
     Tradrate: '交易对费率',

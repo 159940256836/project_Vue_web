@@ -38,7 +38,8 @@
         pageNum: 1,
         tableMoney: [],
         loading: true,
-        totalElement: null
+        totalElement: null,
+        coinInfo: []
       };
     },
     created: function () {

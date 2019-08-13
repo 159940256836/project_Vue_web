@@ -646,7 +646,7 @@ export default {
       }, 1000)
     },
     getReserveTime: function() {
-      var d1 = new Date().getTime()
+        var d1 = new Date().getTime()
       var d2 = new Date(this.msg.createTime.replace(/-/g, '/')).getTime()
       var throughSeconds = parseInt(parseInt(d1 - d2) / 1000)
       var reserveSeconds = parseInt(this.msg.timeLimit) * 60 - throughSeconds
@@ -659,6 +659,7 @@ export default {
       if (reserveSeconds <= 0) {
         this.resetStatus()
       }
+        console.log(this.reserveTime)
     },
     resetStatus: function() {
       // 计时时间已到，重置状态
@@ -910,8 +911,6 @@ export default {
 }
 
 .icons.phone {
-    width: 22px;
-    height: 20px;
     background-image: url(../../assets/images/fait/phone.png);
 }
 

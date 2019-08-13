@@ -1,6 +1,6 @@
 
 <template>
-    <div class="nav-rights" id="leoadmin">
+    <div class="leo-rights" id="leoadmin">
         <Form
             class="form"
             :model="formItem"
@@ -233,7 +233,7 @@ export default {
 }
 </style>
 <style lang="scss">
-    .nav-rights .ivu-table-cell {
+    .leo-rights .ivu-table-cell {
         padding: 0 10px;
     }
 
