@@ -51,7 +51,7 @@
           <p class="circle3"></p>
           <p class="circle4"></p>
           <!--抢购-->
-          <div class="section-main" v-if="isLogin">
+          <div class="section-main">
             <div class="count-down">
               <p class="count-title">
                 倒计时
@@ -308,6 +308,7 @@ export default {
         userWalletBalance: '--', // 币种余额
         snapStatus: false, // 抢购状态
         coinBalance: {}, // 可抢币余额
+        endtime: '',
         balanceData: {
           balance: '--',
           maxSaleAmount: '--',
@@ -318,12 +319,9 @@ export default {
     },
     created() {
       const name = this.$route.path
-      console.log(name)
-      this.countdown()
       if (name == '/fund') {
         console.log(1)
         if (this.isLogin) {
-          console.log(2)
           console.log(name, this.isLogin)
           this.getSaveDataList() // 数据列表存币
           this.getCoinBalance() // 币种余额 存币
@@ -343,7 +341,7 @@ export default {
       },
       // 时间格式转换
       formatTime(date) {
-        return moment(date).format('YYYY/MM/DD')
+        return moment(date).format('YYYY/MM/DD HH:mm:ss')
       },
       goRegister() {
         this.$router.push({ name: 'mobileTerminalFund' })
@@ -352,7 +350,8 @@ export default {
       countdown() {
         let iTime
         // 到期时间
-        const end = Date.parse(new Date('2019/08/13 17:59:00'))
+        // const end = this.endtime
+        const end = Date.parse(new Date('2019/08/13 18:17:00'))
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
@@ -385,8 +384,11 @@ export default {
             this.countdown()
           }, 1000)
         }
-        /*进度条比例 = 总秒数/当前秒数 *100*/
-        this.progressBar = this.totalTime/num * 100
+        /* 进度条比例 = 总秒数/当前秒数 *100*/
+        this.progressBar = this.totalTime / num * 100
+        if (this.progressBar < 0) {
+          this.progressBar = 0
+        }
         console.log(this.progressBar)
         if (this.progressBar == 0) {
           this.sec = '00'
@@ -531,6 +533,8 @@ export default {
           //   this.getCoinRob()
           // }, 1000)
             this.coinBalance = resp.data
+            this.endtime = resp.data.startTime
+            this.countdown()
           } else {
             this.$Message.error(resp.message)
             return false
@@ -557,12 +561,16 @@ export default {
         // const params = getParamsRob(this.savePageNo);
         const id = 1
         this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
-          const resp = res.body;
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.robMoneyList = resp.data;
+            this.loading = false
+            this.robMoneyList = resp.data
           }
-        });
+        })
+      },
+      formatNumber(n) {
+        n = n.toString()
+        return n[1] ? n : '0' + n
       }
     },
     watch: {
@@ -623,54 +631,55 @@ export default {
             return h('span', {}, self.formatTime(params.row.unlockTime))
           }
         })
-        arr.push({
-          title: this.$t('common.fund.interests'),
-          key: 'interests'
-        })
+        // arr.push({
+        //   title: this.$t('common.fund.interests'),
+        //   key: 'interests'
+        // })
         return arr
       },
       // 抢币记录
       tableColumnsRob() {
         const arr = []
+        const that = this
         arr.push({
           title: this.$t('common.fund.lockCoinUnit'),
-          key: "saleCoin",
-        });
+          key: 'saleCoin'
+        })
         arr.push({
           title: this.$t('common.fund.transactionPrice'),
-          key: "transactionPrice",
-        });
+          key: 'transactionPrice'
+        })
         arr.push({
           title: this.$t('common.fund.saleAmount'),
-          key: "saleAmount",
-        });
+          key: 'saleAmount'
+        })
         arr.push({
           title: this.$t('common.fund.actualSaleAmount'),
-          key: "actualSaleAmount",
-        });
+          key: 'actualSaleAmount'
+        })
         arr.push({
           title: this.$t('common.fund.airDropCoin'),
-          key: "airDropCoin",
+          key: 'airDropCoin'
         })
         ;arr.push({
           title: this.$t('common.fund.airDropAmount'),
-          key: "airDropAmount",
-        });
-        ;arr.push({
-          title: this.$t('common.fund.createTime'),
-          key: "createTime",
-          render(h, params){
-            return h("span", {}, self.formatTime(params.row.createTime));
-          }
-        });
+          key: 'airDropAmount'
+        })
+      ;arr.push({
+        title: this.$t('common.fund.createTime'),
+        key: 'createTime',
+        render(h, params) {
+          return h('span', {}, that.formatTime(params.row.createTime))
+        }
+      })
         arr.push({
           title: this.$t('common.fund.actStatus'),
-          key: "actStatus",
-          render(h, params){
-            return h("span", {}, params.row.actStatus == 'I'?'待开奖':params.row.actStatus=='S'?'成功':'失败');
+          key: 'actStatus',
+          render(h, params) {
+            return h('span', {}, params.row.actStatus == 'I' ? '待开奖' : params.row.actStatus == 'S' ? '成功' : '失败')
           }
-        });
-        return arr;
+        })
+        return arr
       }
     }
   }
