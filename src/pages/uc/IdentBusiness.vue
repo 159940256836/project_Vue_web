@@ -340,307 +340,307 @@
 export default {
   data() {
     return {
-      noEmpty: "必填",
-      review: this.$t("uc.identity.review"), //准备资料
-      prepare: this.$t("uc.identity.prepare"), //提交审核；
-      result: this.$t("uc.identity.result"), //等待结果;
-      certified: this.$t("uc.identity.certified"), //已认证
-      shenheshibai: this.$t("uc.identity.shenheshibai"), //审核失败
-      shangjiazhuxiao: this.$t("uc.identity.shangjiazhuxiao"), //商家注销
-      tijiaoshenqing: this.$t("uc.identity.tijiaoshenqing"), //提交申请
-      shenheshibai: this.$t("uc.identity.shenheshibai"), //审核失败
-      passed: this.$t("uc.identity.passed"), //审核通过
-      placeholder: this.$t("uc.identity.placeholder"),
-      select: this.$t("uc.identity.chosen"),
-      phone: this.$t("uc.identity.phone"),
-      qq: this.$t("uc.identity.qq"),
-      wechat: this.$t("uc.identity.wx"),
-      bizhong: this.$t("uc.identity.bizhong"),
-      shuliang: this.$t("uc.identity.shuliang"),
-      loginmsg: this.$t("common.logintip"),
+      noEmpty: '必填',
+      review: this.$t('uc.identity.review'), // 准备资料
+      prepare: this.$t('uc.identity.prepare'), // 提交审核；
+      result: this.$t('uc.identity.result'), // 等待结果;
+      certified: this.$t('uc.identity.certified'), // 已认证
+      shenheshibai: this.$t('uc.identity.shenheshibai'), // 审核失败
+      shangjiazhuxiao: this.$t('uc.identity.shangjiazhuxiao'), // 商家注销
+      tijiaoshenqing: this.$t('uc.identity.tijiaoshenqing'), // 提交申请
+      shenheshibai: this.$t('uc.identity.shenheshibai'), // 审核失败
+      passed: this.$t('uc.identity.passed'), // 审核通过
+      placeholder: this.$t('uc.identity.placeholder'),
+      select: this.$t('uc.identity.chosen'),
+      phone: this.$t('uc.identity.phone'),
+      qq: this.$t('uc.identity.qq'),
+      wechat: this.$t('uc.identity.wx'),
+      bizhong: this.$t('uc.identity.bizhong'),
+      shuliang: this.$t('uc.identity.shuliang'),
+      loginmsg: this.$t('common.logintip'),
       single: false,
-      value: "",
+      value: '',
       isShowShang: true,
       isShowMailt: false,
       isShowSubmitted: false,
       isShowSuccess: false,
       activeStepIndex: 0,
-      emailAdress: "kefu@bdw.pro",
+      emailAdress: 'kefu@bdw.pro',
       steps: [
-        this.$t("uc.identity.prepare"),
-        this.$t("uc.identity.review"),
-        this.$t("uc.identity.passed")
+        this.$t('uc.identity.prepare'),
+        this.$t('uc.identity.review'),
+        this.$t('uc.identity.passed')
       ],
-      certStatus: 0, //认证申请状态，0:未申请，1：审核中，2：已认证，3：认证失败
-      certReason: "",
-      auditCurrency: "",
-      auditText: "",
+      certStatus: 0, // 认证申请状态，0:未申请，1：审核中，2：已认证，3：认证失败
+      certReason: '',
+      auditCurrency: '',
+      auditText: '',
       modal_read: false,
       modal_return: false,
       agreeFrozen: false,
       modal_apply: false,
       applyBtn: false,
       apply_form: {
-        telno: "",
-        wechat: "",
-        qq: "",
-        coinSymbol: "",
-        amount: "",
-        assetData: "",
-        tradeData: ""
+        telno: '',
+        wechat: '',
+        qq: '',
+        coinSymbol: '',
+        amount: '',
+        assetData: '',
+        tradeData: ''
       },
-      assetImg: "",
-      tradeImg: "",
-      uploadHeaders: { "x-auth-token": localStorage.getItem("TOKEN") },
-      uploadUrl: this.host + "/uc/upload/oss/image",
-      returnReason: "",
-      refuseReason: ""
-    };
+      assetImg: '',
+      tradeImg: '',
+      uploadHeaders: { 'x-auth-token': localStorage.getItem('TOKEN') },
+      uploadUrl: this.host + '/uc/upload/oss/image',
+      returnReason: '',
+      refuseReason: ''
+    }
   },
   methods: {
     islogin() {
-      let self = this;
+      const self = this
       //判断是否进行实名认证；
       this.$http
-        .post(this.host + "/uc/approve/security/setting", {})
+        .post(this.host + '/uc/approve/security/newSetting', {})
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
-            if (resp.data.realName == null || resp.data.realName == "") {
-              this.$Message.warning(this.$t("otc.publishad.submittip1"));
-              self.$router.push("/uc/safe");
+            if (resp.data.realName == null || resp.data.realName == '') {
+              this.$Message.warning(this.$t('otc.publishad.submittip1'))
+              self.$router.push('/uc/safe')
             } else if (resp.data.phoneVerified == 0) {
-              this.$Message.warning(this.$t("otc.publishad.submittip2"));
-              self.$router.push("/uc/safe");
+              this.$Message.warning(this.$t('otc.publishad.submittip2'))
+              self.$router.push('/uc/safe')
             } else if (resp.data.fundsVerified == 0) {
-              this.$Message.warning(this.$t("otc.publishad.submittip3"));
-              self.$router.push("/uc/safe");
+              this.$Message.warning(this.$t('otc.publishad.submittip3'))
+              self.$router.push('/uc/safe')
             }
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+        })
     },
     timer() {
       setInterval(() => {
-        this.getSetting();
-      }, 10000);
+        this.getSetting()
+      }, 10000)
     },
     publishAd() {
-      this.$router.push("/PublishAdver");
+      this.$router.push('/PublishAdver')
     },
     returnAdit() {
-      this.modal_return = true;
+      this.modal_return = true
     },
     returnAudit() {
-      var params = {};
-      params["detail"] = this.returnReason;
+      var params = {}
+      params['detail'] = this.returnReason
       this.$http
-        .post(this.host + "/uc/approve/cancel/business", params)
+        .post(this.host + '/uc/approve/cancel/business', params)
         .then(res => {
-          let resp = res.body;
+          const resp = res.body
           if (resp.code == 0) {
-            this.$Message.success("提交成功!");
-            this.modal_return = false;
-            this.getSetting();
+            this.$Message.success('提交成功!')
+            this.modal_return = false
+            this.getSetting()
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+        })
     },
     getAudiCoin(symbol) {
-      var coin = null;
+      var coin = null
       for (var i = 0; i < this.auditCurrency.length; i++) {
         if (symbol == this.auditCurrency[i].coin.unit) {
-          coin = this.auditCurrency[i];
+          coin = this.auditCurrency[i]
           break;
         }
       }
-      return coin;
+      return coin
     },
     onCoinChange(value) {
-      var coin = this.getAudiCoin(value);
+      var coin = this.getAudiCoin(value)
       if (coin != null) {
-        this.apply_form.amount = coin.amount;
+        this.apply_form.amount = coin.amount
       }
     },
     getSetting() {
       this.$http
         .get(this.host + this.api.uc.identification)
         .then(res => {
-          let certifiedBusinessStatus = res.body.data.certifiedBusinessStatus;
-          this.activeStepIndex = certifiedBusinessStatus;
-          this.certStatus = certifiedBusinessStatus;
-          console.log(this.certStatus);
-          this.certReason = res.body.data.detail;
-          this.refuseReason = res.body.data.reason;
+          const certifiedBusinessStatus = res.body.data.certifiedBusinessStatus
+          this.activeStepIndex = certifiedBusinessStatus
+          this.certStatus = certifiedBusinessStatus
+          console.log(this.certStatus)
+          this.certReason = res.body.data.detail
+          this.refuseReason = res.body.data.reason
         })
-        .catch(function(error) {});
+        .catch(function(error) {})
     },
     assetHandleSuccess(res, file, fileList) {
       // fileList = fileList[fileList.length-1]
-      this.$refs.upload1.fileList = [fileList[fileList.length - 1]];
-      this.apply_form.assetData = res.data;
-      this.assetImg = res.data;
+      this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
+      this.apply_form.assetData = res.data
+      this.assetImg = res.data
     },
     tradeHandleSuccess(res, file, fileList) {
-      this.$refs.upload2.fileList = [fileList[fileList.length - 1]];
-      this.apply_form.tradeData = res.data;
-      this.tradeImg = res.data;
+      this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
+      this.apply_form.tradeData = res.data
+      this.tradeImg = res.data
     },
     assetRemove(file, fileList) {
-      this.apply_form.assetData = "";
-      this.assetImg = "";
+      this.apply_form.assetData = '';
+      this.assetImg = '';
     },
     tradeRemove(file, fileList) {
-      this.apply_form.tradeData = "";
-      this.tradeImg = "";
+      this.apply_form.tradeData = '';
+      this.tradeImg = '';
     },
     getAuthFound() {
       this.$http
-        .get(this.host + "/uc/approve/business-auth-deposit/list")
+        .get(this.host + '/uc/approve/business-auth-deposit/list')
         .then(res => {
-          var resp = res.body;
+          var resp = res.body
           if (resp.code == 0) {
-            this.auditCurrency = resp.data;
-            var tempText = "";
+            this.auditCurrency = resp.data
+            var tempText = '';
             for (var i = 0; i < resp.data.length; i++) {
               if (i == 0) {
-                //BHB;
-                //this.apply_form.coinSymbol = resp.data[i].coin.unit;
-                //10000;
-                this.apply_form.amount = resp.data[i].amount;
+                // BHB;
+                // this.apply_form.coinSymbol = resp.data[i].coin.unit;
+                // 10000;
+                this.apply_form.amount = resp.data[i].amount
               }
-              tempText += resp.data[i].amount + "个" + resp.data[i].coin.unit;
-              if (i < resp.data.length - 1) tempText += "或";
+              tempText += resp.data[i].amount + '个' + resp.data[i].coin.unit
+              if (i < resp.data.length - 1) tempText += '或';
             }
-            this.auditText = tempText;
+            this.auditText = tempText
           }
-        });
+        })
     },
     apply() {
-      let stasingle = this.single;
+      const stasingle = this.single
       if (stasingle == false) {
-        this.$Message.warning(this.$t("uc.identity.approve"));
+        this.$Message.warning(this.$t('uc.identity.approve'))
         return;
       }
-      this.modal_read = true;
+      this.modal_read = true
       return;
       this.$http
         .get(this.host + this.api.uc.apply)
         .then(res => {
-          var resp = res.body;
+          var resp = res.body
           if (resp.code == 0) {
-            this.$Message.success(resp.message);
-            this.activeStepIndex = 1;
+            this.$Message.success(resp.message)
+            this.activeStepIndex = 1
           } else {
-            this.$Message.warning(resp.message);
+            this.$Message.warning(resp.message)
           }
         })
         .catch(function(error) {
-          this.$Message.error(error);
-        });
+          this.$Message.error(error)
+        })
     },
     apply2() {
-      let agreeFrozen = this.agreeFrozen;
+      const agreeFrozen = this.agreeFrozen
       if (agreeFrozen == false) {
-        this.$store.state.lang != "English" &&
-          this.$Message.warning("请同意冻结相应数量的币");
-        this.$store.state.lang == "English" &&
+        this.$store.state.lang != 'English' &&
+          this.$Message.warning('请同意冻结相应数量的币')
+        this.$store.state.lang == 'English' &&
           this.$Message.warning(
-            "Please agree to freeze the corresponding amount of currency"
-          );
+            'Please agree to freeze the corresponding amount of currency'
+          )
         return;
       }
-      this.modal_read = false;
-      this.modal_apply = true;
+      this.modal_read = false
+      this.modal_apply = true
     },
     apply3(form) {
-      if (this.apply_form.telno == "") {
-        this.$store.state.lang != "English" &&
-          this.$Message.error("请填写手机号");
-        this.$store.state.lang == "English" &&
-          this.$Message.error("Please fill in your cell phone number");
+      if (this.apply_form.telno == '') {
+        this.$store.state.lang != 'English' &&
+          this.$Message.error('请填写手机号')
+        this.$store.state.lang == 'English' &&
+          this.$Message.error('Please fill in your cell phone number')
         return;
       }
-      if (this.apply_form.wechat == "") {
-        this.$store.state.lang != "English" &&
-          this.$Message.error("请填写微信号");
-        this.$store.state.lang == "English" &&
-          this.$Message.error("Please fill in your cell wechat number");
+      if (this.apply_form.wechat == '') {
+        this.$store.state.lang != 'English' &&
+          this.$Message.error('请填写微信号')
+        this.$store.state.lang == 'English' &&
+          this.$Message.error('Please fill in your cell wechat number')
         return;
       }
-      if (this.apply_form.qq == "") {
-        this.$store.state.lang != "English" &&
-          this.$Message.error("请填写qq号");
-        this.$store.state.lang == "English" &&
-          this.$Message.error("Please fill in your cell qq number");
+      if (this.apply_form.qq == '') {
+        this.$store.state.lang != 'English' &&
+          this.$Message.error('请填写qq号')
+        this.$store.state.lang == 'English' &&
+          this.$Message.error('Please fill in your cell qq number')
         return;
       }
-      if (this.apply_form.assetData == "") {
-        this.$store.state.lang != "English" &&
-          this.$Message.error("请上传资产证明");
-        this.$store.state.lang == "English" &&
-          this.$Message.error("Please upload the asset certificate");
+      if (this.apply_form.assetData == '') {
+        this.$store.state.lang != 'English' &&
+          this.$Message.error('请上传资产证明')
+        this.$store.state.lang == 'English' &&
+          this.$Message.error('Please upload the asset certificate')
         return;
       }
-      if (this.apply_form.tradeData == "") {
-        this.$store.state.lang != "English" &&
-          this.$Message.error("请上传交易证明");
-        this.$store.state.lang == "English" &&
-          this.$Message.error("Please upload the transaction certificate");
+      if (this.apply_form.tradeData == '') {
+        this.$store.state.lang != 'English' &&
+          this.$Message.error('请上传交易证明')
+        this.$store.state.lang == 'English' &&
+          this.$Message.error('Please upload the transaction certificate')
         return;
       }
-      var params = {};
-      params["businessAuthDepositId"] = this.getAudiCoin(
+      var params = {}
+      params['businessAuthDepositId'] = this.getAudiCoin(
         this.apply_form.coinSymbol
-      ).id;
-      params["json"] = JSON.stringify(this.apply_form);
+      ).id
+      params['json'] = JSON.stringify(this.apply_form)
       this.$http
-        .post(this.host + "/uc/approve/certified/business/apply", params)
+        .post(this.host + '/uc/approve/certified/business/apply', params)
         .then(res => {
-          var resp = res.body;
+          var resp = res.body
           if (resp.code == 0) {
-            this.$Message.success("提交成功!");
-            this.modal_apply = false;
-            this.certStatus = 1;
+            this.$Message.success('提交成功!')
+            this.modal_apply = false
+            this.certStatus = 1
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+        })
     }
   },
   created() {
-    //this.timer();
-    this.islogin();
-    this.getSetting();
-    this.getAuthFound();
+    // this.timer();
+    this.islogin()
+    this.getSetting()
+    this.getAuthFound()
   },
   computed: {
     lang: function() {
-      return this.$store.state.lang;
+      return this.$store.state.lang
     }
   },
   watch: {
     lang: function() {
-      this.prepare = this.$t("uc.identity.prepare");
-      this.review = this.$t("uc.identity.review");
-      this.result = this.$t("uc.identity.result");
-      this.certified = this.$t("uc.identity.certified"); //已认证
-      this.shenheshibai = this.$t("uc.identity.shenheshibai"); //审核失败
-      this.shangjiazhuxiao = this.$t("uc.identity.shangjiazhuxiao"); //商家注销
-      this.tijiaoshenqing = this.$t("uc.identity.tijiaoshenqing"); //提交申请
-      this.shenheshibai = this.$t("uc.identity.shenheshibai"); //审核失败
-      this.passed = this.$t("uc.identity.passed"); //审核通过
+      this.prepare = this.$t('uc.identity.prepare')
+      this.review = this.$t('uc.identity.review')
+      this.result = this.$t('uc.identity.result')
+      this.certified = this.$t('uc.identity.certified') //已认证
+      this.shenheshibai = this.$t('uc.identity.shenheshibai') //审核失败
+      this.shangjiazhuxiao = this.$t('uc.identity.shangjiazhuxiao') //商家注销
+      this.tijiaoshenqing = this.$t('uc.identity.tijiaoshenqing') //提交申请
+      this.shenheshibai = this.$t('uc.identity.shenheshibai') //审核失败
+      this.passed = this.$t('uc.identity.passed') //审核通过
 
-      this.phone = this.$t("uc.identity.phone");
-      this.qq = this.$t("uc.identity.qq");
-      this.wechat = this.$t("uc.identity.wx");
-      this.bizhong = this.$t("uc.identity.bizhong");
-      this.shuliang = this.$t("uc.identity.shuliang");
+      this.phone = this.$t('uc.identity.phone')
+      this.qq = this.$t('uc.identity.qq')
+      this.wechat = this.$t('uc.identity.wx')
+      this.bizhong = this.$t('uc.identity.bizhong')
+      this.shuliang = this.$t('uc.identity.shuliang')
     }
   }
-};
+}
 </script>
 
 <style scoped>

@@ -231,7 +231,7 @@ export default {
       }
       .image-desc {
         .uploaded-img {
-          width: 50%;
+          width: 40%;
         }
         .image-caption {
           display: none !important;

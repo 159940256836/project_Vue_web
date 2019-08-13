@@ -975,17 +975,18 @@ export default {
       },
       indexBtn: [
         {
+          text: this.$t('service.BC')
+        },
+        {
           text: this.$t('service.USDT')
         },
         {
           text: this.$t('service.BTC')
         },
-        {
-          text: this.$t('service.ETH')
-        },
-        {
-          text: this.$t('service.BC')
-        },
+        // {
+        //   text: this.$t('service.ETH')
+        // },
+
         {
           text: this.$t('service.CUSTOM')
         }
@@ -1130,16 +1131,13 @@ export default {
     updateLangData() {
       this.indexBtn = [
         {
+          text: this.$t('service.BC')
+        },
+        {
           text: this.$t('service.USDT')
         },
         {
           text: this.$t('service.BTC')
-        },
-        {
-          text: this.$t('service.ETH')
-        },
-        {
-          text: this.$t('service.BC')
         },
         {
           text: this.$t('service.CUSTOM')
@@ -1383,16 +1381,14 @@ export default {
       this.choseBtn = index
       // this.getSymbol()
       if (index == 0) {
-        this.dataIndex = this.coins.USDT
-      } else if (index == 1) {
-        this.dataIndex = this.coins.BTC
-      } else if (index == 2) {
-        this.dataIndex = this.coins.ETH
-      } else if (index == 3) {
         this.indexBtnBC = this.indexBtn[3].text
         window.indexBtnBC = this.indexBtnBC
         this.dataIndex = this.coins.BC
-      } else if (index == 4) {
+      } else if (index == 1) {
+        this.dataIndex = this.coins.USDT
+      } else if (index == 2) {
+        this.dataIndex = this.coins.BTC
+      } else if (index == 3) {
         this.dataIndex = this.coins.favor
       }
     },

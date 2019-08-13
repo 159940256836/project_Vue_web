@@ -997,7 +997,7 @@ export default {
                   click: () => {
                     event.stopPropagation() // 阻止事件冒泡
                     if (this.isLogin) {
-                          if (
+                      if (
                                                 event.currentTarget.className ==
                                                 'ivu-icon ivu-icon-android-star'
                                             ) {
@@ -1009,9 +1009,9 @@ export default {
                             event.currentTarget.className =
                                                     'ivu-icon ivu-icon-android-star'
                           }
-                        } else {
-                          this.$Message.warning(this.$t('common.logintip'))
-                        }
+                    } else {
+                      this.$Message.warning(this.$t('common.logintip'))
+                    }
                   }
                 }
               }),
@@ -1085,24 +1085,24 @@ export default {
                   },
                   nativeOn: {
                     click: () => {
-                          event.stopPropagation() // 阻止事件冒泡
-                          if (this.isLogin) {
+                      event.stopPropagation() // 阻止事件冒泡
+                      if (this.isLogin) {
                             if (
                                                     event.currentTarget.className ==
                                                     'ivu-icon ivu-icon-android-star'
                                                 ) {
-                                this.cancelCollect(params.index, params.row)
-                                event.currentTarget.className ==
+                              this.cancelCollect(params.index, params.row)
+                              event.currentTarget.className ==
                                                         'ivu-icon ivu-icon-android-star-outline'
-                              } else {
-                                this.collect(params.index, params.row)
-                                event.currentTarget.className =
+                            } else {
+                              this.collect(params.index, params.row)
+                              event.currentTarget.className =
                                                         'ivu-icon ivu-icon-android-star'
-                              }
+                            }
                           } else {
                             this.$Message.warning(this.$t('common.logintip'))
                           }
-                        }
+                    }
                   }
                 }),
                 h('span', params.row.coin)
@@ -1584,8 +1584,8 @@ export default {
                                     'span',
                   {
                     style: {
-                          color: '#3399ff'
-                        }
+                      color: '#3399ff'
+                    }
                   },
                                     self.$t('exchange.canceled')
                                 )
@@ -1908,7 +1908,7 @@ export default {
     getMember() {
           // 获取个人安全信息
       this.$http
-            .post(this.host + '/uc/approve/security/setting')
+            .post(this.host + '/uc/approve/security/newSetting')
             .then(response => {
               const resp = response.body
               this.member.realName = resp.data.realName

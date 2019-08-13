@@ -1056,14 +1056,14 @@ export default {
                                                     event.currentTarget.className ==
                                                     'ivu-icon ivu-icon-android-star'
                                                 ) {
-                              this.cancelCollect(params.index, params.row)
-                              event.currentTarget.className ==
+                          this.cancelCollect(params.index, params.row)
+                          event.currentTarget.className ==
                                                         'ivu-icon ivu-icon-android-star-outline'
-                            } else {
-                              this.collect(params.index, params.row)
-                              event.currentTarget.className =
+                        } else {
+                          this.collect(params.index, params.row)
+                          event.currentTarget.className =
                                                         'ivu-icon ivu-icon-android-star'
-                            }
+                        }
                       } else {
                         this.$Message.warning(this.$t('common.logintip'))
                       }
@@ -1903,7 +1903,7 @@ export default {
     getMember() {
           // 获取个人安全信息
       this.$http
-            .post(this.host + '/uc/approve/security/setting')
+            .post(this.host + '/uc/approve/security/newSetting')
             .then(response => {
               const resp = response.body
               this.member.realName = resp.data.realName

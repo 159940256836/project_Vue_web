@@ -105,7 +105,7 @@ export default {
       getCodeText: this.$t('openGoolePage._sendCode'),
       disabled: false,
       openGoogleModal: true,
-        user: {},
+      user: {},
       formInline: {
         code: '',
         emailCode: '',
@@ -115,15 +115,15 @@ export default {
         code: [
             { message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' },
             { type: 'string', min: 6, message: this.$t('openGoolePage._phoneCode'), trigger: 'blur' }
-          ],
+        ],
         emailCode: [
             { message: this.$t('openGoolePage._emailCode'), trigger: 'blur' },
             { type: 'string', min: 6, message: this.$t('openGoolePage._emailCode'), trigger: 'blur' }
-          ],
+        ],
         googleCode: [
             { message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' },
             { type: 'string', min: 6, message: this.$t('openGoolePage._GoogleVerificationCode'), trigger: 'blur' }
-          ]
+        ]
       },
       sendEmailDisabled: false, // 邮箱短信验证
       codeTime1: 60, // 邮箱短信验证倒计时
@@ -135,8 +135,8 @@ export default {
   },
   props: ['phone'],
   created() {
-      this.getMember()
-      this.afetyVerification()
+    this.getMember()
+    this.afetyVerification()
         // if (this.$route.params.phone) {
         //     this.phone = this.$route.params.phone;
         // } else {
@@ -163,26 +163,26 @@ export default {
         this.isCode = data.data
         console.log(this.isCode)
         if (data.code == 0) {
-            switch (data.data) {
-                case 1:
+          switch (data.data) {
+              case 1:
                             // 1为开启谷歌验证
-                  this.isGoogleCode = true
-                  this.isPhoneCode = false
-                  this.isEmailCode = false
-                  break
-                case 2:
+                this.isGoogleCode = true
+                this.isPhoneCode = false
+                this.isEmailCode = false
+                break
+              case 2:
                             // 2为开启手机验证
-                  this.isGoogleCode = false
-                  this.isPhoneCode = true
-                  this.isEmailCode = false
-                  break
-                case 3:
+                this.isGoogleCode = false
+                this.isPhoneCode = true
+                this.isEmailCode = false
+                break
+              case 3:
                             // 3为开启邮箱验证
-                  this.isGoogleCode = false
-                  this.isPhoneCode = false
-                  this.isEmailCode = true
-              }
-          }
+                this.isGoogleCode = false
+                this.isPhoneCode = false
+                this.isEmailCode = true
+            }
+        }
       })
     },
         // 点击返回上个页面
@@ -194,28 +194,28 @@ export default {
       this.$http.post(this.host + '/uc/google/jcgoogle', params).then(res => {
         const resp = res.body
         if (resp.code == 0) {
-            this.$emit('closeGoogle')
-            this.$Message.success(resp.message)
-          } else {
-            this.$Message.error(resp.message)
-          }
+          this.$emit('closeGoogle')
+          this.$Message.success(resp.message)
+        } else {
+          this.$Message.error(resp.message)
+        }
       })
     },
     sureBtn(name) {
-        if(this.user.mobilePhone){
-            if (!this.formInline.code) {
-                this.$Message.error(this.$t('uc.login.phone'))
-                return false
+      if (this.user.mobilePhone) {
+          if (!this.formInline.code) {
+              this.$Message.error(this.$t('uc.login.phone'))
+              return false
             }
         } else {
-            if (!this.formInline.emailCode) {
-                this.$Message.error(this.$t('uc.login.email'))
-                return false
+          if (!this.formInline.emailCode) {
+              this.$Message.error(this.$t('uc.login.email'))
+              return false
             }
         }
-        if(!this.formInline.googleCode) {
-            this.$Message.error(this.$t('uc.login.google'))
-            return false
+      if (!this.formInline.googleCode) {
+          this.$Message.error(this.$t('uc.login.google'))
+          return false
         }
 
       console.log(name)
@@ -233,68 +233,68 @@ export default {
       const me = this
       if (index == 1) {
         this.getPhoneCode().then(res => {
-            let count = 60
-            this.disabled = true
-            const timer = setInterval(() => {
-                this.getCodeText = --count
-                if (count <= 0) {
-                    clearInterval(timer)
-                    this.getCodeText = this.$t('openGoolePage._sendCode')
-                    this.disabled = false
-                  }
-              }, 1000)
-          })
+          let count = 60
+          this.disabled = true
+          const timer = setInterval(() => {
+              this.getCodeText = --count
+              if (count <= 0) {
+                  clearInterval(timer)
+                  this.getCodeText = this.$t('openGoolePage._sendCode')
+                  this.disabled = false
+                }
+            }, 1000)
+        })
       } else if (index == 2) {
                 // 获取邮箱code
-          this.$http.post(this.host + '/uc/unbind/google/email/code').then(response => {
-              const resp = response.body
-              if (resp.code == 0) {
-                  me.sendEmailDisabled = true
-                  const interval = window.setInterval(function() {
+        this.$http.post(this.host + '/uc/unbind/google/email/code').then(response => {
+            const resp = response.body
+            if (resp.code == 0) {
+                me.sendEmailDisabled = true
+                const interval = window.setInterval(function() {
                     if (me.codeTime1-- <= 0) {
-                        me.codeTime1 = 60
-                        me.sendEmailDisabled = false
-                        window.clearInterval(interval)
-                      }
+                      me.codeTime1 = 60
+                      me.sendEmailDisabled = false
+                      window.clearInterval(interval)
+                    }
                   }, 1000)
-                } else {
-                  me.$Message.error(resp.message)
-                }
-            })
-        }
+              } else {
+                me.$Message.error(resp.message)
+              }
+          })
+      }
     },
     getPhoneCode() {
       return this.$http.post(this.host + '/uc/mobile/google/code', {}).then(res => {
         const resp = res.body
         console.log(resp)
         if (resp.code == 0) {
-            return new Promise((resolve, reject) => {
-                resolve()
-              })
-          } else {
-            this.$Notice.error({ title: this.$t('common.tip'), desc: res.body.message })
-          }
+          return new Promise((resolve, reject) => {
+              resolve()
+            })
+        } else {
+          this.$Notice.error({ title: this.$t('common.tip'), desc: res.body.message })
+        }
       })
     },
-      getMember() {
+    getMember() {
           // 获取个人安全信息
-          return this.$http.post(this.host + '/uc/approve/security/setting').then(response => {
-              var resp = response.body
-              if (resp.code == 0) {
-                  return new Promise((resolve, reject) => {
-                      this.user = resp.data
-                      console.log(this.user);
+        return this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+                return new Promise((resolve, reject) => {
+                    this.user = resp.data
+                    console.log(this.user)
                       resolve(resp.data)
                   })
               } else {
-                  this.$Message.error(this.loginmsg)
+                this.$Message.error(this.loginmsg)
               }
           })
       }
   },
-    computed: {
-        member: function() {
-            return this.$store.getters.member
+  computed: {
+      member: function() {
+          return this.$store.getters.member
         }
     }
 }

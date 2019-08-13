@@ -505,6 +505,7 @@ module.exports = {
     fund: 'BD基金',
     downloadapp: '扫码进行下载安装',
     appdownlaod: 'APP下载',
+    Scandownload: '扫描二维码下载',
     choose: '请选择',
     priceIeo: '半价专区'
   },

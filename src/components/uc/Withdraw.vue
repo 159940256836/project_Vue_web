@@ -720,7 +720,7 @@ export default {
     },
     getMember() {
             // 获取个人安全信息
-      this.$http.post(this.host + '/uc/approve/security/setting').then(response => {
+      this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
         var resp = response.body
         if (resp.code == 0) {
           this.user = resp.data
