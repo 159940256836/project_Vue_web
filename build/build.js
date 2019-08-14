@@ -1,5 +1,5 @@
-'use strict'
 require('./check-versions')()
+require('babel-polyfill')
 
 process.env.NODE_ENV = 'production'
 

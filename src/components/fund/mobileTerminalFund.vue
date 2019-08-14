@@ -400,12 +400,8 @@ export default {
       // 币种详细信息 存币
       getCoin() {
         this.$http.get(this.host + `/wallet/lockCoinWallet/getList`).then(res => {
-<<<<<<< HEAD
-          const resp = res.body
-=======
           // alert('111')
-          const resp = res.body;
->>>>>>> edf14a4b9c1bf1cc2c0392274313a5a9c0cab202
+          const resp = res.body
           if (resp.code == 0) {
             this.loading = false
             this.coinInfo = resp.data[0]
@@ -423,11 +419,7 @@ export default {
       // 币种余额 存币
       getCoinBalance() {
         console.log(this.lockCoinUnit)
-<<<<<<< HEAD
-        const unit = !this.lockCoinUnit ? 'TDE' : this.lockCoinUnit
-=======
-        let unit = !this.lockCoinUnit? 'TD':this.lockCoinUnit
->>>>>>> edf14a4b9c1bf1cc2c0392274313a5a9c0cab202
+        const unit = !this.lockCoinUnit ? 'TD' : this.lockCoinUnit
         this.$http.get(this.host + `/wallet/lockCoinWallet/userWallet?unit=${unit}`).then(res => {
           const resp = res.body
           if (resp.code == 0) {
@@ -439,17 +431,13 @@ export default {
         })
       },
       // 接口数据 存币 抢币
-<<<<<<< HEAD
-      buyLockCoin(state) {
-=======
       // 消息提示
       setTime() {
         setTimeout(() => {
           this.modal3 = false
-        }, 1500);
+        }, 1500)
       },
-      buyLockCoin (state) {
->>>>>>> edf14a4b9c1bf1cc2c0392274313a5a9c0cab202
+      buyLockCoin(state) {
         // 判断是否登录
         if (this.token || this.isLogin) {
           if (state == 'buy') {
@@ -476,13 +464,6 @@ export default {
               }
             })
           } else if (state == 'rush') {
-<<<<<<< HEAD
-            if (this.coinBalance !== 0) {
-              alert('活动未开始，请等待！')
-              return false
-            }
-=======
->>>>>>> edf14a4b9c1bf1cc2c0392274313a5a9c0cab202
             if (!this.lockAdvance) {
               this.skylightText1 = this.$t('common.loginInfo1')
               return false
@@ -546,17 +527,7 @@ export default {
             this.$Message.error(resp.message)
             return false
           }
-<<<<<<< HEAD
         })
-        if (this.coinBalance !== 0) {
-          setTimeout(() => {
-            this.getCoinRob()
-          }, 1000)
-        }
-=======
-        });
-
->>>>>>> edf14a4b9c1bf1cc2c0392274313a5a9c0cab202
       },
       // 钱包余额和最多抢购额度 抢币
       snapLines() {
@@ -600,14 +571,7 @@ export default {
         }
       }
     },
-<<<<<<< HEAD
     mounted() {
-      window.setInterval(() => {
-        setTimeout(this.getCoinRob, 0)
-      }, 1000)
-=======
-    mounted () {
->>>>>>> edf14a4b9c1bf1cc2c0392274313a5a9c0cab202
     },
     computed: {
 

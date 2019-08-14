@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import Vue from 'vue'
 import VueClipboard from 'vue-clipboard2'
 import routes from './config/routes.js'
