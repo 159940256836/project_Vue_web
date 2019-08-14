@@ -1,7 +1,6 @@
 ﻿// "v0.4.6 Geetest Inc.";
 
 var gtInit = (function(window) {
-  'use strict'
   if (typeof window === 'undefined') {
     throw new Error('Geetest requires browser environment')
   }
@@ -266,11 +265,11 @@ var gtInit = (function(window) {
             status[type] = 'loaded'
             var cbs = callbacks[type]
             for (var i = 0, len = cbs.length; i < len; i = i + 1) {
-            var cb = cbs[i]
-            if (isFunction(cb)) {
-                  cb()
-                }
-          }
+              var cb = cbs[i]
+              if (isFunction(cb)) {
+              cb()
+            }
+            }
             callbacks[type] = []
           }
         })
@@ -279,8 +278,8 @@ var gtInit = (function(window) {
       } else if (s === 'fail') {
         throwError('networkError', config)
       } else if (s === 'loading') {
-      callbacks[type].push(init)
-    }
+        callbacks[type].push(init)
+      }
     })
   }
 })(window)

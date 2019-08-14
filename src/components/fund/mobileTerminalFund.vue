@@ -273,9 +273,9 @@
   const FixAraible = (pageSize) => (pageNo) => ({
     pageSize,
     pageNo
-  });
-  const getParams = FixAraible(10, '');
-  export default {
+  })
+const getParams = FixAraible(10, '')
+export default {
     data() {
       return {
         modal3: false,
@@ -312,19 +312,18 @@
         balanceData: {
           balance: '--',
           maxSaleAmount: '--',
-          raiseCoin: "BC",
-          saleCoin: "BTC"
+          raiseCoin: 'BC',
+          saleCoin: 'BTC'
         }, // 币种信息
         token: ''
       }
     },
-    created: function () {
-      /* alert('版本不兼容问题') */
+    created: function() {
       this.getUrlParam()
       // alert(this.token)
       this.countdown()
-      /*需判断用户是否登录*/
-      if(this.token||this.isLogin) {
+      /* 需判断用户是否登录*/
+      if (this.token || this.isLogin) {
         this.getSaveDataList() // 数据列表存币
         this.getCoinBalance() // 币种余额 存币
         this.getRobDataList() // 数据列表 抢币
@@ -333,7 +332,7 @@
       this.getCoin() // 币种详细信息 存币
       this.getCoinRob() // 币种详细信息 抢币
     },
-    mounted: function () {},
+    mounted: function() {},
     methods: {
       //控制只能输入小数点后6位
       clearNoNum() {
@@ -356,14 +355,14 @@
       },
       // 获取APP token
       getUrlParam() {
-        var url1 = window.location.href;
-        let theRequest = new Object();
-        if (url1.indexOf("?") != -1) {
-          let str = url1.substr(1);
-          let strs = str.split("&");
+        var url1 = window.location.href
+        const theRequest = new Object()
+        if (url1.indexOf('?') != -1) {
+          const str = url1.substr(1)
+          const strs = str.split('&')
           console.log(str.length)
-          for(let i = 0; i < strs.length; i ++) {
-            theRequest[0]=unescape(strs[i].split("=")[1]);
+          for (let i = 0; i < strs.length; i++) {
+            theRequest[0] = unescape(strs[i].split('=')[1])
           }
         }
         this.token = theRequest[0];
@@ -379,10 +378,10 @@
       },
       // 时间格式转换
       formatTime(date) {
-        return moment(date).format("YYYY/MM/DD")
+        return moment(date).format('YYYY/MM/DD')
       },
       // 倒计时
-      countdown () {
+      countdown() {
         var iTime
         // 到期时间
         // const end = Date.parse(new Date('2019/08/20 21:00:00'))
@@ -391,23 +390,23 @@
         const now = Date.parse(new Date())
         // 开始时间
         const start = Date.parse(new Date('2019/08/13 15:03:00'))
-        /*剩余时间 = 到期时间 - 当前时间*/
+        /* 剩余时间 = 到期时间 - 当前时间*/
         const msec = end - now
-        /*当前秒数 = (到期时间 - 开始时间)*0.001*/
-        const num = (end-start)*0.001
+        /* 当前秒数 = (到期时间 - 开始时间)*0.001*/
+        const num = (end - start) * 0.001
         const that = this
-        /*年月日时分秒*/
-        let day = parseInt(msec / 1000 / 60 / 60 / 24)
-        let hr = parseInt(msec / 1000 / 60 / 60 % 24)
-        let min = parseInt(msec / 1000 / 60 % 60)
-        let sec = parseInt(msec / 1000 % 60)
+        /* 年月日时分秒*/
+        const day = parseInt(msec / 1000 / 60 / 60 / 24)
+        const hr = parseInt(msec / 1000 / 60 / 60 % 24)
+        const min = parseInt(msec / 1000 / 60 % 60)
+        const sec = parseInt(msec / 1000 % 60)
         // console.log(day, hr, min, sec)
 
-        let day1 = parseInt(day * 60 * 60 * 24)
-        let hr1 = parseInt(hr  * 60 * 60)
-        let min1 = parseInt(min  * 60)
-        let sec1 = parseInt(sec)
-        /*总秒数*/
+        const day1 = parseInt(day * 60 * 60 * 24)
+        const hr1 = parseInt(hr * 60 * 60)
+        const min1 = parseInt(min * 60)
+        const sec1 = parseInt(sec)
+        /* 总秒数*/
         this.totalTime = (day1 + hr1 + min1 + sec1)
         if (this.totalTime > 0) {
           this.day = day
@@ -415,12 +414,12 @@
           this.min = min > 9 ? min : '0' + min
           this.sec = sec > 9 ? sec : '0' + sec
           console.log(this.day, this.hr, this.min, this.sec)
-          iTime = setTimeout(function () {
+          iTime = setTimeout(function() {
             that.countdown()
           }, 1000)
         }
-        /*进度条比例 = 总秒数/当前秒数 *100*/
-        this.progressBar = this.totalTime/num * 100
+        /* 进度条比例 = 总秒数/当前秒数 *100*/
+        this.progressBar = this.totalTime / num * 100
         if (this.progressBar == 0) {
           clearTimeout(iTime)
           this.sec = '00'
@@ -430,12 +429,12 @@
       getCoin() {
         this.$http.get(this.host + `/wallet/lockCoinWallet/getList`).then(res => {
           // alert('111')
-          const resp = res.body;
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.coinInfo = resp.data[0];
-            /*需判断用户是否登录*/
-            if(this.token||this.isLogin) {
+            this.loading = false
+            this.coinInfo = resp.data[0]
+          /* 需判断用户是否登录*/
+            if (this.token || this.isLogin) {
               this.lockCoinUnit = resp.data[0].lockCoinUnit
               this.getCoinBalance()
             }
@@ -443,32 +442,32 @@
             this.$Message.error(resp.message)
             return false
           }
-        });
+        })
       },
       // 币种余额 存币
       getCoinBalance() {
         console.log(this.lockCoinUnit)
-        let unit = !this.lockCoinUnit? 'TD':this.lockCoinUnit
+        const unit = !this.lockCoinUnit ? 'TD' : this.lockCoinUnit
         this.$http.get(this.host + `/wallet/lockCoinWallet/userWallet?unit=${unit}`).then(res => {
-          const resp = res.body;
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.userWalletBalance = resp.data.balance;
+            this.loading = false
+            this.userWalletBalance = resp.data.balance
           } else {
             console.log(resp.message)
           }
-        });
+        })
       },
       // 接口数据 存币 抢币
       // 消息提示
       setTime() {
         setTimeout(() => {
           this.modal3 = false
-        }, 1500);
+        }, 1500)
       },
-      buyLockCoin (state) {
+      buyLockCoin(state) {
         // 判断是否登录
-        if(this.token||this.isLogin) {
+        if (this.token || this.isLogin) {
           if (state == 'buy') {
             if (!this.lockAmount) {
               this.skylightText = this.$t('common.loginInfo')
@@ -478,7 +477,7 @@
             params['id'] = this.coinInfo.id
             params['amount'] = this.lockAmount
             this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
-              const resp = res.body;
+              const resp = res.body
               if (resp.code == 0) {
                 this.modal3 = true
                 this.skylightTextModal3 = resp.message
@@ -492,7 +491,7 @@
                 this.skylightTextModal3 = resp.message
                 this.setTime()
               }
-            });
+            })
           } else if (state == 'rush') {
             if (!this.lockAdvance) {
               this.skylightText1 = this.$t('common.loginInfo1')
@@ -502,7 +501,7 @@
             params['id'] = 1
             params['amount'] = this.lockAdvance
             this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
-              const resp = res.body;
+              const resp = res.body
               if (resp.code == 0) {
                 this.modal3 = true
                 this.skylightTextModal3 = resp.message
@@ -516,7 +515,7 @@
                 this.skylightTextModal3 = resp.message
                 this.setTime()
               }
-            });
+            })
           }
         } else {
           this.modal3 = true
@@ -526,26 +525,26 @@
       },
       // 数据列表 存币
       getSaveDataList() {
-        const params = getParams(this.pageNo);
-        this.$http.post(this.host + "/wallet/lockCoinWallet/record", params).then(res => {
-          const resp = res.body;
+        const params = getParams(this.pageNo)
+        this.$http.post(this.host + '/wallet/lockCoinWallet/record', params).then(res => {
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.saveMoneyList = resp.data;
-            this.totalElement = res.total;
+            this.loading = false
+            this.saveMoneyList = resp.data
+            this.totalElement = res.total
             console.log(this.saveMoneyList)
           }
-        });
+        })
       },
 
       // 币种详细信息 抢币
-      getCoinRob () {
-        let id = 1
-        this.$http.get(this.host + `/wallet/activity/lower-price/remain/${id?1:''}`).then(res => {
-          const resp = res.body;
+      getCoinRob() {
+        const id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/remain/${id ? 1 : ''}`).then(res => {
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.coinBalance = resp.data.remain;
+            this.loading = false
+            this.coinBalance = resp.data.remain
             this.endtime = resp.data.startTime
             if (this.coinBalance !== 0 && this.token){
               setTimeout(() => {
@@ -557,52 +556,51 @@
             this.$Message.error(resp.message)
             return false
           }
-        });
-
+        })
       },
       // 钱包余额和最多抢购额度 抢币
-      snapLines () {
-        let id = 1
-        this.$http.get(this.host + `/wallet/activity/lower-price/wallet/result/${id?1:''}`).then(res => {
-          const resp = res.body;
+      snapLines() {
+        const id = 1
+        this.$http.get(this.host + `/wallet/activity/lower-price/wallet/result/${id ? 1 : ''}`).then(res => {
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.balanceData = resp.data;
+            this.loading = false
+            this.balanceData = resp.data
             console.log(this.balanceData)
           } else {
             this.$Message.error(resp.message)
             return false
           }
-        });
+        })
       },
 
       // 数据列表 抢币
       getRobDataList() {
         // const params = getParamsRob(this.savePageNo);
-        let id = 1
+        const id = 1
         this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
-          const resp = res.body;
+          const resp = res.body
           if (resp.code == 0) {
-            this.loading = false;
-            this.robMoneyList = resp.data;
+            this.loading = false
+            this.robMoneyList = resp.data
           }
-        });
+        })
       }
     },
     watch: {
-      countdown () {
+      countdown() {
         if (this.$store.getters.member.id) {
           // console.log(this.totalTime)
           if (this.progressBar == 0) {
             var iTime
-            iTime = setTimeout(function () {
+            iTime = setTimeout(function() {
               this.countdown()
             }, 1000)
           }
         }
       }
     },
-    mounted () {
+    mounted() {
     },
     computed: {
       isLogin: function() {
@@ -615,44 +613,44 @@
         return this.$store.state.lang
       },
       tableColumnsBlc() {
-        let self = this
-        const arr = [];
+        const self = this
+        const arr = []
         arr.push({
           title: this.$t('common.fund.MemberId'),
-          key: "memberId",
-        });
+          key: 'memberId'
+        })
         arr.push({
           title: this.$t('common.fund.lockCoinUnit'),
           key: "lockCoinUnit",
         });
         arr.push({
           title: this.$t('common.fund.lockAmount'),
-          key: "lockAmount",
+          key: 'lockAmount'
         })
         arr.push({
           title: this.$t('common.fund.lockTime'),
-          key: "lockTime",
-        });
+          key: 'lockTime'
+        })
         arr.push({
           title: this.$t('common.fund.unlockTime'),
-          key: "unlockTime",
-        });
+          key: 'unlockTime'
+        })
         arr.push({
           title: this.$t('common.fund.lockCoinDay'),
-          key: "lockCoinDay",
-        });
+          key: 'lockCoinDay'
+        })
         arr.push({
           title: this.$t('common.fund.interests'),
-          key: "interests",
-        });
-        // arr.push({
-        //   title: this.$t('pointPage.operation'),
-        //   key: "operation",
-        //   render(h, params){
-        //     return h("span", {}, self.$store.state.lang == 'English'?params.row.operationEnglish:params.row.operation);
-        //   }
-        // });
-        return arr;
+          key: 'interests'
+        })
+      // arr.push({
+      //   title: this.$t('pointPage.operation'),
+      //   key: "operation",
+      //   render(h, params){
+      //     return h("span", {}, self.$store.state.lang == 'English'?params.row.operationEnglish:params.row.operation);
+      //   }
+      // });
+        return arr
       }
     },
     beforeRouteEnter(to, from, next) {

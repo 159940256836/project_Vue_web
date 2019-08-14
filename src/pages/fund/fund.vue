@@ -268,18 +268,18 @@
   </div>
 </template>
 <script>
-  import moment from 'moment'
+ import moment from 'moment'
   // 存币记录
-  const FixAraibleSave = (pageSize) => (pageNo) => ({
-    pageSize,
-    pageNo
-  })
+ const FixAraibleSave = (pageSize) => (pageNo) => ({
+   pageSize,
+   pageNo
+ })
 const getParamsSave = FixAraibleSave(10, '')
 // 抢币记录
 const FixAraibleRob = (pageSize) => (pageNo) => ({
-    pageSize,
-    pageNo
-  })
+   pageSize,
+   pageNo
+ })
 const getParamsRob = FixAraibleRob(10, '')
 export default {
     data() {
@@ -287,9 +287,9 @@ export default {
         loading: false,
         loadingButton: false,
         /* 存币分页*/
-        savePageNo: 1,
-        savePageSize: 10,
-        saveTotalElement: 0,
+       savePageNo: 1,
+       savePageSize: 10,
+       saveTotalElement: 0,
         // 抢币分页
         robPageNo: 1,
         robPageSize: 10,
@@ -368,53 +368,52 @@ export default {
         this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, '')
       },
       // 时间格式转换
-      formatTime(date) {
-        return moment(date).format('YYYY/MM/DD HH:mm:ss')
-      },
+     formatTime(date) {
+       return moment(date).format('YYYY/MM/DD HH:mm:ss')
+     },
       // goRegister() {
       //   this.$router.push({ name: 'mobileTerminalFund' })
       // },
       // 倒计时
-      countdown() {
-        let iTime
+     countdown() {
+       let iTime
         // 到期时间
         // const end = Date.parse(new Date('2019/08/20 21:00:00'))
-        const end = this.endtime
+       const end = this.endtime
         // 当前时间
-        const now = Date.parse(new Date())
+       const now = Date.parse(new Date())
         // 开始时间
-        const start = Date.parse(new Date('2019/08/10 10:25:00'))
+       const start = Date.parse(new Date('2019/08/10 10:25:00'))
         /* 剩余时间 = 到期时间 - 当前时间*/
-        const msec = end - now
+       const msec = end - now
         /* 当前秒数 = (到期时间 - 开始时间)*0.001*/
-        const num = (end - start) * 0.001
+       const num = (end - start) * 0.001
         // const that = this
         /* 年月日时分秒*/
-        const day = parseInt(msec / 1000 / 60 / 60 / 24)
-        const hr = parseInt(msec / 1000 / 60 / 60 % 24)
-        const min = parseInt(msec / 1000 / 60 % 60)
-        const sec = parseInt(msec / 1000 % 60)
+       const day = parseInt(msec / 1000 / 60 / 60 / 24)
+       const hr = parseInt(msec / 1000 / 60 / 60 % 24)
+       const min = parseInt(msec / 1000 / 60 % 60)
+       const sec = parseInt(msec / 1000 % 60)
         // console.log(day, hr, min, sec)
 
-        const day1 = parseInt(day * 60 * 60 * 24)
-        const hr1 = parseInt(hr * 60 * 60)
-        const min1 = parseInt(min * 60)
-        const sec1 = parseInt(sec)
+       const day1 = parseInt(day * 60 * 60 * 24)
+       const hr1 = parseInt(hr * 60 * 60)
+       const min1 = parseInt(min * 60)
+       const sec1 = parseInt(sec)
         /* 总秒数*/
-        this.totalTime = (day1 + hr1 + min1 + sec1)
-        if (this.totalTime > 0) {
-          this.day = day
-          this.hr = hr > 9 ? hr : '0' + hr
-          this.min = min > 9 ? min : '0' + min
-          this.sec = sec > 9 ? sec : '0' + sec
+       this.totalTime = (day1 + hr1 + min1 + sec1)
+       if (this.totalTime > 0) {
+         this.day = day
+         this.hr = hr > 9 ? hr : '0' + hr
+         this.min = min > 9 ? min : '0' + min
+         this.sec = sec > 9 ? sec : '0' + sec
           // console.log(this.day, this.hr, this.min, this.sec)
-          iTime = setTimeout(() => {
-            this.countdown()
-          }, 1000)
-        }
+         iTime = setTimeout(() => {
+           this.countdown()
+         }, 1000)
+       }
 
-        /* 进度条比例 = 总秒数/当前秒数 *100*/
-        this.progressBar = this.totalTime / num * 100
+        /* 进度条比例 = 总秒数/当前秒数 *100*/ressBar = this.totalTime / num * 100
         console.log(this.progressBar)
         if (this.progressBar < 0) {
           this.progressBar = 0
@@ -426,39 +425,39 @@ export default {
       },
       /** *******存币***********/
       // 币种详细信息 存币
-      getCoin() {
-        this.$http.get(this.host + `/wallet/lockCoinWallet/getList`).then(res => {
-          const resp = res.body
-          if (resp.code == 0) {
-            this.loading = false
-            this.coinInfo = resp.data[0]
-            if (this.isLogin) {
-              this.lockCoinUnit = resp.data[0].lockCoinUnit
-              this.getCoinBalance()
-            }
-            console.log(this.coinInfo, this.lockCoinUnit)
-          } else {
-            this.$Message.error(resp.message)
-            return false
-          }
-        })
-      },
+     getCoin() {
+       this.$http.get(this.host + `/wallet/lockCoinWallet/getList`).then(res => {
+         const resp = res.body
+         if (resp.code == 0) {
+           this.loading = false
+           this.coinInfo = resp.data[0]
+           if (this.isLogin) {
+             this.lockCoinUnit = resp.data[0].lockCoinUnit
+             this.getCoinBalance()
+           }
+           console.log(this.coinInfo, this.lockCoinUnit)
+         } else {
+           this.$Message.error(resp.message)
+           return false
+         }
+       })
+     },
       // 币种余额 存币
-      getCoinBalance() {
-        console.log(this.lockCoinUnit)
-        const unit = !this.lockCoinUnit ? 'TD' : this.lockCoinUnit
-        this.$http.get(this.host + `/wallet/lockCoinWallet/userWallet?unit=${unit}`).then(res => {
-          const resp = res.body
-          if (resp.code == 0) {
-            this.loading = false
-            this.userWalletBalance = resp.data.balance
-          } else {
-            console.log(resp.message)
-          }
-        })
-      },
+     getCoinBalance() {
+       console.log(this.lockCoinUnit)
+       const unit = !this.lockCoinUnit ? 'TD' : this.lockCoinUnit
+       this.$http.get(this.host + `/wallet/lockCoinWallet/userWallet?unit=${unit}`).then(res => {
+         const resp = res.body
+         if (resp.code == 0) {
+           this.loading = false
+           this.userWalletBalance = resp.data.balance
+         } else {
+           console.log(resp.message)
+         }
+       })
+     },
       // 接口数据 存币 抢币
-      buyLockCoin(state) {
+     buyLockCoin(state) {
         // 判断是否登录
         if (this.isLogin) {
           if (state == 'buy') {
@@ -500,42 +499,42 @@ export default {
                 this.$Message.success(resp.message)
                 this.lockAdvance = ''
                 // this.snapStatus = true // 抢购状态
-                this.snapLines()
-                this.getRobDataList()
-              } else {
-                this.$Message.error(resp.message)
-              }
-            })
-          }
-        } else {
-          this.$Message.error(this.$t('common.logintip'))
-        }
-      },
+               this.snapLines()
+               this.getRobDataList()
+             } else {
+               this.$Message.error(resp.message)
+             }
+           })
+         }
+       } else {
+         this.$Message.error(this.$t('common.logintip'))
+       }
+     },
       // 数据列表 存币
-      async getSaveDataList() {
-        const params = getParamsSave(this.savePageNo)
-        this.$http.post(this.host + '/wallet/lockCoinWallet/record', params).then(res => {
-          const resp = res.body
-          if (resp.code == 0) {
-            this.loading = false
-            this.saveMoneyList = resp.data
-            this.totalElement = resp.total
-            console.log(this.saveMoneyList)
-          }
-        })
-      },
+     async getSaveDataList() {
+       const params = getParamsSave(this.savePageNo)
+       this.$http.post(this.host + '/wallet/lockCoinWallet/record', params).then(res => {
+         const resp = res.body
+         if (resp.code == 0) {
+           this.loading = false
+           this.saveMoneyList = resp.data
+           this.totalElement = resp.total
+           console.log(this.saveMoneyList)
+         }
+       })
+     },
       /* 分页 存币*/
-      previouspage(type) {
-        console.log(this.savePageNo)
-        if (type == 'save') {
-          if (this.savePageNo == 1) {
-            this.$Message.error(this.$t('uc.finance.record.nodata'))
-          } else {
-            this.savePageNo = this.savePageNo - 1
-            this.getSaveDataList()
-            console.log(this.savePageNo)
-          }
-        }
+     previouspage(type) {
+       console.log(this.savePageNo)
+       if (type == 'save') {
+         if (this.savePageNo == 1) {
+           this.$Message.error(this.$t('uc.finance.record.nodata'))
+         } else {
+           this.savePageNo = this.savePageNo - 1
+           this.getSaveDataList()
+           console.log(this.savePageNo)
+         }
+       }
         // else if (type == 'rob') {
         //   if (this.robPageNo == 1) {
         //     this.$Message.error(this.$t('uc.finance.record.nodata'))
@@ -544,17 +543,17 @@ export default {
         //     // this.getRobDataList()
         //   }
         // }
-      },
-      nextpage(type) {
-        if (type == 'save') {
-          this.savePageNo = this.savePageNo + 1
-          this.getSaveDataList()
-        }
+     },
+     nextpage(type) {
+       if (type == 'save') {
+         this.savePageNo = this.savePageNo + 1
+         this.getSaveDataList()
+       }
         // else if (type == 'rob') {
         //   this.robPageNo = this.robPageNo + 1
         //   this.getRobDataList()
         // }
-      },
+     },
       /** *******抢币***********/
       // stateTime(){
       //   var iTime
@@ -587,129 +586,129 @@ export default {
 
       },
       // 钱包余额和最多抢购额度 抢币
-      snapLines() {
-        const id = 1
-        this.$http.get(this.host + `/wallet/activity/lower-price/wallet/result/${id ? 1 : ''}`).then(res => {
-          const resp = res.body
-          if (resp.code == 0) {
-            this.loading = false
-            this.balanceData = resp.data
-            console.log(this.balanceData)
-          } else {
-            this.$Message.error(resp.message)
-            return false
-          }
-        })
-      },
+     snapLines() {
+       const id = 1
+       this.$http.get(this.host + `/wallet/activity/lower-price/wallet/result/${id ? 1 : ''}`).then(res => {
+         const resp = res.body
+         if (resp.code == 0) {
+           this.loading = false
+           this.balanceData = resp.data
+           console.log(this.balanceData)
+         } else {
+           this.$Message.error(resp.message)
+           return false
+         }
+       })
+     },
       // 数据列表 抢币
-      getRobDataList() {
+     getRobDataList() {
         // const params = getParamsRob(this.savePageNo);
-        const id = 1
-        this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
-          const resp = res.body
-          if (resp.code == 0) {
-            this.loading = false
-            this.robMoneyList = resp.data
-          }
-        })
-      },
-      formatNumber(n) {
-        n = n.toString()
-        return n[1] ? n : '0' + n
-      }
-    },
-    watch: {
-      countdown() {
-        if (this.isLogin) {
+       const id = 1
+       this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
+         const resp = res.body
+         if (resp.code == 0) {
+           this.loading = false
+           this.robMoneyList = resp.data
+         }
+       })
+     },
+     formatNumber(n) {
+       n = n.toString()
+       return n[1] ? n : '0' + n
+     }
+   },
+   watch: {
+     countdown() {
+       if (this.isLogin) {
           // console.log(this.totalTime)
-          if (this.progressBar == 0) {
-            var iTime
-            iTime = setTimeout(function() {
-              this.countdown()
-            }, 1000)
-          }
-        }
-      }
-    },
-    mounted() {},
-    computed: {
-      isLogin: function() {
-        return this.$store.getters.isLogin
-      },
-      member: function() {
-        return this.$store.getters.member
-      },
-      lang: function() {
-        return this.$store.state.lang
-      },
+         if (this.progressBar == 0) {
+           var iTime
+           iTime = setTimeout(function() {
+             this.countdown()
+           }, 1000)
+         }
+       }
+     }
+   },
+   mounted() {},
+   computed: {
+     isLogin: function() {
+       return this.$store.getters.isLogin
+     },
+     member: function() {
+       return this.$store.getters.member
+     },
+     lang: function() {
+       return this.$store.state.lang
+     },
       // 存币记录
-      tableColumnsSave() {
-        const self = this
-        const arr = []
-        arr.push({
-          title: this.$t('common.fund.lockCoinUnit'),
-          key: 'lockCoinUnit'
-        })
-        arr.push({
-          title: this.$t('common.fund.lockCoinName'),
-          key: 'lockCoinName'
-        })
-        arr.push({
-          title: this.$t('common.fund.lockAmount'),
-          key: 'lockAmount'
-        })
-        arr.push({
-          title: this.$t('common.fund.lockCoinDay'),
-          key: 'lockCoinDay'
-        })
-        arr.push({
-          title: this.$t('common.fund.lockTime'),
-          key: 'lockTime',
-          render(h, params) {
-            return h('span', {}, self.formatTime(params.row.lockTime))
-          }
-        })
-        arr.push({
-          title: this.$t('common.fund.unlockTime'),
-          key: 'unlockTime',
-          render(h, params) {
-            return h('span', {}, self.formatTime(params.row.unlockTime))
-          }
-        })
+     tableColumnsSave() {
+       const self = this
+       const arr = []
+       arr.push({
+         title: this.$t('common.fund.lockCoinUnit'),
+         key: 'lockCoinUnit'
+       })
+       arr.push({
+         title: this.$t('common.fund.lockCoinName'),
+         key: 'lockCoinName'
+       })
+       arr.push({
+         title: this.$t('common.fund.lockAmount'),
+         key: 'lockAmount'
+       })
+       arr.push({
+         title: this.$t('common.fund.lockCoinDay'),
+         key: 'lockCoinDay'
+       })
+       arr.push({
+         title: this.$t('common.fund.lockTime'),
+         key: 'lockTime',
+         render(h, params) {
+           return h('span', {}, self.formatTime(params.row.lockTime))
+         }
+       })
+       arr.push({
+         title: this.$t('common.fund.unlockTime'),
+         key: 'unlockTime',
+         render(h, params) {
+           return h('span', {}, self.formatTime(params.row.unlockTime))
+         }
+       })
         // arr.push({
         //   title: this.$t('common.fund.interests'),
         //   key: 'interests'
         // })
-        return arr
-      },
+       return arr
+     },
       // 抢币记录
-      tableColumnsRob() {
-        const self = this
-        const arr = []
-        const that = this
-        arr.push({
-          title: this.$t('common.fund.lockCoinUnit'),
-          key: 'saleCoin'
-        })
-        arr.push({
-          title: this.$t('common.fund.transactionPrice'),
-          key: 'transactionPrice'
-        })
-        arr.push({
-          title: this.$t('common.fund.saleAmount'),
-          key: 'saleAmount'
-        })
-        arr.push({
-          title: this.$t('common.fund.actualSaleAmount'),
-          key: 'actualSaleAmount',
-          render(h, params) {
-            return h('span', {}, params.row.actStatus == 'I' ? '' : params.row.actualSaleAmount)
-          }
-        })
-        arr.push({
-          title: this.$t('common.fund.airDropCoin'),
-          key: 'airDropCoin'
-        })
+     tableColumnsRob() {
+       const self = this
+       const arr = []
+       const that = this
+       arr.push({
+         title: this.$t('common.fund.lockCoinUnit'),
+         key: 'saleCoin'
+       })
+       arr.push({
+         title: this.$t('common.fund.transactionPrice'),
+         key: 'transactionPrice'
+       })
+       arr.push({
+         title: this.$t('common.fund.saleAmount'),
+         key: 'saleAmount'
+       })
+       arr.push({
+         title: this.$t('common.fund.actualSaleAmount'),
+         key: 'actualSaleAmount',
+         render(h, params) {
+           return h('span', {}, params.row.actStatus == 'I' ? '' : params.row.actualSaleAmount)
+         }
+       })
+       arr.push({
+         title: this.$t('common.fund.airDropCoin'),
+         key: 'airDropCoin'
+       })
         ;arr.push({
           title: this.$t('common.fund.airDropAmount'),
           key: 'airDropAmount',
@@ -724,17 +723,17 @@ export default {
           return h('span', {}, self.formatTime(params.row.createTime))
         }
       })
-        arr.push({
-          title: this.$t('common.fund.actStatus'),
-          key: 'actStatus',
-          render(h, params) {
-            return h('span', {}, params.row.actStatus == 'I' ? '待开奖' : params.row.actStatus == 'S' ? '成功' : '失败')
-          }
-        })
-        return arr
-      }
-    }
-  }
+       arr.push({
+         title: this.$t('common.fund.actStatus'),
+         key: 'actStatus',
+         render(h, params) {
+           return h('span', {}, params.row.actStatus == 'I' ? '待开奖' : params.row.actStatus == 'S' ? '成功' : '失败')
+         }
+       })
+       return arr
+     }
+   }
+ }
 </script>
 <style scoped lang="scss">
   #fund-box {

@@ -1,4 +1,3 @@
-'use strict'
 /*
 	This class implements interaction with UDF-compatible datafeed.
 
