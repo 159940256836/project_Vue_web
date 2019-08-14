@@ -360,7 +360,7 @@ export default {
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
-        const start = Date.parse(new Date('2019/08/13 10:25:00'))
+        const start = Date.parse(new Date('2019/08/10 10:25:00'))
         /* 剩余时间 = 到期时间 - 当前时间*/
         const msec = end - now
         /* 当前秒数 = (到期时间 - 开始时间)*0.001*/
@@ -389,9 +389,12 @@ export default {
             this.countdown()
           }, 1000)
         }
+
         /* 进度条比例 = 总秒数/当前秒数 *100*/
         this.progressBar = this.totalTime / num * 100
-        // console.log(this.progressBar)
+        if (this.progressBar < 0) {
+          this.progressBar = 0
+        }
         if (this.progressBar == 0) {
           this.sec = '00'
           clearTimeout(iTime)
@@ -666,29 +669,29 @@ export default {
         })
         arr.push({
           title: this.$t('common.fund.actualSaleAmount'),
-          key: "actualSaleAmount",
-          render(h, params){
-            return h("span", {}, params.row.actStatus == 'I'?'':params.row.actualSaleAmount);
+          key: 'actualSaleAmount',
+          render(h, params) {
+            return h('span', {}, params.row.actStatus == 'I' ? '' : params.row.actualSaleAmount)
           }
-        });
+        })
         arr.push({
           title: this.$t('common.fund.airDropCoin'),
           key: 'airDropCoin'
         })
         ;arr.push({
           title: this.$t('common.fund.airDropAmount'),
-          key: "airDropAmount",
-          render(h, params){
-            return h("span", {}, params.row.actStatus == 'I'?'':params.row.airDropAmount);
+          key: 'airDropAmount',
+          render(h, params) {
+            return h('span', {}, params.row.actStatus == 'I' ? '' : params.row.airDropAmount)
           }
-        });
-        ;arr.push({
-          title: this.$t('common.fund.createTime'),
-          key: "createTime",
-          render(h, params){
-            return h("span", {}, self.formatTime(params.row.createTime));
-          }
-        });
+        })
+      ;arr.push({
+        title: this.$t('common.fund.createTime'),
+        key: 'createTime',
+        render(h, params) {
+          return h('span', {}, self.formatTime(params.row.createTime))
+        }
+      })
         arr.push({
           title: this.$t('common.fund.actStatus'),
           key: 'actStatus',
