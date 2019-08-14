@@ -365,8 +365,9 @@ export default {
             theRequest[0] = unescape(strs[i].split('=')[1])
           }
         }
+        alert(theRequest[0])
         this.token = theRequest[0];
-        localStorage.setItem('TOKEN', this.token)
+        // localStorage.setItem('TOKEN', this.token)
       },
       // 正则校验只能输入数字和小数点
       text () {
@@ -466,6 +467,7 @@ export default {
         }, 1500)
       },
       buyLockCoin(state) {
+        // localStorage.setItem('TOKEN', this.token)
         // 判断是否登录
         if (this.token || this.isLogin) {
           if (state == 'buy') {
