@@ -38,10 +38,11 @@
           <div class="footer-info">
             <Button
               @click="buyLockCoin('buy')"
-              :disabled="!isLogin"
+              disabled
               :loading="loadingButton"
             >
-              立即存币
+<!--              立即存币-->
+              活动暂未开始
             </Button>
           </div>
         </div>
@@ -100,8 +101,9 @@
                 <Button
                   @click="buyLockCoin('rush')"
                   :loading="loadingButton"
+                  :disabled="coinBalance < 0||progressBar!==0"
                 >
-                  {{ coinBalance==0?'活动结束':'立即抢购' }}
+                  {{ coinBalance < 0?'活动结束':'立即抢购' }}
                 </Button>
               </div>
             </div>
@@ -323,7 +325,9 @@ export default {
     created() {
       const name = this.$route.path
       if (name == '/fund') {
-        this.countdown()
+        this.getCoin() // 币种详细信息 存币
+        this.getCoinRob() // 币种详细信息 抢币
+
         if (this.isLogin) {
           // console.log(name, this.isLogin)
           this.getSaveDataList() // 数据列表存币
@@ -331,8 +335,6 @@ export default {
           this.getRobDataList() // 数据列表 抢币
           this.snapLines() // 钱包余额和最多抢购额度 抢币
         }
-        this.getCoin() // 币种详细信息 存币
-        this.getCoinRob() // 币种详细信息 抢币
       }
     },
     mounted: function() {},
@@ -387,8 +389,9 @@ export default {
        let iTime
         // 到期时间
         // const end = Date.parse(new Date('2019/08/20 21:00:00'))
-       const end = this.endtime
-        // 当前时间
+         const end = this.endtime
+       console.log(end, this.endtime)
+       // 当前时间
        const now = Date.parse(new Date())
         // 开始时间
        const start = Date.parse(new Date('2019/08/10 10:25:00'))
@@ -581,9 +584,10 @@ export default {
             this.loading = false
             this.coinBalance = resp.data.remain
             this.endtime = resp.data.startTime
+            this.countdown()
             const name = this.$route.path
             if (name == '/fund') {
-              if (this.coinBalance !== 0 && this.isLogin){
+              if (this.coinBalance < 0 && this.isLogin){
                 setTimeout(() => {
                   this.getCoinRob()
                 }, 1000);
