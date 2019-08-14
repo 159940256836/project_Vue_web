@@ -143,7 +143,7 @@ export default [
     { path: '/Privgreement', component: Privgreement },
     { path: '/law', component: law },
     { path: '/transactionCosts', component: transactionCosts },
-    { path: '/', component: Index },
+    // { path: '/', component: Index },
     { path: '/index', component: Index },
     { path: '/login', component: Login },
   { path: '/mobile',
@@ -205,14 +205,14 @@ export default [
     // { path: '/message', component: Message },
     { path: '/notice', component: notice },
     { path: '/fund', component: fund }, // BD基金
-    {
-      path: '/mobileTerminalFund',
-      name: 'mobileTerminalFund',
-      component: mobileTerminalFund,
-      meta: {
-        hide: true
-      }
-    }, // 移动BD基金
+  {
+    path: '/mobileTerminalFund',
+    name: 'mobileTerminalFund',
+    component: mobileTerminalFund,
+    meta: {
+      hide: true
+    }
+  }, // 移动BD基金
     { path: '/notice/index', component: noticeitem },
     { path: '*', component: Index },
     { path: '/blc', component: Blc },
