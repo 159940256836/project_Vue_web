@@ -92,7 +92,6 @@
               <div class="footer-info1" :class="skylightText1 == ''?'footer-info':'footer-info1'">
                 <Button
                   @click.native="buyLockCoin('rush')"
-                  :disabled="progressBar!==0&&!token"
                 >
                   {{ coinBalance==0?'活动结束':'立即抢购' }}
                 </Button>
@@ -271,7 +270,7 @@
         skylight: true,
         skylightText: '',
         skylightText1: '',
-        coinBalance: {}, // 可抢币余额
+        coinBalance: '', // 可抢币余额
         balanceData: {
           balance: '--',
           maxSaleAmount: '--',
@@ -415,16 +414,20 @@
             this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
               const resp = res.body;
               if (resp.code == 0) {
-                this.$Message.success(resp.message)
+                alert(resp.message)
                 this.lockAmount = ''
                 // this.snapStatus = true // 抢购状态
                 this.getCoinBalance()
                 this.getSaveDataList()
               } else {
-                this.skylightText = resp.message
+                alert(resp.message)
               }
             });
           } else if (state == 'rush') {
+            if(this.coinBalance!==0) {
+              alert('活动未开始，请等待！')
+              return false
+            }
             if (!this.lockAdvance) {
               alert(this.$t('common.loginInfo1'))
               // this.skylightText1 = this.$t('common.loginInfo1')
@@ -436,13 +439,13 @@
             this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
               const resp = res.body;
               if (resp.code == 0) {
-                this.$Message.success(resp.message)
+                alert(resp.message)
                 this.lockAmount = ''
                 // this.snapStatus = true // 抢购状态
                 this.snapLines()
                 this.getRobDataList()
               } else {
-                this.skylightText1 = resp.message
+                alert(resp.message)
               }
             });
           }
@@ -463,6 +466,7 @@
           }
         });
       },
+
       // 币种详细信息 抢币
       getCoinRob () {
         let id = 1
@@ -470,7 +474,8 @@
           const resp = res.body;
           if (resp.code == 0) {
             this.loading = false;
-            this.coinBalance = resp.data;
+            this.coinBalance = resp.data.remain;
+            console.log(this.coinBalance)
           } else {
             this.$Message.error(resp.message)
             return false
@@ -523,8 +528,13 @@
         }
       }
     },
-    mounted () {},
+    mounted () {
+      window.setInterval(() => {
+        setTimeout(this.getCoinRob, 0)
+      }, 1000)
+    },
     computed: {
+
       isLogin: function() {
         return this.$store.getters.isLogin
       },

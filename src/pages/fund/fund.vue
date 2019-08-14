@@ -307,7 +307,7 @@ export default {
         lockCoinUnit: '', // 币种
         userWalletBalance: '--', // 币种余额
         snapStatus: false, // 抢购状态
-        coinBalance: {}, // 可抢币余额
+        coinBalance: '', // 可抢币余额
         balanceData: {
           balance: '--',
           maxSaleAmount: '--',
@@ -530,7 +530,7 @@ export default {
           // setTimeout(function () {
           //   this.getCoinRob()
           // }, 1000)
-            this.coinBalance = resp.data
+            this.coinBalance = resp.data.remain
           } else {
             this.$Message.error(resp.message)
             return false
@@ -631,6 +631,7 @@ export default {
       },
       // 抢币记录
       tableColumnsRob() {
+        const self = this
         const arr = []
         arr.push({
           title: this.$t('common.fund.lockCoinUnit'),
@@ -647,6 +648,9 @@ export default {
         arr.push({
           title: this.$t('common.fund.actualSaleAmount'),
           key: "actualSaleAmount",
+          render(h, params){
+            return h("span", {}, params.row.actStatus == 'I'?'':params.row.actualSaleAmount);
+          }
         });
         arr.push({
           title: this.$t('common.fund.airDropCoin'),
@@ -655,6 +659,9 @@ export default {
         ;arr.push({
           title: this.$t('common.fund.airDropAmount'),
           key: "airDropAmount",
+          render(h, params){
+            return h("span", {}, params.row.actStatus == 'I'?'':params.row.airDropAmount);
+          }
         });
         ;arr.push({
           title: this.$t('common.fund.createTime'),
