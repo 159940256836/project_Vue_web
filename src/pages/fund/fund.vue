@@ -6,8 +6,8 @@
           <span class="header-title-text">活动时间</span>
           <span class="header-title-border"></span>
           <div class="notice-text">
-            <p>存TD — 8月15日 10:00 至 8月20日 20:00</p>
-            <p>抢购BTC — 8月20日 21:00</p>
+            <p>存TD — 8月16日 10:00 至 8月21日 20:00</p>
+            <p>抢购BTC — 8月22日 20:00</p>
           </div>
         </div>
       </header>
@@ -39,6 +39,7 @@
             <Button
               @click="buyLockCoin('buy')"
               :disabled="!isLogin"
+              :loading="loadingButton"
             >
               立即存币
             </Button>
@@ -98,6 +99,7 @@
               <!--:disabled="progressBar!==0"-->
                 <Button
                   @click="buyLockCoin('rush')"
+                  :loading="loadingButton"
                 >
                   {{ coinBalance==0?'活动结束':'立即抢购' }}
                 </Button>
@@ -116,29 +118,30 @@
               </div>
               <div class="top-content">
                 <div class="top-left">
-                  <p>共500枚BTC <i class="text1">两折</i> 抢购</p>
+                  <p>存币 <i class="text1">2折</i> 抢BTC</p>
+                  <p>本次 <i class="text1">2折</i> 优惠购BTC数量总计五百枚，购完即止</p>
                   <p>1.存TD ≧
                     <span class="text2">500</span>
-                    枚，享
+                    枚，最多可两折购买
                     <span class="text2">1</span>
-                    个BTC抢购资格；
+                    个BTC；
                   </p>
                   <p>2.存TD ≧
                     <span class="text2">1000</span>
-                    枚，享
+                    枚，最多可两折购买
                     <span class="text2">3</span>
-                    个BTC抢购资格；
+                    个BTC；
                   </p>
                   <p>3.存TD ≧
                     <span class="text2">5000</span>
-                    枚，享
+                    枚，最多可两折购买
                     <span class="text2">5</span>
-                    个BTC抢购资格；
+                    个BTC；
                   </p>
                 </div>
                 <span class="top-border"></span>
                 <div class="top-right">
-                  <p>凡没有抢到BTC的用户根据用户存TD数量
+                  <p>未抢到BTC的⽤户，BDW联合TD基⾦
                     <span class="text1">空投BC</span>
                   </p>
                   <p>1.存TD ≧
@@ -167,21 +170,20 @@
               </div>
               <div class="top-content">
                 <div class="bottom-left">
-                  <p>1.参与本次活动，必须在规定时间内存
+                  <p>1.参与抢购BTC活动，必须在存币活动时间内存
                     <span class="text3">相应数量的TD,</span>
-                    才能
                   </p>
-                  <p>拥有在规定时间内打折抢购
+                  <p>获得抢购
                     <span class="text3">BTC</span>
-                    的资格;
+                    的资格和预购最高数量;
                   </p>
-                  <p>2.每人只能参与
-                    <span class="text3">一次抢购</span>;
-                  </p>
-                  <p>3.参与本次存TD活动的最小数量为
-                    <span class="text3">1TD</span>;
-                  </p>
-                  <p>4.本次活动最终解释权归BDW所有。</p>
+                  <p>2.所存TD需锁仓30天，30天后TD解锁，系统将自动将TD返回至您的个人账户中。</p>
+                  <p>3.抢购BTC在存币结束后统一时间抢购，所有存币用户符合条件者，均可参与。</p>
+                  <p>4.抢购BTC时，需提前充值BC到个人账户中，确保BC的数量大于要抢购BTC的⾦额，抢
+                  <p>5.BTC的定价为存币活动期间火币、币安、OK和BDW四家BTC价格的均价。</p>
+                  <p>6.抢购结束后，有30分钟清算时间，未抢到BTC的⽤户，系统将在3个工作⽇内发放
+                    BC空投奖励。</p>
+                  <p>7.如有疑问，请咨询BDW客服。本次活动最终解释权归BDW所有。</p>
                 </div>
               </div>
             </div>
@@ -283,6 +285,7 @@ export default {
     data() {
       return {
         loading: false,
+        loadingButton: false,
         /* 存币分页*/
         savePageNo: 1,
         savePageSize: 10,
@@ -320,7 +323,7 @@ export default {
     created() {
       const name = this.$route.path
       if (name == '/fund') {
-        console.log(1)
+        this.countdown()
         if (this.isLogin) {
           // console.log(name, this.isLogin)
           this.getSaveDataList() // 数据列表存币
@@ -334,6 +337,25 @@ export default {
     },
     mounted: function() {},
     methods: {
+      //控制只能输入小数点后6位
+      clearNoNum() {
+        this.lockAmount = this.lockAmount.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+        this.lockAmount = this.lockAmount.replace(/\.{6,}/g, "."); //只保留第一个. 清除多余的
+        this.lockAmount = this.lockAmount.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        this.lockAmount = this.lockAmount.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
+        if (this.lockAmount.indexOf(".") < 0 && this.lockAmount != "") {
+          //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+          this.lockAmount = parseFloat(this.lockAmount);
+        }
+        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+        this.lockAdvance = this.lockAdvance.replace(/\.{6,}/g, "."); //只保留第一个. 清除多余的
+        this.lockAdvance = this.lockAdvance.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        this.lockAdvance = this.lockAdvance.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
+        if (this.lockAdvance.indexOf(".") < 0 && this.lockAdvance != "") {
+          //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+          this.lockAdvance = parseFloat(this.lockAdvance);
+        }
+      },
       // ScreenWidth(){
       //   if (screen.width < 950){
       //     this.$router.push('/mobileTerminalFund')
@@ -341,6 +363,7 @@ export default {
       // },
       // 正则校验只能输入数字和小数点
       text() {
+        this.clearNoNum()
         this.lockAmount = this.lockAmount.replace(/[^\d.]/g, '')
         this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, '')
       },
@@ -392,6 +415,7 @@ export default {
 
         /* 进度条比例 = 总秒数/当前秒数 *100*/
         this.progressBar = this.totalTime / num * 100
+        console.log(this.progressBar)
         if (this.progressBar < 0) {
           this.progressBar = 0
         }
@@ -445,12 +469,15 @@ export default {
             const params = {}
             params['id'] = this.coinInfo.id
             params['amount'] = this.lockAmount
+            this.loadingButton = true
             this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
               const resp = res.body
               if (resp.code == 0) {
+                this.loadingButton = false
                 this.$Message.success(resp.message)
                 this.lockAmount = ''
                 // this.snapStatus = true // 抢购状态
+                this.snapLines()
                 this.getCoinBalance()
                 this.getSaveDataList()
               } else {
@@ -465,9 +492,11 @@ export default {
             const params = {}
             params['id'] = 1
             params['amount'] = this.lockAdvance
+            this.loadingButton = true
             this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
               const resp = res.body
               if (resp.code == 0) {
+                this.loadingButton = false
                 this.$Message.success(resp.message)
                 this.lockAdvance = ''
                 // this.snapStatus = true // 抢购状态
@@ -527,12 +556,12 @@ export default {
         // }
       },
       /** *******抢币***********/
-      stateTime(){
-        var iTime
-        iTime = setTimeout(function() {
-          this.countdown()
-        }, 1000)
-      },
+      // stateTime(){
+      //   var iTime
+      //   iTime = setTimeout(function() {
+      //     this.countdown()
+      //   }, 1000)
+      // },
       // 币种详细信息 可抢币
       getCoinRob() {
         const id = 1
@@ -542,11 +571,14 @@ export default {
             this.loading = false
             this.coinBalance = resp.data.remain
             this.endtime = resp.data.startTime
-            // if (this.coinBalance !== 0){
-            //   setTimeout(() => {
-            //     this.getCoinRob()
-            //   }, 1000);
-            // }
+            const name = this.$route.path
+            if (name == '/fund') {
+              if (this.coinBalance !== 0 && this.isLogin){
+                setTimeout(() => {
+                  this.getCoinRob()
+                }, 1000);
+              }
+            }
           } else {
             this.$Message.error(resp.message)
             return false
@@ -1075,6 +1107,11 @@ export default {
     }
     .ivu-table-wrapper {
       position: initial !important;
+      .ivu-table {
+        &:before {
+          background: #101646 !important;
+        }
+      }
     }
     .ivu-table {
       tr {

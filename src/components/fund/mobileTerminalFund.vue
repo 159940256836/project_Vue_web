@@ -8,8 +8,8 @@
             <p class="time-div">活动时间</p>
             <span class="border-banner"></span>
             <div class="banner-new">
-              <p>存TD - 8月15日10:00 至 8月20日20:00</p>
-              <p>抢购BTC - 8月20日21:00</p>
+              <p>存TD — 8月16日 10:00 至 8月21日 20:00</p>
+              <p>抢购BTC — 8月22日 20:00</p>
             </div>
           </div>
           <div class="header-main">
@@ -27,7 +27,7 @@
                   type="text"
                   v-model="lockAmount"
                   placeholder="请输入数量"
-                  @keyup.native="text"
+                  @keyup.native="text();"
                   :min="coinInfo.lockMinimum"
                   :max="coinInfo.lockHighest"
                   :placeholder="'请输入存币数量' + (!coinInfo? '0':Number(coinInfo.lockMinimum)) + '～' + (!coinInfo?'0':Number(coinInfo.lockHighest))"
@@ -37,6 +37,7 @@
               <div class="footer-info1" :class="skylightText == ''?'footer-info':'footer-info1'">
                 <Button
                   @click.native="buyLockCoin('buy')"
+                  :loading="loadingButton"
                 >
                   立即存币
                 </Button>
@@ -75,7 +76,7 @@
                 <Input
                   type="text"
                   v-model="lockAdvance"
-                  @keyup.native="text()"
+                  @keyup.native="text();"
                   placeholder="请输入预购BTC数量"
                 />
               </div>
@@ -92,6 +93,7 @@
               <div class="footer-info1" :class="skylightText1 == ''?'footer-info':'footer-info1'">
                 <Button
                   @click.native="buyLockCoin('rush')"
+                  :loading="loadingButton"
                 >
                   {{ coinBalance==0?'活动结束':'立即抢购' }}
                 </Button>
@@ -107,13 +109,14 @@
              <div class="content-text">
                <p class="text">- 活动内容 -</p>
                <div class="activity-text" style="">
-                 <p>共500枚BTC 2折抢购</p>
-                 <p>1. 存 TD≧500枚，享1个BTC抢购资格；</p>
-                 <p>2. 存TD≧1000枚，享3个BTC抢购资格；</p>
-                 <p>3. 存TD≧5000枚，享5个BTC抢购资格。</p>
+                 <p>存币2折抢BTC</p>
+                 <p>本次2折优惠购BTC数量总计五百枚，购完即止</p>
+                 <p>1. 存TD≧500枚，最多可两折购买一个BTC;</p>
+                 <p>2. 存TD≧1000枚，最多可两折购买三个BTC;</p>
+                 <p>3. 存TD≧5000枚，最多可两折购买五个BTC;</p>
                </div>
                <div class="activity-text" style="margin: 0.3rem 0 0.5rem;">
-                 <p>凡没有抢购到BTC的用户根据用户存TD数量空投BC</p>
+                 <p>未抢到BTC的⽤户，BDW联合TD基⾦空投BC</p>
                  <p>1. 存TD≧500枚，空投88BC；</p>
                  <p>2. 存TD≧1000枚，空投188BC；</p>
                  <p>3. 存TD≧5000枚，空投588BC。</p>
@@ -122,9 +125,13 @@
                <div class="detailed-text">
                  <p class="text">- 活动细则 -</p>
                  <div class="text-info1">
-                   <p>1. 参与本次活动，必须在规定时间内存相应数量的TD，才能拥有在规定时间内打折抢购BTC的资格；</p>
-                   <p>2. 每人只能参与一次抢购；</p>
-                   <p>3. 本次活动最终解释权归BDW所有。</p>
+                   <p>1. 参与抢购BTC活动，必须在存币活动时间内存相应数量及以上的TD，获得抢购BTC的资格和预购最高数量。</p>
+                   <p>2. 所存TD需锁仓30天，30天后TD解锁，系统将自动将TD返回至您的个人账户中。</p>
+                   <p>3. 抢购BTC在存币结束后统一时间抢购，所有存币用户符合条件者，均可参与。</p>
+                   <p>4. 抢购BTC时，需提前充值BC到个人账户中，确保BC的数量大于要抢购BTC的⾦额，抢购成功后系统将自动抵扣BC数量，如您账户中没有足够余额，将视为放弃。</p>
+                   <p>5. BTC的定价为存币活动期间火币、币安、OK和BDW四家BTC价格的均价。</p>
+                   <p>6. 抢购结束后，有30分钟清算时间，未抢到BTC的⽤户，系统将在3个工作⽇内发放BC空投奖励。</p>
+                   <p>7. 如有疑问，请咨询BDW客服。本次活动最终解释权归BDW所有。</p>
                  </div>
                </div>
              </div>
@@ -209,14 +216,14 @@
                     id="rush-style1"
                   >
                     <tr>
-                      <td>实购额</td>
+                      <td>抢购时间</td>
                       <td>空投币种</td>
-                      <td>空投额度</td>
+                      <td>状态</td>
                     </tr>
                     <tr>
-                      <td>{{ item.actStatus=='I'?'':item.actualSaleAmount }}</td>
+                      <td>{{ formatTime(item.lockTime) }}</td>
                       <td>{{ item.airDropCoin }}</td>
-                      <td>{{ item.actStatus=='I'?'':item.airDropAmount }}</td>
+                      <td>{{ item.actStatus == 'I'?'待开奖':item.actStatus=='S'?'成功':'失败' }}</td>
                     </tr>
                   </table>
                   <table
@@ -225,12 +232,12 @@
                     id="rush-style2"
                   >
                     <tr>
-                      <td>抢购时间</td>
-                      <td>状态</td>
+                      <td>实购额</td>
+                      <td>空投额度</td>
                     </tr>
                     <tr>
-                      <td>{{ formatTime(item.lockTime) }}</td>
-                      <td>{{ item.actStatus == 'I'?'待开奖':item.actStatus=='S'?'成功':'失败' }}</td>
+                      <td>{{ item.actStatus=='I'?'':item.actualSaleAmount }}</td>
+                      <td>{{ item.actStatus=='I'?'':item.airDropAmount }}</td>
                     </tr>
                   </table>
                 </div>
@@ -273,6 +280,7 @@
       return {
         modal3: false,
         loading: false,
+        loadingButton: false,
         pageNo: 1,
         pageSize: 10,
         totalElement: 0,
@@ -311,6 +319,7 @@
       }
     },
     created: function () {
+      /* alert('版本不兼容问题') */
       this.getUrlParam()
       // alert(this.token)
       this.countdown()
@@ -326,7 +335,26 @@
     },
     mounted: function () {},
     methods: {
-      // urltoken
+      //控制只能输入小数点后6位
+      clearNoNum() {
+        this.lockAmount = this.lockAmount.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+        this.lockAmount = this.lockAmount.replace(/\.{6,}/g, "."); //只保留第一个. 清除多余的
+        this.lockAmount = this.lockAmount.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        this.lockAmount = this.lockAmount.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
+        if (this.lockAmount.indexOf(".") < 0 && this.lockAmount != "") {
+          //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+          this.lockAmount = parseFloat(this.lockAmount);
+        }
+        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+        this.lockAdvance = this.lockAdvance.replace(/\.{6,}/g, "."); //只保留第一个. 清除多余的
+        this.lockAdvance = this.lockAdvance.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        this.lockAdvance = this.lockAdvance.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
+        if (this.lockAdvance.indexOf(".") < 0 && this.lockAdvance != "") {
+          //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+          this.lockAdvance = parseFloat(this.lockAdvance);
+        }
+      },
+      // 获取APP token
       getUrlParam() {
         var url1 = window.location.href;
         let theRequest = new Object();
@@ -338,15 +366,16 @@
             theRequest[0]=unescape(strs[i].split("=")[1]);
           }
         }
-        this.token = theRequest[0]
+        this.token = theRequest[0];
         localStorage.setItem('TOKEN', this.token)
       },
       // 正则校验只能输入数字和小数点
       text () {
-        this.skylightText1 = ''
-        this.skylightText = ''
-        this.lockAmount = this.lockAmount.replace(/[^\d.]/g,"")
-        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g,"")
+        this.clearNoNum()
+        this.skylightText1 = '';
+        this.skylightText = '';
+        this.lockAmount = this.lockAmount.replace(/[^\d.]/g,"");
+        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g,"");
       },
       // 时间格式转换
       formatTime(date) {
@@ -455,6 +484,7 @@
                 this.skylightTextModal3 = resp.message
                 this.setTime()
                 this.lockAmount = ''
+                this.snapLines()
                 this.getCoinBalance()
                 this.getSaveDataList()
               } else {
@@ -517,11 +547,11 @@
             this.loading = false;
             this.coinBalance = resp.data.remain;
             this.endtime = resp.data.startTime
-            // if (this.coinBalance !== 0){
-            //   setTimeout(() => {
-            //     this.getCoinRob()
-            //   }, 1000);
-            // }
+            if (this.coinBalance !== 0 && this.token){
+              setTimeout(() => {
+                this.getCoinRob()
+              }, 1000);
+            }
             console.log(this.coinBalance)
           } else {
             this.$Message.error(resp.message)
@@ -575,7 +605,6 @@
     mounted () {
     },
     computed: {
-
       isLogin: function() {
         return this.$store.getters.isLogin
       },
@@ -596,7 +625,6 @@
           title: this.$t('common.fund.lockCoinUnit'),
           key: "lockCoinUnit",
         });
-
         arr.push({
           title: this.$t('common.fund.lockAmount'),
           key: "lockAmount",
@@ -680,7 +708,7 @@
         .header-info {
           .header-banner {
             color: #fff;
-            padding: 0 10% 0;
+            padding: 0 9% 0;
             min-width: 7rem;
             font-size: .25rem;
             .border-banner {

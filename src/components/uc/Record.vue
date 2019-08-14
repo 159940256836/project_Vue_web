@@ -117,7 +117,12 @@ const map = new Map([
     ['24', '币币转入法币'],
     ['25', '法币转入币币'],
     ['26', '借贷流水'],
-    ['27', '还款流水']
+    ['27', '还款流水'],
+    ['28', '募集新币'],
+    ['29', '募币活动'],
+    ['30', '低价抢购返还'],
+    ['31', '低价抢购空投'],
+    ['32', '低价抢购活动'],
 ])
 const mapEn = new Map([
     ['0', 'recharge'],
@@ -147,7 +152,12 @@ const mapEn = new Map([
     ['24', 'The bitcoins are transferred into legal tender'],
     ['25', 'Legal tender is transferred into bitcoin'],
     ['26', 'loan flow'],
-    ['27', 'repayment flow']
+    ['27', 'repayment flow'],
+    ['28', 'raise new'],
+    ['29', 'money activities'],
+    ['30', 'hunting returns'],
+    ['31', 'airdrops bargain prices'],
+    ['32', 'drop buying']
 ])
 
 export default {
