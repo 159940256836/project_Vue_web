@@ -14,9 +14,9 @@
       <div class="main">
         <div class="header-content">
           <div class="header-title">
-            <img src="../../assets/img/line-two.png" alt="">
+            <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
             <span class="title">存币</span>
-            <img src="../../assets/img/line-one.png" alt="">
+            <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
           </div>
           <div class="info">
             <span>存币数量：</span>
@@ -25,7 +25,7 @@
               v-model="lockAmount"
               placeholder="请输入数量"
               style="width: 555px;"
-              @keyup.native="text()"
+              @keyup.native="clearNoNum('lockAmount')"
               :min="coinInfo.lockMinimum"
               :max="coinInfo.lockHighest"
               :placeholder="(!coinInfo? '0':Number(coinInfo.lockMinimum)) + '～' + (!coinInfo?'0':Number(coinInfo.lockHighest))"
@@ -83,7 +83,7 @@
                   v-model="lockAdvance"
                   placeholder="请输入预购BTC数量"
                   style="width: 555px;"
-                  @keyup.native="text()"
+                  @keyup.native="clearNoNum('lockAdvance')"
                 />
                 <span class="coinName" style="right: 105px;">
                   {{ balanceData.saleCoin }}
@@ -112,9 +112,9 @@
           <div class="activity-rules">
             <div class="activity-top">
               <div class="top-title">
-                <img src="../../assets/img/line-two.png" alt="">
+                <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
                 <span class="title">活动内容</span>
-                <img src="../../assets/img/line-one.png" alt="">
+                <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
               </div>
               <div class="top-content">
                 <div class="top-left">
@@ -164,9 +164,9 @@
             </div>
             <div class="activity-bottom">
               <div class="top-title">
-                <img src="../../assets/img/line-two.png" alt="">
+                <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
                 <span class="title">活动细则</span>
-                <img src="../../assets/img/line-one.png" alt="">
+                <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
               </div>
               <div class="top-content">
                 <div class="bottom-left">
@@ -194,9 +194,9 @@
           <div class="record-list">
             <div class="save-money">
               <div class="save-title">
-                <img src="../../assets/img/line-two.png" alt="">
+                <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
                 <span class="title">存币记录</span>
-                <img src="../../assets/img/line-one.png" alt="">
+                <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
               </div>
               <div class="fund-table">
                 <Table
@@ -229,9 +229,9 @@
             <!--v-if="snapStatus"-->
             <div class="save-purchase">
               <div class="save-title">
-                <img src="../../assets/img/line-two.png" alt="">
+                <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
                 <span class="title">抢币记录</span>
-                <img src="../../assets/img/line-one.png" alt="">
+                <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
               </div>
               <div class="fund-table">
                 <Table
@@ -287,9 +287,9 @@ export default {
         loading: false,
         loadingButton: false,
         /* 存币分页*/
-       savePageNo: 1,
-       savePageSize: 10,
-       saveTotalElement: 0,
+        savePageNo: 1,
+        savePageSize: 10,
+        saveTotalElement: 0,
         // 抢币分页
         robPageNo: 1,
         robPageSize: 10,
@@ -338,22 +338,28 @@ export default {
     mounted: function() {},
     methods: {
       //控制只能输入小数点后6位
-      clearNoNum() {
-        this.lockAmount = this.lockAmount.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
-        this.lockAmount = this.lockAmount.replace(/\.{6,}/g, "."); //只保留第一个. 清除多余的
-        this.lockAmount = this.lockAmount.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-        this.lockAmount = this.lockAmount.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
-        if (this.lockAmount.indexOf(".") < 0 && this.lockAmount != "") {
-          //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
-          this.lockAmount = parseFloat(this.lockAmount);
-        }
-        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
-        this.lockAdvance = this.lockAdvance.replace(/\.{6,}/g, "."); //只保留第一个. 清除多余的
-        this.lockAdvance = this.lockAdvance.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-        this.lockAdvance = this.lockAdvance.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
-        if (this.lockAdvance.indexOf(".") < 0 && this.lockAdvance != "") {
-          //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
-          this.lockAdvance = parseFloat(this.lockAdvance);
+      clearNoNum(type) {
+        this.skylightText1 = '';
+        this.skylightText = '';
+        console.log(type)
+        if (type == 'lockAmount') {
+          this.lockAmount = this.lockAmount.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+          this.lockAmount = this.lockAmount.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
+          this.lockAmount = this.lockAmount.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+          this.lockAmount = this.lockAmount.replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/, '$1$2.$3');//只能输入两个小数
+          if (this.lockAmount.indexOf(".") < 0 && this.lockAmount != "") {
+            //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+            this.lockAmount = parseFloat(this.lockAmount);
+          }
+        } else {
+          this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
+          this.lockAdvance = this.lockAdvance.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
+          this.lockAdvance = this.lockAdvance.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+          this.lockAdvance = this.lockAdvance.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
+          if (this.lockAdvance.indexOf(".") < 0 && this.lockAdvance != "") {
+            //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+            this.lockAdvance = parseFloat(this.lockAdvance);
+          }
         }
       },
       // ScreenWidth(){
@@ -362,11 +368,13 @@ export default {
       //   }
       // },
       // 正则校验只能输入数字和小数点
-      text() {
-        this.clearNoNum()
-        this.lockAmount = this.lockAmount.replace(/[^\d.]/g, '')
-        this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, '')
-      },
+      // textClear () {
+      //   this.clearNoNum()
+      //   this.skylightText1 = '';
+      //   this.skylightText = '';
+      //   // this.lockAmount = this.lockAmount.replace(/[^\d.]/g,"");
+      //   // this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g,"");
+      // },
       // 时间格式转换
      formatTime(date) {
        return moment(date).format('YYYY/MM/DD HH:mm:ss')
@@ -413,7 +421,8 @@ export default {
          }, 1000)
        }
 
-        /* 进度条比例 = 总秒数/当前秒数 *100*/ressBar = this.totalTime / num * 100
+        /* 进度条比例 = 总秒数/当前秒数 *100*/
+       this.progressBar = this.totalTime / num * 100
         console.log(this.progressBar)
         if (this.progressBar < 0) {
           this.progressBar = 0
@@ -481,6 +490,7 @@ export default {
                 this.getSaveDataList()
               } else {
                 this.$Message.error(resp.message)
+                this.loadingButton = false
               }
             })
           } else if (state == 'rush') {
@@ -503,6 +513,7 @@ export default {
                this.getRobDataList()
              } else {
                this.$Message.error(resp.message)
+                this.loadingButton = false
              }
            })
          }
@@ -741,7 +752,8 @@ export default {
     .fund-main {
       header {
         height: 955px;
-        background: url("../../assets/img/banner2.png") 0 0 no-repeat;
+        background: url("
+https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/banner2.png") 0 0 no-repeat;
         background-position: center;
 
         .header-notice {
@@ -976,7 +988,7 @@ export default {
               }
               .top-content {
                 min-height: 357px;
-                background: url("../../assets/img/border.png") 0 0 no-repeat;
+                background: url("https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/border.png") 0 0 no-repeat;
                 background-position: center;
                 background-size: 100% 100%;
                 padding: 54px 40px;

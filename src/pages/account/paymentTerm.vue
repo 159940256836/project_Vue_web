@@ -1,6 +1,6 @@
 <template>
     <div class="nav-rights">
-        <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.accountnewSetting') }}</h2>
+        <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.accountsetting') }}</h2>
         <div class="nav-right col-xs-12 col-md-10 padding-right-clear">
             <div class="bill_box rightarea padding-right-clear record account-box">
                 <!-- <section class="trade-group merchant-top">

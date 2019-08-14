@@ -248,7 +248,7 @@
           <div class="service">
             <div class="service-box">
               <p class="box-text">
-                <img src="../../assets/images/yidong/service-info.png" alt="">
+                <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/service-info.png" alt="">
               </p>
               <p class="box-info">详情请咨询BDW客服</p>
             </div>
@@ -476,9 +476,11 @@ export default {
             const params = {}
             params['id'] = this.coinInfo.id
             params['amount'] = this.lockAmount
+            this.loadingButton = true
             this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
               const resp = res.body
               if (resp.code == 0) {
+                this.loadingButton = false
                 this.modal3 = true
                 this.skylightTextModal3 = resp.message
                 this.setTime()
@@ -490,6 +492,7 @@ export default {
                 this.modal3 = true
                 this.skylightTextModal3 = resp.message
                 this.setTime()
+                this.loadingButton = false
               }
             })
           } else if (state == 'rush') {
@@ -500,9 +503,11 @@ export default {
             const params = {}
             params['id'] = 1
             params['amount'] = this.lockAdvance
+            this.loadingButton = true
             this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
               const resp = res.body
               if (resp.code == 0) {
+                this.loadingButton = false
                 this.modal3 = true
                 this.skylightTextModal3 = resp.message
                 this.setTime()
@@ -514,6 +519,7 @@ export default {
                 this.modal3 = true
                 this.skylightTextModal3 = resp.message
                 this.setTime()
+                this.loadingButton = false
               }
             })
           }
@@ -693,7 +699,7 @@ export default {
       }
       header {
         height: 13.5rem;
-        background: #4C38D8 url(../../assets/images/yidong/yidongbanner.png) 100% 100% no-repeat;
+        background: #4C38D8 url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidongbanner.png') 100% 100% no-repeat;
         background-position: initial;
         background-size: cover;
         position: relative;
@@ -736,7 +742,7 @@ export default {
             .header-content {
               width: 90%;
               height: 4.45rem;
-              background: url("../../assets/images/yidong/yidong1.png") 0 0 no-repeat;
+              background: url("https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong1.png") 0 0 no-repeat;
               background-position: initial;
               background-size: 100% 100%;
               margin: 10% 5% 0;
@@ -863,7 +869,8 @@ export default {
                 position: relative;
                 .info-title {
                   height: 1rem;
-                  background: url("../../assets/images/yidong/yidong4.png") no-repeat center;
+                  background: url("
+https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong4.png") no-repeat center;
                   background-position: center;
                   background-size: cover;
                   font-weight:bold;
@@ -945,7 +952,7 @@ export default {
             .save-money {
               margin-top: -0.02rem;
               min-height: 7.5rem;
-              background: #4C38D8 url(../../assets/images/yidong/yidong2.png) 100% 100% no-repeat;
+              background: #4C38D8 url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong2.png') 100% 100% no-repeat;
               background-position: initial;
               background-size: 100% 100%;
             }
@@ -953,7 +960,7 @@ export default {
             .rush-purchase {
               margin-top: 0.7rem;
               min-height: 3.95rem;
-              background: #4C38D8 url(../../assets/images/yidong/yidong3.png) 100% 100% no-repeat;
+              background: #4C38D8 url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong3.png') 100% 100% no-repeat;
               background-position: initial;
               background-size: 100% 100%;
               .record-main {
@@ -1050,7 +1057,7 @@ export default {
           }
           .service {
             min-height: 6.65rem;
-            background: #4638d8 url("../../assets/images/yidong/footer.png") 100% 100% no-repeat;;
+            background: #4638d8 url("https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/footer.png") 100% 100% no-repeat;;
             background-position: initial;
             background-size: cover;
             position: relative;
