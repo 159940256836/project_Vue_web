@@ -350,7 +350,8 @@ export default {
       countdown() {
         let iTime
         // 到期时间
-        const end = Date.parse(new Date('2019/08/20 21:00:00'))
+        // const end = Date.parse(new Date('2019/08/20 21:00:00'))
+        const end = this.endtime
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
