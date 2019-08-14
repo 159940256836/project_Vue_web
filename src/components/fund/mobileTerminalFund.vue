@@ -132,7 +132,7 @@
          </div>
         </section>
         <!--需要判断用户是否登录-->
-        <footer v-if="token">
+        <footer v-if="token||isLogin">
           <div :class="snapStatus == false? 'record-list-1':'record-list'">
             <!--存币记录-->
             <div class="save-money">
@@ -271,6 +271,7 @@
         skylightText: '',
         skylightText1: '',
         coinBalance: '', // 可抢币余额
+        endtime: '',
         balanceData: {
           balance: '--',
           maxSaleAmount: '--',
@@ -284,7 +285,7 @@
       this.getUrlParam()
       this.countdown()
       /*需判断用户是否登录*/
-      if(this.token) {
+      if(this.token||this.isLogin) {
         this.getSaveDataList() // 数据列表存币
         this.getCoinBalance() // 币种余额 存币
         this.getRobDataList() // 数据列表 抢币
@@ -324,7 +325,8 @@
       countdown () {
         var iTime
         // 到期时间
-        const end = Date.parse(new Date('2019/08/20 21:00:00'))
+        // const end = Date.parse(new Date('2019/08/20 21:00:00'))
+        const end = this.endtime
         // 当前时间
         const now = Date.parse(new Date())
         // 开始时间
@@ -372,7 +374,7 @@
             this.loading = false;
             this.coinInfo = resp.data[0];
             /*需判断用户是否登录*/
-            if(this.token) {
+            if(this.token||this.isLogin) {
               this.lockCoinUnit = resp.data[0].lockCoinUnit
               this.getCoinBalance()
               console.log(this.coinInfo, this.lockCoinUnit)
@@ -401,7 +403,7 @@
       // 接口数据 存币 抢币
       buyLockCoin (state) {
         // 判断是否登录
-        if(this.token) {
+        if(this.token||this.isLogin) {
           if (state == 'buy') {
             if (!this.lockAmount) {
               alert(this.$t('common.loginInfo'))
@@ -475,12 +477,18 @@
           if (resp.code == 0) {
             this.loading = false;
             this.coinBalance = resp.data.remain;
+            this.endtime = resp.data.startTime
             console.log(this.coinBalance)
           } else {
             this.$Message.error(resp.message)
             return false
           }
         });
+        if (this.coinBalance !== 0){
+          setTimeout(() => {
+            this.getCoinRob()
+          }, 1000);
+        }
       },
       // 钱包余额和最多抢购额度 抢币
       snapLines () {

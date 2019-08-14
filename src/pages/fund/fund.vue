@@ -95,9 +95,9 @@
                 <span>{{ balanceData? balanceData.maxSaleAmount: '0' }}&nbsp;{{ balanceData.saleCoin }}</span>
               </div>
               <div class="footer-info">
+              <!--:disabled="progressBar!==0"-->
                 <Button
                   @click="buyLockCoin('rush')"
-                  :disabled="progressBar!==0"
                 >
                   {{ coinBalance==0?'活动结束':'立即抢购' }}
                 </Button>
@@ -319,10 +319,11 @@ export default {
     },
     created() {
       const name = this.$route.path
+      this.ScreenWidth()
       if (name == '/fund') {
         console.log(1)
         if (this.isLogin) {
-          console.log(name, this.isLogin)
+          // console.log(name, this.isLogin)
           this.getSaveDataList() // 数据列表存币
           this.getCoinBalance() // 币种余额 存币
           this.getRobDataList() // 数据列表 抢币
@@ -332,8 +333,13 @@ export default {
         this.getCoinRob() // 币种详细信息 抢币
       }
     },
-    mounted() {},
+    mounted: function() {},
     methods: {
+      ScreenWidth(){
+        if (screen.width < 950){
+          this.$router.push('/mobileTerminalFund')
+        }
+      },
       // 正则校验只能输入数字和小数点
       text() {
         this.lockAmount = this.lockAmount.replace(/[^\d.]/g, '')
@@ -522,6 +528,12 @@ export default {
         // }
       },
       /** *******抢币***********/
+      stateTime(){
+        var iTime
+        iTime = setTimeout(function() {
+          this.countdown()
+        }, 1000)
+      },
       // 币种详细信息 可抢币
       getCoinRob() {
         const id = 1
@@ -529,9 +541,6 @@ export default {
           const resp = res.body
           if (resp.code == 0) {
             this.loading = false
-          // setTimeout(function () {
-          //   this.getCoinRob()
-          // }, 1000)
             this.coinBalance = resp.data.remain
             this.endtime = resp.data.startTime
             this.countdown()
@@ -540,6 +549,11 @@ export default {
             return false
           }
         })
+        if (this.coinBalance !== 0){
+          setTimeout(() => {
+            this.getCoinRob()
+          }, 1000);
+        }
       },
       // 钱包余额和最多抢购额度 抢币
       snapLines() {
