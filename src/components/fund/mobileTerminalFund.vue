@@ -132,8 +132,11 @@
          </div>
         </section>
         <!--需要判断用户是否登录-->
-        <footer v-if="token||isLogin">
-          <div :class="snapStatus == false? 'record-list-1':'record-list'">
+        <footer>
+          <div
+            :class="snapStatus == false? 'record-list-1':'record-list'"
+            v-if="token||isLogin"
+          >
             <!--存币记录-->
             <div class="save-money">
               <div class="title-img">
@@ -180,19 +183,19 @@
               </div>
               <div v-if="robMoneyList.length">
                 <div
-                        class="record-main"
-                        v-for="item in robMoneyList"
-                        style="padding: 0.25rem 8% 0;"
+                  class="record-main"
+                  v-for="item in robMoneyList"
+                  style="padding: 0.25rem 8% 0;"
                 >
                   <table
-                          cellspacing="0"
-                          cellpadding="0"
-                          id="rush-style"
+                    cellspacing="0"
+                    cellpadding="0"
+                    id="rush-style"
                   >
                     <tr>
-                      <td>预存币</td>
-                      <td>抢购成功</td>
-                      <td>空投奖励</td>
+                      <td>币种</td>
+                      <td>价格</td>
+                      <td>预购额</td>
                     </tr>
                     <tr>
                       <td>{{ item.saleCoin }}</td>
@@ -201,18 +204,32 @@
                     </tr>
                   </table>
                   <table
-                          cellspacing="0"
-                          cellpadding="0"
-                          id="rush-style1"
+                    cellspacing="0"
+                    cellpadding="0"
+                    id="rush-style1"
                   >
                     <tr>
-                      <td>预存币</td>
-                      <td>抢购成功</td>
-                      <td>空投奖励</td>
+                      <td>实购额</td>
+                      <td>空投币种</td>
+                      <td>空投额度</td>
+                    </tr>
+                    <tr>
+                      <td>{{ item.actStatus=='I'?'':item.actualSaleAmount }}</td>
+                      <td>{{ item.airDropCoin }}</td>
+                      <td>{{ item.actStatus=='I'?'':item.airDropAmount }}</td>
+                    </tr>
+                  </table>
+                  <table
+                    cellspacing="0"
+                    cellpadding="0"
+                    id="rush-style2"
+                  >
+                    <tr>
+                      <td>抢购时间</td>
+                      <td>状态</td>
                     </tr>
                     <tr>
                       <td>{{ formatTime(item.lockTime) }}</td>
-                      <td>{{ item.actualSaleAmount }}</td>
                       <td>{{ item.actStatus == 'I'?'待开奖':item.actStatus=='S'?'成功':'失败' }}</td>
                     </tr>
                   </table>
@@ -232,6 +249,15 @@
         </footer>
       </div>
     </div>
+    <Modal
+      v-model="modal3"
+      width="55%"
+      footer-hide
+      :closable="false"
+      class="fund-box-modal"
+    >
+      <p>{{ skylightTextModal3 }}</p>
+    </Modal>
   </div>
 </template>
 <script>
@@ -245,6 +271,7 @@
   export default {
     data() {
       return {
+        modal3: false,
         loading: false,
         pageNo: 1,
         pageSize: 10,
@@ -270,6 +297,8 @@
         skylight: true,
         skylightText: '',
         skylightText1: '',
+        skylightTextModal3: '',
+        timer: '',
         coinBalance: '', // 可抢币余额
         endtime: '',
         balanceData: {
@@ -283,6 +312,7 @@
     },
     created: function () {
       this.getUrlParam()
+      // alert(this.token)
       this.countdown()
       /*需判断用户是否登录*/
       if(this.token||this.isLogin) {
@@ -308,7 +338,8 @@
             theRequest[0]=unescape(strs[i].split("=")[1]);
           }
         }
-        this.token = theRequest
+        this.token = theRequest[0]
+        localStorage.setItem('TOKEN', this.token)
       },
       // 正则校验只能输入数字和小数点
       text () {
@@ -369,6 +400,7 @@
       // 币种详细信息 存币
       getCoin() {
         this.$http.get(this.host + `/wallet/lockCoinWallet/getList`).then(res => {
+          // alert('111')
           const resp = res.body;
           if (resp.code == 0) {
             this.loading = false;
@@ -377,9 +409,7 @@
             if(this.token||this.isLogin) {
               this.lockCoinUnit = resp.data[0].lockCoinUnit
               this.getCoinBalance()
-              console.log(this.coinInfo, this.lockCoinUnit)
             }
-
           } else {
             this.$Message.error(resp.message)
             return false
@@ -389,7 +419,7 @@
       // 币种余额 存币
       getCoinBalance() {
         console.log(this.lockCoinUnit)
-        let unit = !this.lockCoinUnit? 'TDE':this.lockCoinUnit
+        let unit = !this.lockCoinUnit? 'TD':this.lockCoinUnit
         this.$http.get(this.host + `/wallet/lockCoinWallet/userWallet?unit=${unit}`).then(res => {
           const resp = res.body;
           if (resp.code == 0) {
@@ -401,13 +431,18 @@
         });
       },
       // 接口数据 存币 抢币
+      // 消息提示
+      setTime() {
+        setTimeout(() => {
+          this.modal3 = false
+        }, 1500);
+      },
       buyLockCoin (state) {
         // 判断是否登录
         if(this.token||this.isLogin) {
           if (state == 'buy') {
             if (!this.lockAmount) {
-              alert(this.$t('common.loginInfo'))
-              // this.skylightText = this.$t('common.loginInfo')
+              this.skylightText = this.$t('common.loginInfo')
               return false
             }
             const params = {}
@@ -416,23 +451,21 @@
             this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
               const resp = res.body;
               if (resp.code == 0) {
-                alert(resp.message)
+                this.modal3 = true
+                this.skylightTextModal3 = resp.message
+                this.setTime()
                 this.lockAmount = ''
-                // this.snapStatus = true // 抢购状态
                 this.getCoinBalance()
                 this.getSaveDataList()
               } else {
-                alert(resp.message)
+                this.modal3 = true
+                this.skylightTextModal3 = resp.message
+                this.setTime()
               }
             });
           } else if (state == 'rush') {
-            if(this.coinBalance!==0) {
-              alert('活动未开始，请等待！')
-              return false
-            }
             if (!this.lockAdvance) {
-              alert(this.$t('common.loginInfo1'))
-              // this.skylightText1 = this.$t('common.loginInfo1')
+              this.skylightText1 = this.$t('common.loginInfo1')
               return false
             }
             const params = {}
@@ -441,18 +474,24 @@
             this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
               const resp = res.body;
               if (resp.code == 0) {
-                alert(resp.message)
+                this.modal3 = true
+                this.skylightTextModal3 = resp.message
+                this.setTime()
                 this.lockAmount = ''
                 // this.snapStatus = true // 抢购状态
                 this.snapLines()
                 this.getRobDataList()
               } else {
-                alert(resp.message)
+                this.modal3 = true
+                this.skylightTextModal3 = resp.message
+                this.setTime()
               }
             });
           }
         } else {
-          alert(this.$t('common.logintip'))
+          this.modal3 = true
+          this.skylightTextModal3 = (this.$t('common.logintip'))
+          this.setTime()
         }
       },
       // 数据列表 存币
@@ -478,17 +517,18 @@
             this.loading = false;
             this.coinBalance = resp.data.remain;
             this.endtime = resp.data.startTime
+            // if (this.coinBalance !== 0){
+            //   setTimeout(() => {
+            //     this.getCoinRob()
+            //   }, 1000);
+            // }
             console.log(this.coinBalance)
           } else {
             this.$Message.error(resp.message)
             return false
           }
         });
-        if (this.coinBalance !== 0){
-          setTimeout(() => {
-            this.getCoinRob()
-          }, 1000);
-        }
+
       },
       // 钱包余额和最多抢购额度 抢币
       snapLines () {
@@ -518,10 +558,6 @@
           }
         });
       }
-      // changePage(page) {
-      //   this.pageNo = this.pageNo = page;
-      //   this.getList();
-      // },
     },
     watch: {
       countdown () {
@@ -537,9 +573,6 @@
       }
     },
     mounted () {
-      window.setInterval(() => {
-        setTimeout(this.getCoinRob, 0)
-      }, 1000)
     },
     computed: {
 
@@ -875,7 +908,7 @@
           .kong1 {
             font-size: 0.3rem;
             text-align: center;
-            line-height: 1.5rem;
+            line-height: 2.5rem;
             color: #fff;
           }
           .record-list,
@@ -893,11 +926,12 @@
             /*抢购记录*/
             .rush-purchase {
               margin-top: 0.7rem;
-              min-height: 2.95rem;
+              min-height: 3.95rem;
               background: #4C38D8 url(../../assets/images/yidong/yidong3.png) 100% 100% no-repeat;
               background-position: initial;
               background-size: 100% 100%;
               .record-main {
+                margin-top: 0.2rem;
                 #rush-style,
                 #rush-style1 {
                   tr {
@@ -929,7 +963,7 @@
                 text-align: center;
                 color: #fff;
                 font-size: 0.3rem;
-                line-height: 0.6rem;
+                line-height: 0.75rem;
               }
               .record-main {
                 padding: 0.5rem 8% 0;
@@ -1037,7 +1071,35 @@
   }
 </style>
 <style lang="scss">
+  .fund-box-modal {
+    .ivu-modal-mask {
+      background: transparent;
+    }
+    .ivu-modal {
+      top: 6rem;
+      .ivu-modal-content {
+        line-height: 0.5rem;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 0.15rem;
+        .ivu-modal-close {
+          .ivu-icon-ios-close {
+            font-size: 0.5rem;
+          }
+
+        }
+        .ivu-modal-body {
+          line-height: 0.45rem;
+          p{
+            color: #fff;
+            font-size: 0.25rem;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
   #fund-box-yi {
+
     .ivu-input {
       width: 100%;
       height: 0.8rem;

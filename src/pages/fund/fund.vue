@@ -15,7 +15,7 @@
         <div class="header-content">
           <div class="header-title">
             <img src="../../assets/img/line-two.png" alt="">
-            <span class="title" @click="goRegister">存币</span>
+            <span class="title">存币</span>
             <img src="../../assets/img/line-one.png" alt="">
           </div>
           <div class="info">
@@ -319,7 +319,6 @@ export default {
     },
     created() {
       const name = this.$route.path
-      this.ScreenWidth()
       if (name == '/fund') {
         console.log(1)
         if (this.isLogin) {
@@ -335,11 +334,11 @@ export default {
     },
     mounted: function() {},
     methods: {
-      ScreenWidth(){
-        if (screen.width < 950){
-          this.$router.push('/mobileTerminalFund')
-        }
-      },
+      // ScreenWidth(){
+      //   if (screen.width < 950){
+      //     this.$router.push('/mobileTerminalFund')
+      //   }
+      // },
       // 正则校验只能输入数字和小数点
       text() {
         this.lockAmount = this.lockAmount.replace(/[^\d.]/g, '')
@@ -349,9 +348,9 @@ export default {
       formatTime(date) {
         return moment(date).format('YYYY/MM/DD HH:mm:ss')
       },
-      goRegister() {
-        this.$router.push({ name: 'mobileTerminalFund' })
-      },
+      // goRegister() {
+      //   this.$router.push({ name: 'mobileTerminalFund' })
+      // },
       // 倒计时
       countdown() {
         let iTime
@@ -420,7 +419,7 @@ export default {
       // 币种余额 存币
       getCoinBalance() {
         console.log(this.lockCoinUnit)
-        const unit = !this.lockCoinUnit ? 'TDE' : this.lockCoinUnit
+        const unit = !this.lockCoinUnit ? 'TD' : this.lockCoinUnit
         this.$http.get(this.host + `/wallet/lockCoinWallet/userWallet?unit=${unit}`).then(res => {
           const resp = res.body
           if (resp.code == 0) {
@@ -540,17 +539,17 @@ export default {
             this.loading = false
             this.coinBalance = resp.data.remain
             this.endtime = resp.data.startTime
-            this.countdown()
+            // if (this.coinBalance !== 0){
+            //   setTimeout(() => {
+            //     this.getCoinRob()
+            //   }, 1000);
+            // }
           } else {
             this.$Message.error(resp.message)
             return false
           }
         })
-        if (this.coinBalance !== 0){
-          setTimeout(() => {
-            this.getCoinRob()
-          }, 1000);
-        }
+
       },
       // 钱包余额和最多抢购额度 抢币
       snapLines() {
