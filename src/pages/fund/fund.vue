@@ -26,8 +26,6 @@
               placeholder="请输入数量"
               style="width: 555px;"
               @keyup.native="clearNoNum('lockAmount')"
-              :min="coinInfo.lockMinimum"
-              :max="coinInfo.lockHighest"
               :placeholder="Number(coinInfo.lockMinimum) + '～' + Number(coinInfo.lockHighest)"
             />
             <span class="coinName">{{ coinInfo.lockCoinUnit }}</span>
@@ -40,8 +38,8 @@
               @click="buyLockCoin('buy')"
               :loading="loadingButton"
             >
-              立即存币
-              <!--活动暂未开始-->
+              <span v-if="!isLogin">请先登录</span>
+              <span v-else>立即存币</span>
             </Button>
           </div>
         </div>
@@ -63,11 +61,11 @@
               <p class="count-time">
                 <span class="time">{{ day }}</span>
                 <span class="day margin">天</span>&nbsp;
-                <span class="time margin1">{{ hr }}</span>
+                <span class="time margin1">{{ time }}</span>
                 <span class="day margin">小时</span>&nbsp;
-                <span class="time margin1">{{ min }}</span>
+                <span class="time margin1">{{ minute }}</span>
                 <span class="day margin">分钟</span>&nbsp;
-                <span class="time margin1">{{ sec }}</span>
+                <span class="time margin1">{{ second }}</span>
                 <span class="day margin">秒</span>&nbsp;
               </p>
               <p class="count-progress">
@@ -96,14 +94,16 @@
                 <span>{{ balanceData? balanceData.maxSaleAmount: '0' }}&nbsp;{{ balanceData.saleCoin }}</span>
               </div>
               <div class="footer-info">
-              <!--:disabled="progressBar!==0"-->
                 <Button
                   @click="buyLockCoin('rush')"
                   :loading="loadingButton"
-                  :disabled="coinBalance < 0||progressBar!==0"
                 >
-                  <!-- {{ coinBalance < 0?'活动结束':'立即抢购' }} -->
-                  {{ coinBalance < 0?'活动结束':'活动暂未开始' }}
+                  <span v-if="!isLogin">
+                    {{ $t("common.logintip") }}
+                  </span>
+                  <span v-else>
+                    {{ coinBalance < 0?'活动已结束':progressBar!==0?'活动暂未开始':'立即抢购' }}
+                  </span>
                 </Button>
               </div>
             </div>
@@ -120,7 +120,6 @@
               </div>
               <div class="top-content">
                 <div class="top-left">
-                  <p>存币 <i class="text1">2折</i> 抢BTC</p>
                   <p>本次 <i class="text1">2折</i> 优惠购BTC数量总计五百枚，购完即止</p>
                   <p>1.存TD ≧
                     <span class="text2">500</span>
@@ -172,20 +171,21 @@
               </div>
               <div class="top-content">
                 <div class="bottom-left">
-                  <p>1.参与抢购BTC活动，必须在存币活动时间内存
+                  <p>1. 参与抢购BTC活动，必须在存币活动时间内存
                     <span class="text3">相应数量的TD,</span>
                   </p>
                   <p>获得抢购
                     <span class="text3">BTC</span>
                     的资格和预购最高数量;
                   </p>
-                  <p>2.所存TD需锁仓30天，30天后TD解锁，系统将自动将TD返回至您的个人账户中。</p>
-                  <p>3.抢购BTC在存币结束后统一时间抢购，所有存币用户符合条件者，均可参与。</p>
-                  <p>4.抢购BTC时，需提前充值BC到个人账户中，确保BC的数量大于要抢购BTC的⾦额，抢
-                  <p>5.BTC的定价为存币活动期间火币、币安、OK和BDW四家BTC价格的均价。</p>
-                  <p>6.抢购结束后，有30分钟清算时间，未抢到BTC的⽤户，系统将在3个工作⽇内发放
+                  <p>2. 所存TD需锁仓30天，30天后TD解锁，系统将自动将TD返回至您的个人账户中。</p>
+                  <p>3. 抢购BTC在存币结束后统一时间抢购，所有存币用户符合条件者，均可参与。</p>
+                  <p>4. 抢购BTC时，需提前充值BC到个人账户中，确保BC的数量大于要抢购BTC的⾦额，抢</p>
+                  <p>购成功后系统将自动抵扣BC数量，如您账户中没有足够余额，将视为放弃。</p>
+                  <p>5. BTC的定价为存币活动期间火币、币安、OK和BDW四家BTC价格的均价。</p>
+                  <p>6. 抢购结束后，有30分钟清算时间，未抢到BTC的⽤户，系统将在3个工作⽇内发放
                     BC空投奖励。</p>
-                  <p>7.如有疑问，请咨询BDW客服。本次活动最终解释权归BDW所有。</p>
+                  <p>7. 如有疑问，请咨询BDW客服。本次活动最终解释权归BDW所有。</p>
                 </div>
               </div>
             </div>
@@ -209,7 +209,7 @@
                   :loading="loading"
                   :disabled-hover="true"
                 ></Table>
-                <ul class="page" v-show="saveMoneyList.length > 9">
+                <ul class="page">
                   <ul class="ivu-page"></ul>
                   <li
                     title="上一页"
@@ -286,8 +286,8 @@ const getParamsRob = FixAraibleRob(10, '')
 export default {
    data() {
      return {
-       loading: false,
-       loadingButton: false,
+       loading: false, // 存币抢币记录 loading
+       loadingButton: false, // 点击按钮 loading
         /* 存币分页*/
        savePageNo: 1,
        savePageSize: 10,
@@ -298,16 +298,15 @@ export default {
        robTotalElement: 0,
        lockAmount: '', // 存币数量
        lockAdvance: '', // 预购数量
-       saveMoneyList: [],
-       robMoneyList: [],
-       reserveTime: '60',
-       reserveInteval: null,
-       day: 0,
-       hr: 0,
-       min: 0,
-       sec: 0,
-       totalTime: '',
-       progressBar: '',
+       saveMoneyList: [], // 存币记录
+       robMoneyList: [], // 抢币记录
+       day: 0, // 天
+       time: 0, // 时
+       minute: 0, // 分
+       second: 0, // 秒
+       totalTime: '', // 总秒数
+       progressBar: '', // 进度条比例
+        /* 币种可存最大最小*/
        coinInfo: {
          lockMinimum: 0,
          lockHighest: 0
@@ -316,7 +315,7 @@ export default {
        userWalletBalance: '--', // 币种余额
        snapStatus: false, // 抢购状态
        coinBalance: '', // 可抢币余额
-       endtime: '',
+       endtime: '', // 结束时间
        balanceData: {
          balance: '--',
          maxSaleAmount: '--',
@@ -326,6 +325,7 @@ export default {
      }
    },
    created() {
+    //  this.ScreenWidth()
      const name = this.$route.path
      if (name == '/fund') {
        this.getCoin() // 币种详细信息 存币
@@ -367,26 +367,15 @@ export default {
          }
        }
      },
-      // ScreenWidth(){
-      //   if (screen.width < 950){
-      //     this.$router.push('/mobileTerminalFund')
-      //   }
-      // },
-      // 正则校验只能输入数字和小数点
-      // textClear () {
-      //   this.clearNoNum()
-      //   this.skylightText1 = '';
-      //   this.skylightText = '';
-      //   // this.lockAmount = this.lockAmount.replace(/[^\d.]/g,"");
-      //   // this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g,"");
-      // },
+    //  ScreenWidth() {
+    //    if (screen.width < 950) {
+    //      this.$router.push('/mobileTerminalFund')
+    //    }
+    //  },
       // 时间格式转换
      formatTime(date) {
        return moment(date).format('YYYY/MM/DD HH:mm:ss')
      },
-      // goRegister() {
-      //   this.$router.push({ name: 'mobileTerminalFund' })
-      // },
       // 倒计时
      countdown() {
        let iTime
@@ -417,10 +406,10 @@ export default {
         /* 总秒数*/
        this.totalTime = (day1 + hr1 + min1 + sec1)
        if (this.totalTime > 0) {
-         this.day = day
-         this.hr = hr > 9 ? hr : '0' + hr
-         this.min = min > 9 ? min : '0' + min
-         this.sec = sec > 9 ? sec : '0' + sec
+         this.day = day > 9 ? day : '0' + day
+         this.time = hr > 9 ? hr : '0' + hr
+         this.minute = min > 9 ? min : '0' + min
+         this.second = sec > 9 ? sec : '0' + sec
           // console.log(this.day, this.hr, this.min, this.sec)
          iTime = setTimeout(() => {
            this.countdown()
@@ -482,11 +471,52 @@ export default {
              this.$Message.error(this.$t('common.loginInfo'))
              return false
            }
+           if (this.lockAmount < this.coinInfo.lockMinimum || this.lockAmount > this.coinInfo.lockHighest) {
+             this.$Message.error('您输入的锁仓金额小于500最小值,或者大于5000000最大值，请重新输入')
+             this.lockAmount = ''
+             return false
+           }
            const params = {}
            params['id'] = this.coinInfo.id ? this.coinInfo.id : '0'
            params['amount'] = this.lockAmount
            this.loadingButton = true
            this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
+             const resp = res.body
+             if (resp.code == 0) {
+               this.loadingButton = false
+               this.$Message.success(resp.message)
+               this.lockAmount = ''
+               this.snapLines()
+               this.getCoinBalance()
+               this.getSaveDataList()
+             } else {
+               if (resp.message == '锁仓金额小于500最小值,或者大于5000000最大值') {
+                 this.lockAmount = ''
+                 this.loadingButton = false
+                 return false
+               }
+               this.$Message.error(resp.message)
+               this.loadingButton = false
+             }
+           })
+         } else if (state == 'rush') {
+           if (this.progressBar !== 0) {
+             this.$Message.error('活动暂未开始')
+             return false
+           }
+           if (this.coinBalance < 0) {
+             this.$Message.error('活动已结束')
+             return false
+           }
+           if (!this.lockAdvance) {
+             this.$Message.error(this.$t('common.loginInfo1'))
+             return false
+           }
+           const params = {}
+           params['id'] = 1
+           params['amount'] = this.lockAdvance
+           this.loadingButton = true
+           this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
              const resp = res.body
              if (resp.code == 0) {
                this.loadingButton = false
@@ -502,7 +532,8 @@ export default {
            })
          }
        } else {
-         this.$Message.error(this.$t('common.logintip'))
+         // this.$Message.error(this.$t('common.logintip'))
+         this.$router.push('/login')
        }
      },
       // 数据列表 存币
@@ -550,12 +581,6 @@ export default {
         // }
      },
       /** *******抢币***********/
-      // stateTime(){
-      //   var iTime
-      //   iTime = setTimeout(function() {
-      //     this.countdown()
-      //   }, 1000)
-      // },
       // 币种详细信息 可抢币
      getCoinRob() {
        const id = 1
@@ -568,7 +593,7 @@ export default {
            this.countdown()
             // const name = this.$route.path
             /* if (name == '/fund') {
-              if (this.coinBalance < 0 && this.isLogin){
+              if (this.coinBalance >= 0 && this.isLogin){
                 setTimeout(() => {
                   this.getCoinRob()
                 }, 1000);
@@ -597,7 +622,6 @@ export default {
      },
       // 数据列表 抢币
      getRobDataList() {
-        // const params = getParamsRob(this.savePageNo);
        const id = 1
        this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
          const resp = res.body
@@ -670,17 +694,12 @@ export default {
            return h('span', {}, self.formatTime(params.row.unlockTime))
          }
        })
-        // arr.push({
-        //   title: this.$t('common.fund.interests'),
-        //   key: 'interests'
-        // })
        return arr
      },
       // 抢币记录
      tableColumnsRob() {
        const self = this
        const arr = []
-       const that = this
        arr.push({
          title: this.$t('common.fund.lockCoinUnit'),
          key: 'saleCoin'
@@ -704,20 +723,20 @@ export default {
          title: this.$t('common.fund.airDropCoin'),
          key: 'airDropCoin'
        })
-        ;arr.push({
-          title: this.$t('common.fund.airDropAmount'),
-          key: 'airDropAmount',
-          render(h, params) {
-            return h('span', {}, params.row.actStatus == 'I' ? '' : params.row.airDropAmount)
-          }
-        })
-      ;arr.push({
-        title: this.$t('common.fund.createTime'),
-        key: 'createTime',
-        render(h, params) {
-          return h('span', {}, self.formatTime(params.row.createTime))
-        }
-      })
+       arr.push({
+         title: this.$t('common.fund.airDropAmount'),
+         key: 'airDropAmount',
+         render(h, params) {
+           return h('span', {}, params.row.actStatus == 'I' ? '' : params.row.airDropAmount)
+         }
+       })
+       arr.push({
+         title: this.$t('common.fund.createTime'),
+         key: 'createTime',
+         render(h, params) {
+           return h('span', {}, self.formatTime(params.row.createTime))
+         }
+       })
        arr.push({
          title: this.$t('common.fund.actStatus'),
          key: 'actStatus',
@@ -731,344 +750,342 @@ export default {
  }
 </script>
 <style scoped lang="scss">
-  #fund-box {
-    padding-top: 8px;
-    .fund-main {
-      header {
-        height: 955px;
-        background: url("
-https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/banner2.png") 0 0 no-repeat;
-        background-position: center;
+#fund-box {
+  padding-top: 8px;
+  .fund-main {
+    header {
+      height: 955px;
+      background: url("https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/banner2.png") 0 0 no-repeat;
+      background-position: center;
+      .header-notice {
+        width: 420px;
+        margin: 0 auto;
+        padding-top: 500px;
+        color: #EBEBEB;
+        font-size: 16px;
 
-        .header-notice {
-          width: 420px;
-          margin: 0 auto;
-          padding-top: 500px;
-          color: #EBEBEB;
-          font-size: 16px;
+        .header-title-text {
+          float: left;
+          display: inline-block;
+          height: 55px;
+          line-height: 55px;
+        }
 
-          .header-title-text {
-            float: left;
-            display: inline-block;
-            height: 55px;
-            line-height: 55px;
-          }
+        .header-title-border {
+          display: inline-block;
+          width: 1px;
+          height: 30px;
+          background: #EBEBEB;
+          margin: 13px 25px;
+        }
 
-          .header-title-border {
-            display: inline-block;
-            width: 1px;
-            height: 30px;
-            background: #EBEBEB;
-            margin: 13px 25px;
-          }
-
-          .notice-text {
-            float: right;
-            line-height: 28px;
-          }
+        .notice-text {
+          float: right;
+          line-height: 28px;
         }
       }
-      .main {
-        background: #101646;
-        padding-bottom: 100px;
-        .header-content {
-          width: 800px;
-          margin: 0 auto;
-          position: relative;
-          top: -140px;
+    }
+    .main {
+      background: #101646;
+      padding-bottom: 100px;
+      .header-content {
+        width: 800px;
+        margin: 0 auto;
+        position: relative;
+        top: -140px;
+      }
+      .header-title {
+        margin-bottom: 80px;
+        span {
+          display: inline-block;
+          width: 140px;
+          height: 20px;
+          font-size: 18px;
+          color: #45AAFF;
+          line-height: 20px;
+          text-align: center;
         }
-        .header-title {
-          margin-bottom: 80px;
-          span {
-            display: inline-block;
-            width: 140px;
-            height: 20px;
-            font-size: 18px;
-            color: #45AAFF;
-            line-height: 20px;
-            text-align: center;
-          }
-          img {
-            vertical-align: middle;
-          }
+        img {
+          vertical-align: middle;
         }
-        .info {
-          padding: 0 80px 0 45px;
-          position: relative;
-          span {
-            color: #FEFFFF;
-            font-size: 16px;
-            display: inline-block;
-            min-width: 75px;
-            height: 45px;
-            line-height: 45px;
-          }
-          .coinName {
-            display: inline-block;
-            line-height: 64px;
-            position: absolute;
-            right: 90px;
-            top: 0;
-          }
+      }
+      .info {
+        padding: 0 80px 0 45px;
+        position: relative;
+        span {
+          color: #FEFFFF;
+          font-size: 16px;
+          display: inline-block;
+          min-width: 75px;
+          height: 45px;
+          line-height: 45px;
         }
-        .info-text {
+        .coinName {
+          display: inline-block;
+          line-height: 64px;
+          position: absolute;
+          right: 90px;
+          top: 0;
+        }
+      }
+      .info-text {
+        height: 64px;
+        color: #fff;
+        line-height: 64px;
+        text-align: right;
+        padding-right: 115px;
+      }
+      .footer-info {
+        text-align: right;
+        padding-right: 115px;
+        button {
+          width: 555px;
           height: 64px;
           color: #fff;
-          line-height: 64px;
-          text-align: right;
-          padding-right: 115px;
+          border: 0;
+          border-radius: 0;
+          font-size: 16px;
+          text-align: center;
+          background: #293872;
         }
-        .footer-info {
-          text-align: right;
-          padding-right: 115px;
-          button {
-            width: 555px;
-            height: 64px;
-            color: #fff;
-            border: 0;
-            border-radius: 0;
-            font-size: 16px;
-            text-align: center;
-            background: #293872;
-          }
+      }
+      section {
+        margin: 0 auto;
+        min-height: 400px;
+        position: relative;
+        .circle1 {
+          width: 100px;
+          height: 205px;
+          border-radius: 0 205px 205px 0;
+          background: radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+          position: absolute;
+          top: -6%;
+          left: -10px;
+          opacity: 0.06;
         }
-        section {
-          margin: 0 auto;
-          min-height: 400px;
-          position: relative;
-          .circle1 {
-            width: 100px;
-            height: 205px;
-            border-radius: 0 205px 205px 0;
-            background: radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
-            position: absolute;
-            top: -6%;
-            left: -10px;
-            opacity: 0.06;
-          }
-          .circle2 {
-            width:100px;
-            height:100px;
-            background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
-            opacity:0.06;
-            border-radius:50%;
-            position: absolute;
-            top: -7%;
-            right: 10%;
-          }
-          .circle3 {
-            width:75px;
-            height:75px;
-            background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
-            opacity:0.06;
-            border-radius:50%;
-            position: absolute;
-            top: 33%;
-            left: 17%;
-          }
-          .circle4 {
-            width:110px;
-            height:110px;
-            background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
-            opacity:0.06;
-            border-radius:50%;
-            position: absolute;
-            top: 35%;
-            right: 12%;
-          }
-          .circle5 {
-             width:95px;
-             height:95px;
-             background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
-             opacity:0.06;
-             border-radius:50%;
-             position: absolute;
-             bottom: -8%;
-             left: 8%;
-           }
-          .circle6 {
-            width: 65px;
-            height: 130px;
-            border-radius: 130px 0 0 130px;
-            background: radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
-            position: absolute;
-            bottom: -6%;
-            right: -6px;
-            opacity: 0.06;
-          }
-          .section-main {
-            margin-bottom: 75px;
-            .count-down {
-              width: 875px;
-              margin: 0 auto 130px;
-              .count-title {
-                text-align: center;
-                font-size:48px;
-                font-family:PingFangSC-Regular;
+        .circle2 {
+          width:100px;
+          height:100px;
+          background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+          opacity:0.06;
+          border-radius:50%;
+          position: absolute;
+          top: -7%;
+          right: 10%;
+        }
+        .circle3 {
+          width:75px;
+          height:75px;
+          background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+          opacity:0.06;
+          border-radius:50%;
+          position: absolute;
+          top: 33%;
+          left: 17%;
+        }
+        .circle4 {
+          width:110px;
+          height:110px;
+          background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+          opacity:0.06;
+          border-radius:50%;
+          position: absolute;
+          top: 35%;
+          right: 12%;
+        }
+        .circle5 {
+           width:95px;
+           height:95px;
+           background:radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+           opacity:0.06;
+           border-radius:50%;
+           position: absolute;
+           bottom: -8%;
+           left: 8%;
+         }
+        .circle6 {
+          width: 65px;
+          height: 130px;
+          border-radius: 130px 0 0 130px;
+          background: radial-gradient(circle,rgba(31,49,188,1),rgba(87,184,240,1));
+          position: absolute;
+          bottom: -6%;
+          right: -6px;
+          opacity: 0.06;
+        }
+        .section-main {
+          margin-bottom: 75px;
+          .count-down {
+            width: 875px;
+            margin: 0 auto 130px;
+            .count-title {
+              text-align: center;
+              font-size:48px;
+              font-family:PingFangSC-Regular;
+              font-weight:bold;
+              color:rgba(69,170,255,1);
+            }
+            .count-icon {
+              text-align: center;
+              .icon {
+                color: #3F7DA8;
+                font-size: 35px;
+              }
+            }
+            .count-time {
+              text-align: center;
+              margin-top: 20px;
+              .time {
+                font-size:54px;
                 font-weight:bold;
+                font-style:italic;
                 color:rgba(69,170,255,1);
               }
-              .count-icon {
-                text-align: center;
-                .icon {
-                  color: #3F7DA8;
-                  font-size: 35px;
-                }
+              .margin {
+                margin-left: 10px;
               }
-              .count-time {
-                text-align: center;
-                margin-top: 20px;
-                .time {
-                  font-size:54px;
-                  font-weight:bold;
-                  font-style:italic;
-                  color:rgba(69,170,255,1);
-                }
-                .margin {
-                  margin-left: 10px;
-                }
-                .margin1 {
-                  margin-left: 15px;
-                }
-                .day {
-                  font-size: 45px;
-                  color: #fff;
-                }
+              .margin1 {
+                margin-left: 15px;
               }
-              .count-progress {
-                text-align: center;
-                margin: 75px auto 0;
-                width: 875px;
+              .day {
+                font-size: 45px;
+                color: #fff;
               }
             }
-            .purchase {
+            .count-progress {
               text-align: center;
-              width: 800px;
-              margin: 0 auto;
+              margin: 75px auto 0;
+              width: 875px;
             }
           }
-
-          .activity-rules {
-            width: 1200px;
-            margin: 0 auto 75px;
-            padding: 40px;
-            .activity-top,
-            .activity-bottom {
-              .top-title {
-                width: 875px;
-                margin: 0 auto 74px;
-                text-align: center;
-                img {
-                  vertical-align: middle;
-                }
-                .title {
-                  font-size: 18px;
-                  color: #45AAFF;
-                  display: inline-block;
-                  text-align: center;
-                  width: 150px;
-                  line-height: 64px;
-                }
-              }
-              .top-content {
-                min-height: 357px;
-                background: url("https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/border.png") 0 0 no-repeat;
-                background-position: center;
-                background-size: 100% 100%;
-                padding: 54px 40px;
-                display: flex;
-                .top-left {
-                  flex: 6;
-                  margin-left: 80px;
-                  p {
-                    font-size: 16px;
-                    font-weight:400;
-                    color:rgba(235,235,235,1);
-                    line-height:48px;
-                    .text1 {
-                      color: #45AAFF;
-                      font-size: 20px;
-                    }
-                    .text2 {
-                      color: #45AAFF;
-                      font-size: 18px;
-                    }
-                  }
-                }
-                .top-border {
-                  display: inline-block;
-                  border: 1px dashed #3F7DA8;
-                  height: 195px;
-                }
-                .top-right {
-                  flex: 7;
-                  margin-left: 80px;
-                  p {
-                    font-size: 16px;
-                    font-weight:400;
-                    color:rgba(235,235,235,1);
-                    line-height:48px;
-                    .text1 {
-                      color: #45AAFF;
-                      font-size: 20px;
-                    }
-                    .text2 {
-                      color: #45AAFF;
-                      font-size: 18px;
-                    }
-                  }
-                }
-                .bottom-left {
-                  margin: 0 auto;
-                  p {
-                    font-size:16px;
-                    font-weight:400;
-                    color:rgba(235,235,235,1);
-                    line-height:48px;
-                    .text3 {
-                      color: #45AAFF;
-                      font-size: 20px;
-                    }
-                  }
-                }
-              }
-            }
-            .activity-bottom {
-              margin-top: 150px;
-            }
+          .purchase {
+            text-align: center;
+            width: 800px;
+            margin: 0 auto;
           }
         }
-        footer {
+
+        .activity-rules {
           width: 1200px;
-          min-height: 150px;
-          margin: 100px auto 0;
-          .record-list {
-            .save-money,
-            .save-purchase {
+          margin: 0 auto 75px;
+          padding: 40px;
+          .activity-top,
+          .activity-bottom {
+            .top-title {
+              width: 875px;
+              margin: 0 auto 74px;
               text-align: center;
-              margin-bottom: 100px;
-              .save-title {
-                color: #8090af;
-                margin-bottom: 30px;
-                .title {
-                  font-size: 18px;
-                  color: #45AAFF;
-                  display: inline-block;
-                  text-align: center;
-                  width: 150px;
-                  line-height: 64px;
+              img {
+                vertical-align: middle;
+              }
+              .title {
+                font-size: 18px;
+                color: #45AAFF;
+                display: inline-block;
+                text-align: center;
+                width: 150px;
+                line-height: 64px;
+              }
+            }
+            .top-content {
+              min-height: 357px;
+              background: url("https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/border.png") 0 0 no-repeat;
+              background-position: center;
+              background-size: 100% 100%;
+              padding: 54px 40px;
+              display: flex;
+              .top-left {
+                flex: 6;
+                margin-left: 80px;
+                p {
+                  font-size: 16px;
+                  font-weight:400;
+                  color:rgba(235,235,235,1);
+                  line-height:48px;
+                  .text1 {
+                    color: #45AAFF;
+                    font-size: 20px;
+                  }
+                  .text2 {
+                    color: #45AAFF;
+                    font-size: 18px;
+                  }
                 }
-                img {
-                  vertical-align: middle;
+              }
+              .top-border {
+                display: inline-block;
+                border: 1px dashed #3F7DA8;
+                height: 195px;
+              }
+              .top-right {
+                flex: 7;
+                margin-left: 80px;
+                p {
+                  font-size: 16px;
+                  font-weight:400;
+                  color:rgba(235,235,235,1);
+                  line-height:48px;
+                  .text1 {
+                    color: #45AAFF;
+                    font-size: 20px;
+                  }
+                  .text2 {
+                    color: #45AAFF;
+                    font-size: 18px;
+                  }
                 }
+              }
+              .bottom-left {
+                margin: 0 auto;
+                p {
+                  font-size:16px;
+                  font-weight:400;
+                  color:rgba(235,235,235,1);
+                  line-height:48px;
+                  .text3 {
+                    color: #45AAFF;
+                    font-size: 20px;
+                  }
+                }
+              }
+            }
+          }
+          .activity-bottom {
+            margin-top: 150px;
+          }
+        }
+      }
+      footer {
+        width: 1200px;
+        min-height: 150px;
+        margin: 100px auto 0;
+        .record-list {
+          .save-money,
+          .save-purchase {
+            text-align: center;
+            margin-bottom: 100px;
+            .save-title {
+              color: #8090af;
+              margin-bottom: 30px;
+              .title {
+                font-size: 18px;
+                color: #45AAFF;
+                display: inline-block;
+                text-align: center;
+                width: 150px;
+                line-height: 64px;
+              }
+              img {
+                vertical-align: middle;
               }
             }
           }
         }
       }
-
     }
+
   }
+}
 </style>
 <style lang="scss">
 
