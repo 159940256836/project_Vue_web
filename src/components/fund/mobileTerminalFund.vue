@@ -28,9 +28,7 @@
                   v-model="lockAmount"
                   placeholder="请输入数量"
                   @keyup.native="text();"
-                  :min="coinInfo.lockMinimum"
-                  :max="coinInfo.lockHighest"
-                  :placeholder="'请输入存币数量' + (!coinInfo? '0':Number(coinInfo.lockMinimum)) + '～' + (!coinInfo?'0':Number(coinInfo.lockHighest))"
+                  :placeholder="'请输入存币数量' + Number(coinInfo.lockMinimum) + '～' + Number(coinInfo.lockHighest)"
                 />
                 <p class="info-text-tip">{{ skylightText }}</p>
               </div>
@@ -39,7 +37,8 @@
                   @click.native="buyLockCoin('buy')"
                   :loading="loadingButton"
                 >
-                  立即存币
+                  <span v-if="!isLogin">请先登录</span>
+                  <span v-else>立即存币</span>
                 </Button>
               </div>
             </div>
@@ -54,11 +53,11 @@
             <p class="count-time">
               <span class="time">{{ day }}</span>
               <span class="day margin">天</span>&nbsp;
-              <span class="time margin1">{{ hr }}</span>
+              <span class="time margin1">{{ time }}</span>
               <span class="day margin">小时</span>&nbsp;
-              <span class="time margin1">{{ min }}</span>
+              <span class="time margin1">{{ minute }}</span>
               <span class="day margin">分钟</span>&nbsp;
-              <span class="time margin1">{{ sec }}</span>
+              <span class="time margin1">{{ second }}</span>
               <span class="day margin">秒</span>&nbsp;
             </p>
           </div>
@@ -95,7 +94,12 @@
                   @click.native="buyLockCoin('rush')"
                   :loading="loadingButton"
                 >
-                  {{ coinBalance==0?'活动结束':'立即抢购' }}
+                  <span v-if="!isLogin">
+                    请先登录
+                  </span>
+                  <span v-else>
+                    {{ coinBalance < 0?'活动已结束':progressBar!==0?'活动暂未开始':'立即抢购' }}
+                  </span>
                 </Button>
               </div>
             </div>
@@ -142,108 +146,120 @@
         <footer>
           <div
             :class="snapStatus == false? 'record-list-1':'record-list'"
-            v-if="token||isLogin"
+            v-if="isLogin"
           >
+            <div class="record-img"></div>
             <!--存币记录-->
             <div class="save-money">
-              <div class="title-img">
-                <p>存币记录</p>
-              </div>
-              <div v-if="saveMoneyList.length">
-                <div class="record-main" v-for="item in saveMoneyList">
-                  <table cellspacing="0" cellpadding="0">
-                    <tr>
-                      <td>时间</td>
-                      <td>存币方案</td>
-                      <td>天数</td>
-                    </tr>
-                    <tr>
-                      <td>{{ formatTime(item.lockTime) }}</td>
-                      <td>{{ item.lockCoinName }}</td>
-                      <td>{{ item.lockCoinDay }}</td>
-                    </tr>
-                  </table>
-                  <table
-                          cellspacing="0"
-                          cellpadding="0"
-                  >
-                    <tr>
-                      <td>币种</td>
-                      <td>数量</td>
-                      <td>状态</td>
-                    </tr>
-                    <tr>
-                      <td>{{ item.lockCoinUnit }}</td>
-                      <td>{{ item.lockAmount }}</td>
-                      <td>{{ item.lockStatus == 0? '锁仓中':'已释放' }}</td>
-                    </tr>
-                  </table>
+
+              <div class="money-box">
+                <div class="title-img">
+                  <p>存币记录</p>
                 </div>
+                <div v-if="saveMoneyList.length">
+                  <div class="record-main" v-for="item in saveMoneyList">
+                    <table cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td>时间</td>
+                        <td>存币方案</td>
+                        <td>天数</td>
+                      </tr>
+                      <tr>
+                        <td>{{ formatTime(item.lockTime) }}</td>
+                        <td>{{ item.lockCoinName }}</td>
+                        <td>{{ item.lockCoinDay }}</td>
+                      </tr>
+                    </table>
+                    <table
+                      cellspacing="0"
+                      cellpadding="0"
+                    >
+                      <tr>
+                        <td>币种</td>
+                        <td>数量</td>
+                        <td>状态</td>
+                      </tr>
+                      <tr>
+                        <td>{{ item.lockCoinUnit }}</td>
+                        <td>{{ item.lockAmount }}</td>
+                        <td>{{ item.lockStatus == 0? '锁仓中':'已释放' }}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <p class="kong" v-else>暂无数据</p>
               </div>
-              <p class="kong" v-else>暂无数据</p>
+
             </div>
+            <p>查看更多</p>
             <!--抢购记录-->
             <!--v-show="snapStatus"-->
-            <div class="rush-purchase">
-              <div class="title-img">
-                <p>抢购记录</p>
-              </div>
-              <div v-if="robMoneyList.length">
-                <div
-                  class="record-main"
-                  v-for="item in robMoneyList"
-                  style="padding: 0.25rem 8% 0;"
-                >
-                  <table
-                    cellspacing="0"
-                    cellpadding="0"
-                    id="rush-style"
-                  >
-                    <tr>
-                      <td>币种</td>
-                      <td>价格</td>
-                      <td>预购额</td>
-                    </tr>
-                    <tr>
-                      <td>{{ item.saleCoin }}</td>
-                      <td>{{ item.transactionPrice }}</td>
-                      <td>{{ item.saleAmount }}</td>
-                    </tr>
-                  </table>
-                  <table
-                    cellspacing="0"
-                    cellpadding="0"
-                    id="rush-style1"
-                  >
-                    <tr>
-                      <td>抢购时间</td>
-                      <td>空投币种</td>
-                      <td>状态</td>
-                    </tr>
-                    <tr>
-                      <td>{{ formatTime(item.lockTime) }}</td>
-                      <td>{{ item.airDropCoin }}</td>
-                      <td>{{ item.actStatus == 'I'?'待开奖':item.actStatus=='S'?'成功':'失败' }}</td>
-                    </tr>
-                  </table>
-                  <table
-                    cellspacing="0"
-                    cellpadding="0"
-                    id="rush-style2"
-                  >
-                    <tr>
-                      <td>实购额</td>
-                      <td>空投额度</td>
-                    </tr>
-                    <tr>
-                      <td>{{ item.actStatus=='I'?'':item.actualSaleAmount }}</td>
-                      <td>{{ item.actStatus=='I'?'':item.airDropAmount }}</td>
-                    </tr>
-                  </table>
+            <div class="rush-box">
+              <div class="record-img"></div>
+              <div class="rush-purchase">
+                <div class="money-box">
+                  <div class="title-img">
+                    <p>抢购记录</p>
+                  </div>
+                  <div v-if="robMoneyList.length">
+                    <div
+                      class="record-main"
+                      v-for="item in robMoneyList"
+                    >
+                      <table
+                        cellspacing="0"
+                        cellpadding="0"
+                        id="rush-style"
+                      >
+                        <tr>
+                          <td>币种</td>
+                          <td>价格</td>
+                          <td>预购额</td>
+                        </tr>
+                        <tr>
+                          <td>{{ item.saleCoin }}</td>
+                          <td>{{ item.transactionPrice }}</td>
+                          <td>{{ item.saleAmount }}</td>
+                        </tr>
+                      </table>
+                      <table
+                        cellspacing="0"
+                        cellpadding="0"
+                        id="rush-style1"
+                      >
+                        <tr>
+                          <td>抢购时间</td>
+                          <td>空投币种</td>
+                          <td>状态</td>
+                        </tr>
+                        <tr>
+                          <td>{{ formatTime(item.lockTime) }}</td>
+                          <td>{{ item.airDropCoin }}</td>
+                          <td>{{ item.actStatus == 'I'?'待开奖':item.actStatus=='S'?'成功':'失败' }}</td>
+                        </tr>
+                      </table>
+                      <table
+                        cellspacing="0"
+                        cellpadding="0"
+                        id="rush-style2"
+                      >
+                        <tr>
+                          <td>实购额</td>
+                          <td>空投额度</td>
+                        </tr>
+                        <tr>
+                          <td>{{ item.actStatus=='I'?'':item.actualSaleAmount }}</td>
+                          <td>{{ item.actStatus=='I'?'':item.airDropAmount }}</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <p class="kong1" v-else>暂无数据</p>
                 </div>
+
               </div>
-              <p class="kong1" v-else>暂无数据</p>
             </div>
+
           </div>
           <div class="service">
             <div class="service-box">
@@ -274,63 +290,59 @@
     pageSize,
     pageNo
   })
-const getParams = FixAraible(10, '')
+const getParams = FixAraible(2, '')
 export default {
     data() {
       return {
-        modal3: false,
-        loading: false,
-        loadingButton: false,
-        pageNo: 1,
-        pageSize: 10,
-        totalElement: 0,
+        savePageNo: 1,
+        savePageSize: 10,
+        saveTotalElement: 0,
+        modal3: false, // 错误消息提示
+        loading: false, // 存币抢币记录 loading
+        loadingButton: false, // 点击按钮 loading
         lockAmount: '', // 存币数量
         lockAdvance: '', // 预购数量
-        // 存币记录
-        saveMoneyList: [],
-        // 抢购记录
-        robMoneyList: [],
-        reserveTime: '60',
-        reserveInteval: null,
-        day: 0,
-        hr: 0,
-        min: 0,
-        sec: 0,
-        totalTime: '',
-        progressBar: '',
-        coinInfo: {}, // 币种详细信息
+        saveMoneyList: [], // 存币记录
+        robMoneyList: [], // 抢购记录
+        day: 0, // 天
+        time: 0, // 时
+        minute: 0, // 分
+        second: 0, // 秒
+        totalTime: '', // 总秒数
+        progressBar: '', // 进度条比例
+        /*币种可存最大最小*/
+        coinInfo: {
+          lockMinimum: 0,
+          lockHighest: 0
+        },
         lockCoinUnit: '', // 币种
         userWalletBalance: '--', // 币种余额
         snapStatus: false, // 抢购状态
-        skylight: true,
-        skylightText: '',
-        skylightText1: '',
-        skylightTextModal3: '',
-        timer: '',
+        skylightText: '', // 存币错误消息提示
+        skylightText1: '', // 抢币错误消息提示
+        skylightTextModal3: '', // 错误消息提示
         coinBalance: '', // 可抢币余额
-        endtime: '',
+        endtime: '', // 结束时间
         balanceData: {
           balance: '--',
           maxSaleAmount: '--',
           raiseCoin: 'BC',
           saleCoin: 'BTC'
         }, // 币种信息
-        token: ''
       }
     },
     created: function() {
-      this.getUrlParam()
-      // alert(this.token)
+      this.getCoin() // 币种详细信息 存币
+      this.getCoinRob() // 币种详细信息 抢币
       this.countdown()
       /* 需判断用户是否登录*/
-      if (this.token || this.isLogin) {
+      if (this.isLogin) {
         this.getSaveDataList() // 数据列表存币
         this.getCoinBalance() // 币种余额 存币
         this.getRobDataList() // 数据列表 抢币
         this.snapLines() // 钱包余额和最多抢购额度 抢币
       }
-      this.getCoin() // 币种详细信息 存币
-      this.getCoinRob() // 币种详细信息 抢币
+
     },
     mounted: function() {},
     methods: {
@@ -354,21 +366,20 @@ export default {
         }
       },
       // 获取APP token
-      getUrlParam() {
-        var url1 = window.location.href
-        const theRequest = new Object()
-        if (url1.indexOf('?') != -1) {
-          const str = url1.substr(1)
-          const strs = str.split('&')
-          console.log(str.length)
-          for (let i = 0; i < strs.length; i++) {
-            theRequest[0] = unescape(strs[i].split('=')[1])
-          }
-        }
-        alert(theRequest[0])
-        this.token = theRequest[0];
-        // localStorage.setItem('TOKEN', this.token)
-      },
+      // getUrlParam() {
+      //   var url1 = window.location.href
+      //   const theRequest = new Object()
+      //   if (url1.indexOf('?') != -1) {
+      //     const str = url1.substr(1)
+      //     const strs = str.split('&')
+      //     console.log(str.length)
+      //     for (let i = 0; i < strs.length; i++) {
+      //       theRequest[0] = unescape(strs[i].split('=')[1])
+      //     }
+      //   }
+      //   this.token = theRequest[0];
+      //   localStorage.setItem('TOKEN', this.token)
+      // },
       // 正则校验只能输入数字和小数点
       text () {
         this.clearNoNum()
@@ -410,11 +421,10 @@ export default {
         /* 总秒数*/
         this.totalTime = (day1 + hr1 + min1 + sec1)
         if (this.totalTime > 0) {
-          this.day = day
-          this.hr = hr > 9 ? hr : '0' + hr
-          this.min = min > 9 ? min : '0' + min
-          this.sec = sec > 9 ? sec : '0' + sec
-          console.log(this.day, this.hr, this.min, this.sec)
+          this.day = day > 9 ? day : '0' + day
+          this.time = hr > 9 ? hr : '0' + hr
+          this.minute = min > 9 ? min : '0' + min
+          this.second = sec > 9 ? sec : '0' + sec
           iTime = setTimeout(function() {
             that.countdown()
           }, 1000)
@@ -423,7 +433,7 @@ export default {
         this.progressBar = this.totalTime / num * 100
         if (this.progressBar == 0) {
           clearTimeout(iTime)
-          this.sec = '00'
+          this.second = '00'
         }
       },
       // 币种详细信息 存币
@@ -435,12 +445,12 @@ export default {
             this.loading = false
             this.coinInfo = resp.data[0]
           /* 需判断用户是否登录*/
-            if (this.token || this.isLogin) {
+            if (this.isLogin) {
               this.lockCoinUnit = resp.data[0].lockCoinUnit
               this.getCoinBalance()
             }
           } else {
-            this.$Message.error(resp.message)
+            // this.$Message.error(resp.message)
             return false
           }
         })
@@ -467,12 +477,21 @@ export default {
         }, 1500)
       },
       buyLockCoin(state) {
-        // localStorage.setItem('TOKEN', this.token)
         // 判断是否登录
-        if (this.token || this.isLogin) {
           if (state == 'buy') {
+            if (!this.isLogin) {
+              this.modal3 = true
+              this.skylightTextModal3 = (this.$t('common.logintip'))
+              this.setTime()
+              return false
+            }
             if (!this.lockAmount) {
               this.skylightText = this.$t('common.loginInfo')
+              return false
+            }
+            if (this.lockAmount < this.coinInfo.lockMinimum || this.lockAmount > this.coinInfo.lockHighest) {
+              this.$Message.error('您输入的锁仓金额小于500最小值,或者大于5000000最大值，请重新输入')
+              this.lockAmount = ''
               return false
             }
             const params = {}
@@ -498,6 +517,24 @@ export default {
               }
             })
           } else if (state == 'rush') {
+            if (!this.isLogin) {
+              this.modal3 = true
+              this.skylightTextModal3 = (this.$t('common.logintip'))
+              this.setTime()
+              return false
+            }
+            if (this.progressBar !== 0) {
+              this.modal3 = true
+              this.skylightTextModal3 = '活动暂未开始'
+              this.setTime()
+              return false
+            }
+            if (this.coinBalance < 0) {
+              this.modal3 = true
+              this.skylightTextModal3 = '活动已结束'
+              this.setTime()
+              return false
+            }
             if (!this.lockAdvance) {
               this.skylightText1 = this.$t('common.loginInfo1')
               return false
@@ -514,7 +551,6 @@ export default {
                 this.skylightTextModal3 = resp.message
                 this.setTime()
                 this.lockAmount = ''
-                // this.snapStatus = true // 抢购状态
                 this.snapLines()
                 this.getRobDataList()
               } else {
@@ -525,15 +561,10 @@ export default {
               }
             })
           }
-        } else {
-          this.modal3 = true
-          this.skylightTextModal3 = (this.$t('common.logintip'))
-          this.setTime()
-        }
       },
       // 数据列表 存币
       getSaveDataList() {
-        const params = getParams(this.pageNo)
+        const params = getParams(this.savePageNo)
         this.$http.post(this.host + '/wallet/lockCoinWallet/record', params).then(res => {
           const resp = res.body
           if (resp.code == 0) {
@@ -554,11 +585,12 @@ export default {
             this.loading = false
             this.coinBalance = resp.data.remain
             this.endtime = resp.data.startTime
-            if (this.coinBalance !== 0 && this.token){
+            this.countdown()
+           /* if (this.coinBalance >= 0  && this.isLogin){
               setTimeout(() => {
                 this.getCoinRob()
               }, 1000);
-            }
+            }*/
             console.log(this.coinBalance)
           } else {
             this.$Message.error(resp.message)
@@ -584,7 +616,6 @@ export default {
 
       // 数据列表 抢币
       getRobDataList() {
-        // const params = getParamsRob(this.savePageNo);
         const id = 1
         this.$http.get(this.host + `/wallet/activity/lower-price/records/${id}`).then(res => {
           const resp = res.body
@@ -598,7 +629,6 @@ export default {
     watch: {
       countdown() {
         if (this.$store.getters.member.id) {
-          // console.log(this.totalTime)
           if (this.progressBar == 0) {
             var iTime
             iTime = setTimeout(function() {
@@ -651,13 +681,6 @@ export default {
           title: this.$t('common.fund.interests'),
           key: 'interests'
         })
-      // arr.push({
-      //   title: this.$t('pointPage.operation'),
-      //   key: "operation",
-      //   render(h, params){
-      //     return h("span", {}, self.$store.state.lang == 'English'?params.row.operationEnglish:params.row.operation);
-      //   }
-      // });
         return arr
       }
     },
@@ -841,21 +864,6 @@ export default {
                   float: right;
                 }
               }
-              /*.footer-info {*/
-              /*  text-align: center;*/
-              /*  margin-top: 0.3rem;*/
-              /*  button {*/
-              /*    width: 100%;*/
-              /*    height: 0.8rem;*/
-              /*    color: #fff;*/
-              /*    border: 0;*/
-              /*    border-radius: 0;*/
-              /*    font-size: 0.25rem;*/
-              /*    text-align: center;*/
-              /*    background: #5C52EB;*/
-              /*    cursor: pointer;*/
-              /*  }*/
-              /*}*/
             }
           }
           .activity-rules {
@@ -871,8 +879,7 @@ export default {
                 position: relative;
                 .info-title {
                   height: 1rem;
-                  background: url("
-https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong4.png") no-repeat center;
+                  background: url("https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong4.png") no-repeat center;
                   background-position: center;
                   background-size: cover;
                   font-weight:bold;
@@ -923,17 +930,9 @@ https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong4.png") no-repeat cent
                 }
               }
             }
-
           }
         }
-
         footer {
-          /*.record-list {*/
-          /*  height: 10.7rem;*/
-          /*}*/
-          /*.record-list-1 {*/
-          /*  height: 7.1rem;*/
-          /*}*/
           .kong {
             font-size: 0.3rem;
             text-align: center;
@@ -950,111 +949,138 @@ https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong4.png") no-repeat cent
           .record-list-1 {
             padding: 0 5%;
             background: #4638d8;
+            .record-img {
+              margin-top: -2px;
+              height: 0.32rem;
+              background: url("../../assets/img/bd/tuceng.png") 100% 100% no-repeat;
+              background-position: initial;
+              background-size: 100% 100%;
+            }
             /*存币记录*/
             .save-money {
               margin-top: -0.02rem;
-              min-height: 7.5rem;
-              background: #4C38D8 url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong2.png') 100% 100% no-repeat;
-              background-position: initial;
-              background-size: 100% 100%;
+              min-height: 6rem;
+              border-bottom-right-radius: 0.2rem;
+              border-bottom-left-radius: 0.2rem;
+              border-right: 0.201rem solid #5900d6;
+              border-left: 0.201rem solid #5900d6;
+              border-bottom: 0.35rem solid #5900d6;
+              background: #5900d6;
             }
             /*抢购记录*/
-            .rush-purchase {
-              margin-top: 0.7rem;
-              min-height: 3.95rem;
-              background: #4C38D8 url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong3.png') 100% 100% no-repeat;
-              background-position: initial;
-              background-size: 100% 100%;
-              .record-main {
-                margin-top: 0.2rem;
-                #rush-style,
-                #rush-style1 {
-                  tr {
-                    display: flex;
-                    &:first-child {
+            .rush-box {
+              margin-top: 1rem;
+              .rush-purchase {
+                border-bottom-right-radius: 0.2rem;
+                border-bottom-left-radius: 0.2rem;
+                border-right: 0.201rem solid #5900d6;
+                border-left: 0.201rem solid #5900d6;
+                border-bottom: 0.35rem solid #5900d6;
+                background: #5900d6;
+                .record-main {
+                  #rush-style,
+                  #rush-style1 {
+                    tr {
+                      display: flex;
+                      /*&:first-child {*/
+                      /*  td {*/
+                      /*    &:nth-child(2) {*/
+                      /*      text-align: center;*/
+                      /*    }*/
+                      /*  }*/
+                      /*}*/
+                      /*&:last-child {*/
+                      /*  td {*/
+                      /*    &:nth-child(2) {*/
+                      /*      padding-left: 0.9rem;*/
+                      /*    }*/
+                      /*  }*/
+                      /*}*/
                       td {
-                        &:nth-child(2) {
-                          text-align: center;
-                        }
+                        flex: 1;
                       }
-                    }
-                    &:last-child {
-                      td {
-                        &:nth-child(2) {
-                          padding-left: 0.9rem;
-                        }
-                      }
-                    }
-                    td {
-                      flex: 1;
                     }
                   }
                 }
               }
             }
+
             .save-money,
             .rush-purchase {
-              .title-img {
-                text-align: center;
-                color: #fff;
-                font-size: 0.3rem;
-                line-height: 0.75rem;
-              }
-              .record-main {
-                padding: 0.5rem 8% 0;
-                &:last-child {
-                  table {
-                    &:last-child {
-                      border-bottom: 0;
-                      padding-bottom: 1rem;
-                    }
-                  }
+              .money-box {
+                background: #4300a0;
+                border-radius: 0.2rem;
+                position: relative;
+                .title-img {
+                  text-align: center;
+                  color: #fff;
+                  font-size: 0.3rem;
+                  line-height: 0.75rem;
+                  background: url("../../assets/img/bd/yi1.png") 100% 100% no-repeat;
+                  background-position: initial;
+                  background-size: 100% 100%;
+                  position: absolute;
+                  width: 44%;
+                  left: 30%;
+                  top: -0.55rem;
                 }
-                table {
-                  width: 100%;
-                  font-size: 0.29rem;
-                  line-height: 0.45rem;
+                .record-main {
+                  padding: 0.5rem 8% 0;
                   &:last-child {
-                    margin-top: 0.15rem;
-                    border-bottom: 0.01rem dashed #5900D6;
-                    padding-bottom: 0.5rem;
-                  }
-                  tr {
-                    color: #FFFFFF;
-                    display: flex;
-                    td {
-                      flex: 1;
-                    }
-                    &:first-child {
-                      td {
-                        color: #B2A6DC;
-                        &:nth-child(2) {
-                          padding-left: 0.5rem;
-                        }
-                        &:last-child {
-                          text-align: right;
-                        }
+                    table {
+                      &:last-child {
+                        border-bottom: 0;
+                        padding-bottom: 0.5rem;
                       }
                     }
+                  }
+                  table {
+                    width: 100%;
+                    font-size: 0.29rem;
+                    line-height: 0.45rem;
                     &:last-child {
+                      margin-top: 0.15rem;
+                      border-bottom: 0.01rem dashed #5900D6;
+                      padding-bottom: 0.5rem;
+                    }
+                    tr {
+                      color: #FFFFFF;
+                      display: flex;
                       td {
-                        &:nth-child(2) {
-                          padding-left: 9%;
+                        flex: 1;
+                      }
+                      &:first-child {
+                        td {
+                          color: #B2A6DC;
+                          &:nth-child(2) {
+                            padding-left: 0.5rem;
+                          }
+                          &:last-child {
+                            text-align: right;
+                          }
                         }
-                        &:last-child {
-                          text-align: right;
+                      }
+                      &:last-child {
+                        td {
+                          &:nth-child(2) {
+                            padding-left: 9%;
+                          }
+                          &:last-child {
+                            text-align: right;
+                          }
                         }
                       }
                     }
                   }
-                }
-                p {
-                  width: 100%;
-                  border: 0.01rem dashed #5900D6;
-                  border-top: 0;
-                  margin-top: 0.4rem;
+                  p {
+                    width: 100%;
+                    border: 0.01rem dashed #5900D6;
+                    border-top: 0;
+                    margin-top: 0.4rem;
+                  }
                 }
               }
+
             }
           }
           .service {
@@ -1068,7 +1094,7 @@ https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong4.png") no-repeat cent
             .service-box {
               .box-text {
                 width: 100%;
-                padding: 27% 30% 0;
+                padding: 23% 30% 0;
                 img {
                   width: 100%;
                 }
@@ -1155,7 +1181,6 @@ https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong4.png") no-repeat cent
     }
 
     .ivu-progress-show-info .ivu-progress-outer {
-      /* padding-right: 55px; */
       margin-right: -55px;
     }
     .ivu-progress-inner {
@@ -1164,7 +1189,6 @@ https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/yidong4.png") no-repeat cent
       overflow: hidden;
       .ivu-progress-bg {
         height: 38px !important;
-        /*background: linear-gradient(0deg, #fff 0%,#000 100%);*/
         background:linear-gradient(45deg, rgba(49, 107, 239, .6), rgba(20, 56, 240, .7));
       }
     }
