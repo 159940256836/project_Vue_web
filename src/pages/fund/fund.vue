@@ -28,7 +28,7 @@
               @keyup.native="clearNoNum('lockAmount')"
               :min="coinInfo.lockMinimum"
               :max="coinInfo.lockHighest"
-              :placeholder="(!coinInfo? '0':Number(coinInfo.lockMinimum)) + '～' + (!coinInfo?'0':Number(coinInfo.lockHighest))"
+              :placeholder="Number(coinInfo.lockMinimum) + '～' + Number(coinInfo.lockHighest)"
             />
             <span class="coinName">{{ coinInfo.lockCoinUnit }}</span>
           </div>
@@ -38,11 +38,10 @@
           <div class="footer-info">
             <Button
               @click="buyLockCoin('buy')"
-              disabled
               :loading="loadingButton"
             >
-<!--              立即存币-->
-              活动暂未开始
+              立即存币
+              <!--活动暂未开始-->
             </Button>
           </div>
         </div>
@@ -103,7 +102,7 @@
                   :loading="loadingButton"
                   :disabled="coinBalance < 0||progressBar!==0"
                 >
-                  {{ coinBalance < 0?'活动结束':'立即抢购' }}
+                  {{ coinBalance < 0?'活动结束':'活动未开始' }}
                 </Button>
               </div>
             </div>
@@ -308,7 +307,10 @@ export default {
         sec: 0,
         totalTime: '',
         progressBar: '',
-        coinInfo: {}, // 币种详细信息
+        coinInfo: {
+          lockMinimum: 0,
+          lockHighest: 0
+        }, // 币种详细信息
         lockCoinUnit: '', // 币种
         userWalletBalance: '--', // 币种余额
         snapStatus: false, // 抢购状态
@@ -327,7 +329,7 @@ export default {
       if (name == '/fund') {
         this.getCoin() // 币种详细信息 存币
         this.getCoinRob() // 币种详细信息 抢币
-
+        this.countdown()
         if (this.isLogin) {
           // console.log(name, this.isLogin)
           this.getSaveDataList() // 数据列表存币
@@ -390,7 +392,7 @@ export default {
         // 到期时间
         // const end = Date.parse(new Date('2019/08/20 21:00:00'))
          const end = this.endtime
-       console.log(end, this.endtime)
+       // console.log(end, this.endtime)
        // 当前时间
        const now = Date.parse(new Date())
         // 开始时间
@@ -426,7 +428,7 @@ export default {
 
         /* 进度条比例 = 总秒数/当前秒数 *100*/
        this.progressBar = this.totalTime / num * 100
-        console.log(this.progressBar)
+        // console.log(this.progressBar)
         if (this.progressBar < 0) {
           this.progressBar = 0
         }
@@ -440,6 +442,7 @@ export default {
      getCoin() {
        this.$http.get(this.host + `/wallet/lockCoinWallet/getList`).then(res => {
          const resp = res.body
+         console.log(resp)
          if (resp.code == 0) {
            this.loading = false
            this.coinInfo = resp.data[0]
@@ -449,7 +452,8 @@ export default {
            }
            console.log(this.coinInfo, this.lockCoinUnit)
          } else {
-           this.$Message.error(resp.message)
+           console.log(this.coinInfo)
+           // this.$Message.error(resp.message)
            return false
          }
        })
@@ -478,7 +482,7 @@ export default {
               return false
             }
             const params = {}
-            params['id'] = this.coinInfo.id
+            params['id'] = this.coinInfo.id?this.coinInfo.id:'0'
             params['amount'] = this.lockAmount
             this.loadingButton = true
             this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
@@ -585,23 +589,22 @@ export default {
             this.coinBalance = resp.data.remain
             this.endtime = resp.data.startTime
             this.countdown()
-            const name = this.$route.path
-            if (name == '/fund') {
+            // const name = this.$route.path
+            /*if (name == '/fund') {
               if (this.coinBalance < 0 && this.isLogin){
                 setTimeout(() => {
                   this.getCoinRob()
                 }, 1000);
               }
-            }
+            }*/
           } else {
             this.$Message.error(resp.message)
             return false
           }
         })
-
       },
       // 钱包余额和最多抢购额度 抢币
-     snapLines() {
+      snapLines() {
        const id = 1
        this.$http.get(this.host + `/wallet/activity/lower-price/wallet/result/${id ? 1 : ''}`).then(res => {
          const resp = res.body
