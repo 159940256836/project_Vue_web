@@ -103,7 +103,8 @@
                   :loading="loadingButton"
                   :disabled="coinBalance < 0||progressBar!==0"
                 >
-                  {{ coinBalance < 0?'活动结束':'立即抢购' }}
+                  <!-- {{ coinBalance < 0?'活动结束':'立即抢购' }} -->
+                  {{ coinBalance < 0?'活动结束':'活动暂未开始' }}
                 </Button>
               </div>
             </div>
@@ -284,86 +285,86 @@ const FixAraibleRob = (pageSize) => (pageNo) => ({
  })
 const getParamsRob = FixAraibleRob(10, '')
 export default {
-    data() {
-      return {
-        loading: false,
-        loadingButton: false,
+   data() {
+     return {
+       loading: false,
+       loadingButton: false,
         /* 存币分页*/
-        savePageNo: 1,
-        savePageSize: 10,
-        saveTotalElement: 0,
+       savePageNo: 1,
+       savePageSize: 10,
+       saveTotalElement: 0,
         // 抢币分页
-        robPageNo: 1,
-        robPageSize: 10,
-        robTotalElement: 0,
-        lockAmount: '', // 存币数量
-        lockAdvance: '', // 预购数量
-        saveMoneyList: [],
-        robMoneyList: [],
-        reserveTime: '60',
-        reserveInteval: null,
-        day: 0,
-        hr: 0,
-        min: 0,
-        sec: 0,
-        totalTime: '',
-        progressBar: '',
-        coinInfo: {}, // 币种详细信息
-        lockCoinUnit: '', // 币种
-        userWalletBalance: '--', // 币种余额
-        snapStatus: false, // 抢购状态
-        coinBalance: '', // 可抢币余额
-        endtime: '',
-        balanceData: {
-          balance: '--',
-          maxSaleAmount: '--',
-          raiseCoin: 'BC',
-          saleCoin: 'BTC'
-        } // 可抢币余额
-      }
-    },
-    created() {
-      const name = this.$route.path
-      if (name == '/fund') {
-        this.getCoin() // 币种详细信息 存币
-        this.getCoinRob() // 币种详细信息 抢币
+       robPageNo: 1,
+       robPageSize: 10,
+       robTotalElement: 0,
+       lockAmount: '', // 存币数量
+       lockAdvance: '', // 预购数量
+       saveMoneyList: [],
+       robMoneyList: [],
+       reserveTime: '60',
+       reserveInteval: null,
+       day: 0,
+       hr: 0,
+       min: 0,
+       sec: 0,
+       totalTime: '',
+       progressBar: '',
+       coinInfo: {}, // 币种详细信息
+       lockCoinUnit: '', // 币种
+       userWalletBalance: '--', // 币种余额
+       snapStatus: false, // 抢购状态
+       coinBalance: '', // 可抢币余额
+       endtime: '',
+       balanceData: {
+         balance: '--',
+         maxSaleAmount: '--',
+         raiseCoin: 'BC',
+         saleCoin: 'BTC'
+       } // 可抢币余额
+     }
+   },
+   created() {
+     const name = this.$route.path
+     if (name == '/fund') {
+       this.getCoin() // 币种详细信息 存币
+       this.getCoinRob() // 币种详细信息 抢币
 
-        if (this.isLogin) {
+       if (this.isLogin) {
           // console.log(name, this.isLogin)
-          this.getSaveDataList() // 数据列表存币
-          this.getCoinBalance() // 币种余额 存币
-          this.getRobDataList() // 数据列表 抢币
-          this.snapLines() // 钱包余额和最多抢购额度 抢币
-        }
-      }
-    },
-    mounted: function() {},
-    methods: {
-      //控制只能输入小数点后6位
-      clearNoNum(type) {
-        this.skylightText1 = '';
-        this.skylightText = '';
-        console.log(type)
-        if (type == 'lockAmount') {
-          this.lockAmount = this.lockAmount.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
-          this.lockAmount = this.lockAmount.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
-          this.lockAmount = this.lockAmount.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-          this.lockAmount = this.lockAmount.replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/, '$1$2.$3');//只能输入两个小数
-          if (this.lockAmount.indexOf(".") < 0 && this.lockAmount != "") {
-            //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
-            this.lockAmount = parseFloat(this.lockAmount);
-          }
-        } else {
-          this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
-          this.lockAdvance = this.lockAdvance.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
-          this.lockAdvance = this.lockAdvance.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-          this.lockAdvance = this.lockAdvance.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');//只能输入两个小数
-          if (this.lockAdvance.indexOf(".") < 0 && this.lockAdvance != "") {
-            //以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
-            this.lockAdvance = parseFloat(this.lockAdvance);
-          }
-        }
-      },
+         this.getSaveDataList() // 数据列表存币
+         this.getCoinBalance() // 币种余额 存币
+         this.getRobDataList() // 数据列表 抢币
+         this.snapLines() // 钱包余额和最多抢购额度 抢币
+       }
+     }
+   },
+   mounted: function() {},
+   methods: {
+      // 控制只能输入小数点后6位
+     clearNoNum(type) {
+       this.skylightText1 = ''
+       this.skylightText = ''
+       console.log(type)
+       if (type == 'lockAmount') {
+         this.lockAmount = this.lockAmount.replace(/[^\d.]/g, '')  // 清除“数字”和“.”以外的字符
+         this.lockAmount = this.lockAmount.replace(/\.{2,}/g, '.') // 只保留第一个. 清除多余的
+         this.lockAmount = this.lockAmount.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
+         this.lockAmount = this.lockAmount.replace(/^(\-)*(\d+)\.(\d\d\d\d).*$/, '$1$2.$3')// 只能输入两个小数
+         if (this.lockAmount.indexOf('.') < 0 && this.lockAmount != '') {
+            // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+           this.lockAmount = parseFloat(this.lockAmount)
+         }
+       } else {
+         this.lockAdvance = this.lockAdvance.replace(/[^\d.]/g, '')  // 清除“数字”和“.”以外的字符
+         this.lockAdvance = this.lockAdvance.replace(/\.{2,}/g, '.') // 只保留第一个. 清除多余的
+         this.lockAdvance = this.lockAdvance.replace('.', '$#$').replace(/\./g, '').replace('$#$', '.')
+         this.lockAdvance = this.lockAdvance.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3')// 只能输入两个小数
+         if (this.lockAdvance.indexOf('.') < 0 && this.lockAdvance != '') {
+            // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+           this.lockAdvance = parseFloat(this.lockAdvance)
+         }
+       }
+     },
       // ScreenWidth(){
       //   if (screen.width < 950){
       //     this.$router.push('/mobileTerminalFund')
@@ -389,12 +390,12 @@ export default {
        let iTime
         // 到期时间
         // const end = Date.parse(new Date('2019/08/20 21:00:00'))
-         const end = this.endtime
+       const end = this.endtime
        console.log(end, this.endtime)
        // 当前时间
        const now = Date.parse(new Date())
         // 开始时间
-       const start = Date.parse(new Date('2019/08/10 10:25:00'))
+       const start = Date.parse(new Date('2019/08/14 22:00:00'))
         /* 剩余时间 = 到期时间 - 当前时间*/
        const msec = end - now
         /* 当前秒数 = (到期时间 - 开始时间)*0.001*/
@@ -426,15 +427,15 @@ export default {
 
         /* 进度条比例 = 总秒数/当前秒数 *100*/
        this.progressBar = this.totalTime / num * 100
-        console.log(this.progressBar)
-        if (this.progressBar < 0) {
-          this.progressBar = 0
-        }
-        if (this.progressBar == 0) {
-          this.sec = '00'
-          clearTimeout(iTime)
-        }
-      },
+       console.log(this.progressBar)
+       if (this.progressBar < 0) {
+         this.progressBar = 0
+       }
+       if (this.progressBar == 0) {
+         this.sec = '00'
+         clearTimeout(iTime)
+       }
+     },
       /** *******存币***********/
       // 币种详细信息 存币
      getCoin() {
@@ -471,53 +472,53 @@ export default {
       // 接口数据 存币 抢币
      buyLockCoin(state) {
         // 判断是否登录
-        if (this.isLogin) {
-          if (state == 'buy') {
-            if (!this.lockAmount) {
-              this.$Message.error(this.$t('common.loginInfo'))
-              return false
-            }
-            const params = {}
-            params['id'] = this.coinInfo.id
-            params['amount'] = this.lockAmount
-            this.loadingButton = true
-            this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
-              const resp = res.body
-              if (resp.code == 0) {
-                this.loadingButton = false
-                this.$Message.success(resp.message)
-                this.lockAmount = ''
+       if (this.isLogin) {
+         if (state == 'buy') {
+           if (!this.lockAmount) {
+             this.$Message.error(this.$t('common.loginInfo'))
+             return false
+           }
+           const params = {}
+           params['id'] = this.coinInfo.id
+           params['amount'] = this.lockAmount
+           this.loadingButton = true
+           this.$http.post(this.host + '/wallet/lockCoinWallet/buyLockCoin', params).then(res => {
+             const resp = res.body
+             if (resp.code == 0) {
+               this.loadingButton = false
+               this.$Message.success(resp.message)
+               this.lockAmount = ''
                 // this.snapStatus = true // 抢购状态
-                this.snapLines()
-                this.getCoinBalance()
-                this.getSaveDataList()
-              } else {
-                this.$Message.error(resp.message)
-                this.loadingButton = false
-              }
-            })
-          } else if (state == 'rush') {
-            if (!this.lockAdvance) {
-              this.$Message.error(this.$t('common.loginInfo1'))
-              return false
-            }
-            const params = {}
-            params['id'] = 1
-            params['amount'] = this.lockAdvance
-            this.loadingButton = true
-            this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
-              const resp = res.body
-              if (resp.code == 0) {
+               this.snapLines()
+               this.getCoinBalance()
+               this.getSaveDataList()
+             } else {
+               this.$Message.error(resp.message)
+               this.loadingButton = false
+             }
+           })
+         } else if (state == 'rush') {
+           if (!this.lockAdvance) {
+             this.$Message.error(this.$t('common.loginInfo1'))
+             return false
+           }
+           const params = {}
+           params['id'] = 1
+           params['amount'] = this.lockAdvance
+           this.loadingButton = true
+           this.$http.post(this.host + '/wallet/activity/lower-price/order', params).then(res => {
+             const resp = res.body
+             if (resp.code == 0) {
                 this.loadingButton = false
                 this.$Message.success(resp.message)
                 this.lockAdvance = ''
                 // this.snapStatus = true // 抢购状态
-               this.snapLines()
-               this.getRobDataList()
-             } else {
-               this.$Message.error(resp.message)
+                this.snapLines()
+                this.getRobDataList()
+              } else {
+                this.$Message.error(resp.message)
                 this.loadingButton = false
-             }
+              }
            })
          }
        } else {
@@ -576,30 +577,29 @@ export default {
       //   }, 1000)
       // },
       // 币种详细信息 可抢币
-      getCoinRob() {
-        const id = 1
-        this.$http.get(this.host + `/wallet/activity/lower-price/remain/${id ? 1 : ''}`).then(res => {
-          const resp = res.body
-          if (resp.code == 0) {
-            this.loading = false
-            this.coinBalance = resp.data.remain
-            this.endtime = resp.data.startTime
-            this.countdown()
-            const name = this.$route.path
-            if (name == '/fund') {
-              if (this.coinBalance < 0 && this.isLogin){
-                setTimeout(() => {
+     getCoinRob() {
+       const id = 1
+       this.$http.get(this.host + `/wallet/activity/lower-price/remain/${id ? 1 : ''}`).then(res => {
+         const resp = res.body
+         if (resp.code == 0) {
+           this.loading = false
+           this.coinBalance = resp.data.remain
+           this.endtime = resp.data.startTime
+           this.countdown()
+           const name = this.$route.path
+           if (name == '/fund') {
+             if (this.coinBalance < 0 && this.isLogin) {
+               setTimeout(() => {
                   this.getCoinRob()
-                }, 1000);
-              }
-            }
-          } else {
-            this.$Message.error(resp.message)
-            return false
-          }
-        })
-
-      },
+                }, 1000)
+             }
+           }
+         } else {
+           this.$Message.error(resp.message)
+           return false
+         }
+       })
+     },
       // 钱包余额和最多抢购额度 抢币
      snapLines() {
        const id = 1
