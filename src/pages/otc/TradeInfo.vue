@@ -156,189 +156,186 @@
     </div>
 </template>
 <script>
-import $ from "@js/jquery.min.js";
+import $ from '@js/jquery.min.js'
 export default {
   components: {},
   data() {
     return {
-      usernameS: "",
-      text1: "",
-      text2: "",
+      usernameS: '',
+      text1: '',
+      text2: '',
       btnDisabled: false,
       submitBtn: false,
-      btnType: "",
-      type: "",
-      remark: "",
+      btnType: '',
+      type: '',
+      remark: '',
       user: {
-          username:"aaa"
+        username: 'aaa'
       },
       // price: '',
-      buyPrice: "",
+      buyPrice: '',
       nuyNum: 0,
       minLimit: 100,
       maxLimit: 1000,
       // number:0.6,
       advertiseType: 1
-    };
+    }
   },
   methods: {
     update() {
       // this.price = '100';
       // this.user.advertiseType=1
     },
-    keyEvent1(event){
-       let val=$(event.target).val();
-            if(val!=""){
-                let r = /^[0-9]+\.?[0-9]{0,9}$/;
-                let flag =r.test(val)
-                if(!flag){
-                   this.buyPrice=""
-                }
-              }
-    },keyEvent2(event){
-       let val=$(event.target).val();
-            if(val!=""){
-                let r = /^[0-9]+\.?[0-9]{0,9}$/;
-                let flag =r.test(val)
-                if(!flag){
-                   this.nuyNum=""
-                }
-              }
+    keyEvent1(event) {
+      const val = $(event.target).val()
+      if (val != '') {
+        const r = /^[0-9]+\.?[0-9]{0,9}$/
+        const flag = r.test(val)
+        if (!flag) {
+          this.buyPrice = ''
+        }
+      }
+    }, keyEvent2(event) {
+      const val = $(event.target).val()
+      if (val != '') {
+        const r = /^[0-9]+\.?[0-9]{0,9}$/
+        const flag = r.test(val)
+        if (!flag) {
+          this.nuyNum = ''
+        }
+      }
     },
     transform1() {
-
-       if (!Number.isNaN(Number(this.buyPrice))) {
-            this.nuyNum = this.round(this.div(this.buyPrice, this.priceNow), 8);
-            if (/^\d+(\.\d{1,2})?$/.test(this.buyPrice)) {
-                   this.submitBtn = true;
-              } else {
-                      this.submitBtn = false;
-                      this.text1 = this.$t("otc.tradeinfo.warning1");
-                    }
-                  } else {
-                      this.text1 =
-                        this.$t("otc.tradeinfo.warning2") +
+      if (!Number.isNaN(Number(this.buyPrice))) {
+        this.nuyNum = this.round(this.div(this.buyPrice, this.priceNow), 8)
+        if (/^\d+(\.\d{1,2})?$/.test(this.buyPrice)) {
+          this.submitBtn = true
+        } else {
+          this.submitBtn = false
+          this.text1 = this.$t('otc.tradeinfo.warning1')
+        }
+      } else {
+        this.text1 =
+                        this.$t('otc.tradeinfo.warning2') +
                         this.user.minLimit +
-                        "~" +
-                        this.user.maxLimit;
-                      this.submitBtn = false;
-                      return false;
-       }
-
-
+                        '~' +
+                        this.user.maxLimit
+        this.submitBtn = false
+        return false
+      }
     },
     transform2() {
       if (!Number.isNaN(Number(this.nuyNum))) {
-        this.buyPrice = this.round(this.mul(this.nuyNum, this.priceNow), 8);
+        this.buyPrice = this.round(this.mul(this.nuyNum, this.priceNow), 8)
         if (this.nuyNum <= this.user.number) {
           if (/^\d+(\.\d{1,8})?$/.test(this.nuyNum)) {
-            this.submitBtn = true;
+            this.submitBtn = true
           } else {
-            this.submitBtn = false;
-            this.text2 = this.$t("otc.tradeinfo.warning3");
+            this.submitBtn = false
+            this.text2 = this.$t('otc.tradeinfo.warning3')
           }
         } else {
-          this.submitBtn = false;
-          return false;
+          this.submitBtn = false
+          return false
         }
       } else {
         this.text2 =
-          this.$t("otc.tradeinfo.warning4") +
+          this.$t('otc.tradeinfo.warning4') +
           this.minNum +
-          "~" +
-          this.user.number;
-        this.submitBtn = false;
-        return false;
+          '~' +
+          this.user.number
+        this.submitBtn = false
+        return false
       }
     },
     getIdAdv() {
-      //获取id广告信息
+      // 获取id广告信息
       this.$http
-        .post(this.host + "/otc/order/pre", { id: this.$route.query.tradeId, memberId: this.$store.getters.member.id })
+        .post(this.host + '/otc/order/pre', { id: this.$route.query.tradeId, memberId: this.$store.getters.member.id })
         // .post('http://192.168.124.188:6006' + "/otc/order/pre", { id: this.$route.query.tradeId })
         .then(response => {
-          var resp = response.body;
+          var resp = response.body
           if (resp.code == 0) {
-            this.user = resp.data;
+            this.user = resp.data
             this.text1 =
-              this.$t("otc.tradeinfo.warning2") +
+              this.$t('otc.tradeinfo.warning2') +
               this.user.minLimit +
-              "~" +
-              this.user.maxLimit;
+              '~' +
+              this.user.maxLimit
             // this.minNum = (this.user.minLimit/this.user.price).toFixed(8);
             this.text2 =
-              this.$t("otc.tradeinfo.warning4") +
+              this.$t('otc.tradeinfo.warning4') +
               this.minNum +
-              "~" +
-              this.user.number;
+              '~' +
+              this.user.number
             if (this.user.advertiseType == 1) {
-              this.btnType = this.$t("otc.tradeinfo.confirmbuyin");
-              this.type = this.$t("otc.tradeinfo.buyin");
+              this.btnType = this.$t('otc.tradeinfo.confirmbuyin')
+              this.type = this.$t('otc.tradeinfo.buyin')
             } else if (this.user.advertiseType == 0) {
-              this.btnType = this.$t("otc.tradeinfo.confirmsellout");
-              this.type = this.$t("otc.tradeinfo.sellout");
+              this.btnType = this.$t('otc.tradeinfo.confirmsellout')
+              this.type = this.$t('otc.tradeinfo.sellout')
             }
-            this.usernameS = (this.user.username + "")
-              .replace(/^\s+|\s+$/g, "")
-              .slice(0, 1);
+            this.usernameS = (this.user.username + '')
+              .replace(/^\s+|\s+$/g, '')
+              .slice(0, 1)
           } else {
-            this.$Message.error(resp.message);
+            this.$Message.error(resp.message)
           }
-        });
+        })
     },
     submit() {
       if (this.submitBtn) {
-        this.btnDisabled = true;
+        this.btnDisabled = true
         if (this.user.advertiseType == 1) {
-          let param = {};
-          param["id"] = this.$route.query.tradeId;
-          param["coinId"] = this.user.otcCoinId;
-          param["price"] = this.user.price;
-          param["money"] = this.buyPrice;
-          param["amount"] = this.nuyNum;
-          param["remark"] = this.nuyNum;
+          const param = {}
+          param['id'] = this.$route.query.tradeId
+          param['coinId'] = this.user.otcCoinId
+          param['price'] = this.user.price
+          param['money'] = this.buyPrice
+          param['amount'] = this.nuyNum
+          param['remark'] = this.nuyNum
           this.$http
-            .post(this.host + "/otc/order/buy", param)
+            .post(this.host + '/otc/order/buy', param)
             .then(response => {
-              this.btnDisabled = false;
-              var resp = response.body;
+              this.btnDisabled = false
+              var resp = response.body
               if (resp.code == 0) {
-                this.$Message.success(resp.message);
+                this.$Message.success(resp.message)
 
-                let self = this;
+                const self = this
                 setTimeout(() => {
-                  self.$router.push("/chat?tradeId=" + resp.data);
-                }, 2000);
+                  self.$router.push('/chat?tradeId=' + resp.data)
+                }, 2000)
               } else {
-                this.$Message.error(resp.message);
+                this.$Message.error(resp.message)
               }
-            });
+            })
         } else if (this.user.advertiseType == 0) {
-          let param = {};
-          param["id"] = this.$route.query.tradeId;
-          param["coinId"] = this.user.otcCoinId;
-          param["price"] = this.user.price;
-          param["money"] = this.buyPrice;
-          param["amount"] = this.nuyNum;
-          param["remark"] = this.nuyNum;
+          const param = {}
+          param['id'] = this.$route.query.tradeId
+          param['coinId'] = this.user.otcCoinId
+          param['price'] = this.user.price
+          param['money'] = this.buyPrice
+          param['amount'] = this.nuyNum
+          param['remark'] = this.nuyNum
           this.$http
-            .post(this.host + "/otc/order/sell", param)
+            .post(this.host + '/otc/order/sell', param)
             .then(response => {
-              this.btnDisabled = false;
-              var resp = response.body;
+              this.btnDisabled = false
+              var resp = response.body
               if (resp.code == 0) {
-                this.$Message.success(resp.message);
-                let self = this;
+                this.$Message.success(resp.message)
+                const self = this
                 setTimeout(() => {
-                  self.$router.push("/chat?tradeId=" + resp.data);
-                }, 2000);
+                  self.$router.push('/chat?tradeId=' + resp.data)
+                }, 2000)
               } else {
-                this.$Message.error(resp.message);
+                this.$Message.error(resp.message)
               }
-            });
+            })
         }
       } else {
-        this.$Message.error(this.$t("otc.tradeinfo.warning5"));
+        this.$Message.error(this.$t('otc.tradeinfo.warning5'))
       }
     },
     sendMsg() {
@@ -359,76 +356,76 @@ export default {
       console.log(a)
       var c = 0,
         d = a.toString(),
-        e = b.toString();
+        e = b.toString()
       try {
-        c += d.split(".")[1].length;
+        c += d.split('.')[1].length
       } catch (f) {}
       try {
-        c += e.split(".")[1].length;
+        c += e.split('.')[1].length
       } catch (f) {}
-      d == null ? d = 0 : (typeof d == 'string' ? d = d.replace('.','') : '')
-      e == null ? e = 0 : (typeof e == 'string' ? e = e.replace('.','') : '')
+      d == null ? d = 0 : (typeof d === 'string' ? d = d.replace('.', '') : '')
+      e == null ? e = 0 : (typeof e === 'string' ? e = e.replace('.', '') : '')
       return (
         Number(d) *
         Number(e) /
         Math.pow(10, c)
-      );
+      )
     },
     div(a, b) {
       var c,
         d,
         e = 0,
-        f = 0;
+        f = 0
       try {
-        e = a.toString().split(".")[1].length;
+        e = a.toString().split('.')[1].length
       } catch (g) {}
       try {
-        f = b.toString().split(".")[1].length;
+        f = b.toString().split('.')[1].length
       } catch (g) {}
       return (
-        (c = Number(a.toString().replace(".", ""))),
-        (d = Number(b.toString().replace(".", ""))),
+        (c = Number(a.toString().replace('.', ''))),
+        (d = Number(b.toString().replace('.', ''))),
         this.mul(c / d, Math.pow(10, f - e))
-      );
+      )
     },
     round(v, e) {
-      var t = 1;
+      var t = 1
       for (; e > 0; t *= 10, e--);
       for (; e < 0; t /= 10, e++);
-      return Math.round(v * t) / t;
+      return Math.round(v * t) / t
     },
     strpro(str) {
-      let newStr = str;
-      str = str.slice(1);
-      var re = /[\D\d]*/g;
+      const newStr = str
+      str = str.slice(1)
+      var re = /[\D\d]*/g
       var str2 = str.replace(re, function(str) {
-        var result = "";
+        var result = ''
         for (var i = 0; i < str.length; i++) {
-          result += "*";
+          result += '*'
         }
-        return result;
-      });
-      return newStr.slice(0, 1) + str2;
+        return result
+      })
+      return newStr.slice(0, 1) + str2
     }
   },
   created() {
     // this.update()
-    this.getIdAdv();
+    this.getIdAdv()
   },
   computed: {
     priceNow: function() {
       return (
-        (this.user.price + "").replace(/,/g, "").replace(/[^\d|.]/g, "") - 0
-      );
+        (this.user.price + '').replace(/,/g, '').replace(/[^\d|.]/g, '') - 0
+      )
     },
     minNum: function() {
-      return (this.user.minLimit / this.priceNow).toFixed(8);
+      return (this.user.minLimit / this.priceNow).toFixed(8)
     },
     maxNum: function() {
-      return this.user.maxLimit / this.priceNow;
+      return this.user.maxLimit / this.priceNow
     }
   }
-};
+}
 </script>
 
 <style scoped>
