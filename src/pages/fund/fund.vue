@@ -89,9 +89,9 @@
               </div>
               <div class="info-text">
                 <span>可用余额</span>：
-                <span>{{ balanceData? balanceData.balance: '0' }}&nbsp;{{ balanceData.raiseCoin }}</span>
+                <span>{{ balanceData.balance !== ''?parseFloat(balanceData.balance).toFixed(4):'--' }}&nbsp;{{ balanceData.raiseCoin }}</span>
                 <span style="margin-left: 15px;">可抢购数量</span>：
-                <span>{{ balanceData? balanceData.maxSaleAmount: '0' }}&nbsp;{{ balanceData.saleCoin }}</span>
+                <span>{{ balanceData.maxSaleAmount!==''?balanceData.maxSaleAmount:'--' }}&nbsp;{{ balanceData.saleCoin }}</span>
               </div>
               <div class="footer-info">
                 <Button
@@ -173,8 +173,7 @@
                 <div class="bottom-left">
                   <p>1. 参与抢购BTC活动，必须在存币活动时间内存
                     <span class="text3">相应数量的TD,</span>
-                  </p>
-                  <p>获得抢购
+                    获得抢购
                     <span class="text3">BTC</span>
                     的资格和预购最高数量;
                   </p>
@@ -317,8 +316,8 @@ export default {
         coinBalance: '', // 可抢币余额
         endtime: '', // 结束时间
         balanceData: {
-          balance: '--',
-          maxSaleAmount: '--',
+          balance: '',
+          maxSaleAmount: '',
           raiseCoin: 'BC',
           saleCoin: 'BTC'
         } // 可抢币余额
