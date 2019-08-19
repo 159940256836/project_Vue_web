@@ -10,10 +10,11 @@
                         {{ $t('exchange.marketing') }}
                     </div>
                     <div class="sc_filter">
+                      <span @click="changeBaseCion('bc')" :class="{active:basecion==='bc'}">BC</span>
                         <span @click="changeBaseCion('usdt')" :class="{active:basecion==='usdt'}">USDT</span>
                         <span @click="changeBaseCion('btc')" :class="{active:basecion==='btc'}">BTC</span>
                         <span @click="changeBaseCion('eth')" :class="{active:basecion==='eth'}">ETH</span>
-                        <span @click="changeBaseCion('bc')" :class="{active:basecion==='bc'}">BC</span>
+                        
                         <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">{{$t('coin.option')}}</span>
                         <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
                         <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
@@ -95,8 +96,8 @@
                     </div>-->
                     <div class="item">
                         <span class="coin">
-                          {{currentCoin.base?currentCoin.base:'---'}}
-                            <small style="font-size: 16px">/ {{currentCoin.coin?currentCoin.coin:'---'}}</small>
+                          {{currentCoin.coin?currentCoin.coin:'---'}}
+                            <small style="font-size: 16px">/{{currentCoin.base?currentCoin.base:'---'}} </small>
                         </span>
                     </div>
                     <!--币币交易币种详情-->
@@ -1158,8 +1159,8 @@ export default {
       selectedPlate: 'all', // 当前显示的买卖盘
       CNYRate: null,
       datafeed: null,
-      defaultPath: 'btc_usdt',
-      basecion: 'usdt',
+      defaultPath: 'btc_bc',
+      basecion: 'bc',
       coinScale: 4,
       baseCoinScale: 2,
       symbolFee: 0.001,
@@ -1987,6 +1988,7 @@ export default {
   created: function() {
     this.getdefaultSymbol().then(res => {
       this.defaultPath = res
+      console.log(this.defaultPath)
       this.init()
       this.statusCurreny()
     })
@@ -2042,7 +2044,7 @@ export default {
           return new Promise((resolve, reject) => {
             this.detailCoin = data.data.web
             resolve(data.data.web)
-          }).catch(reject => reject('BTC_USDT'))
+          }).catch(reject => reject('BTC_BC'))
         }
       })
     },
@@ -2063,7 +2065,8 @@ export default {
       if (params == undefined) {
         // this.$router.push('/exchange/' + this.defaultPath)
         params = this.defaultPath
-        const title = this.currentTradingPrice + ' ' + 'BTC/USDT' + ' bdw'
+        console.log(params)
+        const title = this.currentTradingPrice + ' ' + 'BTC/BC' + ' bdw'
         this.settiele(title)
       } else {
           /* this.currentTradingPrice + ' ' +*/
@@ -2079,6 +2082,7 @@ export default {
         params = this.defaultPath
       }
       const basecion = params.split('_')[1]
+      console.log(basecion, params, this.$route)
       if (basecion) {
         this.basecion = basecion.toLowerCase()
       }

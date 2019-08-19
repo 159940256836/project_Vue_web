@@ -26,7 +26,6 @@ Vue.prototype.host = 'https://api.nr3d.cn' // 正式
 // Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
 // Vue.prototype.url = 'http://192.168.124.45' // 链接地址
 Vue.prototype.api = Api
-// Vue.prototype.host = 'http://47.244.100.113'
 Vue.http.options.credentials = true
 Vue.http.options.emulateJSON = true
 Vue.http.options.headers = {
