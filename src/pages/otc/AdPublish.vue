@@ -783,7 +783,7 @@ export default {
       // 获取个人账户信息
       const self = this
       this.$http
-        .post(this.host + '/uc/approve/account/newSetting')
+        .post(this.host + '/uc/approve/security/newSetting')
         .then(response => {
           var resp = response.body
           if (resp.code == 0) {
