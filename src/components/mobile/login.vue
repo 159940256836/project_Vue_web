@@ -259,6 +259,7 @@ export default {
       const formParams = this.formInline
       params.username = formParams.user
       params.password = formParams.password
+      params.loginType = 2
       if (this.openGoogleCode) {
         params.code = formParams.googleCode
       }
