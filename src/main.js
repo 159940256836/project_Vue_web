@@ -53,15 +53,14 @@ Vue.http.interceptors.push((request, next) => {
     if (xAuthToken != null && xAuthToken !== '') {
       localStorage.setItem('TOKEN', xAuthToken)
     }
-        //
-    console.log(response.body.code)
+    // 判断单点登陆 接口状态 4001已在其他设备登录 1.5s后退出登录
     if (response.body.code === 4001) {
+      iView.Message.error(response.body.message)
       store.commit('setMember', null)
       localStorage.removeItem('TOKEN')
-      this.$Message.error(response.body.message)
       setTimeout(() => {
         location.href = '/'
-      }, 2000)
+      }, 1500)
     }
     if (response.body.code === '4000' || response.body.code === '3000') {
       store.commit('setMember', null)
