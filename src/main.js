@@ -54,11 +54,14 @@ Vue.http.interceptors.push((request, next) => {
       localStorage.setItem('TOKEN', xAuthToken)
     }
         //
-    if (response.body.code === '4001') {
+    console.log(response.body.code)
+    if (response.body.code === 4001) {
+      store.commit('setMember', null)
       localStorage.removeItem('TOKEN')
+      this.$Message.error(response.body.message)
       setTimeout(() => {
         location.href = '/'
-      }, 500)
+      }, 2000)
     }
     if (response.body.code === '4000' || response.body.code === '3000') {
       store.commit('setMember', null)
