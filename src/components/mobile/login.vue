@@ -331,6 +331,7 @@ export default {
       params.username = formParams.user
       params.password = formParams.password
       params.code = formParams.googleCode
+      params.loginType = 2
       if (this.openGoogleCode) {
         params.code = formParams.googleCode
       }

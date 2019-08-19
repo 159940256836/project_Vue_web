@@ -2443,7 +2443,17 @@ export default {
             .createStudy('Moving Average', false, false, [10], null, {
               'plot.color': '#84AAD5'
             })
+         /* widget
+            .chart()
+            .createStudy('Moving Average', false, false, [30], null, {
+                'plot.color': 'rgb(57,109,73)'
+            })
 
+          widget
+            .chart()
+            .createStudy('Moving Average', false, false, [60], null, {
+                'plot.color': 'rgb(127,33,105)'
+            })*/
           widget
             .createButton()
             .attr('title', 'realtime')
