@@ -21,133 +21,113 @@ Vue.use(vueResource)
 Vue.use(VueI18n)
     // Vue.prototype.host = 'https://www.bdw.top'
 Vue.prototype.url = 'https://www.bdw.top' // 链接地址
-<<<<<<< HEAD
-    // Vue.prototype.host = 'http://192.168.124.14/' // 陈然
-    // Vue.prototype.host = 'https://api.nr3d.cn' // 正式
-=======
 // Vue.prototype.host = 'http://192.168.124.14/' // 陈然
 // Vue.prototype.host = 'https://api.nr3d.cn' // 正式
 // Vue.prototype.host = 'http://192.168.124.188:6006' // 周光银
->>>>>>> c225397e82cf638e1faa4be59b5549c56b1db017
 Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
     // Vue.prototype.url = 'http://192.168.124.45' // 链接地址
 Vue.prototype.api = Api
-<<<<<<< HEAD
-    // Vue.prototype.host = 'http://47.244.100.113'
-=======
->>>>>>> c225397e82cf638e1faa4be59b5549c56b1db017
 Vue.http.options.credentials = true
 Vue.http.options.emulateJSON = true
 Vue.http.options.headers = {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
 }
 const router = new VueRouter({
-    mode: 'hash',
-    routes
+  mode: 'hash',
+  routes
 })
 const i18n = new VueI18n({
-    locale: 'zh', // 语言标识
-    messages: {
-        'zh': require('./assets/lang/zh.js'),
-        'en': require('./assets/lang/en.js')
-    }
+  locale: 'zh', // 语言标识
+  messages: {
+    'zh': require('./assets/lang/zh.js'),
+    'en': require('./assets/lang/en.js')
+  }
 })
 
 Vue.http.interceptors.push((request, next) => {
     // 登录成功后将后台返回的TOKEN在本地存下来,每次请求从sessionStorage中拿到存储的TOKEN值
-    request.headers.set('x-auth-token', localStorage.getItem('TOKEN'))
-    next((response) => {
+  request.headers.set('x-auth-token', localStorage.getItem('TOKEN'))
+  next((response) => {
         // 登录极验证时需获取后台返回的TOKEN值
-        var xAuthToken = response.headers.get('x-auth-token')
-        if (xAuthToken != null && xAuthToken !== '') {
-            localStorage.setItem('TOKEN', xAuthToken)
-        }
-        //
-        if (response.body.code === '4000' || response.body.code === '3000') {
-            store.commit('setMember', null)
-            return false
-        }
-        return response
-    })
     var xAuthToken = response.headers.get('x-auth-token')
     if (xAuthToken != null && xAuthToken !== '') {
-        localStorage.setItem('TOKEN', xAuthToken)
+      localStorage.setItem('TOKEN', xAuthToken)
     }
-    // 判断单点登陆 接口状态 4001已在其他设备登录 1.5s后退出登录
+ // 判断单点登陆 接口状态 4001已在其他设备登录 1.5s后退出登录
     if (response.body.code === 4001) {
-        iView.Message.error(response.body.message)
-        store.commit('setMember', null)
-        localStorage.removeItem('TOKEN')
-        setTimeout(() => {
-            location.href = '/'
-        }, 1500)
+      iView.Message.error(response.body.message)
+      store.commit('setMember', null)
+      localStorage.removeItem('TOKEN')
+      setTimeout(() => {
+        location.href = '/'
+      }, 1500)
     }
     if (response.body.code === '4000' || response.body.code === '3000') {
-        store.commit('setMember', null)
-        return false
+      store.commit('setMember', null)
+      return false
     }
     return response
+  })
 })
-
 Vue.config.productionTip = false
 Vue.filter('timeFormat', function(tick) {
-    return moment(tick).format('HH:mm:ss')
+  return moment(tick).format('HH:mm:ss')
 })
 Vue.filter('dateFormat', function(tick) {
-    return moment(tick).format('YYYY-MM-DD HH:mm:ss')
+  return moment(tick).format('YYYY-MM-DD HH:mm:ss')
 })
 Vue.filter('ymdFormat', function(tick) {
-    return moment(tick).format('YYYY-MM-DD')
+  return moment(tick).format('YYYY-MM-DD')
 })
 Vue.filter('toFixed', function(number, scale) {
-    return new Number(number).toFixed(scale)
+  return new Number(number).toFixed(scale)
 })
 Vue.filter('toPercent', function(point) {
-        var str = Number(point * 100).toFixed(1)
-        str += '%'
-        return str
-    })
+  var str = Number(point * 100).toFixed(1)
+  str += '%'
+  return str
+})
     // 数字进行下舍入(舍去)
 function toFloor(number) {
-    if (new Number(number) === 0) { // 如果是"0.0000000000000000"
-        return 0
-    }
-    var str = (number + '').toString()
-    if (str.indexOf('.') === -1) {
-        var reg = /^(\d+)(e)([\-]?\d+)$/
-        var arr, len,
-            zero = ''
+  if (new Number(number) === 0) { // 如果是"0.0000000000000000"
+    return 0
+  }
+  var str = (number + '').toString()
+  if (str.indexOf('.') === -1) {
+    var reg = /^(\d+)(e)([\-]?\d+)$/
+    var arr, len,
+      zero = ''
 
         /* 6e7或6e+7 都会自动转换数值 */
-        if ((!reg.test(str))) {
-            return number
-        } else {
-            /* 6e-7 需要手动转换 */
-            arr = reg.exec(str)
-            len = Math.abs(arr[3]) - 1
-            for (var i = 0; i < len; i++) {
-                zero += '0'
-            }
-            return '0.' + zero + arr[1]
-        }
+    if ((!reg.test(str))) {
+      return number
     } else {
-        var reg = /^(\d+[.]?\d+)(e)([\-]?\d+)$/
-        var arr, len,
-            zero = ''
+            /* 6e-7 需要手动转换 */
+      arr = reg.exec(str)
+      len = Math.abs(arr[3]) - 1
+      for (var i = 0; i < len; i++) {
+        zero += '0'
+      }
+      return '0.' + zero + arr[1]
+    }
+  } else {
+    var reg = /^(\d+[.]?\d+)(e)([\-]?\d+)$/
+    var arr, len,
+      zero = ''
 
         /* 6e7或6e+7 都会自动转换数值 */
-        if ((!reg.test(str))) {
-            return number
-        } else {
+    if ((!reg.test(str))) {
+      return number
+    } else {
             /* 6e-7 需要手动转换 */
-            arr = reg.exec(str)
-            len = Math.abs(arr[3]) - 1
-            for (var i = 0; i < len; i++) {
-                zero += '0'
-            }
-            return '0.' + zero + arr[1].replace('.', '')
-        }
+      arr = reg.exec(str)
+      len = Math.abs(arr[3]) - 1
+      for (var i = 0; i < len; i++) {
+        zero += '0'
+      }
+      return '0.' + zero + arr[1].replace('.', '')
     }
+  }
     // let str = number + ""; //转字符串
     // if (str.indexOf('e') > -1 || str.indexOf('E') > -1) { //科学计数法
     //     let num = new Number(number).toFixed(scale + 1),
@@ -164,37 +144,37 @@ function toFloor(number) {
 }
 
 Vue.filter('toFloor', (number, scale) => {
-        return toFloor(number, scale)
-    })
+  return toFloor(number, scale)
+})
     // Input 特殊字符限制
 Vue.filter('reg', function(reg) {
-        var reg = new RegExp(/[\-\_\,\!\|\~\`\(\)\#\@\%\-\+\=\/\'\￥\。\ \…\$\（\）\(\)\[\]\【\】\^\&\*\{\}\:\;\"\L\<\>\?\\]/g, '')
-        return reg
-    })
+  var reg = new RegExp(/[\-\_\,\!\|\~\`\(\)\#\@\%\-\+\=\/\'\￥\。\ \…\$\（\）\(\)\[\]\【\】\^\&\*\{\}\:\;\"\L\<\>\?\\]/g, '')
+  return reg
+})
     // 数组三位一个逗号的正则匹配
 const threeComma = (num) => {
-    if (num) {
-        return String(num).replace(/(?=(\B)(\d{3})+$)/g, ',')
-    } else {
-        return 0
-    }
+  if (num) {
+    return String(num).replace(/(?=(\B)(\d{3})+$)/g, ',')
+  } else {
+    return 0
+  }
 }
 Vue.filter('threeComma', threeComma)
 
 Vue.prototype.toFloor = toFloor
 Vue.prototype.settiele = (name, num) => {
-    if (name !== undefined) {
-        window.document.title = name
-    } else {
-        window.document.title = 'bdw 投资者最信赖的数字资产增值平台'
-    }
+  if (name !== undefined) {
+    window.document.title = name
+  } else {
+    window.document.title = 'bdw 投资者最信赖的数字资产增值平台'
+  }
 }
 
 new Vue({
-    el: '#app',
-    router,
-    i18n,
-    store,
-    template: '<App/>',
-    components: { App }
+  el: '#app',
+  router,
+  i18n,
+  store,
+  template: '<App/>',
+  components: { App }
 })
