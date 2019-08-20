@@ -40,54 +40,54 @@
 </template>
 <script>
 export default {
-    data() {
-        return {
-            mySelf: {},
-            allSelf: []
-        }
-    },
-    created() {
+  data() {
+    return {
+      mySelf: {},
+      allSelf: []
+    }
+  },
+  created() {
         // const level = this.$store.getters.member.memberGradeId;
-        const level = (memberGradeId) => {
-            return `V${memberGradeId}`
+    const level = (memberGradeId) => {
+      return `V${memberGradeId}`
+    }
+    const memberGradeId = level(this.$store.getters.member.memberGradeId)
+    console.log(memberGradeId)
+    this.init().then(data => {
+      const mySelf = data.filter(ele => ele.gradeCode == memberGradeId)
+      console.log(mySelf)
+      this.mySelf = mySelf[0]
+      console.log(this.mySelf)
+      this.allSelf = data
+      console.log(this.allSelf)
+    })
+  },
+  methods: {
+    init() {
+      return this.$http.get(this.host + '/uc/integration/grade').then(res => {
+        const resp = res.body
+        if (resp.code == 0) {
+          return new Promise((resolve, reject) => {
+            console.log(resp.data)
+            resolve(resp.data)
+          })
         }
-        const memberGradeId = level(this.$store.getters.member.memberGradeId);
-        console.log(memberGradeId);
-        this.init().then(data => {
-            const mySelf = data.filter(ele => ele.gradeCode == memberGradeId);
-            console.log(mySelf);
-            this.mySelf = mySelf[0];
-            console.log(this.mySelf);
-            this.allSelf = data;
-            console.log(this.allSelf);
-        })
-    },
-    methods: {
-        init() {
-            return this.$http.get(this.host + "/uc/integration/grade").then(res => {
-                const resp = res.body;
-                if (resp.code == 0) {
-                    return new Promise((resolve, reject) => {
-                        console.log(resp.data);
-                        resolve(resp.data);
-                    })
-                }
-            })
-        }
-    },
-    computed: {
-        columns() {
-            const arr = [];
-            const E = this.$store.getters.lang == "English" ? 230 : '';
-            const L = this.$store.getters.lang == "English" ? 200 : '';
-            arr.push({
-                title: this.$t('leverDescPage._grade'),
-                key: "gradeName"
-            });
-            arr.push({
-                title: this.$t('leverDescPage._BitcoinServiceCharge'),
-                key: "exchangeFeeRate"
-            });
+      })
+    }
+  },
+  computed: {
+    columns() {
+      const arr = []
+      const E = this.$store.getters.lang == 'English' ? 230 : ''
+      const L = this.$store.getters.lang == 'English' ? 200 : ''
+      arr.push({
+        title: this.$t('leverDescPage._grade'),
+        key: 'gradeName'
+      })
+      arr.push({
+        title: this.$t('leverDescPage._BitcoinServiceCharge'),
+        key: 'exchangeFeeRate'
+      })
             // arr.push({
             //     title: this.$t('leverDescPage._legalServiceCharge'),
             //     key: "exchangeFeeRate"
@@ -96,20 +96,20 @@ export default {
             //     title: this.$t('leverDescPage._leverServiveCharge'),
             //     key: "exchangeFeeRate"
             // });
-            arr.push({
-                title: this.$t('leverDescPage._dayLimit')+"（USDT）",
-                width: E,
-                key: "withdrawCoinAmount"
-            });
-            arr.push({
-                title: this.$t('leverDescPage._daynumLimit'),
-                width: L,
-                key: "dayWithdrawCount"
-            });
-            return arr;
-        }
-
+      arr.push({
+        title: this.$t('leverDescPage._dayLimit') + '（USDT）',
+        width: E,
+        key: 'withdrawCoinAmount'
+      })
+      arr.push({
+        title: this.$t('leverDescPage._daynumLimit'),
+        width: L,
+        key: 'dayWithdrawCount'
+      })
+      return arr
     }
+
+  }
 }
 </script>
 <style lang="scss" scoped>

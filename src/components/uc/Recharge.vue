@@ -133,311 +133,308 @@
     </div>
 </template>
 <script>
-import Vue from "vue";
-import VueQriously from "vue-qriously";
-Vue.use(VueQriously);
+import Vue from 'vue'
+import VueQriously from 'vue-qriously'
+Vue.use(VueQriously)
 
 export default {
-    components: {
-        VueQriously
-    },
-    data() {
-        return {
-            buttonAdd: false,
-            loadingButton1: false,
-            isShowEwm: false,
-            dataCount: 0,
-            loading: true,
-            transaction: {
-                page: 1,
-                pageSize: 10,
-                symbol: ''
-            },
-            qrcode: {
-                value: "",
-                size: 200,
-                coinName: ""
-            },
-            coinType: "",
-            coinAddress: "",
-            coinTypeFee: "",
-            coinList: [],
-            tableRecharge: [],
-            allTableRecharge: []
-        };
-    },
-    methods: {
+  components: {
+    VueQriously
+  },
+  data() {
+    return {
+      buttonAdd: false,
+      loadingButton1: false,
+      isShowEwm: false,
+      dataCount: 0,
+      loading: true,
+      transaction: {
+        page: 1,
+        pageSize: 10,
+        symbol: ''
+      },
+      qrcode: {
+        value: '',
+        size: 200,
+        coinName: ''
+      },
+      coinType: '',
+      coinAddress: '',
+      coinTypeFee: '',
+      coinList: [],
+      tableRecharge: [],
+      allTableRecharge: []
+    }
+  },
+  methods: {
         // 复制功能
-        copyToken (data) {
-            let url = data
-            let oInput = document.createElement('input')
-            oInput.value = url
-            document.body.appendChild(oInput)
-            oInput.select() // 选择对象
-            console.log(oInput.value)
-            document.execCommand('Copy') // 执行浏览器复制命令
-            this.$Message.success(
-                this.$t("uc.finance.recharge.copysuccess")
+    copyToken(data) {
+      const url = data
+      const oInput = document.createElement('input')
+      oInput.value = url
+      document.body.appendChild(oInput)
+      oInput.select() // 选择对象
+      console.log(oInput.value)
+      document.execCommand('Copy') // 执行浏览器复制命令
+      this.$Message.success(
+                this.$t('uc.finance.recharge.copysuccess')
             )
-            oInput.remove()
-        },
-        changePage(index) {
-            console.log(index);
-            this.transaction.page = index
-            this.getList();
-        },
-        showEwm() {
-            this.isShowEwm = !this.isShowEwm;
-        },
-        onCopy(e) {
-            this.$Message.success(
-                this.$t("uc.finance.recharge.copysuccess") + e.text
-            );
-        },
-        onError(e) {
-            this.$Message.error(this.$t("uc.finance.recharge.copysuccess"));
-        },
-        changeCoin(value) {
-            console.log(value)
-            this.coinList.forEach((item)=>{
-                //model就是上面的数据源
+      oInput.remove()
+    },
+    changePage(index) {
+      console.log(index)
+      this.transaction.page = index
+      this.getList()
+    },
+    showEwm() {
+      this.isShowEwm = !this.isShowEwm
+    },
+    onCopy(e) {
+      this.$Message.success(
+                this.$t('uc.finance.recharge.copysuccess') + e.text
+            )
+    },
+    onError(e) {
+      this.$Message.error(this.$t('uc.finance.recharge.copysuccess'))
+    },
+    changeCoin(value) {
+      console.log(value)
+      this.coinList.forEach((item) => {
+                // model就是上面的数据源
                 // console.log(item, item.coin.unit, value);
-                if (item.coin.unit == value) {
-                    this.coinTypeFee = item.coin.minRechargeAmount
-                    this.qrcode.value = item.address
-                }
+        if (item.coin.unit == value) {
+          this.coinTypeFee = item.coin.minRechargeAmount
+          this.qrcode.value = item.address
+        }
                 // console.log(this.coinTypeFee)
-            });
-            if (!this.qrcode.value) {
-                this.buttonAdd = true
-            } else {
-                this.buttonAdd = false
-            }
-            if (value) {
-                this.transaction.symbol = value
-            } else if (value == undefined) {
-                this.transaction.symbol = ''
-            }
-            this.getList();
-        },
+      })
+      if (!this.qrcode.value) {
+        this.buttonAdd = true
+      } else {
+        this.buttonAdd = false
+      }
+      if (value) {
+        this.transaction.symbol = value
+      } else if (value == undefined) {
+        this.transaction.symbol = ''
+      }
+      this.getList()
+    },
         // 获取充币地址
-        resetAddress() {
-            if (!this.coinType) {
-                /*请选择币种*/
-                this.$Message.error(this.$t('uc.finance.withdraw.symboltip'));
-                return;
-            }
-            let params = {};
-            params["unit"] = this.coinType;
-            console.log(this.coinType);
-            let that = this;
-            this.loadingButton1 = true;
-            this.$http.post(this.host + "/uc/asset/wallet/reset-address", params).then(response => {
-                let resp = response.body;
-                if (resp.code == 0) {
-                    this.$Message.success(this.$t("uc.finance.money.resetsuccess"));
-                    this.loadingButton1 = false;
-                    setTimeout(function () {
-                        that.getMoney();
-                    }, 3000);
-                } else {
-                    this.$Message.error(resp.message);
-                    this.loadingButton1 = false;
-                }
-            });
-        },
-        getMoney() {
-            //获取
-            this.$http.post(this.host + this.api.uc.wallet).then(response => {
-                let resp = response.body;
-                if (resp.code == 0) {
-                   this.coinList =  (resp.data.length>0 && resp.data.filter(ele=>ele.coin.canRecharge ==1)) || [];
-                   this.changeCoin(this.coinType);
-                } else {
-                    this.$Message.error(resp.message);
-                }
-            });
-        },
-        getList() {
-            //获取tableRecharge
+    resetAddress() {
+      if (!this.coinType) {
+                /* 请选择币种*/
+        this.$Message.error(this.$t('uc.finance.withdraw.symboltip'))
+        return
+      }
+      const params = {}
+      params['unit'] = this.coinType
+      console.log(this.coinType)
+      const that = this
+      this.loadingButton1 = true
+      this.$http.post(this.host + '/uc/asset/wallet/reset-address', params).then(response => {
+        const resp = response.body
+        if (resp.code == 0) {
+          this.$Message.success(this.$t('uc.finance.money.resetsuccess'))
+          this.loadingButton1 = false
+          setTimeout(function() {
+            that.getMoney()
+          }, 3000)
+        } else {
+          this.$Message.error(resp.message)
+          this.loadingButton1 = false
+        }
+      })
+    },
+    getMoney() {
+            // 获取
+      this.$http.post(this.host + this.api.uc.wallet).then(response => {
+        const resp = response.body
+        if (resp.code == 0) {
+          this.coinList = (resp.data.length > 0 && resp.data.filter(ele => ele.coin.canRecharge == 1)) || []
+          this.changeCoin(this.coinType)
+        } else {
+          this.$Message.error(resp.message)
+        }
+      })
+    },
+    getList() {
+            // 获取tableRecharge
             // let memberId = 0;
-            !this.$store.getters.isLogin && this.$router.push("/login");
+      !this.$store.getters.isLogin && this.$router.push('/login')
             // this.$store.getters.isLogin && (memberId = this.$store.getters.member.id);
 
-            const params = {}
-            params['pageNo'] = this.transaction.page
-            params['type'] = '0'
-            params['pageSize'] = this.transaction.pageSize
-            params['symbol'] = this.transaction.symbol
-            this.$http.post(this.host + "/uc/asset/transaction", params).then(response => {
-                let resp = response.body;
-                if (resp.code == 0) {
-                    if (resp.data) {
-                        this.tableRecharge = resp.data.content || [];
-                        this.dataCount = resp.data.totalElements || 0;
-                    }
-                    this.loading = false;
-                } else {
-                    this.$Message.error(resp.message);
-                }
-            });
-        },
-        getMember() {
-            let self = this;
-            this.$http.post(this.host + "/uc/approve/security/newSetting").then(response => {
-                var resp = response.body;
-                if (resp.code == 0) {
-                    if (resp.data.realName == null || resp.data.realName == "") {
+      const params = {}
+      params['pageNo'] = this.transaction.page
+      params['type'] = '0'
+      params['pageSize'] = this.transaction.pageSize
+      params['symbol'] = this.transaction.symbol
+      this.$http.post(this.host + '/uc/asset/transaction', params).then(response => {
+        const resp = response.body
+        if (resp.code == 0) {
+          if (resp.data) {
+            this.tableRecharge = resp.data.content || []
+            this.dataCount = resp.data.totalElements || 0
+          }
+          this.loading = false
+        } else {
+          this.$Message.error(resp.message)
+        }
+      })
+    },
+    getMember() {
+      const self = this
+      this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
+          if (resp.data.realName == null || resp.data.realName == '') {
                         // 判断是否实名认证，未认证跳转到实名认证页面；
-                        this.$Message.success(this.$t("otc.publishad.submittip1"));
-                        self.$router.push("/uc/safe");
-                    } else if (resp.data.phoneVerified == 0) {
+            this.$Message.success(this.$t('otc.publishad.submittip1'))
+            self.$router.push('/uc/safe')
+          } else if (resp.data.phoneVerified == 0) {
                         // 判断是否是手机号0，1，未认证跳转到实名认证页面；
-                        this.$Message.success(this.$t("otc.publishad.submittip2"));
-                        self.$router.push("/uc/safe");
-                    } else if (resp.data.fundsVerified == 0) {
+            this.$Message.success(this.$t('otc.publishad.submittip2'))
+            self.$router.push('/uc/safe')
+          } else if (resp.data.fundsVerified == 0) {
                         // 判断是否设置交易密码，未认证跳转到实名认证页面；
-                        this.$Message.success(this.$t("otc.publishad.submittip3"));
-                        self.$router.push("/uc/safe");
-                    }
-                } else {
-                    this.$Message.error(resp.message);
-                }
-            });
+            this.$Message.success(this.$t('otc.publishad.submittip3'))
+            self.$router.push('/uc/safe')
+          }
+        } else {
+          this.$Message.error(resp.message)
         }
-    },
-    created() {
-        console.log(this.$route.query, this.coinType)
-        this.coinType = this.$route.query.name || "";
-        console.log(this.coinType)
-        // this.getMember();
-        this.getMoney();
-        this.getList();
-    },
-    computed: {
-        tableColumnsRecharge() {
-            let columns = [];
-            columns.push({
-                title: this.$t("uc.finance.recharge.time"),
-                align: "center",
-                render: (h, param) => {
-                    let str = param.row.createTime;
-                    return h("div", {}, str);
-                }
-            });
-            columns.push({
-                title: this.$t("uc.finance.recharge.symbol"),
-                align: "center",
-                render: (h, param) => {
-                    let str = param.row.symbol;
-                    return h("div", {}, str);
-                }
-            });
-
-            columns.push({
-                title: this.$t("uc.finance.recharge.hash"),
-                width: 160,
-                align: "center",
-                render: (h, param) => {
-                    if (param.row.txid) {
-                        let str = param.row.txid;
-                        let tokenLenth = param.row.txid.length
-                        // 显示前五位 后五位
-                        let tokenCont = param.row.txid.substring(0, 5)
-                                +
-                                '...'
-                                + param.row.txid.substring(tokenLenth - 5, tokenLenth)
-                        if (str) {
-                            return h("div", [
-                                h('Icon', {
-                                    props: {
-                                        type: 'ios-paper-outline',
-                                    },
-                                    style: {
-                                        height: '20px',
-                                        fontSize: '16px',
-                                        marginRight: '4px',
-                                        float: 'left',
-                                        color: '#fff',
-                                        border: 0,
-                                        lineHeight: '20px',
-                                        marginLeft: '10px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.copyToken(str)
-                                        }
-                                    }
-                                }),
-                                h("div", {
-                                    style: {
-                                        fontSize: '1%',
-                                        float: 'left'
-                                    },
-                                }, tokenCont)
-                            ])
-                        }
-                    }
-
-                }
-            });
-
-            columns.push({
-                title: this.$t("uc.finance.recharge.address"),
-                align: "center",
-                render: (h, param) => {
-                    let str = param.row.address;
-                    let tokenLenth = param.row.address.length
-                    // 显示前五位 后五位
-                    let tokenCont = param.row.address.substring(0, 5)
-                            +
-                            '...'
-                            + param.row.address.substring(tokenLenth - 5, tokenLenth)
-                    if (str) {
-                        return h("div", [
-                            h('Icon', {
-                                props: {
-                                    type: 'ios-paper-outline',
-                                },
-                                style: {
-                                    height: '20px',
-                                    fontSize: '16px',
-                                    marginRight: '4px',
-                                    float: 'left',
-                                    color: '#fff',
-                                    border: 0,
-                                    lineHeight: '20px',
-                                    marginLeft: '60px'
-                                },
-                                on: {
-                                    click: () => {
-                                        this.copyToken(str)
-                                    }
-                                }
-                            }),
-                            h("div", {
-                                style: {
-                                    textAlign: 'center',
-                                    fontSize: '1%',
-                                    float: 'left'
-                                },
-                            }, tokenCont)
-                        ])
-                    }
-                }
-            });
-            columns.push({
-                title: this.$t("uc.finance.recharge.amount"),
-                align: "center",
-                render: (h, param) => {
-                    let str = param.row.amount;
-                    return h("div", {}, str);
-                }
-            });
-            return columns;
-        }
+      })
     }
-};
+  },
+  created() {
+    console.log(this.$route.query, this.coinType)
+    this.coinType = this.$route.query.name || ''
+    console.log(this.coinType)
+        // this.getMember();
+    this.getMoney()
+    this.getList()
+  },
+  computed: {
+    tableColumnsRecharge() {
+      const columns = []
+      columns.push({
+        title: this.$t('uc.finance.recharge.time'),
+        align: 'center',
+        render: (h, param) => {
+          const str = param.row.createTime
+          return h('div', {}, str)
+        }
+      })
+      columns.push({
+        title: this.$t('uc.finance.recharge.symbol'),
+        align: 'center',
+        render: (h, param) => {
+          const str = param.row.symbol
+          return h('div', {}, str)
+        }
+      })
+
+      columns.push({
+        title: this.$t('uc.finance.recharge.hash'),
+        width: 160,
+        align: 'center',
+        render: (h, param) => {
+          if (param.row.txid) {
+            const str = param.row.txid
+            const tokenLenth = param.row.txid.length
+                        // 显示前五位 后五位
+            const tokenCont = param.row.txid.substring(0, 5) +
+                                '...' +
+                                param.row.txid.substring(tokenLenth - 5, tokenLenth)
+            if (str) {
+              return h('div', [
+                h('Icon', {
+                  props: {
+                    type: 'ios-paper-outline'
+                  },
+                  style: {
+                    height: '20px',
+                    fontSize: '16px',
+                    marginRight: '4px',
+                    float: 'left',
+                    color: '#fff',
+                    border: 0,
+                    lineHeight: '20px',
+                    marginLeft: '10px'
+                  },
+                  on: {
+                    click: () => {
+                      this.copyToken(str)
+                    }
+                  }
+                }),
+                h('div', {
+                  style: {
+                    fontSize: '1%',
+                    float: 'left'
+                  }
+                }, tokenCont)
+              ])
+            }
+          }
+        }
+      })
+
+      columns.push({
+        title: this.$t('uc.finance.recharge.address'),
+        align: 'center',
+        render: (h, param) => {
+          const str = param.row.address
+          const tokenLenth = param.row.address.length
+                    // 显示前五位 后五位
+          const tokenCont = param.row.address.substring(0, 5) +
+                            '...' +
+                            param.row.address.substring(tokenLenth - 5, tokenLenth)
+          if (str) {
+            return h('div', [
+              h('Icon', {
+                props: {
+                  type: 'ios-paper-outline'
+                },
+                style: {
+                  height: '20px',
+                  fontSize: '16px',
+                  marginRight: '4px',
+                  float: 'left',
+                  color: '#fff',
+                  border: 0,
+                  lineHeight: '20px',
+                  marginLeft: '60px'
+                },
+                on: {
+                  click: () => {
+                    this.copyToken(str)
+                  }
+                }
+              }),
+              h('div', {
+                style: {
+                  textAlign: 'center',
+                  fontSize: '1%',
+                  float: 'left'
+                }
+              }, tokenCont)
+            ])
+          }
+        }
+      })
+      columns.push({
+        title: this.$t('uc.finance.recharge.amount'),
+        align: 'center',
+        render: (h, param) => {
+          const str = param.row.amount
+          return h('div', {}, str)
+        }
+      })
+      return columns
+    }
+  }
+}
 </script>
 <style scoped lang="scss">
     .nav-recharge {

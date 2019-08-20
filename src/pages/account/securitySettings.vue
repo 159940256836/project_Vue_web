@@ -1237,15 +1237,15 @@ export default {
       this.modal7 = true
       this.googleSwitch = !this.googleSwitch
     },
-      closeGoogle() { // 改变google验证状态
-          if (this.googleSwitch) {
-              this.modal7 = false
-              this.googleAuthentication = this.$t('openGoolePage._reset')
-          } else {
-              this.modal8 = false
-              this.googleAuthentication = ''
-          }
-      },
+    closeGoogle() { // 改变google验证状态
+      if (this.googleSwitch) {
+          this.modal7 = false
+          this.googleAuthentication = this.$t('openGoolePage._reset')
+        } else {
+          this.modal8 = false
+          this.googleAuthentication = ''
+        }
+    },
     changeGoogleSwitch() { // 改变google验证状态
       if (this.googleSwitch) {
         this.modal7 = true
