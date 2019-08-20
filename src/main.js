@@ -171,10 +171,19 @@ Vue.prototype.settiele = (name, num) => {
 }
 
 new Vue({
+<<<<<<< HEAD
   el: '#app',
   router,
   i18n,
   store,
   template: '<App/>',
   components: { App }
+=======
+    el: '#app',
+    router,
+    i18n,
+    store,
+    template: '<App/>',
+    components: { App }
+>>>>>>> e5c0549b4ac4a00c3c4a76b8a8db886972ecfb60
 })
