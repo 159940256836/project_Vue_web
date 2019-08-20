@@ -103,8 +103,8 @@ function Processdata(event) {
 
 WebsockFeed.prototype.getBars = function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
   var bars = []
+  var bar = []
   var that = this
-
   this._send(this._datafeedURL + '/history', {
     symbol: symbolInfo.name,
     from: from * 1000,
@@ -116,12 +116,14 @@ WebsockFeed.prototype.getBars = function(symbolInfo, resolution, from, to, onHis
       for (var i = 0; i < data.length; i++) {
         var item = data[i]
         bars.push({ time: item[0], open: item[1], high: item[2], low: item[3], close: item[4], volume: item[5] })
+        bar.push({ time: item[0], open: item[1], high: item[2], low: item[3], close: item[4], volume: item[5] })
       }
+      // bar = bars
       that.lastBar = bars.length > 0 ? bars[bars.length - 1] : null
       Processdata(bars)
       that.currentBar = that.lastBar
       var noData = bars.length == 0
-      var retBars = onHistoryCallback(bars, { noData: noData })
+      onHistoryCallback(bar, { noData: noData })
     })
     .fail(function(reason) {
       onErrorCallback(reason)
@@ -140,7 +142,6 @@ WebsockFeed.prototype.periodLengthSeconds = function(resolution, requiredPeriods
   } else {
     daysCount = requiredPeriodsCount * resolution / (24 * 60)
   }
-
   return daysCount * 24 * 60 * 60
 }
 

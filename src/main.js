@@ -21,12 +21,21 @@ Vue.use(vueResource)
 Vue.use(VueI18n)
     // Vue.prototype.host = 'https://www.bdw.top'
 Vue.prototype.url = 'https://www.bdw.top' // 链接地址
+<<<<<<< HEAD
     // Vue.prototype.host = 'http://192.168.124.14/' // 陈然
     // Vue.prototype.host = 'https://api.nr3d.cn' // 正式
+=======
+// Vue.prototype.host = 'http://192.168.124.14/' // 陈然
+// Vue.prototype.host = 'https://api.nr3d.cn' // 正式
+// Vue.prototype.host = 'http://192.168.124.188:6006' // 周光银
+>>>>>>> c225397e82cf638e1faa4be59b5549c56b1db017
 Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
     // Vue.prototype.url = 'http://192.168.124.45' // 链接地址
 Vue.prototype.api = Api
+<<<<<<< HEAD
     // Vue.prototype.host = 'http://47.244.100.113'
+=======
+>>>>>>> c225397e82cf638e1faa4be59b5549c56b1db017
 Vue.http.options.credentials = true
 Vue.http.options.emulateJSON = true
 Vue.http.options.headers = {

@@ -229,388 +229,387 @@
 
 export default {
   components: {
-    },
+  },
   data() {
-      const validatePass = (rule, value, callback) => {
-          if (value === '') {
-              callback(new Error(this.$t('uc.account.banknomsg1')))
+    const validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.account.banknomsg1')))
             // } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-            } else if (!/([0-9]){6,18}/.test(value)) {
-              callback(new Error(this.$t('uc.account.banknomsg1')))
-            } else {
-              callback()
-            }
-        }
-        const validatePassCheck = (rule, value, callback) => {
-          if (value === '') {
-              callback(new Error(this.$t('uc.account.banknomsg1')))
+      } else if (!/([0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.account.banknomsg1')))
+      } else {
+        callback()
+      }
+    }
+    const validatePassCheck = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error(this.$t('uc.account.banknomsg1')))
             // } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-            } else if (!/([0-9]){6,18}/.test(value)) {
-              callback(new Error(this.$t('uc.account.banknomsg1')))
-            } else if (value !== this.formValidate1.bankNo) {
-              callback(new Error(this.$t('uc.account.banknomsg2')))
-            } else {
-              callback()
-            }
+      } else if (!/([0-9]){6,18}/.test(value)) {
+        callback(new Error(this.$t('uc.account.banknomsg1')))
+      } else if (value !== this.formValidate1.bankNo) {
+        callback(new Error(this.$t('uc.account.banknomsg2')))
+      } else {
+        callback()
+      }
+    }
+    return {
+      modal1: false,
+      modal2: false,
+      modal3: false,
+      uploadHeaders: { 'x-auth-token': localStorage.getItem('TOKEN') },
+      uploadUrl: this.host + '/uc/upload/oss/image',
+      aliImg: '',
+      aliPreview: '',
+      weImg: '',
+      wePreview: '',
+      isNoName: true,
+      msg: '',
+      choseItem: 0,
+      user: {},
+      formValidate1: {
+        name: '',
+        password: '',
+        bankName: '',
+        bankBranch: '',
+        bankNo: '',
+        bankNoConfirm: ''
+
+      },
+      formValidate2: {
+        name: '',
+        alipay: '',
+        password: ''
+      },
+      formValidate3: {
+        name: '',
+        wechat: '',
+        password: ''
+      },
+      bankNameList: [
+        {
+          value: '中国工商银行',
+          label: '中国工商银行'
+        },
+        {
+          value: '中国农业银行',
+          label: '中国农业银行'
+        },
+        {
+          value: '中国建设银行',
+          label: '中国建设银行'
+        },
+        {
+          value: '中国邮政储蓄银行',
+          label: '中国邮政储蓄银行'
+        },
+        {
+          value: '招商银行',
+          label: '招商银行'
+        },
+        {
+          value: '中国银行',
+          label: '中国银行'
+        },
+        {
+          value: '交通银行',
+          label: '交通银行'
+        },
+        {
+          value: '中信银行',
+          label: '中信银行'
+        },
+        {
+          value: '华夏银行',
+          label: '华夏银行'
+        },
+        {
+          value: '中国民生银行',
+          label: '中国民生银行'
+        },
+        {
+          value: '广发银行',
+          label: '广发银行'
+        },
+        {
+          value: '平安银行',
+          label: '平安银行'
+        },
+        {
+          value: '兴业银行',
+          label: '兴业银行'
+        },
+        {
+          value: '上海浦东发展银行',
+          label: '上海浦东发展银行'
+        },
+        {
+          value: '浙商银行',
+          label: '浙商银行'
+        },
+        {
+          value: '渤海银行',
+          label: '渤海银行'
+        },
+        {
+          value: '恒丰银行',
+          label: '恒丰银行'
+        },
+        {
+          value: '花旗银行',
+          label: '花旗银行'
+        },
+        {
+          value: '渣打银行',
+          label: '渣打银行'
+        },
+        {
+          value: '汇丰银行',
+          label: '汇丰银行'
+        },
+        {
+          value: '中国光大银行',
+          label: '中国光大银行'
+        },
+        {
+          value: '上海银行',
+          label: '上海银行'
+        },
+        {
+          value: '江苏银行',
+          label: '江苏银行'
+        },
+        {
+          value: '重庆银行',
+          label: '重庆银行'
+        },
+        {
+          value: '天津银行',
+          label: '天津银行'
+        },
+        {
+          value: '厦门银行',
+          label: '厦门银行'
+        },
+        {
+          value: '城市商业银行',
+          label: '城市商业银行'
+        },
+        {
+          value: '农村商业银行',
+          label: '农村商业银行'
+        },
+        {
+          value: '徽商银行',
+          label: '徽商银行'
         }
-        return {
-          modal1: false,
-          modal2: false,
-          modal3: false,
-          uploadHeaders: { 'x-auth-token': localStorage.getItem('TOKEN') },
-          uploadUrl: this.host + '/uc/upload/oss/image',
-          aliImg: '',
-          aliPreview: '',
-          weImg: '',
-          wePreview: '',
-          isNoName: true,
-          msg: '',
-          choseItem: 0,
-          user: {},
-          formValidate1: {
-              name: '',
-              password: '',
-              bankName: '',
-              bankBranch: '',
-              bankNo: '',
-              bankNoConfirm: ''
 
-            },
-          formValidate2: {
-              name: '',
-              alipay: '',
-              password: ''
-            },
-          formValidate3: {
-              name: '',
-              wechat: '',
-              password: ''
-            },
-          bankNameList: [
-              {
-                value: '中国工商银行',
-                label: '中国工商银行'
-              },
-              {
-                value: '中国农业银行',
-                label: '中国农业银行'
-              },
-              {
-                value: '中国建设银行',
-                label: '中国建设银行'
-              },
-              {
-                value: '中国邮政储蓄银行',
-                label: '中国邮政储蓄银行'
-              },
-              {
-                value: '招商银行',
-                label: '招商银行'
-              },
-              {
-                value: '中国银行',
-                label: '中国银行'
-              },
-              {
-                value: '交通银行',
-                label: '交通银行'
-              },
-              {
-                value: '中信银行',
-                label: '中信银行'
-              },
-              {
-                value: '华夏银行',
-                label: '华夏银行'
-              },
-              {
-                value: '中国民生银行',
-                label: '中国民生银行'
-              },
-              {
-                value: '广发银行',
-                label: '广发银行'
-              },
-              {
-                value: '平安银行',
-                label: '平安银行'
-              },
-              {
-                value: '兴业银行',
-                label: '兴业银行'
-              },
-              {
-                value: '上海浦东发展银行',
-                label: '上海浦东发展银行'
-              },
-              {
-                value: '浙商银行',
-                label: '浙商银行'
-              },
-              {
-                value: '渤海银行',
-                label: '渤海银行'
-              },
-              {
-                value: '恒丰银行',
-                label: '恒丰银行'
-              },
-              {
-                value: '花旗银行',
-                label: '花旗银行'
-              },
-              {
-                value: '渣打银行',
-                label: '渣打银行'
-              },
-              {
-                value: '汇丰银行',
-                label: '汇丰银行'
-              },
-              {
-                value: '中国光大银行',
-                label: '中国光大银行'
-              },
-              {
-                value: '上海银行',
-                label: '上海银行'
-              },
-              {
-                value: '江苏银行',
-                label: '江苏银行'
-              },
-              {
-                value: '重庆银行',
-                label: '重庆银行'
-              },
-              {
-                value: '天津银行',
-                label: '天津银行'
-              },
-              {
-                value: '厦门银行',
-                label: '厦门银行'
-              },
-              {
-                value: '城市商业银行',
-                label: '城市商业银行'
-              },
-              {
-                value: '农村商业银行',
-                label: '农村商业银行'
-              },
-              {
-                value: '徽商银行',
-                label: '徽商银行'
-              }
-
-            ],
-          ruleValidate: {
-              name: [
+      ],
+      ruleValidate: {
+        name: [
                     { required: true, message: this.$t('uc.account.verifiedmsg'), trigger: 'blur' }
-                ],
-              bankName: [
+        ],
+        bankName: [
                     { required: true, message: this.$t('uc.account.bankaccountmsg'), trigger: 'change' }
-                ],
-              bankBranch: [
+        ],
+        bankBranch: [
                     { required: true, message: this.$t('uc.account.bankbranchmsg'), trigger: 'blur' }
-                ],
-              bankNo: [
+        ],
+        bankNo: [
                     { required: true, type: 'string', min: 6, message: this.$t('uc.account.banknomsg1'), trigger: 'blur' },
                     { validator: validatePass, trigger: 'blur' }
-                ],
-              bankNoConfirm: [
+        ],
+        bankNoConfirm: [
                     { required: true, type: 'string', min: 6, message: this.$t('uc.account.banknomsg2'), trigger: 'blur' },
                     { validator: validatePassCheck, trigger: 'blur' }
-                ],
-              password: [
+        ],
+        password: [
                     { required: true, message: this.$t('uc.account.fundpwdmsg1'), trigger: 'blur' },
                     { min: 6, message: this.$t('uc.account.fundpwdmsg2'), trigger: 'blur' }
-                ],
-              alipay: [
+        ],
+        alipay: [
                     { required: true, message: this.$t('uc.account.zfbaccountmsg'), trigger: 'blur' }
-                ],
-              wechat: [
+        ],
+        wechat: [
                     { required: true, message: this.$t('uc.account.wxaccountmsg'), trigger: 'blur' }
-                ]
-            }
+        ]
+      }
+
+    }
+  },
+  methods: {
+    openModal(callback) {
+      console.log(this.user.realName)
+      if (!this.user.realName) {
+        return this.$Message.error(this.$t('otc.validate'))
+      }
+      callback()
+    },
+    aliHandleSuccess(res, file, fileList) {
+      this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
+      this.aliImg = this.aliPreview = res.data
+    },
+    weHandleSuccess(res, file, fileList) {
+      this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
+      this.weImg = this.wePreview = res.data
+    },
+    handleSubmit(name) {
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          this.submit(name)
+        } else {
 
         }
+      })
     },
-  methods: {
-      openModal(callback) {
-          console.log(this.user.realName)
-          if (!this.user.realName) {
-              return this.$Message.error(this.$t('otc.validate'))
-            }
-          callback()
-        },
-      aliHandleSuccess(res, file, fileList) {
-          this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
-          this.aliImg = this.aliPreview = res.data
-        },
-      weHandleSuccess(res, file, fileList) {
-          this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
-          this.weImg = this.wePreview = res.data
-        },
-      handleSubmit(name) {
-          this.$refs[name].validate((valid) => {
-              if (valid) {
-                  this.submit(name)
-                } else {
-
-                }
-            })
-        },
-      handleReset(name) {
-          this.$refs[name].resetFields()
-        },
-      submit(name) {
+    handleReset(name) {
+      this.$refs[name].resetFields()
+    },
+    submit(name) {
             // 银行卡
-          if (name == 'formValidate1') {
-              const param = {}
-              param['bank'] = this.formValidate1.bankName
-              param['branch'] = this.formValidate1.bankBranch
-              param['jyPassword'] = this.formValidate1.password
-              param['realName'] = this.formValidate1.name
-              param['cardNo'] = this.formValidate1.bankNo
-              if (this.user.bankVerified == 1) { // 修改
-                this.$http.post(this.host + '/uc/approve/update/bank', param).then(response => {
-                  var resp = response.body
-                  if (resp.code == 0) {
-                    this.modal1 = false
-                    this.$Message.success(this.$t('uc.account.save_success'))
-                    this.getAccount()
-                    this.choseItem = 0
-                  } else {
-                    this.$Message.error(resp.message)
-                  }
-                })
-              } else { // 设置
-                this.$http.post(this.host + '/uc/approve/bind/bank', param).then(response => {
-                  var resp = response.body
-                    if (resp.code == 0) {
-                      this.modal1 = false
-                      this.$Message.success(this.$t('uc.account.save_success'))
-                        this.getAccount()
-                      this.choseItem = 0
-                    } else {
-                      this.$Message.error(resp.message)
-                    }
-                })
-              }
+      if (name == 'formValidate1') {
+        const param = {}
+        param['bank'] = this.formValidate1.bankName
+        param['branch'] = this.formValidate1.bankBranch
+        param['jyPassword'] = this.formValidate1.password
+        param['realName'] = this.formValidate1.name
+        param['cardNo'] = this.formValidate1.bankNo
+        if (this.user.bankVerified == 1) { // 修改
+          this.$http.post(this.host + '/uc/approve/update/bank', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal1 = false
+              this.$Message.success(this.$t('uc.account.save_success'))
+              this.getAccount()
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
             }
+          })
+        } else { // 设置
+          this.$http.post(this.host + '/uc/approve/bind/bank', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal1 = false
+              this.$Message.success(this.$t('uc.account.save_success'))
+              this.getAccount()
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        }
+      }
             // 支付宝
-          if (name == 'formValidate2') {
-              const param = {}
-              param['ali'] = this.formValidate2.alipay
-              param['jyPassword'] = this.formValidate2.password
-              param['realName'] = this.formValidate2.name
-              param['qrCodeUrl'] = this.aliPreview
+      if (name == 'formValidate2') {
+        const param = {}
+        param['ali'] = this.formValidate2.alipay
+        param['jyPassword'] = this.formValidate2.password
+        param['realName'] = this.formValidate2.name
+        param['qrCodeUrl'] = this.aliPreview
 
-                if (this.user.aliVerified == 1) {
-                  this.$http.post(this.host + '/uc/approve/update/ali', param).then(response => {
-                    var resp = response.body
-                    if (resp.code == 0) {
-                      this.modal2 = false
-                      this.$Message.success(this.$t('uc.account.save_success'))
-                      this.getAccount()
-                      this.choseItem = 0
-                    } else {
-                      this.$Message.error(resp.message)
-                    }
-                  })
-                } else {
-                  this.$http.post(this.host + '/uc/approve/bind/ali', param).then(response => {
-                    var resp = response.body
-                      if (resp.code == 0) {
-                        this.modal2 = false
-                        this.$Message.success(this.$t('uc.account.save_success'))
-                          this.getAccount()
-                        this.choseItem = 0
-                      } else {
-                        this.$Message.error(resp.message)
-                      }
-                  })
-                }
+        if (this.user.aliVerified == 1) {
+          this.$http.post(this.host + '/uc/approve/update/ali', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal2 = false
+              this.$Message.success(this.$t('uc.account.save_success'))
+              this.getAccount()
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
             }
+          })
+        } else {
+          this.$http.post(this.host + '/uc/approve/bind/ali', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal2 = false
+              this.$Message.success(this.$t('uc.account.save_success'))
+              this.getAccount()
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        }
+      }
             // 微信
-          if (name == 'formValidate3') {
-              const param = {}
-              param['wechat'] = this.formValidate3.wechat
-              param['jyPassword'] = this.formValidate3.password
-              param['realName'] = this.formValidate3.name
-              param['qrCodeUrl'] = this.wePreview
+      if (name == 'formValidate3') {
+        const param = {}
+        param['wechat'] = this.formValidate3.wechat
+        param['jyPassword'] = this.formValidate3.password
+        param['realName'] = this.formValidate3.name
+        param['qrCodeUrl'] = this.wePreview
 
-              if (this.user.wechatVerified == 1) {
-                this.$http.post(this.host + '/uc/approve/update/wechat', param).then(response => {
-                  var resp = response.body
-                  if (resp.code == 0) {
-                    this.modal3 = false
-                    this.$Message.success(this.$t('uc.account.save_success'))
-                    this.getAccount()
-                    this.choseItem = 0
-                  } else {
-                    this.$Message.error(resp.message)
-                  }
-                })
-              } else{
-                this.$http.post(this.host + '/uc/approve/bind/wechat', param).then(response => {
-                  var resp = response.body
-                    if (resp.code == 0) {
-                      this.modal3 = false
-                      this.$Message.success(this.$t('uc.account.save_success'))
-                        this.getAccount()
-                      this.choseItem = 0
-                    } else {
-                      this.$Message.error(resp.message)
-                    }
-                })
-              }
+        if (this.user.wechatVerified == 1) {
+          this.$http.post(this.host + '/uc/approve/update/wechat', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal3 = false
+              this.$Message.success(this.$t('uc.account.save_success'))
+              this.getAccount()
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
             }
-        },
-      showItem(index) {
-          this.choseItem = index
-            this.formValidate1.password = '';
-          this.formValidate2.password = '';
-          this.formValidate3.password = '';
-        },
-      noName() {
-          this.$Message.error(this.msg)
-        },
-      getAccount() {
+          })
+        } else {
+          this.$http.post(this.host + '/uc/approve/bind/wechat', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal3 = false
+              this.$Message.success(this.$t('uc.account.save_success'))
+              this.getAccount()
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        }
+      }
+    },
+    showItem(index) {
+      this.choseItem = index
+      this.formValidate1.password = ''
+      this.formValidate2.password = ''
+      this.formValidate3.password = ''
+    },
+    noName() {
+      this.$Message.error(this.msg)
+    },
+    getAccount() {
             // 获取个人账户信息
-          this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
-              var resp = response.body
-                if (resp.code == 0) {
-                  this.user = resp.data
-                    this.formValidate1.name = this.formValidate2.name = this.formValidate3.name = this.user.realName
+      this.$http.post(this.host + '/uc/approve/account/setting').then(response => {
+        var resp = response.body
+        if (resp.code == 0) {
+          this.user = resp.data
+          this.formValidate1.name = this.formValidate2.name = this.formValidate3.name = this.user.realName
                     // this.usernameS = (this.user.username + '').slice(0, 1)
                     // this.dataCount = resp.data.length
-                  this.isNoName = false
+          this.isNoName = false
                     // 设置
-                  this.formValidate1.bankName = this.user.bankInfo == null ? '' : this.user.bankInfo.bank
-                  this.formValidate1.bankBranch = this.user.bankInfo == null ? '' : this.user.bankInfo.branch
-                  this.formValidate1.bankNo = this.user.bankInfo == null ? '' : this.user.bankInfo.cardNo
-                  this.formValidate2.alipay = this.user.alipay == null ? '' : this.user.alipay.aliNo
-                  this.formValidate3.wechat = this.user.wechatPay == null ? '' : this.user.wechatPay.wechat
-                  this.aliImg = this.aliPreview = this.user.alipay == null ? 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/20190509152321.png' : this.user.alipay.qrCodeUrl
-                    this.weImg = this.wePreview = this.user.wechatPay == null ? 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/20190509152321.png' : this.user.wechatPay.qrWeCodeUrl
-
-                } else {
-                  this.msg = resp.message
-                    this.$Message.error(resp.message)
+          this.formValidate1.bankName = this.user.bankInfo == null ? '' : this.user.bankInfo.bank
+          this.formValidate1.bankBranch = this.user.bankInfo == null ? '' : this.user.bankInfo.branch
+          this.formValidate1.bankNo = this.user.bankInfo == null ? '' : this.user.bankInfo.cardNo
+          this.formValidate2.alipay = this.user.alipay == null ? '' : this.user.alipay.aliNo
+          this.formValidate3.wechat = this.user.wechatPay == null ? '' : this.user.wechatPay.wechat
+          this.aliImg = this.aliPreview = this.user.alipay == null ? 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/20190509152321.png' : this.user.alipay.qrCodeUrl
+          this.weImg = this.wePreview = this.user.wechatPay == null ? 'https://wangzhanzhaopian.oss-cn-shanghai.aliyuncs.com/20190509152321.png' : this.user.wechatPay.qrWeCodeUrl
+        } else {
+          this.msg = resp.message
+          this.$Message.error(resp.message)
                     // this.$router.push("/uc/safe");
-                }
-            })
         }
-
-    },
-  created() {
-      this.getAccount()
-    },
-  computed: {
+      })
     }
+
+  },
+  created() {
+    this.getAccount()
+  },
+  computed: {
+  }
 }
 </script>
 <style scoped>

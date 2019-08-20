@@ -521,7 +521,7 @@ export default {
     },
     getAccount() {
             // 获取个人账户信息
-      this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
+      this.$http.post(this.host + '/uc/approve/account/setting').then(response => {
         var resp = response.body
         if (resp.code == 0) {
           this.user = resp.data

@@ -157,6 +157,7 @@
 </template>
 <script>
 import $ from '@js/jquery.min.js'
+import { setTimeout } from 'timers'
 export default {
   components: {},
   data() {
@@ -252,7 +253,7 @@ export default {
       // 获取id广告信息
       this.$http
         .post(this.host + '/otc/order/pre', { id: this.$route.query.tradeId, memberId: this.$store.getters.member.id })
-        // .post('http://192.168.124.188:6006' + "/otc/order/pre", { id: this.$route.query.tradeId })
+        // .post('http://192.168.124.188:6006' + '/otc/order/pre', { id: this.$route.query.tradeId })
         .then(response => {
           var resp = response.body
           if (resp.code == 0) {
@@ -320,6 +321,7 @@ export default {
           param['remark'] = this.nuyNum
           this.$http
             .post(this.host + '/otc/order/sell', param)
+            // .post('http://192.168.124.188:6006/otc/order/sell', param)
             .then(response => {
               this.btnDisabled = false
               var resp = response.body
@@ -329,6 +331,11 @@ export default {
                 setTimeout(() => {
                   self.$router.push('/chat?tradeId=' + resp.data)
                 }, 2000)
+              } else if (resp.code == 4005) {
+                this.$Message.error(resp.message, 3)
+                setTimeout(() => {
+                  self.$router.push('/account')
+                }, 3000)
               } else {
                 this.$Message.error(resp.message)
               }
