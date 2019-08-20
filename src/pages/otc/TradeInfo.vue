@@ -325,17 +325,17 @@ export default {
             .then(response => {
               this.btnDisabled = false
               var resp = response.body
+              const self = this
               if (resp.code == 0) {
                 this.$Message.success(resp.message)
-                const self = this
                 setTimeout(() => {
                   self.$router.push('/chat?tradeId=' + resp.data)
                 }, 2000)
               } else if (resp.code == 4005) {
-                this.$Message.error(resp.message, 3)
+                this.$Message.error(resp.message, 4)
                 setTimeout(() => {
                   self.$router.push('/account')
-                }, 3000)
+                }, 1000)
               } else {
                 this.$Message.error(resp.message)
               }
