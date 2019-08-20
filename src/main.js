@@ -68,7 +68,6 @@ Vue.http.interceptors.push((request, next) => {
         return response
     })
 })
-
 Vue.config.productionTip = false
 Vue.filter('timeFormat', function(tick) {
     return moment(tick).format('HH:mm:ss')
