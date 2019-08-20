@@ -60,6 +60,24 @@ Vue.http.interceptors.push((request, next) => {
         }
         return response
     })
+    var xAuthToken = response.headers.get('x-auth-token')
+    if (xAuthToken != null && xAuthToken !== '') {
+        localStorage.setItem('TOKEN', xAuthToken)
+    }
+    // 判断单点登陆 接口状态 4001已在其他设备登录 1.5s后退出登录
+    if (response.body.code === 4001) {
+        iView.Message.error(response.body.message)
+        store.commit('setMember', null)
+        localStorage.removeItem('TOKEN')
+        setTimeout(() => {
+            location.href = '/'
+        }, 1500)
+    }
+    if (response.body.code === '4000' || response.body.code === '3000') {
+        store.commit('setMember', null)
+        return false
+    }
+    return response
 })
 
 Vue.config.productionTip = false

@@ -16,6 +16,7 @@ module.exports = {
             //     target: 'http://172.24.102.98:6004',
             //     secure: false
             // }
+<<<<<<< HEAD
         },
         // Various Dev Server settings
         host: 'localhost', // can be overwritten by process.env.HOST
@@ -25,6 +26,17 @@ module.exports = {
         errorOverlay: true,
         notifyOnErrors: true,
         poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+=======
+    },
+    // Various Dev Server settings
+    // host: 'localhost', // can be overwritten by process.env.HOST
+    host: '192.168.124.48', // can be overwritten by process.env.HOST
+    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    autoOpenBrowser: true,
+    errorOverlay: true,
+    notifyOnErrors: true,
+    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+>>>>>>> c27d0dd6112f54344ab0238f08b3682bef078666
 
         // Use Eslint Loader?
         // If true, your code will be linted during bundling and
