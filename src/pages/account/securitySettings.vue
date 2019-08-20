@@ -185,15 +185,65 @@
                 <div class="detail-list" style="width: 100%;">
                     <!-- 请上传资料完成实名认证 -->
                     <!-- <h3 style="color:#3697FE;font-weight:400;">{{ $t("new.nformationto") }}</h3> -->
-                    <Form ref="formValidate6" :model="formValidate6" :rules="ruleValidate" :label-width="85" style="text-align:center;">
-                        <div class="validate" style="text-align:center;color:#8090AF;">
-                            <FormItem :label="$t('uc.safe.realname')" prop="realName" >
-                                <Input v-model="formValidate6.realName" size="large" style="width:300px;"></Input>
+                    <Form
+                        ref="formValidate6"
+                        :model="formValidate6"
+                        :rules="ruleValidate"
+                        :label-width="85"
+                        width="300px"
+                    >
+                        <div
+                            class="validate"
+                            style="color:#8090AF;"
+                        >
+                            <!--<FormItem
+                                :label="$t('uc.safe.typeId')"
+                            >
+                                <Select
+                                    v-model="formValidate6.typeId"
+                                    @on-change="areaChange"
+                                >
+                                    <Option
+                                        v-for="(item, index) in typeIdList"
+                                        :value="item.value"
+                                        :key="item.value"
+
+                                    >
+                                        {{ item.label }}
+                                    </Option>
+                                </Select>
+                            </FormItem>-->
+                            <FormItem
+                                :label="$t('uc.safe.realname')"
+                            >
+                                <Input
+                                    v-model="formValidate6.realName"
+                                    size="large"
+                                    style="width:300px;"
+                                />
                             </FormItem>
                             <!-- 身份证号 -->
-                            <FormItem :label="$t('uc.safe.idcard')" prop="idCard" >
-                                <Input v-model="formValidate6.idCard" size="large" style="width:300px;"></Input>
+                            <!--v-if="formValidate6.typeId == 1"-->
+                            <FormItem
+                                :label="$t('uc.safe.idcard')"
+                            >
+                                <Input
+                                    v-model="formValidate6.idCard"
+                                    size="large"
+                                    style="width:300px;"
+                                />
                             </FormItem>
+                            <!-- 证件号码 -->
+                            <!--<FormItem
+                                :label="$t('uc.safe.idNumber')"
+                                v-if="formValidate6.typeId == 2"
+                            >
+                                <Input
+                                    v-model="formValidate6.idNumber"
+                                    size="large"
+                                    style="width:300px;"
+                                />
+                            </FormItem>-->
                         </div>
                         <!-- 真实姓名 -->
 
@@ -884,9 +934,9 @@ export default {
       imgLast: '',
       loginmsg: this.$t('common.logintip'),
       memberlevel: '',
-      frontCardImg: require('../../assets/images/frontCardImg1.jpg'),
-      backCardImg: require('../../assets/images/backCardImg1.jpg'),
-      handCardImg: require('../../assets/images/HandCardImg1.jpg'),
+      // frontCardImg: require('../../assets/images/frontCardImg1.jpg'),
+      // backCardImg: require('../../assets/images/backCardImg1.jpg'),
+      // handCardImg: require('../../assets/images/HandCardImg1.jpg'),
 
       uploadHeaders: { 'x-auth-token': localStorage.getItem('TOKEN') },
       uploadUrl: this.host + '/uc/upload/oss/image',
@@ -921,10 +971,24 @@ export default {
         emailCode: '',
         googleCode: ''
       },
+        // 身份认证
       formValidate6: {
         realName: '',
-        idCard: ''
+        idCard: '',
+          typeId: 1,
+        idNumber: '',
       },
+        // 证件类型
+        typeIdList: [
+            {
+                value: 1,
+                label: '身份证'
+            },
+            {
+                value: 2,
+                label: '护照'
+            }
+        ],
       formValidate7: {
         pw7: '',
         pw7Confirm: ''
@@ -1061,13 +1125,6 @@ export default {
           },
                     { validator: validatepw7check, trigger: 'blur' }
         ],
-        phoneCode: [
-          {
-            required: true,
-            message: this.$t('uc.safe.codetip'),
-            trigger: 'blur'
-          }
-        ],
         realName: [
           {
             required: true,
@@ -1082,6 +1139,13 @@ export default {
             trigger: 'blur'
           }
         ],
+          // idNumber: [
+          //     {
+          //         required: true,
+          //         message: this.$t('uc.safe.passport'),
+          //         trigger: 'blur'
+          //     }
+          // ],
         newMPw8: [
           {
             required: true,
@@ -1192,49 +1256,49 @@ export default {
     googleModalCancel() {
       this.googleSwitch = !this.googleSwitch
     },
-    beforeUpload(data) {
-            // console.log(data)
-            // let name = data.name;//截取后4位
-            // name.substring(name.length-3);
-            // console.log(name.substring(name.length - 3));
-            // this.$Notice.warning({
-            //     title: '文件格式不正确',
-            //     desc: '文件 ' + name + ' 格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。'
-            // })
-            // if (name !== 'jpg') {:on-format-error="handleFormatError"
-            //     this.$Message.error('文件格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。');
-            //     return false;
-            // }
-      if (data && data.size >= 1024000 * 2) {
-                /* 上传图片大小不能超过2M*/
-        this.$Message.error(this.$t('uc.identity.upload'))
-        return false
-      }
-    },
-    frontHandleSuccess(res, file, fileList) {
-      this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
-      if (res.code == 0) {
-        this.frontCardImg = this.imgPreview = res.data
-      } else {
-        this.$Message.error(res.message)
-      }
-    },
-    backHandleSuccess(res, file, fileList) {
-      this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
-      if (res.code == 0) {
-        this.backCardImg = this.imgNext = res.data
-      } else {
-        this.$Message.error(res.message)
-      }
-    },
-    handHandleSuccess(res, file, fileList) {
-      this.$refs.upload3.fileList = [fileList[fileList.length - 1]]
-      if (res.code == 0) {
-        this.handCardImg = this.imgLast = res.data
-      } else {
-        this.$Message.error(res.message)
-      }
-    },
+    // beforeUpload(data) {
+    //         // console.log(data)
+    //         // let name = data.name;//截取后4位
+    //         // name.substring(name.length-3);
+    //         // console.log(name.substring(name.length - 3));
+    //         // this.$Notice.warning({
+    //         //     title: '文件格式不正确',
+    //         //     desc: '文件 ' + name + ' 格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。'
+    //         // })
+    //         // if (name !== 'jpg') {:on-format-error="handleFormatError"
+    //         //     this.$Message.error('文件格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。');
+    //         //     return false;
+    //         // }
+    //   if (data && data.size >= 1024000 * 2) {
+    //             /* 上传图片大小不能超过2M*/
+    //     this.$Message.error(this.$t('uc.identity.upload'))
+    //     return false
+    //   }
+    // },
+    // frontHandleSuccess(res, file, fileList) {
+    //   this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
+    //   if (res.code == 0) {
+    //     this.frontCardImg = this.imgPreview = res.data
+    //   } else {
+    //     this.$Message.error(res.message)
+    //   }
+    // },
+    // backHandleSuccess(res, file, fileList) {
+    //   this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
+    //   if (res.code == 0) {
+    //     this.backCardImg = this.imgNext = res.data
+    //   } else {
+    //     this.$Message.error(res.message)
+    //   }
+    // },
+    // handHandleSuccess(res, file, fileList) {
+    //   this.$refs.upload3.fileList = [fileList[fileList.length - 1]]
+    //   if (res.code == 0) {
+    //     this.handCardImg = this.imgLast = res.data
+    //   } else {
+    //     this.$Message.error(res.message)
+    //   }
+    // },
     noPhone() {
       // if (this.user.phoneVerified==0 || this.user.phoneVerified==1) {
       //     this.$Message.info(this.$t('uc.safe.bindphonetip'))
@@ -1272,17 +1336,31 @@ export default {
         }
       })
     },
+
+      areaChange(value) {
+          console.log(value)
+          this.typeIdList.forEach((ele, index) => {
+              console.log(ele, index)
+              // if (ele.symbol == list[0].symbol) {
+              //     this.hostSymbolList.splice(index, 1, resp);
+              // }
+          });
+      },
     submit(name) {
             // 实名认证
       if (name == 'formValidate6') {
         if (!this.formValidate6.realName) {
-          this.$Message.error(this.$t('uc.safe.upload_positivetip'))
+          this.$Message.error(this.$t('uc.safe.realnametip'))
           return false
         }
         if (!this.formValidate6.idCard) {
-          this.$Message.error(this.$t('uc.safe.upload_positivetip'))
+          this.$Message.error(this.$t('uc.safe.idcardtip'))
           return false
         }
+          // if (!this.formValidate6.idNumber) {
+          //     this.$Message.error(this.$t('uc.safe.passport'))
+          //     return false
+          // }
                 // if (this.imgPreview == "") {
                 //     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
                 //     return false;
@@ -1298,23 +1376,23 @@ export default {
         const param = {}
         param['realName'] = this.formValidate6.realName
         param['idCard'] = this.formValidate6.idCard.toUpperCase()
-                // param["idCardFront"] = this.imgPreview;
-                // param["idCardBack"] = this.imgNext;
-                // param["handHeldIdCard"] = this.imgLast;
-        this.$http.post(this.host + '/uc/approve/real/name', param)
-                    .then(response => {
-                      var resp = response.body
-                      if (resp.code == 0) {
-                        this.member.realName = this.formValidate6.realName
-                        this.$store.commit('setMember', this.member)
-                        this.modal6 = false
-                        this.$Message.success(this.$t('uc.safe.save_success'))
-                        this.getMember()
-                        this.choseItem = 0
-                      } else {
-                        this.$Message.error(resp.message)
-                      }
-                    })
+        // param['idNumber'] = this.formValidate6.idNumber
+        // param["idCardFront"] = this.imgPreview;
+        // param["idCardBack"] = this.imgNext;
+        // param["handHeldIdCard"] = this.imgLast;
+        this.$http.post(this.host + '/uc/approve/real/name', param).then(response => {
+          var resp = response.body
+          if (resp.code == 0) {
+            this.member.realName = this.formValidate6.realName
+            this.$store.commit('setMember', this.member)
+            this.modal6 = false
+            this.$Message.success(this.$t('uc.safe.save_success'))
+            this.getMember()
+            this.choseItem = 0
+          } else {
+            this.$Message.error(resp.message)
+          }
+        })
       }
             // 邮箱认证
       if (name == 'formValidate2') {
@@ -1322,19 +1400,17 @@ export default {
         param['email'] = this.formValidate2.mail
         param['code'] = this.formValidate2.vailCode1
         param['password'] = this.formValidate2.password
-        this.$http
-                    .post(this.host + '/uc/approve/bind/email', param)
-                    .then(response => {
-                      var resp = response.body
-                      if (resp.code == 0) {
-                        this.modal2 = false
-                        this.$Message.success(this.$t('uc.safe.save_success'))
-                        this.getMember()
-                        this.choseItem = 0
-                      } else {
-                        this.$Message.error(resp.message)
-                      }
-                    })
+        this.$http.post(this.host + '/uc/approve/bind/email', param).then(response => {
+          var resp = response.body
+          if (resp.code == 0) {
+            this.modal2 = false
+            this.$Message.success(this.$t('uc.safe.save_success'))
+            this.getMember()
+            this.choseItem = 0
+          } else {
+            this.$Message.error(resp.message)
+          }
+        })
       }
             // 手机认证
       if (name == 'formValidate3') {
@@ -1342,19 +1418,17 @@ export default {
         param['phone'] = this.formValidate3.mobile
         param['code'] = this.formValidate3.vailCode2
         param['password'] = this.formValidate3.password
-        this.$http
-                    .post(this.host + '/uc/approve/bind/phone', param)
-                    .then(response => {
-                      var resp = response.body
-                      if (resp.code == 0) {
-                        this.modal3 = false
-                        this.$Message.success(this.$t('uc.safe.save_success'))
-                        this.getMember()
-                        this.choseItem = 0
-                      } else {
-                        this.$Message.error(resp.message)
-                      }
-                    })
+        this.$http.post(this.host + '/uc/approve/bind/phone', param).then(response => {
+          var resp = response.body
+          if (resp.code == 0) {
+              this.modal3 = false
+              this.$Message.success(this.$t('uc.safe.save_success'))
+              this.getMember()
+              this.choseItem = 0
+          } else {
+              this.$Message.error(resp.message)
+          }
+      })
       }
             // 登录密码
       if (name == 'formValidate4') {
@@ -1675,7 +1749,7 @@ export default {
 }
 .validate {
     width: 100%;
-    height: 60px;
+    /*height: 60px;*/
     margin-bottom: 10px;
     .ivu-form-item-required {
         float: left;
@@ -2118,11 +2192,19 @@ export default {
         justify-content: center;
     }
 
-
     //弹窗样式
     .popups-modal {
         .ivu-modal{
             top: 0;
+            .ivu-select-multiple,
+            .ivu-select-single {
+                .ivu-select-selection {
+                    .ivu-select-placeholder {
+                        height: 38px;
+                        line-height: 38px;
+                    }
+                }
+            }
         }
         .ivu-modal-content {
             padding: 0 42px;
@@ -2192,7 +2274,7 @@ export default {
         }
     }
     .validate {
-        height: 130px !important;
+        /*height: 130px;*/
         overflow: hidden;
         color: #8090AF;
         .ivu-input {
@@ -2217,6 +2299,18 @@ export default {
         }
     }
     .detail-list {
+        .ivu-select{
+            background: transparent !important;
+            width: 300px;
+            .ivu-select-selection {
+                background: transparent !important;
+                border-radius: 0;
+                .ivu-select-selected-value {
+                    height: 38px;
+                    line-height: 38px;
+                }
+            }
+        }
         .ivu-form-item {
             margin-bottom: 30px;
         }
