@@ -77,7 +77,9 @@
                                         {{$t('uc.safe.bindemail')}}
                                     </p>
                                     <p class="right-side" v-if="user.emailVerified==1">
-                                        <span  style="color:#fff;">{{$t('uc.safe.binded')}}</span>
+                                        <a class="btn" @click="modal2 = true">
+                                           换绑
+                                        </a>
                                     </p>
                                     <p class="right-side" v-else>
                                         <a class="btn" @click="modal2 = true">
@@ -98,7 +100,11 @@
                                     <p v-else class="bankInfo" style="color: grey;">
                                         {{$t('uc.safe.bindphone')}}
                                     </p>
-                                    <p class="right-side" v-if="user.phoneVerified==1" style="color:#fff;">{{$t('uc.safe.binded')}}</p>
+                                    <p class="right-side" v-if="user.phoneVerified==1" style="color:#fff;">
+                                         <a  class="btn" @click="modal31= true">
+                                           换绑<!-- {{$t('uc.safe.binded')}} -->
+                                        </a> 
+                                    </p>
                                     <p v-else class="right-side">
                                         <a  class="btn" @click="modal3 = true">
                                             {{$t('uc.safe.bind')}}
@@ -391,6 +397,67 @@
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate3')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
+                                {{$t('new.confirmaaa')}}
+                            </Button>
+                            <!-- <Button @click="handleReset('formValidate3')" style="margin-left: 8px;">
+                                {{$t('uc.safe.reset')}}
+                            </Button> -->
+                        </FormItem>
+                    </Form>
+                </div>
+            </Modal>
+            <!-- 手机换绑弹窗 -->
+            <Modal
+                :title="$t('uc.safe.bindphone')"
+                v-model="modal31"
+                className="vertical-center-modal"
+                width="534"
+                class="popups-modal"
+                :mask-closable="false"
+                footer-hide
+                >
+                <div class="detail-list">
+                    <Form ref="formValidate31" :model="formValidate31" :rules="ruleValidate" :label-width="110">
+                          <!-- 旧手机验证码 -->
+                        <FormItem :label="'旧手机验证码'"  class="defeat-ivu">
+                            <Input v-model="formValidate31.vailCode2" size="large" style="width:300px;">
+                            <!-- <Button slot="append">点击获取</Button> -->
+                            <div class="timebox" slot="append">
+                                <Button @click="send(21)" :disabled="sendMsgDisabled2">
+                                    <span v-if="sendMsgDisabled2">{{time2+$t('uc.safe.second')}}</span>
+                                    <span v-if="!sendMsgDisabled2">{{$t('uc.safe.clickget')}}</span>
+                                </Button>
+                            </div>
+                            </Input>
+                        </FormItem>
+                        <!--新手机 -->
+                        <FormItem :label="'新手机号'" prop="newMobile">
+                            <Input v-model="formValidate31.newMobile" size="large" style="width:300px;">
+                            </Input>
+                        </FormItem>
+                          <!-- 新手机验证码 -->
+                        <FormItem :label="'新手机验证码'" prop="vailCode22" class="defeat-ivu">
+                            <Input v-model="formValidate31.vailCode22" size="large" style="width:300px;">
+                            <!-- <Button slot="append">点击获取</Button> -->
+                            <div class="timebox" slot="append">
+                                <Button @click="send(22)" :disabled="sendMsgDisabled22">
+                                    <span v-if="sendMsgDisabled22">{{time22+$t('uc.safe.second')}}</span>
+                                    <span v-if="!sendMsgDisabled22">{{$t('uc.safe.clickget')}}</span>
+                                </Button>
+                            </div>
+                            </Input>
+                        </FormItem>
+                        
+                          
+                        <!-- 登录密码 -->
+                        <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
+                            <Input v-model="formValidate31.password" size="large" type="password" style="width:300px;">
+                            </Input>
+                        </FormItem>
+                    
+                        <!-- Button -->
+                        <FormItem>
+                            <Button type="primary" @click="handleSubmit('formValidate31')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
                                 {{$t('new.confirmaaa')}}
                             </Button>
                             <!-- <Button @click="handleReset('formValidate3')" style="margin-left: 8px;">
@@ -916,6 +983,7 @@ export default {
     return {
       modal2: false,
       modal3: false,
+      modal31:false,
       modal4: false,
       modal5: false,
       modal6: false,
@@ -953,6 +1021,13 @@ export default {
       formValidate3: {
         mobile: '',
         vailCode2: '',
+        password: ''
+      },
+      //换绑手机
+      formValidate31: {
+        newMobile: '',
+        vailCode2: '',
+        vailCode22: '',
         password: ''
       },
       formValidate4: {
@@ -1034,6 +1109,13 @@ export default {
           }
         ],
         vailCode2: [
+          {
+            required: true,
+            message: this.$t('uc.safe.codetip'),
+            trigger: 'blur'
+          }
+        ],
+          vailCode22: [
           {
             required: true,
             message: this.$t('uc.safe.codetip'),
@@ -1169,6 +1251,7 @@ export default {
       },
       time1: 60, // 发送验证码倒计时
       time2: 60, // 发送验证码倒计时
+      time22: 60, // 发送验证码倒计时
       time3: 60, // 发送验证码倒计时
       time5: 60, // 发送验证码倒计时
       time8: 60, // 发送验证码倒计时
@@ -1179,6 +1262,7 @@ export default {
       isCode: '',
       sendMsgDisabled1: false,
       sendMsgDisabled2: false,
+      sendMsgDisabled22:false,
       sendMsgDisabled3: false,
       sendMsgDisabled5: false,
       sendMsgDisabled8: false,
@@ -1412,7 +1496,7 @@ export default {
           }
         })
       }
-            // 手机认证
+        // 手机认证
       if (name == 'formValidate3') {
         const param = {}
         param['phone'] = this.formValidate3.mobile
@@ -1422,6 +1506,27 @@ export default {
           var resp = response.body
           if (resp.code == 0) {
               this.modal3 = false
+              this.$Message.success(this.$t('uc.safe.save_success'))
+              this.getMember()
+              this.choseItem = 0
+          } else {
+              this.$Message.error(resp.message)
+          }
+      })
+      }
+        //换绑手机
+        if (name == 'formValidate31') {
+        // console.log('换绑手机')
+        const param = {}
+        param['password'] = this.formValidate31.password
+        param['phone'] = this.formValidate31.newMobile
+        param['code'] = this.formValidate31.vailCode2
+        param['newCode']=this.formValidate31.vailCode22
+        console.log(param);
+        this.$http.get(this.host + '/uc/approve/change/phone'+param).then(response => {
+          var resp = response.body
+          if (resp.code == 0) {
+              this.modal31 = false
               this.$Message.success(this.$t('uc.safe.save_success'))
               this.getMember()
               this.choseItem = 0
@@ -1594,7 +1699,57 @@ export default {
         } else {
           this.$refs.formValidate3.validateField('mobile')
         }
-      } else if (index == 3) {
+      } 
+       else if (index == 21) {
+        if (this.$store.getters.member.mobile) {
+                    // 获取旧手机code
+          this.$http.post(this.host + '/uc/mobile/change/code', {
+            phone: this.$store.getters.member.mobile
+          })
+                        .then(response => {
+                          var resp = response.body
+                          if (resp.code == 0) {
+                            me.sendMsgDisabled2 = true
+                            const interval = window.setInterval(function() {
+                              if (me.time2-- <= 0) {
+                                me.time2 = 60
+                                me.sendMsgDisabled2 = false
+                                window.clearInterval(interval)
+                              }
+                            }, 1000)
+                          } else {
+                            this.$Message.error(resp.message)
+                          }
+                        })
+        } else {
+          this.$refs.formValidate3.validateField('mobile')
+        }
+      }  else if (index == 22) {
+        if (this.formValidate31.newMobile) {
+                    // 获取新手机code
+          this.$http.post(this.host + '/uc/mobile/change/resetNewPhoneCode', {
+            phone: this.formValidate31.newMobile,areaCode:'86'
+          })
+                        .then(response => {
+                          var resp = response.body
+                          if (resp.code == 0) {
+                            me.sendMsgDisabled22 = true
+                            const interval = window.setInterval(function() {
+                              if (me.time22-- <= 0) {
+                                me.time22 = 60
+                                me.sendMsgDisabled22 = false
+                                window.clearInterval(interval)
+                              }
+                            }, 1000)
+                          } else {
+                            this.$Message.error(resp.message)
+                          }
+                        })
+        } else {
+          this.$refs.formValidate31.validateField('mobile')
+        }
+      } 
+      else if (index == 3) {
                 // 登录密码获取手机code
         this.$http.post(this.host + '/uc/mobile/update/password/code')
                     .then(response => {
@@ -1612,7 +1767,8 @@ export default {
                         this.$Message.error(resp.message)
                       }
                     })
-      } else if (index == 4) {
+      } 
+      else if (index == 4) {
           // 获取邮箱code
         this.$http.post(this.host + '/uc/update/email/code').then(response => {
           const resp = response.body
@@ -1629,7 +1785,8 @@ export default {
             me.$Message.error(resp.message)
           }
         })
-      } else if (index == 5) {
+      } 
+      else if (index == 5) {
                 // 资金密码获取手机code
         this.$http.post(this.host + '/uc/mobile/trade/code')
                     .then(response => {
@@ -1647,7 +1804,8 @@ export default {
                         this.$Message.error(resp.message)
                       }
                     })
-      } else if (index == 6) {
+      } 
+      else if (index == 6) {
           // 获取邮箱code
         this.$http.post(this.host + '/uc/transaction/email/code').then(response => {
           console.log(response)
@@ -1665,7 +1823,8 @@ export default {
             me.$Message.error(resp.message)
           }
         })
-      } else if (index == 8) {
+      } 
+      else if (index == 8) {
         this.$http.post(this.host + '/uc/mobile/transaction/code')
                     .then(response => {
                       var resp = response.body
