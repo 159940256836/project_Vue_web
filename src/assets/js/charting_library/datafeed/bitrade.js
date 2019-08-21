@@ -103,7 +103,6 @@ function Processdata(event) {
 
 WebsockFeed.prototype.getBars = function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
   var bars = []
-  var bar = []
   var that = this
   this._send(this._datafeedURL + '/history', {
     symbol: symbolInfo.name,
@@ -116,14 +115,14 @@ WebsockFeed.prototype.getBars = function(symbolInfo, resolution, from, to, onHis
       for (var i = 0; i < data.length; i++) {
         var item = data[i]
         bars.push({ time: item[0], open: item[1], high: item[2], low: item[3], close: item[4], volume: item[5] })
-        bar.push({ time: item[0], open: item[1], high: item[2], low: item[3], close: item[4], volume: item[5] })
       }
       // bar = bars
       that.lastBar = bars.length > 0 ? bars[bars.length - 1] : null
+      // console.log(that.lastBar)
       Processdata(bars)
       that.currentBar = that.lastBar
       var noData = bars.length == 0
-      onHistoryCallback(bar, { noData: noData })
+      onHistoryCallback(bars, { noData: noData })
     })
     .fail(function(reason) {
       onErrorCallback(reason)

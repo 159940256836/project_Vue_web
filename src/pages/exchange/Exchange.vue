@@ -1988,7 +1988,6 @@ export default {
   created: function() {
     this.getdefaultSymbol().then(res => {
       this.defaultPath = res
-      console.log(this.defaultPath)
       this.init()
       this.statusCurreny()
     })
@@ -2065,7 +2064,6 @@ export default {
       if (params == undefined) {
         // this.$router.push('/exchange/' + this.defaultPath)
         params = this.defaultPath
-        console.log(params)
         const title = this.currentTradingPrice + ' ' + 'BTC/BC' + ' bdw'
         this.settiele(title)
       } else {
@@ -2082,7 +2080,6 @@ export default {
         params = this.defaultPath
       }
       const basecion = params.split('_')[1]
-      console.log(basecion, params, this.$route)
       if (basecion) {
         this.basecion = basecion.toLowerCase()
       }
@@ -2699,7 +2696,6 @@ export default {
                 .then(response => {
                   this.form.sell.limitPrice = response.data.bid.items[0].price
                   this.form.buy.limitPrice = response.data.ask.items[0].price
-                  console.log(response.data.bid.items[0].price, response.data.ask.items[0].price)
                   this.plate.askRows = []
                   this.plate.bidRows = []
                   const resp = response.body
