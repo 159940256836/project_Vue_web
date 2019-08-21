@@ -179,6 +179,7 @@
                             </div>
                             <div class="action-foot">
                                 <!--提币数量等于零 或者 小于最小提币数量 该按钮禁用-->
+                                 
                                 <Button
                                     id="withdrawSubmit"
                                     long
@@ -187,7 +188,7 @@
                                     style="height:40px;"
                                     @click="apply"
                                     :disabled="withdrawAmount == 0 || withdrawAmount < currentCoin.minAmount"
-                                >
+                                >   
                                     {{$t('uc.finance.withdraw.pickup')}}
                                 </Button>
                             </div>
@@ -344,13 +345,14 @@
             <!--取消-->
             {{$t('common.cancel')}}
         </span>
-        <span
+         
+        <Button
             class="footer-btn-q"
             @click="ok"
+            :disabled="isDisabled" 
         >
-            <!--确定-->
             {{$t('common.confirm')}}
-        </span>
+        </Button>
       </div>
     </Modal>
   </div>
@@ -359,6 +361,7 @@
 export default {
   data() {
     return {
+        isDisabled:false, //谷歌验证确认按钮状态
         isGoogleCode: false, // 是否开启google验证状态;
         isPhoneCode: false, // 是否开启Phone验证状态;
         codeIsSending: false, // 手机验证
@@ -368,7 +371,7 @@ export default {
         codeTime1: 60, // 邮箱短信验证倒计时
       user: {},
       sendcodeValue: this.$t('uc.regist.sendcode'),
-        isCode: '',
+      isCode: '',
       formInline: {
         code: '',
         googleCode: '',
@@ -513,7 +516,6 @@ export default {
                 return false
             }
         }
-
         // 邮箱验证码不能为空
         if (this.isEmailCode) {
             if (this.formInline.emailCode == '') {
@@ -522,7 +524,6 @@ export default {
                 return false
             }
         }
-
         // 谷歌验证码不能为空
       if (this.googleSwitch) {
         if (this.formInline.googleCode == '') {
@@ -546,10 +547,12 @@ export default {
       params['jyPassword'] = this.formInline.fundpwd
       params['code'] = this.isCode == 2 ? this.formInline.code : this.formInline.emailCode
       params['googleCode'] = this.formInline.googleCode
+      this.isDisabled=true //按钮禁用  
       this.$http.post(this.host + '/uc/withdraw/apply', params).then(response => {
         this.fundpwd = ''
         var resp = response.body
         if (resp.code == 0) {
+          this.isDisabled=false //按钮恢复
           this.modal = false
           this.formInline.code = ''
           this.formInline.fundpwd = ''
@@ -558,6 +561,7 @@ export default {
           this.clearValues()
           this.$Message.success(resp.message)
         } else {
+          this.isDisabled=false //按钮恢复
           this.$Message.error(resp.message)
         }
 
@@ -1256,9 +1260,14 @@ export default {
     display:inline-block;
     text-align:center;
     height:30px;
-    line-height: 30px;
-    cursor: pointer;
+    // line-height: 30px;
+    // cursor: pointer;
+    /deep/.footer-btn-q:hover{
+    background:#3399ff;
+    border:none;
+    }
   }
+ 
   .withdraw {
 
     .nav-right {

@@ -21,10 +21,9 @@ Vue.use(vueResource)
 Vue.use(VueI18n)
     // Vue.prototype.host = 'https://www.bdw.top'
 Vue.prototype.url = 'https://www.bdw.top' // 链接地址
-// Vue.prototype.host = 'http://192.168.124.14/' // 陈然
-Vue.prototype.host = 'https://api.nr3d.cn' // 正式
-// Vue.prototype.host = 'http://192.168.124.188:6006' // 周光银
-// Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
+    // Vue.prototype.host = 'http://192.168.124.14/' // 陈然
+    // Vue.prototype.host = 'https://api.nr3d.cn' // 正式
+Vue.prototype.host = 'http://192.168.124.43/' // 测试环境
     // Vue.prototype.url = 'http://192.168.124.45' // 链接地址
 Vue.prototype.api = Api
 Vue.http.options.credentials = true
@@ -53,8 +52,8 @@ Vue.http.interceptors.push((request, next) => {
     if (xAuthToken != null && xAuthToken !== '') {
       localStorage.setItem('TOKEN', xAuthToken)
     }
- // 判断单点登陆 接口状态 4001已在其他设备登录 1.5s后退出登录
-    if (response.body.code === 4001) {
+        // 判断单点登陆 接口状态 4001已在其他设备登录 1.5s后退出登录
+    if (response.body.code === 4001 || response.body.code === '4000') {
       iView.Message.error(response.body.message)
       store.commit('setMember', null)
       localStorage.removeItem('TOKEN')

@@ -493,6 +493,7 @@ export default {
     },
         // login(params) {
     login() {
+      console.log(1)
       const params = {}
       const formParams = this.formInline
       params.username = formParams.user

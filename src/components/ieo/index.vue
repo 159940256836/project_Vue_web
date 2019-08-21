@@ -10,14 +10,13 @@
                     <div style="margin-top:38px;">{{$t('Ieo.totalSales')}}</div>
                     <div style="margin-top:32px">{{$t('Ieo.cycle')}}</div>
                     <div style="margin-top:34px">{{$t('Ieo.currency')}}</div>
-                    
                 </div>
             </div>
             <div style="color:#3399FF; font-size:14px; text-align:right;">
                 <div style="font-size:16px;" class="type" :class="statusClass">{{str}}</div>
                 <div style="margin-top:36px;">{{content.saleAmount|threeComma}} {{content.saleCoin}}</div>
                 <div style="margin-top:33px;">{{content.startTime|ymdFormat}} - {{content.endTime|ymdFormat}}</div>
-                 <div style="margin-top:36px">{{content.raiseCoin}}</div>
+                <div style="margin-top:36px">{{content.raiseCoin}}</div>
             </div>
         </div>
 
