@@ -77,8 +77,8 @@
                                         {{$t('uc.safe.bindemail')}}
                                     </p>
                                     <p class="right-side" v-if="user.emailVerified==1">
-                                        <a class="btn" @click="modal2 = true">
-                                           换绑
+                                        <a class="btn" style="color:#fff">
+                                            {{$t('uc.safe.binded')}}
                                         </a>
                                     </p>
                                     <p class="right-side" v-else>
@@ -983,7 +983,7 @@ export default {
     return {
       modal2: false,
       modal3: false,
-      modal31:false,
+      modal31: false,
       modal4: false,
       modal5: false,
       modal6: false,
@@ -1023,7 +1023,7 @@ export default {
         vailCode2: '',
         password: ''
       },
-      //换绑手机
+      // 换绑手机
       formValidate31: {
         newMobile: '',
         vailCode2: '',
@@ -1050,20 +1050,20 @@ export default {
       formValidate6: {
         realName: '',
         idCard: '',
-          typeId: 1,
-        idNumber: '',
+        typeId: 1,
+        idNumber: ''
       },
         // 证件类型
-        typeIdList: [
-            {
-                value: 1,
-                label: '身份证'
-            },
-            {
-                value: 2,
-                label: '护照'
-            }
-        ],
+      typeIdList: [
+        {
+          value: 1,
+          label: '身份证'
+        },
+        {
+          value: 2,
+          label: '护照'
+        }
+      ],
       formValidate7: {
         pw7: '',
         pw7Confirm: ''
@@ -1115,7 +1115,7 @@ export default {
             trigger: 'blur'
           }
         ],
-          vailCode22: [
+        vailCode22: [
           {
             required: true,
             message: this.$t('uc.safe.codetip'),
@@ -1262,7 +1262,7 @@ export default {
       isCode: '',
       sendMsgDisabled1: false,
       sendMsgDisabled2: false,
-      sendMsgDisabled22:false,
+      sendMsgDisabled22: false,
       sendMsgDisabled3: false,
       sendMsgDisabled5: false,
       sendMsgDisabled8: false,
@@ -1323,12 +1323,12 @@ export default {
     },
     closeGoogle() { // 改变google验证状态
       if (this.googleSwitch) {
-          this.modal7 = false
-          this.googleAuthentication = this.$t('openGoolePage._reset')
-        } else {
-          this.modal8 = false
-          this.googleAuthentication = ''
-        }
+        this.modal7 = false
+        this.googleAuthentication = this.$t('openGoolePage._reset')
+      } else {
+        this.modal8 = false
+        this.googleAuthentication = ''
+      }
     },
     changeGoogleSwitch() { // 改变google验证状态
       if (this.googleSwitch) {
@@ -1421,15 +1421,15 @@ export default {
       })
     },
 
-      areaChange(value) {
-          console.log(value)
-          this.typeIdList.forEach((ele, index) => {
-              console.log(ele, index)
+    areaChange(value) {
+      console.log(value)
+      this.typeIdList.forEach((ele, index) => {
+        console.log(ele, index)
               // if (ele.symbol == list[0].symbol) {
               //     this.hostSymbolList.splice(index, 1, resp);
               // }
-          });
-      },
+      })
+    },
     submit(name) {
             // 实名认证
       if (name == 'formValidate6') {
@@ -1505,35 +1505,34 @@ export default {
         this.$http.post(this.host + '/uc/approve/bind/phone', param).then(response => {
           var resp = response.body
           if (resp.code == 0) {
-              this.modal3 = false
-              this.$Message.success(this.$t('uc.safe.save_success'))
-              this.getMember()
-              this.choseItem = 0
+            this.modal3 = false
+            this.$Message.success(this.$t('uc.safe.save_success'))
+            this.getMember()
+            this.choseItem = 0
           } else {
-              this.$Message.error(resp.message)
+            this.$Message.error(resp.message)
           }
-      })
+        })
       }
-        //换绑手机
-        if (name == 'formValidate31') {
-        // console.log('换绑手机')
+        // 换绑手机
+      if (name == 'formValidate31') {
         const param = {}
         param['password'] = this.formValidate31.password
         param['phone'] = this.formValidate31.newMobile
         param['code'] = this.formValidate31.vailCode2
-        param['newCode']=this.formValidate31.vailCode22
-        console.log(param);
-        this.$http.get(this.host + '/uc/approve/change/phone'+param).then(response => {
+        param['newCode'] = this.formValidate31.vailCode22
+        this.$http.get(this.host + '/uc/approve/change/phone', { 'params': param }).then(response => {
           var resp = response.body
           if (resp.code == 0) {
-              this.modal31 = false
-              this.$Message.success(this.$t('uc.safe.save_success'))
-              this.getMember()
-              this.choseItem = 0
+            this.modal31 = false
+            this.$Message.success(resp.message)
+            this.formValidate31 = ''
+            this.choseItem = 0
+            this.logou()
           } else {
-              this.$Message.error(resp.message)
+            this.$Message.error(resp.message)
           }
-      })
+        })
       }
             // 登录密码
       if (name == 'formValidate4') {
@@ -1558,14 +1557,15 @@ export default {
             this.$Message.success(this.$t('uc.safe.save_success'))
             this.getMember()
             this.choseItem = 0
-            localStorage.removeItem('MEMBER')
-            localStorage.removeItem('TOKEN')
-            this.$store.state.showLogout = true
-            this.$store.state.showLogin = false
-            const self = this
-            setTimeout(() => {
-              self.$router.push('/login')
-            }, 2000)
+            this.logou()
+            // localStorage.removeItem('MEMBER')
+            // localStorage.removeItem('TOKEN')
+            // this.$store.state.showLogout = true
+            // this.$store.state.showLogin = false
+            // const self = this
+            // setTimeout(() => {
+            //   self.$router.push('/login')
+            // }, 2000)
           } else {
             this.$Message.error(resp.message)
           }
@@ -1699,10 +1699,9 @@ export default {
         } else {
           this.$refs.formValidate3.validateField('mobile')
         }
-      } 
-       else if (index == 21) {
+      } else if (index == 21) {
         if (this.$store.getters.member.mobile) {
-                    // 获取旧手机code
+              // 获取旧手机code
           this.$http.post(this.host + '/uc/mobile/change/code', {
             phone: this.$store.getters.member.mobile
           })
@@ -1724,11 +1723,11 @@ export default {
         } else {
           this.$refs.formValidate3.validateField('mobile')
         }
-      }  else if (index == 22) {
+      } else if (index == 22) {
         if (this.formValidate31.newMobile) {
-                    // 获取新手机code
+            // 获取新手机code
           this.$http.post(this.host + '/uc/mobile/change/resetNewPhoneCode', {
-            phone: this.formValidate31.newMobile,areaCode:'86'
+            phone: this.formValidate31.newMobile, areaCode: '86'
           })
                         .then(response => {
                           var resp = response.body
@@ -1746,10 +1745,9 @@ export default {
                           }
                         })
         } else {
-          this.$refs.formValidate31.validateField('mobile')
+          // this.$refs.formValidate31.validateField('mobile')
         }
-      } 
-      else if (index == 3) {
+      } else if (index == 3) {
                 // 登录密码获取手机code
         this.$http.post(this.host + '/uc/mobile/update/password/code')
                     .then(response => {
@@ -1767,8 +1765,7 @@ export default {
                         this.$Message.error(resp.message)
                       }
                     })
-      } 
-      else if (index == 4) {
+      } else if (index == 4) {
           // 获取邮箱code
         this.$http.post(this.host + '/uc/update/email/code').then(response => {
           const resp = response.body
@@ -1785,8 +1782,7 @@ export default {
             me.$Message.error(resp.message)
           }
         })
-      } 
-      else if (index == 5) {
+      } else if (index == 5) {
                 // 资金密码获取手机code
         this.$http.post(this.host + '/uc/mobile/trade/code')
                     .then(response => {
@@ -1804,8 +1800,7 @@ export default {
                         this.$Message.error(resp.message)
                       }
                     })
-      } 
-      else if (index == 6) {
+      } else if (index == 6) {
           // 获取邮箱code
         this.$http.post(this.host + '/uc/transaction/email/code').then(response => {
           console.log(response)
@@ -1823,8 +1818,7 @@ export default {
             me.$Message.error(resp.message)
           }
         })
-      } 
-      else if (index == 8) {
+      } else if (index == 8) {
         this.$http.post(this.host + '/uc/mobile/transaction/code')
                     .then(response => {
                       var resp = response.body
@@ -1842,6 +1836,21 @@ export default {
                       }
                     })
       }
+    },
+    logou() {
+      this.$http.post(this.host + '/uc/loginout', {}).then(response => {
+        var resp = response.body
+        if (resp.code === 0) {
+          this.$Message.success(resp.message)
+          this.$store.commit('setMember', null)
+          localStorage.removeItem('TOKEN')
+          setTimeout(() => {
+            location.href = '/'
+          }, 500)
+        } else {
+          this.$Message.error(resp.message)
+        }
+      })
     },
     getMember() {
             // 获取个人安全信息
