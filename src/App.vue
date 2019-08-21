@@ -255,6 +255,9 @@
                                 <li>
                                     <router-link to="/transactionCosts">{{$t("footer.transactionCosts")}}</router-link>
                                 </li>
+                                <li>
+                                    <router-link to="/brief">{{$t("header.brief")}}</router-link>
+                                </li>
                             </ul>
                             <!--投票上币-->
                             <ul class="footer_info" :class="this.$store.getters.lang == 'English' ? 'margin10' : 'margin40'">

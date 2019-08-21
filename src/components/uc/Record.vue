@@ -10,8 +10,7 @@
                         <DatePicker
                             v-model="rangeDate"
                             @on-change="changedate"
-                            format="yyyy-MM-dd"
-                            type="daterange"
+                            type="datetimerange"
                             style="margin-right:10px;"
                             @on-clear="clear"
                         ></DatePicker>
@@ -421,6 +420,67 @@ export default {
 </style>
 <style lang="scss">
 .nav-record {
+    .ivu-select-dropdown {
+        .ivu-time-picker-header {
+            border-bottom: 1px solid #58698A;
+        }
+        .ivu-picker-confirm {
+            border-top: 1px solid #58698A;
+            padding: 0;
+        }
+        .ivu-time-picker-cells-list {
+            border-left: 1px solid #58698A;
+        }
+        .ivu-time-picker-with-range {
+            .ivu-picker-panel-content {
+                &:after {
+                    background: transparent;
+                }
+            }
+        }
+        .ivu-time-picker-cells-list::-webkit-scrollbar-thumb {
+            background: #191D3A;
+        }
+        .ivu-time-picker-cells-list::-webkit-scrollbar {
+            width: 3px;
+            height: 1px;
+        }
+        .ivu-time-picker-cells-list::-webkit-scrollbar-track {
+            background: #111530;
+        }
+        .ivu-time-picker-cells-cell {
+            &:hover {
+                background: #191D3A;
+                color: #3399ff;
+            }
+        }
+        .ivu-time-picker-cells-cell-selected,
+        .ivu-time-picker-cells-cell-selected:hover {
+            background: #191D3A;
+            color: #3399ff;
+        }
+        .ivu-btn-text {
+            &:hover {
+                background: transparent;
+                border-color: #3399ff;
+            }
+        }
+        .ivu-btn-text[disabled] {
+            background: transparent;
+            border: 1px solid #2A3850;
+            color: #8090af;
+        }
+        .ivu-date-picker-cells-cell-range {
+            &:before {
+                background: #191D3A;
+            }
+        }
+        .ivu-picker-confirm-time,
+        .ivu-btn-small {
+            margin: 0 30px;
+        }
+    }
+
     .ivu-select-dropdown {
         li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
             background: #10122B;
