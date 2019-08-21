@@ -9,6 +9,7 @@ import checkuser from '../pages/otc/CheckUser'
 import chat from '../pages/otc/Chat'
 import notice from '../pages/cms/Notice'
 import fund from '../pages/fund/fund' // BD基金
+import brief from '../pages/fund/brief' // BD简介
 import noticeitem from '../pages/cms/NoticeItem'
 import newhelp from '../pages/cms/NewHelp'
 import question from '../pages/cms/Question'
@@ -205,6 +206,7 @@ export default [
     // { path: '/message', component: Message },
     { path: '/notice', component: notice },
     { path: '/fund', component: fund }, // BD基金
+    { path: '/brief', component: brief }, // BD简介
   {
     path: '/mobileTerminalFund',
     name: 'mobileTerminalFund',

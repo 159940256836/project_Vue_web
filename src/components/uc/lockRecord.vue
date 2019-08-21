@@ -102,6 +102,12 @@
               this.tableMoney = resp.data.content;
               console.log(this.tableMoney)
               this.totalElement = resp.data.totalElements;
+            } else {
+              if (resp.message == '币种不合法') {
+                this.$Message.error(this.$t('foot.reasonCoin'))
+                return false
+              }
+              this.$Message.error(resp.message)
             }
         });
       },
