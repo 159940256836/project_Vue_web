@@ -16,9 +16,7 @@
             </div>
           </router-link>
         </header>
-        <div class="images">
-          <!--<img style="margin-top: -160px" src="../../assets/img/brief/info.png">-->
-        </div>
+        <div class="images"></div>
       </div>
     </div>
     <div class="brief-main">

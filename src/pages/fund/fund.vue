@@ -98,6 +98,7 @@
                 <Button
                   @click="buyLockCoin('rush')"
                   :loading="loadingButton"
+                  :disabled="coinBalance < 0"
                 >
                   <span v-if="!isLogin">
                     {{ $t("common.logintip") }}
@@ -380,7 +381,7 @@ export default {
      countdown() {
        let iTime
         // 到期时间
-       // const end = Date.parse(new Date('2019/08/21 21:51:50'))
+       // const end = Date.parse(new Date('2019/08/22 14:05:00'))
        const end = this.endtime
        // console.log(end, this.endtime)
        // 当前时间
@@ -467,7 +468,7 @@ export default {
              this.$Message.error(this.$t('common.loginInfo'))
              return false
            }
-           console.log(this.coinInfo.lockMinimum, this.lockAmount, this.coinInfo.lockHighest)
+           // console.log(this.coinInfo.lockMinimum, this.lockAmount, this.coinInfo.lockHighest)
           //  if (this.lockAmount < this.coinInfo.lockMinimum || this.lockAmount > this.coinInfo.lockHighest) {
           //    this.$Message.error('您输入的锁仓金额小于500最小值,或者大于5000000最大值，请重新输入')
           //    this.lockAmount = ''
@@ -519,7 +520,6 @@ export default {
                this.loadingButton = false
                this.$Message.success(resp.message)
                this.lockAdvance = ''
-                // this.snapStatus = true // 抢购状态
                this.snapLines()
                this.getRobDataList()
              } else {
@@ -529,7 +529,6 @@ export default {
            })
          }
        } else {
-         // this.$Message.error(this.$t('common.logintip'))
          this.$router.push('/login')
        }
      },
@@ -558,24 +557,12 @@ export default {
            console.log(this.savePageNo)
          }
        }
-        // else if (type == 'rob') {
-        //   if (this.robPageNo == 1) {
-        //     this.$Message.error(this.$t('uc.finance.record.nodata'))
-        //   } else {
-        //     this.robPageNo = this.savePageNo - 1
-        //     // this.getRobDataList()
-        //   }
-        // }
      },
      nextpage(type) {
        if (type == 'save') {
          this.savePageNo = this.savePageNo + 1
          this.getSaveDataList()
        }
-        // else if (type == 'rob') {
-        //   this.robPageNo = this.robPageNo + 1
-        //   this.getRobDataList()
-        // }
      },
       /** *******抢币***********/
       // 币种详细信息 可抢币
@@ -588,14 +575,14 @@ export default {
            this.coinBalance = resp.data.remain
            this.endtime = resp.data.startTime
            this.countdown()
-            // const name = this.$route.path
-            /* if (name == '/fund') {
+            const name = this.$route.path
+             if (name == '/fund') {
               if (this.coinBalance >= 0 && this.isLogin){
                 setTimeout(() => {
                   this.getCoinRob()
                 }, 1000);
               }
-            }*/
+            }
          } else {
            this.$Message.error(resp.message)
            return false
