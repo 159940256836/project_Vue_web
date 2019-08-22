@@ -42,7 +42,7 @@ const i18n = new VueI18n({
     'en': require('./assets/lang/en.js')
   }
 })
-
+Vue.prototype.httpdata = true
 Vue.http.interceptors.push((request, next) => {
     // 登录成功后将后台返回的TOKEN在本地存下来,每次请求从sessionStorage中拿到存储的TOKEN值
   request.headers.set('x-auth-token', localStorage.getItem('TOKEN'))
@@ -52,16 +52,19 @@ Vue.http.interceptors.push((request, next) => {
     if (xAuthToken != null && xAuthToken !== '') {
       localStorage.setItem('TOKEN', xAuthToken)
     }
-        // 判断单点登陆 接口状态 4001已在其他设备登录 1.5s后退出登录
+        // 判断单点登陆 接口状态 4001已在其他设备登录 1s后退出登录
     if (response.body.code === 4001 || response.body.code === '4000') {
-      iView.Message.error(response.body.message)
+      if (Vue.httpdata) {
+        iView.Message.error(response.body.message, 2)
+        Vue.httpdata = false
+      }
       store.commit('setMember', null)
       localStorage.removeItem('TOKEN')
       setTimeout(() => {
         location.href = '/'
-      }, 1500)
+      }, 800)
     }
-    if (response.body.code === '4000' || response.body.code === '3000') {
+    if (response.body.code === '3000') {
       store.commit('setMember', null)
       return false
     }
