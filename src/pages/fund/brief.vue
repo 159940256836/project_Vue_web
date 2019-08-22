@@ -4,7 +4,6 @@
       <div class="brief-header-text0">
         <!--v-if="this.$store.getters.lang !== 'English'-->
         <header style="margin-right: -20px;" class="title-header">
-
           <p class="brief-header-text">
             <img v-if="$store.getters.lang !== 'English'" src="../../assets/img/brief/text.png">
             <img v-if="$store.getters.lang == 'English'" src="../../assets/img/brief/ying.png">
@@ -21,7 +20,6 @@
           <!--<img style="margin-top: -160px" src="../../assets/img/brief/info.png">-->
         </div>
       </div>
-
     </div>
     <div class="brief-main">
       <div class="brief-content">
@@ -170,234 +168,278 @@ export default {
 </script>
 <style lang="scss" scoped>
   .brief-box {
-    background: #101646;
-    width: 100%;
-    .brief-header {
-      /*display: flex;*/
-      height: 995px;
-      .brief-header-text0 {
-        position: relative;
-        .images {
-          width: 1200px;
-          min-height: 1015px;
-          background: url("../../assets/img/brief/info.png") no-repeat;
-          background-size: cover;
-          margin-top: -160px;
-          float: right;
-        }
-        .title-header {
-          min-height: 150px;
-          position: absolute;
-          left: 19%;
-          top: 450px;
-        }
-        header {
-          .brief-header-text {
-            text-align: right;
-            font-size:80px;
-            font-family:'MF ShaoHua(Noncommercial)';
-            font-weight:400;
-            color:rgba(39,145,218,1);
+      background: #101646;
+      width: 100%;
+      .brief-header {
+        /*display: flex;*/
+        height: 995px;
+        .brief-header-text0 {
+          position: relative;
+          .images {
+            width: 1200px;
+            min-height: 1015px;
+            background: url("../../assets/img/brief/info.png") no-repeat;
+            background-size: cover;
+            margin-top: -160px;
+            float: right;
           }
-          .briefHeaderButton {
-            min-width: 190px;
-            height: 55px;
-            border-radius: 5px;
-            border: 1px solid #2791DA;
-            line-height: 55px;
-            float: left;
-            margin-right: 13%;
-            .brief-header-button {
-              text-align: center;
-              font-size: 20px;
-              color: #2791DA;
+          .title-header {
+            min-height: 150px;
+            position: absolute;
+            left: 19%;
+            top: 450px;
+          }
+          header {
+            .brief-header-text {
+              text-align: right;
+              font-size:80px;
+              font-family:'MF ShaoHua(Noncommercial)';
+              font-weight:400;
+              color:rgba(39,145,218,1);
             }
-          }
-          .briefHeaderButton1 {
-            min-width: 190px;
-            height: 55px;
-            border-radius: 5px;
-            border: 1px solid #2791DA;
-            line-height: 55px;
-            float: left;
-            margin-right: 31%;
-            .brief-header-button {
-              text-align: center;
-              font-size: 20px;
-              color: #2791DA;
+            .briefHeaderButton {
+              min-width: 190px;
+              height: 55px;
+              border-radius: 5px;
+              border: 1px solid #2791DA;
+              line-height: 55px;
+              float: left;
+              margin-right: 13%;
+              .brief-header-button {
+                text-align: center;
+                font-size: 20px;
+                color: #2791DA;
+              }
+            }
+            .briefHeaderButton1 {
+              min-width: 190px;
+              height: 55px;
+              border-radius: 5px;
+              border: 1px solid #2791DA;
+              line-height: 55px;
+              float: left;
+              margin-right: 31%;
+              .brief-header-button {
+                text-align: center;
+                font-size: 20px;
+                color: #2791DA;
+              }
             }
           }
         }
       }
+      .brief-main {
+        width: 1200px;
+        margin: -140px auto;
+        padding-bottom: 50px;
 
-    }
-    .brief-main {
-      width: 1200px;
-      margin: -140px auto;
-      padding-bottom: 50px;
-
-      .brief-content {
-        min-height: 400px;
-        section {
-          .brief-info,
-          .brief-distribution,
-          .brief-value {
-            header {
-              text-align: center;
-              height: 50px;
-              line-height: 50px;
-              img {
-                vertical-align: middle;
-              }
-              span {
-                display: inline-block;
-                min-width: 245px;
-                font-size:24px;
-                font-family:Microsoft YaHei;
-                font-weight:400;
-                color:rgba(39, 145, 218, 1);
-              }
-            }
-          }
-          .brief-info {
-            .section-text {
-              height: 182px;
-              background: rgba(19, 26, 79, 1);
-              box-shadow: 0 0 14px 0 rgba(51, 51, 51, .1);
-              padding: 35px 44px;
-              text-indent: 2em;
-              color: #fff;
-              line-height: 32px;
-              font-size: 16px;
-              margin-top: 60px;
-            }
-          }
-          .brief-distribution {
-            header {
-              margin: 100px auto 60px;
-            }
-            .distribution-info {
-              height: 720px;
-              background: #131A4F;
-              text-align: center;
-              padding: 120px 0;
-              position: relative;
-              .brief-img {
-                height: 470px;
-                background: url("../../assets/img/brief/pc.png") no-repeat;
-                position: absolute;
-                left: 24%;
-                width: 53%;
-              }
-              .brief-text-info {
-                width: 98%;
-                position: absolute;
-                top: 46%;
-                p {
-                  &:first-child {
-                    font-size: 24px;
-                    color: #fff;
-                  }
-                  &:last-child {
-                    font-size: 50px;
-                    color: #2791DA;
-                    margin-top: 10px;
-                  }
-                }
-              }
-              .distribution-left-top,
-              .distribution-left-bottom,
-              .distributionRightTop,
-              .distributionRightTop1,
-              .distributionRightBottom,
-              .distributionRightBottom1 {
-                width: 220px;
-                font-size: 14px;
-                font-family: Microsoft YaHei;
-                font-weight: 400;
-                color: rgba(199, 195, 211, 1);
-                position: absolute;
-              }
-              .distribution-left-top {
-                left: 4.5%;
-                top: 35%;
-                text-align: right;
-              }
-              .distribution-left-bottom {
-                right: 29%;
-                top: 16%;
-                text-align: left;
-              }
-              .distributionRightTop {
-                left: 4.5%;
-                bottom: 21%;
-                text-align: right;
-              }
-              .distributionRightTop1 {
-                left: 4.5%;
-                bottom: 15%;
-                text-align: right;
-              }
-              .distributionRightBottom {
-                right: 5%;
-                bottom: 42%;
-                text-align: left;
-              }
-              .distributionRightBottom1 {
-                right: 5%;
-                bottom: 35%;
-                text-align: left;
-              }
-            }
-          }
-          .brief-value {
-            header {
-              margin: 100px auto 60px;
-            }
-            .value-info {
-              height: 890px;
-              background: #131A4F;
-              padding: 95px 50px;
-              margin-bottom: 180px;
-              .value-box {
-                width: 310px;
-                min-height: 310px;
-                float: left;
+        .brief-content {
+          min-height: 400px;
+          section {
+            .brief-info,
+            .brief-distribution,
+            .brief-value {
+              header {
                 text-align: center;
-                -ms-flex-wrap: wrap;
-                flex-wrap: wrap;
-                margin-right: 85px;
+                height: 50px;
+                line-height: 50px;
                 img {
-                  width: 98px;
-                  height: 113px;
+                  vertical-align: middle;
                 }
-                p {
-                  &:nth-child(2) {
-                    font-size:24px;
-                    font-family:Microsoft YaHei;
-                    font-weight:400;
-                    color:rgba(255,255,255,1);
-                    line-height:29px;
-                    margin-top: 34px;
+                span {
+                  display: inline-block;
+                  min-width: 245px;
+                  font-size:24px;
+                  font-family:Microsoft YaHei;
+                  font-weight:400;
+                  color:rgba(39, 145, 218, 1);
+                }
+              }
+            }
+            .brief-info {
+              .section-text {
+                height: 182px;
+                background: rgba(19, 26, 79, 1);
+                box-shadow: 0 0 14px 0 rgba(51, 51, 51, .1);
+                padding: 35px 44px;
+                text-indent: 2em;
+                color: #fff;
+                line-height: 32px;
+                font-size: 16px;
+                margin-top: 60px;
+              }
+            }
+            .brief-distribution {
+              header {
+                margin: 100px auto 60px;
+              }
+              .distribution-info {
+                height: 720px;
+                background: #131A4F;
+                text-align: center;
+                padding: 120px 0;
+                position: relative;
+                .brief-img {
+                  height: 470px;
+                  background: url("../../assets/img/brief/pc.png") no-repeat;
+                  position: absolute;
+                  left: 24%;
+                  width: 53%;
+                }
+                .brief-text-info {
+                  width: 98%;
+                  position: absolute;
+                  top: 46%;
+                  p {
+                    &:first-child {
+                      font-size: 24px;
+                      color: #fff;
+                    }
+                    &:last-child {
+                      font-size: 50px;
+                      color: #2791DA;
+                      margin-top: 10px;
+                    }
                   }
-                  &:last-child {
-                    font-size:14px;
-                    font-family:Microsoft YaHei;
-                    font-weight:400;
-                    color:rgba(255,255,255,1);
-                    line-height:29px;
-                    margin-top: 24px;
+                }
+                .distribution-left-top,
+                .distribution-left-bottom,
+                .distributionRightTop,
+                .distributionRightTop1,
+                .distributionRightBottom,
+                .distributionRightBottom1 {
+                  width: 220px;
+                  font-size: 14px;
+                  font-family: Microsoft YaHei;
+                  font-weight: 400;
+                  color: rgba(199, 195, 211, 1);
+                  position: absolute;
+                }
+                .distribution-left-top {
+                  left: 4.5%;
+                  top: 35%;
+                  text-align: right;
+                }
+                .distribution-left-bottom {
+                  right: 29%;
+                  top: 16%;
+                  text-align: left;
+                }
+                .distributionRightTop {
+                  left: 4.5%;
+                  bottom: 21%;
+                  text-align: right;
+                }
+                .distributionRightTop1 {
+                  left: 4.5%;
+                  bottom: 15%;
+                  text-align: right;
+                }
+                .distributionRightBottom {
+                  right: 5%;
+                  bottom: 42%;
+                  text-align: left;
+                }
+                .distributionRightBottom1 {
+                  right: 5%;
+                  bottom: 35%;
+                  text-align: left;
+                }
+              }
+            }
+            .brief-value {
+              header {
+                margin: 100px auto 60px;
+              }
+              .value-info {
+                height: 890px;
+                background: #131A4F;
+                padding: 95px 50px;
+                margin-bottom: 180px;
+                .value-box {
+                  width: 310px;
+                  min-height: 310px;
+                  float: left;
+                  text-align: center;
+                  -ms-flex-wrap: wrap;
+                  flex-wrap: wrap;
+                  margin-right: 85px;
+                  img {
+                    width: 98px;
+                    height: 113px;
+                  }
+                  p {
+                    &:nth-child(2) {
+                      font-size:24px;
+                      font-family:Microsoft YaHei;
+                      font-weight:400;
+                      color:rgba(255,255,255,1);
+                      line-height:29px;
+                      margin-top: 34px;
+                    }
+                    &:last-child {
+                      font-size:14px;
+                      font-family:Microsoft YaHei;
+                      font-weight:400;
+                      color:rgba(255,255,255,1);
+                      line-height:29px;
+                      margin-top: 24px;
+                    }
+                  }
+                  &:nth-child(3),
+                  &:nth-child(6) {
+                    margin-right: 0;
+                  }
+                  &:nth-child(4),
+                  &:nth-child(5),
+                  &:nth-child(6) {
+                    margin-top: 80px;
                   }
                 }
-                &:nth-child(3),
-                &:nth-child(6) {
-                  margin-right: 0;
-                }
-                &:nth-child(4),
-                &:nth-child(5),
-                &:nth-child(6) {
-                  margin-top: 80px;
-                }
+              }
+            }
+          }
+        }
+      }
+  }
+  @media (min-width: 450px) and (max-width: 1255px) {
+    .brief-box {
+      .brief-header {
+        .brief-header-text0 {
+          .title-header {
+            min-height: 150px;
+            position: absolute;
+            left: 40%;
+            top: 105px;
+          }
+          header {
+            .briefHeaderButton {
+              min-width: 190px;
+              height: 55px;
+              border-radius: 5px;
+              border: 1px solid #2791DA;
+              line-height: 55px;
+              float: none;
+              margin-right: 0;
+              text-align: center;
+              .brief-header-button {
+                text-align: center;
+                font-size: 20px;
+                color: #2791DA;
+              }
+            }
+            .briefHeaderButton1 {
+              min-width: 190px;
+              height: 55px;
+              border-radius: 5px;
+              border: 1px solid #2791DA;
+              line-height: 55px;
+              float: left;
+              margin-right: 31%;
+              .brief-header-button {
+                text-align: center;
+                font-size: 20px;
+                color: #2791DA;
               }
             }
           }
