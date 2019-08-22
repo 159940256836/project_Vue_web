@@ -1153,6 +1153,14 @@ export default {
             trigger: 'blur'
           }
         ],
+        newMail: [
+          {
+            required: true,
+            type: 'email',
+            message: this.$t('uc.safe.emailtip'),
+            trigger: 'blur'
+          }
+        ],
         vailCode1: [
           {
             required: true,
