@@ -12,6 +12,7 @@
                             @on-change="changedate"
                             type="datetimerange"
                             style="margin-right:10px;"
+                            :editable="ediblon"
                             @on-clear="clear"
                         ></DatePicker>
                         <!--<DatePicker v-model="startDate" type="date"></DatePicker>-->
@@ -121,7 +122,7 @@ const map = new Map([
     ['29', '募币活动'],
     ['30', '低价抢购返还'],
     ['31', '低价抢购空投'],
-    ['32', '低价抢购活动'],
+    ['32', '低价抢购活动']
 ])
 const mapEn = new Map([
     ['0', 'recharge'],
@@ -164,6 +165,7 @@ export default {
   data() {
     return {
       loading: false,
+      ediblon: false,
       ordKeyword: '',
       rangeDate: '',
       startDate: '',
@@ -490,7 +492,7 @@ export default {
         color: #8090AF;
     }
     .ivu-input-suffix {
-        right: 10px;
+        right: -15px;
     }
     .ivu-date-picker-with-range {
         .ivu-date-picker-with-range {
@@ -512,7 +514,7 @@ export default {
                     width: 260px !important;
                     .ivu-date-picker-rel {
                         .ivu-input {
-                            width: 260px !important;
+                            width: 280px !important;
                             height: 30px;
                             background: transparent;
                             color: #fff;

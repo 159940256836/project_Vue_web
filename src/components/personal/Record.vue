@@ -408,7 +408,7 @@ export default {
         width: 128px;
     }
     .ivu-input-suffix {
-        right: 10px;
+        right: -15px;
     }
     .ivu-date-picker-with-range {
         .ivu-date-picker-with-range {
@@ -431,7 +431,7 @@ export default {
                     width: 260px !important;
                     .ivu-date-picker-rel {
                         .ivu-input {
-                            width: 260px !important;
+                            width: 280px !important;
                             background: transparent;
                             color: #fff;
                             border-radius: 0;

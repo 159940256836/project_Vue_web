@@ -37,9 +37,10 @@
             <Button
               @click="buyLockCoin('buy')"
               :loading="loadingButton"
+              disabled
             >
               <span v-if="!isLogin">请先登录</span>
-              <span v-else>立即存币</span>
+              <span v-else>活动已结束</span>
             </Button>
           </div>
         </div>
@@ -292,45 +293,45 @@ export default {
        savePageSize: 10,
        saveTotalElement: 0,
         // 抢币分页
-        robPageNo: 1,
-        robPageSize: 10,
-        robTotalElement: 0,
-        lockAmount: '', // 存币数量
-        lockAdvance: '', // 预购数量
-        saveMoneyList: [], // 存币记录
-        robMoneyList: [], // 抢币记录
-        day: 0, // 天
-        time: 0, // 时
-        minute: 0, // 分
-        second: 0, // 秒
-        totalTime: '', // 总秒数
-        progressBar: '', // 进度条比例
-        /*币种可存最大最小*/
-        coinInfo: {
-          lockMinimum: 0,
-          lockHighest: 0
-        }, // 币种详细信息
-        lockCoinUnit: '', // 币种
-        userWalletBalance: '--', // 币种余额
-        snapStatus: false, // 抢购状态
-        coinBalance: '', // 可抢币余额
-        endtime: '', // 结束时间
-        balanceData: {
-          balance: '',
-          maxSaleAmount: '',
-          raiseCoin: 'BC',
-          saleCoin: 'BTC'
-        } // 可抢币余额
-      }
-    },
-    created() {
+       robPageNo: 1,
+       robPageSize: 10,
+       robTotalElement: 0,
+       lockAmount: '', // 存币数量
+       lockAdvance: '', // 预购数量
+       saveMoneyList: [], // 存币记录
+       robMoneyList: [], // 抢币记录
+       day: 0, // 天
+       time: 0, // 时
+       minute: 0, // 分
+       second: 0, // 秒
+       totalTime: '', // 总秒数
+       progressBar: '', // 进度条比例
+        /* 币种可存最大最小*/
+       coinInfo: {
+         lockMinimum: 0,
+         lockHighest: 0
+       }, // 币种详细信息
+       lockCoinUnit: '', // 币种
+       userWalletBalance: '--', // 币种余额
+       snapStatus: false, // 抢购状态
+       coinBalance: '', // 可抢币余额
+       endtime: '', // 结束时间
+       balanceData: {
+         balance: '',
+         maxSaleAmount: '',
+         raiseCoin: 'BC',
+         saleCoin: 'BTC'
+       } // 可抢币余额
+     }
+   },
+   created() {
       // this.ScreenWidth()
-      const name = this.$route.path
-      if (name == '/fund') {
-        this.getCoin() // 币种详细信息 存币
-        this.getCoinRob() // 币种详细信息 抢币
-        this.countdown()
-        if (this.isLogin) {
+     const name = this.$route.path
+     if (name == '/fund') {
+       this.getCoin() // 币种详细信息 存币
+       this.getCoinRob() // 币种详细信息 抢币
+       this.countdown()
+       if (this.isLogin) {
           // console.log(name, this.isLogin)
          this.getSaveDataList() // 数据列表存币
          this.getCoinBalance() // 币种余额 存币
@@ -379,7 +380,7 @@ export default {
      countdown() {
        let iTime
         // 到期时间
-        // const end = Date.parse(new Date('2019/08/20 21:00:00'))
+       // const end = Date.parse(new Date('2019/08/21 21:51:50'))
        const end = this.endtime
        // console.log(end, this.endtime)
        // 当前时间
@@ -413,11 +414,9 @@ export default {
          iTime = setTimeout(() => {
            this.countdown()
          }, 1000)
-       }
-
+       } else if (this.totalTime == 0) { this.second = '00' }
         /* 进度条比例 = 总秒数/当前秒数 *100*/
        this.progressBar = this.totalTime / num * 100
-        // console.log(this.progressBar)
        if (this.progressBar < 0) {
          this.progressBar = 0
        }
@@ -439,9 +438,7 @@ export default {
              this.lockCoinUnit = resp.data[0].lockCoinUnit
              this.getCoinBalance()
            }
-           console.log(this.coinInfo, this.lockCoinUnit)
          } else {
-           console.log(this.coinInfo)
            // this.$Message.error(resp.message)
            return false
          }
@@ -470,11 +467,12 @@ export default {
              this.$Message.error(this.$t('common.loginInfo'))
              return false
            }
-           if (this.lockAmount < this.coinInfo.lockMinimum || this.lockAmount > this.coinInfo.lockHighest) {
-             this.$Message.error('您输入的锁仓金额小于500最小值,或者大于5000000最大值，请重新输入')
-             this.lockAmount = ''
-             return false
-           }
+           console.log(this.coinInfo.lockMinimum, this.lockAmount, this.coinInfo.lockHighest)
+          //  if (this.lockAmount < this.coinInfo.lockMinimum || this.lockAmount > this.coinInfo.lockHighest) {
+          //    this.$Message.error('您输入的锁仓金额小于500最小值,或者大于5000000最大值，请重新输入')
+          //    this.lockAmount = ''
+          //    return false
+          //  }
            const params = {}
            params['id'] = this.coinInfo.id ? this.coinInfo.id : '0'
            params['amount'] = this.lockAmount
@@ -740,7 +738,7 @@ export default {
          title: this.$t('common.fund.actStatus'),
          key: 'actStatus',
          render(h, params) {
-           return h('span', {}, params.row.actStatus == 'I' ? '待开奖' : params.row.actStatus == 'S' ? '成功' : '失败')
+           return h('span', {}, params.row.actStatus == 'I' ? '待开奖' : params.row.actStatus == 'S' ? '抢购成功' : '抢购失败')
          }
        })
        return arr
