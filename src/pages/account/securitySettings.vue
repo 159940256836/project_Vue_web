@@ -362,7 +362,7 @@
             </Modal>
             <!-- 邮箱换绑弹窗 -->
             <Modal
-                :title="$t('uc.safe.bindemail')"
+                :title="'换绑邮箱'"
                 v-model="modal21"
                 className="vertical-center-modal"
                 width="534"
@@ -460,7 +460,7 @@
             </Modal>
             <!-- 手机换绑弹窗 -->
             <Modal
-                :title="$t('uc.safe.bindphone')"
+                :title="'换绑手机'"
                 v-model="modal31"
                 className="vertical-center-modal"
                 width="534"
@@ -1146,6 +1146,14 @@ export default {
           }
         ],
         mail: [
+          {
+            required: true,
+            type: 'email',
+            message: this.$t('uc.safe.emailtip'),
+            trigger: 'blur'
+          }
+        ],
+        newMail: [
           {
             required: true,
             type: 'email',
