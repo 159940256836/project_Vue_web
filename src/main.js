@@ -62,7 +62,7 @@ Vue.http.interceptors.push((request, next) => {
         location.href = '/'
       }, 1500)
     }
-    if ( response.body.code === 3000) {
+    if (response.body.code === 3000) {
       store.commit('setMember', null)
       return false
     }
@@ -171,19 +171,10 @@ Vue.prototype.settiele = (name, num) => {
 }
 
 new Vue({
-<<<<<<< HEAD
   el: '#app',
   router,
   i18n,
   store,
   template: '<App/>',
   components: { App }
-=======
-    el: '#app',
-    router,
-    i18n,
-    store,
-    template: '<App/>',
-    components: { App }
->>>>>>> 14b7d3515590f0ce2b588d3f0d47c874576b777a
 })
