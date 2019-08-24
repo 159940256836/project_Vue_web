@@ -381,7 +381,7 @@ export default {
      countdown() {
        let iTime
         // 到期时间
-       // const end = Date.parse(new Date('2019/08/22 14:05:00'))
+      //  const end = Date.parse(new Date('2019/08/22 18:42:50'))
        const end = this.endtime
        // console.log(end, this.endtime)
        // 当前时间
@@ -575,14 +575,14 @@ export default {
            this.coinBalance = resp.data.remain
            this.endtime = resp.data.startTime
            this.countdown()
-            const name = this.$route.path
-             if (name == '/fund') {
-              if (this.coinBalance >= 0 && this.isLogin){
-                setTimeout(() => {
-                  this.getCoinRob()
-                }, 1000);
-              }
-            }
+           const name = this.$route.path
+           if (name == '/fund') {
+             if (this.coinBalance >= 0 && this.isLogin) {
+               setTimeout(() => {
+                 this.getCoinRob()
+               }, 1000)
+             }
+           }
          } else {
            this.$Message.error(resp.message)
            return false
