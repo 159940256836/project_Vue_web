@@ -14,7 +14,7 @@
                         <span @click="changeBaseCion('usdt')" :class="{active:basecion==='usdt'}">USDT</span>
                         <span @click="changeBaseCion('btc')" :class="{active:basecion==='btc'}">BTC</span>
                         <span @click="changeBaseCion('eth')" :class="{active:basecion==='eth'}">ETH</span>
-                        
+
                         <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">{{$t('coin.option')}}</span>
                         <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
                         <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
