@@ -1,367 +1,381 @@
 <template>
-    <div class="withdraw">
-        <div class="nav-right">
-            <div class="rightarea">
-                <!--<section class="trade-groups merchant-tops">
-                    &lt;!&ndash; <i class="merchant-icon tips"></i>
-          <span class="tips-word">{{$t('uc.finance.withdraw.pickup')}}</span> &ndash;&gt;
-                    <router-link to="/uc/withdraw/address">
-                        {{$t('uc.finance.withdraw.addressmanager')}}
-                    </router-link>
-                </section>-->
-                <section>
-                    <div class="operationform">
-                        <div class="operationform-title">{{ $t('uc.finance.pickup') }}</div>
-                        <div class="operationform-info">
-                            <p><i class="hb_icon_toast_failed"></i>{{ $t('uc.finance.withdraw.msg7') }}</p>
-                            <p>{{ $t('uc.finance.withdraw.msg8') }}</p>
-                        </div>
-                        <div class="operationform-from">
-                            <div class="action-inner">
-                                <div class="inner-left">
-                                    <span class="describe">{{$t('uc.finance.withdraw.symbol')}}</span>：
-                                    <Select
-                                        v-model="coinType"
-                                        style="width:270px; margin-left:10px;"
-                                        @on-change="getAddrList"
-                                    >
-                                        <Option
-                                            v-for="item in coinList"
-                                            :value="item.unit"
-                                            :key="item.unit"
-                                        >
-                                            {{ item.unit }}
-                                        </Option>
-                                    </Select>
-                                </div>
-                                <div class="inner-box">
-                                    <div class="inner-left form-group form-address">
+  <div class="withdraw">
+    <div class="nav-right">
+      <div class="rightarea">
+        <!--<section class="trade-groups merchant-tops">
+            &lt;!&ndash; <i class="merchant-icon tips"></i>
+  <span class="tips-word">{{$t('uc.finance.withdraw.pickup')}}</span> &ndash;&gt;
+            <router-link to="/uc/withdraw/address">
+                {{$t('uc.finance.withdraw.addressmanager')}}
+            </router-link>
+        </section>-->
+        <section>
+          <div class="operationform">
+            <div class="operationform-title">{{ $t('uc.finance.pickup') }}</div>
+            <div class="operationform-info">
+              <p><i class="hb_icon_toast_failed"></i>{{ $t('uc.finance.withdraw.msg7') }}</p>
+              <p>{{ $t('uc.finance.withdraw.msg8') }}</p>
+            </div>
+            <div class="operationform-from">
+              <div class="action-inner">
+                <div class="inner-left">
+                  <span class="describe">{{$t('uc.finance.withdraw.symbol')}}</span>：
+                  <Select
+                          v-model="coinType"
+                          style="width:270px; margin-left:10px;"
+                          @on-change="getAddrList"
+                  >
+                    <Option
+                            v-for="item in coinList"
+                            :value="item.unit"
+                            :key="item.unit"
+                    >
+                      {{ item.unit }}
+                    </Option>
+                  </Select>
+                </div>
+                <div class="inner-box">
+                  <div class="inner-left form-group form-address">
                                         <span
-                                            for="controlAddress"
-                                            class="controlAddress describe"
+                                                for="controlAddress"
+                                                class="controlAddress describe"
                                         >
                                             {{$t('uc.finance.withdraw.address')}}
                                         </span>：
-                                        <div class="control-input-group">
-                                            <Select
-                                                ref="address"
-                                                v-model="withdrawAdress"
-                                                style="width:270px;margin-left:10px;"
-                                                clearable
-                                                @on-query-change="onAddressChange"
-                                                :placeholder="$t('header.choose')"
-                                            >
-                                                <Option
-                                                    v-for="item in currentCoin.addresses"
-                                                    :value="item.address"
-                                                    :key="item.address"
-                                                >
-                                                    {{ item.remark +'('+ item.address+')'}}
-                                                </Option>
-                                            </Select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="availablenum form-group-container">
-                                <div class="form-group form-amount">
-                                    <!--可用余额-->
-                                    <span class="label-amount describe">
+                    <div class="control-input-group">
+                      <Select
+                              ref="address"
+                              v-model="withdrawAdress"
+                              style="width:270px;margin-left:10px;"
+                              clearable
+                              @on-query-change="onAddressChange"
+                              :placeholder="$t('header.choose')"
+                      >
+                        <Option
+                                v-for="item in currentCoin.addresses"
+                                :value="item.address"
+                                :key="item.address"
+                        >
+                          {{ item.remark +'('+ item.address+')'}}
+                        </Option>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="availablenum form-group-container">
+                <div class="form-group form-amount">
+                  <!--可用余额-->
+                  <span class="label-amount describe">
                                         {{$t('uc.finance.withdraw.num')}}
                                     </span>：
-                                    <!--提币数量-->
-                                    <div class="input-group">
-                                        <Poptip
-                                            trigger="focus"
-                                            :content="$t('uc.finance.withdraw.tip1')+currentCoin.withdrawScale+$t('uc.finance.withdraw.tip11')+
-                                    currentCoin.minAmount+' ,'+$t('uc.finance.withdraw.tip2')+currentCoin.maxAmount"
-                                        >
-                                            <!--当前币种可用为零 该input禁止输入-->
-                                            <Input
-                                                :disabled="currentCoin.balance == 0"
-                                                @keyup.native="computerAmount"
-                                                v-model="withdrawAmount"
-                                                :placeholder="$t('uc.finance.withdraw.numtip1')"
-                                                size="large"
-                                                :max="currentCoin.maxAmount"
-                                                style="width:350px;margin-left:5px;"
-                                            />
-                                            <span class="input-group-addon addon-tag uppercase first">
+                  <!--提币数量-->
+                  <div class="input-group">
+                    <Poptip
+                            trigger="focus"
+                            :content="
+                        $t('uc.finance.withdraw.carryNum')
+                        +
+                        currentCoin.minAmount
+                        +
+                        '-'
+                        +
+                        currentCoin.maxAmount
+                        +
+                        ', '
+                        +
+                        (currentCoin.withdrawScale == 0?$t('uc.finance.withdraw.decimal'):$t('uc.finance.withdraw.msg0')
+                        +
+                        currentCoin.withdrawScale+
+                        $t('uc.finance.withdraw.msg01'))
+                        "
+                    >
+                      <!--当前币种可用为零 该input禁止输入-->
+                      <Input
+                              :disabled="currentCoin.balance == 0"
+                              @keyup.native="computerAmount"
+                              v-model="withdrawAmount"
+                              :placeholder="$t('uc.finance.withdraw.numtip1')"
+                              size="large"
+                              :max="currentCoin.maxAmount"
+                              style="width:350px;margin-left:5px;"
+                      />
+                      <span class="input-group-addon addon-tag uppercase first">
                                                 {{currentCoin.unit}}
                                             </span>
-                                        </Poptip>
-                                    </div>
-                                    <p class="label-fr">
+                    </Poptip>
+                  </div>
+                  <p class="label-fr">
                                         <span>
                                             {{$t('uc.finance.withdraw.avabalance')}}：
                                             <span
-                                                class="label-pointer"
-                                                id="valueAvailable"
+                                                    class="label-pointer"
+                                                    id="valueAvailable"
                                             >
                                                 {{!currentCoin.balance?'---':currentCoin.balance|toFloor}}
                                             </span>
                                         </span>
-                                        <span v-if="currentCoin.enableAutoWithdraw == 0">
+                    <span v-if="currentCoin.enableAutoWithdraw == 0">
                                             {{$t('common.tip')}}：{{$t('uc.finance.withdraw.msg1')}} {{currentCoin.threshold}} {{$t('uc.finance.withdraw.msg2')}}
                                         </span>
-                                        <span>
+                    <span>
                                             <a
-                                                href="javascript:;"
-                                                id="levelUp"
-                                                style="display: none;"
+                                                    href="javascript:;"
+                                                    id="levelUp"
+                                                    style="display: none;"
                                             >
                                                 {{$t('uc.finance.withdraw.increase')}}
                                             </a>
                                         </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <Slider
-                                v-if="currentCoin.maxTxFee > currentCoin.minTxFee"
-                                v-model="withdrawFee"
-                                show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10"
-                                :max="currentCoin.maxTxFee"
-                                :min="currentCoin.minTxFee"
-                            >
-                            </Slider>
-                            <!--手续费-->
-                            <div class="availablenum form-group-container form-group-container2">
-                                <div class="form-group form-fee">
+                  </p>
+                </div>
+              </div>
+              <Slider
+                      v-if="currentCoin.maxTxFee > currentCoin.minTxFee"
+                      v-model="withdrawFee"
+                      show-input :step="(currentCoin.maxTxFee - currentCoin.minTxFee)/10"
+                      :max="currentCoin.maxTxFee"
+                      :min="currentCoin.minTxFee"
+              >
+              </Slider>
+              <!--手续费-->
+              <div class="availablenum form-group-container form-group-container2">
+                <div class="form-group form-fee">
                                 <span class="label-amount describe">
                                     {{$t('uc.finance.withdraw.fee')}}
-                                    <!--<p class="label-fr">-->
-                                    <!--<span>{{$t('uc.finance.withdraw.range')}}：{{currentCoin.minTxFee}} - {{currentCoin.maxTxFee}}</span>-->
-                                    <!--</p>-->
+                                  <!--<p class="label-fr">-->
+                                  <!--<span>{{$t('uc.finance.withdraw.range')}}：{{currentCoin.minTxFee}} - {{currentCoin.maxTxFee}}</span>-->
+                                  <!--</p>-->
                                 </span>：
-                                    <div
-                                        class="input-group"
-                                        style="margin-top:14px;position:relative;display:inline-block;"
-                                    >
-                                        <!--<Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">-->
-                                        <Input
-                                            readonly
-                                            v-model="withdrawFee"
-                                            :min="currentCoin.minTxFee"
-                                            :max="currentCoin.maxTxFee"
-                                            size="large"
-                                            style="width:350px;margin-left:5px;"
-                                        />
-                                        <span class="input-group-addon addon-tag uppercase">
+                  <div
+                          class="input-group"
+                          style="margin-top:14px;position:relative;display:inline-block;"
+                  >
+                    <!--<Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">-->
+                    <Input
+                            readonly
+                            v-model="withdrawFee"
+                            :min="currentCoin.minTxFee"
+                            :max="currentCoin.maxTxFee"
+                            size="large"
+                            style="width:350px;margin-left:5px;"
+                    />
+                    <span class="input-group-addon addon-tag uppercase">
                                             {{currentCoin.unit}}
                                         </span>
-                                        <!--</Poptip>-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="availablenum form-group-container form-group-container2">
-                                <!--到账数量-->
-                                <div class="form-group">
+                    <!--</Poptip>-->
+                  </div>
+                </div>
+              </div>
+              <div class="availablenum form-group-container form-group-container2">
+                <!--到账数量-->
+                <div class="form-group">
                                     <span class="describe">
                                         {{$t('uc.finance.withdraw.arriamount')}}
                                     </span>：
-                                    <div
-                                        class="input-group"
-                                        style="margin-top:14px;position:relative;display:inline-block"
-                                    >
-                                        <Input
-                                            readonly
-                                            v-model="withdrawOutAmount"
-                                            :placeholder="$t('uc.finance.withdraw.arriamount')"
-                                            size="large"
-                                            style="width:350px;margin-left:5px;"
-                                        />
-                                        <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->
-                                        <span class="input-group-addon addon-tag uppercase">
+                  <div
+                          class="input-group"
+                          style="margin-top:14px;position:relative;display:inline-block"
+                  >
+                    <Input
+                            readonly
+                            v-model="withdrawOutAmount"
+                            :placeholder="$t('uc.finance.withdraw.arriamount')"
+                            size="large"
+                            style="width:350px;margin-left:5px;"
+                    />
+                    <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->
+                    <span class="input-group-addon addon-tag uppercase">
                                             {{currentCoin.unit}}
                                         </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="action-foot">
-                                <!--提币数量等于零 或者 小于最小提币数量 该按钮禁用-->
-                                 
-                                <Button
-                                    id="withdrawSubmit"
-                                    long
-                                    size="large"
-                                    type="primary"
-                                    style="height:40px;"
-                                    @click="apply"
-                                    :disabled="withdrawAmount == 0 || withdrawAmount < currentCoin.minAmount"
-                                >   
-                                    {{$t('uc.finance.withdraw.pickup')}}
-                                </Button>
-                            </div>
-                        </div>
-                        <div class="action-content pt10">
-                            <div class="action-body">
-                                <p class="acb-p1">
-                                    {{$t('common.tip')}}
-                                </p>
-                                <p class="acb-p2">
-                                    • {{$t('uc.finance.withdraw.msg3')}}：{{currentCoin.minAmount}}{{$t('uc.finance.withdraw.msg4')}}。<br>
-                                    • {{$t('uc.finance.withdraw.msg5')}}。<br>
-                                    • {{$t('uc.finance.withdraw.msg6')}}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-inner action-box">
-                        <!-- <i class="angle" style="right: 27px;"></i> -->
-                        <div class="action-content">
-                            <div class="action-body">
-                                <p class="acb-p1">{{$t('uc.finance.withdraw.record')}}</p>
-                                <div class="order-table">
-                                    <!--<p class="acb-p2" style="margin-bottom:10px;">
-                                        • {{$t('uc.finance.withdraw.click')}}
-                                        <i class="ivu-icon ivu-icon-funnel"></i>
-                                        {{$t('uc.finance.withdraw.filtrate')}}
-                                    </p>-->
-                                    <Table
-                                        stripe
-                                        :columns="tableColumnsWithdraw"
-                                        :data="tableWithdraw"
-                                        :loading="loading"
-                                    >
-                                    </Table>
-                                    <div id="pages">
-                                        <div style="float: right;">
-                                            <Page
-                                                class="pages_a"
-                                                :total="transaction.total"
-                                                :current="transaction.page + 1"
-                                                @on-change="changePage"
-                                            >
-                                            </Page>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                  </div>
+                </div>
+              </div>
+              <div class="action-foot">
+                <!--提币数量等于零 或者 小于最小提币数量 该按钮禁用-->
+
+                <Button
+                        id="withdrawSubmit"
+                        long
+                        size="large"
+                        type="primary"
+                        style="height:40px;"
+                        @click="apply"
+                        :disabled="withdrawAmount == 0"
+                >
+                  {{$t('uc.finance.withdraw.pickup')}}
+                </Button>
+              </div>
             </div>
-        </div>
-        <Modal v-model="modal" width="450">
-            <!-- <P style="color:red;font-weight: bold;">
-              {{$t('uc.finance.withdraw.fundpwdtip')}}<br/>
-              <Input type="password" v-model="fundpwd" :placeholder="$t('otc.chat.msg7')"></Input>
-            </p> -->
-            <p slot="header">
-                <!--提示-->
-                {{$t('uc.finance.pickup')}}
-            </p>
-            <Form
-                class="withdraw-form-inline"
-                ref="formInline"
-                :model="formInline"
-                inline
-                :label-width="85"
-            >
-            <!-- <FormItem>
-              <Input type="text" v-model="user.mobilePhone" disabled></Input>
-            </FormItem> -->
-                <!--手机验证-->
-            <FormItem
+            <div class="action-content pt10">
+              <div class="action-body">
+                <p class="acb-p1">
+                  {{$t('common.tip')}}
+                </p>
+                <p class="acb-p2">
+                  • {{$t('uc.finance.withdraw.msg3')}}：{{currentCoin.minAmount}}{{$t('uc.finance.withdraw.msg4')}}。<br>
+                  • {{$t('uc.finance.withdraw.msg5')}}。<br>
+                  • {{$t('uc.finance.withdraw.msg6')}}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="table-inner action-box">
+            <!-- <i class="angle" style="right: 27px;"></i> -->
+            <div class="action-content">
+              <div class="action-body">
+                <p class="acb-p1">{{$t('uc.finance.withdraw.record')}}</p>
+                <div class="order-table">
+                  <!--<p class="acb-p2" style="margin-bottom:10px;">
+                      • {{$t('uc.finance.withdraw.click')}}
+                      <i class="ivu-icon ivu-icon-funnel"></i>
+                      {{$t('uc.finance.withdraw.filtrate')}}
+                  </p>-->
+                  <Table
+                          stripe
+                          :columns="tableColumnsWithdraw"
+                          :data="tableWithdraw"
+                          :loading="loading"
+                  >
+                  </Table>
+                  <div id="pages">
+                    <div style="float: right;">
+                      <Page
+                              class="pages_a"
+                              :total="transaction.total"
+                              :current="transaction.page + 1"
+                              @on-change="changePage"
+                      >
+                      </Page>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <Modal v-model="modal" width="450">
+      <!-- <P style="color:red;font-weight: bold;">
+        {{$t('uc.finance.withdraw.fundpwdtip')}}<br/>
+        <Input type="password" v-model="fundpwd" :placeholder="$t('otc.chat.msg7')"></Input>
+      </p> -->
+      <p slot="header">
+        <!--提示-->
+        {{$t('uc.finance.pickup')}}
+      </p>
+      <Form
+              class="withdraw-form-inline"
+              ref="formInline"
+              :model="formInline"
+              inline
+              :label-width="85"
+      >
+        <!-- <FormItem>
+          <Input type="text" v-model="user.mobilePhone" disabled></Input>
+        </FormItem> -->
+        <!--手机验证-->
+        <FormItem
                 prop="code"
                 :label="$t('uc.regist.smscode')"
                 v-if="isPhoneCode"
-            >
-              <Input
+        >
+          <Input
                   class="input-text"
                   type="text"
                   v-model="formInline.code"
                   :placeholder="$t('uc.regist.smscode')"
-              />
-              <input
+          />
+          <input
                   class="input-text"
                   id="sendCode"
                   @click="sendCode(1)"
                   type="Button"
                   :value="sendcodeValue"
                   :disabled="codeIsSending"
-              />
-            </FormItem>
-                <!--谷歌验证-->
-            <FormItem
+          />
+        </FormItem>
+        <!--谷歌验证-->
+        <FormItem
                 :label="$t('uc.safe.GoogleAuthentication')"
                 v-if="isGoogleCode"
+        >
+          <!--请输入谷歌验证码-->
+          <Input
+                  class="input-text"
+                  type="text"
+                  v-model="formInline.googleCode"
+                  :placeholder="$t('uc.login.google')"
+          />
+        </FormItem>
+        <!--邮箱验证码 6.06-->
+        <FormItem
+                class="code-title"
+                prop="vailCode4"
+                v-if="isEmailCode"
+                :label="$t('uc.forget.emailcode')"
+        >
+          <Input
+                  style="width: 315px;"
+                  v-model="formInline.emailCode"
+                  size="large"
+                  :placeholder="$t('uc.login.email')"
+          >
+            <div
+                    class="timebox"
+                    slot="append"
             >
-                <!--请输入谷歌验证码-->
-                <Input
-                    class="input-text"
-                    type="text"
-                    v-model="formInline.googleCode"
-                    :placeholder="$t('uc.login.google')"
-                />
-            </FormItem>
-                <!--邮箱验证码 6.06-->
-                <FormItem
-                    class="code-title"
-                    prop="vailCode4"
-                    v-if="isEmailCode"
-                    :label="$t('uc.forget.emailcode')"
-                >
-                    <Input
-                        style="width: 315px;"
-                        v-model="formInline.emailCode"
-                        size="large"
-                        :placeholder="$t('uc.login.email')"
-                    >
-                        <div
-                            class="timebox"
-                            slot="append"
-                        >
-                            <div
-                                class="button-code"
-                                @click="sendCode(2)"
-                                :disabled="sendMsgDisabled1"
-                            >
+              <div
+                      class="button-code"
+                      @click="sendCode(2)"
+                      :disabled="sendMsgDisabled1"
+              >
                                 <span v-if="sendMsgDisabled1">
                                     {{codeTime1+$t('uc.safe.second')}}
                                 </span>
-                                <span v-if="!sendMsgDisabled1">
+                <span v-if="!sendMsgDisabled1">
                                     {{$t('uc.safe.clickget')}}
                                 </span>
-                            </div>
-                        </div>
-                    </Input>
-                </FormItem>
-            <FormItem :label="$t('otc.chat.msg7')">
-                <Input
-                    class="input-text"
-                    type="password"
-                    v-model="formInline.fundpwd"
-                    :placeholder="$t('otc.chat.msg7')"
-                />
-            </FormItem>
+              </div>
+            </div>
+          </Input>
+        </FormItem>
+        <FormItem :label="$t('otc.chat.msg7')">
+          <Input
+                  class="input-text"
+                  type="password"
+                  v-model="formInline.fundpwd"
+                  :placeholder="$t('otc.chat.msg7')"
+          />
+        </FormItem>
 
-        </Form>
+      </Form>
       <div slot="footer">
         <span
-            class="footer-btn-c"
-            @click="cancel"
+                class="footer-btn-c"
+                @click="cancel"
         >
             <!--取消-->
             {{$t('common.cancel')}}
         </span>
-         
+
         <Button
-            class="footer-btn-q"
-            @click="ok"
-            :disabled="isDisabled" 
+                class="footer-btn-q"
+                @click="ok"
+                :disabled="isDisabled"
         >
-            {{$t('common.confirm')}}
+          {{$t('common.confirm')}}
         </Button>
       </div>
     </Modal>
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-        isDisabled:false, //谷歌验证确认按钮状态
+  export default {
+    data() {
+      return {
+        isDisabled: false, //谷歌验证确认按钮状态
         isGoogleCode: false, // 是否开启google验证状态;
         isPhoneCode: false, // 是否开启Phone验证状态;
         codeIsSending: false, // 手机验证
@@ -369,346 +383,353 @@ export default {
         isEmailCode: false, // 是否开启Email验证状态;
         sendMsgDisabled1: false, // 邮箱短信验证
         codeTime1: 60, // 邮箱短信验证倒计时
-      user: {},
-      sendcodeValue: this.$t('uc.regist.sendcode'),
-      isCode: '',
-      formInline: {
-        code: '',
-        googleCode: '',
-        emailCode: '',
-        fundpwd: ''
-      },
-      modal: false,
-      fundpwd: '',
-      currentCoin: {},
-      transaction: {
-        page: 0,
-        pageSize: 10,
-        total: 0
-      },
-      loading: true,
-      withdrawAdress: '',
-      inputAddress: '', // 用户输入的地址
-      withdrawAmount: 0, // 默认提币数量
-      withdrawFee: 0, // 默认提币手续费
-      withdrawOutAmount: 0, // 默认到账数量
-      coinType: '',
-      coinList: [],
-      tableWithdraw: [],
-      allTableWithdraw: []
-    }
-  },
-  watch: {
-    currentCoin: function() {
-      this.withdrawFee =
-                this.currentCoin.minTxFee +
-                (this.currentCoin.maxTxFee - this.currentCoin.minTxFee) / 2
-    }
-  },
-  methods: {
-      // 复制功能
-      copyToken (data) {
-          let url = data
-          let oInput = document.createElement('input')
-          oInput.value = url
-          document.body.appendChild(oInput)
-          oInput.select() // 选择对象
-          console.log(oInput.value)
-          document.execCommand('Copy') // 执行浏览器复制命令
-          this.$Message.success(
-                  this.$t("uc.finance.recharge.copysuccess")
-          )
-          oInput.remove()
-      },
-    cancel() {
-      this.modal = false
-      this.formInline.code = ''
-      this.formInline.fundpwd = ''
-      this.formInline.emailCode = ''
-      this.formInline.googleCode = ''
+        user: {},
+        sendcodeValue: this.$t('uc.regist.sendcode'),
+        isCode: '',
+        formInline: {
+          code: '',
+          googleCode: '',
+          emailCode: '',
+          fundpwd: ''
+        },
+        modal: false,
+        fundpwd: '',
+        currentCoin: {},
+        transaction: {
+          page: 0,
+          pageSize: 10,
+          total: 0
+        },
+        loading: true,
+        withdrawAdress: '',
+        inputAddress: '', // 用户输入的地址
+        withdrawAmount: '', // 默认提币数量
+        withdrawFee: 0, // 默认提币手续费
+        withdrawOutAmount: '', // 默认到账数量
+        coinType: '',
+        coinList: [],
+        tableWithdraw: [],
+        allTableWithdraw: []
+      }
     },
-    sendCode(index) {
+    watch: {
+      currentCoin: function () {
+        this.withdrawFee =
+            this.currentCoin.minTxFee +
+            (this.currentCoin.maxTxFee - this.currentCoin.minTxFee) / 2
+      }
+    },
+    methods: {
+      // 复制功能
+      copyToken(data) {
+        let url = data
+        let oInput = document.createElement('input')
+        oInput.value = url
+        document.body.appendChild(oInput)
+        oInput.select() // 选择对象
+        console.log(oInput.value)
+        document.execCommand('Copy') // 执行浏览器复制命令
+        this.$Message.success(
+            this.$t("uc.finance.recharge.copysuccess")
+        )
+        oInput.remove()
+      },
+      cancel() {
+        this.modal = false
+        this.formInline.code = ''
+        this.formInline.fundpwd = ''
+        this.formInline.emailCode = ''
+        this.formInline.googleCode = ''
+      },
+      sendCode(index) {
         const me = this
-      if (index == 1) {
+        if (index == 1) {
           // 获取手机验证码
           this.$http.post(this.host + '/uc/mobile/withdraw/code').then(response => {
-              const resp = response.body
-              if (resp.code == 0) {
-                  me.settime()
-                  me.$Message.success(resp.message)
-              } else {
-                  me.$Message.error(resp.message)
-              }
+            const resp = response.body
+            if (resp.code == 0) {
+              me.settime()
+              me.$Message.success(resp.message)
+            } else {
+              me.$Message.error(resp.message)
+            }
           })
-      } else {
+        } else {
           // 获取邮箱code
           this.$http.post(this.host + '/uc/withdraw/email/code').then(response => {
-              console.log(response)
-              const resp = response.body
-              if (resp.code == 0) {
-                  me.sendMsgDisabled1 = true
-                  const interval = window.setInterval(function() {
-                      if (me.codeTime1-- <= 0) {
-                          me.codeTime1 = 60
-                          me.sendMsgDisabled1 = false
-                          window.clearInterval(interval)
-                      }
-                  }, 1000)
-              } else {
-                  me.$Message.error(resp.message)
-              }
+            console.log(response)
+            const resp = response.body
+            if (resp.code == 0) {
+              me.sendMsgDisabled1 = true
+              const interval = window.setInterval(function () {
+                if (me.codeTime1-- <= 0) {
+                  me.codeTime1 = 60
+                  me.sendMsgDisabled1 = false
+                  window.clearInterval(interval)
+                }
+              }, 1000)
+            } else {
+              me.$Message.error(resp.message)
+            }
           })
-      }
+        }
 
-    },
-    settime() {
-      this.sendcodeValue = this.countdown
-      this.codeIsSending = true
-      const timercode = setInterval(() => {
-        this.countdown--
+      },
+      settime() {
         this.sendcodeValue = this.countdown
-        if (this.countdown <= 0) {
-          clearInterval(timercode)
-          this.sendcodeValue = this.$t('uc.regist.sendcode')
-          this.countdown = 60
-          this.codeIsSending = false
-        }
-      }, 1000)
-    },
-    changePage(index) {
-      this.transaction.page = index - 1
-      this.getList()
-    },
-    onAddressChange(data) {
-      this.inputAddress = data
-    },
-    clearValues() {
-      if (this.$refs.address) {
-        this.$refs.address.setQuery(' ')
-      }
-      this.withdrawAdress = ''
-      this.inputAddress = ''
-      this.withdrawAmount = 0
-            // this.withdrawFee= 0;
-      this.withdrawOutAmount = 0
-    },
-    getCurrentCoinRecharge() {
-      if (this.coinType != '') {
-        var temp = []
-        for (var i = 0; i < this.allTableWithdraw.length; i++) {
-                    //   if (this.allTableWithdraw[i].symbol == this.coinType) {
-          if (this.allTableWithdraw[i].coin.unit == this.coinType) {
-            temp.push(this.allTableWithdraw[i])
+        this.codeIsSending = true
+        const timercode = setInterval(() => {
+          this.countdown--
+          this.sendcodeValue = this.countdown
+          if (this.countdown <= 0) {
+            clearInterval(timercode)
+            this.sendcodeValue = this.$t('uc.regist.sendcode')
+            this.countdown = 60
+            this.codeIsSending = false
           }
+        }, 1000)
+      },
+      changePage(index) {
+        this.transaction.page = index - 1
+        this.getList()
+      },
+      onAddressChange(data) {
+        this.inputAddress = data
+      },
+      clearValues() {
+        if (this.$refs.address) {
+          this.$refs.address.setQuery(' ')
         }
-        this.tableWithdraw = temp
-      } else {
-        this.tableWithdraw = this.allTableWithdraw
-      }
-    },
-    ok() {
+        this.withdrawAdress = ''
+        this.inputAddress = ''
+        this.withdrawAmount = 0
+        // this.withdrawFee= 0;
+        this.withdrawOutAmount = 0
+      },
+      getCurrentCoinRecharge() {
+        if (this.coinType != '') {
+          var temp = []
+          for (var i = 0; i < this.allTableWithdraw.length; i++) {
+            //   if (this.allTableWithdraw[i].symbol == this.coinType) {
+            if (this.allTableWithdraw[i].coin.unit == this.coinType) {
+              temp.push(this.allTableWithdraw[i])
+            }
+          }
+          this.tableWithdraw = temp
+        } else {
+          this.tableWithdraw = this.allTableWithdraw
+        }
+      },
+      ok() {
         const params = {}
         // 短信验证码不能为空
         if (this.isPhoneCode) {
-            if (this.formInline.code == '') {
-                this.modal = true
-                this.$Message.error(this.$t('otc.chat.msg8tip'))
-                return false
-            }
+          if (this.formInline.code == '') {
+            this.modal = true
+            this.$Message.error(this.$t('otc.chat.msg8tip'))
+            return false
+          }
         }
         // 邮箱验证码不能为空
         if (this.isEmailCode) {
-            if (this.formInline.emailCode == '') {
-                this.modal = true
-                this.$Message.error(this.$t('otc.chat.msg81tip'))
-                return false
-            }
+          if (this.formInline.emailCode == '') {
+            this.modal = true
+            this.$Message.error(this.$t('otc.chat.msg81tip'))
+            return false
+          }
         }
         // 谷歌验证码不能为空
-      if (this.googleSwitch) {
-        if (this.formInline.googleCode == '') {
-          this.modal = true
-          this.$Message.error(this.$t('otc.chat.msg9tip'))
+        if (this.googleSwitch) {
+          if (this.formInline.googleCode == '') {
+            this.modal = true
+            this.$Message.error(this.$t('otc.chat.msg9tip'))
             return false
-        } else {
-          params.googleCode = this.formInline.googleCode
+          } else {
+            params.googleCode = this.formInline.googleCode
+          }
         }
-      }
         // 资金密码不能为空
         if (this.formInline.fundpwd == '') {
-            this.modal = true
-            this.$Message.error(this.$t('otc.chat.msg7tip'))
-            return false
+          this.modal = true
+          this.$Message.error(this.$t('otc.chat.msg7tip'))
+          return false
         }
-      params['unit'] = this.currentCoin.unit
-      params['address'] = this.withdrawAdress
-      params['amount'] = this.withdrawAmount
-      params['fee'] = this.withdrawFee
-      params['jyPassword'] = this.formInline.fundpwd
-      params['code'] = this.isCode == 2 ? this.formInline.code : this.formInline.emailCode
-      params['googleCode'] = this.formInline.googleCode
-      this.isDisabled=true //按钮禁用  
-      this.$http.post(this.host + '/uc/withdraw/apply', params).then(response => {
-        this.fundpwd = ''
-        var resp = response.body
-        if (resp.code == 0) {
-          this.isDisabled=false //按钮恢复
-          this.modal = false
-          this.formInline.code = ''
-          this.formInline.fundpwd = ''
-          this.transaction.page = 0
-          this.getList()
-          this.clearValues()
-          this.$Message.success(resp.message)
-        } else {
-          this.isDisabled=false //按钮恢复
-          this.$Message.error(resp.message)
-        }
+        params['unit'] = this.currentCoin.unit
+        params['address'] = this.withdrawAdress
+        params['amount'] = this.withdrawAmount
+        params['fee'] = this.withdrawFee
+        params['jyPassword'] = this.formInline.fundpwd
+        params['code'] = this.isCode == 2 ? this.formInline.code : this.formInline.emailCode
+        params['googleCode'] = this.formInline.googleCode
+        this.isDisabled = true //按钮禁用
+        this.$http.post(this.host + '/uc/withdraw/apply', params).then(response => {
+          this.fundpwd = ''
+          var resp = response.body
+          if (resp.code == 0) {
+            this.isDisabled = false //按钮恢复
+            this.modal = false
+            this.formInline.code = ''
+            this.formInline.fundpwd = ''
+            this.transaction.page = 0
+            this.getList()
+            this.clearValues()
+            this.$Message.success(resp.message)
+          } else {
+            this.isDisabled = false //按钮恢复
+            this.$Message.error(resp.message)
+          }
 
-      })
-    },
-    getAddrList() {
-            // 初始化页面上的值
-      this.clearValues()
-            // 获取地址
-      this.$http.post(this.host + '/uc/withdraw/support/coin/info').then(response => {
-        var resp = response.body
-        if (resp.code == 0 && resp.data.length > 0) {
-          this.coinList = resp.data
-          if (this.coinType) {
-            for (let i = 0; i < resp.data.length; i++) {
-              if (this.coinType == resp.data[i].unit) {
-                this.currentCoin = resp.data[i]
-                break
+        })
+      },
+      getAddrList() {
+        // 初始化页面上的值
+        this.clearValues()
+        // 获取地址
+        this.$http.post(this.host + '/uc/withdraw/support/coin/info').then(response => {
+          var resp = response.body
+          if (resp.code == 0 && resp.data.length > 0) {
+            this.coinList = resp.data
+            if (this.coinType) {
+              for (let i = 0; i < resp.data.length; i++) {
+                if (this.coinType == resp.data[i].unit) {
+                  this.currentCoin = resp.data[i]
+                  break
+                }
               }
+            } else {
+              this.currentCoin = this.coinList[0]
+              this.coinType = this.currentCoin.unit
             }
           } else {
-            this.currentCoin = this.coinList[0]
-            this.coinType = this.currentCoin.unit
+            this.$Message.error(resp.message)
           }
-        } else {
-          this.$Message.error(resp.message)
-        }
-      })
-    },
-    getList() {
-      this.loading = true
-            // 获取tableWithdraw
-      const params = {}
-      params['page'] = this.transaction.page
-      params['pageSize'] = this.transaction.pageSize
-      this.$http
-                .post(this.host + '/uc/withdraw/record', params)
-                .then(response => {
-                  var resp = response.body
-                  if (resp.code == 0) {
-                    this.tableWithdraw = resp.data.content
-                    this.transaction.total = resp.data.totalElements
-                    this.transaction.page = resp.data.number
-                  } else {
-                    this.$Message.error(resp.message)
-                  }
-                  this.loading = false
-                })
-    },
-    accSub(arg1, arg2) {
-      var r1, r2, m, n
-      try {
-        r1 = arg1.toString().split('.')[1].length
-      } catch (e) {
-        r1 = 0
-      }
-      try {
-        r2 = arg2.toString().split('.')[1].length
-      } catch (e) {
-        r2 = 0
-      }
-      m = Math.pow(10, Math.max(r1, r2))
-            // last modify by deeka
-            // 动态控制精度长度
-      n = r1 >= r2 ? r1 : r2
-      return ((arg1 * m - arg2 * m) / m).toFixed(n)
-    },
-    round(v, e) {
-      var t = 1
-      for (; e > 0; t *= 10, e--);
-      for (; e < 0; t /= 10, e++);
-      return Math.round(v * t) / t
-    },
-    computerAmount() {
-      const r = /^[0-9]+\.?[0-9]{0,9}$/　　// 正数
-      if (!r) {
-        this.withdrawOutAmount = 0
-        return false
-      }
-            /* let num = this.round(
-                this.accSub(this.withdrawAmount, this.withdrawFee),
-                this.currentCoin.withdrawScale
-            );
-            this.withdrawOutAmount = num >= 0 ? num : 0;*/
-            // 新增代码
-            // 判断 提币数量 < 最小手续费 = 最小提币数量
-            // if (this.withdrawAmount <= this.currentCoin.minAmount) {
-            //     this.withdrawAmount = this.currentCoin.maxAmount
-            // }
-            // 否则 提出当前数量减去手续费
-      this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
-            // 旧代码
-            // this.withdrawOutAmount = this.round(
-            //   this.accSub(this.withdrawAmount, this.withdrawFee),
-            //   this.currentCoin.withdrawScale
-            // );
-    },
-    computerAmount2() {
-      this.withdrawAmount =
-                (this.withdrawAmount + '').replace(/([0-9]+\.[0-9]{6})[0-9]*/, '$1') -
-                0
-      this.withdrawOutAmount = this.round(
-                this.accSub(this.withdrawAmount, this.withdrawFee),
-                this.currentCoin.withdrawScale
-            )
-    },
-    valid() {
-      this.withdrawAdress = this.withdrawAdress || this.inputAddress
-      if (this.coinType === '') {
-        this.$Message.error(this.$t('uc.finance.withdraw.symboltip'))
-        return false
-      } else if (this.withdrawAdress === '') {
-        this.$Message.error(this.$t('uc.finance.withdraw.addresstip'))
-        return false
-      } else if (
-                this.withdrawAmount === '' ||
-                this.withdrawAmount === 0 ||
-                this.withdrawAmount - 0 < this.currentCoin.minAmount
-            ) {
-        this.$Message.error(
-                    this.$t('uc.finance.withdraw.numtip2') + this.currentCoin.minAmount
-                )
-        return false
-      } else if (this.withdrawAmount - 0 < this.withdrawFee) {
-        this.$Message.error(this.$t('uc.finance.withdraw.numtip3'))
-        return false
-      } else if (
-                this.withdrawFee === '' ||
-                this.withdrawFee === 0 ||
-                this.withdrawFee - 0 > this.currentCoin.maxTxFee ||
-                this.withdrawFee - 0 < this.currentCoin.minTxFee
-            ) {
-        this.$Message.error(
-            this.$t('uc.finance.withdraw.feetip1') + this.currentCoin.minTxFee + ' , ' + this.$t('uc.finance.withdraw.feetip2') + this.currentCoin.maxTxFee
-        )
-        return false
-      } else {
-        return true
-      }
-    },
-    empty() {
-          this.formInline.code = ''
-          this.formInline.fundpwd = ''
-          this.formInline.googleCode = ''
-          this.formInline.emailCode = ''
+        })
       },
-    apply() {
+      getList() {
+        this.loading = true
+        // 获取tableWithdraw
+        const params = {}
+        params['page'] = this.transaction.page
+        params['pageSize'] = this.transaction.pageSize
+        this.$http
+            .post(this.host + '/uc/withdraw/record', params)
+            .then(response => {
+              var resp = response.body
+              if (resp.code == 0) {
+                this.tableWithdraw = resp.data.content
+                this.transaction.total = resp.data.totalElements
+                this.transaction.page = resp.data.number
+              } else {
+                this.$Message.error(resp.message)
+              }
+              this.loading = false
+            })
+      },
+      accSub(arg1, arg2) {
+        var r1, r2, m, n
+        try {
+          r1 = arg1.toString().split('.')[1].length
+        } catch (e) {
+          r1 = 0
+        }
+        try {
+          r2 = arg2.toString().split('.')[1].length
+        } catch (e) {
+          r2 = 0
+        }
+        m = Math.pow(10, Math.max(r1, r2))
+        // last modify by deeka
+        // 动态控制精度长度
+        n = r1 >= r2 ? r1 : r2
+        return ((arg1 * m - arg2 * m) / m).toFixed(n)
+      },
+      round(v, e) {
+        var t = 1
+        for (; e > 0; t *= 10, e--) ;
+        for (; e < 0; t /= 10, e++) ;
+        return Math.round(v * t) / t
+      },
+      computerAmount() {
+        const r = /^[0-9]+\.?[0-9]{0,9}$/　　// 正数
+        if (!r) {
+          this.withdrawOutAmount = 0
+          return false
+        }
+        /* let num = this.round(
+            this.accSub(this.withdrawAmount, this.withdrawFee),
+            this.currentCoin.withdrawScale
+        );
+        this.withdrawOutAmount = num >= 0 ? num : 0;*/
+        this.withdrawAmount = this.withdrawAmount.replace(/[^\d.]/g,"");
+        if(this.withdrawAmount < this.currentCoin.minTxFee) {
+          this.withdrawAmount = this.currentCoin.minAmount
+        }
+        // 新增代码
+        if (this.withdrawAmount > this.currentCoin.balance) {
+            this.withdrawAmount = this.currentCoin.balance
+        }
+        // 否则 提出当前数量减去手续费
+        this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
+        // 旧代码
+        // this.withdrawOutAmount = this.round(
+        //   this.accSub(this.withdrawAmount, this.withdrawFee),
+        //   this.currentCoin.withdrawScale
+        // );
+      },
+      computerAmount2() {
+        this.withdrawAmount =
+            (this.withdrawAmount + '').replace(/([0-9]+\.[0-9]{6})[0-9]*/, '$1') -
+            0
+        this.withdrawOutAmount = this.round(
+            this.accSub(this.withdrawAmount, this.withdrawFee),
+            this.currentCoin.withdrawScale
+        )
+      },
+      valid() {
+        this.withdrawAdress = this.withdrawAdress || this.inputAddress
+        if (this.coinType === '') {
+          this.$Message.error(this.$t('uc.finance.withdraw.symboltip'))
+          return false
+        } else if (this.withdrawAdress === '') {
+          this.$Message.error(this.$t('uc.finance.withdraw.addresstip'))
+          return false
+        } else if (
+            this.withdrawAmount === '' ||
+            this.withdrawAmount === 0 ||
+            this.withdrawAmount - 0 < this.currentCoin.minAmount
+        ) {
+          this.$Message.error(
+              this.$t('uc.finance.withdraw.numtip2') + this.currentCoin.minAmount
+          )
+          return false
+        } else if (this.withdrawAmount - 0 < this.withdrawFee) {
+          this.$Message.error(this.$t('uc.finance.withdraw.numtip3'))
+          return false
+        } else if (
+            this.withdrawFee === '' ||
+            this.withdrawFee === 0 ||
+            this.withdrawFee - 0 > this.currentCoin.maxTxFee ||
+            this.withdrawFee - 0 < this.currentCoin.minTxFee
+        ) {
+          this.$Message.error(
+              this.$t('uc.finance.withdraw.feetip1') + this.currentCoin.minTxFee + ' , ' + this.$t('uc.finance.withdraw.feetip2') + this.currentCoin.maxTxFee
+          )
+          return false
+        } else {
+          return true
+        }
+      },
+      empty() {
+        this.formInline.code = ''
+        this.formInline.fundpwd = ''
+        this.formInline.googleCode = ''
+        this.formInline.emailCode = ''
+      },
+      apply() {
+        if(this.withdrawAmount < this.currentCoin.minAmount) {
+          this.$Message.error(this.$t('uc.finance.withdraw.numtip31'))
+          return false
+        }
         this.afetyVerification()
         this.empty()
         if (this.valid()) {
@@ -721,370 +742,400 @@ export default {
             }
           }, 1000)
         }
-    },
-    getMember() {
-            // 获取个人安全信息
-      this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
-        var resp = response.body
-        if (resp.code == 0) {
-          this.user = resp.data
-        } else {
-          this.$Message.error(this.loginmsg)
-        }
-      })
-    },
-    // 安全验证接口
-    afetyVerification () {
-          // 1.输入谷歌验证码
-          // 2.输入手机验证码
-          // 3.输入邮箱验证码
-          this.$http.post(this.host + '/uc/getGoogleState',{ mobile: this.$store.getters.member.mobile }).then(res => {
-              const data = res.body
-              this.isCode = data.data
-              if (data.code == 0) {
-                  switch (data.data) {
-                      case 1:
-                          // 1为开启谷歌验证
-                          this.isGoogleCode = true
-                          this.isPhoneCode = false
-                          this.isEmailCode = false
-                          break
-                      case 2:
-                          // 2为开启手机验证
-                          this.isGoogleCode = false
-                          this.isPhoneCode = true
-                          this.isEmailCode = false
-                          break
-                      case 3:
-                          // 3为开启邮箱验证
-                          this.isGoogleCode = false
-                          this.isPhoneCode = false
-                          this.isEmailCode = true
-                  }
-              }
-          })
-      }
-  },
-  created() {
-        // this.getMember();
-    this.$http.options.emulateJSON = false
-    this.coinType = this.$route.query.name || ''
-    this.getAddrList()
-    this.getList(0, 10, 1)
-  },
-  computed: {
-
-    member: function() {
-      return this.$store.getters.member
-    },
-    tableColumnsWithdraw() {
-      let columns = [],
-        filters = []
-      if (this.coinList.length > 0) {
-        this.coinList.forEach(v => {
-          filters.push({
-            label: v.unit,
-            value: v.unit
-          })
+      },
+      getMember() {
+        // 获取个人安全信息
+        this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
+          var resp = response.body
+          if (resp.code == 0) {
+            this.user = resp.data
+          } else {
+            this.$Message.error(this.loginmsg)
+          }
+        })
+      },
+      // 安全验证接口
+      afetyVerification() {
+        // 1.输入谷歌验证码
+        // 2.输入手机验证码
+        // 3.输入邮箱验证码
+        this.$http.post(this.host + '/uc/getGoogleState', {mobile: this.$store.getters.member.mobile}).then(res => {
+          const data = res.body
+          this.isCode = data.data
+          if (data.code == 0) {
+            switch (data.data) {
+              case 1:
+                // 1为开启谷歌验证
+                this.isGoogleCode = true
+                this.isPhoneCode = false
+                this.isEmailCode = false
+                break
+              case 2:
+                // 2为开启手机验证
+                this.isGoogleCode = false
+                this.isPhoneCode = true
+                this.isEmailCode = false
+                break
+              case 3:
+                // 3为开启邮箱验证
+                this.isGoogleCode = false
+                this.isPhoneCode = false
+                this.isEmailCode = true
+            }
+          }
         })
       }
-      columns.push({
-        title: this.$t('uc.finance.withdraw.time'),
-        key: 'createTime'
-      })
-      columns.push({
-        title: this.$t('uc.finance.withdraw.symbol'),
-        key: 'symbol',
-        filters,
-        filterMultiple: false,
-        filterMethod(value, row) {
-          return row.coin.unit === value
-        },
-        render: function(h, params) {
-          return h('span', params.row.coin.unit)
+    },
+    created() {
+      // this.getMember();
+      this.$http.options.emulateJSON = false
+      this.coinType = this.$route.query.name || ''
+      this.getAddrList()
+      this.getList(0, 10, 1)
+    },
+    computed: {
+
+      member: function () {
+        return this.$store.getters.member
+      },
+      tableColumnsWithdraw() {
+        let columns = [],
+            filters = []
+        if (this.coinList.length > 0) {
+          this.coinList.forEach(v => {
+            filters.push({
+              label: v.unit,
+              value: v.unit
+            })
+          })
         }
-      })
-      columns.push({
-        title: this.$t('uc.finance.withdraw.address'),
-        key: 'address',
+        columns.push({
+          title: this.$t('uc.finance.withdraw.time'),
+          key: 'createTime'
+        })
+        columns.push({
+          title: this.$t('uc.finance.withdraw.symbol'),
+          key: 'symbol',
+          filters,
+          filterMultiple: false,
+          filterMethod(value, row) {
+            return row.coin.unit === value
+          },
+          render: function (h, params) {
+            return h('span', params.row.coin.unit)
+          }
+        })
+        columns.push({
+          title: this.$t('uc.finance.withdraw.address'),
+          key: 'address',
           render: (h, param) => {
-              let str = param.row.address;
-              let tokenLenth = param.row.address.length
-              // 显示前五位 后五位
-              let tokenCont = param.row.address.substring(0, 5)
-                      +
-                      '...'
-                      + param.row.address.substring(tokenLenth - 5, tokenLenth)
-              if (str) {
-                  return h("div", [
-                      h('Icon', {
-                          props: {
-                              type: 'ios-paper-outline'
-                          },
-                          style: {
-                              height: '20px',
-                              fontSize: '16px',
-                              float: 'left',
-                              color: '#fff',
-                              border: 0,
-                              lineHeight: '20px',
-                              margin: '0 5px 0 25px'
-                          },
-                          on: {
-                              click: () => {
-                                  this.copyToken(str)
-                              }
-                          }
-                      }),
-                      h("div", {
-                          style: {
-                              fontSize: '1%',
-                              float: 'left'
-                          },
-                      }, tokenCont)
-                  ])
-              }
+            let str = param.row.address;
+            let tokenLenth = param.row.address.length
+            // 显示前五位 后五位
+            let tokenCont = param.row.address.substring(0, 5)
+                +
+                '...'
+                + param.row.address.substring(tokenLenth - 5, tokenLenth)
+            if (str) {
+              return h("div", [
+                h('Icon', {
+                  props: {
+                    type: 'ios-paper-outline'
+                  },
+                  style: {
+                    height: '20px',
+                    fontSize: '16px',
+                    float: 'left',
+                    color: '#fff',
+                    border: 0,
+                    lineHeight: '20px',
+                    margin: '0 5px 0 25px'
+                  },
+                  on: {
+                    click: () => {
+                      this.copyToken(str)
+                    }
+                  }
+                }),
+                h("div", {
+                  style: {
+                    fontSize: '1%',
+                    float: 'left'
+                  },
+                }, tokenCont)
+              ])
+            }
           }
-      })
-      columns.push({
-        title: this.$t('uc.finance.withdraw.num'),
-        key: 'totalAmount'
-      })
-      columns.push({
-        title: this.$t('uc.finance.withdraw.fee'),
-        key: 'fee'
-      })
-      columns.push({
-        title: this.$t('uc.finance.withdraw.status'),
-        key: 'status',
-        render: (h, params) => {
-          let text = ''
-          if (params.row.status == 0) {
-            text = this.$t('uc.finance.withdraw.status_0')
-          } else if (params.row.status == 1) {
-            text = this.$t('uc.finance.withdraw.status_1')
-          } else if (params.row.status == 2) {
-            text = this.$t('uc.finance.withdraw.status_2')
-          } else if (params.row.status == 3) {
-            text = this.$t('uc.finance.withdraw.status_3')
-          } else if (params.row.status == 4) {
+        })
+        columns.push({
+          title: this.$t('uc.finance.withdraw.num'),
+          key: 'totalAmount'
+        })
+        columns.push({
+          title: this.$t('uc.finance.withdraw.fee'),
+          key: 'fee'
+        })
+        columns.push({
+          title: this.$t('uc.finance.withdraw.status'),
+          key: 'status',
+          render: (h, params) => {
+            let text = ''
+            if (params.row.status == 0) {
+              text = this.$t('uc.finance.withdraw.status_0')
+            } else if (params.row.status == 1) {
+              text = this.$t('uc.finance.withdraw.status_1')
+            } else if (params.row.status == 2) {
+              text = this.$t('uc.finance.withdraw.status_2')
+            } else if (params.row.status == 3) {
+              text = this.$t('uc.finance.withdraw.status_3')
+            } else if (params.row.status == 4) {
               text = this.$t('uc.finance.withdraw.status_4')
-          } else if (params.row.status == 5) {
+            } else if (params.row.status == 5) {
               text = this.$t('uc.finance.withdraw.status_5')
+            }
+            return h('div', [h('p', text)])
           }
-          return h('div', [h('p', text)])
-        }
-      })
-      return columns
+        })
+        return columns
+      }
     }
   }
-}
 </script>
 <style lang="scss">
-    .ivu-modal-header p {
-        color: #8090af;
+  .ivu-modal-header p {
+    color: #8090af;
+  }
+
+  .ivu-form {
+    .ivu-form-item-label {
+      color: #8090af;
     }
-    .ivu-form {
-        .ivu-form-item-label {
-            color: #8090af;
-        }
+  }
+
+  .ivu-modal-footer {
+    border-top: 1px solid #8090AF;
+  }
+
+  .withdraw {
+    input::-webkit-input-placeholder {
+      color: #8090af;
     }
-    .ivu-modal-footer {
-        border-top: 1px solid #8090AF;
+
+    input:-moz-placeholder {
+      color: #8090af;
     }
-    .withdraw {
-        input::-webkit-input-placeholder {
-            color: #8090af;
+
+    input::-moz-placeholder {
+      color: #8090af;
+    }
+
+    input:-ms-input-placeholder {
+      color: #8090af;
+    }
+
+    .ivu-table {
+      td {
+        &:first-child {
+          text-align: left;
+          padding-left: 12px;
         }
 
-        input:-moz-placeholder {
-            color: #8090af;
+        &:last-child {
+          text-align: right;
+          padding-right: 12px;
         }
 
-        input::-moz-placeholder {
-            color: #8090af;
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(5) {
+          text-align: center;
         }
+      }
 
-        input:-ms-input-placeholder {
-            color: #8090af;
-        }
-        .ivu-table {
-            td {
-                &:first-child {
-                    text-align: left;
-                    padding-left: 12px;
-                }
-                &:last-child {
-                    text-align: right;
-                    padding-right: 12px;
-                }
-                &:nth-child(2),
-                &:nth-child(3),
-                &:nth-child(4),
-                &:nth-child(5) {
-                    text-align: center;
-                }
-            }
-            .ivu-table-header {
-                th {
-                    height: 50px;
-                    background: #191D3A;
-                    border-bottom: 0 !important;
-                    color: #8090AF;
-                    &:first-child {
-                        text-align: left;
-                        padding-left: 10px;
-                    }
-                    &:last-child {
-                        text-align: right;
-                        padding-right: 10px;
-                    }
-                    &:nth-child(2),
-                    &:nth-child(3),
-                    &:nth-child(4),
-                    &:nth-child(5) {
-                        text-align: center;
-                    }
-                }
-            }
-            .ivu-table-tip {
-                td {
-                    text-align: center;
-                    background: #111530;
-                }
-            }
-        }
-        .ivu-input[disabled]:hover {
-            border-color: #58698A;
-        }
-        .ivu-input[disabled],
-        fieldset[disabled] .ivu-input {
-            background-color: #111530;
-        }
-        .withdraw-form-inline {
-            padding: 20px 40px 0 40px;
-        }
-        .input-group,
-        .ivu-input-wrapper {
-            width: 270px;
-            height: 35px;
-            line-height: 35px;
-        }
+      .ivu-table-header {
+        th {
+          height: 50px;
+          background: #191D3A;
+          border-bottom: 0 !important;
+          color: #8090AF;
 
-        .ivu-table-filter-list .ivu-table-filter-select-item {
-            color: #fff;
-            &:hover {
-                background: transparent;
-                color: #3399ff;
-            }
+          &:first-child {
+            text-align: left;
+            padding-left: 10px;
+          }
+
+          &:last-child {
+            text-align: right;
+            padding-right: 10px;
+          }
+
+          &:nth-child(2),
+          &:nth-child(3),
+          &:nth-child(4),
+          &:nth-child(5) {
+            text-align: center;
+          }
         }
+      }
+
+      .ivu-table-tip {
+        td {
+          text-align: center;
+          background: #111530;
+        }
+      }
     }
+
+    .ivu-input[disabled]:hover {
+      border-color: #58698A;
+    }
+
+    .ivu-input[disabled],
+    fieldset[disabled] .ivu-input {
+      background-color: #111530;
+    }
+
+    .withdraw-form-inline {
+      padding: 20px 40px 0 40px;
+    }
+
+    .input-group,
+    .ivu-input-wrapper {
+      width: 270px;
+      height: 35px;
+      line-height: 35px;
+    }
+
+    .ivu-table-filter-list .ivu-table-filter-select-item {
+      color: #fff;
+
+      &:hover {
+        background: transparent;
+        color: #3399ff;
+      }
+    }
+  }
 
 </style>
 
 <style lang="scss">
-    ivu-poptip-body-content-inner {
-        color: #fff;
+  ivu-poptip-body-content-inner {
+    color: #fff;
+  }
+
+  // .ivu-poptip-inner {
+  //     background: #10122B;
+  //     color: #8090AF;
+  // }
+  .ivu-poptip-popper[x-placement^=bottom] .ivu-poptip-arrow:after {
+    border-bottom-color: #10122B;
+  }
+
+  .withdraw {
+    .ivu-select-dropdown .ivu-select-item {
+      padding: 6px 16px;
+
+      &:hover {
+        background: #10122B !important;
+        color: #3399ff;
+      }
     }
-    // .ivu-poptip-inner {
-    //     background: #10122B;
-    //     color: #8090AF;
-    // }
-    .ivu-poptip-popper[x-placement^=bottom] .ivu-poptip-arrow:after {
-        border-bottom-color: #10122B;
+
+    .ivu-select-dropdown {
+      li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+        background: #10122B;
+        color: #3399ff;
+      }
+
+      li.ivu-select-item.ivu-select-item-selected {
+        background: #10122B;
+        color: #495060;
+
+        &:hover {
+          color: #3399ff;
+        }
+      }
     }
-    .withdraw {
-        .ivu-select-dropdown .ivu-select-item {
-            padding: 6px 16px;
 
-            &:hover {
-                background: #10122B !important;
-                color: #3399ff;
-            }
-        }
-
-        .ivu-select-dropdown {
-            li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-                background: #10122B;
-                color: #3399ff;
-            }
-
-            li.ivu-select-item.ivu-select-item-selected {
-                background: #10122B;
-                color: #495060;
-
-                &:hover {
-                    color: #3399ff;
-                }
-            }
-        }
     .ivu-select-single {
-        .ivu-select-selection {
-            background: #111530;
-            width: 270px;
-            line-height: 35px;
-            border: 1px solid #58698A;
-            border-radius: 0;
-        }
+      .ivu-select-selection {
+        background: #111530;
+        width: 270px;
+        line-height: 35px;
+        border: 1px solid #58698A;
+        border-radius: 0;
+      }
     }
-  .nav-right {
-    .rightarea {
-      .action-box {
-        .action-inner {
-          .inner-left,
-          .inner-box {
-            /*左侧边框*/
-            .ivu-select.ivu-select-single {
-              .ivu-select-selection {
+
+    .nav-right {
+      .rightarea {
+        .action-box {
+          .action-inner {
+            .inner-left,
+            .inner-box {
+              /*左侧边框*/
+              .ivu-select.ivu-select-single {
+                .ivu-select-selection {
                   width: 270px;
-                &:hover {
+
+                  &:hover {
+                    border-color: #3399ff;
+                  }
+                }
+
+                .ivu-select-selection.ivu-select-selection-focused {
                   border-color: #3399ff;
                 }
               }
 
-              .ivu-select-selection.ivu-select-selection-focused {
-                border-color: #3399ff;
+              .ivu-select.ivu-select-visible.ivu-select-single {
+                .ivu-select-selection {
+                  border-color: #3399ff;
+                }
               }
+
+              /*.ivu-select-dropdown .ivu-select-item {*/
+              /*  padding: 6px 16px;*/
+
+              /*  &:hover {*/
+              /*    background: #10122B !important;*/
+              /*    color: #3399ff;*/
+              /*  }*/
+              /*}*/
+
+              /*.ivu-select-dropdown {*/
+              /*  li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {*/
+              /*    background: #10122B;*/
+              /*    color: #3399ff;*/
+              /*  }*/
+
+              /*  li.ivu-select-item.ivu-select-item-selected {*/
+              /*    background: #10122B;*/
+              /*    color: #495060;*/
+
+              /*    &:hover {*/
+              /*      color: #3399ff;*/
+              /*    }*/
+              /*  }*/
+              /*}*/
             }
-
-            .ivu-select.ivu-select-visible.ivu-select-single {
-              .ivu-select-selection {
-                border-color: #3399ff;
-              }
-            }
-
-            /*.ivu-select-dropdown .ivu-select-item {*/
-            /*  padding: 6px 16px;*/
-
-            /*  &:hover {*/
-            /*    background: #10122B !important;*/
-            /*    color: #3399ff;*/
-            /*  }*/
-            /*}*/
-
-            /*.ivu-select-dropdown {*/
-            /*  li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {*/
-            /*    background: #10122B;*/
-            /*    color: #3399ff;*/
-            /*  }*/
-
-            /*  li.ivu-select-item.ivu-select-item-selected {*/
-            /*    background: #10122B;*/
-            /*    color: #495060;*/
-
-            /*    &:hover {*/
-            /*      color: #3399ff;*/
-            /*    }*/
-            /*  }*/
-            /*}*/
           }
-        }
 
-        .form-group-container {
-          .form-group {
-            .input-group {
-              .ivu-poptip-rel {
-                display: block;
+          .form-group-container {
+            .form-group {
+              .input-group {
+                .ivu-poptip-rel {
+                  display: block;
+
+                  .ivu-input-number {
+                    width: 100%;
+
+                    &:hover {
+                      border-color: #3399ff;
+                    }
+                  }
+                }
 
                 .ivu-input-number {
                   width: 100%;
@@ -1094,60 +1145,43 @@ export default {
                   }
                 }
               }
-
-              .ivu-input-number {
-                width: 100%;
-
-                &:hover {
-                  border-color: #3399ff;
-                }
-              }
             }
           }
         }
-      }
 
-      .table-inner.action-box {
-        .action-content .action-body {
-          /*分页*/
-          .order-table .ivu-table-wrapper .ivu-table-header {
-            thead .ivu-table-cell {
-              .ivu-poptip .ivu-poptip-rel .ivu-table-filter {
-                i.ivu-icon.ivu-icon-funnel.on {
-                  color: #3399ff;
+        .table-inner.action-box {
+          .action-content .action-body {
+            /*分页*/
+            .order-table .ivu-table-wrapper .ivu-table-header {
+              thead .ivu-table-cell {
+                .ivu-poptip .ivu-poptip-rel .ivu-table-filter {
+                  i.ivu-icon.ivu-icon-funnel.on {
+                    color: #3399ff;
+                  }
                 }
               }
             }
-          }
 
-          #pages {
-            .ivu-page {
-              .ivu-page-item.ivu-page-item-active {
+            #pages {
+              .ivu-page {
+                .ivu-page-item.ivu-page-item-active {
                   background-color: #111530;
                   border-color: #191f44;
-                  a {
-                      color: #3399ff;
-                  }
-
-                &:hover {
-                    background-color: #111530;
-                    a {
-                        color: #3399ff;
-                    }
-                }
-              }
-
-              .ivu-page-item {
-                &:hover {
-                  border: 1px solid #3399ff;
 
                   a {
                     color: #3399ff;
                   }
+
+                  &:hover {
+                    background-color: #111530;
+
+                    a {
+                      color: #3399ff;
+                    }
+                  }
                 }
 
-                .ivu-page-prev,
-                .ivu-page-next {
+                .ivu-page-item {
                   &:hover {
                     border: 1px solid #3399ff;
 
@@ -1155,119 +1189,143 @@ export default {
                       color: #3399ff;
                     }
                   }
+
+                  .ivu-page-prev,
+                  .ivu-page-next {
+                    &:hover {
+                      border: 1px solid #3399ff;
+
+                      a {
+                        color: #3399ff;
+                      }
+                    }
+                  }
                 }
               }
             }
           }
-        }
-        .v-transfer-dom .ivu-poptip-content .ivu-poptip-inner {
-          .ivu-poptip-body .ivu-table-filter-list-single {
-            .ivu-table-filter-select-item {
-              &:hover {
-                /*background: #fff;*/
-              }
-            }
 
-            li.ivu-table-filter-select-item.ivu-table-filter-select-item-selected {
-              background: #3399ff;
-              color: #fff;
+          .v-transfer-dom .ivu-poptip-content .ivu-poptip-inner {
+            .ivu-poptip-body .ivu-table-filter-list-single {
+              .ivu-table-filter-select-item {
+                &:hover {
+                  /*background: #fff;*/
+                }
+              }
+
+              li.ivu-table-filter-select-item.ivu-table-filter-select-item-selected {
+                background: #3399ff;
+                color: #fff;
+              }
             }
           }
         }
       }
     }
-  }
+
     .ivu-table-wrapper {
-        margin-right: -1px;
-        .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
-        .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-            background: #10122B;
+      margin-right: -1px;
+
+      .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
+      .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+        background: #10122B;
+      }
+
+      ivu-table {
+        td {
+          text-align: center !important;
         }
-        ivu-table {
-            td {
-                text-align: center !important;
-            }
-        }
+      }
     }
+
     .ivu-select-selection {
-        width: 270px;
-        height: 35px;
-        line-height: 35px;
-        &:hover {
-            border-color: #58698A;
-        }
-        .ivu-select-placeholder {
-            color: #8090af;
-        }
-        .ivu-select-selected-value {
-            height: 35px;
-            line-height: 35px;
-            color: #fff;
-        }
-    }
-    .ivu-select-item-selected {
-        background: transparent;
-    }
-    .ivu-input {
-        width: 270px;
-        height: 35px;
-        line-height: 35px;
-        border-radius: 0;
-        background: transparent;
+      width: 270px;
+      height: 35px;
+      line-height: 35px;
+
+      &:hover {
         border-color: #58698A;
+      }
+
+      .ivu-select-placeholder {
+        color: #8090af;
+      }
+
+      .ivu-select-selected-value {
+        height: 35px;
+        line-height: 35px;
         color: #fff;
+      }
     }
-}
+
+    .ivu-select-item-selected {
+      background: transparent;
+    }
+
+    .ivu-input {
+      width: 270px;
+      height: 35px;
+      line-height: 35px;
+      border-radius: 0;
+      background: transparent;
+      border-color: #58698A;
+      color: #fff;
+    }
+  }
 </style>
 <style scoped lang="scss">
-    .input-text{
-        width: 95%;
-    }
-    .timebox {
-        cursor: pointer;
-    }
-  #sendCode {
-      position: absolute;
-      border: none;
-      background: none;
-      top: 10px;
-      outline: none;
-      right: 25px;
-      width: 20%;
-      color: #3399ff;
-      cursor: pointer;
-      height: 16px;
-      line-height: 16px;
-      border-left: 1px solid #dddee1;
+  .input-text {
+    width: 95%;
   }
+
+  .timebox {
+    cursor: pointer;
+  }
+
+  #sendCode {
+    position: absolute;
+    border: none;
+    background: none;
+    top: 10px;
+    outline: none;
+    right: 25px;
+    width: 20%;
+    color: #3399ff;
+    cursor: pointer;
+    height: 16px;
+    line-height: 16px;
+    border-left: 1px solid #dddee1;
+  }
+
   .footer-btn-c {
-    margin-right:50px;
-    color:#fff;
-    width:80px;
-    border-radius:0;
-    display:inline-block;
-    text-align:center;
-    height:30px;
+    margin-right: 50px;
+    color: #fff;
+    width: 80px;
+    border-radius: 0;
+    display: inline-block;
+    text-align: center;
+    height: 30px;
     line-height: 30px;
     cursor: pointer;
     border: 1px solid #2A3850;
   }
+
   .footer-btn-q {
-    background:#3399ff;
-    color:#fff;
-    width:80px;
-    border-radius:0;
-    display:inline-block;
-    text-align:center;
-    height:30px;
+    background: #3399ff;
+    color: #fff;
+    width: 80px;
+    border-radius: 0;
+    display: inline-block;
+    text-align: center;
+    height: 30px;
     // line-height: 30px;
     // cursor: pointer;
-    /deep/.footer-btn-q:hover{
-    background:#3399ff;
-    border:none;
+    /deep/ .footer-btn-q:hover {
+      background: #3399ff;
+      border: none;
     }
   }
- 
+
   .withdraw {
 
     .nav-right {
@@ -1275,9 +1333,11 @@ export default {
       overflow: hidden;
       display: block;
       margin-right: 0;
-      .operationform{
-        padding:0 28px 30px;
+
+      .operationform {
+        padding: 0 28px 30px;
         background: #111530;
+
         .operationform-title {
           height: 50px;
           line-height: 50px;
@@ -1287,41 +1347,49 @@ export default {
           padding-left: 10px;
           font-size: 14px;
         }
+
         .operationform-info {
-            width: 85%;
-            margin: 40px auto;
-            background: rgba(186,218,248,.2);
-            border: 1px solid rgba(117,188,255,.2);
-            padding: 10px 15px;
-            line-height: 25px;
-            font-size: 12px;
-            color: #cdd9f0;
+          width: 85%;
+          margin: 40px auto;
+          background: rgba(186, 218, 248, .2);
+          border: 1px solid rgba(117, 188, 255, .2);
+          padding: 10px 15px;
+          line-height: 25px;
+          font-size: 12px;
+          color: #cdd9f0;
         }
+
         .operationform-from {
           margin: 0 240px 60px;
         }
-        .inner-left{
+
+        .inner-left {
           display: flex;
           align-items: center;
-          margin-left:60px;
+          margin-left: 60px;
           margin-bottom: 15px;
         }
-        .controlAddress{
-          font-size:14px;
+
+        .controlAddress {
+          font-size: 14px;
         }
-        .availablenum{
+
+        .availablenum {
           display: flex;
           align-items: center;
-          margin-left:60px;
-          span{
+          margin-left: 60px;
+
+          span {
             display: inline-block;
-            font-size:14px;
+            font-size: 14px;
             color: #8090af;
           }
-          .input-group{
+
+          .input-group {
             display: inline-block;
           }
-          .label-fr{
+
+          .label-fr {
             margin: 10px 0 0 145px;
           }
         }
@@ -1340,6 +1408,7 @@ export default {
         margin-right: 20px;
       }
     }
+
     .action-box {
       .form-group-container {
         .form-group.form-amount {
@@ -1382,9 +1451,11 @@ export default {
         }
       }
     }
+
     .ivu-slider-button-wrap {
       top: -6px;
     }
+
     #withdrawAddressList {
       position: absolute;
       height: 0;
@@ -1430,7 +1501,7 @@ export default {
 
     .describe {
       display: inline-block;
-      width:120px;
+      width: 120px;
       text-align: right;
       color: #8090AF;
     }
@@ -1760,24 +1831,30 @@ export default {
       border-radius: 0;
       border: 0;
     }
+
     #pages {
       margin: 10px 10px 25px;
       overflow: hidden;
     }
+
     #pages .ivu-page li.ivu-page-item-active {
       background-color: #3399ff !important;
       border-color: #3399ff !important;
     }
+
     #pages li.ivu-page-item-active:hover {
       color: #3399ff !important;
     }
+
     .ivu-page-item-active {
       background-color: #3399ff;
       border-color: #3399ff;
     }
+
     .ivu-page-item:hover {
       color: #3399ff;
     }
+
     .pages_a .ivu-page-item-active {
       background-color: red !important;
     }

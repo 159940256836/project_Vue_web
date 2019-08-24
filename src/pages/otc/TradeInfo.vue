@@ -824,7 +824,7 @@ export default {
           width: 60px;
           background: transparent;
           border-radius: 0;
-          border: 1px solid #58698A;
+          border: 1px solid #58698A !important;
           border-right: 0;
           color: #8090AF;
       }

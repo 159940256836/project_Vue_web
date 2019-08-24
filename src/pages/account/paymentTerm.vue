@@ -27,7 +27,13 @@
                                 <p class="right-side" v-else>
                                     <a class="btn"  @click="openModal(function(){modal1 = true})">{{$t('uc.account.bind')}}</a>
                                 </p>
-
+                                <!--<p class="switch-style">
+                                    &lt;!&ndash;v-model="googleSwitch" @on-change="changeGoogleSwitch"&ndash;&gt;
+                                    <i-switch>
+                                        <span slot="open">关</span>
+                                        <span slot="close">开</span>
+                                    </i-switch>
+                                </p>-->
                             </div>
                         </div>
                         <div class="account-item">
@@ -684,84 +690,27 @@ export default {
     text-align: right;
 }
 
+.account-box .account-in .account-item .account-item-in .switch-style {
+    margin-left: 10px;
+}
+
 .account-box .account-in .account-item .account-item-in .btn {
     padding: 8px 0;
     cursor: pointer;
     color: #3399ff;
 }
 
-.tips-g {
-    color: #8994a3;
-    font-size: 12px;
-}
-
-.table-inner {
-    position: relative;
-    text-align: left;
-    border-radius: 3px;
-    padding: 23px 20px 20px;
-}
-
-.acb-p1 {
-    font-size: 18px;
-    font-weight: 600;
-    line-height: 50px;
-}
-
-.acb-p2 {
-    font-size: 14px;
-    line-height: 24px;
-}
-
-.action-inner {
-    width: 100%;
-    display: table;
-}
-
-.action-inner .inner-box {
-    display: table-cell;
-    width: 100%;
-}
-
-.action-box .title .copy {
-    user-select: text;
-}
-
-.action-box .title a.link-copy {
-    font-size: 14px;
-    margin-left: 20px;
-}
-
 .hb-night a {
     text-decoration: none;
     color: #3399ff;
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
-
-.action-box .title a.link-qrcode {
-    margin-left: 20px;
-    font-size: 14px;
-    position: relative;
-}
-
 .hb-night a {
     text-decoration: none;
     color: #3399ff;
     transition: all .2s ease-in-out;
     cursor: pointer;
-}
-
-.action-box .subtitle {
-    font-size: 12px;
-    margin-top: 30px;
-}
-
-.action-content {
-    width: 100%;
-    margin-top: 30px;
-    overflow: hidden;
-    display: table;
 }
 
 .action-box .title {
@@ -769,119 +718,10 @@ export default {
     font-size: 20px;
     user-select: none;
 }
-
-.action-box .title .show-qrcode {
-    position: absolute;
-    top: -100px;
-    left: 40px;
-    padding: 10px;
-}
-
-.action-inner .inner-box.deposit-address {
-    width: 80%;
-}
-
-p.describe {
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.merchant-top {
-    height: 50px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: 0 15px;
-    color: #0d214e;
-}
-
-.trade-group {
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.merchant-icon {
-    display: inline-block;
-    margin-left: 4px;
-    background-size: 100% 100%;
-}
-
-.merchant-top .tips-word {
-    -webkit-box-flex: 2;
-    -ms-flex-positive: 2;
-    flex-grow: 2;
-    text-align: left;
-}
-
-.merchant-icon.tips {
-    width: 4px;
-    height: 22px;
-    margin-right: 10px;
-    background: #3399ff;
-}
-
 .bill_box {
     width: 100%;
     height: auto;
     overflow: hidden;
-}
-
-
-.rightarea .rightarea-top {
-    line-height: 75px;
-    border-bottom: #f1f1f1 solid 1px;
-}
-
-.rightarea .rightarea-con {
-    padding-top: 30px;
-    padding-bottom: 125px;
-}
-
-.rightarea .trade-process {
-    line-height: 30px;
-    padding: 0 15px;
-    background: #f1f1f1;
-    display: inline-block;
-    position: relative;
-    margin-right: 20px;
-}
-
-.rightarea .trade-process.active {
-    color: #eb6f6c;
-    background: #f9f5eb;
-}
-
-.rightarea .trade-process .icon {
-    background: #fff;
-    border-radius: 20px;
-    height: 20px;
-    width: 20px;
-    display: inline-block;
-    line-height: 20px;
-    text-align: center;
-    margin-right: 10px;
-}
-
-.rightarea .trade-process .arrow {
-    position: absolute;
-    top: 10px;
-    right: -5px;
-    width: 0;
-    height: 0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid #f1f1f1;
-}
-
-.rightarea .trade-process.active .arrow {
-    border-left: 5px solid #f9f5eb;
-}
-
-.rightarea .rightarea-tabs {
-    border: none;
 }
 
 .rightarea .rightarea-tabs li>a {
@@ -914,10 +754,6 @@ p.describe {
     cursor: pointer;
 }
 
-.rightarea .rightarea-tabs li.active {
-    background-color: #fcfbfb;
-}
-
 .rightarea .rightarea-tabs li:last-child {
     border-right: 1px solid #f1f1f1;
 }
@@ -928,71 +764,10 @@ p.describe {
     border: none;
 }
 
-.rightarea .panel-tips {
-    border: 3px solid #fdfaf3;
-    color: #9e9e9e;
-    font-size: 12px;
-}
-
-.rightarea .panel-tips .panel-header {
-    background: #fdfaf3;
-    line-height: 40px;
-    margin-bottom: 15px;
-}
-
-.rightarea .panel-tips .panel-title {
-    font-size: 16px;
-}
-
-.rightarea .recordtitle {
-    cursor: pointer;
-}
-
 .nav-right {
     /* width: 1000px; */
     height: auto;
     overflow: hidden;
-}
-
-.order_box {
-    width: 100%;
-    background: #fff;
-    height: 56px;
-    line-height: 56px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ccf2ff;
-    position: relative;
-    text-align: left;
-}
-
-.order_box a {
-    color: #8994A3;
-    font-size: 16px;
-    padding: 0 30px;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    line-height: 54px;
-    display: inline-block;
-}
-
-.order_box .active {
-    border-bottom: 2px solid #3399ff;
-}
-
-.order_box .search {
-    position: absolute;
-    width: 300px;
-    height: 32px;
-    top: 12px;
-    right: 0;
-    display: flex;
-    /* border: #c5cdd7 solid 1px; */
-}
-.ivu-btn-primary{
-    width: 100%;
-    background-color: #3399ff;
-    border-color: #3399ff;
 }
 </style>
 
@@ -1008,6 +783,15 @@ p.describe {
             border-radius: 0;
         }
     }
+    /*.ivu-switch {*/
+    /*    line-height: 17px;*/
+    /*}*/
+    /*.ivu-switch-inner {*/
+    /*    left: 19px;*/
+    /*}*/
+    /*.ivu-switch-checked .ivu-switch-inner {*/
+    /*    left: 2px;*/
+    /*}*/
     .ivu-select-selection {
       background: transparent;
       border-radius: 0;
