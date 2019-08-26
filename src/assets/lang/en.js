@@ -71,7 +71,7 @@ module.exports = {
       operation6: '20 million, 20 million in total',
       operation7: 'User rewards, ecological construction and market',
       operation8: 'Marketing activities, total 55 million',
-      value: 'value',
+      value: 'value'
       // integral: 'integral',
       // integralText: 'BD is the integral system of BDW global ecology based on blockchain distribution and management, which can be used in multiple scenarios within BDW and under the BDW ecosystem.',
       // isotopic: 'carriers of value',

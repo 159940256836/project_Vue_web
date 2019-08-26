@@ -2286,7 +2286,7 @@ export default {
         autosize: true,
         fullscreen: true,
         symbol: that.symbol,
-        interval: '5', // K线默认时间传值
+        interval: '15', // K线默认时间传值
         timezone: 'Asia/Shanghai',
         toolbar_bg: '#0E0E28',
         container_id: 'kline_container',
@@ -2496,7 +2496,6 @@ export default {
               widget.setSymbol('', '5')
             })
             .append('<span>M5</span>')
-            .addClass('selected') // 静态默认分时
 
           widget
             .createButton()
@@ -2513,7 +2512,7 @@ export default {
               widget.setSymbol('', '15')
             })
         .append('<span>M15</span>')
-
+            .addClass('selected') // 静态默认分时
           widget
             .createButton()
             .attr('title', 'M30')

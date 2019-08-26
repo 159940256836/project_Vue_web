@@ -1071,11 +1071,11 @@ export default {
         vailCode1: '',
         password: ''
       },
-      //换绑邮箱
+      // 换绑邮箱
       formValidate21: {
         newMail: '',
         vailCode1: '',
-        vailCode11: '',
+        vailCode11: ''
       },
       formValidate3: {
         mobile: '',
@@ -1354,7 +1354,6 @@ export default {
       this.$http.post(this.host + '/uc/getGoogleState', { mobile: this.$store.getters.member.mobile }).then(res => {
         const data = res.body
         this.isCode = data.data
-        console.log(this.isCode)
         if (data.code == 0) {
           switch (data.data) {
             case 1:
@@ -1498,16 +1497,15 @@ export default {
     },
 
     areaChange(value) {
-      console.log(value)
       this.typeIdList.forEach((ele, index) => {
-        console.log(ele, index)
               // if (ele.symbol == list[0].symbol) {
               //     this.hostSymbolList.splice(index, 1, resp);
               // }
       })
     },
     submit(name) {
-            // 实名认证
+      console.log(name, this.formValidate6.realName, this.formValidate6.idCard)
+// 实名认证
       if (name == 'formValidate6') {
         if (!this.formValidate6.realName) {
           this.$Message.error(this.$t('uc.safe.realnametip'))
@@ -1572,25 +1570,25 @@ export default {
           }
         })
       }
-        //换绑邮箱
-       if (name == 'formValidate21') {
+        // 换绑邮箱
+      if (name == 'formValidate21') {
         const param = {}
         param['newEmail'] = this.formValidate21.newMail
         param['oldEmailCode'] = this.formValidate21.vailCode1
         param['newEmailCode'] = this.formValidate21.vailCode11
-        this.$http.get(this.host + '/uc/approve/update/email',{ 'params': param }).then(response => {
+        this.$http.get(this.host + '/uc/approve/update/email', { 'params': param }).then(response => {
           var resp = response.body
           if (resp.code == 0) {
             this.modal21 = false
             this.$Message.success(this.$t('uc.safe.save_success'))
-           this.logou()
+            this.logou()
             this.formValidate21 = ''
             this.choseItem = 0
           } else {
             this.$Message.error(resp.message)
           }
         })
-      } 
+      }
         // 手机认证
       if (name == 'formValidate3') {
         const param = {}
@@ -1730,13 +1728,19 @@ export default {
       }
     },
     handleSubmit(name) {
-      this.$refs[name].validate(valid => {
-        if (valid) {
-          this.submit(name)
-        } else {
-          // this.$Message.error(this.$t("uc.safe.save_failure"));
-        }
-      })
+      console.log(name)
+      if (name == 'formValidate6') {
+        this.submit(name)
+      } else {
+        this.$refs[name].validate(valid => {
+          console.log(valid)
+          if (valid) {
+            this.submit(name)
+          } else {
+            this.$Message.error(this.$t('uc.safe.save_failure'))
+          }
+        })
+      }
     },
     handleReset(name) {
       this.$refs[name].resetFields()
@@ -1770,11 +1774,11 @@ export default {
         } else {
           this.$refs.formValidate2.validateField('mail')
         }
-      }else if (index == 11) {
+      } else if (index == 11) {
         if (this.$store.getters.member.email) {
                     // 获取旧邮箱code
-          this.$http.post(this.host + '/uc/untie/email/code',{
-            email:this.$store.getters.member.email
+          this.$http.post(this.host + '/uc/untie/email/code', {
+            email: this.$store.getters.member.email
           })
             .then(response => {
               var resp = response.body
@@ -1794,11 +1798,11 @@ export default {
         } else {
           this.$refs.formValidate2.validateField('mail')
         }
-      }else if (index == 12) {
+      } else if (index == 12) {
         if (this.formValidate21.newMail) {
                     // 获取新邮箱code
-          this.$http.post(this.host + '/uc/email/update/code',{
-            email:this.formValidate21.newMail
+          this.$http.post(this.host + '/uc/email/update/code', {
+            email: this.formValidate21.newMail
           })
             .then(response => {
               var resp = response.body
@@ -1818,8 +1822,7 @@ export default {
         } else {
           this.$refs.formValidate2.validateField('mail')
         }
-      }
-       else if (index == 2) {
+      } else if (index == 2) {
         if (this.formValidate3.mobile) {
                     // 获取手机code
           this.$http.post(this.host + '/uc/mobile/bind/code', {
@@ -1948,7 +1951,6 @@ export default {
       } else if (index == 6) {
           // 获取邮箱code
         this.$http.post(this.host + '/uc/transaction/email/code').then(response => {
-          console.log(response)
           const resp = response.body
           if (resp.code == 0) {
             me.sendEmailDisabled1 = true

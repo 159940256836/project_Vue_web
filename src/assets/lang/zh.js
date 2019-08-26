@@ -126,7 +126,7 @@ module.exports = {
       operation6: '放2000万，共计2000万',
       operation7: '用户奖励、生态建设及市场',
       operation8: '营销活动，共计5500万',
-      value: '价值',
+      value: '价值'
       // integral: '积分',
       // integralText: 'BD是BDW全球生态基于区块链发行和管理的积分系统，可在BDW内部以及BDW生态体系下的多场景中使用。',
       // isotopic: '价值载体',
