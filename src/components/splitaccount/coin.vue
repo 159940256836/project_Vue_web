@@ -124,12 +124,15 @@
         columns.push({
           title: this.$t('uc.finance.money.cointype'),
           key: 'coinType',
-          align: 'center'
+          align: 'center',
+          width: 220
         })
         columns.push({
           title: this.$t('uc.finance.money.balance'),
           key: 'balance',
           align: 'center',
+          width: 200,
+          sortable: true,
           render(h, params) {
             return h(
                 'span',
@@ -146,6 +149,7 @@
           title: this.$t('uc.finance.money.frozen'),
           key: 'frozenBalance',
           align: 'center',
+          width: 200,
           render(h, params) {
             return h(
                 'span',
@@ -161,6 +165,8 @@
         columns.push({
           title: this.$t('uc.finance.money.needreleased'),
           align: 'center',
+          width: 200,
+          sortable: true,
           render(h, params) {
             return h(
                 'span',
@@ -176,6 +182,8 @@
         columns.push({
           title: this.$t('uc.finance.money.assetValuation'),
           align: 'center',
+          width: 180,
+          sortable: true,
           render(h, params) {
             /*          console.log(params.row, (params.row.releaseBalance + params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate)*/
             return h(
@@ -185,7 +193,7 @@
                     title: (params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate + ' CNY' || '0.00'
                   }
                 },
-                // self.toFloor(((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate) == 0? '0.00' + ' CNY': ((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate).toFixed(2)-0 + ' CNY' || '0.00')
+                // self.toFloor((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate + ' CNY' '0.00')
                 self.toFloor(((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate) == 0? '0.00' + ' CNY': ((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate).toFixed(2)-0 + ' CNY' || '0.00')
             )
           }
@@ -193,7 +201,7 @@
         columns.push({
           title: this.$t('uc.finance.money.operate'),
           key: 'price1',
-          width: 300,
+          width: 200,
           align: 'center',
           render: (h, params) => {
             var actions = []

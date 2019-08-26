@@ -99,12 +99,15 @@
         columns.push({
           title: this.$t('uc.finance.money.cointype'),
           key: 'coinType',
-          align: 'center'
+          align: 'center',
+          width: 220
         })
         columns.push({
           title: this.$t('uc.finance.money.balance'),
           key: 'balance',
           align: 'center',
+          width: 200,
+          sortable: true,
           render(h, params) {
             return h(
                 'span',
@@ -113,7 +116,7 @@
                     title: params.row.balance
                   }
                 },
-                self.toFloor(params.row.balance || '0')
+                self.toFloor(params.row.balance.toFixed(8)-0 || '0.00000000')
             )
           }
         })
@@ -121,6 +124,7 @@
           title: this.$t('uc.finance.money.frozen'),
           key: 'frozenBalance',
           align: 'center',
+          width: 200,
           render(h, params) {
             return h(
                 'span',
@@ -129,13 +133,15 @@
                     title: params.row.frozenBalance
                   }
                 },
-                self.toFloor(params.row.frozenBalance || '0')
+                self.toFloor(params.row.frozenBalance.toFixed(8)-0 || '0.00000000')
             )
           }
         })
         columns.push({
           title: this.$t('uc.finance.money.needreleased'),
           align: 'center',
+          width: 200,
+          sortable: true,
           render(h, params) {
             return h(
                 'span',
@@ -144,13 +150,15 @@
                     title: params.row.frozenBalance + params.row.balance
                   }
                 },
-                self.toFloor(params.row.frozenBalance + params.row.balance || '0')
+                self.toFloor((params.row.frozenBalance + params.row.balance).toFixed(8) - 0 || '0.00000000')
             )
           }
         })
         columns.push({
           title: this.$t('uc.finance.money.assetValuation'),
           align: 'center',
+          width: 180,
+          sortable: true,
           render(h, params) {
             return h(
                 'span',
@@ -159,7 +167,8 @@
                     title: (params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate + ' CNY'
                   }
                 },
-                self.toFloor((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate + ' CNY' || '0')
+                // self.toFloor((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate + ' CNY' || '0')
+                self.toFloor(((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate) == 0? '0.00' + ' CNY': ((params.row.frozenBalance + params.row.balance) * params.row.coin.cnyRate).toFixed(2)-0 + ' CNY' || '0.00')
             )
           }
         })
