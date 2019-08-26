@@ -2370,32 +2370,116 @@
               const resp = response.body
               this.CNYRate = resp.data
             })
-      },
-      getCoin(symbol) {
-        return this.coins._map[symbol]
-      },
-      getKline() {
-        const that = this
-        const config = {
-          autosize: true,
-          fullscreen: true,
-          symbol: that.symbol,
-          interval: '5', // K线默认时间传值
-          timezone: 'Asia/Shanghai',
-          toolbar_bg: '#0E0E28',
-          container_id: 'kline_container',
-          symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
+    },
+    getCoin(symbol) {
+      return this.coins._map[symbol]
+    },
+    getKline() {
+      const that = this
+      const config = {
+        autosize: true,
+        fullscreen: true,
+        symbol: that.symbol,
+        interval: '15', // K线默认时间传值
+        timezone: 'Asia/Shanghai',
+        toolbar_bg: '#0E0E28',
+        container_id: 'kline_container',
+        symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
 
-          datafeed: that.datafeed,
-          library_path:
-              process.env.NODE_ENV === 'production'
-                  ? '/assets/charting_library/'
-                  : 'src/assets/js/charting_library/',
-          locale: 'zh',
-          debug: false,
-          drawings_access: {
-            type: 'black',
-            tools: [{name: 'Regression Trend'}]
+        datafeed: that.datafeed,
+        library_path:
+                    process.env.NODE_ENV === 'production'
+                        ? '/assets/charting_library/'
+                        : 'src/assets/js/charting_library/',
+        locale: 'zh',
+        debug: false,
+        drawings_access: {
+          type: 'black',
+          tools: [{ name: 'Regression Trend' }]
+        },
+        disabled_features: [
+          'header_resolutions',
+          'timeframes_toolbar',
+          'header_symbol_search',
+          'header_chart_type',
+          'header_compare',
+          'header_undo_redo',
+          'header_screenshot',
+          'header_saveload',
+          'use_localstorage_for_settings',
+          'left_toolbar',
+          'volume_force_overlay',
+          'header_settings',
+          'main_meries_seale_menu' // 隐藏右上角设置
+        ],
+        enabled_features: [
+          'hide_last_na_study_output'
+          // 'move_logo_to_main_pane' // TradingView login 开启显示在网格上 隐藏显示在网格下
+        ],
+        custom_css_url: 'bundles/common.css',
+        supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M'],
+        charts_storage_url: 'http://saveload.tradingview.com',
+        charts_storage_api_version: '1.1',
+        client_id: 'tradingview.com',
+        user_id: 'public_user_id',
+        overrides: {
+          // 'symbolWatermarkProperties.color': 'rgba(255, 255, 255, .1)', // 水印透明度
+          'paneProperties.background': '#131630', // 背景色网格颜色
+          'paneProperties.vertGridProperties.style': 0,
+          'paneProperties.vertGridProperties.color': 'rgba(255,255,255,.04)', // 列分割线
+          'paneProperties.horzGridProperties.color': 'rgba(255,255,255,.04)', // 行分割线
+          'scalesProperties.textColor': '#8090AF', // 开高低收
+          'mainSeriesProperties.candleStyle.upColor': '#00b275',
+          'mainSeriesProperties.candleStyle.downColor': '#f15057',
+          'mainSeriesProperties.candleStyle.drawBorder': false,
+          'mainSeriesProperties.candleStyle.wickUpColor': '#00b275',
+          'mainSeriesProperties.candleStyle.wickDownColor': '#f15057',
+          'paneProperties.legendProperties.showLegend': false,
+          'mainSeriesProperties.areaStyle.color1': 'rgba(71, 78, 112, 0.5)',
+          'mainSeriesProperties.areaStyle.color2': 'rgba(71, 78, 112, 0.5)',
+          'mainSeriesProperties.areaStyle.linecolor': '#9194a4',
+          'scalesProperties.lineColor': '#8090AF', // xy刻度线色值
+          // "paneProperties.crossHairProperties.color": "#00b275", // 十字光标颜色
+          'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
+          'mainSeriesProperties.candleStyle.borderDownColor': '#f15057' // 开高低收卖出标线
+        },
+        // 柱状图样式
+        studies_overrides: {
+          'volume.volume.color.0': 'rgba(241, 80, 87, .3)',  // 第一根的颜色
+          'volume.volume.color.1': 'rgba(0, 178, 117, .3)'  // 第二根的颜色
+        },
+        time_frames: [
+          {
+            text: '1min',
+            resolution: '1',
+            description: 'realtime',
+            title: this.$t('exchange.realtime')
+          },
+          {
+            text: '1min',
+            resolution: '1',
+            description: '1min'
+          },
+          {
+            text: '5min',
+            resolution: '5',
+            description: '5min'
+          },
+          {
+            text: '15min',
+            resolution: '15',
+            description: '15min'
+          },
+          {
+            text: '30min',
+            resolution: '30',
+            description: '30min'
+          },
+          {
+            text: '1hour',
+            resolution: '60',
+            description: '1hour',
+            title: '1hour'
           },
           disabled_features: [
             'header_resolutions',
@@ -2545,84 +2629,83 @@
             .createStudy('Moving Average', false, false, [60], null, {
                 'plot.color': 'rgb(127,33,105)'
             })*/
-            widget
-                .createButton()
-                .attr('title', 'realtime')
-                .on('click', function () {
-                  if ($(this).hasClass('selected')) return
-                  $(this)
-                      .addClass('selected')
-                      .parent('.group')
-                      .siblings('.group')
-                      .find('.button.selected')
-                      .removeClass('selected')
-                  widget.chart().setChartType(3)
-                  widget.setSymbol('', '1')
-                })
-                .append('<span>分时</span>')
-            widget
-                .createButton()
-                .attr('title', 'M1')
-                .on('click', function () {
-                  if ($(this).hasClass('selected')) return
-                  $(this)
-                      .addClass('selected')
-                      .parent('.group')
-                      .siblings('.group')
-                      .find('.button.selected')
-                      .removeClass('selected')
-                  widget.chart().setChartType(1)
-                  widget.setSymbol('', '1')
-                })
-                .append('<span>M1</span>')
-            widget
-                .createButton()
-                .attr('title', 'M5')
-                .on('click', function () {
-                  if ($(this).hasClass('selected')) return
-                  $(this)
-                      .addClass('selected')
-                      .parent('.group')
-                      .siblings('.group')
-                      .find('.button.selected')
-                      .removeClass('selected')
-                  widget.chart().setChartType(1)
-                  widget.setSymbol('', '5')
-                })
-                .append('<span>M5</span>')
-                .addClass('selected') // 静态默认分时
+          widget
+            .createButton()
+            .attr('title', 'realtime')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(3)
+              widget.setSymbol('', '1')
+            })
+            .append('<span>分时</span>')
+          widget
+            .createButton()
+            .attr('title', 'M1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '1')
+            })
+            .append('<span>M1</span>')
+          widget
+            .createButton()
+            .attr('title', 'M5')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '5')
+            })
+            .append('<span>M5</span>')
 
-            widget
-                .createButton()
-                .attr('title', 'M15')
-                .on('click', function () {
-                  if ($(this).hasClass('selected')) return
-                  $(this)
-                      .addClass('selected')
-                      .parent('.group')
-                      .siblings('.group')
-                      .find('.button.selected')
-                      .removeClass('selected')
-                  widget.chart().setChartType(1)
-                  widget.setSymbol('', '15')
-                })
-                .append('<span>M15</span>')
-
-            widget
-                .createButton()
-                .attr('title', 'M30')
-                .on('click', function () {
-                  if ($(this).hasClass('selected')) return
-                  $(this)
-                      .addClass('selected')
-                      .parent('.group')
-                      .siblings('.group')
-                      .find('.button.selected')
-                      .removeClass('selected')
-                  widget.chart().setChartType(1)
-                  widget.setSymbol('', '30')
-                })
-                .append('<span>M30</span>')
+          widget
+            .createButton()
+            .attr('title', 'M15')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '15')
+            })
+        .append('<span>M15</span>')
+            .addClass('selected') // 静态默认分时
+          widget
+            .createButton()
+            .attr('title', 'M30')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '30')
+            })
+            .append('<span>M30</span>')
 
             widget
                 .createButton()
