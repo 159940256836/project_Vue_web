@@ -1076,7 +1076,9 @@ module.exports = {
       emailtip: 'Enter email',
       emailcodetip: 'Enter email verification code',
       resetpwdsuccess: 'Reset password success',
-      smswarn: 'Please check for SMS'
+      smswarn: 'Please check for SMS',
+      verification: 'Please complete the verification.',
+      emailNumber: 'Please fill in the correct mobile phone number or email number'
     },
     finance: {
       center: 'Finance center',
@@ -1111,6 +1113,7 @@ module.exports = {
         matcherr2: 'Exceeds the maximum number of matches!',
         matchsuccess: 'Match Success!',
         needreleased: 'Stay release',
+        assetValuation: 'asset valuation',
         hiddenAssets: 'The currency in which the hidden asset is 0'
       },
       trade: {
@@ -1390,6 +1393,7 @@ module.exports = {
       userguide: 'user guide',
       nickname: 'Nickname',
       bind: 'Bind',
+      inTie: 'In tie',
       binded: 'Binded',
       binding: 'Bindind',
       binderr: 'Failure',
@@ -1411,6 +1415,9 @@ module.exports = {
       bindemail: 'Bind email',
       loginpwd: 'Login Password',
       emailcode: 'Email verification code',
+      oldEmailCode: 'old Code',
+      newEmail: 'new Email',
+      newEmailCode: 'new Code',
       clickget: 'Click to get',
       second: 's',
       phone: 'Telphone',
@@ -1458,7 +1465,7 @@ module.exports = {
       bankaccount: 'Bank account',
       bankbranch: 'Bank branch',
       bankno: 'Bank number',
-      confirmbankno: 'Confirm card number',
+      confirmbankno: 'card number',
       fundpwd: 'Fund password',
       save: 'Save',
       zfbaccount: 'Alipay account',

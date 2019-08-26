@@ -673,7 +673,7 @@ export default {
     width: 152px;
     height: 40px;
     margin-right: 15px;
-    padding: 0 34px;
+    padding: 0 0 0 34px;
     line-height: 40px;
     text-align: left;
     display: inline-block;

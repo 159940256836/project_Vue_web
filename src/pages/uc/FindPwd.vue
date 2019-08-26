@@ -364,7 +364,8 @@ export default {
       }).onSuccess(() => {
         const result = (this._captchaResult = captchaObj.getValidate())
         if (!result) {
-          this.$Message.error('请完成验证')
+            /*请完成验证*/
+          this.$Message.error(this.$t('uc.forget.verification'))
         } else {
           mobilereg.test(this.formInline.user) && this.afterValidate()
           emailReg.test(this.formInline.user) && this.emailReset()
@@ -372,9 +373,10 @@ export default {
       })
       $('#sendCode').click(() => {
         const tel = this.formInline.user,
-          flagtel = mobilereg.test(tel) || emailReg.test(tel)
+          flagtel = emailReg.test(tel)
         flagtel && captchaObj.verify()
-        !flagtel && this.$Message.error('请填写正确的手机号或者邮箱号')
+          // 请填写正确的手机号或者邮箱号
+        !flagtel && this.$Message.error(this.$t('uc.forget.emailNumber'))
       })
     },
     emailReset() {

@@ -20,7 +20,11 @@
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
           <!-- <div class="content_tab_title1">{{$t("foot.Tradrate")}}</div> -->
           <div class="content_tab_buy">
-            <Table :columns="columns2" :data="data2"></Table>
+            <Table
+                    :no-data-text="$t('common.nodata')"
+                    :columns="columns2"
+                    :data="data2"
+            ></Table>
           </div>
         </div>
       </div>
@@ -30,7 +34,11 @@
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
           <!-- <div class="content_tab_title1">{{$t("foot.Gradrate")}}</div> -->
           <div class="content_tab_buy">
-            <Table :columns="columns1" :data="data1">
+            <Table
+                    :no-data-text="$t('common.nodata')"
+                    :columns="columns1"
+                    :data="data1"
+            >
               <template slot-scope="{ row }" slot="exchangeFeeRate">
                 <span>{{ row.exchangeFeeRate*100 }}%</span>
               </template>
@@ -44,7 +52,11 @@
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
           <!-- <div class="content_tab_title1">{{$t("foot.Otcurrenrates")}}</div> -->
           <div class="content_tab_buy">
-            <Table :columns="columns3" :data="data3"></Table>
+            <Table
+                    :no-data-text="$t('common.nodata')"
+                    :columns="columns3"
+                    :data="data3"
+            ></Table>
           </div>
         </div>
       </div>
@@ -55,7 +67,11 @@
           <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
           <!-- <div class="content_tab_title1">{{$t("foot.Currencrates")}}</div> -->
           <div class="content_tab_buy">
-            <Table :columns="columns4" :data="data4"></Table>
+            <Table
+                    :no-data-text="$t('common.nodata')"
+                    :columns="columns4"
+                    :data="data4"
+            ></Table>
           </div>
         </div>
       </div>
@@ -243,6 +259,9 @@ export default {
       })
       return listaa
     }
+  },
+  created() {
+    this.getDate()
   },
   methods: {
     getDate() {

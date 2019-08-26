@@ -1089,7 +1089,9 @@ module.exports = {
       emailtip: '请输入邮箱',
       emailcodetip: '请输入邮箱验证码',
       resetpwdsuccess: '重置密码成功',
-      smswarn: '请注意查收短信'
+      smswarn: '请注意查收短信',
+      verification: '请完成验证',
+      emailNumber: '请填写正确的手机号或者邮箱号'
     },
     finance: {
       pointManagement: '积分管理',
@@ -1408,6 +1410,7 @@ module.exports = {
       userguide: '使用指南',
       nickname: '昵称',
       bind: '绑定',
+      inTie: '换绑',
       certification: '高级认证',
       binded: '已绑定',
       binding: '审核中',
@@ -1430,6 +1433,9 @@ module.exports = {
       bindemail: '绑定邮箱',
       loginpwd: '登录密码',
       emailcode: '邮箱验证码',
+      oldEmailCode: '旧邮箱验证码',
+      newEmail: '新邮箱账号',
+      newEmailCode: '新邮箱验证码',
       code: '验证码',
       clickget: '点击获取',
       second: '秒',
