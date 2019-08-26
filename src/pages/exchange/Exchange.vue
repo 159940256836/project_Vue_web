@@ -2607,7 +2607,6 @@
                 })
                 .append('<span>M15</span>')
                 .addClass('selected') // 静态默认分时
-
             widget
                 .createButton()
                 .attr('title', 'M30')
@@ -3316,7 +3315,7 @@
                   desc: that.$t('exchange.success')
                 })
                 this.loadingButton1 = false
-                this.form.buy.limitAmount = 0
+                this.form.buy.limitAmount = ''
                 this.getWallet()
                 this.getCurrentOrder()
                 this.getHistoryOrder()
@@ -3485,7 +3484,7 @@
                   desc: that.$t('exchange.success')
                 })
                 this.loadingButton4 = false
-                this.form.sell.limitAmount = 0
+                this.form.sell.limitAmount = ''
                 this.refreshAccount()
               } else {
                 this.$Notice.error({

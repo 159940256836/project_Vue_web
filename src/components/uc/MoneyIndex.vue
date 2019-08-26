@@ -443,6 +443,9 @@
           }
         }
       }
+      td.ivu-table-column-center,th.ivu-table-column-center{
+        text-align: left;
+      }
     }
 
     .hidden-assets {
