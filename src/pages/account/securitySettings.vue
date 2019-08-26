@@ -78,8 +78,9 @@
                                     </p>
                                     <p class="right-side" v-if="user.emailVerified==1">
                                        <a class="btn" @click="modal21 = true">
-                                           换绑
-                                        </a>
+                                           <!--换绑-->
+                                           {{$t('uc.safe.inTie')}}
+                                       </a>
                                     </p>
                                     <p class="right-side" v-else>
                                         <a class="btn" @click="modal2 = true">
@@ -102,8 +103,9 @@
                                     </p>
                                     <p class="right-side" v-if="user.phoneVerified==1" style="color:#fff;">
                                          <a  class="btn" @click="modal31= true">
-                                           换绑<!-- {{$t('uc.safe.binded')}} -->
-                                        </a> 
+                                           <!--换绑-->
+                                          {{$t('uc.safe.inTie')}}
+                                        </a>
                                     </p>
                                     <p v-else class="right-side">
                                         <a  class="btn" @click="modal3 = true">
@@ -362,7 +364,7 @@
             </Modal>
             <!-- 邮箱换绑弹窗 -->
             <Modal
-                :title="'换绑邮箱'"
+                :title="$t('uc.safe.bindemail')"
                 v-model="modal21"
                 className="vertical-center-modal"
                 width="534"
@@ -373,7 +375,7 @@
                 <div class="detail-list">
                     <Form ref="formValidate21" :model="formValidate21" :rules="ruleValidate" :label-width="110">
                          <!-- 旧邮箱验证码 -->
-                        <FormItem  class="defeat-ivu" :label="'旧邮箱验证码'" prop="vailCode1">
+                        <FormItem  class="defeat-ivu" :label="$t('uc.safe.oldEmailCode')" prop="vailCode1">
                             <Input v-model="formValidate21.vailCode1" size="large" style="width:300px;border-right:none;">
                             <!-- <Button slot="append">点击获取</Button> -->
                             <div class="timebox" slot="append">
@@ -385,11 +387,11 @@
                             </Input>
                         </FormItem>
                         <!-- 新mail -->
-                        <FormItem :label="'新邮箱账号'" prop="newMail">
+                        <FormItem :label="$t('uc.safe.newEmail')" prop="newMail">
                             <Input v-model="formValidate21.newMail" size="large" style="width:300px;"></Input>
                         </FormItem>
                         <!-- 新邮箱验证码 -->
-                        <FormItem  class="defeat-ivu" :label="'新邮箱验证码'" prop="vailCode11">
+                        <FormItem  class="defeat-ivu" :label="$t('uc.safe.newEmailCode')" prop="vailCode11">
                             <Input v-model="formValidate21.vailCode11" size="large" style="width:300px;border-right:none;">
                             <!-- <Button slot="append">点击获取</Button> -->
                             <div class="timebox" slot="append">
@@ -499,14 +501,14 @@
                             </div>
                             </Input>
                         </FormItem>
-                        
-                          
+
+
                         <!-- 登录密码 -->
                         <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
                             <Input v-model="formValidate31.password" size="large" type="password" style="width:300px;">
                             </Input>
                         </FormItem>
-                    
+
                         <!-- Button -->
                         <FormItem>
                             <Button type="primary" @click="handleSubmit('formValidate31')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
@@ -2151,7 +2153,7 @@ export default {
         width: 152px;
         height: 40px;
         margin-right: 15px;
-        padding: 0 34px;
+        padding: 0 0 0 34px;
         line-height: 40px;
         text-align: left;
         display: inline-block;
@@ -2694,7 +2696,7 @@ export default {
             border-radius: 0;
         }
         .timebox {
-            width: 60px;
+            width: 70px;
             cursor: pointer;
             .button-code {
                 font-size: 12px;

@@ -31,7 +31,12 @@
             </div>
             <div class="feelevelTop">
                 <h4>{{$t("leverDescPage._gradDes")}}</h4>
-                <Table :columns="columns" :data="allSelf"></Table>
+                <Table
+                        :no-data-text="$t('common.nodata')"
+                        :columns="columns"
+                        :data="allSelf"
+
+                ></Table>
                 <div class="cover-box-left"></div>
                 <div class="cover-box-right"></div>
             </div>
