@@ -1328,7 +1328,7 @@
             title: this.$t('exchange.lastprice'),
             key: 'close',
             sortable: true,
-            sortMethod: function (a, b, type) {
+            sortMethod: function(a, b, type) {
               const a1 = parseFloat(a)
               const b1 = parseFloat(b)
               if (type == 'asc') {
@@ -1342,7 +1342,7 @@
             title: this.$t('exchange.daychange'),
             key: 'rose',
             sortable: true,
-            sortMethod: function (a, b, type) {
+            sortMethod: function(a, b, type) {
               const a1 = a.replace(/[^\d|.|-]/g, '') - 0
               const b1 = b.replace(/[^\d|.|-]/g, '') - 0
               if (type == 'asc') {
@@ -1356,11 +1356,11 @@
               const className = parseFloat(row.rose) < 0 ? 'sell' : 'buy'
               return h(
                   'span',
-                  {
-                    attrs: {
-                      class: className
-                    }
-                  },
+                {
+                  attrs: {
+                    class: className
+                  }
+                },
                   row.rose
               )
             }
@@ -1413,7 +1413,7 @@
               title: this.$t('exchange.lastprice'),
               key: 'close',
               sortable: true,
-              sortMethod: function (a, b, type) {
+              sortMethod: function(a, b, type) {
                 const a1 = parseFloat(a)
                 const b1 = parseFloat(b)
                 if (type == 'asc') {
@@ -1427,7 +1427,7 @@
               title: this.$t('exchange.daychange'),
               key: 'rose',
               sortable: true,
-              sortMethod: function (a, b, type) {
+              sortMethod: function(a, b, type) {
                 const a1 = a.replace(/[^\d|.|-]/g, '') - 0
                 const b1 = b.replace(/[^\d|.|-]/g, '') - 0
                 if (type == 'asc') {
@@ -1441,11 +1441,11 @@
                 const className = parseFloat(row.rose) < 0 ? 'sell' : 'buy'
                 return h(
                     'span',
-                    {
-                      attrs: {
-                        class: className
-                      }
-                    },
+                  {
+                    attrs: {
+                      class: className
+                    }
+                  },
                     row.rose
                 )
               }
@@ -1494,11 +1494,11 @@
 
                 return h(
                     'span',
-                    {
-                      attrs: {
-                        class: className
-                      }
-                    },
+                  {
+                    attrs: {
+                      class: className
+                    }
+                  },
                     params.row.price.toFixed(this.baseCoinScale)
                 )
               },
@@ -1569,11 +1569,11 @@
                 (price = params.row.price.toFixed(this.baseCoinScale)) &&
                 (str = h(
                     'span',
-                    {
-                      attrs: {
-                        class: className
-                      }
-                    },
+                  {
+                    attrs: {
+                      class: className
+                    }
+                  },
                     price
                 ))
                 return str
@@ -1629,9 +1629,9 @@
               width: 1,
               render: (h, params) => {
                 let width = '0',
-                    backgroundColor =
+                  backgroundColor =
                         params.row.direction === 'BUY' ? '#00b275' : '#f15057',
-                    totle =
+                  totle =
                         params.row.direction === 'BUY'
                             ? this.plate.bidTotle
                             : this.plate.askTotle
@@ -1640,15 +1640,15 @@
                 }
                 return h(
                     'div',
-                    {
-                      style: {
-                        width,
-                        backgroundColor
-                      },
-                      attrs: {
-                        class: 'percentdiv'
-                      }
+                  {
+                    style: {
+                      width,
+                      backgroundColor
                     },
+                    attrs: {
+                      class: 'percentdiv'
+                    }
+                  },
                     ' '
                 )
               }
@@ -1698,11 +1698,11 @@
                 const className = row.direction.toLowerCase()
                 return h(
                     'span',
-                    {
-                      attrs: {
-                        class: className
-                      }
-                    },
+                  {
+                    attrs: {
+                      class: className
+                    }
+                  },
                     row.direction == 'BUY'
                         ? self.$t('exchange.buyin')
                         : self.$t('exchange.sellout')
@@ -1749,18 +1749,18 @@
               render: (h, params) => {
                 return h(
                     'Button',
-                    {
-                      props: {
-                        size: 'small',
-                        type: 'warning'
-                      },
-                      style: {},
-                      on: {
-                        click: () => {
-                          this.cancel(params.index)
-                        }
-                      }
+                  {
+                    props: {
+                      size: 'small',
+                      type: 'warning'
                     },
+                    style: {},
+                    on: {
+                      click: () => {
+                        this.cancel(params.index)
+                      }
+                    }
+                  },
                     self.$t('exchange.undo')
                 )
               }
@@ -1813,11 +1813,11 @@
                 const className = row.direction.toLowerCase()
                 return h(
                     'span',
-                    {
-                      attrs: {
-                        class: className
-                      }
-                    },
+                  {
+                    attrs: {
+                      class: className
+                    }
+                  },
                     row.direction == 'BUY'
                         ? self.$t('exchange.buyin')
                         : self.$t('exchange.sellout')
@@ -1860,21 +1860,21 @@
                 if (status == 'COMPLETED') {
                   return h(
                       'span',
-                      {
-                        style: {
-                          color: '#3399ff'
-                        }
-                      },
+                    {
+                      style: {
+                        color: '#3399ff'
+                      }
+                    },
                       self.$t('exchange.finished')
                   )
                 } else if (status == 'CANCELED') {
                   return h(
                       'span',
-                      {
-                        style: {
-                          color: '#3399ff'
-                        }
-                      },
+                    {
+                      style: {
+                        color: '#3399ff'
+                      }
+                    },
                       self.$t('exchange.canceled')
                   )
                 } else {
@@ -1904,36 +1904,36 @@
       }
     },
     computed: {
-      rechargeUSDTUrl: function () {
+      rechargeUSDTUrl: function() {
         return '/personal/recharge'
         // return "#/finance/recharge?name=" + this.currentCoin.base;
       },
-      rechargeCoinUrl: function () {
+      rechargeCoinUrl: function() {
         return '/personal/recharge'
         // return "#/finance/recharge?name=" + this.currentCoin.coin;
       },
-      isLogin: function () {
+      isLogin: function() {
         return this.$store.getters.isLogin
       },
-      member: function () {
+      member: function() {
         return this.$store.getters.member
       },
-      lang: function () {
+      lang: function() {
         return this.$store.state.lang
       },
       sliderBuyDisabled() {
         let account = this.wallet.base,
-            min = this.toFloor(1 / Math.pow(10, this.baseCoinScale))
+          min = this.toFloor(1 / Math.pow(10, this.baseCoinScale))
         return account < min
       },
       sliderSellDisabled() {
         let account = this.wallet.coin,
-            min = this.toFloor(1 / Math.pow(10, this.coinScale))
+          min = this.toFloor(1 / Math.pow(10, this.coinScale))
         return account < min
       }
     },
     watch: {
-      'form.buy.limitPrice': function (val) {
+      'form.buy.limitPrice': function(val) {
         // let price = this.form.buy.limitPrice,
         //     account = this.wallet.base,
         //     amount = ''
@@ -1953,16 +1953,16 @@
             this.baseCoinScale
         )
       },
-      'form.buy.limitAmount': function (val) {
+      'form.buy.limitAmount': function(val) {
         this.form.buy.limitTurnover = this.toFloor(
             val.mul(this.form.buy.limitPrice),
             this.baseCoinScale
         )
       },
-      'form.buy.stopBuyPrice': function (val) {
+      'form.buy.stopBuyPrice': function(val) {
         let price = this.form.buy.stopBuyPrice,
-            account = this.wallet.base,
-            amount = 0
+          account = this.wallet.base,
+          amount = 0
         if (val > 0) {
           amount = this.toFloor(
               account
@@ -1978,43 +1978,43 @@
             this.baseCoinScale
         )
       },
-      'form.buy.stopBuyAmount': function (val) {
+      'form.buy.stopBuyAmount': function(val) {
         this.form.buy.stopTurnover = this.toFloor(
             val.mul(this.form.buy.stopBuyPrice),
             this.baseCoinScale
         )
       },
-      'form.sell.limitPrice': function (val) {
+      'form.sell.limitPrice': function(val) {
         this.form.sell.limitTurnover = this.toFloor(
             val.mul(this.form.sell.limitAmount),
             this.coinScale
         )
       },
-      'form.sell.limitAmount': function (val) {
+      'form.sell.limitAmount': function(val) {
         this.form.sell.limitTurnover = this.toFloor(
             val.mul(this.form.sell.limitPrice),
             this.coinScale
         )
       },
-      'form.sell.stopBuyPrice': function (val) {
+      'form.sell.stopBuyPrice': function(val) {
         this.form.sell.stopTurnover = this.toFloor(
             val.mul(this.form.sell.stopBuyAmount),
             this.coinScale
         )
       },
-      'form.sell.stopBuyAmount': function (val) {
+      'form.sell.stopBuyAmount': function(val) {
         this.form.sell.stopTurnover = this.toFloor(
             val.mul(this.form.sell.stopBuyPrice),
             this.coinScale
         )
       },
-      lang: function () {
+      lang: function() {
         this.updateLangData()
       },
       // currentCoin: function () {
       //     this.updateTitle();
       // },
-      'currentCoin.price': function () {
+      'currentCoin.price': function() {
         this.currentTradingPrice = this.currentCoin.price
       },
       $route(to, from) {
@@ -2022,8 +2022,8 @@
       },
       sliderBuyLimitPercent() {
         let price = this.form.buy.limitPrice,
-            account = this.wallet.base,
-            amount = 0
+          account = this.wallet.base,
+          amount = 0
         if (price > 0) {
           amount = this.toFloor(
               account
@@ -2058,8 +2058,8 @@
       },
       sliderBuyStopPercent() {
         let price = this.form.buy.stopBuyPrice,
-            account = this.wallet.base,
-            amount = 0
+          account = this.wallet.base,
+          amount = 0
         if (price > 0) {
           amount = this.toFloor(
               account
@@ -2079,14 +2079,14 @@
         )
       }
     },
-    created: function () {
+    created: function() {
       this.getdefaultSymbol().then(res => {
         this.defaultPath = res
         this.init()
         this.statusCurreny()
       })
     },
-    mounted: function () {
+    mounted: function() {
       // console.log(this.tableData);
       // this.getCNYRate();
       // this.getSymbolScale();
@@ -2370,116 +2370,32 @@
               const resp = response.body
               this.CNYRate = resp.data
             })
-    },
-    getCoin(symbol) {
-      return this.coins._map[symbol]
-    },
-    getKline() {
-      const that = this
-      const config = {
-        autosize: true,
-        fullscreen: true,
-        symbol: that.symbol,
-        interval: '15', // K线默认时间传值
-        timezone: 'Asia/Shanghai',
-        toolbar_bg: '#0E0E28',
-        container_id: 'kline_container',
-        symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
+      },
+      getCoin(symbol) {
+        return this.coins._map[symbol]
+      },
+      getKline() {
+        const that = this
+        const config = {
+          autosize: true,
+          fullscreen: true,
+          symbol: that.symbol,
+          interval: '15', // K线默认时间传值
+          timezone: 'Asia/Shanghai',
+          toolbar_bg: '#0E0E28',
+          container_id: 'kline_container',
+          symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
 
-        datafeed: that.datafeed,
-        library_path:
-                    process.env.NODE_ENV === 'production'
-                        ? '/assets/charting_library/'
-                        : 'src/assets/js/charting_library/',
-        locale: 'zh',
-        debug: false,
-        drawings_access: {
-          type: 'black',
-          tools: [{ name: 'Regression Trend' }]
-        },
-        disabled_features: [
-          'header_resolutions',
-          'timeframes_toolbar',
-          'header_symbol_search',
-          'header_chart_type',
-          'header_compare',
-          'header_undo_redo',
-          'header_screenshot',
-          'header_saveload',
-          'use_localstorage_for_settings',
-          'left_toolbar',
-          'volume_force_overlay',
-          'header_settings',
-          'main_meries_seale_menu' // 隐藏右上角设置
-        ],
-        enabled_features: [
-          'hide_last_na_study_output'
-          // 'move_logo_to_main_pane' // TradingView login 开启显示在网格上 隐藏显示在网格下
-        ],
-        custom_css_url: 'bundles/common.css',
-        supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M'],
-        charts_storage_url: 'http://saveload.tradingview.com',
-        charts_storage_api_version: '1.1',
-        client_id: 'tradingview.com',
-        user_id: 'public_user_id',
-        overrides: {
-          // 'symbolWatermarkProperties.color': 'rgba(255, 255, 255, .1)', // 水印透明度
-          'paneProperties.background': '#131630', // 背景色网格颜色
-          'paneProperties.vertGridProperties.style': 0,
-          'paneProperties.vertGridProperties.color': 'rgba(255,255,255,.04)', // 列分割线
-          'paneProperties.horzGridProperties.color': 'rgba(255,255,255,.04)', // 行分割线
-          'scalesProperties.textColor': '#8090AF', // 开高低收
-          'mainSeriesProperties.candleStyle.upColor': '#00b275',
-          'mainSeriesProperties.candleStyle.downColor': '#f15057',
-          'mainSeriesProperties.candleStyle.drawBorder': false,
-          'mainSeriesProperties.candleStyle.wickUpColor': '#00b275',
-          'mainSeriesProperties.candleStyle.wickDownColor': '#f15057',
-          'paneProperties.legendProperties.showLegend': false,
-          'mainSeriesProperties.areaStyle.color1': 'rgba(71, 78, 112, 0.5)',
-          'mainSeriesProperties.areaStyle.color2': 'rgba(71, 78, 112, 0.5)',
-          'mainSeriesProperties.areaStyle.linecolor': '#9194a4',
-          'scalesProperties.lineColor': '#8090AF', // xy刻度线色值
-          // "paneProperties.crossHairProperties.color": "#00b275", // 十字光标颜色
-          'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
-          'mainSeriesProperties.candleStyle.borderDownColor': '#f15057' // 开高低收卖出标线
-        },
-        // 柱状图样式
-        studies_overrides: {
-          'volume.volume.color.0': 'rgba(241, 80, 87, .3)',  // 第一根的颜色
-          'volume.volume.color.1': 'rgba(0, 178, 117, .3)'  // 第二根的颜色
-        },
-        time_frames: [
-          {
-            text: '1min',
-            resolution: '1',
-            description: 'realtime',
-            title: this.$t('exchange.realtime')
-          },
-          {
-            text: '1min',
-            resolution: '1',
-            description: '1min'
-          },
-          {
-            text: '5min',
-            resolution: '5',
-            description: '5min'
-          },
-          {
-            text: '15min',
-            resolution: '15',
-            description: '15min'
-          },
-          {
-            text: '30min',
-            resolution: '30',
-            description: '30min'
-          },
-          {
-            text: '1hour',
-            resolution: '60',
-            description: '1hour',
-            title: '1hour'
+          datafeed: that.datafeed,
+          library_path:
+              process.env.NODE_ENV === 'production'
+                  ? '/assets/charting_library/'
+                  : 'src/assets/js/charting_library/',
+          locale: 'zh',
+          debug: false,
+          drawings_access: {
+            type: 'black',
+            tools: [{ name: 'Regression Trend' }]
           },
           disabled_features: [
             'header_resolutions',
@@ -2602,10 +2518,10 @@
           config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#39c595' // 第一根的颜色
           config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#f96969' // 第二根的颜色
         }
-        require(['@js/charting_library/charting_library.min.js'], function (tv) {
+        require(['@js/charting_library/charting_library.min.js'], function(tv) {
           const widget = (window.tvWidget = new TradingView.widget(config))
           /* onChartReady 自定义初始化指标线（平均移动线等），设置颜色*/
-          widget.onChartReady(function () {
+          widget.onChartReady(function() {
             widget.chart().executeActionById('drawingToolbarAction')
             // 创建最新价水平线
             widget
@@ -2629,88 +2545,89 @@
             .createStudy('Moving Average', false, false, [60], null, {
                 'plot.color': 'rgb(127,33,105)'
             })*/
-          widget
-            .createButton()
-            .attr('title', 'realtime')
-            .on('click', function() {
-              if ($(this).hasClass('selected')) return
-              $(this)
-                    .addClass('selected')
-                    .parent('.group')
-                    .siblings('.group')
-                    .find('.button.selected')
-                    .removeClass('selected')
-              widget.chart().setChartType(3)
-              widget.setSymbol('', '1')
-            })
-            .append('<span>分时</span>')
-          widget
-            .createButton()
-            .attr('title', 'M1')
-            .on('click', function() {
-              if ($(this).hasClass('selected')) return
-              $(this)
-                    .addClass('selected')
-                    .parent('.group')
-                    .siblings('.group')
-                    .find('.button.selected')
-                    .removeClass('selected')
-              widget.chart().setChartType(1)
-              widget.setSymbol('', '1')
-            })
-            .append('<span>M1</span>')
-          widget
-            .createButton()
-            .attr('title', 'M5')
-            .on('click', function() {
-              if ($(this).hasClass('selected')) return
-              $(this)
-                    .addClass('selected')
-                    .parent('.group')
-                    .siblings('.group')
-                    .find('.button.selected')
-                    .removeClass('selected')
-              widget.chart().setChartType(1)
-              widget.setSymbol('', '5')
-            })
-            .append('<span>M5</span>')
+            widget
+                .createButton()
+                .attr('title', 'realtime')
+                .on('click', function() {
+                  if ($(this).hasClass('selected')) return
+                  $(this)
+                      .addClass('selected')
+                      .parent('.group')
+                      .siblings('.group')
+                      .find('.button.selected')
+                      .removeClass('selected')
+                  widget.chart().setChartType(3)
+                  widget.setSymbol('', '1')
+                })
+                .append('<span>分时</span>')
+            widget
+                .createButton()
+                .attr('title', 'M1')
+                .on('click', function() {
+                  if ($(this).hasClass('selected')) return
+                  $(this)
+                      .addClass('selected')
+                      .parent('.group')
+                      .siblings('.group')
+                      .find('.button.selected')
+                      .removeClass('selected')
+                  widget.chart().setChartType(1)
+                  widget.setSymbol('', '1')
+                })
+                .append('<span>M1</span>')
+            widget
+                .createButton()
+                .attr('title', 'M5')
+                .on('click', function() {
+                  if ($(this).hasClass('selected')) return
+                  $(this)
+                      .addClass('selected')
+                      .parent('.group')
+                      .siblings('.group')
+                      .find('.button.selected')
+                      .removeClass('selected')
+                  widget.chart().setChartType(1)
+                  widget.setSymbol('', '5')
+                })
+                .append('<span>M5</span>')
 
-          widget
-            .createButton()
-            .attr('title', 'M15')
-            .on('click', function() {
-              if ($(this).hasClass('selected')) return
-              $(this)
-                    .addClass('selected')
-                    .parent('.group')
-                    .siblings('.group')
-                    .find('.button.selected')
-                    .removeClass('selected')
-              widget.chart().setChartType(1)
-              widget.setSymbol('', '15')
-            })
-        .append('<span>M15</span>')
-            .addClass('selected') // 静态默认分时
-          widget
-            .createButton()
-            .attr('title', 'M30')
-            .on('click', function() {
-              if ($(this).hasClass('selected')) return
-              $(this)
-                    .addClass('selected')
-                    .parent('.group')
-                    .siblings('.group')
-                    .find('.button.selected')
-                    .removeClass('selected')
-              widget.chart().setChartType(1)
-              widget.setSymbol('', '30')
-            })
-            .append('<span>M30</span>')
+            widget
+                .createButton()
+                .attr('title', 'M15')
+                .on('click', function() {
+                  if ($(this).hasClass('selected')) return
+                  $(this)
+                      .addClass('selected')
+                      .parent('.group')
+                      .siblings('.group')
+                      .find('.button.selected')
+                      .removeClass('selected')
+                  widget.chart().setChartType(1)
+                  widget.setSymbol('', '15')
+                })
+                .append('<span>M15</span>')
+                .addClass('selected') // 静态默认分时
+
+            widget
+                .createButton()
+                .attr('title', 'M30')
+                .on('click', function() {
+                  if ($(this).hasClass('selected')) return
+                  $(this)
+                      .addClass('selected')
+                      .parent('.group')
+                      .siblings('.group')
+                      .find('.button.selected')
+                      .removeClass('selected')
+                  widget.chart().setChartType(1)
+                  widget.setSymbol('', '30')
+                })
+                .append('<span>M30</span>')
 
             widget
                 .createButton()
                 .attr('title', 'H1')
-                .on('click', function () {
+                .on('click', function() {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2725,7 +2642,7 @@
             widget
                 .createButton()
                 .attr('title', 'H4')
-                .on('click', function () {
+                .on('click', function() {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2740,7 +2657,7 @@
             widget
                 .createButton()
                 .attr('title', 'D1')
-                .on('click', function () {
+                .on('click', function() {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2756,7 +2673,7 @@
             widget
                 .createButton()
                 .attr('title', 'W1')
-                .on('click', function () {
+                .on('click', function() {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2772,7 +2689,7 @@
             widget
                 .createButton()
                 .attr('title', 'M1')
-                .on('click', function () {
+                .on('click', function() {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2841,7 +2758,7 @@
           if (this.isLogin) {
             this.getFavor()
           }
-          require(['../../assets/js/exchange.js'], function (e) {
+          require(['../../assets/js/exchange.js'], function(e) {
             e.clickScTab()
           })
           this.startWebsock()
@@ -2893,12 +2810,12 @@
                     this.plate.askRows.push(ask)
                   }
                   const rows = this.plate.askRows,
-                      len = rows.length,
-                      totle = rows[0].totalAmount
+                    len = rows.length,
+                    totle = rows[0].totalAmount
                   this.plate.askTotle = totle
                 } else {
                   for (let i = 12; i > resp.ask.items.length; i--) {
-                    const ask = {price: 0, amount: 0}
+                    const ask = { price: 0, amount: 0 }
                     ask.direction = 'SELL'
                     ask.position = i
                     ask.totalAmount = ask.amount
@@ -2939,20 +2856,20 @@
                       i < this.plate.maxPostion;
                       i++
                   ) {
-                    const bid = {price: 0, amount: 0}
+                    const bid = { price: 0, amount: 0 }
                     bid.direction = 'BUY'
                     bid.position = i + 1
                     bid.totalAmount = 0
                     this.plate.bidRows.push(bid)
                   }
                   const rows = this.plate.bidRows,
-                      len = rows.length,
-                      totle = rows[resp.bid.items.length - 1].totalAmount
+                    len = rows.length,
+                    totle = rows[resp.bid.items.length - 1].totalAmount
                   this.plate.bidTotle = totle
                 } else {
                   const rows = this.plate.bidRows,
-                      len = rows.length,
-                      totle = rows[len - 1].totalAmount
+                    len = rows.length,
+                    totle = rows[len - 1].totalAmount
                   this.plate.bidTotle = totle
                 }
                 // this.plate.bidRows = this.plate.bidRows.slice(0,this.plate.maxPostion);
@@ -3030,7 +2947,7 @@
         stompClient.debug = false
         // this.datafeed = new Datafeeds.WebsockFeed(that.host+'/market',this.currentCoin,stompClient);
         // this.getKline();
-        stompClient.connect({}, function (frame) {
+        stompClient.connect({}, function(frame) {
           that.datafeed = new Datafeeds.WebsockFeed(
               that.host + '/market',
               that.currentCoin,
@@ -3039,7 +2956,7 @@
           )
           that.getKline()
           // 订阅价格变化消息
-          stompClient.subscribe('/topic/market/thumb', function (msg) {
+          stompClient.subscribe('/topic/market/thumb', function(msg) {
             that.statusCurreny()
             const resp = JSON.parse(msg.body)
             const coin = that.getCoin(resp.symbol)
@@ -3062,7 +2979,7 @@
           // 订阅实时成交信息
           stompClient.subscribe(
               '/topic/market/trade/' + that.currentCoin.symbol,
-              function (msg) {
+              function(msg) {
                 const resp = JSON.parse(msg.body)
                 if (resp.length > 0) {
                   for (let i = 0; i < resp.length; i++) {
@@ -3081,7 +2998,7 @@
                 that.currentCoin.symbol +
                 '/' +
                 that.member.id,
-                function (msg) {
+                function(msg) {
                   const resp = JSON.parse(msg.body)
                   that.refreshAccount()
                 }
@@ -3092,7 +3009,7 @@
                 that.currentCoin.symbol +
                 '/' +
                 that.member.id,
-                function (msg) {
+                function(msg) {
                   const resp = JSON.parse(msg.body)
                   that.refreshAccount()
                 }
@@ -3103,7 +3020,7 @@
                 that.currentCoin.symbol +
                 '/' +
                 that.member.id,
-                function (msg) {
+                function(msg) {
                   const resp = JSON.parse(msg.body)
                   that.refreshAccount()
                 }
@@ -3113,7 +3030,7 @@
           stompClient.subscribe(
               '/topic/market/trade-plate/buy/' +
               that.currentCoin.symbol,
-              function (msg) {
+              function(msg) {
                 const resp = JSON.parse(msg.body)
                 const bids = resp.items
                 that.plate.bidRows = []
@@ -3148,7 +3065,7 @@
           // 订阅盘口消息
           stompClient.subscribe(
               '/topic/market/trade-plate/sell/' + that.currentCoin.symbol,
-              function (msg) {
+              function(msg) {
                 const resp = JSON.parse(msg.body)
                 if (resp.direction == 'SELL') {
                   const asks = resp.items
@@ -3288,7 +3205,7 @@
         } else {
           // 去添加收藏
           this.$http
-              .post(this.host + this.api.exchange.favorAdd, {symbol})
+              .post(this.host + this.api.exchange.favorAdd, { symbol })
               .then(response => {
                 const resp = response.body
                 if (resp.code == 0) {
@@ -3889,15 +3806,15 @@
           })
         }
       },
-      refreshAccount: function () {
+      refreshAccount: function() {
         this.getCurrentOrder()
         this.getHistoryOrder()
         this.getWallet()
       },
-      timeFormat: function (tick) {
+      timeFormat: function(tick) {
         return moment(tick).format('HH:mm:ss')
       },
-      dateFormat: function (tick) {
+      dateFormat: function(tick) {
         return moment(tick).format('YYYY-MM-DD HH:mm:ss')
       },
       keyEvent(event) {
