@@ -256,9 +256,9 @@
           <p class="contenta_cc">
             4.3{{$t("foot.p214")}}
           </p>
-          <p class="contenta_cc">
+          <!--<p class="contenta_cc">
             4.4{{$t("foot.p215")}}
-          </p>
+          </p>-->
         </div>
       </div>
     </div>
