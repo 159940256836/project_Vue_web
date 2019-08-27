@@ -52,9 +52,12 @@ Vue.http.interceptors.push((request, next) => {
     if (xAuthToken != null && xAuthToken !== '') {
       localStorage.setItem('TOKEN', xAuthToken)
     }
-        // 判断单点登陆 接口状态 4001已在其他设备登录 1.5s后退出登录
+    // 判断单点登陆 接口状态 4001已在其他设备登录 1.5s后退出登录
     if (response.body.code === 4001 || response.body.code == 4000) {
-      iView.Message.error(response.body.message)
+      if (i18n.locale == 'zh') {
+        iView.Message.error(response.body.message)
+      } else iView.Message.error('The user is not logged in or the login is invalid')
+
       store.commit('setMember', null)
       localStorage.removeItem('TOKEN')
       setTimeout(() => {

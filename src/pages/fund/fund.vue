@@ -3,11 +3,14 @@
     <div class="fund-main">
       <header>
         <div class="header-notice">
-          <span class="header-title-text">活动时间</span>
+          <!--活动时间-->
+          <span class="header-title-text">{{ $t('common.fund.activityTime') }}</span>
           <span class="header-title-border"></span>
           <div class="notice-text">
-            <p>存TD — 8月16日 10:00 至 8月21日 20:00</p>
-            <p>抢购BTC — 8月22日 20:00</p>
+            <!--存TD — 8月16日 10:00 至 8月21日 20:00-->
+            <p>{{ $t('common.fund.timeSave') }}</p>
+            <!--抢购BTC — 8月22日 20:00-->
+            <p>{{ $t('common.fund.timeRush') }}</p>
           </div>
         </div>
       </header>
@@ -15,15 +18,16 @@
         <div class="header-content">
           <div class="header-title">
             <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
-            <span class="title">存币</span>
+            <!--存币-->
+            <span class="title">{{ $t('common.fund.rushPurchase') }}</span>
             <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
           </div>
           <div class="info">
-            <span>存币数量：</span>
+            <!--存币数量-->
+            <span>{{ $t('common.fund.rushPurchaseAmount') }}：</span>
             <Input
               type="text"
               v-model="lockAmount"
-              placeholder="请输入数量"
               style="width: 555px;"
               @keyup.native="clearNoNum('lockAmount')"
               :placeholder="Number(coinInfo.lockMinimum) + '～' + Number(coinInfo.lockHighest)"
@@ -31,16 +35,18 @@
             <span class="coinName">{{ coinInfo.lockCoinUnit }}</span>
           </div>
           <div class="info-text">
-            <span>可用余额</span>：<span>{{ userWalletBalance }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
+            <!--可用余额-->
+            <span>{{ $t('common.fund.available') }}</span>：<span>{{ userWalletBalance }}&nbsp;{{ coinInfo.lockCoinUnit }}</span>
           </div>
           <div class="footer-info">
             <Button
               @click="buyLockCoin('buy')"
               :loading="loadingButton"
-              disabled
             >
-              <span v-if="!isLogin">请先登录</span>
-              <span v-else>活动已结束</span>
+              <!--请先登录-->
+              <span v-if="!isLogin">{{ $t('common.logintip') }}</span>
+              <!--存币-->
+              <span v-else>{{ $t('common.fund.rushPurchase') }}</span>
             </Button>
           </div>
         </div>
@@ -54,20 +60,25 @@
           <div class="section-main">
             <div class="count-down">
               <p class="count-title">
-                倒计时
+                <!--倒计时-->
+                {{ $t('common.fund.countDown') }}
               </p>
               <p class="count-icon">
                 <i class="ivu-icon ivu-icon-md-arrow-dropdown icon"></i>
               </p>
               <p class="count-time">
                 <span class="time">{{ day }}</span>
-                <span class="day margin">天</span>&nbsp;
+                <!--天-->
+                <span class="day margin">{{ $t('common.fund.day') }}</span>&nbsp;
                 <span class="time margin1">{{ time }}</span>
-                <span class="day margin">小时</span>&nbsp;
+                <!--小时-->
+                <span class="day margin">{{ $t('common.fund.hour') }}</span>&nbsp;
                 <span class="time margin1">{{ minute }}</span>
-                <span class="day margin">分钟</span>&nbsp;
+                <!--分钟-->
+                <span class="day margin">{{ $t('common.fund.minute') }}</span>&nbsp;
                 <span class="time margin1">{{ second }}</span>
-                <span class="day margin">秒</span>&nbsp;
+                <!--秒-->
+                <span class="day margin">{{ $t('common.fund.second') }}</span>&nbsp;
               </p>
               <p class="count-progress">
                 <Progress :percent="progressBar" />
@@ -76,11 +87,12 @@
             <!--v-if="progressBar == 0"-->
             <div class="purchase">
               <div class="info" style="padding: 0 80px 0 10px;">
-                <span>预购数量：</span>
+                <!--预购数量-->
+                <span>{{ $t('common.fund.preOrder') }}：</span>
                 <Input
                   type="text"
                   v-model="lockAdvance"
-                  placeholder="请输入预购BTC数量"
+                  :placeholder="$t('common.fund.pleasePreOrder') + balanceData.saleCoin + $t('common.fund.lockAmount')"
                   style="width: 555px;"
                   @keyup.native="clearNoNum('lockAdvance')"
                 />
@@ -89,9 +101,11 @@
                 </span>
               </div>
               <div class="info-text">
-                <span>可用余额</span>：
+                <!--可用余额-->
+                <span>{{ $t('common.fund.available') }}</span>：
                 <span>{{ balanceData.balance !== ''?parseFloat(balanceData.balance).toFixed(4):'--' }}&nbsp;{{ balanceData.raiseCoin }}</span>
-                <span style="margin-left: 15px;">可抢购数量</span>：
+                <!--可抢购数量-->
+                <span style="margin-left: 15px;">{{ $t('common.fund.availableQuantity') }}</span>：
                 <span>{{ balanceData.maxSaleAmount!==''?balanceData.maxSaleAmount:'--' }}&nbsp;{{ balanceData.saleCoin }}</span>
               </div>
               <div class="footer-info">
@@ -104,7 +118,8 @@
                     {{ $t("common.logintip") }}
                   </span>
                   <span v-else>
-                    {{ coinBalance < 0?'活动已结束':progressBar!==0?'活动暂未开始':'立即抢购' }}
+                     <!--活动已结束  活动暂未开始  立即抢购-->
+                    {{ coinBalance < 0?$t('common.fund.finished'):progressBar!==0?$t('common.fund.started'):$t('common.fund.immediately') }}
                   </span>
                 </Button>
               </div>
@@ -117,50 +132,55 @@
             <div class="activity-top">
               <div class="top-title">
                 <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
-                <span class="title">活动内容</span>
+                <!--活动内容-->
+                <span class="title">{{ $t('common.fund.activityContent') }}</span>
                 <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
               </div>
               <div class="top-content">
                 <div class="top-left">
-                  <p>本次 <i class="text1">2折</i> 优惠购BTC数量总计五百枚，购完即止</p>
-                  <p>1.存TD ≧
-                    <span class="text2">500</span>
-                    枚，最多可两折购买
-                    <span class="text2">1</span>
-                    个BTC；
+                  <!--本次2折 优惠购BTC数量总计五百枚，购完即止-->
+                  <p>{{ $t('common.fund.activityContentInfo1') }}
+                    <i class="text1">{{ $t('common.fund.activityContentInfo2') }}</i>
+                    {{ $t('common.fund.activityContentInfo3') }}
                   </p>
-                  <p>2.存TD ≧
-                    <span class="text2">1000</span>
-                    枚，最多可两折购买
-                    <span class="text2">3</span>
-                    个BTC；
+                  <p>1. {{ $t('common.fund.activityContentInfo4') }}{{ coinInfo.lockCoinUnit }} ≧
+                    <span class="text2">{{ amount500 }}</span>
+                    {{ $t('common.fund.activityContentInfo5') }}
+                    <span class="text2">{{ amount1 }}</span>
+                    {{ $t('common.fund.activityContentInfo6') }}{{ balanceData.saleCoin }}；
                   </p>
-                  <p>3.存TD ≧
-                    <span class="text2">5000</span>
-                    枚，最多可两折购买
-                    <span class="text2">5</span>
-                    个BTC；
+                  <p>2. {{ $t('common.fund.activityContentInfo4') }}{{ coinInfo.lockCoinUnit }} ≧
+                    <span class="text2">{{ amount1000 }}</span>
+                    {{ $t('common.fund.activityContentInfo5') }}
+                    <span class="text2">{{ amount3 }}</span>
+                    {{ $t('common.fund.activityContentInfo6') }}{{ balanceData.saleCoin }}；
+                  </p>
+                  <p>3. {{ $t('common.fund.activityContentInfo4') }}{{ coinInfo.lockCoinUnit }} ≧
+                    <span class="text2">{{ amount5000 }}</span>
+                    {{ $t('common.fund.activityContentInfo5') }}
+                    <span class="text2">{{ amount5 }}</span>
+                    {{ $t('common.fund.activityContentInfo6') }}{{ balanceData.saleCoin }}；
                   </p>
                 </div>
                 <span class="top-border"></span>
                 <div class="top-right">
-                  <p>未抢到BTC的⽤户，BDW联合TD基⾦
-                    <span class="text1">空投BC</span>
+                  <p>{{ $t('common.fund.activityContentInfo7') }}{{ coinInfo.lockCoinUnit }}{{ $t('common.fund.activityContentInfo8') }}，{{ $t('common.fund.activityContentInfo9') }}{{ balanceData.saleCoin }}{{ $t('common.fund.activityContentInfo10') }}
+                    <span class="text1">{{ $t('common.fund.activityContentInfo11') }}{{ balanceData.raiseCoin }}</span>
                   </p>
-                  <p>1.存TD ≧
-                    <span class="text2">500</span>
-                    枚，空投
-                    <span class="text2">88BC</span>；
+                  <p>1. {{ $t('common.fund.activityContentInfo4') }}{{ coinInfo.lockCoinUnit }} ≧
+                    <span class="text2">{{ amount500 }}</span>
+                    {{ $t('common.fund.activityContentInfo12') }}
+                    <span class="text2">{{ airDropAmount88 }}{{ balanceData.raiseCoin }}</span>；
                   </p>
-                  <p>2.存TD ≧
-                    <span class="text2">1000</span>
-                    枚，空投
-                    <span class="text2">188BC</span>；
+                  <p>2. {{ $t('common.fund.activityContentInfo4') }}{{ coinInfo.lockCoinUnit }} ≧
+                    <span class="text2">{{ amount1000 }}</span>
+                    {{ $t('common.fund.activityContentInfo12') }}
+                    <span class="text2">{{ airDropAmount188 }}{{ balanceData.raiseCoin }}</span>；
                   </p>
-                  <p>3.存TD ≧
-                    <span class="text2">5000</span>
-                    枚，空投
-                    <span class="text2">588BC</span>；
+                  <p>3. {{ $t('common.fund.activityContentInfo4') }}{{ coinInfo.lockCoinUnit }} ≧
+                    <span class="text2">{{ amount5000 }}</span>
+                    {{ $t('common.fund.activityContentInfo12') }}
+                    <span class="text2">{{ airDropAmount588 }}{{ balanceData.raiseCoin }}</span>；
                   </p>
                 </div>
               </div>
@@ -168,25 +188,65 @@
             <div class="activity-bottom">
               <div class="top-title">
                 <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
-                <span class="title">活动细则</span>
+                <!--活动细则-->
+                <span class="title">{{ $t('common.fund.activityContentInfo13') }}</span>
                 <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
               </div>
               <div class="top-content">
                 <div class="bottom-left">
-                  <p>1. 参与抢购BTC活动，必须在存币活动时间内存
-                    <span class="text3">相应数量的TD,</span>
-                    获得抢购
-                    <span class="text3">BTC</span>
-                    的资格和预购最高数量;
+                  <p>1. {{ $t('common.fund.activityContentInfo14') }}{{ balanceData.raiseCoin }}{{ $t('common.fund.activityContentInfo15') }}
+                    <span class="text3">{{ $t('common.fund.activityContentInfo16') }}{{ coinInfo.lockCoinUnit }},</span>
+                    {{ $t('common.fund.activityContentInfo17') }}
+                    <span class="text3">{{ balanceData.raiseCoin }}</span>
+                    {{ $t('common.fund.activityContentInfo18') }};
                   </p>
-                  <p>2. 所存TD需锁仓30天，30天后TD解锁，系统将自动将TD返回至您的个人账户中。</p>
-                  <p>3. 抢购BTC在存币结束后统一时间抢购，所有存币用户符合条件者，均可参与。</p>
-                  <p>4. 抢购BTC时，需提前充值BC到个人账户中，确保BC的数量大于要抢购BTC的⾦额，抢</p>
-                  <p>购成功后系统将自动抵扣BC数量，如您账户中没有足够余额，将视为放弃。</p>
-                  <p>5. BTC的定价为存币活动期间火币、币安、OK和BDW四家BTC价格的均价。</p>
-                  <p>6. 抢购结束后，有30分钟清算时间，未抢到BTC的⽤户，系统将在3个工作⽇内发放
-                    BC空投奖励。</p>
-                  <p>7. 如有疑问，请咨询BDW客服。本次活动最终解释权归BDW所有。</p>
+                  <p>
+                    2. {{ $t('common.fund.activityContentInfo19') }}
+                    {{ balanceData.raiseCoin }}
+                    {{ $t('common.fund.activityContentInfo20') }}
+                    {{ day30 }}
+                    {{ $t('common.fund.day') }}，{{ day30 }}
+                    {{ $t('common.fund.activityContentInfo21') }}
+                    {{ balanceData.raiseCoin }}
+                    {{ $t('common.fund.activityContentInfo22') }}
+                    {{ balanceData.raiseCoin }}
+                    {{ $t('common.fund.activityContentInfo23') }}。
+                  </p>
+                  <p>3.
+                    {{ $t('common.fund.activityContentInfo24') }}
+                    {{ balanceData.saleCoin }}
+                    {{ $t('common.fund.activityContentInfo25') }}。
+                  </p>
+                  <p>4.
+                    {{ $t('common.fund.activityContentInfo24') }}
+                    {{ balanceData.saleCoin }}
+                    {{ $t('common.fund.activityContentInfo26') }}
+                    {{ balanceData.raiseCoin }}
+                    {{ $t('common.fund.activityContentInfo27') }}
+                    {{ balanceData.raiseCoin }}
+                    {{ $t('common.fund.activityContentInfo28') }}
+                    {{ balanceData.saleCoin }}
+                    {{ $t('common.fund.activityContentInfo29') }}
+                  </p>
+                  <p>
+                    {{ $t('common.fund.activityContentInfo30') }}
+                    {{ balanceData.raiseCoin }}
+                    {{ $t('common.fund.activityContentInfo31') }}。
+                  </p>
+                  <p>5.
+                    {{ balanceData.saleCoin }}
+                    {{ $t('common.fund.activityContentInfo32') }}
+                    {{ balanceData.saleCoin }}
+                    {{ $t('common.fund.activityContentInfo33') }}。
+                  </p>
+                  <p>6.
+                    {{ $t('common.fund.activityContentInfo34') }}
+                    {{ balanceData.saleCoin }}
+                    {{ $t('common.fund.activityContentInfo35') }}
+                    {{ balanceData.raiseCoin }}
+                    {{ $t('common.fund.activityContentInfo36') }}。
+                  </p>
+                  <p>7. {{ $t('common.fund.activityContentInfo37') }}。</p>
                 </div>
               </div>
             </div>
@@ -198,7 +258,7 @@
             <div class="save-money">
               <div class="save-title">
                 <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
-                <span class="title">存币记录</span>
+                <span class="title">{{ $t('common.fund.moneyRecord') }}</span>
                 <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
               </div>
               <div class="fund-table">
@@ -233,7 +293,7 @@
             <div class="save-purchase">
               <div class="save-title">
                 <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-two.png" alt="">
-                <span class="title">抢币记录</span>
+                <span class="title">{{ $t('common.fund.robRecord') }}</span>
                 <img src="https://coinmany2.oss-cn-shanghai.aliyuncs.com/fund/line-one.png" alt="">
               </div>
               <div class="fund-table">
@@ -301,6 +361,16 @@ export default {
        lockAdvance: '', // 预购数量
        saveMoneyList: [], // 存币记录
        robMoneyList: [], // 抢币记录
+       amount500: '500',
+       amount1000: '1000',
+       amount5000: '5000',
+       amount1: '1',
+       amount3: '3',
+       amount5: '5',
+       airDropAmount88: '88',
+       airDropAmount188: '188',
+       airDropAmount588: '588',
+       day30: '30',
        day: 0, // 天
        time: 0, // 时
        minute: 0, // 分
@@ -499,11 +569,11 @@ export default {
            })
          } else if (state == 'rush') {
            if (this.progressBar !== 0) {
-             this.$Message.error('活动暂未开始')
+             this.$Message.error(this.$t('common.fund.started'))
              return false
            }
            if (this.coinBalance < 0) {
-             this.$Message.error('活动已结束')
+             this.$Message.error(this.$t('common.fund.finished'))
              return false
            }
            if (!this.lockAdvance) {
@@ -725,7 +795,7 @@ export default {
          title: this.$t('common.fund.actStatus'),
          key: 'actStatus',
          render(h, params) {
-           return h('span', {}, params.row.actStatus == 'I' ? '待开奖' : params.row.actStatus == 'S' ? '抢购成功' : '抢购失败')
+           return h('span', {}, params.row.actStatus == 'I' ? this.$t('common.fund.lottery') : params.row.actStatus == 'S' ? this.$t('common.fund.successful') : this.$t('common.fund.error'))
          }
        })
        return arr
@@ -800,7 +870,7 @@ export default {
           color: #FEFFFF;
           font-size: 16px;
           display: inline-block;
-          min-width: 75px;
+          width: 110px;
           height: 45px;
           line-height: 45px;
         }
@@ -808,7 +878,7 @@ export default {
           display: inline-block;
           line-height: 64px;
           position: absolute;
-          right: 90px;
+          right: 20px;
           top: 0;
         }
       }
@@ -817,11 +887,11 @@ export default {
         color: #fff;
         line-height: 64px;
         text-align: right;
-        padding-right: 115px;
+        padding-right: 101px;
       }
       .footer-info {
         text-align: right;
-        padding-right: 115px;
+        padding-right: 100px;
         button {
           width: 555px;
           height: 64px;
