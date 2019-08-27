@@ -186,7 +186,7 @@
 </style>
 <script>
 const mobilereg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/,
-  emailReg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+  emailReg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/
 import gtInit from '../../assets/js/gt.js'
 import $ from 'jquery'
 export default {
@@ -364,7 +364,7 @@ export default {
       }).onSuccess(() => {
         const result = (this._captchaResult = captchaObj.getValidate())
         if (!result) {
-            /*请完成验证*/
+            /* 请完成验证*/
           this.$Message.error(this.$t('uc.forget.verification'))
         } else {
           mobilereg.test(this.formInline.user) && this.afterValidate()
@@ -373,10 +373,13 @@ export default {
       })
       $('#sendCode').click(() => {
         const tel = this.formInline.user,
-          flagtel = emailReg.test(tel)
-        flagtel && captchaObj.verify()
+          flagtel = emailReg.test(tel),
+          flagtelipone = mobilereg.test(tel)
+        flagtel && captchaObj.verify() || flagtelipone && captchaObj.verify()
           // 请填写正确的手机号或者邮箱号
-        !flagtel && this.$Message.error(this.$t('uc.forget.emailNumber'))
+        if (!(flagtel || flagtelipone)) {
+          !flagtel && this.$Message.error(this.$t('uc.forget.emailNumber'))
+        }
       })
     },
     emailReset() {
@@ -407,7 +410,6 @@ export default {
       this.modal1 = false
       if (this.changeActive == 1) {
                 // 发送邮件
-
       } else {
         var params = {}
         params['account'] = this.formInline.user
@@ -420,6 +422,7 @@ export default {
             this.settime()
             this.$Notice.success({ title: this.$t('common.tip'), desc: resp.message })
           } else {
+            this.settime()
             this.$Notice.error({ title: this.$t('common.tip'), desc: resp.message })
           }
         })
