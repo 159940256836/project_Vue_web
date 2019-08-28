@@ -613,10 +613,15 @@ export default {
   created() {
     // this.timer();
     this.islogin()
-    this.getSetting()
+    if (this.isLogin) {
+      this.getSetting()
+    }
     this.getAuthFound()
   },
   computed: {
+    isLogin: function() {
+      return this.$store.getters.isLogin
+    },
     lang: function() {
       return this.$store.state.lang
     }
