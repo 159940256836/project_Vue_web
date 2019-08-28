@@ -889,7 +889,9 @@ export default {
   },
   created() {
     this.changeCoin()
-    this.getMember()
+    if (this.isLog) {
+      this.getMember()
+    }
     this.getAreas()
     const lv = (1 + this.form.premisePrice / 100).toFixed(4)
     // 获取币种

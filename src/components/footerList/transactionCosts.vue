@@ -163,14 +163,14 @@ export default {
         // 等级名称
         title: this.$t('foot.Clasame'),
         key: 'gradeName',
-        width: 160,
-        align: 'center'
+        align: 'left',
+        width: 150
       })
       listbb.push({
         // 手续费比例
         title: this.$t('foot.Commissratio'),
         slot: 'exchangeFeeRate',
-        align: 'center',
+        align: 'left',
         width: 200
       })
 
@@ -188,16 +188,16 @@ export default {
         // 交易对
         title: this.$t('foot.Tradingn'),
         key: 'symbol',
-        width: 160,
-        align: 'center'
+        align: 'left',
+        width: 150
 
       })
       listcc.push({
         // 结算币种手续费
         title: this.$t('foot.Setturrencndliarge'),
         key: 'baseFee',
-        width: 300,
-        align: 'center'
+        align: 'left',
+        width: 200
       })
       listcc.push({
         // 基币手续费
@@ -214,14 +214,14 @@ export default {
         // 币种
         title: this.$t('foot.currency'),
         key: 'unit',
-        align: 'center',
-        width: 160
+        align: 'left',
+        width: 150
       })
       listdd.push({
         // 交易手续费率
         title: this.$t('foot.Transactiate'),
         key: 'jyRate',
-        align: 'left'
+        align: 'left',
 
       })
       return listdd
@@ -233,22 +233,22 @@ export default {
         //  title: '名称',
         title: this.$t('foot.Thenamohe'),
         key: 'name',
-        width: 160,
-        align: 'center'
+        align: 'left',
+        width: 150
       })
       listaa.push({
         //  最小提币手续费
         title: this.$t('foot.Miniwithdrawfee'),
         key: 'minTxFee',
-        align: 'center',
+        align: 'left',
         width: 200
       })
       listaa.push({
         // 最大提币手续费
         title: this.$t('foot.Maximuthdrawafee'),
         key: 'maxTxFee',
-        align: 'center',
-        width: 250
+        align: 'left',
+        width: 200
       })
       listaa.push({
         //  矿工费
@@ -295,6 +295,7 @@ export default {
 .new_transactionCosts .ivu-table td{
   height:50px !important;
 }
+
 .new_transactionCosts{
   .ivu-table th{
     height:50px !important;
@@ -515,6 +516,18 @@ export default {
   }
   .ivu-table{
     background: transparent;
+    td {
+     &:last-child {
+       text-align: left;
+     }
+    }
+    .ivu-table-tip {
+      td {
+        &:last-child {
+          text-align: center;
+        }
+      }
+    }
   }
   .content .content_content .content_tab .content_tab_buy{
     //border: 0 !important;

@@ -581,7 +581,9 @@ export default {
           this.coinList = resp.data
           this.coinName1 = this.coinList[0].unit
           // console.log(this.coinList, this.coinList[0].unit);
-          this.currencyDetails(this.coinList[0].unit)
+          if (this.isLogin) {
+            this.currencyDetails(this.coinList[0].unit)
+          }
         }
       })
     },
@@ -661,9 +663,11 @@ export default {
   created: function() {
     this.init()
     this.findCoin()
-    this.getSetting()
+    if (this.isLogin) {
+      this.getSetting()
+      this.currencyDetails()
+    }
     this.getCNYRate()
-    this.currencyDetails()
     // this.activeMenuName = "coin-1";
     // this.$nextTick(function() {
     //   this.$refs.navMenu.updateActiveName();

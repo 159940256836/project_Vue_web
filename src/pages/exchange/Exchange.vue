@@ -95,10 +95,14 @@
                         />
                     </div>-->
           <div class="item">
-                        <span class="coin">
-                          {{currentCoin.coin?currentCoin.coin:'---'}}
-                            <small style="font-size: 16px">/{{currentCoin.base?currentCoin.base:'---'}} </small>
-                        </span>
+            <span class="coin">
+              {{currentCoin.coin?currentCoin.coin:'---'}}
+                <small style="font-size: 16px">/{{currentCoin.base?currentCoin.base:'---'}} </small>
+            </span>
+            <!--<span v-if="$route.params.pathMatch == 'ltc_btc'">
+              <img style="width: 15px" :src="infoLogo" alt="">
+            </span>-->
+            <!--<span v-if="$route.params.pathMatch == 'ltc_btc'?'期':''"></span>-->
           </div>
           <!--币币交易币种详情-->
           <div
@@ -1177,7 +1181,6 @@
   import Datafeeds from '@js/charting_library/datafeed/bitrade.js'
   import transfermodal from '../../components/transfer/Index'
   import coinDetails from '../../components/exchange/coinDetails'
-
   const Stomp = require('stompjs')
   const SockJS = require('sockjs-client')
   const moment = require('moment')
@@ -1209,6 +1212,7 @@
         historyLoading: true, // 历史委单默认loading
         day: require('../../assets/images/exchange/night.png'), // 黑色版本
         night: require('../../assets/images/exchange/day.png'), // 白色版本
+        infoLogo: require('../../assets/images/exchange/infoLogo.png'), // 期
         loadingButton1: false, // 接口请求loading
         loadingButton2: false, // 接口请求loading
         loadingButton3: false, // 接口请求loading
@@ -2989,6 +2993,7 @@
                   that.trade.rows = that.trade.rows.slice(0, 30)
                 }
               }
+
           )
           if (that.isLogin) {
             // 订阅委托取消信息
