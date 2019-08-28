@@ -145,7 +145,7 @@ WebsockFeed.prototype.getBars = function(symbolInfo, resolution, from, to, onHis
         // bar = bars
         that.lastBar = bars.length > 0 ? bars[bars.length - 1] : null
         // console.log(that.lastBar)
-        // Processdata(bars)
+        Processdata(bars)
         that.currentBar = that.lastBar
         var noData = bars.length == 0
         onHistoryCallback(bars, { noData: noData })
