@@ -99,9 +99,9 @@
               {{currentCoin.coin?currentCoin.coin:'---'}}
                 <small style="font-size: 16px">/{{currentCoin.base?currentCoin.base:'---'}} </small>
             </span>
-            <!--<span v-if="$route.params.pathMatch == 'ltc_btc'">
-              <img style="width: 15px" :src="infoLogo" alt="">
-            </span>-->
+            <span v-if="$route.params.pathMatch == 'self_bc'">
+              <img style="width: 15px" :src="infoLogo">
+            </span>
             <!--<span v-if="$route.params.pathMatch == 'ltc_btc'?'期':''"></span>-->
           </div>
           <!--币币交易币种详情-->
