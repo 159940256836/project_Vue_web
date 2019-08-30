@@ -1,6 +1,5 @@
 var $ = require('jquery')
 var WebsockFeed = function(url, coin, stompClient, scale) {
-  console.log(scale)
   this._datafeedURL = url
   this.coin = coin
   this.stompClient = stompClient
@@ -22,7 +21,6 @@ WebsockFeed.prototype.onReady = function(callback) {
 
   $('#' + window.tvWidget.id).contents().on('click', '.date-range-list>a', function() {
     if (window.tvWidget) {
-      console.log(window.tvWidget)
       if ($(this).html() == '分时') {
         $(this).parent().addClass('real-op').removeClass('common-op')
         window.tvWidget.chart().setChartType(3)
@@ -39,6 +37,15 @@ WebsockFeed.prototype.onReady = function(callback) {
 }
 // 订阅实时数据
 WebsockFeed.prototype.subscribeBars = function(symbolInfo, resolution, onRealtimeCallback, listenerGUID, onResetCacheNeededCallback) {
+  this._send(this._datafeedURL + '/current', {
+    symbol: symbolInfo.name,
+    resolution: resolution
+  })
+    .done(function(response) {
+      const bars = []
+      bars.push({ time: response[0], open: response[1], high: response[2], low: response[3], close: response[4], volume: response[5] })
+      onRealtimeCallback(bars[0])
+    })
   var that = this
   this.stompClient.subscribe('/topic/market/trade/' + symbolInfo.name, function(msg) {
     var resp = JSON.parse(msg.body)
@@ -54,7 +61,33 @@ WebsockFeed.prototype.subscribeBars = function(symbolInfo, resolution, onRealtim
       onRealtimeCallback(that.lastBar)
     }
   })
-  this.stompClient.subscribe('/topic/market/kline/' + symbolInfo.name, function(msg) {
+  switch (resolution) {
+    case '1':
+      resolution = '1min'
+      break
+    case '15':
+      resolution = '15min'
+      break
+    case '30':
+      resolution = '30min'
+      break
+    case '60':
+      resolution = '1hour'
+      break
+    case '240':
+      resolution = '4hour'
+      break
+    case '1D':
+      resolution = '1day'
+      break
+    case '1W':
+      resolution = '1week'
+      break
+    case '1M':
+      resolution = '1month'
+      break
+  }
+  this.stompClient.subscribe('/topic/market/kline/' + resolution + '/' + symbolInfo.name, function(msg) {
     if (resolution != '1') return
     if (that.currentBar != null) onRealtimeCallback(that.currentBar)
     var resp = JSON.parse(msg.body)
@@ -69,7 +102,30 @@ WebsockFeed.prototype.subscribeBars = function(symbolInfo, resolution, onRealtim
     that.currentBar = that.lastBar
     onRealtimeCallback(that.lastBar)
   })
+
+  this.stompClient.subscribe('/topic/market/realtime/' + symbolInfo.name, function(msg) {
+    var resp = JSON.parse(msg.body)
+    if (resp[0] != undefined) {
+      for (let i = 0; i < resp.length; i++) {
+        if (resp[i].period == resolution) {
+          that.lastBar = {
+            time: resp[i].time,
+            open: resp[i].openPrice,
+            high: resp[i].highestPrice,
+            low: resp[i].lowestPrice,
+            close: resp[i].closePrice,
+            volume: resp[i].volume
+          }
+        }
+      }
+    }
+    // if (resolution != '1') return
+    // if (that.currentBar != null) onRealtimeCallback(that.currentBar)
+    that.currentBar = that.lastBar
+    onRealtimeCallback(that.lastBar)
+  })
 }
+
 // 取消订阅
 WebsockFeed.prototype.unsubscribeBars = function(subscriberUID) {
   this.subscribe = false
@@ -136,24 +192,24 @@ WebsockFeed.prototype.getBars = function(symbolInfo, resolution, from, to, onHis
     to: firstDataRequest ? new Date().getTime() : to * 1000,
     resolution: resolution
   })
-      .done(function(response) {
-        var data = response
-        for (var i = 0; i < data.length; i++) {
-          var item = data[i]
-          bars.push({ time: item[0], open: item[1], high: item[2], low: item[3], close: item[4], volume: item[5] })
-        }
-        // bar = bars
-        that.lastBar = bars.length > 0 ? bars[bars.length - 1] : null
-        // console.log(that.lastBar)
-        Processdata(bars)
-        that.currentBar = that.lastBar
-        var noData = bars.length == 0
-        onHistoryCallback(bars, { noData: noData })
-      })
-      .fail(function(reason) {
-        onErrorCallback(reason)
-      })
+    .done(function(response) {
+      var data = response
+      for (var i = 0; i < data.length; i++) {
+        var item = data[i]
+        bars.push({ time: item[0], open: item[1], high: item[2], low: item[3], close: item[4], volume: item[5] })
+      }
+      // bar = bars
+      that.lastBar = bars.length > 0 ? bars[bars.length - 1] : null
+      Processdata(bars)
+      that.currentBar = that.lastBar
+      var noData = bars.length == 0
+      onHistoryCallback(bars, { noData: noData })
+    })
+    .fail(function(reason) {
+      onErrorCallback(reason)
+    })
 }
+
 WebsockFeed.prototype.periodLengthSeconds = function(resolution, requiredPeriodsCount) {
   var daysCount = 0
   if (resolution === 'D') {

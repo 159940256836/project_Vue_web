@@ -854,6 +854,9 @@ export default {
     this.changeCoin()
   },
   computed: {
+    isLogin: function() {
+      return this.$store.getters.isLogin
+    },
     wantHistory() {
       return this.form.advertiseType
     },
@@ -889,7 +892,7 @@ export default {
   },
   created() {
     this.changeCoin()
-    if (this.isLog) {
+    if (this.isLogin) {
       this.getMember()
     }
     this.getAreas()

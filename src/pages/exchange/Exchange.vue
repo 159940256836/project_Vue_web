@@ -350,8 +350,8 @@
                     <Button class="bg-green" @click="buyWithMarketPrice" v-show="isLogin" :loading="loadingButton2">
                       <!--{{$t("exchange.buyin")}}{{currentCoin.coin}}-->
                       <span>
-                                                {{ !loadingButton2 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
-                                            </span>
+                          {{ !loadingButton2 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
+                      </span>
                     </Button>
                   </Form>
                 </div>
@@ -2171,6 +2171,20 @@
           this.settiele(title)
         }
       },
+      setcurrentcoin() {
+        let params = this.$route.params.pathMatch
+        if (params == undefined) {
+          // this.$router.push('/exchange/' + this.defaultPath)
+          params = this.defaultPath
+        }
+        const coin = params.toUpperCase().split('_')[0]
+        const base = params.toUpperCase().split('_')[1]
+        // this.currentCoin.coin = coin
+        this.currentCoinBC = base
+        this.currentCoin.base = base
+        this.currentCoin.symbol = coin + '/' + base
+        console.log(this.coins)
+      },
       init() {
         let params = this.$route.params.pathMatch
         if (params == undefined) {
@@ -2181,14 +2195,10 @@
         if (basecion) {
           this.basecion = basecion.toLowerCase()
         }
-        const coin = params.toUpperCase().split('_')[0]
-        const base = params.toUpperCase().split('_')[1]
-        this.currentCoin.symbol = coin + '/' + base
-        this.currentCoin.coin = coin
-        this.currentCoinBC = base
-        this.currentCoin.base = base
+        this.setcurrentcoin()
         this.$store.commit('navigate', 'nav-exchange')
         this.$store.commit('setSkin', this.skin)
+        // console.log(this.coins, basecion, coin, base)
         this.getCNYRate()
         this.getSymbolScale()
         this.getSymbol() // 包含 K线图、getFavor、startWebsock等
@@ -2730,7 +2740,7 @@
       getSymbol() {
         this.$http.post(this.host + this.api.market.thumb, {}).then(response => {
           const resp = response.body
-          // 先清空已有数据
+        // 先清空已有数据
           for (let i = 0; i < resp.length; i++) {
             const coin = resp[i]
             coin.base = resp[i].symbol.split('/')[1]
