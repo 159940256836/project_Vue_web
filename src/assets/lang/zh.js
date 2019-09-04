@@ -1350,6 +1350,7 @@ module.exports = {
         addressmanager: '提币地址管理',
         symbol: '选择币种',
         address: '提币地址',
+        nameChain: '链名称',
         num: '可用数量',
         carryNum: '可提现数量',
         decimal: '禁止输入小数',

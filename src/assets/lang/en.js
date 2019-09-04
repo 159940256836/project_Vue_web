@@ -1345,6 +1345,7 @@ module.exports = {
         addressmanager: 'Address management',
         symbol: 'Select Coin',
         address: 'Address',
+        nameChain: 'Name Chain',
         num: 'Available Amount',
         carryNum: 'Withdrawal amount available',
         decimal: 'No decimal',

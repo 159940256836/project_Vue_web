@@ -4,7 +4,7 @@
       <div class="rightarea">
         <!--<section class="trade-groups merchant-tops">
             &lt;!&ndash; <i class="merchant-icon tips"></i>
-  <span class="tips-word">{{$t('uc.finance.withdraw.pickup')}}</span> &ndash;&gt;
+              <span class="tips-word">{{$t('uc.finance.withdraw.pickup')}}</span> &ndash;&gt;
             <router-link to="/uc/withdraw/address">
                 {{$t('uc.finance.withdraw.addressmanager')}}
             </router-link>
@@ -34,25 +34,68 @@
                     </Option>
                   </Select>
                 </div>
+
+                <div class="inner-left" v-if="linkStatus">
+                  <span class="describe">
+                    {{$t('uc.finance.withdraw.nameChain')}}
+                  </span>：
+                  <div class="link-main">
+                    <p
+                            class="chain-link"
+                            :class="linkStyle == 'USDT' ? 'chain' : ''"
+                            @click="changeChain('USDT')"
+                    >
+                      OMNI
+                      <img v-if="linkStyle == 'USDT'" :src="linkImg">
+                    </p>
+                    <p
+                            class="chain-link"
+                            :class="linkStyle == 'ERCUSDT' ? 'chain' : ''"
+                            @click="changeChain('ERCUSDT')"
+                    >
+                      ERC20
+                      <img v-if="linkStyle == 'ERCUSDT'" :src="linkImg">
+                    </p>
+                  </div>
+                </div>
+
                 <div class="inner-box">
                   <div class="inner-left form-group form-address">
-                                        <span
-                                                for="controlAddress"
-                                                class="controlAddress describe"
-                                        >
-                                            {{$t('uc.finance.withdraw.address')}}
-                                        </span>：
-                    <div class="control-input-group">
+                    <span
+                            for="controlAddress"
+                            class="controlAddress describe"
+                    >
+                      {{$t('uc.finance.withdraw.address')}}
+                    </span>：
+                    <div class="control-input-group" v-if="linkStyle == 'USDT'">
+                      <!--clearable-->
                       <Select
                               ref="address"
                               v-model="withdrawAdress"
                               style="width:270px;margin-left:10px;"
-                              clearable
                               @on-query-change="onAddressChange"
                               :placeholder="$t('header.choose')"
                       >
                         <Option
                                 v-for="item in currentCoin.addresses"
+                                :value="item.address"
+                                :key="item.address"
+                        >
+                          {{ item.remark +'('+ item.address+')'}}
+                        </Option>
+                      </Select>
+                    </div>
+                    <div class="control-input-group" v-else-if="linkStyle == 'ERCUSDT'">
+                      <!--clearable-->
+                      <Select
+                              ref="address"
+                              v-model="withdrawAdressErc"
+                              style="width:270px;margin-left:10px;"
+                              @on-query-change="onAddressChange"
+                              :placeholder="$t('header.choose')"
+                      >
+                        <Option
+                                v-for="item in addressErcUsdt"
                                 :value="item.address"
                                 :key="item.address"
                         >
@@ -67,8 +110,8 @@
                 <div class="form-group form-amount">
                   <!--可用余额-->
                   <span class="label-amount describe">
-                                        {{$t('uc.finance.withdraw.num')}}
-                                    </span>：
+                    {{$t('uc.finance.withdraw.num')}}
+                  </span>：
                   <!--提币数量-->
                   <div class="input-group">
                     <Poptip
@@ -88,7 +131,7 @@
                         +
                         currentCoin.withdrawScale+
                         $t('uc.finance.withdraw.msg01'))
-                        "
+                      "
                     >
                       <!--当前币种可用为零 该input禁止输入-->
                       <Input
@@ -97,36 +140,35 @@
                               v-model="withdrawAmount"
                               :placeholder="$t('uc.finance.withdraw.numtip1')"
                               size="large"
-                              :max="currentCoin.maxAmount"
                               style="width:350px;margin-left:5px;"
                       />
                       <span class="input-group-addon addon-tag uppercase first">
-                                                {{currentCoin.unit}}
-                                            </span>
+                        {{currentCoin.unit}}
+                      </span>
                     </Poptip>
                   </div>
                   <p class="label-fr">
-                                        <span>
-                                            {{$t('uc.finance.withdraw.avabalance')}}：
-                                            <span
-                                                    class="label-pointer"
-                                                    id="valueAvailable"
-                                            >
-                                                {{!currentCoin.balance?'---':currentCoin.balance|toFloor}}
-                                            </span>
-                                        </span>
-                    <span v-if="currentCoin.enableAutoWithdraw == 0">
-                                            {{$t('common.tip')}}：{{$t('uc.finance.withdraw.msg1')}} {{currentCoin.threshold}} {{$t('uc.finance.withdraw.msg2')}}
-                                        </span>
                     <span>
-                                            <a
-                                                    href="javascript:;"
-                                                    id="levelUp"
-                                                    style="display: none;"
-                                            >
-                                                {{$t('uc.finance.withdraw.increase')}}
-                                            </a>
-                                        </span>
+                      {{$t('uc.finance.withdraw.avabalance')}}：
+                      <span
+                              class="label-pointer"
+                              id="valueAvailable"
+                      >
+                        {{!currentCoin.balance?'---':currentCoin.balance|toFloor}}
+                      </span>
+                    </span>
+                    <span v-if="currentCoin.enableAutoWithdraw == 0">
+                      {{$t('common.tip')}}：{{$t('uc.finance.withdraw.msg1')}} {{currentCoin.threshold}} {{$t('uc.finance.withdraw.msg2')}}
+                    </span>
+                    <span>
+                      <a
+                              href="javascript:;"
+                              id="levelUp"
+                              style="display: none;"
+                      >
+                        {{$t('uc.finance.withdraw.increase')}}
+                      </a>
+                    </span>
                   </p>
                 </div>
               </div>
@@ -141,28 +183,26 @@
               <!--手续费-->
               <div class="availablenum form-group-container form-group-container2">
                 <div class="form-group form-fee">
-                                <span class="label-amount describe">
-                                    {{$t('uc.finance.withdraw.fee')}}
-                                  <!--<p class="label-fr">-->
-                                  <!--<span>{{$t('uc.finance.withdraw.range')}}：{{currentCoin.minTxFee}} - {{currentCoin.maxTxFee}}</span>-->
-                                  <!--</p>-->
-                                </span>：
+                  <span class="label-amount describe">
+                      {{$t('uc.finance.withdraw.fee')}}
+                    <!--<p class="label-fr">-->
+                    <!--<span>{{$t('uc.finance.withdraw.range')}}：{{currentCoin.minTxFee}} - {{currentCoin.maxTxFee}}</span>-->
+                    <!--</p>-->
+                  </span>：
                   <div
                           class="input-group"
-                          style="margin-top:14px;position:relative;display:inline-block;"
-                  >
+                          style="margin-top:14px;position:relative;display:inline-block;">
                     <!--<Poptip v-else trigger="focus" :content="$t('uc.finance.withdraw.tip1')+currentCoin.minTxFee+$t('uc.finance.withdraw.tip1')+currentCoin.maxTxFee" style="width: 100%;">-->
+                    <!--v-model="linkStyle == 'USDT'?withdrawFee:linkCoinInfo.coin.minTxFee"-->
                     <Input
                             readonly
-                            v-model="withdrawFee"
-                            :min="currentCoin.minTxFee"
-                            :max="currentCoin.maxTxFee"
+                            v-model="linkStyle == 'USDT'?withdrawFee:withdrawMinTxFee"
                             size="large"
                             style="width:350px;margin-left:5px;"
                     />
                     <span class="input-group-addon addon-tag uppercase">
-                                            {{currentCoin.unit}}
-                                        </span>
+                      {{currentCoin.unit}}
+                    </span>
                     <!--</Poptip>-->
                   </div>
                 </div>
@@ -170,9 +210,9 @@
               <div class="availablenum form-group-container form-group-container2">
                 <!--到账数量-->
                 <div class="form-group">
-                                    <span class="describe">
-                                        {{$t('uc.finance.withdraw.arriamount')}}
-                                    </span>：
+                  <span class="describe">
+                      {{$t('uc.finance.withdraw.arriamount')}}
+                  </span>：
                   <div
                           class="input-group"
                           style="margin-top:14px;position:relative;display:inline-block"
@@ -186,8 +226,8 @@
                     />
                     <!-- <input id="withdrawOutAmount" class="form-control form-out-amount" disabled="" maxlength="20" type="text" value="0"> -->
                     <span class="input-group-addon addon-tag uppercase">
-                                            {{currentCoin.unit}}
-                                        </span>
+                      {{currentCoin.unit}}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -213,7 +253,10 @@
                   {{$t('common.tip')}}
                 </p>
                 <p class="acb-p2">
-                  • {{$t('uc.finance.withdraw.msg3')}}：{{currentCoin.minAmount}}{{$t('uc.finance.withdraw.msg4')}}。<br>
+                  • <span>
+                  <!--linkStyle == 'ERCUSDT'?linkCoinInfo.coin.minWithdrawAmount:currentCoin.minAmount-->
+                      {{$t('uc.finance.withdraw.msg3')}}：{{linkStyle == 'ERCUSDT'?minWithdrawAmount:currentCoin.minAmount}}{{$t('uc.finance.withdraw.msg4')}}。<br>
+                    </span>
                   • {{$t('uc.finance.withdraw.msg5')}}。<br>
                   • {{$t('uc.finance.withdraw.msg6')}}
                 </p>
@@ -241,10 +284,11 @@
                   <div id="pages">
                     <div style="float: right;">
                       <Page
-                              class="pages_a"
                               :total="transaction.total"
-                              :current="transaction.page + 1"
+                              :pageSize="transaction.pageSize"
+                              :current="transaction.page"
                               @on-change="changePage"
+                              id="record_pages"
                       >
                       </Page>
                     </div>
@@ -332,7 +376,7 @@
                       :disabled="sendMsgDisabled1"
               >
                                 <span v-if="sendMsgDisabled1">
-                                    {{codeTime1+$t('uc.safe.second')}}
+                                    {{codeTime1+ 's'}}
                                 </span>
                 <span v-if="!sendMsgDisabled1">
                                     {{$t('uc.safe.clickget')}}
@@ -383,6 +427,11 @@
         isEmailCode: false, // 是否开启Email验证状态;
         sendMsgDisabled1: false, // 邮箱短信验证
         codeTime1: 60, // 邮箱短信验证倒计时
+        linkStyle: 'USDT', // 链名称
+        linkStatus: false, // 链状态
+        linkCoinInfo: {}, // ERCUSDT 币种信息
+        addressErcUsdt: [],
+        linkImg: require('../../assets/img/jiaobiao.png'),
         user: {},
         sendcodeValue: this.$t('uc.regist.sendcode'),
         isCode: '',
@@ -396,12 +445,15 @@
         fundpwd: '',
         currentCoin: {},
         transaction: {
-          page: 0,
+          page: 1,
           pageSize: 10,
           total: 0
         },
         loading: true,
         withdrawAdress: '',
+        withdrawAdressErc: '',
+        withdrawMinTxFee: '',
+        minWithdrawAmount: '',
         inputAddress: '', // 用户输入的地址
         withdrawAmount: '', // 默认提币数量
         withdrawFee: 0, // 默认提币手续费
@@ -420,6 +472,42 @@
       }
     },
     methods: {
+      /*链名称*/
+      changeChain(name) {
+        console.log(name)
+        this.linkStyle = name
+        if (name == 'ERCUSDT') {
+          this.withdrawAdress = ''
+          const params = {}
+          params['unit'] = name
+          // this.loadingButton1 = true
+          this.$http.post(this.host + '/uc/withdraw/support/coin/info/usdt', params).then(response => {
+            const resp = response.body
+            if (resp.code == 0) {
+              this.linkCoinInfo = resp.data.coin
+              if (this.linkCoinInfo.minTxFee && this.linkCoinInfo.minWithdrawAmount) {
+                this.withdrawMinTxFee = this.linkCoinInfo.minTxFee
+                this.minWithdrawAmount = this.linkCoinInfo.minWithdrawAmount
+              }
+              console.log(this.linkCoinInfo.coin)
+              console.log(this.linkCoinInfo.minTxFee)
+              console.log(this.linkCoinInfo.minWithdrawAmount)
+              console.log(resp.data.address[0])
+              if (resp.data.address.length && resp.data.address.length > 0) {
+                this.addressErcUsdt = resp.data.address
+                console.log(this.addressErcUsdt)
+              }
+
+              console.log(this.linkCoinInfo)
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        } else {
+          this.addressErcUsdt = []
+          this.getAddrCoin()
+        }
+      },
       // 复制功能
       copyToken(data) {
         let url = data
@@ -490,35 +578,24 @@
         }, 1000)
       },
       changePage(index) {
-        this.transaction.page = index - 1
+        console.log(index)
+        this.transaction.page = index
         this.getList()
       },
       onAddressChange(data) {
         this.inputAddress = data
       },
       clearValues() {
-        if (this.$refs.address) {
-          this.$refs.address.setQuery(' ')
-        }
+        // if (this.$refs.address) {
+        //   this.$refs.address.setQuery(' ')
+        // }
         this.withdrawAdress = ''
+        this.addressErcUsdt = ''
         this.inputAddress = ''
+        this.withdrawMinTxFee = ''
         this.withdrawAmount = 0
         // this.withdrawFee= 0;
         this.withdrawOutAmount = 0
-      },
-      getCurrentCoinRecharge() {
-        if (this.coinType != '') {
-          var temp = []
-          for (var i = 0; i < this.allTableWithdraw.length; i++) {
-            //   if (this.allTableWithdraw[i].symbol == this.coinType) {
-            if (this.allTableWithdraw[i].coin.unit == this.coinType) {
-              temp.push(this.allTableWithdraw[i])
-            }
-          }
-          this.tableWithdraw = temp
-        } else {
-          this.tableWithdraw = this.allTableWithdraw
-        }
       },
       ok() {
         const params = {}
@@ -554,15 +631,15 @@
           this.$Message.error(this.$t('otc.chat.msg7tip'))
           return false
         }
-        params['unit'] = this.currentCoin.unit
-        params['address'] = this.withdrawAdress
+        params['unit'] = this.linkStyle == 'USDT' ? this.currentCoin.unit : this.linkStyle
+        params['address'] = this.linkStyle == 'USDT' ? this.withdrawAdress : this.withdrawAdressErc
         params['amount'] = this.withdrawAmount
-        params['fee'] = this.withdrawFee
+        params['fee'] = this.linkStyle == 'USDT' ? this.withdrawFee : this.withdrawMinTxFee
         params['jyPassword'] = this.formInline.fundpwd
         params['code'] = this.isCode == 2 ? this.formInline.code : this.formInline.emailCode
         params['googleCode'] = this.formInline.googleCode
         this.isDisabled = true //按钮禁用
-        this.$http.post(this.host + '/uc/withdraw/apply', params).then(response => {
+        this.$http.post(this.host + (this.linkStyle == 'USDT' ? '/uc/withdraw/apply' : '/uc/withdraw/applyERCUSDT'), params).then(response => {
           this.fundpwd = ''
           var resp = response.body
           if (resp.code == 0) {
@@ -570,8 +647,9 @@
             this.modal = false
             this.formInline.code = ''
             this.formInline.fundpwd = ''
-            this.transaction.page = 0
+            this.transaction.page = 1
             this.getList()
+            this.getAddrCoin()
             this.clearValues()
             this.$Message.success(resp.message)
           } else {
@@ -581,10 +659,24 @@
 
         })
       },
-      getAddrList() {
+      getAddrList(value) {
+        console.log(value)
+        if (value == 'USDT') {
+          this.linkStatus = true
+        } else this.linkStatus = false
         // 初始化页面上的值
         this.clearValues()
-        // 获取地址
+        // 循环对比 对应币种 币种信息赋值
+        this.coinList.forEach((item) => {
+          // model就是上面的数据源
+          if (item.unit == value) {
+            console.log(item.unit, value, item)
+          }
+        })
+      },
+      // 获取币种信息
+      getAddrCoin() {
+        /*'http://192.168.124.188:6001'*/
         this.$http.post(this.host + '/uc/withdraw/support/coin/info').then(response => {
           var resp = response.body
           if (resp.code == 0 && resp.data.length > 0) {
@@ -609,7 +701,7 @@
         this.loading = true
         // 获取tableWithdraw
         const params = {}
-        params['page'] = this.transaction.page
+        params['pageNo'] = this.transaction.page
         params['pageSize'] = this.transaction.pageSize
         this.$http
             .post(this.host + '/uc/withdraw/record', params)
@@ -618,7 +710,6 @@
               if (resp.code == 0) {
                 this.tableWithdraw = resp.data.content
                 this.transaction.total = resp.data.totalElements
-                this.transaction.page = resp.data.number
               } else {
                 this.$Message.error(resp.message)
               }
@@ -649,42 +740,69 @@
         for (; e < 0; t /= 10, e++) ;
         return Math.round(v * t) / t
       },
+
       computerAmount() {
         const r = /^[0-9]+\.?[0-9]{0,9}$/　　// 正数
         if (!r) {
           this.withdrawOutAmount = 0
           return false
         }
-        /* let num = this.round(
-            this.accSub(this.withdrawAmount, this.withdrawFee),
-            this.currentCoin.withdrawScale
-        );
-        this.withdrawOutAmount = num >= 0 ? num : 0;*/
-        this.withdrawAmount = this.withdrawAmount.replace(/[^\d.]/g,"");
-        if(this.withdrawAmount < this.currentCoin.minTxFee) {
-          this.withdrawAmount = this.currentCoin.minAmount
+        this.withdrawAmount = this.withdrawAmount.replace(/[^\d.]/g, "");
+        if (this.linkStyle == 'USDT') {
+          // 普通币种类型
+          setTimeout(() => {
+            if (this.withdrawAmount < this.currentCoin.minTxFee) {
+              this.$Message.error(this.$t('uc.finance.withdraw.numtip3'))
+              return false
+            }
+          }, 1000)
+
+        } else if (this.linkStyle == 'ERCUSDT') {
+          // 普通币种类型
+          setTimeout(() => {
+            if (this.withdrawAmount < this.withdrawMinTxFee) {
+              this.$Message.error(this.$t('uc.finance.withdraw.numtip3'))
+              return false
+            }
+          }, 1000)
+
         }
         // 新增代码
         if (this.withdrawAmount > this.currentCoin.balance) {
-            this.withdrawAmount = this.currentCoin.balance
+          this.withdrawAmount = this.currentCoin.balance
         }
         // 否则 提出当前数量减去手续费
         this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
+        // ERC20类型
+        // 否则 提出当前数量减去手续费
+        this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawMinTxFee).toFixed(5))
+        /*// ERC20类型
+        if (this.minWithdrawAmount < this.withdrawMinTxFee) {
+          /!*this.withdrawAmount = this.currentCoin.minAmount*!/
+          this.$Message.error(this.$t('uc.finance.withdraw.numtip3'))
+          return false
+        }
+        // 新增代码
+        if (this.minWithdrawAmount > this.currentCoin.balance) {
+          this.minWithdrawAmount = this.currentCoin.balance
+        }
+        // 否则 提出当前数量减去手续费
+        this.withdrawOutAmount = Number((this.minWithdrawAmount - this.withdrawMinTxFee).toFixed(5))
         // 旧代码
         // this.withdrawOutAmount = this.round(
         //   this.accSub(this.withdrawAmount, this.withdrawFee),
         //   this.currentCoin.withdrawScale
-        // );
+        // );*/
       },
-      computerAmount2() {
-        this.withdrawAmount =
-            (this.withdrawAmount + '').replace(/([0-9]+\.[0-9]{6})[0-9]*/, '$1') -
-            0
-        this.withdrawOutAmount = this.round(
-            this.accSub(this.withdrawAmount, this.withdrawFee),
-            this.currentCoin.withdrawScale
-        )
-      },
+      // computerAmount2() {
+      //   this.withdrawAmount =
+      //       (this.withdrawAmount + '').replace(/([0-9]+\.[0-9]{6})[0-9]*/, '$1') -
+      //       0
+      //   this.withdrawOutAmount = this.round(
+      //       this.accSub(this.withdrawAmount, this.withdrawFee),
+      //       this.currentCoin.withdrawScale
+      //   )
+      // },
       valid() {
         this.withdrawAdress = this.withdrawAdress || this.inputAddress
         if (this.coinType === '') {
@@ -726,7 +844,7 @@
         this.formInline.emailCode = ''
       },
       apply() {
-        if(this.withdrawAmount < this.currentCoin.minAmount) {
+        if (this.withdrawAmount < this.currentCoin.minAmount) {
           this.$Message.error(this.$t('uc.finance.withdraw.numtip31'))
           return false
         }
@@ -790,8 +908,8 @@
       // this.getMember();
       this.$http.options.emulateJSON = false
       this.coinType = this.$route.query.name || ''
-      this.getAddrList()
       this.getList(0, 10, 1)
+      this.getAddrCoin()
     },
     computed: {
 
@@ -917,6 +1035,11 @@
   }
 
   .withdraw {
+    .ivu-btn[disabled]:hover {
+      color: #fff;
+      background-color: #3399ff;
+    }
+
     input::-webkit-input-placeholder {
       color: #8090af;
     }
@@ -1014,6 +1137,35 @@
         background: transparent;
         color: #3399ff;
       }
+    }
+
+    #record_pages li.ivu-page-item.ivu-page-item-active {
+      background-color: #111530;
+      border-color: #191f44;
+
+      a {
+        color: #3399ff;
+      }
+    }
+
+    #record_pages li.ivu-page-item.ivu-page-item-active {
+      &:hover {
+        background-color: #111530;
+
+        a {
+          color: #3399ff;
+        }
+      }
+    }
+
+    .ivu-page-item {
+      background: #111530;
+      color: #8090AF;
+      border: 1px solid #191f44;
+    }
+
+    .ivu-page-item:hover {
+      color: #3399ff;
     }
   }
 
@@ -1368,6 +1520,34 @@
           align-items: center;
           margin-left: 60px;
           margin-bottom: 15px;
+
+          .link-main {
+
+            .chain-link {
+              min-width: 128px;
+              height: 34px;
+              background: #111530;
+              color: #8090af;
+              float: left;
+              margin-left: 13px;
+              text-align: center;
+              line-height: 34px;
+              cursor: pointer;
+              border: 1px solid rgba(88, 105, 138, 1);
+              position: relative;
+
+              img {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+              }
+            }
+
+            .chain {
+              color: #3399FF;
+              border: 1px solid rgba(51, 153, 255, 1);
+            }
+          }
         }
 
         .controlAddress {
@@ -1853,10 +2033,6 @@
 
     .ivu-page-item:hover {
       color: #3399ff;
-    }
-
-    .pages_a .ivu-page-item-active {
-      background-color: red !important;
     }
   }
 </style>

@@ -192,6 +192,11 @@ export default {
 </style>
 <style lang="scss">
     .nav-rights-bjc {
+        .ivu-input {
+            background: #111530;
+            border: 1px solid #58698A;
+            border-radius: 0;
+        }
         .ivu-input-with-suffix {
             padding-right: 32px;
             border-radius: 0;
