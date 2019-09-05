@@ -1091,7 +1091,7 @@ export default {
                         setTimeout(() => {
                           self.$router.push('/uc/safe')
                         }, 2000)
-                      } else if (self.member.kycStatus !== 4) {
+                      } else if (self.member.kycStatus !== 4&&params.row.advertiseType == 0) {
                         self.$Message.error(self.$t('otc.validate1'))
                         return false
                       } else {

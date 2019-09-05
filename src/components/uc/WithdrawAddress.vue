@@ -305,7 +305,9 @@
                       },
                       on: {
                         click: () => {
-                          this.addAddr(2, params.row.id)
+                          if (params.row.id) {
+                            this.addAddr(2, params.row.id)
+                          }
                           // this.getList(0, 10);
                         }
                       }
@@ -432,10 +434,10 @@
         oInput.remove()
       },
       refresh() {
-        this.coinType = null,
-            this.withdrawAddr = null,
-            this.remark = null
         this.getList(0, 10)
+        this.coinType = null,
+        this.withdrawAddr = null,
+        this.remark = null
       },
       getMember() {
         // 获取个人安全信息
@@ -460,10 +462,14 @@
       },
       getCoin() {
         // 币种
+        this.coinList = []
         this.$http.post(this.host + '/uc/withdraw/support/coin').then(response => {
           var resp = response.body
           if (resp.code == 0) {
             for (let i = 0; i < resp.data.length; i++) {
+              if (resp.data[i] == 'ERCUSDT') {
+                resp.data.splice(i, 1);
+              }
               this.coinList.push(resp.data[i])
             }
           } else {
@@ -476,10 +482,18 @@
         const params = {}
         params['pageNo'] = pageNo
         params['pageSize'] = pageSize
+        this.dataRecharge = []
         this.$http.post(this.host + '/uc/withdraw/address/page', params).then(response => {
           var resp = response.body
           if (resp.code == 0 && resp.data.content) {
-            this.dataRecharge = resp.data.content
+            resp.data.content.forEach((item, index) => {
+              console.log(item, index)
+              console.log(item.unit)
+              if (item.unit == 'ERCUSDT') {
+                item.unit = 'USDT'
+              }
+              this.dataRecharge.push(item)
+            })
             this.dataCount = resp.data.totalElement
           } else {
             this.$Message.error(resp.message)

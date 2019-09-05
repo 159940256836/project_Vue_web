@@ -154,7 +154,7 @@
                               class="label-pointer"
                               id="valueAvailable"
                       >
-                        {{!currentCoin.balance?'---':currentCoin.balance|toFloor}}
+                        {{!currentCoin.balance?'0':currentCoin.balance|toFloor}}
                       </span>
                     </span>
                     <span v-if="currentCoin.enableAutoWithdraw == 0">
@@ -663,14 +663,17 @@
         console.log(value)
         if (value == 'USDT') {
           this.linkStatus = true
-        } else this.linkStatus = false
+        } else {
+          this.linkStyle = 'USDT'
+          this.linkStatus = false
+        }
         // 初始化页面上的值
         this.clearValues()
         // 循环对比 对应币种 币种信息赋值
         this.coinList.forEach((item) => {
           // model就是上面的数据源
           if (item.unit == value) {
-            console.log(item.unit, value, item)
+            this.currentCoin = item
           }
         })
       },
@@ -1193,7 +1196,9 @@
         color: #3399ff;
       }
     }
-
+    .ivu-select-item-focus {
+      background: #10122B;
+    }
     .ivu-select-dropdown {
       li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
         background: #10122B;

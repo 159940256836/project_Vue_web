@@ -519,6 +519,10 @@ export default {
         })
     },
     apply() {
+      if (this.member.kycStatus !== 4) {
+        this.$Message.error(self.$t('otc.validate1'))
+        return false
+      }
       const stasingle = this.single
       if (stasingle == false) {
         this.$Message.warning(this.$t('uc.identity.approve'))
@@ -619,6 +623,9 @@ export default {
     this.getAuthFound()
   },
   computed: {
+    member: function () {
+      return this.$store.getters.member
+    },
     isLogin: function() {
       return this.$store.getters.isLogin
     },

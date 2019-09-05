@@ -260,10 +260,13 @@
                 this.$Message.error(this.$t('uc.finance.recharge.copysuccess'))
             },
             changeCoin(value) {
+
                 console.log(value)
                 if (value == 'USDT') {
                     this.linkStatus = true
                 } else {
+                    this.linkStyle = 'USDT'
+                    this.addressErcUsdt = ''
                     this.linkStatus = false
                 }
                 this.coinList.forEach((item) => {
