@@ -202,6 +202,7 @@
                 console.log(name)
                 this.linkStyle = name
                 if (name == 'ERCUSDT') {
+                    this.qrcode.value = ''
                     if (!this.addressErcUsdt) {
                         const params = {}
                         params['type'] = name
@@ -262,7 +263,9 @@
                 console.log(value)
                 if (value == 'USDT') {
                     this.linkStatus = true
-                } else this.linkStatus = false
+                } else {
+                    this.linkStatus = false
+                }
                 this.coinList.forEach((item) => {
                     // model就是上面的数据源
                     // console.log(item, item.coin.unit, value);

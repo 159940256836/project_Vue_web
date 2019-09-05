@@ -1087,15 +1087,17 @@ export default {
                       if (!self.isLogin) {
                         self.$router.push('/login')
                       } else if (!self.member.realName) {
-                          //                                            } else if (!self.member.memberLevel) {
                         self.$Message.error(self.$t('otc.validate'))
                         setTimeout(() => {
                           self.$router.push('/uc/safe')
                         }, 2000)
+                      } else if (self.member.kycStatus !== 4) {
+                        self.$Message.error(self.$t('otc.validate1'))
+                        return false
                       } else {
                         self.$router.push(
-                              '/otc/tradeInfo?tradeId=' + params.row.advertiseId
-                          )
+                          '/otc/tradeInfo?tradeId=' + params.row.advertiseId
+                        )
                       }
                     }
                   }
@@ -1138,21 +1140,7 @@ export default {
       coinData: ''
     }
   },
-  computed: {
-    isLogin: function() {
-      return this.$store.getters.isLogin
-    },
-    member: function() {
-      return this.$store.getters.member
-    },
-    coin: function() {
-      return this.$route.params.pathMatch
-      // return this.$route.params[0];
-    },
-    lang: function() {
-      return this.$store.state.lang
-    }
-  },
+
   watch: {
     coin: function() {
       this.reloadAd()
@@ -1238,12 +1226,28 @@ export default {
     }
   },
   created() {
+    console.log(this.member, this.$store.getters.member)
     this.getMethodCurrency()
     this.reloadAd()
   },
   mounted() {
     this.getMethodCurrency()
     console.log(this.coinsData)
+  },
+  computed: {
+    isLogin: function() {
+      return this.$store.getters.isLogin
+    },
+    member: function () {
+      return this.$store.getters.member
+    },
+    coin: function() {
+      return this.$route.params.pathMatch
+      // return this.$route.params[0];
+    },
+    lang: function() {
+      return this.$store.state.lang
+    }
   }
 }
 </script>
