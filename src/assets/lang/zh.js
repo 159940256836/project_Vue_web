@@ -828,6 +828,7 @@ module.exports = {
     operate: '操作',
     validate: '请先进行实名认证',
     validate1: '已实名，请前往APP完成视频认证。',
+    validate2: '请完成实名认证并且APP视频认证',
     sell: '卖出',
     buy: '买入',
     transaction: '买卖交易',

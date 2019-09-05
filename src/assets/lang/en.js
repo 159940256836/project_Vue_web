@@ -829,6 +829,7 @@ module.exports = {
     operate: 'Action',
     validate: 'Please first Verified',
     validate1: 'Real name, please go to APP to complete video authentication.',
+    validate2: 'Please complete real name authentication and APP video authentication',
     sell: 'sell',
     buy: 'buy',
     transaction: 'Trading transactions',

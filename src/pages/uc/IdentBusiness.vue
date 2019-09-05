@@ -519,31 +519,34 @@ export default {
         })
     },
     apply() {
-      if (this.member.kycStatus !== 4) {
-        this.$Message.error(self.$t('otc.validate1'))
-        return false
-      }
       const stasingle = this.single
       if (stasingle == false) {
         this.$Message.warning(this.$t('uc.identity.approve'))
         return;
       }
-      this.modal_read = true
-      return;
-      this.$http
-        .get(this.host + this.api.uc.apply)
-        .then(res => {
-          var resp = res.body
-          if (resp.code == 0) {
-            this.$Message.success(resp.message)
-            this.activeStepIndex = 1
-          } else {
-            this.$Message.warning(resp.message)
-          }
-        })
-        .catch(function(error) {
-          this.$Message.error(error)
-        })
+      if (this.member.kycStatus !== 4) {
+        this.$Message.error(this.$t('otc.validate2'))
+        return false
+      } else if (this.member.kycStatus === 4) {
+        this.modal_read = true
+        return;
+        this.$http
+            .get(this.host + this.api.uc.apply)
+            .then(res => {
+              var resp = res.body
+              if (resp.code == 0) {
+                this.$Message.success(resp.message)
+                this.activeStepIndex = 1
+              } else {
+                this.$Message.warning(resp.message)
+              }
+            })
+            .catch(function(error) {
+              this.$Message.error(error)
+            })
+      }
+
+
     },
     apply2() {
       const agreeFrozen = this.agreeFrozen
@@ -616,7 +619,7 @@ export default {
   },
   created() {
     // this.timer();
-    this.islogin()
+    // this.islogin()
     if (this.isLogin) {
       this.getSetting()
     }
