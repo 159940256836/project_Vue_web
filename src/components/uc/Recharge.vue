@@ -69,7 +69,7 @@
                                             <!--获取充币地址-->
                                         </span>
                                         <a
-                                                v-clipboard:copy="qrcode.value"
+                                                v-clipboard:copy="addressErcUsdt?addressErcUsdt:qrcode.value"
                                                 v-clipboard:success="onCopy"
                                                 v-clipboard:error="onError"
                                                 href="javascript:;"
@@ -100,7 +100,7 @@
                                                     padding: 5px;"
                                                 >
                                                     <!--<qriously :value="qrcode.coinName+':'+qrcode.value" :size="qrcode.size" />-->
-                                                    <qriously :value="qrcode.value" :size="qrcode.size"/>
+                                                    <qriously :value="addressErcUsdt?addressErcUsdt:qrcode.value" :size="qrcode.size"/>
                                                 </div>
                                                 <div slot="footer"></div>
                                             </Modal>
@@ -382,9 +382,7 @@
             }
         },
         created() {
-            console.log(this.$route.query, this.coinType)
             this.coinType = this.$route.query.name || ''
-            console.log(this.coinType)
             // this.getMember();
             this.getMoney()
             this.getList()

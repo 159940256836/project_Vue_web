@@ -692,7 +692,7 @@
                 }
               }
             } else {
-              this.currentCoin = this.coinList[0]
+              // this.currentCoin = this.coinList[0]
               this.coinType = this.currentCoin.unit
             }
           } else {
@@ -908,11 +908,15 @@
       }
     },
     created() {
-      // this.getMember();
-      this.$http.options.emulateJSON = false
-      this.coinType = this.$route.query.name || ''
       this.getList(0, 10, 1)
       this.getAddrCoin()
+      this.coinType = this.$route.query.name || ''
+      // this.getMember();
+      this.$http.options.emulateJSON = false
+      if (this.coinType == 'USDT') {
+        this.linkStatus = true
+      }
+
     },
     computed: {
 

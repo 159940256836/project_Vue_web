@@ -989,7 +989,7 @@ ul,li{
         }
         td {
             color: #8090AF;
-            border-bottom: 0 !important;
+            /*border-bottom: 0 !important;*/
         }
     }
 }
@@ -1033,7 +1033,7 @@ ul,li{
             }
             .ivu-table-row td {
                 background-color: #111530;
-                border-color: #f5f5f5;
+                border-bottom: 0;
             }
         }
     }

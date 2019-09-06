@@ -373,14 +373,17 @@
     created() {
       this.getMember()
       this.getList(0, 10)
-      this.coinType = this.$route.query.name
       this.getCoin()
     },
     methods: {
       changeCoin(value) {
         if (value == 'USDT') {
           this.linkStatus = true
-        } else this.linkStatus = false
+        } else {
+          this.linkStyle = 'USDT'
+          // this.withdrawAddr = ''
+          this.linkStatus = false
+        }
       },
       /*链名称*/
       changeChain(name) {

@@ -263,6 +263,10 @@ export default {
     changeTab(name) {
       const self = this
       console.log(name)
+      // if ((name !== 'withdraw' || name !== '/personal/withdraw')||(name !== 'recharge' || name !== '/personal/recharge')) {
+        this.$route.query.name = ''
+      // }
+      console.log(name)
       if (name == 'withdraw' || name == '/personal/withdraw') {
         console.log(this.user, name)
         if (this.user != 4) {

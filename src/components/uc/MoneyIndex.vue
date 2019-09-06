@@ -451,7 +451,7 @@
     .hidden-assets {
       position: absolute;
       min-width: 300px;
-      top: -60px;
+      top: -40px;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
