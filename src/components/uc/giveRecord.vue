@@ -183,6 +183,11 @@ export default {
 </style>
 <style lang="scss">
     .nav-rights-give {
+        .ivu-input {
+            background: #111530;
+            border: 1px solid #58698A;
+            border-radius: 0;
+        }
         .ivu-table {
             &:before {
                 background: transparent;
@@ -192,8 +197,9 @@ export default {
             padding-right: 32px;
             border-radius: 0;
             background: #111530;
-            border: 1px solid #2A3850;
+            border: 1px solid #58698A;
         }
+
         .blc-table {
             .ivu-table-wrapper {
                 td {

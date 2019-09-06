@@ -22,6 +22,12 @@
 </style>
 <style lang="scss">
   .mymsg_wrapper {
+    .ivu-tabs {
+      overflow: initial;
+    }
+    /*.ivu-btn[disabled]:hover {*/
+    /*  background: transparent;*/
+    /*}*/
     .ivu-tabs-nav-scroll {
       height: 60px;
       background: #111530;
@@ -256,6 +262,10 @@ export default {
     },
     changeTab(name) {
       const self = this
+      console.log(name)
+      // if ((name !== 'withdraw' || name !== '/personal/withdraw')||(name !== 'recharge' || name !== '/personal/recharge')) {
+        this.$route.query.name = ''
+      // }
       console.log(name)
       if (name == 'withdraw' || name == '/personal/withdraw') {
         console.log(this.user, name)

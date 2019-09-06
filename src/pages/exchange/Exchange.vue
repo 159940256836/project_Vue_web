@@ -188,9 +188,9 @@
                             {{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}
                         </span>
           </div>
-          <!--<div class="item" @click="changeSkin" style="float: right">
+          <div class="item" @click="changeSkin" style="float: right">
                         <img :src="skin == 'night' ? night : day" alt="">
-                    </div>-->
+                    </div>
         </div>
         <div class="imgtable" :loading="loadingButton7">
           <!-- <div class="handler">
@@ -1157,7 +1157,7 @@
         > span {
           color: #333;
           background-color: #fafafa;
-          box-shadow: 0 0 2px #ccc;
+          /*box-shadow: 0 0 2px #ccc;*/
 
           &.active {
             color: #3399ff;
@@ -2269,21 +2269,21 @@
       //         });
       //     }
       // },
-      // changeSkin() {
-      //   const currentSkin = this.skin
-      //   if (currentSkin === 'day') {
-      //     this.skin = 'night'
-      //   } else {
-      //     this.skin = 'day'
-      //   }
-      //   this.$store.commit('setSkin', this.skin)
-      //   this.getKline()
-      //         // this.getPlateFull();
-      //   if (this.isLogin) {
-      //     this.getCurrentOrder()
-      //     this.getHistoryOrder()
-      //   }
-      // },
+      changeSkin() {
+        const currentSkin = this.skin
+        if (currentSkin === 'day') {
+          this.skin = 'night'
+        } else {
+          this.skin = 'day'
+        }
+        this.$store.commit('setSkin', this.skin)
+        this.getKline()
+              // this.getPlateFull();
+        if (this.isLogin) {
+          this.getCurrentOrder()
+          this.getHistoryOrder()
+        }
+      },
       changePlate(str) {
         if (str != 'all') {
           this.plate.maxPostion = 24

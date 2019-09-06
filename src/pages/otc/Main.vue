@@ -65,19 +65,19 @@
           </div>
           <div class="fiat-login-title">
             <div class="fiat-title">
-              <router-link to="/identbusiness">
-                <button>
+<!--              <router-link to="/identbusiness">-->
+                <button @click="pathStatus(1)">
                   {{certStatus == 2 ? $t('uc.identity.shenqingtuibao') : $t('paper.become') }}
                 </button>
-              </router-link>
+<!--              </router-link>-->
             </div>
             <!--发布广告-->
             <div class="fiat-title">
-              <router-link to="/PublishAdver">
-                <button>
+<!--              <router-link to="/PublishAdver">-->
+                <button @click="pathStatus(2)">
                   {{ $t('nav.fabu') }}
                 </button>
-              </router-link>
+<!--              </router-link>-->
             </div>
             <!--查看订单-->
             <div class="fiat-title-info">
@@ -529,12 +529,29 @@ export default {
       CNYRate: '' // 汇率
     }
   },
-  computed: {
-    isLogin: function() {
-      return this.$store.getters.isLogin
-    }
-  },
+
   methods: {
+    pathStatus(status) {
+      if (status == 1) {
+        if (this.member.kycStatus !== 4) {
+          this.$Message.error(this.$t('otc.validate2'))
+          return false
+        } else if (this.member.kycStatus === 4) {
+          this.$router.push({
+            path: '/identbusiness'
+          })
+        }
+      } else if (status == 2) {
+        if (this.member.kycStatus !== 4) {
+          this.$Message.error(this.$t('otc.validate2'))
+          return false
+        } else if (this.member.kycStatus === 4) {
+          this.$router.push({
+            path: '/PublishAdver'
+          })
+        }
+      }
+    },
     init() {
       this.$store.commit('navigate', 'nav-otc')
       this.$http.post(this.host + this.api.otc.coin).then(response => {
@@ -673,6 +690,14 @@ export default {
     //   this.$refs.navMenu.updateActiveName();
     // });
     this.activeMenu()
+  },
+  computed: {
+    member: function () {
+      return this.$store.getters.member
+    },
+    isLogin: function() {
+      return this.$store.getters.isLogin
+    }
   }
 }
 </script>
