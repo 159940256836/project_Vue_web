@@ -2183,7 +2183,6 @@
         this.currentCoinBC = base
         this.currentCoin.base = base
         this.currentCoin.symbol = coin + '/' + base
-        console.log(this.coins)
       },
       init() {
         let params = this.$route.params.pathMatch
@@ -2801,91 +2800,94 @@
         this.$http
             .post(this.host + this.api.market.platemini, params)
             .then(response => {
-              this.form.sell.limitPrice = response.data.bid.items[0].price
-              this.form.buy.limitPrice = response.data.ask.items[0].price
-              this.plate.askRows = []
-              this.plate.bidRows = []
-              const resp = response.body
-              if (resp.ask && resp.ask.items) {
-                for (let i = 0; i < resp.ask.items.length; i++) {
-                  if (i == 0) {
-                    resp.ask.items[i].totalAmount = resp.ask.items[i].amount
-                  } else {
-                    resp.ask.items[i].totalAmount =
+              console.log()
+              if (response.data.bid.items[0] != undefined) {
+                this.form.sell.limitPrice = response.data.bid.items[0].price
+                this.form.buy.limitPrice = response.data.ask.items[0].price
+                this.plate.askRows = []
+                this.plate.bidRows = []
+                const resp = response.body
+                if (resp.ask && resp.ask.items) {
+                  for (let i = 0; i < resp.ask.items.length; i++) {
+                    if (i == 0) {
+                      resp.ask.items[i].totalAmount = resp.ask.items[i].amount
+                    } else {
+                      resp.ask.items[i].totalAmount =
                         resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount
+                    }
                   }
-                }
-                if (resp.ask.items.length >= this.plate.maxPostion) {
-                  for (let i = this.plate.maxPostion; i > 0; i--) {
-                    const ask = resp.ask.items[i - 1]
-                    ask.direction = 'SELL'
-                    ask.position = i
-                    this.plate.askRows.push(ask)
-                  }
-                  const rows = this.plate.askRows,
-                    len = rows.length,
-                    totle = rows[0].totalAmount
-                  this.plate.askTotle = totle
-                } else {
-                  for (let i = 12; i > resp.ask.items.length; i--) {
-                    const ask = { price: 0, amount: 0 }
-                    ask.direction = 'SELL'
-                    ask.position = i
-                    ask.totalAmount = ask.amount
-                    this.plate.askRows.push(ask)
-                  }
-                  for (let i = resp.ask.items.length; i > 0; i--) {
-                    const ask = resp.ask.items[i - 1]
-                    ask.direction = 'SELL'
-                    ask.position = i
-                    this.plate.askRows.push(ask)
-                  }
-                  const rows = this.plate.askRows
-                  const len = rows.length
-                  if (rows[this.plate.maxPostion - resp.ask.items.length]) {
-                    this.plate.askTotle = rows[this.plate.maxPostion - resp.ask.items.length].totalAmount
-                  }
-                }
-              }
-              if (resp.bid && resp.bid.items) {
-                for (let i = 0; i < resp.bid.items.length; i++) {
-                  if (i == 0) {
-                    resp.bid.items[i].totalAmount = resp.bid.items[i].amount
+                  if (resp.ask.items.length >= this.plate.maxPostion) {
+                    for (let i = this.plate.maxPostion; i > 0; i--) {
+                      const ask = resp.ask.items[i - 1]
+                      ask.direction = 'SELL'
+                      ask.position = i
+                      this.plate.askRows.push(ask)
+                    }
+                    const rows = this.plate.askRows,
+                      len = rows.length,
+                      totle = rows[0].totalAmount
+                    this.plate.askTotle = totle
                   } else {
-                    resp.bid.items[i].totalAmount =
-                        resp.bid.items[i - 1].totalAmount + resp.bid.items[i].amount
+                    for (let i = 12; i > resp.ask.items.length; i--) {
+                      const ask = { price: 0, amount: 0 }
+                      ask.direction = 'SELL'
+                      ask.position = i
+                      ask.totalAmount = ask.amount
+                      this.plate.askRows.push(ask)
+                    }
+                    for (let i = resp.ask.items.length; i > 0; i--) {
+                      const ask = resp.ask.items[i - 1]
+                      ask.direction = 'SELL'
+                      ask.position = i
+                      this.plate.askRows.push(ask)
+                    }
+                    const rows = this.plate.askRows
+                    const len = rows.length
+                    if (rows[this.plate.maxPostion - resp.ask.items.length]) {
+                      this.plate.askTotle = rows[this.plate.maxPostion - resp.ask.items.length].totalAmount
+                    }
                   }
                 }
-                for (let i = 0; i < resp.bid.items.length; i++) {
-                  const bid = resp.bid.items[i]
-                  bid.direction = 'BUY'
-                  bid.position = i + 1
-                  this.plate.bidRows.push(bid)
-                  if (i == this.plate.maxPostion - 1) break
-                }
-                if (resp.bid.items.length < this.plate.maxPostion) {
-                  for (
+                if (resp.bid && resp.bid.items) {
+                  for (let i = 0; i < resp.bid.items.length; i++) {
+                    if (i == 0) {
+                      resp.bid.items[i].totalAmount = resp.bid.items[i].amount
+                    } else {
+                      resp.bid.items[i].totalAmount =
+                        resp.bid.items[i - 1].totalAmount + resp.bid.items[i].amount
+                    }
+                  }
+                  for (let i = 0; i < resp.bid.items.length; i++) {
+                    const bid = resp.bid.items[i]
+                    bid.direction = 'BUY'
+                    bid.position = i + 1
+                    this.plate.bidRows.push(bid)
+                    if (i == this.plate.maxPostion - 1) break
+                  }
+                  if (resp.bid.items.length < this.plate.maxPostion) {
+                    for (
                       let i = resp.bid.items.length;
                       i < this.plate.maxPostion;
                       i++
                   ) {
-                    const bid = { price: 0, amount: 0 }
-                    bid.direction = 'BUY'
-                    bid.position = i + 1
-                    bid.totalAmount = 0
-                    this.plate.bidRows.push(bid)
+                      const bid = { price: 0, amount: 0 }
+                      bid.direction = 'BUY'
+                      bid.position = i + 1
+                      bid.totalAmount = 0
+                      this.plate.bidRows.push(bid)
+                    }
+                    const rows = this.plate.bidRows,
+                      len = rows.length,
+                      totle = rows[resp.bid.items.length - 1].totalAmount
+                    this.plate.bidTotle = totle
+                  } else {
+                    const rows = this.plate.bidRows,
+                      len = rows.length,
+                      totle = rows[len - 1].totalAmount
+                    this.plate.bidTotle = totle
                   }
-                  const rows = this.plate.bidRows,
-                    len = rows.length,
-                    totle = rows[resp.bid.items.length - 1].totalAmount
-                  this.plate.bidTotle = totle
-                } else {
-                  const rows = this.plate.bidRows,
-                    len = rows.length,
-                    totle = rows[len - 1].totalAmount
-                  this.plate.bidTotle = totle
-                }
                 // this.plate.bidRows = this.plate.bidRows.slice(0,this.plate.maxPostion);
+                }
               }
             })
       },
@@ -2994,14 +2996,16 @@
               '/topic/market/trade/' + that.currentCoin.symbol,
               function(msg) {
                 const resp = JSON.parse(msg.body)
-                if (resp.length > 0) {
-                  for (let i = 0; i < resp.length; i++) {
-                    that.trade.rows.unshift(resp[i])
-                  }
-                }
-                if (that.trade.rows.length > 30) {
-                  that.trade.rows = that.trade.rows.slice(0, 30)
-                }
+                that.trade.rows.unshift(resp)
+
+                // if (resp.length > 0) {
+                //   for (let i = 0; i < resp.length; i++) {
+                //     that.trade.rows.unshift(resp[i])
+                //   }
+                // }
+                // if (that.trade.rows.length > 30) {
+                //   that.trade.rows = that.trade.rows.slice(0, 30)
+                // }
               }
 
           )

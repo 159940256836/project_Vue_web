@@ -222,7 +222,7 @@ webpackJsonp([4], [function(t, e, i) {
                 if (null !== (t = this.paneViews()))
                     for (e = t, i = 0; i < e.length; i++) e[i].update();
                 for (e = this.m_priceAxisViews, i = 0; i < e.length; i++) e[i].update();
-                for (e = this.m_timeAxisViews, i = 0; i < e.length; i++) e[i].update()
+                for (e = this.m_timeAxisViews, i = 0; i < e.length; i++) e[i].update();
             }, s.prototype.setLastPoint = function(t, e) { this._lastPoint = this._preparePoint(t, e), this.updateAllViews() }, s.prototype.setLastFixedPoint = function(t) { this._lastFixedPoint = t, this.updateAllViews() }, s.prototype.title = function() { return "Line Tool" }, s._pointSetId = 1, s.prototype.start = function() { this.createServerPoints() }, s.prototype.createServerPoints = function() {
                 var t, e, i, o, n, r;
                 if (!this._recursiveGuard && this._isActualSymbol && this._model.chartApi().connected() && (this._currentPointsetId && (this._model.chartApi().removePointset(this.currentPointsetId()), this._currentPointsetId = null), !this._model.timeScale().isEmpty() && (0 === this._timePoint.length && this.normalizePoints(), 0 !== this._timePoint.length))) {
@@ -16210,7 +16210,7 @@ webpackJsonp([4], [function(t, e, i) {
                     }
                     var a, l, h, c, d, p, u, _, f, g, v, y, b, w, S;
                     if (e.kind() === n.MONTHS) a = r(o, s) / e.multiplier();
-                    else if (e.kind() === n.WEEKS) l = Math.ceil((s - o) / 604800), a = Math.ceil(l / e.multiplier());
+                    else if (e.kind() === n.WEEKS) l = Math.ceil((s - o) / 6048.00), a = Math.ceil(l / e.multiplier());
                     else {
                         if (h = m.utc_to_cal(i.timezone, +new Date(1e3 * o)), c = m.utc_to_cal(i.timezone, +new Date(1e3 * s)), (d = (s - o) / 86400) > 4 * (7 - i.spec.weekEndsCount())) u = d / 7, p = u * (7 - i.spec.weekEndsCount());
                         else {
@@ -17624,7 +17624,7 @@ webpackJsonp([4], [function(t, e, i) {
             var e, i;
             "stop" === this._state && this._chart.model().beginUndoMacro(1 === t ? "Move Left" : "Move Right"), this._state = "moving", this._moveType = "animated",
                 this._deferredFinishTimeout && (clearTimeout(this._deferredFinishTimeout), this._deferredFinishTimeout = 0), this._finishingTimeout && (clearTimeout(this._finishingTimeout), this._finishingTimeout = 0), this._startTime = +new Date, this._movingTimeout || (e = this._startTime, i = 10, this._movingTimeout = setTimeout(function o() { this._moveStep.call(this, e, 0, 50 * t, 1e3), this._movingTimeout = setTimeout(o.bind(this), i) }.bind(this), i))
-        }, o.prototype._moveStep = function(t, e, i, o) { var n, s, r; if (!this._chart.model().timeScale().isEmpty()) return n = +new Date, s = 1 - (Math.max(0, t + o - n) / o || 0), s < 1 && (r = jQuery.easing.easeOutCubic(null, o * s, 0, 1, o), this.currentDistance = (i - e) * r + e), this._chart.model().scrollChart(this.currentDistance), s }, o.prototype._finishMove = function(t) {
+        }, o.prototype._moveStep = function(t, e, i, o) { var n, s, r; if (!this._chart.model().timeScale().isEmpty())  return n = +new Date, s = 1 - (Math.max(0, t + o - n) / o || 0), s < 1 && (r = jQuery.easing.easeOutCubic(null, o * s, 0, 1, o), this.currentDistance = (i - e) * r + e), this._chart.model().scrollChart(this.currentDistance), s }, o.prototype._finishMove = function(t) {
             var e, i;
             clearTimeout(this._movingTimeout), this._movingTimeout = 0, this._deferredFinishTimeout = 0, e = this.currentDistance, i = +new Date, this._finishingTimeout = setTimeout(function t() { this._moveStep.call(this, i, e, 0, 700) < 1 ? this._finishingTimeout = setTimeout(t.bind(this), 10) : (this._state = "stop", this._moveType = "", this._movingTimeout = 0, this.currentDistance = 0, this._chart.model().endUndoMacro()) }.bind(this), 10)
         }, o.prototype._stopMove = function(t) { "moving" === this._state && (this._state = "wait_finishing", (new Date).getTime() - this._startTime < 200 ? this._deferredFinishTimeout = setTimeout(this._finishMove.bind(this), 200 - ((new Date).getTime() - this._startTime)) : this._finishMove()) }, o.prototype._moveByBar = function(t) {
@@ -18996,6 +18996,7 @@ webpackJsonp([4], [function(t, e, i) {
                 var e, i = this.dataSourceAtPoint(t.localX, t.localY);
                 i.hittest && i.hittest.result() === T.CUSTOM && (e = i.hittest.data().mouseUpHandler) && e(t)
             }, o.prototype.mouseUpEvent = function(t) {
+                console.log(t)
                 var e, i, o, n, a, l, h, c, d, p, _, f, m, g, v, y, b, w, T, C, L, k, I, A, E, M, D, O, $, V, B, R, N, F;
                 if (this._processMouseUpForCustomHandler(t), this._clonningAtMoveLineTool = null, e = this, P.emit("mouse_up", { clientX: t.clientX, clientY: t.clientY, pageX: t.pageX, pageY: t.pageY, screenX: t.screenX, screenY: t.screenY }), i = this._chart.model(), o = this._touchMove, delete this._touchMove, n = S.tool.value(), TradingView.supportTouch() && !o && "LineToolBrush" !== n && this.isLineTool(n) && !i.lineBeingCreated()) return a = i.crossHairSource().currentPoint(), l = this._state.defaultPriceScale(), h = l.coordinateToPrice(a.y), c = Math.round(i.timeScale().coordinateToIndex(a.x)), d = { index: c, price: h }, p = i.createLineTool(this._state, d, n), i.setSelectedSource(p), i.lineBeingCreated() || this._finishTool(p), this._updateTooltip(a.x, a.y), void delete this._startTouchPoint;
                 if (i.lineBeingCreated() && !(i.lineBeingCreated() instanceof u) && this._startTouchPoint) return _ = !1, delete this._startTouchPoint, o || (p = i.lineBeingCreated(), f = p.points()[p.points().length - 1], h = f.price, m = p.priceScale(), m.isPercent() && (g = i.lineBeingCreated().ownerSource().firstValue(), h = m.priceRange().convertToPercent(h, g)), _ = i.coninueCreatingLine({ index: f.index, price: h }, {}), delete this._lastDrawingPoint), void(_ && this._finishTool(p));
@@ -23088,10 +23089,10 @@ webpackJsonp([4], [function(t, e, i) {
 
     function o(t, e) { return t.ticker + "_" + e }
 
-    function n(t) { return new Date(t).toISOString() }
+    function n(t) { console.log(t); return new Date(t).toISOString() }
     var s, r, a, l, h, c;
     Object.defineProperty(e, "__esModule", { value: !0 }), s = i(36), r = i(364), a = i(56), l = i(3), i(117), h = function() {
-        function t(t, e, i, o) { this._cache = { bars: [] }, this._nextSubscriptionId = 0, this._pendingSubscribers = [], this._subscribers = [], this._requesting = !1, this._leftDate = null, this._gaps = [], this._needPurgeCache = !1, this._realtimeOn = !1, this._endOfData = !1, this._resetCacheTimeout = null, this._errorMessage = null, this._datafeed = t, this._symbolInfo = e, this._resolution = i, this._dwmAligner = o }
+        function t(t, e, i, o) {  console.log(t,o); this._cache = { bars: [] }, this._nextSubscriptionId = 0, this._pendingSubscribers = [], this._subscribers = [], this._requesting = !1, this._leftDate = null, this._gaps = [], this._needPurgeCache = !1, this._realtimeOn = !1, this._endOfData = !1, this._resetCacheTimeout = null, this._errorMessage = null, this._datafeed = t, this._symbolInfo = e, this._resolution = i, this._dwmAligner = o }
         return t.prototype.addSubscription = function(t, e, i) {
                 var o = this,
                     n = this._getNextSubscriptionId(),
@@ -23112,10 +23113,10 @@ webpackJsonp([4], [function(t, e, i) {
                     if ((!this._leftDate || t.range.from < this._leftDate) && (e = new s.Interval(this._resolution), i = (e.inMilliseconds() || 0) / 1e3, o = !this._leftDate, r = !o && !!this._cache.bars.length && this._cache.bars[0].time / 1e3 - t.range.from < i, (o || !r) && !this._endOfData)) return this._pendingSubscribers.push(t), void this._ensureRequestedTo(t.range.from);
                     a = this._moveSubscriberToRealtime(t), this._returnHistoryDataToSubscriber(t, a), this._subscribeRealtimeIfNeeded(), this._processNextPendingSubscriber()
                 }
-            }, t.prototype._moveSubscriberToRealtime = function(t) { var e = { key: t.key, onHistoryCallback: t.onHistoryCallback, barset: null }; return this._subscribers.push(e), e }, t.prototype._subscribeRealtimeIfNeeded = function() {!this._subscribers.length || this._realtimeOn || this._symbolInfo.expired || this._symbolInfo.expiration_date || this._subscribeRealtime() }, t.prototype._subscribeRealtime = function() {
+            }, t.prototype._moveSubscriberToRealtime = function(t) {  var e = { key: t.key, onHistoryCallback: t.onHistoryCallback, barset: null }; console.log(t,e); return this._subscribers.push(e), e }, t.prototype._subscribeRealtimeIfNeeded = function() {!this._subscribers.length || this._realtimeOn || this._symbolInfo.expired || this._symbolInfo.expiration_date || this._subscribeRealtime() }, t.prototype._subscribeRealtime = function() {
                 var t, e, i = this;
                 this._symbolInfo.expired || this._realtimeOn || (t = function(t) {
-                    i._dwmAligner && (t.time = i._dwmAligner.tradingDayToSessionStart(t.time)), i._putToCacheNewBar(t), i._subscribers.forEach(function(e) {
+                    i._dwmAligner && (t.time), i._putToCacheNewBar(t), i._subscribers.forEach(function(e) {
                         var i = e.barset;
                         if (null === i) throw Error("subscirber.barset is null");
                         i.add(t), e.onHistoryCallback(i)
@@ -23128,6 +23129,7 @@ webpackJsonp([4], [function(t, e, i) {
             }, t.prototype._unsubscribeRealtime = function() {!this._symbolInfo.expired && this._realtimeOn && (this._datafeed.unsubscribeBars(o(this._symbolInfo, this._resolution)), this._logMessage("Unsubscribed from realtime"), this._realtimeOn = !1) }, t.prototype._returnHistoryDataToSubscriber = function(t, e) {
                 var i, o, s = t.range,
                     r = l.enabled("cl_feed_return_all_data") ? this._createBarset(this._leftDate || s.from) : this._createBarset(s.from);
+                    // console.log(r,s,   this._endOfData && null !== this._leftDate && t.range.from <= this._leftDate && (r.endOfData = !0))
                 r.count() > 0 ? this._logMessage("Bars to return for request {0}: total {1} bars in [{2} ... {3}] ".format(t.key, r.count(), n(r.bars[0].time), n(r.bars[r.count() - 1].time))) : this._logMessage("Request {0}. Nothing to return.".format(t.key)), e.barset = r, i = this._inGapNextTime(s.from), i ? (this._logMessage("Request {0} is in gap, nextTime = {1}".format(t.key, n(1e3 * i))), r.nextTime = i) : 0 === r.count() && (o = this._cache.bars.length && this._cache.bars[this._cache.bars.length - 1].time / 1e3) && s.from > o && (this._logMessage("Request {0} is in gap, nextTime = {1}".format(t.key, n(1e3 * o))), r.nextTime = o || void 0),
                     this._endOfData && null !== this._leftDate && t.range.from <= this._leftDate && (r.endOfData = !0), t.onHistoryCallback(r)
             }, t.prototype._createBarset = function(t) { var e = r.lowerbound(this._cache.bars, 1e3 * t, function(t, e) { return t.time < e }); return new a.BarSet(this._symbolInfo, this._cache.bars.slice(e)) }, t.prototype._ensureRequestedTo = function(e) {
@@ -23161,8 +23163,9 @@ webpackJsonp([4], [function(t, e, i) {
                     o = 0 === e ? NaN : this._cache.bars[e - 1].time;
                 0 === e || o < i ? this._cache.bars.push(t) : o === i ? this._cache.bars[e - 1] = t : console.error("putToCacheNewBar: time violation, previous bar time: " + n(o) + " should be less or equal to new time: " + n(i))
             }, t.prototype._alignBarsTime = function(t) {
-                if (this._dwmAligner)
-                    for (var e = 0; e < t.length; e++) t[e].time = this._dwmAligner.tradingDayToSessionStart(t[e].time)
+                if (this._dwmAligner){
+                        // for (var e = 0; e < t.length; e++)  t[e].time = this._dwmAligner.tradingDayToSessionStart(t[e].time);
+                }
             }, t._now = function() { return Date.now() + 6e4 }, t
     }(), c = function() {
         function t(t, e) { this._threads = {}, this._datafeed = t, this._dwmAlignerCreator = e }

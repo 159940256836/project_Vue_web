@@ -1238,12 +1238,10 @@ export default {
     }
   },
   created() {
-    this.getMethodCurrency()
     this.reloadAd()
   },
   mounted() {
     this.getMethodCurrency()
-    console.log(this.coinsData)
   }
 }
 </script>

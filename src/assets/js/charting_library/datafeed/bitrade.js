@@ -65,6 +65,9 @@ WebsockFeed.prototype.subscribeBars = function(symbolInfo, resolution, onRealtim
     case '1':
       resolution = '1min'
       break
+    case '5':
+      resolution = '5min'
+      break
     case '15':
       resolution = '15min'
       break
@@ -186,7 +189,7 @@ function Processdata(event) {
 WebsockFeed.prototype.getBars = function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
   var bars = []
   var that = this
-  this._send(this._datafeedURL + '/history', {
+  this._send(this._datafeedURL + '/v2/history', {
     symbol: symbolInfo.name,
     from: from * 1000,
     to: firstDataRequest ? new Date().getTime() : to * 1000,
@@ -221,6 +224,7 @@ WebsockFeed.prototype.periodLengthSeconds = function(resolution, requiredPeriods
   } else if (resolution === 'H') {
     daysCount = requiredPeriodsCount * resolution / 24
   } else {
+    console.log(daysCount)
     daysCount = requiredPeriodsCount * resolution / (24 * 60)
   }
   return daysCount * 24 * 60 * 60
