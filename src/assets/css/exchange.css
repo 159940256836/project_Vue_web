@@ -797,7 +797,7 @@ iframe {
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td {
-    border-bottom: 1px solid #1B1F3C;
+    border-bottom: 1px solid #1B1F3C !important;
     border-color: #1B1F3C;
 }
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row tr:hover {
@@ -1044,17 +1044,17 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td{
 /*}*/
 
 .exchange .left .ivu-table-wrapper .ivu-table .ivu-table-row td{
-    border-bottom: 1px solid #0E0E28;
+    border-bottom: 1px solid #0E0E28 !important;
 }
 .exchange .buy_table .ivu-table-wrapper .ivu-table .ivu-table-row td{
-    border-bottom: 1px solid #0E0E28;
+    border-bottom: 1px solid #0E0E28 !important;
 }
 
 .exchange.day .left .ivu-table-wrapper .ivu-table .ivu-table-row td{
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0 !important;
 }
 .exchange.day .buy_table .ivu-table-wrapper .ivu-table .ivu-table-row td{
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0 !important;
 }
 
 /*.feature-no-touch ._tv-dialog .button:not(.disabled):not(.selected):hover:before,*/

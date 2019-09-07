@@ -2179,7 +2179,7 @@
         }
         const coin = params.toUpperCase().split('_')[0]
         const base = params.toUpperCase().split('_')[1]
-        // this.currentCoin.coin = coin
+        this.currentCoin.coin = coin
         this.currentCoinBC = base
         this.currentCoin.base = base
         this.currentCoin.symbol = coin + '/' + base
