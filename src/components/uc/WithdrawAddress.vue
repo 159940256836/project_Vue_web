@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-rights-address">
+  <div class="nav-rights-address" id="withdraw">
     <div class="nav-right">
       <div class="bill_box_address">
         <section>
@@ -217,7 +217,7 @@
     data() {
       var that = this
       return {
-        interval: function () {
+        interval: function() {
         },
         linkStyle: 'USDT', // 链名称
         linkStatus: false, // 链状态
@@ -298,20 +298,20 @@
               return h('div', [
                 h(
                     'span',
-                    {
-                      style: {
-                        color: '#3399ff',
-                        cursor: 'pointer'
-                      },
-                      on: {
-                        click: () => {
-                          if (params.row.id) {
-                            this.addAddr(2, params.row.id)
-                          }
-                          // this.getList(0, 10);
-                        }
-                      }
+                  {
+                    style: {
+                      color: '#3399ff',
+                      cursor: 'pointer'
                     },
+                    on: {
+                      click: () => {
+                        if (params.row.id) {
+                          this.addAddr(2, params.row.id)
+                        }
+                          // this.getList(0, 10);
+                      }
+                    }
+                  },
                     that.$t('uc.finance.withdraw.delete')
                 )
               ])
@@ -385,7 +385,7 @@
           this.linkStatus = false
         }
       },
-      /*链名称*/
+      /* 链名称*/
       changeChain(name) {
         this.linkStyle = name
       },
@@ -394,7 +394,7 @@
         // 1.输入谷歌验证码
         // 2.输入手机验证码
         // 3.输入邮箱验证码
-        this.$http.post(this.host + '/uc/getGoogleState', {mobile: this.$store.getters.member.mobile}).then(res => {
+        this.$http.post(this.host + '/uc/getGoogleState', { mobile: this.$store.getters.member.mobile }).then(res => {
           const data = res.body
           this.isCode = data.data
           console.log(this.isCode)
@@ -471,7 +471,7 @@
           if (resp.code == 0) {
             for (let i = 0; i < resp.data.length; i++) {
               if (resp.data[i] == 'ERCUSDT') {
-                resp.data.splice(i, 1);
+                resp.data.splice(i, 1)
               }
               this.coinList.push(resp.data[i])
             }
@@ -519,7 +519,7 @@
                 if (resp.code == 0) {
                   this.$Message.success(resp.message)
                   me.sendMsgDisabled1 = true
-                  const interval = window.setInterval(function () {
+                  const interval = window.setInterval(function() {
                     if (me.time1-- <= 0) {
                       me.time1 = 60
                       me.sendMsgDisabled1 = false
@@ -571,7 +571,7 @@
                 if (resp.code == 0) {
                   this.$Message.success(resp.message)
                   me.sendMsgDisabled1 = true
-                  const interval = window.setInterval(function () {
+                  const interval = window.setInterval(function() {
                     if (me.time1-- <= 0) {
                       me.time1 = 60
                       me.sendMsgDisabled1 = false
@@ -874,7 +874,8 @@
   }
 </style>
 <style lang="scss">
-  .ivu-input-group-append,
+#withdraw{
+ .ivu-input-group-append,
   .ivu-input-group-prepend {
     background: #111530 !important;
     border: 1px solid #2a3850 !important;
@@ -1135,6 +1136,7 @@
         }
       }
     }
+}
   }
 </style>
 

@@ -455,7 +455,7 @@
         height: 50px;
       }
       .ivu-table td, .ivu-table th {
-        border: 0;
+        border: 0 !important;
       }
       /*#list1 li:nth-of-type(odd){ background:#00ccff;}*/
       /*#list1 li:nth-of-type(even){ background:#ffcc00;}*/
@@ -692,7 +692,7 @@ export default {
     this.activeMenu()
   },
   computed: {
-    member: function () {
+    member: function() {
       return this.$store.getters.member
     },
     isLogin: function() {

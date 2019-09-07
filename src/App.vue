@@ -896,6 +896,9 @@ export default {
     }
 </style>
 <style lang="scss">
+.ivu-table td, .ivu-table th{
+    border-bottom:0 !important;
+}
 .footer .footer_content .footer-main .footer_right .footer_info li{
     color:#8790a1 !important;
 }
