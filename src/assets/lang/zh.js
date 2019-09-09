@@ -1463,6 +1463,11 @@ module.exports = {
       agentcodee: '请输入正确的推荐码'
     },
     safe: {
+      nickName: '用户昵称',
+      nickAstrict: '昵称最低三个字符',
+      nickNum: '请输入3-12位字符用户昵称',
+      nick: '请输入用户昵称',
+      nickInfo: '用户登录显示、OTC买卖、挂单',
       safelevel_low: '用户等级',
       safelevel_high: '身份认证',
       safelevel_medium: '审核未通过',

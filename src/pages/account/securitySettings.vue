@@ -1,1302 +1,1369 @@
 <template>
-    <div class="nav-rights">
-        <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.securitysetting') }}</h2>
-        <div class="nav-right padding-right-clear">
-            <div class="padding-right-clear padding-left-clear rightarea user account-box">
-                <div class="rightarea-con">
-                    <div class="user-top-icon">
-                        <div class="user-icons">
-                            <div class="user-face user-avatar-public">
-                                <span class="user-avatar-in">{{usernameS}}</span>
-                            </div>
-                            <div class="user-name" style="line-height:52px">
-                                <span style="line-height:52px">{{user.username}}</span>
-                            </div>
-                        </div>
-                        <Row class="user-right">
-                            <div>UID:&nbsp;&nbsp;{{uid}}</div>
-                            <div>{{$t("uc.safe.safelevel_low")}}:&nbsp;&nbsp;{{memberlevel}}</div>
-                        </Row>
-                    </div>
-                    <section class="accountContent">
-                        <div class="account-in">
-                            <!-- 1 -->
-                            <div class="account-item" style="display:none">
-                                <div class="account-item-in">
-                                    <Icon type="person" style="font-size: 18px;color: #00b5f6;"></Icon>
-                                    <span class="card-number">{{$t('uc.safe.nickname')}}</span>
-                                    <p class="bankInfo" style="color:grey;">
-                                        bearbaby
-                                    </p>
-                                    <p class="right-side" style="color:#fff;">{{$t('uc.safe.binded')}}</p>
-                                </div>
-                            </div>
-                            <!-- 2 身份认证 -->
-                            <div class="account-item">
-                                <div class="account-item-in">
-                                    <Icon type="md-card" size="18" color="#00b5f6" />
-                                    <span class="card-number">{{$t('uc.safe.safelevel_high')}}</span>
-                                    <p v-if="user.realVerified==1" class="bankInfo" style="color: grey;">
-                                        {{user.realName}}
-                                    </p>
-                                    <p  v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null" class="bankInfo">
-                                        <!--审核未通过 ，请重试-->
-                                        {{$t('uc.safe.safelevel_medium')}}
-                                        <span style="color: #3399ff;">{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}</span>
-                                    </p>
-                                    <p v-else class="bankInfo" style="color: grey;">
-                                        {{$t('uc.safe.verifiedtip')}}
-                                    </p>
-                                    <p v-if="user.realVerified==1" style="color:#fff" class="right-side">
-                                        {{$t('uc.safe.binded')}}
-                                    </p>
-                                    <p v-else-if="user.realAuditing==1" class="right-side">
-                                        {{$t('uc.safe.binding')}}
-                                    </p>
-                                    <p class="right-side btn" v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null">
-                                        <a @click="modal6 = true"  :title="user.realNameRejectReason">
-                                            {{$t('uc.safe.bindretry')}}
-                                        </a>
-                                    </p>
-                                    <p class="right-side btn"  v-else>
-                                        <a  @click="modal6 = true">
-                                            {{$t('uc.safe.bind')}}
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- 3 邮箱 -->
-                            <div class="account-item">
-                                <div class="account-item-in">
-                                    <Icon type="ios-mail" size="20" color="#00b5f6;" />
-                                    <span class="card-number">{{$t('uc.safe.email')}}</span>
-                                    <p v-if="user.emailVerified==1" class="bankInfo" style="color: grey;">
-                                        {{user.email}}
-                                    </p>
-                                    <p v-else class="bankInfo" style="color: grey;">
-                                        {{$t('uc.safe.bindemail')}}
-                                    </p>
-                                    <p class="right-side" v-if="user.emailVerified==1">
-                                       <a class="btn" @click="modal21 = true">
-                                           <!--换绑-->
-                                           {{$t('uc.safe.inTie')}}
-                                       </a>
-                                    </p>
-                                    <p class="right-side" v-else>
-                                        <a class="btn" @click="modal2 = true">
-                                            {{$t('uc.safe.bind')}}
-                                        </a>
-                                    </p>
-
-                                </div>
-                            </div>
-                            <!-- 3 手机 -->
-                            <div class="account-item">
-                                <div class="account-item-in">
-                                    <Icon type="ios-call" color="#00b5f6" size="20" />
-                                    <span class="card-number">{{$t('uc.safe.phone')}}</span>
-                                    <p v-if="user.phoneVerified==1" class="bankInfo" style="color: grey;">
-                                        {{user.mobilePhone}}
-                                    </p>
-                                    <p v-else class="bankInfo" style="color: grey;">
-                                        {{$t('uc.safe.bindphone')}}
-                                    </p>
-                                    <p class="right-side" v-if="user.phoneVerified==1" style="color:#fff;">
-                                         <a  class="btn" @click="modal31= true">
-                                           <!--换绑-->
-                                          {{$t('uc.safe.inTie')}}
-                                        </a>
-                                    </p>
-                                    <p v-else class="right-side">
-                                        <a  class="btn" @click="modal3 = true">
-                                            {{$t('uc.safe.bind')}}
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- 4 登录密码-->
-                            <div class="account-item">
-                                <div class="account-item-in">
-                                    <Icon type="ios-lock" size="20" color="#00b5f6;"></Icon>
-                                    <span class="card-number">{{$t('uc.safe.loginpwd')}}</span>
-                                    <p class="bankInfo" style="color: grey;">
-                                        {{$t('uc.safe.logintip')}}
-                                    </p>
-                                    <p class="right-side">
-                                        <a class="btn" @click="noPhone">
-                                            {{$t('uc.safe.edit')}}
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- 5 资金密码-->
-                            <div class="account-item">
-                                <div class="account-item-in">
-                                    <Icon type="logo-bitcoin" size="20" color="#00b5f6" />
-                                    <span class="card-number">{{$t('uc.safe.fundpwd')}}</span>
-                                    <p class="bankInfo" style="color: grey;">
-                                        {{$t('uc.safe.fundtip')}}
-                                    </p>
-                                    <!-- <p class="right-side" v-if="user.phoneVerified==0">
-                                        <a class="btn"  @click="noPhone">
-                                            {{$t('uc.safe.set')}}
-                                        </a>
-                                    </p> -->
-                                    <p class="right-side" v-if="user.fundsVerified==0">
-                                        <a class="btn"  @click="modal5 = true">
-                                            {{$t('uc.safe.set')}}
-                                        </a>
-                                    </p>
-                                    <p class="right-side" v-else>
-                                        <a class="btn"  @click="showItemFundpwd()" >
-                                            {{$t('uc.safe.edit')}}
-                                        </a>
-                                    </p>
-
-                                </div>
-                            </div>
-                            <!-- 6 谷歌-->
-                            <div class="account-item googleValidter">
-                                <div class="account-item-in" style="width: 100%;">
-                                    <Icon type="social-googleplus-outline" />
-                                    <Icon type="logo-google" size="20" color="#00b5f6" />
-                                    <span class="card-number">{{$t("uc.safe.GoogleAuthentication")}}</span>
-                                    <p class="bankInfo" style="color: grey;">
-                                        {{$t('uc.safe.GoogleAuthenticationAbs')}}
-                                        <router-link to="/helpList"><a href="javascript:void(0)">{{$t('uc.safe.userguide')}}</a></router-link>
-                                    </p>
-                                    <div class="google-info right-side">
-                                        <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="resetGoogle">{{googleAuthentication}}</span>
-                                        <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
-                                            <span slot="open"></span>
-                                            <span slot="close"></span>
-                                        </i-switch>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+  <div class="nav-rights">
+    <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.securitysetting') }}</h2>
+    <div class="nav-right padding-right-clear">
+      <div class="padding-right-clear padding-left-clear rightarea user account-box">
+        <div class="rightarea-con">
+          <div class="user-top-icon">
+            <div class="user-icons">
+              <div class="user-face user-avatar-public">
+                <span class="user-avatar-in">{{usernameS}}</span>
+              </div>
+              <div class="user-name" style="line-height:52px">
+                <span style="line-height:52px">{{user.username}}</span>
+              </div>
             </div>
+            <Row class="user-right">
+              <div>UID:&nbsp;&nbsp;{{uid}}</div>
+              <div>{{$t("uc.safe.safelevel_low")}}:&nbsp;&nbsp;{{memberlevel}}</div>
+            </Row>
+          </div>
+          <section class="accountContent">
+            <div class="account-in">
+              <!-- 0 -->
+              <div class="account-item" style="display:none">
+                <div class="account-item-in">
+                  <Icon type="person" style="font-size: 18px;color: #00b5f6;"></Icon>
+                  <span class="card-number">{{$t('uc.safe.nickname')}}</span>
+                  <p class="bankInfo" style="color:grey;">
+                    bearbaby
+                  </p>
+                  <p class="right-side" style="color:#fff;">{{$t('uc.safe.binded')}}</p>
+                </div>
+              </div>
+              <!-- 1 用户昵称-->
+              <div class="account-item">
+                <div class="account-item-in">
+                  <Icon type="md-person" style="font-size: 18px;color: #00b5f6;"></Icon>
+                  <span class="card-number">{{ $t('uc.safe.nickName') }}</span>
+                  <p class="bankInfo" style="color: grey;">
+                    {{ $t('uc.safe.nickInfo') }}
+                  </p>
+                  <p class="right-side">
+                    <a class="btn" @click="modalNickName = true">
+                      {{$t('uc.safe.edit')}}
+                    </a>
+                  </p>
+                </div>
+              </div>
+              <!-- 2 身份认证 -->
+              <div class="account-item">
+                <div class="account-item-in">
+                  <Icon type="md-card" size="18" color="#00b5f6"/>
+                  <span class="card-number">{{$t('uc.safe.safelevel_high')}}</span>
+                  <p v-if="user.realVerified==1" class="bankInfo" style="color: grey;">
+                    {{user.realName}}
+                  </p>
+                  <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null"
+                     class="bankInfo">
+                    <!--审核未通过 ，请重试-->
+                    {{$t('uc.safe.safelevel_medium')}}
+                    <span style="color: #3399ff;">{{user.realNameRejectReason?"："+user.realNameRejectReason:""}}</span>
+                  </p>
+                  <p v-else class="bankInfo" style="color: grey;">
+                    {{$t('uc.safe.verifiedtip')}}
+                  </p>
+                  <p v-if="user.realVerified==1" style="color:#fff" class="right-side">
+                    {{$t('uc.safe.binded')}}
+                  </p>
+                  <p v-else-if="user.realAuditing==1" class="right-side">
+                    {{$t('uc.safe.binding')}}
+                  </p>
+                  <p class="right-side btn"
+                     v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null">
+                    <a @click="modal6 = true" :title="user.realNameRejectReason">
+                      {{$t('uc.safe.bindretry')}}
+                    </a>
+                  </p>
+                  <p class="right-side btn" v-else>
+                    <a @click="modal6 = true">
+                      {{$t('uc.safe.bind')}}
+                    </a>
+                  </p>
+                </div>
+              </div>
+              <!-- 3 邮箱 -->
+              <div class="account-item">
+                <div class="account-item-in">
+                  <Icon type="ios-mail" size="20" color="#00b5f6;"/>
+                  <span class="card-number">{{$t('uc.safe.email')}}</span>
+                  <p v-if="user.emailVerified==1" class="bankInfo" style="color: grey;">
+                    {{user.email}}
+                  </p>
+                  <p v-else class="bankInfo" style="color: grey;">
+                    {{$t('uc.safe.bindemail')}}
+                  </p>
+                  <p class="right-side" v-if="user.emailVerified==1">
+                    <a class="btn" @click="modal21 = true">
+                      <!--换绑-->
+                      {{$t('uc.safe.inTie')}}
+                    </a>
+                  </p>
+                  <p class="right-side" v-else>
+                    <a class="btn" @click="modal2 = true">
+                      {{$t('uc.safe.bind')}}
+                    </a>
+                  </p>
+
+                </div>
+              </div>
+              <!-- 3 手机 -->
+              <div class="account-item">
+                <div class="account-item-in">
+                  <Icon type="ios-call" color="#00b5f6" size="20"/>
+                  <span class="card-number">{{$t('uc.safe.phone')}}</span>
+                  <p v-if="user.phoneVerified==1" class="bankInfo" style="color: grey;">
+                    {{user.mobilePhone}}
+                  </p>
+                  <p v-else class="bankInfo" style="color: grey;">
+                    {{$t('uc.safe.bindphone')}}
+                  </p>
+                  <p class="right-side" v-if="user.phoneVerified==1" style="color:#fff;">
+                    <a class="btn" @click="modal31= true">
+                      <!--换绑-->
+                      {{$t('uc.safe.inTie')}}
+                    </a>
+                  </p>
+                  <p v-else class="right-side">
+                    <a class="btn" @click="modal3 = true">
+                      {{$t('uc.safe.bind')}}
+                    </a>
+                  </p>
+                </div>
+              </div>
+              <!-- 4 登录密码-->
+              <div class="account-item">
+                <div class="account-item-in">
+                  <Icon type="ios-lock" size="20" color="#00b5f6;"></Icon>
+                  <span class="card-number">{{$t('uc.safe.loginpwd')}}</span>
+                  <p class="bankInfo" style="color: grey;">
+                    {{$t('uc.safe.logintip')}}
+                  </p>
+                  <p class="right-side">
+                    <a class="btn" @click="noPhone">
+                      {{$t('uc.safe.edit')}}
+                    </a>
+                  </p>
+                </div>
+              </div>
+              <!-- 5 资金密码-->
+              <div class="account-item">
+                <div class="account-item-in">
+                  <Icon type="logo-bitcoin" size="20" color="#00b5f6"/>
+                  <span class="card-number">{{$t('uc.safe.fundpwd')}}</span>
+                  <p class="bankInfo" style="color: grey;">
+                    {{$t('uc.safe.fundtip')}}
+                  </p>
+                  <!-- <p class="right-side" v-if="user.phoneVerified==0">
+                      <a class="btn"  @click="noPhone">
+                          {{$t('uc.safe.set')}}
+                      </a>
+                  </p> -->
+                  <p class="right-side" v-if="user.fundsVerified==0">
+                    <a class="btn" @click="modal5 = true">
+                      {{$t('uc.safe.set')}}
+                    </a>
+                  </p>
+                  <p class="right-side" v-else>
+                    <a class="btn" @click="showItemFundpwd()">
+                      {{$t('uc.safe.edit')}}
+                    </a>
+                  </p>
+
+                </div>
+              </div>
+              <!-- 6 谷歌-->
+              <div class="account-item googleValidter">
+                <div class="account-item-in" style="width: 100%;">
+                  <Icon type="social-googleplus-outline"/>
+                  <Icon type="logo-google" size="20" color="#00b5f6"/>
+                  <span class="card-number">{{$t("uc.safe.GoogleAuthentication")}}</span>
+                  <p class="bankInfo" style="color: grey;">
+                    {{$t('uc.safe.GoogleAuthenticationAbs')}}
+                    <router-link to="/helpList"><a href="javascript:void(0)">{{$t('uc.safe.userguide')}}</a>
+                    </router-link>
+                  </p>
+                  <div class="google-info right-side">
+                    <span style="color:#3399ff;margin-right:5px;cursor:pointer;" @click="resetGoogle">{{googleAuthentication}}</span>
+                    <i-switch v-model="googleSwitch" @on-change="changeGoogleSwitch">
+                      <span slot="open"></span>
+                      <span slot="close"></span>
+                    </i-switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
-        <div class="popups-box">
-            <!-- 身份认证弹窗 -->
-            <Modal
-                :title="$t('uc.safe.safelevel_high')"
-                v-model="modal6"
-                className="vertical-center-modal"
-                width="534"
-                class="popups-modal"
-                :mask-closable="false"
-                footer-hide
-                >
-                <div class="detail-list" style="width: 100%;">
-                    <!-- 请上传资料完成实名认证 -->
-                    <!-- <h3 style="color:#3697FE;font-weight:400;">{{ $t("new.nformationto") }}</h3> -->
-                    <Form
-                        ref="formValidate6"
-                        :model="formValidate6"
-                        :rules="ruleValidate"
-                        :label-width="85"
-                        width="300px"
-                    >
-                        <div
-                            class="validate"
-                            style="color:#8090AF;"
-                        >
-                            <!--<FormItem
-                                :label="$t('uc.safe.typeId')"
-                            >
-                                <Select
-                                    v-model="formValidate6.typeId"
-                                    @on-change="areaChange"
-                                >
-                                    <Option
-                                        v-for="(item, index) in typeIdList"
-                                        :value="item.value"
-                                        :key="item.value"
+      </div>
+    </div>
+    <div class="popups-box">
+      <!--修改用户昵称-->
+      <Modal
+              :title="$t('uc.safe.edit') + $t('uc.safe.nickName')"
+              v-model="modalNickName"
+              className="vertical-center-modal"
+              width="534"
+              class="popups-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <div class="detail-list">
+          <Form
+                  :label-width="85"
+                  width="300px"
+          >
+            <FormItem :label="$t('uc.safe.nickName')" prop="mail">
+              <Input
+                      v-model="nickNameData.nickName"
+                      size="large"
+                      style="width:300px;"
+                      :placeholder="$t('uc.safe.nickNum')"
+                      :maxlength="12"
+              />
+            </FormItem>
+            <FormItem>
+              <Button type="primary" @click="setUserNickname"
+                      style="width:300px;border-radius:0;height:40px;font-size:14px;">
+                {{$t('new.confirmaaa')}}
+              </Button>
+            </FormItem>
+          </Form>
 
-                                    >
-                                        {{ item.label }}
-                                    </Option>
-                                </Select>
-                            </FormItem>-->
-                            <FormItem
-                                :label="$t('uc.safe.realname')"
-                            >
-                                <Input
-                                    v-model="formValidate6.realName"
-                                    size="large"
-                                    style="width:300px;"
-                                />
-                            </FormItem>
-                            <!-- 身份证号 -->
-                            <!--v-if="formValidate6.typeId == 1"-->
-                            <FormItem
-                                :label="$t('uc.safe.idcard')"
-                            >
-                                <Input
-                                    v-model="formValidate6.idCard"
-                                    size="large"
-                                    style="width:300px;"
-                                />
-                            </FormItem>
-                            <!-- 证件号码 -->
-                            <!--<FormItem
-                                :label="$t('uc.safe.idNumber')"
-                                v-if="formValidate6.typeId == 2"
-                            >
-                                <Input
-                                    v-model="formValidate6.idNumber"
-                                    size="large"
-                                    style="width:300px;"
-                                />
-                            </FormItem>-->
-                        </div>
-                        <!-- 真实姓名 -->
-
-                        <!-- <div style="height:300px;">
-                            <Col span="8">
-                                <input type="hidden" name="imgPreview" :value="imgPreview" />
-                                <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_positive')}}</div>
-                                <img id="frontCardImg" style="width: 230px;height: 140px;" :src="frontCardImg">
-                                <div class="acc_sc">
-                                    <Upload
-                                        ref="upload1"
-                                        :before-upload="beforeUpload"
-                                        :on-success="frontHandleSuccess"
-                                        :headers="uploadHeaders"
-                                        :action="uploadUrl"
-                                        accept=".jpg,.jpeg,.png,.gif"
-                                    >
-                                        <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
-                                    </Upload>
-                                </div>
-                            </Col>
-                            <Col span="8">
-                                <input type="hidden" name="imgNext" :value="imgNext" />
-                                <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_negative')}}</div>
-                                <img id="backCardImg" style="width: 230px;height: 140px;" :src="backCardImg">
-                                <div class="acc_sc">
-                                    <Upload
-                                        ref="upload2"
-                                        :before-upload="beforeUpload"
-                                        :on-success="backHandleSuccess"
-                                        :headers="uploadHeaders"
-                                        :action="uploadUrl"
-                                        accept=".jpg,.jpeg,.png,.gif"
-                                    >
-                                        <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
-                                    </Upload>
-                                </div>
-                            </Col>
-                            <Col span="8">
-                                <input type="hidden" name="imgLast" :value="imgLast" />
-                                <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_hand')}}</div>
-                                <img id="handCardImg" style="width: 230px;height: 140px;" :src="handCardImg">
-                                <div class="acc_sc">
-                                    <Upload
-                                        ref="upload3"
-                                        :before-upload="beforeUpload"
-                                        :on-success="handHandleSuccess"
-                                        :headers="uploadHeaders"
-                                        :action="uploadUrl"
-                                        accept=".jpg,.jpeg,.png,.gif"
-                                    >
-                                        <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
-                                    </Upload>
-                                </div>
-                            </Col>
-                        </div> -->
-                        <!-- <span v-if="lang==='简体中文'" class="uploadimgtip">提示：上传图片仅支持.jpg、.gif、.png、.jpeg格式，且推荐大小为100kb-1024kb，否则有可能上传失败。</span>
-                        <span v-else class="uploadimgtip">Tip: uploaded pictures only support.Jpg,.Gif,.Png,.Jpeg format, and recommended size is 100kb-1024kb, otherwise it may fail to upload.</span> -->
-                        <!-- Button -->
-                        <FormItem style="text-align:center;">
-                            <Button type="primary" @click="handleSubmit('formValidate6')" style="margin-left: -65px;width:300px;border-radius:0;height:40px;font-size:14px;">{{$t('new.Uploartification')}}</Button>
-                            <!-- <Button @click="handleReset('formValidate6')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button> -->
-                        </FormItem>
-                    </Form>
-                </div>
-            </Modal>
-            <!-- 邮箱弹窗 -->
-            <Modal
-                :title="$t('uc.safe.bindemail')"
-                v-model="modal2"
-                className="vertical-center-modal"
-                width="534"
-                class="popups-modal"
-                :mask-closable="false"
-                footer-hide
-                >
-                <div class="detail-list">
-                    <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="110">
-                        <!-- mail -->
-                        <FormItem :label="$t('uc.safe.email')" prop="mail">
-                            <Input v-model="formValidate2.mail" size="large" style="width:300px;"></Input>
-                        </FormItem>
-                        <!-- 登录密码 -->
-                        <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
-                            <Input v-model="formValidate2.password" size="large" type="password" style="width:300px;"></Input>
-                        </FormItem>
-                        <!-- 邮箱验证码 -->
-                        <FormItem  class="defeat-ivu" :label="$t('uc.safe.emailcode')" prop="vailCode1">
-                            <Input v-model="formValidate2.vailCode1" size="large" style="width:300px;border-right:none;">
-                            <!-- <Button slot="append">点击获取</Button> -->
-                            <div class="timebox" slot="append">
-                                <Button @click="send(1)" :disabled="sendMsgDisabled1" style="background:transparent;">
-                                    <span v-if="sendMsgDisabled1">{{time1+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled1">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
-                            </div>
-                            </Input>
-                        </FormItem>
-                        <!-- Button -->
-                        <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate2')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('new.confirmaaa')}}
-                            </Button>
-                            <!-- <Button @click="handleReset('formValidate2')" style="margin-left: 8px">
-                                {{$t('uc.safe.reset')}}
-                            </Button> -->
-                        </FormItem>
-                    </Form>
-                </div>
-            </Modal>
-            <!-- 邮箱换绑弹窗 -->
-            <Modal
-                :title="$t('uc.safe.bindemail')"
-                v-model="modal21"
-                className="vertical-center-modal"
-                width="534"
-                class="popups-modal"
-                :mask-closable="false"
-                footer-hide
-                >
-                <div class="detail-list">
-                    <Form ref="formValidate21" :model="formValidate21" :rules="ruleValidate" :label-width="110">
-                         <!-- 旧邮箱验证码 -->
-                        <FormItem  class="defeat-ivu" :label="$t('uc.safe.oldEmailCode')" prop="vailCode1">
-                            <Input v-model="formValidate21.vailCode1" size="large" style="width:300px;border-right:none;">
-                            <!-- <Button slot="append">点击获取</Button> -->
-                            <div class="timebox" slot="append">
-                                <Button @click="send(11)" :disabled="sendMsgDisabled1" style="background:transparent;">
-                                    <span v-if="sendMsgDisabled1">{{time1+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled1">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
-                            </div>
-                            </Input>
-                        </FormItem>
-                        <!-- 新mail -->
-                        <FormItem :label="$t('uc.safe.newEmail')" prop="newMail">
-                            <Input v-model="formValidate21.newMail" size="large" style="width:300px;"></Input>
-                        </FormItem>
-                        <!-- 新邮箱验证码 -->
-                        <FormItem  class="defeat-ivu" :label="$t('uc.safe.newEmailCode')" prop="vailCode11">
-                            <Input v-model="formValidate21.vailCode11" size="large" style="width:300px;border-right:none;">
-                            <!-- <Button slot="append">点击获取</Button> -->
-                            <div class="timebox" slot="append">
-                                <Button @click="send(12)" :disabled="sendMsgDisabled11" style="background:transparent;">
-                                    <span v-if="sendMsgDisabled11">{{time11+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled11">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
-                            </div>
-                            </Input>
-                        </FormItem>
-                        <!-- Button -->
-                        <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate21')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('new.confirmaaa')}}
-                            </Button>
-                            <!-- <Button @click="handleReset('formValidate2')" style="margin-left: 8px">
-                                {{$t('uc.safe.reset')}}
-                            </Button> -->
-                        </FormItem>
-                    </Form>
-                </div>
-            </Modal>
-            <!-- 手机弹窗 -->
-            <Modal
-                :title="$t('uc.safe.bindphone')"
-                v-model="modal3"
-                className="vertical-center-modal"
-                width="534"
-                class="popups-modal"
-                :mask-closable="false"
-                footer-hide
-                >
-                <div class="detail-list">
-                    <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="110">
-                        <!-- 手机 -->
-                        <FormItem :label="$t('uc.safe.phone')" prop="mobile">
-                            <Input v-model="formValidate3.mobile" size="large" style="width:300px;">
-                            </Input>
-                        </FormItem>
-                        <!-- 登录密码 -->
-                        <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
-                            <Input v-model="formValidate3.password" size="large" type="password" style="width:300px;">
-                            </Input>
-                        </FormItem>
-                        <!-- 手机验证码 -->
-                        <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode2" class="defeat-ivu">
-                            <Input v-model="formValidate3.vailCode2" size="large" style="width:300px;">
-                            <!-- <Button slot="append">点击获取</Button> -->
-                            <div class="timebox" slot="append">
-                                <Button @click="send(2)" :disabled="sendMsgDisabled2">
-                                    <span v-if="sendMsgDisabled2">{{time2+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled2">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
-                            </div>
-                            </Input>
-                        </FormItem>
-                        <!-- Button -->
-                        <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate3')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('new.confirmaaa')}}
-                            </Button>
-                            <!-- <Button @click="handleReset('formValidate3')" style="margin-left: 8px;">
-                                {{$t('uc.safe.reset')}}
-                            </Button> -->
-                        </FormItem>
-                    </Form>
-                </div>
-            </Modal>
-            <!-- 手机换绑弹窗 -->
-            <Modal
-                :title="'换绑手机'"
-                v-model="modal31"
-                className="vertical-center-modal"
-                width="534"
-                class="popups-modal"
-                :mask-closable="false"
-                footer-hide
-                >
-                <div class="detail-list">
-                    <Form ref="formValidate31" :model="formValidate31" :rules="ruleValidate" :label-width="110">
-                          <!-- 旧手机验证码 -->
-                        <FormItem :label="'旧手机验证码'"  class="defeat-ivu">
-                            <Input v-model="formValidate31.vailCode2" size="large" style="width:300px;">
-                            <!-- <Button slot="append">点击获取</Button> -->
-                            <div class="timebox" slot="append">
-                                <Button @click="send(21)" :disabled="sendMsgDisabled2">
-                                    <span v-if="sendMsgDisabled2">{{time2+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled2">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
-                            </div>
-                            </Input>
-                        </FormItem>
-                        <!--新手机 -->
-                        <FormItem :label="'新手机号'" prop="newMobile">
-                            <Input v-model="formValidate31.newMobile" size="large" style="width:300px;">
-                            </Input>
-                        </FormItem>
-                          <!-- 新手机验证码 -->
-                        <FormItem :label="'新手机验证码'" prop="vailCode22" class="defeat-ivu">
-                            <Input v-model="formValidate31.vailCode22" size="large" style="width:300px;">
-                            <!-- <Button slot="append">点击获取</Button> -->
-                            <div class="timebox" slot="append">
-                                <Button @click="send(22)" :disabled="sendMsgDisabled22">
-                                    <span v-if="sendMsgDisabled22">{{time22+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled22">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
-                            </div>
-                            </Input>
-                        </FormItem>
-
-
-                        <!-- 登录密码 -->
-                        <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
-                            <Input v-model="formValidate31.password" size="large" type="password" style="width:300px;">
-                            </Input>
-                        </FormItem>
-
-                        <!-- Button -->
-                        <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate31')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('new.confirmaaa')}}
-                            </Button>
-                            <!-- <Button @click="handleReset('formValidate3')" style="margin-left: 8px;">
-                                {{$t('uc.safe.reset')}}
-                            </Button> -->
-                        </FormItem>
-                    </Form>
-                </div>
-            </Modal>
-            <!-- 登陆密码弹窗 -->
-            <Modal
-                :title="$t('new.Modifpassword')"
-                v-model="modal4"
-                width="534"
-                class="popups-modal"
-                className="vertical-center-modal"
-                :mask-closable="false"
-                footer-hide
+        </div>
+      </Modal>
+      <!-- 身份认证弹窗 -->
+      <Modal
+              :title="$t('uc.safe.safelevel_high')"
+              v-model="modal6"
+              className="vertical-center-modal"
+              width="534"
+              class="popups-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <div class="detail-list" style="width: 100%;">
+          <!-- 请上传资料完成实名认证 -->
+          <!-- <h3 style="color:#3697FE;font-weight:400;">{{ $t("new.nformationto") }}</h3> -->
+          <Form
+                  ref="formValidate6"
+                  :model="formValidate6"
+                  :rules="ruleValidate"
+                  :label-width="85"
+                  width="300px"
+          >
+            <div
+                    class="validate"
+                    style="color:#8090AF;"
             >
-                <div class="detail-list">
-                    <Form
-                        ref="formValidate4"
-                        :model="formValidate4"
-                        :rules="ruleValidate"
-                        :label-width="101"
-                    >
-                        <!-- oldPw -->
-                        <FormItem :label="$t('uc.safe.oldpwd')" prop="oldPw">
-                            <Input
-                                v-model="formValidate4.oldPw"
-                                size="large"
-                                type="password"
-                                style="width:300px;"
-                            />
-                        </FormItem>
-                        <!-- newPw -->
-                        <FormItem
-                            :label="$t('uc.safe.newpwd')"
-                            prop="newPw"
+              <!--<FormItem
+                  :label="$t('uc.safe.typeId')"
+              >
+                  <Select
+                      v-model="formValidate6.typeId"
+                      @on-change="areaChange"
+                  >
+                      <Option
+                          v-for="(item, index) in typeIdList"
+                          :value="item.value"
+                          :key="item.value"
+
+                      >
+                          {{ item.label }}
+                      </Option>
+                  </Select>
+              </FormItem>-->
+              <FormItem
+                      :label="$t('uc.safe.realname')"
+              >
+                <Input
+                        v-model="formValidate6.realName"
+                        size="large"
+                        style="width:300px;"
+                />
+              </FormItem>
+              <!-- 身份证号 -->
+              <!--v-if="formValidate6.typeId == 1"-->
+              <FormItem
+                      :label="$t('uc.safe.idcard')"
+              >
+                <Input
+                        v-model="formValidate6.idCard"
+                        size="large"
+                        style="width:300px;"
+                />
+              </FormItem>
+              <!-- 证件号码 -->
+              <!--<FormItem
+                  :label="$t('uc.safe.idNumber')"
+                  v-if="formValidate6.typeId == 2"
+              >
+                  <Input
+                      v-model="formValidate6.idNumber"
+                      size="large"
+                      style="width:300px;"
+                  />
+              </FormItem>-->
+            </div>
+            <!-- 真实姓名 -->
+
+            <!-- <div style="height:300px;">
+                <Col span="8">
+                    <input type="hidden" name="imgPreview" :value="imgPreview" />
+                    <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_positive')}}</div>
+                    <img id="frontCardImg" style="width: 230px;height: 140px;" :src="frontCardImg">
+                    <div class="acc_sc">
+                        <Upload
+                            ref="upload1"
+                            :before-upload="beforeUpload"
+                            :on-success="frontHandleSuccess"
+                            :headers="uploadHeaders"
+                            :action="uploadUrl"
+                            accept=".jpg,.jpeg,.png,.gif"
                         >
-                            <Input
-                                v-model="formValidate4.newPw"
-                                :placeholder="$t('uc.safe.newpwdmsg1')"
-                                size="large"
-                                type="password"
-                                style="width:300px;"
-                            />
-                        </FormItem>
-                        <!-- newPwConfirm -->
-                        <FormItem
-                            :label="$t('uc.safe.confirmnewpwd')"
-                            prop="newPwConfirm"
+                            <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
+                        </Upload>
+                    </div>
+                </Col>
+                <Col span="8">
+                    <input type="hidden" name="imgNext" :value="imgNext" />
+                    <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_negative')}}</div>
+                    <img id="backCardImg" style="width: 230px;height: 140px;" :src="backCardImg">
+                    <div class="acc_sc">
+                        <Upload
+                            ref="upload2"
+                            :before-upload="beforeUpload"
+                            :on-success="backHandleSuccess"
+                            :headers="uploadHeaders"
+                            :action="uploadUrl"
+                            accept=".jpg,.jpeg,.png,.gif"
                         >
-                            <Input
-                                v-model="formValidate4.newPwConfirm"
-                                size="large"
-                                type="password"
-                                style="width:300px;"
-                            />
-                        </FormItem>
-                        <!-- 手机验证码 -->
-                        <FormItem
-                            class="defeat-ivu"
-                            :label="$t('uc.safe.phonecode')"
-                            v-if="isPhoneCode"
+                            <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
+                        </Upload>
+                    </div>
+                </Col>
+                <Col span="8">
+                    <input type="hidden" name="imgLast" :value="imgLast" />
+                    <div style="margin-bottom: 10px;color:#8090AF;">{{$t('uc.safe.upload_hand')}}</div>
+                    <img id="handCardImg" style="width: 230px;height: 140px;" :src="handCardImg">
+                    <div class="acc_sc">
+                        <Upload
+                            ref="upload3"
+                            :before-upload="beforeUpload"
+                            :on-success="handHandleSuccess"
+                            :headers="uploadHeaders"
+                            :action="uploadUrl"
+                            accept=".jpg,.jpeg,.png,.gif"
                         >
-                            <Input
-                                v-model="formValidate4.phoneCode"
-                                size="large"
-                                style="width:300px;"
-                            >
-                            <!-- <Button slot="append">点击获取</Button> -->
-                            <div class="timebox" slot="append">
-                                <Button @click="send(3)" :disabled="sendMsgDisabled3">
-                                    <span v-if="sendMsgDisabled3">{{time3+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled3">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
-                            </div>
-                            </Input>
-                        </FormItem>
-                        <!--邮箱验证码 6.06-->
-                        <FormItem
-                            class="code-title"
-                            v-if="isEmailCode"
-                            :label="$t('uc.forget.emailcode')"
-                        >
-                            <Input
-                                style="width: 300px;"
-                                v-model="formValidate4.emailCode"
-                                size="large"
-                                :placeholder="$t('uc.login.email')"
-                            >
-                                <div
-                                    class="timebox"
-                                    slot="append"
-                                >
-                                    <div
-                                        class="button-code"
-                                        @click="send(4)"
-                                        :disabled="sendEmailDisabled"
-                                    >
+                            <Button icon="ios-cloud-upload-outline">{{$t('uc.safe.upload')}}</Button>
+                        </Upload>
+                    </div>
+                </Col>
+            </div> -->
+            <!-- <span v-if="lang==='简体中文'" class="uploadimgtip">提示：上传图片仅支持.jpg、.gif、.png、.jpeg格式，且推荐大小为100kb-1024kb，否则有可能上传失败。</span>
+            <span v-else class="uploadimgtip">Tip: uploaded pictures only support.Jpg,.Gif,.Png,.Jpeg format, and recommended size is 100kb-1024kb, otherwise it may fail to upload.</span> -->
+            <!-- Button -->
+            <FormItem style="text-align:center;">
+              <Button type="primary" @click="handleSubmit('formValidate6')"
+                      style="margin-left: -65px;width:300px;border-radius:0;height:40px;font-size:14px;">
+                {{$t('new.Uploartification')}}
+              </Button>
+              <!-- <Button @click="handleReset('formValidate6')" style="margin-left: 8px">{{$t('uc.safe.reset')}}</Button> -->
+            </FormItem>
+          </Form>
+        </div>
+      </Modal>
+      <!-- 邮箱弹窗 -->
+      <Modal
+              :title="$t('uc.safe.bindemail')"
+              v-model="modal2"
+              className="vertical-center-modal"
+              width="534"
+              class="popups-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <div class="detail-list">
+          <Form ref="formValidate2" :model="formValidate2" :rules="ruleValidate" :label-width="110">
+            <!-- mail -->
+            <FormItem :label="$t('uc.safe.email')" prop="mail">
+              <Input v-model="formValidate2.mail" size="large" style="width:300px;"></Input>
+            </FormItem>
+            <!-- 登录密码 -->
+            <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
+              <Input v-model="formValidate2.password" size="large" type="password" style="width:300px;"></Input>
+            </FormItem>
+            <!-- 邮箱验证码 -->
+            <FormItem class="defeat-ivu" :label="$t('uc.safe.emailcode')" prop="vailCode1">
+              <Input v-model="formValidate2.vailCode1" size="large" style="width:300px;border-right:none;">
+                <!-- <Button slot="append">点击获取</Button> -->
+                <div class="timebox" slot="append">
+                  <Button @click="send(1)" :disabled="sendMsgDisabled1" style="background:transparent;">
+                    <span v-if="sendMsgDisabled1">{{time1+$t('uc.safe.second')}}</span>
+                    <span v-if="!sendMsgDisabled1">{{$t('uc.safe.clickget')}}</span>
+                  </Button>
+                </div>
+              </Input>
+            </FormItem>
+            <!-- Button -->
+            <FormItem>
+              <Button type="primary" @click="handleSubmit('formValidate2')"
+                      style="width:300px;border-radius:0;height:40px;font-size:14px;">
+                {{$t('new.confirmaaa')}}
+              </Button>
+              <!-- <Button @click="handleReset('formValidate2')" style="margin-left: 8px">
+                  {{$t('uc.safe.reset')}}
+              </Button> -->
+            </FormItem>
+          </Form>
+        </div>
+      </Modal>
+      <!-- 邮箱换绑弹窗 -->
+      <Modal
+              :title="$t('uc.safe.bindemail')"
+              v-model="modal21"
+              className="vertical-center-modal"
+              width="534"
+              class="popups-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <div class="detail-list">
+          <Form ref="formValidate21" :model="formValidate21" :rules="ruleValidate" :label-width="110">
+            <!-- 旧邮箱验证码 -->
+            <FormItem class="defeat-ivu" :label="$t('uc.safe.oldEmailCode')" prop="vailCode1">
+              <Input v-model="formValidate21.vailCode1" size="large" style="width:300px;border-right:none;">
+                <!-- <Button slot="append">点击获取</Button> -->
+                <div class="timebox" slot="append">
+                  <Button @click="send(11)" :disabled="sendMsgDisabled1" style="background:transparent;">
+                    <span v-if="sendMsgDisabled1">{{time1+$t('uc.safe.second')}}</span>
+                    <span v-if="!sendMsgDisabled1">{{$t('uc.safe.clickget')}}</span>
+                  </Button>
+                </div>
+              </Input>
+            </FormItem>
+            <!-- 新mail -->
+            <FormItem :label="$t('uc.safe.newEmail')" prop="newMail">
+              <Input v-model="formValidate21.newMail" size="large" style="width:300px;"></Input>
+            </FormItem>
+            <!-- 新邮箱验证码 -->
+            <FormItem class="defeat-ivu" :label="$t('uc.safe.newEmailCode')" prop="vailCode11">
+              <Input v-model="formValidate21.vailCode11" size="large" style="width:300px;border-right:none;">
+                <!-- <Button slot="append">点击获取</Button> -->
+                <div class="timebox" slot="append">
+                  <Button @click="send(12)" :disabled="sendMsgDisabled11" style="background:transparent;">
+                    <span v-if="sendMsgDisabled11">{{time11+$t('uc.safe.second')}}</span>
+                    <span v-if="!sendMsgDisabled11">{{$t('uc.safe.clickget')}}</span>
+                  </Button>
+                </div>
+              </Input>
+            </FormItem>
+            <!-- Button -->
+            <FormItem>
+              <Button type="primary" @click="handleSubmit('formValidate21')"
+                      style="width:300px;border-radius:0;height:40px;font-size:14px;">
+                {{$t('new.confirmaaa')}}
+              </Button>
+              <!-- <Button @click="handleReset('formValidate2')" style="margin-left: 8px">
+                  {{$t('uc.safe.reset')}}
+              </Button> -->
+            </FormItem>
+          </Form>
+        </div>
+      </Modal>
+      <!-- 手机弹窗 -->
+      <Modal
+              :title="$t('uc.safe.bindphone')"
+              v-model="modal3"
+              className="vertical-center-modal"
+              width="534"
+              class="popups-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <div class="detail-list">
+          <Form ref="formValidate3" :model="formValidate3" :rules="ruleValidate" :label-width="110">
+            <!-- 手机 -->
+            <FormItem :label="$t('uc.safe.phone')" prop="mobile">
+              <Input v-model="formValidate3.mobile" size="large" style="width:300px;">
+              </Input>
+            </FormItem>
+            <!-- 登录密码 -->
+            <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
+              <Input v-model="formValidate3.password" size="large" type="password" style="width:300px;">
+              </Input>
+            </FormItem>
+            <!-- 手机验证码 -->
+            <FormItem :label="$t('uc.safe.phonecode')" prop="vailCode2" class="defeat-ivu">
+              <Input v-model="formValidate3.vailCode2" size="large" style="width:300px;">
+                <!-- <Button slot="append">点击获取</Button> -->
+                <div class="timebox" slot="append">
+                  <Button @click="send(2)" :disabled="sendMsgDisabled2">
+                    <span v-if="sendMsgDisabled2">{{time2+$t('uc.safe.second')}}</span>
+                    <span v-if="!sendMsgDisabled2">{{$t('uc.safe.clickget')}}</span>
+                  </Button>
+                </div>
+              </Input>
+            </FormItem>
+            <!-- Button -->
+            <FormItem>
+              <Button type="primary" @click="handleSubmit('formValidate3')"
+                      style="width:300px;border-radius:0;height:40px;font-size:14px;">
+                {{$t('new.confirmaaa')}}
+              </Button>
+              <!-- <Button @click="handleReset('formValidate3')" style="margin-left: 8px;">
+                  {{$t('uc.safe.reset')}}
+              </Button> -->
+            </FormItem>
+          </Form>
+        </div>
+      </Modal>
+      <!-- 手机换绑弹窗 -->
+      <Modal
+              :title="'换绑手机'"
+              v-model="modal31"
+              className="vertical-center-modal"
+              width="534"
+              class="popups-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <div class="detail-list">
+          <Form ref="formValidate31" :model="formValidate31" :rules="ruleValidate" :label-width="110">
+            <!-- 旧手机验证码 -->
+            <FormItem :label="'旧手机验证码'" class="defeat-ivu">
+              <Input v-model="formValidate31.vailCode2" size="large" style="width:300px;">
+                <!-- <Button slot="append">点击获取</Button> -->
+                <div class="timebox" slot="append">
+                  <Button @click="send(21)" :disabled="sendMsgDisabled2">
+                    <span v-if="sendMsgDisabled2">{{time2+$t('uc.safe.second')}}</span>
+                    <span v-if="!sendMsgDisabled2">{{$t('uc.safe.clickget')}}</span>
+                  </Button>
+                </div>
+              </Input>
+            </FormItem>
+            <!--新手机 -->
+            <FormItem :label="'新手机号'" prop="newMobile">
+              <Input v-model="formValidate31.newMobile" size="large" style="width:300px;">
+              </Input>
+            </FormItem>
+            <!-- 新手机验证码 -->
+            <FormItem :label="'新手机验证码'" prop="vailCode22" class="defeat-ivu">
+              <Input v-model="formValidate31.vailCode22" size="large" style="width:300px;">
+                <!-- <Button slot="append">点击获取</Button> -->
+                <div class="timebox" slot="append">
+                  <Button @click="send(22)" :disabled="sendMsgDisabled22">
+                    <span v-if="sendMsgDisabled22">{{time22+$t('uc.safe.second')}}</span>
+                    <span v-if="!sendMsgDisabled22">{{$t('uc.safe.clickget')}}</span>
+                  </Button>
+                </div>
+              </Input>
+            </FormItem>
+
+
+            <!-- 登录密码 -->
+            <FormItem :label="$t('uc.safe.loginpwd')" prop="password">
+              <Input v-model="formValidate31.password" size="large" type="password" style="width:300px;">
+              </Input>
+            </FormItem>
+
+            <!-- Button -->
+            <FormItem>
+              <Button type="primary" @click="handleSubmit('formValidate31')"
+                      style="width:300px;border-radius:0;height:40px;font-size:14px;">
+                {{$t('new.confirmaaa')}}
+              </Button>
+              <!-- <Button @click="handleReset('formValidate3')" style="margin-left: 8px;">
+                  {{$t('uc.safe.reset')}}
+              </Button> -->
+            </FormItem>
+          </Form>
+        </div>
+      </Modal>
+      <!-- 登陆密码弹窗 -->
+      <Modal
+              :title="$t('new.Modifpassword')"
+              v-model="modal4"
+              width="534"
+              class="popups-modal"
+              className="vertical-center-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <div class="detail-list">
+          <Form
+                  ref="formValidate4"
+                  :model="formValidate4"
+                  :rules="ruleValidate"
+                  :label-width="101"
+          >
+            <!-- oldPw -->
+            <FormItem :label="$t('uc.safe.oldpwd')" prop="oldPw">
+              <Input
+                      v-model="formValidate4.oldPw"
+                      size="large"
+                      type="password"
+                      style="width:300px;"
+              />
+            </FormItem>
+            <!-- newPw -->
+            <FormItem
+                    :label="$t('uc.safe.newpwd')"
+                    prop="newPw"
+            >
+              <Input
+                      v-model="formValidate4.newPw"
+                      :placeholder="$t('uc.safe.newpwdmsg1')"
+                      size="large"
+                      type="password"
+                      style="width:300px;"
+              />
+            </FormItem>
+            <!-- newPwConfirm -->
+            <FormItem
+                    :label="$t('uc.safe.confirmnewpwd')"
+                    prop="newPwConfirm"
+            >
+              <Input
+                      v-model="formValidate4.newPwConfirm"
+                      size="large"
+                      type="password"
+                      style="width:300px;"
+              />
+            </FormItem>
+            <!-- 手机验证码 -->
+            <FormItem
+                    class="defeat-ivu"
+                    :label="$t('uc.safe.phonecode')"
+                    v-if="isPhoneCode"
+            >
+              <Input
+                      v-model="formValidate4.phoneCode"
+                      size="large"
+                      style="width:300px;"
+              >
+                <!-- <Button slot="append">点击获取</Button> -->
+                <div class="timebox" slot="append">
+                  <Button @click="send(3)" :disabled="sendMsgDisabled3">
+                    <span v-if="sendMsgDisabled3">{{time3+$t('uc.safe.second')}}</span>
+                    <span v-if="!sendMsgDisabled3">{{$t('uc.safe.clickget')}}</span>
+                  </Button>
+                </div>
+              </Input>
+            </FormItem>
+            <!--邮箱验证码 6.06-->
+            <FormItem
+                    class="code-title"
+                    v-if="isEmailCode"
+                    :label="$t('uc.forget.emailcode')"
+            >
+              <Input
+                      style="width: 300px;"
+                      v-model="formValidate4.emailCode"
+                      size="large"
+                      :placeholder="$t('uc.login.email')"
+              >
+                <div
+                        class="timebox"
+                        slot="append"
+                >
+                  <div
+                          class="button-code"
+                          @click="send(4)"
+                          :disabled="sendEmailDisabled"
+                  >
                                 <span v-if="sendEmailDisabled">
                                     {{codeTime1+$t('uc.safe.second')}}
                                 </span>
-                                        <span v-if="!sendEmailDisabled">
+                    <span v-if="!sendEmailDisabled">
                                     {{$t('uc.safe.clickget')}}
                                 </span>
-                                    </div>
-                                </div>
-                            </Input>
-                        </FormItem>
-                        <!--谷歌验证-->
-                        <FormItem
-                            :label="$t('openGoolePage._GoogleVerificationCode')"
-                            prop="googleCode"
-                            v-if="isGoogleCode"
-                        >
-                            <Input
-                                v-model="formValidate4.googleCode"
-                                size="large"
-                                type="text"
-                                style="width:300px;"
-                            />
-                        </FormItem>
-                        <!-- Button -->
-                        <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate4')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{ $t('new.confirmaaa') }}
-                            </Button>
-                            <!-- <Button @click="handleReset('formValidate4')" style="margin-left: 8px">
-                                {{$t('uc.safe.reset')}}
-                            </Button> -->
-                        </FormItem>
-                    </Form>
+                  </div>
                 </div>
-            </Modal>
-            <!-- 资金密码弹窗 -->
-            <Modal
-                :title="user.fundsVerified == 0
+              </Input>
+            </FormItem>
+            <!--谷歌验证-->
+            <FormItem
+                    :label="$t('openGoolePage._GoogleVerificationCode')"
+                    prop="googleCode"
+                    v-if="isGoogleCode"
+            >
+              <Input
+                      v-model="formValidate4.googleCode"
+                      size="large"
+                      type="text"
+                      style="width:300px;"
+              />
+            </FormItem>
+            <!-- Button -->
+            <FormItem>
+              <Button type="primary" @click="handleSubmit('formValidate4')"
+                      style="width:300px;border-radius:0;height:40px;font-size:14px;">
+                {{ $t('new.confirmaaa') }}
+              </Button>
+              <!-- <Button @click="handleReset('formValidate4')" style="margin-left: 8px">
+                  {{$t('uc.safe.reset')}}
+              </Button> -->
+            </FormItem>
+          </Form>
+        </div>
+      </Modal>
+      <!-- 资金密码弹窗 -->
+      <Modal
+              :title="user.fundsVerified == 0
                 ? $t('new.setpassword') : user.fundsVerified == 1 ? $t('new.Modifyassword') : $t('new.Retriepassword')"
-                v-model="modal5"
-                className="vertical-center-modal"
-                width="534"
-                class="popups-modal"
-                :mask-closable="false"
-                footer-hide
+              v-model="modal5"
+              className="vertical-center-modal"
+              width="534"
+              class="popups-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <!-- 设置资金密码 -->
+        <div class="detail-list" v-show="user.fundsVerified!=1">
+          <Form
+                  ref="formValidate7"
+                  :model="formValidate7"
+                  :rules="ruleValidate"
+                  :label-width="120"
+          >
+            <!-- newMPw -->
+            <FormItem :label="$t('uc.safe.fundpwd')" prop="pw7">
+              <Input
+                      v-model="formValidate7.pw7"
+                      size="large"
+                      :placeholder="$t('uc.safe.pwdmsg1')"
+                      type="password"
+                      style="width: 300px;"
+              />
+            </FormItem>
+            <!-- newMPwConfirm -->
+            <FormItem :label="$t('uc.safe.confirmpwd')" prop="pw7Confirm">
+              <Input
+                      v-model="formValidate7.pw7Confirm"
+                      size="large"
+                      type="password" style="width: 300px;"></Input>
+            </FormItem>
+            <!--<FormItem label="谷歌验证码" prop="googleCode" v-if="isGoogleCode">
+                <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
+            </FormItem>-->
+            <!-- Button -->
+            <FormItem>
+              <Button type="primary" @click="handleSubmit('formValidate7')"
+                      style="width:300px;border-radius:0;height:40px;font-size:14px;">
+                {{$t('uc.safe.confirm')}}
+              </Button>
+              <!-- <Button @click="handleReset('formValidate7')" style="margin-left: 8px">
+                  {{$t('uc.safe.reset')}}
+              </Button> -->
+            </FormItem>
+          </Form>
+        </div>
+        <!-- 修改资金密码 -->
+        <div class="detail-list" v-show="user.fundsVerified==1  && !fGetBackFundpwd">
+          <Form
+                  ref="formValidate5"
+                  :model="formValidate5"
+                  :rules="ruleValidate"
+                  :label-width="101"
+          >
+            <!-- oldPw -->
+            <FormItem
+                    :label="$t('uc.safe.oldfundpwd')"
+                    prop="oldPw"
+            >
+              <Input
+                      v-model="formValidate5.oldPw"
+                      size="large"
+                      type="password"
+                      style="width: 300px;"
+              />
+            </FormItem>
+            <!-- newMPw -->
+            <FormItem
+                    :label="$t('uc.safe.newfundpwd')"
+                    prop="newMPw"
+            >
+              <Input
+                      v-model="formValidate5.newMPw"
+                      :placeholder="$t('uc.safe.pwdmsg1')"
+                      size="large"
+                      type="password"
+                      style="width: 300px;"
+              />
+            </FormItem>
+            <!-- newMPwConfirm -->
+            <FormItem
+                    :label="$t('uc.safe.confirmnewpwd')"
+                    prop="newMPwConfirm"
+            >
+              <Input
+                      v-model="formValidate5.newMPwConfirm"
+                      size="large"
+                      type="password"
+                      style="width: 300px;"
+              />
+            </FormItem>
+            <!--手机验证-->
+            <FormItem
+                    class="defeat-ivu"
+                    :label="$t('uc.safe.phonecode')"
+                    v-if="isPhoneCode"
+            >
+              <Input
+                      v-model="formValidate5.phoneCode"
+                      size="large"
+                      style="width: 300px;"
+              >
+                <div class="timebox" slot="append"
                 >
-                <!-- 设置资金密码 -->
-                <div class="detail-list" v-show="user.fundsVerified!=1">
-                    <Form
-                        ref="formValidate7"
-                        :model="formValidate7"
-                        :rules="ruleValidate"
-                        :label-width="120"
-                    >
-                        <!-- newMPw -->
-                        <FormItem :label="$t('uc.safe.fundpwd')" prop="pw7">
-                            <Input
-                                v-model="formValidate7.pw7"
-                                size="large"
-                                :placeholder="$t('uc.safe.pwdmsg1')"
-                                type="password"
-                                style="width: 300px;"
-                            />
-                        </FormItem>
-                        <!-- newMPwConfirm -->
-                        <FormItem :label="$t('uc.safe.confirmpwd')" prop="pw7Confirm">
-                            <Input
-                                    v-model="formValidate7.pw7Confirm"
-                                    size="large"
-                                    type="password" style="width: 300px;"></Input>
-                        </FormItem>
-                        <!--<FormItem label="谷歌验证码" prop="googleCode" v-if="isGoogleCode">
-                            <Input v-model="formValidate4.googleCode" size="large" type="text"></Input>
-                        </FormItem>-->
-                        <!-- Button -->
-                        <FormItem>
-                            <Button type="primary" @click="handleSubmit('formValidate7')" style="width:300px;border-radius:0;height:40px;font-size:14px;">
-                                {{$t('uc.safe.confirm')}}
-                            </Button>
-                            <!-- <Button @click="handleReset('formValidate7')" style="margin-left: 8px">
-                                {{$t('uc.safe.reset')}}
-                            </Button> -->
-                        </FormItem>
-                    </Form>
+                  <Button @click="send(5)" :disabled="sendMsgDisabled5">
+                    <span v-if="sendMsgDisabled5">{{time5+$t('uc.safe.second')}}</span>
+                    <span v-if="!sendMsgDisabled5">{{$t('uc.safe.clickget')}}</span>
+                  </Button>
                 </div>
-                <!-- 修改资金密码 -->
-                <div class="detail-list" v-show="user.fundsVerified==1  && !fGetBackFundpwd">
-                    <Form
-                        ref="formValidate5"
-                        :model="formValidate5"
-                        :rules="ruleValidate"
-                        :label-width="101"
-                    >
-                        <!-- oldPw -->
-                        <FormItem
-                            :label="$t('uc.safe.oldfundpwd')"
-                            prop="oldPw"
-                        >
-                            <Input
-                                v-model="formValidate5.oldPw"
-                                size="large"
-                                type="password"
-                                style="width: 300px;"
-                            />
-                        </FormItem>
-                        <!-- newMPw -->
-                        <FormItem
-                            :label="$t('uc.safe.newfundpwd')"
-                            prop="newMPw"
-                        >
-                            <Input
-                                v-model="formValidate5.newMPw"
-                                :placeholder="$t('uc.safe.pwdmsg1')"
-                                size="large"
-                                type="password"
-                                style="width: 300px;"
-                            />
-                        </FormItem>
-                        <!-- newMPwConfirm -->
-                        <FormItem
-                            :label="$t('uc.safe.confirmnewpwd')"
-                            prop="newMPwConfirm"
-                        >
-                            <Input
-                                v-model="formValidate5.newMPwConfirm"
-                                size="large"
-                                type="password"
-                                style="width: 300px;"
-                            />
-                        </FormItem>
-                        <!--手机验证-->
-                        <FormItem
-                            class="defeat-ivu"
-                            :label="$t('uc.safe.phonecode')"
-                            v-if="isPhoneCode"
-                        >
-                            <Input
-                                v-model="formValidate5.phoneCode"
-                                size="large"
-                                style="width: 300px;"
-                            >
-                            <div class="timebox" slot="append"
-                            >
-                                <Button @click="send(5)" :disabled="sendMsgDisabled5">
-                                    <span v-if="sendMsgDisabled5">{{time5+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled5">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
-                            </div>
-                            </Input>
-                        </FormItem>
-                        <!--邮箱验证-->
-                        <FormItem
-                            class="code-title"
-                            v-if="isEmailCode"
-                            :label="$t('uc.forget.emailcode')"
-                        >
-                            <Input
-                                style="width: 300px;"
-                                v-model="formValidate5.emailCode"
-                                size="large"
-                                :placeholder="$t('uc.login.email')"
-                            >
-                                <div
-                                    class="timebox"
-                                    slot="append"
-                                >
-                                    <div
-                                        class="button-code"
-                                        @click="send(6)"
-                                        :disabled="sendEmailDisabled1"
-                                    >
+              </Input>
+            </FormItem>
+            <!--邮箱验证-->
+            <FormItem
+                    class="code-title"
+                    v-if="isEmailCode"
+                    :label="$t('uc.forget.emailcode')"
+            >
+              <Input
+                      style="width: 300px;"
+                      v-model="formValidate5.emailCode"
+                      size="large"
+                      :placeholder="$t('uc.login.email')"
+              >
+                <div
+                        class="timebox"
+                        slot="append"
+                >
+                  <div
+                          class="button-code"
+                          @click="send(6)"
+                          :disabled="sendEmailDisabled1"
+                  >
                                 <span v-if="sendEmailDisabled1">
                                     {{codeTime2+$t('uc.safe.second')}}
                                 </span>
-                                        <span v-if="!sendEmailDisabled1">
+                    <span v-if="!sendEmailDisabled1">
                                     {{$t('uc.safe.clickget')}}
                                 </span>
-                                    </div>
-                                </div>
-                            </Input>
-                        </FormItem>
-                        <FormItem
-                            :label="$t('openGoolePage._GoogleVerificationCode')"
-                            prop="googleCode"
-                            v-if="isGoogleCode"
-                        >
-                            <Input
-                                v-model="formValidate5.googleCode"
-                                size="large"
-                                type="text"
-                                style="width: 300px;"
-                            ></Input>
-                        </FormItem>
-                        <p style="text-align:right;">
-                            <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd" style="color:#3399ff;margin-right:50px;margin-bottom:10px;">
-                                <!--忘记密码?-->
-                                {{$t('uc.login.forget')}}
-                            </a>
-                        </p>
-                        <!-- Button -->
-                        <FormItem>
-                            <Button
-                                type="primary"
-                                @click="handleSubmit('formValidate5')"
-                                style="width:300px;border-radius:0;height:40px;font-size:14px;"
-                            >
-                                {{ $t('new.confirmaaa') }}
-                            </Button>
-                            <!-- <Button @click="handleReset('formValidate5')" style="margin-left: 8px">
-                                {{$t('uc.safe.reset')}}
-                            </Button> -->
-                        </FormItem>
-                    </Form>
+                  </div>
                 </div>
-                <!-- 找回 -->
-                <div class="detail-list" v-show="user.fundsVerified==1 && fGetBackFundpwd">
-                    <Form
-                        ref="formValidate8"
-                        :model="formValidate8"
-                        :rules="ruleValidate"
-                        :label-width="101"
-                    >
-                        <!-- newMPw -->
-                        <FormItem
-                            :label="$t('uc.safe.newfundpwd')"
-                            prop="newMPw8"
-                        >
-                            <Input
-                                v-model="formValidate8.newMPw8"
-                                size="large"
-                                type="password"
-                                style="width: 300px;"
-                            />
-                        </FormItem>
-                        <!-- newMPwConfirm -->
-                        <FormItem
-                            :label="$t('uc.safe.confirmnewpwd')"
-                            prop="newMPwConfirm8"
-                        >
-                            <Input
-                                v-model="formValidate8.newMPwConfirm8"
-                                size="large"
-                                type="password"
-                                style="width: 300px;"
-                            />
-                        </FormItem>
-                        <!-- 邮箱验证码 -->
-                        <FormItem
-                            class="defeat-ivu"
-                            :label="$t('uc.safe.phonecode')"
-                        >
-                            <Input
-                                v-model="formValidate8.phoneCode"
-                                size="large"
-                                style="width: 300px;"
-                            >
-                            <div class="timebox" slot="append">
-                                <Button
-                                    @click="send(8)"
-                                    :disabled="sendMsgDisabled8"
-                                >
-                                    <span v-if="sendMsgDisabled8">{{time8+$t('uc.safe.second')}}</span>
-                                    <span v-if="!sendMsgDisabled8">{{$t('uc.safe.clickget')}}</span>
-                                </Button>
-                            </div>
-                            </Input>
-                        </FormItem>
-                        <FormItem
-                            :label="$t('openGoolePage._GoogleVerificationCode')"
-                            prop="googleCode"
-                            v-if="isGoogleCode"
-                        >
-                            <Input
-                                v-model="formValidate5.googleCode"
-                                size="large"
-                                type="text"
-                                style="width:300px;"
-                            />
-                        </FormItem>
-                        <!-- Button -->
-                        <FormItem>
-                            <Button
-                                type="primary"
-                                @click="handleSubmit('formValidate8')"
-                                style="width:300px;border-radius:0;height:40px;font-size:14px;"
-                            >
-                                {{$t('new.confirmaaa')}}
-                            </Button>
-                            <!-- <Button @click="handleReset('formValidate8')" style="margin-left: 8px">
-                                {{$t('uc.safe.reset')}}
-                            </Button> -->
-                        </FormItem>
-                    </Form>
-                </div>
-            </Modal>
-            <!-- 绑定谷歌验证弹窗 -->
-            <Modal
-                :title="$t('new.BindingGoogle')"
-                v-model="modal7"
-                className="vertical-center-modal"
-                width="714"
-                @on-cancel="googleModalCancel"
-                class="popups-modal"
-                :mask-closable="false"
-                footer-hide
+              </Input>
+            </FormItem>
+            <FormItem
+                    :label="$t('openGoolePage._GoogleVerificationCode')"
+                    prop="googleCode"
+                    v-if="isGoogleCode"
             >
-                <ResetGoogleVali @closeGoogle="closeGoogle"/>
-            </Modal>
-            <!-- 解除谷歌验证弹窗 -->
-            <Modal
-                :title="$t('new.UntieGoogle')"
-                v-model="modal8"
-                className="vertical-center-modal"
-                width="534"
-                @on-cancel="googleModalCancel"
-                class="popups-modal"
-                :mask-closable="false"
-                footer-hide
-            >
-                <CloseGoogleVali :phone="user.mobilePhone ? user.mobilePhone:user.email" @closeGoogle="closeGoogle"/>
-            </Modal>
-            <!-- 重置谷歌验证弹窗 -->
-            <!--<Modal
-                :title="$t('new.ReseGoogle')"
-                v-model="modal10"
-                :styles="{top: '100px'}"
-                width="714"
-            >
-                <ResetGoogleVali />
-            </Modal>-->
+              <Input
+                      v-model="formValidate5.googleCode"
+                      size="large"
+                      type="text"
+                      style="width: 300px;"
+              ></Input>
+            </FormItem>
+            <p style="text-align:right;">
+              <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd"
+                 style="color:#3399ff;margin-right:50px;margin-bottom:10px;">
+                <!--忘记密码?-->
+                {{$t('uc.login.forget')}}
+              </a>
+            </p>
+            <!-- Button -->
+            <FormItem>
+              <Button
+                      type="primary"
+                      @click="handleSubmit('formValidate5')"
+                      style="width:300px;border-radius:0;height:40px;font-size:14px;"
+              >
+                {{ $t('new.confirmaaa') }}
+              </Button>
+              <!-- <Button @click="handleReset('formValidate5')" style="margin-left: 8px">
+                  {{$t('uc.safe.reset')}}
+              </Button> -->
+            </FormItem>
+          </Form>
         </div>
+        <!-- 找回 -->
+        <div class="detail-list" v-show="user.fundsVerified==1 && fGetBackFundpwd">
+          <Form
+                  ref="formValidate8"
+                  :model="formValidate8"
+                  :rules="ruleValidate"
+                  :label-width="101"
+          >
+            <!-- newMPw -->
+            <FormItem
+                    :label="$t('uc.safe.newfundpwd')"
+                    prop="newMPw8"
+            >
+              <Input
+                      v-model="formValidate8.newMPw8"
+                      size="large"
+                      type="password"
+                      style="width: 300px;"
+              />
+            </FormItem>
+            <!-- newMPwConfirm -->
+            <FormItem
+                    :label="$t('uc.safe.confirmnewpwd')"
+                    prop="newMPwConfirm8"
+            >
+              <Input
+                      v-model="formValidate8.newMPwConfirm8"
+                      size="large"
+                      type="password"
+                      style="width: 300px;"
+              />
+            </FormItem>
+            <!-- 邮箱验证码 -->
+            <FormItem
+                    class="defeat-ivu"
+                    :label="$t('uc.safe.phonecode')"
+            >
+              <Input
+                      v-model="formValidate8.phoneCode"
+                      size="large"
+                      style="width: 300px;"
+              >
+                <div class="timebox" slot="append">
+                  <Button
+                          @click="send(8)"
+                          :disabled="sendMsgDisabled8"
+                  >
+                    <span v-if="sendMsgDisabled8">{{time8+$t('uc.safe.second')}}</span>
+                    <span v-if="!sendMsgDisabled8">{{$t('uc.safe.clickget')}}</span>
+                  </Button>
+                </div>
+              </Input>
+            </FormItem>
+            <FormItem
+                    :label="$t('openGoolePage._GoogleVerificationCode')"
+                    prop="googleCode"
+                    v-if="isGoogleCode"
+            >
+              <Input
+                      v-model="formValidate5.googleCode"
+                      size="large"
+                      type="text"
+                      style="width:300px;"
+              />
+            </FormItem>
+            <!-- Button -->
+            <FormItem>
+              <Button
+                      type="primary"
+                      @click="handleSubmit('formValidate8')"
+                      style="width:300px;border-radius:0;height:40px;font-size:14px;"
+              >
+                {{$t('new.confirmaaa')}}
+              </Button>
+              <!-- <Button @click="handleReset('formValidate8')" style="margin-left: 8px">
+                  {{$t('uc.safe.reset')}}
+              </Button> -->
+            </FormItem>
+          </Form>
+        </div>
+      </Modal>
+      <!-- 绑定谷歌验证弹窗 -->
+      <Modal
+              :title="$t('new.BindingGoogle')"
+              v-model="modal7"
+              className="vertical-center-modal"
+              width="714"
+              @on-cancel="googleModalCancel"
+              class="popups-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <ResetGoogleVali @closeGoogle="closeGoogle"/>
+      </Modal>
+      <!-- 解除谷歌验证弹窗 -->
+      <Modal
+              :title="$t('new.UntieGoogle')"
+              v-model="modal8"
+              className="vertical-center-modal"
+              width="534"
+              @on-cancel="googleModalCancel"
+              class="popups-modal"
+              :mask-closable="false"
+              footer-hide
+      >
+        <CloseGoogleVali :phone="user.mobilePhone ? user.mobilePhone:user.email" @closeGoogle="closeGoogle"/>
+      </Modal>
+      <!-- 重置谷歌验证弹窗 -->
+      <!--<Modal
+          :title="$t('new.ReseGoogle')"
+          v-model="modal10"
+          :styles="{top: '100px'}"
+          width="714"
+      >
+          <ResetGoogleVali />
+      </Modal>-->
     </div>
+  </div>
 </template>
 <script>
 
-import BindGoogleVali from '@/pages/google/ResetGoogleVali.vue'
-import ResetGoogleVali from '@/pages/google/ResetGoogleVali.vue'
-import CloseGoogleVali from '@/pages/google/CloseGoogleVali.vue'
+  import BindGoogleVali from '@/pages/google/ResetGoogleVali.vue'
+  import ResetGoogleVali from '@/pages/google/ResetGoogleVali.vue'
+  import CloseGoogleVali from '@/pages/google/CloseGoogleVali.vue'
 
-export default {
-  data() {
-    const validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error(this.$t('uc.safe.newpwdmsg1')))
-      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-        callback(new Error(this.$t('uc.safe.newpwdmsg1')))
-      } else {
-        callback()
-      }
-    }
-    const validatePassCheck = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error(this.$t('uc.safe.newpwdmsg2')))
-      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-        callback(new Error(this.$t('uc.safe.newpwdmsg2')))
-      } else if (value !== this.formValidate4.newPw) {
-        callback(new Error(this.$t('uc.safe.newpwdmsg2')))
-      } else {
-        callback()
-      }
-    }
-    const validateMPass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error(this.$t('uc.safe.pwdmsg1')))
-      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-        callback(new Error(this.$t('uc.safe.pwdmsg1')))
-      } else {
-        callback()
-      }
-    }
-    const validateMPassCheck = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error(this.$t('uc.safe.pwdmsg2')))
-      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-        callback(new Error(this.$t('uc.safe.pwdmsg2')))
-      } else if (value !== this.formValidate5.newMPw) {
-        callback(new Error(this.$t('uc.safe.pwdmsg2')))
-      } else {
-        callback()
-      }
-    }
-    const validatepw7 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error(this.$t('uc.safe.pwdmsg1')))
-      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-        callback(new Error(this.$t('uc.safe.pwdmsg1')))
-      } else {
-        callback()
-      }
-    }
-    const validatepw7check = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error(this.$t('uc.safe.pwdmsg1')))
-      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-        callback(new Error(this.$t('uc.safe.pwdmsg2')))
-      } else if (value !== this.formValidate7.pw7) {
-        callback(new Error(this.$t('uc.safe.pwdmsg2')))
-      } else {
-        callback()
-      }
-    }
-    const validateMPass8 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error(this.$t('uc.safe.pwdmsg1')))
-      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-        callback(new Error(this.$t('uc.safe.pwdmsg1')))
-      } else {
-        callback()
-      }
-    }
-    const validateMPassCheck8 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error(this.$t('uc.safe.pwdmsg2')))
-      } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
-        callback(new Error(this.$t('uc.safe.pwdmsg2')))
-      } else if (value !== this.formValidate8.newMPw8) {
-        callback(new Error(this.$t('uc.safe.pwdmsg2')))
-      } else {
-        callback()
-      }
-    }
-    return {
-      modal2: false,
-      modal21: false,
-      modal3: false,
-      modal31: false,
-      modal4: false,
-      modal5: false,
-      modal6: false,
-      modal7: false,
-      modal8: false,
-      modal9: false,
-      modal10: false,
-      uid: '',
-      googleSwitch: false,
-      isPhoneCode: false, // 是否绑定手机验证状态
-      isEmailCode: false, // 是否绑定手机验证状态
-      isGoogleCode: false, // 是否绑定谷歌验证状态
-      fGetBackFundpwd: false,
-      imgPreview: '',
-      imgNext: '',
-      imgLast: '',
-      loginmsg: this.$t('common.logintip'),
-      memberlevel: '',
-      // frontCardImg: require('../../assets/images/frontCardImg1.jpg'),
-      // backCardImg: require('../../assets/images/backCardImg1.jpg'),
-      // handCardImg: require('../../assets/images/HandCardImg1.jpg'),
-
-      uploadHeaders: { 'x-auth-token': localStorage.getItem('TOKEN') },
-      uploadUrl: this.host + '/uc/upload/oss/image',
-
-      usernameS: '',
-      user: {},
-      choseItem: 0,
-      accountValue: '1',
-      formValidate2: {
-        mail: '',
-        vailCode1: '',
-        password: ''
-      },
-      // 换绑邮箱
-      formValidate21: {
-        newMail: '',
-        vailCode1: '',
-        vailCode11: ''
-      },
-      formValidate3: {
-        mobile: '',
-        vailCode2: '',
-        password: ''
-      },
-      // 换绑手机
-      formValidate31: {
-        newMobile: '',
-        vailCode2: '',
-        vailCode22: '',
-        password: ''
-      },
-      formValidate4: {
-        oldPw: '',
-        newPw: '',
-        newPwConfirm: '',
-        phoneCode: '',
-        googleCode: '',
-        emailCode: ''
-      },
-      formValidate5: {
-        oldPw: '',
-        newMPw: '',
-        newMPwConfirm: '',
-        phoneCode: '',
-        emailCode: '',
-        googleCode: ''
-      },
-        // 身份认证
-      formValidate6: {
-        realName: '',
-        idCard: '',
-        typeId: 1,
-        idNumber: ''
-      },
-        // 证件类型
-      typeIdList: [
-        {
-          value: 1,
-          label: '身份证'
-        },
-        {
-          value: 2,
-          label: '护照'
+  export default {
+    data() {
+      const validatePass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error(this.$t('uc.safe.newpwdmsg1')))
+        } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+          callback(new Error(this.$t('uc.safe.newpwdmsg1')))
+        } else {
+          callback()
         }
-      ],
-      formValidate7: {
-        pw7: '',
-        pw7Confirm: ''
-      },
-      formValidate8: {
-        newMPw8: '',
-        newMPwConfirm8: '',
-        phoneCode: ''
-      },
-      ruleValidate: {
-        googleCode5: [{
-          required: true,
-          message: this.$t('openGoolePage._GoogleVerificationCode'),
-          trigger: 'blur'
-        }],
-        googleCode: [
+      }
+      const validatePassCheck = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error(this.$t('uc.safe.newpwdmsg2')))
+        } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+          callback(new Error(this.$t('uc.safe.newpwdmsg2')))
+        } else if (value !== this.formValidate4.newPw) {
+          callback(new Error(this.$t('uc.safe.newpwdmsg2')))
+        } else {
+          callback()
+        }
+      }
+      const validateMPass = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error(this.$t('uc.safe.pwdmsg1')))
+        } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+          callback(new Error(this.$t('uc.safe.pwdmsg1')))
+        } else {
+          callback()
+        }
+      }
+      const validateMPassCheck = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error(this.$t('uc.safe.pwdmsg2')))
+        } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+          callback(new Error(this.$t('uc.safe.pwdmsg2')))
+        } else if (value !== this.formValidate5.newMPw) {
+          callback(new Error(this.$t('uc.safe.pwdmsg2')))
+        } else {
+          callback()
+        }
+      }
+      const validatepw7 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error(this.$t('uc.safe.pwdmsg1')))
+        } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+          callback(new Error(this.$t('uc.safe.pwdmsg1')))
+        } else {
+          callback()
+        }
+      }
+      const validatepw7check = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error(this.$t('uc.safe.pwdmsg1')))
+        } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+          callback(new Error(this.$t('uc.safe.pwdmsg2')))
+        } else if (value !== this.formValidate7.pw7) {
+          callback(new Error(this.$t('uc.safe.pwdmsg2')))
+        } else {
+          callback()
+        }
+      }
+      const validateMPass8 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error(this.$t('uc.safe.pwdmsg1')))
+        } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+          callback(new Error(this.$t('uc.safe.pwdmsg1')))
+        } else {
+          callback()
+        }
+      }
+      const validateMPassCheck8 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error(this.$t('uc.safe.pwdmsg2')))
+        } else if (!/([a-zA-Z0-9]){6,18}/.test(value)) {
+          callback(new Error(this.$t('uc.safe.pwdmsg2')))
+        } else if (value !== this.formValidate8.newMPw8) {
+          callback(new Error(this.$t('uc.safe.pwdmsg2')))
+        } else {
+          callback()
+        }
+      }
+      return {
+        modalNickName: false, // 修改用户昵称
+        modal2: false,
+        modal21: false,
+        modal3: false,
+        modal31: false,
+        modal4: false,
+        modal5: false,
+        modal6: false,
+        modal7: false,
+        modal8: false,
+        modal9: false,
+        modal10: false,
+        uid: '',
+        googleSwitch: false,
+        isPhoneCode: false, // 是否绑定手机验证状态
+        isEmailCode: false, // 是否绑定手机验证状态
+        isGoogleCode: false, // 是否绑定谷歌验证状态
+        fGetBackFundpwd: false,
+        imgPreview: '',
+        imgNext: '',
+        imgLast: '',
+        loginmsg: this.$t('common.logintip'),
+        memberlevel: '',
+        // frontCardImg: require('../../assets/images/frontCardImg1.jpg'),
+        // backCardImg: require('../../assets/images/backCardImg1.jpg'),
+        // handCardImg: require('../../assets/images/HandCardImg1.jpg'),
+
+        uploadHeaders: {'x-auth-token': localStorage.getItem('TOKEN')},
+        uploadUrl: this.host + '/uc/upload/oss/image',
+
+        usernameS: '',
+        user: {},
+        choseItem: 0,
+        accountValue: '1',
+        // 修改用户昵称
+        nickNameData: {
+          nickName: ''
+        },
+        formValidate2: {
+          mail: '',
+          vailCode1: '',
+          password: ''
+        },
+        // 换绑邮箱
+        formValidate21: {
+          newMail: '',
+          vailCode1: '',
+          vailCode11: ''
+        },
+        formValidate3: {
+          mobile: '',
+          vailCode2: '',
+          password: ''
+        },
+        // 换绑手机
+        formValidate31: {
+          newMobile: '',
+          vailCode2: '',
+          vailCode22: '',
+          password: ''
+        },
+        formValidate4: {
+          oldPw: '',
+          newPw: '',
+          newPwConfirm: '',
+          phoneCode: '',
+          googleCode: '',
+          emailCode: ''
+        },
+        formValidate5: {
+          oldPw: '',
+          newMPw: '',
+          newMPwConfirm: '',
+          phoneCode: '',
+          emailCode: '',
+          googleCode: ''
+        },
+        // 身份认证
+        formValidate6: {
+          realName: '',
+          idCard: '',
+          typeId: 1,
+          idNumber: ''
+        },
+        // 证件类型
+        typeIdList: [
           {
+            value: 1,
+            label: '身份证'
+          },
+          {
+            value: 2,
+            label: '护照'
+          }
+        ],
+        formValidate7: {
+          pw7: '',
+          pw7Confirm: ''
+        },
+        formValidate8: {
+          newMPw8: '',
+          newMPwConfirm8: '',
+          phoneCode: ''
+        },
+        ruleValidate: {
+          googleCode5: [{
             required: true,
             message: this.$t('openGoolePage._GoogleVerificationCode'),
             trigger: 'blur'
-          }
-        ],
-        mail: [
-          {
-            required: true,
-            type: 'email',
-            message: this.$t('uc.safe.emailtip'),
-            trigger: 'blur'
-          }
-        ],
-        newMail: [
-          {
-            required: true,
-            type: 'email',
-            message: this.$t('uc.safe.emailtip'),
-            trigger: 'blur'
-          }
-        ],
-        vailCode1: [
-          {
-            required: true,
-            message: this.$t('uc.safe.codetip'),
-            trigger: 'blur'
-          }
-        ],
-        vailCode11: [
-          {
-            required: true,
-            message: this.$t('uc.safe.codetip'),
-            trigger: 'blur'
-          }
-        ],
-        mobile: [
-          {
-            required: true,
-            message: this.$t('uc.safe.telnotip'),
-            trigger: 'blur'
-          }
-        ],
-        vailCode2: [
-          {
-            required: true,
-            message: this.$t('uc.safe.codetip'),
-            trigger: 'blur'
-          }
-        ],
-        vailCode22: [
-          {
-            required: true,
-            message: this.$t('uc.safe.codetip'),
-            trigger: 'blur'
-          }
-        ],
-        phoneCode: [
-          {
-            required: true,
-            message: this.$t('uc.safe.codetip'),
-            trigger: 'blur'
-          }
-        ],
-        password: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.pwdmsg1'),
-            trigger: 'blur'
-          }
-        ],
-        oldPw: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.oldpwdtip'),
-            trigger: 'blur'
-          }
-        ],
-        newPw: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.newpwdmsg1'),
-            trigger: 'blur'
-          },
-                    { validator: validatePass, trigger: 'blur' }
-        ],
-        newPwConfirm: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.confirmpwd'),
-            trigger: 'blur'
-          },
-                    { validator: validatePassCheck, trigger: 'blur' }
-        ],
-        newMPw: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.pwdmsg1'),
-            trigger: 'blur'
-          },
-                    { validator: validateMPass, trigger: 'blur' }
-        ],
-        newMPwConfirm: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.pwdmsg2'),
-            trigger: 'blur'
-          },
-                    { validator: validateMPassCheck, trigger: 'blur' }
-        ],
-        pw7: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.pwdmsg1'),
-            trigger: 'blur'
-          },
-                    { validator: validatepw7, trigger: 'blur' }
-        ],
-        pw7Confirm: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.pwdmsg2'),
-            trigger: 'blur'
-          },
-                    { validator: validatepw7check, trigger: 'blur' }
-        ],
-        realName: [
-          {
-            required: true,
-            message: this.$t('uc.safe.realnametip'),
-            trigger: 'blur'
-          }
-        ],
-        idCard: [
-          {
-            required: true,
-            message: this.$t('uc.safe.idcardtip'),
-            trigger: 'blur'
-          }
-        ],
+          }],
+          googleCode: [
+            {
+              required: true,
+              message: this.$t('openGoolePage._GoogleVerificationCode'),
+              trigger: 'blur'
+            }
+          ],
+          mail: [
+            {
+              required: true,
+              type: 'email',
+              message: this.$t('uc.safe.emailtip'),
+              trigger: 'blur'
+            }
+          ],
+          newMail: [
+            {
+              required: true,
+              type: 'email',
+              message: this.$t('uc.safe.emailtip'),
+              trigger: 'blur'
+            }
+          ],
+          vailCode1: [
+            {
+              required: true,
+              message: this.$t('uc.safe.codetip'),
+              trigger: 'blur'
+            }
+          ],
+          vailCode11: [
+            {
+              required: true,
+              message: this.$t('uc.safe.codetip'),
+              trigger: 'blur'
+            }
+          ],
+          mobile: [
+            {
+              required: true,
+              message: this.$t('uc.safe.telnotip'),
+              trigger: 'blur'
+            }
+          ],
+          vailCode2: [
+            {
+              required: true,
+              message: this.$t('uc.safe.codetip'),
+              trigger: 'blur'
+            }
+          ],
+          vailCode22: [
+            {
+              required: true,
+              message: this.$t('uc.safe.codetip'),
+              trigger: 'blur'
+            }
+          ],
+          phoneCode: [
+            {
+              required: true,
+              message: this.$t('uc.safe.codetip'),
+              trigger: 'blur'
+            }
+          ],
+          password: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.pwdmsg1'),
+              trigger: 'blur'
+            }
+          ],
+          oldPw: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.oldpwdtip'),
+              trigger: 'blur'
+            }
+          ],
+          newPw: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.newpwdmsg1'),
+              trigger: 'blur'
+            },
+            {validator: validatePass, trigger: 'blur'}
+          ],
+          newPwConfirm: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.confirmpwd'),
+              trigger: 'blur'
+            },
+            {validator: validatePassCheck, trigger: 'blur'}
+          ],
+          newMPw: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.pwdmsg1'),
+              trigger: 'blur'
+            },
+            {validator: validateMPass, trigger: 'blur'}
+          ],
+          newMPwConfirm: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.pwdmsg2'),
+              trigger: 'blur'
+            },
+            {validator: validateMPassCheck, trigger: 'blur'}
+          ],
+          pw7: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.pwdmsg1'),
+              trigger: 'blur'
+            },
+            {validator: validatepw7, trigger: 'blur'}
+          ],
+          pw7Confirm: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.pwdmsg2'),
+              trigger: 'blur'
+            },
+            {validator: validatepw7check, trigger: 'blur'}
+          ],
+          realName: [
+            {
+              required: true,
+              message: this.$t('uc.safe.realnametip'),
+              trigger: 'blur'
+            }
+          ],
+          idCard: [
+            {
+              required: true,
+              message: this.$t('uc.safe.idcardtip'),
+              trigger: 'blur'
+            }
+          ],
           // idNumber: [
           //     {
           //         required: true,
@@ -1304,829 +1371,860 @@ export default {
           //         trigger: 'blur'
           //     }
           // ],
-        newMPw8: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.pwdmsg1'),
-            trigger: 'blur'
-          },
-                    { validator: validateMPass8, trigger: 'blur' }
-        ],
-        newMPwConfirm8: [
-          {
-            required: true,
-            type: 'string',
-            min: 6,
-            message: this.$t('uc.safe.pwdmsg2'),
-            trigger: 'blur'
-          },
-                    { validator: validateMPassCheck8, trigger: 'blur' }
-        ]
-      },
-      time1: 60, // 发送验证码倒计时
-      time11: 60, // 发送验证码倒计时
-      time2: 60, // 发送验证码倒计时
-      time22: 60, // 发送验证码倒计时
-      time3: 60, // 发送验证码倒计时
-      time5: 60, // 发送验证码倒计时
-      time8: 60, // 发送验证码倒计时
-      sendEmailDisabled: false, // 邮箱短信验证
-      codeTime1: 60, // 邮箱短信验证倒计时
-      sendEmailDisabled1: false, // 修改资金密码邮箱短信验证
-      codeTime2: 60, // 修改资金密码邮箱短信验证倒计时
-      isCode: '',
-      sendMsgDisabled1: false,
-      sendMsgDisabled11: false,
-      sendMsgDisabled2: false,
-      sendMsgDisabled22: false,
-      sendMsgDisabled3: false,
-      sendMsgDisabled5: false,
-      sendMsgDisabled8: false,
-      googleAuthentication: ''
-    }
-  },
-  methods: {
-      // 安全验证接口
-    afetyVerification() {
-          // 1.输入谷歌验证码
-          // 2.输入手机验证码
-          // 3.输入邮箱验证码
-      this.$http.post(this.host + '/uc/getGoogleState', { mobile: this.$store.getters.member.mobile }).then(res => {
-        const data = res.body
-        this.isCode = data.data
-        if (data.code == 0) {
-          switch (data.data) {
-            case 1:
-                          // 1为开启谷歌验证
-              this.isGoogleCode = true
-              this.isPhoneCode = false
-              this.isEmailCode = false
-              break
-            case 2:
-                          // 2为开启手机验证
-              this.isGoogleCode = false
-              this.isPhoneCode = true
-              this.isEmailCode = false
-              break
-            case 3:
-                          // 3为开启邮箱验证
-              this.isGoogleCode = false
-              this.isPhoneCode = false
-              this.isEmailCode = true
-          }
-        }
-      })
-    },
-    userUid() {
-      this.uid = this.userId.id
-    },
-    checkGoogleValidtor(data) {
-        // 验证用户是否开启google验证
-      this.$http.post(this.host + '/uc/get/user', data).then(res => {
-        const data = res.body
-        if (data.code == 0) {
-          this.googleSwitch = !!data.data
-        }
-        if (data.data == 1) {
-          this.googleAuthentication = this.$t('openGoolePage._reset')
-        }
-      })
-    },
-    resetGoogle() {
-      this.modal7 = true
-      this.googleSwitch = !this.googleSwitch
-    },
-    closeGoogle() { // 改变google验证状态
-      if (this.googleSwitch) {
-        this.modal7 = false
-        this.googleAuthentication = this.$t('openGoolePage._reset')
-      } else {
-        this.modal8 = false
-        this.googleAuthentication = ''
-      }
-    },
-    changeGoogleSwitch() { // 改变google验证状态
-      if (this.googleSwitch) {
-        this.modal7 = true
-      } else {
-        this.modal8 = true
-      }
-    },
-    googleModalCancel() {
-      this.googleSwitch = !this.googleSwitch
-    },
-    // beforeUpload(data) {
-    //         // console.log(data)
-    //         // let name = data.name;//截取后4位
-    //         // name.substring(name.length-3);
-    //         // console.log(name.substring(name.length - 3));
-    //         // this.$Notice.warning({
-    //         //     title: '文件格式不正确',
-    //         //     desc: '文件 ' + name + ' 格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。'
-    //         // })
-    //         // if (name !== 'jpg') {:on-format-error="handleFormatError"
-    //         //     this.$Message.error('文件格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。');
-    //         //     return false;
-    //         // }
-    //   if (data && data.size >= 1024000 * 2) {
-    //             /* 上传图片大小不能超过2M*/
-    //     this.$Message.error(this.$t('uc.identity.upload'))
-    //     return false
-    //   }
-    // },
-    // frontHandleSuccess(res, file, fileList) {
-    //   this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
-    //   if (res.code == 0) {
-    //     this.frontCardImg = this.imgPreview = res.data
-    //   } else {
-    //     this.$Message.error(res.message)
-    //   }
-    // },
-    // backHandleSuccess(res, file, fileList) {
-    //   this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
-    //   if (res.code == 0) {
-    //     this.backCardImg = this.imgNext = res.data
-    //   } else {
-    //     this.$Message.error(res.message)
-    //   }
-    // },
-    // handHandleSuccess(res, file, fileList) {
-    //   this.$refs.upload3.fileList = [fileList[fileList.length - 1]]
-    //   if (res.code == 0) {
-    //     this.handCardImg = this.imgLast = res.data
-    //   } else {
-    //     this.$Message.error(res.message)
-    //   }
-    // },
-    noPhone() {
-      // if (this.user.phoneVerified==0 || this.user.phoneVerified==1) {
-      //     this.$Message.info(this.$t('uc.safe.bindphonetip'))
-      //     // this.showItem(3);
-      //     this.modal3 = true
-      // } else {
-      this.afetyVerification()
-      this.modal4 = true
-      // }
-    },
-    showItemFundpwd() {
-      this.afetyVerification()
-      this.fGetBackFundpwd = false
-      this.handleReset('formValidate5')
-      this.modal5 = true
-    },
-    renderPw() {
-      this.$Modal.confirm({
-        title: this.$t('uc.safe.resetfundpwd'),
-        onOk: () => {
-          this.$Message.info('Clicked ok')
-        },
-        render: h => {
-          return h('Input', {
-            props: {
-              value: this.value,
-              autofocus: true
+          newMPw8: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.pwdmsg1'),
+              trigger: 'blur'
             },
-            on: {
-              input: val => {
-                this.value = val
-              }
+            {validator: validateMPass8, trigger: 'blur'}
+          ],
+          newMPwConfirm8: [
+            {
+              required: true,
+              type: 'string',
+              min: 6,
+              message: this.$t('uc.safe.pwdmsg2'),
+              trigger: 'blur'
+            },
+            {validator: validateMPassCheck8, trigger: 'blur'}
+          ]
+        },
+        time1: 60, // 发送验证码倒计时
+        time11: 60, // 发送验证码倒计时
+        time2: 60, // 发送验证码倒计时
+        time22: 60, // 发送验证码倒计时
+        time3: 60, // 发送验证码倒计时
+        time5: 60, // 发送验证码倒计时
+        time8: 60, // 发送验证码倒计时
+        sendEmailDisabled: false, // 邮箱短信验证
+        codeTime1: 60, // 邮箱短信验证倒计时
+        sendEmailDisabled1: false, // 修改资金密码邮箱短信验证
+        codeTime2: 60, // 修改资金密码邮箱短信验证倒计时
+        isCode: '',
+        sendMsgDisabled1: false,
+        sendMsgDisabled11: false,
+        sendMsgDisabled2: false,
+        sendMsgDisabled22: false,
+        sendMsgDisabled3: false,
+        sendMsgDisabled5: false,
+        sendMsgDisabled8: false,
+        googleAuthentication: ''
+      }
+    },
+    methods: {
+      // 安全验证接口
+      afetyVerification() {
+        // 1.输入谷歌验证码
+        // 2.输入手机验证码
+        // 3.输入邮箱验证码
+        this.$http.post(this.host + '/uc/getGoogleState', {mobile: this.$store.getters.member.mobile}).then(res => {
+          const data = res.body
+          this.isCode = data.data
+          if (data.code == 0) {
+            switch (data.data) {
+              case 1:
+                // 1为开启谷歌验证
+                this.isGoogleCode = true
+                this.isPhoneCode = false
+                this.isEmailCode = false
+                break
+              case 2:
+                // 2为开启手机验证
+                this.isGoogleCode = false
+                this.isPhoneCode = true
+                this.isEmailCode = false
+                break
+              case 3:
+                // 3为开启邮箱验证
+                this.isGoogleCode = false
+                this.isPhoneCode = false
+                this.isEmailCode = true
             }
-          })
+          }
+        })
+      },
+      userUid() {
+        this.uid = this.userId.id
+      },
+      checkGoogleValidtor(data) {
+        // 验证用户是否开启google验证
+        this.$http.post(this.host + '/uc/get/user', data).then(res => {
+          const data = res.body
+          if (data.code == 0) {
+            this.googleSwitch = !!data.data
+          }
+          if (data.data == 1) {
+            this.googleAuthentication = this.$t('openGoolePage._reset')
+          }
+        })
+      },
+      resetGoogle() {
+        this.modal7 = true
+        this.googleSwitch = !this.googleSwitch
+      },
+      closeGoogle() { // 改变google验证状态
+        if (this.googleSwitch) {
+          this.modal7 = false
+          this.googleAuthentication = this.$t('openGoolePage._reset')
+        } else {
+          this.modal8 = false
+          this.googleAuthentication = ''
         }
-      })
-    },
+      },
+      changeGoogleSwitch() { // 改变google验证状态
+        if (this.googleSwitch) {
+          this.modal7 = true
+        } else {
+          this.modal8 = true
+        }
+      },
+      googleModalCancel() {
+        this.googleSwitch = !this.googleSwitch
+      },
+      // beforeUpload(data) {
+      //         // console.log(data)
+      //         // let name = data.name;//截取后4位
+      //         // name.substring(name.length-3);
+      //         // console.log(name.substring(name.length - 3));
+      //         // this.$Notice.warning({
+      //         //     title: '文件格式不正确',
+      //         //     desc: '文件 ' + name + ' 格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。'
+      //         // })
+      //         // if (name !== 'jpg') {:on-format-error="handleFormatError"
+      //         //     this.$Message.error('文件格式不正确，请上传 jpg、png、gif、jpeg 格式的图片。');
+      //         //     return false;
+      //         // }
+      //   if (data && data.size >= 1024000 * 2) {
+      //             /* 上传图片大小不能超过2M*/
+      //     this.$Message.error(this.$t('uc.identity.upload'))
+      //     return false
+      //   }
+      // },
+      // frontHandleSuccess(res, file, fileList) {
+      //   this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
+      //   if (res.code == 0) {
+      //     this.frontCardImg = this.imgPreview = res.data
+      //   } else {
+      //     this.$Message.error(res.message)
+      //   }
+      // },
+      // backHandleSuccess(res, file, fileList) {
+      //   this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
+      //   if (res.code == 0) {
+      //     this.backCardImg = this.imgNext = res.data
+      //   } else {
+      //     this.$Message.error(res.message)
+      //   }
+      // },
+      // handHandleSuccess(res, file, fileList) {
+      //   this.$refs.upload3.fileList = [fileList[fileList.length - 1]]
+      //   if (res.code == 0) {
+      //     this.handCardImg = this.imgLast = res.data
+      //   } else {
+      //     this.$Message.error(res.message)
+      //   }
+      // },
+      noPhone() {
+        // if (this.user.phoneVerified==0 || this.user.phoneVerified==1) {
+        //     this.$Message.info(this.$t('uc.safe.bindphonetip'))
+        //     // this.showItem(3);
+        //     this.modal3 = true
+        // } else {
+        this.afetyVerification()
+        this.modal4 = true
+        // }
+      },
+      showItemFundpwd() {
+        this.afetyVerification()
+        this.fGetBackFundpwd = false
+        this.handleReset('formValidate5')
+        this.modal5 = true
+      },
+      renderPw() {
+        this.$Modal.confirm({
+          title: this.$t('uc.safe.resetfundpwd'),
+          onOk: () => {
+            this.$Message.info('Clicked ok')
+          },
+          render: h => {
+            return h('Input', {
+              props: {
+                value: this.value,
+                autofocus: true
+              },
+              on: {
+                input: val => {
+                  this.value = val
+                }
+              }
+            })
+          }
+        })
+      },
 
-    areaChange(value) {
-      this.typeIdList.forEach((ele, index) => {
-              // if (ele.symbol == list[0].symbol) {
-              //     this.hostSymbolList.splice(index, 1, resp);
-              // }
-      })
-    },
-    submit(name) {
-      console.log(name, this.formValidate6.realName, this.formValidate6.idCard)
-// 实名认证
-      if (name == 'formValidate6') {
-        if (!this.formValidate6.realName) {
-          this.$Message.error(this.$t('uc.safe.realnametip'))
+      areaChange(value) {
+        this.typeIdList.forEach((ele, index) => {
+          // if (ele.symbol == list[0].symbol) {
+          //     this.hostSymbolList.splice(index, 1, resp);
+          // }
+        })
+      },
+      setUserNickname() {
+        if (!this.nickNameData.nickName) {
+          this.$Message.error(this.$t('uc.safe.nick'))
           return false
         }
-        if (!this.formValidate6.idCard) {
-          this.$Message.error(this.$t('uc.safe.idcardtip'))
+        if (this.nickNameData.nickName.length < 3) {
+          this.$Message.error(this.$t('uc.safe.nickAstrict'))
           return false
         }
+        const param = {}
+        param['nickName'] = this.nickNameData.nickName
+        this.$http.post(this.host + '/uc/approve/change/nickName', param).then(response => {
+          var resp = response.body
+          if (resp.code == 0) {
+            this.modalNickName = false
+           this.getMember()
+            this.$Message.success(resp.message)
+          } else {
+            this.$Message.error(resp.message)
+          }
+        })
+      },
+      submit(name) {
+        console.log(name, this.formValidate6.realName, this.formValidate6.idCard)
+        // 实名认证
+        if (name == 'formValidate6') {
+          if (!this.formValidate6.realName) {
+            this.$Message.error(this.$t('uc.safe.realnametip'))
+            return false
+          }
+          if (!this.formValidate6.idCard) {
+            this.$Message.error(this.$t('uc.safe.idcardtip'))
+            return false
+          }
           // if (!this.formValidate6.idNumber) {
           //     this.$Message.error(this.$t('uc.safe.passport'))
           //     return false
           // }
-                // if (this.imgPreview == "") {
-                //     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
-                //     return false;
-                // }
-                // if (this.imgNext == "") {
-                //     this.$Message.error(this.$t("uc.safe.upload_negativetip"));
-                //     return false;
-                // }
-                // if (this.imgLast == "") {
-                //     this.$Message.error(this.$t("uc.safe.upload_handtip"));
-                //     return false;
-                // }
-        const param = {}
-        param['realName'] = this.formValidate6.realName
-        param['idCard'] = this.formValidate6.idCard.toUpperCase()
-        // param['idNumber'] = this.formValidate6.idNumber
-        // param["idCardFront"] = this.imgPreview;
-        // param["idCardBack"] = this.imgNext;
-        // param["handHeldIdCard"] = this.imgLast;
-        this.$http.post(this.host + '/uc/approve/real/name', param).then(response => {
-          var resp = response.body
-          if (resp.code == 0) {
-            this.member.realName = this.formValidate6.realName
-            this.$store.commit('setMember', this.member)
-            this.modal6 = false
-            this.$Message.success(this.$t('uc.safe.save_success'))
-            this.getMember()
-            this.choseItem = 0
-          } else {
-            this.$Message.error(resp.message)
-          }
-        })
-      }
-            // 邮箱认证
-      if (name == 'formValidate2') {
-        const param = {}
-        param['email'] = this.formValidate2.mail
-        param['code'] = this.formValidate2.vailCode1
-        param['password'] = this.formValidate2.password
-        this.$http.post(this.host + '/uc/approve/bind/email', param).then(response => {
-          var resp = response.body
-          if (resp.code == 0) {
-            this.modal2 = false
-            this.$Message.success(this.$t('uc.safe.save_success'))
-            this.getMember()
-            this.choseItem = 0
-          } else {
-            this.$Message.error(resp.message)
-          }
-        })
-      }
+          // if (this.imgPreview == "") {
+          //     this.$Message.error(this.$t("uc.safe.upload_positivetip"));
+          //     return false;
+          // }
+          // if (this.imgNext == "") {
+          //     this.$Message.error(this.$t("uc.safe.upload_negativetip"));
+          //     return false;
+          // }
+          // if (this.imgLast == "") {
+          //     this.$Message.error(this.$t("uc.safe.upload_handtip"));
+          //     return false;
+          // }
+          const param = {}
+          param['realName'] = this.formValidate6.realName
+          param['idCard'] = this.formValidate6.idCard.toUpperCase()
+          // param['idNumber'] = this.formValidate6.idNumber
+          // param["idCardFront"] = this.imgPreview;
+          // param["idCardBack"] = this.imgNext;
+          // param["handHeldIdCard"] = this.imgLast;
+          this.$http.post(this.host + '/uc/approve/real/name', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.member.realName = this.formValidate6.realName
+              this.$store.commit('setMember', this.member)
+              this.modal6 = false
+              this.$Message.success(this.$t('uc.safe.save_success'))
+              this.getMember()
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        }
+        // 邮箱认证
+        if (name == 'formValidate2') {
+          const param = {}
+          param['email'] = this.formValidate2.mail
+          param['code'] = this.formValidate2.vailCode1
+          param['password'] = this.formValidate2.password
+          this.$http.post(this.host + '/uc/approve/bind/email', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal2 = false
+              this.$Message.success(this.$t('uc.safe.save_success'))
+              this.getMember()
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        }
         // 换绑邮箱
-      if (name == 'formValidate21') {
-        const param = {}
-        param['newEmail'] = this.formValidate21.newMail
-        param['oldEmailCode'] = this.formValidate21.vailCode1
-        param['newEmailCode'] = this.formValidate21.vailCode11
-        this.$http.get(this.host + '/uc/approve/update/email', { 'params': param }).then(response => {
-          var resp = response.body
-          if (resp.code == 0) {
-            this.modal21 = false
-            this.$Message.success(this.$t('uc.safe.save_success'))
-            this.logou()
-            this.formValidate21 = ''
-            this.choseItem = 0
-          } else {
-            this.$Message.error(resp.message)
-          }
-        })
-      }
+        if (name == 'formValidate21') {
+          const param = {}
+          param['newEmail'] = this.formValidate21.newMail
+          param['oldEmailCode'] = this.formValidate21.vailCode1
+          param['newEmailCode'] = this.formValidate21.vailCode11
+          this.$http.get(this.host + '/uc/approve/update/email', {'params': param}).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal21 = false
+              this.$Message.success(this.$t('uc.safe.save_success'))
+              this.logou()
+              this.formValidate21 = ''
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        }
         // 手机认证
-      if (name == 'formValidate3') {
-        const param = {}
-        param['phone'] = this.formValidate3.mobile
-        param['code'] = this.formValidate3.vailCode2
-        param['password'] = this.formValidate3.password
-        this.$http.post(this.host + '/uc/approve/bind/phone', param).then(response => {
-          var resp = response.body
-          if (resp.code == 0) {
-            this.modal3 = false
-            this.$Message.success(this.$t('uc.safe.save_success'))
-            this.getMember()
-            this.choseItem = 0
-          } else {
-            this.$Message.error(resp.message)
-          }
-        })
-      }
+        if (name == 'formValidate3') {
+          const param = {}
+          param['phone'] = this.formValidate3.mobile
+          param['code'] = this.formValidate3.vailCode2
+          param['password'] = this.formValidate3.password
+          this.$http.post(this.host + '/uc/approve/bind/phone', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal3 = false
+              this.$Message.success(this.$t('uc.safe.save_success'))
+              this.getMember()
+              this.choseItem = 0
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        }
         // 换绑手机
-      if (name == 'formValidate31') {
-        const param = {}
-        param['password'] = this.formValidate31.password
-        param['phone'] = this.formValidate31.newMobile
-        param['code'] = this.formValidate31.vailCode2
-        param['newCode'] = this.formValidate31.vailCode22
-        this.$http.get(this.host + '/uc/approve/change/phone', { 'params': param }).then(response => {
-          var resp = response.body
-          if (resp.code == 0) {
-            this.modal31 = false
-            this.$Message.success(resp.message)
-            this.formValidate31 = ''
-            this.choseItem = 0
-            this.logou()
+        if (name == 'formValidate31') {
+          const param = {}
+          param['password'] = this.formValidate31.password
+          param['phone'] = this.formValidate31.newMobile
+          param['code'] = this.formValidate31.vailCode2
+          param['newCode'] = this.formValidate31.vailCode22
+          this.$http.get(this.host + '/uc/approve/change/phone', {'params': param}).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal31 = false
+              this.$Message.success(resp.message)
+              this.formValidate31 = ''
+              this.choseItem = 0
+              this.logou()
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        }
+        // 登录密码
+        if (name == 'formValidate4') {
+          const param = {}
+          param['oldPassword'] = this.formValidate4.oldPw
+          param['newPassword'] = this.formValidate4.newPw
+          param['code'] = this.isCode == 2 ? this.formValidate4.phoneCode : this.formValidate4.emailCode
+          if (this.isCode == 3) {
+            param['codeMold'] = 1
+          } else if (this.isCode == 2) {
+            param['codeMold'] = 0
           } else {
-            this.$Message.error(resp.message)
+            param['codeMold'] = ''
           }
-        })
-      }
-            // 登录密码
-      if (name == 'formValidate4') {
-        const param = {}
-        param['oldPassword'] = this.formValidate4.oldPw
-        param['newPassword'] = this.formValidate4.newPw
-        param['code'] = this.isCode == 2 ? this.formValidate4.phoneCode : this.formValidate4.emailCode
-        if (this.isCode == 3) {
-          param['codeMold'] = 1
-        } else if (this.isCode == 2) {
-          param['codeMold'] = 0
+          if (this.googleSwitch) {
+            param.googleCode = this.formValidate4.googleCode
+          }
+          this.$http.post(this.host + '/uc/approve/update/password', param).then(response => {
+            var resp = response.body
+            if (resp.code == 0) {
+              this.modal4 = false
+              this.$Message.success(this.$t('uc.safe.save_success'))
+              this.getMember()
+              this.choseItem = 0
+              this.logou()
+              // localStorage.removeItem('MEMBER')
+              // localStorage.removeItem('TOKEN')
+              // this.$store.state.showLogout = true
+              // this.$store.state.showLogin = false
+              // const self = this
+              // setTimeout(() => {
+              //   self.$router.push('/login')
+              // }, 2000)
+            } else {
+              this.$Message.error(resp.message)
+            }
+          })
+        }
+        // 修改资金密码
+        if (name == 'formValidate5') {
+          const param = {}
+          param['oldPassword'] = this.formValidate5.oldPw
+          param['newPassword'] = this.formValidate5.newMPw
+          param['msgCode'] = this.isCode == 2 ? this.formValidate5.phoneCode : this.formValidate5.emailCode
+          if (this.googleSwitch) {
+            param.googleCode = this.formValidate5.googleCode
+          }
+          this.$http.post(this.host + '/uc/approve/update/transaction/password', param)
+              .then(response => {
+                var resp = response.body
+                if (resp.code == 0) {
+                  this.modal5 = false
+                  this.$Message.success(this.$t('uc.safe.save_success'))
+                  this.handleReset('formValidate5')
+                  this.getMember()
+                  this.choseItem = 0
+                } else {
+                  this.$Message.error(resp.message)
+                }
+              })
+        }
+        // 设置资金密码
+        if (name == 'formValidate7') {
+          const param = {}
+          param['jyPassword'] = this.formValidate7.pw7
+          this.$http
+              .post(this.host + '/uc/approve/transaction/password', param)
+              .then(response => {
+                var resp = response.body
+                if (resp.code == 0) {
+                  this.modal5 = false
+                  this.$Message.success(this.$t('uc.safe.save_success'))
+                  this.getMember()
+                  this.choseItem = 0
+                } else {
+                  this.$Message.error(resp.message)
+                }
+              })
+        }
+        // 找回资金密码
+        if (name == 'formValidate8') {
+          const param = {}
+          param['newPassword'] = this.formValidate8.newMPw8
+          param['code'] = this.formValidate8.phoneCode
+          this.$http
+              .post(this.host + '/uc/approve/reset/transaction/password', param)
+              .then(response => {
+                var resp = response.body
+                if (resp.code == 0) {
+                  this.modal5 = false
+                  this.$Message.success(this.$t('uc.safe.save_success'))
+                  this.fGetBackFundpwd = false
+                  this.handleReset('formValidate5')
+                  this.getMember()
+                  this.choseItem = 0
+                } else {
+                  this.$Message.error(resp.message)
+                }
+              })
+        }
+      },
+      handleSubmit(name) {
+        console.log(name)
+        if (name == 'formValidate6') {
+          this.submit(name)
         } else {
-          param['codeMold'] = ''
+          this.$refs[name].validate(valid => {
+            console.log(valid)
+            if (valid) {
+              this.submit(name)
+            } else {
+              this.$Message.error(this.$t('uc.safe.save_failure'))
+            }
+          })
         }
-        if (this.googleSwitch) {
-          param.googleCode = this.formValidate4.googleCode
-        }
-        this.$http.post(this.host + '/uc/approve/update/password', param).then(response => {
-          var resp = response.body
-          if (resp.code == 0) {
-            this.modal4 = false
-            this.$Message.success(this.$t('uc.safe.save_success'))
-            this.getMember()
-            this.choseItem = 0
-            this.logou()
-            // localStorage.removeItem('MEMBER')
-            // localStorage.removeItem('TOKEN')
-            // this.$store.state.showLogout = true
-            // this.$store.state.showLogin = false
-            // const self = this
-            // setTimeout(() => {
-            //   self.$router.push('/login')
-            // }, 2000)
+      },
+      handleReset(name) {
+        this.$refs[name].resetFields()
+      },
+      showItem(index) {
+        this.choseItem = index
+      },
+      send(index) {
+        const me = this
+        if (index == 1) {
+          if (this.formValidate2.mail) {
+            // 获取邮箱code
+            this.$http.post(this.host + '/uc/bind/email/code', {
+              email: this.formValidate2.mail
+            })
+                .then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                    me.sendMsgDisabled1 = true
+                    const interval = window.setInterval(function () {
+                      if (me.time1-- <= 0) {
+                        me.time1 = 60
+                        me.sendMsgDisabled1 = false
+                        window.clearInterval(interval)
+                      }
+                    }, 1000)
+                  } else {
+                    this.$Message.error(resp.message)
+                  }
+                })
           } else {
-            this.$Message.error(resp.message)
+            this.$refs.formValidate2.validateField('mail')
           }
-        })
-      }
-            // 修改资金密码
-      if (name == 'formValidate5') {
-        const param = {}
-        param['oldPassword'] = this.formValidate5.oldPw
-        param['newPassword'] = this.formValidate5.newMPw
-        param['msgCode'] = this.isCode == 2 ? this.formValidate5.phoneCode : this.formValidate5.emailCode
-        if (this.googleSwitch) {
-          param.googleCode = this.formValidate5.googleCode
-        }
-        this.$http.post(this.host + '/uc/approve/update/transaction/password', param)
-                    .then(response => {
-                      var resp = response.body
-                      if (resp.code == 0) {
-                        this.modal5 = false
-                        this.$Message.success(this.$t('uc.safe.save_success'))
-                        this.handleReset('formValidate5')
-                        this.getMember()
-                        this.choseItem = 0
-                      } else {
-                        this.$Message.error(resp.message)
+        } else if (index == 11) {
+          if (this.$store.getters.member.email) {
+            // 获取旧邮箱code
+            this.$http.post(this.host + '/uc/untie/email/code', {
+              email: this.$store.getters.member.email
+            })
+                .then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                    me.sendMsgDisabled1 = true
+                    const interval = window.setInterval(function () {
+                      if (me.time1-- <= 0) {
+                        me.time1 = 60
+                        me.sendMsgDisabled1 = false
+                        window.clearInterval(interval)
                       }
-                    })
-      }
-            // 设置资金密码
-      if (name == 'formValidate7') {
-        const param = {}
-        param['jyPassword'] = this.formValidate7.pw7
-        this.$http
-                    .post(this.host + '/uc/approve/transaction/password', param)
-                    .then(response => {
-                      var resp = response.body
-                      if (resp.code == 0) {
-                        this.modal5 = false
-                        this.$Message.success(this.$t('uc.safe.save_success'))
-                        this.getMember()
-                        this.choseItem = 0
-                      } else {
-                        this.$Message.error(resp.message)
-                      }
-                    })
-      }
-            // 找回资金密码
-      if (name == 'formValidate8') {
-        const param = {}
-        param['newPassword'] = this.formValidate8.newMPw8
-        param['code'] = this.formValidate8.phoneCode
-        this.$http
-                    .post(this.host + '/uc/approve/reset/transaction/password', param)
-                    .then(response => {
-                      var resp = response.body
-                      if (resp.code == 0) {
-                        this.modal5 = false
-                        this.$Message.success(this.$t('uc.safe.save_success'))
-                        this.fGetBackFundpwd = false
-                        this.handleReset('formValidate5')
-                        this.getMember()
-                        this.choseItem = 0
-                      } else {
-                        this.$Message.error(resp.message)
-                      }
-                    })
-      }
-    },
-    handleSubmit(name) {
-      console.log(name)
-      if (name == 'formValidate6') {
-        this.submit(name)
-      } else {
-        this.$refs[name].validate(valid => {
-          console.log(valid)
-          if (valid) {
-            this.submit(name)
+                    }, 1000)
+                  } else {
+                    this.$Message.error(resp.message)
+                  }
+                })
           } else {
-            this.$Message.error(this.$t('uc.safe.save_failure'))
+            this.$refs.formValidate2.validateField('mail')
           }
-        })
-      }
-    },
-    handleReset(name) {
-      this.$refs[name].resetFields()
-    },
-    showItem(index) {
-      this.choseItem = index
-    },
-    send(index) {
-      const me = this
-      if (index == 1) {
-        if (this.formValidate2.mail) {
-                    // 获取邮箱code
-          this.$http.post(this.host + '/uc/bind/email/code', {
-            email: this.formValidate2.mail
-          })
-            .then(response => {
-              var resp = response.body
-              if (resp.code == 0) {
-                me.sendMsgDisabled1 = true
-                const interval = window.setInterval(function() {
-                  if (me.time1-- <= 0) {
-                    me.time1 = 60
-                    me.sendMsgDisabled1 = false
-                    window.clearInterval(interval)
-                  }
-                }, 1000)
-              } else {
-                this.$Message.error(resp.message)
-              }
+        } else if (index == 12) {
+          if (this.formValidate21.newMail) {
+            // 获取新邮箱code
+            this.$http.post(this.host + '/uc/email/update/code', {
+              email: this.formValidate21.newMail
             })
-        } else {
-          this.$refs.formValidate2.validateField('mail')
-        }
-      } else if (index == 11) {
-        if (this.$store.getters.member.email) {
-                    // 获取旧邮箱code
-          this.$http.post(this.host + '/uc/untie/email/code', {
-            email: this.$store.getters.member.email
-          })
-            .then(response => {
-              var resp = response.body
-              if (resp.code == 0) {
-                me.sendMsgDisabled1 = true
-                const interval = window.setInterval(function() {
-                  if (me.time1-- <= 0) {
-                    me.time1 = 60
-                    me.sendMsgDisabled1 = false
-                    window.clearInterval(interval)
+                .then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                    me.sendMsgDisabled11 = true
+                    const interval = window.setInterval(function () {
+                      if (me.time11-- <= 0) {
+                        me.time11 = 60
+                        me.sendMsgDisabled11 = false
+                        window.clearInterval(interval)
+                      }
+                    }, 1000)
+                  } else {
+                    this.$Message.error(resp.message)
                   }
-                }, 1000)
-              } else {
-                this.$Message.error(resp.message)
-              }
+                })
+          } else {
+            this.$refs.formValidate2.validateField('mail')
+          }
+        } else if (index == 2) {
+          if (this.formValidate3.mobile) {
+            // 获取手机code
+            this.$http.post(this.host + '/uc/mobile/bind/code', {
+              phone: this.formValidate3.mobile
             })
-        } else {
-          this.$refs.formValidate2.validateField('mail')
-        }
-      } else if (index == 12) {
-        if (this.formValidate21.newMail) {
-                    // 获取新邮箱code
-          this.$http.post(this.host + '/uc/email/update/code', {
-            email: this.formValidate21.newMail
-          })
-            .then(response => {
-              var resp = response.body
-              if (resp.code == 0) {
-                me.sendMsgDisabled11 = true
-                const interval = window.setInterval(function() {
-                  if (me.time11-- <= 0) {
-                    me.time11 = 60
-                    me.sendMsgDisabled11 = false
-                    window.clearInterval(interval)
+                .then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                    me.sendMsgDisabled2 = true
+                    const interval = window.setInterval(function () {
+                      if (me.time2-- <= 0) {
+                        me.time2 = 60
+                        me.sendMsgDisabled2 = false
+                        window.clearInterval(interval)
+                      }
+                    }, 1000)
+                  } else {
+                    this.$Message.error(resp.message)
                   }
-                }, 1000)
-              } else {
-                this.$Message.error(resp.message)
-              }
+                })
+          } else {
+            this.$refs.formValidate3.validateField('mobile')
+          }
+        } else if (index == 21) {
+          if (this.$store.getters.member.mobile) {
+            // 获取旧手机code
+            this.$http.post(this.host + '/uc/mobile/change/code', {
+              phone: this.$store.getters.member.mobile
             })
-        } else {
-          this.$refs.formValidate2.validateField('mail')
-        }
-      } else if (index == 2) {
-        if (this.formValidate3.mobile) {
-                    // 获取手机code
-          this.$http.post(this.host + '/uc/mobile/bind/code', {
-            phone: this.formValidate3.mobile
-          })
-                        .then(response => {
-                          var resp = response.body
-                          if (resp.code == 0) {
-                            me.sendMsgDisabled2 = true
-                            const interval = window.setInterval(function() {
-                              if (me.time2-- <= 0) {
-                                me.time2 = 60
-                                me.sendMsgDisabled2 = false
-                                window.clearInterval(interval)
-                              }
-                            }, 1000)
-                          } else {
-                            this.$Message.error(resp.message)
-                          }
-                        })
-        } else {
-          this.$refs.formValidate3.validateField('mobile')
-        }
-      } else if (index == 21) {
-        if (this.$store.getters.member.mobile) {
-              // 获取旧手机code
-          this.$http.post(this.host + '/uc/mobile/change/code', {
-            phone: this.$store.getters.member.mobile
-          })
-                        .then(response => {
-                          var resp = response.body
-                          if (resp.code == 0) {
-                            me.sendMsgDisabled2 = true
-                            const interval = window.setInterval(function() {
-                              if (me.time2-- <= 0) {
-                                me.time2 = 60
-                                me.sendMsgDisabled2 = false
-                                window.clearInterval(interval)
-                              }
-                            }, 1000)
-                          } else {
-                            this.$Message.error(resp.message)
-                          }
-                        })
-        } else {
-          this.$refs.formValidate3.validateField('mobile')
-        }
-      } else if (index == 22) {
-        // console.log(this.$store.getters.member.country.areaCode);
-        if (this.formValidate31.newMobile) {
+                .then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                    me.sendMsgDisabled2 = true
+                    const interval = window.setInterval(function () {
+                      if (me.time2-- <= 0) {
+                        me.time2 = 60
+                        me.sendMsgDisabled2 = false
+                        window.clearInterval(interval)
+                      }
+                    }, 1000)
+                  } else {
+                    this.$Message.error(resp.message)
+                  }
+                })
+          } else {
+            this.$refs.formValidate3.validateField('mobile')
+          }
+        } else if (index == 22) {
+          // console.log(this.$store.getters.member.country.areaCode);
+          if (this.formValidate31.newMobile) {
             // 获取新手机code
-          this.$http.post(this.host + '/uc/mobile/change/resetNewPhoneCode', {
-            phone: this.formValidate31.newMobile, areaCode: '86'
+            this.$http.post(this.host + '/uc/mobile/change/resetNewPhoneCode', {
+              phone: this.formValidate31.newMobile, areaCode: '86'
+            })
+                .then(response => {
+                  var resp = response.body
+                  if (resp.code == 0) {
+                    me.sendMsgDisabled22 = true
+                    const interval = window.setInterval(function () {
+                      if (me.time22-- <= 0) {
+                        me.time22 = 60
+                        me.sendMsgDisabled22 = false
+                        window.clearInterval(interval)
+                      }
+                    }, 1000)
+                  } else {
+                    this.$Message.error(resp.message)
+                  }
+                })
+          } else {
+            // this.$refs.formValidate31.validateField('mobile')
+          }
+        } else if (index == 3) {
+          // 登录密码获取手机code
+          this.$http.post(this.host + '/uc/mobile/update/password/code')
+              .then(response => {
+                var resp = response.body
+                if (resp.code == 0) {
+                  me.sendMsgDisabled3 = true
+                  const interval = window.setInterval(function () {
+                    if (me.time3-- <= 0) {
+                      me.time3 = 60
+                      me.sendMsgDisabled3 = false
+                      window.clearInterval(interval)
+                    }
+                  }, 1000)
+                } else {
+                  this.$Message.error(resp.message)
+                }
+              })
+        } else if (index == 4) {
+          // 获取邮箱code
+          this.$http.post(this.host + '/uc/update/email/code').then(response => {
+            const resp = response.body
+            if (resp.code == 0) {
+              me.sendEmailDisabled = true
+              const interval = window.setInterval(function () {
+                if (me.codeTime1-- <= 0) {
+                  me.codeTime1 = 60
+                  me.sendEmailDisabled = false
+                  window.clearInterval(interval)
+                }
+              }, 1000)
+            } else {
+              me.$Message.error(resp.message)
+            }
           })
-                        .then(response => {
-                          var resp = response.body
-                          if (resp.code == 0) {
-                            me.sendMsgDisabled22 = true
-                            const interval = window.setInterval(function() {
-                              if (me.time22-- <= 0) {
-                                me.time22 = 60
-                                me.sendMsgDisabled22 = false
-                                window.clearInterval(interval)
-                              }
-                            }, 1000)
-                          } else {
-                            this.$Message.error(resp.message)
-                          }
-                        })
-        } else {
-          // this.$refs.formValidate31.validateField('mobile')
+        } else if (index == 5) {
+          // 资金密码获取手机code
+          this.$http.post(this.host + '/uc/mobile/trade/code')
+              .then(response => {
+                var resp = response.body
+                if (resp.code == 0) {
+                  me.sendMsgDisabled5 = true
+                  const interval = window.setInterval(function () {
+                    if (me.time5-- <= 0) {
+                      me.time5 = 60
+                      me.sendMsgDisabled5 = false
+                      window.clearInterval(interval)
+                    }
+                  }, 1000)
+                } else {
+                  this.$Message.error(resp.message)
+                }
+              })
+        } else if (index == 6) {
+          // 获取邮箱code
+          this.$http.post(this.host + '/uc/transaction/email/code').then(response => {
+            const resp = response.body
+            if (resp.code == 0) {
+              me.sendEmailDisabled1 = true
+              const interval = window.setInterval(function () {
+                if (me.codeTime2-- <= 0) {
+                  me.codeTime2 = 60
+                  me.sendEmailDisabled1 = false
+                  window.clearInterval(interval)
+                }
+              }, 1000)
+            } else {
+              me.$Message.error(resp.message)
+            }
+          })
+        } else if (index == 8) {
+          this.$http.post(this.host + '/uc/mobile/transaction/code')
+              .then(response => {
+                var resp = response.body
+                if (resp.code == 0) {
+                  me.sendMsgDisabled8 = true
+                  const interval = window.setInterval(function () {
+                    if (me.time8-- <= 0) {
+                      me.time8 = 60
+                      me.sendMsgDisabled8 = false
+                      window.clearInterval(interval)
+                    }
+                  }, 1000)
+                } else {
+                  this.$Message.error(resp.message)
+                }
+              })
         }
-      } else if (index == 3) {
-                // 登录密码获取手机code
-        this.$http.post(this.host + '/uc/mobile/update/password/code')
-                    .then(response => {
-                      var resp = response.body
-                      if (resp.code == 0) {
-                        me.sendMsgDisabled3 = true
-                        const interval = window.setInterval(function() {
-                          if (me.time3-- <= 0) {
-                            me.time3 = 60
-                            me.sendMsgDisabled3 = false
-                            window.clearInterval(interval)
-                          }
-                        }, 1000)
-                      } else {
-                        this.$Message.error(resp.message)
-                      }
-                    })
-      } else if (index == 4) {
-          // 获取邮箱code
-        this.$http.post(this.host + '/uc/update/email/code').then(response => {
-          const resp = response.body
-          if (resp.code == 0) {
-            me.sendEmailDisabled = true
-            const interval = window.setInterval(function() {
-              if (me.codeTime1-- <= 0) {
-                me.codeTime1 = 60
-                me.sendEmailDisabled = false
-                window.clearInterval(interval)
-              }
-            }, 1000)
+      },
+      logou() {
+        this.$http.post(this.host + '/uc/loginout', {}).then(response => {
+          var resp = response.body
+          if (resp.code === 0) {
+            this.$Message.success(resp.message)
+            this.$store.commit('setMember', null)
+            localStorage.removeItem('TOKEN')
+            setTimeout(() => {
+              location.href = '/'
+            }, 500)
           } else {
-            me.$Message.error(resp.message)
+            this.$Message.error(resp.message)
           }
         })
-      } else if (index == 5) {
-                // 资金密码获取手机code
-        this.$http.post(this.host + '/uc/mobile/trade/code')
-                    .then(response => {
-                      var resp = response.body
-                      if (resp.code == 0) {
-                        me.sendMsgDisabled5 = true
-                        const interval = window.setInterval(function() {
-                          if (me.time5-- <= 0) {
-                            me.time5 = 60
-                            me.sendMsgDisabled5 = false
-                            window.clearInterval(interval)
-                          }
-                        }, 1000)
-                      } else {
-                        this.$Message.error(resp.message)
-                      }
-                    })
-      } else if (index == 6) {
-          // 获取邮箱code
-        this.$http.post(this.host + '/uc/transaction/email/code').then(response => {
-          const resp = response.body
+      },
+      getMember() {
+        // 获取个人安全信息
+        return this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
+          var resp = response.body
           if (resp.code == 0) {
-            me.sendEmailDisabled1 = true
-            const interval = window.setInterval(function() {
-              if (me.codeTime2-- <= 0) {
-                me.codeTime2 = 60
-                me.sendEmailDisabled1 = false
-                window.clearInterval(interval)
-              }
-            }, 1000)
+            return new Promise((resolve, reject) => {
+              this.user = resp.data
+              this.usernameS = this.user.username.slice(0, 1)
+              resolve(resp.data)
+            })
           } else {
-            me.$Message.error(resp.message)
+            this.$Message.error(this.loginmsg)
           }
         })
-      } else if (index == 8) {
-        this.$http.post(this.host + '/uc/mobile/transaction/code')
-                    .then(response => {
-                      var resp = response.body
-                      if (resp.code == 0) {
-                        me.sendMsgDisabled8 = true
-                        const interval = window.setInterval(function() {
-                          if (me.time8-- <= 0) {
-                            me.time8 = 60
-                            me.sendMsgDisabled8 = false
-                            window.clearInterval(interval)
-                          }
-                        }, 1000)
-                      } else {
-                        this.$Message.error(resp.message)
-                      }
-                    })
       }
     },
-    logou() {
-      this.$http.post(this.host + '/uc/loginout', {}).then(response => {
-        var resp = response.body
-        if (resp.code === 0) {
-          this.$Message.success(resp.message)
-          this.$store.commit('setMember', null)
-          localStorage.removeItem('TOKEN')
-          setTimeout(() => {
-            location.href = '/'
-          }, 500)
-        } else {
-          this.$Message.error(resp.message)
-        }
-      })
-    },
-    getMember() {
-            // 获取个人安全信息
-      return this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
-        var resp = response.body
-        if (resp.code == 0) {
-          return new Promise((resolve, reject) => {
-            this.user = resp.data
-            this.usernameS = this.user.username.slice(0, 1)
-            resolve(resp.data)
-          })
-        } else {
-          this.$Message.error(this.loginmsg)
-        }
-      })
-    }
-  },
-  computed: {
-    userId: function() {
-      return JSON.parse(localStorage.getItem('MEMBER'))
-    },
-    member: function() {
-      return this.$store.getters.member
-    },
-    lang() {
-      return this.$store.state.lang
-    }
+    computed: {
+      userId: function () {
+        return JSON.parse(localStorage.getItem('MEMBER'))
+      },
+      member: function () {
+        return this.$store.getters.member
+      },
+      lang() {
+        return this.$store.state.lang
+      }
 
-  },
-  created() {
-    this.settiele()
-    this.userUid()
-    this.getMember().then(res => {
+    },
+    created() {
+      this.settiele()
+      this.userUid()
+      this.getMember().then(res => {
         // console.log(res);
         // console.log(res.mobilePhone);
         // console.log(res.email);
-      this.checkGoogleValidtor({ mobile: res.mobilePhone ? res.mobilePhone : res.email })
-    })
-    const level = (memberGradeId) => {
-      return `V${memberGradeId}`
+        this.checkGoogleValidtor({mobile: res.mobilePhone ? res.mobilePhone : res.email})
+      })
+      const level = (memberGradeId) => {
+        return `V${memberGradeId}`
+      }
+      const memberGradeId = this.$store.getters.member.memberGradeId
+      this.memberlevel = level(memberGradeId)
+      // 验证用户是否开启google验证
+      // this.checkGoogleValidtor();
+    },
+    components: {
+      ResetGoogleVali,
+      CloseGoogleVali,
+      BindGoogleVali
     }
-    const memberGradeId = this.$store.getters.member.memberGradeId
-    this.memberlevel = level(memberGradeId)
-        // 验证用户是否开启google验证
-        // this.checkGoogleValidtor();
-  },
-  components: {
-    ResetGoogleVali,
-    CloseGoogleVali,
-    BindGoogleVali
   }
-}
 </script>
 <style scoped lang="scss">
 
-%flex {
+  %flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+  }
 
-.acc_sc {
+  .acc_sc {
     margin-top: 29px;
-}
-.validate {
+  }
+
+  .validate {
     width: 100%;
     /*height: 60px;*/
     margin-bottom: 10px;
+
     .ivu-form-item-required {
-        float: left;
+      float: left;
     }
-}
-.nav-right {
+  }
+
+  .nav-right {
     .user .user-top-icon {
-        position: relative;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
     }
-}
-.uploadimgtip {
+  }
+
+  .uploadimgtip {
     position: relative;
     top: -20px;
     color: #3399ff;
-}
-.account-box .account-in .account-item.googleValidter {
+  }
+
+  .account-box .account-in .account-item.googleValidter {
     @extend %flex;
+
     > div h4 {
-        font-size: 24px;
-        div {
-            line-height: 2;
-        }
+      font-size: 24px;
+
+      div {
+        line-height: 2;
+      }
     }
-}
-.account-box .account-in .account-item .account-detail {
+  }
+
+  .account-box .account-in .account-item .account-detail {
     padding: 30px 40px;
     background: white;
     margin: 6px 0;
-}
+  }
 
-.account-box .account-in .account-item .account-detail .detail-list {
+  .account-box .account-in .account-item .account-detail .detail-list {
     width: 40%;
     margin: 0 auto;
-}
+  }
 
-.account-box
-    .account-in
-    .account-item
-    .account-detail
-    .detail-list
-    .input-control {
+  .account-box
+  .account-in
+  .account-item
+  .account-detail
+  .detail-list
+  .input-control {
     margin-bottom: 10px;
     height: 45px;
-}
-.detail-list .input-control .ivu-input-group-prepend {
+  }
+
+  .detail-list .input-control .ivu-input-group-prepend {
     width: 63px;
-}
+  }
 
-.detail-list .input-control .ivu-input {
+  .detail-list .input-control .ivu-input {
     height: 45px;
-}
+  }
 
-// .account-box .account-in .account-item {
-//     margin-bottom: 10px;
-// }
+  // .account-box .account-in .account-item {
+  //     margin-bottom: 10px;
+  // }
 
-.account-box .account-in .account-item .account-item-in {
+  .account-box .account-in .account-item .account-item-in {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2139,56 +2237,64 @@ export default {
     box-shadow: 0 1px 0 0 rgba(69, 112, 128, 0.06);
     font-size: 14px;
     color: #242a4a;
-    .icons {
-        height: 17px;
-        width: 17px;
-        display: inline-block;
-        margin-top: -1px;
-        background-size: 100% 100%;
-    }
-    .yesImg {
-        background-image: url(../../assets/img/overicon.png);
-    }
-    .card-number {
-        width: 152px;
-        height: 40px;
-        margin-right: 15px;
-        padding: 0 0 0 34px;
-        line-height: 40px;
-        text-align: left;
-        display: inline-block;
-    }
-    .bankInfo {
-        width: 70%;
-        text-align: left;
-        color: #8090AF !important;
-    }
-    .btn {
-        padding: 8px 0;
-        cursor: pointer;
-    }
-    .google-info {
-        width: 100px;
-        a {
-            margin-right: 15px;
-        }
-    }
-    .right-side {
-        width: 15%;
-        text-align: right;
-    }
-}
 
-.tips-g {
+    .icons {
+      height: 17px;
+      width: 17px;
+      display: inline-block;
+      margin-top: -1px;
+      background-size: 100% 100%;
+    }
+
+    .yesImg {
+      background-image: url(../../assets/img/overicon.png);
+    }
+
+    .card-number {
+      width: 152px;
+      height: 40px;
+      margin-right: 15px;
+      padding: 0 0 0 34px;
+      line-height: 40px;
+      text-align: left;
+      display: inline-block;
+    }
+
+    .bankInfo {
+      width: 70%;
+      text-align: left;
+      color: #8090AF !important;
+    }
+
+    .btn {
+      padding: 8px 0;
+      cursor: pointer;
+    }
+
+    .google-info {
+      width: 100px;
+
+      a {
+        margin-right: 15px;
+      }
+    }
+
+    .right-side {
+      width: 15%;
+      text-align: right;
+    }
+  }
+
+  .tips-g {
     color: #8994a3;
     font-size: 12px;
-}
+  }
 
-.gr {
+  .gr {
     color: #b4b4b4;
-}
+  }
 
-.m1 {
+  .m1 {
     display: inline-block;
     width: 25px;
     height: 25px;
@@ -2196,9 +2302,9 @@ export default {
     background-size: 100% 100%;
     vertical-align: middle;
     margin-right: 5px;
-}
+  }
 
-.m2 {
+  .m2 {
     display: inline-block;
     width: 25px;
     height: 25px;
@@ -2206,38 +2312,39 @@ export default {
     background-size: 100% 100%;
     vertical-align: middle;
     margin-right: 5px;
-}
+  }
 
-.user-right {
+  .user-right {
     width: 80%;
     height: 22px;
+
     div {
-        display: inline-block;
-        margin-left: 115px;
+      display: inline-block;
+      margin-left: 115px;
     }
-}
+  }
 
 
-.rightarea .rightarea-top {
+  .rightarea .rightarea-top {
     line-height: 75px;
     border-bottom: #f1f1f1 solid 1px;
-}
+  }
 
-.rightarea .trade-process {
+  .rightarea .trade-process {
     line-height: 30px;
     padding: 0 15px;
     background: #f1f1f1;
     display: inline-block;
     position: relative;
     margin-right: 20px;
-}
+  }
 
-.rightarea .trade-process.active {
+  .rightarea .trade-process.active {
     color: #eb6f6c;
     background: #f9f5eb;
-}
+  }
 
-.rightarea .trade-process .icon {
+  .rightarea .trade-process .icon {
     /*background: #fff;*/
     border-radius: 20px;
     height: 20px;
@@ -2246,9 +2353,9 @@ export default {
     line-height: 20px;
     text-align: center;
     margin-right: 10px;
-}
+  }
 
-.rightarea .trade-process .arrow {
+  .rightarea .trade-process .arrow {
     position: absolute;
     top: 10px;
     right: -5px;
@@ -2257,17 +2364,17 @@ export default {
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
     border-left: 5px solid #f1f1f1;
-}
+  }
 
-.rightarea .trade-process.active .arrow {
+  .rightarea .trade-process.active .arrow {
     border-left: 5px solid #f9f5eb;
-}
+  }
 
-.rightarea .rightarea-tabs {
+  .rightarea .rightarea-tabs {
     border: none;
-}
+  }
 
-.rightarea .rightarea-tabs li > a {
+  .rightarea .rightarea-tabs li > a {
     width: 100%;
     height: 100%;
     padding: 0;
@@ -2279,13 +2386,13 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.rightarea .rightarea-tabs li > a:hover {
+  .rightarea .rightarea-tabs li > a:hover {
     background-color: #fcfbfb;
-}
+  }
 
-.rightarea .rightarea-tabs li {
+  .rightarea .rightarea-tabs li {
     width: 125px;
     height: 40px;
     position: relative;
@@ -2295,84 +2402,84 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-}
+  }
 
-.rightarea .rightarea-tabs li.active {
+  .rightarea .rightarea-tabs li.active {
     background-color: #fcfbfb;
-}
+  }
 
-.rightarea .rightarea-tabs li:last-child {
+  .rightarea .rightarea-tabs li:last-child {
     border-right: 1px solid #f1f1f1;
-}
+  }
 
-.rightarea .rightarea-tabs li.active > a,
-.rightarea .rightarea-tabs li:hover > a {
+  .rightarea .rightarea-tabs li.active > a,
+  .rightarea .rightarea-tabs li:hover > a {
     color: #da2e22;
     border: none;
-}
+  }
 
-.rightarea .panel-tips {
+  .rightarea .panel-tips {
     border: 3px solid #fdfaf3;
     color: #9e9e9e;
     font-size: 12px;
-}
+  }
 
-.rightarea .panel-tips .panel-header {
+  .rightarea .panel-tips .panel-header {
     background: #fdfaf3;
     line-height: 40px;
     margin-bottom: 15px;
-}
+  }
 
-.rightarea .panel-tips .panel-title {
+  .rightarea .panel-tips .panel-title {
     font-size: 16px;
-}
+  }
 
-.rightarea .recordtitle {
+  .rightarea .recordtitle {
     cursor: pointer;
-}
+  }
 
-.user .top-icon {
+  .user .top-icon {
     /* background: url("../../images/user/userplist.png") no-repeat 0 0; */
     width: 75px;
     height: 75px;
     display: inline-block;
-}
+  }
 
-.user .top-icon.intro {
+  .user .top-icon.intro {
     background-position: 0 -670px;
-}
+  }
 
-.user .user-info {
+  .user .user-info {
     padding: 0px 10px;
     background-color: #fff;
     color: #0d214e;
-}
+  }
 
-.user .user-info .user-info-top {
+  .user .user-info .user-info-top {
     border-bottom: 1px dashed #ebeff5;
     padding-bottom: 20px;
-}
+  }
 
-.user .user-info h5 {
+  .user .user-info h5 {
     font-size: 18px;
-}
+  }
 
-.user .user-info h5 .iconfont {
+  .user .user-info h5 .iconfont {
     font-size: 20px;
     color: #e24a64;
     margin-left: 10px;
-}
+  }
 
-.user-avatar {
+  .user-avatar {
     display: flex;
     justify-content: space-between;
-}
+  }
 
-.user-icons {
+  .user-icons {
     /*display: flex;*/
-}
+  }
 
-.user-icons .icons-in {
+  .user-icons .icons-in {
     height: 45px;
     width: 45px;
     border-radius: 50%;
@@ -2381,22 +2488,22 @@ export default {
     justify-content: center;
     align-items: center;
     align-self: center;
-}
+  }
 
-.user-icons .icons-in em {
+  .user-icons .icons-in em {
     color: white;
     font-size: 20px;
     font-style: normal;
-}
+  }
 
-.user-icons .user-name {
+  .user-icons .user-name {
     display: flex;
     justify-content: flex-start;
     /* align-items: center; */
     flex-direction: column;
-}
+  }
 
-.user-icons .user-name span {
+  .user-icons .user-name span {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -2407,30 +2514,30 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
-}
+  }
 
-.user-top-icon .trade-info {
+  .user-top-icon .trade-info {
     width: 420px;
     padding-left: 30px;
     display: flex;
-}
+  }
 
-.user-top-icon .trade-info .item {
+  .user-top-icon .trade-info .item {
     display: flex;
     flex-direction: column;
     width: 100%;
-}
+  }
 
-.user-top-icon .trade-info .item.capital {
+  .user-top-icon .trade-info .item.capital {
     width: 60%;
-}
+  }
 
-.user-icons .user-name span.uid {
+  .user-icons .user-name span.uid {
     color: #8994a3;
     font-size: 12px;
-}
+  }
 
-.circle-info {
+  .circle-info {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -2440,25 +2547,25 @@ export default {
     border-radius: 50%;
     border: 2px solid #ebeff5;
     margin-left: 14px;
-}
+  }
 
-.circle-info span {
+  .circle-info span {
     font-weight: bolder;
-}
+  }
 
-.circle-info p {
+  .circle-info p {
     color: #8994a3;
     margin: 0;
     padding: 0;
-}
+  }
 
-.circle-info p.count {
+  .circle-info p.count {
     color: #0d214e;
     font-size: 14px;
     font-weight: 600;
-}
+  }
 
-.user-avatar-public {
+  .user-avatar-public {
     float: left;
     height: 54px;
     width: 54px;
@@ -2468,9 +2575,9 @@ export default {
     // box-shadow: 0 1px 5px 0 rgba(71, 78, 114, 0.24);
     position: relative;
     left: -10px;
-}
+  }
 
-.user-avatar-public > .user-avatar-in {
+  .user-avatar-public > .user-avatar-in {
     background: #3399ff;
     border-radius: 50%;
     height: 37px;
@@ -2479,252 +2586,288 @@ export default {
     justify-content: center;
     align-items: center;
     color: white;
-}
-/*新加样式*/
-// .router-link-active {
-//     color: red;
-// }
-/* router-link-exact-active router-link-active */
-.account-item-in i {
+  }
+
+  /*新加样式*/
+  // .router-link-active {
+  //     color: red;
+  // }
+  /* router-link-exact-active router-link-active */
+  .account-item-in i {
     color: #3399ff !important;
-}
-.btn {
+  }
+
+  .btn {
     color: #3399ff;
-}
-.ivu-btn-primary {
+  }
+
+  .ivu-btn-primary {
     background-color: #3399ff;
     border-color: #3399ff;
-}
+  }
 </style>
 <style lang="scss">
-    .popups-box {
-        * {
-            box-shadow: none !important;
-        }
+  .popups-box {
+    * {
+      box-shadow: none !important;
     }
+  }
 
-    .vertical-center-modal{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  .vertical-center-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    //弹窗样式
-    .popups-modal {
-        .ivu-modal{
-            top: 0;
-            .ivu-select-multiple,
-            .ivu-select-single {
-                .ivu-select-selection {
-                    .ivu-select-placeholder {
-                        height: 38px;
-                        line-height: 38px;
-                    }
-                }
-            }
-        }
-        .ivu-modal-content {
-            padding: 0 42px;
-            background: #111530;
-            border-radius: 0;
-            .ivu-modal-header {
-                border-bottom: 1px solid #2A3850;
-                height: 54px;
-                padding: 18px 0;
-                .ivu-modal-header-inner {
-                    color: #fff;
-                    text-align: left;
-                    font-weight: 400;
-                }
-            }
-            .ivu-modal-close .ivu-icon-ios-close {
-                color: #fff;
-                font-size: 24px;
-            }
+  //弹窗样式
+  .popups-modal {
+    .ivu-modal {
+      top: 0;
 
-            .ivu-modal-close {
-                right: 34px;
-                top: 12px;
-            }
-
-            .ivu-modal-body {
-                padding: 26px 0 1px 0;
-            }
-        }
-    }
-
-
-    .nav-rights {
-        .ivu-switch {
-            width: 35px;
-            height: 17px;
-            &:after {
-                width: 15px;
-                height: 15px;
-                top: 0px;
-            }
-        }
-        .ivu-switch-checked {
-            &:after {
-                left: 17px;
-            }
-        }
-        .ivu-input {
-            background: transparent;
-            border: 1px solid #8090AF;
-            border-radius: 0;
-        }
-        .ivu-form-item  {
-            margin-bottom: 30px !important;
-        }
-        .ivu-form-item-label {
-            color: #8090AF !important;
-        }
-        .ivu-form-item-required {
-            // margin-left: 210px !important;
-        }
-        .ivu-form-item-required:last-child {
-            // margin-left: 210px !important;
-        }
-        .ivu-form-item-required .ivu-form-item-label:before {
-            content: ''
-        }
-    }
-    .validate {
-        /*height: 130px;*/
-        overflow: hidden;
-        color: #8090AF;
-        .ivu-input {
-            background: transparent;
-            border: 1px solid #8090AF;
-            border-radius: 0;
-        }
-        .ivu-form-item-label {
-            color: #8090AF !important;
-        }
-        .ivu-form-item-required {
-            // margin-left: 210px !important;
-        }
-        .ivu-form-item-required:last-child {
-            // margin-left: 210px !important;
-        }
-        .ivu-form-item-required .ivu-form-item-label:before {
-            content: ''
-        }
-        .ivu-input:hover {
-            border-color: #3399ff;
-        }
-    }
-    .detail-list {
-        .ivu-select{
-            background: transparent !important;
-            width: 300px;
-            .ivu-select-selection {
-                background: transparent !important;
-                border-radius: 0;
-                .ivu-select-selected-value {
-                    height: 38px;
-                    line-height: 38px;
-                }
-            }
-        }
-        .ivu-form-item {
-            margin-bottom: 30px;
-        }
+      .ivu-select-multiple,
+      .ivu-select-single {
         .ivu-select-selection {
-            height: 40px !important;
+          .ivu-select-placeholder {
+            height: 38px;
+            line-height: 38px;
+          }
         }
-
-        .ivu-input {
-            background: transparent;
-            border: 1px solid #8090AF !important;
-            border-radius: 0;
-            color: #fff;
-        }
-        .ivu-form-item-label {
-            padding: 14px 12px 14px 0;
-            color: #8090AF !important;
-        }
-        .ivu-form-item-required .ivu-form-item-label:before {
-            content: ''
-        }
-
-        .ivu-input-large {
-            border: 1px solid #8090AF;
-            height: 40px;
-        }
-
-        .ivu-input-large:hover,
-        .ivu-input-large:focus,
-        .ivu-input-large:active {
-            border-color:#8090AF;
-        }
-
-        .ivu-form-item-error .ivu-input {
-            border-color: #8090AF;
-        }
-
-        .ivu-form-item-error {
-            .ivu-input-large:hover,
-            .ivu-input-large:focus,
-            .ivu-input-large:active {
-                border-color: #8090AF;
-            }
-        }
-
-
-        .ivu-btn-default {
-            color: #8090AF;
-            background: transparent;
-            border-radius: 0;
-        }
-        .ivu-input-group-append,
-        .ivu-input-group-prepend {
-            background: transparent !important;
-            color: #3399FF !important;
-            border: 1px solid #8090AF !important;
-            border-left: none !important;
-            border-radius: 0 !important;
-        }
-
-        .ivu-form-item-error .ivu-input-group-append,
-        .ivu-form-item-error .ivu-input-group-prepend {
-            background: transparent;
-            color: #3399FF;
-            border: 1px solid #8090AF;
-            border-left: none;
-            border-radius: 0;
-        }
-        .timebox {
-            width: 70px;
-            cursor: pointer;
-            .button-code {
-                font-size: 12px;
-            }
-        }
-        .defeat-ivu {
-            .ivu-btn-default {
-                color: #3399FF;
-                background: transparent;
-                border: none;
-                border-radius: 0;
-            }
-            .ivu-btn-default:active {
-                border: none;
-            }
-            .ivu-input{
-                border: 1px solid #8090AF;
-                border-right: none;
-                height: 40px;
-            }
-            .timebox {
-                cursor: pointer;
-            }
-        }
-
-
+      }
     }
 
+    .ivu-modal-content {
+      padding: 0 42px;
+      background: #111530;
+      border-radius: 0;
+
+      .ivu-modal-header {
+        border-bottom: 1px solid #2A3850;
+        height: 54px;
+        padding: 18px 0;
+
+        .ivu-modal-header-inner {
+          color: #fff;
+          text-align: left;
+          font-weight: 400;
+        }
+      }
+
+      .ivu-modal-close .ivu-icon-ios-close {
+        color: #fff;
+        font-size: 24px;
+      }
+
+      .ivu-modal-close {
+        right: 34px;
+        top: 12px;
+      }
+
+      .ivu-modal-body {
+        padding: 26px 0 1px 0;
+      }
+    }
+  }
+
+
+  .nav-rights {
+    .ivu-switch {
+      width: 35px;
+      height: 17px;
+
+      &:after {
+        width: 15px;
+        height: 15px;
+        top: 0px;
+      }
+    }
+
+    .ivu-switch-checked {
+      &:after {
+        left: 17px;
+      }
+    }
+
+    .ivu-input {
+      background: transparent;
+      border: 1px solid #8090AF;
+      border-radius: 0;
+    }
+
+    .ivu-form-item {
+      margin-bottom: 30px !important;
+    }
+
+    .ivu-form-item-label {
+      color: #8090AF !important;
+    }
+
+    .ivu-form-item-required {
+      // margin-left: 210px !important;
+    }
+
+    .ivu-form-item-required:last-child {
+      // margin-left: 210px !important;
+    }
+
+    .ivu-form-item-required .ivu-form-item-label:before {
+      content: ''
+    }
+  }
+
+  .validate {
+    /*height: 130px;*/
+    overflow: hidden;
+    color: #8090AF;
+
+    .ivu-input {
+      background: transparent;
+      border: 1px solid #8090AF;
+      border-radius: 0;
+    }
+
+    .ivu-form-item-label {
+      color: #8090AF !important;
+    }
+
+    .ivu-form-item-required {
+      // margin-left: 210px !important;
+    }
+
+    .ivu-form-item-required:last-child {
+      // margin-left: 210px !important;
+    }
+
+    .ivu-form-item-required .ivu-form-item-label:before {
+      content: ''
+    }
+
+    .ivu-input:hover {
+      border-color: #3399ff;
+    }
+  }
+
+  .detail-list {
+    .ivu-select {
+      background: transparent !important;
+      width: 300px;
+
+      .ivu-select-selection {
+        background: transparent !important;
+        border-radius: 0;
+
+        .ivu-select-selected-value {
+          height: 38px;
+          line-height: 38px;
+        }
+      }
+    }
+
+    .ivu-form-item {
+      margin-bottom: 30px;
+    }
+
+    .ivu-select-selection {
+      height: 40px !important;
+    }
+
+    .ivu-input {
+      background: transparent;
+      border: 1px solid #8090AF !important;
+      border-radius: 0;
+      color: #fff;
+    }
+
+    .ivu-form-item-label {
+      padding: 14px 12px 14px 0;
+      color: #8090AF !important;
+    }
+
+    .ivu-form-item-required .ivu-form-item-label:before {
+      content: ''
+    }
+
+    .ivu-input-large {
+      border: 1px solid #8090AF;
+      height: 40px;
+    }
+
+    .ivu-input-large:hover,
+    .ivu-input-large:focus,
+    .ivu-input-large:active {
+      border-color: #8090AF;
+    }
+
+    .ivu-form-item-error .ivu-input {
+      border-color: #8090AF;
+    }
+
+    .ivu-form-item-error {
+      .ivu-input-large:hover,
+      .ivu-input-large:focus,
+      .ivu-input-large:active {
+        border-color: #8090AF;
+      }
+    }
+
+
+    .ivu-btn-default {
+      color: #8090AF;
+      background: transparent;
+      border-radius: 0;
+    }
+
+    .ivu-input-group-append,
+    .ivu-input-group-prepend {
+      background: transparent !important;
+      color: #3399FF !important;
+      border: 1px solid #8090AF !important;
+      border-left: none !important;
+      border-radius: 0 !important;
+    }
+
+    .ivu-form-item-error .ivu-input-group-append,
+    .ivu-form-item-error .ivu-input-group-prepend {
+      background: transparent;
+      color: #3399FF;
+      border: 1px solid #8090AF;
+      border-left: none;
+      border-radius: 0;
+    }
+
+    .timebox {
+      width: 70px;
+      cursor: pointer;
+
+      .button-code {
+        font-size: 12px;
+      }
+    }
+
+    .defeat-ivu {
+      .ivu-btn-default {
+        color: #3399FF;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+      }
+
+      .ivu-btn-default:active {
+        border: none;
+      }
+
+      .ivu-input {
+        border: 1px solid #8090AF;
+        border-right: none;
+        height: 40px;
+      }
+
+      .timebox {
+        cursor: pointer;
+      }
+    }
+
+
+  }
 
 
 </style>
