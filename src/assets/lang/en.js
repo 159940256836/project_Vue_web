@@ -702,7 +702,9 @@ module.exports = {
     ptaq: 'Platform Security',
     ptsl: 'Platform strength',
     xwzx: 'News Center',
-    fabu: 'advertising'
+    fabu: 'advertising',
+    xwzx1: 'Red rose green',
+    xwzx2: 'Red down green'
   },
   progress: {
     already: 'Have to dig',

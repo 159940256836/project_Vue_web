@@ -186,17 +186,17 @@
                         <div class="set-main-style">
                             <Dropdown @on-click="setTheme">
                                 <a href="javascript:void(0)">
-                                    <span class="header-img">设置</span>
+                                    <span class="header-img">{{ $t('common.set') }}</span>
                                     <Icon type="ios-arrow-down" size="6" style="margin-left:6px;"/>
                                 </a>
                                 <DropdownMenu slot="list">
-                                    <DropdownItem name="up" :class="setStyle == 'up' ? 'set-chain' : ''">
-                                        <span>红涨绿跌</span>
-                                        <img v-if="setStyle == 'up'" :src="setImg" >
+                                    <DropdownItem name="up" :class="setMain == 'up' ? 'set-chain' : ''">
+                                        <span>{{ $t('nav.xwzx1') }}</span>
+                                        <img v-if="setMain == 'up'" :src="setImg" >
                                     </DropdownItem>
-                                    <DropdownItem name="down" :class="setStyle == 'down' ? 'set-chain' : ''">
-                                        <span>红跌绿涨</span>
-                                        <img v-if="setStyle == 'down'" :src="setImg" >
+                                    <DropdownItem name="down" :class="setMain == 'down' ? 'set-chain' : ''">
+                                        <span>{{ $t('nav.xwzx2') }}</span>
+                                        <img v-if="setMain == 'down'" :src="setImg" >
                                     </DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
@@ -477,7 +477,6 @@ export default {
       weChat1: false, // 微信客服1
       weChat2: false, // 微信客服2
       FAQList: [], // 公告
-        setMain: 'down' // 切换全局涨跌颜色
     }
   },
   watch: {
@@ -527,6 +526,9 @@ export default {
     }
   },
   computed: {
+      setMain: function () {
+          return this.$store.state.setMain
+      },
     activeNav: function() {
       return this.$store.state.activeNav
     },

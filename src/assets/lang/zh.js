@@ -701,7 +701,9 @@ module.exports = {
     ptjy: '平台交易',
     ptaq: '平台安全',
     ptsl: '平台实力',
-    xwzx: '多终端APP'
+    xwzx: '多终端APP',
+    xwzx1: '红涨绿跌',
+    xwzx2: '红跌绿涨'
   },
   progress: {
     already: '已挖矿',

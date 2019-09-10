@@ -15,15 +15,15 @@ export default new Vuex.Store({
       state.setMain = setStyle
       localStorage.setItem('SETSTYLE', setStyle)
     },
-    setname (state) {
-      console.log(state)
-      if (localStorage.getItem('SETSTYLE') !== null) {
-        state.setMain = localStorage.getItem('SETSTYLE')
-      } else {
-        state.setMain = 'up'
-      }
-      console.log(localStorage.getItem('SETSTYLE'))
-    },
+    // setname (state) {
+    //   console.log(state)
+    //   if (localStorage.getItem('SETSTYLE') !== null) {
+    //     state.setMain = localStorage.getItem('SETSTYLE')
+    //   } else {
+    //     state.setMain = 'up'
+    //   }
+    //   console.log(localStorage.getItem('SETSTYLE'))
+    // },
     navigate(state, nav) {
       state.activeNav = nav
     },
