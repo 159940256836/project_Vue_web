@@ -51,13 +51,13 @@
                             <span class="pairs">{{item.symbol}}</span>
                             <span
                                 class="pairs-sip"
-                                :class="{green: item.isGreen}"
+                                :class="setMain == 'up'?{red: item.isGreen}:{green: item.isGreen}"
                                 v-if="item.isGreen"
                             >
                                 {{item.chg | formateRate}}
                             </span>
                             <span
-                                :class="{red: !item.isGreen}"
+                                :class="setMain == 'up'?{green: !item.isGreen}:{red: !item.isGreen}"
                                 v-if="!item.isGreen"
                             >
                                 {{item.chg | formateRate}}
@@ -838,7 +838,7 @@ export default {
             },
             render: (h, params) => {
               const row = params.row
-              const className = parseFloat(row.rose) < 0 ? 'red' : 'green'
+              const className = this.setMain == 'up'?(parseFloat(row.rose) < 0 ? 'green' : 'red'):(parseFloat(row.rose) < 0 ? 'red' : 'green')
               return h(
                   'span',
                 {
@@ -1016,6 +1016,9 @@ export default {
     }
   },
   computed: {
+    setMain: function () {
+      return this.$store.state.setMain
+    },
     isLogin: function() {
       return this.$store.getters.isLogin
     },

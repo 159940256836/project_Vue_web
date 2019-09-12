@@ -167,6 +167,7 @@
                                 <router-link to="/register" id="register">{{$t("common.register")}}</router-link>
                             </div>
                         </div>
+
                         <!-- app二维码 -->
                         <div class="rightwrapper">
                             <poptip placement="bottom"  class="appdownload">
@@ -181,6 +182,25 @@
                                     </div>
                                 </div>
                             </poptip>
+                        </div>
+                        <div class="set-main-style">
+                            <Dropdown @on-click="setTheme">
+                                <a href="javascript:void(0)">
+                                    <span class="header-img">{{ $t('common.set') }}</span>
+                                    <Icon type="ios-arrow-down" size="6" style="margin-left:6px;"/>
+                                </a>
+                                <DropdownMenu slot="list">
+                                    <DropdownItem name="up" :class="setMain == 'up' ? 'set-chain' : ''">
+                                        <span>{{ $t('nav.xwzx1') }}</span>
+                                        <img v-if="setMain == 'up'" :src="setImg" >
+                                    </DropdownItem>
+                                    <DropdownItem name="down" :class="setMain == 'down' ? 'set-chain' : ''">
+                                        <span>{{ $t('nav.xwzx2') }}</span>
+                                        <img v-if="setMain == 'down'" :src="setImg" >
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+
                         </div>
                     </div>
                 </div>
@@ -435,6 +455,8 @@ export default {
   },
   data() {
     return {
+        setStyle: 'up',
+        setImg: require('./assets/img/jiaobiao.png'),
       locale: '',
       isRouterAlive: true,
       pageView: 'page-view',
@@ -454,7 +476,7 @@ export default {
       pathNameState: true,
       weChat1: false, // 微信客服1
       weChat2: false, // 微信客服2
-      FAQList: [] // 公告
+      FAQList: [], // 公告
     }
   },
   watch: {
@@ -504,6 +526,9 @@ export default {
     }
   },
   computed: {
+      setMain: function () {
+          return this.$store.state.setMain
+      },
     activeNav: function() {
       return this.$store.state.activeNav
     },
@@ -527,6 +552,13 @@ export default {
     }
   },
   created: function() {
+      if (localStorage.getItem('SETSTYLE') == null) {
+          this.setTheme(this.$store.commit('setMain', 'up'))
+      } else {
+          this.setTheme(this.$store.commit('setMain', localStorage.getItem('SETSTYLE')))
+      }
+
+      /*localStorage.setItem('SETSTYLE', JSON.stringify('down'))*/
       /** *
        * 获取公告
        */
@@ -560,6 +592,21 @@ export default {
     })
   },
   methods: {
+    // 切换涨跌样式颜色
+      setTheme(name) {
+          console.log(name)
+          if (name === 'up') {
+              this.setStyle = 'up'
+              this.$store.commit('setMain', 'up')
+          } else if (name === 'down') {
+              this.setStyle = 'down'
+              this.$store.commit('setMain', 'down')
+          } else {
+              if (!localStorage.getItem('SETSTYLE')) {
+                localStorage.setItem('SETSTYLE', null)
+              }
+          }
+      },
     lnswitch: function(language) {
       this.$http.get(this.host + '/uc/lang/change/' + language).then(res => {
       })
@@ -623,7 +670,7 @@ export default {
       this.$store.commit('navigate', 'nav-index')
       this.$store.commit('recoveryMember')
       this.$store.commit('initLang')
-      this.loadTopInfo()
+        this.loadTopInfo()
       this.checkLogin()
     },
     loadTopInfo() {
@@ -812,6 +859,18 @@ export default {
                             }
                         }
                     }
+                    .set-main-style {
+                        float: right;
+                        min-width: 50px;
+                        height: 50px;
+                        cursor: pointer;
+                        color: #8090af;
+                        margin-right: 20px;
+                        .set-chain {
+                            /*background: #3399ff;*/
+                            color: #3399ff;
+                        }
+                    }
                     .rightwrapper {
                         float: right;
                         .appdownload {
@@ -896,6 +955,7 @@ export default {
     }
 </style>
 <style lang="scss">
+/*@import '../src/styles/style';*/
 .footer .footer_content .footer-main .footer_right .footer_info li{
     color:#8790a1 !important;
 }

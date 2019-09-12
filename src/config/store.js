@@ -6,9 +6,24 @@ export default new Vuex.Store({
     member: null,
     activeNav: '',
     lang: '',
-    exchangeSkin: 'day'
+    exchangeSkin: 'day',
+    setMain: '',
   },
   mutations: {
+    setMain(state, setStyle) {
+      console.log(state, setStyle)
+      state.setMain = setStyle
+      localStorage.setItem('SETSTYLE', setStyle)
+    },
+    // setname (state) {
+    //   console.log(state)
+    //   if (localStorage.getItem('SETSTYLE') !== null) {
+    //     state.setMain = localStorage.getItem('SETSTYLE')
+    //   } else {
+    //     state.setMain = 'up'
+    //   }
+    //   console.log(localStorage.getItem('SETSTYLE'))
+    // },
     navigate(state, nav) {
       state.activeNav = nav
     },

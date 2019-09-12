@@ -23,6 +23,7 @@
                   :no-data-text="$t('common.nodata')"
                   @on-current-change="gohref"
                   highlight-row
+                  height="407"
                   id="USDT"
                   v-show="basecion==='usdt'"
                   :columns="coins.columns"
@@ -32,6 +33,7 @@
                   :no-data-text="$t('common.nodata')"
                   @on-current-change="gohref"
                   highlight-row
+                  height="407"
                   id="BTC"
                   v-show="basecion==='btc'"
                   :columns="coins.columns"
@@ -41,6 +43,7 @@
                   :no-data-text="$t('common.nodata')"
                   @on-current-change="gohref"
                   highlight-row
+                  height="407"
                   id="ETH"
                   v-show="basecion==='eth'"
                   :columns="coins.columns"
@@ -50,6 +53,7 @@
                   :no-data-text="$t('common.nodata')"
                   @on-current-change="gohref"
                   highlight-row
+                  height="407"
                   id="BC"
                   v-show="basecion==='bc'"
                   :columns="coins.columns"
@@ -58,6 +62,7 @@
           <Table
                   @on-current-change="gohref"
                   highlight-row
+                  height="407"
                   v-show="basecion==='favor'"
                   :no-data-text="$t('common.nodata')"
                   id="collect"
@@ -112,20 +117,25 @@
           >
             <span>{{ $t('exchange.coinDetails.coinDetail') }}</span>
           </div>
+          <!--<div :class="setMain === 'up'?'sell':'buy'">
+            asdfasdfasdfasdfa
+          </div>-->
           <div class="item">
             <!--<span class="text">{{$t('coin.up')}}</span>-->
+            <!--涨跌逻辑修改 原 红跌（卖出） 绿涨（买入） -->
             <span
                     class="num"
-                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                    :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
             >
                             {{currentCoin.rose?currentCoin.rose:'---'}}
                         </span>
           </div>
           <div class="item">
             <!--<span class="text">{{$t('coin.last')}}</span>-->
+            <!--涨跌逻辑修改 原 红跌（卖出） 绿涨（买入） -->
             <span
                     class="num"
-                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                    :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
                     v-if="currentCoin.close"
             >
                             {{currentCoin.close | toFixed(baseCoinScale)}}
@@ -188,9 +198,9 @@
                             {{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}
                         </span>
           </div>
-          <div class="item" @click="changeSkin" style="float: right">
+          <!--<div class="item" @click="changeSkin" style="float: right">
                         <img :src="skin == 'night' ? night : day" alt="">
-                    </div>
+                    </div>-->
         </div>
         <div class="imgtable" :loading="loadingButton7">
           <!-- <div class="handler">
@@ -276,7 +286,7 @@
                         this.form.buy.limitPrice).toFixed(4)}}</label>
                     </FormItem>
                     <div class="slider-wrap">
-                      <Slider class="silder-buy" v-model="sliderBuyLimitPercent" show-tip="always"
+                      <Slider :class="setMain=='up'?'silder-buy':'silder-sell'" v-model="sliderBuyLimitPercent" show-tip="always"
                               :tip-format="tipFormat" :disabled="sliderBuyDisabled"></Slider>
                       <div class="slider-stop" v-for="item in sliderStep" :style="'left: '+item+'%;'"
                            @click="silderGo('sliderBuyLimitPercent',item)">
@@ -287,11 +297,11 @@
                       {{$t("exchange.amount")}}
                       <span>{{form.buy.limitTurnover|toFloor(baseCoinScale)}}</span> {{currentCoin.base}}
                     </div>
-                    <Button class="bg-green" @click="buyWithLimitPrice" v-show="isLogin" :loading="loadingButton1">
+                    <Button :class="setMain == 'up'?'bg-green':'bg-red'" @click="buyWithLimitPrice" v-show="isLogin" :loading="loadingButton1">
                       <!--{{$t("exchange.buyin")}}{{currentCoin.coin}}-->
                       <span>
-                                                {{ !loadingButton1 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
-                                            </span>
+                        {{ !loadingButton1 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
+                      </span>
                     </Button>
                   </Form>
                 </div>
@@ -312,7 +322,7 @@
                                             <label>{{currentCoin.coin}}</label>
                                         </FormItem>
                                         <div class="slider-wrap">
-                                            <Slider class="silder-buy" v-model="sliderBuyStopPercent" show-tip="always" :tip-format="tipFormat" :disabled="sliderBuyDisabled"></Slider>
+                                            <Slider :class="setMain=='up'?'silder-buy':'silder-sell'" v-model="sliderBuyStopPercent" show-tip="always" :tip-format="tipFormat" :disabled="sliderBuyDisabled"></Slider>
                                             <div class="slider-stop" v-for="item in sliderStep" :style="'left: '+item+'%;'" @click="silderGo('sliderBuyStopPercent',item)">
                                                 <div class="slider-block"></div>
                                             </div>
@@ -321,7 +331,7 @@
                                             {{$t("exchange.amount")}}
                                             <span>{{form.buy.stopTurnover|toFloor(baseCoinScale)}}</span> {{currentCoin.base}}
                                         </div>
-                                        <Button class="bg-green" @click="buyWithStopPrice" v-show="isLogin" :loading="loadingButton3">
+                                        <Button :class="setMain == 'up'?'bg-green':'bg-red'" @click="buyWithStopPrice" v-show="isLogin" :loading="loadingButton3">
                                             &lt;!&ndash;{{$t("exchange.buyin")}}{{currentCoin.coin}}&ndash;&gt;
                                             <span>
                                                 {{ !loadingButton3 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
@@ -340,14 +350,14 @@
                       <label>{{currentCoin.base}}</label>
                     </FormItem>
                     <div class="slider-wrap">
-                      <Slider class="silder-buy" v-model="sliderBuyMarketPercent" show-tip="always"
+                      <Slider :class="setMain=='up'?'silder-buy':'silder-sell'" v-model="sliderBuyMarketPercent" show-tip="always"
                               :tip-format="tipFormat" :disabled="sliderBuyDisabled"></Slider>
                       <div class="slider-stop" v-for="item in sliderStep" :style="'left: '+item+'%;'"
                            @click="silderGo('sliderBuyMarketPercent',item)">
                         <div class="slider-block"></div>
                       </div>
                     </div>
-                    <Button class="bg-green" @click="buyWithMarketPrice" v-show="isLogin" :loading="loadingButton2">
+                    <Button :class="setMain == 'up'?'bg-green':'bg-red'" @click="buyWithMarketPrice" v-show="isLogin" :loading="loadingButton2">
                       <!--{{$t("exchange.buyin")}}{{currentCoin.coin}}-->
                       <span>
                           {{ !loadingButton2 ? ($t("exchange.buyin") + currentCoin.coin) : $t("exchange.buyin")}}
@@ -385,7 +395,7 @@
                     </FormItem>
                     <!-- <Slider class="silder-sell" v-model="sliderSellLimitPercent" :step="25" show-stops :tip-format="tipFormat"></Slider> -->
                     <div class="slider-wrap">
-                      <Slider class="silder-sell" v-model="sliderSellLimitPercent" show-tip="always"
+                      <Slider :class="setMain=='up'?'silder-sell':'silder-buy'" v-model="sliderSellLimitPercent" show-tip="always"
                               :tip-format="tipFormat" :disabled="sliderSellDisabled"></Slider>
                       <div class="slider-stop" v-for="item in sliderStep" :style="'left: '+item+'%;'"
                            @click="silderGo('sliderSellLimitPercent',item)">
@@ -399,7 +409,7 @@
                       {{$t("exchange.amount")}}
                       <span>{{form.sell.limitTurnover|toFloor(coinScale)}}</span> {{currentCoin.base}}
                     </div>
-                    <Button class="bg-red" @click="sellLimitPrice" v-show="isLogin" :loading="loadingButton4">
+                    <Button :class="setMain == 'up'?'bg-red':'bg-green'" @click="sellLimitPrice" v-show="isLogin" :loading="loadingButton4">
                       <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
                       <span>
                                                 {{ !loadingButton4 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
@@ -425,7 +435,7 @@
                                         </FormItem>
                                         &lt;!&ndash; <Slider class="silder-sell" v-model="sliderSellLimitPercent" :step="25" show-stops :tip-format="tipFormat"></Slider> &ndash;&gt;
                                         <div class="slider-wrap">
-                                            <Slider class="silder-sell" v-model="sliderSellStopPercent" show-tip="always" :tip-format="tipFormat" :disabled="sliderSellDisabled"></Slider>
+                                            <Slider :class="setMain=='up'?'silder-sell':'silder-buy'" v-model="sliderSellStopPercent" show-tip="always" :tip-format="tipFormat" :disabled="sliderSellDisabled"></Slider>
                                             <div class="slider-stop" v-for="item in sliderStep" :style="'left: '+item+'%;'" @click="silderGo('sliderSellStopPercent',item)">
                                                 <div class="slider-block"></div>
                                             </div>
@@ -437,7 +447,7 @@
                                             {{$t("exchange.amount")}}
                                             <span>{{form.sell.stopTurnover|toFloor(coinScale)}}</span> {{currentCoin.base}}
                                         </div>
-                                        <Button class="bg-red" @click="sellStopPrice" v-show="isLogin" :loading="loadingButton6">
+                                        <Button :class="setMain == 'up'?'bg-red':'bg-green'" @click="sellStopPrice" v-show="isLogin" :loading="loadingButton6">
                                             &lt;!&ndash;{{$t("exchange.sellout")}}{{currentCoin.coin}}&ndash;&gt;
                                             <span>
                                                 {{ !loadingButton6 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
@@ -458,7 +468,7 @@
                     </FormItem>
                     <!-- <Slider class="silder-sell" v-model="sliderSellMarketPercent" :step="25" show-stops :tip-format="tipFormat"></Slider> -->
                     <div class="slider-wrap">
-                      <Slider class="silder-sell" v-model="sliderSellMarketPercent" show-tip="always"
+                      <Slider :class="setMain=='up'?'silder-sell':'silder-buy'" v-model="sliderSellMarketPercent" show-tip="always"
                               :tip-format="tipFormat" :disabled="sliderSellDisabled"></Slider>
                       <div class="slider-stop" v-for="item in sliderStep" :style="'left: '+item+'%;'"
                            @click="silderGo('sliderSellMarketPercent',item)">
@@ -468,7 +478,7 @@
                     <!--<FormItem>-->
                     <!--<Slider v-model="value6" :step="25" show-stops min="0" max="100"></Slider>-->
                     <!--</FormItem>-->
-                    <Button class="bg-red" @click="sellMarketPrice" v-show="isLogin" :loading="loadingButton5">
+                    <Button :class="setMain == 'up'?'bg-red':'bg-green'" @click="sellMarketPrice" v-show="isLogin" :loading="loadingButton5">
                       <!--{{$t("exchange.sellout")}}{{currentCoin.coin}}-->
                       <span>
                                                 {{ !loadingButton5 ? ($t("exchange.sellout") + currentCoin.coin) : $t("exchange.sellout")}}
@@ -537,23 +547,24 @@
                 :columns="plate.columns"
                 :data="plate.askRows"
         ></Table>
+        <!--setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}-->
         <div class="plate-nowprice">
                     <span
                             class="price"
-                            :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                            :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
                             v-if="currentCoin.price"
                     >
                         {{currentCoin.price | toFixed(baseCoinScale)}}
                     </span>
           <span
                   class="price"
-                  :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+                  :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
                   v-else
           >
                         ---
                     </span>
-          <span v-if="currentCoin.change>0" class="buy">↑</span>
-          <span v-else class="sell">↓</span>
+          <span v-if="currentCoin.change>0" :class="setMain == 'up'?'sell':'buy'">↑</span>
+          <span v-else :class="setMain == 'up'?'buy':'sell'">↓</span>
           <span
                   v-if="currentCoinBC == 'BC'"
                   class="price-cny"
@@ -1181,6 +1192,7 @@
   import Datafeeds from '@js/charting_library/datafeed/bitrade.js'
   import transfermodal from '../../components/transfer/Index'
   import coinDetails from '../../components/exchange/coinDetails'
+
   const Stomp = require('stompjs')
   const SockJS = require('sockjs-client')
   const moment = require('moment')
@@ -1205,6 +1217,7 @@
     data() {
       const self = this
       return {
+        setData: '',
         coinInfo: {}, // 币种详情
         detail: '',
         detailCoin: '',
@@ -1332,7 +1345,7 @@
             title: this.$t('exchange.lastprice'),
             key: 'close',
             sortable: true,
-            sortMethod: function(a, b, type) {
+            sortMethod: function (a, b, type) {
               const a1 = parseFloat(a)
               const b1 = parseFloat(b)
               if (type == 'asc') {
@@ -1346,7 +1359,7 @@
             title: this.$t('exchange.daychange'),
             key: 'rose',
             sortable: true,
-            sortMethod: function(a, b, type) {
+            sortMethod: function (a, b, type) {
               const a1 = a.replace(/[^\d|.|-]/g, '') - 0
               const b1 = b.replace(/[^\d|.|-]/g, '') - 0
               if (type == 'asc') {
@@ -1357,14 +1370,15 @@
             },
             render: (h, params) => {
               const row = params.row
-              const className = parseFloat(row.rose) < 0 ? 'sell' : 'buy'
+              const className = this.setMain == 'up' ? (parseFloat(row.rose) < 0 ? 'buy' : 'sell') : (parseFloat(row.rose) < 0 ? 'sell' : 'buy')
+              /*const className = this.setMain=='up'?(parseFloat(row.rose) < 0 ? 'sell' : 'buy'):parseFloat(row.rose) < 0 ? 'buy' : 'sell'*/
               return h(
                   'span',
-                {
-                  attrs: {
-                    class: className
-                  }
-                },
+                  {
+                    attrs: {
+                      class: className
+                    }
+                  },
                   row.rose
               )
             }
@@ -1417,7 +1431,7 @@
               title: this.$t('exchange.lastprice'),
               key: 'close',
               sortable: true,
-              sortMethod: function(a, b, type) {
+              sortMethod: function (a, b, type) {
                 const a1 = parseFloat(a)
                 const b1 = parseFloat(b)
                 if (type == 'asc') {
@@ -1431,7 +1445,7 @@
               title: this.$t('exchange.daychange'),
               key: 'rose',
               sortable: true,
-              sortMethod: function(a, b, type) {
+              sortMethod: function (a, b, type) {
                 const a1 = a.replace(/[^\d|.|-]/g, '') - 0
                 const b1 = b.replace(/[^\d|.|-]/g, '') - 0
                 if (type == 'asc') {
@@ -1442,14 +1456,14 @@
               },
               render: (h, params) => {
                 const row = params.row
-                const className = parseFloat(row.rose) < 0 ? 'sell' : 'buy'
+                const className = this.setMain == 'up' ? (parseFloat(row.rose) < 0 ? 'buy' : 'sell') : (parseFloat(row.rose) < 0 ? 'sell' : 'buy')
                 return h(
                     'span',
-                  {
-                    attrs: {
-                      class: className
-                    }
-                  },
+                    {
+                      attrs: {
+                        class: className
+                      }
+                    },
                     row.rose
                 )
               }
@@ -1494,15 +1508,15 @@
               key: 'price',
               render: (h, params) => {
                 const row = params.row
-                const className = row.direction == 'BUY' ? 'buy' : 'sell'
+                const className = this.setMain=='up' ? (row.direction == 'BUY' ? 'sell' : 'buy') : (row.direction == 'BUY' ? 'buy' : 'sell')
 
                 return h(
                     'span',
-                  {
-                    attrs: {
-                      class: className
-                    }
-                  },
+                    {
+                      attrs: {
+                        class: className
+                      }
+                    },
                     params.row.price.toFixed(this.baseCoinScale)
                 )
               },
@@ -1567,17 +1581,32 @@
               render: (h, params) => {
                 let str = ''
                 let price = ''
-                const className = params.row.direction.toLowerCase()
+                let className = ''
+                // const className = params.row.direction.toLowerCase()
+                if (this.setMain == 'up') {
+                  if (params.row.direction == 'SELL') {
+                    className = 'buy'
+                  } else {
+                    className = 'sell'
+                  }
+                } else if (this.setMain == 'down') {
+                  if (params.row.direction == 'BUY') {
+                    className = 'buy'
+                  } else {
+                    className = 'sell'
+                  }
+                }
+                // const className = this.setMain == 'up'? this.plateSellStyle:this.plateSellBuy
                 params.row.price === 0 && (str = h('span', {}, '--'))
                 params.row.price != 0 &&
                 (price = params.row.price.toFixed(this.baseCoinScale)) &&
                 (str = h(
                     'span',
-                  {
-                    attrs: {
-                      class: className
-                    }
-                  },
+                    {
+                      attrs: {
+                        class: className
+                      }
+                    },
                     price
                 ))
                 return str
@@ -1633,26 +1662,30 @@
               width: 1,
               render: (h, params) => {
                 let width = '0',
-                  backgroundColor =
-                        params.row.direction === 'BUY' ? '#00b275' : '#f15057',
-                  totle =
-                        params.row.direction === 'BUY'
+                    // backgroundColor =
+                    //     params.row.direction === 'BUY' ? '#00b275' : '#f15057',
+                    backgroundColor = this.setMain == 'up'?(params.row.direction === 'BUY' ? '#f15057' : '#00b275'):(params.row.direction === 'BUY' ? '#00b275' : '#f15057'),
+                    totle = this.setMain == 'up'?
+                        (params.row.direction === 'BUY'
+                            ? this.plate.askTotle
+                            : this.plate.bidTotle):
+                        (params.row.direction === 'BUY'
                             ? this.plate.bidTotle
-                            : this.plate.askTotle
+                            : this.plate.askTotle)
                 if (params.row.totalAmount) {
                   width = (params.row.totalAmount / totle).toFixed(4) * 100 + '%'
                 }
                 return h(
                     'div',
-                  {
-                    style: {
-                      width,
-                      backgroundColor
+                    {
+                      style: {
+                        width,
+                        backgroundColor
+                      },
+                      attrs: {
+                        class: 'percentdiv'
+                      }
                     },
-                    attrs: {
-                      class: 'percentdiv'
-                    }
-                  },
                     ' '
                 )
               }
@@ -1702,11 +1735,11 @@
                 const className = row.direction.toLowerCase()
                 return h(
                     'span',
-                  {
-                    attrs: {
-                      class: className
-                    }
-                  },
+                    {
+                      attrs: {
+                        class: className
+                      }
+                    },
                     row.direction == 'BUY'
                         ? self.$t('exchange.buyin')
                         : self.$t('exchange.sellout')
@@ -1753,18 +1786,18 @@
               render: (h, params) => {
                 return h(
                     'Button',
-                  {
-                    props: {
-                      size: 'small',
-                      type: 'warning'
-                    },
-                    style: {},
-                    on: {
-                      click: () => {
-                        this.cancel(params.index)
+                    {
+                      props: {
+                        size: 'small',
+                        type: 'warning'
+                      },
+                      style: {},
+                      on: {
+                        click: () => {
+                          this.cancel(params.index)
+                        }
                       }
-                    }
-                  },
+                    },
                     self.$t('exchange.undo')
                 )
               }
@@ -1817,11 +1850,11 @@
                 const className = row.direction.toLowerCase()
                 return h(
                     'span',
-                  {
-                    attrs: {
-                      class: className
-                    }
-                  },
+                    {
+                      attrs: {
+                        class: className
+                      }
+                    },
                     row.direction == 'BUY'
                         ? self.$t('exchange.buyin')
                         : self.$t('exchange.sellout')
@@ -1864,21 +1897,21 @@
                 if (status == 'COMPLETED') {
                   return h(
                       'span',
-                    {
-                      style: {
-                        color: '#3399ff'
-                      }
-                    },
+                      {
+                        style: {
+                          color: '#3399ff'
+                        }
+                      },
                       self.$t('exchange.finished')
                   )
                 } else if (status == 'CANCELED') {
                   return h(
                       'span',
-                    {
-                      style: {
-                        color: '#3399ff'
-                      }
-                    },
+                      {
+                        style: {
+                          color: '#3399ff'
+                        }
+                      },
                       self.$t('exchange.canceled')
                   )
                 } else {
@@ -1908,36 +1941,47 @@
       }
     },
     computed: {
-      rechargeUSDTUrl: function() {
+      rechargeUSDTUrl: function () {
         return '/personal/recharge'
         // return "#/finance/recharge?name=" + this.currentCoin.base;
       },
-      rechargeCoinUrl: function() {
+      rechargeCoinUrl: function () {
         return '/personal/recharge'
         // return "#/finance/recharge?name=" + this.currentCoin.coin;
       },
-      isLogin: function() {
+      isLogin: function () {
         return this.$store.getters.isLogin
       },
-      member: function() {
+      member: function () {
         return this.$store.getters.member
       },
-      lang: function() {
+      lang: function () {
         return this.$store.state.lang
+      },
+      setMain: function () {
+        return this.$store.state.setMain
       },
       sliderBuyDisabled() {
         let account = this.wallet.base,
-          min = this.toFloor(1 / Math.pow(10, this.baseCoinScale))
+            min = this.toFloor(1 / Math.pow(10, this.baseCoinScale))
         return account < min
       },
       sliderSellDisabled() {
         let account = this.wallet.coin,
-          min = this.toFloor(1 / Math.pow(10, this.coinScale))
+            min = this.toFloor(1 / Math.pow(10, this.coinScale))
         return account < min
       }
     },
     watch: {
-      'form.buy.limitPrice': function(val) {
+      setMain(newValue) {
+        console.log(newValue)
+        // if (newValue === 'down') {
+        //   console.log(1)
+        this.getKline()
+        this.getPlate()
+        // }
+      },
+      'form.buy.limitPrice': function (val) {
         // let price = this.form.buy.limitPrice,
         //     account = this.wallet.base,
         //     amount = ''
@@ -1957,16 +2001,16 @@
             this.baseCoinScale
         )
       },
-      'form.buy.limitAmount': function(val) {
+      'form.buy.limitAmount': function (val) {
         this.form.buy.limitTurnover = this.toFloor(
             val.mul(this.form.buy.limitPrice),
             this.baseCoinScale
         )
       },
-      'form.buy.stopBuyPrice': function(val) {
+      'form.buy.stopBuyPrice': function (val) {
         let price = this.form.buy.stopBuyPrice,
-          account = this.wallet.base,
-          amount = 0
+            account = this.wallet.base,
+            amount = 0
         if (val > 0) {
           amount = this.toFloor(
               account
@@ -1982,43 +2026,43 @@
             this.baseCoinScale
         )
       },
-      'form.buy.stopBuyAmount': function(val) {
+      'form.buy.stopBuyAmount': function (val) {
         this.form.buy.stopTurnover = this.toFloor(
             val.mul(this.form.buy.stopBuyPrice),
             this.baseCoinScale
         )
       },
-      'form.sell.limitPrice': function(val) {
+      'form.sell.limitPrice': function (val) {
         this.form.sell.limitTurnover = this.toFloor(
             val.mul(this.form.sell.limitAmount),
             this.coinScale
         )
       },
-      'form.sell.limitAmount': function(val) {
+      'form.sell.limitAmount': function (val) {
         this.form.sell.limitTurnover = this.toFloor(
             val.mul(this.form.sell.limitPrice),
             this.coinScale
         )
       },
-      'form.sell.stopBuyPrice': function(val) {
+      'form.sell.stopBuyPrice': function (val) {
         this.form.sell.stopTurnover = this.toFloor(
             val.mul(this.form.sell.stopBuyAmount),
             this.coinScale
         )
       },
-      'form.sell.stopBuyAmount': function(val) {
+      'form.sell.stopBuyAmount': function (val) {
         this.form.sell.stopTurnover = this.toFloor(
             val.mul(this.form.sell.stopBuyPrice),
             this.coinScale
         )
       },
-      lang: function() {
+      lang: function () {
         this.updateLangData()
       },
       // currentCoin: function () {
       //     this.updateTitle();
       // },
-      'currentCoin.price': function() {
+      'currentCoin.price': function () {
         this.currentTradingPrice = this.currentCoin.price
       },
       $route(to, from) {
@@ -2026,8 +2070,8 @@
       },
       sliderBuyLimitPercent() {
         let price = this.form.buy.limitPrice,
-          account = this.wallet.base,
-          amount = 0
+            account = this.wallet.base,
+            amount = 0
         if (price > 0) {
           amount = this.toFloor(
               account
@@ -2062,8 +2106,8 @@
       },
       sliderBuyStopPercent() {
         let price = this.form.buy.stopBuyPrice,
-          account = this.wallet.base,
-          amount = 0
+            account = this.wallet.base,
+            amount = 0
         if (price > 0) {
           amount = this.toFloor(
               account
@@ -2083,14 +2127,14 @@
         )
       }
     },
-    created: function() {
+    created: function () {
       this.getdefaultSymbol().then(res => {
         this.defaultPath = res
         this.init()
         this.statusCurreny()
       })
     },
-    mounted: function() {
+    mounted: function () {
       // console.log(this.tableData);
       // this.getCNYRate();
       // this.getSymbolScale();
@@ -2185,6 +2229,7 @@
         this.currentCoin.symbol = coin + '/' + base
       },
       init() {
+        this.setData = localStorage.getItem('SETSTYLE')
         let params = this.$route.params.pathMatch
         if (params == undefined) {
           // this.$router.push('/exchange/' + this.defaultPath)
@@ -2269,7 +2314,7 @@
       //         });
       //     }
       // },
-      changeSkin() {
+      /*changeSkin() {
         const currentSkin = this.skin
         if (currentSkin === 'day') {
           this.skin = 'night'
@@ -2283,7 +2328,7 @@
           this.getCurrentOrder()
           this.getHistoryOrder()
         }
-      },
+      },*/
       changePlate(str) {
         if (str != 'all') {
           this.plate.maxPostion = 24
@@ -2408,7 +2453,7 @@
           debug: false,
           drawings_access: {
             type: 'black',
-            tools: [{ name: 'Regression Trend' }]
+            tools: [{name: 'Regression Trend'}]
           },
           disabled_features: [
             'header_resolutions',
@@ -2519,22 +2564,40 @@
             }
           ]
         }
-        if (that.skin === 'day') {
-          config.toolbar_bg = '#fff'
-          config.custom_css_url = 'bundles/common_day.css'
-          config.overrides['paneProperties.background'] = '#fff'
-          config.overrides['mainSeriesProperties.candleStyle.upColor'] =
-              '#a6d3a5'
-          config.overrides['mainSeriesProperties.candleStyle.downColor'] =
-              '#ffa5a6'
-          config.overrides['scalesProperties.lineColor'] = '#aaa' // xy刻度线色值
-          config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#39c595' // 第一根的颜色
-          config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#f96969' // 第二根的颜色
+        // 黑白切换
+        // if (that.skin === 'day') {
+        //   config.toolbar_bg = '#fff'
+        //   config.custom_css_url = 'bundles/common_day.css'
+        //   config.overrides['paneProperties.background'] = '#fff'
+        //   config.overrides['mainSeriesProperties.candleStyle.upColor'] =
+        //       '#a6d3a5'
+        //   config.overrides['mainSeriesProperties.candleStyle.downColor'] =
+        //       '#ffa5a6'
+        //   config.overrides['scalesProperties.lineColor'] = '#aaa' // xy刻度线色值
+        //   config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#39c595' // 第一根的颜色
+        //   config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#f96969' // 第二根的颜色
+        // }
+        // 涨跌逻辑修改 由原来的绿涨（买入）红跌（卖出） 修改为红涨（买入）绿跌（卖出）
+        console.log(that.setMain)
+        if (that.setMain == 'up') {
+          console.log(that.setMain)
+          config.studies_overrides['volume.volume.color.0'] = 'rgba(0, 178, 117, .3)' // 第一根柱的颜色
+          config.studies_overrides['volume.volume.color.1'] = 'rgba(241, 80, 87, .3)' // 第二根柱的颜色
+          config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#a6d3a5'
+          config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#ffa5a6'
+          config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#f15057' // 第一根的颜色
+          config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#00b275' // 第二根的颜色
+          config.overrides['volume.volume.color.0'] = 'rgba(0, 178, 117, .3)'
+          config.overrides['volume.volume.color.1'] = 'rgba(241, 80, 87, .3)'
+          config.overrides['mainSeriesProperties.candleStyle.wickUpColor'] = '#f15057'
+          config.overrides['mainSeriesProperties.candleStyle.wickDownColor'] = '#00b275'
+          config.overrides['mainSeriesProperties.candleStyle.borderUpColor'] = '#f15057'
+          config.overrides['mainSeriesProperties.candleStyle.borderDownColor'] = '#00b275'
         }
-        require(['@js/charting_library/charting_library.min.js'], function(tv) {
+        require(['@js/charting_library/charting_library.min.js'], function (tv) {
           const widget = (window.tvWidget = new TradingView.widget(config))
           /* onChartReady 自定义初始化指标线（平均移动线等），设置颜色*/
-          widget.onChartReady(function() {
+          widget.onChartReady(function () {
             widget.chart().executeActionById('drawingToolbarAction')
             // 创建最新价水平线
             widget
@@ -2561,7 +2624,7 @@
             widget
                 .createButton()
                 .attr('title', 'realtime')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2576,7 +2639,7 @@
             widget
                 .createButton()
                 .attr('title', 'M1')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2591,7 +2654,7 @@
             widget
                 .createButton()
                 .attr('title', 'M5')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2607,7 +2670,7 @@
             widget
                 .createButton()
                 .attr('title', 'M15')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2623,7 +2686,7 @@
             widget
                 .createButton()
                 .attr('title', 'M30')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2639,7 +2702,7 @@
             widget
                 .createButton()
                 .attr('title', 'H1')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2654,7 +2717,7 @@
             widget
                 .createButton()
                 .attr('title', 'H4')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2669,7 +2732,7 @@
             widget
                 .createButton()
                 .attr('title', 'D1')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2685,7 +2748,7 @@
             widget
                 .createButton()
                 .attr('title', 'W1')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2701,7 +2764,7 @@
             widget
                 .createButton()
                 .attr('title', 'M1')
-                .on('click', function() {
+                .on('click', function () {
                   if ($(this).hasClass('selected')) return
                   $(this)
                       .addClass('selected')
@@ -2739,7 +2802,7 @@
       getSymbol() {
         this.$http.post(this.host + this.api.market.thumb, {}).then(response => {
           const resp = response.body
-        // 先清空已有数据
+          // 先清空已有数据
           for (let i = 0; i < resp.length; i++) {
             const coin = resp[i]
             coin.base = resp[i].symbol.split('/')[1]
@@ -2770,7 +2833,7 @@
           if (this.isLogin) {
             this.getFavor()
           }
-          require(['../../assets/js/exchange.js'], function(e) {
+          require(['../../assets/js/exchange.js'], function (e) {
             e.clickScTab()
           })
           this.startWebsock()
@@ -2813,7 +2876,7 @@
                       resp.ask.items[i].totalAmount = resp.ask.items[i].amount
                     } else {
                       resp.ask.items[i].totalAmount =
-                        resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount
+                          resp.ask.items[i - 1].totalAmount + resp.ask.items[i].amount
                     }
                   }
                   if (resp.ask.items.length >= this.plate.maxPostion) {
@@ -2824,12 +2887,12 @@
                       this.plate.askRows.push(ask)
                     }
                     const rows = this.plate.askRows,
-                      len = rows.length,
-                      totle = rows[0].totalAmount
+                        len = rows.length,
+                        totle = rows[0].totalAmount
                     this.plate.askTotle = totle
                   } else {
                     for (let i = 12; i > resp.ask.items.length; i--) {
-                      const ask = { price: 0, amount: 0 }
+                      const ask = {price: 0, amount: 0}
                       ask.direction = 'SELL'
                       ask.position = i
                       ask.totalAmount = ask.amount
@@ -2854,7 +2917,7 @@
                       resp.bid.items[i].totalAmount = resp.bid.items[i].amount
                     } else {
                       resp.bid.items[i].totalAmount =
-                        resp.bid.items[i - 1].totalAmount + resp.bid.items[i].amount
+                          resp.bid.items[i - 1].totalAmount + resp.bid.items[i].amount
                     }
                   }
                   for (let i = 0; i < resp.bid.items.length; i++) {
@@ -2866,27 +2929,27 @@
                   }
                   if (resp.bid.items.length < this.plate.maxPostion) {
                     for (
-                      let i = resp.bid.items.length;
-                      i < this.plate.maxPostion;
-                      i++
-                  ) {
-                      const bid = { price: 0, amount: 0 }
+                        let i = resp.bid.items.length;
+                        i < this.plate.maxPostion;
+                        i++
+                    ) {
+                      const bid = {price: 0, amount: 0}
                       bid.direction = 'BUY'
                       bid.position = i + 1
                       bid.totalAmount = 0
                       this.plate.bidRows.push(bid)
                     }
                     const rows = this.plate.bidRows,
-                      len = rows.length,
-                      totle = rows[resp.bid.items.length - 1].totalAmount
+                        len = rows.length,
+                        totle = rows[resp.bid.items.length - 1].totalAmount
                     this.plate.bidTotle = totle
                   } else {
                     const rows = this.plate.bidRows,
-                      len = rows.length,
-                      totle = rows[len - 1].totalAmount
+                        len = rows.length,
+                        totle = rows[len - 1].totalAmount
                     this.plate.bidTotle = totle
                   }
-                // this.plate.bidRows = this.plate.bidRows.slice(0,this.plate.maxPostion);
+                  // this.plate.bidRows = this.plate.bidRows.slice(0,this.plate.maxPostion);
                 }
               }
             })
@@ -2962,7 +3025,7 @@
         stompClient.debug = false
         // this.datafeed = new Datafeeds.WebsockFeed(that.host+'/market',this.currentCoin,stompClient);
         // this.getKline();
-        stompClient.connect({}, function(frame) {
+        stompClient.connect({}, function (frame) {
           that.datafeed = new Datafeeds.WebsockFeed(
               that.host + '/market',
               that.currentCoin,
@@ -2971,7 +3034,7 @@
           )
           that.getKline()
           // 订阅价格变化消息
-          stompClient.subscribe('/topic/market/thumb', function(msg) {
+          stompClient.subscribe('/topic/market/thumb', function (msg) {
             that.statusCurreny()
             const resp = JSON.parse(msg.body)
             const coin = that.getCoin(resp.symbol)
@@ -2994,7 +3057,7 @@
           // 订阅实时成交信息
           stompClient.subscribe(
               '/topic/market/trade/' + that.currentCoin.symbol,
-              function(msg) {
+              function (msg) {
                 const resp = JSON.parse(msg.body)
                 that.trade.rows.unshift(resp)
 
@@ -3007,7 +3070,6 @@
                 //   that.trade.rows = that.trade.rows.slice(0, 30)
                 // }
               }
-
           )
           if (that.isLogin) {
             // 订阅委托取消信息
@@ -3016,7 +3078,7 @@
                 that.currentCoin.symbol +
                 '/' +
                 that.member.id,
-                function(msg) {
+                function (msg) {
                   const resp = JSON.parse(msg.body)
                   that.refreshAccount()
                 }
@@ -3027,7 +3089,7 @@
                 that.currentCoin.symbol +
                 '/' +
                 that.member.id,
-                function(msg) {
+                function (msg) {
                   const resp = JSON.parse(msg.body)
                   that.refreshAccount()
                 }
@@ -3038,7 +3100,7 @@
                 that.currentCoin.symbol +
                 '/' +
                 that.member.id,
-                function(msg) {
+                function (msg) {
                   const resp = JSON.parse(msg.body)
                   that.refreshAccount()
                 }
@@ -3048,7 +3110,7 @@
           stompClient.subscribe(
               '/topic/market/trade-plate/buy/' +
               that.currentCoin.symbol,
-              function(msg) {
+              function (msg) {
                 const resp = JSON.parse(msg.body)
                 const bids = resp.items
                 that.plate.bidRows = []
@@ -3083,7 +3145,7 @@
           // 订阅盘口消息
           stompClient.subscribe(
               '/topic/market/trade-plate/sell/' + that.currentCoin.symbol,
-              function(msg) {
+              function (msg) {
                 const resp = JSON.parse(msg.body)
                 if (resp.direction == 'SELL') {
                   const asks = resp.items
@@ -3223,7 +3285,7 @@
         } else {
           // 去添加收藏
           this.$http
-              .post(this.host + this.api.exchange.favorAdd, { symbol })
+              .post(this.host + this.api.exchange.favorAdd, {symbol})
               .then(response => {
                 const resp = response.body
                 if (resp.code == 0) {
@@ -3824,15 +3886,15 @@
           })
         }
       },
-      refreshAccount: function() {
+      refreshAccount: function () {
         this.getCurrentOrder()
         this.getHistoryOrder()
         this.getWallet()
       },
-      timeFormat: function(tick) {
+      timeFormat: function (tick) {
         return moment(tick).format('HH:mm:ss')
       },
-      dateFormat: function(tick) {
+      dateFormat: function (tick) {
         return moment(tick).format('YYYY-MM-DD HH:mm:ss')
       },
       keyEvent(event) {

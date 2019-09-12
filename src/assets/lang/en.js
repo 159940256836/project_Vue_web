@@ -702,7 +702,9 @@ module.exports = {
     ptaq: 'Platform Security',
     ptsl: 'Platform strength',
     xwzx: 'News Center',
-    fabu: 'advertising'
+    fabu: 'advertising',
+    xwzx1: 'Red rose green',
+    xwzx2: 'Red down green'
   },
   progress: {
     already: 'Have to dig',
@@ -1458,6 +1460,11 @@ module.exports = {
       agentcodee: 'Please enter the correct recommendation code '
     },
     safe: {
+      nickName: 'nick Name',
+      nickAstrict: 'Nickname minimum three characters',
+      nickNum: 'Please enter a 3-12 character minimum nickname',
+      nick: 'Please enter user nickname',
+      nickInfo: 'User login display, OTC trading, order hanging',
       safelevel_low: 'user level ',
       safelevel_high: 'Identity',
       safelevel_medium: 'Audit failed',
