@@ -312,7 +312,8 @@ export default {
         this.$Message.error('请同意')
         return false
       }
-      this.$http.post(this.host + '/uc/register/email', data).then(response => {
+      // this.$http.post(this.host + '/uc/register/email', data).then(response => {
+      this.$http.post(this.host + '/uc/register/newRegisterByEmail', data).then(response => {
         console.log(response)
         const res = response.body
         if (res.code == 0) {
