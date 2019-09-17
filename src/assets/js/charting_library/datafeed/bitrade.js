@@ -224,7 +224,6 @@ WebsockFeed.prototype.periodLengthSeconds = function(resolution, requiredPeriods
   } else if (resolution === 'H') {
     daysCount = requiredPeriodsCount * resolution / 24
   } else {
-    console.log(daysCount)
     daysCount = requiredPeriodsCount * resolution / (24 * 60)
   }
   return daysCount * 24 * 60 * 60
