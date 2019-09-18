@@ -714,6 +714,7 @@ module.exports = {
     BTC: 'BTC',
     ETH: 'ETH',
     BC: 'BC',
+    TD: 'TD',
     CUSTOM: '自选',
     COIN: '币种',
     favor: '收藏',
