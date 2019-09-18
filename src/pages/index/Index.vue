@@ -978,6 +978,9 @@ export default {
           text: this.$t('service.BC')
         },
         {
+          text: this.$t('service.TD')
+        },
+        {
           text: this.$t('service.USDT')
         },
         {
@@ -1135,6 +1138,9 @@ export default {
       this.indexBtn = [
         {
           text: this.$t('service.BC')
+        },
+        {
+          text: this.$t('service.TD')
         },
         {
           text: this.$t('service.USDT')
@@ -1388,16 +1394,18 @@ export default {
         window.indexBtnBC = this.indexBtnBC
         this.dataIndex = this.coins.BC
       } else if (index == 1) {
-        this.dataIndex = this.coins.USDT
+        this.dataIndex = this.coins.TD
       } else if (index == 2) {
-        this.dataIndex = this.coins.BTC
+        this.dataIndex = this.coins.USDT
       } else if (index == 3) {
+        this.dataIndex = this.coins.BTC
+      } else if (index == 4) {
         this.dataIndex = this.coins.favor
       }
     },
     getSymbol() {
       this.loading = true
-      this.coins.USDT = []; this.coins.BTC = []; this.coins.ETH = []; this.coins.BC = []
+      this.coins.USDT = []; this.coins.TD = []; this.coins.BTC = []; this.coins.ETH = []; this.coins.BC = []
       this.$http.post(this.host + this.api.market.thumbTrend, {}).then(response => {
         var resp = response.body
         for (var i = 0; i < resp.length; i++) {
