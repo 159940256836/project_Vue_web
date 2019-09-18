@@ -207,6 +207,25 @@ $focusColor:#3399FF;
                     >
                     </input>
                 </FormItem>
+
+                <FormItem prop="code" v-show="!showCode">
+                    <Input
+                        class="code-input"
+                        type="text"
+                        v-model="formInline.code"
+                        :placeholder="$t('uc.regist.emailcode')"
+                    >
+                    </Input>
+                    <input
+                        id="sendCode"
+                        @click="eamilCode()"
+                        type="Button"
+                        :value="sendcodeValue"
+                        :disabled='emailcodedisabled'
+                    >
+                    </input>
+                </FormItem>
+
                 <FormItem prop="password">
                     <Input
                         type="password"
@@ -426,6 +445,7 @@ export default {
       sendcodeValue: this.$t('uc.regist.sendcode'),
       ticket: '',
       randStr: '',
+      emailcodedisabled: false,
       captchaObj: null,
       modal1: false,
       _captchaResult: null,
@@ -570,10 +590,10 @@ export default {
       this.getAreas()
     },
     initGtCaptcha() {
-            // 直接生成一个验证码对象
+      //       // 直接生成一个验证码对象
       const captcha1 = new TencentCaptcha('2087858432', (res) => {
-        res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr);
-        (this.changeActive == 0) && this.success()
+        res.ret == 0 && (this.ticket = res.ticket) && (this.randStr = res.randstr)
+        this.changeActive == 0 && this.success()
         this.changeActive == 1 && this.emailSuccess()
       })
       captcha1.show() // 显示验证码
@@ -597,6 +617,7 @@ export default {
     },
     actives: function(index) {
       this.changeActive = index
+      this.formInline.user = ''
       if (this.changeActive == 0) {
         this.showCode = true
         this.key = this.$t('uc.regist.telno')
@@ -613,20 +634,21 @@ export default {
         this.ruleInline.code = []
       }
     },
-    emailSuccess() { // 邮箱注册腾讯防水验证成功
+    emailSuccess() {
       const forminline = this.formInline
-      const params = {
+      const LoginByEmailVerification = {
         ticket: this.ticket,
         randStr: this.randStr,
         email: forminline.user,
         password: forminline.password,
+        code: forminline.code,
         username: forminline.username,
         country: forminline.country,
         promotion: forminline.agentcode,
         superPartner: ''
       }
       // this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
-      this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
+      this.$http.post(this.host + '/uc/register/mailVerificationRegistered', LoginByEmailVerification).then(response => { // 新接口
         const resp = response.body
         if (resp.code == 0) {
           this.$Notice.success({
@@ -662,19 +684,34 @@ export default {
         }
       })
     },
-    settime() {
-      this.sendcodeValue = this.countdown
-      this.codedisabled = true
-      const timercode = setInterval(() => {
-        this.countdown--
+    settime(name) {
+      if (name != 'email') {
         this.sendcodeValue = this.countdown
-        if (this.countdown <= 0) {
-          clearInterval(timercode)
-          this.codedisabled = false
-          this.sendcodeValue = this.$t('uc.regist.sendcode')
-          this.countdown = 60
-        }
-      }, 1000)
+        this.codedisabled = true
+        const timercode = setInterval(() => {
+          this.countdown--
+          this.sendcodeValue = this.countdown
+          if (this.countdown <= 0) {
+            clearInterval(timercode)
+            this.codedisabled = false
+            this.sendcodeValue = this.$t('uc.regist.sendcode')
+            this.countdown = 60
+          }
+        }, 1000)
+      } else {
+        this.sendcodeValue = this.countdown
+        this.emailcodedisabled = true
+        const timercode = setInterval(() => {
+          this.countdown--
+          this.sendcodeValue = this.countdown
+          if (this.countdown <= 0) {
+            clearInterval(timercode)
+            this.emailcodedisabled = false
+            this.sendcodeValue = this.$t('uc.regist.sendcode')
+            this.countdown = 60
+          }
+        }, 1000)
+      }
     },
     sendCode() {
       const mobilePhone = this.formInline.user
@@ -687,6 +724,17 @@ export default {
         return
       } else {
         this.initGtCaptcha()
+      }
+    },
+    eamilCode() {
+      const mobilePhone = this.formInline.user
+      if (mobilePhone != '') {
+        this.$http.post(this.host + '/uc/email/registered/code', { 'email': mobilePhone }).then(response => {
+          this.settime('email')
+          this.$Notice.success({ title: this.$t('common.tip'), desc: response.body.message })
+        })
+      } else {
+        this.$Notice.error({ title: this.$t('common.tip'), desc: this.$t('uc.regist.emailtip') })
       }
     },
     success() {

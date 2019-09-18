@@ -41,7 +41,7 @@
       <div class="phone" style="display:flex;">
         <input style="width:5rem" v-model="checkcode" placeholder="短信验证码" maxlength="6">
         <span
-          @click="initGtCaptcha();"
+          @click="initGtCaptcha()"
           :class="setnum1!='获取验证码'?'dis':''"
           style="color:#3399FFFF; display:inline-block; width:2rem;height:0.58rem;line-height:0.58rem;border:1px solid rgba(51,153,255,1); border-radius:29rem;font-size: 0.2rem; text-align:center; margin-top:0.15rem"
         >{{setnum1}}</span>
@@ -103,12 +103,14 @@
       <div class="phone">
         <input placeholder="邮箱" v-model="email1">
       </div>
-      <!-- <div class="phone" style="display:flex;">
-        <input style="width:5rem" placeholder="邮箱验证码">
+      <div class="phone" style="display:flex;">
+        <input style="width:5rem" placeholder="邮箱验证码" v-model="emailcode">
         <span
+          @click="eamilCode()"
+          :class="setnum2!='获取验证码'?'dis':''"
           style="display:inline-block;color:#3399FFFF;width:2rem;height:0.58rem;line-height:0.58rem;border:1px solid rgba(51,153,255,1); border-radius:29rem; text-align:center; margin-top:0.15rem"
         >验证码</span>
-      </div>-->
+      </div>
       <div class="phone">
         <input type="password" v-model="newpwd1" placeholder="请输入8-16位字母加数字登录密码">
       </div>
@@ -149,11 +151,13 @@ export default {
       model9: '',
       telname: '',
       checkcode: '',
+      emailcode: '',
       newpwd: '',
       pwdagain: '',
       agentcode: '',
       country: '中国',
       setnum1: '获取验证码',
+      setnum2: '获取验证码',
       username: '',
       agreee: true,
       email1: '',
@@ -215,8 +219,8 @@ export default {
         this.$Message.error('请同意')
         return false
       }
-      this.$http.post(this.host + '/uc/register/phone', data).then(response => {
-        console.log(response)
+      // this.$http.post(this.host + '/uc/register/phone', data).then(response => {
+      this.$http.post(this.host + '/uc/register/nweLoginByPhone', data).then(response => { // 新接口
         const res = response.body
         if (res.code == 0) {
           this.$Message.success(res.message)
@@ -229,6 +233,27 @@ export default {
           this.$Message.error(res.message)
         }
       })
+    },
+    eamilCode() {
+      const mobilePhone = this.email1
+      if (mobilePhone != '') {
+        this.$http.post(this.host + '/uc/email/registered/code', { 'email': mobilePhone }).then(response => {
+          if (response.body.code === 0) {
+            var count = 60
+            this.timer = setInterval(() => {
+              count--
+              this.setnum2 = count
+              if (count <= 0) {
+                this.setnum2 = '获取验证码'
+                clearInterval(this.timer)
+              }
+            }, 1000)
+          }
+          this.$Notice.success({ title: this.$t('common.tip'), desc: response.body.message })
+        })
+      } else {
+        this.$Notice.error({ title: this.$t('common.tip'), desc: this.$t('uc.regist.emailtip') })
+      }
     },
     // 发送验证码
     sendCode() {
@@ -266,6 +291,7 @@ export default {
     emailMax() {
       const username = this.username1
       const email = this.email1
+      const code = this.emailcode
       const password = this.newpwd1
       const country = this.country1
       const promotion = this.agentcode ? this.agentcode : ''
@@ -275,6 +301,7 @@ export default {
       const randStr = this.randStr1
       const data = {
         username,
+        code,
         email,
         password,
         country,
@@ -313,7 +340,7 @@ export default {
         return false
       }
       // this.$http.post(this.host + '/uc/register/email', data).then(response => {
-      this.$http.post(this.host + '/uc/register/newRegisterByEmail', data).then(response => {
+      this.$http.post(this.host + '/uc/register/mailVerificationRegistered', data).then(response => {
         console.log(response)
         const res = response.body
         if (res.code == 0) {
@@ -332,6 +359,7 @@ export default {
     initGtCaptcha2() {
       const username = this.username1
       const email = this.email1
+      const code = this.emailcode
       const password = this.newpwd1
       const country = this.country1
       const promotion = this.agentcode ? this.agentcode : ''
@@ -341,6 +369,7 @@ export default {
       const data = {
         username,
         email,
+        code,
         password,
         country,
         promotion,
@@ -359,7 +388,10 @@ export default {
         this.$Message.error('请输入邮箱')
         return false
       }
-
+      if (!data.code) {
+        this.$Message.error('请输入邮箱验证码')
+        return false
+      }
       if (!data.password) {
         this.$Message.error('请输入8-16位字母加数字登录密码')
         return false

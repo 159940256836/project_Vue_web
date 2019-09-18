@@ -84,21 +84,22 @@
                           </div>
                       </div>
                     </Input>
-                    <!-- <input
-                        id="sendCode"
-                        @click="sendCode()"
-                        type="Button"
-                        :value="sendcodeValue"
-                        :disabled='codedisabled'
+                </FormItem>
+
+                 <FormItem prop="code" v-show="!showCode" class="time-input">
+                    <Input
+                        class="code-input"
+                        type="text"
+                        v-model="formInline.code"
+                        :placeholder="$t('uc.regist.emailcode')"
                     >
-                      
-                    </input> -->
-                    <!-- <div slot="append">
-                <div @click="sendPhoneCode(2)" :disabled="sendMsgDisabled1">
-                  <span v-if="sendMsgDisabled1">{{codeTime1+$t('uc.safe.second')}}</span>
-                  <span v-if="!sendMsgDisabled1">{{$t('uc.safe.clickget')}}</span>
-                </div>
-              </div> -->
+                     <div slot="append">
+                          <div @click="eamilCode()" :disabled='emailcodedisabled'>
+                            <span>{{ sendcodeValue }}</span>
+                          </div>
+                      </div>
+                    </Input>
+                   
                 </FormItem>
 
                 <FormItem prop="password">
@@ -197,6 +198,7 @@ export default {
       ticket: '',
       randStr: '',
       captchaObj: null,
+      emailcodedisabled: false,
       modal1: false,
       _captchaResult: null,
       agree: true,
@@ -273,20 +275,6 @@ export default {
             trigger: 'blur'
           }
         ],
-                // confirmPwd: [
-                //     {
-                //         required: true,
-                //         message: this.$t("uc.regist.pwdtip"),
-                //         trigger: "blur"
-                //     },
-                //     {
-                //         type: "string",
-                //         min: 6,
-                //         // message: this.$t("uc.regist.pwdmsg"),
-                //         message: '两次密码不一致请重新输入',
-                //         trigger: "blur"
-                //     }
-                // ],
         repassword: [{ validator: validateRepassword, trigger: 'blur' }]
       },
       key: '',
@@ -385,6 +373,17 @@ export default {
       }
       this.formInline.user = null
     },
+    eamilCode() {
+      const mobilePhone = this.formInline.user
+      if (mobilePhone != '') {
+        this.$http.post(this.host + '/uc/email/registered/code', { 'email': mobilePhone }).then(response => {
+          response.body.code == 0 && this.settime()
+          this.$refs.myModal.open({ title: this.$t('common.tip'), desc: response.body.message })
+        })
+      } else {
+        this.$refs.myModal.open({ title: this.$t('common.tip'), desc: this.$t('uc.regist.emailtip') })
+      }
+    },
     emailSuccess() { // 邮箱注册腾讯防水验证成功
       const forminline = this.formInline
       const params = {
@@ -392,13 +391,14 @@ export default {
         randStr: this.randStr,
         email: forminline.user,
         password: forminline.password,
+        code: forminline.code,
         username: forminline.username,
         country: forminline.country,
         promotion: forminline.agentcode,
         superPartner: ''
       }
       // this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
-      this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
+      this.$http.post(this.host + '/uc/register/mailVerificationRegistered', params).then(response => { // 新接口
         const resp = response.body
         if (resp.code == 0) {
           // this.$Notice.success({
@@ -440,24 +440,39 @@ export default {
       })
     },
     settime() {
-      this.sendcodeValue = this.countdown
-      this.codedisabled = true
-      const timercode = setInterval(() => {
-        this.countdown--
+      if (name != 'email') {
         this.sendcodeValue = this.countdown
-        if (this.countdown <= 0) {
-          clearInterval(timercode)
-          this.codedisabled = false
-          this.sendcodeValue = this.$t('uc.regist.sendcode')
-          this.countdown = 60
-        }
-      }, 1000)
+        this.codedisabled = true
+        const timercode = setInterval(() => {
+          this.countdown--
+          this.sendcodeValue = this.countdown
+          if (this.countdown <= 0) {
+            clearInterval(timercode)
+            this.codedisabled = false
+            this.sendcodeValue = this.$t('uc.regist.sendcode')
+            this.countdown = 60
+          }
+        }, 1000)
+      } else {
+        this.sendcodeValue = this.countdown
+        this.emailcodedisabled = true
+        const timercode = setInterval(() => {
+          this.countdown--
+          this.sendcodeValue = this.countdown
+          if (this.countdown <= 0) {
+            clearInterval(timercode)
+            this.emailcodedisabled = false
+            this.sendcodeValue = this.$t('uc.regist.sendcode')
+            this.countdown = 60
+          }
+        }, 1000)
+      }
     },
     sendCode() {
       const mobilePhone = this.formInline.user
       const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
       if (mobilePhone == '' || !reg.test(mobilePhone)) {
-        this.$refs.myModal.open({ title: this.$t('common.tip'), desc: this.$t('uc.regist.teltip') })
+        this.$refs.myModal.open({ title: this.$t('common.tip'), desc: '请输入邮箱' })
         // this.$Notice.error({
         //   title: this.$t('common.tip'),
         //   desc: this.$t('uc.regist.teltip')
