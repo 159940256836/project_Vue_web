@@ -111,6 +111,14 @@
 .ivu-table td:last-child{
   text-align: center;
 }
+.ivu-select-dropdown::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px #21254d;
+    background-color: #21254d;
+}
+.ivu-select-dropdown::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #131738;
+    background-color: #131738;
+}
 </style>
 <template>
   <div class="mymsg_wrapper" id="personal">
@@ -264,7 +272,7 @@ export default {
       const self = this
       console.log(name)
       // if ((name !== 'withdraw' || name !== '/personal/withdraw')||(name !== 'recharge' || name !== '/personal/recharge')) {
-        this.$route.query.name = ''
+      this.$route.query.name = ''
       // }
       console.log(name)
       if (name == 'withdraw' || name == '/personal/withdraw') {

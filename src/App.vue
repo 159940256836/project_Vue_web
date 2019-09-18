@@ -183,7 +183,8 @@
                                 </div>
                             </poptip>
                         </div>
-                        <div class="set-main-style">
+                        <!-- 红涨绿跌 -->
+                        <!-- <div class="set-main-style">
                             <Dropdown @on-click="setTheme">
                                 <a href="javascript:void(0)">
                                     <span class="header-img">{{ $t('common.set') }}</span>
@@ -201,7 +202,7 @@
                                 </DropdownMenu>
                             </Dropdown>
 
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -455,8 +456,8 @@ export default {
   },
   data() {
     return {
-        setStyle: 'up',
-        setImg: require('./assets/img/jiaobiao.png'),
+      setStyle: 'up',
+      setImg: require('./assets/img/jiaobiao.png'),
       locale: '',
       isRouterAlive: true,
       pageView: 'page-view',
@@ -476,7 +477,7 @@ export default {
       pathNameState: true,
       weChat1: false, // 微信客服1
       weChat2: false, // 微信客服2
-      FAQList: [], // 公告
+      FAQList: [] // 公告
     }
   },
   watch: {
@@ -526,9 +527,9 @@ export default {
     }
   },
   computed: {
-      setMain: function () {
-          return this.$store.state.setMain
-      },
+    setMain: function() {
+      return this.$store.state.setMain
+    },
     activeNav: function() {
       return this.$store.state.activeNav
     },
@@ -552,13 +553,13 @@ export default {
     }
   },
   created: function() {
-      if (localStorage.getItem('SETSTYLE') == null) {
-          this.setTheme(this.$store.commit('setMain', 'up'))
-      } else {
-          this.setTheme(this.$store.commit('setMain', localStorage.getItem('SETSTYLE')))
-      }
+    if (localStorage.getItem('SETSTYLE') == null) {
+      this.setTheme(this.$store.commit('setMain', 'down'))
+    } else {
+      this.setTheme(this.$store.commit('setMain', localStorage.getItem('SETSTYLE')))
+    }
 
-      /*localStorage.setItem('SETSTYLE', JSON.stringify('down'))*/
+      /* localStorage.setItem('SETSTYLE', JSON.stringify('down'))*/
       /** *
        * 获取公告
        */
@@ -593,20 +594,20 @@ export default {
   },
   methods: {
     // 切换涨跌样式颜色
-      setTheme(name) {
-          console.log(name)
-          if (name === 'up') {
-              this.setStyle = 'up'
-              this.$store.commit('setMain', 'up')
-          } else if (name === 'down') {
-              this.setStyle = 'down'
-              this.$store.commit('setMain', 'down')
-          } else {
-              if (!localStorage.getItem('SETSTYLE')) {
-                localStorage.setItem('SETSTYLE', null)
-              }
-          }
-      },
+    setTheme(name) {
+      console.log(name)
+      if (name === 'up') {
+        this.setStyle = 'up'
+        this.$store.commit('setMain', 'up')
+      } else if (name === 'down') {
+        this.setStyle = 'down'
+        this.$store.commit('setMain', 'down')
+      } else {
+        if (!localStorage.getItem('SETSTYLE')) {
+          localStorage.setItem('SETSTYLE', null)
+        }
+      }
+    },
     lnswitch: function(language) {
       this.$http.get(this.host + '/uc/lang/change/' + language).then(res => {
       })
@@ -670,7 +671,7 @@ export default {
       this.$store.commit('navigate', 'nav-index')
       this.$store.commit('recoveryMember')
       this.$store.commit('initLang')
-        this.loadTopInfo()
+      this.loadTopInfo()
       this.checkLogin()
     },
     loadTopInfo() {

@@ -625,8 +625,8 @@ export default {
         promotion: forminline.agentcode,
         superPartner: ''
       }
-      this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
-            // this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
+      // this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
+      this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
         const resp = response.body
         if (resp.code == 0) {
           this.$Notice.success({

@@ -310,7 +310,6 @@ export default {
     }
   },
   created: function() {
-    
     window.scrollTo(0, 0)
     this.init()
     this.actives(this.changeActive)
@@ -398,8 +397,8 @@ export default {
         promotion: forminline.agentcode,
         superPartner: ''
       }
-      this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
-            // this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
+      // this.$http.post(this.host + '/uc/register/email', params).then(response => { // 旧接口
+      this.$http.post(this.host + '/uc/register/newRegisterByEmail', params).then(response => { // 新接口
         const resp = response.body
         if (resp.code == 0) {
           // this.$Notice.success({
@@ -431,7 +430,7 @@ export default {
               this.phoneRegister()
             }
           } else {
-            this.$refs.myModal.open({title: this.$t('common.tip'), desc: this.$t('uc.regist.agreementtip')})
+            this.$refs.myModal.open({ title: this.$t('common.tip'), desc: this.$t('uc.regist.agreementtip') })
             // this.$Notice.error({
             //   title: this.$t('common.tip'),
             //   desc: this.$t('uc.regist.agreementtip')
@@ -458,7 +457,7 @@ export default {
       const mobilePhone = this.formInline.user
       const reg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/
       if (mobilePhone == '' || !reg.test(mobilePhone)) {
-        this.$refs.myModal.open({title: this.$t('common.tip'), desc: this.$t('uc.regist.teltip')})
+        this.$refs.myModal.open({ title: this.$t('common.tip'), desc: this.$t('uc.regist.teltip') })
         // this.$Notice.error({
         //   title: this.$t('common.tip'),
         //   desc: this.$t('uc.regist.teltip')
@@ -480,7 +479,7 @@ export default {
         resp.code != 0 && this.$refs.myModal.open({ title: this.$t('common.tip'), desc: resp.message })
       })
       // !reg.test(params['phone']) && this.$Notice.error({ title: this.$t('common.tip'), desc: this.$t('uc.finance.withdraw.telerr') })
-      !reg.test(params['phone']) && this.$refs.myModal.open({title: this.$t('common.tip'), desc: this.$t('uc.finance.withdraw.telerr')})
+      !reg.test(params['phone']) && this.$refs.myModal.open({ title: this.$t('common.tip'), desc: this.$t('uc.finance.withdraw.telerr') })
     },
     phoneRegister() { // 手机注册
       const params = {}
@@ -515,12 +514,12 @@ export default {
     afterValidate() {
       this.initGtCaptcha()
     },
-    closable () {
-        this.$refs.myModal.open({
-            content: this.$t('common.tip'),
+    closable() {
+      this.$refs.myModal.open({
+        content: this.$t('common.tip')
             // duration: 10000,
             // closable: true
-        });
+      })
     }
   },
   components: {

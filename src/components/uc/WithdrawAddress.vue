@@ -875,6 +875,23 @@
 </style>
 <style lang="scss">
 #withdraw{
+    .ivu-select-selection {
+        // height: 30px;
+        // border-radius: 0;
+        border: 1px solid #58698A;
+        background: #111530;
+      }
+          .ivu-input {
+      border: 1px solid #58698A;
+      border-radius: 0;
+      background: #111530;
+      color: #8090AF;
+    }
+          .ivu-select-selected-value {
+        border-radius: 0;
+        background: #111530;
+        color: #8090AF;
+      }
  .ivu-input-group-append,
   .ivu-input-group-prepend {
     background: #111530 !important;
@@ -959,12 +976,6 @@
       line-height: 30px;
     }
 
-    .ivu-input {
-      border: 1px solid #58698A;
-      border-radius: 0;
-      background: #111530;
-      color: #8090AF;
-    }
 
     .nav-right {
       .bill_box_address {
