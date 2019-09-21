@@ -41,18 +41,32 @@ export default {
     rose: {
       type: String,
       required: false
+    },
+    judge: {
+      type: String,
+      required: false
     }
   },
   created: function() {
     this.opts.width = this.width || 120
     this.opts.height = this.height || 50
     this.opts.rose = this.rose || 0
-    if (parseFloat(this.opts.rose) < 0) {
-      this.pColor = '#11132c'
-      this.sColor = '#8090af'
+    if (this.judge != 'table') {
+      if (parseFloat(this.opts.rose) < 0) {
+        this.pColor = '#F5F5F5'
+        this.sColor = '#DCDCDC'
+      } else {
+        this.pColor = '#F5F5F5'
+        this.sColor = '#DCDCDC'
+      }
     } else {
-      this.pColor = '#11132c'
-      this.sColor = '#8090af'
+      if (parseFloat(this.opts.rose) < 0) {
+        this.pColor = 'rgba(255, 73, 95,.1)'
+        this.sColor = '#FF495F'
+      } else {
+        this.pColor = 'rgba(3, 191, 123,.1)'
+        this.sColor = '#03BF7B'
+      }
     }
     this.draw()
   },

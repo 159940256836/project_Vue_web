@@ -880,6 +880,22 @@
                   padding: 0 15px;
                   color: #8090af;
                   font-size: 14px;
+/*=======*/
+/*                min-width: 1100px;*/
+/*                margin: 0 39px;*/
+/*                .netLogo {*/
+/*                    width:120px;*/
+/*                    height:50px;*/
+/*                    float: left;*/
+/*                        .logo {*/
+/*                            background:url("../src/assets/images/logo.png") no-repeat;*/
+/*                            width:100%;*/
+/*                            height:80%;*/
+/*                            // margin-left: 30px;*/
+/*                            margin-top: 7px;*/
+/*                        }*/
+/*                    }*/
+/*>>>>>>> 26c4b84e59ff9042f3dc79c189094b6d1b06d537*/
                 }
 
                 &:hover a {
@@ -1716,7 +1732,6 @@
                   display: block;
                 }
               }
-
               a {
                 line-height: 26px;
                 font-size: 14px;
