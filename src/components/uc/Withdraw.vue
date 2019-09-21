@@ -419,7 +419,7 @@
   export default {
     data() {
       return {
-        isDisabled: false, //谷歌验证确认按钮状态
+        isDisabled: false, // 谷歌验证确认按钮状态
         isGoogleCode: false, // 是否开启google验证状态;
         isPhoneCode: false, // 是否开启Phone验证状态;
         codeIsSending: false, // 手机验证
@@ -465,16 +465,15 @@
       }
     },
     watch: {
-      currentCoin: function () {
+      currentCoin: function() {
         this.withdrawFee =
             this.currentCoin.minTxFee +
             (this.currentCoin.maxTxFee - this.currentCoin.minTxFee) / 2
       }
     },
     methods: {
-      /*链名称*/
+      /* 链名称*/
       changeChain(name) {
-        console.log(name)
         this.linkStyle = name
         if (name == 'ERCUSDT') {
           this.withdrawAdress = ''
@@ -489,16 +488,9 @@
                 this.withdrawMinTxFee = this.linkCoinInfo.minTxFee
                 this.minWithdrawAmount = this.linkCoinInfo.minWithdrawAmount
               }
-              console.log(this.linkCoinInfo.coin)
-              console.log(this.linkCoinInfo.minTxFee)
-              console.log(this.linkCoinInfo.minWithdrawAmount)
-              console.log(resp.data.address[0])
               if (resp.data.address.length && resp.data.address.length > 0) {
                 this.addressErcUsdt = resp.data.address
-                console.log(this.addressErcUsdt)
               }
-
-              console.log(this.linkCoinInfo)
             } else {
               this.$Message.error(resp.message)
             }
@@ -510,15 +502,14 @@
       },
       // 复制功能
       copyToken(data) {
-        let url = data
-        let oInput = document.createElement('input')
+        const url = data
+        const oInput = document.createElement('input')
         oInput.value = url
         document.body.appendChild(oInput)
         oInput.select() // 选择对象
-        console.log(oInput.value)
         document.execCommand('Copy') // 执行浏览器复制命令
         this.$Message.success(
-            this.$t("uc.finance.recharge.copysuccess")
+            this.$t('uc.finance.recharge.copysuccess')
         )
         oInput.remove()
       },
@@ -545,11 +536,10 @@
         } else {
           // 获取邮箱code
           this.$http.post(this.host + '/uc/withdraw/email/code').then(response => {
-            console.log(response)
             const resp = response.body
             if (resp.code == 0) {
               me.sendMsgDisabled1 = true
-              const interval = window.setInterval(function () {
+              const interval = window.setInterval(function() {
                 if (me.codeTime1-- <= 0) {
                   me.codeTime1 = 60
                   me.sendMsgDisabled1 = false
@@ -561,7 +551,6 @@
             }
           })
         }
-
       },
       settime() {
         this.sendcodeValue = this.countdown
@@ -578,7 +567,6 @@
         }, 1000)
       },
       changePage(index) {
-        console.log(index)
         this.transaction.page = index
         this.getList()
       },
@@ -638,12 +626,12 @@
         params['jyPassword'] = this.formInline.fundpwd
         params['code'] = this.isCode == 2 ? this.formInline.code : this.formInline.emailCode
         params['googleCode'] = this.formInline.googleCode
-        this.isDisabled = true //按钮禁用
+        this.isDisabled = true // 按钮禁用
         this.$http.post(this.host + (this.linkStyle == 'USDT' ? '/uc/withdraw/apply' : '/uc/withdraw/applyERCUSDT'), params).then(response => {
           this.fundpwd = ''
           var resp = response.body
           if (resp.code == 0) {
-            this.isDisabled = false //按钮恢复
+            this.isDisabled = false // 按钮恢复
             this.modal = false
             this.formInline.code = ''
             this.formInline.fundpwd = ''
@@ -653,14 +641,12 @@
             this.clearValues()
             this.$Message.success(resp.message)
           } else {
-            this.isDisabled = false //按钮恢复
+            this.isDisabled = false // 按钮恢复
             this.$Message.error(resp.message)
           }
-
         })
       },
       getAddrList(value) {
-        console.log(value)
         if (value == 'USDT') {
           this.linkStatus = true
         } else {
@@ -679,7 +665,7 @@
       },
       // 获取币种信息
       getAddrCoin() {
-        /*'http://192.168.124.188:6001'*/
+        /* 'http://192.168.124.188:6001'*/
         this.$http.post(this.host + '/uc/withdraw/support/coin/info').then(response => {
           var resp = response.body
           if (resp.code == 0 && resp.data.length > 0) {
@@ -750,7 +736,7 @@
           this.withdrawOutAmount = 0
           return false
         }
-        this.withdrawAmount = this.withdrawAmount.replace(/[^\d.]/g, "");
+        this.withdrawAmount = this.withdrawAmount.replace(/[^\d.]/g, '')
         if (this.linkStyle == 'USDT') {
           // 普通币种类型
           setTimeout(() => {
@@ -759,7 +745,6 @@
               return false
             }
           }, 1000)
-
         } else if (this.linkStyle == 'ERCUSDT') {
           // 普通币种类型
           setTimeout(() => {
@@ -768,7 +753,6 @@
               return false
             }
           }, 1000)
-
         }
         // 新增代码
         if (this.withdrawAmount > this.currentCoin.balance) {
@@ -779,7 +763,8 @@
         // ERC20类型
         // 否则 提出当前数量减去手续费
         this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawMinTxFee).toFixed(5))
-        /*// ERC20类型
+        console.log(this.withdrawOutAmount, this.currentCoin.balance, this.withdrawAmount, this.withdrawFee, this.withdrawMinTxFee)
+        /* // ERC20类型
         if (this.minWithdrawAmount < this.withdrawMinTxFee) {
           /!*this.withdrawAmount = this.currentCoin.minAmount*!/
           this.$Message.error(this.$t('uc.finance.withdraw.numtip3'))
@@ -880,7 +865,7 @@
         // 1.输入谷歌验证码
         // 2.输入手机验证码
         // 3.输入邮箱验证码
-        this.$http.post(this.host + '/uc/getGoogleState', {mobile: this.$store.getters.member.mobile}).then(res => {
+        this.$http.post(this.host + '/uc/getGoogleState', { mobile: this.$store.getters.member.mobile }).then(res => {
           const data = res.body
           this.isCode = data.data
           if (data.code == 0) {
@@ -916,16 +901,15 @@
       if (this.coinType == 'USDT') {
         this.linkStatus = true
       }
-
     },
     computed: {
 
-      member: function () {
+      member: function() {
         return this.$store.getters.member
       },
       tableColumnsWithdraw() {
         let columns = [],
-            filters = []
+          filters = []
         if (this.coinList.length > 0) {
           this.coinList.forEach(v => {
             filters.push({
@@ -946,7 +930,7 @@
           filterMethod(value, row) {
             return row.coin.unit === value
           },
-          render: function (h, params) {
+          render: function(h, params) {
             return h('span', params.row.coin.unit)
           }
         })
@@ -954,15 +938,14 @@
           title: this.$t('uc.finance.withdraw.address'),
           key: 'address',
           render: (h, param) => {
-            let str = param.row.address;
-            let tokenLenth = param.row.address.length
+            const str = param.row.address
+            const tokenLenth = param.row.address.length
             // 显示前五位 后五位
-            let tokenCont = param.row.address.substring(0, 5)
-                +
-                '...'
-                + param.row.address.substring(tokenLenth - 5, tokenLenth)
+            const tokenCont = param.row.address.substring(0, 5) +
+              '...' +
+              param.row.address.substring(tokenLenth - 5, tokenLenth)
             if (str) {
-              return h("div", [
+              return h('div', [
                 h('Icon', {
                   props: {
                     type: 'ios-paper-outline'
@@ -982,11 +965,11 @@
                     }
                   }
                 }),
-                h("div", {
+                h('div', {
                   style: {
                     fontSize: '1%',
                     float: 'left'
-                  },
+                  }
                 }, tokenCont)
               ])
             }

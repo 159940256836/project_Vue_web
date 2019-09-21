@@ -1,12 +1,11 @@
 <template>
     <div class="page-view">
         <header v-show="!$route.meta.hide">
-            <!--:style = "{
-            padding: $route.path==='/'? topPadding : '0 1.5%',
-            backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
-            }"-->
             <div
                 class="page-content"
+                            :style = "{
+            backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
+            }"
             >
                 <div class="time_download">
                     <div class="netLogo">
@@ -217,7 +216,7 @@
                         <div class="footer_left">
                             <div class="foot_left_text">
                                 <img src="./assets/images/logo.png"></img>
-                                <span>{{ $t('footer.platform') }}</span>
+                                <!-- <span>{{ $t('footer.platform') }}</span> -->
                             </div>
                             <div class="left-icon">
                                 <a href="http://www.service@bdw.top">
@@ -472,7 +471,7 @@ export default {
       styleTop: 30,
       topPadding: '0 1.5%',
       topBackgroundColor: 'transparent',
-      $mainNightBgColor: '#11132c',
+      $mainNightBgColor: '#0A1928',
       pathName: '',
       pathNameState: true,
       weChat1: false, // 微信客服1
@@ -647,18 +646,18 @@ export default {
           break
       }
     },
-    // handleScroll() {
-    //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-    //   if (scrollTop > 0) {
-    //     this.styleTop = 0
-    //     this.topPadding = '0 17%'
-    //     this.topBackgroundColor = '#11132c'
-    //   } else {
-    //     this.styleTop = 30
-    //     this.topPadding = '0 1.5%'
-    //     this.topBackgroundColor = 'transparent'
-    //   }
-    // },
+    handleScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      if (scrollTop > 0) {
+        this.styleTop = 0
+        // this.topPadding = '0 17%'
+        this.topBackgroundColor = '#0A1928'
+      } else {
+        this.styleTop = 30
+        // this.topPadding = '0 1.5%'
+        this.topBackgroundColor = 'transparent'
+      }
+    },
     strpo(str) {
       if (str.length > 4) {
         str = str.slice(0, 4) + '···'
@@ -763,23 +762,17 @@ export default {
                 align-items: center;
                 overflow: hidden;
                 min-width: 1100px;
+                margin: 0 39px;
                 .netLogo {
-                    width:50px;
+                    width:120px;
                     height:50px;
                     float: left;
                         .logo {
                             background:url("../src/assets/images/logo.png") no-repeat;
-                            width:80%;
+                            width:100%;
                             height:80%;
-                            margin-left: 30px;
-                            margin-top: 10px;
-                        }
-                        .logo:hover {
-                            background:url("../src/assets/images/logo2.png") no-repeat;
-                            width:80%;
-                            height:80%;
-                            margin-left: 30px;
-                            margin-top: 10px;
+                            // margin-left: 30px;
+                            margin-top: 7px;
                         }
                     }
                 }
@@ -788,7 +781,7 @@ export default {
                 }
                 .nav {
                     float: left;
-                    margin-left: 42px;
+                    margin-left: 53px;
                     a {
                         font-size: 14px;
                         color: #8090AF;
@@ -957,9 +950,9 @@ export default {
 </style>
 <style lang="scss">
 /*@import '../src/styles/style';*/
-.footer .footer_content .footer-main .footer_right .footer_info li{
-    color:#8790a1 !important;
-}
+// .footer .footer_content .footer-main .footer_right .footer_info li{
+//     color:#FFFFFF !important;
+// }
 ul,li{
     list-style-type: none;
 }
@@ -1049,7 +1042,7 @@ ul,li{
             }
         }
         td {
-            color: #8090AF;
+            color: #333333;
             border-bottom: 0 !important;
         }
     }
@@ -1197,7 +1190,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 14px;
-    background: #0e0e28 !important;
+    background: #fff;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
         "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
@@ -1472,20 +1465,22 @@ body {
     min-width: 1260px;
     padding-top: 1px;
     // 6.25修改  lhl
-    color: #8090AF;
-    background: #11132C;
+    color: #CCCCCC;
+    background: #0A1928;
+    position: relative;
     .footer_content {
         width: 1200px;
         margin: 60px auto 30px;
         .footer-main {
             height: 150px;
             .footer_left {
-                float: left;
+                float: right;
                 font-size: 14px;
                 .foot_left_text{
                     display: flex;
                     align-items: center;
                     margin-bottom:15px;
+                    justify-content: center;
                     font-size: 16px;
                     img {
                         margin: 0;
@@ -1568,7 +1563,7 @@ body {
                 }
             }
             .footer_right {
-                float: right;
+                float: left;
                 text-align: left;
                 ul {
                     float: left;
@@ -1578,7 +1573,7 @@ body {
                     margin: 0 10px 0 0;
                 }
                 .margin40 {
-                    margin: 0 50px 0 0;
+                    margin: 0 88px 0 0;
                 }
                 .footer_info {
                     .footer_title {
@@ -1595,10 +1590,10 @@ body {
                             }
                         }
 
-                        a {
+                        a,p{
                             line-height: 26px;
                             font-size: 14px;
-                            color: #8790a1;
+                            color: #cccccc;
                         }
                     }
                     .facebook3,
@@ -1643,10 +1638,10 @@ body {
     .info {
         text-align: center;
         width: 100%;
-        border-top: 1px solid #8790a1;
+        border-top: 1px solid #B9B9B9;
         line-height: 60px;
         font-size: 15px;
-        color: #8790a1;
+        color: #ccc;
         .footer-info {
             width: 1200px;
             margin: 20px auto 0;
@@ -1656,7 +1651,7 @@ body {
                 margin-right: 20px;
                 text-align: left;
                 line-height: 45px;
-                color: #8790a1;
+                color: #ffffff;
             }
             .info-img {
                 text-align: left;
@@ -1672,7 +1667,7 @@ body {
                         margin-right: 0;
                     }
                     img {
-                        width: 85%;
+                        // width: 85%;
                     }
                 }
             }

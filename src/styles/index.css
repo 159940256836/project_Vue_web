@@ -77,8 +77,8 @@ p {
   margin-bottom: 0;
 }
 ::-webkit-input-placeholder{
-                    color:#fff;
-                }
+    color:#999999;
+  }
 input,a{
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
 	-webkit-appearance: none;
