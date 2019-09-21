@@ -216,31 +216,6 @@
       <div class="footer">
         <div class="footer_content">
           <div class="footer-main">
-            <div class="footer_left">
-              <div class="foot_left_text">
-                <img src="./assets/images/logo.png"></img>
-                <span>{{ $t('footer.platform') }}</span>
-              </div>
-              <div class="left-icon">
-                <a href="http://www.service@bdw.top">
-                  <img src="./assets/images/twitter.png" alt="">
-                </a>
-                <div class="qrcode">
-                  <img src="./assets/images/facebook.png" alt="">
-                  <div id="facebook"></div>
-                </div>
-                <div class="qrcode1">
-                  <img src="./assets/images/telegram.png" alt="">
-                  <div id="facebook1"></div>
-                </div>
-                <div class="qrcode2">
-                  <img src="./assets/images/wechar.png" alt="">
-                  <div id="facebook2">
-                    <img src="./assets/images/wachar_qc.jpg" alt="">
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="footer_right">
               <!--下载支持-->
               <ul class="footer_info" :class="this.$store.getters.lang == 'English' ? 'margin10' : 'margin40'">
@@ -378,6 +353,31 @@
                 </li>
 
               </ul>
+            </div>
+            <div class="footer_left">
+              <div class="foot_left_text">
+                <img src="./assets/images/logo.png"></img>
+<!--                <span>{{ $t('footer.platform') }}</span>-->
+              </div>
+              <div class="left-icon">
+                <a href="http://www.service@bdw.top">
+                  <img src="./assets/images/twitter.png" alt="">
+                </a>
+                <div class="qrcode">
+                  <img src="./assets/images/facebook.png" alt="">
+                  <div id="facebook"></div>
+                </div>
+                <div class="qrcode1">
+                  <img src="./assets/images/telegram.png" alt="">
+                  <div id="facebook1"></div>
+                </div>
+                <div class="qrcode2">
+                  <img src="./assets/images/wechar.png" alt="">
+                  <div id="facebook2">
+                    <img src="./assets/images/wachar_qc.jpg" alt="">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <!-- <div class="footer-info">
@@ -785,20 +785,12 @@
           min-width: 1100px;
 
           .netLogo {
-            width: 50px;
+            width: 150px;
             height: 50px;
             float: left;
 
             .logo {
               background: url("../src/assets/images/logo.png") no-repeat;
-              width: 80%;
-              height: 80%;
-              margin-left: 30px;
-              margin-top: 10px;
-            }
-
-            .logo:hover {
-              background: url("../src/assets/images/logo2.png") no-repeat;
               width: 80%;
               height: 80%;
               margin-left: 30px;
@@ -1030,9 +1022,6 @@
 </style>
 <style lang="scss">
   /*@import '../src/styles/style';*/
-  .footer .footer_content .footer-main .footer_right .footer_info li {
-    color: #8790a1 !important;
-  }
 
   ul, li {
     list-style-type: none;
@@ -1587,7 +1576,7 @@
     padding-top: 1px;
     // 6.25修改  lhl
     color: #8090AF;
-    background: #11132C;
+    background: #0A1928;
 
     .footer_content {
       width: 1200px;
@@ -1597,16 +1586,19 @@
         height: 150px;
 
         .footer_left {
-          float: left;
+          float: right;
           font-size: 14px;
+          width: 200px;
 
           .foot_left_text {
             display: flex;
             align-items: center;
             margin-bottom: 15px;
             font-size: 16px;
+            float: right;
 
             img {
+              float: right;
               margin: 0;
             }
 
@@ -1623,8 +1615,11 @@
           }
 
           .left-icon {
+            width: 160px;
+            height: 36px;
+            float: right;
             a, div {
-              margin-right: 10px;
+              margin-left: 10px;
               font-size: 14px;
               color: #fff;
               float: left;
@@ -1701,7 +1696,7 @@
         }
 
         .footer_right {
-          float: right;
+          float: left;
           text-align: left;
 
           ul {
@@ -1724,21 +1719,23 @@
             }
 
             li {
-              color: #fff;
-
               &:first-child {
                 span {
                   font-size: 16px;
                   display: block;
+                  color: #fff;
                 }
               }
               a {
                 line-height: 26px;
                 font-size: 14px;
-                color: #8790a1;
+                color: #cccccc;
               }
             }
-
+            .facebook4,
+            .facebook5 {
+              color: #cccccc;
+            }
             .facebook3,
             .facebook4,
             .facebook5 {
@@ -1791,7 +1788,7 @@
       border-top: 1px solid #8790a1;
       line-height: 60px;
       font-size: 15px;
-      color: #8790a1;
+      color: #cccccc;
 
       .footer-info {
         width: 1200px;
@@ -1803,7 +1800,7 @@
           margin-right: 20px;
           text-align: left;
           line-height: 45px;
-          color: #8790a1;
+          color: #fff;
         }
 
         .info-img {
@@ -1820,10 +1817,6 @@
             &:nth-child(8),
             &:last-child {
               margin-right: 0;
-            }
-
-            img {
-              width: 85%;
             }
           }
         }

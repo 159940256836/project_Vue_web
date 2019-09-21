@@ -2034,8 +2034,10 @@ li {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+  overflow: hidden;
     .left{
         float:left;
+      margin-left: 5%;
         .text{
           font-size:32px;
           font-family:Microsoft YaHei;
@@ -2108,12 +2110,16 @@ li {
     .right{
         position: relative;
         top: 180px;
-        right: 160px;
         float:right;
+      img {
+        float: right;
+        width: 45%;
+        margin-right: 30%;
+      }
     }
 }
 #page5 {
-    width:1920px;
+    /*width:1920px;*/
     height:518px;
     background:rgba(246,248,249,1);
     margin-top:122px;
