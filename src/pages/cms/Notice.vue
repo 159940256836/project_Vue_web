@@ -41,10 +41,10 @@
 <style lang="scss" scoped>
 // lhl
 .notice .main .list .item[data-v-5cc99902]{
-    color:#fff !important;
+    color:#333 !important;
 }
 .announcement_notice{
-     background:#0e0e28;
+     background:#f4f6f8;
 }
 .notice {
     padding-top: 60px;
@@ -57,35 +57,29 @@
         // background: url("../../assets/images/notice.jpg");
          height:85px;
          width:1200px;
-        color: #fff;
         margin:0 auto;
         font-size:20px;
-        color:#fff;
-        background:#0e0e28;
+        color:#333;
+        background:#f4f6f8;
         span{
             margin-left:31px;
         }
-
     }
     .main {
         // 6.22修改
         // width: 70%;
         width:1200px;
         margin: 0 auto;
-        background-color: #fff;
+        background-color: #f4f6f8;
         color: #8090AFFF;
         // box-shadow: 0 0 2px #ccc;
-        background:#0e0e28;
         font-size:14px;
         // 6.22修改
         // margin-top: -50px;
         // border-radius: 6px;
-        margin-bottom: 50px;
-        padding-bottom: 159px;
         .list {
             font-size: 14px;
-             border:1px solid rgba(17,21,48,1);
-             background:rgba(17,21,48,1);
+             background:rgba(244,246,248,1);
             .item {
                 line-height: 50px;
                 // border-bottom: 1px solid #f0f0f0;
@@ -98,15 +92,15 @@
                 }
                 .time {
                     float: right;
-                    color: #999;
+                    color: #999999;
                     font-size: 14px;
                 }
             }
             .item:nth-child(2n-1){
-                background:#191d3a;
+                background:#fff;
             }
             .item:nth-child(2n){
-               background:#10122BFF;
+               background:rgba(244,246,248,1);
             }
         }
         .page {
@@ -187,7 +181,12 @@ export default {
 <style lang="scss">
 .ivu-page .ivu-page-item.ivu-page-item-active:hover {
     a {
-        color: #fff;
+        color: #333;
+    }
+}
+.ivu-page .ivu-page-item.ivu-page-item-active:active{
+    a {
+        color: #333;
     }
 }
 .ivu-page .ivu-page-item {
@@ -216,7 +215,7 @@ export default {
         background: transparent;
         border: 1px solid rgba(128,144,175,1);
         text-align:center;
-        color:#fff;
+        color:#333;
         width:38px;
         height:20px;
     }

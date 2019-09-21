@@ -973,6 +973,7 @@ export default {
             render: function(h, params) {
               let valus = null
               const len = params.row.trend.length
+              console.log(len, params.row)
               valus =
                                 len > 0
                                     ? params.row.trend
@@ -1411,24 +1412,27 @@ export default {
     tradeList(name) {
       this.activediv = name
       const data = this.coins[this.base]
+      this.dataIndex = []
       const indexdata = []
-      if (name == 1) {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].rose.indexOf('+') != -1) {
-            indexdata.push(data[i])
+      setTimeout(() => {
+        if (name == 1) {
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].rose.indexOf('+') != -1) {
+              indexdata.push(data[i])
+            }
           }
-        }
-        this.dataIndex = indexdata
-      } else if (name == 2) {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].rose.indexOf('-') != -1) {
-            indexdata.push(data[i])
+          this.dataIndex = indexdata
+        } else if (name == 2) {
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].rose.indexOf('-') != -1) {
+              indexdata.push(data[i])
+            }
           }
+          this.dataIndex = indexdata
+        } else {
+          this.dataIndex = data
         }
-        this.dataIndex = indexdata
-      } else {
-        this.dataIndex = data
-      }
+      }, 50)
     },
     startWebsock() {
       var stompClient = null
@@ -1496,66 +1500,69 @@ export default {
       window.indexBtnBC = ''
       this.choseBtn = index
       this.dataIndex = []
-      this.startWebsockHotlist()
-      console.log(this.coins)
-      if (this.activediv != 1 && this.activediv != 2) {
-        if (index == 0) {
-          this.indexBtnBC = this.indexBtn[3].text
-          window.indexBtnBC = this.indexBtnBC
-          this.dataIndex = this.coins.BC
-          this.base = 'BC'
-        } else if (index == 1) {
-          this.dataIndex = this.coins.TD
-          this.base = 'TD'
-        } else if (index == 2) {
-          this.dataIndex = this.coins.USDT
-          this.base = 'USDT'
-        } else if (index == 3) {
-          this.dataIndex = this.coins.BTC
-          this.base = 'BTC'
-        } else if (index == 4) {
-          this.dataIndex = this.coins.favor
-          this.base = 'favor'
+      this.loading = true
+      // console.log(this.coins)
+      setTimeout(() => {
+        if (this.activediv != 1 && this.activediv != 2) {
+          if (index == 0) {
+            this.indexBtnBC = this.indexBtn[3].text
+            window.indexBtnBC = this.indexBtnBC
+            this.dataIndex = this.coins.BC
+            this.base = 'BC'
+          } else if (index == 1) {
+            this.dataIndex = this.coins.TD
+            this.base = 'TD'
+          } else if (index == 2) {
+            this.dataIndex = this.coins.USDT
+            this.base = 'USDT'
+          } else if (index == 3) {
+            this.dataIndex = this.coins.BTC
+            this.base = 'BTC'
+          } else if (index == 4) {
+            this.dataIndex = this.coins.favor
+            this.base = 'favor'
+          }
+        } else if (this.activediv == 1) {
+          if (index == 0) {
+            this.indexBtnBC = this.indexBtn[3].text
+            window.indexBtnBC = this.indexBtnBC
+            this.base = 'BC'
+            this.tradeList(1)
+          } else if (index == 1) {
+            this.base = 'TD'
+            this.tradeList(1)
+          } else if (index == 2) {
+            this.base = 'USDT'
+            this.tradeList(1)
+          } else if (index == 3) {
+            this.base = 'BTC'
+            this.tradeList(1)
+          } else if (index == 4) {
+            this.base = 'favor'
+            this.tradeList(1)
+          }
+        } else {
+          if (index == 0) {
+            this.indexBtnBC = this.indexBtn[3].text
+            window.indexBtnBC = this.indexBtnBC
+            this.base = 'BC'
+            this.tradeList(2)
+          } else if (index == 1) {
+            this.base = 'TD'
+            this.tradeList(2)
+          } else if (index == 2) {
+            this.base = 'USDT'
+            this.tradeList(2)
+          } else if (index == 3) {
+            this.base = 'BTC'
+            this.tradeList(2)
+          } else if (index == 4) {
+            this.base = 'favor'
+            this.tradeList(2)
+          }
         }
-      } else if (this.activediv == 1) {
-        if (index == 0) {
-          this.indexBtnBC = this.indexBtn[3].text
-          window.indexBtnBC = this.indexBtnBC
-          this.base = 'BC'
-          this.tradeList(1)
-        } else if (index == 1) {
-          this.base = 'TD'
-          this.tradeList(1)
-        } else if (index == 2) {
-          this.base = 'USDT'
-          this.tradeList(1)
-        } else if (index == 3) {
-          this.base = 'BTC'
-          this.tradeList(1)
-        } else if (index == 4) {
-          this.base = 'favor'
-          this.tradeList(1)
-        }
-      } else {
-        if (index == 0) {
-          this.indexBtnBC = this.indexBtn[3].text
-          window.indexBtnBC = this.indexBtnBC
-          this.base = 'BC'
-          this.tradeList(2)
-        } else if (index == 1) {
-          this.base = 'TD'
-          this.tradeList(2)
-        } else if (index == 2) {
-          this.base = 'USDT'
-          this.tradeList(2)
-        } else if (index == 3) {
-          this.base = 'BTC'
-          this.tradeList(2)
-        } else if (index == 4) {
-          this.base = 'favor'
-          this.tradeList(2)
-        }
-      }
+        this.loading = false
+      }, 50)
     },
     getSymbol() {
       this.loading = true
