@@ -116,8 +116,8 @@
                                         • {{$t('uc.finance.recharge.msg1')}} {{ coinType? coinType: '当前' }}
                                         {{$t('uc.finance.recharge.msg11')}} {{ coinType }} {{$t('uc.finance.recharge.msg12')}}<br>
                                         • {{$t('uc.finance.recharge.msg2')}}<br>
-                                        • <span style="color: #3399ff" v-if="linkStyle == 'ERCUSDT'">{{$t('uc.finance.recharge.msg3')}}{{ linkFee?linkFee:'0' }}，{{$t('uc.finance.recharge.msg31')}}<br></span>
-                                        <span style="color: #3399ff" v-if="linkStyle == 'USDT'">{{$t('uc.finance.recharge.msg3')}}{{ coinTypeFee?coinTypeFee:'0' }}，{{$t('uc.finance.recharge.msg31')}}<br></span>
+                                        • <span style="color: #FE5C5C" v-if="linkStyle == 'ERCUSDT'">{{$t('uc.finance.recharge.msg3')}}{{ linkFee?linkFee:'0' }}，{{$t('uc.finance.recharge.msg31')}}<br></span>
+                                        <span style="color: #FE5C5C" v-if="linkStyle == 'USDT'">{{$t('uc.finance.recharge.msg3')}}{{ coinTypeFee?coinTypeFee:'0' }}，{{$t('uc.finance.recharge.msg31')}}<br></span>
                                         • {{$t('uc.finance.recharge.msg4')}}<br>
                                         • {{$t('uc.finance.recharge.msg5')}}
                                     </p>
@@ -525,7 +525,7 @@
             border-radius: 3px;
 
             .action-main {
-                background: #111530;
+                background: #fff;
                 min-height: 320px;
                 padding: 0 25px 25px;
 
@@ -533,7 +533,7 @@
                     width: 100%;
                     height: 80px;
                     /*display: table;*/
-                    border-bottom: 1px solid #2A3850;
+                    border-bottom: 1px solid #eeeeee;
                     padding: 12px 0;
 
                     .inner-box.deposit-address {
@@ -583,7 +583,7 @@
 
                             .copy-add {
                                 width: 95px;
-                                border: 1px solid #58698A;
+                                border: 1px solid #DDDDDD;
                                 border-left: 0;
                                 text-align: center;
                                 position: relative;
@@ -591,7 +591,7 @@
                                 line-height: 30px;
                                 display: inline-block;
                                 font-size: 14px;
-                                color: #3399ff;
+                                color: #FE5C5C;
                                 cursor: pointer;
                             }
 
@@ -619,7 +619,7 @@
         }
 
         .acb-p2 {
-            color: #8090AF;
+            color: #666666;
             font-size: 14px;
             line-height: 30px;
         }
@@ -690,7 +690,7 @@
         /*    width: 80%;*/
         /*}*/
         span.describe {
-            color: #8090AF;
+            color: #333;
             font-size: 14px;
         }
 
@@ -755,7 +755,7 @@
 </style>
 <style lang="scss">
     .ivu-modal-content {
-        background: #111530;
+        background: #fff;
     }
 
     .ivu-modal-header {
@@ -771,6 +771,9 @@
     }
 
     .nav-recharge {
+        .ivu-select-single .ivu-select-selection .ivu-select-placeholder {
+            color: #333333;
+        }
         .ivu-btn-success {
             padding: 0;
         }
@@ -793,7 +796,7 @@
         }
 
         .ivu-modal-content {
-            background: #111530;
+            background: #fff;
         }
 
         .ivu-modal-footer {
@@ -805,7 +808,7 @@
                 .ivu-table {
                     .ivu-table-row {
                         &:hover {
-                            background: #111530;
+                            background: #fff;
                         }
 
                         td {
@@ -819,8 +822,8 @@
                     .ivu-table-header {
                         th {
                             border-bottom: 0 !important;
-                            background: #191D3A;
-                            color: #8090AF;
+                            background: #fff;
+                            color: #666;
                         }
                     }
                 }
@@ -831,7 +834,7 @@
             width: 130px;
             height: 32px;
             background: transparent;
-            border: 1px solid rgba(88, 105, 138, 1);
+            border: 1px solid #DDDDDD;
             border-radius: 0;
         }
 
@@ -842,8 +845,8 @@
         .ivu-select-dropdown {
             .ivu-select-item {
                 &:hover {
-                    background: #0e0e28;
-                    color: #3399ff;
+                    background: #fff;
+                    color: #FE5C5C;
                 }
             }
         }
@@ -858,7 +861,7 @@
         }
 
         .ivu-select-selected-value {
-            color: #8090AF;
+            color: #333;
         }
 
         .ivu-select-dropdown {
@@ -900,7 +903,7 @@
                     height: 50px;
                     background: #191D3A;
                     border-bottom: 0 !important;
-                    color: #8090AF;
+                    color: #333;
 
                     &:first-child {
                         text-align: left;
@@ -917,46 +920,41 @@
             .ivu-table-tip {
                 td {
                     text-align: center;
-                    background: #111530;
+                    background: #fff;
                 }
             }
         }
 
         .ivu-input {
             height: 32px;
-            border: 1px solid #58698A;
+            border: 1px solid #DDDDDD;
             background: transparent;
             border-radius: 0;
             color: #8090af;
         }
 
         #record_pages li.ivu-page-item.ivu-page-item-active {
-            background-color: #111530;
-            border-color: #191f44;
-
+            background-color: #fff;
+            border-color: #DDDDDD;
             a {
-                color: #3399ff;
+                color: #999999;
             }
         }
-
         #record_pages li.ivu-page-item.ivu-page-item-active {
             &:hover {
-                background-color: #111530;
-
+                background-color: #fff;
                 a {
-                    color: #3399ff;
+                    color: #FE5C5C;
                 }
             }
         }
-
         .ivu-page-item {
-            background: #111530;
-            color: #8090AF;
-            border: 1px solid #191f44;
+            background: #f4f6f8;
+            color: #333;
+            border: 1px solid #DDDDDD;
         }
-
         .ivu-page-item:hover {
-            color: #3399ff;
+            color: #FE5C5C;
         }
     }
 

@@ -329,35 +329,26 @@ Datafeeds.UDFCompatibleDatafeed.prototype.getBars = function(symbolInfo, resolut
     resolution: resolution,
     from: rangeStartDate,
     to: rangeEndDate
-  })
-        .done(function(response) {
+  }).done(function(response) {
           var data = parseJSONorNot(response)
-
           var nodata = data.s === 'no_data'
-
           if (data.s !== 'ok' && !nodata) {
             if (onErrorCallback) {
               onErrorCallback(data.s)
             }
-
             return
           }
-
           var bars = []
-
             //	data is JSON having format {s: "status" (ok, no_data, error),
             //  v: [volumes], t: [times], o: [opens], h: [highs], l: [lows], c:[closes], nb: "optional_unixtime_if_no_data"}
           var barsCount = nodata ? 0 : data.t.length
-
           var volumePresent = typeof data.v !== 'undefined'
           var ohlPresent = typeof data.o !== 'undefined'
-
           for (var i = 0; i < barsCount; ++i) {
             var barValue = {
               time: data.t[i] * 1000,
               close: +data.c[i]
             }
-
             if (ohlPresent) {
               barValue.open = +data.o[i]
               barValue.high = +data.h[i]
@@ -365,14 +356,11 @@ Datafeeds.UDFCompatibleDatafeed.prototype.getBars = function(symbolInfo, resolut
             } else {
               barValue.open = barValue.high = barValue.low = +barValue.close
             }
-
             if (volumePresent) {
               barValue.volume = +data.v[i]
             }
-
             bars.push(barValue)
           }
-
           onDataCallback(bars, { noData: nodata, nextTime: data.nb || data.nextTime })
         })
         .fail(function(arg) {

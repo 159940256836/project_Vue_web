@@ -15,30 +15,29 @@
             <span @click="changeBaseCion('usdt')" :class="{active:basecion==='usdt'}">USDT</span>
             <span @click="changeBaseCion('btc')" :class="{active:basecion==='btc'}">BTC</span>
             <!--<span @click="changeBaseCion('eth')" :class="{active:basecion==='eth'}">ETH</span>-->
-
             <span v-show="isLogin" @click="changeBaseCion('favor')" :class="{active:basecion==='favor'}">{{$t('coin.option')}}</span>
             <!-- <span :class="{active:basecion==='favor'}">自选</span> -->
             <!-- <Icon style="line-height:32px;" type="android-star"></Icon> -->
           </div>
           <Table
-                  :no-data-text="$t('common.nodata')"
-                  @on-current-change="gohref"
-                  highlight-row
-                  height="407"
-                  id="USDT"
-                  v-show="basecion==='usdt'"
-                  :columns="coins.columns"
-                  :data="coins.USDT"
+            :no-data-text="$t('common.nodata')"
+            @on-current-change="gohref"
+            highlight-row
+            height="407"
+            id="USDT"
+            v-show="basecion==='usdt'"
+            :columns="coins.columns"
+            :data="coins.USDT"
           ></Table>
           <Table
-                  :no-data-text="$t('common.nodata')"
-                  @on-current-change="gohref"
-                  highlight-row
-                  height="407"
-                  id="BTC"
-                  v-show="basecion==='btc'"
-                  :columns="coins.columns"
-                  :data="coins.BTC"
+            :no-data-text="$t('common.nodata')"
+            @on-current-change="gohref"
+            highlight-row
+            height="407"
+            id="BTC"
+            v-show="basecion==='btc'"
+            :columns="coins.columns"
+            :data="coins.BTC"
           ></Table>
           <!--<Table
                   :no-data-text="$t('common.nodata')"
@@ -51,34 +50,34 @@
                   :data="coins.ETH"
           ></Table>-->
           <Table
-                  :no-data-text="$t('common.nodata')"
-                  @on-current-change="gohref"
-                  highlight-row
-                  height="407"
-                  id="TD"
-                  v-show="basecion==='td'"
-                  :columns="coins.columns"
-                  :data="coins.TD"
+            :no-data-text="$t('common.nodata')"
+            @on-current-change="gohref"
+            highlight-row
+            height="407"
+            id="TD"
+            v-show="basecion==='td'"
+            :columns="coins.columns"
+            :data="coins.TD"
           ></Table>
           <Table
-                  :no-data-text="$t('common.nodata')"
-                  @on-current-change="gohref"
-                  highlight-row
-                  height="407"
-                  id="BC"
-                  v-show="basecion==='bc'"
-                  :columns="coins.columns"
-                  :data="coins.BC"
+            :no-data-text="$t('common.nodata')"
+            @on-current-change="gohref"
+            highlight-row
+            height="407"
+            id="BC"
+            v-show="basecion==='bc'"
+            :columns="coins.columns"
+            :data="coins.BC"
           ></Table>
           <Table
-                  @on-current-change="gohref"
-                  highlight-row
-                  height="407"
-                  v-show="basecion==='favor'"
-                  :no-data-text="$t('common.nodata')"
-                  id="collect"
-                  :columns="favorColumns"
-                  :data="coins.favor"
+            @on-current-change="gohref"
+            highlight-row
+            height="407"
+            v-show="basecion==='favor'"
+            :no-data-text="$t('common.nodata')"
+            id="collect"
+            :columns="favorColumns"
+            :data="coins.favor"
           ></Table>
         </div>
         <div class="trade-wrap">
@@ -87,10 +86,10 @@
             {{ $t('exchange.recent_deal') }}
           </div>
           <Table
-                  :no-data-text="$t('common.nodata')"
-                  height="443"
-                  :columns="trade.columns"
-                  :data="trade.rows"
+            :no-data-text="$t('common.nodata')"
+            height="443"
+            :columns="trade.columns"
+            :data="trade.rows"
           ></Table>
         </div>
       </div>
@@ -686,7 +685,7 @@
   .exchange {
     width: 100%;
     color: #fff;
-    background-color: #191d3a;
+    background-color: #1f2a34;
     // height: calc(100vh - 402px);
     .main {
       display: flex;
@@ -703,7 +702,7 @@
           height: 50px;
           line-height: 30px;
           padding: 10px 0;
-          background-color: #13152F;
+          background-color: #0A1928;
 
           .handler {
             display: inline-block;
@@ -903,7 +902,7 @@
 
         .coin-menu {
           height: 540px;
-          background-color: #0E0E28;
+          background-color: #141F2B;
           margin-bottom: 10px;
           overflow: hidden;
           /*border-radius: 6px;*/
@@ -915,7 +914,7 @@
       height: 50px;
       line-height: 50px;
       padding: 0 20px;
-      background: #13152F;
+      background: #0A1928;
       display: flex;
       /*margin-bottom: 20px;*/
       align-items: center;
@@ -985,7 +984,7 @@
       margin-top: 20px;
 
       .order-handler {
-        background: #13152F;
+        background: #0A1928;
         height: 50px;
         line-height: 50px;
         font-size: 0;
@@ -1302,17 +1301,12 @@
             className: 'coin-menu-symbol',
             render: (h, params) => {
               return h('div', [
-                h('Icon', {
+                h('icon', {
                   props: {
-                    color: '#3399ff',
+                    color: params.row.isFavor? '#FE5C5C':'#CCCCCC',
                     size: '18',
-                    type: params.row.isFavor
-                        ? 'ios-star'
-                        : 'ios-star-outline'
-                    // type: params.row.isFavor
-                    //                       ? 'android-star'
-                    //                       : 'android-star-outline'
                   },
+                  class: 'iconfont iconchangyongtubiao-mianxing--copy',
                   nativeOn: {
                     click: () => {
                       event.stopPropagation() // 阻止事件冒泡
@@ -1335,12 +1329,8 @@
                       if (this.isLogin) {
                         if (params.row.isFavor) {
                           this.cancelCollect(params.index, params.row)
-                          // event.currentTarget.className ==
-                          //                               'ivu-icon ivu-icon-android-star-outline'
                         } else {
                           this.collect(params.index, params.row)
-                          // event.currentTarget.className =
-                          //                               'ivu-icon ivu-icon-android-star'
                         }
                       } else {
                         this.$Message.warning(this.$t('common.logintip'))
@@ -1398,9 +1388,9 @@
         // 当前市场上的交易币种，按交易对分
         coins: {
           _map: [],
-          USDT: [],
           BTC: [],
           /*ETH: [],*/
+          USDT: [],
           TD: [],
           BC: [],
           favor: [],
@@ -1412,14 +1402,12 @@
               className: 'coin-menu-symbol',
               render: (h, params) => {
                 return h('div', [
-                  h('Icon', {
+                  h('icon', {
                     props: {
-                      color: '#3399ff',
+                      color: params.row.isFavor? '#FE5C5C':'#CCCCCC',
                       size: '18',
-                      type: params.row.isFavor
-                          ? 'ios-star'
-                          : 'ios-star-outline'
                     },
+                    class: 'iconfont iconchangyongtubiao-mianxing--copy',
                     nativeOn: {
                       click: () => {
                         event.stopPropagation() // 阻止事件冒泡

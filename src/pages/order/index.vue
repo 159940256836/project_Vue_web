@@ -64,7 +64,7 @@ export default {
 <style scoped>
 .box-wrap {
     padding-top: 60px;
-    background: #0e0e28;
+    background: #fff;
 }
 
 .box {
@@ -90,21 +90,21 @@ export default {
 .box {
   .ivu-tabs-bar {
       border-color: transparent;
-      background: #111530;
+      background: #f4f6f8;
       margin-bottom: 22px;
       padding-left: 28px;
   }
   .ivu-tabs-nav .ivu-tabs-tab {
-    color: #fff;
+    color: #333;
     height: 65px;
     line-height: 65px;
     padding: 0;
   }
   .ivu-tabs-nav .ivu-tabs-tab:hover {
-    color: #3399FF;
+    color: #FE5C5C;
   }
   .ivu-tabs-nav .ivu-tabs-tab-active {
-    color: #3399FF;
+    color: #FE5C5C;
   }
 }
 
@@ -114,7 +114,7 @@ export default {
   }
   .ivu-tabs-tab-active,
   .ivu-tabs-tab-focused {
-    border-bottom: 3px solid #3399FF;
+    border-bottom: 3px solid #FE5C5C;
   }
   .ivu-tabs-tab {
     margin-right: 47px !important;

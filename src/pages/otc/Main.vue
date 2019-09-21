@@ -182,23 +182,25 @@
 <style scoped lang="scss">
 .content-wraps {
   .addclass1 {
+    font-weight: 600;
     height: 35px;
-    border-bottom: 2px solid #3399ff !important;
-    color: #3399ff !important;
+    border-bottom: 2px solid #D5382B !important;
+    color: #D5382B !important;
   }
   .containers {
     width: 100%;
 
     /*margin: 20px 0;*/
     .fiat-login {
-      background: #0e0e28;
+      background: #fff;
       padding-top: 70px;
       .fiat-login-main {
         width: 1200px;
         height: 180px;
-        background: #111530;
         margin: 0 auto;
         display: flex;
+        border:1px solid rgba(238,238,238,1);
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
         .fiat-login-title {
           &:first-child {
             padding: 0;
@@ -217,19 +219,19 @@
             /*定义滚动条轨道 内阴影+圆角*/
             &::-webkit-scrollbar-track {
               border-radius: 0;  /*滚动条的背景区域的圆角*/
-              background-color: #131738;/*滚动条的背景颜色*/
+              background-color: #EEEEEE;/*滚动条的背景颜色*/
             }
 
             /*定义滑块 内阴影+圆角*/
             &::-webkit-scrollbar-thumb {
               border-radius: 0;  /*滚动条的圆角*/
-              background-color: #21254D;  /*滚动条的背景颜色*/
+              background-color: #DDDDDD;  /*滚动条的背景颜色*/
             }
             ul {
               padding: 25px 0;
               .addclass {
-                background: #191D3A;
-                color: #8090AF;
+                background: rgba(244,246,248,1);
+                color: #333;
               }
               li {
                 height: 40px;
@@ -245,8 +247,8 @@
                   text-align: right;
                 }
                 &:hover {
-                  background: #191D3A;
-                  color: #8090AF;
+                  background: rgba(244,246,248,1);
+                  color: #333;
                 }
               }
             }
@@ -264,22 +266,22 @@
             margin-top: 10px;
             button {
               cursor: pointer;
-              color: #fff;
+              color: #333;
               width: 100px;
               min-height: 32px;
-              background: transparent;
-              border: 1px solid #282F4C;
+              background: #fff;
+              border: 1px solid #DDDDDD;
             }
           }
           .fiat-title-info {
             margin-top: 10px;
             button {
               cursor: pointer;
-              color: #fff;
+              color: #333;
               width: 100px;
               height: 32px;
-              background: #5E6B89;
-              border: 0;
+              background: #fff;
+              border: 1px solid #DDDDDD;
               outline:none;
             }
           }
@@ -288,7 +290,7 @@
           }
           p {
             height: 62px;
-            color: #8090AF;
+            color: #333;
             span {
               width: 100%;
               display: inline-block;
@@ -339,7 +341,7 @@
   }
   }
   .main-box {
-    background: #0e0e28;
+    background: #fff;
     .fiat-main {
       width: 1200px;
       margin: 0 auto;
@@ -354,7 +356,8 @@
           height: 60px;
           line-height: 60px;
           font-size: 20px;
-          color: #fff;
+          color: #333;
+          font-weight: 600;
         }
         ul {
           display: flex;
@@ -379,13 +382,13 @@
             div.title {
               line-height: 30px;
               font-size: 16px;
-              color: #fff;
+              color: #000;
             }
             div.content1 {
               padding: 20px 40px;
               line-height: 20px;
               font-size: 12px;
-              color: #8090AF;
+              color: #666;
             }
           }
         }
@@ -406,19 +409,20 @@
       }
       .ivu-tabs-nav-scroll {
         height: 55px;
-        background: #191D3A;
+        background: #F4F6F8;
         padding: 0 24px;
       }
       .ivu-menu-light {
         width: 100%;
         height: 55px;
-        background: #191D3A;
+        background: #F4F6F8;
         position: absolute;
         top: 74px;
       }
       .ivu-tabs-nav .ivu-tabs-tab {
         line-height: 38px;
-        color: #fff;
+        font-weight: 600;
+        color: #333;
       }
       .ivu-menu-horizontal .ivu-menu-item {
         margin: 0 0px 0 22px;
@@ -432,9 +436,10 @@
           li.ivu-menu-item {
             height: 35px;
             border: none;
-            color: #fff;
+            color: #333;
+            font-weight: 600;
             &:hover {
-              color: #3399ff;
+              color: #D5382B;
             }
           }
           /*li.ivu-menu-item {*/
@@ -444,14 +449,14 @@
           /*  }*/
           /*}*/
           li.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
-            color: #3399ff;
-            border-bottom: 2px solid #3399ff;
+            color: #D5382B;
+            border-bottom: 2px solid #D5382B;
             height: 35px;
           }
         }
       }
       .ivu-table-large td {
-        background: #10122B;
+        background: #F4F6F8;
         height: 50px;
       }
       .ivu-table td, .ivu-table th {

@@ -368,22 +368,22 @@
         }
       }
 
-      .ivu-btn-default {
-        background: #111530 !important;
-        border: 1px solid #8090AF !important;
-        color: #8090AF !important;
+      /*.ivu-btn-default {*/
+      /*  background: #111530 !important;*/
+      /*  border: 1px solid #8090AF !important;*/
+      /*  color: #8090AF !important;*/
 
-        &:hover {
-          background: #111530;
-        }
-      }
+      /*  &:hover {*/
+      /*    background: #111530;*/
+      /*  }*/
+      /*}*/
 
       .ivu-tabs-bar {
         margin-bottom: 0;
       }
 
       .ivu-tabs-nav .ivu-tabs-tab-active {
-        color: #2d8cf0 !important;
+        color: #FE5C5C !important;
       }
 
       .rightarea.bill_box {
@@ -482,6 +482,7 @@
       }
 
       .ivu-switch-checked {
+        background: #FE5C5C;
         &:after {
           left: 15px;
         }
@@ -505,12 +506,13 @@
     .ivu-table {
       .ivu-table-tip {
         td {
+          background: #fff;
           text-align: center !important;
         }
       }
 
       td {
-        background: #111530;
+        background: #f4f6f8;
 
         &:first-child {
           text-align: left;
@@ -526,9 +528,9 @@
       .ivu-table-header {
         th {
           height: 50px;
-          background: #191D3A;
+          background: #fff;
           border-bottom: 0 !important;
-          color: #8090AF;
+          color: #666666;
 
           &:first-child {
             text-align: left;
@@ -558,34 +560,34 @@
     }
 
     .ivu-input-group-append {
-      background: #111530;
+      background: #fff;
       border-radius: 0;
-      border: 1px solid #8090AF;
+      border: 1px solid #DDDDDD;
     }
 
     .ivu-modal-content {
-      background: #111530;
+      background: #fff;
 
       .ivu-modal-header {
-        border-bottom: 1px solid #8090AF;
+        border-bottom: 1px solid #333;
 
         .ivu-modal-header-inner {
-          color: #8090AF;
+          color: #666666;
         }
       }
 
       .ivu-input-wrapper {
         .ivu-input[disabled] {
           border-radius: 0;
-          background: #111530;
-          border: 1px solid #58698A;
+          background: #fff;
+          border: 1px solid #DDDDDD;
         }
       }
 
       .ivu-input-group {
         .ivu-input {
-          background: #111530;
-          border: 1px solid #58698A;
+          background: #fff;
+          border: 1px solid #DDDDDD;
           border-radius: 0;
         }
       }

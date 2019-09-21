@@ -1,214 +1,217 @@
 .exchange {
-    width: 100%;
-    height: 100%;
-    padding: 60px 10px;
+  width: 100%;
+  height: 100%;
+  padding: 60px 10px;
 }
 
 .sidebar {
-    width: 22%;
-    float: left;
-    background: #18202A;
-    padding-bottom: 10px;
+  width: 22%;
+  float: left;
+  background: #18202A;
+  padding-bottom: 10px;
 }
 
 .sc {
-    padding: 16px 8%;
-    height: 50px;
+  padding: 16px 8%;
+  height: 50px;
 }
 
 .sc_thead span {
-    display: inline-block;
-    height: 27px;
-    line-height: 27px;
-    margin-right: 16%;
-    position: relative;
-    cursor: pointer;
+  display: inline-block;
+  height: 27px;
+  line-height: 27px;
+  margin-right: 16%;
+  position: relative;
+  cursor: pointer;
 }
 
 .sc_thead i {
-    position: absolute;
+  position: absolute;
 }
 
 .ivu-icon-arrow-up-b {
-    top: 5px;
+  top: 5px;
 }
 
 .sc_thead {
-    font-size: 9px;
-    padding: 0 7%;
+  font-size: 9px;
+  padding: 0 7%;
 }
 
 .sidebar .ivu-table-body tr:hover {
-    background: #262A42;
-    cursor: pointer;
+  background: #262A42;
+  cursor: pointer;
 }
 
 .sc_filter {
-    /* padding: 0 7%; */
-    font-size: 0;
-    /*background-color: #13152F;*/
+  /* padding: 0 7%; */
+  font-size: 0;
+  /*background-color: #13152F;*/
 }
 
 .day .sc_filter {
-    background-color: #fff;
-    margin-right: -2px;
+  background-color: #fff;
+  margin-right: -2px;
 }
+
 /*6.20杨孝喜 开始*/
 .bazaar-info,
 .recent-deal {
-    height: 50px;
-    line-height: 50px;
-    padding-left: 22px;
-    background: #13152F;
-    font-weight: 600;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 22px;
+  background: #0A1928;
+  font-weight: 600;
 }
 
 .exchange.day .bazaar-info,
-.exchange.day .recent-deal{
-    height: 50px;
-    line-height: 50px;
-    padding-left: 22px;
-    background: #fff;
-    font-weight: 600;
+.exchange.day .recent-deal {
+  height: 50px;
+  line-height: 50px;
+  padding-left: 22px;
+  background: #fff;
+  font-weight: 600;
 }
 
 .handicap {
-    font-weight: 600;
-    display: inline-block;
-    padding-left: 23px;
-    float: left;
+  font-weight: 600;
+  display: inline-block;
+  padding-left: 23px;
+  float: left;
 }
+
 /*6.20杨孝喜 结束*/
 .sc_filter span {
-    margin-right: 20px;
-    font-size: 14px;
-    display: inline-block;
-    color: #8090AF;
-    cursor: pointer;
-    line-height: 40px;
-    background-color: #0E0E28;
+  margin-right: 20px;
+  font-size: 14px;
+  display: inline-block;
+  color: #EEEEEE;
+  cursor: pointer;
+  line-height: 40px;
+  background-color: #141F2B;
 }
+
 .sc_filter span:first-child {
-    margin-left: 22px;
+  margin-left: 22px;
 }
+
 .day .sc_filter span {
-    color: #333;
-    background-color: #fafafa;
-    /*box-shadow: 0 0 2px #ccc;*/
-    border-bottom: 2px solid transparent;
+  color: #333;
+  background-color: #fafafa;
+  /*box-shadow: 0 0 2px #ccc;*/
+  border-bottom: 2px solid transparent;
 }
 
-.sc_filter>span:first-child {
-    border-top-left-radius: 6px;
+.sc_filter > span:first-child {
+  border-top-left-radius: 6px;
 }
 
-.sc_filter>span:last-child {
-    float: right;
-    margin-right: 10px;
-    border-top-right-radius: 6px;
+.sc_filter > span:last-child {
+  float: right;
+  margin-right: 10px;
+  border-top-right-radius: 6px;
 }
 
 .sc_filter span.active,
 .sc_filter i.active {
-    border-bottom: 2px solid #3399FF;
-    /*background-color: #13152F;*/
-    /*color: #3399ff;*/
+  border-bottom: 2px solid #FE5C5C;
+  color: #FE5C5C;
 }
 
 .day .sc_filter span.active,
 .day .sc_filter i.active {
-    background-color: #fff;
-    /* border-right: 1px solid #ccc; */
-    color: #3399ff;
+  background-color: #fff;
+  /* border-right: 1px solid #ccc; */
+  color: #FE5C5C;
 }
 
 .coin-menu .ivu-table td.coin-menu-symbol {
-    text-align: left;
-    padding-left: 25px;
+  text-align: left;
+  padding-left: 25px;
 }
 
-.coin-menu .coin-menu-symbol .ivu-icon {
-    color: #3399ff;
-    margin-right: 5px;
-    position: relative;
-    top: -2px;
+.coin-menu .coin-menu-symbol .iconfont {
+  color: #cccccc;
+  margin-right: 5px;
+  position: relative;
+  top: -2px;
 }
 
 .ivu-icon {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .sc_filter span {
-    /* margin-right: 16%; */
+  /* margin-right: 16%; */
 }
 
 .sc_table th {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .sc_table .ivu-table-body tr:hover {
-    background: #262A42;
-    cursor: pointer;
+  background: #262A42;
+  cursor: pointer;
 }
 
 span.price {
-    margin: 0;
+  margin: 0;
 }
 
 .buy {
-    color: #00b275 !important;
+  color: #00b275 !important;
 }
 
 .sell {
-    color: #f15057 !important;
+  color: #f15057 !important;
 }
 
 .kline {
-    float: right;
-    width: 77%;
-    overflow: hidden;
-    margin-bottom: 100px;
+  float: right;
+  width: 77%;
+  overflow: hidden;
+  margin-bottom: 100px;
 }
 
 #chart_parameter_settings {
-    right: 0 !important;
+  right: 0 !important;
 }
 
 #kline_container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    margin-bottom: 20px;
-    overflow: hidden;
-    height: 490px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 20px;
+  overflow: hidden;
+  height: 490px;
 }
 
 #kline_container.hidden,
 #depth_chart.hidden {
-    z-index: -100;
+  z-index: -100;
 }
 
 #depth_chart {
-    position: absolute!important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 480px;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 480px;
 }
 
 .trade_container dark hide {
-    display: none;
+  display: none;
 }
 
 .trade_panel {
-    float: left;
-    width: 100%;
-    background: #0E0E28;
+  float: left;
+  width: 100%;
+  background: #0E0E28;
 }
 
 .day .trade_panel {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .sc,
@@ -217,246 +220,257 @@ span.price {
 .order_book_hd,
 .open_orders_hd,
 .deal_record_hd {
-    padding: 0 30px;
-    height: 50px;
-    line-height: 48px;
-    background: #1B1E2E;
-    font-size: 16px;
+  padding: 0 30px;
+  height: 50px;
+  line-height: 48px;
+  background: #1B1E2E;
+  font-size: 16px;
 }
 
 .trade_hd ul li {
-    float: left;
-    margin-right: 40px;
-    cursor: pointer;
+  float: left;
+  margin-right: 40px;
+  cursor: pointer;
 }
+
 ul li {
-    list-style-type: none;
+  list-style-type: none;
 }
+
 .trade_hd .feesRate {
-    float: right;
+  float: right;
 }
 
 .trade_bd {
-    padding: 25px 40px 78px;
-    overflow: hidden;
+  padding: 25px 40px 78px;
+  overflow: hidden;
 }
 
 .trade_bd .panel {
-    position: relative;
-    z-index: 2;
-    float: left;
-    width: 45%;
-    height: 340px;
-    margin-top: 0;
-    margin-right: 0;
-    border: 0 solid transparent;
-    padding-top: 10px;
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 45%;
+  height: 340px;
+  margin-top: 0;
+  margin-right: 0;
+  border: 0 solid transparent;
+  padding-top: 10px;
 }
 
 .mod_tab li.active {
-    border-bottom: 1px solid #7A98F7;
-    color: #7A98F7;
+  border-bottom: 1px solid #7A98F7;
+  color: #7A98F7;
 }
 
 .trade_panel .panel .hd {
-    color: #8090AF;
-    line-height: 50px;
-    height: 50px;
-    margin-right: 10px;
-    border-bottom: 1px solid #1F2943;
+  color: #8090AF;
+  line-height: 50px;
+  height: 50px;
+  margin-right: 10px;
+  border-bottom: 1px solid #1F2943;
 }
 
 .trade_panel .panel .hd span {
-    padding-left: 0;
-    font-size: 14px;
+  padding-left: 0;
+  font-size: 14px;
 }
 
 .trade_panel .panel .hd b {
-    padding-left: 0;
-    font-size: 14px;
-    color: #8090AF;
+  padding-left: 0;
+  font-size: 14px;
+  color: #8090AF;
 }
 
 .trade_panel .panel .hd.hd_login a {
-    float: right;
-    text-decoration: none;
+  float: right;
+  text-decoration: none;
 }
 
 .trade_panel .panel.panel_buy {
-    padding-right: 15px;
+  padding-right: 15px;
 }
 
 .trade_panel .border-height {
-    display: inline-block;
-    height: 220px;
-    width: 1px;
-    background: #2A3850;
-    margin: 65px 0 0 45px;
+  display: inline-block;
+  height: 220px;
+  width: 1px;
+  background: #2A3850;
+  margin: 65px 0 0 45px;
 }
 
 .exchange.day .trade_panel .border-height {
-    display: inline-block;
-    height: 220px;
-    width: 1px;
-    background: #f0f0f0;
-    margin: 65px 0 0 45px;
+  display: inline-block;
+  height: 220px;
+  width: 1px;
+  background: #f0f0f0;
+  margin: 65px 0 0 45px;
 }
 
 .trade_panel .panel.panel_sell {
-    padding-left: 15px;
-    float: right;
+  padding-left: 15px;
+  float: right;
 }
 
 .trade_wrap .ivu-input {
-    background: transparent;
-    border: 1px solid #2A3850;
-    color: #8090af;
-    height: 40px;
-    text-indent: 20px;
-    border-radius: 0;
+  background: transparent;
+  border: 1px solid #2A3850;
+  color: #8090af;
+  height: 40px;
+  text-indent: 20px;
+  border-radius: 0;
 }
 
 .trade_wrap .ivu-input-wrapper {
-    outline: none;
+  outline: none;
 }
 
 .trade_wrap .ivu-input:focus,
 .trade_wrap .ivu-input:hover {
-    box-shadow: none;
-    border-color: rgba(69, 83, 112, .8);
-    outline: none;
+  box-shadow: none;
+  border-color: rgba(69, 83, 112, .8);
+  outline: none;
 }
 
 .order .ivu-table-wrapper .ivu-table .ivu-table-header th {
-    background-color: #0E0E28;
-    padding: 15px 0;
-    text-align: center;
+  background-color: #0E0E28;
+  padding: 15px 0;
+  text-align: center;
 }
 
 .day .trade_wrap .ivu-input {
-    background: #fff;
-    color: #333;
-    border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ccc;
 }
 
 .trade_wrap .ivu-form-item-content label {
-    position: absolute;
-    top: 4px;
-    right: 10px;
-    color: #8090AF;
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  color: #8090AF;
 }
 
 p.math_price {
-    height: 24px;
-    line-height: 24px;
-    overflow: hidden;
-    margin-top: -1px;
-    font-size: 12px;
-    text-align: right;
-    color: #8090AF;
+  height: 24px;
+  line-height: 24px;
+  overflow: hidden;
+  margin-top: -1px;
+  font-size: 12px;
+  text-align: right;
+  color: #8090AF;
 }
 
 .total {
-    margin: 20px 0 25px;
-    height: 20px;
-    color: #8090AF;
+  margin: 20px 0 25px;
+  height: 20px;
+  color: #8090AF;
 }
 
 .trade_bd Button {
-    width: 100%;
-    border: 0;
-    color: #fff;
+  width: 100%;
+  border: 0;
+  color: #fff;
 }
 
 .trade_bd Button.bg-red {
-    background-color: #f15057;
+  background-color: #f15057;
 }
 
 .trade_bd Button.bg-green {
-    background-color: #00b275;
+  background-color: #00b275;
 }
 
 .trade_bd Button:hover {
-    /* background: #54679F; */
+  /* background: #54679F; */
 }
 
 .order_book {
-    float: right;
-    width: 34%;
-    height: 430px;
-    background: #18202A;
-    margin-bottom: 15px;
+  float: right;
+  width: 34%;
+  height: 430px;
+  background: #18202A;
+  margin-bottom: 15px;
 }
 
 .order_book_hd {
-    height: 50px;
+  height: 50px;
 }
 
 .order_book_hd b {
-    color: #BCD7E6;
+  color: #BCD7E6;
 }
 
 .exchange .ivu-table th,
 .exchange .ivu-table td {
-    background: none;
-    border: 0;
+  background: none;
+  border: 0;
 }
+
 .exchange .right .ivu-table .ivu-table-header tr th:nth-child(2) {
-    text-align: center;
+  text-align: center;
 }
+
 .exchange .right .ivu-table .ivu-table-row td:nth-child(1) {
-    padding-left: 20px;
+  padding-left: 20px;
 }
+
 .exchange .right .ivu-table .ivu-table-row td:nth-child(2) {
-    text-align: center;
+  text-align: center;
 }
+
 .exchange .right .ivu-table .ivu-table-header tr th:last-child {
-    text-align: right;
-    padding-right: 10px;
+  text-align: right;
+  padding-right: 10px;
 }
+
 .exchange .right .ivu-table .ivu-table-row td:last-child {
-    text-align: right;
-    padding-right: 10px;
+  text-align: right;
+  padding-right: 10px;
 }
 
 .exchange .right .trade-wrap .ivu-table-header tr th:nth-child(3) {
-    text-align: right;
-    padding-right: 10px;
+  text-align: right;
+  padding-right: 10px;
 }
 
 .exchange .left .sell_table .ivu-table-header tr th:nth-child(2) {
-    text-align: center;
+  text-align: center;
 }
+
 .exchange .left .ivu-table-wrapper .ivu-table .ivu-table-row td:nth-child(1) {
-    padding-left: 28px;
+  padding-left: 28px;
 }
+
 .exchange .left .ivu-table-wrapper .ivu-table .ivu-table-row td:nth-child(2) {
-    text-align: center;
+  text-align: center;
 }
 
 .exchange .left .sell_table .ivu-table-header tr th:nth-child(3) {
-    text-align: right;
-    padding-right: 15px;
+  text-align: right;
+  padding-right: 15px;
 }
 
 .exchange .left .ivu-table-wrapper .ivu-table .ivu-table-row td:nth-child(3) {
-    text-align: right;
-    padding-right: 15px;
+  text-align: right;
+  padding-right: 15px;
 }
+
 /*.exchange .right .ivu-table ivu-table-tip tr td span,*/
 /*.exchange .left .ivu-table .ivu-table-tip td {*/
 /*    text-align: center;*/
 /*}*/
 .ivu-modal-content {
-    background: #191D3A;
+  background: #fff;
 }
+
 .ivu-modal-header .ivu-modal-header-inner {
-    color: #3399ff;
-    text-align: center;
+  color: #3399ff;
+  text-align: center;
 }
 
 .ivu-modal-header {
-    border-bottom: 1px solid #191D3A;
+  border-bottom: 1px solid #191D3A;
 }
 
 /*.ivu-modal-footer {*/
@@ -468,23 +482,23 @@ p.math_price {
 } */
 
 .exchange .ivu-table-expanded-cell {
-    background: #0E0E28 !important;
+  background: #0E0E28 !important;
 }
 
 .exchange.day .ivu-table-expanded-cell {
-    background: #f8f8f9 !important;
+  background: #f8f8f9 !important;
 }
 
 .exchange .order .ivu-table-cell-expand {
-    color: #3399ff;
+  color: #FE5C5C;
 }
 
 .exchange .ivu-table th {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .exchange .ivu-table th span {
-    color: #8090AF;
+  color: #AAAAAA;
 }
 
 
@@ -496,40 +510,45 @@ p.math_price {
 .ivu-table-stripe .ivu-table-body tr.ivu-table-row-highlight:nth-child(2n) td,
 .ivu-table-stripe .ivu-table-fixed-body tr.ivu-table-row-highlight:nth-child(2n) td,
 tr.ivu-table-row-highlight.ivu-table-row-hover td {
-    background: transparent !important;
+  background: transparent !important;
 }
+
 .exchange .ivu-table-overflowY::-webkit-scrollbar {
-    width: 5px; /*对垂直流动条有效*/
+  width: 5px; /*对垂直流动条有效*/
 }
+
 /*定义滚动条的轨道颜色、内阴影及圆角*/
-.exchange .ivu-table-overflowY::-webkit-scrollbar-track{
-    -webkit-box-shadow: inset 0 0 6px #131738;
-    background-color: #131738;
+.exchange .ivu-table-overflowY::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #f2f2f2;
+  background-color: #f2f2f2;
 }
+
 /*定义滑块颜色、内阴影及圆角*/
-.exchange .ivu-table-overflowY::-webkit-scrollbar-thumb{
-    -webkit-box-shadow: inset 0 0 6px #21254D;
-    background-color: #21254D;
+.exchange .ivu-table-overflowY::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px #e5e5e5;
+  background-color: #e5e5e5;
 }
 
 .exchange.day .ivu-table-overflowY::-webkit-scrollbar {
-    width: 5px; /*对垂直流动条有效*/
+  width: 5px; /*对垂直流动条有效*/
 }
+
 /*定义滚动条的轨道颜色、内阴影及圆角*/
-.exchange.day .ivu-table-overflowY::-webkit-scrollbar-track{
-    -webkit-box-shadow: inset 0 0 6px rgba(238, 238, 238, .9);
-    background-color: rgba(238, 238, 238, .9);
-    border-radius: 3px;
+.exchange.day .ivu-table-overflowY::-webkit-scrollbar-track {
+  /*-webkit-box-shadow: inset 0 0 6px rgba(238, 238, 238, .9);*/
+  background-color: #f2f2f2;
+  border-radius: 3px;
 }
+
 /*定义滑块颜色、内阴影及圆角*/
-.exchange.day .ivu-table-overflowY::-webkit-scrollbar-thumb{
-    -webkit-box-shadow: inset 0 0 6px rgba(238, 238, 238, .9);
-    background-color: rgba(238, 238, 238, .9);
+.exchange.day .ivu-table-overflowY::-webkit-scrollbar-thumb {
+  /*-webkit-box-shadow: inset 0 0 6px rgba(238, 238, 238, .9);*/
+  background-color: #e5e5e5;
 }
 
 .order_book .ivu-table .ivu-table-body tr:hover {
-    background: #262A42;
-    cursor: pointer;
+  background: #262A42;
+  cursor: pointer;
 }
 
 /*.main .trade-wrap .ivu-table {*/
@@ -538,199 +557,201 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 
 .exchange .ivu-table th,
 .exchange .ivu-table td {
-    height: 30px;
+  height: 30px;
 }
+
 .exchange .right .ivu-table td {
-    height: 38px;
+  height: 38px;
 }
+
 .exchange .sidebar .ivu-table th,
 .exchange .sidebar .ivu-table td {
-    height: 35px;
+  height: 35px;
 }
 
 .exchange .ivu-table td span {
-    color: #BCD7E6;
+  color: #DDDDDD;
 }
 
 .exchange.day .ivu-table td span {
-    color: #333;
+  color: #333;
 }
 
 .exchange .ivu-table td .ivu-btn-warning {
-    background: #3399FF !important;
-    border: 1px solid #3399FF;
+  background: #3399FF !important;
+  border: 1px solid #3399FF;
 }
 
 .exchange .ivu-table td .ivu-btn-warning span {
-    color: #fff;
+  color: #fff;
 }
 
 .exchange .ivu-table-cell {
-    padding: 0;
+  padding: 0;
 }
 
 .ivu-table-sort {
-    height: 14px;
+  height: 14px;
 }
 
 .buy_table {
-    /* border-top: 2px solid #1F2943 !important; */
+  /* border-top: 2px solid #1F2943 !important; */
 }
 
 .buy_table.hidden .ivu-table-header {
-    display: none;
+  display: none;
 }
 
 .open_orders {
-    float: left;
-    width: 64%;
-    min-height: 400px;
-    background: #18202A;
-    margin-bottom: 15px;
+  float: left;
+  width: 64%;
+  min-height: 400px;
+  background: #18202A;
+  margin-bottom: 15px;
 }
 
 .open_orders .ivu-select-item {
-    color: #fff;
+  color: #fff;
 }
 
 .open_orders .ivu-table .ivu-table-body tr:hover {
-    background: #262A42;
+  background: #262A42;
 }
 
 .depth_graph {
-    float: left;
-    width: 64%;
-    min-height: 550px;
-    background: #18202A;
+  float: left;
+  width: 64%;
+  min-height: 550px;
+  background: #18202A;
 }
 
 .depth_graph_hd {
-    height: 50px;
-    line-height: 50px;
-    font-size: 16px;
-    padding-left: 30px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  padding-left: 30px;
 }
 
 .depth_graph_ct {
-    padding-left: 30px;
-    height: 500px;
+  padding-left: 30px;
+  height: 500px;
 }
 
 .mod_hd {
-    height: 48px;
-    line-height: 48px;
-    font-size: 14px;
-    padding-left: 15px;
+  height: 48px;
+  line-height: 48px;
+  font-size: 14px;
+  padding-left: 15px;
 }
 
 .mod_hd dl dt {
-    display: inline-block;
-    font-size: 20px;
-    font-weight: bold;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .mod_hd dl dd {
-    display: inline-block;
-    margin-left: 20px;
+  display: inline-block;
+  margin-left: 20px;
 }
 
 .kline .ivu-table button span {
-    color: #fff;
+  color: #fff;
 }
 
 .deal_record {
-    float: right;
-    width: 34%;
-    height: 550px;
-    background: #18202A;
+  float: right;
+  width: 34%;
+  height: 550px;
+  background: #18202A;
 }
 
 .deal_record .ivu-table-body {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .history {
-    float: left;
+  float: left;
 }
 
 .history li {
-    float: left;
-    padding-right: 20px;
-    cursor: pointer;
+  float: left;
+  padding-right: 20px;
+  cursor: pointer;
 }
 
 .history li.active {
-    color: #7A98F7
+  color: #7A98F7
 }
 
 .open_orders_hd .ivu-select {
-    float: right;
-    width: 100px;
+  float: right;
+  width: 100px;
 }
 
 .open_orders_hd .ivu-select-selection {
-    margin-top: 12px;
-    background: #1B1E2E;
+  margin-top: 12px;
+  background: #1B1E2E;
 }
 
 .trade_wrap .ivu-btn {
-    font-size: 16px;
-    padding: 8px 15px;
-    color: #fff;
-    border-radius: 0;
+  font-size: 16px;
+  padding: 8px 15px;
+  color: #fff;
+  border-radius: 0;
 }
 
 .trade_wrap .ivu-btn:hover {
-    color: #fff;
+  color: #fff;
 }
 
 iframe {
-    height: 490px !important;
+  height: 490px !important;
 }
 
 #tradingview_188a1 {
-    height: 490px;
+  height: 490px;
 }
 
 .exchange .ivu-page-next,
 .exchange .ivu-page-prev {
-    background: #1B1E2E;
+  background: #1B1E2E;
 }
 
 .exchange .ivu-page-item-active {
-    background: #54677F;
-    border-color: #54677F;
+  background: #54677F;
+  border-color: #54677F;
 }
 
 .exchange .ivu-page-item:hover {
-    border-color: #54677F;
+  border-color: #54677F;
 }
 
 .exchange .ivu-table-wrapper {
-    width: 100%;
-    box-shadow: none;
-    border: 0;
+  width: 100%;
+  box-shadow: none;
+  border: 0;
 }
 
 .exchange .order .table .ivu-table-wrapper {
-    box-shadow: none;
-    border: 0;
+  box-shadow: none;
+  border: 0;
 }
 
 .exchange .order .table .ivu-table-wrapper .ivu-table .ivu-table-row td:first-child,
-.order .ivu-table-wrapper .ivu-table .ivu-table-header th:first-child{
-    text-align: left;
-    padding-left: 30px;
+.order .ivu-table-wrapper .ivu-table .ivu-table-header th:first-child {
+  text-align: left;
+  padding-left: 30px;
 }
 
 .exchange .order .table .ivu-table-wrapper .ivu-table .ivu-table-row td {
-    background-color: #13152F;
-    padding-left: 0;
+  background-color: #13152F;
+  padding-left: 0;
 }
 
 .exchange .order .ivu-table td {
-    background-color: #10122B;
-    text-align: center;
+  background-color: #10122B;
+  text-align: center;
 }
 
 /* .day .exchange .coin-menu .ivu-table-wrapper{
@@ -738,304 +759,312 @@ iframe {
 } */
 
 .exchange .ivu-table {
-    background: none;
-    color: #fff;
+  background: none;
+  color: #fff;
 }
 
 .exchange .ivu-table:before,
 .exchange .ivu-table:after {
-    display: none;
+  display: none;
 }
 
 .exchange .ivu-input[disabled],
 .exchange fieldset[disabled] .ivu-input {
-    border-color: transparent !important;
-    cursor: unset !important;
-    background: #13152f;
+  border-color: transparent !important;
+  cursor: unset !important;
+  background: #13152f;
 }
 
 .exchange.day .ivu-input[disabled] {
-    border-color: #ccc !important;
-    background-color: #fff;
+  border-color: #ccc !important;
+  background-color: #fff;
 }
 
 .exchange .ivu-input[disabled]:hover {
-    border-color: transparent !important;
+  border-color: transparent !important;
 }
 
 .exchange.day .ivu-input[disabled]:hover {
-    border-color: #ccc !important;
+  border-color: #ccc !important;
 }
 
 .exchange .ivu-select-dropdown {
-    background: #0b0d1b;
+  background: #0b0d1b;
 }
+
 .layout__area--top.header-chart-panel {
-    top: 55px;
+  top: 55px;
 }
+
 .exchange .main .ivu-table .ivu-table-header th:first-child {
-    text-align: left;
-    padding-left: 22px;
+  text-align: left;
+  padding-left: 22px;
 }
+
 .exchange .main .ivu-table .ivu-table-header th {
-    line-height: 40px;
-    background-color: #0E0E28;
+  line-height: 40px;
+  background-color: #141F2B;
 }
 
 .exchange.day .ivu-table .ivu-table-header th {
-    background-color: #fff;
-    border-top: 1px solid #f0f0f0;
-    border-bottom: 1px solid #f0f0f0;
+  background-color: #fff;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .exchange .ivu-table {
-    background-color: #0E0E28;
+  background-color: #141F2B;
 }
 
 .exchange.day .ivu-table {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td {
-    border-bottom: 1px solid #1B1F3C !important;
-    border-color: #1B1F3C;
+  border-bottom: 1px solid #1B1F3C !important;
+  border-color: #1B1F3C;
 }
+
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row tr:hover {
-    border-bottom: 1px solid #1B1F3C;
-    border-color: #1B1F3C;
+  border-bottom: 1px solid #1B1F3C;
+  border-color: #1B1F3C;
 }
+
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row-highlight {
-    border-bottom: 1px solid #1B1F3C;
-    border-color: #1B1F3C;
+  border-bottom: 1px solid #1B1F3C;
+  border-color: #1B1F3C;
 }
 
 .ivu-table-row-highlight td,
 .ivu-table-stripe .ivu-table-body tr.ivu-table-row-highlight:nth-child(2n) td,
 .ivu-table-stripe .ivu-table-fixed-body tr.ivu-table-row-highlight:nth-child(2n) td,
-tr.ivu-table-row-highlight.ivu-table-row-hover td{
-    background-color: transparent !important;
+tr.ivu-table-row-highlight.ivu-table-row-hover td {
+  background-color: transparent !important;
 }
 
 .exchange.day .ivu-table-wrapper .ivu-table .ivu-table-row td {
-    border-bottom: 1px solid #f0f0f0;
-    border-color: #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  border-color: #f0f0f0;
 }
 
 .exchange .buy_table .ivu-table .ivu-table-row:nth-last-child(1) td {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .exchange .sell_table .ivu-table .ivu-table-row:nth-last-child(1) td {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .exchange .order .ivu-table-tip td {
-    height: 144px;
+  height: 144px;
 }
 
 .exchange .coin-menu td {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .exchange .order .linkmore {
-    float: right;
-    color: #3399ff;
-    font-size: 14px;
-    line-height: 50px;
-    margin-right: 20px;
+  float: right;
+  color: #3399ff;
+  font-size: 14px;
+  line-height: 50px;
+  margin-right: 20px;
 }
 
 
 /* 滑块样式 */
 
 .exchange .ivu-slider-wrap {
-    height: 6px;
-    margin: 0;
-    background-color: rgb(32, 39, 64) !important;
+  height: 6px;
+  margin: 0;
+  background-color: rgb(32, 39, 64) !important;
 }
 
 .exchange.day .ivu-slider-wrap {
-    height: 6px;
-    margin: 0;
-    background-color: #f0f0f0 !important;
+  height: 6px;
+  margin: 0;
+  background-color: #f0f0f0 !important;
 }
 
 .exchange .slider-wrap {
-    position: relative;
-    margin: 40px 0 16px 7px;
+  position: relative;
+  margin: 40px 0 16px 7px;
 }
 
 .exchange .slider-wrap .slider-stop {
-    position: absolute;
-    top: -4px;
-    cursor: pointer;
-    width: 14px;
-    height: 15px;
-    border: 2px solid #0E0E28;
-    margin-left: -12px;
-    border-radius: 50%;
+  position: absolute;
+  top: -4px;
+  cursor: pointer;
+  width: 14px;
+  height: 15px;
+  border: 2px solid #0E0E28;
+  margin-left: -12px;
+  border-radius: 50%;
 }
 
 .exchange.day .slider-wrap .slider-stop {
-    position: absolute;
-    top: -4px;
-    cursor: pointer;
-    width: 14px;
-    height: 15px;
-    border: 2px solid #fff;
-    margin-left: -12px;
-    border-radius: 50%;
+  position: absolute;
+  top: -4px;
+  cursor: pointer;
+  width: 14px;
+  height: 15px;
+  border: 2px solid #fff;
+  margin-left: -12px;
+  border-radius: 50%;
 }
 
 .exchange .slider-wrap .slider-block {
-    margin-top: 0px;
-    margin-left: 0px;
-    width: 10px;
-    border-radius: 5px;
-    height: 10px;
-    background-color: rgb(32, 39, 64);
-    /*border-radius: 6px;*/
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 10px;
+  border-radius: 5px;
+  height: 10px;
+  background-color: rgb(32, 39, 64);
+  /*border-radius: 6px;*/
 }
 
 .exchange.day .slider-wrap .slider-block {
-    margin-top: 0px;
-    margin-left: 0px;
-    width: 10px;
-    border-radius: 5px;
-    height: 10px;
-    background-color: #8090af;
-    /*border-radius: 6px;*/
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 10px;
+  border-radius: 5px;
+  height: 10px;
+  background-color: #8090af;
+  /*border-radius: 6px;*/
 }
 
 .exchange .ivu-slider-bar {
-    z-index: 100;
+  z-index: 100;
 }
 
 .exchange .ivu-slider-button-wrap {
-    z-index: 101;
+  z-index: 101;
 }
 
 .exchange .silder-buy .ivu-slider-bar {
-    height: 6px;
-    background: #00b275;
+  height: 6px;
+  background: #00b275;
 }
 
 .exchange .silder-buy .ivu-slider-button {
-    border-color: #00b275;
-    background-color: #0E0E28;
+  border-color: #00b275;
+  background-color: #0E0E28;
 }
 
 .exchange .silder-sell .ivu-slider-bar {
-    height: 6px;
-    background: #f15057;
+  height: 6px;
+  background: #f15057;
 }
 
 .exchange .silder-sell .ivu-slider-button {
-    border-color: #f15057;
-    background-color: #0E0E28;
+  border-color: #f15057;
+  background-color: #0E0E28;
 }
 
 .exchange .ivu-slider-stop {
-    width: 6px;
-    height: 6px;
+  width: 6px;
+  height: 6px;
 }
 
 .exchange .slider-wrap .ivu-tooltip-popper {
-    padding: 0;
+  padding: 0;
 }
 
 .exchange .slider-wrap .ivu-tooltip-arrow {
-    display: none;
+  display: none;
 }
 
 .exchange.day .ivu-tooltip-inner {
-    background-color: #fff;
-    color: #333;
-    box-shadow: 0 0 2px #ccc;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 0 2px #ccc;
 }
 
 .exchange .slider-wrap .ivu-tooltip-inner {
-    box-shadow: none;
-    border: none;
-    padding: 0;
-    min-height: 0;
-    margin-bottom: 3px;
-    background-color: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  min-height: 0;
+  margin-bottom: 3px;
+  background-color: transparent;
 }
 
 .exchange .bd_market .ivu-btn {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .exchange .bd_limited .ivu-form-item {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .exchange.day .ivu-tooltip-popper .ivu-tooltip-arrow {
-    border-top-color: rgba(217, 217, 217, .5);
+  border-top-color: rgba(217, 217, 217, .5);
 }
 
 .exchange.day .ivu-tooltip-popper .ivu-tooltip-arrow:after {
-    position: absolute;
-    width: 0;
-    height: 0;
-    bottom: 1px;
-    content: "";
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent;
-    margin-left: -5px;
-    border-top-width: 5px;
-    border-bottom-width: 0;
-    border-top-color: #fff;
+  position: absolute;
+  width: 0;
+  height: 0;
+  bottom: 1px;
+  content: "";
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent;
+  margin-left: -5px;
+  border-top-width: 5px;
+  border-bottom-width: 0;
+  border-top-color: #fff;
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row {
-    position: relative;
+  position: relative;
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd {
-    position: absolute;
-    right: 0;
-    left: 0;
+  position: absolute;
+  right: 0;
+  left: 0;
 }
 
-.exchange .ivu-table-wrapper .ivu-table .ivu-table-header {
-    background-color: #0E0E28;
-}
+/*.exchange .ivu-table-wrapper .ivu-table .ivu-table-header {*/
+/*  background-color: #141F2B;*/
+/*}*/
 
 .exchange.day .ivu-table-header {
-    background-color: #fff !important;
+  background-color: #fff !important;
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-header th.percenttd {
-    display: none;
-    font-size: 0;
+  display: none;
+  font-size: 0;
 }
+
 .exchange .ivu-table-wrapper .ivu-table td {
-    background: transparent;
+  background: transparent;
 }
+
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd .ivu-table-cell {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
-    pointer-events: none;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd .percentdiv {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    opacity: .2;
-    transition: all 1s;
+  position: absolute;
+  right: 0;
+  height: 100%;
+  opacity: .2;
+  transition: all 1s;
 }
 
 .exchange.day .ivu-table-wrapper .ivu-table .ivu-table-row td.percenttd .percentdiv {
-    opacity: .1;
+  opacity: .1;
 }
+
 /*.exchange .ivu-table-wrapper > .ivu-spin-fix {*/
 /*    border-color: rgba(255, 255, 255, .05);*/
 /*}*/
@@ -1043,18 +1072,20 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td{
 /*    background: rgba(255, 255, 255, .05);*/
 /*}*/
 
-.exchange .left .ivu-table-wrapper .ivu-table .ivu-table-row td{
-    border-bottom: 1px solid #0E0E28 !important;
-}
-.exchange .buy_table .ivu-table-wrapper .ivu-table .ivu-table-row td{
-    border-bottom: 1px solid #0E0E28 !important;
+.exchange .left .ivu-table-wrapper .ivu-table .ivu-table-row td {
+  border-bottom: 1px solid #0E0E28 !important;
 }
 
-.exchange.day .left .ivu-table-wrapper .ivu-table .ivu-table-row td{
-    border-bottom: 1px solid #f0f0f0 !important;
+.exchange .buy_table .ivu-table-wrapper .ivu-table .ivu-table-row td {
+  border-bottom: 1px solid #0E0E28 !important;
 }
-.exchange.day .buy_table .ivu-table-wrapper .ivu-table .ivu-table-row td{
-    border-bottom: 1px solid #f0f0f0 !important;
+
+.exchange.day .left .ivu-table-wrapper .ivu-table .ivu-table-row td {
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.exchange.day .buy_table .ivu-table-wrapper .ivu-table .ivu-table-row td {
+  border-bottom: 1px solid #f0f0f0 !important;
 }
 
 /*.feature-no-touch ._tv-dialog .button:not(.disabled):not(.selected):hover:before,*/

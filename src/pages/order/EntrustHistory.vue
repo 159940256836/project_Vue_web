@@ -5,8 +5,8 @@
     width: 100%;
     .form {
         padding-left: 12px;
-        background: #111530;
-        color: #8090AF;
+        background: #fff;
+        color: #333;
         font-family: MicrosoftYaHei;
         font-weight:400;
     }
@@ -28,7 +28,7 @@
     overflow: hidden;
     margin-top: 22px;
     .ivu-table-tip {
-      background: #191D3A !important;
+      background: #fff;
       td{
         text-align: center;
         background: #191D3A !important;
@@ -53,17 +53,17 @@
     background: #111530 !important;
 }
 .table .ivu-table-cell-expand {
-    color: #3399ff;
+    color: #FE5C5C;
 }
 .ivu-table-cell {
     padding-left: 28px;
 }
 
 .form .my-btn {
-  background: #3399FF;
+  background: #FE5C5C;
   color: #fff;
   display: inline-block;
-  padding:0px 24px;
+  padding: 0 24px;
   font-size: 14px;
   height: 30px;
   line-height: 30px;
@@ -78,7 +78,7 @@
   background: #2A3850;
 }
 .table .ivu-table-cell-expand {
-  color: #3399ff;
+  color: #FE5C5C;
 }
 
 .entrusthistory .form {
@@ -86,10 +86,10 @@
     input {
       outline:none;
       box-shadow: none;
-      color: #fff;
+      color: #333;
     }
     .ivu-form-item-label {
-      color: #8090AF;
+      color: #333;
     }
     input:focus{
       box-shadow: none;
@@ -97,7 +97,7 @@
     .ivu-input {
       background: transparent;
       border-radius: 0;
-      border:1px solid rgba(88,105,138,1);
+      border:1px solid #dddddd;
       height: 30px;
       line-height: 24px;
     }
@@ -108,20 +108,20 @@
     .ivu-select-selection {
       background: transparent;
       border-radius: 0;
-      border:1px solid rgba(88,105,138,1);
+      border:1px solid #eeeeee;
       height: 30px;
       line-height: 22px;
       outline:none;
       box-shadow: none;
       .ivu-select-selected-value {
-        color: #fff;
+        color: #333;
       }
     }
     .ivu-select-selection:focus {
       box-shadow: none;
     }
     .ivu-select-placeholder {
-      color: #8090af;
+      color: #333;
     }
     .ivu-btn {
       border-radius: 0;
@@ -131,14 +131,14 @@
     }
 
     .ivu-select-item:hover {
-        background: #10122b;
-        color: #8090AF;
+        background: #fff;
+        color: #FE5C5C;
     }
 
     .ivu-select-item-selected,
     .ivu-select-item-selected:hover {
-        background: #10122b;
-        color: #fff;
+        background: #fff;
+        color: #FE5C5C;
     }
 
     .ivu-select-dropdown {
@@ -149,14 +149,14 @@
         }
 
         /*定义滚动条的轨道颜色、内阴影及圆角*/
-        &::-webkit-scrollbar-track{
-            background-color: #111530;
-            border-radius: 3px;
-        }
-        &::-webkit-scrollbar-thumb{
-            border-radius: 7px;
-            background-color: #8090AF;
-        }
+      &::-webkit-scrollbar-track{
+        background-color: #EDEDED;
+        border-radius: 3px;
+      }
+      &::-webkit-scrollbar-thumb{
+        border-radius: 7px;
+        background-color: #E0E0E0
+      }
     }
 
     .ivu-date-picker-with-range {
@@ -171,10 +171,13 @@
     .ivu-page-total {
         color: #8090AF;
     }
-    .ivu-page-next, .ivu-page-prev {
-        background: #111530;
-        border: 1px solid #191f44;
+  .ivu-page-next, .ivu-page-prev {
+    background-color: #fff;
+    border-color: #DDDDDD;
+    a {
+      color: #999999;
     }
+  }
 }
 
 .entrusthistory {
@@ -196,8 +199,11 @@
       color: #8090AF;
     }
     .ivu-page-next, .ivu-page-prev {
-      background: #111530;
-      border: 1px solid #191f44;
+      background-color: #fff;
+      border-color: #DDDDDD;
+      a {
+        color: #999999;
+      }
     }
     .ivu-icon.ivu-icon-ios-arrow-left,
     .ivu-icon.ivu-icon-ios-arrow-right {
@@ -296,7 +302,7 @@
   }
 
   .ivu-table td, .ivu-table th {
-    border: none none;
+    border: none;
   }
 
   .ivu-table-wrapper  .ivu-table-stripe {
@@ -308,26 +314,26 @@
     }
 
     .ivu-table-wrapper .ivu-table .ivu-table-header th {
-            background: #191D3A;
-            color: #8090AF;
+            background: #fff;
+            color: #333;
             border: none;
             //表格标题颜色
     }
 
     .ivu-table-wrapper .ivu-table .ivu-table-header th {
-            background: #191D3A;
-            color: #8090AF;
+            background: #fff;
+            color: #666666;
             border: none;
             //表格标题颜色
     }
 
     .ivu-table-wrapper .ivu-table .ivu-table-tbody tr:nth-child(2n) td,
     .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-            background: #10122B;
+            background: #fff;
             //表格双数行样式
     }
     .ivu-table-wrapper .ivu-table .ivu-table-tbody tr td {
-        background: #090e2e;
+        background: #f4f6f8;
         //表格单数行样式
     }
 
@@ -423,7 +429,7 @@
                     {{$t('historyAndCu.search')}}
                 </span>
                 <span
-                    style="margin-left: 20px;background:transparent;border:1px solid #3399FF;color:#3399FF;"
+                        style="background: #fff;border: 1px solid #FE5C5C;color: #FE5C5C;"
                     @click="handleClear"
                     class="my-btn"
                 >
@@ -833,7 +839,7 @@ export default {
                             'span',
               {
                 style: {
-                  color: '#3399ff'
+                  color: '#FE5C5C'
                 }
               },
                             this.$t('exchange.finished')
@@ -843,7 +849,7 @@ export default {
                             'span',
               {
                 style: {
-                  color: '#3399ff'
+                  color: '#FE5C5C'
                 }
               },
                             this.$t('exchange.canceled')

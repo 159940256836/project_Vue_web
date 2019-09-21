@@ -116,15 +116,17 @@
             .ivu-tabs-nav-scroll {
 
               .ivu-tabs-ink-bar.ivu-tabs-ink-bar-animated {
-                background: #3399ff;
+                background: #D5382B;
               }
               .ivu-tabs-tab {
                 &:hover {
-                  color: #3399ff;
+                  color: #D5382B;
+                  border-bottom: 3px solid #D5382B;
                 }
               }
               .ivu-tabs-tab.ivu-tabs-tab-active.ivu-tabs-tab-focused {
-                color: #3399ff;
+                color: #D5382B;
+                border-bottom: 3px solid #D5382B;
               }
             }
           }
@@ -138,11 +140,11 @@
               .ivu-table-tbody{
                 .ivu-table-row {
                   td {
-                    background: #10122B;
+                    background: #F4F6F8;
                   }
                   &:nth-child(2n) {
                     td {
-                      background: #111530;
+                      background: #fff;
                       border-bottom: 0 !important;
                     }
                   }
@@ -157,7 +159,7 @@
                       }
                     }
                     p a{
-                      color:#3399ff;
+                      color:#333;
                     }
                   }
                 }
@@ -169,12 +171,12 @@
             overflow: hidden;
             .ivu-page {
               .ivu-page-item.ivu-page-item-active {
-                background-color: #3399ff;
-                border-color: #3399ff;
-                color: #fff;
+                background-color: #f4f6f8;
+                border-color: #dddddd;
+                color: #333;
                 &:hover {
                   a {
-                    color: #fff;
+                    color: #F4F6F8;
                   }
                 }
               }
@@ -792,7 +794,7 @@
 }
 .ivu-table-wrapper .ivu-table:after,
 .ivu-table-wrapper .ivu-table:before {
-  background: #111530 !important;
+  background: #f4f6f8 !important;
 }
 
 .ivu-table-column-center .ivu-table-cell {
@@ -812,8 +814,8 @@
 }
 .ivu-table-wrapper .ivu-table .ivu-table-header th,
 .ivu-table-wrapper .ivu-table td {
-  color: #8090AF;
-  background-color: #111530;
+  color: #333;
+  background-color: #fff;
 }
 .ivu-table-cell .user-avatar-public > .user-avatar-in {
   transform: translate(5px, 5px);
@@ -1030,7 +1032,7 @@ export default {
               return h('div',
                 {
                   style: {
-                    color: '#3399ff'
+                    color: '#D5382B'
                   }
                 },
                 params.row.price + 'CNY')

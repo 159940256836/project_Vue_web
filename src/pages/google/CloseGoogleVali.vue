@@ -339,6 +339,9 @@ export default {
 
 <style lang="scss">
 #openGoogle{
+    .ivu-btn[disabled] {
+        color: #FE5C5C !important;
+    }
     .code-title {
         .ivu-form-item-label {
             margin-top: -31px;
@@ -352,15 +355,15 @@ export default {
         height: 40px;
         border-radius: 0;
         background: transparent;
-        border: 1px solid #8090AF;
-        color: #fff;
+        border: 1px solid #DDDDDD;
+        color: #333;
     }
     .ivu-form-item {
         height: 40px;
         /*margin-bottom: 30px;*/
     }
     .ivu-input-large {
-            border: 1px solid #8090AF;
+            border: 1px solid #DDDDDD;
         }
 
     /*.ivu-input-large:hover,*/
@@ -370,7 +373,7 @@ export default {
     /*}*/
 
     .ivu-form-item-error .ivu-input {
-            border-color: #8090AF;
+            border-color: #DDDDDD;
     }
 
 
@@ -397,7 +400,7 @@ export default {
         line-height: 40px;
         padding-right: 12px;
         /*text-align: right;*/
-        color: #8090AF;
+        color: #333;
 
     }
     .ivu-form-item-content {
@@ -407,30 +410,30 @@ export default {
 
 
     .ivu-btn-default {
-        color: #3399FF;
+        color: #333;
         background: transparent;
         border-radius: 0;
     }
     .ivu-input-group-append,
     .ivu-input-group-prepend {
         background: transparent;
-        color: #3399FF;
-        border: 1px solid #8090AF;
+        color: #FE5C5C;
+        border: 1px solid #DDDDDD;
         border-left: none;
         border-radius: 0;
     }
     .ivu-form-item-error .ivu-input-group-append,
     .ivu-form-item-error .ivu-input-group-prepend {
         background: transparent;
-        color: #3399FF;
-        border: 1px solid #8090AF;
+        color: #FE5C5C;
+        border: 1px solid #DDDDDD;
         border-left: none;
         border-radius: 0;
     }
 
     .defeat-ivu {
         .ivu-btn-default {
-            color: #3399FF;
+            color: #FE5C5C;
             background: transparent;
             border: none;
             border-radius: 0;
@@ -440,13 +443,13 @@ export default {
             /*margin-top: 10px;*/
         }
         .ivu-input{
-            border: 1px solid #8090AF;
+            border: 1px solid #DDDDDD;
             border-right: none;
         }
         .timebox {
             width: 88px;
             cursor: pointer;
-            border-left: 1px solid #8090AF;
+            border-left: 1px solid #DDDDDD;
         }
         .ivu-btn:focus {
             -webkit-box-shadow: none;
@@ -462,7 +465,7 @@ export default {
             background: transparent;
             width: 300px;
             font-size:16px;
-            border: 1px solid #8090AF;
+            border: 1px solid #DDDDDD;
         }
     }
 

@@ -1715,8 +1715,8 @@ li {
           margin: 14px 25px 0;
           padding: 0 0 0 35px;
           font-size: 14px;
-          color: #fff;
-          border-left: 2px solid #8090af;
+          color: #333;
+          border-left: 2px solid #dddddd;
           outline: none;
           line-height: 16px;
         }

@@ -145,14 +145,14 @@ export default {
                 line-height: 60px;
                 font-size: 20px;
                 margin-bottom: 22px;
-                background: #111530;
+                background: #fff;
                 padding: 0 28px;
                 span {
                     &:first-child {
-                        color: #fff;
+                        color: #333;
                     }
                     &:last-child {
-                        color: #3399ff;
+                        color: #FE5C5C;
                     }
                 }
             }
@@ -160,17 +160,17 @@ export default {
                 height: 60px;
                 line-height: 60px;
                 padding: 0 28px;
-                background: #111530;
+                background: #fff;
                 margin-bottom: 22px;
                 span {
-                    color: #8090af;
+                    color: #333;
                     font-size: 14px;
                 }
                 .search_btn {
                     height: 32px;
                     line-height: 32px;
                     width: 86px;
-                    background: #3399ff;
+                    background: #E62B25;
                     color: #fff;
                     font-size: 14px;
                     border: none;
@@ -200,27 +200,27 @@ export default {
         .ivu-input-with-suffix {
             padding-right: 32px;
             border-radius: 0;
-            background: #111530;
-            border: 1px solid #2A3850;
+            background: #fff;
+            border: 1px solid #DDDDDD;
         }
         .ivu-table {
             &:before {
                 background: transparent;
             }
             td {
-                background: #111530;
+                background: #fff;
             }
         }
         .blc-table {
             .ivu-table-wrapper {
                 .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
                 .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-                    background: #10122B;
+                    background: #fff;
                 }
                 .ivu-table-header {
                     thead th {
                         height: 50px;
-                        background: #191D3A;
+                        background: #fff;
                     }
                 }
                 tbody.ivu-table-tbody .ivu-table-row td {
@@ -232,27 +232,27 @@ export default {
             }
         }
         #record_pages li.ivu-page-item.ivu-page-item-active {
-            background-color: #111530;
-            border-color: #191f44;
+            background-color: #fff;
+            border-color: #DDDDDD;
             a {
-                color: #3399ff;
+                color: #999999;
             }
         }
         #record_pages li.ivu-page-item.ivu-page-item-active {
             &:hover {
-                background-color: #111530;
+                background-color: #fff;
                 a {
-                    color: #3399ff;
+                    color: #FE5C5C;
                 }
             }
         }
         .ivu-page-item {
-            background: #111530;
-            color: #8090AF;
-            border: 1px solid #191f44;
+            background: #f4f6f8;
+            color: #333;
+            border: 1px solid #DDDDDD;
         }
         .ivu-page-item:hover {
-            color: #3399ff;
+            color: #FE5C5C;
         }
     }
 </style>

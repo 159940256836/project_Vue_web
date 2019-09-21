@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
   .mymsg_wrapper {
-    background: #0e0e28;
+    background: #f4f6f8;
     padding-top: 100px;
     .wrapper {
       width: 1200px;
@@ -9,7 +9,7 @@
       .wrapper-title {
         height: 50px;
         line-height: 50px;
-        color: #fff;
+        color: #333;
         font-size: 18px;
       }
       .nav-rights {
@@ -30,13 +30,13 @@
     /*}*/
     .ivu-tabs-nav-scroll {
       height: 60px;
-      background: #111530;
+      background: #fff;
       .ivu-tabs-nav .ivu-tabs-tab-active {
-        color: #3399ff !important;
+        color: #FE5C5C !important;
       }
       .ivu-tabs-nav .ivu-tabs-tab {
         padding:0;
-        color: #fff;
+        color: #666666;
       }
     }
     .ivu-tabs-bar {
@@ -57,7 +57,7 @@
         margin-right: 47px;
       }
       .ivu-tabs-tab-active{
-        border-bottom:2px solid #3399ff;
+        border-bottom:2px solid #FE5C5C;
         padding:17px 0;
       }
     }
@@ -77,8 +77,8 @@
      color: #8090AF;
    }
    .ivu-page-next, .ivu-page-prev {
-     background: #111530;
-     border: 1px solid #191f44;
+     background: #fff;
+     border: 1px solid #DDDDDD;
    }
  }
 
@@ -86,25 +86,25 @@
 .mymsg_wrapper {
   .ivu-date-picker-with-range {
     .ivu-date-picker-with-range {
-      background: #10122B;
+      background: #fff;
     }
   }
   .ivu-page-total {
     color: #8090AF;
   }
   .ivu-page-next, .ivu-page-prev {
-    background: #111530;
-    border: 1px solid #191f44;
+    background: #fff;
+    border: 1px solid #DDDDDD;
   }
     .ivu-tabs-nav-scroll {
     height: 60px;
-    background: #111530;
+    background: #fff;
     .ivu-tabs-nav .ivu-tabs-tab-active {
-      color: #3399ff !important;
+      color: #FE5C5C !important;
     }
     .ivu-tabs-nav .ivu-tabs-tab {
       padding: 19px 16px;
-      color: #fff;
+      color: #666666;
     }
   }
 }

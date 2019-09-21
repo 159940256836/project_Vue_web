@@ -2,6 +2,7 @@
   <div class="my_ad_container">
     <Spin v-show="isSpinShow" class="my_ad_container_spin" fix></Spin>
     <div class="send-box">
+      <header>{{ $t('nav.fabu') }}</header>
       <div class="title-box">
         <h6 class="titles">{{ $t('otc.publishad.createad') }}
           <i class="iconfont icon-hongjiantou"></i>
@@ -200,7 +201,7 @@
                 </Input>
               </FormItem>
               <p class="msg">{{$t('otc.publishad.tip1')}} </p>
-              <router-link to="/uc/account" style="padding-left: 90px;color:#3399ff;">
+              <router-link to="/uc/account" style="padding-left: 90px;color:#FE5C5C;">
                 {{$t('otc.publishad.tip2')}}
               </router-link>
             </div>
@@ -935,17 +936,18 @@ export default {
 <style scoped lang="scss">
 .my_ad_container {
   float: left;
+  background: #f4f6f8;
   /*padding-bottom: 193px;*/
 }
 .cankao {
-  color: #3399ff;
+  color: #FE5C5C;
 }
 .contbox {
   position: relative;
 }
 #price {
   font-size: 18px;
-  color: #3399ff;
+  color: #FE5C5C;
 }
 .textarea {
   height: 100px !important;
@@ -957,18 +959,19 @@ export default {
   margin-bottom: 10px;
   position: relative;
   top: -4px;
+  color: #666666;
 }
 .bun {
   height: 40px;
-  background:#3399ff !important;
-  color:#fff !important;
-  border:1px solid #3399ff !important;
-  border-radius: 0 !important;
+  background: #E62B25;
+  color:#fff;
+  border: 0;
+  border-radius: 0;
 }
 .formbox {
   float: left;
   padding: 30px 0 80px;
-  background: #191D3A;
+  background: #fff;
   margin-top: 30px;
 }
 
@@ -985,6 +988,14 @@ export default {
   color: #8090AF;
   padding: 32px;
   float: left;
+  header {
+    height: 50px;
+    padding-left: 20px;
+    line-height: 50px;
+    color: #333;
+    font-weight: 600;
+    font-size: 20px;
+  }
 }
 
 .title-box {
@@ -992,24 +1003,24 @@ export default {
   float: left;
   text-align: left;
   padding: 20px;
-  background: #111530;
+  background: #fff;
 }
 
 .title-box .titles {
   font-size: 16px;
   font-weight: normal;
-  color: #fff;
+  color: #000;
 
   margin-bottom: 15px;
 }
 
 .title-box p {
-  color: #8090AF;
+  color: #333;
   line-height: 2;
 }
 
 .title-box p a {
-  color: #3399ff;
+  color: #FE5C5C;
 }
 
 .order-table {
@@ -1030,13 +1041,13 @@ export default {
     .ivu-select-selection {
       width: 370px;
       height: 40px;
-      background: #191d3a;
+      /*background: #191d3a;*/
       border-radius: 0;
-      border: 1px solid #2A3850;
+      border: 1px solid #DDDDDD;
       .ivu-select-selected-value {
         height: 40px;
         line-height: 40px;
-        color: #8090AF;
+        color: #333;
       }
     }
     .ivu-tag {
@@ -1051,7 +1062,7 @@ export default {
         .ivu-select-selected-value {
           height: 40px !important;
           line-height: 40px !important;
-          color: #8090AF;
+          color: #333;
         }
       }
     }
@@ -1065,40 +1076,43 @@ export default {
     }
     .ivu-select-dropdown {
       min-width: 370px !important;
-      background: #191D3A;
+      background: #fff;
+      box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.1);
       .ivu-select-item-selected {
-        background: #191D3A;
+        color: rgb(254, 92, 92);
+        background: #F4F6F8;
       }
       .ivu-select-item {
         &:hover {
-          background: #191D3A;
-          color: #8090AF;
+          background: #F4F6F8;
+          color: rgb(254, 92, 92);
         }
       }
       li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-        background: transparent;
+        background: #fff;
+        /*box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.1);*/
         &:hover {
-          background: transparent;
-          color: #8090AF;
+          background: #F4F6F8;
+          color: rgb(254, 92, 92);
         }
       }
     }
     .ivu-form .ivu-form-item-label {
       padding: 13px 12px 10px 0;
-      color: #8090AF;
+      color: #333;
     }
     .ivu-form-item-content {
       width: 370px;
       .ivu-input {
         background: transparent;
         border-radius: 0;
-        border: 1px solid #2A3850;
+        border: 1px solid #DDDDDD;
         height: 40px;
         line-height: 40px;
         color: #8090AF;
-        &:hover {
-          border: 1px solid #2A3850;
-        }
+        /*&:hover {*/
+        /*  border: 1px solid #2A3850;*/
+        /*}*/
       }
       .ivu-input-group {
         .ivu-input {
@@ -1108,16 +1122,24 @@ export default {
       .ivu-input-group-append {
         padding: 4px 17px;
         background: transparent;
-        border: 1px solid #2A3850;
+        border: 1px solid #DDDDDD;
         border-left: 0;
         border-radius: 0;
       }
       .ivu-switch {
-        background: #3399ff;
-        border: 1px solid #3399ff;
+        background: #FE5C5C;
+        border: 1px solid #FE5C5C;
+      }
+      .ivu-switch-checked {
+        background: #61C283;
+        border: 1px solid #61C283;
       }
       .ivu-radio-inner {
+        border-color: #E62B25;
         background: transparent;
+        &:after {
+          background: #E62B25;
+        }
       }
     }
     .ivu-btn[disabled] {
@@ -1132,8 +1154,8 @@ export default {
 </style>
 <style scoped lang="scss">
   .rmb-input {
-    border: 1px solid #2A3850;
-    background: #111530;
+    border: 1px solid #DDDDDD;
+    background: rgba(246,246,246,1);
     width: 370px;
     height: 40px;
     line-height: 40px;

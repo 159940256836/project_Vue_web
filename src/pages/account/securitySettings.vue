@@ -1,6 +1,6 @@
 <template>
   <div class="nav-rights">
-    <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.securitysetting') }}</h2>
+    <h2 class="title">{{ this.$t('uc.member.securitysetting') }}</h2>
     <div class="nav-right padding-right-clear">
       <div class="padding-right-clear padding-left-clear rightarea user account-box">
         <div class="rightarea-con">
@@ -23,20 +23,20 @@
               <!-- 0 -->
               <div class="account-item" style="display:none">
                 <div class="account-item-in">
-                  <Icon type="person" style="font-size: 18px;color: #00b5f6;"></Icon>
+                  <Icon type="person" size="20"></Icon>
                   <span class="card-number">{{$t('uc.safe.nickname')}}</span>
                   <p class="bankInfo" style="color:grey;">
                     bearbaby
                   </p>
-                  <p class="right-side" style="color:#fff;">{{$t('uc.safe.binded')}}</p>
+                  <p class="right-side" style="color:#3399ff;">{{$t('uc.safe.binded')}}</p>
                 </div>
               </div>
               <!-- 1 用户昵称-->
               <div class="account-item">
                 <div class="account-item-in">
-                  <Icon type="md-person" style="font-size: 18px;color: #00b5f6;"></Icon>
+                  <i class="iconfont iconyonghu1" style="font-size: 22px"></i>
                   <span class="card-number">{{ $t('uc.safe.nickName') }}</span>
-                  <p class="bankInfo" style="color: grey;">
+                  <p class="bankInfo">
                     {{ $t('uc.safe.nickInfo') }}
                   </p>
                   <p class="right-side">
@@ -49,9 +49,9 @@
               <!-- 2 身份认证 -->
               <div class="account-item">
                 <div class="account-item-in">
-                  <Icon type="md-card" size="18" color="#00b5f6"/>
+                  <i class="iconfont iconshenfenrenzheng" style="font-size: 22px"></i>
                   <span class="card-number">{{$t('uc.safe.safelevel_high')}}</span>
-                  <p v-if="user.realVerified==1" class="bankInfo" style="color: grey;">
+                  <p v-if="user.realVerified==1" class="bankInfo">
                     {{user.realName}}
                   </p>
                   <p v-else-if="user.realVerified==0&&user.realAuditing==0&&user.realNameRejectReason!=null"
@@ -63,7 +63,7 @@
                   <p v-else class="bankInfo" style="color: grey;">
                     {{$t('uc.safe.verifiedtip')}}
                   </p>
-                  <p v-if="user.realVerified==1" style="color:#fff" class="right-side">
+                  <p v-if="user.realVerified==1" style="color:#3399ff" class="right-side">
                     {{$t('uc.safe.binded')}}
                   </p>
                   <p v-else-if="user.realAuditing==1" class="right-side">
@@ -85,9 +85,9 @@
               <!-- 3 邮箱 -->
               <div class="account-item">
                 <div class="account-item-in">
-                  <Icon type="ios-mail" size="20" color="#00b5f6;"/>
+                  <i class="iconfont iconyouxiang" style="font-size: 22px"></i>
                   <span class="card-number">{{$t('uc.safe.email')}}</span>
-                  <p v-if="user.emailVerified==1" class="bankInfo" style="color: grey;">
+                  <p v-if="user.emailVerified==1" class="bankInfo">
                     {{user.email}}
                   </p>
                   <p v-else class="bankInfo" style="color: grey;">
@@ -110,15 +110,15 @@
               <!-- 3 手机 -->
               <div class="account-item">
                 <div class="account-item-in">
-                  <Icon type="ios-call" color="#00b5f6" size="20"/>
+                  <i class="iconfont iconshouji" style="font-size: 25px"></i>
                   <span class="card-number">{{$t('uc.safe.phone')}}</span>
-                  <p v-if="user.phoneVerified==1" class="bankInfo" style="color: grey;">
+                  <p v-if="user.phoneVerified==1" class="bankInfo">
                     {{user.mobilePhone}}
                   </p>
                   <p v-else class="bankInfo" style="color: grey;">
                     {{$t('uc.safe.bindphone')}}
                   </p>
-                  <p class="right-side" v-if="user.phoneVerified==1" style="color:#fff;">
+                  <p class="right-side" v-if="user.phoneVerified==1">
                     <a class="btn" @click="modal31= true">
                       <!--换绑-->
                       {{$t('uc.safe.inTie')}}
@@ -134,9 +134,9 @@
               <!-- 4 登录密码-->
               <div class="account-item">
                 <div class="account-item-in">
-                  <Icon type="ios-lock" size="20" color="#00b5f6;"></Icon>
+                  <i class="iconfont iconmima" style="font-size: 22px"></i>
                   <span class="card-number">{{$t('uc.safe.loginpwd')}}</span>
-                  <p class="bankInfo" style="color: grey;">
+                  <p class="bankInfo">
                     {{$t('uc.safe.logintip')}}
                   </p>
                   <p class="right-side">
@@ -149,9 +149,9 @@
               <!-- 5 资金密码-->
               <div class="account-item">
                 <div class="account-item-in">
-                  <Icon type="logo-bitcoin" size="20" color="#00b5f6"/>
+                  <i class="iconfont iconyouxianzijin" style="font-size: 22px"></i>
                   <span class="card-number">{{$t('uc.safe.fundpwd')}}</span>
-                  <p class="bankInfo" style="color: grey;">
+                  <p class="bankInfo">
                     {{$t('uc.safe.fundtip')}}
                   </p>
                   <!-- <p class="right-side" v-if="user.phoneVerified==0">
@@ -175,12 +175,11 @@
               <!-- 6 谷歌-->
               <div class="account-item googleValidter">
                 <div class="account-item-in" style="width: 100%;">
-                  <Icon type="social-googleplus-outline"/>
-                  <Icon type="logo-google" size="20" color="#00b5f6"/>
+                  <i class="iconfont icongugegoogle115" style="font-size: 22px"></i>
                   <span class="card-number">{{$t("uc.safe.GoogleAuthentication")}}</span>
-                  <p class="bankInfo" style="color: grey;">
+                  <p class="bankInfo">
                     {{$t('uc.safe.GoogleAuthenticationAbs')}}
-                    <router-link to="/helpList"><a href="javascript:void(0)">{{$t('uc.safe.userguide')}}</a>
+                    <router-link to="/helpList"><a style="color: #FE5C5C;" href="javascript:void(0)">{{$t('uc.safe.userguide')}}</a>
                     </router-link>
                   </p>
                   <div class="google-info right-side">
@@ -869,7 +868,7 @@
             </FormItem>
             <p style="text-align:right;">
               <a @click="handleReset('formValidate8');fGetBackFundpwd=!fGetBackFundpwd"
-                 style="color:#3399ff;margin-right:50px;margin-bottom:10px;">
+                 style="color:#FE5C5C;margin-right:50px;margin-bottom:10px;">
                 <!--忘记密码?-->
                 {{$t('uc.login.forget')}}
               </a>
@@ -2232,7 +2231,7 @@
     -ms-flex-align: center;
     align-items: center;
     padding: 6px 0;
-    background-color: #111530;
+    /*background-color: #111530;*/
     -webkit-box-shadow: 0 1px 0 0 rgba(69, 112, 128, 0.06);
     box-shadow: 0 1px 0 0 rgba(69, 112, 128, 0.06);
     font-size: 14px;
@@ -2263,7 +2262,7 @@
     .bankInfo {
       width: 70%;
       text-align: left;
-      color: #8090AF !important;
+      color: #666666;
     }
 
     .btn {
@@ -2321,6 +2320,7 @@
     div {
       display: inline-block;
       margin-left: 115px;
+      color: #333;
     }
   }
 
@@ -2504,6 +2504,7 @@
   }
 
   .user-icons .user-name span {
+    color: #333;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -2578,10 +2579,10 @@
   }
 
   .user-avatar-public > .user-avatar-in {
-    background: #3399ff;
+    background: #FE5C5C;
     border-radius: 50%;
-    height: 37px;
-    width: 37px;
+    height: 34px;
+    width: 34px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2594,16 +2595,16 @@
   // }
   /* router-link-exact-active router-link-active */
   .account-item-in i {
-    color: #3399ff !important;
+    color: #8090af !important;
   }
 
   .btn {
-    color: #3399ff;
+    color: #FE5C5C;
   }
 
   .ivu-btn-primary {
-    background-color: #3399ff;
-    border-color: #3399ff;
+    background-color: #E62B25;
+    border-color: #E62B25;
   }
 </style>
 <style lang="scss">
@@ -2637,23 +2638,23 @@
 
     .ivu-modal-content {
       padding: 0 42px;
-      background: #111530;
+      background: #fff;
       border-radius: 0;
 
       .ivu-modal-header {
-        border-bottom: 1px solid #2A3850;
+        border-bottom: 1px solid #eeeeee;
         height: 54px;
         padding: 18px 0;
 
         .ivu-modal-header-inner {
-          color: #fff;
+          color: #333;
           text-align: left;
           font-weight: 400;
         }
       }
 
       .ivu-modal-close .ivu-icon-ios-close {
-        color: #fff;
+        color: #333;
         font-size: 24px;
       }
 
@@ -2670,6 +2671,8 @@
 
 
   .nav-rights {
+    margin-top: 22px;
+    border: 1px solid rgba(238,238,238,1);
     .ivu-switch {
       width: 35px;
       height: 17px;
@@ -2682,6 +2685,8 @@
     }
 
     .ivu-switch-checked {
+      background: #E62B25;
+      border-color: #E62B25;
       &:after {
         left: 17px;
       }
@@ -2689,7 +2694,7 @@
 
     .ivu-input {
       background: transparent;
-      border: 1px solid #8090AF;
+      border: 1px solid #DDDDDD;
       border-radius: 0;
     }
 
@@ -2698,7 +2703,7 @@
     }
 
     .ivu-form-item-label {
-      color: #8090AF !important;
+      color: #333;
     }
 
     .ivu-form-item-required {
@@ -2721,12 +2726,12 @@
 
     .ivu-input {
       background: transparent;
-      border: 1px solid #8090AF;
+      border: 1px solid #DDDDDD;
       border-radius: 0;
     }
 
     .ivu-form-item-label {
-      color: #8090AF !important;
+      color: #333;
     }
 
     .ivu-form-item-required {
@@ -2742,11 +2747,14 @@
     }
 
     .ivu-input:hover {
-      border-color: #3399ff;
+      border-color: #DDDDDD;
     }
   }
 
   .detail-list {
+    .ivu-btn[disabled] {
+      color: #FE5C5C !important;
+    }
     .ivu-select {
       background: transparent !important;
       width: 300px;
@@ -2772,14 +2780,14 @@
 
     .ivu-input {
       background: transparent;
-      border: 1px solid #8090AF !important;
+      border: 1px solid #DDDDDD !important;
       border-radius: 0;
-      color: #fff;
+      color: #333;
     }
 
     .ivu-form-item-label {
       padding: 14px 12px 14px 0;
-      color: #8090AF !important;
+      color: #333 !important;
     }
 
     .ivu-form-item-required .ivu-form-item-label:before {
@@ -2787,14 +2795,14 @@
     }
 
     .ivu-input-large {
-      border: 1px solid #8090AF;
+      border: 1px solid #DDDDDD;
       height: 40px;
     }
 
     .ivu-input-large:hover,
     .ivu-input-large:focus,
     .ivu-input-large:active {
-      border-color: #8090AF;
+      border-color: #DDDDDD;
     }
 
     .ivu-form-item-error .ivu-input {
@@ -2811,7 +2819,7 @@
 
 
     .ivu-btn-default {
-      color: #8090AF;
+      color: #333;
       background: transparent;
       border-radius: 0;
     }
@@ -2819,8 +2827,8 @@
     .ivu-input-group-append,
     .ivu-input-group-prepend {
       background: transparent !important;
-      color: #3399FF !important;
-      border: 1px solid #8090AF !important;
+      color: #FE5C5C !important;
+      border: 1px solid #DDDDDD !important;
       border-left: none !important;
       border-radius: 0 !important;
     }
@@ -2845,7 +2853,7 @@
 
     .defeat-ivu {
       .ivu-btn-default {
-        color: #3399FF;
+        color: #FE5C5C;
         background: transparent;
         border: none;
         border-radius: 0;
@@ -2856,7 +2864,7 @@
       }
 
       .ivu-input {
-        border: 1px solid #8090AF;
+        border: 1px solid #DDDDDD;
         border-right: none;
         height: 40px;
       }

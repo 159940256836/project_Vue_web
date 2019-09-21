@@ -10,15 +10,15 @@
                   {{ $t('uc.finance.withdraw.symbol') }}
                 </span>：
                 <Select
-                  v-model="coinType"
-                  style="width:130px;"
-                  size="large"
-                  @on-change="changeCoin"
-                  :placeholder="$t('header.choose')"
+                        v-model="coinType"
+                        style="width:130px;"
+                        size="large"
+                        @on-change="changeCoin"
+                        :placeholder="$t('header.choose')"
                 >
                   <Option
-                    v-for="item in coinList"
-                    :value="item" :key="item"
+                          v-for="item in coinList"
+                          :value="item" :key="item"
                   >
                     {{ item }}
                   </Option>
@@ -28,18 +28,18 @@
                 <!--<span class="describe">{{$t('uc.finance.recharge.symbol')}}</span>:&nbsp;&nbsp;-->
                 <div class="link-main">
                   <p
-                    class="chain-link"
-                    :class="linkStyle == 'USDT' ? 'chain' : ''"
-                    @click="changeChain('USDT')"
-                    style="margin-left: 0"
+                          class="chain-link"
+                          :class="linkStyle == 'USDT' ? 'chain' : ''"
+                          @click="changeChain('USDT')"
+                          style="margin-left: 0"
                   >
                     OMNI
                     <img v-if="linkStyle == 'USDT'" :src="linkImg">
                   </p>
                   <p
-                    class="chain-link"
-                    :class="linkStyle == 'ERCUSDT' ? 'chain' : ''"
-                    @click="changeChain('ERCUSDT')"
+                          class="chain-link"
+                          :class="linkStyle == 'ERCUSDT' ? 'chain' : ''"
+                          @click="changeChain('ERCUSDT')"
                   >
                     ERC20
                     <img v-if="linkStyle == 'ERCUSDT'" :src="linkImg">
@@ -52,9 +52,9 @@
                 </span>
                 <div class="title">
                   <Input
-                    v-model="withdrawAddr"
-                    style="width: 260px;"
-                    size="large"
+                          v-model="withdrawAddr"
+                          style="width: 260px;"
+                          size="large"
                   />
                 </div>
               </div>
@@ -64,16 +64,16 @@
                 </span>
                 <div class="title">
                   <Input
-                    v-model="remark"
-                    style="width: 100px;"
-                    size="large"
+                          v-model="remark"
+                          style="width: 100px;"
+                          size="large"
                   />
                 </div>
               </div>
               <Button
-                  id="addrSubmit"
-                  @click='addAddr(1)'
-                  size="large"
+                      id="addrSubmit"
+                      @click='addAddr(1)'
+                      size="large"
               >
                 {{$t('uc.finance.withdraw.add')}}
               </Button>
@@ -84,21 +84,21 @@
                 <!--<p class="acb-p1 describe">{{$t('uc.finance.withdraw.addresslist')}}</p>-->
                 <div class="order-table">
                   <Table
-                    stripe
-                    :columns="tableColumnsRecharge"
-                    :data="dataRecharge"
-                    :disabled-hover="true"
-                    :no-data-text="$t('common.nodata')"
+                          stripe
+                          :columns="tableColumnsRecharge"
+                          :data="dataRecharge"
+                          :disabled-hover="true"
+                          :no-data-text="$t('common.nodata')"
                   ></Table>
                   <div style="margin: 10px;overflow: hidden">
                     <div style="float: right;">
                       <Page
-                        v-show="dataCount > 10"
-                        :total="dataCount"
-                        :current="1"
-                        @on-change="changePage"
-                        :loading="loading"
-                        class="recharge_btn"
+                              v-show="dataCount > 10"
+                              :total="dataCount"
+                              :current="1"
+                              @on-change="changePage"
+                              :loading="loading"
+                              class="recharge_btn"
                       ></Page>
                     </div>
                   </div>
@@ -111,31 +111,31 @@
     </div>
     <!-- model -->
     <Modal v-model="modal2" width="400">
-      <p slot="header" style="color:#39f;text-align:center">
+      <p slot="header" style="color:#FE5C5C;text-align:center">
         <span>{{ id == undefined?$t('uc.finance.withdraw.safevalidate'):$t('otc.myad.delete')}}</span>
       </p>
       <div style="text-align:center">
         <Form
-          ref="formValidateAddr"
-          :model="formValidateAddr"
-          :rules="ruleValidate"
-          :label-width="85"
+                ref="formValidateAddr"
+                :model="formValidateAddr"
+                :rules="ruleValidate"
+                :label-width="85"
         >
           <!-- 手机号 -->
           <FormItem
-            :label="$t('uc.finance.withdraw.telno')"
-            prop="mobileNo"
-            v-if="isPhoneCode"
-            style="width:90%"
+                  :label="$t('uc.finance.withdraw.telno')"
+                  prop="mobileNo"
+                  v-if="isPhoneCode"
+                  style="width:90%"
           >
             <Input disabled size="large" v-model="formValidateAddr.mobileNo"/>
           </FormItem>
           <!-- 手机验证码 -->
           <FormItem
-            :label="$t('uc.safe.phonecode')"
-            prop="vailCode2"
-            v-if="isPhoneCode"
-            style="width:90%"
+                  :label="$t('uc.safe.phonecode')"
+                  prop="vailCode2"
+                  v-if="isPhoneCode"
+                  style="width:90%"
           >
             <Input v-model="formValidateAddr.vailCode2" size="large">
               <!-- <Button slot="append">点击获取</Button> -->
@@ -150,23 +150,23 @@
           </FormItem>
           <!-- 邮箱 -->
           <FormItem
-            :label="$t('uc.finance.withdraw.email')"
-            prop="email"
-            v-if="isEmailCode"
-            style="width:90%"
+                  :label="$t('uc.finance.withdraw.email')"
+                  prop="email"
+                  v-if="isEmailCode"
+                  style="width:90%"
           >
             <Input
-              disabled
-              v-model="formValidateAddr.email"
-              size="large"
+                    disabled
+                    v-model="formValidateAddr.email"
+                    size="large"
             />
           </FormItem>
           <!-- 邮箱验证码 -->
           <FormItem
-            :label="$t('uc.forget.emailcode')"
-            prop="vailCode1"
-            v-if="isEmailCode"
-            style="width:90%"
+                  :label="$t('uc.forget.emailcode')"
+                  prop="vailCode1"
+                  v-if="isEmailCode"
+                  style="width:90%"
           >
             <Input v-model="formValidateAddr.vailCode1" size="large">
               <!-- <Button slot="append">点击获取</Button> -->
@@ -183,26 +183,26 @@
             </Input>
           </FormItem>
           <FormItem
-            :label="$t('openGoolePage._GoogleVerificationCode')"
-            v-if="isGoogleCode"
-            style="text-align: left"
+                  :label="$t('openGoolePage._GoogleVerificationCode')"
+                  v-if="isGoogleCode"
+                  style="text-align: left"
           >
             <Input
-              v-model="formValidateAddr.googleCode"
-              size="large"
-              type="text"
-              style="width:88%"
+                    v-model="formValidateAddr.googleCode"
+                    size="large"
+                    type="text"
+                    style="width:88%"
             />
           </FormItem>
         </Form>
       </div>
       <div slot="footer" style="width: 68%;margin-left:23%;">
         <Button
-          type="primary"
-          size="large"
-          long
-          @click="handleSubmit('formValidateAddr')"
-          style="color: #fff;height: 35px;"
+                type="primary"
+                size="large"
+                long
+                @click="handleSubmit('formValidateAddr')"
+                style="color: #fff;height: 35px;background: #E62B25;border: 0;"
         >
           {{ id == undefined?$t('uc.finance.withdraw.save'):$t('new.confirmaaa')}}
         </Button>
@@ -217,7 +217,7 @@
     data() {
       var that = this
       return {
-        interval: function() {
+        interval: function () {
         },
         linkStyle: 'USDT', // 链名称
         linkStatus: false, // 链状态
@@ -298,20 +298,20 @@
               return h('div', [
                 h(
                     'span',
-                  {
-                    style: {
-                      color: '#3399ff',
-                      cursor: 'pointer'
-                    },
-                    on: {
-                      click: () => {
-                        if (params.row.id) {
-                          this.addAddr(2, params.row.id)
-                        }
+                    {
+                      style: {
+                        color: '#FE5C5C',
+                        cursor: 'pointer'
+                      },
+                      on: {
+                        click: () => {
+                          if (params.row.id) {
+                            this.addAddr(2, params.row.id)
+                          }
                           // this.getList(0, 10);
+                        }
                       }
-                    }
-                  },
+                    },
                     that.$t('uc.finance.withdraw.delete')
                 )
               ])
@@ -394,7 +394,7 @@
         // 1.输入谷歌验证码
         // 2.输入手机验证码
         // 3.输入邮箱验证码
-        this.$http.post(this.host + '/uc/getGoogleState', { mobile: this.$store.getters.member.mobile }).then(res => {
+        this.$http.post(this.host + '/uc/getGoogleState', {mobile: this.$store.getters.member.mobile}).then(res => {
           const data = res.body
           this.isCode = data.data
           console.log(this.isCode)
@@ -439,8 +439,8 @@
       refresh() {
         this.getList(0, 10)
         this.coinType = null,
-        this.withdrawAddr = null,
-        this.remark = null
+            this.withdrawAddr = null,
+            this.remark = null
       },
       getMember() {
         // 获取个人安全信息
@@ -519,7 +519,7 @@
                 if (resp.code == 0) {
                   this.$Message.success(resp.message)
                   me.sendMsgDisabled1 = true
-                  const interval = window.setInterval(function() {
+                  const interval = window.setInterval(function () {
                     if (me.time1-- <= 0) {
                       me.time1 = 60
                       me.sendMsgDisabled1 = false
@@ -571,7 +571,7 @@
                 if (resp.code == 0) {
                   this.$Message.success(resp.message)
                   me.sendMsgDisabled1 = true
-                  const interval = window.setInterval(function() {
+                  const interval = window.setInterval(function () {
                     if (me.time1-- <= 0) {
                       me.time1 = 60
                       me.sendMsgDisabled1 = false
@@ -739,7 +739,7 @@
 
 <style scoped lang="scss">
   .timebox {
-    color: #3399ff;
+    color: #FE5C5C;
     min-width: 50px;
     cursor: pointer;
   }
@@ -751,8 +751,12 @@
 
     .ivu-select-dropdown {
       li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-        background: #10122B;
-        color: #3399ff;
+        background: #fff;
+        color: rgb(254, 92, 92);
+        &:hover {
+          background: #F4F6F8;
+          color: rgb(254, 92, 92);
+        }
       }
 
       li.ivu-select-item.ivu-select-item-selected {
@@ -770,7 +774,7 @@
       .bill_box_address {
         .table-inner {
           .action-inner {
-            background: #111530;
+            background: #fff;
             display: table;
             height: 60px;
             line-height: 60px;
@@ -786,7 +790,7 @@
                   min-width: 105px;
                   height: 31px;
                   background: #111530;
-                  color: #8090af;
+                  color: #333;
                   float: left;
                   margin-left: 25px;
                   text-align: center;
@@ -815,7 +819,7 @@
               display: table-cell;
 
               .describe {
-                color: #8090af;
+                color: #333;
                 float: left;
               }
             }
@@ -842,7 +846,7 @@
     height: 32px;
     width: 86px;
     color: #fff;
-    background: #3399ff;
+    background: #E62B25;
     float: right;
     border-radius: 0;
     margin: 14px;
@@ -874,280 +878,286 @@
   }
 </style>
 <style lang="scss">
-#withdraw{
+  #withdraw {
     .ivu-select-selection {
-        // height: 30px;
-        // border-radius: 0;
-        border: 1px solid #58698A;
-        background: #111530;
-      }
-          .ivu-input {
-      border: 1px solid #58698A;
+      // height: 30px;
       border-radius: 0;
-      background: #111530;
-      color: #8090AF;
-    }
-          .ivu-select-selected-value {
-        border-radius: 0;
-        background: #111530;
-        color: #8090AF;
-      }
- .ivu-input-group-append,
-  .ivu-input-group-prepend {
-    background: #111530 !important;
-    border: 1px solid #2a3850 !important;
-    border-left: none !important;
-    border-radius: 0 !important;
-  }
-
-  .ivu-form .ivu-form-item-label {
-    color: #8090af;
-  }
-
-  .ivu-modal-footer {
-    border-top: 1px solid #8090AF;
-  }
-
-  .ivu-modal-confirm-head-icon-confirm {
-    display: none;
-  }
-
-  .ivu-modal-confirm-head {
-    .ivu-modal-confirm-head-title {
-      color: #8090af;
+      border: 1px solid #DDDDDD;
+      background: #fff;
     }
 
-    text-align: left;
-  }
-
-  .ivu-modal-confirm-body {
-    padding-left: 14px;
-  }
-
-  .ivu-btn-text {
-    &:hover {
-      background: transparent;
+    .ivu-input {
+      border: 1px solid #DDDDDD;
+      border-radius: 0;
+      background: #fff;
+      color: #333;
     }
-  }
 
-  .ivu-btn[disabled]:hover {
-    /*background-color: transparent;*/
-    background-color: #111530;
-    border-color: transparent;
-  }
+    .ivu-select-selected-value {
+      border-radius: 0;
+      background: #fff;
+      color: #333;
+    }
 
-  .ivu-modal-confirm-footer .ivu-btn-primary,
-  .ivu-modal-confirm-footer .ivu-btn-text {
-    padding: 3px 15px;
-  }
+    .ivu-input-group-append,
+    .ivu-input-group-prepend {
+      background: #fff !important;
+      border: 1px solid #DDDDDD !important;
+      border-left: none !important;
+      border-radius: 0 !important;
+    }
 
-  .nav-rights-address {
     .ivu-form .ivu-form-item-label {
-      padding: 14px 12px 10px 0;
-    }
-
-    .ivu-select-large.ivu-select-single {
-      .ivu-select-selection {
-        height: 30px;
-        border-radius: 0;
-        border: 1px solid #58698A;
-        background: #111530;
-      }
-
-      .ivu-select-selected-value {
-        border-radius: 0;
-        background: #111530;
-      }
-    }
-
-    .ivu-select-large.ivu-select-single .ivu-select-selection .ivu-select-placeholder,
-    .ivu-select-large.ivu-select-single .ivu-select-selection .ivu-select-selected-value {
-      height: 28px;
-      line-height: 30px;
-      border-radius: 0;
-      background: #111530;
       color: #8090af;
     }
 
-    .ivu-input-large,
-    .ivu-select-placeholder,
-    .ivu-select-selection {
-      height: 30px;
-      line-height: 30px;
+    .ivu-modal-footer {
+      border-top: 1px solid #8090AF;
     }
 
+    .ivu-modal-confirm-head-icon-confirm {
+      display: none;
+    }
 
-    .nav-right {
-      .bill_box_address {
-        .table-inner {
-          .action-inner {
-            .inner-left {
-              /*左侧边框*/
-              .ivu-select.ivu-select-single {
-                .ivu-select-selection {
-                  &:hover {
-                    border-color: #3399ff;
-                  }
-                }
+    .ivu-modal-confirm-head {
+      .ivu-modal-confirm-head-title {
+        color: #8090af;
+      }
 
-                .ivu-select-selection.ivu-select-selection-focused {
-                  border-color: #3399ff;
-                }
-              }
+      text-align: left;
+    }
 
-              .ivu-select-dropdown .ivu-select-item {
-                padding: 6px 16px;
+    .ivu-modal-confirm-body {
+      padding-left: 14px;
+    }
 
-                &:hover {
-                  background: #10122B;
-                  color: #3399ff;
-                }
-              }
-
-              .ivu-select-dropdown {
-                li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-                  /*background: #fff;*/
-                  color: #3399ff;
-                }
-
-                li.ivu-select-item.ivu-select-item-selected {
-                  /*background: #fff;*/
-                  color: #495060;
-
-                  &:hover {
-                    color: #3399ff;
-                  }
-                }
-
-                &::-webkit-scrollbar {
-                  width: 4px; /*对垂直流动条有效*/
-                  height: 10px; /*对水平流动条有效*/
-                }
-
-                /*定义滚动条的轨道颜色、内阴影及圆角*/
-                &::-webkit-scrollbar-track {
-                  background-color: #111530;
-                  border-radius: 3px;
-                }
-
-                &::-webkit-scrollbar-thumb {
-                  border-radius: 7px;
-                  background-color: #8090AF;
-                }
-
-                .ivu-select-item {
-                  &:hover {
-                    background: transparent;
-                    color: #8090AF;
-                  }
-                }
-              }
-            }
-
-            .action-content .action-body {
-              /*分页*/
-              .ivu-page {
-                .ivu-page-item.ivu-page-item-active {
-                  background-color: #111530;
-                  border-color: #191f44;
-
-                  a {
-                    color: #3399ff;
-                  }
-
-                  &:hover {
-                    a {
-                      color: #fff;
-                    }
-                  }
-                }
-
-                .ivu-page-item {
-                  background: #111530;
-                  color: #8090AF;
-                  border: 1px solid #191f44;
-                }
-
-                .ivu-page-item:hover {
-                  color: #3399ff;
-                }
-
-                .ivu-page-prev,
-                .ivu-page-next {
-                  &:hover {
-                    border: 1px solid #3399ff;
-
-                    a {
-                      color: #3399ff;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
+    .ivu-btn-text {
+      &:hover {
+        background: transparent;
       }
     }
 
-    .ivu-table {
-      .ivu-table-tip {
-        td {
+    .ivu-btn[disabled]:hover {
+      /*background-color: transparent;*/
+      background-color: #fff;
+      border-color: #fff;
+    }
+
+    .ivu-modal-confirm-footer .ivu-btn-primary,
+    .ivu-modal-confirm-footer .ivu-btn-text {
+      padding: 3px 15px;
+    }
+
+    .nav-rights-address {
+      .ivu-form .ivu-form-item-label {
+        padding: 14px 12px 10px 0;
+      }
+
+      .ivu-select-large.ivu-select-single {
+        .ivu-select-selection {
+          height: 30px;
+          border-radius: 0;
+          border: 1px solid #58698A;
+          background: #111530;
+        }
+
+        .ivu-select-selected-value {
+          border-radius: 0;
           background: #111530;
         }
       }
 
-      .ivu-table-row {
-        td {
-          &:first-child {
-            text-align: left;
-            padding-left: 10px;
-          }
+      .ivu-select-large.ivu-select-single .ivu-select-selection .ivu-select-placeholder,
+      .ivu-select-large.ivu-select-single .ivu-select-selection .ivu-select-selected-value {
+        height: 28px;
+        line-height: 30px;
+        border-radius: 0;
+        background: #111530;
+        color: #8090af;
+      }
 
-          &:last-child {
-            text-align: right;
-            padding-right: 10px;
-          }
+      .ivu-input-large,
+      .ivu-select-placeholder,
+      .ivu-select-selection {
+        height: 30px;
+        line-height: 30px;
+      }
 
-          &:nth-child(2) {
-            text-align: left;
-            padding-left: 50px;
-          }
 
-          &:nth-child(3) {
-            text-align: center;
+      .nav-right {
+        .bill_box_address {
+          .table-inner {
+            .action-inner {
+              .inner-left {
+                /*左侧边框*/
+                .ivu-select.ivu-select-single {
+                  .ivu-select-selection {
+                    &:hover {
+                      border-color: #3399ff;
+                    }
+                  }
+
+                  .ivu-select-selection.ivu-select-selection-focused {
+                    border-color: #3399ff;
+                  }
+                }
+
+                .ivu-select-dropdown .ivu-select-item {
+                  padding: 6px 16px;
+
+                  &:hover {
+                    background: #fff;
+                    color: #D5382B;
+                  }
+                }
+
+                .ivu-select-dropdown {
+                  li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
+                    background: #fff;
+                    &:hover {
+                      background: #F4F6F8;
+                      color: rgb(254, 92, 92);
+                    }
+                  }
+
+                  li.ivu-select-item.ivu-select-item-selected {
+                    /*background: #fff;*/
+                    color: #495060;
+
+                    &:hover {
+                      color: #3399ff;
+                    }
+                  }
+
+                  &::-webkit-scrollbar {
+                    width: 4px; /*对垂直流动条有效*/
+                    height: 10px; /*对水平流动条有效*/
+                  }
+
+                  /*定义滚动条的轨道颜色、内阴影及圆角*/
+                  &::-webkit-scrollbar-track {
+                    background-color: #EDEDED;
+                    border-radius: 3px;
+                  }
+
+                  &::-webkit-scrollbar-thumb {
+                    border-radius: 7px;
+                    background-color: #E0E0E0
+                  }
+
+                  .ivu-select-item {
+                    &:hover {
+                      background: transparent;
+                      color: #D5382B;
+                    }
+                  }
+                }
+              }
+
+              .action-content .action-body {
+                /*分页*/
+                .ivu-page {
+                  .ivu-page-item.ivu-page-item-active {
+                    background-color: #111530;
+                    border-color: #191f44;
+
+                    a {
+                      color: #3399ff;
+                    }
+
+                    &:hover {
+                      a {
+                        color: #fff;
+                      }
+                    }
+                  }
+
+                  .ivu-page-item {
+                    background: #111530;
+                    color: #8090AF;
+                    border: 1px solid #191f44;
+                  }
+
+                  .ivu-page-item:hover {
+                    color: #3399ff;
+                  }
+
+                  .ivu-page-prev,
+                  .ivu-page-next {
+                    &:hover {
+                      border: 1px solid #3399ff;
+
+                      a {
+                        color: #3399ff;
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
 
-      .ivu-table-header {
-        th {
-          height: 50px;
-          background: #191D3A;
-          border-bottom: 0 !important;
-          color: #8090AF;
-
-          &:first-child {
-            text-align: left;
-            padding-left: 10px;
+      .ivu-table {
+        .ivu-table-tip {
+          td {
+            background: #111530;
           }
+        }
 
-          &:last-child {
-            text-align: right;
-            padding-right: 10px;
+        .ivu-table-row {
+          td {
+            &:first-child {
+              text-align: left;
+              padding-left: 10px;
+            }
+
+            &:last-child {
+              text-align: right;
+              padding-right: 10px;
+            }
+
+            &:nth-child(2) {
+              text-align: left;
+              padding-left: 50px;
+            }
+
+            &:nth-child(3) {
+              text-align: center;
+            }
           }
+        }
 
-          &:nth-child(2) {
-            text-align: left;
-            padding-left: 50px;
-          }
+        .ivu-table-header {
+          th {
+            height: 50px;
+            background: #191D3A;
+            border-bottom: 0 !important;
+            color: #8090AF;
 
-          &:nth-child(3) {
-            text-align: center;
+            &:first-child {
+              text-align: left;
+              padding-left: 10px;
+            }
+
+            &:last-child {
+              text-align: right;
+              padding-right: 10px;
+            }
+
+            &:nth-child(2) {
+              text-align: left;
+              padding-left: 50px;
+            }
+
+            &:nth-child(3) {
+              text-align: center;
+            }
           }
         }
       }
     }
-}
   }
 </style>
 

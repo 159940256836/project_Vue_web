@@ -281,7 +281,7 @@
                           :loading="loading"
                   >
                   </Table>
-                  <div id="pages">
+                  <div>
                     <div style="float: right;">
                       <Page
                               :total="transaction.total"
@@ -774,11 +774,14 @@
         if (this.withdrawAmount > this.currentCoin.balance) {
           this.withdrawAmount = this.currentCoin.balance
         }
-        // 否则 提出当前数量减去手续费
-        this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
-        // ERC20类型
-        // 否则 提出当前数量减去手续费
-        this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawMinTxFee).toFixed(5))
+        if (this.linkStyle == 'USDT') {
+          // 否则 提出当前数量减去手续费
+          this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawFee).toFixed(5))
+        } else {
+          // ERC20类型
+          // 否则 提出当前数量减去手续费
+          this.withdrawOutAmount = Number((this.withdrawAmount - this.withdrawMinTxFee).toFixed(5))
+        }
         /*// ERC20类型
         if (this.minWithdrawAmount < this.withdrawMinTxFee) {
           /!*this.withdrawAmount = this.currentCoin.minAmount*!/
@@ -1028,39 +1031,39 @@
 </script>
 <style lang="scss">
   .ivu-modal-header p {
-    color: #8090af;
+    color: #333;
   }
 
   .ivu-form {
     .ivu-form-item-label {
-      color: #8090af;
+      color: #333;
     }
   }
 
   .ivu-modal-footer {
-    border-top: 1px solid #8090AF;
+    border-top: 1px solid #eeeeee;
   }
 
   .withdraw {
     .ivu-btn[disabled]:hover {
       color: #fff;
-      background-color: #3399ff;
+      background-color: #E62B25;
     }
 
     input::-webkit-input-placeholder {
-      color: #8090af;
+      color: #333;
     }
 
     input:-moz-placeholder {
-      color: #8090af;
+      color: #333;
     }
 
     input::-moz-placeholder {
-      color: #8090af;
+      color: #333;
     }
 
     input:-ms-input-placeholder {
-      color: #8090af;
+      color: #333;
     }
 
     .ivu-table {
@@ -1088,7 +1091,7 @@
           height: 50px;
           background: #191D3A;
           border-bottom: 0 !important;
-          color: #8090AF;
+          color: #666666;
 
           &:first-child {
             text-align: left;
@@ -1112,7 +1115,7 @@
       .ivu-table-tip {
         td {
           text-align: center;
-          background: #111530;
+          background: #fff;
         }
       }
     }
@@ -1145,34 +1148,36 @@
         color: #3399ff;
       }
     }
-
+    #record_pages {
+      margin-top: 20px;
+    }
     #record_pages li.ivu-page-item.ivu-page-item-active {
-      background-color: #111530;
-      border-color: #191f44;
-
+      background-color: #fff;
+      border-color: #DDDDDD;
       a {
-        color: #3399ff;
+        color: #999999;
       }
     }
-
     #record_pages li.ivu-page-item.ivu-page-item-active {
       &:hover {
-        background-color: #111530;
-
+        background-color: #fff;
         a {
-          color: #3399ff;
+          color: #FE5C5C;
         }
       }
     }
-
     .ivu-page-item {
-      background: #111530;
-      color: #8090AF;
-      border: 1px solid #191f44;
+      background: #f4f6f8;
+      color: #333;
+      border: 1px solid #DDDDDD;
+      a {
+        &:hover {
+          color: #FE5C5C;
+        }
+      }
     }
-
     .ivu-page-item:hover {
-      color: #3399ff;
+      color: #FE5C5C;
     }
   }
 
@@ -1196,8 +1201,8 @@
       padding: 6px 16px;
 
       &:hover {
-        background: #10122B !important;
-        color: #3399ff;
+        background: #fff;
+        color: #D5382B;
       }
     }
     .ivu-select-item-focus {
@@ -1205,8 +1210,12 @@
     }
     .ivu-select-dropdown {
       li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
-        background: #10122B;
-        color: #3399ff;
+        background: #fff;
+        color: rgb(254, 92, 92);
+        &:hover {
+          background: #F4F6F8;
+          color: rgb(254, 92, 92);
+        }
       }
 
       li.ivu-select-item.ivu-select-item-selected {
@@ -1221,10 +1230,10 @@
 
     .ivu-select-single {
       .ivu-select-selection {
-        background: #111530;
+        background: #fff;
         width: 270px;
         line-height: 35px;
-        border: 1px solid #58698A;
+        border: 1px solid #DDDDDD;
         border-radius: 0;
       }
     }
@@ -1241,7 +1250,7 @@
                   width: 270px;
 
                   &:hover {
-                    border-color: #3399ff;
+                    border-color: #DDDDDD;
                   }
                 }
 
@@ -1322,48 +1331,6 @@
                 }
               }
             }
-
-            #pages {
-              .ivu-page {
-                .ivu-page-item.ivu-page-item-active {
-                  background-color: #111530;
-                  border-color: #191f44;
-
-                  a {
-                    color: #3399ff;
-                  }
-
-                  &:hover {
-                    background-color: #111530;
-
-                    a {
-                      color: #3399ff;
-                    }
-                  }
-                }
-
-                .ivu-page-item {
-                  &:hover {
-                    border: 1px solid #3399ff;
-
-                    a {
-                      color: #3399ff;
-                    }
-                  }
-
-                  .ivu-page-prev,
-                  .ivu-page-next {
-                    &:hover {
-                      border: 1px solid #3399ff;
-
-                      a {
-                        color: #3399ff;
-                      }
-                    }
-                  }
-                }
-              }
-            }
           }
 
           .v-transfer-dom .ivu-poptip-content .ivu-poptip-inner {
@@ -1389,13 +1356,14 @@
 
       .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
       .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-        background: #10122B;
+        background: #fff;
       }
 
       ivu-table {
         td {
           text-align: center !important;
         }
+        margin-bottom: 10px;
       }
     }
 
@@ -1405,19 +1373,19 @@
       line-height: 35px;
 
       &:hover {
-        border-color: #58698A;
+        border-color: #DDDDDD;
       }
 
       .ivu-select-placeholder {
-        color: #8090af;
+        color: #333;
       }
 
       .ivu-select-selected-value {
         height: 35px;
         line-height: 35px;
-        color: #fff;
+        color: #333;
       }
-    }
+  }
 
     .ivu-select-item-selected {
       background: transparent;
@@ -1429,8 +1397,8 @@
       line-height: 35px;
       border-radius: 0;
       background: transparent;
-      border-color: #58698A;
-      color: #fff;
+      border-color: #DDDDDD;
+      color: #333;
     }
   }
 </style>
@@ -1460,7 +1428,7 @@
 
   .footer-btn-c {
     margin-right: 50px;
-    color: #fff;
+    color: #E62B25;
     width: 80px;
     border-radius: 0;
     display: inline-block;
@@ -1468,11 +1436,11 @@
     height: 30px;
     line-height: 30px;
     cursor: pointer;
-    border: 1px solid #2A3850;
+    border: 1px solid #E62B25;
   }
 
   .footer-btn-q {
-    background: #3399ff;
+    background: #E62B25;
     color: #fff;
     width: 80px;
     border-radius: 0;
@@ -1482,7 +1450,7 @@
     // line-height: 30px;
     // cursor: pointer;
     /deep/ .footer-btn-q:hover {
-      background: #3399ff;
+      background: #E62B25;
       border: none;
     }
   }
@@ -1497,13 +1465,13 @@
 
       .operationform {
         padding: 0 28px 30px;
-        background: #111530;
+        background: #fff;
 
         .operationform-title {
           height: 50px;
           line-height: 50px;
-          color: #fff;
-          border-bottom: 1px solid #2A3850;
+          color: #333;
+          border-bottom: 1px solid #eeeeee;
           margin-bottom: 35px;
           padding-left: 10px;
           font-size: 14px;
@@ -1512,12 +1480,12 @@
         .operationform-info {
           width: 85%;
           margin: 40px auto;
-          background: rgba(186, 218, 248, .2);
-          border: 1px solid rgba(117, 188, 255, .2);
+          background: #F4F6F8;
+          /*border: 1px solid rgba(117, 188, 255, .2);*/
           padding: 10px 15px;
           line-height: 25px;
           font-size: 12px;
-          color: #cdd9f0;
+          color: #666666;
         }
 
         .operationform-from {
@@ -1571,7 +1539,7 @@
           span {
             display: inline-block;
             font-size: 14px;
-            color: #8090af;
+            color: #333;
           }
 
           .input-group {
@@ -1580,6 +1548,9 @@
 
           .label-fr {
             margin: 10px 0 0 145px;
+            .label-pointer {
+              color: #FE5C5C;
+            }
           }
         }
       }
@@ -1692,7 +1663,7 @@
       display: inline-block;
       width: 120px;
       text-align: right;
-      color: #8090AF;
+      color: #333;
     }
 
     .acb-p1 {
@@ -1703,14 +1674,14 @@
     }
 
     .acb-p2 {
-      color: #8090AF;
+      color: #333;
       font-size: 14px;
       line-height: 30px;
     }
 
     .action-content.pt10 {
       padding-top: 10px;
-      border-top: 1px solid #2A3850;
+      border-top: 1px solid #EEEEEE;
     }
 
     .action-content {
@@ -2016,7 +1987,7 @@
 
     .ivu-btn-primary {
       color: #fff;
-      background-color: #3399ff;
+      background-color: #E62B25;
       border-radius: 0;
       border: 0;
     }

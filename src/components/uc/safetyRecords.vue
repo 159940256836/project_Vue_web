@@ -124,20 +124,21 @@
       .blc_box {
         height: 60px;
         line-height: 60px;
-        background: #111530;
+        background: #F4F6F8;
         padding: 0 28px;
         margin-bottom: 22px;
         font-weight: 600;
-        color: #8090af;
+        color: #333;
+        border: 1px solid #eeeeee;
         span {
-          color: #8090af;
+          color: #333;
           font-size: 14px;
         }
         .search_btn {
           height: 32px;
           line-height: 32px;
           width: 86px;
-          background: #3399ff;
+          background: #E62B25;
           color: #fff;
           font-size: 14px;
           border: none;
@@ -175,25 +176,27 @@
       border: 1px solid #2A3850;
     }
     .blc-table {
+      border: 1px solid #eeeeee;
       .ivu-table-wrapper {
         td {
           background: #111530;
         }
         .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
         .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-          background: #10122B;
+          background: #fff;
         }
         .ivu-table-header {
           thead th {
             height: 50px;
-            background: #191D3A;
+            background: #fff;
+            border-bottom: 1px solid #eeeeee;
             &:last-child {
               text-align: right;
             }
           }
         }
         tbody.ivu-table-tbody .ivu-table-row td {
-          background: #111530;
+          background: #F4F6F8;
           &:last-child {
             text-align: right;
           }

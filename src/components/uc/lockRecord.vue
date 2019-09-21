@@ -183,20 +183,20 @@
       .lock_box {
         height: 60px;
         line-height: 60px;
-        background: #111530;
+        background: #F4F6F8;
         padding: 0 28px;
         margin-bottom: 22px;
         font-weight: 600;
-        color: #8090af;
+        color: #333;
         span {
-          color: #8090af;
+          color: #333;
           font-size: 14px;
         }
         .search_btn {
           height: 32px;
           line-height: 32px;
           width: 86px;
-          background: #3399ff;
+          background: #E62B25;
           color: #fff;
           font-size: 14px;
           border: none;
@@ -209,18 +209,18 @@
       }
       .lock_info {
         height: 60px;
-        background: #111530;
+        background: #eeeeee;
         padding-left: 20px;
         line-height: 60px;
         margin-bottom: 20px;
         span {
-          color: #8090af;
+          color: #333;
         }
         .search_btn {
           height: 32px;
           line-height: 32px;
           width: 86px;
-          background: #3399ff;
+          background: #E62B25;
           color: #fff;
           font-size: 14px;
           border: none;
@@ -232,6 +232,7 @@
         }
       }
       .lock-table {
+        border: 1px solid #EEEEEE;
         .page-wrap {
           float: right;
           margin-top: 20px;
@@ -252,48 +253,47 @@
       }
     }
     .ivu-select-item {
-      color: #8090af;
+      color: #333;
     }
     .ivu-select-item-focus {
-      background: #191d3a;
+      background: #fff;
     }
     .ivu-select-selection {
       width: 130px;
       height: 32px;
-      background: #111530;
-      border: 1px solid #58698a;
+      border: 1px solid #DDDDDD;
       border-radius: 0;
     }
     .ivu-select-selected-value {
-      color: #8090af;
+      color: #333;
     }
     .ivu-input {
       width: 260px;
       height: 30px;
-      border: 1px solid #58698a;
+      border: 1px solid #DDDDDD;
       border-radius: 0;
-      background: #111530;
-      color: #8090AF;
+      color: #333;
     }
     .ivu-input-with-suffix {
       padding-right: 32px;
       border-radius: 0;
-      background: #111530;
-      border: 1px solid #2A3850;
+      border: 1px solid #DDDDDD;
     }
     .lock-table {
+      border: 1px solid #dddddd;
       .ivu-table-wrapper {
         td {
-          background: #111530;
+          background: #fff;
         }
         .ivu-table-stripe .ivu-table-body tr:nth-child(2n) td,
         .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-          background: #10122B;
+          background: #fff;
         }
         .ivu-table-header {
           thead th {
             height: 50px;
-            background: #191D3A;
+            background: #fff;
+            border-bottom: 1px solid #dddddd;
             &:last-child {
               text-align: right;
             }

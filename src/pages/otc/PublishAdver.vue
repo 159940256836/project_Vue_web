@@ -22,11 +22,11 @@ export default {
 <style scoped lang="scss">
   .nav-advert {
     min-height: 1120px;
-    background: #0e0e28;
+    background: #f4f6f8;
     padding-top: 60px;
     .advert-box {
       width: 1200px;
-      min-height: 900px;
+      min-height: 1135px;
       margin: 0 auto;
     }
   }

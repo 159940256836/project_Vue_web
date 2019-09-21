@@ -433,12 +433,12 @@ export default {
                         .ivu-input {
                             width: 280px !important;
                             background: transparent;
-                            .
+                            /*.*/
 
-                            
-                            color: #fff;
-                            border-radius: 0;
-                            border: 1px solid #58698A;
+
+                            /*color: #fff;*/
+                            /*border-radius: 0;*/
+                            /*border: 1px solid #58698A;*/
                         }
                     }
                 }

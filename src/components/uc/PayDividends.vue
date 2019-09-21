@@ -443,19 +443,19 @@ export default {
 }
 
 #record_pages ivu-page-item-active {
-  background-color: #3399ff !important;
-  border-color: #3399ff !important;
+  background-color: #fff;
+  border-color: #dddddd;
 }
 #record_pages ivu-page-item-active:hover {
-  background-color: #3399ff !important;
+  background-color: transparent;
 }
-.ivu-page-item-active {
-  background-color: #3399ff;
-  border-color: #3399ff;
-}
-.ivu-page-item:hover {
-  color: #3399ff;
-}
+/*.ivu-page-item-active {*/
+/*  background-color: #3399ff;*/
+/*  border-color: #3399ff;*/
+/*}*/
+/*.ivu-page-item:hover {*/
+/*  color: #3399ff;*/
+/*}*/
 .order-table .ivu-table-body .ivu-table-cell {
   padding-right: 0 !important;
 }

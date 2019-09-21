@@ -9,9 +9,9 @@
         line-height: 20px;
     }
     .expand {
-        border: 1px solid #2A3850;
+        border: 1px solid #DDDDDD;
         padding: 16px 20px;
-        color: #8090AF;
+        color: #666;
     }
 
     .expand  .ivu-row {

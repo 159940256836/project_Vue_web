@@ -1,6 +1,6 @@
 <template>
     <div class="nav-rights">
-        <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.accountsetting') }}</h2>
+        <h2 class="title">{{ this.$t('uc.member.accountsetting') }}</h2>
         <div class="nav-right col-xs-12 col-md-10 padding-right-clear">
             <div class="bill_box rightarea padding-right-clear record account-box">
                 <!-- <section class="trade-group merchant-top">
@@ -17,7 +17,7 @@
                                 <p v-if="user.bankVerified==1" class="bankInfo" style="color: grey;">
                                     {{user.bankInfo.cardNo}}
                                 </p>
-                                <p v-else class="bankInfo" style="color: grey;">
+                                <p v-else class="bankInfo">
                                   {{$t('uc.account.backcardtip')}}
                                 </p>
                                 <!-- 银行卡号 -->
@@ -40,7 +40,7 @@
                             <div class="account-item-in">
                                 <i class="icons alipay"></i>
                                 <span class="card-number">{{$t('uc.account.zfbaccount')}}</span>
-                                <p v-if="user.aliVerified==1" class="bankInfo" style="color: grey;">
+                                <p v-if="user.aliVerified==1" class="bankInfo">
                                     {{user.alipay.aliNo}}
                                 </p>
                                 <p v-else class="bankInfo" style="color: grey;">
@@ -58,7 +58,7 @@
                             <div class="account-item-in">
                                 <i class="icons wechat"></i>
                                 <span class="card-number">{{$t('uc.account.wxaccount')}}</span>
-                                <p v-if="user.wechatVerified==1" class="bankInfo" style="color: grey;">
+                                <p v-if="user.wechatVerified==1" class="bankInfo">
                                     {{user.wechatPay.wechat}}
                                 </p>
                                 <p v-else class="bankInfo" style="color: grey;">
@@ -138,7 +138,9 @@
                         <Col span="8">
                         <input type="hidden" name="aliPreview" :value="aliPreview" />
                         <img :alt="$t('uc.account.imgtip')" id="aliImg" style="width: 150px;height: 150px;" :src="aliImg">
-                        <p style="text-align:center;"><Icon type="ios-alert" style="color:#3697FE;"/><span style="margin-top:20px;">{{ $t('new.Pleascode') }}</span></p>
+                        <p style="text-align:center;"><Icon type="ios-alert" style="color:#FE5C5C;"/>
+                            <span style="margin-top:20px;color:#FE5C5C;">{{ $t('new.Pleascode') }}</span>
+                        </p>
                         <div class="acc_sc">
                             <Upload
                             ref="upload1"
@@ -192,7 +194,10 @@
                         <Col span="8">
                             <input type="hidden" name="wePreview" :value="wePreview" />
                             <img :alt="$t('uc.account.imgtip')" id="weImg" style="width: 150px;height: 150px;" :src=weImg>
-                            <p style="text-align:center;margin-top:10px;"><Icon type="ios-alert" style="color:#3697FE;"/><span style="margin-top:20px;">{{ $t('new.Pleasuplode') }}</span></p>
+                            <p style="text-align:center;margin-top:10px;">
+                                <Icon type="ios-alert" style="color:#FE5C5C;"/>
+                                <span style="margin-top:20px;color: #FE5C5C;">{{ $t('new.Pleasuplode') }}</span>
+                            </p>
                             <div class="acc_sc" style="margin-top:20px;">
                             <Upload
                                 ref="upload2"
@@ -642,7 +647,7 @@ export default {
     -ms-flex-align: center;
     align-items: center;
     padding: 6px 0;
-    background-color: #111530;
+    /*background-color: #111530;*/
     -webkit-box-shadow: 0 1px 0 0 rgba(69, 112, 128, 0.06);
     box-shadow: 0 1px 0 0 rgba(69, 112, 128, 0.06);
     font-size: 14px;
@@ -682,7 +687,7 @@ export default {
 .account-box .account-in .account-item .account-item-in .bankInfo {
     width:70%;
     text-align: left;
-    color: #8090AF !important;
+    color: #666666;
 }
 
 .account-box .account-in .account-item .account-item-in .right-side {
@@ -697,18 +702,18 @@ export default {
 .account-box .account-in .account-item .account-item-in .btn {
     padding: 8px 0;
     cursor: pointer;
-    color: #3399ff;
+    color: #FE5C5C;
 }
 
 .hb-night a {
     text-decoration: none;
-    color: #3399ff;
+    color: #FE5C5C;
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
 .hb-night a {
     text-decoration: none;
-    color: #3399ff;
+    color: #FE5C5C;
     transition: all .2s ease-in-out;
     cursor: pointer;
 }
@@ -795,25 +800,25 @@ export default {
     .ivu-select-selection {
       background: transparent;
       border-radius: 0;
-      border:1px solid rgba(88,105,138,1);
+      border:1px solid #dddddd;
       height: 30px;
       line-height: 22px;
       outline:none;
       box-shadow: none;
       .ivu-select-selected-value {
-        color: #fff;
+        color: #333;
       }
     }
 
     .ivu-select-item:hover {
-        background: #10122b;
-        color: #8090AF;
+        background: #FFF;
+        color: #FE5C5C;
     }
 
     .ivu-select-item-selected,
     .ivu-select-item-selected:hover {
-        background: #10122b;
-        color: #fff;
+        background: #FFF;
+        color: #FE5C5C;
     }
     .ivu-select-selection:focus {
       box-shadow: none;
@@ -827,12 +832,12 @@ export default {
 
         /*定义滚动条的轨道颜色、内阴影及圆角*/
         &::-webkit-scrollbar-track{
-            background-color: #111530;
+            background-color: #EDEDED;
             border-radius: 3px;
         }
         &::-webkit-scrollbar-thumb{
             border-radius: 7px;
-            background-color: #8090AF;
+            background-color: #E0E0E0
         }
     }
 
@@ -870,7 +875,7 @@ export default {
     }
 
     .ivu-btn-default {
-        border: 1px solid #8090af;
+        border: 1px solid #dddddd;
     }
 
     .ivu-btn-default:hover {
@@ -888,7 +893,7 @@ export default {
     fieldset[disabled] .ivu-btn:focus,
     fieldset[disabled] .ivu-btn:hover {
         background: transparent;
-        color: #3399FF;
+        color: #FE5C5C;
     }
 }
 </style>

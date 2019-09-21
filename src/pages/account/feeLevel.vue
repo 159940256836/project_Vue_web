@@ -1,6 +1,6 @@
 <template>
     <div class="nav-rights nav-bottom">
-        <h2 class="title" style="margin-top:22px;">{{ this.$t('uc.member.FeeGrade') }}</h2>
+        <h2 class="title">{{ this.$t('uc.member.FeeGrade') }}</h2>
 
         <div class="rightarea">
             <div class="fee-top">
@@ -30,7 +30,7 @@
                 </ul>
             </div>
             <div class="feelevelTop">
-                <h4>{{$t("leverDescPage._gradDes")}}</h4>
+                <!--<h4>{{$t("leverDescPage._gradDes")}}</h4>-->
                 <Table
                         :no-data-text="$t('common.nodata')"
                         :columns="columns"
@@ -123,7 +123,7 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
-$color: #39f;
+$color: #FE5C5C;
 .fee-top {
     ul {
         @extend %flex;
@@ -141,7 +141,7 @@ $color: #39f;
             font-size: 20px;
         }
         li p:first-child {
-            color: #8090AF;
+            color: #333;
             margin-bottom: 24px;
         }
     }
@@ -165,7 +165,6 @@ $color: #39f;
     {
         height: 288px;
         width: 35px;
-        background: #111530;
         position: absolute;
         z-index: 999;
         bottom: 0;
@@ -189,15 +188,12 @@ $color: #39f;
 
 <style lang="scss">
     .feelevelTop {
-        .ivu-table-wrapper {
-            margin-top: 25px;
-        }
         .ivu-table {
             background: transparent;
             td {
-                background: #111530;
-                border-bottom: 1px solid #2A3850;
-                color: #fff;
+                background: #fff;
+                border-bottom: 1px solid #eeeeee !important;
+                color: #666666;
             }
 
             th {
@@ -215,7 +211,7 @@ $color: #39f;
             }
         }
         .ivu-table-wrapper .ivu-table .ivu-table-header th {
-            background: #10122B;
+            background: #EEEEEE
         }
 
         .ivu-table-header thead tr{

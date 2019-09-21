@@ -19,6 +19,7 @@
           <input
                   type="text"
                   :placeholder="$t('new.searchCurrency')"
+                  stripe
                   class="text-input"
                   v-model="searchKey"
                   maxlength="10"
@@ -194,7 +195,7 @@
               },
               style: {
                 marginRight: '30px',
-                color: '#3399ff',
+                color: '#FE5C5C',
                 cursor: 'pointer'
               }
             }, self.$t('myAccount._rollout'))
@@ -214,7 +215,7 @@
                 }
               },
               style: {
-                color: '#3399ff',
+                color: '#FE5C5C',
                 cursor: 'pointer'
               }
             }, self.$t('myAccount.rollout'))
@@ -271,8 +272,8 @@
           margin: 14px 25px 0;
           padding: 0 0 0 35px;
           font-size: 14px;
-          color: #fff;
-          border-left: 2px solid #8090af;
+          color: #333;
+          border-left: 2px solid #dddddd;
           outline: none;
         }
 
@@ -293,7 +294,35 @@
       }
 
       .title-header {
-        color: #8090af;
+        color: #666666;
+      }
+    }
+  }
+</style>
+<style lang="scss">
+  .ivu-table-wrapper {
+    margin-right: -1px;
+
+    .ivu-table {
+      .ivu-table-stripe {
+        .ivu-table-body {
+          tr {
+            &:nth-child(2n) {
+              td {
+                background: #fff;
+                border-bottom: 0 !important;
+              }
+            }
+          }
+        }
+      }
+
+      .ivu-table-header {
+        th {
+          background: #fff;
+          border-bottom: 0 !important;
+          color: #666666;
+        }
       }
     }
   }

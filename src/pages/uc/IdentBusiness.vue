@@ -21,67 +21,71 @@
       <div style="width: 80%; margin: 0 auto;">
         <!--0 未认证 1 审核中 2 已认证 3 未通过 5 申请退保中-->
         <div
-          class="ident-title ident-info"
-          v-if="certStatus === 0"
+                class="ident-title ident-info"
+                v-if="certStatus === 0"
         >
           <!--未认证-->
           <!-- 申请认证商家 -->
           <span>{{$t('uc.identity.apply')}}</span>
-          <p style="font-size: 14px;margin-top: 10px">
+          <p style="font-size: 14px;margin-top: 10px;color: #666666">
             <!-- 成为bdw认证商家，享更多交易特权 -->
             {{$t('uc.identity.become')}}
           </p>
         </div>
         <div
-          class="ident-title ident-info"
-          v-else-if="certStatus == 1"
+                class="ident-title ident-info"
+                v-else-if="certStatus == 1"
         >
           <!--审核中 您的商家认证审核已提交-->
           <span>{{$t('uc.identity.tijiao')}}</span>
         </div>
         <div
-          class="ident-title ident-info"
-          v-else-if="certStatus == 2"
+                class="ident-title ident-info"
+                v-else-if="certStatus == 2"
         >
           <!--恭喜！您的商家认证审核已通过-->
           <span>{{$t('uc.identity.tijiaosuc')}}</span>
         </div>
         <div
-          class="ident-title ident-info"
-          v-else-if="certStatus == 3"
+                class="ident-title ident-info"
+                v-else-if="certStatus == 3"
         >
           <!--抱歉！您的商家认证审核未通过-->
           <span>{{$t("uc.identity.tijiaofail")}}</span>
         </div>
         <div
-          class="ident-title ident-info"
-          v-else-if="certStatus == 5"
+                class="ident-title ident-info"
+                v-else-if="certStatus == 5"
         >
           <!--您的商家注销申请已提交-->
           <span>{{$t("uc.identity.zhuxiaotijiao")}}</span>
         </div>
         <div
-          class="ident-title ident-info"
-          v-else-if="certStatus == 6"
+                class="ident-title ident-info"
+                v-else-if="certStatus == 6"
         >
           <!--未通过 您的商家注销申请审核未通过-->
           <span>{{$t("uc.identity.shenhefail")}}</span>
         </div>
         <div
-          class="ident-title ident-info"
-          v-else-if="certStatus == 7"
+                class="ident-title ident-info"
+                v-else-if="certStatus == 7"
         >
           <!--已认证 您的商家注销申请审核已通过-->
           <span>{{$t("uc.identity.shenhesuc")}}</span>
         </div>
         <!-- prepare:准备资料； review：提交审核； result:审核结果；certified：已认证 ; shenheshibai：审核失败-->
-        <Steps class="apply-step" :current="certStatus == 2 ? 3 : certStatus == 3 ? 2 : certStatus" :status="certStatus == 3 ? 'error' :'finish'" v-if="certStatus != 0 && certStatus != 5 && certStatus != 6 && certStatus != 7">
+        <Steps class="apply-step" :current="certStatus == 2 ? 3 : certStatus == 3 ? 2 : certStatus"
+               :status="certStatus == 3 ? 'error' :'finish'"
+               v-if="certStatus != 0 && certStatus != 5 && certStatus != 6 && certStatus != 7">
           <Step :title=prepare></Step>
           <Step :title=review></Step>
           <Step :title="certStatus == 1 || certStatus == 0  ? result : certStatus == 2 ? certified : shenheshibai"></Step>
         </Steps>
         <!-- shangjiazhuxiao：商家注销  tijiaoshenqing：提交申请 shenheshibai：审核失败；passed：审核通过-->
-        <Steps class="apply-step" :current="certStatus == 5 ? 1 : certStatus == 6 ? 2 : 3" :status="certStatus == 6 ? 'error':'finish'" v-if="certStatus == 5 || certStatus == 6 || certStatus == 7">
+        <Steps class="apply-step" :current="certStatus == 5 ? 1 : certStatus == 6 ? 2 : 3"
+               :status="certStatus == 6 ? 'error':'finish'"
+               v-if="certStatus == 5 || certStatus == 6 || certStatus == 7">
           <Step :title=shangjiazhuxiao></Step>
           <Step :title=tijiaoshenqing></Step>
           <Step :title="certStatus == 5 ? result : certStatus == 6 ? shenheshibai : passed"></Step>
@@ -89,27 +93,27 @@
 
         <div v-if="certStatus == 6" class="business">
           <button
-            type="button"
-            @click="modal_return=true"
-            long
-            size="large"
-            class="ok-business"
+                  type="button"
+                  @click="modal_return=true"
+                  long
+                  size="large"
+                  class="ok-business"
           >
             {{$t("uc.identity.sheqinggain")}}
           </button>
           <div class="fail-reason" style="margin-top: 50px;font-size: 16px;">
-            <Icon type="md-alert" color="red" size="16" />
+            <Icon type="md-alert" color="red" size="16"/>
             <span style="margin-left: 10px;">{{$t('uc.identity.yuanyin')}}：{{refuseReason}}</span>
           </div>
         </div>
 
         <div v-if="certStatus == 7" class="business">
           <button
-            type="button"
-            @click="modal_read=true"
-            long
-            size="large"
-            class="ok-business"
+                  type="button"
+                  @click="modal_read=true"
+                  long
+                  size="large"
+                  class="ok-business"
           >
             {{$t("uc.identity.sheqinggain")}}
           </button>
@@ -117,32 +121,32 @@
 
         <div v-if="certStatus == 3" class="business">
           <button
-            type="button"
-            @click="modal_read=true"
-            long
-            size="large"
-            class="ok-business"
+                  type="button"
+                  @click="modal_read=true"
+                  long
+                  size="large"
+                  class="ok-business"
           >
             {{$t("uc.identity.sheqinggain")}}
           </button>
           <div class="fail-reason" style="margin-top: 50px;font-size: 16px;">
-            <Icon type="md-alert" color="red" size="16" />
+            <Icon type="md-alert" color="red" size="16"/>
             <span style="margin-left: 10px;">{{$t("uc.identity.reason")}}：{{certReason}}</span>
           </div>
         </div>
 
         <div v-else-if="certStatus == 2" class="business">
           <button
-            type="button"
-            @click="publishAd"
-            long
-            size="large"
-            class="ok-business"
+                  type="button"
+                  @click="publishAd"
+                  long
+                  size="large"
+                  class="ok-business"
           >
             {{$t('nav.fabu')}}
           </button>
           <div style="margin-top: 30px;font-size: 16px;text-align: center;">
-            <a @click="returnAdit" style="color: #8090af;">{{$t("uc.identity.shenqingtuibao")}}</a>
+            <a @click="returnAdit" style="color: #333;">{{$t("uc.identity.shenqingtuibao")}}</a>
           </div>
         </div>
       </div>
@@ -188,9 +192,9 @@
           <Checkbox v-model="single"></Checkbox>
           <span>{{$t("uc.identity.read")}}</span>
           <router-link
-            to="/merchantsDeal"
-            class="cur"
-            style="color:#3399ff"
+                  to="/merchantsDeal"
+                  class="cur"
+                  style="color:#3399ff"
           >
             {{$t('uc.identity.agreement')}}
           </router-link>
@@ -207,7 +211,8 @@
       <div class="mail" v-show="isShowMailt">
         <Input v-model="value" placeholder="Enter something..." style="width: 300px"></Input><br/>
         <Input v-model="value" placeholder="Enter something..." style="width:202px"></Input>
-        <Button type="info">{{$t('uc.identity.sendcode')}}</Button><br/>
+        <Button type="info">{{$t('uc.identity.sendcode')}}</Button>
+        <br/>
         <Button type="info" style="margin-top: 25px; width: 297px;">{{$t('uc.identity.confirm')}}</Button>
       </div>
       <!-- 邮件end -->
@@ -235,11 +240,14 @@
         <h3>{{$t('uc.identity.second.step3')}}</h3>
         <p>{{$t('uc.identity.second.stepc')}}</p>
         <div style="text-align: left;padding: 30px 0;">
-          <Checkbox v-model="agreeFrozen"></Checkbox> {{$t('uc.identity.second.agree')}}
+          <Checkbox v-model="agreeFrozen"></Checkbox>
+          {{$t('uc.identity.second.agree')}}
           <span>
-            <font color="#3399ff">{{auditText}}</font>{{$t('uc.identity.second.agreec')}}</span>
+            <font color="#FE5C5C">{{auditText}}</font>{{$t('uc.identity.second.agreec')}}</span>
         </div>
-        <Button @click="apply2" long style="font-size: 16px;background:#3399ff;color:#fff;border:1px solid #3399ff;">{{$t('uc.identity.second.shenqingchngweishangjia')}}</Button>
+        <Button @click="apply2" long style="font-size: 16px;background:#E62B25;color:#fff;border:1px solid #E62B25;">
+          {{$t('uc.identity.second.shenqingchngweishangjia')}}
+        </Button>
       </div>
       <p slot="footer">
         <!--<span style="text-align: left">-->
@@ -268,48 +276,52 @@
           </FormItem>
           <Row>
             <Col span="8">
-            <FormItem :label="bizhong">
-              <!-- //5.20修改 -->
-              <Select v-model="apply_form.coinSymbol" :placeholder="select" @on-change="onCoinChange">
-                <Option v-for="(item,index) in auditCurrency" :value="item.coin.unit" :key="index">{{item.coin.unit}}</Option>
-              </Select>
-            </FormItem>
+              <FormItem :label="bizhong">
+                <!-- //5.20修改 -->
+                <Select v-model="apply_form.coinSymbol" :placeholder="select" @on-change="onCoinChange">
+                  <Option v-for="(item,index) in auditCurrency" :value="item.coin.unit" :key="index">
+                    {{item.coin.unit}}
+                  </Option>
+                </Select>
+              </FormItem>
             </Col>
             <Col span="8">
-            <span>&nbsp;</span>
+              <span>&nbsp;</span>
             </Col>
             <Col span="8">
-            <FormItem :label="shuliang">
-              <Label v-model="apply_form.amount">{{apply_form.amount}}</Label>
-            </FormItem>
+              <FormItem :label="shuliang">
+                <Label v-model="apply_form.amount">{{apply_form.amount}}</Label>
+              </FormItem>
             </Col>
           </Row>
           <Row>
             <Col span="8">
-            <Upload type="drag" ref="upload1" :on-success="assetHandleSuccess" :headers="uploadHeaders" :action="uploadUrl" :on-remove="assetRemove">
-              <span style="line-height: 100px;font-size: 50px">+</span>
-              <img v-show="assetImg" class="previewImg" :src="assetImg">
-            </Upload>
-            <span class="user-text">{{$t("uc.identity.gerenzichan")}}</span>
+              <Upload type="drag" ref="upload1" :on-success="assetHandleSuccess" :headers="uploadHeaders"
+                      :action="uploadUrl" :on-remove="assetRemove">
+                <span style="line-height: 100px;font-size: 50px">+</span>
+                <img v-show="assetImg" class="previewImg" :src="assetImg">
+              </Upload>
+              <span class="user-text">{{$t("uc.identity.gerenzichan")}}</span>
             </Col>
             <Col span="8">
-            <span>&nbsp;</span>
+              <span>&nbsp;</span>
             </Col>
             <Col span="8">
-            <Upload type="drag" ref="upload2" :on-success="tradeHandleSuccess" :headers="uploadHeaders" :action="uploadUrl" :on-remove="tradeRemove">
-              <span style="line-height: 100px;font-size: 50px">+</span>
-              <img v-show="tradeImg" class="previewImg" :src="tradeImg">
+              <Upload type="drag" ref="upload2" :on-success="tradeHandleSuccess" :headers="uploadHeaders"
+                      :action="uploadUrl" :on-remove="tradeRemove">
+                <span style="line-height: 100px;font-size: 50px">+</span>
+                <img v-show="tradeImg" class="previewImg" :src="tradeImg">
 
-            </Upload>
-            <span class="user-text">{{$t("uc.identity.shuzizichan")}}</span>
+              </Upload>
+              <span class="user-text">{{$t("uc.identity.shuzizichan")}}</span>
             </Col>
           </Row>
           <FormItem style="margin-top: 20px;">
             <Button
-              style="width:100%;background:#3399ff;color:#fff;border:1px solid #3399ff;"
-              type="info"
-              @click="apply3('apply_form')"
-              :disabled="applyBtn"
+                    style="width:100%;background:#E62B25;color:#fff;border:1px solid #E62B25;"
+                    type="info"
+                    @click="apply3('apply_form')"
+                    :disabled="applyBtn"
             >
               {{ $t("uc.identity.lijishenqing") }}
             </Button>
@@ -320,816 +332,899 @@
     </Modal>
 
     <Modal
-      v-model="modal_return"
-      @on-ok="returnAudit"
+            v-model="modal_return"
+            @on-ok="returnAudit"
     >
       <p slot="header">{{$t("uc.identity.tips")}}</p>
-      <p style="font-size: 14px;color: #8090AF;">{{$t("uc.identity.wufachexiao")}}</p>
-      <p style="font-size: 14px;color: #8090AF;">{{$t("uc.identity.suredo")}}</p>
+      <p style="font-size: 14px;color: #666666;">{{$t("uc.identity.wufachexiao")}}</p>
+      <p style="font-size: 14px;color: #666666;">{{$t("uc.identity.suredo")}}</p>
       <Input
-        v-model="returnReason"
-        type="textarea"
-        :placeholder=placeholder
-        :rows="4"
+              v-model="returnReason"
+              type="textarea"
+              :placeholder=placeholder
+              :rows="4"
       />
     </Modal>
   </div>
 
 </template>
 <script>
-export default {
-  data() {
-    return {
-      noEmpty: '必填',
-      review: this.$t('uc.identity.review'), // 准备资料
-      prepare: this.$t('uc.identity.prepare'), // 提交审核；
-      result: this.$t('uc.identity.result'), // 等待结果;
-      certified: this.$t('uc.identity.certified'), // 已认证
-      shenheshibai: this.$t('uc.identity.shenheshibai'), // 审核失败
-      shangjiazhuxiao: this.$t('uc.identity.shangjiazhuxiao'), // 商家注销
-      tijiaoshenqing: this.$t('uc.identity.tijiaoshenqing'), // 提交申请
-      shenheshibai: this.$t('uc.identity.shenheshibai'), // 审核失败
-      passed: this.$t('uc.identity.passed'), // 审核通过
-      placeholder: this.$t('uc.identity.placeholder'),
-      select: this.$t('uc.identity.chosen'),
-      phone: this.$t('uc.identity.phone'),
-      qq: this.$t('uc.identity.qq'),
-      wechat: this.$t('uc.identity.wx'),
-      bizhong: this.$t('uc.identity.bizhong'),
-      shuliang: this.$t('uc.identity.shuliang'),
-      loginmsg: this.$t('common.logintip'),
-      single: false,
-      value: '',
-      isShowShang: true,
-      isShowMailt: false,
-      isShowSubmitted: false,
-      isShowSuccess: false,
-      activeStepIndex: 0,
-      emailAdress: 'kefu@bdw.pro',
-      steps: [
-        this.$t('uc.identity.prepare'),
-        this.$t('uc.identity.review'),
-        this.$t('uc.identity.passed')
-      ],
-      certStatus: 0, // 认证申请状态，0:未申请，1：审核中，2：已认证，3：认证失败
-      certReason: '',
-      auditCurrency: '',
-      auditText: '',
-      modal_read: false,
-      modal_return: false,
-      agreeFrozen: false,
-      modal_apply: false,
-      applyBtn: false,
-      apply_form: {
-        telno: '',
-        wechat: '',
-        qq: '',
-        coinSymbol: '',
-        amount: '',
-        assetData: '',
-        tradeData: ''
-      },
-      assetImg: '',
-      tradeImg: '',
-      uploadHeaders: { 'x-auth-token': localStorage.getItem('TOKEN') },
-      uploadUrl: this.host + '/uc/upload/oss/image',
-      returnReason: '',
-      refuseReason: ''
-    }
-  },
-  methods: {
-    islogin() {
-      const self = this
-      //判断是否进行实名认证；
-      this.$http
-        .post(this.host + '/uc/approve/security/newSetting', {})
-        .then(response => {
-          var resp = response.body
-          if (resp.code == 0) {
-            if (resp.data.realName == null || resp.data.realName == '') {
-              this.$Message.warning(this.$t('otc.publishad.submittip1'))
-              self.$router.push('/uc/safe')
-            } else if (resp.data.phoneVerified == 0) {
-              this.$Message.warning(this.$t('otc.publishad.submittip2'))
-              self.$router.push('/uc/safe')
-            } else if (resp.data.fundsVerified == 0) {
-              this.$Message.warning(this.$t('otc.publishad.submittip3'))
-              self.$router.push('/uc/safe')
-            }
-          } else {
-            this.$Message.error(resp.message)
-          }
-        })
-    },
-    timer() {
-      setInterval(() => {
-        this.getSetting()
-      }, 10000)
-    },
-    publishAd() {
-      this.$router.push('/PublishAdver')
-    },
-    returnAdit() {
-      this.modal_return = true
-    },
-    returnAudit() {
-      var params = {}
-      params['detail'] = this.returnReason
-      this.$http
-        .post(this.host + '/uc/approve/cancel/business', params)
-        .then(res => {
-          const resp = res.body
-          if (resp.code == 0) {
-            this.$Message.success('提交成功!')
-            this.modal_return = false
-            this.getSetting()
-          } else {
-            this.$Message.error(resp.message)
-          }
-        })
-    },
-    getAudiCoin(symbol) {
-      var coin = null
-      for (var i = 0; i < this.auditCurrency.length; i++) {
-        if (symbol == this.auditCurrency[i].coin.unit) {
-          coin = this.auditCurrency[i]
-          break;
-        }
-      }
-      return coin
-    },
-    onCoinChange(value) {
-      var coin = this.getAudiCoin(value)
-      if (coin != null) {
-        this.apply_form.amount = coin.amount
+  export default {
+    data() {
+      return {
+        noEmpty: '必填',
+        review: this.$t('uc.identity.review'), // 准备资料
+        prepare: this.$t('uc.identity.prepare'), // 提交审核；
+        result: this.$t('uc.identity.result'), // 等待结果;
+        certified: this.$t('uc.identity.certified'), // 已认证
+        shenheshibai: this.$t('uc.identity.shenheshibai'), // 审核失败
+        shangjiazhuxiao: this.$t('uc.identity.shangjiazhuxiao'), // 商家注销
+        tijiaoshenqing: this.$t('uc.identity.tijiaoshenqing'), // 提交申请
+        shenheshibai: this.$t('uc.identity.shenheshibai'), // 审核失败
+        passed: this.$t('uc.identity.passed'), // 审核通过
+        placeholder: this.$t('uc.identity.placeholder'),
+        select: this.$t('uc.identity.chosen'),
+        phone: this.$t('uc.identity.phone'),
+        qq: this.$t('uc.identity.qq'),
+        wechat: this.$t('uc.identity.wx'),
+        bizhong: this.$t('uc.identity.bizhong'),
+        shuliang: this.$t('uc.identity.shuliang'),
+        loginmsg: this.$t('common.logintip'),
+        single: false,
+        value: '',
+        isShowShang: true,
+        isShowMailt: false,
+        isShowSubmitted: false,
+        isShowSuccess: false,
+        activeStepIndex: 0,
+        emailAdress: 'kefu@bdw.pro',
+        steps: [
+          this.$t('uc.identity.prepare'),
+          this.$t('uc.identity.review'),
+          this.$t('uc.identity.passed')
+        ],
+        certStatus: 0, // 认证申请状态，0:未申请，1：审核中，2：已认证，3：认证失败
+        certReason: '',
+        auditCurrency: '',
+        auditText: '',
+        modal_read: false,
+        modal_return: false,
+        agreeFrozen: false,
+        modal_apply: false,
+        applyBtn: false,
+        apply_form: {
+          telno: '',
+          wechat: '',
+          qq: '',
+          coinSymbol: '',
+          amount: '',
+          assetData: '',
+          tradeData: ''
+        },
+        assetImg: '',
+        tradeImg: '',
+        uploadHeaders: {'x-auth-token': localStorage.getItem('TOKEN')},
+        uploadUrl: this.host + '/uc/upload/oss/image',
+        returnReason: '',
+        refuseReason: ''
       }
     },
-    getSetting() {
-      this.$http
-        .get(this.host + this.api.uc.identification)
-        .then(res => {
-          const certifiedBusinessStatus = res.body.data.certifiedBusinessStatus
-          this.activeStepIndex = certifiedBusinessStatus
-          this.certStatus = certifiedBusinessStatus
-          console.log(this.certStatus)
-          this.certReason = res.body.data.detail
-          this.refuseReason = res.body.data.reason
-        })
-        .catch(function(error) {})
-    },
-    assetHandleSuccess(res, file, fileList) {
-      // fileList = fileList[fileList.length-1]
-      this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
-      this.apply_form.assetData = res.data
-      this.assetImg = res.data
-    },
-    tradeHandleSuccess(res, file, fileList) {
-      this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
-      this.apply_form.tradeData = res.data
-      this.tradeImg = res.data
-    },
-    assetRemove(file, fileList) {
-      this.apply_form.assetData = '';
-      this.assetImg = '';
-    },
-    tradeRemove(file, fileList) {
-      this.apply_form.tradeData = '';
-      this.tradeImg = '';
-    },
-    getAuthFound() {
-      this.$http
-        .get(this.host + '/uc/approve/business-auth-deposit/list')
-        .then(res => {
-          var resp = res.body
-          if (resp.code == 0) {
-            this.auditCurrency = resp.data
-            var tempText = '';
-            for (var i = 0; i < resp.data.length; i++) {
-              if (i == 0) {
-                // BHB;
-                // this.apply_form.coinSymbol = resp.data[i].coin.unit;
-                // 10000;
-                this.apply_form.amount = resp.data[i].amount
-              }
-              tempText += resp.data[i].amount + '个' + resp.data[i].coin.unit
-              if (i < resp.data.length - 1) tempText += '或';
-            }
-            this.auditText = tempText
-          }
-        })
-    },
-    apply() {
-      const stasingle = this.single
-      if (stasingle == false) {
-        this.$Message.warning(this.$t('uc.identity.approve'))
-        return;
-      }
-      if (this.member.kycStatus !== 4) {
-        this.$Message.error(this.$t('otc.validate2'))
-        return false
-      } else if (this.member.kycStatus === 4) {
-        this.modal_read = true
-        return;
+    methods: {
+      islogin() {
+        const self = this
+        //判断是否进行实名认证；
         this.$http
-            .get(this.host + this.api.uc.apply)
+            .post(this.host + '/uc/approve/security/newSetting', {})
+            .then(response => {
+              var resp = response.body
+              if (resp.code == 0) {
+                if (resp.data.realName == null || resp.data.realName == '') {
+                  this.$Message.warning(this.$t('otc.publishad.submittip1'))
+                  self.$router.push('/uc/safe')
+                } else if (resp.data.phoneVerified == 0) {
+                  this.$Message.warning(this.$t('otc.publishad.submittip2'))
+                  self.$router.push('/uc/safe')
+                } else if (resp.data.fundsVerified == 0) {
+                  this.$Message.warning(this.$t('otc.publishad.submittip3'))
+                  self.$router.push('/uc/safe')
+                }
+              } else {
+                this.$Message.error(resp.message)
+              }
+            })
+      },
+      timer() {
+        setInterval(() => {
+          this.getSetting()
+        }, 10000)
+      },
+      publishAd() {
+        this.$router.push('/PublishAdver')
+      },
+      returnAdit() {
+        this.modal_return = true
+      },
+      returnAudit() {
+        var params = {}
+        params['detail'] = this.returnReason
+        this.$http
+            .post(this.host + '/uc/approve/cancel/business', params)
+            .then(res => {
+              const resp = res.body
+              if (resp.code == 0) {
+                this.$Message.success('提交成功!')
+                this.modal_return = false
+                this.getSetting()
+              } else {
+                this.$Message.error(resp.message)
+              }
+            })
+      },
+      getAudiCoin(symbol) {
+        var coin = null
+        for (var i = 0; i < this.auditCurrency.length; i++) {
+          if (symbol == this.auditCurrency[i].coin.unit) {
+            coin = this.auditCurrency[i]
+            break;
+          }
+        }
+        return coin
+      },
+      onCoinChange(value) {
+        var coin = this.getAudiCoin(value)
+        if (coin != null) {
+          this.apply_form.amount = coin.amount
+        }
+      },
+      getSetting() {
+        this.$http
+            .get(this.host + this.api.uc.identification)
+            .then(res => {
+              const certifiedBusinessStatus = res.body.data.certifiedBusinessStatus
+              this.activeStepIndex = certifiedBusinessStatus
+              this.certStatus = certifiedBusinessStatus
+              console.log(this.certStatus)
+              this.certReason = res.body.data.detail
+              this.refuseReason = res.body.data.reason
+            })
+            .catch(function (error) {
+            })
+      },
+      assetHandleSuccess(res, file, fileList) {
+        // fileList = fileList[fileList.length-1]
+        this.$refs.upload1.fileList = [fileList[fileList.length - 1]]
+        this.apply_form.assetData = res.data
+        this.assetImg = res.data
+      },
+      tradeHandleSuccess(res, file, fileList) {
+        this.$refs.upload2.fileList = [fileList[fileList.length - 1]]
+        this.apply_form.tradeData = res.data
+        this.tradeImg = res.data
+      },
+      assetRemove(file, fileList) {
+        this.apply_form.assetData = '';
+        this.assetImg = '';
+      },
+      tradeRemove(file, fileList) {
+        this.apply_form.tradeData = '';
+        this.tradeImg = '';
+      },
+      getAuthFound() {
+        this.$http
+            .get(this.host + '/uc/approve/business-auth-deposit/list')
             .then(res => {
               var resp = res.body
               if (resp.code == 0) {
-                this.$Message.success(resp.message)
-                this.activeStepIndex = 1
-              } else {
-                this.$Message.warning(resp.message)
+                this.auditCurrency = resp.data
+                var tempText = '';
+                for (var i = 0; i < resp.data.length; i++) {
+                  if (i == 0) {
+                    // BHB;
+                    // this.apply_form.coinSymbol = resp.data[i].coin.unit;
+                    // 10000;
+                    this.apply_form.amount = resp.data[i].amount
+                  }
+                  tempText += resp.data[i].amount + '个' + resp.data[i].coin.unit
+                  if (i < resp.data.length - 1) tempText += '或';
+                }
+                this.auditText = tempText
               }
             })
-            .catch(function(error) {
-              this.$Message.error(error)
+      },
+      apply() {
+        const stasingle = this.single
+        if (stasingle == false) {
+          this.$Message.warning(this.$t('uc.identity.approve'))
+          return;
+        }
+        if (this.member.kycStatus !== 4) {
+          this.$Message.error(this.$t('otc.validate2'))
+          return false
+        } else if (this.member.kycStatus === 4) {
+          this.modal_read = true
+          return;
+          this.$http
+              .get(this.host + this.api.uc.apply)
+              .then(res => {
+                var resp = res.body
+                if (resp.code == 0) {
+                  this.$Message.success(resp.message)
+                  this.activeStepIndex = 1
+                } else {
+                  this.$Message.warning(resp.message)
+                }
+              })
+              .catch(function (error) {
+                this.$Message.error(error)
+              })
+        }
+
+
+      },
+      apply2() {
+        const agreeFrozen = this.agreeFrozen
+        if (agreeFrozen == false) {
+          this.$store.state.lang != 'English' &&
+          this.$Message.warning('请同意冻结相应数量的币')
+          this.$store.state.lang == 'English' &&
+          this.$Message.warning(
+              'Please agree to freeze the corresponding amount of currency'
+          )
+          return;
+        }
+        this.modal_read = false
+        this.modal_apply = true
+      },
+      apply3(form) {
+        if (this.apply_form.telno == '') {
+          this.$store.state.lang != 'English' &&
+          this.$Message.error('请填写手机号')
+          this.$store.state.lang == 'English' &&
+          this.$Message.error('Please fill in your cell phone number')
+          return;
+        }
+        if (this.apply_form.wechat == '') {
+          this.$store.state.lang != 'English' &&
+          this.$Message.error('请填写微信号')
+          this.$store.state.lang == 'English' &&
+          this.$Message.error('Please fill in your cell wechat number')
+          return;
+        }
+        if (this.apply_form.qq == '') {
+          this.$store.state.lang != 'English' &&
+          this.$Message.error('请填写qq号')
+          this.$store.state.lang == 'English' &&
+          this.$Message.error('Please fill in your cell qq number')
+          return;
+        }
+        if (this.apply_form.assetData == '') {
+          this.$store.state.lang != 'English' &&
+          this.$Message.error('请上传资产证明')
+          this.$store.state.lang == 'English' &&
+          this.$Message.error('Please upload the asset certificate')
+          return;
+        }
+        if (this.apply_form.tradeData == '') {
+          this.$store.state.lang != 'English' &&
+          this.$Message.error('请上传交易证明')
+          this.$store.state.lang == 'English' &&
+          this.$Message.error('Please upload the transaction certificate')
+          return;
+        }
+        var params = {}
+        params['businessAuthDepositId'] = this.getAudiCoin(
+            this.apply_form.coinSymbol
+        ).id
+        params['json'] = JSON.stringify(this.apply_form)
+        this.$http
+            .post(this.host + '/uc/approve/certified/business/apply', params)
+            .then(res => {
+              var resp = res.body
+              if (resp.code == 0) {
+                this.$Message.success('提交成功!')
+                this.modal_apply = false
+                this.certStatus = 1
+              } else {
+                this.$Message.error(resp.message)
+              }
             })
       }
+    },
+    created() {
+      // this.timer();
+      // this.islogin()
+      if (this.isLogin) {
+        this.getSetting()
+      }
+      this.getAuthFound()
+    },
+    computed: {
+      member: function () {
+        return this.$store.getters.member
+      },
+      isLogin: function () {
+        return this.$store.getters.isLogin
+      },
+      lang: function () {
+        return this.$store.state.lang
+      }
+    },
+    watch: {
+      lang: function () {
+        this.prepare = this.$t('uc.identity.prepare')
+        this.review = this.$t('uc.identity.review')
+        this.result = this.$t('uc.identity.result')
+        this.certified = this.$t('uc.identity.certified') //已认证
+        this.shenheshibai = this.$t('uc.identity.shenheshibai') //审核失败
+        this.shangjiazhuxiao = this.$t('uc.identity.shangjiazhuxiao') //商家注销
+        this.tijiaoshenqing = this.$t('uc.identity.tijiaoshenqing') //提交申请
+        this.shenheshibai = this.$t('uc.identity.shenheshibai') //审核失败
+        this.passed = this.$t('uc.identity.passed') //审核通过
 
-
-    },
-    apply2() {
-      const agreeFrozen = this.agreeFrozen
-      if (agreeFrozen == false) {
-        this.$store.state.lang != 'English' &&
-          this.$Message.warning('请同意冻结相应数量的币')
-        this.$store.state.lang == 'English' &&
-          this.$Message.warning(
-            'Please agree to freeze the corresponding amount of currency'
-          )
-        return;
+        this.phone = this.$t('uc.identity.phone')
+        this.qq = this.$t('uc.identity.qq')
+        this.wechat = this.$t('uc.identity.wx')
+        this.bizhong = this.$t('uc.identity.bizhong')
+        this.shuliang = this.$t('uc.identity.shuliang')
       }
-      this.modal_read = false
-      this.modal_apply = true
-    },
-    apply3(form) {
-      if (this.apply_form.telno == '') {
-        this.$store.state.lang != 'English' &&
-          this.$Message.error('请填写手机号')
-        this.$store.state.lang == 'English' &&
-          this.$Message.error('Please fill in your cell phone number')
-        return;
-      }
-      if (this.apply_form.wechat == '') {
-        this.$store.state.lang != 'English' &&
-          this.$Message.error('请填写微信号')
-        this.$store.state.lang == 'English' &&
-          this.$Message.error('Please fill in your cell wechat number')
-        return;
-      }
-      if (this.apply_form.qq == '') {
-        this.$store.state.lang != 'English' &&
-          this.$Message.error('请填写qq号')
-        this.$store.state.lang == 'English' &&
-          this.$Message.error('Please fill in your cell qq number')
-        return;
-      }
-      if (this.apply_form.assetData == '') {
-        this.$store.state.lang != 'English' &&
-          this.$Message.error('请上传资产证明')
-        this.$store.state.lang == 'English' &&
-          this.$Message.error('Please upload the asset certificate')
-        return;
-      }
-      if (this.apply_form.tradeData == '') {
-        this.$store.state.lang != 'English' &&
-          this.$Message.error('请上传交易证明')
-        this.$store.state.lang == 'English' &&
-          this.$Message.error('Please upload the transaction certificate')
-        return;
-      }
-      var params = {}
-      params['businessAuthDepositId'] = this.getAudiCoin(
-        this.apply_form.coinSymbol
-      ).id
-      params['json'] = JSON.stringify(this.apply_form)
-      this.$http
-        .post(this.host + '/uc/approve/certified/business/apply', params)
-        .then(res => {
-          var resp = res.body
-          if (resp.code == 0) {
-            this.$Message.success('提交成功!')
-            this.modal_apply = false
-            this.certStatus = 1
-          } else {
-            this.$Message.error(resp.message)
-          }
-        })
-    }
-  },
-  created() {
-    // this.timer();
-    // this.islogin()
-    if (this.isLogin) {
-      this.getSetting()
-    }
-    this.getAuthFound()
-  },
-  computed: {
-    member: function () {
-      return this.$store.getters.member
-    },
-    isLogin: function() {
-      return this.$store.getters.isLogin
-    },
-    lang: function() {
-      return this.$store.state.lang
-    }
-  },
-  watch: {
-    lang: function() {
-      this.prepare = this.$t('uc.identity.prepare')
-      this.review = this.$t('uc.identity.review')
-      this.result = this.$t('uc.identity.result')
-      this.certified = this.$t('uc.identity.certified') //已认证
-      this.shenheshibai = this.$t('uc.identity.shenheshibai') //审核失败
-      this.shangjiazhuxiao = this.$t('uc.identity.shangjiazhuxiao') //商家注销
-      this.tijiaoshenqing = this.$t('uc.identity.tijiaoshenqing') //提交申请
-      this.shenheshibai = this.$t('uc.identity.shenheshibai') //审核失败
-      this.passed = this.$t('uc.identity.passed') //审核通过
-
-      this.phone = this.$t('uc.identity.phone')
-      this.qq = this.$t('uc.identity.qq')
-      this.wechat = this.$t('uc.identity.wx')
-      this.bizhong = this.$t('uc.identity.bizhong')
-      this.shuliang = this.$t('uc.identity.shuliang')
     }
   }
-}
 </script>
 
 <style scoped>
-.merchant {
-  background: #0e0e28;
-  padding: 80px 0;
-}
-.previewImg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-.content {
-  width: 1200px;
-  margin: 0 auto;
-  padding-top: 30px;
-}
-.ip .ivu-col {
-  line-height: 37px;
-  text-align: left;
-  padding-left: 139px;
-}
-.business {
-  width: 500px;
-  margin: 0 auto;
-  text-align: center;
-}
-.ok-business {
-  width: 120px;
-  height: 40px;
-  font-size: 16px;
-  color: #fff;
-  background: #191D3A;
-  border: 1px solid #556382;
-  border-radius: 0;
-  cursor: pointer;
-}
-.ipshang {
-  overflow: hidden;
-}
-.ipshang.applying {
-  padding: 40px 0;
-}
-.sq {
-  width: 1200px;
-  margin-top: 50px;
-  text-align: center;
-  margin-bottom: 50px;
-}
-.xian {
-  width: 100%;
-  height: 1px;
-  margin-top: 105px;
-  border-top: 1px #ececec dotted;
-}
-.sq button {
-  background:#191D3A;
-  border: 1px solid #556382;
-  border-radius: 0;
-  color:#fff;
-  outline:none;
-  height: 50px;
-  font-size: 18px;
-  min-width: 165px;
-}
-.tit {
-  font-size: 16px;
-  line-height: 25px;
-  border-left: 5px solid #3399ff;
-  padding-left: 15px;
-}
-.plancon {
-  width: 64%;
-  margin: 49px auto;
-  position: relative;
-}
-.plan {
-  position: absolute;
-  height: 36px;
-  width: 100%;
-  top: -13px;
-}
-.plans {
-  position: absolute;
-  height: 36px;
-  width: 100%;
-  top: 13px;
-}
-.plan div {
-  z-index: 99;
-  float: left;
-  width: 33.33%;
-  color: white;
-  height: 31px;
-  line-height: 31px;
-  text-align: center;
-  background: url("../../assets/img/2.png") center no-repeat;
-  background-size: contain;
-}
-.action {
-  z-index: 99999 !important;
-  float: left;
-  width: 25%;
-  height: 31px;
-  line-height: 31px;
-  text-align: center;
-  background-size: contain;
-  background: url("../../assets/img/1.png") center no-repeat !important;
-}
-.plans div {
-  z-index: 99;
-  float: left;
-  width: 33.333%;
-  height: 53px;
-  line-height: 53px;
-  font-size: 14px;
-  text-align: center;
-  background-size: contain;
-}
-.plancon span {
-  background: #ececec;
-  height: 1px;
-  width: 65%;
-  display: inherit;
-  margin: 0 auto;
-}
-.ivu-col-span-8 p {
-  font-size: 19px;
-}
-.peakfire {
-  width: 1000px;
-  margin: 0 auto;
-  height: 80px;
-  line-height: 80px;
-  border: 1px solid #eaeaea;
-  margin-top: 43px;
-  padding-left: 25px;
-}
-.peakfire span {
-  color: #3faef5;
-}
-.mail {
-  width: 1000px;
-  margin: 87px auto;
-  text-align: center;
-  line-height: 50px;
-  display: none;
-}
-.submittedAudit {
-  width: 1000px;
-  margin: 87px auto;
-  text-align: center;
-  display: none;
-}
-.auditSuccess {
-  width: 1000px;
-  margin: 87px auto;
-  text-align: center;
-  display: none;
-}
-.apply-note {
-  color: #8090AF;
-  font-size: 14px;
-}
-.apply-note h3 {
-  padding: 20px 0;
-  font-size: 16px;
-}
-.apply-note ul {
-  list-style: initial;
-  padding-left: 20px;
-}
-.apply-content {
-  width: 80%;
-  margin: 0 auto;
-}
-.apply-title {
-  text-align: center;
-}
-.apply-title h3 {
-  color: #8090AF;
-  font-size: 20px;
-}
-.apply-title p {
-  color: #8090AF;
-  font-size: 14px;
-  padding: 10px 0;
-}
-.ident-title {
-  text-align: center;
-  font-size: 20px;
-}
-.ident-info {
-  color: #8090AF;
-  margin: 57px 0 40px;
-}
-.ident-title span {
-  font-size: 44px;
-}
-.ident-title p:first-child {
-  font-size: 46px;
-  color: #fff;
-  font-weight: 100;
-}
-.ident-title p:last-child {
-  font-size: 18px;
-  color: #8090AF;
-  font-weight: 100;
-  margin: 15px 0 65px;
-}
-.apply-step {
-  padding: 50px 0;
-  margin-left: 115px;
-}
-.apply-step .ivu-steps-title {
-  display: block;
-}
-.business-function {
-  width: 320px;
-  height: 332px;
-  margin: 0 auto;
-  padding-bottom: 20px;
-  background: #191D3A;
-}
-.business-function img {
-  margin: 60px 0 20px;
-}
-.business-function .business-info {
-  padding: 20px 0;
-  font-size: 18px;
-  color: #3399ff;
-}
-.business-function .business-span {
-  font-size: 14px;
-  margin: 10px auto;
-  overflow: hidden;
-  display: block;
-  width: 67%;
-  color: #8090AF;
-}
+  .merchant {
+    background: #fff;
+    padding: 80px 0;
+  }
+
+  .previewImg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .content {
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 30px;
+  }
+
+  .ip .ivu-col {
+    line-height: 37px;
+    text-align: left;
+    padding-left: 139px;
+  }
+
+  .business {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ok-business {
+    width: 165px;
+    height: 50px;
+    font-size: 16px;
+    color: #333;
+    background: rgba(238, 238, 238, 1);
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+  }
+
+  .ipshang {
+    overflow: hidden;
+  }
+
+  .ipshang.applying {
+    padding: 40px 0;
+  }
+
+  .sq {
+    width: 1200px;
+    margin-top: 50px;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .xian {
+    width: 100%;
+    height: 1px;
+    margin-top: 105px;
+    border-top: 1px #ececec dotted;
+  }
+
+  .sq button {
+    background: #eeeeee;
+    border: 1px solid #eeeeee;
+    border-radius: 0;
+    color: #333;
+    outline: none;
+    height: 50px;
+    font-size: 18px;
+    min-width: 165px;
+  }
+
+  .tit {
+    font-size: 16px;
+    line-height: 25px;
+    /*border-left: 5px solid #3399ff;*/
+    /*padding-left: 15px;*/
+  }
+
+  .plancon {
+    width: 64%;
+    margin: 49px auto;
+    position: relative;
+  }
+
+  .plan {
+    position: absolute;
+    height: 36px;
+    width: 100%;
+    top: -13px;
+  }
+
+  .plans {
+    position: absolute;
+    height: 36px;
+    width: 100%;
+    top: 13px;
+  }
+
+  .plan div {
+    z-index: 99;
+    float: left;
+    width: 33.33%;
+    color: white;
+    height: 31px;
+    line-height: 31px;
+    text-align: center;
+    background: url("../../assets/img/2.png") center no-repeat;
+    background-size: contain;
+  }
+
+  .action {
+    z-index: 99999 !important;
+    float: left;
+    width: 25%;
+    height: 31px;
+    line-height: 31px;
+    text-align: center;
+    background-size: contain;
+    background: url("../../assets/img/1.png") center no-repeat !important;
+  }
+
+  .plans div {
+    z-index: 99;
+    float: left;
+    width: 33.333%;
+    height: 53px;
+    line-height: 53px;
+    font-size: 14px;
+    text-align: center;
+    background-size: contain;
+  }
+
+  .plancon span {
+    background: #ececec;
+    height: 1px;
+    width: 65%;
+    display: inherit;
+    margin: 0 auto;
+  }
+
+  .ivu-col-span-8 p {
+    font-size: 19px;
+  }
+
+  .peakfire {
+    width: 1000px;
+    margin: 0 auto;
+    height: 80px;
+    line-height: 80px;
+    border: 1px solid #eaeaea;
+    margin-top: 43px;
+    padding-left: 25px;
+  }
+
+  .peakfire span {
+    color: #3faef5;
+  }
+
+  .mail {
+    width: 1000px;
+    margin: 87px auto;
+    text-align: center;
+    line-height: 50px;
+    display: none;
+  }
+
+  .submittedAudit {
+    width: 1000px;
+    margin: 87px auto;
+    text-align: center;
+    display: none;
+  }
+
+  .auditSuccess {
+    width: 1000px;
+    margin: 87px auto;
+    text-align: center;
+    display: none;
+  }
+
+  .apply-note {
+    color: #666666;
+    font-size: 14px;
+  }
+
+  .apply-note h3 {
+    padding: 20px 0;
+    font-size: 16px;
+  }
+
+  .apply-note ul {
+    list-style: initial;
+    padding-left: 20px;
+  }
+
+  .apply-content {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .apply-title {
+    text-align: center;
+  }
+
+  .apply-title h3 {
+    color: #666666;
+    font-size: 20px;
+  }
+
+  .apply-title p {
+    color: #666666;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .ident-title {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .ident-info {
+    color: #333;
+    margin: 57px 0 40px;
+  }
+
+  .ident-title span {
+    font-size: 44px;
+  }
+
+  .ident-title p:first-child {
+    font-size: 46px;
+    color: #fff;
+    font-weight: 100;
+  }
+
+  .ident-title p:last-child {
+    font-size: 18px;
+    color: #8090AF;
+    font-weight: 100;
+    margin: 15px 0 65px;
+  }
+
+  .apply-step {
+    padding: 50px 0;
+    margin-left: 115px;
+  }
+
+  .apply-step .ivu-steps-title {
+    display: block;
+  }
+
+  .business-function {
+    width: 320px;
+    height: 332px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 15px 0 rgba(4, 0, 0, 0.12);
+  }
+
+  .business-function img {
+    margin: 60px 0 20px;
+  }
+
+  .business-function .business-info {
+    padding: 20px 0;
+    font-size: 18px;
+    color: #3399ff;
+  }
+
+  .business-function .business-span {
+    font-size: 14px;
+    margin: 10px auto;
+    overflow: hidden;
+    display: block;
+    width: 67%;
+    color: #8090AF;
+  }
 </style>
 <style lang="scss">
-.merchant {
-  .ivu-form-item {
-    margin-bottom: 24px;
-  }
-  .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner {
-    background-color: #313654;
-    border-color: #313654;
-  }
-  .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner > .ivu-steps-icon,
-  .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner span {
-    color: #fff !important;
-  }
-  .ivu-steps-item.ivu-steps-status-process .ivu-steps-head-inner {
-    border-color: #313654;
-    background-color: #313654;
-  }
-  .ivu-steps-item.ivu-steps-status-finish .ivu-steps-tail > i:after {
-    background: #313654;
-  }
-
-  .ivu-steps .ivu-steps-head {
-    background: transparent;
-  }
-  .ivu-steps .ivu-steps-title {
-    background: #0e0e28;
-    padding-top: 4px;
-  }
-  .ivu-btn-primary {
-    background: #3399ff;
-    border: 1px solid #3399ff;
-    &:hover {
-      background: #3399ff;
-      border: 1px solid #3399ff;
-    }
-  }
-  .ivu-btn-text {
-    &:hover {
-      color: #3399ff;
-    }
-  }
-}
-
-</style>
-<style lang="scss">
-    .ivu-checkbox-inner {
-      background: #191D3A;
-    }
-    .ipshang {
-      .sq {
-        button {
-          &:active {
-            border-color: #3399ff;
-          }
-        }
-
-        button.ivu-btn {
-          /*&:focus {
-            -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-            -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-            box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-          }*/
-          &:hover {
-            border: 1px solid #3399ff;
-          }
-        }
-      }
+  .merchant {
+    .ivu-form-item {
+      margin-bottom: 24px;
     }
 
-    .v-transfer-dom {
-      .ivu-modal-wrap {
-        .ivu-modal-header {
-          border-bottom: 1px solid #2A3850;
-          text-align: left;
-          p{
-            font-size: 16px;
-            color: #fff;
-          }
-        }
-        textarea.ivu-input {
-          margin-top: 10px;
-          background: #191D3A;
-          box-shadow: 2px 2px 5px #191D3A;
-          color: #fff;
-          border: 1px solid #2A3850;
-        }
-        .ivu-modal-content {
-          background: #191D3A;
-          .apply-content {
-
-            form.apply-form.ivu-form.ivu-form-label-top {
-              .ivu-select-item-focus {
-                background: transparent;
-              }
-              .user-text {
-                color: #8090af;
-              }
-              .ivu-form-item-label {
-                color: #8090AF;
-              }
-              .ivu-form-item-content {
-                color: #8090AF;
-                .ivu-input {
-                  border: 1px solid #8090AF;
-                  background: transparent;
-                  color: #8090AF;
-                  border-radius: 0;
-                  &:hover {
-                    border-color: #3399ff;
-                  }
-                  &:focus {
-                    border-color: #3399ff;
-                    -moz-box-shadow: none;
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
-                  }
-                }
-
-                .ivu-select.ivu-select-single {
-                  .ivu-select-dropdown {
-                    background: #111530;
-                    color: #8090AF;
-                    .ivu-select-item {
-                      &:hover {
-                        background: #191D3A;
-                        color: #3399ff;
-                      }
-                    }
-                  }
-                  .ivu-select-selection {
-                    background: transparent;
-                    border: 1px solid #8090af;
-                    border-radius: 0;
-                    .ivu-select-selected-value {
-                      color: #8090AF;
-                    }
-                    &:hover {
-                      border-color: #3399ff;
-                    }
-                    -moz-box-shadow: none;
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
-                  }
-                }
-                .ivu-select-visible .ivu-select-selection {
-                  border-color: #3399ff;
-                }
-              }
-              .ivu-row {
-                .ivu-upload.ivu-upload-drag {
-                  border-radius: 0;
-                  background: transparent;
-                  &:hover {
-                    border-color: #3399ff;
-                  }
-                }
-              }
-              .ivu-col {
-                .ivu-upload {
-                  span {
-                    color: #8090AF;
-                  }
-                }
-              }
-              .ivu-form-item-content {
-                button {
-                  &:focus {
-                    -moz-box-shadow: none;
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
-                  }
-                }
-              }
-            }
-          }
-          /*.ivu-modal-body {
-            .apply-note {
-              button {
-                &:focus {
-                  -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                  -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                  box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
-                }
-              }
-            }
-          }*/
-          .ivu-modal-footer {
-            border: none;
-            .ivu-btn-primary {
-              background-color: #3399ff;
-              color: #fff;
-              border-color: #3399ff;
-            }
-            .ivu-btn-text {
-              &:hover,
-              &:focus {
-                border: 1px solid #3399ff;
-                background: transparent;
-                color: #3399ff;
-              }
-            }
-          }
-        }
-      }
+    .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner {
+      background-color: #313654;
+      border-color: #313654;
     }
+
+    .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner > .ivu-steps-icon,
+    .ivu-steps-item.ivu-steps-status-finish .ivu-steps-head-inner span {
+      color: #fff !important;
+    }
+
+    .ivu-steps-item.ivu-steps-status-process .ivu-steps-head-inner {
+      border-color: #313654;
+      background-color: #313654;
+    }
+
+    .ivu-steps-item.ivu-steps-status-finish .ivu-steps-tail > i:after {
+      background: #313654;
+    }
+
     .ivu-steps .ivu-steps-head {
       background: transparent;
     }
+
     .ivu-steps .ivu-steps-title {
-      background: #0e0e28;
+      background: #fff;
       padding-top: 4px;
     }
+
     .ivu-btn-primary {
-      background: #3399ff;
-      border: 1px solid #3399ff;
+      background: #E62B25;
+      border: 1px solid #E62B25;
+
       &:hover {
         background: #3399ff;
         border: 1px solid #3399ff;
       }
     }
-    .ivu-checkbox-checked .ivu-checkbox-inner {
-      background-color: #3399ff !important;
-      border: 1px solid #3399ff !important;
-    }
-    li.ivu-upload-list-file.ivu-upload-list-file-finish {
+
+    .ivu-btn-text {
       &:hover {
-        span {
-          color: #3399ff;
+        color: #3399ff;
+      }
+    }
+  }
+
+</style>
+<style lang="scss">
+  .ivu-checkbox-inner {
+    background: #fff;
+    border: 1px solid #999999;
+  }
+
+  .ipshang {
+    .sq {
+      button {
+        &:active {
+          border-color: #3399ff;
+        }
+      }
+
+      button.ivu-btn {
+        /*&:focus {
+          -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+          -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+          box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+        }*/
+        &:hover {
+          border: 1px solid #eeeeee;
         }
       }
     }
+  }
+
+  .v-transfer-dom {
+    .ivu-modal-wrap {
+      .ivu-modal-header {
+        border-bottom: 1px solid #eeeeee;
+        text-align: left;
+
+        p {
+          font-size: 16px;
+          color: #666666;
+        }
+      }
+
+      textarea.ivu-input {
+        margin-top: 10px;
+        background: #fff;
+        box-shadow: 2px 2px 5px #eeeeee;
+        color: #333;
+        border: 1px solid #eeeeee;
+      }
+
+      .ivu-modal-content {
+        background: #fff;
+
+        .apply-content {
+
+          form.apply-form.ivu-form.ivu-form-label-top {
+            .ivu-select-item-focus {
+              background: transparent;
+            }
+
+            .user-text {
+              color: #333;
+            }
+
+            .ivu-form-item-label {
+              color: #333;
+            }
+
+            .ivu-form-item-content {
+              color: #333;
+
+              .ivu-input {
+                border: 1px solid #DDDDDD;
+                background: transparent;
+                color: #333;
+                border-radius: 0;
+
+                &:hover {
+                  border-color: #DDDDDD;
+                }
+
+                &:focus {
+                  border-color: #DDDDDD;
+                  -moz-box-shadow: none;
+                  -webkit-box-shadow: none;
+                  box-shadow: none;
+                }
+              }
+
+              .ivu-select.ivu-select-single {
+                .ivu-select-dropdown {
+                  background: #fff;
+                  color: #333;
+
+                  .ivu-select-item {
+                    &:hover {
+                      background: #fff;
+                      color: rgb(254, 92, 92);
+                    }
+                  }
+                }
+
+                .ivu-select-selection {
+                  background: transparent;
+                  border: 1px solid #DDDDDD;
+                  border-radius: 0;
+
+                  .ivu-select-selected-value {
+                    color: #333;
+                  }
+
+                  &:hover {
+                    border-color: rgb(254, 92, 92);
+                  }
+
+                  -moz-box-shadow: none;
+                  -webkit-box-shadow: none;
+                  box-shadow: none;
+                }
+              }
+
+              .ivu-select-visible .ivu-select-selection {
+                border-color: #3399ff;
+              }
+            }
+
+            .ivu-row {
+              .ivu-upload.ivu-upload-drag {
+                border-radius: 0;
+                background: transparent;
+
+                &:hover {
+                  border-color: #3399ff;
+                }
+              }
+            }
+
+            .ivu-col {
+              .ivu-upload {
+                span {
+                  color: #8090AF;
+                }
+              }
+            }
+
+            .ivu-form-item-content {
+              button {
+                &:focus {
+                  -moz-box-shadow: none;
+                  -webkit-box-shadow: none;
+                  box-shadow: none;
+                }
+              }
+            }
+          }
+        }
+
+        /*.ivu-modal-body {
+          .apply-note {
+            button {
+              &:focus {
+                -moz-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                -webkit-box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+                box-shadow: 2px 2px 5px #fff, -2px -2px 4px #fff;
+              }
+            }
+          }
+        }*/
+        .ivu-modal-footer {
+          border: none;
+
+          .ivu-btn-primary {
+            background-color: #E62B25;
+            color: #fff;
+            border-color: #E62B25;
+          }
+
+          .ivu-btn-text {
+            &:hover,
+            &:focus {
+              border: 1px solid #E62B25;
+              background: transparent;
+              color: #E62B25;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ivu-steps .ivu-steps-head {
+    background: transparent;
+  }
+
+  .ivu-steps .ivu-steps-title {
+    background: #0e0e28;
+    padding-top: 4px;
+  }
+
+  .ivu-btn-primary {
+    background: #3399ff;
+    border: 1px solid #3399ff;
+
+    &:hover {
+      background: #3399ff;
+      border: 1px solid #3399ff;
+    }
+  }
+
+  .ivu-checkbox-checked .ivu-checkbox-inner {
+    background-color: #FE5C5C !important;
+    border: 1px solid #FE5C5C !important;
+  }
+
+  li.ivu-upload-list-file.ivu-upload-list-file-finish {
+    &:hover {
+      span {
+        color: #3399ff;
+      }
+    }
+  }
 
   .content {
     .apply-step.ivu-steps.ivu-steps-horizontal {
@@ -1141,18 +1236,21 @@ export default {
             }
           }
         }
+
         .ivu-steps-head {
           .ivu-steps-head-inner {
             background-color: #3399ff;
             border-color: #3399ff;
           }
         }
+
         .ivu-steps-main {
           .ivu-steps-title {
             color: #8090AF;
           }
         }
       }
+
       .ivu-steps-item.ivu-steps-status-process {
         .ivu-steps-head {
           .ivu-steps-head-inner {

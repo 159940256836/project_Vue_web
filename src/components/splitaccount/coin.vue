@@ -225,7 +225,7 @@
                         },
                         style: {
                           marginRight: '30px',
-                          color: '#3399ff',
+                          color: '#FE5C5C',
                           cursor: 'pointer'
                         }
                       },
@@ -275,7 +275,7 @@
                           }
                         },
                         style: {
-                          color: '#3399ff',
+                          color: '#FE5C5C',
                           cursor: 'pointer'
                         }
                       },
@@ -327,8 +327,8 @@
           margin: 14px 25px 0;
           padding: 0 0 0 35px;
           font-size: 14px;
-          color: #fff;
-          border-left: 2px solid #8090af;
+          color: #333;
+          border-left: 2px solid #dddddd;
           outline: none;
         }
 
@@ -341,7 +341,7 @@
     }
 
     .title-header {
-      color: #8090af;
+      color: #666666;
     }
   }
 </style>
@@ -355,19 +355,19 @@
   }
 
   input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-    color: #8090af;
+    color: #666666;
   }
 
   input:-moz-placeholder, textarea:-moz-placeholder {
-    color: #8090af;
+    color: #666666;
   }
 
   input::-moz-placeholder, textarea::-moz-placeholder {
-    color: #8090af;
+    color: #666666;
   }
 
   input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-    color: #8090af;
+    color: #666666;
   }
 
   .ivu-table-wrapper {
@@ -379,7 +379,7 @@
           tr {
             &:nth-child(2n) {
               td {
-                background: #10122B;
+                background: #fff;
                 border-bottom: 0 !important;
               }
             }
@@ -389,9 +389,9 @@
 
       .ivu-table-header {
         th {
-          background: #111530;
+          background: #fff;
           border-bottom: 0 !important;
-          color: #8090AF;
+          color: #666666;
         }
       }
     }

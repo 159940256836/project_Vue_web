@@ -338,7 +338,10 @@ export default {
       height: 50px;
       line-height: 50px;
       padding: 0 30px;
-      color: #8090AF;
+      color: #333;
+  }
+  .spe_show {
+      color: #666666;
   }
   /*.msg-notice>label{*/
   /*  margin-top: 8px;*/
@@ -380,8 +383,8 @@ export default {
     height: 400px;
     padding: 10px;
     overflow-x: hidden;
-    border: 1px solid #2A3850;
-    background: #10122B;
+    border: 1px solid #eeeeee;
+    /*background: #10122B;*/
 }
   .scroll-chat::-webkit-scrollbar {
       width: 4px; /*对垂直流动条有效*/
@@ -390,7 +393,7 @@ export default {
 
   /*定义滚动条的轨道颜色、内阴影及圆角*/
   .scroll-chat::-webkit-scrollbar-track{
-      background-color: #131738;
+      background-color: #EDEDED;
       border-radius: 3px;
   }
 
@@ -399,7 +402,7 @@ export default {
   .scroll-chat::-webkit-scrollbar-thumb{
       border-radius: 7px;
       -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-      background-color: #21254D;
+      background-color: #E0E0E0;
   }
 
   /*!*定义两端按钮的样式*!*/
@@ -560,15 +563,16 @@ export default {
 .chat-container-box .user-chat-box .user-content-box .chat-info .self-desc {
     margin-left: 0;
     margin-right: 16px;
-    background-color: #8090AF;
-    color: #10122B;
+    background-color: #f4f6f8;
+    color: #333;
+    border: 1px solid #dddddd;
 }
 
 .chat-container-box .user-chat-box .user-content-box .chat-info .self-desc .icon {
     height: 0;
     width: 0;
     border: 8px solid transparent;
-    border-left: 14px solid #8090AF;
+    border-left: 14px solid #f4f6f8;
     position: absolute;
     top: 6px;
     right: -18px;
@@ -620,10 +624,10 @@ export default {
 
 .send-msg-box input {
     height: 60px;
-    border: 1px solid #2A3850;
+    border: 1px solid #eeeeee;
     border-top: 0;
-    background: #111530;
-    color: #8090AF;
+    background: #fff;
+    color: #333;
     padding: 10px;
     outline: none;
     width: 88%;
@@ -653,9 +657,13 @@ export default {
 </style>
 <style lang="scss">
     .ivu-checkbox-inner {
-        border: 1px solid #3399ff;
-        background: #111530;
+        border: 1px solid #FE5C5C;
+        background: #fff;
         border-radius: 50%;
+    }
+    .ivu-checkbox-checked .ivu-checkbox-inner {
+        border-color: #FE5C5C;
+        background-color: #FE5C5C;
     }
 </style>
 
