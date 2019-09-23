@@ -806,7 +806,7 @@ module.exports = {
     view: '查看',
     all: '全部',
     coinDetails: {
-      coinDetail: '币种详情',
+      coinDetail: '详情',
       coinName: '币种名称',
       publishTime: '发行时间',
       officialWebsite: '相关连接',

@@ -39,15 +39,20 @@
 }
 
 .chart-page .tv-side-toolbar .group .button:hover, .chart-page .tv-side-toolbar .group .button.selected, .chart-page .header-chart-panel .group .button:hover, .chart-page .header-chart-panel .group .button.selected {
-  background: #3399ff;
+  background: #FE5C5C;
   color: #fff;
   cursor: pointer;
-  border: 0;
+  border: 1px solid #FE5C5C;
+}
+
+.charts-popup-list .item.active, .feature-no-touch .charts-popup-list .item:hover {
+  background: #2c3b59;
+  color: #5ec6e8;
 }
 
 .chart-page .tv-side-toolbar .group .button, .chart-page .header-chart-panel .group .button {
   font-weight: normal;
-  color: #8090AF;
+  color: #666666;
 }
 .chart-page .button.selected, .chart-page .button.active {
   background-color: #1B1F3C;
@@ -91,7 +96,7 @@
 }
 
 .js-rootresizer__contents{
-  background-color: #0E0E28;
+  background-color: #141F2B;
 }
 .loading-indicator{
   background-color: rgba(14, 14, 40, .6);

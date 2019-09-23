@@ -1442,7 +1442,7 @@ textarea.tv-textarea {
 .tv-close-panel {
     width: 5px;
     height: 25px;
-    background: #2b304a no-repeat 50% 50%
+    /*background: #2b304a no-repeat 50% 50%*/
 }
 
 .hidden .tv-close-panel.right,
@@ -1575,9 +1575,9 @@ textarea {
 }
 
 .chart-page .chart-container {
-    box-sizing: border-box
+    margin-top: 7px;
+    box-sizing: border-box;
 }
-
 .chart-page .chart-container.multiple.active {
     border: 1px solid #007fb9
 }
@@ -7419,10 +7419,10 @@ textarea {
     float: left;
     cursor: default;
     padding: 7px 12px;
-    /*border: 1px solid #c9cbcd;*/
+    border: 1px solid #666666;
     height: 14px;
-    background: #1B1F3C;
-    color: #555;
+    background: #141F2B;
+    color: #666666;
     font-size: 11px;
     font-weight: 600
 }
@@ -8433,7 +8433,7 @@ div.symbol-edit-popup .exchange-filter .sbToggle {
 }
 
 .button.indicators svg {
-    fill: #8090AF;
+    fill: #666666;
 }
 
 .button.indicators:not(:only-child) {

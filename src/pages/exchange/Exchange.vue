@@ -121,9 +121,9 @@
           </div>
           <!--币币交易币种详情-->
           <div
-                  class="item"
-                  style="cursor: pointer"
-                  @click="getCoinDetails"
+            class="item"
+            style="cursor: pointer"
+            @click="getCoinDetails"
           >
             <span>{{ $t('exchange.coinDetails.coinDetail') }}</span>
           </div>
@@ -134,117 +134,115 @@
             <!--<span class="text">{{$t('coin.up')}}</span>-->
             <!--涨跌逻辑修改 原 红跌（卖出） 绿涨（买入） -->
             <span
-                    class="num"
-                    :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+              class="num"
+              :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
             >
-                            {{currentCoin.rose?currentCoin.rose:'---'}}
-                        </span>
+              {{currentCoin.rose?currentCoin.rose:'---'}}
+            </span>
           </div>
           <div class="item">
             <!--<span class="text">{{$t('coin.last')}}</span>-->
             <!--涨跌逻辑修改 原 红跌（卖出） 绿涨（买入） -->
             <span
-                    class="num"
-                    :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
-                    v-if="currentCoin.close"
+              class="num"
+              :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+              v-if="currentCoin.close"
             >
-                            {{currentCoin.close | toFixed(baseCoinScale)}}
-                        </span>
+              {{currentCoin.close | toFixed(baseCoinScale)}}
+            </span>
             <span
-                    class="num"
-                    v-else
-                    :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+              class="num"
+              v-else
+              :class="{buy:currentCoin.change>0,sell:currentCoin.change<0}"
             >
-                            ---
-                        </span>
+              ---
+            </span>
             <span
-                    v-if="currentCoinBC == 'BC'"
-                    class="price-cny"
+              v-if="currentCoinBC == 'BC'"
+              class="price-cny"
             >
-                       ≈ {{currentCoin.price * 1 | toFixed(2)}} CNY
-                    </span>
+             ≈ {{currentCoin.price * 1 | toFixed(2)}} CNY
+            </span>
 
             <span class="price-cny" v-else>
-                          ≈  ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
-                        </span>
+              ≈  ￥{{currentCoin.usdRate*CNYRate | toFixed(2)}}
+            </span>
           </div>
           <div class="item">
-                        <span
-                                class="text item-media"
-                                style="color: #8090af;"
-                        >
-                            {{$t('coin.celling')}}
-                        </span>
             <span
-                    class="num item-media-red"
-                    v-if="currentCoin.high"
+              class="text item-media"
             >
-                            {{currentCoin.high | toFixed(baseCoinScale)}}
-                        </span>
+              {{$t('coin.celling')}}:
+            </span>
+            <span
+              class="num item-media-red"
+              v-if="currentCoin.high"
+            >
+              {{currentCoin.high | toFixed(baseCoinScale)}}
+            </span>
             <span class="num item-media-red" v-else>---</span>
           </div>
           <div class="item">
-                        <span
-                                class="text item-media"
-                        >
-                            {{$t('coin.floor')}}
-                        </span>
             <span
-                    class="num item-media-bule"
-                    v-if="currentCoin.low >= 0"
+              class="text item-media"
             >
-                            {{currentCoin.low | toFixed(baseCoinScale)}}
-                        </span>
+              {{$t('coin.floor')}}:
+            </span>
+            <span
+              class="num item-media-bule"
+              v-if="currentCoin.low >= 0"
+            >
+              {{currentCoin.low | toFixed(baseCoinScale)}}
+            </span>
             <span class="num item-media-bule" v-else>---</span>
           </div>
           <div class="item">
-                        <span
-                                class="text item-media"
-                                style="color: #8090af;"
-                        >
-                            {{$t('coin.turnover')}}
-                        </span>
-            <span class="num" style="color: #8090af;">
-                            {{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}
-                        </span>
+            <span
+              class="text item-media"
+            >
+              {{$t('coin.turnover')}}:
+            </span>
+            <span class="num">
+              {{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}
+            </span>
           </div>
-          <!--<div class="item" @click="changeSkin" style="float: right">
-                        <img :src="skin == 'night' ? night : day" alt="">
-                    </div>-->
+          <div class="item" @click="changeSkin" style="float: right">
+              <img :src="skin == 'night' ? night : day" alt="">
+          </div>
         </div>
         <div class="imgtable" :loading="loadingButton7">
           <!-- <div class="handler">
-                        <span @click="changeImgTable('k')" :class="{active:currentImgTable==='k'}">k线图</span>
-                        <span @click="changeImgTable('s')" :class="{active:currentImgTable==='s'}">深度图</span>
-                      </div> -->
+            <span @click="changeImgTable('k')" :class="{active:currentImgTable==='k'}">k线图</span>
+            <span @click="changeImgTable('s')" :class="{active:currentImgTable==='s'}">深度图</span>
+          </div> -->
           <div id="kline_container" :class="{hidden:currentImgTable==='s'}"></div>
           <!-- <DepthGraph :class="{hidden:currentImgTable==='k'}" ref="depthGraph"></DepthGraph> -->
         </div>
         <div class="trade_wrap">
           <div class="trade_panel trade_panel_logout">
             <div class="mask" v-show="!isLogin">
-                            <span>
-                                <!--请先-->
-                                {{$t("common.please")}}
-                                <router-link to="/login">
-                                    <span style="color:#3399ff; font-size:24px">{{$t("common.login")}}</span>
-                                </router-link> /
-                                <router-link to="/register">
-                                    <span style="color:#f67951; font-size:24px">{{$t("common.register")}}</span>
-                                </router-link>
-                            </span>
+              <span>
+                <!--请先-->
+                {{$t("common.please")}}
+                <router-link to="/login">
+                  <span style="color:#3399ff; font-size:24px">{{$t("common.login")}}</span>
+                </router-link> /
+                <router-link to="/register">
+                  <span style="color:#f67951; font-size:24px">{{$t("common.register")}}</span>
+                </router-link>
+              </span>
             </div>
             <div class="mask" v-show="isLogin&&!member.realName">
-                            <span>
-                                <!--请先-->
-                                {{$t("common.please")}}
-                                <router-link to="/uc/safe">
-                                    <span style="color:#3399ff; font-size:24px">
-                                        <!--实名认证-->
-                                        {{$t("uc.safe.verified")}}
-                                    </span>
-                                </router-link>
-                            </span>
+              <span>
+                <!--请先-->
+                {{$t("common.please")}}
+                <router-link to="/uc/safe">
+                  <span style="color:#3399ff; font-size:24px">
+                    <!--实名认证-->
+                    {{$t("uc.safe.verified")}}
+                  </span>
+                </router-link>
+              </span>
             </div>
             <div class="trade_menu">
               <ul>
@@ -280,9 +278,9 @@
                   <Form ref="formValidate">
                     <FormItem>
                       <Input
-                              @on-keyup="keyEvent"
-                              v-model="form.buy.limitPrice"
-                              :placeholder="$t('exchange.buyprice')"
+                        @on-keyup="keyEvent"
+                        v-model="form.buy.limitPrice"
+                        :placeholder="$t('exchange.buyprice')"
                       ></Input>
                       <label>{{currentCoin.base}}</label>
                       <p class="math_price">≈
@@ -503,10 +501,10 @@
       </div>
       <div class="left plate-wrap">
         <div class="handlers">
-                    <span class="handicap">
-                        <!--盘口-->
-                        {{ $t('exchange.handicap') }}
-                    </span>
+          <span class="handicap">
+            <!--盘口-->
+            {{ $t('exchange.handicap') }}
+          </span>
           <!--<span
                         @click="changePlate('all')"
                         class="handler handler-all"
@@ -523,120 +521,120 @@
                         :class="{active:selectedPlate=='sell'}"
                     ></span>-->
           <span
-                  @click="changePlate('all')"
-                  class="handler"
-                  :class="{active:selectedPlate=='all'}"
+            @click="changePlate('all')"
+            class="handler"
+            :class="{active:selectedPlate=='all'}"
           >
-                        <!--全部-->
-                        {{ $t('uc.otcorder.all') }}
-                    </span>
+            <!--全部-->
+            {{ $t('uc.otcorder.all') }}
+          </span>
           <span
-                  @click="changePlate('buy')"
-                  class="handler"
-                  :class="{active:selectedPlate=='buy'}"
+            @click="changePlate('buy')"
+            class="handler"
+            :class="{active:selectedPlate=='buy'}"
           >
-                        <!--买单-->
-                        {{ $t('uc.otcorder.type_pay') }}
-                    </span>
+            <!--买单-->
+            {{ $t('uc.otcorder.type_pay') }}
+          </span>
           <span
-                  @click="changePlate('sell')"
-                  class="handler"
-                  :class="{active:selectedPlate=='sell'}"
+            @click="changePlate('sell')"
+            class="handler"
+            :class="{active:selectedPlate=='sell'}"
           >
-                        <!--卖单-->
-                        {{ $t('uc.otcorder.type_sale') }}
-                    </span>
+            <!--卖单-->
+            {{ $t('uc.otcorder.type_sale') }}
+          </span>
         </div>
         <Table
-                :no-data-text="$t('common.nodata')"
-                v-show="selectedPlate!='buy'"
-                @on-current-change="buyPlate"
-                highlight-row
-                ref="currentRowTable"
-                class="sell_table"
-                :columns="plate.columns"
-                :data="plate.askRows"
+          :no-data-text="$t('common.nodata')"
+          v-show="selectedPlate!='buy'"
+          @on-current-change="buyPlate"
+          highlight-row
+          ref="currentRowTable"
+          class="sell_table"
+          :columns="plate.columns"
+          :data="plate.askRows"
         ></Table>
         <!--setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}-->
         <div class="plate-nowprice">
-                    <span
-                            class="price"
-                            :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
-                            v-if="currentCoin.price"
-                    >
-                        {{currentCoin.price | toFixed(baseCoinScale)}}
-                    </span>
           <span
-                  class="price"
-                  :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
-                  v-else
+            class="price"
+            :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+            v-if="currentCoin.price"
           >
-                        ---
-                    </span>
+            {{currentCoin.price | toFixed(baseCoinScale)}}
+          </span>
+          <span
+            class="price"
+            :class="setMain == 'up'?{buy:currentCoin.change<0,sell:currentCoin.change>0}:{buy:currentCoin.change>0,sell:currentCoin.change<0}"
+            v-else
+          >
+            ---
+          </span>
           <span v-if="currentCoin.change>0" :class="setMain == 'up'?'sell':'buy'">↑</span>
           <span v-else :class="setMain == 'up'?'buy':'sell'">↓</span>
           <span
-                  v-if="currentCoinBC == 'BC'"
-                  class="price-cny"
+            v-if="currentCoinBC == 'BC'"
+            class="price-cny"
           >
-                        ≈ {{currentCoin.price * 1 | toFixed(2)}} CNY
-                    </span>
+            ≈ {{currentCoin.price * 1 | toFixed(2)}} CNY
+          </span>
           <span
-                  v-else
-                  class="price-cny"
+            v-else
+            class="price-cny"
           >
-                        ≈ {{currentCoin.usdRate * CNYRate | toFixed(2)}} CNY
-                    </span>
+            ≈ {{currentCoin.usdRate * CNYRate | toFixed(2)}} CNY
+          </span>
           <!--<span class="price-cny"> ≈ {{currentCoin.usdRate*CNYRate | toFixed(2)}} CNY</span>-->
         </div>
         <Table
-                :no-data-text="$t('common.nodata')"
-                v-show="selectedPlate!='sell'"
-                @on-current-change="sellPlate"
-                highlight-row
-                class="buy_table"
-                :class="{hidden:selectedPlate==='all'}"
-                :columns="plate.columns"
-                :data="plate.bidRows"
+          :no-data-text="$t('common.nodata')"
+          v-show="selectedPlate!='sell'"
+          @on-current-change="sellPlate"
+          highlight-row
+          class="buy_table"
+          :class="{hidden:selectedPlate==='all'}"
+          :columns="plate.columns"
+          :data="plate.bidRows"
         ></Table>
       </div>
     </div>
     <div class="order" v-show="this.isLogin && this.member.realName">
       <div class="order-handler">
-                <span
-                        class="order-list"
-                        @click="changeOrder('current')"
-                        :class="{active:selectedOrder==='current'}"
-                >
-                    {{$t('exchange.curdelegation')}}
-                </span>
         <span
-                class="order-list"
-                @click="changeOrder('history')"
-                :class="{active:selectedOrder==='history'}"
+          class="order-list"
+          @click="changeOrder('current')"
+          :class="{active:selectedOrder==='current'}"
         >
-                    {{$t('exchange.hisdelegation')}}
-                </span>
+          {{$t('exchange.curdelegation')}}
+        </span>
+        <span
+          class="order-list"
+          @click="changeOrder('history')"
+          :class="{active:selectedOrder==='history'}"
+        >
+          {{$t('exchange.hisdelegation')}}
+        </span>
         <div class="single">
-                    <span
-                            v-if="currentOrder.rows.length > 2 && selectedOrder === 'current'"
-                            class="repeal"
-                            @click="repeal()"
-                    >
-                        <!--撤销全部委单-->
-                        {{$t('exchange.curdelRepealAll')}}
-                    </span>
+          <span
+            v-if="currentOrder.rows.length > 2 && selectedOrder === 'current'"
+            class="repeal"
+            @click="repeal()"
+          >
+            <!--撤销全部委单-->
+            {{$t('exchange.curdelRepealAll')}}
+          </span>
           <router-link
-                  v-show="selectedOrder==='current'"
-                  class="linkmore"
-                  to="/order"
+            v-show="selectedOrder==='current'"
+            class="linkmore"
+            to="/order"
           >
             {{$t('coin.view')}}>>
           </router-link>
           <router-link
-                  v-show="selectedOrder==='history'"
-                  class="linkmore"
-                  to="/order"
+            v-show="selectedOrder==='history'"
+            class="linkmore"
+            to="/order"
           >
             {{$t('coin.view')}}>>
           </router-link>
@@ -644,30 +642,30 @@
       </div>
       <div class="table">
         <Table
-                v-if="selectedOrder==='current'"
-                :columns="currentOrder.columns"
-                :data="currentOrder.rows"
-                :loading="currentLoading"
-                @on-expand="onExpand"
-                :no-data-text="$t('common.nodata')"
+          v-if="selectedOrder==='current'"
+          :columns="currentOrder.columns"
+          :data="currentOrder.rows"
+          :loading="currentLoading"
+          @on-expand="onExpand"
+          :no-data-text="$t('common.nodata')"
         >
         </Table>
         <Table
-                v-else
-                ref="table"
-                :columns="historyOrder.columns"
-                :data="historyOrder.rows"
-                :loading="historyLoading"
-                @on-expand="onExpand"
-                :no-data-text="$t('common.nodata')"
+          v-else
+          ref="table"
+          :columns="historyOrder.columns"
+          :data="historyOrder.rows"
+          :loading="historyLoading"
+          @on-expand="onExpand"
+          :no-data-text="$t('common.nodata')"
         ></Table>
       </div>
     </div>
     <Modal
-            v-model="detailsModal"
-            class-name="vertical"
-            width="760"
-            footer-hide
+      v-model="detailsModal"
+      class-name="vertical"
+      width="760"
+      footer-hide
     >
       <div class="details">
         <coinDetails :coinInfo="coinInfo"></coinDetails>
@@ -692,7 +690,7 @@
 
       .left {
         /*width: 410px;*/
-        min-width: 21.7%;
+        min-width: 19%;
         /*flex: 0 0 24%;*/
         background-color: #0E0E28;
 
@@ -717,41 +715,16 @@
             color: #8090af;
 
             &.active {
-              background: #3399ff;
-              color: #fff;
+              background: #FE5C5C;
+              color: #fff !important;
               /*background-image: url("../../assets/images/exchange/plate_all_active.png");*/
             }
-
-            /*&.handler-all {*/
-            /*    font-size: 12px;*/
-            /*    color: #fff;*/
-            /*    height: 25px;*/
-            /*    line-height: 25px;*/
-            /*    !*background-image: url("../../assets/images/exchange/plate_all.png");*!*/
-            /*    &.active {*/
-            /*        background: #3399ff;*/
-            /*        color: #fff;*/
-            /*        !*background-image: url("../../assets/images/exchange/plate_all_active.png");*!*/
-            /*    }*/
-            /*}*/
-            /*&.handler-green {*/
-            /*    background-image: url("../../assets/images/exchange/plate_green.png");*/
-            /*    &.active {*/
-            /*        background-image: url("../../assets/images/exchange/plate_green_active.png");*/
-            /*    }*/
-            /*}*/
-            /*&.handler-red {*/
-            /*    background-image: url("../../assets/images/exchange/plate_red.png");*/
-            /*    &.active {*/
-            /*        background-image: url("../../assets/images/exchange/plate_red_active.png");*/
-            /*    }*/
-            /*}*/
           }
         }
 
         .plate-nowprice {
           text-align: center;
-          background-color: #13152F;
+          background-color: #0A1928;
           line-height: 1;
           display: flex;
           align-items: center;
@@ -769,14 +742,14 @@
             font-size: 14px;
             margin-left: 10px;
             font-weight: 400;
-            color: #fff;
+            color: #DDDDDD;
           }
         }
       }
 
       .center {
         /*width: 1060px;*/
-        min-width: 55.5%;
+        min-width: 60.8%;
         /*flex: 0 0 50%;*/
         margin-right: 10px;
 
@@ -811,7 +784,7 @@
         .trade_wrap {
           .trade_menu {
             position: relative;
-            background-color: #13152F;
+            background-color: #0A1928;
             /*border-top-left-radius: 6px;*/
             /*border-top-right-radius: 6px;*/
             font-size: 0;
@@ -835,9 +808,8 @@
                 margin-right: 50px;
 
                 &.active {
-                  background-color: #13152F;
-                  border-bottom: 2px solid #3399ff;
-                  color: #3399ff;
+                  border-bottom: 2px solid #FE5C5C;
+                  color: #FE5C5C;
                 }
 
                 &:first-child {
@@ -884,11 +856,11 @@
             border-bottom: none;
 
             b {
-              color: #8090af;
+              color: #999999;
             }
 
             a {
-              color: #3399ff;
+              color: #FE5C5C;
             }
           }
         }
@@ -896,7 +868,7 @@
 
       .right {
         /*width: 410px;*/
-        min-width: 21.7%;
+        min-width: 19%;
         /*flex: 0 0 24%;*/
         margin-right: 10px;
 
@@ -930,18 +902,18 @@
 
         .price-cny {
           font-size: 12px;
-          color: #fff;
+          color: #dddddd;
         }
 
         .coin {
+          font-weight: 600;
           font-size: 16px;
         }
 
         .text {
           width: 100%;
-          /*display: block;*/
           font-size: 12px;
-          color: #8090af;
+          color: #999999;
           margin-bottom: 5px;
         }
 
@@ -950,14 +922,12 @@
         }
 
         .num {
+          color: #dddddd;
           font-size: 14px;
-          color: #8090af;
         }
 
         > img {
           display: block;
-          width: 18px;
-          height: 18px;
           cursor: pointer;
         }
 
@@ -1000,8 +970,8 @@
           margin-right: 50px;
 
           &.active {
-            color: #3399ff;
-            border-bottom: 2px solid #3399ff;
+            color: #FE5C5C;
+            border-bottom: 2px solid #FE5C5C;
             background-color: transparent;
             border-radius: 0;
           }
@@ -1026,7 +996,7 @@
             right: 115px;
             top: -6px;
             border: 0;
-            color: #3399FF;
+            color: #FE5C5C;
             font-size: 14px;
             padding: 3px 5px;
             border-radius: 5px;
@@ -1045,7 +1015,7 @@
 
   .exchange.day {
     color: #333;
-    background-color: #fff;
+    background-color: #f4f6f8;
 
     .main {
       .left {
@@ -1053,16 +1023,26 @@
 
         .handlers {
           background-color: #fff;
+
+          .handler {
+            color: #666;
+          }
         }
 
         .plate-nowprice {
-          background-color: #fff;
-          border-top: 1px solid #f0f0f0;
-          border-bottom: 1px solid #f0f0f0;
+          background-color: #F7F7F7;
+          border-top: 1px solid #eeeeee;
+          border-bottom: 1px solid #eeeeee;
+
+          .price-cny {
+            color: #666;
+          }
         }
       }
 
       .imgtable {
+        border: 1px solid #eeeeee;
+        border-top: 0;
         /*border-radius: 6px;*/
         .handler {
           > span {
@@ -1073,7 +1053,8 @@
 
       .trade_wrap {
         .trade_menu {
-          background-color: #fafafa;
+          background-color: #F7F7F7;
+          border: 1px solid #EEEEEE;
 
           > ul {
             display: flex;
@@ -1084,8 +1065,8 @@
               cursor: pointer;
 
               &.active {
-                background-color: #f0f0f0;
-                color: #3399ff;
+                background-color: #F7F7F7;
+                color: #FE5C5C;
               }
 
               &:first-child {
@@ -1094,31 +1075,32 @@
             }
           }
         }
-      }
 
-      // > span {
-      //     background-color: #fafafa;
-      //     border-right: 1px solid #f0f0f0;
-      //     &.active {
-      //         background-color: #fff;
-      //         color: #3399ff;
-      //     }
-      //     &:last-child {
-      //         border-top-right-radius: 6px;
-      //     }
-      // }
+        .trade_panel .panel .hd {
+          border-bottom: none;
+
+          b {
+            color: #666;
+            font-weight: 100;
+          }
+
+          a {
+            color: #FE5C5C;
+          }
+        }
+      }
       .ivu-icon {
         color: #333 !important;
       }
 
       .right {
         width: 410px;
-        /*flex: 0 0 24%;*/
         .coin-menu {
-          height: 480px;
           background-color: #fff;
           margin-bottom: 10px;
-          /*border-radius: 6px;*/
+        }
+        .trade-wrap {
+          border: 1px solid #eeeeee;
         }
       }
     }
@@ -1127,6 +1109,10 @@
       .mask {
         background-color: rgba(0, 0, 0, 0.4);
         color: #fff;
+      }
+      .mask {
+        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.3);
       }
     }
 
@@ -1141,28 +1127,27 @@
         .coin-menu {
           background-color: #fff;
         }
-
-        .trade-wrap {
-          /*border-radius: 6px;*/
-        }
-
-        // .ivu-table-wrapper{
-        //         box-shadow:0 0 2px #ccc;
-        //       }
       }
     }
 
     .symbol {
-      background-color: #fff;
-      box-shadow: 0 0 2px #ccc;
+      background-color: #F7F7F7;
+      border: 1px solid #eeeeee;
+      /*box-shadow: 0 0 2px #ccc;*/
 
       .item {
+        font-weight: bold;
+        .price-cny {
+          font-size: 12px;
+          color: #333;
+        }
+
         .text {
           color: #999;
         }
 
         .num {
-          color: #333;
+          color: #666666;
         }
       }
     }
@@ -1181,7 +1166,7 @@
           /*box-shadow: 0 0 2px #ccc;*/
 
           &.active {
-            color: #3399ff;
+            color: #FE5C5C;
             background-color: #fff;
           }
         }
@@ -1272,7 +1257,8 @@
         collecRequesting: false,
         currentCoinIsFavor: false,
         // isUseBHB: false, //是否试用BHB抵扣手续费
-        skin: 'night', // 皮肤样式day&night
+        // skin: 'night', // 皮肤样式day&night
+        skin: 'day', // 皮肤样式day&night
         currentImgTable: 'k',
         stopLoss: false,
         selectedOrder: 'current', // 当前显示的委托记录
@@ -1664,7 +1650,7 @@
                 let width = '0',
                     // backgroundColor =
                     //     params.row.direction === 'BUY' ? '#00b275' : '#f15057',
-                    backgroundColor = this.setMain == 'up'?(params.row.direction === 'BUY' ? '#f15057' : '#00b275'):(params.row.direction === 'BUY' ? '#00b275' : '#f15057'),
+                    backgroundColor = this.setMain == 'up'?(params.row.direction === 'BUY' ? 'rgba(255, 131, 136, 0.85)' : 'rgba(0, 178, 117, 0.92)'):(params.row.direction === 'BUY' ? 'rgba(0, 178, 117, 0.92)' : 'rgba(255, 131, 136, 0.85)'),
                     totle = this.setMain == 'up'?
                         (params.row.direction === 'BUY'
                             ? this.plate.askTotle
@@ -1785,13 +1771,15 @@
               width: 110,
               render: (h, params) => {
                 return h(
-                    'Button',
+                    'span',
                     {
                       props: {
                         size: 'small',
                         type: 'warning'
                       },
-                      style: {},
+                      style: {
+                        color: '#FE5C5C'
+                      },
                       on: {
                         click: () => {
                           this.cancel(params.index)
@@ -2314,7 +2302,7 @@
       //         });
       //     }
       // },
-      /*changeSkin() {
+      changeSkin() {
         const currentSkin = this.skin
         if (currentSkin === 'day') {
           this.skin = 'night'
@@ -2328,7 +2316,7 @@
           this.getCurrentOrder()
           this.getHistoryOrder()
         }
-      },*/
+      },
       changePlate(str) {
         if (str != 'all') {
           this.plate.maxPostion = 24
@@ -2436,70 +2424,100 @@
         const that = this
         const config = {
           autosize: true,
-          fullscreen: true,
-          symbol: that.symbol,
+          fullscreen: true, // 布尔值显示图表是否占用窗口中所有可用的空间
+          symbol: that.symbol, // 币名称
           interval: '15', // K线默认时间传值
-          timezone: 'Asia/Shanghai',
-          toolbar_bg: '#0E0E28',
-          container_id: 'kline_container',
+          timezone: 'Asia/Shanghai', // 默认时区
+          toolbar_bg: '#141F2B', // 背景色
+          container_id: 'kline_container', // `id`属性为指定要包含widget的DOM元素id。
           symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
 
-          datafeed: that.datafeed,
+          datafeed: that.datafeed, // 请求地址
           library_path:
               process.env.NODE_ENV === 'production'
                   ? '/assets/charting_library/'
-                  : 'src/assets/js/charting_library/',
-          locale: 'zh',
-          debug: false,
+                  : 'src/assets/js/charting_library/', // 默认脚本核心文件存储位置
+          locale: 'zh',//  语言
           drawings_access: {
             type: 'black',
             tools: [{name: 'Regression Trend'}]
           },
+          // 禁用属性
+          // 包含功能在默认情况下启用/禁用名称的数组。功能表示图表功能的一部分（更是UI/UX的一部分） http://tradingview.gitee.io/featuresets参考文档
           disabled_features: [
-            'header_resolutions',
-            'timeframes_toolbar',
-            'header_symbol_search',
-            'header_chart_type',
-            'header_compare',
-            'header_undo_redo',
-            'header_screenshot',
-            'header_saveload',
-            'use_localstorage_for_settings',
-            'left_toolbar',
-            'volume_force_overlay',
-            'header_settings',
+            // 'left_toolbar', // 左边工具栏
+
+            // "header_widget_dom_node", // 顶部工具栏
+            // 'border_around_the_chart', // 周围边框
+            // 'pane_context_menu', // 图表右键菜单
+            // 'header_fullscreen_button', // 全屏
+            // 'header_indicators', // 技术指标线
+            'header_resolutions', // 分辨率
+            'timeframes_toolbar', // 底部时间栏目
+            'header_symbol_search', // 搜索
+            'header_chart_type', // 图表类型
+            'header_compare', // compare
+            'header_undo_redo', // 左右箭头
+            'header_screenshot', // 照相机
+            'header_saveload', // 上传下载按钮
+            'use_localstorage_for_settings', // 用户本地存储
+            'save_chart_properties_to_local_storage',
+            'volume_force_overlay', // k线与销量分开
+            'header_settings', // 设置按钮
             'main_meries_seale_menu' // 隐藏右上角设置
           ],
+          // 包含功能在默认情况下启用/禁用名称的数组。功能表示图表功能的一部分（更是UI/UX的一部分）  http://tradingview.gitee.io/featuresets 参考文档
           enabled_features: [
-            'hide_last_na_study_output'
+            // 'left_toolbar', //  开启左边工具栏
+            'hide_last_na_study_output',
             // 'move_logo_to_main_pane' // TradingView login 开启显示在网格上 隐藏显示在网格下
           ],
           custom_css_url: 'bundles/common.css',
           supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M'],
-          charts_storage_url: 'http://saveload.tradingview.com',
+          charts_storage_url: 'http://saveload.tradingview.com', // 设置图库页面
+          // 下面三项是开发自己的后端用的 前台的请求会带着这三项值
           charts_storage_api_version: '1.1',
           client_id: 'tradingview.com',
           user_id: 'public_user_id',
+
           overrides: {
             // 'symbolWatermarkProperties.color': 'rgba(255, 255, 255, .1)', // 水印透明度
-            'paneProperties.background': '#131630', // 背景色网格颜色
+            'paneProperties.background': '#141F2B', // 背景颜色
             'paneProperties.vertGridProperties.style': 0,
+
+            // 网格线
             'paneProperties.vertGridProperties.color': 'rgba(255,255,255,.04)', // 列分割线
             'paneProperties.horzGridProperties.color': 'rgba(255,255,255,.04)', // 行分割线
-            'scalesProperties.textColor': '#8090AF', // 开高低收
+
+            // 蜡烛样式
             'mainSeriesProperties.candleStyle.upColor': '#00b275',
             'mainSeriesProperties.candleStyle.downColor': '#f15057',
+
             'mainSeriesProperties.candleStyle.drawBorder': false,
+
+            // 烛心颜色
             'mainSeriesProperties.candleStyle.wickUpColor': '#00b275',
             'mainSeriesProperties.candleStyle.wickDownColor': '#f15057',
+
+            // 默认收缩行情信息
             'paneProperties.legendProperties.showLegend': false,
+
+            // //坐标轴和刻度标签颜色
+            'scalesProperties.lineColor': '#999999',
+            'scalesProperties.textColor': '#999999', // 开高低收
             'mainSeriesProperties.areaStyle.color1': 'rgba(71, 78, 112, 0.5)',
             'mainSeriesProperties.areaStyle.color2': 'rgba(71, 78, 112, 0.5)',
             'mainSeriesProperties.areaStyle.linecolor': '#9194a4',
-            'scalesProperties.lineColor': '#8090AF', // xy刻度线色值
             // "paneProperties.crossHairProperties.color": "#00b275", // 十字光标颜色
+
+            // 边框
             'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
-            'mainSeriesProperties.candleStyle.borderDownColor': '#f15057' // 开高低收卖出标线
+            'mainSeriesProperties.candleStyle.borderDownColor': '#f15057', // 开高低收卖出标线
+
+            // 成交量高度
+            "volumePaneSize": "medium",
+            "MACDPaneSize": "tiny",
+            'scalesProperties.fontSize': 12 // 坐标轴字体
           },
           // 柱状图样式
           studies_overrides: {
@@ -2565,18 +2583,29 @@
           ]
         }
         // 黑白切换
-        // if (that.skin === 'day') {
-        //   config.toolbar_bg = '#fff'
-        //   config.custom_css_url = 'bundles/common_day.css'
-        //   config.overrides['paneProperties.background'] = '#fff'
-        //   config.overrides['mainSeriesProperties.candleStyle.upColor'] =
-        //       '#a6d3a5'
-        //   config.overrides['mainSeriesProperties.candleStyle.downColor'] =
-        //       '#ffa5a6'
-        //   config.overrides['scalesProperties.lineColor'] = '#aaa' // xy刻度线色值
-        //   config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#39c595' // 第一根的颜色
-        //   config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#f96969' // 第二根的颜色
-        // }
+        if (that.skin === 'day') {
+          config.toolbar_bg = '#fff', // 背景色
+          config.custom_css_url = 'bundles/common_day.css'
+          config.overrides['paneProperties.background'] = '#fff'  // 背景色网格颜色
+          config.overrides['mainSeriesProperties.areaStyle.linecolor'] = '#fff'
+          config.overrides['scalesProperties.textColor'] = '#666'
+
+          // 网格线
+          config.overrides['paneProperties.vertGridProperties.color'] =
+              '#eeeeee'
+          config.overrides['paneProperties.horzGridProperties.color'] =
+              '#eeeeee'
+
+          // 蜡烛样式
+          config.overrides['mainSeriesProperties.candleStyle.upColor'] =
+              '#a6d3a5'
+          config.overrides['mainSeriesProperties.candleStyle.downColor'] =
+              '#ffa5a6'
+
+          config.overrides['scalesProperties.lineColor'] = '#999999' // xy刻度线色值
+          config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#39c595' // 第一根的颜色
+          config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#f96969' // 第二根的颜色
+        }
         // 涨跌逻辑修改 由原来的绿涨（买入）红跌（卖出） 修改为红涨（买入）绿跌（卖出）
         console.log(that.setMain)
         if (that.setMain == 'up') {
@@ -2598,7 +2627,7 @@
           const widget = (window.tvWidget = new TradingView.widget(config))
           /* onChartReady 自定义初始化指标线（平均移动线等），设置颜色*/
           widget.onChartReady(function () {
-            widget.chart().executeActionById('drawingToolbarAction')
+            // widget.chart().executeActionById('drawingToolbarAction')
             // 创建最新价水平线
             widget
                 .chart()
@@ -2650,7 +2679,7 @@
                   widget.chart().setChartType(1)
                   widget.setSymbol('', '1')
                 })
-                .append('<span>M1</span>')
+                .append('<span>1M</span>')
             widget
                 .createButton()
                 .attr('title', 'M5')
@@ -2665,7 +2694,7 @@
                   widget.chart().setChartType(1)
                   widget.setSymbol('', '5')
                 })
-                .append('<span>M5</span>')
+                .append('<span>5M</span>')
 
             widget
                 .createButton()
@@ -2681,7 +2710,7 @@
                   widget.chart().setChartType(1)
                   widget.setSymbol('', '15')
                 })
-                .append('<span>M15</span>')
+                .append('<span>15M</span>')
                 .addClass('selected') // 静态默认分时
             widget
                 .createButton()
@@ -2697,7 +2726,7 @@
                   widget.chart().setChartType(1)
                   widget.setSymbol('', '30')
                 })
-                .append('<span>M30</span>')
+                .append('<span>30M</span>')
 
             widget
                 .createButton()
@@ -2713,7 +2742,7 @@
                   widget.chart().setChartType(1)
                   widget.setSymbol('', '60')
                 })
-                .append('<span>H1</span>')
+                .append('<span>1H</span>')
             widget
                 .createButton()
                 .attr('title', 'H4')
@@ -2728,7 +2757,7 @@
                   widget.chart().setChartType(1)
                   widget.setSymbol('', '240')
                 })
-                .append('<span>H4</span>')
+                .append('<span>4H</span>')
             widget
                 .createButton()
                 .attr('title', 'D1')
@@ -2743,7 +2772,7 @@
                   widget.chart().setChartType(1)
                   widget.setSymbol('', '1D')
                 })
-                .append('<span>D1</span>')
+                .append('<span>1D</span>')
 
             widget
                 .createButton()
@@ -2759,7 +2788,7 @@
                   widget.chart().setChartType(1)
                   widget.setSymbol('', '1W')
                 })
-                .append('<span>W1</span>')
+                .append('<span>1W</span>')
 
             widget
                 .createButton()
@@ -2775,7 +2804,7 @@
                   widget.chart().setChartType(1)
                   widget.setSymbol('', '1M')
                 })
-                .append('<span>M1</span>')
+                .append('<span>1M</span>')
           })
         })
       },
