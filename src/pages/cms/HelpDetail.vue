@@ -20,7 +20,7 @@
                 <div class="content-wrap">
                     <div class="helpdetail_title helpdetail_title_new">
                         <h3 class="title">{{article.title}}</h3>
-                        <p class="time">{{article.createTime}}</p>
+                        <!-- <p class="time">{{article.createTime}}</p> -->
                     </div>
                     <div class="content">
                             <div v-html="article.content"></div>
@@ -179,19 +179,16 @@ export default {
         width: 100%;
         // margin-left: 35px;
         .helpdetail_title{
-            height:85px;
+            height: 65px;
+            line-height: 65px;
             background:#FFFFFF;
             // color:#fff;
-            padding-top:25px;
         }
 
         .title {
-            line-height: 1;
-            margin-bottom: 20px;
             font-size:16px;
             color:#333333;
             margin-left:30px;
-
         }
         .time {
             color: #333;
@@ -204,7 +201,7 @@ export default {
             background:rgba(255,255,255,1);
             margin-top:22px;
             // color:#8090AFFF !important;
-            color: #8090AF !important;
+            color: #333 !important;
             font-size:14px;
         }
     }
@@ -233,7 +230,7 @@ export default {
 .main .content-wrap .title,.main .content-wrap .time{
     // text-align: center;
     font-size:16px;
-    color:#8090AF !important;
+    color:#333 !important;
     margin-left:30px;
 }
 </style>

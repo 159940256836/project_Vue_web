@@ -2262,19 +2262,19 @@ li {
 </style>
 <style lang="scss">
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #8090af;
+  color: #999999;
 }
 
 input:-moz-placeholder, textarea:-moz-placeholder {
-  color: #8090af;
+  color: #999999;
 }
 
 input::-moz-placeholder, textarea::-moz-placeholder {
-  color: #8090af;
+  color: #999999;
 }
 
 input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  color: #8090af;
+  color: #999999;
 }
 .ivu-table-wrapper > .ivu-spin-fix{
     // background: rgba(17,22,52,1)

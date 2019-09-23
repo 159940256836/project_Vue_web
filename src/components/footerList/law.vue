@@ -10,7 +10,7 @@
         <div class="contenta_cont_title new_title">{{$t("foot.Legatices")}}</div>
         <div class="contenta_cont_content">
           <!-- 第一条 -->
-          <p class="contenta_aa" style="color:#fff">{{$t("foot.First")}}</p>
+          <p class="contenta_aa">{{$t("foot.First")}}</p>
           <p class="contenta_cc">{{$t("foot.illegtrading")}}</p>
           <!-- 第二条 -->
           <p class="contenta_bb">{{$t("foot.Second")}}</p>
@@ -42,79 +42,49 @@ export default {
 }
 </script>
 <style lang="scss">
-
 .law{
-  padding-bottom: 80px;
-  .contenta_newtile{
-    padding-top:38px;
-  }
-  .new_title{
-    line-height:20px !important;
-    height:20px;
-    font-size:20px;
-    color:#fff !important;
-  
-   
-   
-  }
-  .contenta_cont{
-    border:0 !important;
-  }
-  background:#0e0e28;
-  .contenta_cont_title{
-    width:1200px !important;
-    margin-left:0 !important;
-    border:0 !important;
-    border:1px solid rgba(17,21,48,1);
-    height:20px !important;
-  }
-  .contenta_cont_content{
-    margin-top:22px !important;
-    background:rgba(17,21,48,1) !important;
-    border:1px solid rgba(17,21,48,1) !important;
-    color:#8090AF !important;
-    font-size:14px !important;
-  }
-}
-.law .contenta {
-  width: 100%;
-  position: relative;
-  // top: 60px;
-  padding-top: 50px;
-  // padding-bottom: 148px;
-  .contenta_cont_content {
-    padding: 30px;
-    .contenta_aa {
-      font-size: 14px;
-      // color: #333;
-      font-weight: bold;
-    }
-    .contenta_bb {
-      margin-top: 50px;
-      font-size: 14px;
-      // color: #333;
-      font-weight: bold;
-      color:#fff !important;
-    }
-    .contenta_cc {
-      font-size: 14px;
-      // color: #333;
-      line-height: 40px;
-    }
-  }
-  .contenta_cont {
-    width: 1200px;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    .contenta_cont_title {
-      width: 1138px;
-      margin-left: 31px;
-      height: 90px;
-      // color: #333333ff;
-      font-size: 18px;
-      border-bottom: 1px solid #ddddddff;
-      line-height: 90px;
-      // text-align: center;
+  background:#f4f6f8;
+  padding-bottom: 100px;
+  .contenta{
+    width: 100%;
+    position: relative;
+    padding-top: 50px;
+    .contenta_newtile{
+      width: 1200px;
+      margin: 0 auto;
+      padding-top:38px;
+      border:0;
+      .new_title{
+        font-size:20px;
+        color:#333 !important;
+        width:1200px;
+        font-weight: bold;
+        height: 90px;
+        line-height: 90px;
+      }
+      .contenta_cont_content{
+          margin-top:22px;
+          background:#fff;
+          color:#8090AF;
+          font-size:14px;
+          padding: 30px;
+          .contenta_aa {
+            font-size: 14px;
+            font-weight: bold;
+            color:#333
+          }
+          .contenta_bb {
+            margin-top: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            color:#333
+          }
+          .contenta_cc {
+            font-size: 14px;
+            line-height: 40px;
+            color:#666666
+          }
+      }
     }
   }
 }

@@ -9,7 +9,7 @@
         <!-- 隐私条款 -->
         <div class="contenta_cont_title">{{$t("foot.PrivacPolicy")}}</div>
         <div class="contenta_cont_content">
-          <p class="contenta_aa" style="color:#fff">{{$t("foot.Firstothdes")}}</p>
+          <p class="contenta_aa">{{$t("foot.Firstothdes")}}</p>
           <p class="contenta_cc">1.1{{$t("foot.websitedicated")}}</p>
           <p class="contenta_cc">1.2{{$t("foot.Asthenatural")}}</p>
           <p class="contenta_cc">1.3{{$t("foot.referredto")}}</p>
@@ -79,6 +79,7 @@ export default {
 </script>
 <style lang="scss">
 .Privgreement_new{
+    background:#f4f6f8;
   padding-bottom: 120px;
   .pre_title{
     padding-top:38px;
@@ -86,26 +87,21 @@ export default {
   .contenta_cont{
     border:0 !important;
   }
-  background:#0e0e28;
   .contenta_cont_title{
-    width:1200px !important;
-    margin-left:0 !important;
-    border:0 !important;
-    // background:rgba(25,29,58,1);
-    // border:1px solid rgba(17,21,48,1);
-    height:20px !important;
-    line-height:20px !important;
-    color:#fff !important;
-    font-size:20px !important;
-    // padding-left:30px !important;
-
+    width:1200px;
+    margin-left:0;
+    border:0;
+    height:20px;
+    line-height:20px;
+    color:#333;
+    font-weight: bold;
+    font-size:20px;
   }
   .contenta_cont_content{
-     margin-top:22px !important;
-    background:rgba(17,21,48,1) !important;
-    border:1px solid rgba(17,21,48,1) !important;
-    color:#8090AF !important;
-    font-size:14px !important;
+     margin-top:22px;
+    background:#fff;
+    color:#666;
+    font-size:14px;
   }
 }
 .Privgreement_new .contenta {
@@ -117,20 +113,19 @@ export default {
     padding: 30px;
     .contenta_aa {
       font-size: 14px;
-      // color: #333;
+      color: #333;
       font-weight: bold;
     }
     .contenta_bb {
       margin-top: 30px;
       font-size: 14px;
-      // color: #333;
+      color: #666;
       font-weight: bold;
-      color:#fff;
     }
     .contenta_cc {
       text-indent: 14px;
       font-size: 14px;
-      // color: #333;
+      color: #666;
       line-height: 28px;
     }
   }
@@ -138,16 +133,6 @@ export default {
     width: 1200px;
     margin: 0 auto;
     border: 1px solid #ddd;
-    .contenta_cont_title {
-      width: 1138px;
-      margin-left: 31px;
-      height: 90px;
-      // color: #333333ff;
-      font-size: 18px;
-      border-bottom: 1px solid #ddddddff;
-      line-height: 90px;
-      // text-align: center;
-    }
   }
 }
 

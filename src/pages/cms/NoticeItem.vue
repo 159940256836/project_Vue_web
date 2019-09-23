@@ -25,7 +25,7 @@
             </div>
           </div> -->
         <div class="content">
-            <div style="display:flex; font-size:16px; color:#fff;margin-bottom:40px;">
+            <div style="display:flex; font-size:16px; color:#333333;margin-bottom:40px;">
               <!-- 公告中心 -->
               <div>{{ $t("new.Announcemcenter") }}</div>
               <div style="margin-left:5px"> ></div>
@@ -115,7 +115,7 @@ export default {
   min-height: 800px;
 }
 .notice_box{
-  background:#0e0e28 !important;
+  background:#f4f6f8 !important;
 }
 .content-wrap {
   width: 1200px;
@@ -125,7 +125,7 @@ export default {
 .notice_content-wrap{
   margin-top:85px !important;
   width:1200px !important;
-  background:#0e0e28 !important;
+  background:#f4f6f8 !important;
   border:0 !important;
 
 }
@@ -150,9 +150,9 @@ export default {
         // text-align: center;
         height:64px;
         line-height:64px;
-        background:rgba(25,29,58,1);
+        background:rgba(255,255,255,1);
         padding-left:30px;
-        color:#8090AF;
+        color:#333333;
         font-size:16px;
 
     }
@@ -197,8 +197,8 @@ export default {
         // background:rgba(17,21,48,1) !important;
         margin-top:22px;
         padding:28px 28px 40px 30px;
-        color:#8090AF;
-        border: 1px solid rgba(42,56,80,1);
+        color:#333333;
+        background:#fff;
       }
       span {
         .MsoNormal {

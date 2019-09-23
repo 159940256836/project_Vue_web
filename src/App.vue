@@ -1,12 +1,11 @@
 <template>
   <div class="page-view">
     <header v-show="!$route.meta.hide">
-      <!--:style = "{
-      padding: $route.path==='/'? topPadding : '0 1.5%',
-      backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
-      }"-->
       <div
               class="page-content"
+                    :style = "{
+      backgroundColor: $route.path==='/'? topBackgroundColor : '$mainNightBgColor'
+      }"
       >
         <div class="time_download">
           <div class="netLogo">
@@ -651,18 +650,18 @@
             break
         }
       },
-      // handleScroll() {
-      //   const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      //   if (scrollTop > 0) {
-      //     this.styleTop = 0
-      //     this.topPadding = '0 17%'
-      //     this.topBackgroundColor = '#11132c'
-      //   } else {
-      //     this.styleTop = 30
-      //     this.topPadding = '0 1.5%'
-      //     this.topBackgroundColor = 'transparent'
-      //   }
-      // },
+      handleScroll() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        if (scrollTop > 0) {
+          this.styleTop = 0
+          // this.topPadding = '0 17%'
+          this.topBackgroundColor = '#11132c'
+        } else {
+          this.styleTop = 30
+          // this.topPadding = '0 1.5%'
+          this.topBackgroundColor = 'transparent'
+        }
+      },
       strpo(str) {
         if (str.length > 4) {
           str = str.slice(0, 4) + '···'
@@ -809,7 +808,7 @@
 
           a {
             font-size: 14px;
-            color: #8090AF;
+            color: #FFFFFF;
             display: inline-block;
             margin-right: 45px;
             text-align: center;
@@ -819,8 +818,8 @@
           }
 
           a:hover {
-            color: #2d8cf0;
-            border-bottom: 1px solid #2d8cf0;
+            color: #D5382B;
+            border-bottom: 1px solid #D5382B;
           }
 
           // a.router-link-exact-active.router-link-active {
@@ -828,8 +827,8 @@
           // }
           // 5.15修改
           a.router-link-active {
-            color: #2d8cf0;
-            border-bottom: 1px solid #2d8cf0;
+            color: #D5382B;
+            border-bottom: 1px solid #D5382B;
           }
         }
 
@@ -842,9 +841,13 @@
 
             .login_register {
               display: flex;;
-
+              .ivu-dropdown-item{
+                a{
+                  color:#333;
+                }
+              }
               a {
-                color: #8090AF;
+                color: #fff;
                 margin: 0 20px 0 10px;
                 font-size: 14px;
 
@@ -865,33 +868,18 @@
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
-
+                border-bottom:1px solid rgba(238,238,238,1);
                 a {
                   min-width: 150px;
-                  background: #10122B;
-                  padding: 0 15px;
-                  color: #8090af;
-                  font-size: 14px;
-/*=======*/
-/*                min-width: 1100px;*/
-/*                margin: 0 39px;*/
-/*                .netLogo {*/
-/*                    width:120px;*/
-/*                    height:50px;*/
-/*                    float: left;*/
-/*                        .logo {*/
-/*                            background:url("../src/assets/images/logo.png") no-repeat;*/
-/*                            width:100%;*/
-/*                            height:80%;*/
-/*                            // margin-left: 30px;*/
-/*                            margin-top: 7px;*/
-/*                        }*/
-/*                    }*/
-/*>>>>>>> 26c4b84e59ff9042f3dc79c189094b6d1b06d537*/
+                  background: #fff;
+                  padding: 15px;
+                  color: #333;
+                  font-size: 12px;
+                  margin:0;
                 }
 
                 &:hover a {
-                  color: #3399ff;
+                  color: #FE5C5C;
                 }
               }
 
@@ -899,8 +887,8 @@
                 text-align: center;
                 display: inline-block;
                 margin: 0;
-                padding: 0 0 0 25px;
-                color: #3399ff;
+                padding: 0 0 0 15px;
+                color: #FE5C5C;
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
               }
@@ -930,7 +918,7 @@
 
               .ivu-poptip-rel {
                 a {
-                  color: #8090AF;
+                  color: #fff;
                 }
 
                 i.ivu-icon.ivu-icon-arrow-down-b {
@@ -993,7 +981,7 @@
 
             #change_language_theme .ivu-dropdown-item {
               font-size: 14px !important;
-              color: #8090AF;
+              color: #333;
             }
           }
         }
@@ -1214,7 +1202,7 @@
   .ivu-select-dropdown {
     /*background: #10122B;*/
     .ivu-dropdown-item {
-      color: #8090AF;
+      color: #333;
       font-size: 14px !important;
 
       &:hover {
@@ -1340,9 +1328,9 @@
   // }
 
   .login_title {
-    color: #3399FF;
+    color: #000000;
     height: 80px;
-    font-size: 25px;
+    font-size: 22px;
     line-height: 80px;
   }
 
@@ -1842,7 +1830,7 @@
             .login_register {
               .ivu-menu-light.ivu-menu-vertical
               .ivu-menu-item-active:not(.ivu-menu-submenu) {
-                color: #8090AF;
+                color: #fff;
               }
             }
 
@@ -2136,6 +2124,6 @@
 
   //修改placeholder字体颜色
   .ivu-input::-webkit-input-placeholder {
-    color: #333;
+    color: #CCCCCC;
   }
 </style>

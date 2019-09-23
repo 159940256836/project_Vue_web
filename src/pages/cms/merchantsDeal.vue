@@ -79,6 +79,7 @@
 </script>
 <style lang="scss">
   .Privgreement_new{
+    background:#f4f6f8;
     padding-bottom: 120px;
     .pre_title{
       padding-top:38px;
@@ -86,19 +87,14 @@
     .contenta_cont{
       border:0 !important;
     }
-    background:#0e0e28;
     .contenta_cont_title{
-      width:1200px !important;
-      margin-left:0 !important;
-      border:0 !important;
-      // background:rgba(25,29,58,1);
-      // border:1px solid rgba(17,21,48,1);
-      height:20px !important;
-      line-height:20px !important;
-      color:#fff !important;
-      font-size:20px !important;
-      // padding-left:30px !important;
-
+      width:1200px;
+      margin-left:0;
+      border:0;
+      height:20px;
+      line-height:20px;
+      color:#fff;
+      font-size:20px;
     }
     .contenta_cont_content{
       margin-top:22px !important;
@@ -138,16 +134,6 @@
       width: 1200px;
       margin: 0 auto;
       border: 1px solid #ddd;
-      .contenta_cont_title {
-        width: 1138px;
-        margin-left: 31px;
-        height: 90px;
-        // color: #333333ff;
-        font-size: 18px;
-        border-bottom: 1px solid #ddddddff;
-        line-height: 90px;
-        // text-align: center;
-      }
     }
   }
 

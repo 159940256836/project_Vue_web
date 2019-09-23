@@ -283,11 +283,11 @@ export default {
 </script>
 <style lang="scss">
 .new_Usereement .contenta .contenta_list > div:hover{
-  color:#3399ff;
+  color:#FF495F;
 }
 
 .new_Usereement{
-  background:#0e0e28 !important;
+  background:#f4f6f8;
   .contentb {
   padding-bottom: 140px !important;
 }
@@ -300,11 +300,11 @@ export default {
   .contenta_list{
     display:flex;
     width:1200px;
-    background:rgba(17,21,48,1);
+    background:#fff;
     height:64px;
     line-height:64px;
     font-size:14px;
-    color:#fff;
+    columns: #333333;;
     margin: 26px auto 22px;
     .list1{
       margin-left:30px;
@@ -317,7 +317,8 @@ export default {
   }
   .contenta_title{
     font-size:20px;
-    color:#fff;
+    color:#333;
+    font-weight: bold;
     width:1200px;
     padding-top:39px;
     margin:0 auto;
@@ -326,19 +327,19 @@ export default {
     padding: 30px;
     .contenta_aa {
       font-size: 14px;
-      // color: #333;
+      color: #333;
       font-weight: bold;
     }
     .contenta_bb {
       margin-top: 30px;
       font-size: 14px;
-      // color: #333;
+      color: #333;
       font-weight: bold;
     }
     .contenta_cc {
       text-indent: 14px;
       font-size: 14px;
-      // color: #333;
+      color: #333;
       line-height: 28px;
     }
   }
@@ -374,12 +375,7 @@ export default {
     font-size: 46px;
   }
 }
-  .contenta_aa{
-  color:#fff !important;
-}
-.contenta_bb{
-  color:#fff !important;
-}
+
 .new_tabid2{
   position:relative;
   top:-50px;
@@ -394,17 +390,16 @@ export default {
   padding-top:0 !important;
 }
 .activeaa{
-  color:#3399FF;
-  border-bottom:1px solid #3399FF;
+  color:#FF495F;
+  border-bottom:1px solid #FF495F;
 }
    .contenta_cont{
     border:0 !important;
   }
   .contenta_cont_content{
-    background:rgba(17,21,48,1);
-    border:1px solid rgba(17,21,48,1);
-    color:#8090AF !important;
-    font-size:14px !important;
+    background:#fff;
+    color:#666;
+    font-size:14px;
   }
   .contenta_cont_title{
     width:1200px !important;

@@ -103,7 +103,7 @@
                         <router-link to="/register">
                             {{$t("uc.login.registerLog")}}
                         </router-link>
-                        <router-link to="/findPwd" style="color:#3399FF;float:right;padding-right:10px;font-size:12px;">
+                        <router-link to="/findPwd" style="float:right;padding-right:10px;font-size:12px;">
                             {{$t('uc.login.forget')}}
                         </router-link>
                     </div>
@@ -138,9 +138,9 @@
 </template>
 <style scoped lang="scss">
 /* 验证码 */
-$primary-color: #3399ff;
+$primary-color: #FE5C5C;
 .login_form {
-    background: #fff url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/brnner.png') no-repeat center;
+    background: url('../../assets/images/brnner.png') no-repeat center;
     height: 760px;
     position: relative;
     overflow: hidden;
@@ -154,15 +154,15 @@ $primary-color: #3399ff;
         // background: #fff url("../../assets/images/login-watermark.png") no-repeat center !important;
         padding: 0 30px 0 45px;
         position: absolute;
-        background: #10122B;
+        background: #fff;
         width: 767px;
         height: 440px;
         left: 50%;
         top: 50%;
         margin-left: -381px;
         margin-top: -220px;
-        border:1px solid;
-        border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
+        // border:1px solid;
+        // border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
         .left-login {
             width: 50%;
             height: 100%;
@@ -184,22 +184,26 @@ $primary-color: #3399ff;
             margin-top: 109px;
             .right-border {
                 height: 230px;
-                border-left: 1px solid rgba(51,153,255,1);
+                border-left:1px solid rgba(221,221,221,1);
                 .right-main {
                     float: right;
                     width: 270px;
                     text-align: center;
                     .right-img {
+                      width:138px;
+                      height:138px;
+                      box-shadow:0px 0px 10px 0px rgba(4,0,0,0.1);
+                      border-radius:2px;
                         background: #fff;
-                        width: 150px;
-                        margin: 0 auto;
+                        margin:auto;
                         img {
-                            width: 90%;
-                            margin-top:5%
+                            width:117px;
+                            height:116px;
+                            margin-top:11px;
                         }
                     }
                     p {
-                        color: #8090AF;
+                        color: #333333;
                         font-size: 14px;
                     }
                 }
@@ -211,9 +215,9 @@ $primary-color: #3399ff;
                     .login_btn.ivu-btn {
                         width: 100%;
                         height: 48px;
-                        background-color: $primary-color;
+                        background-color: #E62B25;
                         outline: none;
-                        border-color: $primary-color;
+                        border-color: #E62B25;
                         color: #fff;
                         font-size: 14px;
                         border-radius: 0;
@@ -238,7 +242,7 @@ $primary-color: #3399ff;
         overflow: hidden;
         span {
             float: left;
-            color: #8090AF;
+            color: #CCCCCC;
              font-size: 12px;
         }
         a {
@@ -538,7 +542,7 @@ $white:#fff;
                 .ivu-form-item-content {
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
-                            background:#10122B;
+                            background:#fff;
                             width: 100%;
                             height: 42px;
                             font-size: 14px;
@@ -546,13 +550,8 @@ $white:#fff;
                             // border: 1px solid $changeColor;
                             padding-left: 20px;
                             box-sizing: border-box;
-                            border:1px solid;
-                            border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
-                            color:white;
-                            &:focus {
-                                border: 1px solid $focusColor;
-                                // box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
-                            }
+                            border:1px solid #DDDDDD;
+                            color:#333
                         }
                     }
                 }

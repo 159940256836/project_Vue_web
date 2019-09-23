@@ -17,7 +17,7 @@
       <div class="content_content" id="content" v-show="tabid==1">
         <div class="content_tab">
           <!-- 费率标准 交易对费率 -->
-          <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
+          <!-- <div class="content_tab_title">{{$t("foot.Standardates")}}</div> -->
           <!-- <div class="content_tab_title1">{{$t("foot.Tradrate")}}</div> -->
           <div class="content_tab_buy">
             <Table
@@ -31,7 +31,7 @@
       <!-- 等级费率 -->
       <div class="content_content" id="content" v-show="tabid==2">
         <div class="content_tab">
-          <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
+          <!-- <div class="content_tab_title">{{$t("foot.Standardates")}}</div> -->
           <!-- <div class="content_tab_title1">{{$t("foot.Gradrate")}}</div> -->
           <div class="content_tab_buy">
             <Table
@@ -49,7 +49,7 @@
       <!-- otc币种费率 -->
       <div class="content_content" id="content"  v-show="tabid==3">
         <div class="content_tab">
-          <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
+          <!-- <div class="content_tab_title">{{$t("foot.Standardates")}}</div> -->
           <!-- <div class="content_tab_title1">{{$t("foot.Otcurrenrates")}}</div> -->
           <div class="content_tab_buy">
             <Table
@@ -64,7 +64,7 @@
       <!-- 币种费率 -->
       <div class="content_content" id="content" v-show="tabid==4">
         <div class="content_tab">
-          <div class="content_tab_title">{{$t("foot.Standardates")}}</div>
+          <!-- <div class="content_tab_title">{{$t("foot.Standardates")}}</div> -->
           <!-- <div class="content_tab_title1">{{$t("foot.Currencrates")}}</div> -->
           <div class="content_tab_buy">
             <Table
@@ -221,7 +221,7 @@ export default {
         // 交易手续费率
         title: this.$t('foot.Transactiate'),
         key: 'jyRate',
-        align: 'left',
+        align: 'left'
 
       })
       return listdd
@@ -289,6 +289,11 @@ export default {
 .ivu-table:after{
   width: 0 !important;
 }
+.ivu-table-body{
+  table{
+        background: #fff;
+  }
+}
 .new_transactionCosts .ivu-table td{
   border-bottom: none !important;
 }
@@ -305,24 +310,30 @@ export default {
   width:1200px !important;
 }
 #i_bg {
-.ivu-table-wrapper .ivu-table td{
-  background: transparent !important;
-}
+  .ivu-table-wrapper .ivu-table tr:nth-of-type(2n){
+    background: #f4f6f8 !important;
+  }
+  .ivu-table-wrapper .ivu-table tr:nth-of-type(2n-1){
+    background: #fff !important;
+  }
 }
 .top11111{
   width: 1200px;
-    // height: 242px;
-    // line-height: 242px;
     margin: 0 auto;
-    color: #ffffffff;
+    font-size: bold;
     margin-top:60px;
-    background:#0e0e28;
-    // font-size: 46px;
     font-size:20px;
-
+  .title_a {
+    width: 1200px;
+    margin: 0 auto;
+    color: #333;
+    font-weight: bold;
+    font-size:20px;
+    margin-bottom: 26px;
+  }
 }
 .new_transactionCosts{
-  background:#0e0e28 !important;
+  background:#f4f6f8;
   padding-top:29px;
   .top {
   width: 100%;
@@ -331,21 +342,9 @@ export default {
   height: auto;
   position: relative;
   top: 60px;
-  .title_a {
-    width: 1200px;
-    // height: 242px;
-    // line-height: 242px;
-    margin: 0 auto;
-    color: #ffffffff;
-    // font-size: 46px;
-    font-size:20px;
-  }
+
 }
-  .content_tab_title{
-    font-size:16px !important;
-    color:#fff !important;
-    margin-bottom: 22px;
-  }
+
   .content_tab_buy{
     background:#0e0e28 !important;
   }
@@ -357,26 +356,18 @@ export default {
   .content_tab{
   border:0 !important;
   }
-  .content .content_top .content_top_list div{
-    color:#fff !important;
-  }
+
   .content .content_top .content_top_list .active{
-    background:transparent !important;
-    border-bottom: 1px solid #3399FF !important;
-    color:#3399FF !important;
-  }
-  .content_top_list{
-    height:65px !important;
-   background:rgba(17,21,48,1) !important;
-   margin-top:16px !important;
+    background:transparent;
+    border-bottom: 1px solid #FF495F;
+    color:#FF495F;
   }
   .top{
-      height:30px !important;
-      line-height:30px !important;
+      height:30px;
+      line-height:30px;
     }
   .content_top{
-     background:#0e0e28 !important;
-     font-size:20px !important;
+     font-size:20px;
   }
 }
 
@@ -457,31 +448,31 @@ export default {
 
   .content_top {
     width: 100%;
-    height: 104px;
-    background: #f7f7f7ff;
+    height: 64px;
+    background: #f7f7f7;
     position: relative;
-    // top: 60px;
+    margin-bottom:22px;
     .content_top_list {
       width: 1200px;
-      height: 104px;
+      height: 64px;
       margin: 0 auto;
       display: flex;
-      color: #3399ffff;
-      font-size: 16px;
+      color: #333;
+      font-size: 14px;
       align-items: center;
+      background:#fff;
       .active {
         // width: 108px;
-        height: 44px;
-        background: #378febff;
-        color: #fff;
+        background: #FF495F;
+        color: #FF495F;
       }
       div {
         margin-right:20px;
         // width: 108px;
-        height: 44px;
+        height: 64px;
         text-align: center;
-        color: #3399ffff;
-        line-height: 44px;
+        color: #333;
+        line-height: 64px;
         cursor: pointer;
       }
       .right {
@@ -493,8 +484,8 @@ export default {
 .bg{
   thead {
     height:50px;
-    background:rgba(25,29,58,1) !important;
-    color:#8090AF !important;
+    background:#f4f6f8;
+    color:#333;
     font-size:14px !important;
   }
   tr:nth-child(2n){
@@ -508,14 +499,10 @@ export default {
   .ivu-table-tbody{
     color:#fff;
   }
-  .ivu-table-wrapper .ivu-table .ivu-table-header th{
-    background: transparent;
-  }
   .ivu-table th{
     background: transparent;
   }
   .ivu-table{
-    background: transparent;
     td {
      &:last-child {
        text-align: left;

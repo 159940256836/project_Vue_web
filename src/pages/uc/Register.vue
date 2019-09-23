@@ -1,14 +1,14 @@
 <style lang="scss">
 $changeColor:#DDDDDD;
-$focusColor:#3399FF;
+$focusColor:#FE5C5C;
 .login_form {
-    $main_theme: #3399ff;
+    $main_theme: #FE5C5C;
     .login_right {
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 border:0 !important;
                 .ivu-form-item-content {
-                    border:0;
+                    border-bottom:1px solid rgba(221,221,221,1);
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
                             width: 100%;
@@ -18,10 +18,9 @@ $focusColor:#3399FF;
                             border: 1px solid $changeColor;
                             padding-left: 20px;
                             box-sizing: border-box;
-                            background:#10122B;
-                            border:1px solid;
-                            color:white;
-                            border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
+                            background:#fff;
+                            border:1px solid rgba(221,221,221,1);
+                            border-radius:2px;
                             &:focus {
                                 border: 1px solid $focusColor;
                                 box-shadow: 2px 2px 5px transparent, -2px -2px 4px transparent;
@@ -66,18 +65,16 @@ $focusColor:#3399FF;
                 height: 42px;
                 border-radius: 0;
                 border-right: 0;
-                border:1px solid;
-                border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
                 background-color:transparent;
                 text-align: center;
             }
             .ivu-select-single .ivu-select-selection .ivu-select-selected-value {
-                background:#10122B;
+                background:#fff;
                 height: 40px;
                 border-radius: 0;
                 line-height: 42px;
                 border-right: 0;
-                color:#fff;
+                color: rgba(204,204,204,1);
                 text-align: center;
             }
             .check-agree {
@@ -276,8 +273,7 @@ $focusColor:#3399FF;
 </template>
 <style scoped lang="scss">
 .login_form {
-    background: #f9f9f9 url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/brnner.png') no-repeat center
-        center;
+    background: url('../../assets/images/brnner.png') no-repeat center;
     height: 760px;
     position: relative;
     overflow: hidden;
@@ -290,7 +286,7 @@ $focusColor:#3399FF;
         // background: #fff url("../../assets/images/register.png") no-repeat center !important;
         padding: 0 42px;
         position: absolute;
-        background: #10122B;
+        background: #fff;
         width: 465px;
         left: 50%;
         top: 42%;
@@ -307,9 +303,9 @@ $focusColor:#3399FF;
                     }
                     .register_btn.ivu-btn {
                         width: 100%;
-                        background-color: #3399ff;
+                        background-color: #E62B25;
                         outline: none;
-                        border-color: #3399ff;
+                        border-color: #E62B25;
                         color: #fff;
                         border-radius: 0;
                         font-size: 18px;
@@ -329,16 +325,14 @@ $focusColor:#3399FF;
                     #sendCode {
                         position: absolute;
                         border: 1px solid #DDDDDD;
-                        background: #10122B;
+                        background: #fff;
                         top: 0px;
                         outline: none;
                         line-height: 40px;
                         right: 0px;
                         width: 27%;
-                        color: #3399ff;
+                        color: #666666;
                         cursor: pointer;
-                        border:1px solid;
-                        border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
                     }
                 }
             }
@@ -349,14 +343,14 @@ $focusColor:#3399FF;
                 font-size: 12px;
                 cursor: default;
                 a {
-                    color: #3399ff;
+                    color: #FE5C5C;
                     margin-left: -10px;
                 }
                 .ivu-checkbox-wrapper.ivu-checkbox-wrapper-checked {
                     .ivu-checkbox.ivu-checkbox-checked {
                         .ivu-checkbox-inner {
-                            border: 1px solid #3399ff;
-                            background-color: #3399ff;
+                            border: 1px solid #FE5C5C;
+                            background-color: #FE5C5C;
                         }
                     }
                 }
@@ -366,10 +360,10 @@ $focusColor:#3399FF;
 }
 
 .login_title {
-    color: #3399FF;
+    color: #000000;
     text-align: center;
     height: 80px;
-    font-size: 25px;
+    font-size:22px;
 }
 .select-input {
     border-radius: 0;

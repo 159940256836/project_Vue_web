@@ -193,7 +193,7 @@ export default {
     &:hover {
         border: 1px solid #3399ff;
         a {
-            color: #3399ff;
+            color: #D5382B;
         }
     }
 }
