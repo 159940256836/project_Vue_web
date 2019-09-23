@@ -76,10 +76,6 @@
   padding-right: 5px;
 }
 
-.chart-page .chart-container {
-  border-top: 1px solid #eeeeee;
-}
-
 /* 计数指标弹出框 */
 .tv-dialog.i-focused {
   top: 45px !important;
