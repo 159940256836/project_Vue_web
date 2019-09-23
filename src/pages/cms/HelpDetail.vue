@@ -17,7 +17,7 @@
                     </div>
                     <router-link :to="{path:'helplist',query:{cate:cate,cateTitle:cateTitle}}">查看更多>></router-link>
                 </div> -->
-                <div class="content-wrap" style="background:#fff">
+                <div class="content-wrap">
                     <div class="helpdetail_title helpdetail_title_new">
                         <h3 class="title">{{article.title}}</h3>
                         <p class="time">{{article.createTime}}</p>
@@ -125,7 +125,7 @@ export default {
 <style lang="scss" scoped>
 // lhl
 .helplist_helpdetail{
-    background:#0e0e28;
+    background:#f4f6f8;
 
 }
 .helpdetail {
@@ -178,10 +178,9 @@ export default {
         flex: 1 1 100%;
         width: 100%;
         // margin-left: 35px;
-       background:#0e0e28 !important;
         .helpdetail_title{
             height:85px;
-            background:#111530FF;
+            background:#FFFFFF;
             // color:#fff;
             padding-top:25px;
         }
@@ -190,24 +189,23 @@ export default {
             line-height: 1;
             margin-bottom: 20px;
             font-size:16px;
-            color:#8090AF;
+            color:#333333;
             margin-left:30px;
 
         }
         .time {
-            color: #fff;
+            color: #333;
             line-height: 1;
             margin-bottom: 20px;
         }
         .content {
             // border-top: 1px solid #f0f0f0;
             padding: 29px 29px 45px 29px;
-            // background:#111530FF;
+            background:rgba(255,255,255,1);
             margin-top:22px;
             // color:#8090AFFF !important;
             color: #8090AF !important;
             font-size:14px;
-            border: 1px solid rgba(42,56,80,1);
         }
     }
 }
@@ -216,12 +214,12 @@ export default {
     margin:0 auto;
 }
 .route-wrap {
-    color: #fff;
+    color: #333333;
     margin-bottom: 20px;
     height:56px;
     line-height:56px;
     a {
-        color: #fff;
+        color: #333333;
         font-size:16px;
     }
 }

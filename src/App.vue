@@ -448,8 +448,8 @@
   var $ = require('jquery')
   import QRCode from 'qrcode2'
   import Vue from 'vue'
-  import {mapGetters, mapActions} from 'vuex'
-  import {Transform} from 'stream'
+  import { mapGetters, mapActions } from 'vuex'
+  import { Transform } from 'stream'
 
   export default {
     name: 'App',
@@ -485,7 +485,7 @@
       }
     },
     watch: {
-      activeNav: function (newVal) {
+      activeNav: function(newVal) {
         switch (this.activeNav) {
           case 'nav-exchange':
             break
@@ -513,7 +513,7 @@
           this.pageView = 'page-view'
           // this.container_test = "";
         } else {
-          $('.page-content').css({'background': '#11132c'})
+          $('.page-content').css({ 'background': '#11132c' })
           if (to.path.indexOf('exchange') > 0 && this.exchangeSkin === 'night') {
             this.pageView = 'page-view'
           } else {
@@ -531,19 +531,19 @@
       }
     },
     computed: {
-      setMain: function () {
+      setMain: function() {
         return this.$store.state.setMain
       },
-      activeNav: function () {
+      activeNav: function() {
         return this.$store.state.activeNav
       },
-      isLogin: function () {
+      isLogin: function() {
         return this.$store.getters.isLogin
       },
-      member: function () {
+      member: function() {
         return this.$store.getters.member
       },
-      languageValue: function () {
+      languageValue: function() {
         var curlang = this.$store.getters.lang
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         if (curlang === 'English') this.$i18n.locale = 'en'
@@ -556,7 +556,7 @@
         return this.$store.state.exchangeSkin
       }
     },
-    created: function () {
+    created: function() {
       if (localStorage.getItem('SETSTYLE') == null) {
         this.setTheme(this.$store.commit('setMain', 'down'))
       } else {
@@ -612,14 +612,14 @@
           }
         }
       },
-      lnswitch: function (language) {
+      lnswitch: function(language) {
         this.$http.get(this.host + '/uc/lang/change/' + language).then(res => {
         })
       },
       // header动画效果
       reload() {
         this.isRouterAlive = false
-        this.$nextTick(function () {
+        this.$nextTick(function() {
           this.isRouterAlive = true
         })
       },
@@ -719,7 +719,7 @@
           }
         })
       },
-      changelanguage: function (name) {
+      changelanguage: function(name) {
         if (name === 'en') {
           this.$store.commit('setlang', 'English')
           this.$i18n.locale = 'en'
@@ -731,16 +731,16 @@
       },
       systemservice() {
         window.addEventListener('scroll', this.handleScroll);
-        (function (a, h, c, b, f, g) {
-          a['UdeskApiObject'] = f;
-          a[f] = a[f] || function () {
+        (function(a, h, c, b, f, g) {
+          a['UdeskApiObject'] = f
+          a[f] = a[f] || function() {
             (a[f].d = a[f].d || []).push(arguments)
-          };
-          g = h.createElement(c);
-          g.async = 1;
-          g.charset = 'utf-8';
-          g.src = b;
-          c = h.getElementsByTagName(c)[0];
+          }
+          g = h.createElement(c)
+          g.async = 1
+          g.charset = 'utf-8'
+          g.src = b
+          c = h.getElementsByTagName(c)[0]
           c.parentNode.insertBefore(g, c)
         })(window, document, 'script', 'https://assets-cli.s2.udesk.cn/im_client/js/udeskApi.js', 'ud')
         ud({
@@ -1925,7 +1925,8 @@
   }
 
   .ivu-page-item.ivu-page-item-active a {
-    color: #fff;
+    color: #333;
+    font-weight: bold;
   }
 
   .ivu-page-disabled {

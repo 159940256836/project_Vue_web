@@ -7,7 +7,7 @@
         <div class="help_container">
             <!-- <h1>{{cateTitle}}</h1> -->
             <!-- <h1>{{$t("footer.helpCenter")}}</h1> -->
-            <div style="display:flex; height:50px;line-height:50px; text-align:center; background:#191d3a !important; cursor: pointer;">
+            <div style="display:flex; height:50px;line-height:50px; text-align:center; background:#f4f6f8 !important; cursor: pointer;">
                 <div style="margin-left:10px;margin-left:30px; text-aling:center;" v-for="(item, index) in selectList" :key='index' class="select_list" :class="cate == item.status ? 'on' : ''" @click="changeStatus(item.status)">{{item.klassName}}</div>
             </div>
             <div></div>
@@ -39,23 +39,23 @@
 </template>
 <style lang="scss" scoped>
 .select_list[data-v-9dbbb4ae]:hover{
-    color:#3399ff;
+    color:#D5382B;
 }
 .list .item[data-v-9dbbb4ae]{
-    color:#fff !important;
+    color:#333 !important;
 }
 // lhl
 .select_list{
     // background:#2d8cf0;
-    color:#fff;
+    color:#333;
     cursor: pointer;
 }
 .select_list:hover{
-    color:#57a3f3;
+    color:#D5382B;
 }
 .select_list.on{
-    color: #2d8cf0 !important;
-    border-bottom: 1px solid #2d8cf0;
+    color: #D5382B !important;
+    border-bottom: 2px solid #D5382B;
 }
 .helpList_page{
     margin-top:20px;
@@ -65,7 +65,7 @@
     width:1200px;
 }
 .help_common{
-    background:#0e0e28 !important;
+    background:#f4f6f8 !important;
 }
 .helplist {
     width: 60%;
@@ -97,8 +97,8 @@
     height:85px;
     margin:0 auto;
     font-size:20px;
-    color:#FFFFFFFF;
-    background:#0e0e28;
+    color:rgba(51,51,51,1);
+    background:#f4f6f8;
     line-height:85px;
     span{
         margin-left:31px;
@@ -111,20 +111,20 @@
    margin:0 auto;
     height: 100%;
     min-height: 389px;
-    background:#0e0e28;
+    background:#f4f6f8;
     > h1 {
         font-size: 32px;
         line-height: 1;
         padding: 110px 0;
         text-align: center;
-        color:white;
+        color:#333333;
     }
 }
 .list {
     font-size: 14px;
     margin-top:22px;
     .item {
-        color: #8090AFFF;
+        color: #333333;
         display: block;
         line-height: 50px;
         // border-bottom: 1px solid #f0f0f0;
@@ -137,15 +137,15 @@
         }
         .time {
             float: right;
-            color: #8090AFFF;
+            color: #333333;
             font-size: 14px;
         }
     }
     .item:nth-child(2n-1){
-        background:#191d3a;
+        background:#fff;
     }
      .item:nth-child(2n){
-        background:#10122BFF;
+        background:#f4f6f8;
     }
 }
 .route-wrap {
