@@ -758,7 +758,7 @@
         margin-right: 10px;
 
         .imgtable {
-          height: 490px;
+          height: 500px;
           position: relative;
           overflow: hidden;
           margin-bottom: 10px;
@@ -877,7 +877,7 @@
         margin-right: 10px;
 
         .coin-menu {
-          height: 540px;
+          height: 550px;
           background-color: #141F2B;
           margin-bottom: 10px;
           overflow: hidden;
@@ -1552,7 +1552,7 @@
         },
         // 最新价的 table 数据;
         plate: {
-          maxPostion: 15, // 买卖盘口数据条数最大限制
+          maxPostion: 14, // 买卖盘口数据条数最大限制
           columns: [
             // {
             //   title: self.$t("exchange.stall"),
@@ -2444,11 +2444,11 @@
           fullscreen: true, // 布尔值显示图表是否占用窗口中所有可用的空间
           symbol: that.symbol, // 币名称
           interval: '15', // K线默认时间传值
-          // timeframe: '3D',
+          // timeframe: '3D', // x 周期范围
           timezone: 'Asia/Shanghai', // 默认时区
           toolbar_bg: '#141F2B', // 背景色
           container_id: 'kline_container', // `id`属性为指定要包含widget的DOM元素id。
-          symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
+          // symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
 
           datafeed: that.datafeed, // 请求地址
           library_path:
@@ -2461,7 +2461,7 @@
             tools: [{name: 'Regression Trend'}]
           },
           // 禁用属性
-          // 包含功能在默认情况下启用/禁用名称的数组。功能表示图表功能的一部分（更是UI/UX的一部分） http://tradingview.gitee.io/featuresets参考文档
+          // 包含功能在默认情况下启用/禁用名称的数组
           disabled_features: [
             // 'left_toolbar', // 左边工具栏
 
@@ -2484,10 +2484,10 @@
             'header_settings', // 设置按钮
             'main_meries_seale_menu' // 隐藏右上角设置
           ],
-          // 包含功能在默认情况下启用/禁用名称的数组。功能表示图表功能的一部分（更是UI/UX的一部分）  http://tradingview.gitee.io/featuresets 参考文档
+          // 包含功能在默认情况下启用/禁用名称的数组
           enabled_features: [
             'hide_last_na_study_output',
-            // 'move_logo_to_main_pane' // TradingView login 开启显示在网格上 隐藏显示在网格下
+            'move_logo_to_main_pane' // TradingView login 开启显示在网格上 隐藏显示在网格下
           ],
           custom_css_url: 'bundles/common.css',
           supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M'],

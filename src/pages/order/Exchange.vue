@@ -598,7 +598,7 @@ $night-color: #fff;
             flex: 0 0 50%;
             margin-right: 1%;
             .imgtable {
-                height: 480px;
+                height: 500px;
                 position: relative;
                 overflow: hidden;
                 margin-bottom: 20px;

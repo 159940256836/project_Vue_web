@@ -189,7 +189,7 @@ span.price {
   width: 100%;
   margin-bottom: 20px;
   overflow: hidden;
-  height: 490px;
+  height: 500px;
 }
 
 #kline_container.hidden,
@@ -723,7 +723,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 }
 
 iframe {
-  height: 490px !important;
+  height: 500px !important;
 }
 
 #tradingview_188a1 {
@@ -1085,7 +1085,22 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
   font-size: 0;
 }
 
-.ivu-table-wrapper .ivu-table td {
+.exchange .ivu-table-wrapper .ivu-table td {
+  background: #141F2B;
+  border-bottom: 0;
+}
+
+.exchange .left .ivu-table-wrapper .ivu-table td {
+  background: transparent;
+  border-bottom: 0;
+}
+
+.exchange.day .ivu-table-wrapper .ivu-table td {
+  background: #fff;
+  border-bottom: 0;
+}
+
+.exchange.day .left .ivu-table-wrapper .ivu-table td {
   background: transparent;
   border-bottom: 0;
 }
