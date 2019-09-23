@@ -815,7 +815,7 @@
 .ivu-table-wrapper .ivu-table .ivu-table-header th,
 .ivu-table-wrapper .ivu-table td {
   color: #333;
-  background-color: #fff;
+  /*background-color: #fff;*/
 }
 .ivu-table-cell .user-avatar-public > .user-avatar-in {
   transform: translate(5px, 5px);

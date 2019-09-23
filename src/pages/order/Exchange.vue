@@ -2080,7 +2080,7 @@ export default {
           'header_screenshot',
           'header_saveload',
           'use_localstorage_for_settings',
-          'left_toolbar',
+          // 'left_toolbar',
           'volume_force_overlay'
         ],
         enabled_features: [
@@ -2197,174 +2197,174 @@ export default {
         widget.onChartReady(function() {
           widget.chart().executeActionById('drawingToolbarAction')
           widget
-                        .chart()
-                        .createStudy('Moving Average', false, false, [5], null, {
-                          'plot.color': '#965FC4'
-                        })
+            .chart()
+            .createStudy('Moving Average', false, false, [5], null, {
+              'plot.color': '#965FC4'
+            })
           widget
-                        .chart()
-                        .createStudy('Moving Average', false, false, [10], null, {
-                          'plot.color': '#84AAD5'
-                        })
+            .chart()
+            .createStudy('Moving Average', false, false, [10], null, {
+              'plot.color': '#84AAD5'
+            })
 
           widget
-                        .createButton()
-                        .attr('title', 'realtime')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(3)
-                          widget.setSymbol('', '1')
-                        })
-                        .append('<span>分时</span>')
+        .createButton()
+        .attr('title', 'realtime')
+        .on('click', function() {
+          if ($(this).hasClass('selected')) return
+          $(this)
+                .addClass('selected')
+                .parent('.group')
+                .siblings('.group')
+                .find('.button.selected')
+                .removeClass('selected')
+          widget.chart().setChartType(3)
+          widget.setSymbol('', '1')
+        })
+        .append('<span>分时</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'M1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '1')
-                        })
-                        .append('<span>M1</span>')
+        .createButton()
+        .attr('title', 'M1')
+        .on('click', function() {
+          if ($(this).hasClass('selected')) return
+          $(this)
+                .addClass('selected')
+                .parent('.group')
+                .siblings('.group')
+                .find('.button.selected')
+                .removeClass('selected')
+          widget.chart().setChartType(1)
+          widget.setSymbol('', '1')
+        })
+        .append('<span>M1</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'M5')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '5')
-                        })
-                        .append('<span>M5</span>')
-                        .addClass('selected') // 静态默认分时
+            .createButton()
+            .attr('title', 'M5')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '5')
+            })
+            .append('<span>M5</span>')
+            .addClass('selected') // 静态默认分时
 
           widget
-                        .createButton()
-                        .attr('title', 'M15')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '15')
-                        })
-                        .append('<span>M15</span>')
+            .createButton()
+            .attr('title', 'M15')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '15')
+            })
+            .append('<span>M15</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'M30')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '30')
-                        })
-                        .append('<span>M30</span>')
+            .createButton()
+            .attr('title', 'M30')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '30')
+            })
+            .append('<span>M30</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'H1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '60')
-                        })
-                        .append('<span>H1</span>')
+            .createButton()
+            .attr('title', 'H1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '60')
+            })
+            .append('<span>H1</span>')
           widget
-                        .createButton()
-                        .attr('title', 'H4')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '240')
-                        })
-                        .append('<span>H4</span>')
+            .createButton()
+            .attr('title', 'H4')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '240')
+            })
+            .append('<span>H4</span>')
           widget
-                        .createButton()
-                        .attr('title', 'D1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '1D')
-                        })
-                        .append('<span>D1</span>')
+            .createButton()
+            .attr('title', 'D1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '1D')
+            })
+            .append('<span>D1</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'W1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '1W')
-                        })
-                        .append('<span>W1</span>')
+            .createButton()
+            .attr('title', 'W1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '1W')
+            })
+            .append('<span>W1</span>')
 
           widget
-                        .createButton()
-                        .attr('title', 'M1')
-                        .on('click', function() {
-                          if ($(this).hasClass('selected')) return
-                          $(this)
-                                .addClass('selected')
-                                .parent('.group')
-                                .siblings('.group')
-                                .find('.button.selected')
-                                .removeClass('selected')
-                          widget.chart().setChartType(1)
-                          widget.setSymbol('', '1M')
-                        })
-                        .append('<span>M1</span>')
+            .createButton()
+            .attr('title', 'M1')
+            .on('click', function() {
+              if ($(this).hasClass('selected')) return
+              $(this)
+                    .addClass('selected')
+                    .parent('.group')
+                    .siblings('.group')
+                    .find('.button.selected')
+                    .removeClass('selected')
+              widget.chart().setChartType(1)
+              widget.setSymbol('', '1M')
+            })
+            .append('<span>M1</span>')
         })
       })
     },

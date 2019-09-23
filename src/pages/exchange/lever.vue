@@ -2077,7 +2077,7 @@ export default {
           'header_screenshot',
           'header_saveload',
           'use_localstorage_for_settings',
-          'left_toolbar',
+          // 'left_toolbar',
           'volume_force_overlay'
         ],
         enabled_features: [

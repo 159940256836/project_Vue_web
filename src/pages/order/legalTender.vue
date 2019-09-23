@@ -582,7 +582,7 @@
 
             .ivu-table-tip td {
               text-align: center !important;
-              background: #191D3A !important;
+              background: #f4f6f8;
             }
 
             .ivu-table-header th:first-child,

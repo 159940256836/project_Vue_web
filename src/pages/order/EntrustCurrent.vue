@@ -368,12 +368,12 @@
 
     .ivu-table-wrapper .ivu-table .ivu-table-tbody tr:nth-child(2n) td,
     .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
-      background: #10122B;
+      background: #fff;
       //表格双数行样式
     }
 
     .ivu-table-wrapper .ivu-table .ivu-table-tbody tr td {
-      background: #090e2e;
+      background: #f4f6f8;
       //表格单数行样式
     }
 
@@ -873,7 +873,7 @@
                   },
                   style: {
                     background: 'transparent',
-                    color: '#3399FF',
+                    color: '#FE5C5C',
                     lineHeight: '15px',
                     border: 'none'
                   },
