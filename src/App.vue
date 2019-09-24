@@ -185,7 +185,7 @@
               </poptip>
             </div>
             <!-- 红涨绿跌 -->
-            <!-- <div class="set-main-style">
+             <div class="set-main-style">
                 <Dropdown @on-click="setTheme">
                     <a href="javascript:void(0)">
                         <span class="header-img">{{ $t('common.set') }}</span>
@@ -203,7 +203,7 @@
                     </DropdownMenu>
                 </Dropdown>
 
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -562,7 +562,7 @@
         this.setTheme(this.$store.commit('setMain', localStorage.getItem('SETSTYLE')))
       }
 
-      /* localStorage.setItem('SETSTYLE', JSON.stringify('down'))*/
+       localStorage.setItem('SETSTYLE', JSON.stringify('up'))
       /** *
        * 获取公告
        */

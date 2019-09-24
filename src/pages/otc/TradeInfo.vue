@@ -118,6 +118,7 @@
               </p>
               <button
                       class="btn-trade-in"
+                      :class="setMain == 'up'? (type == '买入'?'trade':'trade1'):(type == '买入'?'trade1':'trade') "
                       @click="submit"
                       :disabled="btnDisabled"
               >
@@ -428,6 +429,10 @@
       this.getIdAdv()
     },
     computed: {
+      setMain: function () {
+        return this.$store.state.setMain
+      },
+
       priceNow: function () {
         return (
             (this.user.price + '').replace(/,/g, '').replace(/[^\d|.]/g, '') - 0
@@ -564,11 +569,18 @@
     outline: medium;
     border: 0;
     color: white;
-    background-color: #E62B25;
     cursor: pointer;
     text-align: center;
     font-size: 14px;
     float: right;
+  }
+
+  .trade-right-box .trade-operation .trade-price-box .trade {
+    background-color: #E62B25;
+  }
+
+  .trade-right-box .trade-operation .trade-price-box .trade1 {
+    background-color: rgb(0, 178, 117);
   }
 
   .trade-remark-box {

@@ -1080,18 +1080,20 @@ export default {
             align: 'center',
             paddingLeft: '0',
             render: function(h, params) {
+              console.log(params.row.advertiseType)
               return h(
                   'p',
                 {
                   style: {
                     textAlign: 'center',
                     fontSize: '12px',
-                    color: params.row.advertiseType == 0 ? 'rgba(241, 80, 87)' : 'rgb(0, 178, 117)',
+                    // color: params.row.advertiseType == 0 ? 'rgba(241, 80, 87)' : 'rgb(0, 178, 117)',
+                    color: self.setMain == 'up'? (params.row.advertiseType == 0 ? 'rgb(0, 178, 117)' : 'rgba(241, 80, 87)'):(params.row.advertiseType == 0 ? 'rgba(241, 80, 87)' : 'rgb(0, 178, 117)'),
                     width: '50px',
                     height: '24px',
                     lineHeight: '23px',
                     cursor: 'pointer',
-                    border: params.row.advertiseType == 0 ? '1px solid rgba(241, 80, 87)' : '1px solid rgb(0, 178, 117)'
+                    border: self.setMain == 'up'?(params.row.advertiseType == 0 ? '1px solid rgb(0, 178, 117)' : '1px solid rgba(241, 80, 87)'):(params.row.advertiseType == 0 ? '1px solid rgba(241, 80, 87)' : '1px solid rgb(0, 178, 117)')
                   },
                   on: {
                     click: () => {
@@ -1153,6 +1155,10 @@ export default {
   },
 
   watch: {
+    setMain(newValue) {
+      console.log(newValue)
+      this.reloadAd()
+    },
     coin: function() {
       this.reloadAd()
     },
@@ -1246,6 +1252,9 @@ export default {
     console.log(this.coinsData)
   },
   computed: {
+    setMain: function () {
+      return this.$store.state.setMain
+    },
     isLogin: function() {
       return this.$store.getters.isLogin
     },
