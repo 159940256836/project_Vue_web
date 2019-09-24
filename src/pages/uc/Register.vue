@@ -114,10 +114,13 @@ $focusColor:#FE5C5C;
   .ivu-btn:focus{
     box-shadow: 0 !important;
   }
+  .ivu-btn.active, .ivu-btn:active{
+    color:#FE5C5C;
+  }
 }
 </style>
 <template>
-    <div class="login_form" id="logo">
+    <div class="login_form register" id="logo">
         <div class="wrap-mask"></div>
         <div class="login_right" id="button">
             <Form
@@ -171,7 +174,7 @@ $focusColor:#FE5C5C;
                     </Select>
                     <Input
                         prop="user"
-                        class="select-input1"
+                        class="select-input1 onlychange"
                         v-if="changeActive == 0"
                         type="text" v-model="formInline.user"
                         :placeholder="key"
@@ -179,7 +182,7 @@ $focusColor:#FE5C5C;
                     </Input>
                     <Input
                         v-else
-                        class="select-input1"
+                        class="select-input1 onlychange"
                         type="text"
                         v-model="formInline.user"
                         :placeholder="key"
@@ -272,7 +275,7 @@ $focusColor:#FE5C5C;
     </div>
 </template>
 <style scoped lang="scss">
-.login_form {
+.register {
     background: url('../../assets/images/brnner.png') no-repeat center;
     height: 760px;
     position: relative;
@@ -296,10 +299,12 @@ $focusColor:#FE5C5C;
             .ivu-form-item {
                 .ivu-form-item-content {
                     .ivu-select-item-selected, .ivu-select-item-selected:hover{
-                        background:#191d3a;
+                        color: #fe5c5c;
+                        background: #F4F6F8;
                     }
                     .ivu-select-item:hover{
-                        background:#191d3a;
+                        color: #fe5c5c;
+                        background: #F4F6F8;
                     }
                     .register_btn.ivu-btn {
                         width: 100%;

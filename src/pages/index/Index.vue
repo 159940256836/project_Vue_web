@@ -290,96 +290,6 @@
                 </div>
               </div> -->
             </div>
-            <!--币种列表-->
-            <!-- 下载部分 -->
-            <!-- 网站功能模块 -->
-            <!-- <div class="section" id="page2">
-                <div class="page2nav">
-                    <ul class="brclearfix">
-                        <li
-                            v-show="!(index==4&&!isLogin)"
-                            v-for="(item,index) in indexBtn"
-                            @click="addClass(index)"
-                            :class="{'active':index==choseBtn,'ivu-btn-default':index!=choseBtn}"
-                            :key="index"
-                        >
-                            {{item.text}}
-                        </li>
-                    </ul>
-                </div>
-                <div class="ptjy">
-                    <Table
-                        v-if="choseBtn==4"
-                        :columns="favorColumns"
-                        :data="dataIndex"
-                        class="tables"
-                        :disabled-hover="true"
-                        :loading="loading"
-                        :no-data-text="$t('common.nodata')"
-                    ></Table>
-                    <Table
-                        v-else
-                        :columns="coins.columns"
-                        :data="dataIndex"
-                        class="tables"
-                        :disabled-hover="true"
-                        :loading="loading"
-                        :no-data-text="$t('common.nodata')"
-                    ></Table>
-                </div>
-            </div>
-            <div class="section" id="page5">
-                <div class="section-main">
-                    <ul class="download">
-                        <li class="qrcode">{{$t("downLoadAbs.big")}}</li>
-                        <li class="description">{{$t("downLoadAbs.small")}}</li>
-                        <li>
-                            <ul class="os">
-                                <li>
-                                    <Icon type="logo-windows" size="25" /> <span>win32位</span></li>
-                                <li>
-                                    <Icon type="logo-windows" size="25" /> <span>win64位</span></li>
-                                <li>
-                                    <Icon type="logo-apple" size="30" /><span>mac</span></li>
-                                <li>
-                                    <Icon type="logo-apple" size="30" /><span>ios</span></li>
-                                <li>
-                                    <Icon type="logo-android" size="30" /><span>Android</span></li>
-                                <li>
-                                    <Icon type="logo-apple" size="30" /><span>Apple Store</span></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="phone_image">
-                        <img src="../../assets/images/phone_img.png" alt="">
-                    </div>
-                </div>
-
-            </div>
-            <div class="section" id="page4">
-                <ul>
-                    <li>
-                        <div><img src="../../assets/images/feature_safe.png" alt=""></div>
-                        <p class="title">{{$t("sectionPage.ptaqTitle")}}</p>
-                        <p>{{$t("sectionPage.leverExchange")}}<br>{{$t("sectionPage.ptaqContent")}}</p>
-                    </li>
-                    <li>
-                        <div><img src="../../assets/images/feature_fast.png" alt=""></div>
-                        <p class="title">{{$t("sectionPage.ptslTitle")}}</p>
-                        <p>{{$t("sectionPage.ptslContent")}}<br>{{$t("sectionPage.newsTitle")}}</p>
-                    </li>
-                    <li>
-                        <div><img src="../../assets/images/feature_experience.png" alt=""></div>
-                        <p class="title">{{$t("sectionPage.part3Title")}}</p>
-                        <p>{{$t("sectionPage.part3Content")}}<br>{{$t("sectionPage.part3Content2")}}</p>
-                    </li>
-                    <li>
-                        <div><img src="../../assets/images/serve24.png" alt=""></div>
-                        <p class="title">{{$t("sectionPage.part4Title")}}</p>
-                        <p>{{$t("sectionPage.part4Content")}}<br>{{$t("sectionPage.part4Content2")}}</p>
-                    </li>
-                </ul>
-            </div> -->
         </div>
         <div id="onlineservice">
             <a href="http://kefu.caymanex.pro:80/im/text/15FwEk.html" target="_blank"></a>
@@ -423,7 +333,7 @@ export default {
       CNYRate: null,
       dataIndex: [], // 原始币种列表数据
       searchKeyWord: '', // 搜索框内容
-      checkoutapp: 'true',
+      checkoutapp: false,
       Carouseltock: 'none',
       activediv: '0',
       // pageNo: 1,
