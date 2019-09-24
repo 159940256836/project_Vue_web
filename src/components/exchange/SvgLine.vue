@@ -60,17 +60,30 @@ export default {
         this.sColor = '#DCDCDC'
       }
     } else {
-      if (parseFloat(this.opts.rose) < 0) {
-        this.pColor = 'rgba(255, 73, 95,.1)'
-        this.sColor = '#FF495F'
+      if (this.setMain == 'up') {
+        if (parseFloat(this.opts.rose) < 0) {
+          this.pColor = 'rgba(3, 191, 123,.1)'
+          this.sColor = '#03BF7B'
+        } else {
+          this.pColor = 'rgba(255, 73, 95,.1)'
+          this.sColor = '#FF495F'
+        }
       } else {
-        this.pColor = 'rgba(3, 191, 123,.1)'
-        this.sColor = '#03BF7B'
+        if (parseFloat(this.opts.rose) < 0) {
+          this.pColor = 'rgba(255, 73, 95,.1)'
+          this.sColor = '#FF495F'
+        } else {
+          this.pColor = 'rgba(3, 191, 123,.1)'
+          this.sColor = '#03BF7B'
+        }
       }
     }
     this.draw()
   },
   computed: {
+    setMain: function () {
+      return this.$store.state.setMain
+    },
     polylinePoints: function() {
       return this.coords.slice(2, this.coords.length - 2).join(' ')
     },

@@ -845,7 +845,6 @@ export default {
                 rmb = self.round(self.mul(params.row.usdRate, self.CNYRate), 2)
               const isgreen = parseFloat(params.row.rose) < 0 ? 'none' : 'inline-block'
               const nogreen = parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
-              console.log(params.row.price, window.indexBtnBC)
               return h('div', [
                 // h('span', {}, params.row.price + ' /￥' + rmb),
                 h('span', {}, window.indexBtnBC === 'BC' ? params.row.price : params.row.price),
@@ -1104,6 +1103,10 @@ export default {
     }
   },
   watch: {
+    setMain(newValue) {
+      console.log(newValue)
+      this.tradeList()
+    },
     lang: function() {
       this.updateLangData()
     },
@@ -1280,9 +1283,9 @@ export default {
         $('.carsoul').animate({ top: p })
       }, 3000)
     },
-        /** *
-         * 获取公告
-         */
+    /** *
+     * 获取公告
+     */
     loadDataPage(pageIndex) {
       var param = {}
       param['pageNo'] = pageIndex
@@ -1316,9 +1319,9 @@ export default {
         }
       })
     },
-        /** *
-         * 获取到usdt对人民币的实时汇率
-         */
+    /** *
+     * 获取到usdt对人民币的实时汇率
+     */
     getCNYRate() {
       this.$http.post(this.host + '/market/exchange-rate/usd-cny').then(response => {
         var resp = response.body
@@ -1503,7 +1506,6 @@ export default {
       setTimeout(() => {
         if (this.activediv != 1 && this.activediv != 2) {
           if (index == 0) {
-            console.log(this.indexBtnBC)
             this.indexBtnBC = this.indexBtn[0].text
             window.indexBtnBC = this.indexBtnBC
             this.dataIndex = this.coins.BC
@@ -1741,8 +1743,7 @@ li {
     }
   }
 }
-
-    .section-market {
+.section-market {
         // width: 1200px;
         // margin: 0 auto;
         width: 100%;
@@ -2153,7 +2154,7 @@ li {
             margin-top:12px;
         }
         div{
-            font-weight: MicrosoftYaHei;
+            font-weight: 'MicrosoftYaHei';
             color:#000000;
             font-size:18px;
             margin-bottom:18px;
