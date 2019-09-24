@@ -71,7 +71,7 @@
               <div class="pictureCarouse">
                 <ul>
                   <li v-for="(item,index) in pictureCarouse">
-                    <a :href="item.url"><img src="../../assets/images/banner.png" alt=""></a>
+                    <a :href="item.linkUrl"><img :src="item.url" alt=""></a>
                   </li>
                 </ul>
               </div>
@@ -991,6 +991,7 @@ export default {
     this.stop()
     this.init()
     this.settiele()
+    this.getloadImg()
   },
   filters: {
     formateRate(str) {
@@ -1224,6 +1225,15 @@ export default {
             desc: resp.message
           })
         }
+      })
+    },
+    // 获取广告图片
+    getloadImg() {
+      const param = {}
+      param['sysAdvertiseLocation'] = 0
+      this.$http.post(this.host + '/uc/ancillary/system/advertise_image', param).then(response => {
+        this.pictureCarouse = response.data.data
+        console.log(this.pictureCarouse)
       })
     },
         /** *
