@@ -1,9 +1,9 @@
 <template>
-    <div class="login_form" id="logo">
+    <div class="login_form findpwd" id="logo">
         <div class="wrap-mask"></div>
         <div class="login_right">
             <Form ref="formInline" :model="formInline" :rules="ruleInline" inline>
-                <FormItem style="text-align:center;">
+                <FormItem style="text-align:center;margin-bottom: 38px;margin-top:40px;">
                     <ButtonGroup>
                         <!-- <Button v-for="(list,index) in buttonLists" :key="list.text" :class="{ active:changeActive == index}" @click="actives(index)">{{list.text}}</Button> -->
                         <div class="tel-title">{{$t('uc.forget.title')}}</div>
@@ -48,7 +48,7 @@
                     >
                     </Input>
                 </FormItem>
-                <FormItem>
+                <FormItem style="margin-top:36px">
                     <Button
                         class="login_btn"
                         @click="handleSubmit('formInline')"
@@ -73,10 +73,10 @@
     </div>
 </template>
 <style scoped lang="scss">
-.login_form {
+.findpwd {
     // background: #f9f9f9 url(../../assets/images/login_bg.jpg) no-repeat center
     //     center;
-    background: #f9f9f9 url('https://coinmany2.oss-cn-shanghai.aliyuncs.com/brnner.png') no-repeat center !important;
+    background:url('../../assets/images/brnner.png') no-repeat center !important;
     height: 760px;
     position: relative;
     overflow: hidden;
@@ -87,32 +87,33 @@
     }
     .login_right {
         // background: #fff url("../../assets/images/forget-pass.png") no-repeat center !important;
-        background: #10122B !important;
-        padding: 20px 40px;
+        background: #fff !important;
+        padding: 20px 60px;
         position: absolute;
-        /*background: #fff;*/
-        width: 465px;
+        width:483px;
+        height:498px;
         height: auto;
         left: 50%;
         top: 50%;
-        margin-left: -232px;
+        margin-left: -241px;
         margin-top: -255px;
         // -moz-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         // -webkit-box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         // box-shadow: 2px 2px 5px #f5f5f5, -2px -2px 4px #f5f5f5;
         /*border-top: 4px solid #3399ff;*/
         .tel-title {
-            font-size: 25px;
-            color:#3399ff
+            font-size: 22px;
+            color:#000000
         }
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 .ivu-form-item-content {
+                  width:360px;
+                  height:40px;
                     .login_btn.ivu-btn {
                         width: 100%;
-                        background-color: #3399ff;
+                        background-color: #E62B25;
                         outline: none;
-                        border-color: #3399ff;
                         color: #fff;
                         font-size: 18px;
                         border-radius: 0;
@@ -125,15 +126,15 @@
                     }
                     #sendCode {
                         position: absolute;
-                        border:1px solid;
-                        border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
-                        background: #10122B;
+                        background: #F5F5F5;
                         top: 0px;
                         outline: none;
+                        height:40px;
                         line-height: 40px;
                         right: 0px;
                         width: 27%;
-                        color: #3399ff;
+                        color: #999999;
+                        border: 1px solid #ccc;
                         cursor: pointer;
                     }
                 }
@@ -529,22 +530,21 @@ export default {
 }
 </script>
 <style lang="scss">
-#logo {
+.findpwd {
     .login_right {
         form.ivu-form.ivu-form-label-right.ivu-form-inline {
             .ivu-form-item {
                 .ivu-form-item-content {
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
-                            height: 42px !important;
-                            border:1px solid;
-                            border-image:linear-gradient(-83deg, rgba(41,136,232,1), rgba(81,232,255,1)) 10 10;
+                            height: 40px !important;
+                            width:360px;
                             font-size: 14px;
                             border-radius: 0;
-                            background:#10122B;
-                            color:white;
+                            background:#fff;
+                            color:#CCCCCC;
                             &:focus {
-                                border: 1px solid #3399FF;
+                                border: 1px solid #fe5c5c;
                             }
                         }
                     }

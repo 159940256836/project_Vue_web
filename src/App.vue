@@ -1206,8 +1206,8 @@
       font-size: 14px !important;
 
       &:hover {
-        background: transparent;
-        color: #3399ff;
+        color: #fe5c5c;
+        background: #F4F6F8;
       }
     }
   }
@@ -1943,11 +1943,11 @@
 
   /*下拉框样式重置*/
   .ivu-select-selection:hover {
-    border-color: #3399ff;
+    border-color: #FE5C5C;
   }
 
   .ivu-select-visible .ivu-select-selection {
-    border-color: #3399ff;
+    border-color: #FE5C5C;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
