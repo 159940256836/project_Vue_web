@@ -1,38 +1,52 @@
-.chart-controls-bar{
+.chart-controls-bar {
   height: 30px;
   left: 0;
 }
-.chart-controls-bar-buttons{
+
+.chart-controls-bar-buttons {
   line-height: 30px;
 }
-.chart-controls-bar-buttons a{
+
+.chart-controls-bar-buttons a {
   padding: 4px 13px;
   height: 30px;
 }
-.layout__area--top.header-chart-panel{
-  top: 0 !important;
+
+.layout__area--top.header-chart-panel {
+  width: 100% !important;
+  left: 0 !important;
+  /*top: 0 !important;*/
   /*z-index: 999;*/
-  /*width: 40% !important;*/
   /*left: 60% !important;*/
 }
-.header-chart-panel .left{
+
+.layout__area--left {
+  height: 440px !important;
+  top: 40px !important;
+}
+
+.header-chart-panel .left {
   /*text-align: right;*/
 }
-.header-chart-panel .group{
+
+.header-chart-panel .group {
   /*margin: 5px 0 0;*/
 }
-.header-chart-panel .group.header-group-properties{
+
+.header-chart-panel .group.header-group-properties {
   margin-left: 0;
 }
+
 /*._tv-dialog{*/
-  /*z-index: 1110 !important;*/
+/*z-index: 1110 !important;*/
 /*}*/
-.real-op>a:nth-child(2){
+.real-op > a:nth-child(2) {
   color: #8b8c8e;
   stroke: #8b8c8e;
   fill: #8b8c8e;
 }
-.common-op>a:nth-child(1){
+
+.common-op > a:nth-child(1) {
   color: #8b8c8e;
   stroke: #8b8c8e;
   fill: #8b8c8e;
@@ -45,15 +59,86 @@
   border: 1px solid #FE5C5C;
 }
 
-.charts-popup-list .item.active, .feature-no-touch .charts-popup-list .item:hover {
-  background: #2c3b59;
-  color: #5ec6e8;
+/*重置K线样式开始*/
+.tv-dialog {
+  background: #141F2B;
 }
+
+.feature-no-touch .tv-tabs__tab:active, .feature-no-touch .tv-tabs__tab:hover, .feature-touch .tv-tabs__tab:active, .tv-tabs__tab.i-active, .tv-tabs__tab.i-hover {
+  color: #999999;
+}
+
+.feature-no-touch .tv-objects-tree-item:hover, .tv-objects-tree-item.ui-sortable-helper {
+  background: transparent;
+  color: #fff;
+}
+
+.feature-no-touch .tv-objects-tree-item.i-active:hover {
+  background: transparent;
+}
+
+.tv-objects-tree-item {
+  color: #999999;
+}
+
+.tv-objects-tree-item.i-active,
+.tv-objects-tree-item.i-active:hover{
+  background: transparent;
+  color: #fff;
+}
+
+.chart-page .tv-side-toolbar .tools-group .button:hover,
+.feature-no-touch .tv-side-toolbar .tools-group .button:hover {
+  background: transparent;
+}
+
+.chart-page .tv-side-toolbar .tools-group .button:hover svg,
+.feature-no-touch .tv-side-toolbar .tools-group .button:hover svg {
+  fill: #fff;
+}
+
+.chart-page .chart-container {
+  border: 1px solid #212F3D;
+}
+
+.charts-popup-list .item.active span,
+.charts-popup-list .item.active span svg {
+  color: #FE5C5C;
+  fill: #FE5C5C;
+}
+
+.charts-popup-list .item.active, .feature-no-touch .charts-popup-list .item:hover span {
+  color: #FE5C5C;
+}
+
+.charts-popup-list .item.active, .feature-no-touch .charts-popup-list .item:hover span svg {
+  fill: #FE5C5C;
+}
+
+.charts-popup-list::-webkit-scrollbar {
+  width: 5px;  /*滚动条宽度*/
+  height: 15px;  /*滚动条高度*/
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+.charts-popup-list::-webkit-scrollbar-track {
+  border-radius: 5px;  /*滚动条的背景区域的圆角*/
+  background-color: #0f202d;/*滚动条的背景颜色*/
+}
+
+/*定义滑块 内阴影+圆角*/
+.charts-popup-list::-webkit-scrollbar-thumb {
+  border-radius: 5px;  /*滚动条的圆角*/
+  background-color: #0f202d;  /*滚动条的背景颜色*/
+}
+
+/*结束*/
 
 .chart-page .tv-side-toolbar .group .button, .chart-page .header-chart-panel .group .button {
   font-weight: normal;
   color: #666666;
 }
+
 .chart-page .button.selected, .chart-page .button.active {
   background-color: #1B1F3C;
 }
@@ -61,43 +146,65 @@
 .chart-page .tv-side-toolbar .group, .chart-page .header-chart-panel .group {
   float: left;
 }
+
 .chart-page .tv-side-toolbar .header-group-properties, .chart-page .tv-side-toolbar .header-group-indicators, .chart-page .header-chart-panel .header-group-properties, .chart-page .header-chart-panel .header-group-indicators {
   float: none;
 }
+
 .chart-page .js-rootresizer__contents .layout__area--top .header-chart-panel-sizer .header-chart-panel-content .left .header-group-indicators:hover a svg {
   fill: #fff;
 }
+
 .chart-page .js-rootresizer__contents .layout__area--top .header-chart-panel-sizer .header-chart-panel-content .left .header-group-fullscreen:hover span svg {
   fill: #fff;
 }
+
 .chart-page .tv-side-toolbar .header-group-fullscreen, .chart-page .header-chart-panel .header-group-fullscreen {
   float: right;
   padding-right: 5px;
 }
 
 /* 计数指标弹出框 */
-.tv-dialog.i-focused{
-  top: 45px!important;
+.tv-dialog.i-focused {
+  top: 45px !important;
   height: calc(100% - 100px);
   overflow: hidden;
 }
-.pane-legend{
-  top: -2px;
+
+.pane-legend {
+  top: 5px;
 }
+
+.drawings-popup-list.iconed .item,
+.drawings-popup-list .item {
+  display: table-row;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  background: #181b2a;
+}
+
+.charts-popup-list {
+  background: #141F2B;
+  border: 1px solid #212F3D;
+}
+
 /* 设置弹出框 */
-._tv-dialog{
-  top: 45px!important;
+._tv-dialog {
+  top: 45px !important;
   overflow: auto;
   height: calc(100% - 100px);
   width: 80%;
-  left: 0!important;
+  left: 0 !important;
   right: 0;
   margin: 0 auto;
 }
 
-.js-rootresizer__contents{
+.js-rootresizer__contents {
   background-color: #141F2B;
 }
-.loading-indicator{
+
+.loading-indicator {
   background-color: rgba(14, 14, 40, .6);
 }

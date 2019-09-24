@@ -21,7 +21,7 @@ export default {
 <style lang="scss"></style>
 <style scoped lang="scss">
   .nav-advert {
-    min-height: 1120px;
+    min-height: 1300px;
     background: #f4f6f8;
     padding-top: 60px;
     .advert-box {

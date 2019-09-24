@@ -368,10 +368,10 @@ export default {
                   if (this.isLogin) {
                     event.stopPropagation() // 阻止事件冒泡
                     if (
-                                            event.currentTarget.className ==
-                                            'ivu-icon ivu-icon-ios-star'
-                                        ) {
-                                            // 解除收藏
+                        event.currentTarget.className ==
+                        'ivu-icon ivu-icon-ios-star'
+                    ) {
+                        // 解除收藏
                       this.cancelCollect(params.index, params.row)
                       event.currentTarget.className ==
                                                 'ivu-icon ivu-icon-ios-star-outline'
@@ -434,9 +434,9 @@ export default {
             }
           },
           render: function(h, params) {
-                        // var rmb = self.round(self.mul(params.row.price, 6.5), 2);
-                        // if (self.CNYRate != null)
-                        //   rmb = self.round(self.mul(params.row.price, self.CNYRate), 2);
+            // var rmb = self.round(self.mul(params.row.price, 6.5), 2);
+            // if (self.CNYRate != null)
+            //   rmb = self.round(self.mul(params.row.price, self.CNYRate), 2);
             let CNYRate = self.CNYRate || 6.5,
               rmb = self.round(self.mul(params.row.usdRate, CNYRate), 2)
             const isgreen =
@@ -481,8 +481,8 @@ export default {
                     red: true
                   }
                 },
-                                '↓'
-                            )
+                '↓'
+              )
             ])
           }
         },
@@ -753,10 +753,9 @@ export default {
                             //   rmb = self.round(self.mul(params.row.price, self.CNYRate), 2);
               let CNYRate = self.CNYRate || 6.5,
                 rmb = self.round(self.mul(params.row.usdRate, self.CNYRate), 2)
-              const isgreen =
-                                parseFloat(params.row.rose) < 0 ? 'none' : 'inline-block'
-              const nogreen =
-                                parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
+              const isgreen = parseFloat(params.row.rose) < 0 ? 'none' : 'inline-block'
+              const nogreen = parseFloat(params.row.rose) < 0 ? 'inline-block' : 'none'
+              console.log(params.row.price, window.indexBtnBC)
               return h('div', [
                 // h('span', {}, params.row.price + ' /￥' + rmb),
                 h('span', {}, window.indexBtnBC === 'BC' ? params.row.price : params.row.price),
@@ -883,7 +882,6 @@ export default {
             render: function(h, params) {
               let valus = null
               const len = params.row.trend.length
-              console.log(len, params.row)
               valus =
                                 len > 0
                                     ? params.row.trend
@@ -1415,7 +1413,8 @@ export default {
       setTimeout(() => {
         if (this.activediv != 1 && this.activediv != 2) {
           if (index == 0) {
-            this.indexBtnBC = this.indexBtn[3].text
+            console.log(this.indexBtnBC)
+            this.indexBtnBC = this.indexBtn[0].text
             window.indexBtnBC = this.indexBtnBC
             this.dataIndex = this.coins.BC
             this.base = 'BC'
@@ -1434,7 +1433,7 @@ export default {
           }
         } else if (this.activediv == 1) {
           if (index == 0) {
-            this.indexBtnBC = this.indexBtn[3].text
+            this.indexBtnBC = this.indexBtn[0].text
             window.indexBtnBC = this.indexBtnBC
             this.base = 'BC'
             this.tradeList(1)
@@ -1453,7 +1452,7 @@ export default {
           }
         } else {
           if (index == 0) {
-            this.indexBtnBC = this.indexBtn[3].text
+            this.indexBtnBC = this.indexBtn[0].text
             window.indexBtnBC = this.indexBtnBC
             this.base = 'BC'
             this.tradeList(2)

@@ -25,6 +25,11 @@
   fill: #fff;
 }
 
+.layout__area--left {
+  height: 440px !important;
+  top: 40px !important;
+}
+
 .chart-page .tv-side-toolbar .group .button:hover, .chart-page .tv-side-toolbar .group .button.selected, .chart-page .header-chart-panel .group .button:hover, .chart-page .header-chart-panel .group .button.selected {
   background: #FE5C5C;
   color: #fff;
@@ -32,22 +37,64 @@
   border: 1px solid #FE5C5C;
 }
 
+.chart-page .header-chart-panel .group .button:hover svg {
+  fill: #fff;
+}
+
 .chart-page .tv-side-toolbar .tools-group .button.selected, .chart-page .tv-side-toolbar .tools-group .button:hover, .chart-page .tv-side-toolbar .tools-group .button:active {
   background-color: #fff;
 }
 
+/*重置K线样式开始*/
+.tv-dialog {
+  background: #fff;
+}
+
+.chart-page .tv-side-toolbar .tools-group .button:hover svg,
+.feature-no-touch .tv-side-toolbar .tools-group .button:hover svg {
+  fill: #333333;
+}
+
+.chart-page .chart-container {
+  border: 1px solid #eeeeee;
+}
+
+.charts-popup-list {
+  border: 1px solid #eeeeee;
+}
+
+.charts-popup-list .item.active span,
+.charts-popup-list .item.active span svg {
+  color: #FE5C5C;
+  fill: #FE5C5C;
+}
+
 .charts-popup-list .item.active, .feature-no-touch .charts-popup-list .item:hover span {
-  background: #F7F7F7;
-  color: #5ec6e8;
+  color: #FE5C5C;
 }
 
-.drawings-popup-list.iconed .item, .drawings-popup-list .item span {
-  background-color: #fff;
+.charts-popup-list .item.active, .feature-no-touch .charts-popup-list .item:hover span svg {
+  fill: #FE5C5C;
 }
 
-.charts-popup-list .item.active {
-  background: #F7F7F7;
+.charts-popup-list::-webkit-scrollbar {
+  width: 5px;  /*滚动条宽度*/
+  height: 15px;  /*滚动条高度*/
 }
+
+/*定义滚动条轨道 内阴影+圆角*/
+.charts-popup-list::-webkit-scrollbar-track {
+   border-radius: 5px;  /*滚动条的背景区域的圆角*/
+   background-color: #EEEEEE;/*滚动条的背景颜色*/
+ }
+
+/*定义滑块 内阴影+圆角*/
+.charts-popup-list::-webkit-scrollbar-thumb {
+   border-radius: 5px;  /*滚动条的圆角*/
+   background-color: #DDDDDD;  /*滚动条的背景颜色*/
+ }
+
+/*结束*/
 
 .bottom-widgetbar-content.backtesting .button, .header-chart-panel .button, .hotlist-controls .button, .symbol-edit-widget .button {
   background-color: #fff;
@@ -56,7 +103,9 @@
 }
 
 .layout__area--top.header-chart-panel {
-  top: 0 !important;
+  /*top: 0 !important;*/
+  width: 100% !important;
+  left: 0 !important;
 }
 
 .feature-no-touch ._tv-dialog .button:not(.disabled):not(.selected):hover:before, .feature-no-touch ._tv-dialog .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch ._tv-dialog .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch ._tv-dialog .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .submenu:not(.disabled):not(.selected):hover:before {
@@ -74,10 +123,6 @@
 .chart-page .tv-side-toolbar .header-group-fullscreen, .chart-page .header-chart-panel .header-group-fullscreen {
   float: right;
   padding-right: 5px;
-}
-
-.chart-page .chart-container {
-  border-top: 1px solid #eeeeee;
 }
 
 /* 计数指标弹出框 */
@@ -105,7 +150,7 @@
 
 
 .pane-legend {
-  top: -2px;
+  top: 5px;
 }
 
 .js-rootresizer__contents {

@@ -189,7 +189,7 @@ span.price {
   width: 100%;
   margin-bottom: 20px;
   overflow: hidden;
-  height: 490px;
+  height: 500px;
 }
 
 #kline_container.hidden,
@@ -347,8 +347,8 @@ ul li {
   border-bottom: 1px solid #212F3D !important;
 }
 
-.day .trade_wrap .ivu-input {
-  background: #fff;
+.exchange.day .trade_wrap .ivu-input {
+  /*background: #fff;*/
   color: #333;
   border: 1px solid #ccc;
 }
@@ -723,7 +723,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 }
 
 iframe {
-  height: 490px !important;
+  height: 500px !important;
 }
 
 #tradingview_188a1 {
@@ -789,10 +789,12 @@ iframe {
   background-color: #0A1928;
   text-align: center;
 }
+
 .exchange.day .order .ivu-table td {
   background-color: #fff;
   text-align: center;
 }
+
 /* .day .exchange .coin-menu .ivu-table-wrapper{
     box-shadow: 0 0 2px #ccc;
 } */
@@ -1085,7 +1087,22 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
   font-size: 0;
 }
 
-.ivu-table-wrapper .ivu-table td {
+.exchange .ivu-table-wrapper .ivu-table td {
+  /*background: #141F2B;*/
+  border-bottom: 0;
+}
+
+.exchange .left .ivu-table-wrapper .ivu-table td {
+  background: transparent;
+  border-bottom: 0;
+}
+
+.exchange.day .ivu-table-wrapper .ivu-table td {
+  /*background: #fff;*/
+  border-bottom: 0;
+}
+
+.exchange.day .left .ivu-table-wrapper .ivu-table td {
   background: transparent;
   border-bottom: 0;
 }
@@ -1138,6 +1155,7 @@ tr.ivu-table-row-highlight.ivu-table-row-hover td {
 .exchange .ivu-input::-webkit-input-placeholder {
   color: #999999;
 }
+
 /*.feature-no-touch ._tv-dialog .button:not(.disabled):not(.selected):hover:before,*/
 /*.feature-no-touch ._tv-dialog .custom-select .switcher:not(.disabled):not(.selected):hover:before,*/
 /*.feature-no-touch ._tv-dialog .favored-list-container span:not(.disabled):not(.selected):hover:before,*/

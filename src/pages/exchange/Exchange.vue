@@ -206,8 +206,11 @@
               {{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}
             </span>
           </div>
-          <div class="item" @click="changeSkin" style="float: right">
-              <img :src="skin == 'night' ? night : day" alt="">
+          <div class="item" style="flex: 1">
+            <span class="set" @click="changeSkin">
+              <img style="float: right" :src="set" alt="切换主题">
+            </span>
+              <!--<img style="float: right" :src="skin == 'night' ? night : day" alt="">-->
           </div>
         </div>
         <div class="imgtable" :loading="loadingButton7">
@@ -754,7 +757,7 @@
         margin-right: 10px;
 
         .imgtable {
-          height: 490px;
+          height: 500px;
           position: relative;
           overflow: hidden;
           margin-bottom: 10px;
@@ -873,7 +876,7 @@
         margin-right: 10px;
 
         .coin-menu {
-          height: 540px;
+          height: 550px;
           background-color: #141F2B;
           margin-bottom: 10px;
           overflow: hidden;
@@ -895,6 +898,17 @@
         min-width: 30px;
         margin-left: 15px;
         line-height: 21px;
+
+        .set {
+          display: inline-block;
+          cursor: pointer;
+          float: right;
+          background: url('../../assets/images/exchange/set.svg') no-repeat;
+
+          &:hover {
+            background: url('../../assets/images/exchange/set1.svg') no-repeat;
+          }
+        }
 
         &:first-child {
           margin-left: 0;
@@ -1076,6 +1090,11 @@
           }
         }
 
+        .mask {
+          background-color: rgba(0, 0, 0, 0.4);
+          color: #fff;
+        }
+
         .trade_panel .panel .hd {
           border-bottom: none;
 
@@ -1105,16 +1124,12 @@
       }
     }
 
-    .trade_panel {
-      .mask {
-        background-color: rgba(0, 0, 0, 0.4);
-        color: #fff;
-      }
-      .mask {
-        background-color: rgba(0, 0, 0, 0.3);
-        background-color: rgba(0, 0, 0, 0.3);
-      }
-    }
+    /*.trade_panel {*/
+    /*  .mask {*/
+    /*    background-color: rgba(0, 0, 0, 0.4);*/
+    /*    color: #fff;*/
+    /*  }*/
+    /*}*/
 
     .trade_panel .panel .hd {
       border-bottom: none;
@@ -1218,8 +1233,9 @@
         detailCoin: '',
         currentLoading: true, // 当前委单默认loading
         historyLoading: true, // 历史委单默认loading
-        day: require('../../assets/images/exchange/night.png'), // 黑色版本
-        night: require('../../assets/images/exchange/day.png'), // 白色版本
+        set: require('../../assets/images/exchange/set.svg'),
+        // day: require('../../assets/images/exchange/night.png'), // 黑色版本
+        // night: require('../../assets/images/exchange/day.png'), // 白色版本
         infoLogo: require('../../assets/images/exchange/infoLogo.png'), // 期
         loadingButton1: false, // 接口请求loading
         loadingButton2: false, // 接口请求loading
@@ -1535,7 +1551,7 @@
         },
         // 最新价的 table 数据;
         plate: {
-          maxPostion: 15, // 买卖盘口数据条数最大限制
+          maxPostion: 14, // 买卖盘口数据条数最大限制
           columns: [
             // {
             //   title: self.$t("exchange.stall"),
@@ -2427,10 +2443,11 @@
           fullscreen: true, // 布尔值显示图表是否占用窗口中所有可用的空间
           symbol: that.symbol, // 币名称
           interval: '15', // K线默认时间传值
+          // timeframe: '3D', // x 周期范围
           timezone: 'Asia/Shanghai', // 默认时区
           toolbar_bg: '#141F2B', // 背景色
           container_id: 'kline_container', // `id`属性为指定要包含widget的DOM元素id。
-          symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
+          // symbolWatermarkProperties_url: ('../../asstes/images/exchange/watermark.jpg'),
 
           datafeed: that.datafeed, // 请求地址
           library_path:
@@ -2443,7 +2460,7 @@
             tools: [{name: 'Regression Trend'}]
           },
           // 禁用属性
-          // 包含功能在默认情况下启用/禁用名称的数组。功能表示图表功能的一部分（更是UI/UX的一部分） http://tradingview.gitee.io/featuresets参考文档
+          // 包含功能在默认情况下启用/禁用名称的数组
           disabled_features: [
             // 'left_toolbar', // 左边工具栏
 
@@ -2466,11 +2483,10 @@
             'header_settings', // 设置按钮
             'main_meries_seale_menu' // 隐藏右上角设置
           ],
-          // 包含功能在默认情况下启用/禁用名称的数组。功能表示图表功能的一部分（更是UI/UX的一部分）  http://tradingview.gitee.io/featuresets 参考文档
+          // 包含功能在默认情况下启用/禁用名称的数组
           enabled_features: [
-            // 'left_toolbar', //  开启左边工具栏
             'hide_last_na_study_output',
-            // 'move_logo_to_main_pane' // TradingView login 开启显示在网格上 隐藏显示在网格下
+            'move_logo_to_main_pane' // TradingView login 开启显示在网格上 隐藏显示在网格下
           ],
           custom_css_url: 'bundles/common.css',
           supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M'],
@@ -2502,7 +2518,7 @@
             // 默认收缩行情信息
             'paneProperties.legendProperties.showLegend': false,
 
-            // //坐标轴和刻度标签颜色
+            // 坐标轴和刻度标签颜色
             'scalesProperties.lineColor': '#999999',
             'scalesProperties.textColor': '#999999', // 开高低收
             'mainSeriesProperties.areaStyle.color1': 'rgba(71, 78, 112, 0.5)',
@@ -2510,7 +2526,7 @@
             'mainSeriesProperties.areaStyle.linecolor': '#9194a4',
             // "paneProperties.crossHairProperties.color": "#00b275", // 十字光标颜色
 
-            // 边框
+            // 边框颜色
             'mainSeriesProperties.candleStyle.borderUpColor': '#00b275', // 开高低收买入标线
             'mainSeriesProperties.candleStyle.borderDownColor': '#f15057', // 开高低收卖出标线
 
@@ -2591,35 +2607,29 @@
           config.overrides['scalesProperties.textColor'] = '#666'
 
           // 网格线
-          config.overrides['paneProperties.vertGridProperties.color'] =
-              '#eeeeee'
-          config.overrides['paneProperties.horzGridProperties.color'] =
-              '#eeeeee'
+          config.overrides['paneProperties.vertGridProperties.color'] = '#eeeeee'
+          config.overrides['paneProperties.horzGridProperties.color'] = '#eeeeee'
 
           // 蜡烛样式
-          config.overrides['mainSeriesProperties.candleStyle.upColor'] =
-              '#a6d3a5'
-          config.overrides['mainSeriesProperties.candleStyle.downColor'] =
-              '#ffa5a6'
-
           config.overrides['scalesProperties.lineColor'] = '#999999' // xy刻度线色值
           config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#39c595' // 第一根的颜色
           config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#f96969' // 第二根的颜色
         }
         // 涨跌逻辑修改 由原来的绿涨（买入）红跌（卖出） 修改为红涨（买入）绿跌（卖出）
-        console.log(that.setMain)
         if (that.setMain == 'up') {
-          console.log(that.setMain)
+          // 柱状图样式
           config.studies_overrides['volume.volume.color.0'] = 'rgba(0, 178, 117, .3)' // 第一根柱的颜色
           config.studies_overrides['volume.volume.color.1'] = 'rgba(241, 80, 87, .3)' // 第二根柱的颜色
-          config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#a6d3a5'
-          config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#ffa5a6'
+
+          // 蜡烛样式
           config.overrides['mainSeriesProperties.candleStyle.upColor'] = '#f15057' // 第一根的颜色
           config.overrides['mainSeriesProperties.candleStyle.downColor'] = '#00b275' // 第二根的颜色
-          config.overrides['volume.volume.color.0'] = 'rgba(0, 178, 117, .3)'
-          config.overrides['volume.volume.color.1'] = 'rgba(241, 80, 87, .3)'
+
+          // 烛心颜色
           config.overrides['mainSeriesProperties.candleStyle.wickUpColor'] = '#f15057'
           config.overrides['mainSeriesProperties.candleStyle.wickDownColor'] = '#00b275'
+
+          // 边框颜色
           config.overrides['mainSeriesProperties.candleStyle.borderUpColor'] = '#f15057'
           config.overrides['mainSeriesProperties.candleStyle.borderDownColor'] = '#00b275'
         }
@@ -2639,17 +2649,17 @@
                 .createStudy('Moving Average', false, false, [10], null, {
                   'plot.color': '#84AAD5'
                 })
-            /* widget
-            .chart()
-            .createStudy('Moving Average', false, false, [30], null, {
-                'plot.color': 'rgb(57,109,73)'
-            })
+             widget
+              .chart()
+              .createStudy('Moving Average', false, false, [30], null, {
+                  'plot.color': 'rgb(57,109,73)'
+              })
 
-          widget
-            .chart()
-            .createStudy('Moving Average', false, false, [60], null, {
-                'plot.color': 'rgb(127,33,105)'
-            })*/
+            widget
+              .chart()
+              .createStudy('Moving Average', false, false, [60], null, {
+                  'plot.color': 'rgb(127,33,105)'
+              })
             widget
                 .createButton()
                 .attr('title', 'realtime')

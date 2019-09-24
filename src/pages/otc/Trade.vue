@@ -812,6 +812,11 @@
   text-align: center;
   line-height: 42px;
 }
+
+.ivu-table-wrapper .ivu-table .ivu-table-header th {
+  background-color: #fff;
+}
+
 .ivu-table-wrapper .ivu-table .ivu-table-header th,
 .ivu-table-wrapper .ivu-table td {
   color: #333;
@@ -1011,7 +1016,10 @@ export default {
           {
             title: self.$t('otc.paymethod'),
             key: 'payMode',
-            align: 'center'
+            align: 'center',
+            // render: (h, params) => {
+            //   console.log(params)
+            // }
           },
           {
             align: 'center',
@@ -1076,6 +1084,7 @@ export default {
                   'p',
                 {
                   style: {
+                    textAlign: 'center',
                     fontSize: '12px',
                     color: params.row.advertiseType == 0 ? 'rgba(241, 80, 87)' : 'rgb(0, 178, 117)',
                     width: '50px',
