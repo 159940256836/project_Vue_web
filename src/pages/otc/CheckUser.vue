@@ -2,10 +2,10 @@
   <div class="content-wrap" id="List">
     <div class="container">
       <!--<h2 class="title">{{ this.$t('otc.myorder')+' > ' + '订单详情' }}</h2>-->
-      <p style="padding: 10px 0 10px 20px;font-size: 18px;">
+      <p style="padding: 10px 0 10px 20px;font-size: 18px;color: #666;">
         <router-link
                 to="/order"
-                style="color:#3399ff;"
+                style="color:#FE5C5C;"
         >
           {{$t('otc.myorder')}}
         </router-link>

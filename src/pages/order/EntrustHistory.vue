@@ -11,7 +11,7 @@
         font-weight:400;
     }
     * {
-        background: transparent;
+        background: #fff;
     }
     .search-btn {
         color: #fff;

@@ -139,7 +139,7 @@ WebsockFeed.prototype.resolveSymbol = function(symbolName, onSymbolResolvedCallb
   var data = {
     'name': this.coin.symbol,
     'exchange-traded': '',
-    'exchange-listed': 'HUOBI',
+    'exchange-listed': 'BDW',
     'minmov': 1,
     'volumescale': 10000,
     'has_daily': true,

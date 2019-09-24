@@ -206,12 +206,11 @@
               {{currentCoin.volume?currentCoin.volume:'---'}} {{currentCoin.coin?currentCoin.coin:'---'}}
             </span>
           </div>
-          <div class="item" @click="changeSkin" style="flex: 1">
-            <span class="set">
+          <div class="item" style="flex: 1">
+            <span class="set" @click="changeSkin">
               <img style="float: right" :src="set" alt="切换主题">
             </span>
               <!--<img style="float: right" :src="skin == 'night' ? night : day" alt="">-->
-
           </div>
         </div>
         <div class="imgtable" :loading="loadingButton7">
@@ -2650,17 +2649,17 @@
                 .createStudy('Moving Average', false, false, [10], null, {
                   'plot.color': '#84AAD5'
                 })
-            /* widget
-            .chart()
-            .createStudy('Moving Average', false, false, [30], null, {
-                'plot.color': 'rgb(57,109,73)'
-            })
+             widget
+              .chart()
+              .createStudy('Moving Average', false, false, [30], null, {
+                  'plot.color': 'rgb(57,109,73)'
+              })
 
-          widget
-            .chart()
-            .createStudy('Moving Average', false, false, [60], null, {
-                'plot.color': 'rgb(127,33,105)'
-            })*/
+            widget
+              .chart()
+              .createStudy('Moving Average', false, false, [60], null, {
+                  'plot.color': 'rgb(127,33,105)'
+              })
             widget
                 .createButton()
                 .attr('title', 'realtime')

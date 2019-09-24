@@ -758,8 +758,7 @@ export default {
           this.$router.push('/identbusiness')
         }
       })
-      //
-      //
+
       // this.$http.post(this.host + '/uc/approve/security/newSetting').then(response => {
       //     var resp = response.body;
       //     if (resp.code == 0) {
@@ -1126,13 +1125,13 @@ export default {
         border-left: 0;
         border-radius: 0;
       }
-      .ivu-switch {
+      /*.ivu-switch {*/
+      /*  background: #FE5C5C;*/
+      /*  border: 1px solid #FE5C5C;*/
+      /*}*/
+      .ivu-switch-checked {
         background: #FE5C5C;
         border: 1px solid #FE5C5C;
-      }
-      .ivu-switch-checked {
-        background: #61C283;
-        border: 1px solid #61C283;
       }
       .ivu-radio-inner {
         border-color: #E62B25;
