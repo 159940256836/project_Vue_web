@@ -1006,7 +1006,7 @@ export default {
     this.stop()
     this.init()
     this.settiele()
-    this.getloadImg()
+    // this.getloadImg()
   },
   filters: {
     formateRate(str) {

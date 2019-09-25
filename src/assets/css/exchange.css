@@ -865,9 +865,12 @@ iframe {
   border-bottom: 1px solid #212F3D !important;
 }
 
+.exchange .ivu-table-body table {
+  background: transparent;
+}
+
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row tr:hover {
   border-bottom: 1px solid #1B1F3C;
-  border-color: #1B1F3C;
 }
 
 .exchange .ivu-table-wrapper .ivu-table .ivu-table-row-highlight {
