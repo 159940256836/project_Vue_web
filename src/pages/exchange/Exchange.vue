@@ -2488,7 +2488,7 @@
             'hide_last_na_study_output',
             'move_logo_to_main_pane' // TradingView login 开启显示在网格上 隐藏显示在网格下
           ],
-          custom_css_url: 'bundles/common_day.css',
+          custom_css_url: 'bundles/common.css',
           supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '1W', '1M'],
           charts_storage_url: 'http://saveload.tradingview.com', // 设置图库页面
           // 下面三项是开发自己的后端用的 前台的请求会带着这三项值
