@@ -43,7 +43,7 @@
         <span
           @click="initGtCaptcha()"
           :class="setnum1!='获取验证码'?'dis':''"
-          style="color:#3399FFFF; display:inline-block; width:2rem;height:0.58rem;line-height:0.58rem;border:1px solid rgba(51,153,255,1); border-radius:29rem;font-size: 0.2rem; text-align:center; margin-top:0.15rem"
+          style="color: #FE5C5C; display:inline-block; width:2rem;height:0.58rem;line-height:0.58rem;border:1px solid #FE5C5C; border-radius:29rem;font-size: 0.2rem; text-align:center; margin-top:0.15rem"
         >{{setnum1}}</span>
       </div>
       <div class="phone">
@@ -55,13 +55,13 @@
       <div class="phone">
         <input v-model="agentcode" placeholder="邀请码">
       </div>
-      <div class="check-agree" style="margin-top:0.16rem; font-size:0.24rem;color:#CCCCCCFF">
+      <div class="check-agree" style="margin-top:0.16rem; font-size:0.24rem;color:#666666">
         <label>
           <Checkbox v-model="agreee">我已阅读并同意</Checkbox>
         </label>
         <router-link
           to="/Usereement"
-          style="color:#CCCCCCFF; font-size:0.2rem; position:relative; left:-0.2rem"
+          style="color: #FE5C5C; font-size:0.2rem; position:relative; left:-0.2rem"
         >《用户名协议》</router-link>
         <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
       </div>
@@ -127,7 +127,7 @@
         <router-link
           class="ft-2"
           to="/Usereement"
-          style="color:#CCCCCCFF;  position:relative; left:-0.2rem;font-size: 0.2rem;"
+          style="color: #FE5C5C;  position:relative; left:-0.2rem;font-size: 0.2rem;"
         >《用户名协议》</router-link>
         <!--<a href="#/helpdetail?cate=1&id=9&cateTitle=常见问题" target="_blank" style="">《{{$t('uc.regist.userprotocol')}}》</a>-->
       </div>
@@ -477,7 +477,7 @@ export default {
   width: 6.07rem;
   height: 0.8rem;
   line-height: 0.8rem;
-  background: #3399ff;
+  background: #E62B25;
   border-radius: 0.4rem;
   text-align: center;
   color: #fff;
@@ -487,7 +487,7 @@ export default {
     height: 0.8rem;
     line-height: 0.8rem;
     font-size: 0.3rem;
-    background: #3399ff !important;
+    background: #E62B25 !important;
     border-radius: 0.4rem;
     text-align: center;
     color: #fff;
@@ -499,11 +499,11 @@ export default {
   width: 5.74rem;
   height: 0.89rem;
   box-sizing: border-box;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #999;
   input {
     margin-left: 0.14rem;
     width: 5.6rem;
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
     font-size: 0.28rem;
     outline: none;
     border: 0;
@@ -523,8 +523,8 @@ export default {
   margin: 0.5rem auto 0;
   justify-content: space-around;
   .actives {
-    color: #3399ff;
-    border-bottom: 1px solid #3399ff;
+    color: #FE5C5C;
+    border-bottom: 0.03rem solid #FE5C5C;
   }
   div {
     width: 1.5rem;
@@ -584,7 +584,7 @@ background:#fff !important;
   }
   .ivu-select-item-selected {
     background: #fff;
-    color: #3399ff;
+    color: #E62B25;
   }
   .content {
     padding: 0.2rem 0.8rem;

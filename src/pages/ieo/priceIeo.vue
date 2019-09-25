@@ -12,7 +12,7 @@
                 <div class="contentWrapper contentWrapper_content">
                     <template v-if="list.length == 0">
                           <div style="margin-top:150px; margin-bottom: 150px;">{{ $t("common.nodata") }}</div>
-                       
+
                     </template>
                     <!-- <template v-else>
 
@@ -124,7 +124,7 @@ export default {
 .common_speicial{
     padding-top:0 !important;
     background:#0e0e28 !important;
-   
+
 }
 .ieo_common{
     background: #0e0e28;
@@ -228,7 +228,7 @@ $pageTheme: rgb(13, 70, 125);
 }
 .father .ivu-tabs-bar{
     border-bottom: 0 !important;
-    background:rgba(25,29,58,1);
+    background: #fff;
 }
 .speicial {
       .ivu-tabs-tab {

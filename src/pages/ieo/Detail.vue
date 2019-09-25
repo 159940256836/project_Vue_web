@@ -680,7 +680,7 @@
               width: 100%;
               margin-bottom: 15px;
               text-align: center;
-              background: #3399ff;
+              background: #E62B25;
               color: #fff;
               line-height: 2.5;
 
@@ -695,7 +695,7 @@
               width: 100%;
               margin-bottom: 15px;
               text-align: center;
-              background: #3399ff;
+              background: #E62B25;
               color: #fff;
               line-height: 2.5;
               cursor: pointer;
@@ -786,8 +786,9 @@
     background: #eeeeee;
   }
 
-  .ieo_detail_box .common .ieoDetail .progress span[data-v-2300a631] {
-    color: #999999;
+  .ieo_detail_box .common .ieoDetail .progress span[data-v-2300a631],
+  .ieo_detail_box .common .ieoDetail .progress span[data-v-82e4cc98] {
+    color: #999999 !important;
     font-size: 14px;
   }
 
