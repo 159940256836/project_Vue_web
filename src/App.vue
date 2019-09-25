@@ -201,8 +201,7 @@
                             <img v-if="setMain == 'down'" :src="setImg" >
                         </DropdownItem>
                     </DropdownMenu>
-                </Dropdown>
-
+                </Dropdown> 
             </div>
           </div>
         </div>
@@ -562,7 +561,7 @@
         this.setTheme(this.$store.commit('setMain', localStorage.getItem('SETSTYLE')))
       }
 
-       localStorage.setItem('SETSTYLE', JSON.stringify('up'))
+      localStorage.setItem('SETSTYLE', JSON.stringify('up'))
       /** *
        * 获取公告
        */

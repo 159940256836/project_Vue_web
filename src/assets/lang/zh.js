@@ -675,6 +675,9 @@ module.exports = {
     part4Content2: '及时响应用户问题',
     spotTrading: '现货交易',
     multiCurrency: '多币种支持，高流动性',
+    hotrecommended: '热门推荐',
+    performer: '涨幅榜',
+    droplist: '跌幅榜',
     performance: '高性能撮合交易',
     OTCtransaction: 'OTC场外交易',
     Support: '支持多种法币交易',
@@ -688,7 +691,11 @@ module.exports = {
     terminal: '支持多个平台终端交易',
     Instant: '即时随地、放心交易，一切尽在掌握之中',
     soontrading: '马上交易',
-    Registeraccount: '注册账号、跟BDW来一场不一样的资产交易之旅'
+    Registeraccount: '注册账号、跟BDW来一场不一样的资产交易之旅',
+    Download: '下载官方app',
+    Multipleplatforms: 'iOS、Android多个平台支持全业务功能',
+    androiddownload: 'Android 版下载',
+    iosdownload: 'ios 版下载'
   },
   nav: {
     shouye: '首页',

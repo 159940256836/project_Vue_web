@@ -682,6 +682,9 @@ module.exports = {
 
     spotTrading: 'Spot trading',
     multiCurrency: 'Multi-currency support, high liquidity',
+    performer: 'performer',
+    droplist: 'Drop list',
+    hotrecommended: 'HotRecommended',
     performance: 'High performance dealmaking',
     OTCtransaction: 'OTC transaction',
     Support: 'Support a variety of legal tender transactions',
@@ -695,7 +698,11 @@ module.exports = {
     terminal: 'Support multiple platform terminal trading',
     Instant: 'Instant, anywhere, assured trading, all under control',
     soontrading: 'Soon trading',
-    Registeraccount: 'Register an account, and BDW to a different asset trading journey'
+    Registeraccount: 'Register an account, and BDW to a different asset trading journey',
+    Download: 'Download official app',
+    Multipleplatforms: 'Multiple platforms of iOS and Android support full service functions',
+    androiddownload: 'Android download',
+    iosdownload: 'ios download'
   },
   nav: {
     ptjy: 'Platform Trading',

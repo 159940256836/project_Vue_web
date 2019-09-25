@@ -68,15 +68,15 @@
             >
             </div>
               <!-- 公告图片展示 -->
-              <div class="pictureCarouse">
+              <!-- <div class="pictureCarouse">
                 <ul>
                   <li v-for="(item,index) in pictureCarouse">
                     <a :href="item.linkUrl"><img :src="item.url" alt=""></a>
                   </li>
                 </ul>
-              </div>
+              </div> -->
             <!-- 首页行情图 -->
-            <section class="section-market">
+            <div class="section-market">
                 <div
                     class="market-box"
                     v-for="(item,index) in hostSymbolList"
@@ -128,12 +128,12 @@
                         style="position:absolute;bottom:0;left:0"
                     ></SvgLine>
                 </div>
-            </section>
+            </div>
             <div class="Central">
               <div class="list">
-                <div @click="tradeList(0)" :class="activediv==0?'divactive':''">热门推荐</div>
-                <div @click="tradeList(1)" :class="activediv==1?'divactive':''">涨幅榜</div>
-                <div @click="tradeList(2)" :class="activediv==2?'divactive':''">跌幅榜</div>
+                <div @click="tradeList(0)" :class="activediv==0?'divactive':''">{{$t("sectionPage.hotrecommended")}}</div>
+                <div @click="tradeList(1)" :class="activediv==1?'divactive':''">{{$t("sectionPage.performer")}}</div>
+                <div @click="tradeList(2)" :class="activediv==2?'divactive':''">{{$t("sectionPage.droplist")}}</div>
               </div>
               <div class="section" id="page2">
                 <div class="page2nav">
@@ -222,10 +222,10 @@
               <div class="section" id="page4">
                 <div class="left">
                   <div class="text">
-                    下载官方app
+                    {{$t("sectionPage.Download")}}
                   </div>
                   <div class="text1">
-                    iOS、Android多个平台支持全业务功能
+                    {{$t("sectionPage.Multipleplatforms")}}
                   </div>
                     <!-- <span class="text">{{$t("sectionPage.terminal")}}</span>
                     <p>{{$t("sectionPage.Instant")}}</p> -->
@@ -233,21 +233,33 @@
                       <div class="Qrleft" v-show="this.checkoutapp">
                         <div class="android" @click="checkoutfasle">
                             <img src="../../assets/img/ad.png" style="margin:0 12px 0 18px" alt="">
-                            <span>Android 版下载</span>
+                            <span>{{$t("sectionPage.androiddownload")}}</span>
+                            <div class="switchqr1">
+                              <img src="../../assets/images/app_qrcode.png" alt="" width="100">
+                            </div>
                         </div>
                         <div class="ipone click" @click="checkouttrue">
                             <img src="../../assets/img/ios.png" style="margin:0 12px 0 18px" alt="">
-                            <span>ios 版下载</span>
+                            <span>{{$t("sectionPage.iosdownload")}}</span>
+                            <div class="switchqr">
+                              <img src="../../assets/images/app_qrcode.png" alt="" width="100">
+                            </div>
                         </div>
                       </div>
                       <div class="Qrleft" v-show="!checkoutapp">
                           <div class="android click" @click="checkoutfasle">
                             <img src="../../assets/img/ad.png" style="margin:0 12px 0 18px" alt="">
-                            <span>Android 版下载</span>
+                            <span>{{$t("sectionPage.androiddownload")}}</span>
+                            <div class="switchqr1">
+                              <img src="../../assets/images/app_qrcode.png" alt="" width="100">
+                            </div>
                           </div>
                           <div class="ipone" @click="checkouttrue">
                             <img src="../../assets/img/ios.png" style="margin:0 12px 0 18px" alt="">
-                            <span>ios 版下载</span>
+                            <span>{{$t("sectionPage.iosdownload")}}</span>
+                            <div class="switchqr">
+                              <img src="../../assets/images/app_qrcode.png" alt="" width="100">
+                            </div>
                           </div>
                       </div>
                       <!-- <div class="Qrright">
@@ -1667,7 +1679,7 @@ li {
         // width: 1200px;
         // margin: 0 auto;
         width: 100%;
-        padding:23px;
+        padding:55px;
         display: flex;
         justify-content:center;
         .market-box {
@@ -1931,7 +1943,7 @@ li {
                 .ivu-table-row {
                   background:transparent !important;
                     &:nth-of-type(odd) td{
-                        background: rgba(17,22,52,1);
+                        background: #f4f6f8;
                         color:#333333;
                         font-size:14px;
                         height:52px;
@@ -1972,7 +1984,7 @@ li {
           color:rgba(0,0,0,1);
           line-height:21px;
           margin-bottom:24px;
-              margin-top:182px;
+              margin-top:160px;
         }
         .text1{
           font-size:16px;
@@ -1994,12 +2006,13 @@ li {
             height:40px;
             background:#FF857B;
             border-radius:5px;
-              margin-bottom:12px;
-              display: flex;
-              align-items: center;
-              cursor: pointer;
-              color:#fff;
-              margin-right:19px;
+            margin-bottom:12px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color:#fff;
+            margin-right:19px;
+            position:relative;
               span{
                 font-size: 14px;
                 color:white;
@@ -2013,6 +2026,7 @@ li {
               display: flex;
               align-items: center;
               cursor: pointer;
+              position:relative;
               span{
                 font-size: 14px;
                 color:white;
@@ -2020,6 +2034,36 @@ li {
             }
             .click{
               background:#D5382B;
+            }
+            .switchqr{
+              width:120px;
+              height:120px;
+              position:absolute;
+              top: -120px;
+              left: 25px;
+              display:none;
+              background:#f6f8f9;
+              img{
+                margin:10px;
+              }
+            }
+            .switchqr1{
+              width:120px;
+              height:120px;
+              position:absolute;
+              top: -120px;
+              left: 25px;
+              display:none;
+              background:#f6f8f9;
+              img{
+                margin:10px;
+              }
+            }
+            .ipone:hover .switchqr{
+              display:block;
+            }
+            .android:hover .switchqr1{
+              display:block;
             }
           }
           .Qrright{
@@ -2251,10 +2295,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
       height:34px;
       display: flex;
       margin: 0 auto;
-      margin-top: 46px;
+      // margin-top: 46px;
       line-height: 34px;
       div{
-        width:91px;
+        // width:91px;
         height:34px;
         text-align: center;
         background:transparent;
@@ -2262,7 +2306,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
         color:#003333;
         font-family:Microsoft YaHei;
         font-weight:400;
-
+        margin-right: 10px;
+        padding:0 10px;
       }
       .divactive{
         background:linear-gradient(270deg,rgba(235,56,26,1),rgba(236,28,168,1));
