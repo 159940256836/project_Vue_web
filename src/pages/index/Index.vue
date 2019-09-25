@@ -383,18 +383,19 @@ export default {
                         event.currentTarget.className ==
                         'ivu-icon ivu-icon-ios-star'
                     ) {
-                        // 解除收藏
+                      // 解除收藏
                       this.cancelCollect(params.index, params.row)
                       event.currentTarget.className ==
-                                                'ivu-icon ivu-icon-ios-star-outline'
+                        'ivu-icon ivu-icon-ios-star-outline'
                     } else {
-                                            // 收藏
+                      // 收藏
                       this.collect(params.index, params.row)
                       event.currentTarget.className =
-                                                'ivu-icon ivu-icon-ios-star'
+                        'ivu-icon ivu-icon-ios-star'
                     }
                   } else {
-                    this.$Message.warning('请先登录')
+                    this.$Message.warning(this.$t('common.logintip'))
+                    return false
                   }
                 }
               }
@@ -651,7 +652,7 @@ export default {
         _map: [],
         USDT: [],
         BTC: [],
-        ETH: [],
+        // ETH: [],
         BC: [],
         favor: [],
         columns: [
@@ -675,21 +676,22 @@ export default {
                     if (this.isLogin) {
                       event.stopPropagation() // 阻止事件冒泡
                       if (
-                                                event.currentTarget.className ==
-                                                'ivu-icon ivu-icon-ios-star'
-                                            ) {
-                                                // 解除收藏
+                        event.currentTarget.className ==
+                        'ivu-icon ivu-icon-ios-star'
+                      ) {
+                          // 解除收藏
                         this.cancelCollect(params.index, params.row)
                         event.currentTarget.className ==
-                                                    'ivu-icon ivu-icon-ios-star-outline'
+                          'ivu-icon ivu-icon-ios-star-outline'
                       } else {
-                                                // 收藏
+                      // 收藏
                         this.collect(params.index, params.row)
                         event.currentTarget.className =
-                                                    'ivu-icon ivu-icon-ios-star'
+                          'ivu-icon ivu-icon-ios-star'
                       }
                     } else {
                       this.$Message.warning(this.$t('common.logintip'))
+                      return false
                     }
                   }
                 }
@@ -706,9 +708,11 @@ export default {
               var iconName = ''
               if (params.row.coin == 'BTC') {
                 iconName = '比特币'
-              } else if (params.row.coin == 'ETH') {
-                iconName = '以太币'
-              } else if (params.row.coin == 'GCC') {
+              }
+              // else if (params.row.coin == 'ETH') {
+              //   iconName = '以太币'
+              // }
+              else if (params.row.coin == 'GCC') {
                 iconName = '银河链'
               }
               return h('div', { style: { 'text-align': 'left' }}, [
@@ -1499,7 +1503,7 @@ export default {
     },
     getSymbol() {
       this.loading = true
-      this.coins.USDT = []; this.coins.TD = []; this.coins.BTC = []; this.coins.ETH = []; this.coins.BC = []
+      this.coins.USDT = []; this.coins.TD = []; this.coins.BTC = []; /*this.coins.ETH = [];*/ this.coins.BC = []
       this.$http.post(this.host + this.api.market.thumbTrend, {}).then(response => {
         var resp = response.body
         for (var i = 0; i < resp.length; i++) {
