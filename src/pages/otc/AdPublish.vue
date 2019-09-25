@@ -1050,7 +1050,7 @@ export default {
       }
     }
     .ivu-tag {
-      background: #2A3850;
+      background: #F7F7F7;
       border: 0;
       margin: 8px 4px 3px 0;
     }

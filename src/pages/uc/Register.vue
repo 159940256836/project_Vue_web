@@ -8,7 +8,7 @@ $focusColor:#FE5C5C;
             .ivu-form-item {
                 border:0 !important;
                 .ivu-form-item-content {
-                    border-bottom:1px solid rgba(221,221,221,1);
+                    /*border-bottom:1px solid rgba(221,221,221,1);*/
                     .ivu-input-wrapper.ivu-input-type {
                         .ivu-input {
                             width: 100%;

@@ -497,12 +497,7 @@
         this.locale = newVal
       },
       $route(to, from) {
-        //     console.log(to)
-        //   this.pathName = to.path
-        //   if (this.pathName == '/mobile/home') {
-        //        this.$router.push('/')
-        //   }
-        if (this.pathName === '/login' || this.pathName === '/register') {
+        if (to.fullPath === '/login' || to.fullPath === '/register') {
           this.pathNameState = false
         } else {
           this.pathNameState = true
@@ -510,7 +505,6 @@
 
         if (to.path === '/') {
           this.pageView = 'page-view'
-          // this.container_test = "";
         } else {
           $('.page-content').css({ 'background': '#11132c' })
           if (to.path.indexOf('exchange') > 0 && this.exchangeSkin === 'night') {
@@ -518,7 +512,6 @@
           } else {
             this.pageView = 'page-view2'
           }
-          // this.container_test = "container_test";
         }
       },
       exchangeSkin() {

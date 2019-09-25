@@ -1017,9 +1017,44 @@ export default {
             title: self.$t('otc.paymethod'),
             key: 'payMode',
             align: 'center',
-            // render: (h, params) => {
-            //   console.log(params)
-            // }
+            render: (h, params) => {
+              console.log(params, params.row.payMode)
+              // let typePayment = (params.row.payMode + '').split(',')
+              let typeAlipay = params.row.alipay
+              let typeBankInfo = params.row.bankInfo
+              let typeWechatPay = params.row.wechatPay
+              console.log(typeAlipay, typeBankInfo, typeWechatPay)
+                return h('div', [
+                  h('icon', {
+                    props: {
+                      size: '20',
+                      color: '#1296db'
+                    },
+                    style: {
+                      marginRight: '8px'
+                    },
+                    class: typeAlipay == 1 ? 'iconfont iconzhifubao1':''
+                  }),
+                  h('icon', {
+                    props: {
+                      size: '20',
+                      color: '#50b674'
+                    },
+                    style: {
+                      marginRight: '8px'
+                    },
+                    class: typeWechatPay == 1 ? 'iconfont iconweixin1':''
+                  }),
+                  h('icon', {
+                    props: {
+                      size: '25',
+                      color: '#ffb916'
+                    },
+                    class: typeBankInfo == 1 ? 'iconfont iconyinhangqia':''
+                  }),
+
+                ])
+            }
           },
           {
             align: 'center',
@@ -1080,7 +1115,6 @@ export default {
             align: 'center',
             paddingLeft: '0',
             render: function(h, params) {
-              console.log(params.row.advertiseType)
               return h(
                   'p',
                 {
