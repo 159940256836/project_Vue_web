@@ -549,14 +549,14 @@
                             .chain-link {
                                 min-width: 105px;
                                 height: 31px;
-                                background: #111530;
-                                color: #8090af;
+                                background: #fff;
+                                color: #FE5C5C;
                                 float: left;
                                 margin-left: 25px;
                                 text-align: center;
                                 line-height: 31px;
                                 cursor: pointer;
-                                border:1px solid rgba(88,105,138,1);
+                                border:1px solid #FE5C5C;
                                 position: relative;
                                 img {
                                     position: absolute;
@@ -566,8 +566,8 @@
                             }
 
                             .chain {
-                                color: #3399FF;
-                                border:1px solid rgba(51,153,255,1);
+                                color: #FE5C5C;
+                                border:1px solid #FE5C5C;
                             }
                         }
                     }
@@ -598,7 +598,7 @@
                             a.link-copy {
                                 font-size: 14px;
                                 margin-left: 20px;
-                                color: #3399ff;
+                                color:#FE5C5C;
                             }
 
                         }
@@ -867,6 +867,10 @@
         .ivu-select-dropdown {
             li.ivu-select-item.ivu-select-item-selected.ivu-select-item-focus {
                 background: transparent;
+            }
+            &::-webkit-scrollbar {
+                width: 4px; /*对垂直流动条有效*/
+                height: 10px; /*对水平流动条有效*/
             }
         }
 

@@ -112,12 +112,12 @@
   text-align: center;
 }
 .ivu-select-dropdown::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px #21254d;
-    background-color: #21254d;
+    -webkit-box-shadow: inset 0 0 6px #f2f2f2;
+    background-color: #f2f2f2;
 }
 .ivu-select-dropdown::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px #131738;
-    background-color: #131738;
+    -webkit-box-shadow: inset 0 0 6px #e5e5e5;
+    background-color: #e5e5e5;
 }
 </style>
 <template>

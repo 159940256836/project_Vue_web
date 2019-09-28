@@ -789,14 +789,14 @@
                 .chain-link {
                   min-width: 105px;
                   height: 31px;
-                  background: #111530;
-                  color: #333;
+                  background: #fff;
+                  color: #FE5C5C;
                   float: left;
                   margin-left: 25px;
                   text-align: center;
                   line-height: 31px;
                   cursor: pointer;
-                  border: 1px solid rgba(88, 105, 138, 1);
+                  border: 1px solid #FE5C5C;
                   position: relative;
 
                   img {
@@ -807,8 +807,8 @@
                 }
 
                 .chain {
-                  color: #3399FF;
-                  border: 1px solid rgba(51, 153, 255, 1);
+                  color: #FE5C5C;
+                  border: 1px solid #FE5C5C;
                 }
               }
             }
@@ -1030,19 +1030,21 @@
                   }
 
                   &::-webkit-scrollbar {
-                    width: 4px; /*对垂直流动条有效*/
-                    height: 10px; /*对水平流动条有效*/
-                  }
+                        width: 4px; /*对垂直流动条有效*/
+                        height: 10px; /*对水平流动条有效*/
+                    }
 
                   /*定义滚动条的轨道颜色、内阴影及圆角*/
                   &::-webkit-scrollbar-track {
-                    background-color: #EDEDED;
+                    // -webkit-box-shadow: inset 0 0 6px #f2f2f2;
+                    background-color: #f2f2f2;
                     border-radius: 3px;
                   }
 
                   &::-webkit-scrollbar-thumb {
+                    // -webkit-box-shadow: inset 0 0 6px #e5e5e5;
                     border-radius: 7px;
-                    background-color: #E0E0E0
+                    background-color: #e5e5e5
                   }
 
                   .ivu-select-item {

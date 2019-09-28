@@ -1108,7 +1108,7 @@
 
     .ivu-input[disabled],
     fieldset[disabled] .ivu-input {
-      background-color: #111530;
+      background-color: #f7f7f7;
     }
 
     .withdraw-form-inline {
@@ -1208,6 +1208,10 @@
           color: #3399ff;
         }
       }
+      &::-webkit-scrollbar {
+                width: 4px; /*对垂直流动条有效*/
+                height: 10px; /*对水平流动条有效*/
+            }
     }
 
     .ivu-select-single {
@@ -1485,14 +1489,14 @@
             .chain-link {
               min-width: 128px;
               height: 34px;
-              background: #111530;
-              color: #8090af;
+              background: #fff;
+              color: #FE5C5C;
               float: left;
               margin-left: 13px;
               text-align: center;
               line-height: 34px;
               cursor: pointer;
-              border: 1px solid rgba(88, 105, 138, 1);
+              border: 1px solid #FE5C5C;
               position: relative;
 
               img {
@@ -1503,8 +1507,8 @@
             }
 
             .chain {
-              color: #3399FF;
-              border: 1px solid rgba(51, 153, 255, 1);
+              color: #FE5C5C;
+              border: 1px solid #FE5C5C;
             }
           }
         }

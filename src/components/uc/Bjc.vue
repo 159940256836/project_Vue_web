@@ -193,7 +193,7 @@ export default {
 <style lang="scss">
     .nav-rights-bjc {
         .ivu-input {
-            background: #111530;
+            background: #fff;
             border: 1px solid #58698A;
             border-radius: 0;
         }
@@ -224,7 +224,7 @@ export default {
                     }
                 }
                 tbody.ivu-table-tbody .ivu-table-row td {
-                    background: #111530;
+                    background: #10122B;
                     &:last-child {
                         text-align: left;
                     }
